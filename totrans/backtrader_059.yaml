@@ -1,188 +1,246 @@
 - en: Futures and Spot Compensation
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
 - en: 原文：[https://www.backtrader.com/docu/order-creation-execution/futurespot/future-vs-spot/](https://www.backtrader.com/docu/order-creation-execution/futurespot/future-vs-spot/)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
 - en: Release `1.9.32.116` adds support for an interesting use case presented in the
     [Community](https://community.backtrader.com/)
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
 - en: Start a trade with a future, which includes **physical delivery**
+  id: totrans-3
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: Have an indicator tell you something
+  id: totrans-4
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: If needed be, close the position by operating on the spot price, effectively
     canceling the physical delivery, be it for receiving the goods or for having to
     deliver them (and hopefully making a profit)
+  id: totrans-5
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: The future expires on the same day the operation on the spot price takes place
+  id: totrans-6
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
 - en: 'That means:'
+  id: totrans-7
   prefs: []
   type: TYPE_NORMAL
 - en: The platform is fed with data points from two different assets
+  id: totrans-8
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: The platform has to somehow understand the assets are related and that operations
     on the *spot* price will close positions open on the *future*
+  id: totrans-9
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: In reality, the future is not closed, only the physical delivery is *compensated*
+  id: totrans-10
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
 - en: Using that *compensation* concept, `backtrader` adds a way to let the user communicate
     to the platform that things on one data feed will have compensating effects on
     another. The usage pattern
+  id: totrans-11
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE0]'
+  id: totrans-12
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: Putting it all together
+  id: totrans-13
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
 - en: An example is always worth a thousand posts, so let’s put all the pieces together
     for it.
+  id: totrans-14
   prefs: []
   type: TYPE_NORMAL
 - en: Use one of the standard sample feeds from the `backtrader` sources. This will
     be the future
+  id: totrans-15
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: 'Simulate a similar but distinct price, by reusing the same feed and adding
     a filter which will randomly move the price some points above/below, to create
     a spread. As simple as:'
+  id: totrans-16
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: '[PRE1]'
+  id: totrans-17
   prefs:
   - PREF_IND
   type: TYPE_PRE
+  zh: '[PRE1]'
 - en: Plotting on the same axis will mix the default included `BuyObserver` markers
     and therefore the standard observers will be disabled and manually readded to
     plot with different per-data markers
+  id: totrans-18
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: Positions will be entered randomly and exited 10 days later
+  id: totrans-19
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: This doesn’t match future expiration periods, but this is just putting the functionality
     in place and not checking a trading calendar
+  id: totrans-20
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
 - en: '!!! note'
+  id: totrans-21
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE2]'
+  id: totrans-22
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE2]'
 - en: Notice that the strategy
+  id: totrans-23
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: '`buy` operations are executed on `data0`'
+  id: totrans-24
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
 - en: '`sell` operations are executed on `data1`'
+  id: totrans-25
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
 - en: '[PRE3]'
+  id: totrans-26
   prefs:
   - PREF_IND
   type: TYPE_PRE
+  zh: '[PRE3]'
 - en: 'The execution:'
+  id: totrans-27
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE4]'
+  id: totrans-28
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE4]'
 - en: With this graphical output.
+  id: totrans-29
   prefs: []
   type: TYPE_NORMAL
 - en: '![image](../Images/a6204d4e6c557f947ffc6c19bf64c75b.png)'
+  id: totrans-30
   prefs: []
   type: TYPE_IMG
 - en: 'And it works:'
+  id: totrans-31
   prefs: []
   type: TYPE_NORMAL
 - en: '`buy` operations are signaled with a green triangle pointing upwards and the
     legend tells us they belong to `data0` as expected'
+  id: totrans-32
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: '`sell` operations are signaled with an arrow pointing downwards and the legend
     tells us they belong to `data1` as expected'
+  id: totrans-33
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: Trades are being closed, even if they are being open with `data0` and being
     closed with `data1`, achieving the desired effect (which in real life is avoiding
     the physical delivery of the goods acquired by means of the *future*)
+  id: totrans-34
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: 'One could only imagine what would happen if the same logic is applied without
     the *compensation* taking place. Let’s do it:'
+  id: totrans-35
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE5]'
+  id: totrans-36
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE5]'
 - en: And the output
+  id: totrans-37
   prefs: []
   type: TYPE_NORMAL
 - en: '![image](../Images/7c47768a70258cb8ad6b6954d6621046.png)'
+  id: totrans-38
   prefs: []
   type: TYPE_IMG
 - en: 'It should be quite obvious that this fails miserably:'
+  id: totrans-39
   prefs: []
   type: TYPE_NORMAL
 - en: The logic expects positions on `data0` to be closed by the operations on `data1`
     and to only open positions on `data0` when not in the market
+  id: totrans-40
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 逻辑期望`data0`上的仓位在`data1`上的操作关闭，并且只有在市场中没有仓位时才开放`data0`上的仓位。
 - en: But *compensation* has been deactivated and the intial operation on `data0`
     (green triangle) is never closed, so no other operation can never be initiated
     and short positions on `data1` start accumulating.
+  id: totrans-41
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 但*补偿*已被停用，并且对`data0`的初始操作（绿色三角形）从未关闭，因此不会启动任何其他操作，而`data1`上的空头仓位开始累积。
 - en: Sample Usage
+  id: totrans-42
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 示例用法
 - en: '[PRE6]'
+  id: totrans-43
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE6]'
 - en: Sample Code
+  id: totrans-44
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 示例代码
 - en: '[PRE7]'
+  id: totrans-45
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE7]'
