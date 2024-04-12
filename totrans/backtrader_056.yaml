@@ -213,40 +213,48 @@
   id: totrans-32
   prefs: []
   type: TYPE_NORMAL
+  zh: '*backtrader*尝试为每个新功能提供一个示例，这不例外。没有花里胡哨，只是为了测试结果是否符合预期。这个示例在`order_target`目录中。'
 - en: 'The logic in the sample is rather dumb and only meaant for testing:'
   id: totrans-33
   prefs: []
   type: TYPE_NORMAL
+  zh: 示例中的逻辑相当愚蠢，只是用于测试：
 - en: During *odd months* (Jan, Mar, …), use the *day* as target (in the case of `order_target_value`
     multiplying the day by `1000`)
   id: totrans-34
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 在*奇数月*（一月，三月，...），使用*日*作为目标（对于`order_target_value`，将日乘以`1000`）
 - en: This mimics an increasing *target*
   id: totrans-35
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 这模仿了一个递增的*目标*。
 - en: During *even months* (Feb, Apr, …) use `31 - day` as the *target*
   id: totrans-36
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 在*偶数月*（二月，四月，...）使用`31 - day`作为*目标*。
 - en: This mimics an decreasing *target*
   id: totrans-37
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 这模仿了一个递减的*目标*。
 - en: order_target_size
   id: totrans-38
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: order_target_size
 - en: Let’s see what happens in *Jan* and *Feb*.
   id: totrans-39
   prefs: []
   type: TYPE_NORMAL
+  zh: 让我们看看在*一月*和*二月*会发生什么。
 - en: '[PRE0]'
   id: totrans-40
   prefs: []
@@ -258,6 +266,7 @@
   id: totrans-41
   prefs: []
   type: TYPE_NORMAL
+  zh: 在*一月*，*目标*从第一交易日的`3`开始增加。初始时，*仓位*大小从`0`到`3`，然后以`1`的增量递增。
 - en: Finishing *Jan* the last *order_target* is for `31` and that *position size*
     is reported when entering the 1^(st) day of *Feb*, when the new *target side*
     is requested to be `30` and goes changing along with the position in decrements
@@ -265,19 +274,23 @@
   id: totrans-42
   prefs: []
   type: TYPE_NORMAL
+  zh: 完成*一月*时，最后一个*order_target*为`31`，当进入*二月*的第一天时，报告了该*仓位大小*，新的*目标方向*要求为`30`，并随着仓位递减。
 - en: '![image](../Images/b2e3c6547ba066cc417c27ec3e855f3a.png)'
   id: totrans-43
   prefs: []
   type: TYPE_IMG
+  zh: '![图片](../Images/b2e3c6547ba066cc417c27ec3e855f3a.png)'
 - en: order_target_value
   id: totrans-44
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: order_target_value
 - en: A similar behavior is expected from *target values*
   id: totrans-45
   prefs: []
   type: TYPE_NORMAL
+  zh: 类似的行为可预期来自*目标值*。
 - en: '[PRE1]'
   id: totrans-46
   prefs: []
@@ -288,63 +301,75 @@
   id: totrans-47
   prefs: []
   type: TYPE_NORMAL
+  zh: 有一行额外的信息告诉实际*数据值*（在投资组合中）是什么。这有助于确定是否已达到*目标值*。
 - en: The initial target is `3000.0` and the reported initial value is `2853.24`.
     The question here is whether this is *close enough*. And the answer is *Yes*
   id: totrans-48
   prefs: []
   type: TYPE_NORMAL
+  zh: 初始目标是`3000.0`，报告的初始值是`2853.24`。这里的问题是这是否*足够接近*。答案是*是的*。
 - en: The sample uses a `Market` order at the end of a daily bar and the last available
     price to calculate a *target size* which meets the *target value*
   id: totrans-49
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 示例在每日K线图结束时使用`Market`订单和最后可用价格来计算满足*目标价值*的*目标大小*。
 - en: The execution uses then the `open` price of the next day and this is unlikely
     to be the previous `close`
   id: totrans-50
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 执行随后使用下一天的`open`价格，这不太可能是前一天的`close`。
 - en: Doing it in any other way would mean one is *cheating* him/herfself.
   id: totrans-51
   prefs: []
   type: TYPE_NORMAL
+  zh: 以任何其他方式做都意味着一个人在*欺骗*自己。
 - en: 'The next *target value* and *final value* are much closer: `4000` and `3938.17`.'
   id: totrans-52
   prefs: []
   type: TYPE_NORMAL
+  zh: 下一个*目标值*和*最终值*要接近得多：`4000`和`3938.17`。
 - en: 'When changing into *Feb* the *target value* starts decreasing from `31000`
     to `30000` and `29000`. So does the *data value* with from `30580.00` to `30706.56`
     and then to `28633.44`. Wait:'
   id: totrans-53
   prefs: []
   type: TYPE_NORMAL
+  zh: 当转换为*二月*时，*目标值*从`31000`减少到`30000`和`29000`。数据值也是如此，从`30580.00`到`30706.56`，然后到`28633.44`。等等：
 - en: '`30580` -> `30706.56` is a positive change'
   id: totrans-54
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`30580` -> `30706.56`是一个正变化。'
 - en: Indeed. In this case the calculated *size* for the *target value* met an *opening
     price* which bumped the value to `30706.56`
   id: totrans-55
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 确实。在这种情况下，计算出的*目标值*的*大小*遇到了一个将值提高到`30706.56`的*开盘价*。
 - en: 'How this effect can be avoided:'
   id: totrans-56
   prefs: []
   type: TYPE_NORMAL
+  zh: 如何避免这种影响：
 - en: The sample uses a `Market` type execution for the orders and this effect cannot
     be avoided
   id: totrans-57
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 示例在订单中使用`Market`类型的执行，这种效果无法避免。
 - en: The methods `order_target_xxx` allow specifying the *execution type* and *price*.
   id: totrans-58
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 方法`order_target_xxx`允许指定*执行类型*和*价格*。
 - en: One could specify `Limit` as the execution order and let the price be the *close*
     price (chosen by the method if nothing else be provided) or even provide specific
     pricing
@@ -352,19 +377,23 @@
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 一个可以指定`Limit`作为执行订单的方式，并让价格成为*收盘*价格（如果没有提供其他内容，则由该方法选择）或者甚至提供具体定价。
 - en: '![image](../Images/246ef7232b15055edb0c9e18b46b2178.png)'
   id: totrans-60
   prefs: []
   type: TYPE_IMG
+  zh: '![图片](../Images/246ef7232b15055edb0c9e18b46b2178.png)'
 - en: order_target_percent
   id: totrans-61
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: order_target_percent
 - en: In this case it is simply a percentage of the current portfolio value.
   id: totrans-62
   prefs: []
   type: TYPE_NORMAL
+  zh: 在这种情况下，它只是当前投资组合价值的百分比。
 - en: '[PRE2]'
   id: totrans-63
   prefs: []
@@ -375,15 +404,18 @@
   id: totrans-64
   prefs: []
   type: TYPE_NORMAL
+  zh: 数据信息已更改，以查看投资组合中数据所代表的`%`。
 - en: '![image](../Images/b10d16c4ec6852e5190b9b8c8c535bf7.png)'
   id: totrans-65
   prefs: []
   type: TYPE_IMG
+  zh: '![图片](../Images/b10d16c4ec6852e5190b9b8c8c535bf7.png)'
 - en: Sample Usage
   id: totrans-66
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 示例用法
 - en: '[PRE3]'
   id: totrans-67
   prefs: []
@@ -394,6 +426,7 @@
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 示例代码
 - en: '[PRE4]'
   id: totrans-69
   prefs: []
