@@ -3,83 +3,100 @@
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 订单管理和执行
 - en: 原文：[https://www.backtrader.com/docu/order-creation-execution/order-creation-execution/](https://www.backtrader.com/docu/order-creation-execution/order-creation-execution/)
   id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.backtrader.com/docu/order-creation-execution/order-creation-execution/](https://www.backtrader.com/docu/order-creation-execution/order-creation-execution/)
 - en: Backtesting, and hence `backtrader`, would not be complete if orders could not
     be simulated. To do so, the following is available in the platform.
   id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果订单不能模拟，回测和因此`backtrader`将不完整。为此，平台提供了以下功能。
 - en: 'For order management 3 primitives:'
   id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: 对于订单管理的3个基本原则：
 - en: '`buy`'
   id: totrans-4
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`buy`'
 - en: '`sell`'
   id: totrans-5
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`sell`'
 - en: '`cancel`'
   id: totrans-6
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`cancel`'
 - en: Note
   id: totrans-7
   prefs: []
   type: TYPE_NORMAL
+  zh: 注意
 - en: An `update` primitive is obviously something logic but common sense dictates
     that such a method is mostly used by manual operators working with a judgmental
     trading approach.
   id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: 显然，`update`原语是一种逻辑，但常识告诉我们，这种方法主要由使用判断性交易方法的手动操作者使用。
 - en: 'For order execution logic the following execution types:'
   id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: 对于订单执行逻辑，有以下执行类型：
 - en: '`Market`'
   id: totrans-10
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`Market`'
 - en: '`Close`'
   id: totrans-11
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`Close`'
 - en: '`Limit`'
   id: totrans-12
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`Limit`'
 - en: '`Stop`'
   id: totrans-13
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`Stop`'
 - en: '`StopLimit`'
   id: totrans-14
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`StopLimit`'
 - en: Order Management
   id: totrans-15
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 订单管理
 - en: 'Some examples:'
   id: totrans-16
   prefs: []
   type: TYPE_NORMAL
+  zh: 一些例子：
 - en: '[PRE0]'
   id: totrans-17
   prefs: []
@@ -89,11 +106,13 @@
   id: totrans-18
   prefs: []
   type: TYPE_NORMAL
+  zh: 注意
 - en: 'All order types can be create by creating an `Order` instance (or one of its
     subclasses) and then passed to to the broker with:'
   id: totrans-19
   prefs: []
   type: TYPE_NORMAL
+  zh: 所有订单类型都可以通过创建一个`Order`实例（或其子类之一），然后通过以下方式传递给经纪人：
 - en: '[PRE1]'
   id: totrans-20
   prefs: []
@@ -103,30 +122,36 @@
   id: totrans-21
   prefs: []
   type: TYPE_NORMAL
+  zh: 注意
 - en: There are `buy` and `sell` primitives in the `broker` itself, but they are less
     forgiving with regards to default parameters.
   id: totrans-22
   prefs: []
   type: TYPE_NORMAL
+  zh: '`broker`本身有`buy`和`sell`的基本原则，但对于默认参数要求更严格。'
 - en: Order Execution Logic
   id: totrans-23
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 订单执行逻辑
 - en: The `broker` uses 2 main guidelines (assumptions?) for order execution.
   id: totrans-24
   prefs: []
   type: TYPE_NORMAL
+  zh: 经纪人对订单执行有两个主要准则（假设？）
 - en: The current data has already happened and cannot be used to execcute an order.
   id: totrans-25
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 当前数据已经发生，不能用于执行订单。
 - en: 'If the logic in the strategy is something like:'
   id: totrans-26
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 如果策略中的逻辑是这样的：
 - en: '[PRE2]'
   id: totrans-27
   prefs:
@@ -139,23 +164,27 @@
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 期望不能是订单将以正在逻辑中检查的`close`价格执行，因为它已经发生。
 - en: The order CAN BE 1^(st) EXECUTED withing the bounds of the next set of Open/High/Low/Close
     price points (and the conditions set forth herein by the order)
   id: totrans-29
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 订单可以在下一个一组开/高/低/收价格点的范围内（以及订单中规定的条件）第一次执行
 - en: Volume does not play a role
   id: totrans-30
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 交易量不起作用
 - en: It actually does in real trading if the trader goes for non-liquid assets or
     precisely the extremes (high/low) of a price bar are hit.
   id: totrans-31
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 如果交易者选择非流动资产或者精确地击中价格柱的极端点（高/低），它在实际交易中确实会发生。
 - en: But hitting the high/low points is a seldom occurrence (if you do … you don’t
     need `backtrader`) and the chosen assets will have enough liquidity to absorb
     the orders of any regular trading
@@ -163,58 +192,70 @@
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 但是击中高/低点是很少发生的（如果你这样做...你就不需要`backtrader`），并且所选择的资产将有足够的流动性来吸收任何常规交易的订单
 - en: Market
   id: totrans-33
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 市场
 - en: 'Execution:'
   id: totrans-34
   prefs: []
   type: TYPE_NORMAL
+  zh: 执行：
 - en: Opening price of the next set of Open/High/Low/Close prices (commonly referred
     as *bar*)
   id: totrans-35
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 下一个一组开/高/低/收价格的开盘价（通常称为*柱*）
 - en: 'Rationale:'
   id: totrans-36
   prefs: []
   type: TYPE_NORMAL
+  zh: 原因：
 - en: If the logic has executed at point X in time and issued a `Market` order, the
     next price spot that will happen is the upcoming `open` price
   id: totrans-37
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 如果逻辑在时间点X执行并发出`Market`订单，那么接下来会发生的价格是即将到来的`open`价格
 - en: Note
   id: totrans-38
   prefs: []
   type: TYPE_NORMAL
+  zh: 注意
 - en: This order executes always and disregards any `price` and `valid` parameters
     used to create it
   id: totrans-39
   prefs: []
   type: TYPE_NORMAL
+  zh: 这个订单总是执行，并且忽略了用于创建它的`price`和`valid`参数
 - en: Close
   id: totrans-40
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: Close
 - en: 'Execution:'
   id: totrans-41
   prefs: []
   type: TYPE_NORMAL
+  zh: 执行：
 - en: Using the `close` price of the next barwhen the next bar actually CLOSES
   id: totrans-42
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 当下一个柱子实际关闭时，使用下一个柱子的`close`价格
 - en: 'Rationale:'
   id: totrans-43
   prefs: []
   type: TYPE_NORMAL
+  zh: 原因：
 - en: Most **backtesting** feeds contain already **closed** bars and the order will
     execute immediately with the `close` price of the next bar. A daily data feed
     is the most common example.
@@ -222,6 +263,7 @@
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 大多数**回测**数据源已经包含了**关闭**的柱子，订单将立即以下一个柱子的`close`价格执行。日线数据源是最常见的例子。
 - en: But the system could be fed with “tick” prices and the actual bar (time/date
     wise) is being udpated constantly with the new ticks, without actually moving
     to the **next** bar (because time and/or date have not changed)
@@ -229,59 +271,70 @@
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 但是系统可以提供“tick”价格，并且实际柱（时间/日期方面）会不断更新新的tick，而不会实际移动到**下一个**柱（因为时间和/或日期尚未更改）
 - en: Only when the time or date changes, the bar has actually been closed and the
     order gets executed
   id: totrans-46
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 只有当时间或日期发生变化时，柱子才会真正关闭并执行订单
 - en: Limit
   id: totrans-47
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: Limit
 - en: 'Execution:'
   id: totrans-48
   prefs: []
   type: TYPE_NORMAL
+  zh: 执行：
 - en: The `price` set at order creation if the `data` touches it, starting with the
     next price bar.
   id: totrans-49
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 订单创建时设置的`price`，如果`data`触及它，从下一个价格柱开始。
 - en: The order will be canceled if `valid` is set and the time point is reached
   id: totrans-50
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 如果设置了`valid`且时间点已到达，则订单将被取消
 - en: 'Price Matching:'
   id: totrans-51
   prefs: []
   type: TYPE_NORMAL
+  zh: 价格匹配：
 - en: '`backtrader` tries to provide **most realistic execution price** for `Limit`
     orders.'
   id: totrans-52
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`backtrader`尝试为`Limit`订单提供**最逼真的执行价格**。'
 - en: Using the 4 price spots (Open/High/Low/Close) it can be partially inferred if
     the requested `price` can be improved.
   id: totrans-53
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 使用4个价格点（开盘价/最高价/最低价/收盘价），可以部分推断请求的`价格`是否可以改善。
 - en: For `Buy` Orders
   id: totrans-54
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 对于`Buy`订单
 - en: 'Case 1:'
   id: totrans-55
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 情况1：
 - en: If the `open` price of the bar is below the limit price the order executes immediately
     with the `open` price. The order has been swept during the opening phase of the
     session
@@ -290,12 +343,14 @@
   - PREF_IND
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 如果柱的`开盘`价低于限价，则订单立即以`开盘`价执行。订单已在会话开启阶段清算
 - en: 'Case 2:'
   id: totrans-57
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 情况2：
 - en: If the `open` price has not penetrated below the limit price but the `low` price
     is below the limit price, then the limit price has been seen during the session
     and the order can be executed
@@ -304,57 +359,68 @@
   - PREF_IND
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 如果`开盘`价没有穿过限价但`最低`价低于限价，则在会话期间已见到限价，订单可以执行
 - en: The logic is obviously inverted for `Sell` orders.
   id: totrans-59
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 对于`Sell`订单，逻辑显然是相反的。
 - en: Stop
   id: totrans-60
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 停止
 - en: 'Execution:'
   id: totrans-61
   prefs: []
   type: TYPE_NORMAL
+  zh: 执行：
 - en: The trigger `price` set at order creation if the `data` touches it, starting
     with the next price bar.
   id: totrans-62
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 如果`数据`触及触发`价格`，则设置在订单创建时，从下一个价格柱开始。
 - en: The order will be canceled if `valid` is set and the time point is reached
   id: totrans-63
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 如果设置了`valid`且时间点已到达，则订单将被取消
 - en: 'Price Matching:'
   id: totrans-64
   prefs: []
   type: TYPE_NORMAL
+  zh: 价格匹配：
 - en: '`backtrader` tries to provide **most realistic trigger price** for `Stop` orders.'
   id: totrans-65
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`backtrader`尝试为`Stop`订单提供**最逼真的触发价格**。'
 - en: Using the 4 price spots (Open/High/Low/Close) it can be partially inferred if
     the requested `price` can be improved.
   id: totrans-66
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 使用4个价格点（开盘价/最高价/最低价/收盘价），可以部分推断请求的`价格`是否可以改善。
 - en: For `\`Stop`orders which`Buy`
   id: totrans-67
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 对于`Buy`的`\`Stop`orders`
 - en: 'Case 1:'
   id: totrans-68
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 情况1：
 - en: If the `open` price of the bar is above the stop price the order is executed
     immediately with the `open` price.
   id: totrans-69
@@ -362,6 +428,7 @@
   - PREF_IND
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 如果柱的`开盘`价高于止损价，则订单立即以`开盘`价执行。
 - en: Intended to stop a loss if the price is moving upwards against an existing short
     position
   id: totrans-70
@@ -369,12 +436,14 @@
   - PREF_IND
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 旨在在价格向上移动反对现有空头头寸时停止损失
 - en: 'Case 2:'
   id: totrans-71
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 情况2：
 - en: If the `open` price has not penetrated above the stop price but the `high` price
     is above the stop price, then the stop price has been seen during the session
     and the order can be executed
@@ -383,76 +452,91 @@
   - PREF_IND
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 如果`开盘`价没有穿过止损价但`最高`价高于止损价，则在会话期间已见到止损价，订单可以执行
 - en: The logic is obviously inverted for `Stop` orders which `Sell`.
   id: totrans-73
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 对于`Sell`的`Stop`订单，逻辑显然是相反的。
 - en: StopLimit
   id: totrans-74
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 停止限价
 - en: 'Execution:'
   id: totrans-75
   prefs: []
   type: TYPE_NORMAL
+  zh: 执行：
 - en: The trigger `price` sets the order in motion starting with the next price bar.
   id: totrans-76
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 触发`价格`设置订单，从下一个价格柱开始。
 - en: 'Price Matching:'
   id: totrans-77
   prefs: []
   type: TYPE_NORMAL
+  zh: 价格匹配：
 - en: '**Trigger**: Uses the `Stop` matching logic (but only triggers and turns the
     order into a `Limit` order)'
   id: totrans-78
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**触发**：使用`Stop`匹配逻辑（但仅触发并将订单转换为`Limit`订单）'
 - en: '**Limit**: Uses the `Limit` price matching logic'
   id: totrans-79
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**限价**：使用`Limit`价格匹配逻辑'
 - en: Some samples
   id: totrans-80
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 一些样本
 - en: As always pictures (with code) are worth several million long explanations.
     Please note that the snippets concentrate on the order creation part. The full
     code is at the bottom.
   id: totrans-81
   prefs: []
   type: TYPE_NORMAL
+  zh: 一如既往，图片（带代码）价值数百万长的解释。请注意，片段集中在订单创建部分。完整代码在底部。
 - en: A *price closes above/below a simple moving average* strategy will be used for
     the generation of the buy/sell signals
   id: totrans-82
   prefs: []
   type: TYPE_NORMAL
+  zh: 使用*价格在简单移动平均线上/下方关闭*策略来生成买入/卖出信号
 - en: 'The signal is seen at the bottom of the charts: the `CrossOver` using the crossover
     indicator.'
   id: totrans-83
   prefs: []
   type: TYPE_NORMAL
+  zh: 信号在图表底部可见：使用交叉指示器的`CrossOver`。
 - en: A reference to generated “buy” orders will be kept to only allow one simultaneous
     order at most in the system.
   id: totrans-84
   prefs: []
   type: TYPE_NORMAL
+  zh: 将生成的“买入”订单的参考保留，以允许系统中最多同时存在一个订单。
 - en: 'Execution Type: Market'
   id: totrans-85
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 执行类型：市价
 - en: See in the chart how how the orders are executed one bar after the signal is
     generated with the opening price.
   id: totrans-86
   prefs: []
   type: TYPE_NORMAL
+  zh: 在图表中看到，订单是在信号生成后的一个价格柱后执行的，使用开盘价。
 - en: '[PRE3]'
   id: totrans-87
   prefs: []
@@ -462,14 +546,17 @@
   id: totrans-88
   prefs: []
   type: TYPE_NORMAL
+  zh: 输出图表。
 - en: '![image](../Images/49e4b0a5cc967a235fb702dd7aae0493.png)'
   id: totrans-89
   prefs: []
   type: TYPE_IMG
+  zh: '![image](../Images/49e4b0a5cc967a235fb702dd7aae0493.png)'
 - en: 'The command line and output:'
   id: totrans-90
   prefs: []
   type: TYPE_NORMAL
+  zh: 命令行和输出：
 - en: '[PRE4]'
   id: totrans-91
   prefs: []
@@ -480,11 +567,13 @@
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 执行类型：关闭
 - en: Now the orders are also executed one bar after the signal but with the closing
     price.
   id: totrans-93
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在订单也是在信号后一个柱执行的，但是使用收盘价。
 - en: '[PRE5]'
   id: totrans-94
   prefs: []
@@ -494,14 +583,17 @@
   id: totrans-95
   prefs: []
   type: TYPE_NORMAL
+  zh: 输出图表。
 - en: '![image](../Images/1dbc2cab1a8ab906cdec7e3815a25176.png)'
   id: totrans-96
   prefs: []
   type: TYPE_IMG
+  zh: '![image](../Images/1dbc2cab1a8ab906cdec7e3815a25176.png)'
 - en: 'The command line and output:'
   id: totrans-97
   prefs: []
   type: TYPE_NORMAL
+  zh: 命令行和输出：
 - en: '[PRE6]'
   id: totrans-98
   prefs: []
@@ -512,11 +604,13 @@
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 执行类型：限价
 - en: Validity is being calculated some lines before in case it has been passed as
     argument.
   id: totrans-100
   prefs: []
   type: TYPE_NORMAL
+  zh: 在几行之前计算有效性，以防已作为参数传递。
 - en: '[PRE7]'
   id: totrans-101
   prefs: []
