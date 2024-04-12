@@ -8631,6 +8631,7 @@
   id: totrans-1814
   prefs: []
   type: TYPE_NORMAL
+  zh: 绘图线：
 - en: '[PRE718]'
   id: totrans-1815
   prefs: []
@@ -8640,18 +8641,22 @@
   id: totrans-1816
   prefs: []
   type: TYPE_NORMAL
+  zh: PLUS_###DM
 - en: PLUS_DM([input_arrays], [timeperiod=14])
   id: totrans-1817
   prefs: []
   type: TYPE_NORMAL
+  zh: PLUS_DM（[输入数组]，[时间周期=14]）
 - en: Plus Directional Movement (Momentum Indicators)
   id: totrans-1818
   prefs: []
   type: TYPE_NORMAL
+  zh: 正向趋势指标（动量指标）
 - en: 'Inputs:'
   id: totrans-1819
   prefs: []
   type: TYPE_NORMAL
+  zh: 输入：
 - en: '[PRE719]'
   id: totrans-1820
   prefs: []
@@ -8661,6 +8666,7 @@
   id: totrans-1821
   prefs: []
   type: TYPE_NORMAL
+  zh: 参数：
 - en: '[PRE720]'
   id: totrans-1822
   prefs: []
@@ -8670,6 +8676,7 @@
   id: totrans-1823
   prefs: []
   type: TYPE_NORMAL
+  zh: 输出：
 - en: '[PRE721]'
   id: totrans-1824
   prefs: []
@@ -8679,6 +8686,7 @@
   id: totrans-1825
   prefs: []
   type: TYPE_NORMAL
+  zh: 线条：
 - en: '[PRE722]'
   id: totrans-1826
   prefs: []
@@ -8688,6 +8696,7 @@
   id: totrans-1827
   prefs: []
   type: TYPE_NORMAL
+  zh: 参数：
 - en: '[PRE723]'
   id: totrans-1828
   prefs: []
@@ -8697,6 +8706,7 @@
   id: totrans-1829
   prefs: []
   type: TYPE_NORMAL
+  zh: 绘图信息：
 - en: '[PRE724]'
   id: totrans-1830
   prefs: []
@@ -8706,6 +8716,7 @@
   id: totrans-1831
   prefs: []
   type: TYPE_NORMAL
+  zh: 绘图线：
 - en: '[PRE725]'
   id: totrans-1832
   prefs: []
@@ -8716,18 +8727,22 @@
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: PPO
 - en: PPO([input_arrays], [fastperiod=12], [slowperiod=26], [matype=0])
   id: totrans-1834
   prefs: []
   type: TYPE_NORMAL
+  zh: PPO（[输入数组]，[fastperiod=12]，[slowperiod=26]，[matype=0]）
 - en: Percentage Price Oscillator (Momentum Indicators)
   id: totrans-1835
   prefs: []
   type: TYPE_NORMAL
+  zh: 百分比价格振荡器（动量指标）
 - en: 'Inputs:'
   id: totrans-1836
   prefs: []
   type: TYPE_NORMAL
+  zh: 输入：
 - en: '[PRE726]'
   id: totrans-1837
   prefs: []
@@ -8737,6 +8752,7 @@
   id: totrans-1838
   prefs: []
   type: TYPE_NORMAL
+  zh: 参数：
 - en: '[PRE727]'
   id: totrans-1839
   prefs: []
@@ -8746,6 +8762,7 @@
   id: totrans-1840
   prefs: []
   type: TYPE_NORMAL
+  zh: 输出：
 - en: '[PRE728]'
   id: totrans-1841
   prefs: []
@@ -8755,6 +8772,7 @@
   id: totrans-1842
   prefs: []
   type: TYPE_NORMAL
+  zh: 线条：
 - en: '[PRE729]'
   id: totrans-1843
   prefs: []
@@ -8764,6 +8782,7 @@
   id: totrans-1844
   prefs: []
   type: TYPE_NORMAL
+  zh: 参数：
 - en: '[PRE730]'
   id: totrans-1845
   prefs: []
@@ -8773,6 +8792,7 @@
   id: totrans-1846
   prefs: []
   type: TYPE_NORMAL
+  zh: 绘图信息：
 - en: '[PRE731]'
   id: totrans-1847
   prefs: []
@@ -8782,6 +8802,7 @@
   id: totrans-1848
   prefs: []
   type: TYPE_NORMAL
+  zh: 绘图线：
 - en: '[PRE732]'
   id: totrans-1849
   prefs: []
@@ -8792,18 +8813,22 @@
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: ROC
 - en: ROC([input_arrays], [timeperiod=10])
   id: totrans-1851
   prefs: []
   type: TYPE_NORMAL
+  zh: ROC（[输入数组]，[时间周期=10]）
 - en: 'Rate of change : ((price/prevPrice)-1)*100 (Momentum Indicators)'
   id: totrans-1852
   prefs: []
   type: TYPE_NORMAL
+  zh: 变化率：((price/prevPrice)-1)*100（动量指标）
 - en: 'Inputs:'
   id: totrans-1853
   prefs: []
   type: TYPE_NORMAL
+  zh: 输入：
 - en: '[PRE733]'
   id: totrans-1854
   prefs: []
@@ -8813,6 +8838,7 @@
   id: totrans-1855
   prefs: []
   type: TYPE_NORMAL
+  zh: 参数：
 - en: '[PRE734]'
   id: totrans-1856
   prefs: []
@@ -8822,6 +8848,7 @@
   id: totrans-1857
   prefs: []
   type: TYPE_NORMAL
+  zh: 输出：
 - en: '[PRE735]'
   id: totrans-1858
   prefs: []
@@ -8831,6 +8858,7 @@
   id: totrans-1859
   prefs: []
   type: TYPE_NORMAL
+  zh: 线条：
 - en: '[PRE736]'
   id: totrans-1860
   prefs: []
@@ -8840,6 +8868,7 @@
   id: totrans-1861
   prefs: []
   type: TYPE_NORMAL
+  zh: 参数：
 - en: '[PRE737]'
   id: totrans-1862
   prefs: []
@@ -8849,6 +8878,7 @@
   id: totrans-1863
   prefs: []
   type: TYPE_NORMAL
+  zh: 绘图信息：
 - en: '[PRE738]'
   id: totrans-1864
   prefs: []
@@ -8858,6 +8888,7 @@
   id: totrans-1865
   prefs: []
   type: TYPE_NORMAL
+  zh: 绘图线：
 - en: '[PRE739]'
   id: totrans-1866
   prefs: []
@@ -8868,18 +8899,22 @@
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: ROCP
 - en: ROCP([input_arrays], [timeperiod=10])
   id: totrans-1868
   prefs: []
   type: TYPE_NORMAL
+  zh: ROCP（[输入数组]，[时间周期=10]）
 - en: 'Rate of change Percentage: (price-prevPrice)/prevPrice (Momentum Indicators)'
   id: totrans-1869
   prefs: []
   type: TYPE_NORMAL
+  zh: 变化率百分比：(price-prevPrice)/prevPrice（动量指标）
 - en: 'Inputs:'
   id: totrans-1870
   prefs: []
   type: TYPE_NORMAL
+  zh: 输入：
 - en: '[PRE740]'
   id: totrans-1871
   prefs: []
@@ -8889,6 +8924,7 @@
   id: totrans-1872
   prefs: []
   type: TYPE_NORMAL
+  zh: 参数：
 - en: '[PRE741]'
   id: totrans-1873
   prefs: []
@@ -8898,6 +8934,7 @@
   id: totrans-1874
   prefs: []
   type: TYPE_NORMAL
+  zh: 输出：
 - en: '[PRE742]'
   id: totrans-1875
   prefs: []
@@ -8907,6 +8944,7 @@
   id: totrans-1876
   prefs: []
   type: TYPE_NORMAL
+  zh: 线条：
 - en: '[PRE743]'
   id: totrans-1877
   prefs: []
@@ -8916,6 +8954,7 @@
   id: totrans-1878
   prefs: []
   type: TYPE_NORMAL
+  zh: 参数：
 - en: '[PRE744]'
   id: totrans-1879
   prefs: []
@@ -8925,6 +8964,7 @@
   id: totrans-1880
   prefs: []
   type: TYPE_NORMAL
+  zh: 绘图信息：
 - en: '[PRE745]'
   id: totrans-1881
   prefs: []
@@ -8934,6 +8974,7 @@
   id: totrans-1882
   prefs: []
   type: TYPE_NORMAL
+  zh: 绘图线：
 - en: '[PRE746]'
   id: totrans-1883
   prefs: []
@@ -8944,18 +8985,22 @@
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: ROCR
 - en: ROCR([input_arrays], [timeperiod=10])
   id: totrans-1885
   prefs: []
   type: TYPE_NORMAL
+  zh: ROCR（[输入数组]，[时间周期=10]）
 - en: 'Rate of change ratio: (price/prevPrice) (Momentum Indicators)'
   id: totrans-1886
   prefs: []
   type: TYPE_NORMAL
+  zh: 变化率比率：（price/prevPrice）（动量指标）
 - en: 'Inputs:'
   id: totrans-1887
   prefs: []
   type: TYPE_NORMAL
+  zh: 输入：
 - en: '[PRE747]'
   id: totrans-1888
   prefs: []
@@ -8965,6 +9010,7 @@
   id: totrans-1889
   prefs: []
   type: TYPE_NORMAL
+  zh: 参数：
 - en: '[PRE748]'
   id: totrans-1890
   prefs: []
@@ -8974,6 +9020,7 @@
   id: totrans-1891
   prefs: []
   type: TYPE_NORMAL
+  zh: 输出：
 - en: '[PRE749]'
   id: totrans-1892
   prefs: []
@@ -8983,6 +9030,7 @@
   id: totrans-1893
   prefs: []
   type: TYPE_NORMAL
+  zh: 线条：
 - en: '[PRE750]'
   id: totrans-1894
   prefs: []
@@ -8992,6 +9040,7 @@
   id: totrans-1895
   prefs: []
   type: TYPE_NORMAL
+  zh: 参数：
 - en: '[PRE751]'
   id: totrans-1896
   prefs: []
@@ -9001,6 +9050,7 @@
   id: totrans-1897
   prefs: []
   type: TYPE_NORMAL
+  zh: 绘图信息：
 - en: '[PRE752]'
   id: totrans-1898
   prefs: []
@@ -9010,6 +9060,7 @@
   id: totrans-1899
   prefs: []
   type: TYPE_NORMAL
+  zh: 绘图线：
 - en: '[PRE753]'
   id: totrans-1900
   prefs: []
@@ -9019,18 +9070,22 @@
   id: totrans-1901
   prefs: []
   type: TYPE_NORMAL
+  zh: ROCR100
 - en: ROCR100([input_arrays], [timeperiod=10])
   id: totrans-1902
   prefs: []
   type: TYPE_NORMAL
+  zh: ROCR100（[输入数组]，[时间周期=10]）
 - en: 'Rate of change ratio 100 scale: (price/prevPrice)*100 (Momentum Indicators)'
   id: totrans-1903
   prefs: []
   type: TYPE_NORMAL
+  zh: 百分比价格振荡比率 100 比例：（价格/prevPrice）*100（动量指标）
 - en: 'Inputs:'
   id: totrans-1904
   prefs: []
   type: TYPE_NORMAL
+  zh: 输入：
 - en: '[PRE754]'
   id: totrans-1905
   prefs: []
@@ -9040,6 +9095,7 @@
   id: totrans-1906
   prefs: []
   type: TYPE_NORMAL
+  zh: 参数：
 - en: '[PRE755]'
   id: totrans-1907
   prefs: []
@@ -9049,6 +9105,7 @@
   id: totrans-1908
   prefs: []
   type: TYPE_NORMAL
+  zh: 输出：
 - en: '[PRE756]'
   id: totrans-1909
   prefs: []
@@ -9058,6 +9115,7 @@
   id: totrans-1910
   prefs: []
   type: TYPE_NORMAL
+  zh: 线条：
 - en: '[PRE757]'
   id: totrans-1911
   prefs: []
@@ -9067,6 +9125,7 @@
   id: totrans-1912
   prefs: []
   type: TYPE_NORMAL
+  zh: 参数：
 - en: '[PRE758]'
   id: totrans-1913
   prefs: []
@@ -9076,6 +9135,7 @@
   id: totrans-1914
   prefs: []
   type: TYPE_NORMAL
+  zh: 绘图信息：
 - en: '[PRE759]'
   id: totrans-1915
   prefs: []
@@ -9085,6 +9145,7 @@
   id: totrans-1916
   prefs: []
   type: TYPE_NORMAL
+  zh: 绘图线：
 - en: '[PRE760]'
   id: totrans-1917
   prefs: []
@@ -9095,18 +9156,22 @@
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: RSI
 - en: RSI([input_arrays], [timeperiod=14])
   id: totrans-1919
   prefs: []
   type: TYPE_NORMAL
+  zh: RSI（[输入数组]，[时间周期=14]）
 - en: Relative Strength Index (Momentum Indicators)
   id: totrans-1920
   prefs: []
   type: TYPE_NORMAL
+  zh: 相对强度指数（动量指标）
 - en: 'Inputs:'
   id: totrans-1921
   prefs: []
   type: TYPE_NORMAL
+  zh: 输入：
 - en: '[PRE761]'
   id: totrans-1922
   prefs: []
@@ -9116,6 +9181,7 @@
   id: totrans-1923
   prefs: []
   type: TYPE_NORMAL
+  zh: 参数：
 - en: '[PRE762]'
   id: totrans-1924
   prefs: []
@@ -9125,6 +9191,7 @@
   id: totrans-1925
   prefs: []
   type: TYPE_NORMAL
+  zh: 输出：
 - en: '[PRE763]'
   id: totrans-1926
   prefs: []
@@ -9134,6 +9201,7 @@
   id: totrans-1927
   prefs: []
   type: TYPE_NORMAL
+  zh: 线条：
 - en: '[PRE764]'
   id: totrans-1928
   prefs: []
@@ -9143,6 +9211,7 @@
   id: totrans-1929
   prefs: []
   type: TYPE_NORMAL
+  zh: 参数：
 - en: '[PRE765]'
   id: totrans-1930
   prefs: []
@@ -9152,6 +9221,7 @@
   id: totrans-1931
   prefs: []
   type: TYPE_NORMAL
+  zh: 绘图信息：
 - en: '[PRE766]'
   id: totrans-1932
   prefs: []
@@ -9161,6 +9231,7 @@
   id: totrans-1933
   prefs: []
   type: TYPE_NORMAL
+  zh: 绘图线：
 - en: '[PRE767]'
   id: totrans-1934
   prefs: []
@@ -9171,18 +9242,22 @@
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: SAR
 - en: SAR([input_arrays], [acceleration=0.02], [maximum=0.2])
   id: totrans-1936
   prefs: []
   type: TYPE_NORMAL
+  zh: SAR（[输入数组]，[acceleration=0.02]，[maximum=0.2]）
 - en: Parabolic SAR (Overlap Studies)
   id: totrans-1937
   prefs: []
   type: TYPE_NORMAL
+  zh: 抛物线 SAR（重叠研究）
 - en: 'Inputs:'
   id: totrans-1938
   prefs: []
   type: TYPE_NORMAL
+  zh: 输入：
 - en: '[PRE768]'
   id: totrans-1939
   prefs: []
@@ -9192,6 +9267,7 @@
   id: totrans-1940
   prefs: []
   type: TYPE_NORMAL
+  zh: 参数：
 - en: '[PRE769]'
   id: totrans-1941
   prefs: []
@@ -9201,6 +9277,7 @@
   id: totrans-1942
   prefs: []
   type: TYPE_NORMAL
+  zh: 输出：
 - en: '[PRE770]'
   id: totrans-1943
   prefs: []
@@ -9210,6 +9287,7 @@
   id: totrans-1944
   prefs: []
   type: TYPE_NORMAL
+  zh: 线条：
 - en: '[PRE771]'
   id: totrans-1945
   prefs: []
@@ -9219,6 +9297,7 @@
   id: totrans-1946
   prefs: []
   type: TYPE_NORMAL
+  zh: 参数：
 - en: '[PRE772]'
   id: totrans-1947
   prefs: []
@@ -9228,6 +9307,7 @@
   id: totrans-1948
   prefs: []
   type: TYPE_NORMAL
+  zh: 绘图信息：
 - en: '[PRE773]'
   id: totrans-1949
   prefs: []
@@ -9237,6 +9317,7 @@
   id: totrans-1950
   prefs: []
   type: TYPE_NORMAL
+  zh: 绘图线：
 - en: '[PRE774]'
   id: totrans-1951
   prefs: []
@@ -9247,20 +9328,24 @@
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: SAREXT
 - en: SAREXT([input_arrays], [startvalue=0], [offsetonreverse=0], [accelerationinitlong=0.02],
     [accelerationlong=0.02], [accelerationmaxlong=0.2], [accelerationinitshort=0.02],
     [accelerationshort=0.02], [accelerationmaxshort=0.2])
   id: totrans-1953
   prefs: []
   type: TYPE_NORMAL
+  zh: SAREXT（[输入数组]，[startvalue=0]，[offsetonreverse=0]，[accelerationinitlong=0.02]，[accelerationlong=0.02]，[accelerationmaxlong=0.2]，[accelerationinitshort=0.02]，[accelerationshort=0.02]，[accelerationmaxshort=0.2]）
 - en: Parabolic SAR - Extended (Overlap Studies)
   id: totrans-1954
   prefs: []
   type: TYPE_NORMAL
+  zh: 抛物线 SAR - 扩展（重叠研究）
 - en: 'Inputs:'
   id: totrans-1955
   prefs: []
   type: TYPE_NORMAL
+  zh: 输入：
 - en: '[PRE775]'
   id: totrans-1956
   prefs: []
@@ -9270,6 +9355,7 @@
   id: totrans-1957
   prefs: []
   type: TYPE_NORMAL
+  zh: 参数：
 - en: '[PRE776]'
   id: totrans-1958
   prefs: []
@@ -9279,6 +9365,7 @@
   id: totrans-1959
   prefs: []
   type: TYPE_NORMAL
+  zh: 输出：
 - en: '[PRE777]'
   id: totrans-1960
   prefs: []
@@ -9288,6 +9375,7 @@
   id: totrans-1961
   prefs: []
   type: TYPE_NORMAL
+  zh: 线条：
 - en: '[PRE778]'
   id: totrans-1962
   prefs: []
@@ -9297,6 +9385,7 @@
   id: totrans-1963
   prefs: []
   type: TYPE_NORMAL
+  zh: 参数：
 - en: '[PRE779]'
   id: totrans-1964
   prefs: []
@@ -9306,6 +9395,7 @@
   id: totrans-1965
   prefs: []
   type: TYPE_NORMAL
+  zh: 绘图信息：
 - en: '[PRE780]'
   id: totrans-1966
   prefs: []
@@ -9315,6 +9405,7 @@
   id: totrans-1967
   prefs: []
   type: TYPE_NORMAL
+  zh: 绘图线：
 - en: '[PRE781]'
   id: totrans-1968
   prefs: []
@@ -9325,18 +9416,22 @@
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: SIN
 - en: SIN([input_arrays])
   id: totrans-1970
   prefs: []
   type: TYPE_NORMAL
+  zh: SIN（[输入数组]）
 - en: Vector Trigonometric Sin (Math Transform)
   id: totrans-1971
   prefs: []
   type: TYPE_NORMAL
+  zh: 矢量双曲正弦（数学转换）
 - en: 'Inputs:'
   id: totrans-1972
   prefs: []
   type: TYPE_NORMAL
+  zh: 输入：
 - en: '[PRE782]'
   id: totrans-1973
   prefs: []
@@ -9346,6 +9441,7 @@
   id: totrans-1974
   prefs: []
   type: TYPE_NORMAL
+  zh: 输出：
 - en: '[PRE783]'
   id: totrans-1975
   prefs: []
@@ -9355,6 +9451,7 @@
   id: totrans-1976
   prefs: []
   type: TYPE_NORMAL
+  zh: 线条：
 - en: '[PRE784]'
   id: totrans-1977
   prefs: []
@@ -9364,6 +9461,7 @@
   id: totrans-1978
   prefs: []
   type: TYPE_NORMAL
+  zh: 绘图信息：
 - en: '[PRE785]'
   id: totrans-1979
   prefs: []
@@ -9373,6 +9471,7 @@
   id: totrans-1980
   prefs: []
   type: TYPE_NORMAL
+  zh: 绘图线：
 - en: '[PRE786]'
   id: totrans-1981
   prefs: []
@@ -9383,18 +9482,22 @@
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: SINH
 - en: SINH([input_arrays])
   id: totrans-1983
   prefs: []
   type: TYPE_NORMAL
+  zh: SINH（[输入数组]）
 - en: Vector Trigonometric Sinh (Math Transform)
   id: totrans-1984
   prefs: []
   type: TYPE_NORMAL
+  zh: 矢量双曲正弦（数学转换）
 - en: 'Inputs:'
   id: totrans-1985
   prefs: []
   type: TYPE_NORMAL
+  zh: 输入：
 - en: '[PRE787]'
   id: totrans-1986
   prefs: []
@@ -9404,6 +9507,7 @@
   id: totrans-1987
   prefs: []
   type: TYPE_NORMAL
+  zh: 输出：
 - en: '[PRE788]'
   id: totrans-1988
   prefs: []
@@ -9413,6 +9517,7 @@
   id: totrans-1989
   prefs: []
   type: TYPE_NORMAL
+  zh: 线条：
 - en: '[PRE789]'
   id: totrans-1990
   prefs: []
@@ -9422,6 +9527,7 @@
   id: totrans-1991
   prefs: []
   type: TYPE_NORMAL
+  zh: 绘图信息：
 - en: '[PRE790]'
   id: totrans-1992
   prefs: []
@@ -9431,6 +9537,7 @@
   id: totrans-1993
   prefs: []
   type: TYPE_NORMAL
+  zh: 绘图线：
 - en: '[PRE791]'
   id: totrans-1994
   prefs: []
@@ -9441,18 +9548,22 @@
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: SMA
 - en: SMA([input_arrays], [timeperiod=30])
   id: totrans-1996
   prefs: []
   type: TYPE_NORMAL
+  zh: SMA（[输入数组]，[时间周期=30]）
 - en: Simple Moving Average (Overlap Studies)
   id: totrans-1997
   prefs: []
   type: TYPE_NORMAL
+  zh: 简单移动平均线（重叠研究）
 - en: 'Inputs:'
   id: totrans-1998
   prefs: []
   type: TYPE_NORMAL
+  zh: 输入：
 - en: '[PRE792]'
   id: totrans-1999
   prefs: []
@@ -9462,6 +9573,7 @@
   id: totrans-2000
   prefs: []
   type: TYPE_NORMAL
+  zh: 参数：
 - en: '[PRE793]'
   id: totrans-2001
   prefs: []
@@ -9471,6 +9583,7 @@
   id: totrans-2002
   prefs: []
   type: TYPE_NORMAL
+  zh: 输出：
 - en: '[PRE794]'
   id: totrans-2003
   prefs: []
@@ -9480,6 +9593,7 @@
   id: totrans-2004
   prefs: []
   type: TYPE_NORMAL
+  zh: 线条：
 - en: '[PRE795]'
   id: totrans-2005
   prefs: []
@@ -9489,6 +9603,7 @@
   id: totrans-2006
   prefs: []
   type: TYPE_NORMAL
+  zh: 参数：
 - en: '[PRE796]'
   id: totrans-2007
   prefs: []
@@ -9498,6 +9613,7 @@
   id: totrans-2008
   prefs: []
   type: TYPE_NORMAL
+  zh: 绘图信息：
 - en: '[PRE797]'
   id: totrans-2009
   prefs: []
@@ -9507,6 +9623,7 @@
   id: totrans-2010
   prefs: []
   type: TYPE_NORMAL
+  zh: 绘图线：
 - en: '[PRE798]'
   id: totrans-2011
   prefs: []
@@ -9517,18 +9634,22 @@
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: SQRT
 - en: SQRT([input_arrays])
   id: totrans-2013
   prefs: []
   type: TYPE_NORMAL
+  zh: SQRT（[输入数组]）
 - en: Vector Square Root (Math Transform)
   id: totrans-2014
   prefs: []
   type: TYPE_NORMAL
+  zh: 矢量平方根（数学转换）
 - en: 'Inputs:'
   id: totrans-2015
   prefs: []
   type: TYPE_NORMAL
+  zh: 输入：
 - en: '[PRE799]'
   id: totrans-2016
   prefs: []
@@ -9538,6 +9659,7 @@
   id: totrans-2017
   prefs: []
   type: TYPE_NORMAL
+  zh: 输出：
 - en: '[PRE800]'
   id: totrans-2018
   prefs: []
@@ -9547,6 +9669,7 @@
   id: totrans-2019
   prefs: []
   type: TYPE_NORMAL
+  zh: 线条：
 - en: '[PRE801]'
   id: totrans-2020
   prefs: []
@@ -9556,6 +9679,7 @@
   id: totrans-2021
   prefs: []
   type: TYPE_NORMAL
+  zh: 绘图信息：
 - en: '[PRE802]'
   id: totrans-2022
   prefs: []
@@ -9565,6 +9689,7 @@
   id: totrans-2023
   prefs: []
   type: TYPE_NORMAL
+  zh: 绘图线：
 - en: '[PRE803]'
   id: totrans-2024
   prefs: []
@@ -9575,18 +9700,22 @@
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: STDDEV
 - en: STDDEV([input_arrays], [timeperiod=5], [nbdev=1])
   id: totrans-2026
   prefs: []
   type: TYPE_NORMAL
+  zh: STDDEV（[输入数组]，[时间周期=5]，[nbdev=1]）
 - en: Standard Deviation (Statistic Functions)
   id: totrans-2027
   prefs: []
   type: TYPE_NORMAL
+  zh: 标准差（统计函数）
 - en: 'Inputs:'
   id: totrans-2028
   prefs: []
   type: TYPE_NORMAL
+  zh: 输入：
 - en: '[PRE804]'
   id: totrans-2029
   prefs: []
@@ -9596,6 +9725,7 @@
   id: totrans-2030
   prefs: []
   type: TYPE_NORMAL
+  zh: 参数：
 - en: '[PRE805]'
   id: totrans-2031
   prefs: []
@@ -9605,6 +9735,7 @@
   id: totrans-2032
   prefs: []
   type: TYPE_NORMAL
+  zh: 输出：
 - en: '[PRE806]'
   id: totrans-2033
   prefs: []
@@ -9614,6 +9745,7 @@
   id: totrans-2034
   prefs: []
   type: TYPE_NORMAL
+  zh: 线条：
 - en: '[PRE807]'
   id: totrans-2035
   prefs: []
@@ -9623,6 +9755,7 @@
   id: totrans-2036
   prefs: []
   type: TYPE_NORMAL
+  zh: 参数：
 - en: '[PRE808]'
   id: totrans-2037
   prefs: []
@@ -9632,6 +9765,7 @@
   id: totrans-2038
   prefs: []
   type: TYPE_NORMAL
+  zh: 绘图信息：
 - en: '[PRE809]'
   id: totrans-2039
   prefs: []
@@ -9641,6 +9775,7 @@
   id: totrans-2040
   prefs: []
   type: TYPE_NORMAL
+  zh: 绘图线：
 - en: '[PRE810]'
   id: totrans-2041
   prefs: []
@@ -9651,19 +9786,23 @@
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: STOCH
 - en: STOCH([input_arrays], [fastk_period=5], [slowk_period=3], [slowk_matype=0],
     [slowd_period=3], [slowd_matype=0])
   id: totrans-2043
   prefs: []
   type: TYPE_NORMAL
+  zh: STOCH（[输入数组]，[fastk_period=5]，[slowk_period=3]，[slowk_matype=0]，[slowd_period=3]，[slowd_matype=0]）
 - en: Stochastic (Momentum Indicators)
   id: totrans-2044
   prefs: []
   type: TYPE_NORMAL
+  zh: 随机线（动量指标）
 - en: 'Inputs:'
   id: totrans-2045
   prefs: []
   type: TYPE_NORMAL
+  zh: 输入：
 - en: '[PRE811]'
   id: totrans-2046
   prefs: []
@@ -9673,6 +9812,7 @@
   id: totrans-2047
   prefs: []
   type: TYPE_NORMAL
+  zh: 参数：
 - en: '[PRE812]'
   id: totrans-2048
   prefs: []
@@ -9682,6 +9822,7 @@
   id: totrans-2049
   prefs: []
   type: TYPE_NORMAL
+  zh: 输出：
 - en: '[PRE813]'
   id: totrans-2050
   prefs: []
@@ -9691,6 +9832,7 @@
   id: totrans-2051
   prefs: []
   type: TYPE_NORMAL
+  zh: 线条：
 - en: '[PRE814]'
   id: totrans-2052
   prefs: []
@@ -9700,6 +9842,7 @@
   id: totrans-2053
   prefs: []
   type: TYPE_NORMAL
+  zh: 参数：
 - en: '[PRE815]'
   id: totrans-2054
   prefs: []
@@ -9709,6 +9852,7 @@
   id: totrans-2055
   prefs: []
   type: TYPE_NORMAL
+  zh: 绘图信息：
 - en: '[PRE816]'
   id: totrans-2056
   prefs: []
@@ -9718,6 +9862,7 @@
   id: totrans-2057
   prefs: []
   type: TYPE_NORMAL
+  zh: 绘图线：
 - en: '[PRE817]'
   id: totrans-2058
   prefs: []
@@ -9728,18 +9873,22 @@
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: STOCHF
 - en: STOCHF([input_arrays], [fastk_period=5], [fastd_period=3], [fastd_matype=0])
   id: totrans-2060
   prefs: []
   type: TYPE_NORMAL
+  zh: STOCHF（[输入数组]，[fastk_period=5]，[fastd_period=3]，[fastd_matype=0]）
 - en: Stochastic Fast (Momentum Indicators)
   id: totrans-2061
   prefs: []
   type: TYPE_NORMAL
+  zh: 快速随机线（动量指标）
 - en: 'Inputs:'
   id: totrans-2062
   prefs: []
   type: TYPE_NORMAL
+  zh: 输入：
 - en: '[PRE818]'
   id: totrans-2063
   prefs: []
@@ -9749,6 +9898,7 @@
   id: totrans-2064
   prefs: []
   type: TYPE_NORMAL
+  zh: 参数：
 - en: '[PRE819]'
   id: totrans-2065
   prefs: []
@@ -9758,6 +9908,7 @@
   id: totrans-2066
   prefs: []
   type: TYPE_NORMAL
+  zh: 输出：
 - en: '[PRE820]'
   id: totrans-2067
   prefs: []
@@ -9767,6 +9918,7 @@
   id: totrans-2068
   prefs: []
   type: TYPE_NORMAL
+  zh: 线条：
 - en: '[PRE821]'
   id: totrans-2069
   prefs: []
@@ -9776,6 +9928,7 @@
   id: totrans-2070
   prefs: []
   type: TYPE_NORMAL
+  zh: 参数：
 - en: '[PRE822]'
   id: totrans-2071
   prefs: []
@@ -9785,6 +9938,7 @@
   id: totrans-2072
   prefs: []
   type: TYPE_NORMAL
+  zh: 绘图信息：
 - en: '[PRE823]'
   id: totrans-2073
   prefs: []
@@ -9794,6 +9948,7 @@
   id: totrans-2074
   prefs: []
   type: TYPE_NORMAL
+  zh: 绘图线：
 - en: '[PRE824]'
   id: totrans-2075
   prefs: []
@@ -9804,19 +9959,23 @@
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: STOCHRSI
 - en: STOCHRSI([input_arrays], [timeperiod=14], [fastk_period=5], [fastd_period=3],
     [fastd_matype=0])
   id: totrans-2077
   prefs: []
   type: TYPE_NORMAL
+  zh: STOCHRSI（[输入数组]，[时间周期=14]，[fastk_period=5]，[fastd_period=3]，[fastd_matype=0]）
 - en: Stochastic Relative Strength Index (Momentum Indicators)
   id: totrans-2078
   prefs: []
   type: TYPE_NORMAL
+  zh: 随机相对强度指数（动量指标）
 - en: 'Inputs:'
   id: totrans-2079
   prefs: []
   type: TYPE_NORMAL
+  zh: 输入：
 - en: '[PRE825]'
   id: totrans-2080
   prefs: []
@@ -9826,6 +9985,7 @@
   id: totrans-2081
   prefs: []
   type: TYPE_NORMAL
+  zh: 参数：
 - en: '[PRE826]'
   id: totrans-2082
   prefs: []
@@ -9835,6 +9995,7 @@
   id: totrans-2083
   prefs: []
   type: TYPE_NORMAL
+  zh: 输出：
 - en: '[PRE827]'
   id: totrans-2084
   prefs: []
@@ -9844,6 +10005,7 @@
   id: totrans-2085
   prefs: []
   type: TYPE_NORMAL
+  zh: 线条：
 - en: '[PRE828]'
   id: totrans-2086
   prefs: []
@@ -9853,6 +10015,7 @@
   id: totrans-2087
   prefs: []
   type: TYPE_NORMAL
+  zh: 参数：
 - en: '[PRE829]'
   id: totrans-2088
   prefs: []
@@ -9862,6 +10025,7 @@
   id: totrans-2089
   prefs: []
   type: TYPE_NORMAL
+  zh: 绘图信息：
 - en: '[PRE830]'
   id: totrans-2090
   prefs: []
@@ -9871,6 +10035,7 @@
   id: totrans-2091
   prefs: []
   type: TYPE_NORMAL
+  zh: 绘图线：
 - en: '[PRE831]'
   id: totrans-2092
   prefs: []
@@ -9881,6 +10046,7 @@
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: SUB
 - en: SUB([input_arrays])
   id: totrans-2094
   prefs: []
