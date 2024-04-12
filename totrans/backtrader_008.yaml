@@ -1,173 +1,262 @@
 - en: Education - Papers
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 教育 - 论文
 - en: 原文：[https://www.backtrader.com/home/references/education/](https://www.backtrader.com/home/references/education/)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.backtrader.com/home/references/education/](https://www.backtrader.com/home/references/education/)
 - en: aCubeIT - Institute of Artificial Intelligenge
+  id: totrans-2
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: aCubeIT - 人工智能学院
 - en: Selling a course which includes the use of *backtrader* to make predictive algorithms.
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: 出售一门课程，其中包括使用 *backtrader* 制作预测算法。
 - en: '[Stock Prediction Based On Sentiment Analysis](https://acubeit.com/stock-prediction-based-on-sentiment-analysis/)'
+  id: totrans-4
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[基于情感分析的股票预测](https://acubeit.com/stock-prediction-based-on-sentiment-analysis/)'
 - en: Arxiv.org - Kartikay Gupta (corresponding author), Niladri Chatterjee
+  id: totrans-5
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: Arxiv.org - Kartikay Gupta（通讯作者），Niladri Chatterjee
 - en: '[SELECTING STOCK PAIRS FOR PAIRS TRADING WHILE INCORPORATING LEAD-LAG RELATIONSHIP](https://arxiv.org/ftp/arxiv/papers/1906/1906.05057.pdf)'
+  id: totrans-6
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[在考虑先导滞后关系的情况下选择股票对进行对冲交易](https://arxiv.org/ftp/arxiv/papers/1906/1906.05057.pdf)'
 - en: Brock University
+  id: totrans-7
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 布罗克大学
 - en: '[Using Deep Learning for Predicting Stock Trend](https://dr.library.brocku.ca/bitstream/handle/10464/14506/Brock_Fazeli_Arvand_2019.pdf)'
+  id: totrans-8
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[使用深度学习预测股票趋势](https://dr.library.brocku.ca/bitstream/handle/10464/14506/Brock_Fazeli_Arvand_2019.pdf)'
 - en: Columbia University
+  id: totrans-9
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 哥伦比亚大学
 - en: '[Masters Program in Mathematics of Finance](http://www.math.columbia.edu/mafn/wp-content/uploads/2018/10/Early-Regular-Summer-Employment-Candidates-10-25-2018.pdf)'
+  id: totrans-10
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[金融数学硕士项目](http://www.math.columbia.edu/mafn/wp-content/uploads/2018/10/Early-Regular-Summer-Employment-Candidates-10-25-2018.pdf)'
 - en: Some students in the Columbia University "Masters Program in Mathematics of
     Finance" list backtrader in the resumes
+  id: totrans-11
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 哥伦比亚大学“金融数学硕士项目”中的一些学生在简历中列出了 backtrader
 - en: Earlham College
+  id: totrans-12
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 伊尔汉姆学院
 - en: '[Examine different neural networks’ efficiency in predicting stock price](https://portfolios.cs.earlham.edu/wp-content/uploads/2017/12/examine-neural-networks-1.pdf)'
+  id: totrans-13
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[检验不同神经网络在预测股票价格方面的效率](https://portfolios.cs.earlham.edu/wp-content/uploads/2017/12/examine-neural-networks-1.pdf)'
 - en: ETH Zurich - Alain Glücksmann - Master Thesis
+  id: totrans-14
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 苏黎世联邦理工学院 - Alain Glücksmann - 硕士论文
 - en: '[Backtesting of Trading Strategies for Bitcoin](https://www.ethz.ch/content/dam/ethz/special-interest/mtec/chair-of-entrepreneurial-risks-dam/documents/dissertation/master%20thesis/Master_Thesis_Gl%C3%BCcksmann_13June2019.pdf)'
+  id: totrans-15
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[比特币交易策略的回测](https://www.ethz.ch/content/dam/ethz/special-interest/mtec/chair-of-entrepreneurial-risks-dam/documents/dissertation/master%20thesis/Master_Thesis_Gl%C3%BCcksmann_13June2019.pdf)'
 - en: FACULTY OF INFORMATION TECHNOLOGY DEPARTMENT OF COMPUTER GRAPHICS AND MULTIMEDIA
+  id: totrans-16
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 信息技术学院计算机图形与多媒体系
 - en: '**Brno** - Czech Republic'
+  id: totrans-17
   prefs: []
   type: TYPE_NORMAL
+  zh: '**布尔诺** - 捷克共和国'
 - en: '[ALGORITHMIC TRADING USING ARTIFICIAL NEURAL NETWORKS](https://core.ac.uk/download/pdf/44404873.pdf)'
+  id: totrans-18
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[使用人工神经网络进行算法交易](https://core.ac.uk/download/pdf/44404873.pdf)'
 - en: Master's Thesis
+  id: totrans-19
   prefs: []
   type: TYPE_NORMAL
+  zh: 硕士论文
 - en: 'Language: *Czech*'
+  id: totrans-20
   prefs: []
   type: TYPE_NORMAL
+  zh: 语言：*捷克语*
 - en: (The) Hong Kong University of Science and Technology
+  id: totrans-21
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 香港科技大学
 - en: '[A System for Comparative Analysis of Different Stock Prediction Methodologies
     for Beginner Investors http://www.cse.ust.hk/~rossiter/fyp/90_RO3_Final_201819.pdf](http://www.cse.ust.hk/~rossiter/fyp/90_RO3_Final_201819.pdf)'
+  id: totrans-22
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[用于初学者投资者的不同股票预测方法的比较分析系统](http://www.cse.ust.hk/~rossiter/fyp/90_RO3_Final_201819.pdf)'
 - en: National Institute of Development Administration (Thailand)
+  id: totrans-23
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 泰国国家发展管理学院
 - en: '[Robust Financial Trading System with Deep Q Network (DQN)](https://repository.nida.ac.th/bitstream/handle/662723737/4077/b203303.pdf)'
+  id: totrans-24
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[基于深度 Q 网络（DQN）的稳健金融交易系统](https://repository.nida.ac.th/bitstream/handle/662723737/4077/b203303.pdf)'
 - en: PHD Dissertation
+  id: totrans-25
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 博士论文
 - en: NTU - Computer Science & Information Engineering
+  id: totrans-26
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: NTU - 计算机科学与信息工程
 - en: '**National Taiwan University**'
+  id: totrans-27
   prefs: []
   type: TYPE_NORMAL
+  zh: '**国立台湾大学**'
 - en: '[Python Programming in Finance - 2018](https://www.csie.ntu.edu.tw/~d00922011/python/298/python.html)'
+  id: totrans-28
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[2018年金融Python编程](https://www.csie.ntu.edu.tw/~d00922011/python/298/python.html)'
 - en: '[Python Programming in Finance - 2019](https://www.csie.ntu.edu.tw/~d00922011/python.html)'
+  id: totrans-29
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[2019年金融Python编程](https://www.csie.ntu.edu.tw/~d00922011/python.html)'
 - en: Recent Advances in Big Data and Deep Learning ...
+  id: totrans-30
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 大数据和深度学习的最新进展...
 - en: '[Amazon - Recent Advances in Big Data and Deep Learning: Proceedings of the
     INNS Big Data and Deep Learning Conference INNSBDDL2019, held at Sestri Levante,
     Genova, ... Neural Networks Society Book 1](https://www.amazon.com/s?k=9783030168414)'
+  id: totrans-31
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[亚马逊 - 大数据和深度学习的最新进展：第 INNS 大数据和深度学习会议 INNSBDDL2019 的论文集，于 Sestri Levante，Genova
+    举办，... 神经网络学会图书 1](https://www.amazon.com/s?k=9783030168414)'
 - en: Mentioned as the *"specific tool"* used to backtest in page 182
+  id: totrans-32
   prefs: []
   type: TYPE_NORMAL
+  zh: 在第182页被提及为用于回测的“具体工具”
 - en: Science Direct
+  id: totrans-33
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 科学直达
 - en: '[Technical analysis and sentiment embeddings for market trend prediction](https://www.sciencedirect.com/science/article/pii/S0957417419304142)'
+  id: totrans-34
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[技术分析和情绪嵌入用于市场趋势预测](https://www.sciencedirect.com/science/article/pii/S0957417419304142)'
 - en: 'PDF at: [https://sentic.net/market-trend-prediction.pdf](https://sentic.net/market-trend-prediction.pdf)'
+  id: totrans-35
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: PDF：[https://sentic.net/market-trend-prediction.pdf](https://sentic.net/market-trend-prediction.pdf)
 - en: VTAD (Vereinigung Technischer Analysten Deutschlands e.V.)
+  id: totrans-36
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: VTAD（德国技术分析协会）
 - en: 'Translation: *German Association of Technical Analysts (Registered)*'
+  id: totrans-37
   prefs: []
   type: TYPE_NORMAL
+  zh: 翻译：*德国技术分析协会（注册）*
 - en: '[Spreer - Trading mit idiosynkratischem Risiko](https://www.vtad.de/wp-content/uploads/2019/04/AW19-spreer_final.pdf)'
+  id: totrans-38
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[Spreer - 具有特异风险的交易](https://www.vtad.de/wp-content/uploads/2019/04/AW19-spreer_final.pdf)'
 - en: '*Language*: German'
+  id: totrans-39
   prefs: []
   type: TYPE_NORMAL
+  zh: '*语言*：德语'
 - en: Worcester Polytechnic Institute - Digital WPI
+  id: totrans-40
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 伍斯特理工学院 - 数字WPI
 - en: '[Trading System Development by Maier/Richardson/Gonsalves](https://digitalcommons.wpi.edu/cgi/viewcontent.cgi?article=6334&context=iqp-all)'
+  id: totrans-41
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[Maier/Richardson/Gonsalves编写的交易系统开发](https://digitalcommons.wpi.edu/cgi/viewcontent.cgi?article=6334&context=iqp-all)'
 - en: 'World Finance Conference - 2019 Session 25: Investments'
+  id: totrans-42
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 世界金融会议 - 2019年第25届：投资
 - en: '[Portfolio selection and trading strategies of cryptocurrencies base on different
     algorithms](https://www.world-finance-conference.com/papers_wfc/cf8e5e641a354ea66de0d3c09ff59f52.pdf)'
+  id: totrans-43
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[基于不同算法的加密货币组合选择和交易策略](https://www.world-finance-conference.com/papers_wfc/cf8e5e641a354ea66de0d3c09ff59f52.pdf)'
