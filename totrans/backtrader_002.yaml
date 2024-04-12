@@ -1,52 +1,82 @@
 - en: Welcome to backtrader!
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 欢迎来到backtrader！
 - en: 原文：[https://www.backtrader.com/](https://www.backtrader.com/)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.backtrader.com/](https://www.backtrader.com/)
 - en: '**A feature-rich Python framework for backtesting and trading**'
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: '**一个功能丰富的Python框架，用于回测和交易**'
 - en: '*backtrader* allows you to focus on writing reusable trading strategies, indicators
     and analyzers instead of having to spend time building infrastructure.'
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: '*backtrader*允许您专注于编写可重复使用的交易策略、指标和分析器，而不必花时间构建基础设施。'
 - en: '* * *'
+  id: totrans-4
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: '[**Open Source - GitHub**](https://github.com/mementum/backtrader)'
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: '[**开源 - GitHub**](https://github.com/mementum/backtrader)'
 - en: Use, modify, audit and share it. The secret is in the sauce and you are the
     cook. This is just the tool.
+  id: totrans-6
   prefs: []
   type: TYPE_NORMAL
+  zh: 使用、修改、审计和分享它。秘诀在于调味料，而你就是厨师。这只是工具。
 - en: '[**Docs**](https://www.backtrader.com/docu) & [**Blog**](https://www.backtrader.com/blog)'
+  id: totrans-7
   prefs: []
   type: TYPE_NORMAL
+  zh: '[**文档**](https://www.backtrader.com/docu) & [**博客**](https://www.backtrader.com/blog)'
 - en: Check the QuickStart, the extensive documentation, in-depth topics and ideas
     in the blog.
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: 查看快速入门、详尽的文档、博客中的深入主题和想法。
 - en: '**Community** (~~En~~)**Disabled**'
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: '**社区**（~~已禁用~~）'
 - en: 'It was being abused. It may come back in the future. In the meanwhile try for
     example: [stackoverflow "backtrader"](https://stackoverflow.com/questions/tagged/backtrader)
     .'
+  id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: 它被滥用了。可能会在未来回来。与此同时，可以尝试例如：[stackoverflow "backtrader"](https://stackoverflow.com/questions/tagged/backtrader)。
 - en: '[**Hello Algotrading!**](home/helloalgotrading/)'
+  id: totrans-11
   prefs: []
   type: TYPE_NORMAL
+  zh: '[**你好，算法交易！**](home/helloalgotrading/)'
 - en: See a quick example of a *Simple Moving Average Crossover* strategy (long-only)
+  id: totrans-12
   prefs: []
   type: TYPE_NORMAL
+  zh: 查看一个*简单移动平均线交叉*策略的快速示例（仅限多头）
 - en: '[**Features**](home/features/)'
+  id: totrans-13
   prefs: []
   type: TYPE_NORMAL
+  zh: '[**特性**](home/features/)'
 - en: See a quick overview of all the goodies that *backtrader* has to offer.
+  id: totrans-14
   prefs: []
   type: TYPE_NORMAL
+  zh: 查看*backtrader*提供的所有好东西的快速概述。

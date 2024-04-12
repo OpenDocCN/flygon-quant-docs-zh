@@ -1,59 +1,89 @@
 - en: Who is using it
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 谁在使用它
 - en: 原文：[https://www.backtrader.com/home/references/who-is-using-it/](https://www.backtrader.com/home/references/who-is-using-it/)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.backtrader.com/home/references/who-is-using-it/](https://www.backtrader.com/home/references/who-is-using-it/)
 - en: See the sections after this for references of usage.
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: 请参阅后面的章节了解使用情况的参考资料。
 - en: Old Website References
+  id: totrans-3
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 旧网站参考资料
 - en: 'The original website stated that *backtrader* is used in (at least):'
+  id: totrans-4
   prefs: []
   type: TYPE_NORMAL
+  zh: 原始网站说明*backtrader*至少被以下机构使用：
 - en: 2 Eurostoxx50 Banks
+  id: totrans-5
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 2家Eurostoxx50银行
 - en: 6 Quantitative Trading Firms
+  id: totrans-6
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 6家量化交易公司
 - en: That was long ago and a lot more are known to the author, including other type
     of trading companies in sectors like *"Energy Trading"*.
+  id: totrans-7
   prefs: []
   type: TYPE_NORMAL
+  zh: 那是很久以前的事了，作者已经知道更多了，包括其他类型的交易公司，如“能源交易”等行业。
 - en: Why were no names given?
+  id: totrans-8
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 为什么没有提供名称？
 - en: I never asked
+  id: totrans-9
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 我从未问过
 - en: They never asked
+  id: totrans-10
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 他们从未问过
 - en: Can you then sustain those claims?
+  id: totrans-11
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 那你能支撑这些说法吗？
 - en: Already asked (and answered) in [Reddit - [Question] How popular is Backtrader
     on this sub?](https://www.reddit.com/r/algotrading/comments/9k51kt/question_how_popular_is_backtrader_on_this_sub/)
+  id: totrans-12
   prefs: []
   type: TYPE_NORMAL
+  zh: 在[Reddit - [Question] How popular is Backtrader on this sub?](https://www.reddit.com/r/algotrading/comments/9k51kt/question_how_popular_is_backtrader_on_this_sub/)中已经问过（并得到了回答）。
 - en: Let's quote the answer from that thread.
+  id: totrans-13
   prefs: []
   type: TYPE_NORMAL
+  zh: 让我们引用那个帖子的回答。
 - en: Quote
+  id: totrans-14
   prefs: []
   type: TYPE_NORMAL
+  zh: 引用
 - en: 'No. There is not a list. This is actually outdated: the number of banks remains
     at `2` (there may be more, but I don''t know it), but there are more than 6 firms
     using it for internal purposes, including for example companies working in energy
@@ -61,24 +91,34 @@
     assets which compensate each other (this is probably not available in `zipline`)
     which allows to model using spot and futures prices (this is a particularity of
     energy markets to avoid having the actual goods delivered to you)'
+  id: totrans-15
   prefs: []
   type: TYPE_NORMAL
+  zh: 不，没有清单。这实际上已经过时了：银行的数量仍然是`2`（可能还有更多，但我不知道），但有超过6家公司在内部使用它，包括在能源市场工作的公司，因为`compensation`功能允许购买和销售不同的资产来相互补偿（这可能在`zipline`中不可用），从而允许使用现货和期货价格进行建模（这是能源市场的一个特点，以避免将实际商品交付给您）
 - en: 'The thing here is that one would have to define **usage**. I can for example
     quote what someone from one of those banks told me: *"we use backtrader to quickly
     prototype our ideas and backtest them. If they prove to be what we expected and
     after further refinement, they will be rewritten in Java and put into our production
     system"*'
+  id: totrans-16
   prefs: []
   type: TYPE_NORMAL
+  zh: 这里的关键是必须定义**使用情况**。例如，我可以引用一位来自其中一家银行的人告诉我的话：“我们使用backtrader快速原型设计我们的想法并对其进行回测。如果它们被证明符合我们的预期，并经过进一步完善，它们将被重写为Java并放入我们的生产系统中”。
 - en: 'This is actually the same scheme which one of the Quant firms (which I personally
     visited) used: prototyping in *backtrader* and production in *Java*.'
+  id: totrans-17
   prefs: []
   type: TYPE_NORMAL
+  zh: 实际上，这是一个量化公司（我亲自访问过的）使用的相同方案：在*backtrader*中进行原型设计，然后在*Java*中进行生产。
 - en: As you may imagine I don't track the lifes of those using *backtrader*, so it
     may also be that some of the banks and companies decided to no longer use *backtrader*.
+  id: totrans-18
   prefs: []
   type: TYPE_NORMAL
+  zh: 正如您可以想象的那样，我不追踪那些使用*backtrader*的人的生活，所以也许一些银行和公司决定不再使用*backtrader*。
 - en: I do also guess that some banks and quant firms use `zipline` following the
     same scheme.
+  id: totrans-19
   prefs: []
   type: TYPE_NORMAL
+  zh: 我也猜测一些银行和量化公司使用`zipline`遵循相同的方案。

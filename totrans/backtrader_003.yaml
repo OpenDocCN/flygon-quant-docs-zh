@@ -1,240 +1,356 @@
 - en: Features
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 特性
 - en: 原文：[https://www.backtrader.com/home/features/](https://www.backtrader.com/home/features/)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.backtrader.com/home/features/](https://www.backtrader.com/home/features/)
 - en: Live Trading
+  id: totrans-2
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 实时交易
 - en: With Interactive Brokers, Oanda v1, VisualChart and also with external 3^(rd)
     party brokers (alpaca, Oanda v2, ccxt, ...)
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: 与Interactive Brokers、Oanda v1、VisualChart以及外部第三方经纪人（alpaca、Oanda v2、ccxt，...）一起使用
 - en: '`0` based indexing'
+  id: totrans-4
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 基于`0`的索引
 - en: Use `0` in arrays for the present moment to address the look-ahead bias when
     accessing values in arrays
+  id: totrans-5
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 在数组中使用`0`表示当前时刻，以解决访问数组值时的前瞻性偏差
 - en: 'Use `-1`, `-2` (i.e.: negative values) for the **last** moments, to keep in
     sync with Python''s definition'
+  id: totrans-6
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 使用`-1`，`-2`（即：负值）表示**最后**时刻，以与Python的定义保持同步
 - en: Any positive index means the **future** (test your code in `event-only` mode
     and it will break)
+  id: totrans-7
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 任何正索引表示**未来**（在`event-only`模式下测试代码，会出错）
 - en: Event and Vectorized
+  id: totrans-8
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 事件和矢量化
 - en: The trading logic and the broker are always run on an event by event basis
+  id: totrans-9
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 交易逻辑和经纪人始终基于事件运行
 - en: The calculation for indicators is vectorized if possible (source data can be
     preloaded)
+  id: totrans-10
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 如果可能，指标的计算是矢量化的（源数据可以预加载）
 - en: Everything can be run in `event-only` mode with no data preloaded, just like
     if things were live.
+  id: totrans-11
   prefs: []
   type: TYPE_NORMAL
+  zh: 一切都可以在仅事件模式下运行，无需预加载数据，就像实时运行一样
 - en: Data Feeds (Live Too)
+  id: totrans-12
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 数据源（包括实时数据）
 - en: 'Built-in support for several sources: *CSV*, Database-Sources, YahooFinance,
     Interactive Brokers, Oanda v1, ...'
+  id: totrans-13
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 内置支持多种数据源：*CSV*、数据库数据源、YahooFinance、交互经纪人、Oanda v1，...
 - en: Any number of simultaneous data feeds (memory constrained, obviously) can be
     run simultaneously
+  id: totrans-14
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 可以同时运行任意数量的数据源（受内存限制，显然）
 - en: Warning
+  id: totrans-15
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 警告
 - en: Beware of survivorshipt bias!
+  id: totrans-16
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 注意幸存者偏差！
 - en: Multiple timeframes can be mixed and run
+  id: totrans-17
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 可以混合和运行多个时间框架
 - en: Integrated Resampling and Replaying
+  id: totrans-18
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 集成重采样和重播功能
 - en: Broker with batteries included
+  id: totrans-19
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 内置电池的经纪人
 - en: 'Order Types: `Market`, `Limit`, `Stop`, `StopLimit`, `StopTrail`, `StopTrailLimit`,
     `OCO`, `Bracket`, `MarketOnClose`'
+  id: totrans-20
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 订单类型：`Market`、`Limit`、`Stop`、`StopLimit`、`StopTrail`、`StopTrailLimit`、`OCO`、`Bracket`、`MarketOnClose`
 - en: Long Short selling
+  id: totrans-21
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 多空卖出
 - en: Continuous Cash Adjustment for Future-like instruments
+  id: totrans-22
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 未来类工具的持续现金调整
 - en: User defined commission schemes and credit interest
+  id: totrans-23
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 用户定义的佣金方案和信用利息
 - en: Fund Mode
+  id: totrans-24
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 基金模式
 - en: Volume Filling Strategies
+  id: totrans-25
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 成交量填充策略
 - en: Custom Slippage
+  id: totrans-26
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 自定义滑点
 - en: Strategies - Trading Logic
+  id: totrans-27
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 策略 - 交易逻辑
 - en: Automatic warm-up period calculation before operating
+  id: totrans-28
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 在操作之前自动计算热身期
 - en: Multiple Strategies (against same broker) can run in parallel
+  id: totrans-29
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 多个策略（针对同一经纪人）可以并行运行
 - en: Multiple order generation methods (`buy/sell`, `order_target_xxx`, automated
     signals)
+  id: totrans-30
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 多种订单生成方法（`buy/sell`、`order_target_xxx`、自动信号）
 - en: 'Event notification for: Incoming Data, Data Feed provider, orders, trades,
     timers.'
+  id: totrans-31
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 事件通知：传入数据、数据源提供者、订单、交易、定时器
 - en: Indicators
+  id: totrans-32
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 指标
 - en: Over 122 indicators with the usual suspects on board
+  id: totrans-33
   prefs: []
   type: TYPE_NORMAL
+  zh: 超过122种指标，常见的指标都在其中
 - en: 'Many moving averages (`SMA`, `EMA`, ...), classic: (`MACD`, `Stochastic`, `RSI`,
     ...) and others'
+  id: totrans-34
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 许多移动平均线（`SMA`、`EMA`，...）、经典指标（`MACD`、`Stochastic`、`RSI`，...）和其他指标
 - en: '`ta-lib` integration'
+  id: totrans-35
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`ta-lib`集成'
 - en: Performance Analyzers
+  id: totrans-36
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 性能分析器
 - en: Several built-in performance analyzers (`TimeReturns`, `TradeAnalyzer`, `SharpeRatio`,
     `VWR`, `SQN`, ...)
+  id: totrans-37
   prefs: []
   type: TYPE_NORMAL
+  zh: 几个内置的性能分析器（`TimeReturns`、`TradeAnalyzer`、`SharpeRatio`、`VWR`、`SQN`，...）
 - en: Plotting (extra)
+  id: totrans-38
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 绘图（额外）
 - en: Automated (customizable) plotting with a single command.
+  id: totrans-39
   prefs: []
   type: TYPE_NORMAL
+  zh: 使用单个命令进行自动化（可定制）绘图
 - en: Note
+  id: totrans-40
   prefs: []
   type: TYPE_NORMAL
+  zh: 注意
 - en: For this to work, `matplotlib` has to be installed
+  id: totrans-41
   prefs: []
   type: TYPE_NORMAL
+  zh: 为了使其工作，必须安装`matplotlib`
 - en: Sizers
+  id: totrans-42
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 大小调整器
 - en: Define and plug smart automated staking policies
+  id: totrans-43
   prefs: []
   type: TYPE_NORMAL
+  zh: 定义并插入智能自动化的押注策略
 - en: Observers
+  id: totrans-44
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 观察者
 - en: Agents which will be plotted and can observe everything in the system (usually
     will be used to plot statistics)
+  id: totrans-45
   prefs: []
   type: TYPE_NORMAL
+  zh: 代理可以被绘制，并且可以观察系统中的一切（通常用于绘制统计数据）
 - en: Miscelanea
+  id: totrans-46
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 杂项
 - en: Timers for repeated actions over time
+  id: totrans-47
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 定时器用于随时间重复的操作
 - en: Trading Calendars
+  id: totrans-48
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 交易日历
 - en: Timezone Support
+  id: totrans-49
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 时区支持
 - en: Pure Python
+  id: totrans-50
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 纯Python
 - en: Work with one of the most powerful, yet easy to use, programming languages.
     No external libraries required.
+  id: totrans-51
   prefs: []
   type: TYPE_NORMAL
+  zh: 使用最强大且易于使用的编程语言之一。无需外部库。
 - en: Uses OO to easily let the pieces of the puzzle be fitted to each other.
+  id: totrans-52
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 使用面向对象的方法轻松地将拼图的各个部分拼合在一起
 - en: 'Operators are overloaded, where possible, to provide natural language constructs
     such as:'
+  id: totrans-53
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 操作符在可能的情况下进行重载，以提供自然语言构造，例如：
 - en: '[PRE0]'
+  id: totrans-54
   prefs:
   - PREF_IND
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: where `av_diff` will contain the difference of the simple moving averages of
     `30` and `15` periods.
+  id: totrans-55
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 其中`av_diff`将包含`30`和`15`周期的简单移动平均线的差值
 - en: For language constructs, cannot be overrideen, like `and`, `or`, `if`, equivalent
     *functions* are provided to ensure no functionality is missing, such as
+  id: totrans-56
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 对于语言结构，不能被覆盖，比如`and`，`or`，`if`，提供了等效的*函数*以确保没有功能丢失，例如
 - en: '[PRE1]'
+  id: totrans-57
   prefs:
   - PREF_IND
   type: TYPE_PRE
+  zh: '[PRE1]'

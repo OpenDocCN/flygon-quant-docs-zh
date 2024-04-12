@@ -1,25 +1,39 @@
 - en: Hello Algotrading!
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 你好，算法交易！
 - en: 原文：[https://www.backtrader.com/home/helloalgotrading/](https://www.backtrader.com/home/helloalgotrading/)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.backtrader.com/home/helloalgotrading/](https://www.backtrader.com/home/helloalgotrading/)
 - en: A classic *Simple Moving Average Crossover* strategy, can be easily implemented
     and in different ways. The results and the chart are the same for the three snippets
     presented below.
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: 一个经典的*简单移动平均线交叉*策略，可以轻松地以不同方式实现。下面呈现的三个片段的结果和图表是相同的。
 - en: '![image](../Images/80e7046cb8ec40277514e948183e2afa.png)'
+  id: totrans-3
   prefs: []
   type: TYPE_IMG
+  zh: '![image](../Images/80e7046cb8ec40277514e948183e2afa.png)'
 - en: '[PRE0]'
+  id: totrans-4
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: '[PRE1]'
+  id: totrans-5
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE1]'
 - en: '[PRE2]'
+  id: totrans-6
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE2]'
