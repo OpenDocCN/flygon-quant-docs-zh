@@ -1,166 +1,235 @@
 - en: Orders
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 订单。
 - en: 原文：[https://www.backtrader.com/docu/order/](https://www.backtrader.com/docu/order/)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 译文：[https://www.backtrader.com/docu/order/](https://www.backtrader.com/docu/order/)
 - en: '`Cerebro` is the key control system in `backtrader` and `Strategy` (a subclass)
     is the key control point of the end user. The latter needs a chaining method to
     other parts of the system and that’s where **orders** play a key role.'
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: '`Cerebro` 是 `backtrader` 中的关键控制系统，而 `Strategy`（一个子类）是最终用户的关键控制点。后者需要一种方法将系统的其他部分链接起来，这就是**订单**发挥关键作用的地方。'
 - en: '*Orders* translate the decisions made by the logic in a `Strategy` into a message
     suitable for the `Broker` to execute an action. This is done with:'
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: '*订单*将 `Strategy` 中的逻辑决策转化为适合 `Broker` 执行操作的消息。这是通过以下方式完成的：'
 - en: '*Creation*'
+  id: totrans-4
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '*创建*。'
 - en: 'Through Strategy’s methods: `buy\``,`sell`and`close`(Strategy) which return
     an`order` instance as a reference'
+  id: totrans-5
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 通过 Strategy 的方法：`buy\``,`sell` 和 `close`（Strategy），它们返回一个`order`实例作为参考。
 - en: '*Cancellation*'
+  id: totrans-6
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '*取消*。'
 - en: 'Through Strategy’s method: `cancel` (Strategy) which takes an order instance
     to operate on'
+  id: totrans-7
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 通过 Strategy 的方法：`cancel`（Strategy），它接受一个订单实例进行操作。
 - en: And the *orders* serve also as a communication method back to the user, to notify
     how things are running in the broker.
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: '*订单*也作为一种向用户传达信息的方法，通知经纪人运行情况。'
 - en: '*Notification*'
+  id: totrans-9
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '*通知*。'
 - en: 'To Strategy method: `notify_order` (Strategy) which reports an `order` instance'
+  id: totrans-10
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 对 Strategy 方法：`notify_order`（Strategy），报告一个`order`实例。
 - en: Order creation
+  id: totrans-11
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 订单创建。
 - en: 'When invoking the `buy`, `sell` and `close` the following parameters apply
     for creation:'
+  id: totrans-12
   prefs: []
   type: TYPE_NORMAL
+  zh: 在调用 `buy`、`sell` 和 `close` 时，以下参数适用于创建：
 - en: '`data` (default: `None`)'
+  id: totrans-13
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`data`（默认值：`None`）。'
 - en: For which data the order has to be created. If `None` then the first data in
     the system, `self.datas[0] or self.data0` (aka `self.data`) will be used
+  id: totrans-14
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 要创建订单的数据。如果为 `None`，则系统中的第一个数据，`self.datas[0] 或 self.data0`（又名 `self.data`），将被使用。
 - en: '`size` (default: `None`)'
+  id: totrans-15
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`size`（默认值：`None`）。'
 - en: Size to use (positive) of units of data to use for the order.
+  id: totrans-16
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 要使用的单位数据的大小（正数）用于订单。
 - en: If `None` the `sizer` instance retrieved via `getsizer` will be used to determine
     the size.
+  id: totrans-17
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 如果为 `None`，则将使用通过 `getsizer` 检索到的 `sizer` 实例来确定大小。
 - en: '`price` (default: `None`)'
+  id: totrans-18
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`price`（默认值：`None`）。'
 - en: Price to use (live brokers may place restrictions on the actual format if it
     does not comply to minimum tick size requirements)
+  id: totrans-19
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 要使用的价格（实时经纪人可能对实际格式施加限制，如果不符合最小跳动要求）。
 - en: '`None` is valid for `Market` and `Close` orders (the market determines the
     price)'
+  id: totrans-20
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: '`None` 对于 `Market` 和 `Close` 订单是有效的（市场确定价格）。'
 - en: For `Limit`, `Stop` and `StopLimit` orders this value determines the trigger
     point (in the case of `Limit` the trigger is obviously at which price the order
     should be matched)
+  id: totrans-21
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 对于 `Limit`、`Stop` 和 `StopLimit` 订单，此值确定触发点（在 `Limit` 的情况下，触发显然是订单应该匹配的价格）。
 - en: '`plimit` (default: `None`)'
+  id: totrans-22
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`plimit`（默认值：`None`）。'
 - en: Only applicable to `StopLimit` orders. This is the price at which to set the
     implicit *Limit* order, once the *Stop* has been triggered (for which `price`
     has been used)
+  id: totrans-23
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 仅适用于 `StopLimit` 订单。这是在*Stop*触发后设置隐式*限价*订单的价格（其中使用了`price`）。
 - en: '`exectype` (default: `None`)'
+  id: totrans-24
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`exectype`（默认值：`None`）。'
 - en: 'Possible values:'
+  id: totrans-25
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 可能的值：
 - en: '`Order.Market` or `None`. A market order will be executed with the next available
     price. In backtesting it will be the opening price of the next bar'
+  id: totrans-26
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`Order.Market` 或 `None`。市价订单将以下一个可用价格执行。在回测中，它将是下一个柱的开盘价。'
 - en: '`Order.Limit`. An order which can only be executed at the given `price` or
     better'
+  id: totrans-27
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`Order.Limit`。只能以给定的 `price` 或更好的价格执行的订单。'
 - en: '`Order.Stop`. An order which is triggered at `price` and executed like an `Order.Market`
     order'
+  id: totrans-28
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`Order.Stop`。在 `price` 触发并像 `Order.Market` 订单一样执行的订单。'
 - en: '`Order.StopLimit`. An order which is triggered at `price` and executed as an
     implicit *Limit* order with price given by `pricelimit`'
+  id: totrans-29
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`Order.StopLimit`。在 `price` 触发并作为隐式*限价*订单执行的订单，其价格由 `pricelimit` 给出。'
 - en: '`valid` (default: `None`)'
+  id: totrans-30
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`valid`（默认值：`None`）。'
 - en: 'Possible values:'
+  id: totrans-31
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 可能的值：
 - en: '`None`: this generates an order that will not expire (aka *Good till cancel*)
     and remain in the market until matched or canceled. In reality brokers tend to
     impose a temporal limit, but this is usually so far away in time to consider it
     as not expiring'
+  id: totrans-32
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`None`：这将生成一个不会过期的订单（也称为*有效直至取消*），并保持在市场上直到匹配或取消。实际上，经纪人往往会强加时间限制，但通常时间跨度很长，可以视为不会过期。'
 - en: '`datetime.datetime` or `datetime.date` instance: the date will be used to generate
     an order valid until the given datetime (aka *good till date*)'
+  id: totrans-33
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`datetime.datetime` 或 `datetime.date` 实例：日期将用于生成一个在给定日期时间之前有效的订单（也称为*有效截止日期*）。'
 - en: '`Order.DAY` or `0` or `timedelta()`: a day valid until the *End of the Session*
     (aka *day* order) will be generated'
+  id: totrans-34
   prefs:
   - PREF_IND
   - PREF_UL
@@ -168,90 +237,109 @@
 - en: '`numeric value`: This is assumed to be a value corresponding to a datetime
     in `matplotlib` coding (the one used by `backtrader`) and will used to generate
     an order valid until that time (*good till date*)'
+  id: totrans-35
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
 - en: '`tradeid` (default: `0`)'
+  id: totrans-36
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: This is an internal value applied by `backtrader` to keep track of overlapping
     trades on the same asset. This `tradeid` is sent back to the *strategy* when notifying
     changes to the status of the orders.
+  id: totrans-37
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
 - en: '`**kwargs`: additional broker implementations may support extra parameters.
     `backtrader` will pass the *kwargs* down to the created order objects'
+  id: totrans-38
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: 'Example: if the 4 order execution types directly supported by `backtrader`
     are not enough, in the case of for example *Interactive Brokers* the following
     could be passed as *kwargs*:'
+  id: totrans-39
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
 - en: '[PRE0]'
+  id: totrans-40
   prefs:
   - PREF_IND
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: This would override the settings created by `backtrader` and generate a `LIMIT
     IF TOUCHED` order with a *touched* price of 9.8 and a *limit* price of 10.0.
+  id: totrans-41
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
 - en: Note
+  id: totrans-42
   prefs: []
   type: TYPE_NORMAL
 - en: The `close` method will examine the current position and correspondingly use
     `buy` or `sell` to effectively **close** the position. `size` will also be automatically
     calculated unless the parameter is an input from the user, in which case a partial
     *close* or a *reversal* can be achieved
+  id: totrans-43
   prefs: []
   type: TYPE_NORMAL
 - en: Order notification
+  id: totrans-44
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
 - en: 'To receive notifications the `notify_order` method has to be overriden in the
     user subclassed `Strategy` (the default behavior is to do nothing). The following
     applies to those notifications:'
+  id: totrans-45
   prefs: []
   type: TYPE_NORMAL
 - en: Issued before the strategy’s `next` method is called
+  id: totrans-46
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: May (and will) happen several times for the same *order* with the same or different
     status during the same *next* cycle.
+  id: totrans-47
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: An *order* may be submitted to the *broker* and be *accepted* and its execution
     *completed* before `next` will be invoked again.
+  id: totrans-48
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
 - en: 'In this case at least 3 notifications will happen with the following `status`
     values:'
+  id: totrans-49
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
 - en: '`Order.Submitted` because the order was sent to the *broker*'
+  id: totrans-50
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
 - en: '`Order.Accepted` because the order was taken by the *broker* and awaits potential
     execution'
+  id: totrans-51
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
 - en: '`Order.Completed` because in the example it was quickly matched and completely
     filled (which may be the case usually for `Market` orders)'
+  id: totrans-52
   prefs:
   - PREF_IND
   - PREF_UL
@@ -259,31 +347,38 @@
 - en: Notifications may happen even several times for the same status in the case
     of `Order.Partial`. This status will not be seen in the *backtesting* broker (which
     doesn’t consider volume when matching) but it will for sure be set by real brokers.
+  id: totrans-53
   prefs: []
   type: TYPE_NORMAL
 - en: Real brokers may issue one or more executions before updating a position, and
     this group of executions will make up for an `Order.Partial` notification.
+  id: totrans-54
   prefs: []
   type: TYPE_NORMAL
 - en: 'Actual execution data is in the attribute: `order.executed` which is an object
     of type `OrderData` (see below for the reference), with usual fields as `size`
     and `price`'
+  id: totrans-55
   prefs: []
   type: TYPE_NORMAL
 - en: The values at the time of creation are stored in `order.created` which remains
     unchanged throughout the lifecycle of an `order`
+  id: totrans-56
   prefs: []
   type: TYPE_NORMAL
 - en: Order Status values
+  id: totrans-57
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
 - en: 'The following are defined:'
+  id: totrans-58
   prefs: []
   type: TYPE_NORMAL
 - en: '`Order.Created`: set when the `Order` instance is created. Never to be seen
     by end-users unless `order` instances are manually created rather than through
     `buy`, `sell` and `close`'
+  id: totrans-59
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
@@ -291,32 +386,38 @@
     `broker`. This simply means it has been *sent*. In *backtesting* mode this will
     be an immediate action, but it may take actual *time* with a real broker, which
     may receive the order and only first notify when it has been forwarded to an exchange'
+  id: totrans-60
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: '`Order.Accepted`: the `broker` has taken the order and it is in the system
     (or already in a exchange) awaiting execution according to the set parameters
     like execution type, size, price and validity'
+  id: totrans-61
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: '`Order.Partial`: the `order` has been partially executed. `order.executed`
     contains the current filled `size` and average price.'
+  id: totrans-62
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: '`order.executed.exbits` contains a complete list of `ExecutionBits` detailing
     the partial fillings'
+  id: totrans-63
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
 - en: '`Order.Complete`: the `order` has been completely filled average price.'
+  id: totrans-64
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: '`Order.Rejected`: the `broker` has rejected the order. A parameter (like for
     example `valid` to determine its lifetime) may not be accepted by the `broker`
     and the `order` cannot be accepted.'
+  id: totrans-65
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
@@ -324,20 +425,24 @@
     Although this may seem awkward, the reason is that real life brokers will notify
     this over an event, which may or may not be direclty related to the order. But
     the notification from the broker can still be seen in `notify_store`.
+  id: totrans-66
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
 - en: This status will not be seen in the *backtesting* broker
+  id: totrans-67
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
 - en: '`Order.Margin`: the order execution would imply a margin call and the previously
     accepted order has been taken off the system'
+  id: totrans-68
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: '`Order.Cancelled` (or `Order.Canceled`): confirmation of the user requested
     cancellation'
+  id: totrans-69
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
@@ -345,62 +450,77 @@
     method of the strategy is no guarantee of cancellation. The order may have been
     already executed but such execution may not have yet notified by the broker and/or
     the notification may not have yet been delivered to the strategy
+  id: totrans-70
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
 - en: '`Order.Expired`: a previously accepted *order* which had a time validity has
     expired and been taken off the system'
+  id: totrans-71
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: 'Reference: Order and associated classes'
+  id: totrans-72
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
 - en: These objects are the generic classes in the `backtrader` ecosystem. They may
     been extended and/or contain extra embedded information when operating with other
     brokers. See the reference of the appropriate broker
+  id: totrans-73
   prefs: []
   type: TYPE_NORMAL
 - en: class backtrader.order.Order()
+  id: totrans-74
   prefs:
   - PREF_H4
   type: TYPE_NORMAL
 - en: Class which holds creation/execution data and type of oder.
+  id: totrans-75
   prefs: []
   type: TYPE_NORMAL
 - en: 'The order may have the following status:'
+  id: totrans-76
   prefs: []
   type: TYPE_NORMAL
 - en: 'Submitted: sent to the broker and awaiting confirmation'
+  id: totrans-77
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: 'Accepted: accepted by the broker'
+  id: totrans-78
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: 'Partial: partially executed'
+  id: totrans-79
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: 'Completed: fully exexcuted'
+  id: totrans-80
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: 'Canceled/Cancelled: canceled by the user'
+  id: totrans-81
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: 'Expired: expired'
+  id: totrans-82
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: 'Margin: not enough cash to execute the order.'
+  id: totrans-83
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: 'Rejected: Rejected by the broker'
+  id: totrans-84
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
@@ -408,179 +528,223 @@
     the Accepted status) or before execution with each new bar price because cash
     has been drawn by other sources (future-like instruments may have reduced the
     cash or orders orders may have been executed)
+  id: totrans-85
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
 - en: 'Member Attributes:'
+  id: totrans-86
   prefs: []
   type: TYPE_NORMAL
 - en: 'ref: unique order identifier'
+  id: totrans-87
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: 'created: OrderData holding creation data'
+  id: totrans-88
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: 'executed: OrderData holding execution data'
+  id: totrans-89
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: 'info: custom information passed over method `addinfo()`. It is kept in the
     form of an OrderedDict which has been subclassed, so that keys can also be specified
     using ‘.’ notation'
+  id: totrans-90
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: 'User Methods:'
+  id: totrans-91
   prefs: []
   type: TYPE_NORMAL
 - en: 'isbuy(): returns bool indicating if the order buys'
+  id: totrans-92
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: 'issell(): returns bool indicating if the order sells'
+  id: totrans-93
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: 'alive(): returns bool if order is in status Partial or Accepted'
+  id: totrans-94
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: class backtrader.order.OrderData(dt=None, size=0, price=0.0, pricelimit=0.0,
     remsize=0, pclose=0.0, trailamount=0.0, trailpercent=0.0)
+  id: totrans-95
   prefs:
   - PREF_H4
   type: TYPE_NORMAL
 - en: Holds actual order data for Creation and Execution.
+  id: totrans-96
   prefs: []
   type: TYPE_NORMAL
 - en: In the case of Creation the request made and in the case of Execution the actual
     outcome.
+  id: totrans-97
   prefs: []
   type: TYPE_NORMAL
 - en: 'Member Attributes:'
+  id: totrans-98
   prefs: []
   type: TYPE_NORMAL
 - en: 'exbits : iterable of OrderExecutionBits for this OrderData'
+  id: totrans-99
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: 'dt: datetime (float) creation/execution time'
+  id: totrans-100
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: 'size: requested/executed size'
+  id: totrans-101
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: 'price: execution price Note: if no price is given and no pricelimite is given,
     the closing price at the time or order creation will be used as reference'
+  id: totrans-102
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: 'pricelimit: holds pricelimit for StopLimit (which has trigger first)'
+  id: totrans-103
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: 'trailamount: absolute price distance in trailing stops'
+  id: totrans-104
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: 'trailpercent: percentage price distance in trailing stops'
+  id: totrans-105
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: 'value: market value for the entire bit size'
+  id: totrans-106
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: 'comm: commission for the entire bit execution'
+  id: totrans-107
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: 'pnl: pnl generated by this bit (if something was closed)'
+  id: totrans-108
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: 'margin: margin incurred by the Order (if any)'
+  id: totrans-109
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: 'psize: current open position size'
+  id: totrans-110
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: 'pprice: current open position price'
+  id: totrans-111
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: class backtrader.order.OrderExecutionBit(dt=None, size=0, price=0.0, closed=0,
     closedvalue=0.0, closedcomm=0.0, opened=0, openedvalue=0.0, openedcomm=0.0, pnl=0.0,
     psize=0, pprice=0.0)
+  id: totrans-112
   prefs:
   - PREF_H4
   type: TYPE_NORMAL
 - en: Intended to hold information about order execution. A “bit” does not determine
     if the order has been fully/partially executed, it just holds information.
+  id: totrans-113
   prefs: []
   type: TYPE_NORMAL
 - en: 'Member Attributes:'
+  id: totrans-114
   prefs: []
   type: TYPE_NORMAL
 - en: 'dt: datetime (float) execution time'
+  id: totrans-115
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: 'size: how much was executed'
+  id: totrans-116
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: 'price: execution price'
+  id: totrans-117
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: 'closed: how much of the execution closed an existing postion'
+  id: totrans-118
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: 'opened: how much of the execution opened a new position'
+  id: totrans-119
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: 'openedvalue: market value of the “opened” part'
+  id: totrans-120
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: 'closedvalue: market value of the “closed” part'
+  id: totrans-121
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: 'closedcomm: commission for the “closed” part'
+  id: totrans-122
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: 'openedcomm: commission for the “opened” part'
+  id: totrans-123
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: 'value: market value for the entire bit size'
+  id: totrans-124
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: 'comm: commission for the entire bit execution'
+  id: totrans-125
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: 'pnl: pnl generated by this bit (if something was closed)'
+  id: totrans-126
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: 'psize: current open position size'
+  id: totrans-127
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: 'pprice: current open position price'
+  id: totrans-128
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
