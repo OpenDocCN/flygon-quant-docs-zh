@@ -1,97 +1,147 @@
 - en: Introduction
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 介绍
 - en: 原文：[https://www.backtrader.com/docu/](https://www.backtrader.com/docu/)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.backtrader.com/docu/](https://www.backtrader.com/docu/)
 - en: Welcome to the *backtrader* documentation!
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: 欢迎来到*backtrader*文档！
 - en: 'The platform has 2 main objectives:'
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: 该平台有两个主要目标：
 - en: Ease of use
+  id: totrans-4
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 易用性
 - en: Go back to 1
+  id: totrans-5
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 回到1
 - en: Note
+  id: totrans-6
   prefs: []
   type: TYPE_NORMAL
+  zh: 注意
 - en: Loosely based on the *Karate (Kid)* rules by *Mr. Miyagi*.
+  id: totrans-7
   prefs: []
   type: TYPE_NORMAL
+  zh: 基于*《功夫小子》*的规则（*Mr. Miyagi*制定的）而松散地制定。
 - en: 'The basics of running this platform:'
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: 运行该平台的基础知识：
 - en: Create a Strategy
+  id: totrans-9
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 创建一个策略
 - en: Decide on potential adjustable parameters
+  id: totrans-10
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 决定潜在的可调参数
 - en: Instantiate the Indicators you need in the Strategy
+  id: totrans-11
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 实例化策略中需要的指标
 - en: Write down the logic for entering/exiting the market
+  id: totrans-12
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 写下进入/退出市场的逻辑
 - en: Tip
+  id: totrans-13
   prefs: []
   type: TYPE_NORMAL
+  zh: 提示
 - en: 'Or alternatively:'
+  id: totrans-14
   prefs: []
   type: TYPE_NORMAL
+  zh: 或者：
 - en: Prepare some indicators to work as *long*/*short* signals
+  id: totrans-15
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 准备一些指标作为*多头*/*空头*信号
 - en: And then
+  id: totrans-16
   prefs: []
   type: TYPE_NORMAL
+  zh: 然后
 - en: Create a *Cerebro* Engine
+  id: totrans-17
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 创建一个*Cerebro*引擎
 - en: 'First: Inject the *Strategy* (or signal-based strategy)'
+  id: totrans-18
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 首先：注入*策略*（或基于信号的策略）
 - en: 'And then:'
+  id: totrans-19
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 然后：
 - en: Load and Inject a Data Feed (once created use `cerebro.adddata`)
+  id: totrans-20
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 加载并注入数据源（一旦创建，请使用`cerebro.adddata`）
 - en: And execute `cerebro.run()`
+  id: totrans-21
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 然后执行`cerebro.run()`
 - en: 'For visual feedback use: `cerebro.plot()`'
+  id: totrans-22
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 若要视觉反馈，请使用：`cerebro.plot()`
 - en: The platform is highly configurable
+  id: totrans-23
   prefs: []
   type: TYPE_NORMAL
+  zh: 该平台高度可配置
 - en: Let’s hope you, the user, find the platform useful and fun to work with.
+  id: totrans-24
   prefs: []
   type: TYPE_NORMAL
+  zh: 希望您作为用户能够发现该平台既实用又有趣。

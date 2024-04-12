@@ -1,1111 +1,1650 @@
 - en: Cerebro
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: Cerebro
 - en: 原文：[https://www.backtrader.com/docu/cerebro/](https://www.backtrader.com/docu/cerebro/)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.backtrader.com/docu/cerebro/](https://www.backtrader.com/docu/cerebro/)
 - en: 'This class is the cornerstone of `backtrader` because it serves as a central
     point for:'
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: 这个类是`backtrader`的基石，因为它作为以下方面的中心点：
 - en: Gathering all inputs (*Data Feeds*), actors (*Stratgegies*), spectators (*Observers*),
     critics (*Analyzers*) and documenters (*Writers*) ensuring the show still goes
     on at any moment.
+  id: totrans-3
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 收集所有输入（*数据源*）、行动者（*策略*）、旁观者（*观察员*）、评论者（*分析器*）和文档编制者（*写作者*），确保节目随时进行。
 - en: Execute the backtesting/or live data feeding/trading
+  id: totrans-4
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 执行回测/或实时数据提供/交易
 - en: Returning the results
+  id: totrans-5
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 返回结果
 - en: Giving access to the plotting facilities
+  id: totrans-6
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 提供对绘图设施的访问
 - en: Gathering input
+  id: totrans-7
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 收集输入
 - en: 'Start by creating a `cerebro`:'
+  id: totrans-8
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 首先创建一个`cerebro`：
 - en: '[PRE0]'
+  id: totrans-9
   prefs:
   - PREF_IND
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: Some `**kwargs` to control execution are supported, see the reference (the same
     arguments can be applied later to the `run` method)
+  id: totrans-10
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 支持一些`**kwargs`来控制执行，参见参考文献（这些参数后来也可以应用于`run`方法）
 - en: Add *Data feeds*
+  id: totrans-11
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 添加*数据源*
 - en: 'The most usual pattern is `cerebro.adddata(data)`, where `data` is a *data
     feed* already instantiated. Example:'
+  id: totrans-12
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 最常见的模式是`cerebro.adddata(data)`，其中`data`已经实例化为*数据源*。例如：
 - en: '[PRE1]'
+  id: totrans-13
   prefs:
   - PREF_IND
   type: TYPE_PRE
+  zh: '[PRE1]'
 - en: '*Resampling* and *Replaying* a data is possible and follows the same pattern:'
+  id: totrans-14
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: '*重新采样*和*回放*数据是可能的，遵循相同的模式：'
 - en: '[PRE2]'
+  id: totrans-15
   prefs:
   - PREF_IND
   type: TYPE_PRE
+  zh: '[PRE2]'
 - en: 'or:'
+  id: totrans-16
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 或：
 - en: '[PRE3]'
+  id: totrans-17
   prefs:
   - PREF_IND
   type: TYPE_PRE
+  zh: '[PRE3]'
 - en: 'The system can accept any number of data feeds, including mixing regular data
     with resampled and/or replayed data. Of course some of this combinationns will
     for sure make no sense and a restriction apply in order to be able to combine
     datas: *time aligment*. See the Data - Multiple Timeframes, Data Resampling -
     Resampling` and Data - Replay sections.'
+  id: totrans-18
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 系统可以接受任意数量的数据源，包括混合常规数据与重新采样和/或重放数据。当然，其中一些组合肯定毫无意义，因此在能够组合数据时会应用一些限制：*时间对齐*。请参阅数据-多时间框架、数据重新采样-重新采样和数据-重播部分。
 - en: Add `Strategies`
+  id: totrans-19
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 添加`Strategies`
 - en: 'Unlike the `datas feeds` which are already an instance of a class, `cerebro`
     takes directly the `Strategy` class and the arguments to pass to it. The rationale
     behind: *in an optimization scenario the class will be instantiated several times
     and passed different arguments*'
+  id: totrans-20
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 与已经是类实例的`数据源`不同，`cerebro`直接接受`Strategy`类和传递给它的参数。背后的原理是：*在优化场景中，该类将被实例化多次并传递不同的参数*
 - en: 'Even if no *optimization* is run, the pattern still applies:'
+  id: totrans-21
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 即使没有运行*优化*，该模式仍然适用：
 - en: '[PRE4]'
+  id: totrans-22
   prefs:
   - PREF_IND
   type: TYPE_PRE
+  zh: '[PRE4]'
 - en: 'When *optimizing* the parameters have to be added as iterables. See the *Optimization*
     section for a detailed explanation. The basic pattern:'
+  id: totrans-23
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 当*优化*参数时，必须添加为可迭代对象。详细说明请参见*优化*部分。基本模式：
 - en: '[PRE5]'
+  id: totrans-24
   prefs:
   - PREF_IND
   type: TYPE_PRE
+  zh: '[PRE5]'
 - en: Which will run `MyStrategy` 10 times with `myparam1` taking values from 10 to
     19 (remember ranges in Python are half-open and `20` will not be reached)
+  id: totrans-25
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 运行`MyStrategy` 10次，其中`myparam1`的值从10到19（请记住，Python中的范围是半开放的，`20`不会被包含）
 - en: Other elements
+  id: totrans-26
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 其他元素
 - en: 'There are some other elements which can be added to enhance the backtesting
     experience. See the appropriate sections for it. The methods are:'
+  id: totrans-27
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 还有一些其他元素可以添加以增强回测体验。查看相应的部分以了解详情。方法包括：
 - en: '`addwriter`'
+  id: totrans-28
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`addwriter`'
 - en: '`addanalyzer`'
+  id: totrans-29
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`addanalyzer`'
 - en: '`addobserver` (or `addobservermulti`)'
+  id: totrans-30
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`addobserver`（或`addobservermulti`）'
 - en: Changing the broker
+  id: totrans-31
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 更改经纪人
 - en: 'Cerebro will use the default broker in `backtrader`, but this can be overriden:'
+  id: totrans-32
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: Cerebro将在`backtrader`中使用默认经纪人，但可以被覆盖：
 - en: '[PRE6]'
+  id: totrans-33
   prefs:
   - PREF_IND
   type: TYPE_PRE
+  zh: '[PRE6]'
 - en: Receive notifications
+  id: totrans-34
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 接收通知
 - en: If *data feeds* and/or *brokers* send notifications (or a *store* provider which
     creates them) they will be received through the `Cerebro.notify_store` method.
     There are three (3) ways to work with these notifications
+  id: totrans-35
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 如果*数据源*和/或*经纪人*发送通知（或创建它们的*存储*提供程序），它们将通过`Cerebro.notify_store`方法接收。有三（3）种处理这些通知的方法
 - en: 'Add a *callback* to a `cerebro` instance via the `addnotifycallback(callback)`
     call. The callback has to support this signature:'
+  id: totrans-36
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 通过`addnotifycallback(callback)`调用向`cerebro`实例添加*回调*。回调函数必须支持此签名：
 - en: '[PRE7]'
+  id: totrans-37
   prefs:
   - PREF_IND
   type: TYPE_PRE
+  zh: '[PRE7]'
 - en: The actual `msg`, `*args` and `**kwargs` received are implementation defined
     (depend entirely on the *data/broker/store*) but in general one should expect
     them to be *printable* to allow for reception and experimentation.
+  id: totrans-38
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 实际的`msg`、`*args`和`**kwargs`接收的内容是实现定义的（完全取决于*数据/经纪人/存储*），但一般可以期望它们是*可打印*的，以便接收和实验。
 - en: Override the `notify_store` method in the `Strategy` subclass which is added
     to a `cerebro` instance.
+  id: totrans-39
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 在添加到`cerebro`实例的`Strategy`子类中覆盖`notify_store`方法。
 - en: 'The signature: `notify_store(self, msg, *args, **kwargs)`'
+  id: totrans-40
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 签名：`notify_store(self, msg, *args, **kwargs)`
 - en: Subclass `Cerebro` and override `notify_store` (same signature as in the `Strategy`)
+  id: totrans-41
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 子类`Cerebro`并覆盖`notify_store`（与`Strategy`中的签名相同）
 - en: This should be the least preferred method
+  id: totrans-42
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 这应该是最不受欢迎的方法
 - en: Execute the backtesting
+  id: totrans-43
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 执行回测
 - en: 'There is a single method to do it, but it supports several options (which can
     be also specified when instantiating) to decide how to run:'
+  id: totrans-44
   prefs: []
   type: TYPE_NORMAL
+  zh: 有一个单一的方法可以做到这一点，但它支持几个选项（也可以在实例化时指定），以决定如何运行：
 - en: '[PRE8]'
+  id: totrans-45
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE8]'
 - en: See the reerence below to understand which arguments are available.
+  id: totrans-46
   prefs: []
   type: TYPE_NORMAL
+  zh: 请参阅下面的参考文献，了解可用的参数。
 - en: Standard Observers
+  id: totrans-47
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 标准观察者
 - en: '`cerebro` (unless otherwise specified) automatically instantiates *three* standard
     observers'
+  id: totrans-48
   prefs: []
   type: TYPE_NORMAL
+  zh: '`cerebro`（除非另有说明）会自动实例化*三个*标准观察者'
 - en: A *Broker* observer which keeps track of `cash` and `value` (portfolio)
+  id: totrans-49
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 一个*Broker*观察者，用于跟踪`cash`和`value`（投资组合）
 - en: A *Trades* observer which should show how effective each trade has been
+  id: totrans-50
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 一个*Trades*观察者，应显示每次交易的有效性如何
 - en: A *Buy/Sell* observer which should document when operations are executed
+  id: totrans-51
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 一个*Buy/Sell*观察者，应记录操作何时执行
 - en: Should a cleaner plotting be wished just disable them with `stdstats=False`
+  id: totrans-52
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果希望更干净的绘图，只需使用`stdstats=False`禁用它们
 - en: Returning the results
+  id: totrans-53
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 返回结果
 - en: '`cerebro` returns the instances of the strategies it created during backtesting.
     This allows to analyze what they did, because all elements in the strategies are
     accessible:'
+  id: totrans-54
   prefs: []
   type: TYPE_NORMAL
+  zh: '`cerebro`在回测期间返回所创建的策略实例。这允许分析它们的操作，因为可以访问策略中的所有元素：'
 - en: '[PRE9]'
+  id: totrans-55
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE9]'
 - en: 'The format of `result` returned by `run` will vary depending on whether *optimization*
     is used (a *strategy* was added with `optstrategy`):'
+  id: totrans-56
   prefs: []
   type: TYPE_NORMAL
+  zh: 由`run`返回的`result`的格式取决于是否使用了*优化*（使用`optstrategy`添加了一个*策略*）：
 - en: All strategies added with `addstrategy`
+  id: totrans-57
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 所有使用`addstrategy`添加的策略
 - en: '`result` will be a `list` of the instances run during the backtesting'
+  id: totrans-58
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: '`result`将是在回测期间运行的实例的`list`'
 - en: 1 or more strategies were added with `optstrategy`
+  id: totrans-59
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 使用`optstrategy`添加了1个或多个策略
 - en: '`result` will be a `list` of `list`. Each internal list will contain the strategies
     after each optimization run'
+  id: totrans-60
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: '`result`将是`list`的`list`。每个内部列表将包含每次优化运行后的策略'
 - en: Note
+  id: totrans-61
   prefs: []
   type: TYPE_NORMAL
+  zh: 注意
 - en: The default behavior for *optimization* was changed to only return the *analyzers*
     present in the system, to make message passing across computer cores lighter.
+  id: totrans-62
   prefs: []
   type: TYPE_NORMAL
+  zh: '*优化*的默认行为已更改为仅返回系统中存在的*分析器*，以减轻跨计算机核心的消息传递负担。'
 - en: If the complete set of strategies is wished as return value, set the parameter
     `optreturn` to `False`
+  id: totrans-63
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果希望返回完整的策略集，请将参数`optreturn`设置为`False`
 - en: Giving access to the plotting facilities
+  id: totrans-64
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 提供对绘图功能的访问
 - en: 'As an extra an if `matplotlib` is installed, the strategies can be plotted.
     With the usual pattern being:'
+  id: totrans-65
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果安装了`matplotlib`，则可以绘制策略图。通常的模式是：
 - en: '[PRE10]'
+  id: totrans-66
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE10]'
 - en: See below for the reference and the section Plotting
+  id: totrans-67
   prefs: []
   type: TYPE_NORMAL
+  zh: 请参阅下文的参考文献和绘图部分
 - en: Backtesting logic
+  id: totrans-68
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 回测逻辑
 - en: 'Brief outline of the flow of things:'
+  id: totrans-69
   prefs: []
   type: TYPE_NORMAL
+  zh: 事物流程的简要概述：
 - en: Deliver any store notifications
+  id: totrans-70
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 传递任何存储通知
 - en: Ask data feeds to deliver the next set of ticks/bars
+  id: totrans-71
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 要求数据源提供下一组ticks/bars
 - en: '**Versionchanged:** Changed in version 1.9.0.99: *New Behavior*'
+  id: totrans-72
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: '**版本更改：**版本1.9.0.99中已更改：*新行为*'
 - en: Data Feeds are synchronized by peeking at the *datetime* which is going to be
     provided next by available data feeds. Feeds which have not traded in the new
     period still provide the old data points, whilst data feeds which have new data
     available offer this one (along with the calculation of indicators)
+  id: totrans-73
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 数据源通过查看下一个将提供的*datetime*来同步。在新周期中尚未交易的数据源仍提供旧数据点，而具有新数据的数据源则提供此数据（以及指标的计算）
 - en: '*Old Behavior* (retained when using `oldsync=True` with *Cerebro*)'
+  id: totrans-74
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: '*旧行为*（在*Cerebro*中使用`oldsync=True`时保留）'
 - en: The 1^(st) data inserted into the system is the `datamaster` and the system
     will wait for it to deliver a tick
+  id: totrans-75
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 第1个插入系统的数据是`datamaster`，系统将等待它提供一个tick
 - en: 'The other data feeds are, more or less, slaves to the `datamaster` and:'
+  id: totrans-76
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 其他数据源或多或少是`datamaster`的从属，且：
 - en: '[PRE11]'
+  id: totrans-77
   prefs:
   - PREF_IND
   type: TYPE_PRE
+  zh: '[PRE11]'
 - en: The logic was designed to easily synchronize multiple data feeds and data feeds
     with different timeframes
+  id: totrans-78
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 逻辑被设计为轻松同步多个数据源和具有不同时间框架的数据源
 - en: Notify the strategy about queued broker notifications of orders, trades and
     cash/value
+  id: totrans-79
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 通知策略有关已排队的经纪人订单、交易和现金/价值的通知
 - en: Tell the broker to accept queued orders and execute the pending orders with
     the new data
+  id: totrans-80
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 告诉经纪人接受排队的订单，并使用新数据执行待处理的订单
 - en: Call the strategies’ `next` method to let the strategy evaluate the new data
     (and maybe issue orders which are queued in the broker)
+  id: totrans-81
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 调用策略的 `next` 方法以使策略评估新数据（并可能发出在经纪人中排队的订单）
 - en: Depending on the stage it may be `prenext` or `nextstart` before the minimum
     period requirements of the strategy/indicators are met
+  id: totrans-82
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 根据阶段，策略/指标的最小周期要求可能在满足之前是 `prenext` 还是 `nextstart`。
 - en: Internally the strategies will also kick the `observers`, `indicators`, `analyzers`
     and other active elements
+  id: totrans-83
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 在内部，策略还会触发 `observers`、`indicators`、`analyzers` 和其他活动元素
 - en: Tell any `writers` to write the data to its target
+  id: totrans-84
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 告诉任何 `writers` 将数据写入其目标
 - en: 'Important to take into account:'
+  id: totrans-85
   prefs: []
   type: TYPE_NORMAL
+  zh: 注意：
 - en: Note
+  id: totrans-86
   prefs: []
   type: TYPE_NORMAL
+  zh: 注意
 - en: In step `1` above when the *data feeds* deliver the new set of bars, those bars
     are **closed**. This means the data has already happened.
+  id: totrans-87
   prefs: []
   type: TYPE_NORMAL
+  zh: 在上述第 `1` 步中，当 *数据源* 传递新的柱集时，这些柱是 **关闭** 的。 这意味着数据已经发生了。
 - en: As such, *orders* issued by the strategy in step `4` cannot be *executed* with
     the data from step `1`.
+  id: totrans-88
   prefs: []
   type: TYPE_NORMAL
+  zh: 因此，在第 `4` 步中策略发出的 *订单* 无法使用第 `1` 步的数据 *执行*。
 - en: This means that orders will be executed with the concept of `x + 1`. Where `x`
     is the bar moment at which the order was executed and `x + 1` the next one, which
     is the earliest moment in time for a possible order execution
+  id: totrans-89
   prefs: []
   type: TYPE_NORMAL
+  zh: 这意味着订单将使用 `x + 1` 的概念执行。 其中 `x` 是订单执行的柱时刻，而 `x + 1` 是下一个，它是可能的订单执行的最早时刻
 - en: Reference
+  id: totrans-90
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 参考
 - en: class backtrader.Cerebro()
+  id: totrans-91
   prefs:
   - PREF_H4
   type: TYPE_NORMAL
+  zh: 类 backtrader.Cerebro()
 - en: 'Params:'
+  id: totrans-92
   prefs: []
   type: TYPE_NORMAL
+  zh: 参数：
 - en: '`preload` (default: `True`)'
+  id: totrans-93
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`preload`（默认：`True`）'
 - en: Whether to preload the different `data feeds` passed to cerebro for the Strategies
+  id: totrans-94
   prefs: []
   type: TYPE_NORMAL
+  zh: 是否预加载传递给 cerebro 的不同 `data feeds` 用于策略
 - en: '`runonce` (default: `True`)'
+  id: totrans-95
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`runonce`（默认：`True`）'
 - en: Run `Indicators` in vectorized mode to speed up the entire system. Strategies
     and Observers will always be run on an event based basis
+  id: totrans-96
   prefs: []
   type: TYPE_NORMAL
+  zh: 在向量化模式下运行 `Indicators` 以加速整个系统。 策略和观察器将始终基于事件运行。
 - en: '`live` (default: `False`)'
+  id: totrans-97
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`live`（默认：`False`）'
 - en: If no data has reported itself as *live* (via the data’s `islive` method but
     the end user still want to run in `live` mode, this parameter can be set to true
+  id: totrans-98
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果没有数据通过数据的 `islive` 方法报告自身为 *live*，但最终用户仍希望以 `live` 模式运行，可以将此参数设置为 true
 - en: This will simultaneously deactivate `preload` and `runonce`. It will have no
     effect on memory saving schemes.
+  id: totrans-99
   prefs: []
   type: TYPE_NORMAL
+  zh: 这将同时停用 `preload` 和 `runonce`。 对内存节省方案没有影响。
 - en: Run `Indicators` in vectorized mode to speed up the entire system. Strategies
     and Observers will always be run on an event based basis
+  id: totrans-100
   prefs: []
   type: TYPE_NORMAL
+  zh: 在向量化模式下运行 `Indicators` 以加速整个系统。 策略和观察器将始终基于事件运行。
 - en: '`maxcpus` (default: None -> all available cores)'
+  id: totrans-101
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`maxcpus`（默认：无->所有可用核心）'
 - en: How many cores to use simultaneously for optimization
+  id: totrans-102
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 同时使用多少核心进行优化
 - en: '`stdstats` (default: `True`)'
+  id: totrans-103
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`stdstats`（默认：`True`）'
 - en: 'If True default Observers will be added: Broker (Cash and Value), Trades and
     BuySell'
+  id: totrans-104
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果为 True，默认观察者将被添加：经纪人（现金和价值）、交易和买卖
 - en: '`oldbuysell` (default: `False`)'
+  id: totrans-105
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`oldbuysell`（默认：`False`）'
 - en: If `stdstats` is `True` and observers are getting automatically added, this
     switch controls the main behavior of the `BuySell` observer
+  id: totrans-106
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果 `stdstats` 为 `True` 并且观察者自动添加，则此开关控制 `BuySell` 观察者的主要行为
 - en: '`False`: use the modern behavior in which the buy / sell signals are plotted
     below / above the low / high prices respectively to avoid cluttering the plot'
+  id: totrans-107
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`False`：使用现代行为，在低/高价格的下方/上方分别绘制买入/卖出信号，以避免图表混乱'
 - en: '`True`: use the deprecated behavior in which the buy / sell signals are plotted
     where the average price of the order executions for the given moment in time is.
     This will of course be on top of an OHLC bar or on a Line on Cloe bar, difficulting
     the recognition of the plot.'
+  id: totrans-108
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`True`：使用已弃用的行为，在给定时刻的订单执行的平均价格绘制买入/卖出信号。 这当然会在 OHLC 柱或 Cloe 柱上方绘制，难以识别图的内容。'
 - en: '`oldtrades` (default: `False`)'
+  id: totrans-109
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`oldtrades`（默认：`False`）'
 - en: If `stdstats` is `True` and observers are getting automatically added, this
     switch controls the main behavior of the `Trades` observer
+  id: totrans-110
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果 `stdstats` 为 `True` 并且观察者自动添加，则此开关控制 `Trades` 观察者的主要行为
 - en: '`False`: use the modern behavior in which trades for all datas are plotted
     with different markers'
+  id: totrans-111
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`False`：使用现代行为，其中所有数据的交易都用不同的标记绘制'
 - en: '`True`: use the old Trades observer which plots the trades with the same markers,
     differentiating only if they are positive or negative'
+  id: totrans-112
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`True`：使用旧的交易观察器，它使用相同的标记绘制交易，仅在它们是正数还是负数时有所区别。'
 - en: '`exactbars` (default: `False`)'
+  id: totrans-113
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`exactbars`（默认：`False`）'
 - en: With the default value each and every value stored in a line is kept in memory
+  id: totrans-114
   prefs: []
   type: TYPE_NORMAL
+  zh: 默认情况下，每个值都会存储在内存中的一行中。
 - en: 'Possible values:'
+  id: totrans-115
   prefs: []
   type: TYPE_NORMAL
+  zh: 可能的值：
 - en: '[PRE12]'
+  id: totrans-116
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE12]'
 - en: '`objcache` (default: `False`)'
+  id: totrans-117
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`objcache`（默认：`False`）'
 - en: 'Experimental option to implement a cache of lines objects and reduce the amount
     of them. Example from UltimateOscillator:'
+  id: totrans-118
   prefs: []
   type: TYPE_NORMAL
+  zh: 实验选项，用于实现线条对象的缓存并减少它们的数量。从UltimateOscillator示例：
 - en: '[PRE13]'
+  id: totrans-119
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE13]'
 - en: If this is `True` the 2^(nd) `TrueLow(self.data)` inside `TrueRange` matches
     the signature of the one in the `bp` calculation. It will be reused.
+  id: totrans-120
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果这是`True`，则`TrueRange`内的第2个`TrueLow(self.data)`将与`bp`计算中的签名匹配。它将被重用。
 - en: Corner cases may happen in which this drives a line object off its minimum period
     and breaks things and it is therefore disabled.
+  id: totrans-121
   prefs: []
   type: TYPE_NORMAL
+  zh: 边缘情况可能会发生，其中这会使线条对象超出其最小周期并且导致故障，因此已禁用。
 - en: '`writer` (default: `False`)'
+  id: totrans-122
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`writer`（默认：`False`）'
 - en: If set to `True` a default WriterFile will be created which will print to stdout.
     It will be added to the strategy (in addition to any other writers added by the
     user code)
+  id: totrans-123
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果设置为`True`，将创建一个默认的WriterFile，它将打印到stdout。它将被添加到策略中（除了用户代码添加的任何其他写入器）
 - en: '`tradehistory` (default: `False`)'
+  id: totrans-124
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`tradehistory`（默认：`False`）'
 - en: If set to `True`, it will activate update event logging in each trade for all
     strategies. This can also be accomplished on a per strategy basis with the strategy
     method `set_tradehistory`
+  id: totrans-125
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果设置为`True`，它将激活每个策略的每次交易的更新事件记录。这也可以通过策略方法`set_tradehistory`逐个策略地完成。
 - en: '`optdatas` (default: `True`)'
+  id: totrans-126
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`optdatas`（默认：`True`）'
 - en: If `True` and optimizing (and the system can `preload` and use `runonce`, data
     preloading will be done only once in the main process to save time and resources.
+  id: totrans-127
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果为`True`且正在优化（并且系统可以`preload`并使用`runonce`，数据预加载将仅在主进程中执行一次，以节省时间和资源。
 - en: The tests show an approximate `20%` speed-up moving from a sample execution
     in `83` seconds to `66`
+  id: totrans-128
   prefs: []
   type: TYPE_NORMAL
+  zh: 测试显示，从在`83`秒的样本执行中移动到`66`秒的执行速度提高了约`20%`。
 - en: '`optreturn` (default: `True`)'
+  id: totrans-129
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`optreturn`（默认：`True`）'
 - en: 'If `True` the optimization results will not be full `Strategy` objects (and
     all *datas*, *indicators*, *observers* …) but and object with the following attributes
     (same as in `Strategy`):'
+  id: totrans-130
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果为`True`，则优化结果将不是完整的`Strategy`对象（以及所有*datas*、*indicators*、*observers*...），而是具有以下属性的对象（与`Strategy`中相同）：
 - en: '[PRE14]'
+  id: totrans-131
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE14]'
 - en: In most occassions, only the *analyzers* and with which *params* are the things
     needed to evaluate a the performance of a strategy. If detailed analysis of the
     generated values for (for example) *indicators* is needed, turn this off
+  id: totrans-132
   prefs: []
   type: TYPE_NORMAL
+  zh: 在大多数情况下，只有*分析器*和与之相关的*参数*是评估策略性能所需的内容。如果需要对生成的值（例如*指标*）进行详细分析，则关闭此选项。
 - en: The tests show a `13% - 15%` improvement in execution time. Combined with `optdatas`
     the total gain increases to a total speed-up of `32%` in an optimization run.
+  id: totrans-133
   prefs: []
   type: TYPE_NORMAL
+  zh: 测试显示执行时间提高了`13% - 15%`。与`optdatas`结合使用，总增益增加到了优化运行的`32%`的总体加速。
 - en: '`oldsync` (default: `False`)'
+  id: totrans-134
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`oldsync`（默认：`False`）'
 - en: Starting with release 1.9.0.99 the synchronization of multiple datas (same or
     different timeframes) has been changed to allow datas of different lengths.
+  id: totrans-135
   prefs: []
   type: TYPE_NORMAL
+  zh: 从版本1.9.0.99开始，多个数据的同步（相同或不同的时间框架）已更改为允许长度不同的数据。
 - en: If the old behavior with data0 as the master of the system is wished, set this
     parameter to true
+  id: totrans-136
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果希望保留旧的行为，并将data0设置为系统的主要数据，则将此参数设置为true。
 - en: '`tz` (default: `None`)'
+  id: totrans-137
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`tz`（默认：`None`）'
 - en: Adds a global timezone for strategies. The argument `tz` can be
+  id: totrans-138
   prefs: []
   type: TYPE_NORMAL
+  zh: 为策略添加全局时区。参数`tz`可以是
 - en: '[PRE15]'
+  id: totrans-139
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE15]'
 - en: '`cheat_on_open` (default: `False`)'
+  id: totrans-140
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`cheat_on_open`（默认：`False`）'
 - en: The `next_open` method of strategies will be called. This happens before `next`
     and before the broker has had a chance to evaluate orders. The indicators have
     not yet been recalculated. This allows issuing an orde which takes into account
     the indicators of the previous day but uses the `open` price for stake calculations
+  id: totrans-141
   prefs: []
   type: TYPE_NORMAL
+  zh: 在调用策略的`next_open`方法之前将会调用它。这发生在`next`之前，也发生在经纪人有机会评估订单之前。指标尚未重新计算。这允许发出一个订单，该订单考虑了前一天的指标，但使用`open`价格进行股份计算。
 - en: For cheat_on_open order execution, it is also necessary to make the call `cerebro.broker.set_coo(True)`
     or instantite a broker with `BackBroker(coo=True)` (where *coo* stands for cheat-on-open)
     or set the `broker_coo` parameter to `True`. Cerebro will do it automatically
     unless disabled below.
+  id: totrans-142
   prefs: []
   type: TYPE_NORMAL
+  zh: 对于`cheat_on_open`订单执行，还需要调用`cerebro.broker.set_coo(True)`或使用`BackBroker(coo=True)`实例化一个经纪人（其中*coo*代表cheat-on-open），或者将`broker_coo`参数设置为`True`。除非在下面禁用，否则Cerebro将自动执行此操作。
 - en: '`broker_coo` (default: `True`)'
+  id: totrans-143
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`broker_coo`（默认：`True`）'
 - en: This will automatically invoke the `set_coo` method of the broker with `True`
     to activate `cheat_on_open` execution. Will only do it if `cheat_on_open` is also
     `True`
+  id: totrans-144
   prefs: []
   type: TYPE_NORMAL
+  zh: 这将自动调用经纪人的`set_coo`方法，并使用`True`来激活`cheat_on_open`执行。仅当`cheat_on_open`也为`True`时才执行。
 - en: '`quicknotify` (default: `False`)'
+  id: totrans-145
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`quicknotify`（默认值：`False`）'
 - en: Broker notifications are delivered right before the delivery of the *next* prices.
     For backtesting this has no implications, but with live brokers a notification
     can take place long before the bar is delivered. When set to `True` notifications
     will be delivered as soon as possible (see `qcheck` in live feeds)
+  id: totrans-146
   prefs: []
   type: TYPE_NORMAL
+  zh: 经纪人通知将在*下一个*价格传递之前立即传递。 对于回测，这没有任何影响，但对于实时经纪人，通知可能会在交付柱形图之前很久就发生了。 当设置为 `True`
+    时，通知将尽快传递（请参阅实时数据源中的 `qcheck`）
 - en: Set to `False` for compatibility. May be changed to `True`
+  id: totrans-147
   prefs: []
   type: TYPE_NORMAL
+  zh: 设置为 `False` 以实现兼容性。 可能会更改为 `True`
 - en: addstorecb(callback)
+  id: totrans-148
   prefs:
   - PREF_H4
   type: TYPE_NORMAL
+  zh: addstorecb(callback)
 - en: Adds a callback to get messages which would be handled by the notify_store method
+  id: totrans-149
   prefs: []
   type: TYPE_NORMAL
+  zh: 添加一个回调来获取将由 notify_store 方法处理的消息
 - en: 'The signature of the callback must support the following:'
+  id: totrans-150
   prefs: []
   type: TYPE_NORMAL
+  zh: 回调函数的签名必须支持以下内容：
 - en: '`callback(msg, *args, **kwargs)`'
+  id: totrans-151
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`callback(msg, *args, **kwargs)`'
 - en: The actual `msg`, `*args` and `**kwargs` received are implementation defined
     (depend entirely on the *data/broker/store*) but in general one should expect
     them to be *printable* to allow for reception and experimentation.
+  id: totrans-152
   prefs: []
   type: TYPE_NORMAL
+  zh: 实际接收到的 `msg`、`*args` 和 `**kwargs` 取决于实现（完全依赖于 *数据/经纪人/存储*），但通常应该期望它们是*可打印的*，以便接收和实验。
 - en: notify_store(msg, *args, **kwargs)
+  id: totrans-153
   prefs:
   - PREF_H4
   type: TYPE_NORMAL
+  zh: notify_store(msg, *args, **kwargs)
 - en: Receive store notifications in cerebro
+  id: totrans-154
   prefs: []
   type: TYPE_NORMAL
+  zh: 在 cerebro 中接收存储通知
 - en: This method can be overridden in `Cerebro` subclasses
+  id: totrans-155
   prefs: []
   type: TYPE_NORMAL
+  zh: 此方法可以在 `Cerebro` 的子类中重写
 - en: The actual `msg`, `*args` and `**kwargs` received are implementation defined
     (depend entirely on the *data/broker/store*) but in general one should expect
     them to be *printable* to allow for reception and experimentation.
+  id: totrans-156
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果 `name` 不为 None，则将其放入 `data._name` 中，该参数用于装饰/绘图目的。
 - en: adddatacb(callback)
+  id: totrans-157
   prefs:
   - PREF_H4
   type: TYPE_NORMAL
+  zh: adddatacb(callback)
 - en: Adds a callback to get messages which would be handled by the notify_data method
+  id: totrans-158
   prefs: []
   type: TYPE_NORMAL
+  zh: adddata(data, name=None)
 - en: 'The signature of the callback must support the following:'
+  id: totrans-159
   prefs: []
   type: TYPE_NORMAL
+  zh: 向获取将由 notify_data 方法处理的消息添加一个回调
 - en: callback(data, status, *args, **kwargs)
+  id: totrans-160
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: callback(data, status, *args, **kwargs)
 - en: The actual `*args` and `**kwargs` received are implementation defined (depend
     entirely on the *data/broker/store*) but in general one should expect them to
     be *printable* to allow for reception and experimentation.
+  id: totrans-161
   prefs: []
   type: TYPE_NORMAL
+  zh: 实际接收到的 `*args` 和 `**kwargs` 取决于实现（完全依赖于 *数据/经纪人/存储*），但通常应该期望它们是*可打印的*，以便接收和实验。
 - en: notify_data(data, status, *args, **kwargs)
+  id: totrans-162
   prefs:
   - PREF_H4
   type: TYPE_NORMAL
+  zh: 实际接收到的 `msg`、`*args` 和 `**kwargs` 取决于实现（完全依赖于 *数据/经纪人/存储*），但通常应该期望它们是*可打印的*，以便接收和实验。
 - en: Receive data notifications in cerebro
+  id: totrans-163
   prefs: []
   type: TYPE_NORMAL
+  zh: 在 cerebro 中接收数据通知
 - en: This method can be overridden in `Cerebro` subclasses
+  id: totrans-164
   prefs: []
   type: TYPE_NORMAL
+  zh: 此方法可以在 `Cerebro` 的子类中重写
 - en: The actual `*args` and `**kwargs` received are implementation defined (depend
     entirely on the *data/broker/store*) but in general one should expect them to
     be *printable* to allow for reception and experimentation.
+  id: totrans-165
   prefs: []
   type: TYPE_NORMAL
+  zh: 回调函数的签名必须支持以下内容：
 - en: adddata(data, name=None)
+  id: totrans-166
   prefs:
   - PREF_H4
   type: TYPE_NORMAL
+  zh: notify_data(data, status, *args, **kwargs)
 - en: Adds a `Data Feed` instance to the mix.
+  id: totrans-167
   prefs: []
   type: TYPE_NORMAL
+  zh: 向组合中添加一个 `Data Feed` 实例。
 - en: If `name` is not None it will be put into `data._name` which is meant for decoration/plotting
     purposes.
+  id: totrans-168
   prefs: []
   type: TYPE_NORMAL
+  zh: 添加一个 `callback` 来获取将由 notify_store 方法处理的消息
 - en: resampledata(dataname, name=None, **kwargs)
+  id: totrans-169
   prefs:
   - PREF_H4
   type: TYPE_NORMAL
+  zh: resampledata(dataname, name=None, **kwargs)
 - en: Adds a `Data Feed` to be resample by the system
+  id: totrans-170
   prefs: []
   type: TYPE_NORMAL
+  zh: 向系统添加一个将由系统重新采样的 `Data Feed`
 - en: If `name` is not None it will be put into `data._name` which is meant for decoration/plotting
     purposes.
+  id: totrans-171
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果 `name` 不为 None，则将其放入 `data._name` 中，该参数用于装饰/绘图目的。
 - en: Any other kwargs like `timeframe`, `compression`, `todate` which are supported
     by the resample filter will be passed transparently
+  id: totrans-172
   prefs: []
   type: TYPE_NORMAL
+  zh: 任何其他支持重新采样过滤器的 kwargs，如 `timeframe`、`compression`、`todate`，都将被透明地传递
 - en: replaydata(dataname, name=None, **kwargs)
+  id: totrans-173
   prefs:
   - PREF_H4
   type: TYPE_NORMAL
+  zh: replaydata(dataname, name=None, **kwargs)
 - en: Adds a `Data Feed` to be replayed by the system
+  id: totrans-174
   prefs: []
   type: TYPE_NORMAL
+  zh: 向系统添加一个将由系统重播的 `Data Feed`
 - en: If `name` is not None it will be put into `data._name` which is meant for decoration/plotting
     purposes.
+  id: totrans-175
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果 `name` 不为 None，则将其放入 `data._name` 中，该参数用于装饰/绘图目的。
 - en: Any other kwargs like `timeframe`, `compression`, `todate` which are supported
     by the replay filter will be passed transparently
+  id: totrans-176
   prefs: []
   type: TYPE_NORMAL
+  zh: 任何其他支持回放过滤器的 kwargs，如 `timeframe`、`compression`、`todate`，都将被透明地传递
 - en: chaindata(*args, **kwargs)
+  id: totrans-177
   prefs:
   - PREF_H4
   type: TYPE_NORMAL
+  zh: chaindata(*args, **kwargs)
 - en: Chains several data feeds into one
+  id: totrans-178
   prefs: []
   type: TYPE_NORMAL
+  zh: 将几个数据源串联成一个
 - en: If `name` is passed as named argument and is not None it will be put into `data._name`
     which is meant for decoration/plotting purposes.
+  id: totrans-179
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果 `name` 被传递为命名参数且不为 None，则将其放入 `data._name` 中，该参数用于装饰/绘图目的。
 - en: If `None`, then the name of the 1^(st) data will be used
+  id: totrans-180
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果为 `None`，则将使用第 1 个数据的名称
 - en: rolloverdata(*args, **kwargs)
+  id: totrans-181
   prefs:
   - PREF_H4
   type: TYPE_NORMAL
+  zh: rolloverdata(*args, **kwargs)
 - en: Chains several data feeds into one
+  id: totrans-182
   prefs: []
   type: TYPE_NORMAL
+  zh: 将几个数据源链接到一个数据源中
 - en: If `name` is passed as named argument and is not None it will be put into `data._name`
     which is meant for decoration/plotting purposes.
+  id: totrans-183
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果将 `name` 作为命名参数传递，并且不为 None，则将放入 `data._name` 中，用于装饰/绘图目的。
 - en: If `None`, then the name of the 1^(st) data will be used
+  id: totrans-184
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果为 `None`，则将使用第 1 个数据的名称
 - en: Any other kwargs will be passed to the RollOver class
+  id: totrans-185
   prefs: []
   type: TYPE_NORMAL
+  zh: 任何其他的 kwargs 将传递给 RollOver 类
 - en: addstrategy(strategy, *args, **kwargs)
+  id: totrans-186
   prefs:
   - PREF_H4
   type: TYPE_NORMAL
+  zh: addstrategy(strategy, *args, **kwargs)
 - en: Adds a `Strategy` class to the mix for a single pass run. Instantiation will
     happen during `run` time.
+  id: totrans-187
   prefs: []
   type: TYPE_NORMAL
+  zh: 将 `Strategy` 类添加到混合中，以进行单次运行。实例化将在`运行`时发生。
 - en: args and kwargs will be passed to the strategy as they are during instantiation.
+  id: totrans-188
   prefs: []
   type: TYPE_NORMAL
+  zh: args 和 kwargs 将像在实例化期间一样传递给策略。
 - en: Returns the index with which addition of other objects (like sizers) can be
     referenced
+  id: totrans-189
   prefs: []
   type: TYPE_NORMAL
+  zh: 返回用于引用其他对象（如调整器）的添加索引
 - en: optstrategy(strategy, *args, **kwargs)
+  id: totrans-190
   prefs:
   - PREF_H4
   type: TYPE_NORMAL
+  zh: optstrategy(strategy, *args, **kwargs)
 - en: Adds a `Strategy` class to the mix for optimization. Instantiation will happen
     during `run` time.
+  id: totrans-191
   prefs: []
   type: TYPE_NORMAL
+  zh: 将 `Strategy` 类添加到混合中以进行优化。实例化将在`运行`时发生。
 - en: args and kwargs MUST BE iterables which hold the values to check.
+  id: totrans-192
   prefs: []
   type: TYPE_NORMAL
+  zh: args 和 kwargs 必须是可迭代的，其中包含要检查的值。
 - en: 'Example: if a Strategy accepts a parameter `period`, for optimization purposes
     the call to `optstrategy` looks like:'
+  id: totrans-193
   prefs: []
   type: TYPE_NORMAL
+  zh: 示例：如果一个策略接受一个参数 `period`，为了优化目的，`optstrategy` 的调用如下所示：
 - en: cerebro.optstrategy(MyStrategy, period=(15, 25))
+  id: totrans-194
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: cerebro.optstrategy(MyStrategy, period=(15, 25))
 - en: This will execute an optimization for values 15 and 25\. Whereas
+  id: totrans-195
   prefs: []
   type: TYPE_NORMAL
+  zh: 这将为值 15 和 25 执行优化。而
 - en: cerebro.optstrategy(MyStrategy, period=range(15, 25))
+  id: totrans-196
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: cerebro.optstrategy(MyStrategy, period=range(15, 25))
 - en: will execute MyStrategy with `period` values 15 -> 25 (25 not included, because
     ranges are semi-open in Python)
+  id: totrans-197
   prefs: []
   type: TYPE_NORMAL
+  zh: 将使用 `period` 值 15 -> 25（因为 Python 中的范围是半开放的，所以不包括 25）执行 MyStrategy
 - en: 'If a parameter is passed but shall not be optimized the call looks like:'
+  id: totrans-198
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果传递了一个参数，但不应该进行优化，则调用如下：
 - en: cerebro.optstrategy(MyStrategy, period=(15,))
+  id: totrans-199
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: cerebro.optstrategy(MyStrategy, period=(15,))
 - en: Notice that `period` is still passed as an iterable … of just 1 element
+  id: totrans-200
   prefs: []
   type: TYPE_NORMAL
+  zh: 请注意，`period` 仍然传递为可迭代对象 … 只有 1 个元素
 - en: '`backtrader` will anyhow try to identify situations like:'
+  id: totrans-201
   prefs: []
   type: TYPE_NORMAL
+  zh: '`backtrader` 将尝试识别诸如以下情况：'
 - en: cerebro.optstrategy(MyStrategy, period=15)
+  id: totrans-202
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: cerebro.optstrategy(MyStrategy, period=15)
 - en: and will create an internal pseudo-iterable if possible
+  id: totrans-203
   prefs: []
   type: TYPE_NORMAL
+  zh: 并在可能的情况下创建内部伪可迭代对象
 - en: optcallback(cb)
+  id: totrans-204
   prefs:
   - PREF_H4
   type: TYPE_NORMAL
+  zh: optcallback(cb)
 - en: Adds a *callback* to the list of callbacks that will be called with the optimizations
     when each of the strategies has been run
+  id: totrans-205
   prefs: []
   type: TYPE_NORMAL
+  zh: 将 *callback* 添加到将在每个策略运行时调用的回调列表中进行优化
 - en: 'The signature: cb(strategy)'
+  id: totrans-206
   prefs: []
   type: TYPE_NORMAL
+  zh: 签名：cb(strategy)
 - en: addindicator(indcls, *args, **kwargs)
+  id: totrans-207
   prefs:
   - PREF_H4
   type: TYPE_NORMAL
+  zh: addindicator(indcls, *args, **kwargs)
 - en: Adds an `Indicator` class to the mix. Instantiation will be done at `run` time
     in the passed strategies
+  id: totrans-208
   prefs: []
   type: TYPE_NORMAL
+  zh: 将 `Indicator` 类添加到混合中。实例化将在传递的策略的`运行`时完成
 - en: addobserver(obscls, *args, **kwargs)
+  id: totrans-209
   prefs:
   - PREF_H4
   type: TYPE_NORMAL
+  zh: addobserver(obscls, *args, **kwargs)
 - en: Adds an `Observer` class to the mix. Instantiation will be done at `run` time
+  id: totrans-210
   prefs: []
   type: TYPE_NORMAL
+  zh: 将 `Observer` 类添加到混合中。实例化将在`运行`时完成
 - en: addobservermulti(obscls, *args, **kwargs)
+  id: totrans-211
   prefs:
   - PREF_H4
   type: TYPE_NORMAL
+  zh: addobservermulti(obscls, *args, **kwargs)
 - en: Adds an `Observer` class to the mix. Instantiation will be done at `run` time
+  id: totrans-212
   prefs: []
   type: TYPE_NORMAL
+  zh: 将 `Observer` 类添加到混合中。实例化将在`运行`时完成
 - en: It will be added once per “data” in the system. A use case is a buy/sell observer
     which observes individual datas.
+  id: totrans-213
   prefs: []
   type: TYPE_NORMAL
+  zh: 它将每个“数据”系统中添加一次。一个用例是观察单个数据的买入/卖出观察者。
 - en: A counter-example is the CashValue, which observes system-wide values
+  id: totrans-214
   prefs: []
   type: TYPE_NORMAL
+  zh: 反例是 CashValue，它观察系统范围的值
 - en: addanalyzer(ancls, *args, **kwargs)
+  id: totrans-215
   prefs:
   - PREF_H4
   type: TYPE_NORMAL
+  zh: addanalyzer(ancls, *args, **kwargs)
 - en: Adds an `Analyzer` class to the mix. Instantiation will be done at `run` time
+  id: totrans-216
   prefs: []
   type: TYPE_NORMAL
+  zh: 将 `Analyzer` 类添加到混合中。实例化将在`运行`时完成
 - en: addwriter(wrtcls, *args, **kwargs)
+  id: totrans-217
   prefs:
   - PREF_H4
   type: TYPE_NORMAL
+  zh: addwriter(wrtcls, *args, **kwargs)
 - en: Adds an `Writer` class to the mix. Instantiation will be done at `run` time
     in cerebro
+  id: totrans-218
   prefs: []
   type: TYPE_NORMAL
+  zh: 将 `Writer` 类添加到混合中。实例化将在`运行`时在 cerebro 中完成
 - en: run(**kwargs)
+  id: totrans-219
   prefs:
   - PREF_H4
   type: TYPE_NORMAL
+  zh: run(**kwargs)
 - en: The core method to perform backtesting. Any `kwargs` passed to it will affect
     the value of the standard parameters `Cerebro` was instantiated with.
+  id: totrans-220
   prefs: []
   type: TYPE_NORMAL
+  zh: 执行回测的核心方法。传递给它的任何 `kwargs` 都会影响实例化时 `Cerebro` 的标准参数的值。
 - en: If `cerebro` has not datas the method will immediately bail out.
+  id: totrans-221
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果 `cerebro` 没有数据，则该方法将立即退出。
 - en: 'It has different return values:'
+  id: totrans-222
   prefs: []
   type: TYPE_NORMAL
+  zh: 它具有不同的返回值：
 - en: 'For No Optimization: a list contanining instances of the Strategy classes added
     with `addstrategy`'
+  id: totrans-223
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 对于无优化：包含使用 `addstrategy` 添加的策略类实例的列表
 - en: 'For Optimization: a list of lists which contain instances of the Strategy classes
     added with `addstrategy`'
+  id: totrans-224
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 用于优化：包含使用`addstrategy`添加的Strategy类实例的列表的列表
 - en: runstop()
+  id: totrans-225
   prefs:
   - PREF_H4
   type: TYPE_NORMAL
+  zh: runstop()
 - en: If invoked from inside a strategy or anywhere else, including other threads
     the execution will stop as soon as possible.
+  id: totrans-226
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果从策略内部或其他任何地方调用，包括其他线程，执行将尽快停止。
 - en: setbroker(broker)
+  id: totrans-227
   prefs:
   - PREF_H4
   type: TYPE_NORMAL
+  zh: setbroker(broker)
 - en: Sets a specific `broker` instance for this strategy, replacing the one inherited
     from cerebro.
+  id: totrans-228
   prefs: []
   type: TYPE_NORMAL
+  zh: 为此策略设置特定的`broker`实例，替换从cerebro继承的实例。
 - en: getbroker()
+  id: totrans-229
   prefs:
   - PREF_H4
   type: TYPE_NORMAL
+  zh: getbroker()
 - en: Returns the broker instance.
+  id: totrans-230
   prefs: []
   type: TYPE_NORMAL
+  zh: 返回经纪人实例。
 - en: This is also available as a `property` by the name `broker`
+  id: totrans-231
   prefs: []
   type: TYPE_NORMAL
+  zh: 这也可以作为名为`broker`的`property`使用
 - en: plot(plotter=None, numfigs=1, iplot=True, start=None, end=None, width=16, height=9,
     dpi=300, tight=True, use=None, **kwargs)
+  id: totrans-232
   prefs:
   - PREF_H4
   type: TYPE_NORMAL
+  zh: 绘图（plotter=None，numfigs=1，iplot=True，start=None，end=None，width=16，height=9，dpi=300，tight=True，use=None，**kwargs）
 - en: Plots the strategies inside cerebro
+  id: totrans-233
   prefs: []
   type: TYPE_NORMAL
+  zh: 在cerebro内部绘制策略
 - en: If `plotter` is None a default `Plot` instance is created and `kwargs` are passed
     to it during instantiation.
+  id: totrans-234
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果`plotter`为None，则会创建一个默认的`Plot`实例，并在实例化期间将`kwargs`传递给它。
 - en: '`numfigs` split the plot in the indicated number of charts reducing chart density
     if wished'
+  id: totrans-235
   prefs: []
   type: TYPE_NORMAL
+  zh: '`numfigs`将绘图分成指定数量的图表，如果需要，可以减少图表密度'
 - en: '`iplot`: if `True` and running in a `notebook` the charts will be displayed
     inline'
+  id: totrans-236
   prefs: []
   type: TYPE_NORMAL
+  zh: '`iplot`：如果为`True`并在`notebook`中运行，则图表将内联显示'
 - en: '`use`: set it to the name of the desired matplotlib backend. It will take precedence
     over `iplot`'
+  id: totrans-237
   prefs: []
   type: TYPE_NORMAL
+  zh: '`use`：将其设置为所需matplotlib后端的名称。它将优先于`iplot`'
 - en: '`start`: An index to the datetime line array of the strategy or a `datetime.date`,
     `datetime.datetime` instance indicating the start of the plot'
+  id: totrans-238
   prefs: []
   type: TYPE_NORMAL
+  zh: '`start`：策略或`datetime.date`、`datetime.datetime`实例的日期时间线数组的索引，指示绘图的开始'
 - en: '`end`: An index to the datetime line array of the strategy or a `datetime.date`,
     `datetime.datetime` instance indicating the end of the plot'
+  id: totrans-239
   prefs: []
   type: TYPE_NORMAL
+  zh: '`end`：策略的日期时间线数组的索引或`datetime.date`、`datetime.datetime`实例，指示绘图的结束'
 - en: '`width`: in inches of the saved figure'
+  id: totrans-240
   prefs: []
   type: TYPE_NORMAL
+  zh: '`width`：保存图形的英寸'
 - en: '`height`: in inches of the saved figure'
+  id: totrans-241
   prefs: []
   type: TYPE_NORMAL
+  zh: '`height`：保存图形的英寸'
 - en: '`dpi`: quality in dots per inches of the saved figure'
+  id: totrans-242
   prefs: []
   type: TYPE_NORMAL
+  zh: '`dpi`：保存图形的每英寸点数的质量'
 - en: '`tight`: only save actual content and not the frame of the figure'
+  id: totrans-243
   prefs: []
   type: TYPE_NORMAL
+  zh: '`tight`：仅保存实际内容而不是图形的框架'
 - en: addsizer(sizercls, *args, **kwargs)
+  id: totrans-244
   prefs:
   - PREF_H4
   type: TYPE_NORMAL
+  zh: 添加sizer(sizercls，*args，**kwargs）
 - en: Adds a `Sizer` class (and args) which is the default sizer for any strategy
     added to cerebro
+  id: totrans-245
   prefs: []
   type: TYPE_NORMAL
+  zh: 添加一个`Sizer`类（和args），它是添加到cerebro的任何策略的默认sizer
 - en: addsizer_byidx(idx, sizercls, *args, **kwargs)
+  id: totrans-246
   prefs:
   - PREF_H4
   type: TYPE_NORMAL
+  zh: addsizer_byidx(idx，sizercls，*args，**kwargs）
 - en: Adds a `Sizer` class by idx. This idx is a reference compatible to the one returned
     by `addstrategy`. Only the strategy referenced by `idx` will receive this size
+  id: totrans-247
   prefs: []
   type: TYPE_NORMAL
+  zh: 按idx添加一个`Sizer`类。此idx是与`addstrategy`返回的兼容引用。只有由`idx`引用的策略将接收此大小
 - en: add_signal(sigtype, sigcls, *sigargs, **sigkwargs)
+  id: totrans-248
   prefs:
   - PREF_H4
   type: TYPE_NORMAL
+  zh: add_signal(sigtype，sigcls，*sigargs，**sigkwargs）
 - en: Adds a signal to the system which will be later added to a `SignalStrategy`
+  id: totrans-249
   prefs: []
   type: TYPE_NORMAL
+  zh: 向系统添加一个信号，稍后将其添加到`SignalStrategy`中。
 - en: signal_concurrent(onoff)
+  id: totrans-250
   prefs:
   - PREF_H4
   type: TYPE_NORMAL
+  zh: signal_concurrent(onoff)
 - en: If signals are added to the system and the `concurrent` value is set to True,
     concurrent orders will be allowed
+  id: totrans-251
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果向系统添加信号并且将`concurrent`值设置为True，则将允许并发订单
 - en: signal_accumulate(onoff)
+  id: totrans-252
   prefs:
   - PREF_H4
   type: TYPE_NORMAL
+  zh: signal_accumulate(onoff)
 - en: If signals are added to the system and the `accumulate` value is set to True,
     entering the market when already in the market, will be allowed to increase a
     position
+  id: totrans-253
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果向系统添加信号并且将`accumulate`值设置为True，则在已经进入市场时进入市场，将允许增加头寸
 - en: signal_strategy(stratcls, *args, **kwargs)
+  id: totrans-254
   prefs:
   - PREF_H4
   type: TYPE_NORMAL
+  zh: signal_strategy(stratcls，*args，**kwargs）
 - en: Adds a SignalStrategy subclass which can accept signals
+  id: totrans-255
   prefs: []
   type: TYPE_NORMAL
+  zh: 添加一个可以接受信号的SignalStrategy子类
 - en: addcalendar(cal)
+  id: totrans-256
   prefs:
   - PREF_H4
   type: TYPE_NORMAL
+  zh: addcalendar(cal)
 - en: Adds a global trading calendar to the system. Individual data feeds may have
     separate calendars which override the global one
+  id: totrans-257
   prefs: []
   type: TYPE_NORMAL
+  zh: 向系统添加全局交易日历。个别数据源可能具有覆盖全局日历的单独日历
 - en: '`cal` can be an instance of `TradingCalendar` a string or an instance of `pandas_market_calendars`.
     A string will be will be instantiated as a `PandasMarketCalendar` (which needs
     the module `pandas_market_calendar` installed in the system.'
+  id: totrans-258
   prefs: []
   type: TYPE_NORMAL
+  zh: '`cal`可以是`TradingCalendar`的实例、字符串或`pandas_market_calendars`的实例。字符串将被实例化为`PandasMarketCalendar`（需要系统中安装`pandas_market_calendar`模块。'
 - en: If a subclass of TradingCalendarBase is passed (not an instance) it will be
     instantiated
+  id: totrans-259
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果传递的是TradingCalendarBase的子类（而不是实例），它将被实例化
 - en: addtz(tz)
+  id: totrans-260
   prefs:
   - PREF_H4
   type: TYPE_NORMAL
+  zh: addtz(tz)
 - en: This can also be done with the parameter `tz`
+  id: totrans-261
   prefs: []
   type: TYPE_NORMAL
+  zh: 这也可以通过参数`tz`完成
 - en: Adds a global timezone for strategies. The argument `tz` can be
+  id: totrans-262
   prefs: []
   type: TYPE_NORMAL
+  zh: 为策略添加全局时区。参数`tz`可以是
 - en: '`None`: in this case the datetime displayed by strategies will be in UTC, which
     has been always the standard behavior'
+  id: totrans-263
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: '`pytz` instance. It will be used as such to convert UTC times to the chosen
     timezone'
+  id: totrans-264
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: '`string`. Instantiating a `pytz` instance will be attempted.'
+  id: totrans-265
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: '`integer`. Use, for the strategy, the same timezone as the corresponding `data`
     in the `self.datas` iterable (`0` would use the timezone from `data0`)'
+  id: totrans-266
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: add_timer(when, offset=datetime.timedelta(0), repeat=datetime.timedelta(0),
     weekdays=[], weekcarry=False, monthdays=[], monthcarry=True, allow=None, tzdata=None,
     strats=False, cheat=False, *args, **kwargs)
+  id: totrans-267
   prefs:
   - PREF_H4
   type: TYPE_NORMAL
 - en: Schedules a timer to invoke `notify_timer`
+  id: totrans-268
   prefs: []
   type: TYPE_NORMAL
 - en: '**Parameters**'
+  id: totrans-269
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: '**when** (*-*) – can be'
+  id: totrans-270
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
 - en: '`datetime.time` instance (see below `tzdata`)'
+  id: totrans-271
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
 - en: '`bt.timer.SESSION_START` to reference a session start'
+  id: totrans-272
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
 - en: '`bt.timer.SESSION_END` to reference a session end'
+  id: totrans-273
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
 - en: '`offset` which must be a `datetime.timedelta` instance'
+  id: totrans-274
   prefs:
   - PREF_IND
   - PREF_UL
@@ -1113,33 +1652,39 @@
 - en: Used to offset the value `when`. It has a meaningful use in combination with
     `SESSION_START` and `SESSION_END`, to indicated things like a timer being called
     `15 minutes` after the session start.
+  id: totrans-275
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
 - en: '`repeat` which must be a `datetime.timedelta` instance'
+  id: totrans-276
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
 - en: Indicates if after a 1^(st) call, further calls will be scheduled within the
     same session at the scheduled `repeat` delta
+  id: totrans-277
   prefs:
   - PREF_IND
   - PREF_IND
   type: TYPE_NORMAL
 - en: Once the timer goes over the end of the session it is reset to the original
     value for `when`
+  id: totrans-278
   prefs:
   - PREF_IND
   - PREF_IND
   type: TYPE_NORMAL
 - en: '`weekdays`: a **sorted** iterable with integers indicating on which days (iso
     codes, Monday is 1, Sunday is 7) the timers can be actually invoked'
+  id: totrans-279
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
 - en: If not specified, the timer will be active on all days
+  id: totrans-280
   prefs:
   - PREF_IND
   - PREF_IND
@@ -1147,58 +1692,68 @@
 - en: '`weekcarry` (default: `False`). If `True` and the weekday was not seen (ex:
     trading holiday), the timer will be executed on the next day (even if in a new
     week)'
+  id: totrans-281
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
 - en: '`monthdays`: a **sorted** iterable with integers indicating on which days of
     the month a timer has to be executed. For example always on day *15* of the month'
+  id: totrans-282
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
 - en: If not specified, the timer will be active on all days
+  id: totrans-283
   prefs:
   - PREF_IND
   - PREF_IND
   type: TYPE_NORMAL
 - en: '`monthcarry` (default: `True`). If the day was not seen (weekend, trading holiday),
     the timer will be executed on the next available day.'
+  id: totrans-284
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
 - en: '`allow` (default: `None`). A callback which receives a datetime.date` instance
     and returns `True` if the date is allowed for timers or else returns `False`'
+  id: totrans-285
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
 - en: '`tzdata` which can be either `None` (default), a `pytz` instance or a `data
     feed` instance.'
+  id: totrans-286
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
 - en: '`None`: `when` is interpreted at face value (which translates to handling it
     as if it where UTC even if it’s not)'
+  id: totrans-287
   prefs:
   - PREF_IND
   - PREF_IND
   type: TYPE_NORMAL
 - en: '`pytz` instance: `when` will be interpreted as being specified in the local
     time specified by the timezone instance.'
+  id: totrans-288
   prefs:
   - PREF_IND
   - PREF_IND
   type: TYPE_NORMAL
 - en: '`data feed` instance: `when` will be interpreted as being specified in the
     local time specified by the `tz` parameter of the data feed instance.'
+  id: totrans-289
   prefs:
   - PREF_IND
   - PREF_IND
   type: TYPE_NORMAL
 - en: Note
+  id: totrans-290
   prefs:
   - PREF_IND
   - PREF_IND
@@ -1206,11 +1761,13 @@
 - en: If `when` is either `SESSION_START` or `SESSION_END` and `tzdata` is `None`,
     the 1^(st) *data feed* in the system (aka `self.data0`) will be used as the reference
     to find out the session times.
+  id: totrans-291
   prefs:
   - PREF_IND
   - PREF_IND
   type: TYPE_NORMAL
 - en: '`strats` (default: `False`) call also the `notify_timer` of strategies'
+  id: totrans-292
   prefs:
   - PREF_IND
   - PREF_UL
@@ -1218,92 +1775,112 @@
 - en: '`cheat` (default `False`) if `True` the timer will be called before the broker
     has a chance to evaluate the orders. This opens the chance to issue orders based
     on opening price for example right before the session starts'
+  id: totrans-293
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
 - en: '`*args`: any extra args will be passed to `notify_timer`'
+  id: totrans-294
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
 - en: '`**kwargs`: any extra kwargs will be passed to `notify_timer`'
+  id: totrans-295
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
 - en: 'Return Value:'
+  id: totrans-296
   prefs: []
   type: TYPE_NORMAL
 - en: The created timer
+  id: totrans-297
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: notify_timer(timer, when, *args, **kwargs)
+  id: totrans-298
   prefs:
   - PREF_H4
   type: TYPE_NORMAL
 - en: Receives a timer notification where `timer` is the timer which was returned
     by `add_timer`, and `when` is the calling time. `args` and `kwargs` are any additional
     arguments passed to `add_timer`
+  id: totrans-299
   prefs: []
   type: TYPE_NORMAL
 - en: The actual `when` time can be later, but the system may have not be able to
     call the timer before. This value is the timer value and no the system time.
+  id: totrans-300
   prefs: []
   type: TYPE_NORMAL
 - en: add_order_history(orders, notify=True)
+  id: totrans-301
   prefs:
   - PREF_H4
   type: TYPE_NORMAL
 - en: Add a history of orders to be directly executed in the broker for performance
     evaluation
+  id: totrans-302
   prefs: []
   type: TYPE_NORMAL
 - en: '`orders`: is an iterable (ex: list, tuple, iterator, generator) in which each
     element will be also an iterable (with length) with the following sub-elements
     (2 formats are possible)'
+  id: totrans-303
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: '`[datetime, size, price]` or `[datetime, size, price, data]`'
+  id: totrans-304
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
 - en: Note
+  id: totrans-305
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
 - en: it must be sorted (or produce sorted elements) by datetime ascending
+  id: totrans-306
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
 - en: 'where:'
+  id: totrans-307
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
 - en: '`datetime` is a python `date/datetime` instance or a string with format YYYY-MM-DD[THH:MM:SS[.us]]
     where the elements in brackets are optional'
+  id: totrans-308
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
 - en: '`size` is an integer (positive to *buy*, negative to *sell*)'
+  id: totrans-309
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
 - en: '`price` is a float/integer'
+  id: totrans-310
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
 - en: '`data` if present can take any of the following values'
+  id: totrans-311
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
 - en: '*None* - The 1^(st) data feed will be used as target'
+  id: totrans-312
   prefs:
   - PREF_IND
   - PREF_IND
@@ -1311,6 +1888,7 @@
   type: TYPE_NORMAL
 - en: '*integer* - The data with that index (insertion order in **Cerebro**) will
     be used'
+  id: totrans-313
   prefs:
   - PREF_IND
   - PREF_IND
@@ -1318,25 +1896,30 @@
   type: TYPE_NORMAL
 - en: '*string* - a data with that name, assigned for example with `cerebro.addata(data,
     name=value)`, will be the target'
+  id: totrans-314
   prefs:
   - PREF_IND
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
 - en: '`notify` (default: *True*)'
+  id: totrans-315
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: If `True` the 1^(st) strategy inserted in the system will be notified of the
     artificial orders created following the information from each order in `orders`
+  id: totrans-316
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
 - en: Note
+  id: totrans-317
   prefs: []
   type: TYPE_NORMAL
 - en: Implicit in the description is the need to add a data feed which is the target
     of the orders. This is for example needed by analyzers which track for example
     the returns
+  id: totrans-318
   prefs: []
   type: TYPE_NORMAL

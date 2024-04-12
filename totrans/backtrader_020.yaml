@@ -1,690 +1,1020 @@
 - en: Operating the platform
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 操作平台
 - en: 原文：[https://www.backtrader.com/docu/operating/](https://www.backtrader.com/docu/operating/)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.backtrader.com/docu/operating/](https://www.backtrader.com/docu/operating/)
 - en: Line Iterators
+  id: totrans-2
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 线迭代器
 - en: To engage into operations, the plaftorm uses the notion of line iterators. They
     have been loosely modeled after Python’s iterators but have actually nothing to
     do with them.
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: 为了参与操作，平台使用线迭代器的概念。它们松散地模仿了Python的迭代器，但实际上与它们毫不相关。
 - en: Strategies and Indicators are line iterators.
+  id: totrans-4
   prefs: []
   type: TYPE_NORMAL
+  zh: 策略和指标都是线迭代器。
 - en: 'The line iterator concept tries to describe the following:'
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: 线迭代器的概念试图描述以下内容：
 - en: A Line Iterator kicks slave line iterators telling them to iterate
+  id: totrans-6
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 一条线迭代器踢动从属线迭代器，告诉它们迭代
 - en: A Line Iterator then iterates over its own declared named lines setting values
+  id: totrans-7
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 然后，线迭代器遍历其自己声明的命名行并设置值
 - en: 'The key to iteration, just like with regular Python iterators, is:'
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: 迭代的关键，就像普通的Python迭代器一样，是：
 - en: The `next` method
+  id: totrans-9
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`next` 方法'
 - en: It will be called for each iteration. The `datas` array which the *line iterator*
     has and serve as basis for logic/calculations will have already been moved to
     the next index by the platform (barring data replay)
+  id: totrans-10
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 它将被每次迭代调用。 *线迭代器*具有的并作为逻辑/计算基础的`datas`数组已经被平台移动到下一个索引（除了数据重播）
 - en: Called when the **minimum period** for the line iterator has been met. A bit
     more on this below.
+  id: totrans-11
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 在满足线迭代器的**最小周期**时调用。稍后将详细介绍。
 - en: 'But because they are not regular iterators, two additional methods exist:'
+  id: totrans-12
   prefs: []
   type: TYPE_NORMAL
+  zh: 但因为它们不是常规迭代器，所以还存在两种额外的方法：
 - en: '`prenext`'
+  id: totrans-13
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`prenext`'
 - en: Called before the **minimum period** for the line iterator` has been met.
+  id: totrans-14
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 在满足**最小周期**的条件之前调用**线迭代器**。
 - en: '`nextstart`'
+  id: totrans-15
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`nextstart`'
 - en: Called exactly **ONCE** when the **minimum period** for the line iterator` has
     been met.
+  id: totrans-16
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 当满足**最小周期**的条件时**仅调用一次**线迭代器。
 - en: The default behavior is to forward the call to `next`, but can of course be
     overriden if needed.
+  id: totrans-17
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 默认行为是将调用转发给`next`，但如果需要的话当然可以重写。
 - en: Extra methods for *Indicators*
+  id: totrans-18
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: '*指标*的额外方法'
 - en: To speed up operations, Indicators support a batch operation mode which has
     been termed as runonce. It is not strictly needed (a `next` method suffices) but
     it greatly reduces time.
+  id: totrans-19
   prefs: []
   type: TYPE_NORMAL
+  zh: 为了加快操作速度，指标支持一种称为runonce的批处理操作模式。这不是严格必需的（一个`next`方法就足够了），但它极大地减少了时间。
 - en: The runonce methods rules void the get/set point with index 0 and relies on
     direct access to the underlying arrays holding the data and being passed the right
     indices for each state.
+  id: totrans-20
   prefs: []
   type: TYPE_NORMAL
+  zh: runonce方法规则使得与索引0的点的获取/设置无效，并依赖于直接访问保存数据的底层数组，并为每个状态传递正确的索引。
 - en: 'The defined methods follow the naming of the next family:'
+  id: totrans-21
   prefs: []
   type: TYPE_NORMAL
+  zh: 定义的方法遵循next系列的命名：
 - en: '`once(self, start, end)`'
+  id: totrans-22
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`once(self, start, end)`'
 - en: Called when the minimum period has been met. The internal array must be processed
     between start and end which are zero based from the start of the internal array
+  id: totrans-23
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 在满足最小周期的条件时调用。必须在从内部数组的起始位置为零开始的start和end之间处理内部数组
 - en: '`preonce(self, start, end)`'
+  id: totrans-24
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`preonce(self, start, end)`'
 - en: Called before the minimum period has been met.
+  id: totrans-25
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 在满足最小周期之前调用。
 - en: '`oncestart(self, start, end)`'
+  id: totrans-26
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`oncestart(self, start, end)`'
 - en: Called exactly **ONCE** when the minimum period has been met.
+  id: totrans-27
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 当满足最小周期的条件时**仅调用一次**。
 - en: The default behavior is to forward the call to `once`, but can of course be
     overriden if needed.
+  id: totrans-28
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 默认行为是将调用转发给`once`，但如果需要的话当然可以重写。
 - en: Minimum Period
+  id: totrans-29
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 最小周期
 - en: 'A picture is worth a thousand words and in this case possibly an example too.
     A SimpleMovingAverage is capable of explaining it:'
+  id: totrans-30
   prefs: []
   type: TYPE_NORMAL
+  zh: 一张图值千言，而在这种情况下可能还有一个例子。一个简单移动平均能够解释它：
 - en: '[PRE0]'
+  id: totrans-31
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: 'And the instantiation could look like:'
+  id: totrans-32
   prefs: []
   type: TYPE_NORMAL
+  zh: 实例化可能如下所示：
 - en: '[PRE1]'
+  id: totrans-33
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE1]'
 - en: 'Briefly explained:'
+  id: totrans-34
   prefs: []
   type: TYPE_NORMAL
+  zh: 简要解释：
 - en: 'Assuming the data passed to the moving average is a standard data feed its
     default period is `1` that is: the data feed produces a bar with no initial delay.'
+  id: totrans-35
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 假设传递给移动平均的数据是标准数据源，默认周期为`1`，即数据源生成一个没有初始延迟的条形图。
 - en: 'Then the **“period=25”** instantiated moving average would have its methods
     called as follows:'
+  id: totrans-36
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 然后，**“period=25”**实例化的移动平均将按以下方式调用其方法：
 - en: '`prenext` 24 times'
+  id: totrans-37
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`prenext` 24 次'
 - en: '`nextstart` 1 time (in turn calling `next`)'
+  id: totrans-38
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`nextstart` 1 次（依次调用`next`）'
 - en: '`next` n additional times until the *data feed* has been exhausted'
+  id: totrans-39
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`next` 再次直到*数据源*耗尽'
 - en: 'Let’s go for the killer indicator: *a SimpleMovingAverage* over another *SimpleMovingAverage*.
     The instantiation could look like:'
+  id: totrans-40
   prefs: []
   type: TYPE_NORMAL
+  zh: 让我们来看一个致命的指标：*另一个简单移动平均值*的*a SimpleMovingAverage*。实例化可能如下所示：
 - en: '[PRE2]'
+  id: totrans-41
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE2]'
 - en: 'What now goes on:'
+  id: totrans-42
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在发生的情况是：
 - en: The same as above for `sma1`
+  id: totrans-43
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 对于`sma1`也是如上所述
 - en: '`sma2` is receiving a **data feed** which has a *minimum period* of 25 which
     is our `sma1` and therefore'
+  id: totrans-44
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`sma2`正在接收一个**数据源**，其*最小周期*为25，这是我们的`sma1`，因此'
 - en: 'The `sma2` methods are called as indicated:'
+  id: totrans-45
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`sma2`方法的调用方式如下：'
 - en: '`prenext` the first 25 + 18 times for a total of 43 times'
+  id: totrans-46
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`prenext`首次调用25 + 18次，总共43次'
 - en: 25 times to let `sma1` produce its 1^(st) sensible value
+  id: totrans-47
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 25次让`sma1`产生其第1个合理值。
 - en: 18 times to accumulate extra `sma1` values
+  id: totrans-48
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 18次累积额外的`sma1`值
 - en: For a total of 19 values (1 after 25 calls and then 18 more)
+  id: totrans-49
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 总共19个值（在25次调用后再加1次，然后再加18次）
 - en: '`nextstart` then 1 time (in turn calling `next`)'
+  id: totrans-50
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`nextstart`然后调用1次（轮流调用`next`）'
 - en: '`next` the n additional times until the *data feed* has been exhausted'
+  id: totrans-51
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`next`另外调用n次，直到*数据源*耗尽'
 - en: The platform is calling `next` when the system has already processed 44 bars.
+  id: totrans-52
   prefs: []
   type: TYPE_NORMAL
+  zh: 当系统已经处理了44个柱状时，平台会调用`next`。
 - en: The *minimum period* has been automatically adjusted to the incoming data.
+  id: totrans-53
   prefs: []
   type: TYPE_NORMAL
+  zh: '*最小周期*已自动调整为传入数据。'
 - en: 'Strategies and Indicators adhere to this behavior:'
+  id: totrans-54
   prefs: []
   type: TYPE_NORMAL
+  zh: 策略和指标遵循这种行为：
 - en: Only when the automatically calculated minimum period has been reached will
     `next` be called (barring the initial hook call to `nextstart`)
+  id: totrans-55
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 只有当自动计算的最小周期已达到时，才会调用`next`（除了对`nextstart`的初始钩子调用）
 - en: Note
+  id: totrans-56
   prefs: []
   type: TYPE_NORMAL
+  zh: 注意。
 - en: The same rules apply to `preonce`, `oncestart` and `once` for the **runonce**
     batch operation mode
+  id: totrans-57
   prefs: []
   type: TYPE_NORMAL
+  zh: 相同的规则适用于**runonce**批量操作模式的`preonce`、`oncestart`和`once`
 - en: Note
+  id: totrans-58
   prefs: []
   type: TYPE_NORMAL
+  zh: 注意。
 - en: The **minimum period** behavior can be manipulated although it’s not recommended.
     Should it be wished used the `setminperiod(minperiod)` method in either Strategies
     or Indicators
+  id: totrans-59
   prefs: []
   type: TYPE_NORMAL
+  zh: '*最小周期*行为可以被操纵，尽管不建议这样做。如果希望使用，在策略或指标中使用`setminperiod(minperiod)`方法'
 - en: Up and Running
+  id: totrans-60
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 已启动并运行。
 - en: 'Getting up and running involves at least 3 *Lines* objects:'
+  id: totrans-61
   prefs: []
   type: TYPE_NORMAL
+  zh: 启动和运行至少涉及3个*Lines*对象：
 - en: A Data feed
+  id: totrans-62
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 一个数据源
 - en: A Strategy (actually a class derived from Strategy)
+  id: totrans-63
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 一个策略（实际上是从策略派生的类）
 - en: A Cerebro (*brain* in Spanish)
+  id: totrans-64
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 一个Cerebro（西班牙语中的“大脑”）。
 - en: Data Feeds
+  id: totrans-65
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 数据源
 - en: These objects, obviously, provide the data which will be backtested by applying
     calculations (direct and/or with Indicators)
+  id: totrans-66
   prefs: []
   type: TYPE_NORMAL
+  zh: 这些对象显然提供将通过应用计算（直接和/或带有指标）进行回测的数据。
 - en: 'The platform provides several data feeds:'
+  id: totrans-67
   prefs: []
   type: TYPE_NORMAL
+  zh: 该平台提供了几个数据源：
 - en: Several CSV Format and a Generic CSV reader
+  id: totrans-68
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 几种CSV格式和一个通用的CSV阅读器
 - en: Yahoo online fetcher
+  id: totrans-69
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 雅虎在线获取器
 - en: Support for receiving *Pandas DataFrames* and *blaze* objects
+  id: totrans-70
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 支持接收*Pandas DataFrames*和*blaze*对象
 - en: Live Data Feeds with *Interacive Brokers*, *Visual Chart* and *Oanda*
+  id: totrans-71
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 与*Interacive Brokers*、*Visual Chart*和*Oanda*一起的实时数据源。
 - en: The platform makes no assumption about the content of the data feed such as
     timeframe and compression. Those values, together with a name, can be supplied
     for informational purposes and advance operations like Data Feed Resampling (turning
     a for example a 5 minute Data Feed into a Daily Data Feed)
+  id: totrans-72
   prefs: []
   type: TYPE_NORMAL
+  zh: 该平台不对数据源的内容（如时间段和压缩）做任何假设。这些值，连同名称，可以供信息用途和高级操作（例如数据源重采样，将例如5分钟数据源转换为每日数据源）。
 - en: 'Example of setting up a Yahoo Finance Data Feed:'
+  id: totrans-73
   prefs: []
   type: TYPE_NORMAL
+  zh: 设置Yahoo Finance数据源的示例：
 - en: '[PRE3]'
+  id: totrans-74
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE3]'
 - en: The optional `reversed` parameter for Yahoo is shown, because the CSV files
     directly downloaded from Yahoo start with the latest date, rather than with the
     oldest.
+  id: totrans-75
   prefs: []
   type: TYPE_NORMAL
+  zh: 显示了雅虎的可选`reversed`参数，因为直接从雅虎下载的CSV文件从最新日期开始，而不是从最旧日期开始。
 - en: 'If your data spans a large time range, the actual loaded data can be limited
     as follows:'
+  id: totrans-76
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果您的数据跨越了大的时间范围，则实际加载的数据可以限制如下：
 - en: '[PRE4]'
+  id: totrans-77
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE4]'
 - en: Both the *fromdate* and the *todate* will be included if present in the data
     feed.
+  id: totrans-78
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果存在，*fromdate*和*todate*都将被包含在数据源中。
 - en: 'As already mentioned timeframe, compression and name can be added:'
+  id: totrans-79
   prefs: []
   type: TYPE_NORMAL
+  zh: 如已提及的时间段、压缩和名称可添加：
 - en: '[PRE5]'
+  id: totrans-80
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE5]'
 - en: If the data is plotted, those values will be used.
+  id: totrans-81
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果数据已绘制，则将使用这些值。
 - en: A Strategy (derived) class
+  id: totrans-82
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 一个策略（派生）类
 - en: Note
+  id: totrans-83
   prefs: []
   type: TYPE_NORMAL
+  zh: 注意。
 - en: Before going on and for a more simplified approach, please check the *Signals*
     section of the documentation if subclassing a strategy is not wished.
+  id: totrans-84
   prefs: []
   type: TYPE_NORMAL
+  zh: 在继续之前，并且为了更简化的方法，请检查文档的*Signals*部分，如果不希望子类化策略。
 - en: The goal of anyone using the platform is backtesting the data and this is done
     inside a Strategy (derived class).
+  id: totrans-85
   prefs: []
   type: TYPE_NORMAL
+  zh: 使用该平台的任何人的目标都是对数据进行回测，这是在策略（派生类）内完成的。
 - en: 'There are 2 methods which at least need customization:'
+  id: totrans-86
   prefs: []
   type: TYPE_NORMAL
+  zh: 至少有2种方法需要定制：
 - en: '`__init__`'
+  id: totrans-87
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`__init__`'
 - en: '`next`'
+  id: totrans-88
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`next`'
 - en: During initialization indicators on data and other calculations are created
     prepared to later apply the logic.
+  id: totrans-89
   prefs: []
   type: TYPE_NORMAL
+  zh: 在初始化过程中，对数据和其他计算进行了创建和准备，以后将应用逻辑。
 - en: The next method is later called to apply the logic for each and every bar of
     the data.
+  id: totrans-90
   prefs: []
   type: TYPE_NORMAL
+  zh: 稍后将调用`next`方法来应用每个数据条的逻辑。
 - en: Note
+  id: totrans-91
   prefs: []
   type: TYPE_NORMAL
+  zh: 注意
 - en: If data feeds of different timeframes (and thus different bar counts) are passed
     the `next` method will be called for the master data (the 1^(st) one passed to
     cerebro, see below) which must be the the data with the smaller timeframe
+  id: totrans-92
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果传递了不同时间框架（因此具有不同的条形计数）的数据源，则将调用`next`方法以获取主数据（传递给cerebro的第一个数据，见下文），它必须是具有较小时间框架的数据
 - en: Note
+  id: totrans-93
   prefs: []
   type: TYPE_NORMAL
+  zh: 注意
 - en: If the Data Replay functionality is used, the `next` method will be called several
     time for the same bar as the development of the bar is replayed.
+  id: totrans-94
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果使用数据重播功能，则将为相同的条形进行多次调用`next`方法，因为条形的发展正在重播。
 - en: 'A basic Strategy derived class:'
+  id: totrans-95
   prefs: []
   type: TYPE_NORMAL
+  zh: 一个基本的派生自类的策略：
 - en: '[PRE6]'
+  id: totrans-96
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE6]'
 - en: 'Strategies have other methods (or hook points) which can be overriden:'
+  id: totrans-97
   prefs: []
   type: TYPE_NORMAL
+  zh: 策略具有其他方法（或挂钩点）可以重写：
 - en: '[PRE7]'
+  id: totrans-98
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE7]'
 - en: 'The `start` and `stop` methods should be self-explanatory. As expected and
     following the text in the print function, the `notify_order` method will be called
     when the strategy needs a notification. Use case:'
+  id: totrans-99
   prefs: []
   type: TYPE_NORMAL
+  zh: '`start`和`stop`方法应该是不言而喻的。与预期的一样，并且遵循打印函数中的文本，当策略需要通知时，将调用`notify_order`方法。用例：'
 - en: A buy or sell is requested (as seen in next)
+  id: totrans-100
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 请求购买或出售（如下所示）
 - en: buy/sell will return an *order* which is submitted to the broker. Keeping a
     reference to this submitted order is up to the caller.
+  id: totrans-101
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 购买/出售将返回一个*order*，该订单将提交给经纪人。保留对此已提交订单的引用由调用者自行决定。
 - en: It can for example be used to ensure that no new orders are submitted if an
     order is still pending.
+  id: totrans-102
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 例如，可以用它来确保如果订单仍未处理，则不会提交新订单。
 - en: If the order is Accepted/Executed/Canceled/Changed the broker will notify the
     status change (and for example execution size) back to the strategy via the notify
     method
+  id: totrans-103
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 如果订单被接受/执行/取消/更改，则经纪人将通过notify方法将状态更改（例如执行大小）通知回策略
 - en: The QuickStart guide has a complete and functional example of order management
     in the `notify_order` method.
+  id: totrans-104
   prefs: []
   type: TYPE_NORMAL
+  zh: 快速入门指南在`notify_order`方法中有一个完整而实用的订单管理示例。
 - en: 'More can be done with other Strategy classes:'
+  id: totrans-105
   prefs: []
   type: TYPE_NORMAL
+  zh: 还可以使用其他策略类做更多事情：
 - en: '`buy` / `sell` / `close`'
+  id: totrans-106
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`buy`/`sell`/`close`'
 - en: Use the underlying *broker* and *sizer* to send the broker a buy/sell order
+  id: totrans-107
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 使用底层的*broker*和*sizer*向经纪人发送购买/出售订单
 - en: The same could be done by manually creating an Order and passing it over to
     the broker. But the platform is about making it easy for those using it.
+  id: totrans-108
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 也可以通过手动创建订单并将其传递给经纪人来完成相同的操作。但是该平台旨在使使用它的人更容易。
 - en: '`close` will get the current market position and close it immediately.'
+  id: totrans-109
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: '`close`将获取当前的市场持仓并立即关闭它。'
 - en: '`getposition` (or the property “position”)'
+  id: totrans-110
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`getposition`（或属性“position”）'
 - en: Returns the current market position
+  id: totrans-111
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 返回当前的市场持仓
 - en: '`setsizer`/`getsizer` (or the property “sizer”)'
+  id: totrans-112
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`setsizer`/`getsizer`（或属性“sizer”）'
 - en: These allow setting/getting the underlying stake Sizer. The same logic can be
     checked against Sizers which provide different stakes for the same situation (fixed
     size, proportional to capital, exponential)
+  id: totrans-113
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 这些允许设置/获取底层的Stake Sizer。可以对提供相同情况的不同Stake的Sizer检查相同的逻辑（固定大小，与资本成比例，指数）
 - en: There is plenty of literature but Van K. Tharp has excellent books on the subject.
+  id: totrans-114
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 有很多文献，但Van K. Tharp在这个领域有出色的书籍。
 - en: 'A Strategy is a *Lines* object and these support parameters, which are collected
     using the standard Python kwargs argument:'
+  id: totrans-115
   prefs: []
   type: TYPE_NORMAL
+  zh: 策略是*Lines*对象，这些对象支持参数，这些参数使用标准Python kwargs参数进行收集：
 - en: '[PRE8]'
+  id: totrans-116
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE8]'
 - en: Notice how the `SimpleMovingAverage` is no longer instantiated with a fixed
     value of 20, but rather with the parameter “period” which has been defined for
     the strategy.
+  id: totrans-117
   prefs: []
   type: TYPE_NORMAL
+  zh: 注意`SimpleMovingAverage`如何不再以固定值20进行实例化，而是使用已为策略定义的参数“period”进行实例化。
 - en: A Cerebro
+  id: totrans-118
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 一个Cerebro
 - en: 'Once Data Feeds are available and the Strategy has been defined, a Cerebro
     instance is what brings everything together and execute the actions. Instantiating
     one is easy:'
+  id: totrans-119
   prefs: []
   type: TYPE_NORMAL
+  zh: 一旦数据源可用并且策略已定义，Cerebro实例就是将所有内容汇集在一起并执行操作的工具。实例化一个很容易：
 - en: '[PRE9]'
+  id: totrans-120
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE9]'
 - en: Defaults are taking care of if nothing special is wished.
+  id: totrans-121
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果没有特殊要求，则默认情况下会进行处理。
 - en: A default broker is created
+  id: totrans-122
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 创建默认经纪人
 - en: No commission for the operations
+  id: totrans-123
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 操作无佣金
 - en: Data Feeds will be preloaded
+  id: totrans-124
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 数据源将被预加载
 - en: The default execution mode will be runonce (batch operation) which is the faster
+  id: totrans-125
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 默认执行模式将是runonce（批量操作），这是更快的模式
 - en: All indicators must support the `runonce` mode for full speed. The ones included
     in the platform do.
+  id: totrans-126
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 所有指标必须支持`runonce`模式以实现全速运行。平台中包含的指标可以。
 - en: Custom indicators do not need to implement the runonce functionality. `Cerebro`
     will simulate it, which means those non-runonce compatible indicators will run
     slower. But still most of the system will run in batch mode.
+  id: totrans-127
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 自定义指标不需要实现runonce功能。`Cerebro`将模拟它，这意味着那些不兼容runonce的指标将运行得更慢。但大部分系统仍将以批处理模式运行。
 - en: 'Since a Data feed is already available and a Strategy too (created earlier)
     the standard way to put it all together and get it up and running is:'
+  id: totrans-128
   prefs: []
   type: TYPE_NORMAL
+  zh: 由于数据源已经可用，策略也已经创建（之前创建），将它们组合在一起并使其运行的标准方法是：
 - en: '[PRE10]'
+  id: totrans-129
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE10]'
 - en: 'Notice the following:'
+  id: totrans-130
   prefs: []
   type: TYPE_NORMAL
+  zh: 请注意以下内容：
 - en: The Data Feed “instance” is added
+  id: totrans-131
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 数据源“实例”被添加
 - en: The MyStrategy “class” is added along with parameters (kwargs) that will be
     passed to it.
+  id: totrans-132
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: MyStrategy“类”被添加以及将传递给它的参数（kwargs）。
 - en: The instantiation of MyStrategy will be done by cerebro in the background and
     any kwargs in “addstrategy” will be passed to it
+  id: totrans-133
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: MyStrategy的实例化将由cerebro在后台完成，并且“addstrategy”中的任何kwargs将被传递给它
 - en: The user may add as many Strategies and Data Feeds as wished. How Strategies
     communicate with each other to achieve coordination (if wished be) is not enforced/restricted
     by the platform.
+  id: totrans-134
   prefs: []
   type: TYPE_NORMAL
+  zh: 用户可以根据需要添加任意多的策略和数据源。策略如何相互通信以实现协调（如果需要）并不受平台的强制/限制。
 - en: 'Of course a Cerebro offers additional possibilities:'
+  id: totrans-135
   prefs: []
   type: TYPE_NORMAL
+  zh: 当然，Cerebro提供了额外的可能性：
 - en: 'Decide about preloading and operation mode:'
+  id: totrans-136
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 决定预加载和操作模式：
 - en: '[PRE11]'
+  id: totrans-137
   prefs:
   - PREF_IND
   type: TYPE_PRE
+  zh: '[PRE11]'
 - en: 'There is a constraint here: `runonce` needs preloading (if not, a batch operation
     cannot be run) Of course preloading Data Feeds does not enforce `runonce`'
+  id: totrans-138
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 这里有一个约束：`runonce`需要预加载（如果不是，批处理操作将无法运行）。当然，预加载数据源并不强制执行`runonce`
 - en: '`setbroker` / `getbroker` (and the *broker* property)'
+  id: totrans-139
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`setbroker` / `getbroker`（以及*broker*属性）'
 - en: A custom broker can be set if wished. The actual broker instance can also be
     accesed
+  id: totrans-140
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 如果需要，可以设置自定义经纪人。实际经纪人实例也可以被访问
 - en: 'Plotting. In a regular case as easy as:'
+  id: totrans-141
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 绘图。在常规情况下，就像这样简单：
 - en: '[PRE12]'
+  id: totrans-142
   prefs:
   - PREF_IND
   type: TYPE_PRE
+  zh: '[PRE12]'
 - en: plot takes some arguments for the customization
+  id: totrans-143
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 绘图需要一些参数进行自定义
 - en: '`numfigs=1`'
+  id: totrans-144
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`numfigs=1`'
 - en: If the plot is too dense it may be broken down into several plots
+  id: totrans-145
   prefs:
   - PREF_IND
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 如果图表过于密集，可以将其拆分为多个图表
 - en: '`plotter=None`'
+  id: totrans-146
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`plotter=None`'
 - en: A customer plotter instance can be passed and cerebro will not instantiate a
     default one
+  id: totrans-147
   prefs:
   - PREF_IND
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 可以传递自定义绘图器实例，cerebro将不会实例化默认绘图器
 - en: '`**kwargs` - standard keyword arguments'
+  id: totrans-148
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`**kwargs` - 标准关键字参数'
 - en: Which will get passed to the plotter.
+  id: totrans-149
   prefs:
   - PREF_IND
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 这将传递给绘图器。
 - en: Please see the plotting section for more information.
+  id: totrans-150
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 请查看绘图部分获取更多信息。
 - en: Optimization of strategies.
+  id: totrans-151
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 优化策略。
 - en: As mentioned above, Cerebro gets a Strategy derived class (not an instance)
     and the keyword arguments that will be passed to it upon instantiation, which
     will happen when “run” is called.
+  id: totrans-152
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 如上所述，Cerebro获得一个派生自Strategy的类（而不是实例），以及将在调用“run”时传递给它的关键字参数。
 - en: This is so to enable optimization. The same Strategy class will be instantiated
     as many times as needed with new parameters. If an instance had been passed to
     cerebro … this would not be possible.
+  id: totrans-153
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 这样可以实现优化。相同的Strategy类将根据需要实例化多次，并使用新参数。如果一个实例已经传递给cerebro…这将是不可能的。
 - en: 'Optimization is requested as follows:'
+  id: totrans-154
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 请求优化如下：
 - en: '[PRE13]'
+  id: totrans-155
   prefs:
   - PREF_IND
   type: TYPE_PRE
+  zh: '[PRE13]'
 - en: The method `optstrategy` has the same signature as `addstrategy` but does extra
     housekeeping to ensure optimization runs as expected. A strategy could be expecting
     a *range* as a normal parameter for a strategy and `addstrategy` will make no
     assumptions about the passed parameter.
+  id: totrans-156
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 方法`optstrategy`具有与`addstrategy`相同的签名，但会进行额外的管理工作以确保优化按预期运行。一个策略可能期望一个*范围*作为策略的正常参数，而`addstrategy`不会对传递的参数做任何假设。
 - en: On the other hand, `optstrategy` will understand that an iterable is a set of
     values that has to be passed in sequence to each instantiation of the Strategy
     class.
+  id: totrans-157
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 另一方面，`optstrategy`将理解可迭代对象是一组值，必须按顺序传递给每个Strategy类的实例化。
 - en: Notice that instead of a single value a *range* of values is passed. In this
     simple case 10 values 10 -> 19 (20 is the upper limit) will be tried for this
     strategy.
+  id: totrans-158
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 注意，传递的不是单个值，而是*一系列*值。在这个简单的情况下，将尝试这个策略的10个值10 -> 19（20是上限）。
 - en: 'If a more complex strategy is developed with extra parameters they can all
     be passed to *optstrategy*. Parameters which must not undergo optimization can
     be passed directly without the end user having to create a dummy iterable of just
     one value. Example:'
+  id: totrans-159
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 如果开发了更复杂的策略并具有额外的参数，它们都可以传递给*optstrategy*。必须不经过优化的参数可以直接传递，而无需最终用户创建一个仅包含一个值的虚拟可迭代对象。例如：
 - en: '[PRE14]'
+  id: totrans-160
   prefs:
   - PREF_IND
   type: TYPE_PRE
+  zh: '[PRE14]'
 - en: The `optstrategy` method sees factor and creates (a needed) dummy iterable in
     the background for factor which has a single element (in the example 3.5)
+  id: totrans-161
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: '`optstrategy`方法看到因子并在后台为具有单个元素的因子创建（所需的）虚拟可迭代对象（例如3.5中的示例）。'
 - en: Note
+  id: totrans-162
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 注意
 - en: Interactive Python shells and some types of frozen executables under *Windows*
     have problems with the Python `multiprocessing` module
+  id: totrans-163
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 交互式Python shell和某些类型的在*Windows*下的冻结可执行文件对Python的`multiprocessing`模块存在问题。
 - en: Please read the Python documentation about `multiprocessing`.
+  id: totrans-164
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 请阅读有关`multiprocessing`的Python文档。

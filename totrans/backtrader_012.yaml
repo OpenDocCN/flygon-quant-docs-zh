@@ -1,206 +1,309 @@
 - en: Job Offers
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 工作机会
 - en: 原文：[https://www.backtrader.com/home/references/jobs/](https://www.backtrader.com/home/references/jobs/)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.backtrader.com/home/references/jobs/](https://www.backtrader.com/home/references/jobs/)
 - en: Alpaca
+  id: totrans-2
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: Alpaca
 - en: '[AngelCo - Open Source Developer at Alpaca](https://angel.co/company/alpaca/jobs/398197-open-source-developer)'
+  id: totrans-3
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[AngelCo - Alpaca的开源开发人员](https://angel.co/company/alpaca/jobs/398197-open-source-developer)'
 - en: CodeMentor
+  id: totrans-4
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: CodeMentor
 - en: '[Python Expert Ideally with Backtrader Experience Needed to Build Automated
     Trading Bot (Remote)](https://www.codementor.io/remote-jobs/details/6ihemotrf8)'
+  id: totrans-5
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[需要具有Backtrader经验的Python专家来构建自动交易机器人（远程）](https://www.codementor.io/remote-jobs/details/6ihemotrf8)'
 - en: Freelancer
+  id: totrans-6
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 自由职业者
 - en: '[Python (backtrader/zipline) and Interactive Brokers](https://www.freelancer.com/projects/python/python-backtrader-zipline-interactive/)'
+  id: totrans-7
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[Python（backtrader/zipline）和Interactive Brokers](https://www.freelancer.com/projects/python/python-backtrader-zipline-interactive/)'
 - en: '[Compile Python Programs (BackTrader and Interactive Brokers API) and Build
     A Website for user interface](https://www.freelancer.com/projects/php/compile-python-programs-backtrader/)'
+  id: totrans-8
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[编译Python程序（BackTrader和Interactive Brokers API）并构建用户界面的网站](https://www.freelancer.com/projects/php/compile-python-programs-backtrader/)'
 - en: '[Python backtesting platform](https://www.freelancer.com/projects/python/python-backtesting-platform/)'
+  id: totrans-9
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[Python回测平台](https://www.freelancer.com/projects/python/python-backtesting-platform/)'
 - en: '[Project for James A. --2](https://www.freelancer.com/projects/java/project-for-james-17134165/)'
+  id: totrans-10
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[James A.的项目--2](https://www.freelancer.com/projects/java/project-for-james-17134165/)'
 - en: '[A framework for trading at financial markets](https://www.freelancer.com/projects/software-architecture/framework-for-trading-financial-markets/)'
+  id: totrans-11
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[金融市场交易框架](https://www.freelancer.com/projects/software-architecture/framework-for-trading-financial-markets/)'
 - en: '[Project for Saira I.](https://www.freelancer.com/projects/php/project-for-saira-16611437/)'
+  id: totrans-12
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[Saira I.的项目](https://www.freelancer.com/projects/php/project-for-saira-16611437/)'
 - en: '[Tensorflow](https://www.freelancer.com/projects/software-architecture/tensorflow/)'
+  id: totrans-13
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[Tensorflow](https://www.freelancer.com/projects/software-architecture/tensorflow/)'
 - en: '[Algorithmic Trading Python Platform](https://www.freelancer.com/projects/python/algorithmic-trading-python-platform/)'
+  id: totrans-14
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[算法交易Python平台](https://www.freelancer.com/projects/python/algorithmic-trading-python-platform/)'
 - en: '[Private project or contest #15215084](https://www.freelancer.com/login?goto=YzdjZjYxODdkNDY2NGZiZWZhYWQ5YzlmOWNiOWU5NTFodHRwczovL3d3dy5mcmVlbGFuY2VyLmNvbS9wcm9qZWN0cy9waHAvcHJvamVjdC1mb3ItbWFyY2Vsby0xNTIxNTA4NC8,)'
+  id: totrans-15
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[私人项目或比赛＃15215084](https://www.freelancer.com/login?goto=YzdjZjYxODdkNDY2NGZiZWZhYWQ5YzlmOWNiOWU5NTFodHRwczovL3d3dy5mcmVlbGFuY2VyLmNvbS9wcm9qZWN0cy9waHAvcHJvamVjdC1mb3ItbWFyY2Vsby0xNTIxNTA4NC8,)'
 - en: '[Need freelancer with knowledge of backtrader (algorithm trading)](https://www.freelancer.co.za/projects/algorithm/need-freelancer-with-knowledge/#)'
+  id: totrans-16
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[需要具有backtrader（算法交易）知识的自由职业者](https://www.freelancer.co.za/projects/algorithm/need-freelancer-with-knowledge/#)'
 - en: FL.ru
+  id: totrans-17
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: FL.ru
 - en: '[Python - creating a platform for testing trading strategies](https://www.fl.ru/projects/4084063/python---sozdanie-platformyi-dlya-testirovaniya-torgovyih-strategiy.html)'
+  id: totrans-18
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[Python - 创建用于测试交易策略的平台](https://www.fl.ru/projects/4084063/python---sozdanie-platformyi-dlya-testirovaniya-torgovyih-strategiy.html)'
 - en: Guru.com
+  id: totrans-19
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: Guru.com
 - en: '[Backtrader Analyzers](https://www.guru.com/jobs/backtrader-analyzers/1620746&SearchUrl=search.aspx?)'
+  id: totrans-20
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[Backtrader分析器](https://www.guru.com/jobs/backtrader-analyzers/1620746&SearchUrl=search.aspx?)'
 - en: '**Language: Russian**'
+  id: totrans-21
   prefs: []
   type: TYPE_NORMAL
+  zh: '**语言：俄语**'
 - en: Haolai Network Technology (Shanghai) Co. Ltd.
+  id: totrans-22
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 浩来网络技术（上海）有限公司
 - en: '[Quantitative engineer](https://cn.linkedin.com/jobs/view/%E9%87%8F%E5%8C%96%E5%B7%A5%E7%A8%8B%E5%B8%88-at-%E6%98%A7%E6%9D%A5%E7%BD%91%E7%BB%9C%E7%A7%91%E6%8A%80%EF%BC%88%E4%B8%8A%E6%B5%B7%EF%BC%89%E6%9C%89%E9%99%90%E5%85%AC%E5%8F%B8-1035267305)'
+  id: totrans-23
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[量化工程师](https://cn.linkedin.com/jobs/view/%E9%87%8F%E5%8C%96%E5%B7%A5%E7%A8%8B%E5%B8%88-at-%E6%98%A7%E6%9D%A5%E7%BD%91%E7%BB%9C%E7%A7%91%E6%8A%80%EF%BC%88%E4%B8%8A%E6%B5%B7%EF%BC%89%E6%9C%89%E9%99%90%E5%85%AC%E5%8F%B8-1035267305)'
 - en: '**Language: Chinese**'
+  id: totrans-24
   prefs: []
   type: TYPE_NORMAL
+  zh: '**语言：中文**'
 - en: MindPool
+  id: totrans-25
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: MindPool
 - en: '[Data Analyst](https://www.naukri.com/job-listings-Data-Analyst-Mindpool-Technologies-Pvt-Ltd-Mumbai-4-to-6-years-101018500874?src=seo_srp&sid=15424766186813&xp=2&px=1)'
+  id: totrans-26
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[数据分析师](https://www.naukri.com/job-listings-Data-Analyst-Mindpool-Technologies-Pvt-Ltd-Mumbai-4-to-6-years-101018500874?src=seo_srp&sid=15424766186813&xp=2&px=1)'
 - en: MQL5
+  id: totrans-27
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: MQL5
 - en: '[Convert MT4 Indicator to Python (Backtrader)](https://www.mql5.com/en/job/110781)'
+  id: totrans-28
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[将MT4指标转换为Python（Backtrader）](https://www.mql5.com/en/job/110781)'
 - en: '[MQL5 Testing to Python](https://www.mql5.com/en/job/110670)'
+  id: totrans-29
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[MQL5测试到Python](https://www.mql5.com/en/job/110670)'
 - en: '[MQL performance metrics translated to python -](https://www.mql5.com/en/job/111750)'
+  id: totrans-30
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[将MQL性能指标翻译成Python -](https://www.mql5.com/en/job/111750)'
 - en: PeoplerPerHour
+  id: totrans-31
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: PeoplerPerHour
 - en: '[Backtrader realtime data integration - python](https://www.peopleperhour.com/freelance-jobs/software-development/integration-api/backtrader-realtime-data-integration-python-2003107)'
+  id: totrans-32
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[Backtrader实时数据集成 - python](https://www.peopleperhour.com/freelance-jobs/software-development/integration-api/backtrader-realtime-data-integration-python-2003107)'
 - en: QuantInsti
+  id: totrans-33
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: QuantInsti
 - en: '[LinkedIn Sample](https://in.linkedin.com/jobs/view/python-developer-data-structure-algorithm-%282-5-yrs%29-mumbai-at-quantinsti-521788470)
     ){target=_blank}'
+  id: totrans-34
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[LinkedIn 示例](https://in.linkedin.com/jobs/view/python-developer-data-structure-algorithm-%282-5-yrs%29-mumbai-at-quantinsti-521788470)
+    ){target=_blank}'
 - en: '[AngelCo - Python Developer at Quantinsti Quantitative Learning](https://angel.co/company/quantinsti-quantitative-learning/jobs/306165-python-developer)'
+  id: totrans-35
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[AngelCo - 量化学习的 Python 开发者](https://angel.co/company/quantinsti-quantitative-learning/jobs/306165-python-developer)'
 - en: '[Wisdom Jobs - Python Developer](https://www.wisdomjobs.com/jobs/python-developer-jobs-in-mumbai-quantinsti-quantitative-learning-pvt-ltd-openings-21960506)'
+  id: totrans-36
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[智慧招聘 - Python 开发者](https://www.wisdomjobs.com/jobs/python-developer-jobs-in-mumbai-quantinsti-quantitative-learning-pvt-ltd-openings-21960506)'
 - en: '[Times Jobs - Python Developer](https://www.timesjobs.com/job-detail/it-software-application-programming-job-in-quantinsti-quantitative-learning-pvt-ltd-mumbai-jobid-k5yp4SeZ5pVzpSvf__PLUS__uAgZw==)'
+  id: totrans-37
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[时代招聘 - Python 开发者](https://www.timesjobs.com/job-detail/it-software-application-programming-job-in-quantinsti-quantitative-learning-pvt-ltd-mumbai-jobid-k5yp4SeZ5pVzpSvf__PLUS__uAgZw==)'
 - en: Shixian
+  id: totrans-38
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: Shixian
 - en: '[Quantified backtesting system](https://shixian.com/jobs/1981651029)'
+  id: totrans-39
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[量化回测系统](https://shixian.com/jobs/1981651029)'
 - en: '**Note**: Chinese.'
+  id: totrans-40
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: '**注意**：中文。'
 - en: Upwork
+  id: totrans-41
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: Upwork
 - en: '[Freelancers Listing *"backtrader"*](https://www.upwork.com/o/profiles/browse/?q=backtrader)'
+  id: totrans-42
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[自由职业者列表 *"backtrader"*](https://www.upwork.com/o/profiles/browse/?q=backtrader)'
 - en: '[Cryptocurrency Trading Bot UI](https://www.upwork.com/jobs/Cryptocurrency-Trading-Bot_~01b7f9750af33d2fc4?source=rss)'
+  id: totrans-43
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[加密货币交易机器人 UI](https://www.upwork.com/jobs/Cryptocurrency-Trading-Bot_~01b7f9750af33d2fc4?source=rss)'
 - en: '[Cryptocurrency Trading Bot UI](https://www.upwork.com/jobs/Cryptocurrency-Trading-Bot_~01b7f9750af33d2fc4?source=rss)'
+  id: totrans-44
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[加密货币交易机器人 UI](https://www.upwork.com/jobs/Cryptocurrency-Trading-Bot_~01b7f9750af33d2fc4?source=rss)'
 - en: '[ZuluQuant](https://www.upwork.com/mobile/jobs/_~0126fca498fbb93d7b)'
+  id: totrans-45
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[ZuluQuant](https://www.upwork.com/mobile/jobs/_~0126fca498fbb93d7b)'
 - en: '(Also here: [Community - ZuluQuant - Contract Position](https://community.backtrader.com/topic/546/contract-position)
     )'
+  id: totrans-46
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: （同时也在这里：[社区 - ZuluQuant - 合同职位](https://community.backtrader.com/topic/546/contract-position)）
 - en: '[BackTrader Assistances. Easy Quick Fast Cash Job](https://www.upwork.com/job/BackTrader-Assistances-Easy-Quick-Fast-Cash-Job_~01a17105602dd59412/)'
+  id: totrans-47
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[BackTrader 助手。简单快速赚钱的工作](https://www.upwork.com/job/BackTrader-Assistances-Easy-Quick-Fast-Cash-Job_~01a17105602dd59412/)'
 - en: '[Development of trading algorithms in backtrader and python](https://www.upwork.com/job/Development-trading-algorithms-backtrader-and-python_~01df00f98eb93dce83/)'
+  id: totrans-48
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[在 backtrader 和 python 中开发交易算法](https://www.upwork.com/job/Development-trading-algorithms-backtrader-and-python_~01df00f98eb93dce83/)'
 - en: Wisdom Jobs
+  id: totrans-49
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 智慧招聘
 - en: '[Python Architect - Data Structure/algorithm](https://www.wisdomjobs.com/jobs/python-architect-data-structure-a-jobs-in-mumbai-quantinsti-quantitative-learning-pvt-ltd-openings-6356247)'
+  id: totrans-50
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[Python 架构师 - 数据结构/算法](https://www.wisdomjobs.com/jobs/python-architect-data-structure-a-jobs-in-mumbai-quantinsti-quantitative-learning-pvt-ltd-openings-6356247)'

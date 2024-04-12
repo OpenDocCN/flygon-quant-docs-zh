@@ -1,245 +1,367 @@
 - en: Reviews / Mentions
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 评论 / 提及
 - en: 原文：[https://www.backtrader.com/home/references/reviews/](https://www.backtrader.com/home/references/reviews/)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.backtrader.com/home/references/reviews/](https://www.backtrader.com/home/references/reviews/)
 - en: 4-chan
+  id: totrans-2
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 4-chan
 - en: '[http://boards.4channel.org/biz/thread/7372143/ai-anon-again-here-a-prediction-from-96-hours-ago](http://boards.4channel.org/biz/thread/7372143/ai-anon-again-here-a-prediction-from-96-hours-ago)'
+  id: totrans-3
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[http://boards.4channel.org/biz/thread/7372143/ai-anon-again-here-a-prediction-from-96-hours-ago](http://boards.4channel.org/biz/thread/7372143/ai-anon-again-here-a-prediction-from-96-hours-ago)'
 - en: Bitcointalk
+  id: totrans-4
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: Bitcointalk
 - en: '[Re: Trading with SMA crosses only, with 1 day chart: infallible ?](https://bitcointalk.org/index.php?topic=1855541.0)'
+  id: totrans-5
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[关于仅使用 SMA 交叉进行交易，使用1天图表：无懈可击吗？](https://bitcointalk.org/index.php?topic=1855541.0)'
 - en: Bogleheads.org
+  id: totrans-6
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: Bogleheads.org
 - en: '["Steelmanning" the case for owning individual stocks](https://www.bogleheads.org/forum/viewtopic.php?t=271184&start=50)'
+  id: totrans-7
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '["钢化" 拥有个股的情况](https://www.bogleheads.org/forum/viewtopic.php?t=271184&start=50)'
 - en: EliteTrader
+  id: totrans-8
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: EliteTrader
 - en: '[Where do I start?](https://www.elitetrader.com/et/threads/where-do-i-start.310301/)'
+  id: totrans-9
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[我从哪里开始？](https://www.elitetrader.com/et/threads/where-do-i-start.310301/)'
 - en: GAIN Capital
+  id: totrans-10
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: GAIN Capital
 - en: '[www.backtrader.com integration](http://faq.labs.gaincapital.com/topic/1908-wwwbacktradercom-integration/)'
+  id: totrans-11
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[www.backtrader.com 的整合](http://faq.labs.gaincapital.com/topic/1908-wwwbacktradercom-integration/)'
 - en: Hacker News
+  id: totrans-12
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: Hacker News
 - en: '[Fuzzy MA System with GA Optimization for Trading Crude Palm Oil Futures](https://news.ycombinator.com/item?id=18361090)'
+  id: totrans-13
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[模糊 MA 系统与 GA 优化交易棕榈油期货](https://news.ycombinator.com/item?id=18361090)'
 - en: '[Anyone designs financial engineering tools as a hobby?](https://news.ycombinator.com/item?id=17088759)'
+  id: totrans-14
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[有人将金融工程工具设计为爱好吗？](https://news.ycombinator.com/item?id=17088759)'
 - en: Ian Mobbs
+  id: totrans-15
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: Ian Mobbs
 - en: '[Backtrader](http://ianmobbs.com/projects/backtrader)'
+  id: totrans-16
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[Backtrader](http://ianmobbs.com/projects/backtrader)'
 - en: Medium - Hackernoon
+  id: totrans-17
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: Medium - Hackernoon
 - en: '[9 Great Tools for Algotrading](https://hackernoon.com/9-great-tools-for-algo-trading-e0938a6856cd)'
+  id: totrans-18
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[9个量化交易的好工具](https://hackernoon.com/9-great-tools-for-algo-trading-e0938a6856cd)'
 - en: Medium - Sten Alferd
+  id: totrans-19
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: Medium - Sten Alferd
 - en: '[Is Python for Financial App Development the Right fit?](https://medium.com/@stenalferd/everybody-is-talking-about-the-growing-popularity-of-python-in-the-industry-these-days-875cfa7fe7d9)'
+  id: totrans-20
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[Python 在金融应用开发中是否合适？](https://medium.com/@stenalferd/everybody-is-talking-about-the-growing-popularity-of-python-in-the-industry-these-days-875cfa7fe7d9)'
 - en: NetGuru
+  id: totrans-21
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: NetGuru
 - en: '[How Python is Used in Finance and Fintech](https://www.netguru.com/blog/how-python-is-used-in-finance-and-fintech)'
+  id: totrans-22
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[Python 在金融和金融科技中的应用](https://www.netguru.com/blog/how-python-is-used-in-finance-and-fintech)'
 - en: PyConUK 2017
+  id: totrans-23
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: PyConUK 2017
 - en: '[https://randomactsofcartography.wordpress.com/2017/11/01/what-i-learned-at-pyconuk-2017/](https://randomactsofcartography.wordpress.com/2017/11/01/what-i-learned-at-pyconuk-2017/)'
+  id: totrans-24
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[https://randomactsofcartography.wordpress.com/2017/11/01/what-i-learned-at-pyconuk-2017/](https://randomactsofcartography.wordpress.com/2017/11/01/what-i-learned-at-pyconuk-2017/)'
 - en: '[https://www.slideshare.net/BrianTsang11/pycon-2017-preevent](https://www.slideshare.net/BrianTsang11/pycon-2017-preevent)'
+  id: totrans-25
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[https://www.slideshare.net/BrianTsang11/pycon-2017-preevent](https://www.slideshare.net/BrianTsang11/pycon-2017-preevent)'
 - en: Qiita
+  id: totrans-26
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: Qiita
 - en: '[python algorithm trade library](https://qiita.com/neka-nat@github/items/334a567d13f8a0c34ece)'
+  id: totrans-27
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[Python 算法交易库](https://qiita.com/neka-nat@github/items/334a567d13f8a0c34ece)'
 - en: QuantLabs
+  id: totrans-28
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: QuantLabs
 - en: '[Ultimate motherload Python packages list for quant trading](http://quantlabs.net/blog/2016/01/ultimate-motherload-python-packages-list-for-quant-trading/)'
+  id: totrans-29
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[量化交易的终极 Python 软件包列表](http://quantlabs.net/blog/2016/01/ultimate-motherload-python-packages-list-for-quant-trading/)'
 - en: Quantopian Forums
+  id: totrans-30
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: Quantopian 论坛
 - en: '[Comparing various python live trading platforms](https://www.quantopian.com/posts/comparing-various-python-live-trading-platforms)'
+  id: totrans-31
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[比较各种 Python 实时交易平台](https://www.quantopian.com/posts/comparing-various-python-live-trading-platforms)'
 - en: '[forget about it and use backtrader!](https://www.quantopian.com/posts/contributors-and-reviewers-needed-for-zipline-live)'
+  id: totrans-32
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 忘掉其他工具，使用[backtrader](https://www.quantopian.com/posts/contributors-and-reviewers-needed-for-zipline-live)！
 - en: QuantStart
+  id: totrans-33
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: QuantStart
 - en: '[Choosing a Platform for Backtesting and Automated Execution](https://www.quantstart.com/articles/Choosing-a-Platform-for-Backtesting-and-Automated-Execution)'
+  id: totrans-34
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[选择用于回测和自动化执行的平台](https://www.quantstart.com/articles/Choosing-a-Platform-for-Backtesting-and-Automated-Execution)'
 - en: Quora
+  id: totrans-35
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: Quora
 - en: '[How does Algo trading work? Is there any way for an individual to set it up?
     Also, what is the tech. and logic behind this?](https://www.quora.com/How-does-Algo-trading-work-Is-there-any-way-for-an-individual-to-set-it-up-Also-what-is-the-tech-and-logic-behind-this)'
+  id: totrans-36
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[量化交易是如何工作的？个人如何设置？以及背后的技术和逻辑是什么？](https://www.quora.com/How-does-Algo-trading-work-Is-there-any-way-for-an-individual-to-set-it-up-Also-what-is-the-tech-and-logic-behind-this)'
 - en: '[What is the best way to learn algorithmic trading in Python and test out models](https://www.quora.com/What-is-the-best-way-to-learn-algorithmic-trading-in-Python-and-test-out-models)'
+  id: totrans-37
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[用Python学习和测试算法交易模型的最佳方式是什么？](https://www.quora.com/What-is-the-best-way-to-learn-algorithmic-trading-in-Python-and-test-out-models)'
 - en: '[What are good and bad reasons for getting into algorithmic trading (as an
     individual, not an employee at a hedge fund)?](https://www.quora.com/What-are-good-and-bad-reasons-for-getting-into-algorithmic-trading-as-an-individual-not-an-employee-at-a-hedge-fund)'
+  id: totrans-38
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[作为个人进入算法交易（而不是对冲基金的雇员）的好处和坏处是什么？](https://www.quora.com/What-are-good-and-bad-reasons-for-getting-into-algorithmic-trading-as-an-individual-not-an-employee-at-a-hedge-fund)'
 - en: '[What kind of mathematics do I need to learn for algorithmic trading?](https://www.quora.com/What-kind-of-mathematics-do-I-need-to-learn-for-algorithmic-trading)'
+  id: totrans-39
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[我需要学习怎样的数学才能进行算法交易？](https://www.quora.com/What-kind-of-mathematics-do-I-need-to-learn-for-algorithmic-trading)'
 - en: '[What are some of the common practical uses of R/Python in finance?](https://www.quora.com/What-are-some-of-the-common-practical-uses-of-R-Python-in-finance)'
+  id: totrans-40
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[金融领域中R/Python的常见实际用途是什么？](https://www.quora.com/What-are-some-of-the-common-practical-uses-of-R-Python-in-finance)'
 - en: '[What would happen to manual trading with the rise of algotrading?](https://www.quora.com/What-would-happen-to-manual-trading-with-the-rise-of-algotrading)'
+  id: totrans-41
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[随着算法交易的兴起，手动交易会发生什么变化？](https://www.quora.com/What-would-happen-to-manual-trading-with-the-rise-of-algotrading)'
 - en: '[https://www.quora.com/Which-is-the-best-service-provider-for-algo-trading](https://www.quora.com/Which-is-the-best-service-provider-for-algo-trading)'
+  id: totrans-42
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[https://www.quora.com/Which-is-the-best-service-provider-for-algo-trading](https://www.quora.com/Which-is-the-best-service-provider-for-algo-trading)'
 - en: '[What''s the best library to back-test trading strategies in python?](https://www.quora.com/Whats-the-best-library-to-back-test-trading-strategies-in-python)'
+  id: totrans-43
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[用Python回测交易策略的最佳库是什么？](https://www.quora.com/Whats-the-best-library-to-back-test-trading-strategies-in-python)'
 - en: '[Is data science/analytics useful for quant/algo trading?](https://www.quora.com/Is-data-science-analytics-useful-for-quant-algo-trading)'
+  id: totrans-44
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[数据科学/分析对量化/算法交易有用吗？](https://www.quora.com/Is-data-science-analytics-useful-for-quant-algo-trading)'
 - en: '[Which is the best algorithm trading software?](https://www.quora.com/Which-is-the-best-algorithm-trading-software)'
+  id: totrans-45
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[哪种算法交易软件最好？](https://www.quora.com/Which-is-the-best-algorithm-trading-software)'
 - en: Statsmage
+  id: totrans-46
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: Statsmage
 - en: '[Current State of Open-Source Backtesting Frameworks in Python](http://statsmage.com/backtesting-frameworks-in-python/)'
+  id: totrans-47
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[Python中开源回测框架的当前状态](http://statsmage.com/backtesting-frameworks-in-python/)'
 - en: The Developers Conference
+  id: totrans-48
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 开发者大会
 - en: (Portuguese)
+  id: totrans-49
   prefs: []
   type: TYPE_NORMAL
+  zh: （葡萄牙语）
 - en: '[Criando robôs para compra e venda de criptomoedas](http://www.thedevelopersconference.com.br/tdc/2019/belohorizonte/trilha-python#descricao-161)'
+  id: totrans-50
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[Creating robots for buying and selling cryptocurrencies](http://www.thedevelopersconference.com.br/tdc/2019/belohorizonte/trilha-python#descricao-161)'
 - en: '[Slides](https://slides.com/rodrigo73/criptomoedas-tdc-2019#/)'
+  id: totrans-51
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[幻灯片](https://slides.com/rodrigo73/criptomoedas-tdc-2019#/)'
 - en: TODOTrader
+  id: totrans-52
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: TODOTrader
 - en: '[Blog](https://todotrader.com/blog/)'
+  id: totrans-53
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[博客](https://todotrader.com/blog/)'
 - en: TopQuant
+  id: totrans-54
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: TopQuant
 - en: '*"China''s Python Quantitative Enlighteners and Trailblazers"*'
+  id: totrans-55
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '*"中国的Python量化启示者和开拓者"*'
 - en: '[Category: backtrader](http://www.topquant.vip/?cat=20)'
+  id: totrans-56
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[类别：backtrader](http://www.topquant.vip/?cat=20)'
 - en: Traders-Mag
+  id: totrans-57
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: Traders-Mag
 - en: '[Cryptotrading Algorítmico – Trading de Criptodivisas con Análisis Técnico](https://www.traders-mag.es/cryptotrading-algoritmico-trading-de-criptodivisas-con-analisis-tecnico/)'
+  id: totrans-58
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[加密货币算法交易 - 使用技术分析进行加密货币交易](https://www.traders-mag.es/cryptotrading-algoritmico-trading-de-criptodivisas-con-analisis-tecnico/)'
 - en: X-trader Forums
+  id: totrans-59
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: X-trader论坛
 - en: '[Re: Quantopian](https://www.x-trader.net/foro/viewtopic.php?t=18782)'
+  id: totrans-60
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[关于Quantopian](https://www.x-trader.net/foro/viewtopic.php?t=18782)'

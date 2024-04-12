@@ -1,389 +1,585 @@
 - en: Blogs - Articles
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 博客 - 文章
 - en: 原文：[https://www.backtrader.com/home/references/blogs/](https://www.backtrader.com/home/references/blogs/)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[博客列表](https://www.backtrader.com/home/references/blogs/)
 - en: A list of blogs which have shown backtrader in action.
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: 展示 backtrader 的博客列表。
 - en: Aadhunik
+  id: totrans-3
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: Aadhunik
 - en: '[This is How I Implemented SUPER TREND Indicator in Backtrader (Python)](https://aadhunik.ml/this-is-how-i-implemented-super-trend-indicator-in-backtrader-python/)'
+  id: totrans-4
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[这是我如何在 Backtrader 中实现超级趋势指标的方法（Python）](https://aadhunik.ml/this-is-how-i-implemented-super-trend-indicator-in-backtrader-python/)'
 - en: '[https://aadhunik.ml/this-is-how-i-implemented-super-trend-indicator-in-backtrader-python/](https://aadhunik.ml/this-is-how-i-implemented-super-trend-indicator-in-backtrader-python/)'
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: '[这是我如何在 Backtrader 中实现超级趋势指标的方法](https://aadhunik.ml/this-is-how-i-implemented-super-trend-indicator-in-backtrader-python/)'
 - en: Actuarial Data Science
+  id: totrans-6
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 精算数据科学
 - en: '[Creating Performance Reports with Backtrader](http://actuarialdatascience.com/backtrader_performance_report.html)'
+  id: totrans-7
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[使用 Backtrader 创建性能报告](http://actuarialdatascience.com/backtrader_performance_report.html)'
 - en: Alpha Over Beta
+  id: totrans-8
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: Alpha Over Beta
 - en: '[Trading Volatility to Hedge Equity https://www.alphaoverbeta.net/trading-volatility-to-hedge-equity/
     -](https://www.alphaoverbeta.net/trading-volatility-to-hedge-equity/)'
+  id: totrans-9
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[用于对冲股票的交易波动率](https://www.alphaoverbeta.net/trading-volatility-to-hedge-equity/)'
 - en: Analyzing Alpha
+  id: totrans-10
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: Analyzing Alpha
 - en: '[Backtrader: Getting Started Backtesting - https://analyzingalpha.com/backtrader-backtesting-trading-strategies](https://analyzingalpha.com/backtrader-backtesting-trading-strategies)'
+  id: totrans-11
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[Backtrader：开始回测交易策略](https://analyzingalpha.com/backtrader-backtesting-trading-strategies)'
 - en: '[Sector Momentum: Explained & Backtested - https://analyzingalpha.com/sector-momentum](https://analyzingalpha.com/sector-momentum)'
+  id: totrans-12
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[行业动量：解释与回测](https://analyzingalpha.com/sector-momentum)'
 - en: '[Stop Loss: Explained & The Best Strategy - https://analyzingalpha.com/stop-loss-for-stocks](https://analyzingalpha.com/stop-loss-for-stocks)'
+  id: totrans-13
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[止损：解释与最佳策略](https://analyzingalpha.com/stop-loss-for-stocks)'
 - en: '[The Top 21 Python Trading Tools for 2019 - https://analyzingalpha.com/python-trading-tools](https://analyzingalpha.com/python-trading-tools)'
+  id: totrans-14
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[2019 年最佳 21 个 Python 交易工具](https://analyzingalpha.com/python-trading-tools)'
 - en: Andreas Clenow - Following the Trend
+  id: totrans-15
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: Andreas Clenow - 《追随趋势》
 - en: '[Backtesting with Python](https://www.followingthetrend.com/2018/06/backtesting-with-python/)'
+  id: totrans-16
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[Python 回测](https://www.followingthetrend.com/2018/06/backtesting-with-python/)'
 - en: Angel List - Justin Wagner
+  id: totrans-17
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: Angel List - Justin Wagner
 - en: '[Cryptocurrency Bot with Encoded Strategies and Backtesting](https://angel.co/projects/729346-cryptocurrency-bot-with-encoded-strategies-and-backtesting?src=user_profile)'
+  id: totrans-18
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[加密货币机器人与编码策略以及回测](https://angel.co/projects/729346-cryptocurrency-bot-with-encoded-strategies-and-backtesting?src=user_profile)'
 - en: Backtest Rookies (several posts)
+  id: totrans-19
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: Backtest Rookies（多篇文章）
 - en: '[Backtrader: Data Replay](https://backtest-rookies.com/2017/12/06/backtrader-data-replay/)'
+  id: totrans-20
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[Backtrader：数据回放](https://backtest-rookies.com/2017/12/06/backtrader-data-replay/)'
 - en: CSDN - Qiantang Xiajiazi
+  id: totrans-21
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: CSDN - 千塘夏家子
 - en: '[Backtrader Quantization Platform Tutorial (8) TimeFrame](https://blog.csdn.net/qtlyx/article/details/72716995)'
+  id: totrans-22
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[Backtrader 量化平台教程（8）时间框架](https://blog.csdn.net/qtlyx/article/details/72716995)'
 - en: '**Language**: *Chinese*'
+  id: totrans-23
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: '**语言**：*中文*'
 - en: DevTo - dennislwm
+  id: totrans-24
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: '[DevTo - dennislwm](https://dev.to/dennislwm)'
 - en: '[How to Dockerize Backtrader in 4 GIF Steps](https://dev.to/dennislwm/how-to-dockerize-backtrader-in-4-gif-steps-4af2)'
+  id: totrans-25
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[如何用 4 个 GIF 步骤 Dockerize Backtrader](https://dev.to/dennislwm/how-to-dockerize-backtrader-in-4-gif-steps-4af2)'
 - en: '[https://dev.to/dennislwm/how-to-dockerize-backtrader-in-4-gif-steps-4af2](https://dev.to/dennislwm/how-to-dockerize-backtrader-in-4-gif-steps-4af2)'
+  id: totrans-26
   prefs: []
   type: TYPE_NORMAL
+  zh: '[如何用 4 个 GIF 步骤 Dockerize Backtrader](https://dev.to/dennislwm/how-to-dockerize-backtrader-in-4-gif-steps-4af2)'
 - en: EtherSchtroumpf
+  id: totrans-27
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: EtherSchtroumpf
 - en: '[TOP30 Strategy 1.0e](https://blog.etherschtroumpf.money/2019/06/04/top30-strategy-1-0/)'
+  id: totrans-28
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[TOP30 策略 1.0 版](https://blog.etherschtroumpf.money/2019/06/04/top30-strategy-1-0/)'
 - en: Finanzas.com
+  id: totrans-29
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: Finanzas.com
 - en: '[Cryptotrading algorítmico: diseñando un sistema](http://www.finanzas.com/noticias/mercados/bolsas/20180718/cryptotrading-algoritmico-disenando-sistema-3876840.html)'
+  id: totrans-30
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[加密货币交易算法：设计一个系统](http://www.finanzas.com/noticias/mercados/bolsas/20180718/cryptotrading-algoritmico-disenando-sistema-3876840.html)'
 - en: '**Language**: *Spanish*'
+  id: totrans-31
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: '**语言**：*西班牙语*'
 - en: Intrinio Blog
+  id: totrans-32
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: Intrinio 博客
 - en: '[A Quant Quickstart with Intrinio & Backtrader](https://blog.intrinio.com/a-quant-quickstart-with-intrinio-backtrader/)'
+  id: totrans-33
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[用 Intrinio & Backtrader 开始量化](https://blog.intrinio.com/a-quant-quickstart-with-intrinio-backtrader/)'
 - en: LinkedIn - Majid AliAkbar
+  id: totrans-34
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: LinkedIn - Majid AliAkbar
 - en: '[Best Python Libraries/Packages for Finance and Financial Data Scientists](https://www.linkedin.com/pulse/best-python-librariespackages-finance-financial-data-majid-aliakbar/)'
+  id: totrans-35
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[金融和金融数据科学家的最佳 Python 库/软件包](https://www.linkedin.com/pulse/best-python-librariespackages-finance-financial-data-majid-aliakbar/)'
 - en: LinkedIn - Ali Kokaz
+  id: totrans-36
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 领英 - Ali Kokaz
 - en: '[Exploring a Cross-Sectional Mean Reversion Trading Strategy](https://www.linkedin.com/pulse/exploring-cross-sectional-mean-reversion-trading-strategy-ali-kokaz-1f)'
+  id: totrans-37
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[探索横截面均值回归交易策略](https://www.linkedin.com/pulse/exploring-cross-sectional-mean-reversion-trading-strategy-ali-kokaz-1f)'
 - en: Medium - Chul Lim
+  id: totrans-38
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: Medium - Chul Lim
 - en: '[Algo Trading / Program Trading](https://medium.com/@chulla/algo-trading-%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%A8-%ED%8A%B8%EB%A0%88%EC%9D%B4%EB%94%A9-fd7f88c99834)'
+  id: totrans-39
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[算法交易/程序交易](https://medium.com/@chulla/algo-trading-%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%A8-%ED%8A%B8%EB%A0%88%EC%9D%B4%EB%94%A9-fd7f88c99834)'
 - en: '**Language**: Korean'
+  id: totrans-40
   prefs: []
   type: TYPE_NORMAL
+  zh: '**语言**：韩语'
 - en: Medium - Dim Norin
+  id: totrans-41
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: Medium - Dim Norin
 - en: '[Test for Klinger Volume Oscillator](https://medium.com/@uachatse/test-for-klinger-volume-oscillator-b234b66a9a84?source=---------2------------------)'
+  id: totrans-42
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[Klinger Volume Oscillator 测试](https://medium.com/@uachatse/test-for-klinger-volume-oscillator-b234b66a9a84?source=---------2------------------)'
 - en: Medium - Etienne Brunet
+  id: totrans-43
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: Medium - Etienne Brunet
 - en: '[My landscape on artificial intelligence quantitative funds and DIY funds](https://medium.com/@etiennebr/my-landscape-on-artificial-intelligence-quantitative-funds-and-diy-funds-13e1b4c25706)'
+  id: totrans-44
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[我对人工智能量化基金和DIY基金的看法](https://medium.com/@etiennebr/my-landscape-on-artificial-intelligence-quantitative-funds-and-diy-funds-13e1b4c25706)'
 - en: Medium - Sumit Ojha
+  id: totrans-45
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: Medium - Sumit Ojha
 - en: '[Holding vs Smart Holding in cryptocurrency](https://medium.com/@ojhasumit93/holding-vs-smart-holding-in-cryptocurrency-c3c9d89c85f)'
+  id: totrans-46
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[加密货币中的持有与智能持有](https://medium.com/@ojhasumit93/holding-vs-smart-holding-in-cryptocurrency-c3c9d89c85f)'
 - en: Medium - Towards Data Science
+  id: totrans-47
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: Medium - Towards Data Science
 - en: '[Trading Strategy: Back testing with Backtrader](https://towardsdatascience.com/trading-strategy-back-testing-with-backtrader-6c173f29e37f)'
+  id: totrans-48
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[交易策略：使用 Backtrader 进行回测](https://towardsdatascience.com/trading-strategy-back-testing-with-backtrader-6c173f29e37f)'
 - en: '[Backtesting Your First Trading Strategy](https://towardsdatascience.com/backtesting-your-first-trading-strategy-ad3977f3f2a)'
+  id: totrans-49
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[Backtesting 你的第一个交易策略](https://towardsdatascience.com/backtesting-your-first-trading-strategy-ad3977f3f2a)'
 - en: '[Algorithmic Trading using Sentiment Analysis on News Articles](https://towardsdatascience.com/https-towardsdatascience-com-algorithmic-trading-using-sentiment-analysis-on-news-articles-83db77966704)'
+  id: totrans-50
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[使用新闻文章情感分析的算法交易](https://towardsdatascience.com/https-towardsdatascience-com-algorithmic-trading-using-sentiment-analysis-on-news-articles-83db77966704)'
 - en: '[Quant’s Advice on Generating Trading Ideas](https://towardsdatascience.com/quants-advice-on-generating-trading-ideas-580ea62672f3)'
+  id: totrans-51
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[量化交易员关于生成交易思路的建议](https://towardsdatascience.com/quants-advice-on-generating-trading-ideas-580ea62672f3)'
 - en: Medium - ttamg
+  id: totrans-52
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: Medium - ttamg
 - en: '[TradingBot series — Architecture for a trading bot](https://medium.com/@MattGosden/tradingbot-series-architecture-for-a-trading-bot-ac2352508c82)'
+  id: totrans-53
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[TradingBot 系列 —— 交易机器人的架构](https://medium.com/@MattGosden/tradingbot-series-architecture-for-a-trading-bot-ac2352508c82)'
 - en: Medium - Ugur Akyol
+  id: totrans-54
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: Medium - Ugur Akyol
 - en: '[Walk forward worksheet for Backtrader bot](https://medium.com/@UgurAkyol1/walk-forward-worksheet-for-backtrader-81c7571099a1)'
+  id: totrans-55
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[Backtrader 机器人的前行工作表](https://medium.com/@UgurAkyol1/walk-forward-worksheet-for-backtrader-81c7571099a1)'
 - en: Medium - Wen Chang
+  id: totrans-56
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: Medium - Wen Chang
 - en: '[Handwriting an AI trading robot](https://medium.com/@meowent/%E5%8B%95%E6%89%8B%E5%AF%AB%E4%B8%80%E9%9A%BBai%E4%BA%A4%E6%98%93%E6%A9%9F%E5%99%A8%E4%BA%BA-e995500b55f7)'
+  id: totrans-57
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[手写一个AI交易机器人](https://medium.com/@meowent/%E5%8B%95%E6%89%8B%E5%AF%AB%E4%B8%80%E9%9A%BBai%E4%BA%A4%E6%98%93%E6%A9%9F%E5%99%A8%E4%BA%BA-e995500b55f7)'
 - en: '**Language**: *Chinese*'
+  id: totrans-58
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: '**语言**：*中文*'
 - en: Medium - You Xie
+  id: totrans-59
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: Medium - You Xie
 - en: '[Event Study on IGNIS Airdrop](https://medium.com/@xyshell/event-study-on-ignis-airdrop-2f7a93bb24f4)'
+  id: totrans-60
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[IGNIS空投的事件研究](https://medium.com/@xyshell/event-study-on-ignis-airdrop-2f7a93bb24f4)'
 - en: My Financial Markets
+  id: totrans-61
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 我的金融市场
 - en: '[Backtest a trading strategy in Python](https://myfinancialmarkets.club/2017/11/23/backtest-a-trading-strategy-in-python/)'
+  id: totrans-62
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[用 Python 回测交易策略](https://myfinancialmarkets.club/2017/11/23/backtest-a-trading-strategy-in-python/)'
 - en: NTGuardian
+  id: totrans-63
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: NTGuardian
 - en: '[Getting Started with Backtrader](https://ntguardian.wordpress.com/2017/06/12/getting-started-with-backtrader/)'
+  id: totrans-64
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[开始使用 Backtrader](https://ntguardian.wordpress.com/2017/06/12/getting-started-with-backtrader/)'
 - en: Profit Adda
+  id: totrans-65
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 利润加
 - en: '[Creating Performance Reports with Backtrader](http://actuarialdatascience.com/backtrader_performance_report.html)'
+  id: totrans-66
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[使用 Backtrader 创建绩效报告](http://actuarialdatascience.com/backtrader_performance_report.html)'
 - en: Pythonic Finance
+  id: totrans-67
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: Pythonic Finance
 - en: '[Comparing Python platforms for automated trading](https://randlow.github.io/posts/trading/trading-introduction/)'
+  id: totrans-68
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[比较用于自动交易的 Python 平台](https://randlow.github.io/posts/trading/trading-introduction/)'
 - en: '[Optimizing parameters of the trading strategy](https://randlow.github.io/posts/trading/trading-strat-parameter-opt/)'
+  id: totrans-69
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[优化交易策略的参数](https://randlow.github.io/posts/trading/trading-strat-parameter-opt/)'
 - en: '[Adding indicators to your trading strategy](https://randlow.github.io/posts/trading/trading-indicators-backtrader/)'
+  id: totrans-70
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[为您的交易策略添加指标](https://randlow.github.io/posts/trading/trading-indicators-backtrader/)'
 - en: '[Customizing the trading strategy](https://randlow.github.io/posts/trading/trading-custom-backtrader/)'
+  id: totrans-71
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[定制交易策略](https://randlow.github.io/posts/trading/trading-custom-backtrader/)'
 - en: '[Introduction to automated trading with backtrader](https://randlow.github.io/posts/trading/trading-intro-backtrader/)'
+  id: totrans-72
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[使用backtrader介绍自动化交易](https://randlow.github.io/posts/trading/trading-intro-backtrader/)'
 - en: QuantInsti
+  id: totrans-73
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: QuantInsti
 - en: '[Installing Python Packages ;](https://blog.quantinsti.com/installing-python-packages/)'
+  id: totrans-74
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[安装Python软件包 ;](https://blog.quantinsti.com/installing-python-packages/)'
 - en: Rankia.com
+  id: totrans-75
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: Rankia.com
 - en: '[Trading de criptodivisas con análisis técnico](https://www.rankia.com/blog/blockchain-criptomonedas-bitcoin-ethereum/3968963-trading-criptodivisas-analisis-tecnico)'
+  id: totrans-76
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[使用技术分析交易加密货币](https://www.rankia.com/blog/blockchain-criptomonedas-bitcoin-ethereum/3968963-trading-criptodivisas-analisis-tecnico)'
 - en: '**Language**: *Spanish*'
+  id: totrans-77
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: '**语言**: *西班牙语*'
 - en: '[Trading de criptomoedas com análise técnica](https://www.rankia.pt/trading-de-criptomoedas-com-analise-tecnica/)'
+  id: totrans-78
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[使用技术分析交易加密货币](https://www.rankia.pt/trading-de-criptomoedas-com-analise-tecnica/)'
 - en: '**Language**: *Portuguese*'
+  id: totrans-79
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: '**语言**: *葡萄牙语*'
 - en: Renbuar Blog
+  id: totrans-80
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: Renbuar博客
 - en: '[Mean Reversion Strategy](https://renbuar.blogspot.com/2018/05/backtrader-multiple-data-feeds.html)'
+  id: totrans-81
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[均值回归策略](https://renbuar.blogspot.com/2018/05/backtrader-multiple-data-feeds.html)'
 - en: ScienceWal
+  id: totrans-82
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: ScienceWal
 - en: '[Trading Strategy Backtesting-with-backtrader](https://ms.sciencewal.com/61369-trading-strategy-back-testing-with-backtrader-6c173f29e37f-94)'
+  id: totrans-83
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[使用backtrader进行交易策略回测](https://ms.sciencewal.com/61369-trading-strategy-back-testing-with-backtrader-6c173f29e37f-94)'
 - en: '**Language**: *Indonesian*'
+  id: totrans-84
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: '**语言**: *印尼语*'
 - en: SeanGTKelly Blog
+  id: totrans-85
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: SeanGTKelly博客
 - en: '[BASIC ALGO-TRADING PART 2 - BACKTRADING](http://seangtkelley.me/blog/2018/08/15/algo-trading-pt2)'
+  id: totrans-86
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[基础算法交易第2部分 - 回测](http://seangtkelley.me/blog/2018/08/15/algo-trading-pt2)'
 - en: SmudlaTrader
+  id: totrans-87
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: SmudlaTrader
 - en: '[Faber’s strategy on Daily and Weekly](https://smudlatrader.wordpress.com/tag/backtrader/)'
+  id: totrans-88
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[Faber每日和每周策略](https://smudlatrader.wordpress.com/tag/backtrader/)'
 - en: Teddy Koker
+  id: totrans-89
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: Teddy Koker
 - en: '[Momentum Strategy from "Stocks on the Move" in Python](https://teddykoker.com/2019/05/momentum-strategy-from-stocks-on-the-move-in-python/)'
+  id: totrans-90
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[Python中的"移动股票"动量策略](https://teddykoker.com/2019/05/momentum-strategy-from-stocks-on-the-move-in-python/)'
 - en: '[Improving Cross Sectional Mean Reversion Strategy in Python](https://teddykoker.com/2019/05/improving-cross-sectional-mean-reversion-strategy-in-python/)'
+  id: totrans-91
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[改进Python中的横截面均值回归策略](https://teddykoker.com/2019/05/improving-cross-sectional-mean-reversion-strategy-in-python/)'
 - en: '[Backtesting a Cross-Sectional Mean Reversion Strategy in Python](https://teddykoker.com/2019/04/backtesting-a-cross-sectional-mean-reversion-strategy-in-python/)'
+  id: totrans-92
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[在Python中回测横截面均值回归策略](https://teddykoker.com/2019/04/backtesting-a-cross-sectional-mean-reversion-strategy-in-python/)'
 - en: '[Backtesting Portfolios of Leveraged ETFs in Python with Backtrader](https://teddykoker.com/2019/04/backtesting-portfolios-of-leveraged-etfs-in-python-with-backtrader/)'
+  id: totrans-93
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[使用Backtrader在Python中回测杠杆ETF组合](https://teddykoker.com/2019/04/backtesting-portfolios-of-leveraged-etfs-in-python-with-backtrader/)'
 - en: The Startup - Roman Paolucci
+  id: totrans-94
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: The Startup - Roman Paolucci
 - en: '[Creating Profitable Stock Trading Strategies](https://medium.com/swlh/build-a-profitable-stock-trading-bot-6ba376cba955)'
+  id: totrans-95
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[创建盈利的股票交易策略](https://medium.com/swlh/build-a-profitable-stock-trading-bot-6ba376cba955)'
 - en: The Lab - swapniljariwala
+  id: totrans-96
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: The Lab - swapniljariwala
 - en: '[Simple example of how to use NSEpy with backtrader](https://swapniljariwala.github.io/2017/11/03/NSEPy-with-backtrader.html)'
+  id: totrans-97
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[使用NSEpy和backtrader的简单示例](https://swapniljariwala.github.io/2017/11/03/NSEPy-with-backtrader.html)'

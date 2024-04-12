@@ -1,171 +1,261 @@
 - en: Companies
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: Companies
 - en: 原文：[https://www.backtrader.com/home/references/companies/](https://www.backtrader.com/home/references/companies/)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.backtrader.com/home/references/companies/](https://www.backtrader.com/home/references/companies/)
 - en: A list of companies which list (or have listed) *backtrader* or for which a
     public usage reference exists (*Professional Profile*, *Blog Entry*, *Articles*,
     ...)
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: 列出了列出（或已列出）*backtrader* 或公开使用参考存在的公司清单（*专业资料*、*博客文章*、*文章*等等）
 - en: Note
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: 注意
 - en: This is not any kind of endorsement, proof of work, official sanctioning (and
     any other disclaimer)
+  id: totrans-4
   prefs: []
   type: TYPE_NORMAL
+  zh: 这并不是任何形式的认可、工作证明、官方认可（和任何其他免责声明）
 - en: Note
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: 注意
 - en: Below "companies" you will find Un*x like distributions which have chosen to
     have it available
+  id: totrans-6
   prefs: []
   type: TYPE_NORMAL
+  zh: 在“公司”下面，您将找到选择将其提供的类 Unix 发行版
 - en: Companies
+  id: totrans-7
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: Companies
 - en: Agora EAFI
+  id: totrans-8
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: Agora EAFI
 - en: '[https://agoraeaf.com/](https://agoraeaf.com/)'
+  id: totrans-9
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[https://agoraeaf.com/](https://agoraeaf.com/)'
 - en: From a LinkedIn profile and the Rankia/Finanzas.com articles
+  id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: 来自 LinkedIn 档案和 Rankia/Finanzas.com 文章
 - en: Alpaca
+  id: totrans-11
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: Alpaca
 - en: '[https://pypi.org/project/alpaca-backtrader-api/](https://pypi.org/project/alpaca-backtrader-api/)'
+  id: totrans-12
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[https://pypi.org/project/alpaca-backtrader-api/](https://pypi.org/project/alpaca-backtrader-api/)'
 - en: Alpha Over Beta
+  id: totrans-13
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: Alpha Over Beta
 - en: '[Trading Volatility to Hedge Equity https://www.alphaoverbeta.net/trading-volatility-to-hedge-equity/
     -](https://www.alphaoverbeta.net/trading-volatility-to-hedge-equity/)'
+  id: totrans-14
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[Trading Volatility to Hedge Equity https://www.alphaoverbeta.net/trading-volatility-to-hedge-equity/
+    -](https://www.alphaoverbeta.net/trading-volatility-to-hedge-equity/)'
 - en: Total
+  id: totrans-15
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 总计
 - en: '[https://ch.linkedin.com/in/karl-vernet-599a464/de](https://ch.linkedin.com/in/karl-vernet-599a464/de)'
+  id: totrans-16
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[https://ch.linkedin.com/in/karl-vernet-599a464/de](https://ch.linkedin.com/in/karl-vernet-599a464/de)'
 - en: Part of the job of Karl Vernet.
+  id: totrans-17
   prefs: []
   type: TYPE_NORMAL
+  zh: 卡尔·维尔内特（Karl Vernet）的工作的一部分。
 - en: Data Trading
+  id: totrans-18
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 数据交易
 - en: '[https://datatrading.info/](https://datatrading.info/)'
+  id: totrans-19
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[https://datatrading.info/](https://datatrading.info/)'
 - en: Small shop with articles, offering services for algorithmic trading.
+  id: totrans-20
   prefs: []
   type: TYPE_NORMAL
+  zh: 提供算法交易服务的小商店。
 - en: Intrinio
+  id: totrans-21
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: Intrinio
 - en: '[https://intrinio.com/](https://intrinio.com/)'
+  id: totrans-22
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[https://intrinio.com/](https://intrinio.com/)'
 - en: NORGATE DATA
+  id: totrans-23
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: NORGATE DATA
 - en: '[https://pypi.org/project/norgatedata/](https://pypi.org/project/norgatedata/)'
+  id: totrans-24
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[https://pypi.org/project/norgatedata/](https://pypi.org/project/norgatedata/)'
 - en: Quantify Capital
+  id: totrans-25
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: Quantify Capital
 - en: '[https://www.quantifycapital.in/](https://www.quantifycapital.in/)'
+  id: totrans-26
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[https://www.quantifycapital.in/](https://www.quantifycapital.in/)'
 - en: QuantInsti
+  id: totrans-27
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: QuantInsti
 - en: '[https://www.quantinsti.com/](https://www.quantinsti.com/)'
+  id: totrans-28
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[https://www.quantinsti.com/](https://www.quantinsti.com/)'
 - en: From blog entries, job offers ...
+  id: totrans-29
   prefs: []
   type: TYPE_NORMAL
+  zh: 来自博客文章、招聘启事...
 - en: StormDealers Ltd.
+  id: totrans-30
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: StormDealers Ltd.
 - en: '[https://www.stormdealers.com/](https://www.stormdealers.com/)'
+  id: totrans-31
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[https://www.stormdealers.com/](https://www.stormdealers.com/)'
 - en: Listed on the website
+  id: totrans-32
   prefs: []
   type: TYPE_NORMAL
+  zh: 列在网站上
 - en: TradeFab
+  id: totrans-33
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: TradeFab
 - en: '[https://tradefab.org/](https://tradefab.org/)'
+  id: totrans-34
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[https://tradefab.org/](https://tradefab.org/)'
 - en: 'Quote: *"Backtrader Development Development of Python Backtrader scripts, including
     backtesting/optimization support."*'
+  id: totrans-35
   prefs: []
   type: TYPE_NORMAL
+  zh: 引言：“*Backtrader Development Development of Python Backtrader scripts, including
+    backtesting/optimization support.*”
 - en: ZuluQuant
+  id: totrans-36
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: ZuluQuant
 - en: '[http://zuluquant.com/ (apparently gone)](http://zuluquant.com/)'
+  id: totrans-37
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[http://zuluquant.com/（似乎已经消失）](http://zuluquant.com/)'
 - en: Listed *backtrader* as one of the technologies used and posted a job offer in
     the community
+  id: totrans-38
   prefs: []
   type: TYPE_NORMAL
+  zh: 将 *backtrader* 列为使用的技术之一，并在社区发布了一份工作启事
 - en: Distributions
+  id: totrans-39
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 发行
 - en: FreeBSD Ports
+  id: totrans-40
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: FreeBSD Ports
 - en: '[FreeBSD](https://svnweb.freebsd.org/ports/head/finance/py-backtrader)'
+  id: totrans-41
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[FreeBSD](https://svnweb.freebsd.org/ports/head/finance/py-backtrader)'
 - en: NetBSD
+  id: totrans-42
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: NetBSD
 - en: '[NetBSD](https://ftp.netbsd.org/pub/pkgsrc/current/pkgsrc/finance/py-backtrader/README.html)'
+  id: totrans-43
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[NetBSD](https://ftp.netbsd.org/pub/pkgsrc/current/pkgsrc/finance/py-backtrader/README.html)'

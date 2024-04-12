@@ -1,80 +1,120 @@
 - en: Videos
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 视频
 - en: 原文：[https://www.backtrader.com/home/references/videos/](https://www.backtrader.com/home/references/videos/)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.backtrader.com/home/references/videos/](https://www.backtrader.com/home/references/videos/)
 - en: '[Overview of backtrader with Python and GUI project](https://www.youtube.com/watch?v=8Y9OXA8gyjg)'
+  id: totrans-2
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: '[使用 Python 和 GUI 项目概述 backtrader](https://www.youtube.com/watch?v=8Y9OXA8gyjg)'
 - en: '[Backtest Strategy in Python with the help of Backtrader Framework](https://www.youtube.com/watch?v=m6b4Ti4P2HA)'
+  id: totrans-3
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: '[使用 Backtrader 框架在 Python 中进行策略回测](https://www.youtube.com/watch?v=m6b4Ti4P2HA)'
 - en: '[Getting Started With Python Backtrader](https://www.youtube.com/watch?v=6UqjZmN_mwY)'
+  id: totrans-4
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: '[Python Backtrader 入门指南](https://www.youtube.com/watch?v=6UqjZmN_mwY)'
 - en: '[Overview of backtrader with Python3 and GUI project](https://www.youtube.com/watch?v=6zXUgkV92Rw)'
+  id: totrans-5
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: '[使用 Python3 和 GUI 项目概述 backtrader](https://www.youtube.com/watch?v=6zXUgkV92Rw)'
 - en: '[Tutorial: Deep Reinforcement Learning For Algorithmic Trading in Python](https://www.youtube.com/watch?v=_O4T5Vjmgeo)'
+  id: totrans-6
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: '[教程：Python 中的深度强化学习算法交易](https://www.youtube.com/watch?v=_O4T5Vjmgeo)'
 - en: '[Tutorial: How to Backtest a Bitcoin Trading Strategy in Python](https://www.youtube.com/watch?v=1V0_oat-HEw)'
+  id: totrans-7
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: '[教程：如何在 Python 中对比特币交易策略进行回测](https://www.youtube.com/watch?v=1V0_oat-HEw)'
 - en: '[Backtest Strategy Using Backtrader Framework](https://youtu.be/m6b4Ti4P2HA)'
+  id: totrans-8
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: '[使用 Backtrader 框架进行策略回测](https://youtu.be/m6b4Ti4P2HA)'
 - en: '[Best back testing framework for algo trading in Python](https://youtu.be/ApV7Fpwr_fg)'
+  id: totrans-9
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: '[Python 中最佳的算法交易回测框架](https://youtu.be/ApV7Fpwr_fg)'
 - en: Algorithmic Trading with Python and BAcktrader
+  id: totrans-10
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: Python 和 BAcktrader 的算法交易
 - en: '[Part 1](https://www.youtube.com/watch?v=UNkH1TQl7qo)'
+  id: totrans-11
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[第 1 部分](https://www.youtube.com/watch?v=UNkH1TQl7qo)'
 - en: '[Part 2](https://www.youtube.com/watch?v=5VU3CJMuk0w)'
+  id: totrans-12
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[第 2 部分](https://www.youtube.com/watch?v=5VU3CJMuk0w)'
 - en: '[Part 3](https://www.youtube.com/watch?v=K8buXUxEfMc)'
+  id: totrans-13
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[第 3 部分](https://www.youtube.com/watch?v=K8buXUxEfMc)'
 - en: Golden Cross Algorithmic Trading Strategy with Python and Backtrader
+  id: totrans-14
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 金叉算法交易策略与 Python 和 Backtrader
 - en: '[Part 1](https://www.youtube.com/watch?v=bbKTYelmfR4)'
+  id: totrans-15
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[第 1 部分](https://www.youtube.com/watch?v=bbKTYelmfR4)'
 - en: '[Part 2](https://www.youtube.com/watch?v=5VU3CJMuk0w)'
+  id: totrans-16
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[第 2 部分](https://www.youtube.com/watch?v=5VU3CJMuk0w)'
 - en: '[Part 3](https://www.youtube.com/watch?v=JyX3b5I5uiY)'
+  id: totrans-17
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[第 3 部分](https://www.youtube.com/watch?v=JyX3b5I5uiY)'
 - en: '[Part 4](https://www.youtube.com/watch?v=AAm3t0ETctE)'
+  id: totrans-18
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[第 4 部分](https://www.youtube.com/watch?v=AAm3t0ETctE)'
 - en: '[Part 5](https://www.youtube.com/watch?v=j23eDlTpEaQ)'
+  id: totrans-19
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[第 5 部分](https://www.youtube.com/watch?v=j23eDlTpEaQ)'

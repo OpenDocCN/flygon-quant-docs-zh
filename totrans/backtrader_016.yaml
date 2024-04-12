@@ -1,124 +1,194 @@
 - en: Installation
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 安装
 - en: 原文：[https://www.backtrader.com/docu/installation/](https://www.backtrader.com/docu/installation/)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.backtrader.com/docu/installation/](https://www.backtrader.com/docu/installation/)
 - en: Requirements and versions
+  id: totrans-2
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 要求和版本
 - en: '`backtrader` is self-contained with no external dependencies (except if you
     want to plot)'
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: '`backtrader` 是自包含的，没有外部依赖项（除非你想要绘图）'
 - en: 'Basic requirements are:'
+  id: totrans-4
   prefs: []
   type: TYPE_NORMAL
+  zh: 基本要求是：
 - en: Python 2.7
+  id: totrans-5
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: Python 2.7
 - en: Python 3.2 / 3.3/ 3.4 / 3.5
+  id: totrans-6
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: Python 3.2 / 3.3 / 3.4 / 3.5
 - en: pypy/pypy3
+  id: totrans-7
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: pypy/pypy3
 - en: 'Additional requirements if plotting is wished:'
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: 若需要绘图功能，还需要额外的要求：
 - en: Matplotlib >= 1.4.1
+  id: totrans-9
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: Matplotlib >= 1.4.1
 - en: It may work with previous versions, but this the one used for development
+  id: totrans-10
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 其他版本可能也可以，但这是用于开发的版本
 - en: '**NOTE**: At the time of writing Matplotlib is not supported under *pypy/pypy3*'
+  id: totrans-11
   prefs: []
   type: TYPE_NORMAL
+  zh: '**注意**：在撰写本文时，Matplotlib 不支持 *pypy/pypy3*'
 - en: Python 2.x/3.x compatibility
+  id: totrans-12
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: Python 2.x/3.x 兼容
 - en: Development takes place under Python 2.7 and sometimes under 3.4\. Tests are
     run locally with both versions.
+  id: totrans-13
   prefs: []
   type: TYPE_NORMAL
+  zh: 开发工作在 Python 2.7 下进行，有时也在 3.4 下进行。本地同时运行两个版本的测试。
 - en: Compatibility with 3.2 / 3.3 / 3.5 and pypy/pyp3 is checked with continuous
     integration under Travis
+  id: totrans-14
   prefs: []
   type: TYPE_NORMAL
+  zh: 在 Travis 下，使用连续集成检查与 3.2 / 3.3 / 3.5 以及 pypy/pyp3 的兼容性
 - en: Install from pypi
+  id: totrans-15
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 从 pypi 安装
 - en: 'For example using pip:'
+  id: totrans-16
   prefs: []
   type: TYPE_NORMAL
+  zh: 例如使用 pip：
 - en: '[PRE0]'
+  id: totrans-17
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: '*easy_install* with the same syntax can also be applied'
+  id: totrans-18
   prefs: []
   type: TYPE_NORMAL
+  zh: 使用相同语法也可以应用 *easy_install*
 - en: Install from pypi (including *matplotlib*)
+  id: totrans-19
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 从 pypi 安装（包括 *matplotlib*）
 - en: 'Use this if plotting capabilities are wished:'
+  id: totrans-20
   prefs: []
   type: TYPE_NORMAL
+  zh: 若需要绘图功能，请使用此选项：
 - en: '[PRE1]'
+  id: totrans-21
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE1]'
 - en: This pulls in matplotlib which will in turn pull in other dependencies.
+  id: totrans-22
   prefs: []
   type: TYPE_NORMAL
+  zh: 这会引入 matplotlib，它将进一步引入其他依赖项。
 - en: Again you may prefer (or only have access to …) `easy_install`
+  id: totrans-23
   prefs: []
   type: TYPE_NORMAL
+  zh: 你可能更喜欢（或只能使用...）`easy_install`
 - en: Install from source
+  id: totrans-24
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 从源码安装
 - en: 'First downloading a release or the latest tarball from the github site:'
+  id: totrans-25
   prefs: []
   type: TYPE_NORMAL
+  zh: 首先从 github 网站下载一个发布版或最新的压缩包：
 - en: '[https://github.com/mementum/backtrader](https://github.com/mementum/backtrader)'
+  id: totrans-26
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[https://github.com/mementum/backtrader](https://github.com/mementum/backtrader)'
 - en: 'And after unpacking run the command:'
+  id: totrans-27
   prefs: []
   type: TYPE_NORMAL
+  zh: 解压后运行以下命令：
 - en: '[PRE2]'
+  id: totrans-28
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE2]'
 - en: Run from source in your project
+  id: totrans-29
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 从源码在你的项目中运行
 - en: 'Download a release or the latest tarball from the github site:'
+  id: totrans-30
   prefs: []
   type: TYPE_NORMAL
+  zh: 从 github 网站下载一个发布版或最新的压缩包：
 - en: '[https://github.com/mementum/backtrader](https://github.com/mementum/backtrader)'
+  id: totrans-31
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[https://github.com/mementum/backtrader](https://github.com/mementum/backtrader)'
 - en: 'And then copy the *backtrader* package directory to your own project. Under
     a Unix-like OS for example:'
+  id: totrans-32
   prefs: []
   type: TYPE_NORMAL
+  zh: 然后将 *backtrader* 包目录复制到你自己的项目中。例如，在类 Unix 操作系统下：
 - en: '[PRE3]'
+  id: totrans-33
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE3]'
 - en: Remember that you would then need to manually install `matplotlib` for plotting.
+  id: totrans-34
   prefs: []
   type: TYPE_NORMAL
+  zh: 请记住，你随后需要手动安装 `matplotlib` 以进行绘图。
