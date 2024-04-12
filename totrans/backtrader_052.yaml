@@ -1,7161 +1,10581 @@
 - en: Indicators - ta-lib - Reference
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
 - en: 原文：[https://www.backtrader.com/docu/talibindautoref/](https://www.backtrader.com/docu/talibindautoref/)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
 - en: TA-Lib Indicator Reference
+  id: totrans-2
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
 - en: ACOS
+  id: totrans-3
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
 - en: ACOS([input_arrays])
+  id: totrans-4
   prefs: []
   type: TYPE_NORMAL
 - en: Vector Trigonometric ACos (Math Transform)
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
 - en: 'Inputs:'
+  id: totrans-6
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE0]'
+  id: totrans-7
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: 'Outputs:'
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE1]'
+  id: totrans-9
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE1]'
 - en: 'Lines:'
+  id: totrans-10
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE2]'
+  id: totrans-11
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE2]'
 - en: 'PlotInfo:'
+  id: totrans-12
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE3]'
+  id: totrans-13
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE3]'
 - en: 'PlotLines:'
+  id: totrans-14
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE4]'
+  id: totrans-15
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE4]'
 - en: AD
+  id: totrans-16
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
 - en: AD([input_arrays])
+  id: totrans-17
   prefs: []
   type: TYPE_NORMAL
 - en: Chaikin A/D Line (Volume Indicators)
+  id: totrans-18
   prefs: []
   type: TYPE_NORMAL
 - en: 'Inputs:'
+  id: totrans-19
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE5]'
+  id: totrans-20
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE5]'
 - en: 'Outputs:'
+  id: totrans-21
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE6]'
+  id: totrans-22
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE6]'
 - en: 'Lines:'
+  id: totrans-23
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE7]'
+  id: totrans-24
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE7]'
 - en: 'PlotInfo:'
+  id: totrans-25
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE8]'
+  id: totrans-26
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE8]'
 - en: 'PlotLines:'
+  id: totrans-27
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE9]'
+  id: totrans-28
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE9]'
 - en: ADD
+  id: totrans-29
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
 - en: ADD([input_arrays])
+  id: totrans-30
   prefs: []
   type: TYPE_NORMAL
 - en: Vector Arithmetic Add (Math Operators)
+  id: totrans-31
   prefs: []
   type: TYPE_NORMAL
 - en: 'Inputs:'
+  id: totrans-32
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE10]'
+  id: totrans-33
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE10]'
 - en: 'Outputs:'
+  id: totrans-34
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE11]'
+  id: totrans-35
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE11]'
 - en: 'Lines:'
+  id: totrans-36
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE12]'
+  id: totrans-37
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE12]'
 - en: 'PlotInfo:'
+  id: totrans-38
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE13]'
+  id: totrans-39
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE13]'
 - en: 'PlotLines:'
+  id: totrans-40
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE14]'
+  id: totrans-41
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE14]'
 - en: ADOSC
+  id: totrans-42
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
 - en: ADOSC([input_arrays], [fastperiod=3], [slowperiod=10])
+  id: totrans-43
   prefs: []
   type: TYPE_NORMAL
 - en: Chaikin A/D Oscillator (Volume Indicators)
+  id: totrans-44
   prefs: []
   type: TYPE_NORMAL
 - en: 'Inputs:'
+  id: totrans-45
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE15]'
+  id: totrans-46
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE15]'
 - en: 'Parameters:'
+  id: totrans-47
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE16]'
+  id: totrans-48
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE16]'
 - en: 'Outputs:'
+  id: totrans-49
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE17]'
+  id: totrans-50
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE17]'
 - en: 'Lines:'
+  id: totrans-51
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE18]'
+  id: totrans-52
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE18]'
 - en: 'Params:'
+  id: totrans-53
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE19]'
+  id: totrans-54
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE19]'
 - en: 'PlotInfo:'
+  id: totrans-55
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE20]'
+  id: totrans-56
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE20]'
 - en: 'PlotLines:'
+  id: totrans-57
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE21]'
+  id: totrans-58
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE21]'
 - en: ADX
+  id: totrans-59
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
 - en: ADX([input_arrays], [timeperiod=14])
+  id: totrans-60
   prefs: []
   type: TYPE_NORMAL
 - en: Average Directional Movement Index (Momentum Indicators)
+  id: totrans-61
   prefs: []
   type: TYPE_NORMAL
 - en: 'Inputs:'
+  id: totrans-62
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE22]'
+  id: totrans-63
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE22]'
 - en: 'Parameters:'
+  id: totrans-64
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE23]'
+  id: totrans-65
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE23]'
 - en: 'Outputs:'
+  id: totrans-66
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE24]'
+  id: totrans-67
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE24]'
 - en: 'Lines:'
+  id: totrans-68
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE25]'
+  id: totrans-69
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE25]'
 - en: 'Params:'
+  id: totrans-70
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE26]'
+  id: totrans-71
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE26]'
 - en: 'PlotInfo:'
+  id: totrans-72
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE27]'
+  id: totrans-73
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE27]'
 - en: 'PlotLines:'
+  id: totrans-74
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE28]'
+  id: totrans-75
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE28]'
 - en: ADXR
+  id: totrans-76
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
 - en: ADXR([input_arrays], [timeperiod=14])
+  id: totrans-77
   prefs: []
   type: TYPE_NORMAL
 - en: Average Directional Movement Index Rating (Momentum Indicators)
+  id: totrans-78
   prefs: []
   type: TYPE_NORMAL
 - en: 'Inputs:'
+  id: totrans-79
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE29]'
+  id: totrans-80
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE29]'
 - en: 'Parameters:'
+  id: totrans-81
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE30]'
+  id: totrans-82
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE30]'
 - en: 'Outputs:'
+  id: totrans-83
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE31]'
+  id: totrans-84
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE31]'
 - en: 'Lines:'
+  id: totrans-85
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE32]'
+  id: totrans-86
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE32]'
 - en: 'Params:'
+  id: totrans-87
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE33]'
+  id: totrans-88
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE33]'
 - en: 'PlotInfo:'
+  id: totrans-89
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE34]'
+  id: totrans-90
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE34]'
 - en: 'PlotLines:'
+  id: totrans-91
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE35]'
+  id: totrans-92
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE35]'
 - en: APO
+  id: totrans-93
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
 - en: APO([input_arrays], [fastperiod=12], [slowperiod=26], [matype=0])
+  id: totrans-94
   prefs: []
   type: TYPE_NORMAL
 - en: Absolute Price Oscillator (Momentum Indicators)
+  id: totrans-95
   prefs: []
   type: TYPE_NORMAL
 - en: 'Inputs:'
+  id: totrans-96
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE36]'
+  id: totrans-97
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE36]'
 - en: 'Parameters:'
+  id: totrans-98
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE37]'
+  id: totrans-99
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE37]'
 - en: 'Outputs:'
+  id: totrans-100
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE38]'
+  id: totrans-101
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE38]'
 - en: 'Lines:'
+  id: totrans-102
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE39]'
+  id: totrans-103
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE39]'
 - en: 'Params:'
+  id: totrans-104
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE40]'
+  id: totrans-105
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE40]'
 - en: 'PlotInfo:'
+  id: totrans-106
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE41]'
+  id: totrans-107
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE41]'
 - en: 'PlotLines:'
+  id: totrans-108
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE42]'
+  id: totrans-109
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE42]'
 - en: AROON
+  id: totrans-110
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
 - en: AROON([input_arrays], [timeperiod=14])
+  id: totrans-111
   prefs: []
   type: TYPE_NORMAL
 - en: Aroon (Momentum Indicators)
+  id: totrans-112
   prefs: []
   type: TYPE_NORMAL
 - en: 'Inputs:'
+  id: totrans-113
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE43]'
+  id: totrans-114
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE43]'
 - en: 'Parameters:'
+  id: totrans-115
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE44]'
+  id: totrans-116
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE44]'
 - en: 'Outputs:'
+  id: totrans-117
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE45]'
+  id: totrans-118
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE45]'
 - en: 'Lines:'
+  id: totrans-119
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE46]'
+  id: totrans-120
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE46]'
 - en: 'Params:'
+  id: totrans-121
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE47]'
+  id: totrans-122
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE47]'
 - en: 'PlotInfo:'
+  id: totrans-123
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE48]'
+  id: totrans-124
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE48]'
 - en: 'PlotLines:'
+  id: totrans-125
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE49]'
+  id: totrans-126
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE49]'
 - en: AROONOSC
+  id: totrans-127
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
 - en: AROONOSC([input_arrays], [timeperiod=14])
+  id: totrans-128
   prefs: []
   type: TYPE_NORMAL
 - en: Aroon Oscillator (Momentum Indicators)
+  id: totrans-129
   prefs: []
   type: TYPE_NORMAL
 - en: 'Inputs:'
+  id: totrans-130
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE50]'
+  id: totrans-131
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE50]'
 - en: 'Parameters:'
+  id: totrans-132
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE51]'
+  id: totrans-133
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE51]'
 - en: 'Outputs:'
+  id: totrans-134
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE52]'
+  id: totrans-135
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE52]'
 - en: 'Lines:'
+  id: totrans-136
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE53]'
+  id: totrans-137
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE53]'
 - en: 'Params:'
+  id: totrans-138
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE54]'
+  id: totrans-139
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE54]'
 - en: 'PlotInfo:'
+  id: totrans-140
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE55]'
+  id: totrans-141
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE55]'
 - en: 'PlotLines:'
+  id: totrans-142
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE56]'
+  id: totrans-143
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE56]'
 - en: ASIN
+  id: totrans-144
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
 - en: ASIN([input_arrays])
+  id: totrans-145
   prefs: []
   type: TYPE_NORMAL
 - en: Vector Trigonometric ASin (Math Transform)
+  id: totrans-146
   prefs: []
   type: TYPE_NORMAL
 - en: 'Inputs:'
+  id: totrans-147
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE57]'
+  id: totrans-148
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE57]'
 - en: 'Outputs:'
+  id: totrans-149
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE58]'
+  id: totrans-150
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE58]'
 - en: 'Lines:'
+  id: totrans-151
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE59]'
+  id: totrans-152
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE59]'
 - en: 'PlotInfo:'
+  id: totrans-153
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE60]'
+  id: totrans-154
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE60]'
 - en: 'PlotLines:'
+  id: totrans-155
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE61]'
+  id: totrans-156
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE61]'
 - en: ATAN
+  id: totrans-157
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
 - en: ATAN([input_arrays])
+  id: totrans-158
   prefs: []
   type: TYPE_NORMAL
 - en: Vector Trigonometric ATan (Math Transform)
+  id: totrans-159
   prefs: []
   type: TYPE_NORMAL
 - en: 'Inputs:'
+  id: totrans-160
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE62]'
+  id: totrans-161
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE62]'
 - en: 'Outputs:'
+  id: totrans-162
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE63]'
+  id: totrans-163
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE63]'
 - en: 'Lines:'
+  id: totrans-164
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE64]'
+  id: totrans-165
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE64]'
 - en: 'PlotInfo:'
+  id: totrans-166
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE65]'
+  id: totrans-167
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE65]'
 - en: 'PlotLines:'
+  id: totrans-168
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE66]'
+  id: totrans-169
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE66]'
 - en: ATR
+  id: totrans-170
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
 - en: ATR([input_arrays], [timeperiod=14])
+  id: totrans-171
   prefs: []
   type: TYPE_NORMAL
 - en: Average True Range (Volatility Indicators)
+  id: totrans-172
   prefs: []
   type: TYPE_NORMAL
 - en: 'Inputs:'
+  id: totrans-173
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE67]'
+  id: totrans-174
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE67]'
 - en: 'Parameters:'
+  id: totrans-175
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE68]'
+  id: totrans-176
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE68]'
 - en: 'Outputs:'
+  id: totrans-177
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE69]'
+  id: totrans-178
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE69]'
 - en: 'Lines:'
+  id: totrans-179
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE70]'
+  id: totrans-180
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE70]'
 - en: 'Params:'
+  id: totrans-181
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE71]'
+  id: totrans-182
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE71]'
 - en: 'PlotInfo:'
+  id: totrans-183
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE72]'
+  id: totrans-184
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE72]'
 - en: 'PlotLines:'
+  id: totrans-185
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE73]'
+  id: totrans-186
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE73]'
 - en: AVGPRICE
+  id: totrans-187
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
 - en: AVGPRICE([input_arrays])
+  id: totrans-188
   prefs: []
   type: TYPE_NORMAL
 - en: Average Price (Price Transform)
+  id: totrans-189
   prefs: []
   type: TYPE_NORMAL
 - en: 'Inputs:'
+  id: totrans-190
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE74]'
+  id: totrans-191
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE74]'
 - en: 'Outputs:'
+  id: totrans-192
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE75]'
+  id: totrans-193
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE75]'
 - en: 'Lines:'
+  id: totrans-194
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE76]'
+  id: totrans-195
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE76]'
 - en: 'PlotInfo:'
+  id: totrans-196
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE77]'
+  id: totrans-197
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE77]'
 - en: 'PlotLines:'
+  id: totrans-198
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE78]'
+  id: totrans-199
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE78]'
 - en: BBANDS
+  id: totrans-200
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
 - en: BBANDS([input_arrays], [timeperiod=5], [nbdevup=2], [nbdevdn=2], [matype=0])
+  id: totrans-201
   prefs: []
   type: TYPE_NORMAL
 - en: Bollinger Bands (Overlap Studies)
+  id: totrans-202
   prefs: []
   type: TYPE_NORMAL
 - en: 'Inputs:'
+  id: totrans-203
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE79]'
+  id: totrans-204
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE79]'
 - en: 'Parameters:'
+  id: totrans-205
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE80]'
+  id: totrans-206
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE80]'
 - en: 'Outputs:'
+  id: totrans-207
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE81]'
+  id: totrans-208
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE81]'
 - en: 'Lines:'
+  id: totrans-209
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE82]'
+  id: totrans-210
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE82]'
 - en: 'Params:'
+  id: totrans-211
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE83]'
+  id: totrans-212
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE83]'
 - en: 'PlotInfo:'
+  id: totrans-213
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE84]'
+  id: totrans-214
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE84]'
 - en: 'PlotLines:'
+  id: totrans-215
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE85]'
+  id: totrans-216
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE85]'
 - en: BETA
+  id: totrans-217
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
 - en: BETA([input_arrays], [timeperiod=5])
+  id: totrans-218
   prefs: []
   type: TYPE_NORMAL
 - en: Beta (Statistic Functions)
+  id: totrans-219
   prefs: []
   type: TYPE_NORMAL
 - en: 'Inputs:'
+  id: totrans-220
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE86]'
+  id: totrans-221
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE86]'
 - en: 'Parameters:'
+  id: totrans-222
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE87]'
+  id: totrans-223
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE87]'
 - en: 'Outputs:'
+  id: totrans-224
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE88]'
+  id: totrans-225
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE88]'
 - en: 'Lines:'
+  id: totrans-226
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE89]'
+  id: totrans-227
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE89]'
 - en: 'Params:'
+  id: totrans-228
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE90]'
+  id: totrans-229
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE90]'
 - en: 'PlotInfo:'
+  id: totrans-230
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE91]'
+  id: totrans-231
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE91]'
 - en: 'PlotLines:'
+  id: totrans-232
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE92]'
+  id: totrans-233
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE92]'
 - en: BOP
+  id: totrans-234
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
 - en: BOP([input_arrays])
+  id: totrans-235
   prefs: []
   type: TYPE_NORMAL
 - en: Balance Of Power (Momentum Indicators)
+  id: totrans-236
   prefs: []
   type: TYPE_NORMAL
 - en: 'Inputs:'
+  id: totrans-237
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE93]'
+  id: totrans-238
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE93]'
 - en: 'Outputs:'
+  id: totrans-239
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE94]'
+  id: totrans-240
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE94]'
 - en: 'Lines:'
+  id: totrans-241
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE95]'
+  id: totrans-242
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE95]'
 - en: 'PlotInfo:'
+  id: totrans-243
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE96]'
+  id: totrans-244
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE96]'
 - en: 'PlotLines:'
+  id: totrans-245
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE97]'
+  id: totrans-246
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE97]'
 - en: CCI
+  id: totrans-247
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
 - en: CCI([input_arrays], [timeperiod=14])
+  id: totrans-248
   prefs: []
   type: TYPE_NORMAL
 - en: Commodity Channel Index (Momentum Indicators)
+  id: totrans-249
   prefs: []
   type: TYPE_NORMAL
 - en: 'Inputs:'
+  id: totrans-250
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE98]'
+  id: totrans-251
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE98]'
 - en: 'Parameters:'
+  id: totrans-252
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE99]'
+  id: totrans-253
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE99]'
 - en: 'Outputs:'
+  id: totrans-254
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE100]'
+  id: totrans-255
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE100]'
 - en: 'Lines:'
+  id: totrans-256
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE101]'
+  id: totrans-257
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE101]'
 - en: 'Params:'
+  id: totrans-258
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE102]'
+  id: totrans-259
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE102]'
 - en: 'PlotInfo:'
+  id: totrans-260
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE103]'
+  id: totrans-261
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE103]'
 - en: 'PlotLines:'
+  id: totrans-262
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE104]'
+  id: totrans-263
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE104]'
 - en: CDL2###CROWS
+  id: totrans-264
   prefs: []
   type: TYPE_NORMAL
 - en: CDL2CROWS([input_arrays])
+  id: totrans-265
   prefs: []
   type: TYPE_NORMAL
 - en: Two Crows (Pattern Recognition)
+  id: totrans-266
   prefs: []
   type: TYPE_NORMAL
 - en: 'Inputs:'
+  id: totrans-267
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE105]'
+  id: totrans-268
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE105]'
 - en: 'Outputs:'
+  id: totrans-269
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE106]'
+  id: totrans-270
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE106]'
 - en: 'Lines:'
+  id: totrans-271
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE107]'
+  id: totrans-272
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE107]'
 - en: 'PlotInfo:'
+  id: totrans-273
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE108]'
+  id: totrans-274
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE108]'
 - en: 'PlotLines:'
+  id: totrans-275
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE109]'
+  id: totrans-276
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE109]'
 - en: CDL3###BLACKCROWS
+  id: totrans-277
   prefs: []
   type: TYPE_NORMAL
 - en: CDL3BLACKCROWS([input_arrays])
+  id: totrans-278
   prefs: []
   type: TYPE_NORMAL
 - en: Three Black Crows (Pattern Recognition)
+  id: totrans-279
   prefs: []
   type: TYPE_NORMAL
 - en: 'Inputs:'
+  id: totrans-280
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE110]'
+  id: totrans-281
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE110]'
 - en: 'Outputs:'
+  id: totrans-282
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE111]'
+  id: totrans-283
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE111]'
 - en: 'Lines:'
+  id: totrans-284
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE112]'
+  id: totrans-285
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE112]'
 - en: 'PlotInfo:'
+  id: totrans-286
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE113]'
+  id: totrans-287
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE113]'
 - en: 'PlotLines:'
+  id: totrans-288
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE114]'
+  id: totrans-289
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE114]'
 - en: CDL3###INSIDE
+  id: totrans-290
   prefs: []
   type: TYPE_NORMAL
 - en: CDL3INSIDE([input_arrays])
+  id: totrans-291
   prefs: []
   type: TYPE_NORMAL
 - en: Three Inside Up/Down (Pattern Recognition)
+  id: totrans-292
   prefs: []
   type: TYPE_NORMAL
 - en: 'Inputs:'
+  id: totrans-293
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE115]'
+  id: totrans-294
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE115]'
 - en: 'Outputs:'
+  id: totrans-295
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE116]'
+  id: totrans-296
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE116]'
 - en: 'Lines:'
+  id: totrans-297
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE117]'
+  id: totrans-298
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE117]'
 - en: 'PlotInfo:'
+  id: totrans-299
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE118]'
+  id: totrans-300
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE118]'
 - en: 'PlotLines:'
+  id: totrans-301
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE119]'
+  id: totrans-302
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE119]'
 - en: CDL3###LINESTRIKE
+  id: totrans-303
   prefs: []
   type: TYPE_NORMAL
 - en: CDL3LINESTRIKE([input_arrays])
+  id: totrans-304
   prefs: []
   type: TYPE_NORMAL
 - en: Three-Line Strike (Pattern Recognition)
+  id: totrans-305
   prefs: []
   type: TYPE_NORMAL
 - en: 'Inputs:'
+  id: totrans-306
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE120]'
+  id: totrans-307
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE120]'
 - en: 'Outputs:'
+  id: totrans-308
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE121]'
+  id: totrans-309
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE121]'
 - en: 'Lines:'
+  id: totrans-310
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE122]'
+  id: totrans-311
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE122]'
 - en: 'PlotInfo:'
+  id: totrans-312
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE123]'
+  id: totrans-313
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE123]'
 - en: 'PlotLines:'
+  id: totrans-314
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE124]'
+  id: totrans-315
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE124]'
 - en: CDL3###OUTSIDE
+  id: totrans-316
   prefs: []
   type: TYPE_NORMAL
 - en: CDL3OUTSIDE([input_arrays])
+  id: totrans-317
   prefs: []
   type: TYPE_NORMAL
 - en: Three Outside Up/Down (Pattern Recognition)
+  id: totrans-318
   prefs: []
   type: TYPE_NORMAL
 - en: 'Inputs:'
+  id: totrans-319
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE125]'
+  id: totrans-320
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE125]'
 - en: 'Outputs:'
+  id: totrans-321
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE126]'
+  id: totrans-322
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE126]'
 - en: 'Lines:'
+  id: totrans-323
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE127]'
+  id: totrans-324
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE127]'
 - en: 'PlotInfo:'
+  id: totrans-325
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE128]'
+  id: totrans-326
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE128]'
 - en: 'PlotLines:'
+  id: totrans-327
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE129]'
+  id: totrans-328
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE129]'
 - en: CDL3###STARSINSOUTH
+  id: totrans-329
   prefs: []
   type: TYPE_NORMAL
 - en: CDL3STARSINSOUTH([input_arrays])
+  id: totrans-330
   prefs: []
   type: TYPE_NORMAL
 - en: Three Stars In The South (Pattern Recognition)
+  id: totrans-331
   prefs: []
   type: TYPE_NORMAL
 - en: 'Inputs:'
+  id: totrans-332
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE130]'
+  id: totrans-333
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE130]'
 - en: 'Outputs:'
+  id: totrans-334
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE131]'
+  id: totrans-335
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE131]'
 - en: 'Lines:'
+  id: totrans-336
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE132]'
+  id: totrans-337
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE132]'
 - en: 'PlotInfo:'
+  id: totrans-338
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE133]'
+  id: totrans-339
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE133]'
 - en: 'PlotLines:'
+  id: totrans-340
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE134]'
+  id: totrans-341
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE134]'
 - en: CDL3###WHITESOLDIERS
+  id: totrans-342
   prefs: []
   type: TYPE_NORMAL
 - en: CDL3WHITESOLDIERS([input_arrays])
+  id: totrans-343
   prefs: []
   type: TYPE_NORMAL
 - en: Three Advancing White Soldiers (Pattern Recognition)
+  id: totrans-344
   prefs: []
   type: TYPE_NORMAL
 - en: 'Inputs:'
+  id: totrans-345
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE135]'
+  id: totrans-346
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE135]'
 - en: 'Outputs:'
+  id: totrans-347
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE136]'
+  id: totrans-348
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE136]'
 - en: 'Lines:'
+  id: totrans-349
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE137]'
+  id: totrans-350
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE137]'
 - en: 'PlotInfo:'
+  id: totrans-351
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE138]'
+  id: totrans-352
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE138]'
 - en: 'PlotLines:'
+  id: totrans-353
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE139]'
+  id: totrans-354
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE139]'
 - en: CDLABANDONEDBABY
+  id: totrans-355
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
 - en: CDLABANDONEDBABY([input_arrays], [penetration=0.3])
+  id: totrans-356
   prefs: []
   type: TYPE_NORMAL
 - en: Abandoned Baby (Pattern Recognition)
+  id: totrans-357
   prefs: []
   type: TYPE_NORMAL
 - en: 'Inputs:'
+  id: totrans-358
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE140]'
+  id: totrans-359
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE140]'
 - en: 'Parameters:'
+  id: totrans-360
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE141]'
+  id: totrans-361
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE141]'
 - en: 'Outputs:'
+  id: totrans-362
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE142]'
+  id: totrans-363
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE142]'
 - en: 'Lines:'
+  id: totrans-364
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE143]'
+  id: totrans-365
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE143]'
 - en: 'Params:'
+  id: totrans-366
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE144]'
+  id: totrans-367
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE144]'
 - en: 'PlotInfo:'
+  id: totrans-368
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE145]'
+  id: totrans-369
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE145]'
 - en: 'PlotLines:'
+  id: totrans-370
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE146]'
+  id: totrans-371
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE146]'
 - en: CDLADVANCEBLOCK
+  id: totrans-372
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
 - en: CDLADVANCEBLOCK([input_arrays])
+  id: totrans-373
   prefs: []
   type: TYPE_NORMAL
 - en: Advance Block (Pattern Recognition)
+  id: totrans-374
   prefs: []
   type: TYPE_NORMAL
 - en: 'Inputs:'
+  id: totrans-375
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE147]'
+  id: totrans-376
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE147]'
 - en: 'Outputs:'
+  id: totrans-377
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE148]'
+  id: totrans-378
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE148]'
 - en: 'Lines:'
+  id: totrans-379
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE149]'
+  id: totrans-380
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE149]'
 - en: 'PlotInfo:'
+  id: totrans-381
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE150]'
+  id: totrans-382
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE150]'
 - en: 'PlotLines:'
+  id: totrans-383
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE151]'
+  id: totrans-384
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE151]'
 - en: CDLBELTHOLD
+  id: totrans-385
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
 - en: CDLBELTHOLD([input_arrays])
+  id: totrans-386
   prefs: []
   type: TYPE_NORMAL
 - en: Belt-hold (Pattern Recognition)
+  id: totrans-387
   prefs: []
   type: TYPE_NORMAL
 - en: 'Inputs:'
+  id: totrans-388
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE152]'
+  id: totrans-389
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE152]'
 - en: 'Outputs:'
+  id: totrans-390
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE153]'
+  id: totrans-391
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE153]'
 - en: 'Lines:'
+  id: totrans-392
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE154]'
+  id: totrans-393
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE154]'
 - en: 'PlotInfo:'
+  id: totrans-394
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE155]'
+  id: totrans-395
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE155]'
 - en: 'PlotLines:'
+  id: totrans-396
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE156]'
+  id: totrans-397
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE156]'
 - en: CDLBREAKAWAY
+  id: totrans-398
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
 - en: CDLBREAKAWAY([input_arrays])
+  id: totrans-399
   prefs: []
   type: TYPE_NORMAL
 - en: Breakaway (Pattern Recognition)
+  id: totrans-400
   prefs: []
   type: TYPE_NORMAL
 - en: 'Inputs:'
+  id: totrans-401
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE157]'
+  id: totrans-402
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE157]'
 - en: 'Outputs:'
+  id: totrans-403
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE158]'
+  id: totrans-404
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE158]'
 - en: 'Lines:'
+  id: totrans-405
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE159]'
+  id: totrans-406
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE159]'
 - en: 'PlotInfo:'
+  id: totrans-407
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE160]'
+  id: totrans-408
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE160]'
 - en: 'PlotLines:'
+  id: totrans-409
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE161]'
+  id: totrans-410
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE161]'
 - en: CDLCLOSINGMARUBOZU
+  id: totrans-411
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
 - en: CDLCLOSINGMARUBOZU([input_arrays])
+  id: totrans-412
   prefs: []
   type: TYPE_NORMAL
 - en: Closing Marubozu (Pattern Recognition)
+  id: totrans-413
   prefs: []
   type: TYPE_NORMAL
 - en: 'Inputs:'
+  id: totrans-414
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE162]'
+  id: totrans-415
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE162]'
 - en: 'Outputs:'
+  id: totrans-416
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE163]'
+  id: totrans-417
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE163]'
 - en: 'Lines:'
+  id: totrans-418
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE164]'
+  id: totrans-419
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE164]'
 - en: 'PlotInfo:'
+  id: totrans-420
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE165]'
+  id: totrans-421
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE165]'
 - en: 'PlotLines:'
+  id: totrans-422
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE166]'
+  id: totrans-423
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE166]'
 - en: CDLCONCEALBABYSWALL
+  id: totrans-424
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
 - en: CDLCONCEALBABYSWALL([input_arrays])
+  id: totrans-425
   prefs: []
   type: TYPE_NORMAL
 - en: Concealing Baby Swallow (Pattern Recognition)
+  id: totrans-426
   prefs: []
   type: TYPE_NORMAL
 - en: 'Inputs:'
+  id: totrans-427
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE167]'
+  id: totrans-428
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE167]'
 - en: 'Outputs:'
+  id: totrans-429
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE168]'
+  id: totrans-430
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE168]'
 - en: 'Lines:'
+  id: totrans-431
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE169]'
+  id: totrans-432
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE169]'
 - en: 'PlotInfo:'
+  id: totrans-433
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE170]'
+  id: totrans-434
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE170]'
 - en: 'PlotLines:'
+  id: totrans-435
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE171]'
+  id: totrans-436
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE171]'
 - en: CDLCOUNTERATTACK
+  id: totrans-437
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
 - en: CDLCOUNTERATTACK([input_arrays])
+  id: totrans-438
   prefs: []
   type: TYPE_NORMAL
 - en: Counterattack (Pattern Recognition)
+  id: totrans-439
   prefs: []
   type: TYPE_NORMAL
 - en: 'Inputs:'
+  id: totrans-440
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE172]'
+  id: totrans-441
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE172]'
 - en: 'Outputs:'
+  id: totrans-442
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE173]'
+  id: totrans-443
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE173]'
 - en: 'Lines:'
+  id: totrans-444
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE174]'
+  id: totrans-445
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE174]'
 - en: 'PlotInfo:'
+  id: totrans-446
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE175]'
+  id: totrans-447
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE175]'
 - en: 'PlotLines:'
+  id: totrans-448
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE176]'
+  id: totrans-449
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE176]'
 - en: CDLDARKCLOUDCOVER
+  id: totrans-450
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
 - en: CDLDARKCLOUDCOVER([input_arrays], [penetration=0.5])
+  id: totrans-451
   prefs: []
   type: TYPE_NORMAL
 - en: Dark Cloud Cover (Pattern Recognition)
+  id: totrans-452
   prefs: []
   type: TYPE_NORMAL
 - en: 'Inputs:'
+  id: totrans-453
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE177]'
+  id: totrans-454
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE177]'
 - en: 'Parameters:'
+  id: totrans-455
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE178]'
+  id: totrans-456
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE178]'
 - en: 'Outputs:'
+  id: totrans-457
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE179]'
+  id: totrans-458
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE179]'
 - en: 'Lines:'
+  id: totrans-459
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE180]'
+  id: totrans-460
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE180]'
 - en: 'Params:'
+  id: totrans-461
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE181]'
+  id: totrans-462
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE181]'
 - en: 'PlotInfo:'
+  id: totrans-463
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE182]'
+  id: totrans-464
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE182]'
 - en: 'PlotLines:'
+  id: totrans-465
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE183]'
+  id: totrans-466
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE183]'
 - en: CDLDOJI
+  id: totrans-467
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
 - en: CDLDOJI([input_arrays])
+  id: totrans-468
   prefs: []
   type: TYPE_NORMAL
 - en: Doji (Pattern Recognition)
+  id: totrans-469
   prefs: []
   type: TYPE_NORMAL
 - en: 'Inputs:'
+  id: totrans-470
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE184]'
+  id: totrans-471
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE184]'
 - en: 'Outputs:'
+  id: totrans-472
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE185]'
+  id: totrans-473
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE185]'
 - en: 'Lines:'
+  id: totrans-474
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE186]'
+  id: totrans-475
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE186]'
 - en: 'PlotInfo:'
+  id: totrans-476
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE187]'
+  id: totrans-477
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE187]'
 - en: 'PlotLines:'
+  id: totrans-478
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE188]'
+  id: totrans-479
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE188]'
 - en: CDLDOJISTAR
+  id: totrans-480
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
 - en: CDLDOJISTAR([input_arrays])
+  id: totrans-481
   prefs: []
   type: TYPE_NORMAL
 - en: Doji Star (Pattern Recognition)
+  id: totrans-482
   prefs: []
   type: TYPE_NORMAL
 - en: 'Inputs:'
+  id: totrans-483
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE189]'
+  id: totrans-484
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE189]'
 - en: 'Outputs:'
+  id: totrans-485
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE190]'
+  id: totrans-486
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE190]'
 - en: 'Lines:'
+  id: totrans-487
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE191]'
+  id: totrans-488
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE191]'
 - en: 'PlotInfo:'
+  id: totrans-489
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE192]'
+  id: totrans-490
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE192]'
 - en: 'PlotLines:'
+  id: totrans-491
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE193]'
+  id: totrans-492
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE193]'
 - en: CDLDRAGONFLYDOJI
+  id: totrans-493
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
 - en: CDLDRAGONFLYDOJI([input_arrays])
+  id: totrans-494
   prefs: []
   type: TYPE_NORMAL
 - en: Dragonfly Doji (Pattern Recognition)
+  id: totrans-495
   prefs: []
   type: TYPE_NORMAL
 - en: 'Inputs:'
+  id: totrans-496
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE194]'
+  id: totrans-497
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE194]'
 - en: 'Outputs:'
+  id: totrans-498
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE195]'
+  id: totrans-499
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE195]'
 - en: 'Lines:'
+  id: totrans-500
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE196]'
+  id: totrans-501
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE196]'
 - en: 'PlotInfo:'
+  id: totrans-502
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE197]'
+  id: totrans-503
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE197]'
 - en: 'PlotLines:'
+  id: totrans-504
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE198]'
+  id: totrans-505
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE198]'
 - en: CDLENGULFING
+  id: totrans-506
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
 - en: CDLENGULFING([input_arrays])
+  id: totrans-507
   prefs: []
   type: TYPE_NORMAL
 - en: Engulfing Pattern (Pattern Recognition)
+  id: totrans-508
   prefs: []
   type: TYPE_NORMAL
 - en: 'Inputs:'
+  id: totrans-509
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE199]'
+  id: totrans-510
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE199]'
 - en: 'Outputs:'
+  id: totrans-511
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE200]'
+  id: totrans-512
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE200]'
 - en: 'Lines:'
+  id: totrans-513
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE201]'
+  id: totrans-514
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE201]'
 - en: 'PlotInfo:'
+  id: totrans-515
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE202]'
+  id: totrans-516
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE202]'
 - en: 'PlotLines:'
+  id: totrans-517
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE203]'
+  id: totrans-518
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE203]'
 - en: CDLEVENINGDOJISTAR
+  id: totrans-519
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
 - en: CDLEVENINGDOJISTAR([input_arrays], [penetration=0.3])
+  id: totrans-520
   prefs: []
   type: TYPE_NORMAL
 - en: Evening Doji Star (Pattern Recognition)
+  id: totrans-521
   prefs: []
   type: TYPE_NORMAL
 - en: 'Inputs:'
+  id: totrans-522
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE204]'
+  id: totrans-523
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE204]'
 - en: 'Parameters:'
+  id: totrans-524
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE205]'
+  id: totrans-525
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE205]'
 - en: 'Outputs:'
+  id: totrans-526
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE206]'
+  id: totrans-527
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE206]'
 - en: 'Lines:'
+  id: totrans-528
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE207]'
+  id: totrans-529
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE207]'
 - en: 'Params:'
+  id: totrans-530
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE208]'
+  id: totrans-531
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE208]'
 - en: 'PlotInfo:'
+  id: totrans-532
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE209]'
+  id: totrans-533
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE209]'
 - en: 'PlotLines:'
+  id: totrans-534
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE210]'
+  id: totrans-535
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE210]'
 - en: CDLEVENINGSTAR
+  id: totrans-536
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
 - en: CDLEVENINGSTAR([input_arrays], [penetration=0.3])
+  id: totrans-537
   prefs: []
   type: TYPE_NORMAL
 - en: Evening Star (Pattern Recognition)
+  id: totrans-538
   prefs: []
   type: TYPE_NORMAL
 - en: 'Inputs:'
+  id: totrans-539
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE211]'
+  id: totrans-540
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE211]'
 - en: 'Parameters:'
+  id: totrans-541
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE212]'
+  id: totrans-542
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE212]'
 - en: 'Outputs:'
+  id: totrans-543
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE213]'
+  id: totrans-544
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE213]'
 - en: 'Lines:'
+  id: totrans-545
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE214]'
+  id: totrans-546
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE214]'
 - en: 'Params:'
+  id: totrans-547
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE215]'
+  id: totrans-548
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE215]'
 - en: 'PlotInfo:'
+  id: totrans-549
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE216]'
+  id: totrans-550
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE216]'
 - en: 'PlotLines:'
+  id: totrans-551
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE217]'
+  id: totrans-552
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE217]'
 - en: CDLGAPSIDESIDEWHITE
+  id: totrans-553
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
 - en: CDLGAPSIDESIDEWHITE([input_arrays])
+  id: totrans-554
   prefs: []
   type: TYPE_NORMAL
 - en: Up/Down-gap side-by-side white lines (Pattern Recognition)
+  id: totrans-555
   prefs: []
   type: TYPE_NORMAL
 - en: 'Inputs:'
+  id: totrans-556
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE218]'
+  id: totrans-557
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE218]'
 - en: 'Outputs:'
+  id: totrans-558
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE219]'
+  id: totrans-559
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE219]'
 - en: 'Lines:'
+  id: totrans-560
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE220]'
+  id: totrans-561
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE220]'
 - en: 'PlotInfo:'
+  id: totrans-562
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE221]'
+  id: totrans-563
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE221]'
 - en: 'PlotLines:'
+  id: totrans-564
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE222]'
+  id: totrans-565
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE222]'
 - en: CDLGRAVESTONEDOJI
+  id: totrans-566
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
 - en: CDLGRAVESTONEDOJI([input_arrays])
+  id: totrans-567
   prefs: []
   type: TYPE_NORMAL
 - en: Gravestone Doji (Pattern Recognition)
+  id: totrans-568
   prefs: []
   type: TYPE_NORMAL
 - en: 'Inputs:'
+  id: totrans-569
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE223]'
+  id: totrans-570
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE223]'
 - en: 'Outputs:'
+  id: totrans-571
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE224]'
+  id: totrans-572
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE224]'
 - en: 'Lines:'
+  id: totrans-573
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE225]'
+  id: totrans-574
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE225]'
 - en: 'PlotInfo:'
+  id: totrans-575
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE226]'
+  id: totrans-576
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE226]'
 - en: 'PlotLines:'
+  id: totrans-577
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE227]'
+  id: totrans-578
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE227]'
 - en: CDLHAMMER
+  id: totrans-579
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
 - en: CDLHAMMER([input_arrays])
+  id: totrans-580
   prefs: []
   type: TYPE_NORMAL
 - en: Hammer (Pattern Recognition)
+  id: totrans-581
   prefs: []
   type: TYPE_NORMAL
 - en: 'Inputs:'
+  id: totrans-582
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE228]'
+  id: totrans-583
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE228]'
 - en: 'Outputs:'
+  id: totrans-584
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE229]'
+  id: totrans-585
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE229]'
 - en: 'Lines:'
+  id: totrans-586
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE230]'
+  id: totrans-587
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE230]'
 - en: 'PlotInfo:'
+  id: totrans-588
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE231]'
+  id: totrans-589
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE231]'
 - en: 'PlotLines:'
+  id: totrans-590
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE232]'
+  id: totrans-591
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE232]'
 - en: CDLHANGINGMAN
+  id: totrans-592
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
 - en: CDLHANGINGMAN([input_arrays])
+  id: totrans-593
   prefs: []
   type: TYPE_NORMAL
 - en: Hanging Man (Pattern Recognition)
+  id: totrans-594
   prefs: []
   type: TYPE_NORMAL
 - en: 'Inputs:'
+  id: totrans-595
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE233]'
+  id: totrans-596
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE233]'
 - en: 'Outputs:'
+  id: totrans-597
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE234]'
+  id: totrans-598
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE234]'
 - en: 'Lines:'
+  id: totrans-599
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE235]'
+  id: totrans-600
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE235]'
 - en: 'PlotInfo:'
+  id: totrans-601
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE236]'
+  id: totrans-602
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE236]'
 - en: 'PlotLines:'
+  id: totrans-603
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE237]'
+  id: totrans-604
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE237]'
 - en: CDLHARAMI
+  id: totrans-605
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
 - en: CDLHARAMI([input_arrays])
+  id: totrans-606
   prefs: []
   type: TYPE_NORMAL
 - en: Harami Pattern (Pattern Recognition)
+  id: totrans-607
   prefs: []
   type: TYPE_NORMAL
 - en: 'Inputs:'
+  id: totrans-608
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE238]'
+  id: totrans-609
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE238]'
 - en: 'Outputs:'
+  id: totrans-610
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE239]'
+  id: totrans-611
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE239]'
 - en: 'Lines:'
+  id: totrans-612
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE240]'
+  id: totrans-613
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE240]'
 - en: 'PlotInfo:'
+  id: totrans-614
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE241]'
+  id: totrans-615
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE241]'
 - en: 'PlotLines:'
+  id: totrans-616
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE242]'
+  id: totrans-617
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE242]'
 - en: CDLHARAMICROSS
+  id: totrans-618
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
 - en: CDLHARAMICROSS([input_arrays])
+  id: totrans-619
   prefs: []
   type: TYPE_NORMAL
 - en: Harami Cross Pattern (Pattern Recognition)
+  id: totrans-620
   prefs: []
   type: TYPE_NORMAL
 - en: 'Inputs:'
+  id: totrans-621
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE243]'
+  id: totrans-622
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE243]'
 - en: 'Outputs:'
+  id: totrans-623
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE244]'
+  id: totrans-624
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE244]'
 - en: 'Lines:'
+  id: totrans-625
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE245]'
+  id: totrans-626
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE245]'
 - en: 'PlotInfo:'
+  id: totrans-627
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE246]'
+  id: totrans-628
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE246]'
 - en: 'PlotLines:'
+  id: totrans-629
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE247]'
+  id: totrans-630
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE247]'
 - en: CDLHIGHWAVE
+  id: totrans-631
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
 - en: CDLHIGHWAVE([input_arrays])
+  id: totrans-632
   prefs: []
   type: TYPE_NORMAL
 - en: High-Wave Candle (Pattern Recognition)
+  id: totrans-633
   prefs: []
   type: TYPE_NORMAL
 - en: 'Inputs:'
+  id: totrans-634
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE248]'
+  id: totrans-635
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE248]'
 - en: 'Outputs:'
+  id: totrans-636
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE249]'
+  id: totrans-637
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE249]'
 - en: 'Lines:'
+  id: totrans-638
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE250]'
+  id: totrans-639
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE250]'
 - en: 'PlotInfo:'
+  id: totrans-640
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE251]'
+  id: totrans-641
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE251]'
 - en: 'PlotLines:'
+  id: totrans-642
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE252]'
+  id: totrans-643
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE252]'
 - en: CDLHIKKAKE
+  id: totrans-644
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
 - en: CDLHIKKAKE([input_arrays])
+  id: totrans-645
   prefs: []
   type: TYPE_NORMAL
 - en: Hikkake Pattern (Pattern Recognition)
+  id: totrans-646
   prefs: []
   type: TYPE_NORMAL
 - en: 'Inputs:'
+  id: totrans-647
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE253]'
+  id: totrans-648
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE253]'
 - en: 'Outputs:'
+  id: totrans-649
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE254]'
+  id: totrans-650
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE254]'
 - en: 'Lines:'
+  id: totrans-651
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE255]'
+  id: totrans-652
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE255]'
 - en: 'PlotInfo:'
+  id: totrans-653
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE256]'
+  id: totrans-654
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE256]'
 - en: 'PlotLines:'
+  id: totrans-655
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE257]'
+  id: totrans-656
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE257]'
 - en: CDLHIKKAKEMOD
+  id: totrans-657
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
 - en: CDLHIKKAKEMOD([input_arrays])
+  id: totrans-658
   prefs: []
   type: TYPE_NORMAL
 - en: Modified Hikkake Pattern (Pattern Recognition)
+  id: totrans-659
   prefs: []
   type: TYPE_NORMAL
 - en: 'Inputs:'
+  id: totrans-660
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE258]'
+  id: totrans-661
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE258]'
 - en: 'Outputs:'
+  id: totrans-662
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE259]'
+  id: totrans-663
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE259]'
 - en: 'Lines:'
+  id: totrans-664
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE260]'
+  id: totrans-665
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE260]'
 - en: 'PlotInfo:'
+  id: totrans-666
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE261]'
+  id: totrans-667
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE261]'
 - en: 'PlotLines:'
+  id: totrans-668
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE262]'
+  id: totrans-669
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE262]'
 - en: CDLHOMINGPIGEON
+  id: totrans-670
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
 - en: CDLHOMINGPIGEON([input_arrays])
+  id: totrans-671
   prefs: []
   type: TYPE_NORMAL
 - en: Homing Pigeon (Pattern Recognition)
+  id: totrans-672
   prefs: []
   type: TYPE_NORMAL
 - en: 'Inputs:'
+  id: totrans-673
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE263]'
+  id: totrans-674
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE263]'
 - en: 'Outputs:'
+  id: totrans-675
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE264]'
+  id: totrans-676
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE264]'
 - en: 'Lines:'
+  id: totrans-677
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE265]'
+  id: totrans-678
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE265]'
 - en: 'PlotInfo:'
+  id: totrans-679
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE266]'
+  id: totrans-680
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE266]'
 - en: 'PlotLines:'
+  id: totrans-681
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE267]'
+  id: totrans-682
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE267]'
 - en: CDLIDENTICAL3###CROWS
+  id: totrans-683
   prefs: []
   type: TYPE_NORMAL
 - en: CDLIDENTICAL3CROWS([input_arrays])
+  id: totrans-684
   prefs: []
   type: TYPE_NORMAL
 - en: Identical Three Crows (Pattern Recognition)
+  id: totrans-685
   prefs: []
   type: TYPE_NORMAL
 - en: 'Inputs:'
+  id: totrans-686
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE268]'
+  id: totrans-687
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE268]'
 - en: 'Outputs:'
+  id: totrans-688
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE269]'
+  id: totrans-689
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE269]'
 - en: 'Lines:'
+  id: totrans-690
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE270]'
+  id: totrans-691
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE270]'
 - en: 'PlotInfo:'
+  id: totrans-692
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE271]'
+  id: totrans-693
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE271]'
 - en: 'PlotLines:'
+  id: totrans-694
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE272]'
+  id: totrans-695
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE272]'
 - en: CDLINNECK
+  id: totrans-696
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
 - en: CDLINNECK([input_arrays])
+  id: totrans-697
   prefs: []
   type: TYPE_NORMAL
 - en: In-Neck Pattern (Pattern Recognition)
+  id: totrans-698
   prefs: []
   type: TYPE_NORMAL
 - en: 'Inputs:'
+  id: totrans-699
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE273]'
+  id: totrans-700
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE273]'
 - en: 'Outputs:'
+  id: totrans-701
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE274]'
+  id: totrans-702
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE274]'
 - en: 'Lines:'
+  id: totrans-703
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE275]'
+  id: totrans-704
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE275]'
 - en: 'PlotInfo:'
+  id: totrans-705
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE276]'
+  id: totrans-706
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE276]'
 - en: 'PlotLines:'
+  id: totrans-707
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE277]'
+  id: totrans-708
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE277]'
 - en: CDLINVERTEDHAMMER
+  id: totrans-709
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
 - en: CDLINVERTEDHAMMER([input_arrays])
+  id: totrans-710
   prefs: []
   type: TYPE_NORMAL
 - en: Inverted Hammer (Pattern Recognition)
+  id: totrans-711
   prefs: []
   type: TYPE_NORMAL
 - en: 'Inputs:'
+  id: totrans-712
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE278]'
+  id: totrans-713
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE278]'
 - en: 'Outputs:'
+  id: totrans-714
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE279]'
+  id: totrans-715
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE279]'
 - en: 'Lines:'
+  id: totrans-716
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE280]'
+  id: totrans-717
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE280]'
 - en: 'PlotInfo:'
+  id: totrans-718
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE281]'
+  id: totrans-719
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE281]'
 - en: 'PlotLines:'
+  id: totrans-720
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE282]'
+  id: totrans-721
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE282]'
 - en: CDLKICKING
+  id: totrans-722
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
 - en: CDLKICKING([input_arrays])
+  id: totrans-723
   prefs: []
   type: TYPE_NORMAL
 - en: Kicking (Pattern Recognition)
+  id: totrans-724
   prefs: []
   type: TYPE_NORMAL
 - en: 'Inputs:'
+  id: totrans-725
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE283]'
+  id: totrans-726
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE283]'
 - en: 'Outputs:'
+  id: totrans-727
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE284]'
+  id: totrans-728
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE284]'
 - en: 'Lines:'
+  id: totrans-729
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE285]'
+  id: totrans-730
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE285]'
 - en: 'PlotInfo:'
+  id: totrans-731
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE286]'
+  id: totrans-732
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE286]'
 - en: 'PlotLines:'
+  id: totrans-733
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE287]'
+  id: totrans-734
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE287]'
 - en: CDLKICKINGBYLENGTH
+  id: totrans-735
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
 - en: CDLKICKINGBYLENGTH([input_arrays])
+  id: totrans-736
   prefs: []
   type: TYPE_NORMAL
 - en: Kicking - bull/bear determined by the longer marubozu (Pattern Recognition)
+  id: totrans-737
   prefs: []
   type: TYPE_NORMAL
 - en: 'Inputs:'
+  id: totrans-738
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE288]'
+  id: totrans-739
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE288]'
 - en: 'Outputs:'
+  id: totrans-740
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE289]'
+  id: totrans-741
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE289]'
 - en: 'Lines:'
+  id: totrans-742
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE290]'
+  id: totrans-743
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE290]'
 - en: 'PlotInfo:'
+  id: totrans-744
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE291]'
+  id: totrans-745
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE291]'
 - en: 'PlotLines:'
+  id: totrans-746
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE292]'
+  id: totrans-747
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE292]'
 - en: CDLLADDERBOTTOM
+  id: totrans-748
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
 - en: CDLLADDERBOTTOM([input_arrays])
+  id: totrans-749
   prefs: []
   type: TYPE_NORMAL
 - en: Ladder Bottom (Pattern Recognition)
+  id: totrans-750
   prefs: []
   type: TYPE_NORMAL
 - en: 'Inputs:'
+  id: totrans-751
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE293]'
+  id: totrans-752
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE293]'
 - en: 'Outputs:'
+  id: totrans-753
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE294]'
+  id: totrans-754
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE294]'
 - en: 'Lines:'
+  id: totrans-755
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE295]'
+  id: totrans-756
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE295]'
 - en: 'PlotInfo:'
+  id: totrans-757
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE296]'
+  id: totrans-758
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE296]'
 - en: 'PlotLines:'
+  id: totrans-759
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE297]'
+  id: totrans-760
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE297]'
 - en: CDLLONGLEGGEDDOJI
+  id: totrans-761
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
 - en: CDLLONGLEGGEDDOJI([input_arrays])
+  id: totrans-762
   prefs: []
   type: TYPE_NORMAL
 - en: Long Legged Doji (Pattern Recognition)
+  id: totrans-763
   prefs: []
   type: TYPE_NORMAL
 - en: 'Inputs:'
+  id: totrans-764
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE298]'
+  id: totrans-765
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE298]'
 - en: 'Outputs:'
+  id: totrans-766
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE299]'
+  id: totrans-767
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE299]'
 - en: 'Lines:'
+  id: totrans-768
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE300]'
+  id: totrans-769
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE300]'
 - en: 'PlotInfo:'
+  id: totrans-770
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE301]'
+  id: totrans-771
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE301]'
 - en: 'PlotLines:'
+  id: totrans-772
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE302]'
+  id: totrans-773
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE302]'
 - en: CDLLONGLINE
+  id: totrans-774
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
 - en: CDLLONGLINE([input_arrays])
+  id: totrans-775
   prefs: []
   type: TYPE_NORMAL
 - en: Long Line Candle (Pattern Recognition)
+  id: totrans-776
   prefs: []
   type: TYPE_NORMAL
 - en: 'Inputs:'
+  id: totrans-777
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE303]'
+  id: totrans-778
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE303]'
 - en: 'Outputs:'
+  id: totrans-779
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE304]'
+  id: totrans-780
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE304]'
 - en: 'Lines:'
+  id: totrans-781
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE305]'
+  id: totrans-782
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE305]'
 - en: 'PlotInfo:'
+  id: totrans-783
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE306]'
+  id: totrans-784
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE306]'
 - en: 'PlotLines:'
+  id: totrans-785
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE307]'
+  id: totrans-786
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE307]'
 - en: CDLMARUBOZU
+  id: totrans-787
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
 - en: CDLMARUBOZU([input_arrays])
+  id: totrans-788
   prefs: []
   type: TYPE_NORMAL
 - en: Marubozu (Pattern Recognition)
+  id: totrans-789
   prefs: []
   type: TYPE_NORMAL
 - en: 'Inputs:'
+  id: totrans-790
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE308]'
+  id: totrans-791
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE308]'
 - en: 'Outputs:'
+  id: totrans-792
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE309]'
+  id: totrans-793
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE309]'
 - en: 'Lines:'
+  id: totrans-794
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE310]'
+  id: totrans-795
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE310]'
 - en: 'PlotInfo:'
+  id: totrans-796
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE311]'
+  id: totrans-797
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE311]'
 - en: 'PlotLines:'
+  id: totrans-798
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE312]'
+  id: totrans-799
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE312]'
 - en: CDLMATCHINGLOW
+  id: totrans-800
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
 - en: CDLMATCHINGLOW([input_arrays])
+  id: totrans-801
   prefs: []
   type: TYPE_NORMAL
 - en: Matching Low (Pattern Recognition)
+  id: totrans-802
   prefs: []
   type: TYPE_NORMAL
 - en: 'Inputs:'
+  id: totrans-803
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE313]'
+  id: totrans-804
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE313]'
 - en: 'Outputs:'
+  id: totrans-805
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE314]'
+  id: totrans-806
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE314]'
 - en: 'Lines:'
+  id: totrans-807
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE315]'
+  id: totrans-808
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE315]'
 - en: 'PlotInfo:'
+  id: totrans-809
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE316]'
+  id: totrans-810
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE316]'
 - en: 'PlotLines:'
+  id: totrans-811
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE317]'
+  id: totrans-812
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE317]'
 - en: CDLMATHOLD
+  id: totrans-813
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
 - en: CDLMATHOLD([input_arrays], [penetration=0.5])
+  id: totrans-814
   prefs: []
   type: TYPE_NORMAL
 - en: Mat Hold (Pattern Recognition)
+  id: totrans-815
   prefs: []
   type: TYPE_NORMAL
 - en: 'Inputs:'
+  id: totrans-816
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE318]'
+  id: totrans-817
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE318]'
 - en: 'Parameters:'
+  id: totrans-818
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE319]'
+  id: totrans-819
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE319]'
 - en: 'Outputs:'
+  id: totrans-820
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE320]'
+  id: totrans-821
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE320]'
 - en: 'Lines:'
+  id: totrans-822
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE321]'
+  id: totrans-823
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE321]'
 - en: 'Params:'
+  id: totrans-824
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE322]'
+  id: totrans-825
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE322]'
 - en: 'PlotInfo:'
+  id: totrans-826
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE323]'
+  id: totrans-827
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE323]'
 - en: 'PlotLines:'
+  id: totrans-828
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE324]'
+  id: totrans-829
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE324]'
 - en: CDLMORNINGDOJISTAR
+  id: totrans-830
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
 - en: CDLMORNINGDOJISTAR([input_arrays], [penetration=0.3])
+  id: totrans-831
   prefs: []
   type: TYPE_NORMAL
 - en: Morning Doji Star (Pattern Recognition)
+  id: totrans-832
   prefs: []
   type: TYPE_NORMAL
 - en: 'Inputs:'
+  id: totrans-833
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE325]'
+  id: totrans-834
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE325]'
 - en: 'Parameters:'
+  id: totrans-835
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE326]'
+  id: totrans-836
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE326]'
 - en: 'Outputs:'
+  id: totrans-837
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE327]'
+  id: totrans-838
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE327]'
 - en: 'Lines:'
+  id: totrans-839
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE328]'
+  id: totrans-840
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE328]'
 - en: 'Params:'
+  id: totrans-841
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE329]'
+  id: totrans-842
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE329]'
 - en: 'PlotInfo:'
+  id: totrans-843
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE330]'
+  id: totrans-844
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE330]'
 - en: 'PlotLines:'
+  id: totrans-845
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE331]'
+  id: totrans-846
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE331]'
 - en: CDLMORNINGSTAR
+  id: totrans-847
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
 - en: CDLMORNINGSTAR([input_arrays], [penetration=0.3])
+  id: totrans-848
   prefs: []
   type: TYPE_NORMAL
 - en: Morning Star (Pattern Recognition)
+  id: totrans-849
   prefs: []
   type: TYPE_NORMAL
 - en: 'Inputs:'
+  id: totrans-850
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE332]'
+  id: totrans-851
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE332]'
 - en: 'Parameters:'
+  id: totrans-852
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE333]'
+  id: totrans-853
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE333]'
 - en: 'Outputs:'
+  id: totrans-854
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE334]'
+  id: totrans-855
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE334]'
 - en: 'Lines:'
+  id: totrans-856
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE335]'
+  id: totrans-857
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE335]'
 - en: 'Params:'
+  id: totrans-858
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE336]'
+  id: totrans-859
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE336]'
 - en: 'PlotInfo:'
+  id: totrans-860
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE337]'
+  id: totrans-861
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE337]'
 - en: 'PlotLines:'
+  id: totrans-862
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE338]'
+  id: totrans-863
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE338]'
 - en: CDLONNECK
+  id: totrans-864
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
 - en: CDLONNECK([input_arrays])
+  id: totrans-865
   prefs: []
   type: TYPE_NORMAL
 - en: On-Neck Pattern (Pattern Recognition)
+  id: totrans-866
   prefs: []
   type: TYPE_NORMAL
 - en: 'Inputs:'
+  id: totrans-867
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE339]'
+  id: totrans-868
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE339]'
 - en: 'Outputs:'
+  id: totrans-869
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE340]'
+  id: totrans-870
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE340]'
 - en: 'Lines:'
+  id: totrans-871
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE341]'
+  id: totrans-872
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE341]'
 - en: 'PlotInfo:'
+  id: totrans-873
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE342]'
+  id: totrans-874
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE342]'
 - en: 'PlotLines:'
+  id: totrans-875
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE343]'
+  id: totrans-876
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE343]'
 - en: CDLPIERCING
+  id: totrans-877
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
 - en: CDLPIERCING([input_arrays])
+  id: totrans-878
   prefs: []
   type: TYPE_NORMAL
 - en: Piercing Pattern (Pattern Recognition)
+  id: totrans-879
   prefs: []
   type: TYPE_NORMAL
 - en: 'Inputs:'
+  id: totrans-880
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE344]'
+  id: totrans-881
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE344]'
 - en: 'Outputs:'
+  id: totrans-882
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE345]'
+  id: totrans-883
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE345]'
 - en: 'Lines:'
+  id: totrans-884
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE346]'
+  id: totrans-885
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE346]'
 - en: 'PlotInfo:'
+  id: totrans-886
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE347]'
+  id: totrans-887
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE347]'
 - en: 'PlotLines:'
+  id: totrans-888
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE348]'
+  id: totrans-889
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE348]'
 - en: CDLRICKSHAWMAN
+  id: totrans-890
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
 - en: CDLRICKSHAWMAN([input_arrays])
+  id: totrans-891
   prefs: []
   type: TYPE_NORMAL
 - en: Rickshaw Man (Pattern Recognition)
+  id: totrans-892
   prefs: []
   type: TYPE_NORMAL
 - en: 'Inputs:'
+  id: totrans-893
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE349]'
+  id: totrans-894
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE349]'
 - en: 'Outputs:'
+  id: totrans-895
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE350]'
+  id: totrans-896
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE350]'
 - en: 'Lines:'
+  id: totrans-897
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE351]'
+  id: totrans-898
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE351]'
 - en: 'PlotInfo:'
+  id: totrans-899
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE352]'
+  id: totrans-900
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE352]'
 - en: 'PlotLines:'
+  id: totrans-901
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE353]'
+  id: totrans-902
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE353]'
 - en: CDLRISEFALL3###METHODS
+  id: totrans-903
   prefs: []
   type: TYPE_NORMAL
 - en: CDLRISEFALL3METHODS([input_arrays])
+  id: totrans-904
   prefs: []
   type: TYPE_NORMAL
 - en: Rising/Falling Three Methods (Pattern Recognition)
+  id: totrans-905
   prefs: []
   type: TYPE_NORMAL
 - en: 'Inputs:'
+  id: totrans-906
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE354]'
+  id: totrans-907
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE354]'
 - en: 'Outputs:'
+  id: totrans-908
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE355]'
+  id: totrans-909
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE355]'
 - en: 'Lines:'
+  id: totrans-910
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE356]'
+  id: totrans-911
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE356]'
 - en: 'PlotInfo:'
+  id: totrans-912
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE357]'
+  id: totrans-913
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE357]'
 - en: 'PlotLines:'
+  id: totrans-914
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE358]'
+  id: totrans-915
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE358]'
 - en: CDLSEPARATINGLINES
+  id: totrans-916
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
 - en: CDLSEPARATINGLINES([input_arrays])
+  id: totrans-917
   prefs: []
   type: TYPE_NORMAL
 - en: Separating Lines (Pattern Recognition)
+  id: totrans-918
   prefs: []
   type: TYPE_NORMAL
 - en: 'Inputs:'
+  id: totrans-919
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE359]'
+  id: totrans-920
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE359]'
 - en: 'Outputs:'
+  id: totrans-921
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE360]'
+  id: totrans-922
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE360]'
 - en: 'Lines:'
+  id: totrans-923
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE361]'
+  id: totrans-924
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE361]'
 - en: 'PlotInfo:'
+  id: totrans-925
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE362]'
+  id: totrans-926
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE362]'
 - en: 'PlotLines:'
+  id: totrans-927
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE363]'
+  id: totrans-928
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE363]'
 - en: CDLSHOOTINGSTAR
+  id: totrans-929
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
 - en: CDLSHOOTINGSTAR([input_arrays])
+  id: totrans-930
   prefs: []
   type: TYPE_NORMAL
 - en: Shooting Star (Pattern Recognition)
+  id: totrans-931
   prefs: []
   type: TYPE_NORMAL
 - en: 'Inputs:'
+  id: totrans-932
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE364]'
+  id: totrans-933
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE364]'
 - en: 'Outputs:'
+  id: totrans-934
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE365]'
+  id: totrans-935
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE365]'
 - en: 'Lines:'
+  id: totrans-936
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE366]'
+  id: totrans-937
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE366]'
 - en: 'PlotInfo:'
+  id: totrans-938
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE367]'
+  id: totrans-939
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE367]'
 - en: 'PlotLines:'
+  id: totrans-940
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE368]'
+  id: totrans-941
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE368]'
 - en: CDLSHORTLINE
+  id: totrans-942
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
 - en: CDLSHORTLINE([input_arrays])
+  id: totrans-943
   prefs: []
   type: TYPE_NORMAL
 - en: Short Line Candle (Pattern Recognition)
+  id: totrans-944
   prefs: []
   type: TYPE_NORMAL
 - en: 'Inputs:'
+  id: totrans-945
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE369]'
+  id: totrans-946
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE369]'
 - en: 'Outputs:'
+  id: totrans-947
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE370]'
+  id: totrans-948
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE370]'
 - en: 'Lines:'
+  id: totrans-949
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE371]'
+  id: totrans-950
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE371]'
 - en: 'PlotInfo:'
+  id: totrans-951
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE372]'
+  id: totrans-952
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE372]'
 - en: 'PlotLines:'
+  id: totrans-953
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE373]'
+  id: totrans-954
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE373]'
 - en: CDLSPINNINGTOP
+  id: totrans-955
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
 - en: CDLSPINNINGTOP([input_arrays])
+  id: totrans-956
   prefs: []
   type: TYPE_NORMAL
 - en: Spinning Top (Pattern Recognition)
+  id: totrans-957
   prefs: []
   type: TYPE_NORMAL
 - en: 'Inputs:'
+  id: totrans-958
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE374]'
+  id: totrans-959
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE374]'
 - en: 'Outputs:'
+  id: totrans-960
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE375]'
+  id: totrans-961
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE375]'
 - en: 'Lines:'
+  id: totrans-962
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE376]'
+  id: totrans-963
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE376]'
 - en: 'PlotInfo:'
+  id: totrans-964
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE377]'
+  id: totrans-965
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE377]'
 - en: 'PlotLines:'
+  id: totrans-966
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE378]'
+  id: totrans-967
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE378]'
 - en: CDLSTALLEDPATTERN
+  id: totrans-968
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
 - en: CDLSTALLEDPATTERN([input_arrays])
+  id: totrans-969
   prefs: []
   type: TYPE_NORMAL
 - en: Stalled Pattern (Pattern Recognition)
+  id: totrans-970
   prefs: []
   type: TYPE_NORMAL
 - en: 'Inputs:'
+  id: totrans-971
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE379]'
+  id: totrans-972
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE379]'
 - en: 'Outputs:'
+  id: totrans-973
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE380]'
+  id: totrans-974
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE380]'
 - en: 'Lines:'
+  id: totrans-975
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE381]'
+  id: totrans-976
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE381]'
 - en: 'PlotInfo:'
+  id: totrans-977
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE382]'
+  id: totrans-978
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE382]'
 - en: 'PlotLines:'
+  id: totrans-979
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE383]'
+  id: totrans-980
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE383]'
 - en: CDLSTICKSANDWICH
+  id: totrans-981
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
 - en: CDLSTICKSANDWICH([input_arrays])
+  id: totrans-982
   prefs: []
   type: TYPE_NORMAL
 - en: Stick Sandwich (Pattern Recognition)
+  id: totrans-983
   prefs: []
   type: TYPE_NORMAL
 - en: 'Inputs:'
+  id: totrans-984
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE384]'
+  id: totrans-985
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE384]'
 - en: 'Outputs:'
+  id: totrans-986
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE385]'
+  id: totrans-987
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE385]'
 - en: 'Lines:'
+  id: totrans-988
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE386]'
+  id: totrans-989
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE386]'
 - en: 'PlotInfo:'
+  id: totrans-990
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE387]'
+  id: totrans-991
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE387]'
 - en: 'PlotLines:'
+  id: totrans-992
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE388]'
+  id: totrans-993
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE388]'
 - en: CDLTAKURI
+  id: totrans-994
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
 - en: CDLTAKURI([input_arrays])
+  id: totrans-995
   prefs: []
   type: TYPE_NORMAL
 - en: Takuri (Dragonfly Doji with very long lower shadow) (Pattern Recognition)
+  id: totrans-996
   prefs: []
   type: TYPE_NORMAL
 - en: 'Inputs:'
+  id: totrans-997
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE389]'
+  id: totrans-998
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE389]'
 - en: 'Outputs:'
+  id: totrans-999
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE390]'
+  id: totrans-1000
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE390]'
 - en: 'Lines:'
+  id: totrans-1001
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE391]'
+  id: totrans-1002
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE391]'
 - en: 'PlotInfo:'
+  id: totrans-1003
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE392]'
+  id: totrans-1004
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE392]'
 - en: 'PlotLines:'
+  id: totrans-1005
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE393]'
+  id: totrans-1006
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE393]'
 - en: CDLTASUKIGAP
+  id: totrans-1007
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
 - en: CDLTASUKIGAP([input_arrays])
+  id: totrans-1008
   prefs: []
   type: TYPE_NORMAL
 - en: Tasuki Gap (Pattern Recognition)
+  id: totrans-1009
   prefs: []
   type: TYPE_NORMAL
 - en: 'Inputs:'
+  id: totrans-1010
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE394]'
+  id: totrans-1011
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE394]'
 - en: 'Outputs:'
+  id: totrans-1012
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE395]'
+  id: totrans-1013
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE395]'
 - en: 'Lines:'
+  id: totrans-1014
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE396]'
+  id: totrans-1015
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE396]'
 - en: 'PlotInfo:'
+  id: totrans-1016
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE397]'
+  id: totrans-1017
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE397]'
 - en: 'PlotLines:'
+  id: totrans-1018
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE398]'
+  id: totrans-1019
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE398]'
 - en: CDLTHRUSTING
+  id: totrans-1020
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
 - en: CDLTHRUSTING([input_arrays])
+  id: totrans-1021
   prefs: []
   type: TYPE_NORMAL
 - en: Thrusting Pattern (Pattern Recognition)
+  id: totrans-1022
   prefs: []
   type: TYPE_NORMAL
 - en: 'Inputs:'
+  id: totrans-1023
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE399]'
+  id: totrans-1024
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE399]'
 - en: 'Outputs:'
+  id: totrans-1025
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE400]'
+  id: totrans-1026
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE400]'
 - en: 'Lines:'
+  id: totrans-1027
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE401]'
+  id: totrans-1028
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE401]'
 - en: 'PlotInfo:'
+  id: totrans-1029
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE402]'
+  id: totrans-1030
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE402]'
 - en: 'PlotLines:'
+  id: totrans-1031
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE403]'
+  id: totrans-1032
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE403]'
 - en: CDLTRISTAR
+  id: totrans-1033
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
 - en: CDLTRISTAR([input_arrays])
+  id: totrans-1034
   prefs: []
   type: TYPE_NORMAL
 - en: Tristar Pattern (Pattern Recognition)
+  id: totrans-1035
   prefs: []
   type: TYPE_NORMAL
 - en: 'Inputs:'
+  id: totrans-1036
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE404]'
+  id: totrans-1037
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE404]'
 - en: 'Outputs:'
+  id: totrans-1038
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE405]'
+  id: totrans-1039
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE405]'
 - en: 'Lines:'
+  id: totrans-1040
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE406]'
+  id: totrans-1041
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE406]'
 - en: 'PlotInfo:'
+  id: totrans-1042
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE407]'
+  id: totrans-1043
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE407]'
 - en: 'PlotLines:'
+  id: totrans-1044
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE408]'
+  id: totrans-1045
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE408]'
 - en: CDLUNIQUE3###RIVER
+  id: totrans-1046
   prefs: []
   type: TYPE_NORMAL
 - en: CDLUNIQUE3RIVER([input_arrays])
+  id: totrans-1047
   prefs: []
   type: TYPE_NORMAL
 - en: Unique 3 River (Pattern Recognition)
+  id: totrans-1048
   prefs: []
   type: TYPE_NORMAL
 - en: 'Inputs:'
+  id: totrans-1049
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE409]'
+  id: totrans-1050
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE409]'
 - en: 'Outputs:'
+  id: totrans-1051
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE410]'
+  id: totrans-1052
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE410]'
 - en: 'Lines:'
+  id: totrans-1053
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE411]'
+  id: totrans-1054
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE411]'
 - en: 'PlotInfo:'
+  id: totrans-1055
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE412]'
+  id: totrans-1056
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE412]'
 - en: 'PlotLines:'
+  id: totrans-1057
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE413]'
+  id: totrans-1058
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE413]'
 - en: CDLUPSIDEGAP2###CROWS
+  id: totrans-1059
   prefs: []
   type: TYPE_NORMAL
 - en: CDLUPSIDEGAP2CROWS([input_arrays])
+  id: totrans-1060
   prefs: []
   type: TYPE_NORMAL
 - en: Upside Gap Two Crows (Pattern Recognition)
+  id: totrans-1061
   prefs: []
   type: TYPE_NORMAL
 - en: 'Inputs:'
+  id: totrans-1062
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE414]'
+  id: totrans-1063
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE414]'
 - en: 'Outputs:'
+  id: totrans-1064
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE415]'
+  id: totrans-1065
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE415]'
 - en: 'Lines:'
+  id: totrans-1066
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE416]'
+  id: totrans-1067
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE416]'
 - en: 'PlotInfo:'
+  id: totrans-1068
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE417]'
+  id: totrans-1069
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE417]'
 - en: 'PlotLines:'
+  id: totrans-1070
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE418]'
+  id: totrans-1071
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE418]'
 - en: CDLXSIDEGAP3###METHODS
+  id: totrans-1072
   prefs: []
   type: TYPE_NORMAL
 - en: CDLXSIDEGAP3METHODS([input_arrays])
+  id: totrans-1073
   prefs: []
   type: TYPE_NORMAL
 - en: Upside/Downside Gap Three Methods (Pattern Recognition)
+  id: totrans-1074
   prefs: []
   type: TYPE_NORMAL
 - en: 'Inputs:'
+  id: totrans-1075
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE419]'
+  id: totrans-1076
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE419]'
 - en: 'Outputs:'
+  id: totrans-1077
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE420]'
+  id: totrans-1078
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE420]'
 - en: 'Lines:'
+  id: totrans-1079
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE421]'
+  id: totrans-1080
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE421]'
 - en: 'PlotInfo:'
+  id: totrans-1081
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE422]'
+  id: totrans-1082
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE422]'
 - en: 'PlotLines:'
+  id: totrans-1083
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE423]'
+  id: totrans-1084
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE423]'
 - en: CEIL
+  id: totrans-1085
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
 - en: CEIL([input_arrays])
+  id: totrans-1086
   prefs: []
   type: TYPE_NORMAL
 - en: Vector Ceil (Math Transform)
+  id: totrans-1087
   prefs: []
   type: TYPE_NORMAL
 - en: 'Inputs:'
+  id: totrans-1088
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE424]'
+  id: totrans-1089
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE424]'
 - en: 'Outputs:'
+  id: totrans-1090
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE425]'
+  id: totrans-1091
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE425]'
 - en: 'Lines:'
+  id: totrans-1092
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE426]'
+  id: totrans-1093
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE426]'
 - en: 'PlotInfo:'
+  id: totrans-1094
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE427]'
+  id: totrans-1095
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE427]'
 - en: 'PlotLines:'
+  id: totrans-1096
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE428]'
+  id: totrans-1097
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE428]'
 - en: CMO
+  id: totrans-1098
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
 - en: CMO([input_arrays], [timeperiod=14])
+  id: totrans-1099
   prefs: []
   type: TYPE_NORMAL
 - en: Chande Momentum Oscillator (Momentum Indicators)
+  id: totrans-1100
   prefs: []
   type: TYPE_NORMAL
 - en: 'Inputs:'
+  id: totrans-1101
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE429]'
+  id: totrans-1102
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE429]'
 - en: 'Parameters:'
+  id: totrans-1103
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE430]'
+  id: totrans-1104
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE430]'
 - en: 'Outputs:'
+  id: totrans-1105
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE431]'
+  id: totrans-1106
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE431]'
 - en: 'Lines:'
+  id: totrans-1107
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE432]'
+  id: totrans-1108
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE432]'
 - en: 'Params:'
+  id: totrans-1109
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE433]'
+  id: totrans-1110
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE433]'
 - en: 'PlotInfo:'
+  id: totrans-1111
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE434]'
+  id: totrans-1112
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE434]'
 - en: 'PlotLines:'
+  id: totrans-1113
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE435]'
+  id: totrans-1114
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE435]'
 - en: CORREL
+  id: totrans-1115
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
 - en: CORREL([input_arrays], [timeperiod=30])
+  id: totrans-1116
   prefs: []
   type: TYPE_NORMAL
 - en: Pearson’s Correlation Coefficient ® (Statistic Functions)
+  id: totrans-1117
   prefs: []
   type: TYPE_NORMAL
 - en: 'Inputs:'
+  id: totrans-1118
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE436]'
+  id: totrans-1119
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE436]'
 - en: 'Parameters:'
+  id: totrans-1120
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE437]'
+  id: totrans-1121
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE437]'
 - en: 'Outputs:'
+  id: totrans-1122
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE438]'
+  id: totrans-1123
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE438]'
 - en: 'Lines:'
+  id: totrans-1124
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE439]'
+  id: totrans-1125
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE439]'
 - en: 'Params:'
+  id: totrans-1126
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE440]'
+  id: totrans-1127
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE440]'
 - en: 'PlotInfo:'
+  id: totrans-1128
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE441]'
+  id: totrans-1129
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE441]'
 - en: 'PlotLines:'
+  id: totrans-1130
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE442]'
+  id: totrans-1131
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE442]'
 - en: COS
+  id: totrans-1132
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
 - en: COS([input_arrays])
+  id: totrans-1133
   prefs: []
   type: TYPE_NORMAL
 - en: Vector Trigonometric Cos (Math Transform)
+  id: totrans-1134
   prefs: []
   type: TYPE_NORMAL
 - en: 'Inputs:'
+  id: totrans-1135
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE443]'
+  id: totrans-1136
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE443]'
 - en: 'Outputs:'
+  id: totrans-1137
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE444]'
+  id: totrans-1138
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE444]'
 - en: 'Lines:'
+  id: totrans-1139
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE445]'
+  id: totrans-1140
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE445]'
 - en: 'PlotInfo:'
+  id: totrans-1141
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE446]'
+  id: totrans-1142
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE446]'
 - en: 'PlotLines:'
+  id: totrans-1143
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE447]'
+  id: totrans-1144
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE447]'
 - en: COSH
+  id: totrans-1145
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
 - en: COSH([input_arrays])
+  id: totrans-1146
   prefs: []
   type: TYPE_NORMAL
 - en: Vector Trigonometric Cosh (Math Transform)
+  id: totrans-1147
   prefs: []
   type: TYPE_NORMAL
 - en: 'Inputs:'
+  id: totrans-1148
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE448]'
+  id: totrans-1149
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE448]'
 - en: 'Outputs:'
+  id: totrans-1150
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE449]'
+  id: totrans-1151
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE449]'
 - en: 'Lines:'
+  id: totrans-1152
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE450]'
+  id: totrans-1153
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE450]'
 - en: 'PlotInfo:'
+  id: totrans-1154
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE451]'
+  id: totrans-1155
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE451]'
 - en: 'PlotLines:'
+  id: totrans-1156
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE452]'
+  id: totrans-1157
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE452]'
 - en: DEMA
+  id: totrans-1158
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
 - en: DEMA([input_arrays], [timeperiod=30])
+  id: totrans-1159
   prefs: []
   type: TYPE_NORMAL
 - en: Double Exponential Moving Average (Overlap Studies)
+  id: totrans-1160
   prefs: []
   type: TYPE_NORMAL
 - en: 'Inputs:'
+  id: totrans-1161
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE453]'
+  id: totrans-1162
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE453]'
 - en: 'Parameters:'
+  id: totrans-1163
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE454]'
+  id: totrans-1164
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE454]'
 - en: 'Outputs:'
+  id: totrans-1165
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE455]'
+  id: totrans-1166
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE455]'
 - en: 'Lines:'
+  id: totrans-1167
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE456]'
+  id: totrans-1168
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE456]'
 - en: 'Params:'
+  id: totrans-1169
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE457]'
+  id: totrans-1170
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE457]'
 - en: 'PlotInfo:'
+  id: totrans-1171
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE458]'
+  id: totrans-1172
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE458]'
 - en: 'PlotLines:'
+  id: totrans-1173
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE459]'
+  id: totrans-1174
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE459]'
 - en: DIV
+  id: totrans-1175
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
 - en: DIV([input_arrays])
+  id: totrans-1176
   prefs: []
   type: TYPE_NORMAL
 - en: Vector Arithmetic Div (Math Operators)
+  id: totrans-1177
   prefs: []
   type: TYPE_NORMAL
 - en: 'Inputs:'
+  id: totrans-1178
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE460]'
+  id: totrans-1179
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE460]'
 - en: 'Outputs:'
+  id: totrans-1180
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE461]'
+  id: totrans-1181
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE461]'
 - en: 'Lines:'
+  id: totrans-1182
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE462]'
+  id: totrans-1183
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE462]'
 - en: 'PlotInfo:'
+  id: totrans-1184
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE463]'
+  id: totrans-1185
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE463]'
 - en: 'PlotLines:'
+  id: totrans-1186
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE464]'
+  id: totrans-1187
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE464]'
 - en: DX
+  id: totrans-1188
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
 - en: DX([input_arrays], [timeperiod=14])
+  id: totrans-1189
   prefs: []
   type: TYPE_NORMAL
 - en: Directional Movement Index (Momentum Indicators)
+  id: totrans-1190
   prefs: []
   type: TYPE_NORMAL
 - en: 'Inputs:'
+  id: totrans-1191
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE465]'
+  id: totrans-1192
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE465]'
 - en: 'Parameters:'
+  id: totrans-1193
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE466]'
+  id: totrans-1194
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE466]'
 - en: 'Outputs:'
+  id: totrans-1195
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE467]'
+  id: totrans-1196
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE467]'
 - en: 'Lines:'
+  id: totrans-1197
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE468]'
+  id: totrans-1198
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE468]'
 - en: 'Params:'
+  id: totrans-1199
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE469]'
+  id: totrans-1200
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE469]'
 - en: 'PlotInfo:'
+  id: totrans-1201
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE470]'
+  id: totrans-1202
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE470]'
 - en: 'PlotLines:'
+  id: totrans-1203
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE471]'
+  id: totrans-1204
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE471]'
 - en: EMA
+  id: totrans-1205
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
 - en: EMA([input_arrays], [timeperiod=30])
+  id: totrans-1206
   prefs: []
   type: TYPE_NORMAL
 - en: Exponential Moving Average (Overlap Studies)
+  id: totrans-1207
   prefs: []
   type: TYPE_NORMAL
 - en: 'Inputs:'
+  id: totrans-1208
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE472]'
+  id: totrans-1209
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE472]'
 - en: 'Parameters:'
+  id: totrans-1210
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE473]'
+  id: totrans-1211
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE473]'
 - en: 'Outputs:'
+  id: totrans-1212
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE474]'
+  id: totrans-1213
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE474]'
 - en: 'Lines:'
+  id: totrans-1214
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE475]'
+  id: totrans-1215
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE475]'
 - en: 'Params:'
+  id: totrans-1216
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE476]'
+  id: totrans-1217
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE476]'
 - en: 'PlotInfo:'
+  id: totrans-1218
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE477]'
+  id: totrans-1219
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE477]'
 - en: 'PlotLines:'
+  id: totrans-1220
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE478]'
+  id: totrans-1221
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE478]'
 - en: EXP
+  id: totrans-1222
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
 - en: EXP([input_arrays])
+  id: totrans-1223
   prefs: []
   type: TYPE_NORMAL
 - en: Vector Arithmetic Exp (Math Transform)
+  id: totrans-1224
   prefs: []
   type: TYPE_NORMAL
 - en: 'Inputs:'
+  id: totrans-1225
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE479]'
+  id: totrans-1226
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE479]'
 - en: 'Outputs:'
+  id: totrans-1227
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE480]'
+  id: totrans-1228
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE480]'
 - en: 'Lines:'
+  id: totrans-1229
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE481]'
+  id: totrans-1230
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE481]'
 - en: 'PlotInfo:'
+  id: totrans-1231
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE482]'
+  id: totrans-1232
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE482]'
 - en: 'PlotLines:'
+  id: totrans-1233
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE483]'
+  id: totrans-1234
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE483]'
 - en: FLOOR
+  id: totrans-1235
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
 - en: FLOOR([input_arrays])
+  id: totrans-1236
   prefs: []
   type: TYPE_NORMAL
 - en: Vector Floor (Math Transform)
+  id: totrans-1237
   prefs: []
   type: TYPE_NORMAL
 - en: 'Inputs:'
+  id: totrans-1238
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE484]'
+  id: totrans-1239
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE484]'
 - en: 'Outputs:'
+  id: totrans-1240
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE485]'
+  id: totrans-1241
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE485]'
 - en: 'Lines:'
+  id: totrans-1242
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE486]'
+  id: totrans-1243
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE486]'
 - en: 'PlotInfo:'
+  id: totrans-1244
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE487]'
+  id: totrans-1245
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE487]'
 - en: 'PlotLines:'
+  id: totrans-1246
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE488]'
+  id: totrans-1247
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE488]'
 - en: HT_###DCPERIOD
+  id: totrans-1248
   prefs: []
   type: TYPE_NORMAL
 - en: HT_DCPERIOD([input_arrays])
+  id: totrans-1249
   prefs: []
   type: TYPE_NORMAL
 - en: Hilbert Transform - Dominant Cycle Period (Cycle Indicators)
+  id: totrans-1250
   prefs: []
   type: TYPE_NORMAL
 - en: 'Inputs:'
+  id: totrans-1251
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE489]'
+  id: totrans-1252
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE489]'
 - en: 'Outputs:'
+  id: totrans-1253
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE490]'
+  id: totrans-1254
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE490]'
 - en: 'Lines:'
+  id: totrans-1255
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE491]'
+  id: totrans-1256
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE491]'
 - en: 'PlotInfo:'
+  id: totrans-1257
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE492]'
+  id: totrans-1258
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE492]'
 - en: 'PlotLines:'
+  id: totrans-1259
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE493]'
+  id: totrans-1260
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE493]'
 - en: HT_###DCPHASE
+  id: totrans-1261
   prefs: []
   type: TYPE_NORMAL
 - en: HT_DCPHASE([input_arrays])
+  id: totrans-1262
   prefs: []
   type: TYPE_NORMAL
 - en: Hilbert Transform - Dominant Cycle Phase (Cycle Indicators)
+  id: totrans-1263
   prefs: []
   type: TYPE_NORMAL
 - en: 'Inputs:'
+  id: totrans-1264
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE494]'
+  id: totrans-1265
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE494]'
 - en: 'Outputs:'
+  id: totrans-1266
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE495]'
+  id: totrans-1267
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE495]'
 - en: 'Lines:'
+  id: totrans-1268
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE496]'
+  id: totrans-1269
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE496]'
 - en: 'PlotInfo:'
+  id: totrans-1270
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE497]'
+  id: totrans-1271
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE497]'
 - en: 'PlotLines:'
+  id: totrans-1272
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE498]'
+  id: totrans-1273
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE498]'
 - en: HT_###PHASOR
+  id: totrans-1274
   prefs: []
   type: TYPE_NORMAL
 - en: HT_PHASOR([input_arrays])
+  id: totrans-1275
   prefs: []
   type: TYPE_NORMAL
 - en: Hilbert Transform - Phasor Components (Cycle Indicators)
+  id: totrans-1276
   prefs: []
   type: TYPE_NORMAL
 - en: 'Inputs:'
+  id: totrans-1277
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE499]'
+  id: totrans-1278
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE499]'
 - en: 'Outputs:'
+  id: totrans-1279
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE500]'
+  id: totrans-1280
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE500]'
 - en: 'Lines:'
+  id: totrans-1281
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE501]'
+  id: totrans-1282
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE501]'
 - en: 'PlotInfo:'
+  id: totrans-1283
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE502]'
+  id: totrans-1284
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE502]'
 - en: 'PlotLines:'
+  id: totrans-1285
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE503]'
+  id: totrans-1286
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE503]'
 - en: HT_###SINE
+  id: totrans-1287
   prefs: []
   type: TYPE_NORMAL
 - en: HT_SINE([input_arrays])
+  id: totrans-1288
   prefs: []
   type: TYPE_NORMAL
 - en: Hilbert Transform - SineWave (Cycle Indicators)
+  id: totrans-1289
   prefs: []
   type: TYPE_NORMAL
 - en: 'Inputs:'
+  id: totrans-1290
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE504]'
+  id: totrans-1291
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE504]'
 - en: 'Outputs:'
+  id: totrans-1292
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE505]'
+  id: totrans-1293
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE505]'
 - en: 'Lines:'
+  id: totrans-1294
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE506]'
+  id: totrans-1295
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE506]'
 - en: 'PlotInfo:'
+  id: totrans-1296
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE507]'
+  id: totrans-1297
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE507]'
 - en: 'PlotLines:'
+  id: totrans-1298
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE508]'
+  id: totrans-1299
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE508]'
 - en: HT_###TRENDLINE
+  id: totrans-1300
   prefs: []
   type: TYPE_NORMAL
 - en: HT_TRENDLINE([input_arrays])
+  id: totrans-1301
   prefs: []
   type: TYPE_NORMAL
 - en: Hilbert Transform - Instantaneous Trendline (Overlap Studies)
+  id: totrans-1302
   prefs: []
   type: TYPE_NORMAL
 - en: 'Inputs:'
+  id: totrans-1303
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE509]'
+  id: totrans-1304
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE509]'
 - en: 'Outputs:'
+  id: totrans-1305
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE510]'
+  id: totrans-1306
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE510]'
 - en: 'Lines:'
+  id: totrans-1307
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE511]'
+  id: totrans-1308
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE511]'
 - en: 'PlotInfo:'
+  id: totrans-1309
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE512]'
+  id: totrans-1310
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE512]'
 - en: 'PlotLines:'
+  id: totrans-1311
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE513]'
+  id: totrans-1312
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE513]'
 - en: HT_###TRENDMODE
+  id: totrans-1313
   prefs: []
   type: TYPE_NORMAL
 - en: HT_TRENDMODE([input_arrays])
+  id: totrans-1314
   prefs: []
   type: TYPE_NORMAL
 - en: Hilbert Transform - Trend vs Cycle Mode (Cycle Indicators)
+  id: totrans-1315
   prefs: []
   type: TYPE_NORMAL
 - en: 'Inputs:'
+  id: totrans-1316
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE514]'
+  id: totrans-1317
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE514]'
 - en: 'Outputs:'
+  id: totrans-1318
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE515]'
+  id: totrans-1319
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE515]'
 - en: 'Lines:'
+  id: totrans-1320
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE516]'
+  id: totrans-1321
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE516]'
 - en: 'PlotInfo:'
+  id: totrans-1322
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE517]'
+  id: totrans-1323
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE517]'
 - en: 'PlotLines:'
+  id: totrans-1324
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE518]'
+  id: totrans-1325
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE518]'
 - en: KAMA
+  id: totrans-1326
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
 - en: KAMA([input_arrays], [timeperiod=30])
+  id: totrans-1327
   prefs: []
   type: TYPE_NORMAL
 - en: Kaufman Adaptive Moving Average (Overlap Studies)
+  id: totrans-1328
   prefs: []
   type: TYPE_NORMAL
 - en: 'Inputs:'
+  id: totrans-1329
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE519]'
+  id: totrans-1330
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE519]'
 - en: 'Parameters:'
+  id: totrans-1331
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE520]'
+  id: totrans-1332
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE520]'
 - en: 'Outputs:'
+  id: totrans-1333
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE521]'
+  id: totrans-1334
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE521]'
 - en: 'Lines:'
+  id: totrans-1335
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE522]'
+  id: totrans-1336
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE522]'
 - en: 'Params:'
+  id: totrans-1337
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE523]'
+  id: totrans-1338
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE523]'
 - en: 'PlotInfo:'
+  id: totrans-1339
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE524]'
+  id: totrans-1340
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE524]'
 - en: 'PlotLines:'
+  id: totrans-1341
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE525]'
+  id: totrans-1342
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE525]'
 - en: LINEARREG
+  id: totrans-1343
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
 - en: LINEARREG([input_arrays], [timeperiod=14])
+  id: totrans-1344
   prefs: []
   type: TYPE_NORMAL
 - en: Linear Regression (Statistic Functions)
+  id: totrans-1345
   prefs: []
   type: TYPE_NORMAL
 - en: 'Inputs:'
+  id: totrans-1346
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE526]'
+  id: totrans-1347
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE526]'
 - en: 'Parameters:'
+  id: totrans-1348
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE527]'
+  id: totrans-1349
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE527]'
 - en: 'Outputs:'
+  id: totrans-1350
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE528]'
+  id: totrans-1351
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE528]'
 - en: 'Lines:'
+  id: totrans-1352
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE529]'
+  id: totrans-1353
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE529]'
 - en: 'Params:'
+  id: totrans-1354
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE530]'
+  id: totrans-1355
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE530]'
 - en: 'PlotInfo:'
+  id: totrans-1356
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE531]'
+  id: totrans-1357
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE531]'
 - en: 'PlotLines:'
+  id: totrans-1358
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE532]'
+  id: totrans-1359
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE532]'
 - en: LINEARREG_###ANGLE
+  id: totrans-1360
   prefs: []
   type: TYPE_NORMAL
 - en: LINEARREG_ANGLE([input_arrays], [timeperiod=14])
+  id: totrans-1361
   prefs: []
   type: TYPE_NORMAL
 - en: Linear Regression Angle (Statistic Functions)
+  id: totrans-1362
   prefs: []
   type: TYPE_NORMAL
 - en: 'Inputs:'
+  id: totrans-1363
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE533]'
+  id: totrans-1364
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE533]'
 - en: 'Parameters:'
+  id: totrans-1365
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE534]'
+  id: totrans-1366
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE534]'
 - en: 'Outputs:'
+  id: totrans-1367
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE535]'
+  id: totrans-1368
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE535]'
 - en: 'Lines:'
+  id: totrans-1369
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE536]'
+  id: totrans-1370
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE536]'
 - en: 'Params:'
+  id: totrans-1371
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE537]'
+  id: totrans-1372
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE537]'
 - en: 'PlotInfo:'
+  id: totrans-1373
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE538]'
+  id: totrans-1374
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE538]'
 - en: 'PlotLines:'
+  id: totrans-1375
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE539]'
+  id: totrans-1376
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE539]'
 - en: LINEARREG_###INTERCEPT
+  id: totrans-1377
   prefs: []
   type: TYPE_NORMAL
 - en: LINEARREG_INTERCEPT([input_arrays], [timeperiod=14])
+  id: totrans-1378
   prefs: []
   type: TYPE_NORMAL
 - en: Linear Regression Intercept (Statistic Functions)
+  id: totrans-1379
   prefs: []
   type: TYPE_NORMAL
 - en: 'Inputs:'
+  id: totrans-1380
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE540]'
+  id: totrans-1381
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE540]'
 - en: 'Parameters:'
+  id: totrans-1382
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE541]'
+  id: totrans-1383
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE541]'
 - en: 'Outputs:'
+  id: totrans-1384
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE542]'
+  id: totrans-1385
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE542]'
 - en: 'Lines:'
+  id: totrans-1386
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE543]'
+  id: totrans-1387
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE543]'
 - en: 'Params:'
+  id: totrans-1388
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE544]'
+  id: totrans-1389
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE544]'
 - en: 'PlotInfo:'
+  id: totrans-1390
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE545]'
+  id: totrans-1391
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE545]'
 - en: 'PlotLines:'
+  id: totrans-1392
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE546]'
+  id: totrans-1393
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE546]'
 - en: LINEARREG_###SLOPE
+  id: totrans-1394
   prefs: []
   type: TYPE_NORMAL
 - en: LINEARREG_SLOPE([input_arrays], [timeperiod=14])
+  id: totrans-1395
   prefs: []
   type: TYPE_NORMAL
 - en: Linear Regression Slope (Statistic Functions)
+  id: totrans-1396
   prefs: []
   type: TYPE_NORMAL
 - en: 'Inputs:'
+  id: totrans-1397
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE547]'
+  id: totrans-1398
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE547]'
 - en: 'Parameters:'
+  id: totrans-1399
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE548]'
+  id: totrans-1400
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE548]'
 - en: 'Outputs:'
+  id: totrans-1401
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE549]'
+  id: totrans-1402
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE549]'
 - en: 'Lines:'
+  id: totrans-1403
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE550]'
+  id: totrans-1404
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE550]'
 - en: 'Params:'
+  id: totrans-1405
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE551]'
+  id: totrans-1406
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE551]'
 - en: 'PlotInfo:'
+  id: totrans-1407
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE552]'
+  id: totrans-1408
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE552]'
 - en: 'PlotLines:'
+  id: totrans-1409
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE553]'
+  id: totrans-1410
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE553]'
 - en: LN
+  id: totrans-1411
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
 - en: LN([input_arrays])
+  id: totrans-1412
   prefs: []
   type: TYPE_NORMAL
 - en: Vector Log Natural (Math Transform)
+  id: totrans-1413
   prefs: []
   type: TYPE_NORMAL
 - en: 'Inputs:'
+  id: totrans-1414
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE554]'
+  id: totrans-1415
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE554]'
 - en: 'Outputs:'
+  id: totrans-1416
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE555]'
+  id: totrans-1417
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE555]'
 - en: 'Lines:'
+  id: totrans-1418
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE556]'
+  id: totrans-1419
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE556]'
 - en: 'PlotInfo:'
+  id: totrans-1420
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE557]'
+  id: totrans-1421
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE557]'
 - en: 'PlotLines:'
+  id: totrans-1422
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE558]'
+  id: totrans-1423
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE558]'
 - en: LOG10
+  id: totrans-1424
   prefs: []
   type: TYPE_NORMAL
 - en: LOG10([input_arrays])
+  id: totrans-1425
   prefs: []
   type: TYPE_NORMAL
 - en: Vector Log10 (Math Transform)
+  id: totrans-1426
   prefs: []
   type: TYPE_NORMAL
 - en: 'Inputs:'
+  id: totrans-1427
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE559]'
+  id: totrans-1428
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE559]'
 - en: 'Outputs:'
+  id: totrans-1429
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE560]'
+  id: totrans-1430
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE560]'
 - en: 'Lines:'
+  id: totrans-1431
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE561]'
+  id: totrans-1432
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE561]'
 - en: 'PlotInfo:'
+  id: totrans-1433
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE562]'
+  id: totrans-1434
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE562]'
 - en: 'PlotLines:'
+  id: totrans-1435
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE563]'
+  id: totrans-1436
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE563]'
 - en: MA
+  id: totrans-1437
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
 - en: MA([input_arrays], [timeperiod=30], [matype=0])
+  id: totrans-1438
   prefs: []
   type: TYPE_NORMAL
 - en: Moving average (Overlap Studies)
+  id: totrans-1439
   prefs: []
   type: TYPE_NORMAL
 - en: 'Inputs:'
+  id: totrans-1440
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE564]'
+  id: totrans-1441
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE564]'
 - en: 'Parameters:'
+  id: totrans-1442
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE565]'
+  id: totrans-1443
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE565]'
 - en: 'Outputs:'
+  id: totrans-1444
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE566]'
+  id: totrans-1445
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE566]'
 - en: 'Lines:'
+  id: totrans-1446
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE567]'
+  id: totrans-1447
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE567]'
 - en: 'Params:'
+  id: totrans-1448
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE568]'
+  id: totrans-1449
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE568]'
 - en: 'PlotInfo:'
+  id: totrans-1450
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE569]'
+  id: totrans-1451
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE569]'
 - en: 'PlotLines:'
+  id: totrans-1452
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE570]'
+  id: totrans-1453
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE570]'
 - en: MACD
+  id: totrans-1454
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
 - en: MACD([input_arrays], [fastperiod=12], [slowperiod=26], [signalperiod=9])
+  id: totrans-1455
   prefs: []
   type: TYPE_NORMAL
 - en: Moving Average Convergence/Divergence (Momentum Indicators)
+  id: totrans-1456
   prefs: []
   type: TYPE_NORMAL
 - en: 'Inputs:'
+  id: totrans-1457
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE571]'
+  id: totrans-1458
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE571]'
 - en: 'Parameters:'
+  id: totrans-1459
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE572]'
+  id: totrans-1460
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE572]'
 - en: 'Outputs:'
+  id: totrans-1461
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE573]'
+  id: totrans-1462
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE573]'
 - en: 'Lines:'
+  id: totrans-1463
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE574]'
+  id: totrans-1464
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE574]'
 - en: 'Params:'
+  id: totrans-1465
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE575]'
+  id: totrans-1466
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE575]'
 - en: 'PlotInfo:'
+  id: totrans-1467
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE576]'
+  id: totrans-1468
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE576]'
 - en: 'PlotLines:'
+  id: totrans-1469
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE577]'
+  id: totrans-1470
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE577]'
 - en: MACDEXT
+  id: totrans-1471
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
 - en: MACDEXT([input_arrays], [fastperiod=12], [fastmatype=0], [slowperiod=26], [slowmatype=0],
     [signalperiod=9], [signalmatype=0])
+  id: totrans-1472
   prefs: []
   type: TYPE_NORMAL
 - en: MACD with controllable MA type (Momentum Indicators)
+  id: totrans-1473
   prefs: []
   type: TYPE_NORMAL
 - en: 'Inputs:'
+  id: totrans-1474
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE578]'
+  id: totrans-1475
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE578]'
 - en: 'Parameters:'
+  id: totrans-1476
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE579]'
+  id: totrans-1477
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE579]'
 - en: 'Outputs:'
+  id: totrans-1478
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE580]'
+  id: totrans-1479
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE580]'
 - en: 'Lines:'
+  id: totrans-1480
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE581]'
+  id: totrans-1481
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE581]'
 - en: 'Params:'
+  id: totrans-1482
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE582]'
+  id: totrans-1483
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE582]'
 - en: 'PlotInfo:'
+  id: totrans-1484
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE583]'
+  id: totrans-1485
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE583]'
 - en: 'PlotLines:'
+  id: totrans-1486
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE584]'
+  id: totrans-1487
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE584]'
 - en: MACDFIX
+  id: totrans-1488
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
 - en: MACDFIX([input_arrays], [signalperiod=9])
+  id: totrans-1489
   prefs: []
   type: TYPE_NORMAL
 - en: Moving Average Convergence/Divergence Fix 12/26 (Momentum Indicators)
+  id: totrans-1490
   prefs: []
   type: TYPE_NORMAL
 - en: 'Inputs:'
+  id: totrans-1491
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE585]'
+  id: totrans-1492
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE585]'
 - en: 'Parameters:'
+  id: totrans-1493
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE586]'
+  id: totrans-1494
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE586]'
 - en: 'Outputs:'
+  id: totrans-1495
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE587]'
+  id: totrans-1496
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE587]'
 - en: 'Lines:'
+  id: totrans-1497
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE588]'
+  id: totrans-1498
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE588]'
 - en: 'Params:'
+  id: totrans-1499
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE589]'
+  id: totrans-1500
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE589]'
 - en: 'PlotInfo:'
+  id: totrans-1501
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE590]'
+  id: totrans-1502
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE590]'
 - en: 'PlotLines:'
+  id: totrans-1503
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE591]'
+  id: totrans-1504
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE591]'
 - en: MAMA
+  id: totrans-1505
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
 - en: MAMA([input_arrays], [fastlimit=0.5], [slowlimit=0.05])
+  id: totrans-1506
   prefs: []
   type: TYPE_NORMAL
 - en: MESA Adaptive Moving Average (Overlap Studies)
+  id: totrans-1507
   prefs: []
   type: TYPE_NORMAL
 - en: 'Inputs:'
+  id: totrans-1508
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE592]'
+  id: totrans-1509
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE592]'
 - en: 'Parameters:'
+  id: totrans-1510
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE593]'
+  id: totrans-1511
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE593]'
 - en: 'Outputs:'
+  id: totrans-1512
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE594]'
+  id: totrans-1513
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE594]'
 - en: 'Lines:'
+  id: totrans-1514
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE595]'
+  id: totrans-1515
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE595]'
 - en: 'Params:'
+  id: totrans-1516
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE596]'
+  id: totrans-1517
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE596]'
 - en: 'PlotInfo:'
+  id: totrans-1518
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE597]'
+  id: totrans-1519
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE597]'
 - en: 'PlotLines:'
+  id: totrans-1520
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE598]'
+  id: totrans-1521
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE598]'
 - en: MAVP
+  id: totrans-1522
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
 - en: MAVP([input_arrays], [minperiod=2], [maxperiod=30], [matype=0])
+  id: totrans-1523
   prefs: []
   type: TYPE_NORMAL
 - en: Moving average with variable period (Overlap Studies)
+  id: totrans-1524
   prefs: []
   type: TYPE_NORMAL
 - en: 'Inputs:'
+  id: totrans-1525
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE599]'
+  id: totrans-1526
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE599]'
 - en: 'Parameters:'
+  id: totrans-1527
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE600]'
+  id: totrans-1528
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE600]'
 - en: 'Outputs:'
+  id: totrans-1529
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE601]'
+  id: totrans-1530
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE601]'
 - en: 'Lines:'
+  id: totrans-1531
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE602]'
+  id: totrans-1532
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE602]'
 - en: 'Params:'
+  id: totrans-1533
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE603]'
+  id: totrans-1534
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE603]'
 - en: 'PlotInfo:'
+  id: totrans-1535
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE604]'
+  id: totrans-1536
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE604]'
 - en: 'PlotLines:'
+  id: totrans-1537
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE605]'
+  id: totrans-1538
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE605]'
 - en: MAX
+  id: totrans-1539
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
 - en: MAX([input_arrays], [timeperiod=30])
+  id: totrans-1540
   prefs: []
   type: TYPE_NORMAL
 - en: Highest value over a specified period (Math Operators)
+  id: totrans-1541
   prefs: []
   type: TYPE_NORMAL
 - en: 'Inputs:'
+  id: totrans-1542
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE606]'
+  id: totrans-1543
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE606]'
 - en: 'Parameters:'
+  id: totrans-1544
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE607]'
+  id: totrans-1545
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE607]'
 - en: 'Outputs:'
+  id: totrans-1546
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE608]'
+  id: totrans-1547
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE608]'
 - en: 'Lines:'
+  id: totrans-1548
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE609]'
+  id: totrans-1549
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE609]'
 - en: 'Params:'
+  id: totrans-1550
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE610]'
+  id: totrans-1551
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE610]'
 - en: 'PlotInfo:'
+  id: totrans-1552
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE611]'
+  id: totrans-1553
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE611]'
 - en: 'PlotLines:'
+  id: totrans-1554
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE612]'
+  id: totrans-1555
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE612]'
 - en: MAXINDEX
+  id: totrans-1556
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
 - en: MAXINDEX([input_arrays], [timeperiod=30])
+  id: totrans-1557
   prefs: []
   type: TYPE_NORMAL
 - en: Index of highest value over a specified period (Math Operators)
+  id: totrans-1558
   prefs: []
   type: TYPE_NORMAL
 - en: 'Inputs:'
+  id: totrans-1559
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE613]'
+  id: totrans-1560
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE613]'
 - en: 'Parameters:'
+  id: totrans-1561
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE614]'
+  id: totrans-1562
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE614]'
 - en: 'Outputs:'
+  id: totrans-1563
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE615]'
+  id: totrans-1564
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE615]'
 - en: 'Lines:'
+  id: totrans-1565
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE616]'
+  id: totrans-1566
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE616]'
 - en: 'Params:'
+  id: totrans-1567
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE617]'
+  id: totrans-1568
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE617]'
 - en: 'PlotInfo:'
+  id: totrans-1569
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE618]'
+  id: totrans-1570
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE618]'
 - en: 'PlotLines:'
+  id: totrans-1571
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE619]'
+  id: totrans-1572
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE619]'
 - en: MEDPRICE
+  id: totrans-1573
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
 - en: MEDPRICE([input_arrays])
+  id: totrans-1574
   prefs: []
   type: TYPE_NORMAL
 - en: Median Price (Price Transform)
+  id: totrans-1575
   prefs: []
   type: TYPE_NORMAL
 - en: 'Inputs:'
+  id: totrans-1576
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE620]'
+  id: totrans-1577
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE620]'
 - en: 'Outputs:'
+  id: totrans-1578
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE621]'
+  id: totrans-1579
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE621]'
 - en: 'Lines:'
+  id: totrans-1580
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE622]'
+  id: totrans-1581
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE622]'
 - en: 'PlotInfo:'
+  id: totrans-1582
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE623]'
+  id: totrans-1583
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE623]'
 - en: 'PlotLines:'
+  id: totrans-1584
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE624]'
+  id: totrans-1585
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE624]'
 - en: MFI
+  id: totrans-1586
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
 - en: MFI([input_arrays], [timeperiod=14])
+  id: totrans-1587
   prefs: []
   type: TYPE_NORMAL
 - en: Money Flow Index (Momentum Indicators)
+  id: totrans-1588
   prefs: []
   type: TYPE_NORMAL
 - en: 'Inputs:'
+  id: totrans-1589
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE625]'
+  id: totrans-1590
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE625]'
 - en: 'Parameters:'
+  id: totrans-1591
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE626]'
+  id: totrans-1592
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE626]'
 - en: 'Outputs:'
+  id: totrans-1593
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE627]'
+  id: totrans-1594
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE627]'
 - en: 'Lines:'
+  id: totrans-1595
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE628]'
+  id: totrans-1596
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE628]'
 - en: 'Params:'
+  id: totrans-1597
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE629]'
+  id: totrans-1598
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE629]'
 - en: 'PlotInfo:'
+  id: totrans-1599
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE630]'
+  id: totrans-1600
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE630]'
 - en: 'PlotLines:'
+  id: totrans-1601
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE631]'
+  id: totrans-1602
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE631]'
 - en: MIDPOINT
+  id: totrans-1603
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
 - en: MIDPOINT([input_arrays], [timeperiod=14])
+  id: totrans-1604
   prefs: []
   type: TYPE_NORMAL
 - en: MidPoint over period (Overlap Studies)
+  id: totrans-1605
   prefs: []
   type: TYPE_NORMAL
 - en: 'Inputs:'
+  id: totrans-1606
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE632]'
+  id: totrans-1607
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE632]'
 - en: 'Parameters:'
+  id: totrans-1608
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE633]'
+  id: totrans-1609
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE633]'
 - en: 'Outputs:'
+  id: totrans-1610
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE634]'
+  id: totrans-1611
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE634]'
 - en: 'Lines:'
+  id: totrans-1612
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE635]'
+  id: totrans-1613
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE635]'
 - en: 'Params:'
+  id: totrans-1614
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE636]'
+  id: totrans-1615
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE636]'
 - en: 'PlotInfo:'
+  id: totrans-1616
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE637]'
+  id: totrans-1617
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE637]'
 - en: 'PlotLines:'
+  id: totrans-1618
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE638]'
+  id: totrans-1619
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE638]'
 - en: MIDPRICE
+  id: totrans-1620
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
 - en: MIDPRICE([input_arrays], [timeperiod=14])
+  id: totrans-1621
   prefs: []
   type: TYPE_NORMAL
 - en: Midpoint Price over period (Overlap Studies)
+  id: totrans-1622
   prefs: []
   type: TYPE_NORMAL
 - en: 'Inputs:'
+  id: totrans-1623
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE639]'
+  id: totrans-1624
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE639]'
 - en: 'Parameters:'
+  id: totrans-1625
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE640]'
+  id: totrans-1626
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE640]'
 - en: 'Outputs:'
+  id: totrans-1627
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE641]'
+  id: totrans-1628
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE641]'
 - en: 'Lines:'
+  id: totrans-1629
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE642]'
+  id: totrans-1630
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE642]'
 - en: 'Params:'
+  id: totrans-1631
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE643]'
+  id: totrans-1632
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE643]'
 - en: 'PlotInfo:'
+  id: totrans-1633
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE644]'
+  id: totrans-1634
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE644]'
 - en: 'PlotLines:'
+  id: totrans-1635
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE645]'
+  id: totrans-1636
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE645]'
 - en: MIN
+  id: totrans-1637
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
 - en: MIN([input_arrays], [timeperiod=30])
+  id: totrans-1638
   prefs: []
   type: TYPE_NORMAL
 - en: Lowest value over a specified period (Math Operators)
+  id: totrans-1639
   prefs: []
   type: TYPE_NORMAL
 - en: 'Inputs:'
+  id: totrans-1640
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE646]'
+  id: totrans-1641
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE646]'
 - en: 'Parameters:'
+  id: totrans-1642
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE647]'
+  id: totrans-1643
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE647]'
 - en: 'Outputs:'
+  id: totrans-1644
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE648]'
+  id: totrans-1645
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE648]'
 - en: 'Lines:'
+  id: totrans-1646
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE649]'
+  id: totrans-1647
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE649]'
 - en: 'Params:'
+  id: totrans-1648
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE650]'
+  id: totrans-1649
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE650]'
 - en: 'PlotInfo:'
+  id: totrans-1650
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE651]'
+  id: totrans-1651
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE651]'
 - en: 'PlotLines:'
+  id: totrans-1652
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE652]'
+  id: totrans-1653
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE652]'
 - en: MININDEX
+  id: totrans-1654
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
 - en: MININDEX([input_arrays], [timeperiod=30])
+  id: totrans-1655
   prefs: []
   type: TYPE_NORMAL
 - en: Index of lowest value over a specified period (Math Operators)
+  id: totrans-1656
   prefs: []
   type: TYPE_NORMAL
 - en: 'Inputs:'
+  id: totrans-1657
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE653]'
+  id: totrans-1658
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE653]'
 - en: 'Parameters:'
+  id: totrans-1659
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE654]'
+  id: totrans-1660
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE654]'
 - en: 'Outputs:'
+  id: totrans-1661
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE655]'
+  id: totrans-1662
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE655]'
 - en: 'Lines:'
+  id: totrans-1663
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE656]'
+  id: totrans-1664
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE656]'
 - en: 'Params:'
+  id: totrans-1665
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE657]'
+  id: totrans-1666
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE657]'
 - en: 'PlotInfo:'
+  id: totrans-1667
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE658]'
+  id: totrans-1668
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE658]'
 - en: 'PlotLines:'
+  id: totrans-1669
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE659]'
+  id: totrans-1670
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE659]'
 - en: MINMAX
+  id: totrans-1671
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
 - en: MINMAX([input_arrays], [timeperiod=30])
+  id: totrans-1672
   prefs: []
   type: TYPE_NORMAL
 - en: Lowest and highest values over a specified period (Math Operators)
+  id: totrans-1673
   prefs: []
   type: TYPE_NORMAL
 - en: 'Inputs:'
+  id: totrans-1674
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE660]'
+  id: totrans-1675
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE660]'
 - en: 'Parameters:'
+  id: totrans-1676
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE661]'
+  id: totrans-1677
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE661]'
 - en: 'Outputs:'
+  id: totrans-1678
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE662]'
+  id: totrans-1679
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE662]'
 - en: 'Lines:'
+  id: totrans-1680
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE663]'
+  id: totrans-1681
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE663]'
 - en: 'Params:'
+  id: totrans-1682
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE664]'
+  id: totrans-1683
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE664]'
 - en: 'PlotInfo:'
+  id: totrans-1684
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE665]'
+  id: totrans-1685
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE665]'
 - en: 'PlotLines:'
+  id: totrans-1686
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE666]'
+  id: totrans-1687
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE666]'
 - en: MINMAXINDEX
+  id: totrans-1688
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
 - en: MINMAXINDEX([input_arrays], [timeperiod=30])
+  id: totrans-1689
   prefs: []
   type: TYPE_NORMAL
 - en: Indexes of lowest and highest values over a specified period (Math Operators)
+  id: totrans-1690
   prefs: []
   type: TYPE_NORMAL
 - en: 'Inputs:'
+  id: totrans-1691
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE667]'
+  id: totrans-1692
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE667]'
 - en: 'Parameters:'
+  id: totrans-1693
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE668]'
+  id: totrans-1694
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE668]'
 - en: 'Outputs:'
+  id: totrans-1695
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE669]'
+  id: totrans-1696
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE669]'
 - en: 'Lines:'
+  id: totrans-1697
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE670]'
+  id: totrans-1698
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE670]'
 - en: 'Params:'
+  id: totrans-1699
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE671]'
+  id: totrans-1700
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE671]'
 - en: 'PlotInfo:'
+  id: totrans-1701
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE672]'
+  id: totrans-1702
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE672]'
 - en: 'PlotLines:'
+  id: totrans-1703
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE673]'
+  id: totrans-1704
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE673]'
 - en: MINUS_###DI
+  id: totrans-1705
   prefs: []
   type: TYPE_NORMAL
 - en: MINUS_DI([input_arrays], [timeperiod=14])
+  id: totrans-1706
   prefs: []
   type: TYPE_NORMAL
 - en: Minus Directional Indicator (Momentum Indicators)
+  id: totrans-1707
   prefs: []
   type: TYPE_NORMAL
 - en: 'Inputs:'
+  id: totrans-1708
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE674]'
+  id: totrans-1709
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE674]'
 - en: 'Parameters:'
+  id: totrans-1710
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE675]'
+  id: totrans-1711
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE675]'
 - en: 'Outputs:'
+  id: totrans-1712
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE676]'
+  id: totrans-1713
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE676]'
 - en: 'Lines:'
+  id: totrans-1714
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE677]'
+  id: totrans-1715
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE677]'
 - en: 'Params:'
+  id: totrans-1716
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE678]'
+  id: totrans-1717
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE678]'
 - en: 'PlotInfo:'
+  id: totrans-1718
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE679]'
+  id: totrans-1719
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE679]'
 - en: 'PlotLines:'
+  id: totrans-1720
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE680]'
+  id: totrans-1721
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE680]'
 - en: MINUS_###DM
+  id: totrans-1722
   prefs: []
   type: TYPE_NORMAL
 - en: MINUS_DM([input_arrays], [timeperiod=14])
+  id: totrans-1723
   prefs: []
   type: TYPE_NORMAL
 - en: Minus Directional Movement (Momentum Indicators)
+  id: totrans-1724
   prefs: []
   type: TYPE_NORMAL
 - en: 'Inputs:'
+  id: totrans-1725
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE681]'
+  id: totrans-1726
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE681]'
 - en: 'Parameters:'
+  id: totrans-1727
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE682]'
+  id: totrans-1728
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE682]'
 - en: 'Outputs:'
+  id: totrans-1729
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE683]'
+  id: totrans-1730
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE683]'
 - en: 'Lines:'
+  id: totrans-1731
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE684]'
+  id: totrans-1732
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE684]'
 - en: 'Params:'
+  id: totrans-1733
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE685]'
+  id: totrans-1734
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE685]'
 - en: 'PlotInfo:'
+  id: totrans-1735
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE686]'
+  id: totrans-1736
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE686]'
 - en: 'PlotLines:'
+  id: totrans-1737
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE687]'
+  id: totrans-1738
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE687]'
 - en: MOM
+  id: totrans-1739
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
 - en: MOM([input_arrays], [timeperiod=10])
+  id: totrans-1740
   prefs: []
   type: TYPE_NORMAL
 - en: Momentum (Momentum Indicators)
+  id: totrans-1741
   prefs: []
   type: TYPE_NORMAL
 - en: 'Inputs:'
+  id: totrans-1742
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE688]'
+  id: totrans-1743
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE688]'
 - en: 'Parameters:'
+  id: totrans-1744
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE689]'
+  id: totrans-1745
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE689]'
 - en: 'Outputs:'
+  id: totrans-1746
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE690]'
+  id: totrans-1747
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE690]'
 - en: 'Lines:'
+  id: totrans-1748
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE691]'
+  id: totrans-1749
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE691]'
 - en: 'Params:'
+  id: totrans-1750
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE692]'
+  id: totrans-1751
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE692]'
 - en: 'PlotInfo:'
+  id: totrans-1752
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE693]'
+  id: totrans-1753
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE693]'
 - en: 'PlotLines:'
+  id: totrans-1754
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE694]'
+  id: totrans-1755
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE694]'
 - en: MULT
+  id: totrans-1756
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
 - en: MULT([input_arrays])
+  id: totrans-1757
   prefs: []
   type: TYPE_NORMAL
 - en: Vector Arithmetic Mult (Math Operators)
+  id: totrans-1758
   prefs: []
   type: TYPE_NORMAL
 - en: 'Inputs:'
+  id: totrans-1759
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE695]'
+  id: totrans-1760
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE695]'
 - en: 'Outputs:'
+  id: totrans-1761
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE696]'
+  id: totrans-1762
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE696]'
 - en: 'Lines:'
+  id: totrans-1763
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE697]'
+  id: totrans-1764
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE697]'
 - en: 'PlotInfo:'
+  id: totrans-1765
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE698]'
+  id: totrans-1766
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE698]'
 - en: 'PlotLines:'
+  id: totrans-1767
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE699]'
+  id: totrans-1768
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE699]'
 - en: NATR
+  id: totrans-1769
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
 - en: NATR([input_arrays], [timeperiod=14])
+  id: totrans-1770
   prefs: []
   type: TYPE_NORMAL
 - en: Normalized Average True Range (Volatility Indicators)
+  id: totrans-1771
   prefs: []
   type: TYPE_NORMAL
 - en: 'Inputs:'
+  id: totrans-1772
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE700]'
+  id: totrans-1773
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE700]'
 - en: 'Parameters:'
+  id: totrans-1774
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE701]'
+  id: totrans-1775
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE701]'
 - en: 'Outputs:'
+  id: totrans-1776
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE702]'
+  id: totrans-1777
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE702]'
 - en: 'Lines:'
+  id: totrans-1778
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE703]'
+  id: totrans-1779
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE703]'
 - en: 'Params:'
+  id: totrans-1780
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE704]'
+  id: totrans-1781
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE704]'
 - en: 'PlotInfo:'
+  id: totrans-1782
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE705]'
+  id: totrans-1783
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE705]'
 - en: 'PlotLines:'
+  id: totrans-1784
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE706]'
+  id: totrans-1785
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE706]'
 - en: OBV
+  id: totrans-1786
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
 - en: OBV([input_arrays])
+  id: totrans-1787
   prefs: []
   type: TYPE_NORMAL
 - en: On Balance Volume (Volume Indicators)
+  id: totrans-1788
   prefs: []
   type: TYPE_NORMAL
 - en: 'Inputs:'
+  id: totrans-1789
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE707]'
+  id: totrans-1790
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE707]'
 - en: 'Outputs:'
+  id: totrans-1791
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE708]'
+  id: totrans-1792
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE708]'
 - en: 'Lines:'
+  id: totrans-1793
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE709]'
+  id: totrans-1794
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE709]'
 - en: 'PlotInfo:'
+  id: totrans-1795
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE710]'
+  id: totrans-1796
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE710]'
 - en: 'PlotLines:'
+  id: totrans-1797
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE711]'
+  id: totrans-1798
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE711]'
 - en: PLUS_###DI
+  id: totrans-1799
   prefs: []
   type: TYPE_NORMAL
 - en: PLUS_DI([input_arrays], [timeperiod=14])
+  id: totrans-1800
   prefs: []
   type: TYPE_NORMAL
 - en: Plus Directional Indicator (Momentum Indicators)
+  id: totrans-1801
   prefs: []
   type: TYPE_NORMAL
 - en: 'Inputs:'
+  id: totrans-1802
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE712]'
+  id: totrans-1803
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE712]'
 - en: 'Parameters:'
+  id: totrans-1804
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE713]'
+  id: totrans-1805
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE713]'
 - en: 'Outputs:'
+  id: totrans-1806
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE714]'
+  id: totrans-1807
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE714]'
 - en: 'Lines:'
+  id: totrans-1808
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE715]'
+  id: totrans-1809
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE715]'
 - en: 'Params:'
+  id: totrans-1810
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE716]'
+  id: totrans-1811
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE716]'
 - en: 'PlotInfo:'
+  id: totrans-1812
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE717]'
+  id: totrans-1813
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE717]'
 - en: 'PlotLines:'
+  id: totrans-1814
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE718]'
+  id: totrans-1815
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE718]'
 - en: PLUS_###DM
+  id: totrans-1816
   prefs: []
   type: TYPE_NORMAL
 - en: PLUS_DM([input_arrays], [timeperiod=14])
+  id: totrans-1817
   prefs: []
   type: TYPE_NORMAL
 - en: Plus Directional Movement (Momentum Indicators)
+  id: totrans-1818
   prefs: []
   type: TYPE_NORMAL
 - en: 'Inputs:'
+  id: totrans-1819
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE719]'
+  id: totrans-1820
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE719]'
 - en: 'Parameters:'
+  id: totrans-1821
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE720]'
+  id: totrans-1822
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE720]'
 - en: 'Outputs:'
+  id: totrans-1823
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE721]'
+  id: totrans-1824
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE721]'
 - en: 'Lines:'
+  id: totrans-1825
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE722]'
+  id: totrans-1826
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE722]'
 - en: 'Params:'
+  id: totrans-1827
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE723]'
+  id: totrans-1828
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE723]'
 - en: 'PlotInfo:'
+  id: totrans-1829
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE724]'
+  id: totrans-1830
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE724]'
 - en: 'PlotLines:'
+  id: totrans-1831
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE725]'
+  id: totrans-1832
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE725]'
 - en: PPO
+  id: totrans-1833
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
 - en: PPO([input_arrays], [fastperiod=12], [slowperiod=26], [matype=0])
+  id: totrans-1834
   prefs: []
   type: TYPE_NORMAL
 - en: Percentage Price Oscillator (Momentum Indicators)
+  id: totrans-1835
   prefs: []
   type: TYPE_NORMAL
 - en: 'Inputs:'
+  id: totrans-1836
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE726]'
+  id: totrans-1837
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE726]'
 - en: 'Parameters:'
+  id: totrans-1838
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE727]'
+  id: totrans-1839
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE727]'
 - en: 'Outputs:'
+  id: totrans-1840
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE728]'
+  id: totrans-1841
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE728]'
 - en: 'Lines:'
+  id: totrans-1842
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE729]'
+  id: totrans-1843
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE729]'
 - en: 'Params:'
+  id: totrans-1844
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE730]'
+  id: totrans-1845
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE730]'
 - en: 'PlotInfo:'
+  id: totrans-1846
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE731]'
+  id: totrans-1847
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE731]'
 - en: 'PlotLines:'
+  id: totrans-1848
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE732]'
+  id: totrans-1849
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE732]'
 - en: ROC
+  id: totrans-1850
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
 - en: ROC([input_arrays], [timeperiod=10])
+  id: totrans-1851
   prefs: []
   type: TYPE_NORMAL
 - en: 'Rate of change : ((price/prevPrice)-1)*100 (Momentum Indicators)'
+  id: totrans-1852
   prefs: []
   type: TYPE_NORMAL
 - en: 'Inputs:'
+  id: totrans-1853
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE733]'
+  id: totrans-1854
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE733]'
 - en: 'Parameters:'
+  id: totrans-1855
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE734]'
+  id: totrans-1856
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE734]'
 - en: 'Outputs:'
+  id: totrans-1857
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE735]'
+  id: totrans-1858
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE735]'
 - en: 'Lines:'
+  id: totrans-1859
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE736]'
+  id: totrans-1860
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE736]'
 - en: 'Params:'
+  id: totrans-1861
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE737]'
+  id: totrans-1862
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE737]'
 - en: 'PlotInfo:'
+  id: totrans-1863
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE738]'
+  id: totrans-1864
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE738]'
 - en: 'PlotLines:'
+  id: totrans-1865
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE739]'
+  id: totrans-1866
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE739]'
 - en: ROCP
+  id: totrans-1867
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
 - en: ROCP([input_arrays], [timeperiod=10])
+  id: totrans-1868
   prefs: []
   type: TYPE_NORMAL
 - en: 'Rate of change Percentage: (price-prevPrice)/prevPrice (Momentum Indicators)'
+  id: totrans-1869
   prefs: []
   type: TYPE_NORMAL
 - en: 'Inputs:'
+  id: totrans-1870
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE740]'
+  id: totrans-1871
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE740]'
 - en: 'Parameters:'
+  id: totrans-1872
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE741]'
+  id: totrans-1873
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE741]'
 - en: 'Outputs:'
+  id: totrans-1874
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE742]'
+  id: totrans-1875
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE742]'
 - en: 'Lines:'
+  id: totrans-1876
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE743]'
+  id: totrans-1877
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE743]'
 - en: 'Params:'
+  id: totrans-1878
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE744]'
+  id: totrans-1879
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE744]'
 - en: 'PlotInfo:'
+  id: totrans-1880
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE745]'
+  id: totrans-1881
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE745]'
 - en: 'PlotLines:'
+  id: totrans-1882
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE746]'
+  id: totrans-1883
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE746]'
 - en: ROCR
+  id: totrans-1884
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
 - en: ROCR([input_arrays], [timeperiod=10])
+  id: totrans-1885
   prefs: []
   type: TYPE_NORMAL
 - en: 'Rate of change ratio: (price/prevPrice) (Momentum Indicators)'
+  id: totrans-1886
   prefs: []
   type: TYPE_NORMAL
 - en: 'Inputs:'
+  id: totrans-1887
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE747]'
+  id: totrans-1888
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE747]'
 - en: 'Parameters:'
+  id: totrans-1889
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE748]'
+  id: totrans-1890
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE748]'
 - en: 'Outputs:'
+  id: totrans-1891
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE749]'
+  id: totrans-1892
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE749]'
 - en: 'Lines:'
+  id: totrans-1893
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE750]'
+  id: totrans-1894
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE750]'
 - en: 'Params:'
+  id: totrans-1895
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE751]'
+  id: totrans-1896
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE751]'
 - en: 'PlotInfo:'
+  id: totrans-1897
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE752]'
+  id: totrans-1898
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE752]'
 - en: 'PlotLines:'
+  id: totrans-1899
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE753]'
+  id: totrans-1900
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE753]'
 - en: ROCR100
+  id: totrans-1901
   prefs: []
   type: TYPE_NORMAL
 - en: ROCR100([input_arrays], [timeperiod=10])
+  id: totrans-1902
   prefs: []
   type: TYPE_NORMAL
 - en: 'Rate of change ratio 100 scale: (price/prevPrice)*100 (Momentum Indicators)'
+  id: totrans-1903
   prefs: []
   type: TYPE_NORMAL
 - en: 'Inputs:'
+  id: totrans-1904
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE754]'
+  id: totrans-1905
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE754]'
 - en: 'Parameters:'
+  id: totrans-1906
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE755]'
+  id: totrans-1907
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE755]'
 - en: 'Outputs:'
+  id: totrans-1908
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE756]'
+  id: totrans-1909
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE756]'
 - en: 'Lines:'
+  id: totrans-1910
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE757]'
+  id: totrans-1911
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE757]'
 - en: 'Params:'
+  id: totrans-1912
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE758]'
+  id: totrans-1913
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE758]'
 - en: 'PlotInfo:'
+  id: totrans-1914
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE759]'
+  id: totrans-1915
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE759]'
 - en: 'PlotLines:'
+  id: totrans-1916
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE760]'
+  id: totrans-1917
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE760]'
 - en: RSI
+  id: totrans-1918
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
 - en: RSI([input_arrays], [timeperiod=14])
+  id: totrans-1919
   prefs: []
   type: TYPE_NORMAL
 - en: Relative Strength Index (Momentum Indicators)
+  id: totrans-1920
   prefs: []
   type: TYPE_NORMAL
 - en: 'Inputs:'
+  id: totrans-1921
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE761]'
+  id: totrans-1922
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE761]'
 - en: 'Parameters:'
+  id: totrans-1923
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE762]'
+  id: totrans-1924
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE762]'
 - en: 'Outputs:'
+  id: totrans-1925
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE763]'
+  id: totrans-1926
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE763]'
 - en: 'Lines:'
+  id: totrans-1927
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE764]'
+  id: totrans-1928
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE764]'
 - en: 'Params:'
+  id: totrans-1929
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE765]'
+  id: totrans-1930
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE765]'
 - en: 'PlotInfo:'
+  id: totrans-1931
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE766]'
+  id: totrans-1932
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE766]'
 - en: 'PlotLines:'
+  id: totrans-1933
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE767]'
+  id: totrans-1934
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE767]'
 - en: SAR
+  id: totrans-1935
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
 - en: SAR([input_arrays], [acceleration=0.02], [maximum=0.2])
+  id: totrans-1936
   prefs: []
   type: TYPE_NORMAL
 - en: Parabolic SAR (Overlap Studies)
+  id: totrans-1937
   prefs: []
   type: TYPE_NORMAL
 - en: 'Inputs:'
+  id: totrans-1938
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE768]'
+  id: totrans-1939
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE768]'
 - en: 'Parameters:'
+  id: totrans-1940
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE769]'
+  id: totrans-1941
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE769]'
 - en: 'Outputs:'
+  id: totrans-1942
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE770]'
+  id: totrans-1943
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE770]'
 - en: 'Lines:'
+  id: totrans-1944
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE771]'
+  id: totrans-1945
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE771]'
 - en: 'Params:'
+  id: totrans-1946
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE772]'
+  id: totrans-1947
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE772]'
 - en: 'PlotInfo:'
+  id: totrans-1948
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE773]'
+  id: totrans-1949
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE773]'
 - en: 'PlotLines:'
+  id: totrans-1950
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE774]'
+  id: totrans-1951
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE774]'
 - en: SAREXT
+  id: totrans-1952
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
 - en: SAREXT([input_arrays], [startvalue=0], [offsetonreverse=0], [accelerationinitlong=0.02],
     [accelerationlong=0.02], [accelerationmaxlong=0.2], [accelerationinitshort=0.02],
     [accelerationshort=0.02], [accelerationmaxshort=0.2])
+  id: totrans-1953
   prefs: []
   type: TYPE_NORMAL
 - en: Parabolic SAR - Extended (Overlap Studies)
+  id: totrans-1954
   prefs: []
   type: TYPE_NORMAL
 - en: 'Inputs:'
+  id: totrans-1955
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE775]'
+  id: totrans-1956
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE775]'
 - en: 'Parameters:'
+  id: totrans-1957
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE776]'
+  id: totrans-1958
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE776]'
 - en: 'Outputs:'
+  id: totrans-1959
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE777]'
+  id: totrans-1960
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE777]'
 - en: 'Lines:'
+  id: totrans-1961
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE778]'
+  id: totrans-1962
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE778]'
 - en: 'Params:'
+  id: totrans-1963
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE779]'
+  id: totrans-1964
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE779]'
 - en: 'PlotInfo:'
+  id: totrans-1965
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE780]'
+  id: totrans-1966
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE780]'
 - en: 'PlotLines:'
+  id: totrans-1967
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE781]'
+  id: totrans-1968
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE781]'
 - en: SIN
+  id: totrans-1969
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
 - en: SIN([input_arrays])
+  id: totrans-1970
   prefs: []
   type: TYPE_NORMAL
 - en: Vector Trigonometric Sin (Math Transform)
+  id: totrans-1971
   prefs: []
   type: TYPE_NORMAL
 - en: 'Inputs:'
+  id: totrans-1972
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE782]'
+  id: totrans-1973
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE782]'
 - en: 'Outputs:'
+  id: totrans-1974
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE783]'
+  id: totrans-1975
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE783]'
 - en: 'Lines:'
+  id: totrans-1976
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE784]'
+  id: totrans-1977
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE784]'
 - en: 'PlotInfo:'
+  id: totrans-1978
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE785]'
+  id: totrans-1979
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE785]'
 - en: 'PlotLines:'
+  id: totrans-1980
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE786]'
+  id: totrans-1981
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE786]'
 - en: SINH
+  id: totrans-1982
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
 - en: SINH([input_arrays])
+  id: totrans-1983
   prefs: []
   type: TYPE_NORMAL
 - en: Vector Trigonometric Sinh (Math Transform)
+  id: totrans-1984
   prefs: []
   type: TYPE_NORMAL
 - en: 'Inputs:'
+  id: totrans-1985
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE787]'
+  id: totrans-1986
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE787]'
 - en: 'Outputs:'
+  id: totrans-1987
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE788]'
+  id: totrans-1988
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE788]'
 - en: 'Lines:'
+  id: totrans-1989
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE789]'
+  id: totrans-1990
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE789]'
 - en: 'PlotInfo:'
+  id: totrans-1991
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE790]'
+  id: totrans-1992
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE790]'
 - en: 'PlotLines:'
+  id: totrans-1993
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE791]'
+  id: totrans-1994
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE791]'
 - en: SMA
+  id: totrans-1995
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
 - en: SMA([input_arrays], [timeperiod=30])
+  id: totrans-1996
   prefs: []
   type: TYPE_NORMAL
 - en: Simple Moving Average (Overlap Studies)
+  id: totrans-1997
   prefs: []
   type: TYPE_NORMAL
 - en: 'Inputs:'
+  id: totrans-1998
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE792]'
+  id: totrans-1999
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE792]'
 - en: 'Parameters:'
+  id: totrans-2000
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE793]'
+  id: totrans-2001
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE793]'
 - en: 'Outputs:'
+  id: totrans-2002
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE794]'
+  id: totrans-2003
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE794]'
 - en: 'Lines:'
+  id: totrans-2004
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE795]'
+  id: totrans-2005
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE795]'
 - en: 'Params:'
+  id: totrans-2006
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE796]'
+  id: totrans-2007
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE796]'
 - en: 'PlotInfo:'
+  id: totrans-2008
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE797]'
+  id: totrans-2009
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE797]'
 - en: 'PlotLines:'
+  id: totrans-2010
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE798]'
+  id: totrans-2011
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE798]'
 - en: SQRT
+  id: totrans-2012
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
 - en: SQRT([input_arrays])
+  id: totrans-2013
   prefs: []
   type: TYPE_NORMAL
 - en: Vector Square Root (Math Transform)
+  id: totrans-2014
   prefs: []
   type: TYPE_NORMAL
 - en: 'Inputs:'
+  id: totrans-2015
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE799]'
+  id: totrans-2016
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE799]'
 - en: 'Outputs:'
+  id: totrans-2017
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE800]'
+  id: totrans-2018
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE800]'
 - en: 'Lines:'
+  id: totrans-2019
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE801]'
+  id: totrans-2020
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE801]'
 - en: 'PlotInfo:'
+  id: totrans-2021
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE802]'
+  id: totrans-2022
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE802]'
 - en: 'PlotLines:'
+  id: totrans-2023
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE803]'
+  id: totrans-2024
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE803]'
 - en: STDDEV
+  id: totrans-2025
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
 - en: STDDEV([input_arrays], [timeperiod=5], [nbdev=1])
+  id: totrans-2026
   prefs: []
   type: TYPE_NORMAL
 - en: Standard Deviation (Statistic Functions)
+  id: totrans-2027
   prefs: []
   type: TYPE_NORMAL
 - en: 'Inputs:'
+  id: totrans-2028
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE804]'
+  id: totrans-2029
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE804]'
 - en: 'Parameters:'
+  id: totrans-2030
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE805]'
+  id: totrans-2031
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE805]'
 - en: 'Outputs:'
+  id: totrans-2032
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE806]'
+  id: totrans-2033
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE806]'
 - en: 'Lines:'
+  id: totrans-2034
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE807]'
+  id: totrans-2035
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE807]'
 - en: 'Params:'
+  id: totrans-2036
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE808]'
+  id: totrans-2037
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE808]'
 - en: 'PlotInfo:'
+  id: totrans-2038
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE809]'
+  id: totrans-2039
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE809]'
 - en: 'PlotLines:'
+  id: totrans-2040
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE810]'
+  id: totrans-2041
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE810]'
 - en: STOCH
+  id: totrans-2042
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
 - en: STOCH([input_arrays], [fastk_period=5], [slowk_period=3], [slowk_matype=0],
     [slowd_period=3], [slowd_matype=0])
+  id: totrans-2043
   prefs: []
   type: TYPE_NORMAL
 - en: Stochastic (Momentum Indicators)
+  id: totrans-2044
   prefs: []
   type: TYPE_NORMAL
 - en: 'Inputs:'
+  id: totrans-2045
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE811]'
+  id: totrans-2046
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE811]'
 - en: 'Parameters:'
+  id: totrans-2047
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE812]'
+  id: totrans-2048
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE812]'
 - en: 'Outputs:'
+  id: totrans-2049
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE813]'
+  id: totrans-2050
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE813]'
 - en: 'Lines:'
+  id: totrans-2051
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE814]'
+  id: totrans-2052
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE814]'
 - en: 'Params:'
+  id: totrans-2053
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE815]'
+  id: totrans-2054
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE815]'
 - en: 'PlotInfo:'
+  id: totrans-2055
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE816]'
+  id: totrans-2056
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE816]'
 - en: 'PlotLines:'
+  id: totrans-2057
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE817]'
+  id: totrans-2058
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE817]'
 - en: STOCHF
+  id: totrans-2059
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
 - en: STOCHF([input_arrays], [fastk_period=5], [fastd_period=3], [fastd_matype=0])
+  id: totrans-2060
   prefs: []
   type: TYPE_NORMAL
 - en: Stochastic Fast (Momentum Indicators)
+  id: totrans-2061
   prefs: []
   type: TYPE_NORMAL
 - en: 'Inputs:'
+  id: totrans-2062
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE818]'
+  id: totrans-2063
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE818]'
 - en: 'Parameters:'
+  id: totrans-2064
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE819]'
+  id: totrans-2065
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE819]'
 - en: 'Outputs:'
+  id: totrans-2066
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE820]'
+  id: totrans-2067
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE820]'
 - en: 'Lines:'
+  id: totrans-2068
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE821]'
+  id: totrans-2069
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE821]'
 - en: 'Params:'
+  id: totrans-2070
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE822]'
+  id: totrans-2071
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE822]'
 - en: 'PlotInfo:'
+  id: totrans-2072
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE823]'
+  id: totrans-2073
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE823]'
 - en: 'PlotLines:'
+  id: totrans-2074
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE824]'
+  id: totrans-2075
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE824]'
 - en: STOCHRSI
+  id: totrans-2076
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
 - en: STOCHRSI([input_arrays], [timeperiod=14], [fastk_period=5], [fastd_period=3],
     [fastd_matype=0])
+  id: totrans-2077
   prefs: []
   type: TYPE_NORMAL
 - en: Stochastic Relative Strength Index (Momentum Indicators)
+  id: totrans-2078
   prefs: []
   type: TYPE_NORMAL
 - en: 'Inputs:'
+  id: totrans-2079
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE825]'
+  id: totrans-2080
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE825]'
 - en: 'Parameters:'
+  id: totrans-2081
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE826]'
+  id: totrans-2082
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE826]'
 - en: 'Outputs:'
+  id: totrans-2083
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE827]'
+  id: totrans-2084
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE827]'
 - en: 'Lines:'
+  id: totrans-2085
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE828]'
+  id: totrans-2086
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE828]'
 - en: 'Params:'
+  id: totrans-2087
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE829]'
+  id: totrans-2088
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE829]'
 - en: 'PlotInfo:'
+  id: totrans-2089
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE830]'
+  id: totrans-2090
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE830]'
 - en: 'PlotLines:'
+  id: totrans-2091
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE831]'
+  id: totrans-2092
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE831]'
 - en: SUB
+  id: totrans-2093
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
 - en: SUB([input_arrays])
+  id: totrans-2094
   prefs: []
   type: TYPE_NORMAL
+  zh: SUB([input_arrays])
 - en: Vector Arithmetic Substraction (Math Operators)
+  id: totrans-2095
   prefs: []
   type: TYPE_NORMAL
+  zh: 向量算术减法（数学运算符）
 - en: 'Inputs:'
+  id: totrans-2096
   prefs: []
   type: TYPE_NORMAL
+  zh: 输入：
 - en: '[PRE832]'
+  id: totrans-2097
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE832]'
 - en: 'Outputs:'
+  id: totrans-2098
   prefs: []
   type: TYPE_NORMAL
+  zh: 输出：
 - en: '[PRE833]'
+  id: totrans-2099
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE833]'
 - en: 'Lines:'
+  id: totrans-2100
   prefs: []
   type: TYPE_NORMAL
+  zh: 线：
 - en: '[PRE834]'
+  id: totrans-2101
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE834]'
 - en: 'PlotInfo:'
+  id: totrans-2102
   prefs: []
   type: TYPE_NORMAL
+  zh: 绘图信息：
 - en: '[PRE835]'
+  id: totrans-2103
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE835]'
 - en: 'PlotLines:'
+  id: totrans-2104
   prefs: []
   type: TYPE_NORMAL
+  zh: 绘图线：
 - en: '[PRE836]'
+  id: totrans-2105
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE836]'
 - en: SUM
+  id: totrans-2106
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: SUM
 - en: SUM([input_arrays], [timeperiod=30])
+  id: totrans-2107
   prefs: []
   type: TYPE_NORMAL
+  zh: SUM([input_arrays], [timeperiod=30])
 - en: Summation (Math Operators)
+  id: totrans-2108
   prefs: []
   type: TYPE_NORMAL
+  zh: 求和（数学运算符）
 - en: 'Inputs:'
+  id: totrans-2109
   prefs: []
   type: TYPE_NORMAL
+  zh: 输入：
 - en: '[PRE837]'
+  id: totrans-2110
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE837]'
 - en: 'Parameters:'
+  id: totrans-2111
   prefs: []
   type: TYPE_NORMAL
+  zh: 参数：
 - en: '[PRE838]'
+  id: totrans-2112
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE838]'
 - en: 'Outputs:'
+  id: totrans-2113
   prefs: []
   type: TYPE_NORMAL
+  zh: 输出：
 - en: '[PRE839]'
+  id: totrans-2114
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE839]'
 - en: 'Lines:'
+  id: totrans-2115
   prefs: []
   type: TYPE_NORMAL
+  zh: 线：
 - en: '[PRE840]'
+  id: totrans-2116
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE840]'
 - en: 'Params:'
+  id: totrans-2117
   prefs: []
   type: TYPE_NORMAL
+  zh: 参数：
 - en: '[PRE841]'
+  id: totrans-2118
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE841]'
 - en: 'PlotInfo:'
+  id: totrans-2119
   prefs: []
   type: TYPE_NORMAL
+  zh: 绘图信息：
 - en: '[PRE842]'
+  id: totrans-2120
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE842]'
 - en: 'PlotLines:'
+  id: totrans-2121
   prefs: []
   type: TYPE_NORMAL
+  zh: 绘图线：
 - en: '[PRE843]'
+  id: totrans-2122
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE843]'
 - en: T3
+  id: totrans-2123
   prefs: []
   type: TYPE_NORMAL
+  zh: T3
 - en: T3([input_arrays], [timeperiod=5], [vfactor=0.7])
+  id: totrans-2124
   prefs: []
   type: TYPE_NORMAL
+  zh: T3([input_arrays], [timeperiod=5], [vfactor=0.7])
 - en: Triple Exponential Moving Average (T3) (Overlap Studies)
+  id: totrans-2125
   prefs: []
   type: TYPE_NORMAL
+  zh: 三重指数移动平均线（T3）（重叠研究）
 - en: 'Inputs:'
+  id: totrans-2126
   prefs: []
   type: TYPE_NORMAL
+  zh: 输入：
 - en: '[PRE844]'
+  id: totrans-2127
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE844]'
 - en: 'Parameters:'
+  id: totrans-2128
   prefs: []
   type: TYPE_NORMAL
+  zh: 参数：
 - en: '[PRE845]'
+  id: totrans-2129
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE845]'
 - en: 'Outputs:'
+  id: totrans-2130
   prefs: []
   type: TYPE_NORMAL
+  zh: 输出：
 - en: '[PRE846]'
+  id: totrans-2131
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE846]'
 - en: 'Lines:'
+  id: totrans-2132
   prefs: []
   type: TYPE_NORMAL
+  zh: 线：
 - en: '[PRE847]'
+  id: totrans-2133
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE847]'
 - en: 'Params:'
+  id: totrans-2134
   prefs: []
   type: TYPE_NORMAL
+  zh: 参数：
 - en: '[PRE848]'
+  id: totrans-2135
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE848]'
 - en: 'PlotInfo:'
+  id: totrans-2136
   prefs: []
   type: TYPE_NORMAL
+  zh: 绘图信息：
 - en: '[PRE849]'
+  id: totrans-2137
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE849]'
 - en: 'PlotLines:'
+  id: totrans-2138
   prefs: []
   type: TYPE_NORMAL
+  zh: 绘图线：
 - en: '[PRE850]'
+  id: totrans-2139
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE850]'
 - en: TAN
+  id: totrans-2140
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: TAN
 - en: TAN([input_arrays])
+  id: totrans-2141
   prefs: []
   type: TYPE_NORMAL
+  zh: TAN([input_arrays])
 - en: Vector Trigonometric Tan (Math Transform)
+  id: totrans-2142
   prefs: []
   type: TYPE_NORMAL
+  zh: 向量三角函数正切（数学变换）
 - en: 'Inputs:'
+  id: totrans-2143
   prefs: []
   type: TYPE_NORMAL
+  zh: 输入：
 - en: '[PRE851]'
+  id: totrans-2144
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE851]'
 - en: 'Outputs:'
+  id: totrans-2145
   prefs: []
   type: TYPE_NORMAL
+  zh: 输出：
 - en: '[PRE852]'
+  id: totrans-2146
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE852]'
 - en: 'Lines:'
+  id: totrans-2147
   prefs: []
   type: TYPE_NORMAL
+  zh: 线：
 - en: '[PRE853]'
+  id: totrans-2148
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE853]'
 - en: 'PlotInfo:'
+  id: totrans-2149
   prefs: []
   type: TYPE_NORMAL
+  zh: 绘图信息：
 - en: '[PRE854]'
+  id: totrans-2150
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE854]'
 - en: 'PlotLines:'
+  id: totrans-2151
   prefs: []
   type: TYPE_NORMAL
+  zh: 绘图线：
 - en: '[PRE855]'
+  id: totrans-2152
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE855]'
 - en: TANH
+  id: totrans-2153
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: TANH
 - en: TANH([input_arrays])
+  id: totrans-2154
   prefs: []
   type: TYPE_NORMAL
+  zh: TANH([input_arrays])
 - en: Vector Trigonometric Tanh (Math Transform)
+  id: totrans-2155
   prefs: []
   type: TYPE_NORMAL
+  zh: 向量三角函数正切（数学变换）
 - en: 'Inputs:'
+  id: totrans-2156
   prefs: []
   type: TYPE_NORMAL
+  zh: 输入：
 - en: '[PRE856]'
+  id: totrans-2157
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE856]'
 - en: 'Outputs:'
+  id: totrans-2158
   prefs: []
   type: TYPE_NORMAL
+  zh: 输出：
 - en: '[PRE857]'
+  id: totrans-2159
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE857]'
 - en: 'Lines:'
+  id: totrans-2160
   prefs: []
   type: TYPE_NORMAL
+  zh: 线：
 - en: '[PRE858]'
+  id: totrans-2161
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE858]'
 - en: 'PlotInfo:'
+  id: totrans-2162
   prefs: []
   type: TYPE_NORMAL
+  zh: 绘图信息：
 - en: '[PRE859]'
+  id: totrans-2163
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE859]'
 - en: 'PlotLines:'
+  id: totrans-2164
   prefs: []
   type: TYPE_NORMAL
+  zh: 绘图线：
 - en: '[PRE860]'
+  id: totrans-2165
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE860]'
 - en: TEMA
+  id: totrans-2166
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: TEMA
 - en: TEMA([input_arrays], [timeperiod=30])
+  id: totrans-2167
   prefs: []
   type: TYPE_NORMAL
+  zh: TEMA([input_arrays], [timeperiod=30])
 - en: Triple Exponential Moving Average (Overlap Studies)
+  id: totrans-2168
   prefs: []
   type: TYPE_NORMAL
+  zh: 三重指数移动平均线（重叠研究）
 - en: 'Inputs:'
+  id: totrans-2169
   prefs: []
   type: TYPE_NORMAL
+  zh: 输入：
 - en: '[PRE861]'
+  id: totrans-2170
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE861]'
 - en: 'Parameters:'
+  id: totrans-2171
   prefs: []
   type: TYPE_NORMAL
+  zh: 参数：
 - en: '[PRE862]'
+  id: totrans-2172
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE862]'
 - en: 'Outputs:'
+  id: totrans-2173
   prefs: []
   type: TYPE_NORMAL
+  zh: 输出：
 - en: '[PRE863]'
+  id: totrans-2174
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE863]'
 - en: 'Lines:'
+  id: totrans-2175
   prefs: []
   type: TYPE_NORMAL
+  zh: 线：
 - en: '[PRE864]'
+  id: totrans-2176
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE864]'
 - en: 'Params:'
+  id: totrans-2177
   prefs: []
   type: TYPE_NORMAL
+  zh: 参数：
 - en: '[PRE865]'
+  id: totrans-2178
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE865]'
 - en: 'PlotInfo:'
+  id: totrans-2179
   prefs: []
   type: TYPE_NORMAL
+  zh: 绘图信息：
 - en: '[PRE866]'
+  id: totrans-2180
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE866]'
 - en: 'PlotLines:'
+  id: totrans-2181
   prefs: []
   type: TYPE_NORMAL
+  zh: 绘图线：
 - en: '[PRE867]'
+  id: totrans-2182
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE867]'
 - en: TRANGE
+  id: totrans-2183
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: TRANGE
 - en: TRANGE([input_arrays])
+  id: totrans-2184
   prefs: []
   type: TYPE_NORMAL
+  zh: TRANGE([input_arrays])
 - en: True Range (Volatility Indicators)
+  id: totrans-2185
   prefs: []
   type: TYPE_NORMAL
+  zh: 真实波幅（波动性指标）
 - en: 'Inputs:'
+  id: totrans-2186
   prefs: []
   type: TYPE_NORMAL
+  zh: 输入：
 - en: '[PRE868]'
+  id: totrans-2187
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE868]'
 - en: 'Outputs:'
+  id: totrans-2188
   prefs: []
   type: TYPE_NORMAL
+  zh: 输出：
 - en: '[PRE869]'
+  id: totrans-2189
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE869]'
 - en: 'Lines:'
+  id: totrans-2190
   prefs: []
   type: TYPE_NORMAL
+  zh: 线：
 - en: '[PRE870]'
+  id: totrans-2191
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE870]'
 - en: 'PlotInfo:'
+  id: totrans-2192
   prefs: []
   type: TYPE_NORMAL
+  zh: 绘图信息：
 - en: '[PRE871]'
+  id: totrans-2193
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE871]'
 - en: 'PlotLines:'
+  id: totrans-2194
   prefs: []
   type: TYPE_NORMAL
+  zh: 绘图线：
 - en: '[PRE872]'
+  id: totrans-2195
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE872]'
 - en: TRIMA
+  id: totrans-2196
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: TRIMA
 - en: TRIMA([input_arrays], [timeperiod=30])
+  id: totrans-2197
   prefs: []
   type: TYPE_NORMAL
+  zh: TRIMA([input_arrays], [timeperiod=30])
 - en: Triangular Moving Average (Overlap Studies)
+  id: totrans-2198
   prefs: []
   type: TYPE_NORMAL
+  zh: 三角形移动平均线（重叠研究）
 - en: 'Inputs:'
+  id: totrans-2199
   prefs: []
   type: TYPE_NORMAL
+  zh: 输入：
 - en: '[PRE873]'
+  id: totrans-2200
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE873]'
 - en: 'Parameters:'
+  id: totrans-2201
   prefs: []
   type: TYPE_NORMAL
+  zh: 参数：
 - en: '[PRE874]'
+  id: totrans-2202
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE874]'
 - en: 'Outputs:'
+  id: totrans-2203
   prefs: []
   type: TYPE_NORMAL
+  zh: 输出：
 - en: '[PRE875]'
+  id: totrans-2204
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE875]'
 - en: 'Lines:'
+  id: totrans-2205
   prefs: []
   type: TYPE_NORMAL
+  zh: 线：
 - en: '[PRE876]'
+  id: totrans-2206
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE876]'
 - en: 'Params:'
+  id: totrans-2207
   prefs: []
   type: TYPE_NORMAL
+  zh: 参数：
 - en: '[PRE877]'
+  id: totrans-2208
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE877]'
 - en: 'PlotInfo:'
+  id: totrans-2209
   prefs: []
   type: TYPE_NORMAL
+  zh: 绘图信息：
 - en: '[PRE878]'
+  id: totrans-2210
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE878]'
 - en: 'PlotLines:'
+  id: totrans-2211
   prefs: []
   type: TYPE_NORMAL
+  zh: 绘图线：
 - en: '[PRE879]'
+  id: totrans-2212
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE879]'
 - en: TRIX
+  id: totrans-2213
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: TRIX
 - en: TRIX([input_arrays], [timeperiod=30])
+  id: totrans-2214
   prefs: []
   type: TYPE_NORMAL
+  zh: TRIX([input_arrays], [timeperiod=30])
 - en: 1-day Rate-Of-Change (ROC) of a Triple Smooth EMA (Momentum Indicators)
+  id: totrans-2215
   prefs: []
   type: TYPE_NORMAL
+  zh: 一天的三重平滑指数移动平均线（ROC）（动量指标）
 - en: 'Inputs:'
+  id: totrans-2216
   prefs: []
   type: TYPE_NORMAL
+  zh: 输入：
 - en: '[PRE880]'
+  id: totrans-2217
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE880]'
 - en: 'Parameters:'
+  id: totrans-2218
   prefs: []
   type: TYPE_NORMAL
+  zh: 参数：
 - en: '[PRE881]'
+  id: totrans-2219
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE881]'
 - en: 'Outputs:'
+  id: totrans-2220
   prefs: []
   type: TYPE_NORMAL
+  zh: 输出：
 - en: '[PRE882]'
+  id: totrans-2221
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE882]'
 - en: 'Lines:'
+  id: totrans-2222
   prefs: []
   type: TYPE_NORMAL
+  zh: 线：
 - en: '[PRE883]'
+  id: totrans-2223
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE883]'
 - en: 'Params:'
+  id: totrans-2224
   prefs: []
   type: TYPE_NORMAL
+  zh: 参数：
 - en: '[PRE884]'
+  id: totrans-2225
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE884]'
 - en: 'PlotInfo:'
+  id: totrans-2226
   prefs: []
   type: TYPE_NORMAL
+  zh: 绘图信息：
 - en: '[PRE885]'
+  id: totrans-2227
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE885]'
 - en: 'PlotLines:'
+  id: totrans-2228
   prefs: []
   type: TYPE_NORMAL
+  zh: 绘图线：
 - en: '[PRE886]'
+  id: totrans-2229
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE886]'
 - en: TSF
+  id: totrans-2230
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: TSF
 - en: TSF([input_arrays], [timeperiod=14])
+  id: totrans-2231
   prefs: []
   type: TYPE_NORMAL
+  zh: TSF([input_arrays], [timeperiod=14])
 - en: Time Series Forecast (Statistic Functions)
+  id: totrans-2232
   prefs: []
   type: TYPE_NORMAL
+  zh: 时间序列预测（统计函数）
 - en: 'Inputs:'
+  id: totrans-2233
   prefs: []
   type: TYPE_NORMAL
+  zh: 输入：
 - en: '[PRE887]'
+  id: totrans-2234
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE887]'
 - en: 'Parameters:'
+  id: totrans-2235
   prefs: []
   type: TYPE_NORMAL
+  zh: 参数：
 - en: '[PRE888]'
+  id: totrans-2236
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE888]'
 - en: 'Outputs:'
+  id: totrans-2237
   prefs: []
   type: TYPE_NORMAL
+  zh: 输出：
 - en: '[PRE889]'
+  id: totrans-2238
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE889]'
 - en: 'Lines:'
+  id: totrans-2239
   prefs: []
   type: TYPE_NORMAL
+  zh: 线：
 - en: '[PRE890]'
+  id: totrans-2240
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE890]'
 - en: 'Params:'
+  id: totrans-2241
   prefs: []
   type: TYPE_NORMAL
+  zh: 参数：
 - en: '[PRE891]'
+  id: totrans-2242
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE891]'
 - en: 'PlotInfo:'
+  id: totrans-2243
   prefs: []
   type: TYPE_NORMAL
+  zh: 绘图信息：
 - en: '[PRE892]'
+  id: totrans-2244
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE892]'
 - en: 'PlotLines:'
+  id: totrans-2245
   prefs: []
   type: TYPE_NORMAL
+  zh: 绘图线：
 - en: '[PRE893]'
+  id: totrans-2246
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE893]'
 - en: TYPPRICE
+  id: totrans-2247
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: TYPPRICE
 - en: TYPPRICE([input_arrays])
+  id: totrans-2248
   prefs: []
   type: TYPE_NORMAL
+  zh: TYPPRICE([input_arrays])
 - en: Typical Price (Price Transform)
+  id: totrans-2249
   prefs: []
   type: TYPE_NORMAL
+  zh: 典型价格（价格转换）
 - en: 'Inputs:'
+  id: totrans-2250
   prefs: []
   type: TYPE_NORMAL
+  zh: 输入：
 - en: '[PRE894]'
+  id: totrans-2251
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE894]'
 - en: 'Outputs:'
+  id: totrans-2252
   prefs: []
   type: TYPE_NORMAL
+  zh: 输出：
 - en: '[PRE895]'
+  id: totrans-2253
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE895]'
 - en: 'Lines:'
+  id: totrans-2254
   prefs: []
   type: TYPE_NORMAL
+  zh: 线：
 - en: '[PRE896]'
+  id: totrans-2255
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE896]'
 - en: 'PlotInfo:'
+  id: totrans-2256
   prefs: []
   type: TYPE_NORMAL
+  zh: 绘图信息：
 - en: '[PRE897]'
+  id: totrans-2257
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE897]'
 - en: 'PlotLines:'
+  id: totrans-2258
   prefs: []
   type: TYPE_NORMAL
+  zh: 绘图线：
 - en: '[PRE898]'
+  id: totrans-2259
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE898]'
 - en: ULTOSC
+  id: totrans-2260
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: ULTOSC
 - en: ULTOSC([input_arrays], [timeperiod1=7], [timeperiod2=14], [timeperiod3=28])
+  id: totrans-2261
   prefs: []
   type: TYPE_NORMAL
+  zh: ULTOSC([input_arrays], [timeperiod1=7], [timeperiod2=14], [timeperiod3=28])
 - en: Ultimate Oscillator (Momentum Indicators)
+  id: totrans-2262
   prefs: []
   type: TYPE_NORMAL
+  zh: 终极振荡器（动量指标）
 - en: 'Inputs:'
+  id: totrans-2263
   prefs: []
   type: TYPE_NORMAL
+  zh: 输入：
 - en: '[PRE899]'
+  id: totrans-2264
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE899]'
 - en: 'Parameters:'
+  id: totrans-2265
   prefs: []
   type: TYPE_NORMAL
+  zh: 参数：
 - en: '[PRE900]'
+  id: totrans-2266
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE900]'
 - en: 'Outputs:'
+  id: totrans-2267
   prefs: []
   type: TYPE_NORMAL
+  zh: 输出：
 - en: '[PRE901]'
+  id: totrans-2268
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE901]'
 - en: 'Lines:'
+  id: totrans-2269
   prefs: []
   type: TYPE_NORMAL
+  zh: 线：
 - en: '[PRE902]'
+  id: totrans-2270
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE902]'
 - en: 'Params:'
+  id: totrans-2271
   prefs: []
   type: TYPE_NORMAL
+  zh: 参数：
 - en: '[PRE903]'
+  id: totrans-2272
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE903]'
 - en: 'PlotInfo:'
+  id: totrans-2273
   prefs: []
   type: TYPE_NORMAL
+  zh: 绘图信息：
 - en: '[PRE904]'
+  id: totrans-2274
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE904]'
 - en: 'PlotLines:'
+  id: totrans-2275
   prefs: []
   type: TYPE_NORMAL
+  zh: 绘图线：
 - en: '[PRE905]'
+  id: totrans-2276
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE905]'
 - en: VAR
+  id: totrans-2277
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: VAR
 - en: VAR([input_arrays], [timeperiod=5], [nbdev=1])
+  id: totrans-2278
   prefs: []
   type: TYPE_NORMAL
+  zh: VAR([input_arrays], [timeperiod=5], [nbdev=1])
 - en: Variance (Statistic Functions)
+  id: totrans-2279
   prefs: []
   type: TYPE_NORMAL
+  zh: 方差（统计函数）
 - en: 'Inputs:'
+  id: totrans-2280
   prefs: []
   type: TYPE_NORMAL
+  zh: 输入：
 - en: '[PRE906]'
+  id: totrans-2281
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE906]'
 - en: 'Parameters:'
+  id: totrans-2282
   prefs: []
   type: TYPE_NORMAL
+  zh: 参数：
 - en: '[PRE907]'
+  id: totrans-2283
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE907]'
 - en: 'Outputs:'
+  id: totrans-2284
   prefs: []
   type: TYPE_NORMAL
+  zh: 输出：
 - en: '[PRE908]'
+  id: totrans-2285
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE908]'
 - en: 'Lines:'
+  id: totrans-2286
   prefs: []
   type: TYPE_NORMAL
+  zh: 线：
 - en: '[PRE909]'
+  id: totrans-2287
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE909]'
 - en: 'Params:'
+  id: totrans-2288
   prefs: []
   type: TYPE_NORMAL
+  zh: 参数：
 - en: '[PRE910]'
+  id: totrans-2289
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE910]'
 - en: 'PlotInfo:'
+  id: totrans-2290
   prefs: []
   type: TYPE_NORMAL
+  zh: 绘图信息：
 - en: '[PRE911]'
+  id: totrans-2291
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE911]'
 - en: 'PlotLines:'
+  id: totrans-2292
   prefs: []
   type: TYPE_NORMAL
+  zh: 绘图线：
 - en: '[PRE912]'
+  id: totrans-2293
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE912]'
 - en: WCLPRICE
+  id: totrans-2294
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: WCLPRICE
 - en: WCLPRICE([input_arrays])
+  id: totrans-2295
   prefs: []
   type: TYPE_NORMAL
+  zh: WCLPRICE([input_arrays])
 - en: Weighted Close Price (Price Transform)
+  id: totrans-2296
   prefs: []
   type: TYPE_NORMAL
+  zh: 加权收盘价（价格转换）
 - en: 'Inputs:'
+  id: totrans-2297
   prefs: []
   type: TYPE_NORMAL
+  zh: 输入：
 - en: '[PRE913]'
+  id: totrans-2298
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE913]'
 - en: 'Outputs:'
+  id: totrans-2299
   prefs: []
   type: TYPE_NORMAL
+  zh: 输出：
 - en: '[PRE914]'
+  id: totrans-2300
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE914]'
 - en: 'Lines:'
+  id: totrans-2301
   prefs: []
   type: TYPE_NORMAL
+  zh: 线：
 - en: '[PRE915]'
+  id: totrans-2302
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE915]'
 - en: 'PlotInfo:'
+  id: totrans-2303
   prefs: []
   type: TYPE_NORMAL
+  zh: 绘图信息：
 - en: '[PRE916]'
+  id: totrans-2304
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE916]'
 - en: 'PlotLines:'
+  id: totrans-2305
   prefs: []
   type: TYPE_NORMAL
+  zh: 绘图线：
 - en: '[PRE917]'
+  id: totrans-2306
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE917]'
 - en: WILLR
+  id: totrans-2307
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: WILLR
 - en: WILLR([input_arrays], [timeperiod=14])
+  id: totrans-2308
   prefs: []
   type: TYPE_NORMAL
+  zh: WILLR([input_arrays], [timeperiod=14])
 - en: Williams’ %R (Momentum Indicators)
+  id: totrans-2309
   prefs: []
   type: TYPE_NORMAL
+  zh: 威廉指标（动量指标）
 - en: 'Inputs:'
+  id: totrans-2310
   prefs: []
   type: TYPE_NORMAL
+  zh: 输入：
 - en: '[PRE918]'
+  id: totrans-2311
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE918]'
 - en: 'Parameters:'
+  id: totrans-2312
   prefs: []
   type: TYPE_NORMAL
+  zh: 参数：
 - en: '[PRE919]'
+  id: totrans-2313
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE919]'
 - en: 'Outputs:'
+  id: totrans-2314
   prefs: []
   type: TYPE_NORMAL
+  zh: 输出：
 - en: '[PRE920]'
+  id: totrans-2315
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE920]'
 - en: 'Lines:'
+  id: totrans-2316
   prefs: []
   type: TYPE_NORMAL
+  zh: 线：
 - en: '[PRE921]'
+  id: totrans-2317
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE921]'
 - en: 'Params:'
+  id: totrans-2318
   prefs: []
   type: TYPE_NORMAL
+  zh: 参数：
 - en: '[PRE922]'
+  id: totrans-2319
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE922]'
 - en: 'PlotInfo:'
+  id: totrans-2320
   prefs: []
   type: TYPE_NORMAL
+  zh: 绘图信息：
 - en: '[PRE923]'
+  id: totrans-2321
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE923]'
 - en: 'PlotLines:'
+  id: totrans-2322
   prefs: []
   type: TYPE_NORMAL
+  zh: 绘图线：
 - en: '[PRE924]'
+  id: totrans-2323
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE924]'
 - en: WMA
+  id: totrans-2324
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: WMA
 - en: WMA([input_arrays], [timeperiod=30])
+  id: totrans-2325
   prefs: []
   type: TYPE_NORMAL
+  zh: WMA([input_arrays], [timeperiod=30])
 - en: Weighted Moving Average (Overlap Studies)
+  id: totrans-2326
   prefs: []
   type: TYPE_NORMAL
+  zh: 加权移动平均线（重叠研究）
 - en: 'Inputs:'
+  id: totrans-2327
   prefs: []
   type: TYPE_NORMAL
+  zh: 输入：
 - en: '[PRE925]'
+  id: totrans-2328
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE925]'
 - en: 'Parameters:'
+  id: totrans-2329
   prefs: []
   type: TYPE_NORMAL
+  zh: 参数：
 - en: '[PRE926]'
+  id: totrans-2330
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE926]'
 - en: 'Outputs:'
+  id: totrans-2331
   prefs: []
   type: TYPE_NORMAL
+  zh: 输出：
 - en: '[PRE927]'
+  id: totrans-2332
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE927]'
 - en: 'Lines:'
+  id: totrans-2333
   prefs: []
   type: TYPE_NORMAL
+  zh: 线：
 - en: '[PRE928]'
+  id: totrans-2334
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE928]'
 - en: 'Params:'
+  id: totrans-2335
   prefs: []
   type: TYPE_NORMAL
+  zh: 参数：
 - en: '[PRE929]'
+  id: totrans-2336
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE929]'
 - en: 'PlotInfo:'
+  id: totrans-2337
   prefs: []
   type: TYPE_NORMAL
+  zh: 绘图信息：
 - en: '[PRE930]'
+  id: totrans-2338
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE930]'
 - en: 'PlotLines:'
+  id: totrans-2339
   prefs: []
   type: TYPE_NORMAL
+  zh: 绘图线：
 - en: '[PRE931]'
+  id: totrans-2340
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE931]'

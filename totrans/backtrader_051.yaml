@@ -224,78 +224,93 @@
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '*移动平均线*（如果两者产生相同的结果）将被绘制在现有的*移动平均线*之上。这两个指标不能分开观察，如果是这样，测试就通过了。'
 - en: All samples include a `CDLDOJI` indicator as a reference
   id: totrans-38
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 所有样本都包括一个`CDLDOJI`指标作为参考
 - en: KAMA (Kaufman Moving Average)
   id: totrans-39
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: KAMA（Kaufman移动平均）
 - en: 'This is the 1^(st) example because it is the only (from all indicators which
     the sample directly compare) that has a difference:'
   id: totrans-40
   prefs: []
   type: TYPE_NORMAL
+  zh: 这是第一个示例，因为它是唯一一个（从所有直接比较的指标中）具有差异的示例：
 - en: The initial values of the the samples are not the same
   id: totrans-41
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 样本的初始值不同
 - en: At some point in time, the values converge and both *KAMA* implementations have
     the same behavior.
   id: totrans-42
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 在某个时间点，两种*KAMA*实现会收敛并具有相同的行为。
 - en: 'After having analyzed the *ta-lib* source code:'
   id: totrans-43
   prefs: []
   type: TYPE_NORMAL
+  zh: 在分析了*ta-lib*源代码之后：
 - en: The implementation in *ta-lib* makes a non-industry standard choice for the
     1^(st) values of the *KAMA*.
   id: totrans-44
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '*ta-lib*中的实现对*KAMA*的第一个值进行了非行业标准的选择。'
 - en: 'The choice can be seen in the source code quoting from the source code): *The
     yesterday price is used here as the previous KAMA.*'
   id: totrans-45
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 可以从源代码中看到选择（引用源代码）：*这里使用昨天的价格作为前一天的KAMA。*
 - en: '*backtrader* does the usual choice which is the same as for example the one
     from *Stockcharts*:'
   id: totrans-46
   prefs: []
   type: TYPE_NORMAL
+  zh: '*backtrader*做出了通常的选择，与*Stockcharts*的选择相同：'
 - en: '[KAMA at StockCharts](http://stockcharts.com/school/doku.php?id=chart_school:technical_indicators:kaufman_s_adaptive_moving_average)'
   id: totrans-47
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[StockCharts上的KAMA](http://stockcharts.com/school/doku.php?id=chart_school:technical_indicators:kaufman_s_adaptive_moving_average)'
 - en: '*Since we need an initial value to start the calculation, the first KAMA is
     just a simple moving average*'
   id: totrans-48
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: '*由于我们需要一个初始值来开始计算，因此第一个KAMA只是一个简单的移动平均*'
 - en: 'Hence the difference. Furthermore:'
   id: totrans-49
   prefs: []
   type: TYPE_NORMAL
+  zh: 因此有所不同。此外：
 - en: The *ta-lib* `KAMA` implementation doesn’t allow specifying the `fast` and `slow`
     periods for the adjustment of the *scalable constant* defined by *Kaufman*.
   id: totrans-50
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '*ta-lib*的`KAMA`实现不允许指定用于调整*Kaufman*定义的*可调节常数*的`fast`和`slow`周期。'
 - en: 'Sample execution:'
   id: totrans-51
   prefs: []
   type: TYPE_NORMAL
+  zh: 示例执行：
 - en: '[PRE6]'
   id: totrans-52
   prefs: []
@@ -305,15 +320,18 @@
   id: totrans-53
   prefs: []
   type: TYPE_NORMAL
+  zh: 输出
 - en: '![image](../Images/96adf12f470193982b80cb0e4b04f936.png)'
   id: totrans-54
   prefs: []
   type: TYPE_IMG
+  zh: '![image](../Images/96adf12f470193982b80cb0e4b04f936.png)'
 - en: SMA
   id: totrans-55
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: SMA
 - en: '[PRE7]'
   id: totrans-56
   prefs: []
@@ -323,15 +341,18 @@
   id: totrans-57
   prefs: []
   type: TYPE_NORMAL
+  zh: 输出
 - en: '![image](../Images/854a2174af3a979739fc533d27e6303f.png)'
   id: totrans-58
   prefs: []
   type: TYPE_IMG
+  zh: '![image](../Images/854a2174af3a979739fc533d27e6303f.png)'
 - en: EMA
   id: totrans-59
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: EMA
 - en: '[PRE8]'
   id: totrans-60
   prefs: []
@@ -341,15 +362,18 @@
   id: totrans-61
   prefs: []
   type: TYPE_NORMAL
+  zh: 输出
 - en: '![image](../Images/bb565d4ebf80767c1845e14855425dba.png)'
   id: totrans-62
   prefs: []
   type: TYPE_IMG
+  zh: '![image](../Images/bb565d4ebf80767c1845e14855425dba.png)'
 - en: Stochastic
   id: totrans-63
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 随机指标
 - en: '[PRE9]'
   id: totrans-64
   prefs: []
@@ -359,15 +383,18 @@
   id: totrans-65
   prefs: []
   type: TYPE_NORMAL
+  zh: 输出
 - en: '![image](../Images/4cbafdc7fc9c487af417443d61eb6a7b.png)'
   id: totrans-66
   prefs: []
   type: TYPE_IMG
+  zh: '![image](../Images/4cbafdc7fc9c487af417443d61eb6a7b.png)'
 - en: RSI
   id: totrans-67
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: RSI
 - en: '[PRE10]'
   id: totrans-68
   prefs: []
@@ -377,15 +404,18 @@
   id: totrans-69
   prefs: []
   type: TYPE_NORMAL
+  zh: 输出
 - en: '![image](../Images/c2de2e76ef142baa81dd8013275e619d.png)'
   id: totrans-70
   prefs: []
   type: TYPE_IMG
+  zh: '![image](../Images/c2de2e76ef142baa81dd8013275e619d.png)'
 - en: MACD
   id: totrans-71
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: MACD
 - en: '[PRE11]'
   id: totrans-72
   prefs: []
@@ -395,15 +425,18 @@
   id: totrans-73
   prefs: []
   type: TYPE_NORMAL
+  zh: 输出
 - en: '![image](../Images/cd9c636ab704454de629be07e4916303.png)'
   id: totrans-74
   prefs: []
   type: TYPE_IMG
+  zh: '![image](../Images/cd9c636ab704454de629be07e4916303.png)'
 - en: Bollinger Bands
   id: totrans-75
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 布林带
 - en: '[PRE12]'
   id: totrans-76
   prefs: []
@@ -413,20 +446,24 @@
   id: totrans-77
   prefs: []
   type: TYPE_NORMAL
+  zh: 输出
 - en: '![image](../Images/3873648e820de0c0fdd15ee7015a1500.png)'
   id: totrans-78
   prefs: []
   type: TYPE_IMG
+  zh: '![image](../Images/3873648e820de0c0fdd15ee7015a1500.png)'
 - en: AROON
   id: totrans-79
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: AROON
 - en: Note that *ta-lib* chooses to put the *down* line first and the colours are
     inverted when compared with the *backtrader* built-in indicator.
   id: totrans-80
   prefs: []
   type: TYPE_NORMAL
+  zh: 请注意，*ta-lib*选择先放*down*线，并且颜色与*backtrader*内置指标相比是反转的。
 - en: '[PRE13]'
   id: totrans-81
   prefs: []
@@ -436,15 +473,18 @@
   id: totrans-82
   prefs: []
   type: TYPE_NORMAL
+  zh: 输出
 - en: '![image](../Images/37f6242b93bafec219a22f1b43cdf523.png)'
   id: totrans-83
   prefs: []
   type: TYPE_IMG
+  zh: '![image](../Images/37f6242b93bafec219a22f1b43cdf523.png)'
 - en: Ultimate Oscillator
   id: totrans-84
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 终极波动指标
 - en: '[PRE14]'
   id: totrans-85
   prefs: []
@@ -454,15 +494,18 @@
   id: totrans-86
   prefs: []
   type: TYPE_NORMAL
+  zh: 输出
 - en: '![image](../Images/4417f633399efe2e57e8bbe262242074.png)'
   id: totrans-87
   prefs: []
   type: TYPE_IMG
+  zh: '![image](../Images/4417f633399efe2e57e8bbe262242074.png)'
 - en: Trix
   id: totrans-88
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: Trix
 - en: '[PRE15]'
   id: totrans-89
   prefs: []
@@ -472,19 +515,23 @@
   id: totrans-90
   prefs: []
   type: TYPE_NORMAL
+  zh: 输出
 - en: '![image](../Images/f272a8ba189616dee14e4ee7d9819b19.png)'
   id: totrans-91
   prefs: []
   type: TYPE_IMG
+  zh: '![image](../Images/f272a8ba189616dee14e4ee7d9819b19.png)'
 - en: ADXR
   id: totrans-92
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: ADXR
 - en: Here *backtrader* offers both the `ADX` and `ADXR` lines.
   id: totrans-93
   prefs: []
   type: TYPE_NORMAL
+  zh: 这里*backtrader*提供了`ADX`和`ADXR`线。
 - en: '[PRE16]'
   id: totrans-94
   prefs: []
@@ -494,15 +541,18 @@
   id: totrans-95
   prefs: []
   type: TYPE_NORMAL
+  zh: 输出
 - en: '![image](../Images/418b94a30afcba6da96af98c78127b48.png)'
   id: totrans-96
   prefs: []
   type: TYPE_IMG
+  zh: '![image](../Images/418b94a30afcba6da96af98c78127b48.png)'
 - en: DEMA
   id: totrans-97
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: DEMA
 - en: '[PRE17]'
   id: totrans-98
   prefs: []
@@ -512,15 +562,18 @@
   id: totrans-99
   prefs: []
   type: TYPE_NORMAL
+  zh: 输出
 - en: '![image](../Images/0ffed62784c7804e19c61010bf3bba27.png)'
   id: totrans-100
   prefs: []
   type: TYPE_IMG
+  zh: '![image](../Images/0ffed62784c7804e19c61010bf3bba27.png)'
 - en: TEMA
   id: totrans-101
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: TEMA
 - en: '[PRE18]'
   id: totrans-102
   prefs: []
@@ -530,20 +583,24 @@
   id: totrans-103
   prefs: []
   type: TYPE_NORMAL
+  zh: 输出
 - en: '![image](../Images/e60b1389d6b46d952c2dbbaf589ee7d0.png)'
   id: totrans-104
   prefs: []
   type: TYPE_IMG
+  zh: '![image](../Images/e60b1389d6b46d952c2dbbaf589ee7d0.png)'
 - en: PPO
   id: totrans-105
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: PPO
 - en: Here *backtrader* offers not only the `ppo` line, but a more traditional `macd`
     approach.
   id: totrans-106
   prefs: []
   type: TYPE_NORMAL
+  zh: 这里*backtrader*不仅提供`ppo`线，还提供了更传统的`macd`方法。
 - en: '[PRE19]'
   id: totrans-107
   prefs: []
@@ -553,15 +610,18 @@
   id: totrans-108
   prefs: []
   type: TYPE_NORMAL
+  zh: 输出
 - en: '![image](../Images/f6e2a0829ea03025af80f61183a12524.png)'
   id: totrans-109
   prefs: []
   type: TYPE_IMG
+  zh: '![image](../Images/f6e2a0829ea03025af80f61183a12524.png)'
 - en: WilliamsR
   id: totrans-110
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: WilliamsR
 - en: '[PRE20]'
   id: totrans-111
   prefs: []
@@ -571,20 +631,24 @@
   id: totrans-112
   prefs: []
   type: TYPE_NORMAL
+  zh: 输出
 - en: '![image](../Images/d8e9f717b4eaf1de2c3c4c27dfb37f13.png)'
   id: totrans-113
   prefs: []
   type: TYPE_IMG
+  zh: '![image](../Images/d8e9f717b4eaf1de2c3c4c27dfb37f13.png)'
 - en: ROC
   id: totrans-114
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: ROC
 - en: All indicators show have exactly the same shape, but how to track *momentum*
     or *rate of change* has several definitions
   id: totrans-115
   prefs: []
   type: TYPE_NORMAL
+  zh: 所有指标显示的形状完全相同，但如何跟踪*动量*或*变化率*有几种定义。
 - en: '[PRE21]'
   id: totrans-116
   prefs: []
@@ -594,15 +658,18 @@
   id: totrans-117
   prefs: []
   type: TYPE_NORMAL
+  zh: 输出
 - en: '![image](../Images/43b16c19fb1a12c47be66f17b61b3a5e.png)'
   id: totrans-118
   prefs: []
   type: TYPE_IMG
+  zh: '![image](../Images/43b16c19fb1a12c47be66f17b61b3a5e.png)'
 - en: Sample Usage
   id: totrans-119
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 示例用法
 - en: '[PRE22]'
   id: totrans-120
   prefs: []
@@ -613,6 +680,7 @@
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 示例代码
 - en: '[PRE23]'
   id: totrans-122
   prefs: []
