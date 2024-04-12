@@ -1,198 +1,301 @@
 - en: User Defined Commissions
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 用户自定义佣金
 - en: 原文：[https://www.backtrader.com/docu/user-defined-commissions/commission-schemes-subclassing/](https://www.backtrader.com/docu/user-defined-commissions/commission-schemes-subclassing/)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.backtrader.com/docu/user-defined-commissions/commission-schemes-subclassing/](https://www.backtrader.com/docu/user-defined-commissions/commission-schemes-subclassing/)
 - en: 'The most important part of reworking the CommInfo object to the actual incarnation
     involved:'
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: 重塑 CommInfo 对象到实际形式的最重要部分涉及：
 - en: Retaining the original `CommissionInfo` class and behavior
+  id: totrans-3
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 保留原始的 `CommissionInfo` 类和行为
 - en: Opening the door for easy creation of user defined commissions
+  id: totrans-4
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 为轻松创建用户定义的佣金打开大门
 - en: Making the format xx% the default for new commission schemes instead of 0.xx
     (just a matter of taste), keeping the behavior configurable
+  id: totrans-5
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 将格式 xx% 设为新佣金方案的默认值而不是 0.xx（只是一种品味问题），保持行为可配置
 - en: Note
+  id: totrans-6
   prefs: []
   type: TYPE_NORMAL
+  zh: 注意
 - en: See below the docstring of `CommInfoBase` for parameters reference
+  id: totrans-7
   prefs: []
   type: TYPE_NORMAL
+  zh: 请参阅下面的 `CommInfoBase` 的文档字符串以获取参数参考
 - en: Defining a Commission Scheme
+  id: totrans-8
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 定义佣金方案
 - en: It involves 1 or 2 steps
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: 这涉及到 1 或 2 个步骤
 - en: Subclassing `CommInfoBase`
+  id: totrans-10
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 子类化 `CommInfoBase`
 - en: 'Simply changing the default parameters may be enough. `backtrader` already
     does this with some definitions present in the module `backtrader.commissions`.
     The regular industry standard for Futures is a fixed amount per contract and per
     round. The definition can be done as:'
+  id: totrans-11
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 简单地更改默认参数可能就足够了。`backtrader` 已经在模块 `backtrader.commissions` 中的一些定义中这样做了。期货的常规行业标准是每个合同和每轮的固定金额。定义如下：
 - en: '[PRE0]'
+  id: totrans-12
   prefs:
   - PREF_IND
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: 'For stocks and perc-wise commissions:'
+  id: totrans-13
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 对于股票和百分比佣金：
 - en: '[PRE1]'
+  id: totrans-14
   prefs:
   - PREF_IND
   type: TYPE_PRE
+  zh: '[PRE1]'
 - en: 'As stated above the default for the interpretation of the percentage here (passed
     as parameter `commission`) is that of: **xx%**. Should the old/other behavior
     be wished **0.xx**, it can be easily done:'
+  id: totrans-15
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 如上所述，这里对百分比的解释的默认是：**xx%**。如果希望使用旧的/其他行为 **0.xx**，可以轻松实现：
 - en: '[PRE2]'
+  id: totrans-16
   prefs:
   - PREF_IND
   type: TYPE_PRE
+  zh: '[PRE2]'
 - en: Overriding (if needed be) the `_getcommission` method
+  id: totrans-17
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 覆盖（如果需要的话） `_getcommission` 方法
 - en: 'Defined as:'
+  id: totrans-18
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 定义如下：
 - en: '[PRE3]'
+  id: totrans-19
   prefs:
   - PREF_IND
   type: TYPE_PRE
+  zh: '[PRE3]'
 - en: More details in a practical example below
+  id: totrans-20
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 更多详细信息请参见下面的实际示例
 - en: How to apply this to the platform
+  id: totrans-21
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 如何应用到平台上
 - en: Once a `CommInfoBase` subclass is in place the trick is to use `broker.addcommissioninfo`
     rather than the usual `broker.setcommission`. The latter will internally use the
     legacy `CommissionInfoObject`.
+  id: totrans-22
   prefs: []
   type: TYPE_NORMAL
+  zh: 一旦 `CommInfoBase` 的子类就位，关键是使用 `broker.addcommissioninfo` 而不是通常的 `broker.setcommission`。后者将在内部使用传统的
+    `CommissionInfoObject`。
 - en: 'Easier done than said:'
+  id: totrans-23
   prefs: []
   type: TYPE_NORMAL
+  zh: 说起来容易做起来难：
 - en: '[PRE4]'
+  id: totrans-24
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE4]'
 - en: 'The `addcommissioninfo` method is defined as follows:'
+  id: totrans-25
   prefs: []
   type: TYPE_NORMAL
+  zh: '`addcommissioninfo` 方法定义如下：'
 - en: '[PRE5]'
+  id: totrans-26
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE5]'
 - en: Setting `name` means that the `comminfo` object will only apply to assets with
     that name. The default value of `None` means it applies to all assets in the system.
+  id: totrans-27
   prefs: []
   type: TYPE_NORMAL
+  zh: 设置 `name` 意味着 `comminfo` 对象仅适用于具有该名称的资产。默认值 `None` 意味着它适用于系统中的所有资产。
 - en: A practical example
+  id: totrans-28
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 一个实际的例子
 - en: '[Ticket #45](https://github.com/mementum/backtrader/issues/45) asks about a
     commission scheme which applies to Futures, is percentage wise and uses the commission
     percentage on the entire “virtual” value of the contract. ie: includes the future
     multiplier in the commission calculation.'
+  id: totrans-29
   prefs: []
   type: TYPE_NORMAL
+  zh: '[票号 #45](https://github.com/mementum/backtrader/issues/45) 询问适用于期货的佣金方案，是百分比方式，并在佣金计算中使用合同的“虚拟”价值的佣金百分比。即：在佣金计算中包括未来合约的倍数。'
 - en: 'It should be easy:'
+  id: totrans-30
   prefs: []
   type: TYPE_NORMAL
+  zh: 这应该很容易：
 - en: '[PRE6]'
+  id: totrans-31
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE6]'
 - en: 'Putting it into the system:'
+  id: totrans-32
   prefs: []
   type: TYPE_NORMAL
+  zh: 将其加入系统：
 - en: '[PRE7]'
+  id: totrans-33
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE7]'
 - en: 'If the format **0.xx** is preferred as the default, just set param `percabs`
     to `True`:'
+  id: totrans-34
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果格式 **0.xx** 被偏好为默认值，只需将参数 `percabs` 设置为 `True`：
 - en: '[PRE8]'
+  id: totrans-35
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE8]'
 - en: This all should do the trick.
+  id: totrans-36
   prefs: []
   type: TYPE_NORMAL
+  zh: 这一切都应该行得通。
 - en: Explaining `pseudoexec`
+  id: totrans-37
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 解释 `pseudoexec`
 - en: 'Let’s recall the definition of `_getcommission`:'
+  id: totrans-38
   prefs: []
   type: TYPE_NORMAL
+  zh: 让我们回顾一下 `_getcommission` 的定义：
 - en: '[PRE9]'
+  id: totrans-39
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE9]'
 - en: The purpose of the `pseudoexec` arg may seem obscure but it serves a purpose.
+  id: totrans-40
   prefs: []
   type: TYPE_NORMAL
+  zh: '`pseudoexec` 参数的目的可能看起来很模糊，但它确实有其作用。'
 - en: The platform may call this method to do precalculation of available cash and
     some other tasks
+  id: totrans-41
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 平台可能调用此方法来预先计算可用现金和一些其他任务
 - en: This means that the method may (and it actually will) be called more than once
     with the same parameters
+  id: totrans-42
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 这意味着该方法可能（而且实际上会）使用相同的参数调用多次
 - en: '`pseudoexec` indicates whether the call corresponds to the actual execution
     of an order. Although at first sight this may not seem “relevant”, it is if scenarios
     like the following are considered:'
+  id: totrans-43
   prefs: []
   type: TYPE_NORMAL
+  zh: '`pseudoexec` 表示调用是否对应于订单的实际执行。虽然乍一看这可能似乎“不相关”，但如果考虑以下情景，它就很重要：'
 - en: A broker offers a 50% discount on futures round-trip commission once the amount
     of negotiated contracts has exceeeded 5000 units
+  id: totrans-44
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 一家经纪人在合同数量超过 5000 单位后会给期货来回佣金打 5 折
 - en: In such case and if `pseudoexec` was not there, the multiple non-execution calls
     to the method would quickly trigger the assumption that the discount is in place.
+  id: totrans-45
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 在这种情况下，如果没有`pseudoexec`，对该方法的多次非执行调用将迅速触发折扣已生效的假设。
 - en: 'Putting the scenario to work:'
+  id: totrans-46
   prefs: []
   type: TYPE_NORMAL
+  zh: 将情景付诸实践：
 - en: '[PRE10]'
+  id: totrans-47
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE10]'
 - en: The purpose and being of `pseudoexec` are hopefully clear now.
+  id: totrans-48
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在，`pseudoexec`的目的和存在应该清楚了。
 - en: CommInfoBase docstring and params
+  id: totrans-49
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: CommInfoBase 文档字符串和参数
 - en: 'See Commissions: Stocks vs Futures for the reference of `CommInfoBase`'
+  id: totrans-50
   prefs: []
   type: TYPE_NORMAL
+  zh: 参见[佣金：股票 vs 期货](https://example.org/commissions_stocks_vs_futures)以获取`CommInfoBase`的参考。

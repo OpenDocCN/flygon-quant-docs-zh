@@ -1,623 +1,936 @@
 - en: 'Commissions: Stocks vs Futures'
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 佣金：股票与期货
 - en: 原文：[https://www.backtrader.com/docu/commission-schemes/commission-schemes/](https://www.backtrader.com/docu/commission-schemes/commission-schemes/)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.backtrader.com/docu/commission-schemes/commission-schemes/](https://www.backtrader.com/docu/commission-schemes/commission-schemes/)
 - en: Agnosticity
+  id: totrans-2
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 不可知论
 - en: Before going forward let’s remember that `backtrader` tries to remain agnostic
     as to what the data represents. Different commission schemes can be applied to
     the same data set.
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: 在继续之前，让我们记住，`backtrader`试图保持对数据表示的不可知性。 可以将不同的佣金方案应用于相同的数据集。
 - en: Let’s see how it can be done.
+  id: totrans-4
   prefs: []
   type: TYPE_NORMAL
+  zh: 让我们看看如何做到这一点。
 - en: Using the broker shortcuts
+  id: totrans-5
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 使用经纪商快捷方式
 - en: 'This keeps the end user away from `CommissionInfo` objects because a commission
     scheme can be *created/set* with a single function call. Within the regular `cerebro`
     creation/set-up process, just add a call to `setcommission` over the `broker`
     member attribute. The following call sets a usual commission scheme for **Eurostoxx50**
     futures when working with *Interactive Brokers*:'
+  id: totrans-6
   prefs: []
   type: TYPE_NORMAL
+  zh: 这使得最终用户远离了`CommissionInfo`对象，因为可以通过单个函数调用来创建/设置佣金方案。 在常规的`cerebro`创建/设置过程中，只需在`broker`成员属性上添加一个对`setcommission`的调用。
+    以下调用为使用*Interactive Brokers*时的**Eurostoxx50**期货设置了一个常规佣金方案：
 - en: '[PRE0]'
+  id: totrans-7
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: 'Since most users will usually just test a single instrument, that’s all that’s
     down to it. If you have given a `name` to your data feed, because several instruments
     are being considered simultaneously on a chart, this call can be slightly extended
     to look as follows:'
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: 由于大多数用户通常只会测试单个工具，因此这就是所有的内容。 如果您已为数据源（`data feed`）指定了`name`，因为在图表上同时考虑了多个工具，因此可以稍微扩展此调用，如下所示：
 - en: '[PRE1]'
+  id: totrans-9
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE1]'
 - en: In this case this on-the-fly commission scheme will only applied to instruments
     whose name matches `Eurostoxx50`.
+  id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: 在这种情况下，此即时佣金方案仅适用于名称匹配为`Eurostoxx50`的工具。
 - en: The meaning of the setcommission parameters
+  id: totrans-11
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 设置佣金参数的含义
 - en: '`commission` (default: `0.0`)'
+  id: totrans-12
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`commission`（默认值：`0.0`）'
 - en: Monetary units in absolute or percentage terms each **action** costs.
+  id: totrans-13
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 绝对或百分比单位中每个**操作**的货币单位成本。
 - en: In the above example it is 2.0 euros per contract for a `buy` and again 2.0
     euros per contract for a `sell`.
+  id: totrans-14
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 在上面的示例中，每个`buy`合约的费用为2.0欧元，每个`sell`合约再次为2.0欧元。
 - en: The important issue here is when to use absolute or percentage values.
+  id: totrans-15
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 这里重要的问题是何时使用绝对值或百分比值。
 - en: If `margin` evaluates to `False` (it is False, 0 or None for example) then it
     will be considered that `commission` expresses a percentage of the `price` times
     `size` operatin value
+  id: totrans-16
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 如果`margin`评估为`False`（例如为False、0或None），则会认为`commission`表示`price`乘以`size`操作值的百分比
 - en: If `margin` is something else, it is considered the operations are happenning
     on a `futures` like intstrument and `commission` is a fixed price per `size` contracts
+  id: totrans-17
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 如果`margin`是其他值，则认为操作发生在类似`期货`的工具上，`commission`是每个`size`合约的固定价格
 - en: '`margin` (default: `None`)'
+  id: totrans-18
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`margin`（默认值：`None`）'
 - en: Margin money needed when operating with `futures` like instruments. As expressed
     above
+  id: totrans-19
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 使用`期货`类似工具时需要的保证金。 如上所述
 - en: If a **no** `margin` is set, the `commission` will be understood to be indicated
     in percentage and applied to `price * size` components of a `buy` or `sell` operation
+  id: totrans-20
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 如果未设置**`margin`**，则将理解`commission`为以百分比表示，并应用于`buy`或`sell`操作的`price * size`组件。
 - en: If a `margin` is set, the `commission` will be understood to be a fixed value
     which is multiplied by the `size` component of `buy` or `sell` operation
+  id: totrans-21
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 如果设置了`margin`，则将理解`commission`为固定值，该值将乘以`buy`或`sell`操作的`size`组件。
 - en: '`mult` (default: 1.0)'
+  id: totrans-22
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`mult`（默认值：1.0）'
 - en: For `future` like instruments this determines the multiplicator to apply to
     profit and loss calculations.
+  id: totrans-23
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 对于类似`期货`的工具，这确定要应用于利润和损失计算的乘数。
 - en: This is what makes futures attractive and risky at the same time.
+  id: totrans-24
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 这就是期货同时具有吸引力和风险的原因。
 - en: '`name` (default: None)'
+  id: totrans-25
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`name`（默认值：无）'
 - en: Limit the application of the commission scheme to instruments matching `name`
+  id: totrans-26
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 将佣金方案的应用限制为与`name`匹配的工具
 - en: This can be set during the creation of a data feed.
+  id: totrans-27
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 这可以在数据源创建期间设置。
 - en: If left unset, the scheme will apply to any data present in the system.
+  id: totrans-28
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 如果未设置，该方案将适用于系统中的任何数据。
 - en: 'Two examples now: stocks vs futures'
+  id: totrans-29
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 现在有两个示例：股票 vs 期货
 - en: 'The futures example from above:'
+  id: totrans-30
   prefs: []
   type: TYPE_NORMAL
+  zh: 上述期货示例：
 - en: '[PRE2]'
+  id: totrans-31
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE2]'
 - en: 'A example for stocks:'
+  id: totrans-32
   prefs: []
   type: TYPE_NORMAL
+  zh: 以股票为例：
 - en: '[PRE3]'
+  id: totrans-33
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE3]'
 - en: Note
+  id: totrans-34
   prefs: []
   type: TYPE_NORMAL
+  zh: 注意
 - en: The 2^(nd) syntax doesn’t set *margin* and *mult* and *backtrader* attempts
     a smart approach by considering the commission to be `%` based.
+  id: totrans-35
   prefs: []
   type: TYPE_NORMAL
+  zh: 第2种语法不设置*margin*和*mult*，*backtrader*会尝试通过考虑佣金为`％`来采用智能方法。
 - en: To fully specify commission schemes, a subclass of `CommissionInfo` needs to
     be created
+  id: totrans-36
   prefs: []
   type: TYPE_NORMAL
+  zh: 要完全指定佣金方案，需要创建`CommissionInfo`的子类
 - en: Creating permanent Commission schemes
+  id: totrans-37
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 创建永久委员会方案
 - en: 'A more permanent commission scheme can be created by working directly with
     `CommissionInfo` classes. The user could choose to have this definition somewhere:'
+  id: totrans-38
   prefs: []
   type: TYPE_NORMAL
+  zh: 可以通过直接使用`CommissionInfo`类来创建更永久的佣金方案。用户可以选择在某处定义此定义：
 - en: '[PRE4]'
+  id: totrans-39
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE4]'
 - en: 'To later apply it in another Python module with `addcommissioninfo`:'
+  id: totrans-40
   prefs: []
   type: TYPE_NORMAL
+  zh: 稍后在另一个 Python 模块中应用它与 `addcommissioninfo`：
 - en: '[PRE5]'
+  id: totrans-41
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE5]'
 - en: '`CommissionInfo` is an object which uses a `params` declaration just like other
     objects in the `backtrader` environment. As such the above can be also expressed
     as:'
+  id: totrans-42
   prefs: []
   type: TYPE_NORMAL
+  zh: '`CommissionInfo`是一个对象，它使用与`backtrader`环境中的其他对象相同的`params`声明。因此，以上内容也可以表示为：'
 - en: '[PRE6]'
+  id: totrans-43
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE6]'
 - en: 'And later:'
+  id: totrans-44
   prefs: []
   type: TYPE_NORMAL
+  zh: 以后：
 - en: '[PRE7]'
+  id: totrans-45
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE7]'
 - en: Now a “real” comparison with a SMA Crossover
+  id: totrans-46
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 现在进行与 SMA 交叉的“真实”比较
 - en: Using a SimpleMovingAverage crossover as the entry/exit signal the same data
     set is going to be tested with a `futures` like commission scheme and then with
     a `stocks` like one.
+  id: totrans-47
   prefs: []
   type: TYPE_NORMAL
+  zh: 使用简单移动平均线交叉作为入/出信号，同一数据集将使用`期货`类似的佣金方案进行测试，然后使用类似于`股票`的方案进行测试。
 - en: Note
+  id: totrans-48
   prefs: []
   type: TYPE_NORMAL
+  zh: 注意
 - en: Futures positions could also not only be given the enter/exit behavior but a
     reversal behavior on each occassion. But this example is about comparing the commission
     schemes.
+  id: totrans-49
   prefs: []
   type: TYPE_NORMAL
+  zh: 期货持仓不仅可以给出进入/退出行为，还可以在每次发生时进行反转行为。但这个示例是关于比较委员会方案的。
 - en: The code (see at the bottom for the full strategy) is the same and the scheme
     can be chosen before the strategy is defined.
+  id: totrans-50
   prefs: []
   type: TYPE_NORMAL
+  zh: 代码（请参阅底部的完整策略）是相同的，可以在定义策略之前选择方案。
 - en: '[PRE8]'
+  id: totrans-51
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE8]'
 - en: Just set `futures_like` to false to run with the `stocks` like scheme.
+  id: totrans-52
   prefs: []
   type: TYPE_NORMAL
+  zh: 只需将`futures_like`设置为false即可运行类似于`股票`的方案。
 - en: Some logging code has been added to evaluate the impact of the differrent commission
     schemes. Let’s concentrate on just the 2 first operations.
+  id: totrans-53
   prefs: []
   type: TYPE_NORMAL
+  zh: 已添加一些记录代码以评估不同佣金方案的影响。让我们只关注前两个操作。
 - en: 'For futures:'
+  id: totrans-54
   prefs: []
   type: TYPE_NORMAL
+  zh: 对于期货：
 - en: '[PRE9]'
+  id: totrans-55
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE9]'
 - en: 'For stocks:'
+  id: totrans-56
   prefs: []
   type: TYPE_NORMAL
+  zh: 对于股票：
 - en: '[PRE10]'
+  id: totrans-57
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE10]'
 - en: 'The 1^(st) operation has the following prices:'
+  id: totrans-58
   prefs: []
   type: TYPE_NORMAL
+  zh: 第一次操作的价格如下：
 - en: BUY (Execution) -> 3754.13 / SELL (Execution) -> 3786.93
+  id: totrans-59
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 买入（执行）-> 3754.13 / 卖出（执行）-> 3786.93
 - en: 'Futures Profit & Loss (with commission): 324.0'
+  id: totrans-60
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 期货利润与损失（含佣金）：324.0
 - en: 'Stocks Profit & Loss (with commission): -4.91'
+  id: totrans-61
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 股票利润与损失（含佣金）：-4.91
 - en: Hey!! Commission has fully eaten up any profit on the `stocks` operation but
     has only meant a small dent to the `futures` one.
+  id: totrans-62
   prefs: []
   type: TYPE_NORMAL
+  zh: 嘿！！佣金完全吃掉了`股票`操作的任何利润，但对`期货`操作只是造成了小小的影响。
 - en: 'The 2^(nd) operation:'
+  id: totrans-63
   prefs: []
   type: TYPE_NORMAL
+  zh: 第二次操作：
 - en: BUY (Execution) -> `3863.57` / SELL (Execution) -> `3389.24`
+  id: totrans-64
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 买入（执行）-> `3863.57` / 卖出（执行）-> `3389.24`
 - en: 'Futures Profit & Loss (with commission): `-247.30`'
+  id: totrans-65
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 期货利润与损失（含佣金）：`-247.30`
 - en: 'Stocks Profit & Loss (with commission): `-62.84`'
+  id: totrans-66
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 股票利润与损失（含佣金）：`-62.84`
 - en: The bite has been sensibly larger for this negative operation with `futures`
+  id: totrans-67
   prefs: []
   type: TYPE_NORMAL
+  zh: 对于这个负操作，`期货`的影响更大。
 - en: 'But:'
+  id: totrans-68
   prefs: []
   type: TYPE_NORMAL
+  zh: 但：
 - en: 'Futures accumulated net profit & loss: `324.00 + (-247.30) = 76.70`'
+  id: totrans-69
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 期货累积净利润与损失：`324.00 + (-247.30) = 76.70`
 - en: 'Stocks accumulated net profit & loss: `(-4.91) + (-62.84) = -67.75`'
+  id: totrans-70
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 股票累积净利润与损失：`(-4.91) + (-62.84) = -67.75`
 - en: The accumulated effect can be seen on the charts below, where it can also be
     seen that at the end of the full year, futures have produced a larger profit,
     but have also suffered a larger drawdown (were deeper underwater)
+  id: totrans-71
   prefs: []
   type: TYPE_NORMAL
+  zh: 累积效果可以在下面的图表中看到，在完整年份结束时，期货产生了更大的利润，但也遭受了更大的回撤（更深的亏损）
 - en: 'But the important thing: whether `futures` or `stocks` … **it can be backtested.**'
+  id: totrans-72
   prefs: []
   type: TYPE_NORMAL
+  zh: 但重要的是：无论是`期货`还是`股票`…… **都可以进行回测。**
 - en: Commissions for futures
+  id: totrans-73
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 期货佣金
 - en: '![image](../Images/19e3ebda96a829f4c5f4548a9d4cfa53.png)'
+  id: totrans-74
   prefs: []
   type: TYPE_IMG
+  zh: '![image](../Images/19e3ebda96a829f4c5f4548a9d4cfa53.png)'
 - en: Commissions for stocks
+  id: totrans-75
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 股票佣金
 - en: '![image](../Images/70824338a3eebb03a9a940386140da24.png)'
+  id: totrans-76
   prefs: []
   type: TYPE_IMG
+  zh: '![image](../Images/70824338a3eebb03a9a940386140da24.png)'
 - en: The code
+  id: totrans-77
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 代码
 - en: '[PRE11]'
+  id: totrans-78
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE11]'
 - en: Reference
+  id: totrans-79
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 参考
 - en: class backtrader.CommInfoBase()
+  id: totrans-80
   prefs:
   - PREF_H4
   type: TYPE_NORMAL
+  zh: 类 backtrader.CommInfoBase()
 - en: Base Class for the Commission Schemes.
+  id: totrans-81
   prefs: []
   type: TYPE_NORMAL
+  zh: 基于委员会方案的基类。
 - en: 'Params:'
+  id: totrans-82
   prefs: []
   type: TYPE_NORMAL
+  zh: 参数：
 - en: '`commission` (def: `0.0`): base commission value in percentage or monetary
     units'
+  id: totrans-83
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`commission`（默认值：`0.0`）：以百分比或货币单位表示的基础佣金值'
 - en: '`mult` (def `1.0`): multiplier applied to the asset for value/profit'
+  id: totrans-84
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`mult`（默认为`1.0`）：应用于资产的值/利润的乘数'
 - en: '`margin` (def: `None`): amount of monetary units needed to open/hold an operation.
     It only applies if the final `_stocklike` attribute in the class is set to `False`'
+  id: totrans-85
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`margin`（默认值：`None`）：需要开设/持有操作的货币单位金额。只有当类中的最终`_stocklike`属性设置为`False`时才适用'
 - en: '`automargin` (def: `False`): Used by the method `get_margin` to automatically
     calculate the margin/guarantees needed with the following policy'
+  id: totrans-86
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`automargin`（默认：`False`）：方法`get_margin`使用的，用于自动计算以下策略所需的保证金/担保'
 - en: Use param `margin` if param `automargin` evaluates to `False`
+  id: totrans-87
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 如果参数`automargin`的评估为`False`，则使用参数`margin`
 - en: Use param `mult` and use `mult * price` if `automargin < 0`
+  id: totrans-88
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 如果`automargin < 0`，则使用参数`mult`和`mult * price`
 - en: Use param `automargin` and use `automargin * price` if `automargin > 0`
+  id: totrans-89
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 如果`automargin > 0`，则使用参数`automargin`和`automargin * price`
 - en: '`commtype` (def: `None`): Supported values are `CommInfoBase.COMM_PERC` (commission
     to be understood as %) and `CommInfoBase.COMM_FIXED` (commission to be understood
     as monetary units)'
+  id: totrans-90
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`commtype`（默认：`None`）：支持的值为`CommInfoBase.COMM_PERC`（将佣金理解为％）和`CommInfoBase.COMM_FIXED`（将佣金理解为货币单位）'
 - en: 'The default value of `None` is a supported value to retain compatibility with
     the legacy `CommissionInfo` object. If `commtype` is set to None, then the following
     applies:'
+  id: totrans-91
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: '`None`的默认值是支持的值，以保持与传统的`CommissionInfo`对象的兼容性。 如果`commtype`设置为None，则适用以下规则：'
 - en: '`margin` is `None`: Internal `_commtype` is set to `COMM_PERC` and `_stocklike`
     is set to `True` (Operating %-wise with Stocks)'
+  id: totrans-92
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`margin`是`None`：内部`_commtype`设置为`COMM_PERC`，`_stocklike`设置为`True`（与股票的百分比方式运作）'
 - en: '`margin` is not `None`: `_commtype` set to `COMM_FIXED` and `_stocklike` set
     to `False` (Operating with fixed rount-trip commission with Futures)'
+  id: totrans-93
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 如果`margin`不是`None`：`_commtype`设置为`COMM_FIXED`，`_stocklike`设置为`False`（使用期货的固定来回佣金）
 - en: If this param is set to something else than `None`, then it will be passed to
     the internal `_commtype` attribute and the same will be done with the param `stocklike`
     and the internal attribute `_stocklike`
+  id: totrans-94
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 如果此参数设置为`None`之外的内容，则它将传递给内部的`_commtype`属性，并且参数`stocklike`和内部属性`_stocklike`也是如此
 - en: '`stocklike` (def: `False`): Indicates if the instrument is Stock-like or Futures-like
     (see the `commtype` discussion above)'
+  id: totrans-95
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`stocklike`（默认：`False`）：指示工具是否类似于股票或期货（参见上文的`commtype`讨论）'
 - en: '`percabs` (def: `False`): when `commtype` is set to COMM_PERC, whether the
     parameter `commission` has to be understood as XX% or 0.XX'
+  id: totrans-96
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`percabs`（默认：`False`）：当`commtype`设置为COMM_PERC时，参数`commission`是否必须理解为XX％或0.XX'
 - en: 'If this param is `True`: 0.XX If this param is `False`: XX%'
+  id: totrans-97
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 如果此参数为`True`：0.XX 如果此参数为`False`：XX%
 - en: '`interest` (def: `0.0`)'
+  id: totrans-98
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`interest`（默认：`0.0`）'
 - en: If this is non-zero, this is the yearly interest charged for holding a short
     selling position. This is mostly meant for stock short-selling
+  id: totrans-99
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 如果这不是零，则这是持有空头卖出头寸所收取的年息。 这主要是针对股票的空头卖出
 - en: 'The formula: `days * price * abs(size) * (interest / 365)`'
+  id: totrans-100
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 公式：`days * price * abs(size) * (interest / 365)`
 - en: 'It must be specified in absolute terms: 0.05 -> 5%'
+  id: totrans-101
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 必须用绝对值指定：0.05 -> 5%
 - en: Note
+  id: totrans-102
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 注意
 - en: 'the behavior can be changed by overriding the method: `_get_credit_interest`'
+  id: totrans-103
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 通过覆盖方法`_get_credit_interest`可以更改行为
 - en: '`interest_long` (def: `False`)'
+  id: totrans-104
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`interest_long`（默认：`False`）'
 - en: Some products like ETFs get charged on interest for short and long positions.
     If ths is `True` and `interest` is non-zero the interest will be charged on both
     directions
+  id: totrans-105
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 某些产品，如ETF，对空头和多头头寸收取利息。 如果这是`True`并且`interest`不为零，则将在两个方向上收取利息
 - en: '`leverage` (def: `1.0`)'
+  id: totrans-106
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`leverage`（默认：`1.0`）'
 - en: Amount of leverage for the asset with regards to the needed cash
+  id: totrans-107
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 对于所需现金的资产的杠杆倍数
 - en: '- ``_stocklike``()'
+  id: totrans-108
   prefs:
   - PREF_H4
   type: TYPE_NORMAL
+  zh: '- ``_stocklike``()'
 - en: Final value to use for Stock-like/Futures-like behavior
+  id: totrans-109
   prefs: []
   type: TYPE_NORMAL
+  zh: 用于类Stock-like/Futures-like行为的最终值
 - en: '- ``_commtype``()'
+  id: totrans-110
   prefs:
   - PREF_H4
   type: TYPE_NORMAL
+  zh: '- ``_commtype``()'
 - en: Final value to use for PERC vs FIXED commissions
+  id: totrans-111
   prefs: []
   type: TYPE_NORMAL
+  zh: PERC vs FIXED佣金的最终值
 - en: This two are used internally instead of the declared params to enable the()
+  id: totrans-112
   prefs:
   - PREF_H4
   type: TYPE_NORMAL
+  zh: 这两个参数在内部使用，而不是声明的参数，以启用该方法
 - en: compatibility check described above for the legacy ``CommissionInfo``()
+  id: totrans-113
   prefs:
   - PREF_H4
   type: TYPE_NORMAL
+  zh: 描述的兼容性检查适用于遗留的``CommissionInfo``()
 - en: object()
+  id: totrans-114
   prefs:
   - PREF_H4
   type: TYPE_NORMAL
+  zh: 对象()
 - en: class backtrader.CommissionInfo()
+  id: totrans-115
   prefs:
   - PREF_H4
   type: TYPE_NORMAL
+  zh: 类backtrader.CommissionInfo()
 - en: Base Class for the actual Commission Schemes.
+  id: totrans-116
   prefs: []
   type: TYPE_NORMAL
+  zh: 实际佣金方案的基类。
 - en: CommInfoBase was created to keep suppor for the original, incomplete, support
     provided by *backtrader*. New commission schemes derive from this class which
     subclasses `CommInfoBase`.
+  id: totrans-117
   prefs: []
   type: TYPE_NORMAL
+  zh: CommInfoBase被创建以保持对*backtrader*提供的原始，不完整的支持的支持。新的佣金方案派生自这个类，这些类是`CommInfoBase`的子类。
 - en: The default value of `percabs` is also changed to `True`
+  id: totrans-118
   prefs: []
   type: TYPE_NORMAL
+  zh: '`percabs`的默认值也更改为`True`'
 - en: 'Params:'
+  id: totrans-119
   prefs: []
   type: TYPE_NORMAL
+  zh: 参数：
 - en: '`percabs` (def: True): when `commtype` is set to COMM_PERC, whether the parameter
     `commission` has to be understood as XX% or 0.XX'
+  id: totrans-120
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`percabs`（默认：True）：当`commtype`设置为COMM_PERC时，参数`commission`是否必须理解为XX％或0.XX'
 - en: 'If this param is True: 0.XX If this param is False: XX%'
+  id: totrans-121
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 如果此参数为True：0.XX 如果此参数为False：XX%
 - en: get_leverage()
+  id: totrans-122
   prefs:
   - PREF_H4
   type: TYPE_NORMAL
+  zh: get_leverage()
 - en: Returns the level of leverage allowed for this comission scheme
+  id: totrans-123
   prefs: []
   type: TYPE_NORMAL
+  zh: 返回此佣金方案允许的杠杆水平
 - en: getsize(price, cash)
+  id: totrans-124
   prefs:
   - PREF_H4
   type: TYPE_NORMAL
+  zh: getsize(price, cash)
 - en: Returns the needed size to meet a cash operation at a given price
+  id: totrans-125
   prefs: []
   type: TYPE_NORMAL
+  zh: 返回在给定价格下执行现金操作所需的大小
 - en: getoperationcost(size, price)
+  id: totrans-126
   prefs:
   - PREF_H4
   type: TYPE_NORMAL
+  zh: getoperationcost(size, price)
 - en: Returns the needed amount of cash an operation would cost
+  id: totrans-127
   prefs: []
   type: TYPE_NORMAL
+  zh: 返回操作将花费的现金金额
 - en: getvaluesize(size, price)
+  id: totrans-128
   prefs:
   - PREF_H4
   type: TYPE_NORMAL
+  zh: getvaluesize(size, price)
 - en: Returns the value of size for given a price. For future-like objects it is fixed
     at `size * margin`
+  id: totrans-129
   prefs: []
   type: TYPE_NORMAL
+  zh: 返回给定价格的大小值。对于类似期货的对象，它在`size * margin`处固定。
 - en: getvalue(position, price)
+  id: totrans-130
   prefs:
   - PREF_H4
   type: TYPE_NORMAL
+  zh: getvalue(position, price)
 - en: Returns the value of a position given a price. For future-like objects it is
     fixed at `size * margin`
+  id: totrans-131
   prefs: []
   type: TYPE_NORMAL
+  zh: 返回给定价格的位置值。对于类似期货的对象，它在`size * margin`处固定。
 - en: get_margin(price)
+  id: totrans-132
   prefs:
   - PREF_H4
   type: TYPE_NORMAL
+  zh: get_margin(price)
 - en: 'Returns the actual margin/guarantees needed for a single item of the asset
     at the given price. The default implementation has this policy:'
+  id: totrans-133
   prefs: []
   type: TYPE_NORMAL
+  zh: 返回给定价格下资产单个项目所需的实际保证金/担保。默认实现具有以下策略：
 - en: Use param `margin` if param `automargin` evaluates to `False`
+  id: totrans-134
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 如果参数`automargin`评估为`False`，则使用参数`margin`
 - en: Use param `mult`, i.e. `mult * price` if `automargin < 0`
+  id: totrans-135
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 使用参数`mult`，即如果`automargin < 0`，则为`mult * price`。
 - en: Use param `automargin`, i.e. `automargin * price` if `automargin > 0`
+  id: totrans-136
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 使用参数`automargin`，即如果`automargin > 0`，则为`automargin * price`。
 - en: getcommission(size, price)
+  id: totrans-137
   prefs:
   - PREF_H4
   type: TYPE_NORMAL
+  zh: getcommission(size, price)
 - en: Calculates the commission of an operation at a given price
+  id: totrans-138
   prefs: []
   type: TYPE_NORMAL
+  zh: 计算给定价格的操作的佣金
 - en: _getcommission(size, price, pseudoexec)
+  id: totrans-139
   prefs:
   - PREF_H4
   type: TYPE_NORMAL
+  zh: _getcommission(size, price, pseudoexec)
 - en: Calculates the commission of an operation at a given price
+  id: totrans-140
   prefs: []
   type: TYPE_NORMAL
+  zh: 计算给定价格的操作的佣金
 - en: 'pseudoexec: if True the operation has not yet been executed'
+  id: totrans-141
   prefs: []
   type: TYPE_NORMAL
+  zh: pseudoexec：如果为True，则操作尚未执行
 - en: profitandloss(size, price, newprice)
+  id: totrans-142
   prefs:
   - PREF_H4
   type: TYPE_NORMAL
+  zh: profitandloss(size, price, newprice)
 - en: Return actual profit and loss a position has
+  id: totrans-143
   prefs: []
   type: TYPE_NORMAL
+  zh: 返回位置的实际盈亏
 - en: cashadjust(size, price, newprice)
+  id: totrans-144
   prefs:
   - PREF_H4
   type: TYPE_NORMAL
+  zh: cashadjust(size, price, newprice)
 - en: Calculates cash adjustment for a given price difference
+  id: totrans-145
   prefs: []
   type: TYPE_NORMAL
+  zh: 计算给定价格差异的现金调整
 - en: get_credit_interest(data, pos, dt)
+  id: totrans-146
   prefs:
   - PREF_H4
   type: TYPE_NORMAL
+  zh: get_credit_interest(data, pos, dt)
 - en: Calculates the credit due for short selling or product specific
+  id: totrans-147
   prefs: []
   type: TYPE_NORMAL
+  zh: 计算卖空或特定产品的信用费用
 - en: _get_credit_interest(data, size, price, days, dt0, dt1)
+  id: totrans-148
   prefs:
   - PREF_H4
   type: TYPE_NORMAL
+  zh: _get_credit_interest(data, size, price, days, dt0, dt1)
 - en: This method returns the cost in terms of credit interest charged by the broker.
+  id: totrans-149
   prefs: []
   type: TYPE_NORMAL
+  zh: 此方法返回经纪人收取的信用利息成本。
 - en: In the case of `size > 0` this method will only be called if the parameter to
     the class `interest_long` is `True`
+  id: totrans-150
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果`size > 0`，则仅在类的参数`interest_long`为`True`时才调用此方法。
 - en: 'The formulat for the calculation of the credit interest rate is:'
+  id: totrans-151
   prefs: []
   type: TYPE_NORMAL
+  zh: 计算信用利率的公式为：
 - en: 'The formula: `days * price * abs(size) * (interest / 365)`'
+  id: totrans-152
   prefs: []
   type: TYPE_NORMAL
+  zh: 公式：`days * price * abs(size) * (interest / 365)`
 - en: 'Params:'
+  id: totrans-153
   prefs: []
   type: TYPE_NORMAL
+  zh: 参数：
 - en: '[PRE12]'
+  id: totrans-154
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE12]'
 - en: '`dt0` and `dt1` are not used in the default implementation and are provided
     as extra input for overridden methods'
+  id: totrans-155
   prefs: []
   type: TYPE_NORMAL
+  zh: '`dt0`和`dt1`在默认实现中未被使用，并作为覆盖方法的额外输入提供'

@@ -1,587 +1,877 @@
 - en: Analyzers
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 分析器
 - en: 原文：[https://www.backtrader.com/docu/analyzers/analyzers/](https://www.backtrader.com/docu/analyzers/analyzers/)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.backtrader.com/docu/analyzers/analyzers/](https://www.backtrader.com/docu/analyzers/analyzers/)
 - en: Be it backtesting or trading, being able to analyze the performance of the trading
     system is key to understanding if not only profit has been attained, but also
     if it has been achieved with too much risk or if it was really worth the effort
     when compared with a reference asset (or a risk-free asset)
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: 无论是回测还是交易，能够分析交易系统的性能对于了解是否仅仅获得了利润以及是否存在过多风险或者与参考资产（或无风险资产）相比是否真的值得努力至关重要。
 - en: 'That’s where the family of `Analyzer` objects comes in: provide an analysis
     of what’s happened or even of what’s actually happening.'
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: 这就是 `Analyzer` 对象族的作用：提供已发生情况或实际正在发生情况的分析。
 - en: Nature of analyzers
+  id: totrans-4
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 分析器的性质
 - en: 'The interface is modeled after that of *Lines* objects, feature for example
     a `next` method but there is a major difference:'
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: 接口模仿了 *Lines* 对象的接口，例如包含一个 `next` 方法，但有一个主要区别：
 - en: '`Analyzers` do not hold lines.'
+  id: totrans-6
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`Analyzers` 不保存线条。'
 - en: That means they are not expensive in terms of memory because even after having
     analyzed thousands of price bars they may still simply hold a single result in
     memory.
+  id: totrans-7
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 这意味着它们在内存方面并不昂贵，因为即使在分析了成千上万个价格条之后，它们仍然可能只保存单个结果在内存中。
 - en: Location in the ecosystem
+  id: totrans-8
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 生态系统中的位置
 - en: '`Analyzer` objects are (like *strategies*, *observers* and *datas*) added to
     the system through a `cerebro` instance:'
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: '`Analyzer` 对象（像 *strategies*、*observers* 和 *datas* 一样）通过 `cerebro` 实例添加到系统中：'
 - en: '`addanalyzer(ancls, *args, **kwargs)`'
+  id: totrans-10
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`addanalyzer(ancls, *args, **kwargs)`'
 - en: But when it comes to operation during `cerebro.run` the following will happen
     for each *strategy* present in the system
+  id: totrans-11
   prefs: []
   type: TYPE_NORMAL
+  zh: 但是当在 `cerebro.run` 过程中进行操作时，对于系统中每个 *策略*，将会发生以下情况
 - en: '`ancls` will be instantiated with `*args` and `**kwargs` during a `cerebro.run`'
+  id: totrans-12
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`ancls` 将在 `cerebro.run` 过程中以 `*args` 和 `**kwargs` 实例化。'
 - en: The `ancls` instance will be attached to the strategy
+  id: totrans-13
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`ancls` 实例将被附加到策略上。'
 - en: 'That means:'
+  id: totrans-14
   prefs: []
   type: TYPE_NORMAL
+  zh: 这意味着：
 - en: If the backtesting run contains for example *3 strategies* then *3 instances*
     of `ancls` will be created and each of them will be attached to a different strategy.
+  id: totrans-15
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 如果回测运行包含例如 *3 个策略*，那么将会创建 *3 个 `ancls` 实例*，并且每个实例都将附加到不同的策略上。
 - en: 'Bottomline: *an analyzer analyzes the performance of a single strategy* and
     *not the performance of an entires system*'
+  id: totrans-16
   prefs: []
   type: TYPE_NORMAL
+  zh: 底线是：*分析器分析单个策略的性能*，而不是整个系统的性能
 - en: Additional Location
+  id: totrans-17
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 额外的位置
 - en: 'Some `Analyzer` objects may actually use other analyzers to complete its work.
     For example: `SharpeRatio` uses the output of `TimeReturn` for the calculations.'
+  id: totrans-18
   prefs: []
   type: TYPE_NORMAL
+  zh: 一些 `Analyzer` 对象实际上可能使用其他分析器来完成其工作。例如：`SharpeRatio` 使用 `TimeReturn` 的输出进行计算。
 - en: These *sub-analyzers* or *slave-analyzers* will also be inserted into the same
     strategy as the one creating them. But they are completely invisible to the user.
+  id: totrans-19
   prefs: []
   type: TYPE_NORMAL
+  zh: 这些 *子分析器* 或 *从属分析器* 也将被插入到创建它们的同一策略中。但对用户来说完全看不见。
 - en: Attributes
+  id: totrans-20
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 属性
 - en: 'To carry out the intended work, `Analyzer` objects are provided with some default
     attributes which are automagically passed and set in the instance for ease of
     use:'
+  id: totrans-21
   prefs: []
   type: TYPE_NORMAL
+  zh: 为了执行预期的工作，`Analyzer` 对象提供了一些默认属性，这些属性被自动传递和设置在实例中以便使用：
 - en: '`self.strategy`: reference to the strategy subclass in which the analyzer object
     is operating. Anything accessible by the *strategy* can also be accessd by the
     *analyzer*'
+  id: totrans-22
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`self.strategy`：策略子类的引用，分析器对象正在操作其中。任何 *strategy* 可访问的内容也可以被 *analyzer* 访问。'
 - en: '`self.datas[x]`: the array of data feeds present in the strategy. Although
     this could be accesed over the *strategy* reference, the shortcut makes work more
     comfortable.'
+  id: totrans-23
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`self.datas[x]`：策略中存在的数据源数组。尽管这可以通过 *strategy* 引用访问，但这个快捷方式使工作更加方便。'
 - en: '`self.data`: shortcut to `self.datas[0]` for extra comfort.'
+  id: totrans-24
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`self.data`：为了额外的便利而设置的快捷方式。'
 - en: '`self.dataX`: shortcuts to the different `self.datas[x]`'
+  id: totrans-25
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`self.dataX`：快捷方式到不同的 `self.datas[x]`'
 - en: 'Some other aliases are available although they are probably an overkill:'
+  id: totrans-26
   prefs: []
   type: TYPE_NORMAL
+  zh: 还提供了一些其他别名，尽管它们可能是多余的：
 - en: '[PRE0]'
+  id: totrans-27
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: 'If the line has a name, the following is also available:'
+  id: totrans-28
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果线条有名称，还可以获得以下内容：
 - en: '[PRE1]'
+  id: totrans-29
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE1]'
 - en: 'For the first data, the last two shortcuts are available without the initial
     `X` numeric reference. For example:'
+  id: totrans-30
   prefs: []
   type: TYPE_NORMAL
+  zh: 对于第一个数据，最后两个快捷方式也可用，无需初始的 `X` 数字引用。例如：
 - en: '[PRE2]'
+  id: totrans-31
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE2]'
 - en: And
+  id: totrans-32
   prefs: []
   type: TYPE_NORMAL
+  zh: 和
 - en: '[PRE3]'
+  id: totrans-33
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE3]'
 - en: Returning the analysis
+  id: totrans-34
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 返回分析结果
 - en: The *Analyzer* base class creates a `self.rets` (of type `collections.OrderedDict`)
     member attribute to return the analysis. This is done in the method `create_analysis`
     which can be overriden by subclasses if creating custom analyzers.
+  id: totrans-35
   prefs: []
   type: TYPE_NORMAL
+  zh: '*Analyzer* 基类创建一个 `self.rets`（类型为 `collections.OrderedDict`）成员属性来返回分析结果。 这是在方法
+    `create_analysis` 中完成的，如果创建自定义分析器，子类可以覆盖此方法。'
 - en: Modus operandi
+  id: totrans-36
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 操作模式
 - en: Although `Analyzer` objects are not *Lines* objects and therefore do not iterate
     over lines, they have been designed to follow the same operation pattern.
+  id: totrans-37
   prefs: []
   type: TYPE_NORMAL
+  zh: 虽然 `Analyzer` 对象不是 *Lines* 对象，因此不会迭代线条，但它们被设计为遵循相同的操作模式。
 - en: Instantiated before the system is put into motion (therefore calling `__init__`)
+  id: totrans-38
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 在系统启动之前实例化（因此调用 `__init__`）
 - en: Signaled the begin of operations with `start`
+  id: totrans-39
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 使用 `start` 标志操作的开始
 - en: '`prenext` / `nextstart` / `next` will be invoked following the calculated minimum
     period of the *strategy* the indicator is working in.'
+  id: totrans-40
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 将调用 `prenext` / `nextstart` / `next`，遵循 *策略* 正在运行的最短周期的计算结果。
 - en: The default behaviour of `prenext` and `nextstart` is to invoke next, because
     an analyzer may be analyzing from the very first moment the system is alive.
+  id: totrans-41
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: '`prenext` 和 `nextstart` 的默认行为是调用 next，因为分析器可能从系统启动的第一刻就开始分析。'
 - en: It may be customary to call `len(self)` in *Lines* objects to check the actual
     amount of bars. This also works in `Analyzers` by returning the value for `self.strategy`
+  id: totrans-42
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 在 *Lines* 对象中调用 `len(self)` 来检查实际的条数可能是习惯的。 这在 `Analyzers` 中也适用，通过为 `self.strategy`
+    返回值。
 - en: Orders and trades will be notified just like they are to the strategy via `notify_order`
     and `notify_trade`
+  id: totrans-43
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 订单和交易将像对策略一样通过 `notify_order` 和 `notify_trade` 进行通知
 - en: Cash and value will also be notified like it is done with the strategy over
     the `notify_cashvalue` method
+  id: totrans-44
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 现金和价值也将像对策略一样通过 `notify_cashvalue` 方法进行通知
 - en: Cash, value and fundvalue and fund shares will also be notified like it is done
     with the strategy over the `notify_fund` method
+  id: totrans-45
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 现金、价值、基金价值和基金份额也将像对策略一样通过 `notify_fund` 方法进行通知
 - en: '`stop` will be invoked to signal the end of operations'
+  id: totrans-46
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: '`stop`将被调用以信号操作结束'
 - en: Once the regular operations cycle has been completed, the *analyzers* featuring
     additional methods for extracting/outputting information
+  id: totrans-47
   prefs: []
   type: TYPE_NORMAL
+  zh: 一旦常规操作周期完成，*分析器* 就会提供用于提取/输出信息的附加方法
 - en: '`get_analysis`: which ideally (not enforced) returnes a `dict` -like object
     containing the analysis results.'
+  id: totrans-48
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`get_analysis`：理想情况下（不强制要求）返回一个类似于 `dict` 的对象，其中包含分析结果。'
 - en: '`print` uses a standard `backtrader.WriterFile` (unless overriden) to write
     the analysis result from `get_analysis`.'
+  id: totrans-49
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`print` 使用标准的 `backtrader.WriterFile`（除非被覆盖）来从 `get_analysis` 写入分析结果。'
 - en: '`pprint` (*pretty print*) uses the Python `pprint` module to print the `get_analysis`
     resutls.'
+  id: totrans-50
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`pprint`（*漂亮打印*）使用 Python `pprint` 模块打印 `get_analysis` 的结果。'
 - en: 'And finally:'
+  id: totrans-51
   prefs: []
   type: TYPE_NORMAL
+  zh: 最后：
 - en: '`get_analysis` creates a member attribute `self.ret` (of type `collections.OrderedDict`)
     to which analyzers write the analysis results.'
+  id: totrans-52
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`get_analysis` 创建一个成员属性 `self.ret`（类型为 `collections.OrderedDict`），分析器将分析结果写入其中。'
 - en: Subclasses of *Analyzer* can override this method to change this behavior
+  id: totrans-53
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: '*Analyzer* 的子类可以重写此方法以更改此行为'
 - en: Analyzer Patterns
+  id: totrans-54
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 分析器模式
 - en: 'Development of *Analyzer* objects in the `backtrader` platform have revealed
     2 different usage patterns for the generation of the analysis:'
+  id: totrans-55
   prefs: []
   type: TYPE_NORMAL
+  zh: 在 `backtrader` 平台上开发 *Analyzer* 对象揭示了两种不同的用法模式用于生成分析：
 - en: During execution by gathering information in the `notify_xxx` and `next` methods,
     and generating the current information of the analysis in `next`
+  id: totrans-56
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 通过在 `notify_xxx` 和 `next` 方法中收集信息并在 `next` 中生成分析的当前信息进行执行
 - en: The `TradeAnalyzer`, for example, uses just the `notify_trade` method to generate
     the statistics.
+  id: totrans-57
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 例如，`TradeAnalyzer` 只使用 `notify_trade` 方法生成统计信息。
 - en: Gather (or not) the information as above, but generate the analysis in a single
     pass during the `stop` method
+  id: totrans-58
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 在`stop`方法期间一次性生成分析结果，收集（或不收集）如上信息
 - en: The `SQN` (*System Quality Number*) gathers trade information during `notify_trade`
     but generates the statistic during the `stop` method
+  id: totrans-59
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: '`SQN`（*系统质量数*）在 `notify_trade` 期间收集交易信息，但在 `stop` 方法中生成统计信息'
 - en: A quick example
+  id: totrans-60
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 一个快速的示例
 - en: 'As easy as it can be:'
+  id: totrans-61
   prefs: []
   type: TYPE_NORMAL
+  zh: 尽可能简单：
 - en: '[PRE4]'
+  id: totrans-62
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE4]'
 - en: 'Executing it (having stored it in `analyzer-test.py`:'
+  id: totrans-63
   prefs: []
   type: TYPE_NORMAL
+  zh: 执行它（已将其存储在 `analyzer-test.py` 中：
 - en: '[PRE5]'
+  id: totrans-64
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE5]'
 - en: There is no plotting, because the `SharpeRatio` is a single value at the end
     of the calculation.
+  id: totrans-65
   prefs: []
   type: TYPE_NORMAL
+  zh: 没有绘图，因为 `SharpeRatio` 是在计算结束时的单个值。
 - en: Forensic Analysis of an Analyzer
+  id: totrans-66
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 分析器的法证分析
 - en: Let’s repeat that `Analyzers` are not Lines objects, but to seamlessly integrate
     them into the `backtrader` ecosystem, the internal API conventions of several
     Lines object are followed (actually a **mixture** of them)
+  id: totrans-67
   prefs: []
   type: TYPE_NORMAL
+  zh: 让我们重申一下，`分析器`不是线对象，但为了无缝地将它们整合到`backtrader`生态系统中，遵循了几个线对象的内部API约定（实际上是一个**混合**）
 - en: Note
+  id: totrans-68
   prefs: []
   type: TYPE_NORMAL
+  zh: 注意
 - en: The code for the `SharpeRatio` has evolved to take for example into account
     annualization and the version here should only be a reference.
+  id: totrans-69
   prefs: []
   type: TYPE_NORMAL
+  zh: '`SharpeRatio`的代码已经发展到例如考虑年度化，这里的版本应该仅作为参考。'
 - en: Please check the Analyzers Reference
+  id: totrans-70
   prefs: []
   type: TYPE_NORMAL
+  zh: 请查看分析器参考资料
 - en: There is additionally a `SharpeRatio_A` which provides the value directly in
     annualized form regardless of the sought timeframe
+  id: totrans-71
   prefs: []
   type: TYPE_NORMAL
+  zh: 此外还有一个`SharpeRatio_A`，无论所需的时间范围如何，都会直接提供年化形式的值
 - en: Code for `SharpeRatio` to serve as a basis (a simplified version)
+  id: totrans-72
   prefs: []
   type: TYPE_NORMAL
+  zh: '`SharpeRatio`的代码作为基础（简化版）'
 - en: '[PRE6]'
+  id: totrans-73
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE6]'
 - en: 'The code can be broken down into:'
+  id: totrans-74
   prefs: []
   type: TYPE_NORMAL
+  zh: 代码可以分解为：
 - en: '`params` declaration'
+  id: totrans-75
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`params` 声明'
 - en: Although the declared ones are not used (meant as an example), *Analyzers* like
     most other objects in `backtrader` support parameters
+  id: totrans-76
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 尽管声明的变量没有被使用（仅作为示例），像大多数`backtrader`中的其他对象一样，*分析器*也支持参数
 - en: '`__init__` method'
+  id: totrans-77
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`__init__` 方法'
 - en: Just like *Strategies* declare *Indicators* in `__init__`, the same do analyzers
     with support objects.
+  id: totrans-78
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 就像*策略*在`__init__`中声明*指标*一样，分析器也是使用支持对象的。
 - en: 'In this case: the `SharpeRatio` is calculated using **Annual Returns**. The
     calculation will be automatic and will be available to `SharpeRatio` for its own
     calculations.'
+  id: totrans-79
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 在这种情况下：使用**年度收益**计算`夏普比率`。计算将自动进行，并且将对`夏普比率`进行自己的计算。
 - en: Note
+  id: totrans-80
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 注意
 - en: The actual implementation of `SharpeRatio` uses the more generic and later developed
     `TimeReturn` analyzer
+  id: totrans-81
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: '`夏普比率`的实际实现使用了更通用和后来开发的`TimeReturn`分析器'
 - en: '`next` method'
+  id: totrans-82
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`next` 方法'
 - en: '`SharpeRatio` doesn’t need it, but this method will be called after each invocation
     of the parent strategy `next`'
+  id: totrans-83
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: '`夏普比率`不需要它，但是此方法将在每次调用父策略的`next`后调用'
 - en: '`start` method'
+  id: totrans-84
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`start` 方法'
 - en: Called right before the backtesting starts. Can be used for extra initialization
     tasks. Sharperatio doesn’t need it
+  id: totrans-85
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 在回测开始之前调用。可用于额外的初始化任务。`夏普比率`不需要它
 - en: '`stop` method'
+  id: totrans-86
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`stop` 方法'
 - en: Called right after the backtesting ends. Like `SharpeRatio` does, it can be
     used to finish/make the calculation
+  id: totrans-87
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 在回测结束后立即调用。像`SharpeRatio`一样，它可用于完成/进行计算
 - en: '`get_analysis` method (returns a dictionary)'
+  id: totrans-88
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`get_analysis` 方法（返回一个字典）'
 - en: Access for external callers to the produced analysis
+  id: totrans-89
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 外部调用者对生成的分析的访问
 - en: 'Returns: a dictionary with the analysis.'
+  id: totrans-90
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 返回：带有分析结果的字典。
 - en: Reference
+  id: totrans-91
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 参考资料
 - en: class backtrader.Analyzer()
+  id: totrans-92
   prefs:
   - PREF_H4
   type: TYPE_NORMAL
+  zh: 类 `backtrader.Analyzer()`
 - en: Analyzer base class. All analyzers are subclass of this one
+  id: totrans-93
   prefs: []
   type: TYPE_NORMAL
+  zh: 分析器基类。所有分析器都是此类的子类
 - en: An Analyzer instance operates in the frame of a strategy and provides an analysis
     for that strategy.
+  id: totrans-94
   prefs: []
   type: TYPE_NORMAL
+  zh: 分析器实例在策略的框架内运行，并为该策略提供分析。
 - en: 'Automagically set member attributes:'
+  id: totrans-95
   prefs: []
   type: TYPE_NORMAL
+  zh: 自动设置成员属性：
 - en: '`self.strategy` (giving access to the *strategy* and anything accessible from
     it)'
+  id: totrans-96
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`self.strategy`（提供对*策略*及其可访问的任何内容的访问）'
 - en: '`self.datas[x]` giving access to the array of data feeds present in the the
     system, which could also be accessed via the strategy reference'
+  id: totrans-97
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`self.datas[x]` 提供对系统中存在的数据源数组的访问，也可以通过策略引用访问'
 - en: '`self.data`, giving access to `self.datas[0]`'
+  id: totrans-98
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`self.data`，提供对`self.datas[0]`的访问'
 - en: '`self.dataX` -> `self.datas[X]`'
+  id: totrans-99
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`self.dataX` -> `self.datas[X]`'
 - en: '`self.dataX_Y` -> `self.datas[X].lines[Y]`'
+  id: totrans-100
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`self.dataX_Y` -> `self.datas[X].lines[Y]`'
 - en: '`self.dataX_name` -> `self.datas[X].name`'
+  id: totrans-101
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`self.dataX_name` -> `self.datas[X].name`'
 - en: '`self.data_name` -> `self.datas[0].name`'
+  id: totrans-102
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`self.data_name` -> `self.datas[0].name`'
 - en: '`self.data_Y` -> `self.datas[0].lines[Y]`'
+  id: totrans-103
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`self.data_Y` -> `self.datas[0].lines[Y]`'
 - en: This is not a *Lines* object, but the methods and operation follow the same
     design
+  id: totrans-104
   prefs: []
   type: TYPE_NORMAL
+  zh: 这不是一个*线*对象，但是方法和操作遵循相同的设计
 - en: '`__init__` during instantiation and initial setup'
+  id: totrans-105
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 在实例化和初始设置期间的`__init__`
 - en: '`start` / `stop` to signal the begin and end of operations'
+  id: totrans-106
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`start` / `stop` 用于信号开始和结束操作'
 - en: '`prenext` / `nextstart` / `next` family of methods that follow the calls made
     to the same methods in the strategy'
+  id: totrans-107
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 遵循与策略中相同方法调用后的`prenext` / `nextstart` / `next`方法系列
 - en: '`notify_trade` / `notify_order` / `notify_cashvalue` / `notify_fund` which
     receive the same notifications as the equivalent methods of the strategy'
+  id: totrans-108
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`notify_trade` / `notify_order` / `notify_cashvalue` / `notify_fund`，它们接收与策略的等效方法相同的通知'
 - en: The mode of operation is open and no pattern is preferred. As such the analysis
     can be generated with the `next` calls, at the end of operations during `stop`
     and even with a single method like `notify_trade`
+  id: totrans-109
   prefs: []
   type: TYPE_NORMAL
+  zh: 操作模式是开放的，没有首选模式。因此，分析可以通过`next`调用，在`stop`期间的操作结束时甚至通过单个方法`notify_trade`生成。
 - en: The important thing is to override `get_analysis` to return a *dict-like* object
     containing the results of the analysis (the actual format is implementation dependent)
+  id: totrans-110
   prefs: []
   type: TYPE_NORMAL
+  zh: 重要的是要重写`get_analysis`以返回包含分析结果的*类似于字典*的对象（实际格式取决于实现）。
 - en: start()
+  id: totrans-111
   prefs:
   - PREF_H4
   type: TYPE_NORMAL
+  zh: start()
 - en: Invoked to indicate the start of operations, giving the analyzer time to setup
     up needed things
+  id: totrans-112
   prefs: []
   type: TYPE_NORMAL
+  zh: 表示开始操作，使分析器有时间设置所需的东西。
 - en: stop()
+  id: totrans-113
   prefs:
   - PREF_H4
   type: TYPE_NORMAL
+  zh: stop()
 - en: Invoked to indicate the end of operations, giving the analyzer time to shut
     down needed things
+  id: totrans-114
   prefs: []
   type: TYPE_NORMAL
+  zh: 表示结束操作，使分析器有时间关闭所需的东西。
 - en: prenext()
+  id: totrans-115
   prefs:
   - PREF_H4
   type: TYPE_NORMAL
+  zh: prenext()
 - en: Invoked for each prenext invocation of the strategy, until the minimum period
     of the strategy has been reached
+  id: totrans-116
   prefs: []
   type: TYPE_NORMAL
+  zh: 对策略的每次prenext调用都会调用，直到策略的最小周期已达到。
 - en: The default behavior for an analyzer is to invoke `next`
+  id: totrans-117
   prefs: []
   type: TYPE_NORMAL
+  zh: 分析器的默认行为是调用`next`。
 - en: nextstart()
+  id: totrans-118
   prefs:
   - PREF_H4
   type: TYPE_NORMAL
+  zh: nextstart()
 - en: Invoked exactly once for the nextstart invocation of the strategy, when the
     minimum period has been first reached
+  id: totrans-119
   prefs: []
   type: TYPE_NORMAL
+  zh: 为下一次策略的nextstart调用精确调用一次，当首次达到最小周期时。
 - en: next()
+  id: totrans-120
   prefs:
   - PREF_H4
   type: TYPE_NORMAL
+  zh: next()
 - en: Invoked for each next invocation of the strategy, once the minum preiod of the
     strategy has been reached
+  id: totrans-121
   prefs: []
   type: TYPE_NORMAL
+  zh: 对策略的每次next调用进行调用，一旦策略的最小周期已达到。
 - en: notify_cashvalue(cash, value)
+  id: totrans-122
   prefs:
   - PREF_H4
   type: TYPE_NORMAL
+  zh: notify_cashvalue(cash, value)
 - en: Receives the cash/value notification before each next cycle
+  id: totrans-123
   prefs: []
   type: TYPE_NORMAL
+  zh: 在每次下一周期之前接收现金/价值通知。
 - en: notify_fund(cash, value, fundvalue, shares)
+  id: totrans-124
   prefs:
   - PREF_H4
   type: TYPE_NORMAL
+  zh: notify_fund(cash, value, fundvalue, shares)
 - en: Receives the current cash, value, fundvalue and fund shares
+  id: totrans-125
   prefs: []
   type: TYPE_NORMAL
+  zh: 在每次下一周期之前接收当前现金、价值、基金价值和基金份额。
 - en: notify_order(order)
+  id: totrans-126
   prefs:
   - PREF_H4
   type: TYPE_NORMAL
+  zh: notify_order(order)
 - en: Receives order notifications before each next cycle
+  id: totrans-127
   prefs: []
   type: TYPE_NORMAL
+  zh: 在每次下一周期之前接收订单通知。
 - en: notify_trade(trade)
+  id: totrans-128
   prefs:
   - PREF_H4
   type: TYPE_NORMAL
+  zh: notify_trade(trade)
 - en: Receives trade notifications before each next cycle
+  id: totrans-129
   prefs: []
   type: TYPE_NORMAL
+  zh: 在每次下一周期之前接收交易通知。
 - en: get_analysis()
+  id: totrans-130
   prefs:
   - PREF_H4
   type: TYPE_NORMAL
+  zh: get_analysis()
 - en: Returns a *dict-like* object with the results of the analysis
+  id: totrans-131
   prefs: []
   type: TYPE_NORMAL
+  zh: 返回一个*类似于字典*的对象，其中包含分析结果。
 - en: The keys and format of analysis results in the dictionary is implementation
     dependent.
+  id: totrans-132
   prefs: []
   type: TYPE_NORMAL
+  zh: 字典中分析结果的键和格式取决于具体实现。
 - en: It is not even enforced that the result is a *dict-like object*, just the convention
+  id: totrans-133
   prefs: []
   type: TYPE_NORMAL
+  zh: 甚至不强制结果是*类似于字典对象*，只是约定。
 - en: The default implementation returns the default OrderedDict `rets` created by
     the default `create_analysis` method
+  id: totrans-134
   prefs: []
   type: TYPE_NORMAL
+  zh: 默认实现返回由默认的`create_analysis`方法创建的默认`OrderedDict``rets`。
 - en: create_analysis()
+  id: totrans-135
   prefs:
   - PREF_H4
   type: TYPE_NORMAL
+  zh: create_analysis()
 - en: Meant to be overriden by subclasses. Gives a chance to create the structures
     that hold the analysis.
+  id: totrans-136
   prefs: []
   type: TYPE_NORMAL
+  zh: 应由子类重写。给予创建保存分析的结构的机会。
 - en: The default behaviour is to create a `OrderedDict` named `rets`
+  id: totrans-137
   prefs: []
   type: TYPE_NORMAL
+  zh: 默认行为是创建一个名为`rets`的`OrderedDict`。
 - en: print(*args, **kwargs)
+  id: totrans-138
   prefs:
   - PREF_H4
   type: TYPE_NORMAL
+  zh: print(*args, **kwargs)
 - en: Prints the results returned by `get_analysis` via a standard `Writerfile` object,
     which defaults to writing things to standard output
+  id: totrans-139
   prefs: []
   type: TYPE_NORMAL
+  zh: 通过标准的`Writerfile`对象打印`get_analysis`返回的结果，默认情况下将其写入标准输出。
 - en: pprint(*args, **kwargs)
+  id: totrans-140
   prefs:
   - PREF_H4
   type: TYPE_NORMAL
+  zh: pprint(*args, **kwargs)
 - en: Prints the results returned by `get_analysis` using the pretty print Python
     module (*pprint*)
+  id: totrans-141
   prefs: []
   type: TYPE_NORMAL
+  zh: 使用Python的漂亮打印模块（*pprint*）打印`get_analysis`返回的结果。
 - en: '**len**()'
+  id: totrans-142
   prefs:
   - PREF_H4
   type: TYPE_NORMAL
+  zh: '**len**()'
 - en: Support for invoking `len` on analyzers by actually returning the current length
     of the strategy the analyzer operates on
+  id: totrans-143
   prefs: []
   type: TYPE_NORMAL
+  zh: 通过实际返回分析器所操作的策略的当前长度来支持对分析器进行`len`调用。

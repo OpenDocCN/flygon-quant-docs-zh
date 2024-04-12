@@ -1,167 +1,250 @@
 - en: Trade
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 交易
 - en: 原文：[https://www.backtrader.com/docu/trade/](https://www.backtrader.com/docu/trade/)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.backtrader.com/docu/trade/](https://www.backtrader.com/docu/trade/)
 - en: 'Definition of a trade:'
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: 交易的定义：
 - en: A Trade is open when the a position in a instrument goes from 0 to a size X
     which may positive/negative for long/short positions)
+  id: totrans-3
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 当仪器中的持仓从0变为大小X时，交易就开始了，大小可以是正的/负的，分别表示多头/空头仓位）
 - en: A Trade is closed when a position goes from X to 0.
+  id: totrans-4
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 当仓位从X变为0时，交易关闭。
 - en: 'The followig two actions:'
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: 以下两个动作：
 - en: positive to negative
+  id: totrans-6
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 正至负
 - en: negative to positive
+  id: totrans-7
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 负至正
 - en: 'Are actually seen as:'
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: 实际上被视为：
 - en: A trade has been closed (position went to 0 from X)
+  id: totrans-9
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 一个交易已经关闭（仓位从X变为0）
 - en: A new trade has been open (position goes from 0 to Y)
+  id: totrans-10
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 一个新交易已经打开（仓位从0变为Y）
 - en: Trades are only informative and have no user callable methods.
+  id: totrans-11
   prefs: []
   type: TYPE_NORMAL
+  zh: 交易仅用于信息提供，没有用户可调用的方法。
 - en: 'Reference: Trade'
+  id: totrans-12
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 参考：交易
 - en: class backtrader.trade.Trade(data=None, tradeid=0, historyon=False, size=0,
     price=0.0, value=0.0, commission=0.0)
+  id: totrans-13
   prefs:
   - PREF_H4
   type: TYPE_NORMAL
+  zh: 类 backtrader.trade.Trade(data=None, tradeid=0, historyon=False, size=0, price=0.0,
+    value=0.0, commission=0.0)
 - en: 'Keeps track of the life of an trade: size, price, commission (and value?)'
+  id: totrans-14
   prefs: []
   type: TYPE_NORMAL
+  zh: 跟踪交易的生命周期：大小、价格、佣金（和价值？）
 - en: An trade starts at 0 can be increased and reduced and can be considered closed
     if it goes back to 0.
+  id: totrans-15
   prefs: []
   type: TYPE_NORMAL
+  zh: 一个交易从0开始，可以增加和减少，并且如果回到0可以被视为关闭。
 - en: The trade can be long (positive size) or short (negative size)
+  id: totrans-16
   prefs: []
   type: TYPE_NORMAL
+  zh: 交易可以是多头（正大小）或空头（负大小）
 - en: An trade is not meant to be reversed (no support in the logic for it)
+  id: totrans-17
   prefs: []
   type: TYPE_NORMAL
+  zh: 一个交易不打算被反转（逻辑上不支持）
 - en: 'Member Attributes:'
+  id: totrans-18
   prefs: []
   type: TYPE_NORMAL
+  zh: 成员属性：
 - en: '`ref`: unique trade identifier'
+  id: totrans-19
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`ref`: 唯一的交易标识符'
 - en: '`status` (`int`): one of Created, Open, Closed'
+  id: totrans-20
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`status` (`int`): Created、Open、Closed 中的一个'
 - en: '`tradeid`: grouping tradeid passed to orders during creation The default in
     orders is 0'
+  id: totrans-21
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`tradeid`: 在创建订单时传递给订单的交易id分组，默认为0'
 - en: '`size` (`int`): current size of the trade'
+  id: totrans-22
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`size` (`int`): 交易的当前大小'
 - en: '`price` (`float`): current price of the trade'
+  id: totrans-23
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`price` (`float`): 交易的当前价格'
 - en: '`value` (`float`): current value of the trade'
+  id: totrans-24
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`value` (`float`): 交易的当前价值'
 - en: '`commission` (`float`): current accumulated commission'
+  id: totrans-25
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`commission` (`float`): 当前累积佣金'
 - en: '`pnl` (`float`): current profit and loss of the trade (gross pnl)'
+  id: totrans-26
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`pnl` (`float`): 交易的当前利润和损失（毛利润）'
 - en: '`pnlcomm` (`float`): current profit and loss of the trade minus commission
     (net pnl)'
+  id: totrans-27
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`pnlcomm` (`float`): 交易的当前利润和损失减去佣金（净利润）'
 - en: '`isclosed` (`bool`): records if the last update closed (set size to null the
     trade'
+  id: totrans-28
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`isclosed` (`bool`): 记录最后一个更新是否关闭了交易（将大小设置为null）'
 - en: '`isopen` (`bool`): records if any update has opened the trade'
+  id: totrans-29
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`isopen` (`bool`): 记录是否有任何更新打开了交易'
 - en: '`justopened` (`bool`): if the trade was just opened'
+  id: totrans-30
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`justopened` (`bool`): 如果交易刚刚开启'
 - en: '`baropen` (`int`): bar in which this trade was opened'
+  id: totrans-31
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`baropen` (`int`): 开启此交易的柱'
 - en: '`dtopen` (`float`): float coded datetime in which the trade was opened'
+  id: totrans-32
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`dtopen` (`float`): 交易开启的浮点编码日期时间'
 - en: Use method `open_datetime` to get a Python datetime.datetime or use the platform
     provided `num2date` method
+  id: totrans-33
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 使用方法 `open_datetime` 获取 Python datetime.datetime 或使用平台提供的 `num2date` 方法
 - en: '`barclose` (`int`): bar in which this trade was closed'
+  id: totrans-34
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`barclose` (`int`): 关闭此交易的柱'
 - en: '`dtclose` (`float`): float coded datetime in which the trade was closed'
+  id: totrans-35
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`dtclose` (`float`): 交易关闭的浮点编码日期时间'
 - en: Use method `close_datetime` to get a Python datetime.datetime or use the platform
     provided `num2date` method
+  id: totrans-36
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 使用方法 `close_datetime` 获取 Python datetime.datetime 或使用平台提供的 `num2date` 方法
 - en: '`barlen` (`int`): number of bars this trade was open'
+  id: totrans-37
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`barlen` (`int`): 此交易持续的周期数'
 - en: '`historyon` (`bool`): whether history has to be recorded'
+  id: totrans-38
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`historyon` (`bool`): 是否记录历史记录'
 - en: '`history` (`list`): holds a list updated with each “update” event containing
     the resulting status and parameters used in the update'
+  id: totrans-39
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`history` (`list`): 每个“update”事件更新的列表，包含更新后的状态和更新中使用的参数'
 - en: The first entry in the history is the Opening Event The last entry in the history
     is the Closing Event
+  id: totrans-40
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 历史记录中的第一个条目是开仓事件，最后一个条目是关闭事件

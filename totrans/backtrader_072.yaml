@@ -1,120 +1,180 @@
 - en: 'Commissions: Credit'
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 佣金：信用
 - en: 原文：[https://www.backtrader.com/docu/commission-credit/](https://www.backtrader.com/docu/commission-credit/)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.backtrader.com/docu/commission-credit/](https://www.backtrader.com/docu/commission-credit/)
 - en: 'In some situations, the cash amount in real brokers may be decreased because
     the operation on assets includes an interest rate. Examples:'
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: 在某些情况下，真实经纪人的现金金额可能会减少，因为资产操作包括利率。例如：
 - en: Short selling of stocks
+  id: totrans-3
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 股票空头交易
 - en: ETFs both long and short
+  id: totrans-4
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: ETF即多头又空头
 - en: The charge goes directly against the cash balance in the broker account. But
     it can still be seen as part of a commission scheme. And as such it has been modeled
     in *backtrader*.
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: 收费直接影响经纪账户的现金余额。但它仍然可以被视为佣金方案的一部分。因此，它已经在*backtrader*中建模。
 - en: 'The `CommInfoBase` class (and with it also the `CommissionInfo` main interface
     object) has been extended with:'
+  id: totrans-6
   prefs: []
   type: TYPE_NORMAL
+  zh: '`CommInfoBase`类（以及与之相关的`CommissionInfo`主接口对象）已经扩展了：'
 - en: Two (2) new parameters that allow setting the interest rate and determining
     if should be applied only to the short side or to both long and short
+  id: totrans-7
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 两个新参数，允许设置利率，并确定是否仅应用于空头或同时适用于多头和空头
 - en: Parameters
+  id: totrans-8
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 参数
 - en: '`interest` (def: `0.0`)'
+  id: totrans-9
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`interest`（默认：`0.0`）'
 - en: If this is non-zero, this is the yearly interest charged for holding a short
     selling position. This is mostly meant for stock short-selling
+  id: totrans-10
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 如果这个值不为零，则这是持有空头头寸的年利息。这主要是针对股票空头交易的
 - en: 'The default formula applied: `days * price * size * (interest / 365)`'
+  id: totrans-11
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 应用的默认公式：`days * price * size * (interest / 365)`
 - en: 'It must be specified in absolute terms: 0.05 -> 5%'
+  id: totrans-12
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 必须以绝对值指定：0.05 -> 5%
 - en: Note
+  id: totrans-13
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 注意
 - en: 'the behavior can be changed by overriding the method: `get_credit_interest`'
+  id: totrans-14
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 可以通过重写方法`get_credit_interest`来改变行为
 - en: '`interest_long` (def: `False`)'
+  id: totrans-15
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`interest_long`（默认：`False`）'
 - en: Some products like ETFs get charged on interest for short and long positions.
     If ths is `True` and `interest` is non-zero the interest will be charged on both
     directions
+  id: totrans-16
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 一些产品（如ETF）在空头和多头头寸上都会被收取利息。如果这是`True`，并且`interest`不为零，利息将在两个方向上都收取
 - en: The formula
+  id: totrans-17
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 公式
 - en: 'The default implementation will use the following formula:'
+  id: totrans-18
   prefs: []
   type: TYPE_NORMAL
+  zh: 默认实现将使用以下公式：
 - en: '[PRE0]'
+  id: totrans-19
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: 'Where:'
+  id: totrans-20
   prefs: []
   type: TYPE_NORMAL
+  zh: 其中：
 - en: '`days`: number of days elapsed since position was opened or the last credit
     interest calculation took place'
+  id: totrans-21
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`days`：自仓位开启或上次计算信用利息以来经过的天数'
 - en: Overriding the formula
+  id: totrans-22
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 重写公式
 - en: 'In order to change the formula subclassing of `CommissionInfo` is needed. The
     method to be overridden is:'
+  id: totrans-23
   prefs: []
   type: TYPE_NORMAL
+  zh: 为了改变`CommissionInfo`的公式子类化是必需的。需要被重写的方法是：
 - en: '[PRE1]'
+  id: totrans-24
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE1]'
 - en: It might be that the *broker* doesn’t consider weekends or bank holidays when
     calculating the interest rate. In this case this subclass would do the trick
+  id: totrans-25
   prefs: []
   type: TYPE_NORMAL
+  zh: 可能是*经纪人*在计算利率时不考虑周末或银行假日。在这种情况下，这个子类会奏效
 - en: '[PRE2]'
+  id: totrans-26
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE2]'
 - en: 'In this case, in the formula:'
+  id: totrans-27
   prefs: []
   type: TYPE_NORMAL
+  zh: 在这种情况下，在公式中：
 - en: '`days` has been replaced by `1.0`'
+  id: totrans-28
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`days`已被`1.0`替代'
 - en: Because if weekends/bank holidays do not count, the next calculation will always
     happen `1` trading da after the previous calculation
+  id: totrans-29
   prefs: []
   type: TYPE_NORMAL
+  zh: 因为如果周末/银行假日不计入，下一次计算将始终在上次计算后的`1`个交易日后发生

@@ -1,130 +1,196 @@
 - en: PyFolio Overview
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: PyFolio概述
 - en: 原文：[https://www.backtrader.com/docu/analyzers/pyfolio/](https://www.backtrader.com/docu/analyzers/pyfolio/)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.backtrader.com/docu/analyzers/pyfolio/](https://www.backtrader.com/docu/analyzers/pyfolio/)
 - en: Note
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: 注意
 - en: As of (at least) 2017-07-25 the `pyfolio` APIs have changed and `create_full_tear_sheet`
     no longer has a `gross_lev` as a named argument.
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: 截至至少2017-07-25，`pyfolio`的API已更改，`create_full_tear_sheet`不再具有`gross_lev`作为命名参数。
 - en: Consequently the sample for integration doesn’t work
+  id: totrans-4
   prefs: []
   type: TYPE_NORMAL
+  zh: 因此，集成的示例无法运行
 - en: 'Quoting from the main `pyfolio` page at [http://quantopian.github.io/pyfolio/](http://quantopian.github.io/pyfolio/):'
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: 引用主要`pyfolio`页面上的内容[http://quantopian.github.io/pyfolio/](http://quantopian.github.io/pyfolio/)：
 - en: '[PRE0]'
+  id: totrans-6
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: 'And now it works also well with *backtrader*. What’s needed:'
+  id: totrans-7
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在它也与*backtrader*很好地配合。需要什么：
 - en: '`pyfolio` obviously'
+  id: totrans-8
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 显然是`pyfolio`
 - en: And its dependencies (things like `pandas`, `seaborn` …)
+  id: totrans-9
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 以及它的依赖项（例如`pandas`，`seaborn` …）
 - en: Note
+  id: totrans-10
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 注意
 - en: During the integration with version `0.5.1`, an update to the most recent packages
     of the dependencies was needed, like `seaborn` from the previously installed `0.7.0-dev`
     to `0.7.1`, apparently due to the absence of the method `swarmplot`
+  id: totrans-11
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 在与版本`0.5.1`集成期间，需要更新依赖项的最新软件包，例如从先前安装的`0.7.0-dev`到`0.7.1`的`seaborn`，显然是由于缺少`swarmplot`方法
 - en: Usage
+  id: totrans-12
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 用法
 - en: 'Add the `PyFolio` analyzer to the `cerebro` mix:'
+  id: totrans-13
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 将`PyFolio`分析器添加到`cerebro`混合中：
 - en: '[PRE1]'
+  id: totrans-14
   prefs:
   - PREF_IND
   type: TYPE_PRE
+  zh: '[PRE1]'
 - en: 'Run and retrieve the 1^(st) strategy:'
+  id: totrans-15
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 运行并检索第1个策略：
 - en: '[PRE2]'
+  id: totrans-16
   prefs:
   - PREF_IND
   type: TYPE_PRE
+  zh: '[PRE2]'
 - en: 'Retrieve the analyzer using whatever name you gave to it or the default name
     it will be given to it: `pyfolio`. For example:'
+  id: totrans-17
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 使用您指定的名称或默认名称`pyfolio`检索分析器。例如：
 - en: '[PRE3]'
+  id: totrans-18
   prefs:
   - PREF_IND
   type: TYPE_PRE
+  zh: '[PRE3]'
 - en: 'Use the analyzer method `get_pf_items` to retrieve the 4 components later needed
     for `pyfolio`:'
+  id: totrans-19
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 使用分析器方法`get_pf_items`检索后续需要用于`pyfolio`的4个组件：
 - en: '[PRE4]'
+  id: totrans-20
   prefs:
   - PREF_IND
   type: TYPE_PRE
+  zh: '[PRE4]'
 - en: '!!! note'
+  id: totrans-21
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: '!!! 注意'
 - en: '[PRE5]'
+  id: totrans-22
   prefs:
   - PREF_IND
   type: TYPE_PRE
+  zh: '[PRE5]'
 - en: Work with `pyfolio` (this is already outside of the *backtrader* ecosystem)
+  id: totrans-23
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 使用`pyfolio`（这已经超出了*backtrader*生态系统）
 - en: Some usage notes not directly related to *backtrader*
+  id: totrans-24
   prefs: []
   type: TYPE_NORMAL
+  zh: 一些与*backtrader*无直接关系的使用说明
 - en: '`pyfolio` automatic plotting works outside of a *Jupyter Notebook*, but **it
     works best** inside'
+  id: totrans-25
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`pyfolio`自动绘图功能在*Jupyter Notebook*之外也可以工作，但**在内部效果最佳**。'
 - en: '`pyfolio` data tables’ output seems to barely work outside of a *Jupyter Notebook*.
     It works inside the *Notebook*'
+  id: totrans-26
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`pyfolio`数据表的输出似乎在*Jupyter Notebook*之外几乎无法工作。它在*Notebook*内部工作'
 - en: 'The conclusion is easy if working with `pyfolio` is wished: **work inside a
     Jupyter Notebook**'
+  id: totrans-27
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果希望使用`pyfolio`，结论很简单：**在Jupyter Notebook内部工作**
 - en: Sample Code
+  id: totrans-28
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 示例代码
 - en: 'The code would look like this:'
+  id: totrans-29
   prefs: []
   type: TYPE_NORMAL
+  zh: 代码如下所示：
 - en: '[PRE6]'
+  id: totrans-30
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE6]'
 - en: Reference
+  id: totrans-31
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 参考
 - en: Look into the Analyzers Reference for the `PyFolio` analyzer and which analyzers
     it uses internally
+  id: totrans-32
   prefs: []
   type: TYPE_NORMAL
+  zh: 查看`PyFolio`分析器的参考资料以及它内部使用的分析器
