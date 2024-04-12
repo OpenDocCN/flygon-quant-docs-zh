@@ -1,27 +1,34 @@
 - en: Fillers
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
 - en: 原文：[https://www.backtrader.com/docu/filler/](https://www.backtrader.com/docu/filler/)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
 - en: 'The *backtrader* broker simulation has a default strategy when it comes to
     using volume for order execution:'
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
 - en: Ignore volume
+  id: totrans-3
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: 'This is based on 2 premises:'
+  id: totrans-4
   prefs: []
   type: TYPE_NORMAL
 - en: Trade in markets liquid enough to fully absorb *buy/sell* orders in one go
+  id: totrans-5
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: Real volume matching requires a real wolrd
+  id: totrans-6
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
@@ -30,170 +37,224 @@
     extra actors happen to be in the market to discriminate if such an order would
     be or would not be matched to stick to the `Fill` part or if the order should
     be `Kill`
+  id: totrans-7
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
 - en: But the *broker* can accept *Volume Fillers* which determine how much of the
     volume at a given point in time has to be used for *order matching*.
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
 - en: The fillers signature
+  id: totrans-9
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
 - en: 'A *filler* in the *backtrader* ecosystem can be any *callable* which matches
     the following signature:'
+  id: totrans-10
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE0]'
+  id: totrans-11
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: 'Where:'
+  id: totrans-12
   prefs: []
   type: TYPE_NORMAL
 - en: '`order` is the order which is going to be executed'
+  id: totrans-13
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: This object gives access to the `data` object which is the target of the operation,
     creation sizes/prices, execution prices/sizes/remaining sizes and other details
+  id: totrans-14
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
 - en: '`price` at which the order is going to be executed'
+  id: totrans-15
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: '`ago` is the index to the `data` in the *order* in which to look for the volume
     and price elements'
+  id: totrans-16
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: In almost all cases this will be `0` (current point in time) but in a corner
     case to cover `Close` orders this may be `-1`
+  id: totrans-17
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
 - en: 'To for example access the bar volume do:'
+  id: totrans-18
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
 - en: '[PRE1]'
+  id: totrans-19
   prefs:
   - PREF_IND
   type: TYPE_PRE
+  zh: '[PRE1]'
 - en: 'The callable can be a function or for example an instance of a class supporting
     the `__call__` method, like in:'
+  id: totrans-20
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE2]'
+  id: totrans-21
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE2]'
 - en: Adding a Filler to the broker
+  id: totrans-22
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
 - en: 'The most straightforward method is to use the `set_filler`:'
+  id: totrans-23
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE3]'
+  id: totrans-24
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE3]'
 - en: 'The second choice is to completely replace the `broker`, although this is probably
     only meant for subclasses of `BrokerBack` which have rewritten portions of the
     functionality:'
+  id: totrans-25
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE4]'
+  id: totrans-26
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE4]'
 - en: The sample
+  id: totrans-27
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
 - en: The *backtrader* sources contain a sample named `volumefilling` which allows
     to test some of the integrated `fillers` (initially all)
+  id: totrans-28
   prefs: []
   type: TYPE_NORMAL
 - en: Reference
+  id: totrans-29
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
 - en: class backtrader.fillers.FixedSize()
+  id: totrans-30
   prefs:
   - PREF_H4
   type: TYPE_NORMAL
 - en: Returns the execution size for a given order using a *percentage* of the volume
     in a bar.
+  id: totrans-31
   prefs: []
   type: TYPE_NORMAL
 - en: This percentage is set with the parameter `perc`
+  id: totrans-32
   prefs: []
   type: TYPE_NORMAL
 - en: 'Params:'
+  id: totrans-33
   prefs: []
   type: TYPE_NORMAL
 - en: '`size` (default: `None`) maximum size to be executed. The actual volume of
     the bar at execution time is also a limit if smaller than the size'
+  id: totrans-34
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: If the value of this parameter evaluates to False, the entire volume of the
     bar will be used to match the order
+  id: totrans-35
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
 - en: class backtrader.fillers.FixedBarPerc()
+  id: totrans-36
   prefs:
   - PREF_H4
   type: TYPE_NORMAL
 - en: Returns the execution size for a given order using a *percentage* of the volume
     in a bar.
+  id: totrans-37
   prefs: []
   type: TYPE_NORMAL
 - en: This percentage is set with the parameter `perc`
+  id: totrans-38
   prefs: []
   type: TYPE_NORMAL
 - en: 'Params:'
+  id: totrans-39
   prefs: []
   type: TYPE_NORMAL
 - en: '`perc` (default: `100.0`) (valied values: `0.0 - 100.0`)'
+  id: totrans-40
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: Percentage of the volume bar to use to execute an order
+  id: totrans-41
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
 - en: class backtrader.fillers.BarPointPerc()
+  id: totrans-42
   prefs:
   - PREF_H4
   type: TYPE_NORMAL
 - en: Returns the execution size for a given order. The volume will be distributed
     uniformly in the range *high*-*low* using `minmov` to partition.
+  id: totrans-43
   prefs: []
   type: TYPE_NORMAL
 - en: From the allocated volume for the given price, the `perc` percentage will be
     used
+  id: totrans-44
   prefs: []
   type: TYPE_NORMAL
+  zh: 从给定价格的分配交易量中，将使用 `perc` 百分比
 - en: 'Params:'
+  id: totrans-45
   prefs: []
   type: TYPE_NORMAL
+  zh: 参数：
 - en: '`minmov` (default: `0.01`)'
+  id: totrans-46
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`minmov`（默认值：`0.01`）'
 - en: Minimum price movement. Used to partition the range *high*-*low* to proportionally
     distribute the volume amongst possible prices
+  id: totrans-47
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 最小价格变动。用于将范围 *高*-*低* 分割，以在可能的价格之间按比例分配交易量
 - en: '`perc` (default: `100.0`) (valied values: `0.0 - 100.0`)'
+  id: totrans-48
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`perc`（默认值：`100.0`）（有效值：`0.0 - 100.0`）'
 - en: Percentage of the volume allocated to the order execution price to use for matching
+  id: totrans-49
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 分配给订单执行价格的交易量百分比，用于匹配

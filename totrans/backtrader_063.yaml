@@ -1,300 +1,440 @@
 - en: Slippage
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 滑点
 - en: 原文：[https://www.backtrader.com/docu/slippage/slippage/](https://www.backtrader.com/docu/slippage/slippage/)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.backtrader.com/docu/slippage/slippage/](https://www.backtrader.com/docu/slippage/slippage/)
 - en: 'backtesting cannot guarantee real market conditions. No matter how good the
     market simulation is, under real market conditions slippage can happen. That means:'
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: 回测无法保证真实市场条件。无论市场模拟有多好，在真实市场条件下都可能发生滑点。这意味着：
 - en: The requested price may not be matched.
+  id: totrans-3
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 请求的价格可能无法匹配。
 - en: The integrated backtesting broker supports slippage. The following parameters
     can be passed to the broker
+  id: totrans-4
   prefs: []
   type: TYPE_NORMAL
+  zh: 集成的回测经纪人支持滑点。以下参数可以传递给经纪人
 - en: '`slip_perc` (default: `0.0`) Percentage in absolute termns (and positive) that
     should be used to slip prices up/down for buy/sell orders'
+  id: totrans-5
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`slip_perc` (默认值: `0.0`) 绝对百分比（正数），用于上下滑动买入/卖出订单的价格'
 - en: 'Note:'
+  id: totrans-6
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: '注意:'
 - en: '`0.01` is `1%`'
+  id: totrans-7
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`0.01` 是 `1%`'
 - en: '`0.001` is `0.1%`'
+  id: totrans-8
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`0.001` 是 `0.1%`'
 - en: '`slip_fixed` (default: `0.0`) Percentage in units (and positive) that should
     be used to slip prices up/down for buy/sell orders'
+  id: totrans-9
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`slip_fixed` (默认值: `0.0`) 单位百分比（正数），用于上下滑动买入/卖出订单的价格'
 - en: 'Note: if `slip_perc` is non zero, it takes precendence over this.'
+  id: totrans-10
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 注意：如果`slip_perc`不为零，则它优先于此。
 - en: '`slip_open` (default: `False`) whether to slip prices for order execution which
     would specifically used the *opening* price of the next bar. An example would
     be `Market` order which is executed with the next available tick, i.e: the opening
     price of the bar.'
+  id: totrans-11
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`slip_open` (默认值: `False`) 是否为订单执行滑动价格，该价格特别使用下一个柱的*开盘*价格。一个示例是使用下一个可用刻度执行的`Market`订单，即柱的开盘价格。'
 - en: This also applies to some of the other executions, because the logic tries to
     detect if the *opening* price would match the requested price/execution type when
     moving to a new bar.
+  id: totrans-12
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 这也适用于其他一些执行，因为逻辑试图检测*开盘*价格是否会在移动到新柱时匹配请求的价格/执行类型。
 - en: '`slip_match` (default: `True`)'
+  id: totrans-13
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`slip_match` (默认值: `True`)'
 - en: If `True` the broker will offer a match by capping slippage at `high/low` prices
     in case they would be exceeded.
+  id: totrans-14
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 如果为`True`，经纪人将通过在超出时将滑点限制在`high/low`价格上来提供匹配。
 - en: If `False` the broker will not match the order with the current prices and will
     try execution during the next iteration
+  id: totrans-15
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 如果 `False`，经纪人将不会根据当前价格匹配订单，并将在下一次迭代中尝试执行
 - en: '`slip_limit` (default: `True`)'
+  id: totrans-16
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`slip_limit` (默认值: `True`)'
 - en: '`Limit` orders, given the exact match price requested, will be matched even
     if `slip_match` is `False`.'
+  id: totrans-17
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 即使 `slip_match` 为 `False`，给定请求的精确匹配价格的`Limit`订单也会被匹配。
 - en: This option controls that behavior.
+  id: totrans-18
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 此选项控制该行为。
 - en: If `True`, then `Limit` orders will be matched by capping prices to the `limit`
     / `high/low` prices
+  id: totrans-19
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 如果为`True`，则`Limit`订单将通过将价格限制在`limit` / `high/low`价格上来匹配
 - en: If `False` and slippage exceeds the cap, then there will be no match
+  id: totrans-20
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 如果 `False` 并且滑点超过上限，则不会匹配
 - en: '`slip_out` (default: `False`)'
+  id: totrans-21
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`slip_out` (默认值: `False`)'
 - en: Provide *slippage* even if the price falls outside the `high` - `low` range.
+  id: totrans-22
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 即使价格超出`high` - `low`范围，也提供*滑点*。
 - en: How it works
+  id: totrans-23
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 工作原理
 - en: 'In order to decide when to apply *slippage* the order execution type is taken
     into account:'
+  id: totrans-24
   prefs: []
   type: TYPE_NORMAL
+  zh: 为了决定何时应用*滑点*，订单执行类型被考虑在内：
 - en: '`Close` - **No slippage** is applied'
+  id: totrans-25
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`Close` - **不应用滑点**'
 - en: This order is matched against the `close` price and this price is the last one
     of the day. Slippage cannot happen because the order can only happen with the
     last tick of the session and this is a unique price with no tolerance.
+  id: totrans-26
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 此订单与`close`价格匹配，此价格是当天的最后一个价格。滑点不会发生，因为订单只能在会话的最后一个刻度发生，这是一个唯一的价格，没有容忍度。
 - en: '`Market` - *Slippage* is applied'
+  id: totrans-27
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`Market` - *滑点*被应用'
 - en: Please check the `slip_open` exception. Because `Market` orders will be matched
     against the *opening* price of the next bar.
+  id: totrans-28
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 请检查`slip_open`异常。因为`Market`订单将与下一个柱的*开盘*价格匹配。
 - en: '`Limit` - *Slippage* is applied following this logic'
+  id: totrans-29
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`Limit` - *滑点*按照这个逻辑应用'
 - en: If the matching price would be the *opening* price, then *slippage* is applied
     according to the parameter `slip_open`. If applied, the price will never be worse
     than the requested `limit` price
+  id: totrans-30
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 如果匹配价格将是*开盘*价格，则根据参数 `slip_open` 应用*滑点*。如果应用，则价格永远不会比请求的`limit`价格更差
 - en: If the matching price is not the `limit` price, *slippage* is applied capping
     at `high/low`. In this case `slip_mlimit` applies to decide if a match will be
     happening in case the caps are exceeded
+  id: totrans-31
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 如果匹配价格不是`limit`价格，则应用*滑点*，并在`high/low`上限制。在这种情况下，`slip_mlimit`适用于决定是否在超出上限时会发生匹配
 - en: If the matching price is the `limit` price, then no slippage is applied
+  id: totrans-32
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 如果匹配价格是`limit`价格，则不会应用滑点
 - en: '`Stop` - once the order is *triggered* the same logic as for `Market` orders
     apply'
+  id: totrans-33
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`Stop` - 一旦订单被*触发*，与`市价`订单相同的逻辑将适用'
 - en: '`StopLimit` - once the order is *triggered* the same logic as for `Limit` orders
     apply'
+  id: totrans-34
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`StopLimit` - 一旦订单被*触发*，与`限价`订单相同的逻辑将适用'
 - en: This approach tries to offer the most realistic possible approach within the
     limits of the simulation and available data
+  id: totrans-35
   prefs: []
   type: TYPE_NORMAL
+  zh: 该方法试图在模拟和可用数据的限制内提供尽可能逼真的方法
 - en: Configuring slippage
+  id: totrans-36
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 配置滑点
 - en: 'A *broker* is already instantiated by a *cerebro* engine for each run with
     the default parameters. There are two ways to alter the behavior:'
+  id: totrans-37
   prefs: []
   type: TYPE_NORMAL
+  zh: '*经纪人*已经由每个运行的*智能交易引擎*实例化，具有默认参数。有两种方法可以更改其行为：'
 - en: Use methods to configure *slippage*
+  id: totrans-38
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 使用方法来配置*滑点*
 - en: BackBroker.set_slippage_perc(perc, slip_open=True, slip_limit=True, slip_match=True,
     slip_out=False)
+  id: totrans-39
   prefs:
   - PREF_IND
   - PREF_H4
   type: TYPE_NORMAL
+  zh: BackBroker.set_slippage_perc(perc, slip_open=True, slip_limit=True, slip_match=True,
+    slip_out=False)
 - en: Configure slippage to be percentage based
+  id: totrans-40
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 配置滑点为基于百分比的
 - en: BackBroker.set_slippage_fixed(fixed, slip_open=True, slip_limit=True, slip_match=True,
     slip_out=False)
+  id: totrans-41
   prefs:
   - PREF_IND
   - PREF_H4
   type: TYPE_NORMAL
+  zh: BackBroker.set_slippage_fixed(fixed, slip_open=True, slip_limit=True, slip_match=True,
+    slip_out=False)
 - en: Configure slippage to be fixed points based
+  id: totrans-42
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 配置滑点为固定点位基础
 - en: 'Replace the broker as in:'
+  id: totrans-43
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 将经纪人替换为：
 - en: '[PRE0]'
+  id: totrans-44
   prefs:
   - PREF_IND
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: Practical examples
+  id: totrans-45
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 实际示例
 - en: The sources contain a sample which uses the order execution type `Market` and
     a *long/short* approach using *signals*. This should allow to understand the logic.
+  id: totrans-46
   prefs: []
   type: TYPE_NORMAL
+  zh: 源代码包含一个示例，该示例使用了执行类型为`市价`的订单以及使用*信号*的*多头/空头*方法。这应该能帮助理解其逻辑。
 - en: 'A run with no slippage and an initial plot for reference later:'
+  id: totrans-47
   prefs: []
   type: TYPE_NORMAL
+  zh: 一个没有滑点并且具有初始图表供以后参考的运行：
 - en: '[PRE1]'
+  id: totrans-48
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE1]'
 - en: '![image](../Images/308d5e797cb3b9b08716db17ff65f3ab.png)'
+  id: totrans-49
   prefs: []
   type: TYPE_IMG
+  zh: '![图片](../Images/308d5e797cb3b9b08716db17ff65f3ab.png)'
 - en: 'And the same run using *slippage* with a `1.5%` configured:'
+  id: totrans-50
   prefs: []
   type: TYPE_NORMAL
+  zh: 同样的运行使用了配置为`1.5%`的*滑点*：
 - en: '[PRE2]'
+  id: totrans-51
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE2]'
 - en: There is **NO CHANGE**. This is the expected behavior for the scenario.
+  id: totrans-52
   prefs: []
   type: TYPE_NORMAL
+  zh: 没有**变动**。这是该场景的预期行为。
 - en: 'Execution Type: `Market`'
+  id: totrans-53
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 执行类型：`市价`
 - en: And `slip_open` has not been set to `True`
+  id: totrans-54
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 而`slip_open`没有被设置为`True`
 - en: The `Market` orders are matched against the *opening* price of the next bar
     and we are not allowing the `open` price to be moved.
+  id: totrans-55
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: '`市价`订单与下一根柱的*开盘*价格匹配，我们不允许`open`价格被移动。'
 - en: 'A run setting `slip_open` to `True`:'
+  id: totrans-56
   prefs: []
   type: TYPE_NORMAL
+  zh: 将`slip_open`设置为`True`的一个运行设置：
 - en: '[PRE3]'
+  id: totrans-57
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE3]'
 - en: And one can immediately see tht the prices **HAVE MOVED**. And the allocated
     prices are worst or equal like for operation 35\. *This is not a copy and paste
     error*
+  id: totrans-58
   prefs: []
   type: TYPE_NORMAL
+  zh: 人们可以立即看到价格**已经变动**。并且分配的价格比操作35的最坏或相等。*这不是复制粘贴错误*
 - en: The `open` and the `high` on 20016-12-19 were the same.
+  id: totrans-59
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 2016-12-19的`open`和`high`是相同的。
 - en: The price cannot be pushed above the `high` because that would mean returning
     a non-existent price.
+  id: totrans-60
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 价格不能被推高到`high`之上，因为那将意味着返回一个不存在的价格。
 - en: 'Of course, *backtrader* allows to match outide the `high` - `low` range if
     wished with `slip_out`. A run with it activated:'
+  id: totrans-61
   prefs: []
   type: TYPE_NORMAL
+  zh: 当然，*backtrader*允许匹配超出`high`-`low`范围的价格，如果愿意的话，可以激活`slip_out`进行运行：
 - en: '[PRE4]'
+  id: totrans-62
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE4]'
 - en: 'A matching expression for the matched prices would be: OMG! (Oh My God!). The
     prices are clearly outside of the range. Suffice to look at operation 35, which
     has been matched at `4182.83`. A quick inspection of the chart in this document
     shows that the asset never came close to that price.'
+  id: totrans-63
   prefs: []
   type: TYPE_NORMAL
+  zh: 用于匹配的匹配表达式将是：哦天呐！(我的天啊！）。价格明显超出了范围。只需看看操作35，该操作在`4182.83`处匹配。快速检查本文档中的图表可以看到该资产从未接近过该价格。
 - en: '`slip_match` has a default of `True` and that means that *backtrader* offers
     a match, be it with capped or uncapped prices as seen above. Let’s disable it:'
+  id: totrans-64
   prefs: []
   type: TYPE_NORMAL
+  zh: '`slip_match`的默认值为`True`，这意味着*backtrader*提供了一个匹配，无论是带上限价还是不带上限价，如上所示。让我们将其禁用：'
 - en: '[PRE5]'
+  id: totrans-65
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE5]'
 - en: 'Blistering barnacles! Down to 13 from 35\. The rationale:'
+  id: totrans-66
   prefs: []
   type: TYPE_NORMAL
+  zh: 天啊！从35降到了13。原因是：
 - en: Deactivating `slip_match` disallows matching operations if *slippage* would
     push the matching price above the `high` or below the `low` of the bar. It seems
     that with the `1.5%` of requested *slippage*, around 22 of the operations fail
     to be executed.
+  id: totrans-67
   prefs: []
   type: TYPE_NORMAL
+  zh: 停用`slip_match`将阻止匹配操作，如果*滑点*将匹配价格推高到`high`之上或推低到柱的`low`之下。看起来，随着请求的*滑点*为`1.5%`，大约有22个操作无法执行。
 - en: The examples should have shown how the different *slippage* options work together.
+  id: totrans-68
   prefs: []
   type: TYPE_NORMAL
+  zh: 这些示例应该已经展示了不同的*滑点*选项是如何共同工作的。

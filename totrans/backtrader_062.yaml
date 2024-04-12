@@ -1,470 +1,696 @@
 - en: Broker
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 经纪人
 - en: 原文：[https://www.backtrader.com/docu/broker/](https://www.backtrader.com/docu/broker/)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.backtrader.com/docu/broker/](https://www.backtrader.com/docu/broker/)
 - en: Reference
+  id: totrans-2
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 参考
 - en: class backtrader.brokers.BackBroker()
+  id: totrans-3
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 类`backtrader.brokers.BackBroker()`
 - en: Broker Simulator
+  id: totrans-4
   prefs: []
   type: TYPE_NORMAL
+  zh: 经纪人模拟器
 - en: The simulation supports different order types, checking a submitted order cash
     requirements against current cash, keeping track of cash and value for each iteration
     of `cerebro` and keeping the current position on different datas.
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: 该模拟支持不同的订单类型，检查提交订单的现金需求与当前现金的情况，跟踪每次`cerebro`迭代的现金和价值，并在不同的数据上保持当前位置。
 - en: '*cash* is adjusted on each iteration for instruments like `futures` for'
+  id: totrans-6
   prefs: []
   type: TYPE_NORMAL
+  zh: '*cash*根据仪器进行每次迭代调整，如`期货`'
 - en: '[PRE0]'
+  id: totrans-7
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: 'Supported order types:'
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: 支持的订单类型：
 - en: '`Market`: to be executed with the 1^(st) tick of the next bar (namely the `open`
     price)'
+  id: totrans-9
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`Market`：在下一个柱子的第1^(st)个tick（即`open`价格）执行'
 - en: '`Close`: meant for intraday in which the order is executed with the closing
     price of the last bar of the session'
+  id: totrans-10
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`Close`：用于一日内，在该订单以会话最后一个柱的收盘价执行'
 - en: '`Limit`: executes if the given limit price is seen during the session'
+  id: totrans-11
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`Limit`：在会话期间看到给定的限价时执行'
 - en: '`Stop`: executes a `Market` order if the given stop price is seen'
+  id: totrans-12
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`Stop`：如果看到给定的停止价格，则执行`Market`订单'
 - en: '`StopLimit`: sets a `Limit` order in motion if the given stop price is seen'
+  id: totrans-13
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`StopLimit`：如果看到给定的停止价格，则启动`Limit`订单'
 - en: 'Because the broker is instantiated by `Cerebro` and there should be (mostly)
     no reason to replace the broker, the params are not controlled by the user for
     the instance. To change this there are two options:'
+  id: totrans-14
   prefs: []
   type: TYPE_NORMAL
+  zh: 因为经纪人是由`Cerebro`实例化的，而且应该（大多数情况下）没有理由替换经纪人，所以实例的参数不受用户控制。要更改此参数，有两种选择：
 - en: Manually create an instance of this class with the desired params and use `cerebro.broker
     = instance` to set the instance as the broker for the `run` execution
+  id: totrans-15
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 手动创建此类的实例，并使用`cerebro.broker = instance`将实例设置为`run`执行的经纪人
 - en: Use the `set_xxx` to set the value using `cerebro.broker.set_xxx` where `\`xxx`
     stands for the name of the parameter to set
+  id: totrans-16
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 使用`set_xxx`通过`cerebro.broker.set_xxx`来设置值，其中`\`xxx`代表要设置的参数的名称
 - en: Note
+  id: totrans-17
   prefs: []
   type: TYPE_NORMAL
+  zh: 注意
 - en: '`cerebro.broker` is a *property* supported by the `getbroker` and `setbroker`
     methods of `Cerebro`'
+  id: totrans-18
   prefs: []
   type: TYPE_NORMAL
+  zh: '`cerebro.broker`是`Cerebro`的`getbroker`和`setbroker`方法支持的*property*'
 - en: 'Params:'
+  id: totrans-19
   prefs: []
   type: TYPE_NORMAL
+  zh: 参数：
 - en: '`cash` (default: `10000`): starting cash'
+  id: totrans-20
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`cash`（默认值：`10000`）：起始现金'
 - en: '`commission` (default: `CommInfoBase(percabs=True)`) base commission scheme
     which applies to all assets'
+  id: totrans-21
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`commission`（默认值：`CommInfoBase(percabs=True)`）适用于所有资产的基础佣金方案'
 - en: '`checksubmit` (default: `True`) check margin/cash before accepting an order
     into the system'
+  id: totrans-22
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`checksubmit`（默认值：`True`）：在将订单接受到系统之前检查保证金/现金'
 - en: '`eosbar` (default: `False`): With intraday bars consider a bar with the same
     `time` as the end of session to be the end of the session. This is not usually
     the case, because some bars (final auction) are produced by many exchanges for
     many products for a couple of minutes after the end of the session'
+  id: totrans-23
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`eosbar`（默认值：`False`）：对于一日内柱，如果某个柱具有与会话结束相同的`time`，则将其视为会话结束。这通常不是情况，因为一些柱（最终拍卖）会在会话结束后几分钟内由许多交易所为许多产品产生'
 - en: '`eosbar` (default: `False`): With intraday bars consider a bar with the same
     `time` as the end of session to be the end of the session. This is not usually
     the case, because some bars (final auction) are produced by many exchanges for
     many products for a couple of minutes after the end of the session'
+  id: totrans-24
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`eosbar`（默认值：`False`）：对于一日内柱，如果某个柱具有与会话结束相同的`time`，则将其视为会话结束。这通常不是情况，因为一些柱（最终拍卖）会在会话结束后几分钟内由许多交易所为许多产品产生'
 - en: '`filler` (default: `None`)'
+  id: totrans-25
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`filler`（默认值：`None`）'
 - en: 'A callable with signature: `callable(order, price, ago)`'
+  id: totrans-26
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 一个带有签名的可调用函数：`callable(order, price, ago)`
 - en: '`order`: obviously the order in execution. This provides access to the *data*
     (and with it the *ohlc* and *volume* values), the *execution type*, remaining
     size (`order.executed.remsize`) and others.'
+  id: totrans-27
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`order`：显然是执行的订单。这提供了对*数据*（以及*ohlc*和*volume*值）、*执行类型*、剩余大小（`order.executed.remsize`）和其他内容的访问。'
 - en: Please check the `Order` documentation and reference for things available inside
     an `Order` instance
+  id: totrans-28
   prefs:
   - PREF_IND
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 请检查`Order`文档和参考，以了解`Order`实例中可用的内容
 - en: '`price` the price at which the order is going to be executed in the `ago` bar'
+  id: totrans-29
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`price`：订单将在`ago`柱中执行的价格'
 - en: '`ago`: index meant to be used with `order.data` for the extraction of the *ohlc*
     and *volume* prices. In most cases this will be `0` but on a corner case for `Close`
     orders, this will be `-1`.'
+  id: totrans-30
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`ago`：用于与`order.data`一起使用以提取*ohlc*和*volume*价格的索引。在大多数情况下，这将是`0`，但对于`Close`订单的一个特殊情况，这将是`-1`。'
 - en: 'In order to get the bar volume (for example) do: `volume = order.data.voluume[ago]`'
+  id: totrans-31
   prefs:
   - PREF_IND
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 为了获得柱形体积（例如）：`volume = order.data.voluume[ago]`
 - en: The callable must return the *executed size* (a value >= 0)
+  id: totrans-32
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 可调用函数必须返回*执行大小*（大于等于0的值）
 - en: The callable may of course be an object with `__call__` matching the aforementioned
     signature
+  id: totrans-33
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 可调用函数当然可以是一个与前述签名匹配的对象`__call__`
 - en: With the default `None` orders will be completely executed in a single shot
+  id: totrans-34
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 默认值为`None`时，订单将在一次性完全执行
 - en: '`slip_perc` (default: `0.0`) Percentage in absolute termns (and positive) that
     should be used to slip prices up/down for buy/sell orders'
+  id: totrans-35
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`slip_perc`（默认值：`0.0`）应该使用的百分比绝对值（和正数）使买入/卖出订单的价格上涨/下跌'
 - en: 'Note:'
+  id: totrans-36
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 注意：
 - en: '`0.01` is `1%`'
+  id: totrans-37
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`0.01`是`1%`'
 - en: '`0.001` is `0.1%`'
+  id: totrans-38
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`0.001`是`0.1%`'
 - en: '`slip_fixed` (default: `0.0`) Percentage in units (and positive) that should
     be used to slip prices up/down for buy/sell orders'
+  id: totrans-39
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`slip_fixed`（默认值：`0.0`）应使用的以单位（和正数）表示的百分比来使价格上涨/下跌以进行买入/卖出订单滑点'
 - en: 'Note: if `slip_perc` is non zero, it takes precendence over this.'
+  id: totrans-40
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 注意：如果`slip_perc`不为零，则它优先于此。
 - en: '`slip_open` (default: `False`) whether to slip prices for order execution which
     would specifically used the *opening* price of the next bar. An example would
     be `Market` order which is executed with the next available tick, i.e: the opening
     price of the bar.'
+  id: totrans-41
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`slip_open`（默认值：`False`）是否为订单执行滑点价格，其将特定使用*下一个*条的*开盘*价格。一个例子是使用下一个可用的刻度执行的`Market`订单，即：该条的开盘价。'
 - en: This also applies to some of the other executions, because the logic tries to
     detect if the *opening* price would match the requested price/execution type when
     moving to a new bar.
+  id: totrans-42
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 这也适用于一些其他执行，因为逻辑试图检测*开盘*价格是否会与移动到新条时请求的价格/执行类型匹配。
 - en: '`slip_match` (default: `True`)'
+  id: totrans-43
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`slip_match`（默认值：`True`）'
 - en: If `True` the broker will offer a match by capping slippage at `high/low` prices
     in case they would be exceeded.
+  id: totrans-44
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 如果设置为`True`，则经纪人将通过将滑点限制在`高/低`价格上来提供匹配，以防超出。
 - en: If `False` the broker will not match the order with the current prices and will
     try execution during the next iteration
+  id: totrans-45
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 如果为`False`，则经纪人不会以当前价格匹配订单，并将尝试在下一次迭代期间执行
 - en: '`slip_limit` (default: `True`)'
+  id: totrans-46
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`slip_limit`（默认值：`True`）'
 - en: '`Limit` orders, given the exact match price requested, will be matched even
     if `slip_match` is `False`.'
+  id: totrans-47
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: '`Limit`订单，给定所请求的确切匹配价格，即使`slip_match`为`False`，也将匹配。'
 - en: This option controls that behavior.
+  id: totrans-48
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 此选项控制该行为。
 - en: If `True`, then `Limit` orders will be matched by capping prices to the `limit`
     / `high/low` prices
+  id: totrans-49
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 如果为`True`，则`Limit`订单将通过将价格限制在`限价`/`高/低`价格上来匹配
 - en: If `False` and slippage exceeds the cap, then there will be no match
+  id: totrans-50
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 如果`False`且滑点超过上限，则不会匹配
 - en: '`slip_out` (default: `False`)'
+  id: totrans-51
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`slip_out`（默认值：`False`）'
 - en: Provide *slippage* even if the price falls outside the `high` - `low` range.
+  id: totrans-52
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 即使价格跌出`高`-`低`范围，也要提供*滑点*。
 - en: '`coc` (default: `False`)'
+  id: totrans-53
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`coc`（默认值：`False`）'
 - en: '*Cheat-On-Close* Setting this to `True` with `set_coc` enables'
+  id: totrans-54
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: '*Cheat-On-Close* 将其设置为`True`并使用`set_coc`启用'
 - en: '[PRE1]'
+  id: totrans-55
   prefs:
   - PREF_IND
   type: TYPE_PRE
+  zh: '[PRE1]'
 - en: '`coo` (default: `False`)'
+  id: totrans-56
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`coo`（默认值：`False`）'
 - en: '*Cheat-On-Open* Setting this to `True` with `set_coo` enables'
+  id: totrans-57
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: '*Cheat-On-Open* 将其设置为`True`并使用`set_coo`启用'
 - en: '[PRE2]'
+  id: totrans-58
   prefs:
   - PREF_IND
   type: TYPE_PRE
+  zh: '[PRE2]'
 - en: '`int2pnl` (default: `True`)'
+  id: totrans-59
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`int2pnl`（默认值：`True`）'
 - en: Assign generated interest (if any) to the profit and loss of operation that
     reduces a position (be it long or short). There may be cases in which this is
     undesired, because different strategies are competing and the interest would be
     assigned on a non-deterministic basis to any of them.
+  id: totrans-60
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 将生成的利息（如果有）分配给减少持仓的操作的损益。可能存在这种情况：不同的策略正在竞争，利息将以不确定的方式分配给其中任何一个。
 - en: '`shortcash` (default: `True`)'
+  id: totrans-61
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`shortcash`（默认值：`True`）'
 - en: If True then cash will be increased when a stocklike asset is shorted and the
     calculated value for the asset will be negative.
+  id: totrans-62
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 如果为True，则在对类似股票的资产进行空头操作时会增加现金，并且计算出的资产值将为负。
 - en: If `False` then the cash will be deducted as operation cost and the calculated
     value will be positive to end up with the same amount
+  id: totrans-63
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 如果为`False`，则现金将被扣除为操作成本，并且计算出的值将为正，以保持相同数量
 - en: '`fundstartval` (default: `100.0`)'
+  id: totrans-64
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`fundstartval`（默认值：`100.0`）'
 - en: 'This parameter controls the start value for measuring the performance in a
     fund-like way, i.e.: cash can be added and deducted increasing the amount of shares.
     Performance is not measured using the net asset value of the porftoflio but using
     the value of the fund'
+  id: totrans-65
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 此参数控制以类似基金的方式测量绩效的起始值，即：可以添加和扣除现金以增加股份数量。绩效不是使用投资组合的净资产值来衡量的，而是使用基金的价值来衡量。
 - en: '`fundmode` (default: `False`)'
+  id: totrans-66
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`fundmode`（默认值：`False`）'
 - en: If this is set to `True` analyzers like `TimeReturn` can automatically calculate
     returns based on the fund value and not on the total net asset value
+  id: totrans-67
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 如果设置为 `True`，分析器如 `TimeReturn` 可以根据基金价值而不是总净资产自动计算回报率
 - en: set_cash(cash)
+  id: totrans-68
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: '`set_cash(cash)`'
 - en: 'Sets the cash parameter (alias: `setcash`)'
+  id: totrans-69
   prefs: []
   type: TYPE_NORMAL
+  zh: 设置 `cash` 参数（别名：`setcash`）
 - en: get_cash()
+  id: totrans-70
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: '`get_cash()`'
 - en: 'Returns the current cash (alias: `getcash`)'
+  id: totrans-71
   prefs: []
   type: TYPE_NORMAL
+  zh: 返回当前现金（别名：`getcash`）
 - en: get_value(datas=None, mkt=False, lever=False)
+  id: totrans-72
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: '`get_value(datas=None, mkt=False, lever=False)`'
 - en: 'Returns the portfolio value of the given datas (if datas is `None`, then the
     total portfolio value will be returned (alias: `getvalue`)'
+  id: totrans-73
   prefs: []
   type: TYPE_NORMAL
+  zh: 返回给定数据的投资组合价值（如果数据为 `None`，则将返回总投资组合价值）（别名：`getvalue`）
 - en: set_eosbar(eosbar)
+  id: totrans-74
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: '`set_eosbar(eosbar)`'
 - en: 'Sets the eosbar parameter (alias: `seteosbar`'
+  id: totrans-75
   prefs: []
   type: TYPE_NORMAL
+  zh: 设置 `eosbar` 参数（别名：`seteosbar`）
 - en: set_checksubmit(checksubmit)
+  id: totrans-76
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: '`set_checksubmit(checksubmit)`'
 - en: Sets the checksubmit parameter
+  id: totrans-77
   prefs: []
   type: TYPE_NORMAL
+  zh: 设置 `checksubmit` 参数
 - en: set_filler(filler)
+  id: totrans-78
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: '`set_filler(filler)`'
 - en: Sets a volume filler for volume filling execution
+  id: totrans-79
   prefs: []
   type: TYPE_NORMAL
+  zh: 为成交量填充执行设置一个成交量填充器
 - en: set_coc(coc)
+  id: totrans-80
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: '`set_coc(coc)`'
 - en: Configure the Cheat-On-Close method to buy the close on order bar
+  id: totrans-81
   prefs: []
   type: TYPE_NORMAL
+  zh: 配置“在订单栏上购买收盘价”的“Cheat-On-Close”方法
 - en: set_coo(coo)
+  id: totrans-82
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: '`set_coo(coo)`'
 - en: Configure the Cheat-On-Open method to buy the close on order bar
+  id: totrans-83
   prefs: []
   type: TYPE_NORMAL
+  zh: 配置“在订单栏上购买开盘价”的“Cheat-On-Open”方法
 - en: set_int2pnl(int2pnl)
+  id: totrans-84
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: '`set_int2pnl(int2pnl)`'
 - en: Configure assignment of interest to profit and loss
+  id: totrans-85
   prefs: []
   type: TYPE_NORMAL
+  zh: 配置利息分配给损益
 - en: set_fundstartval(fundstartval)
+  id: totrans-86
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: '`set_fundstartval(fundstartval)` '
 - en: Set the starting value of the fund-like performance tracker
+  id: totrans-87
   prefs: []
   type: TYPE_NORMAL
+  zh: 设置基金样式表现追踪器的起始值
 - en: set_slippage_perc(perc, slip_open=True, slip_limit=True, slip_match=True, slip_out=False)
+  id: totrans-88
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: '`set_slippage_perc(perc, slip_open=True, slip_limit=True, slip_match=True,
+    slip_out=False)`'
 - en: Configure slippage to be percentage based
+  id: totrans-89
   prefs: []
   type: TYPE_NORMAL
+  zh: 配置滑点以百分比为基础
 - en: set_slippage_fixed(fixed, slip_open=True, slip_limit=True, slip_match=True,
     slip_out=False)
+  id: totrans-90
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: '`set_slippage_fixed(fixed, slip_open=True, slip_limit=True, slip_match=True,
+    slip_out=False)`'
 - en: Configure slippage to be fixed points based
+  id: totrans-91
   prefs: []
   type: TYPE_NORMAL
+  zh: 配置滑点以基于固定点进行
 - en: get_orders_open(safe=False)
+  id: totrans-92
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: '`get_orders_open(safe=False)`'
 - en: Returns an iterable with the orders which are still open (either not executed
     or partially executed
+  id: totrans-93
   prefs: []
   type: TYPE_NORMAL
+  zh: 返回仍然打开的订单的可迭代对象（未执行或部分执行）
 - en: The orders returned must not be touched.
+  id: totrans-94
   prefs: []
   type: TYPE_NORMAL
+  zh: 返回的订单不得被更改。
 - en: If order manipulation is needed, set the parameter `safe` to True
+  id: totrans-95
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果需要订单操作，请将参数 `safe` 设置为 `True`
 - en: getcommissioninfo(data)
+  id: totrans-96
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: '`getcommissioninfo(data)`'
 - en: Retrieves the `CommissionInfo` scheme associated with the given `data`
+  id: totrans-97
   prefs: []
   type: TYPE_NORMAL
+  zh: 检索与给定 `data` 相关联的 `CommissionInfo` 方案
 - en: setcommission(commission=0.0, margin=None, mult=1.0, commtype=None, percabs=True,
     stocklike=False, interest=0.0, interest_long=False, leverage=1.0, automargin=False,
     name=None)
+  id: totrans-98
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: '`setcommission(commission=0.0, margin=None, mult=1.0, commtype=None, percabs=True,
+    stocklike=False, interest=0.0, interest_long=False, leverage=1.0, automargin=False,
+    name=None)`'
 - en: This method sets a `` CommissionInfo`` object for assets managed in the broker
     with the parameters. Consult the reference for `CommInfoBase`
+  id: totrans-99
   prefs: []
   type: TYPE_NORMAL
+  zh: 此方法使用参数为经纪人管理的资产设置 `` CommissionInfo`` 对象。请查阅 `CommInfoBase` 的参考资料
 - en: If name is `None`, this will be the default for assets for which no other `CommissionInfo`
     scheme can be found
+  id: totrans-100
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果名称为 `None`，则对于找不到其他 `CommissionInfo` 方案的资产，这将是默认值
 - en: addcommissioninfo(comminfo, name=None)
+  id: totrans-101
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: '`addcommissioninfo(comminfo, name=None)`'
 - en: Adds a `CommissionInfo` object that will be the default for all assets if `name`
     is `None`
+  id: totrans-102
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果 `name` 为 `None`，则添加一个 `CommissionInfo` 对象，如果 `name` 为 `None`，则为所有资产设置默认值
 - en: getposition(data)
+  id: totrans-103
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: '`getposition(data)`'
 - en: Returns the current position status (a `Position` instance) for the given `data`
+  id: totrans-104
   prefs: []
   type: TYPE_NORMAL
+  zh: 返回给定 `data` 的当前持仓状态（`Position` 实例）
 - en: get_fundshares()
+  id: totrans-105
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: '`get_fundshares()`'
 - en: Returns the current number of shares in the fund-like mode
+  id: totrans-106
   prefs: []
   type: TYPE_NORMAL
+  zh: 返回基金模式中当前股份数量
 - en: get_fundvalue()
+  id: totrans-107
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: '`get_fundvalue()`'
 - en: Returns the Fund-like share value
+  id: totrans-108
   prefs: []
   type: TYPE_NORMAL
+  zh: 返回基金样式股票价值
 - en: add_cash(cash)
+  id: totrans-109
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: '`add_cash(cash)`'
 - en: Add/Remove cash to the system (use a negative value to remove)
+  id: totrans-110
   prefs: []
   type: TYPE_NORMAL
+  zh: 向系统添加/移除现金（使用负值来移除）
