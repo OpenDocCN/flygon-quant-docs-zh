@@ -1587,23 +1587,27 @@
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`None`：在这种情况下，策略显示的日期时间将为UTC，这一直是标准行为'
 - en: '`pytz` instance. It will be used as such to convert UTC times to the chosen
     timezone'
   id: totrans-264
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`pytz`实例。将按此使用它将UTC时间转换为所选时区'
 - en: '`string`. Instantiating a `pytz` instance will be attempted.'
   id: totrans-265
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`string`。将尝试实例化一个`pytz`实例。'
 - en: '`integer`. Use, for the strategy, the same timezone as the corresponding `data`
     in the `self.datas` iterable (`0` would use the timezone from `data0`)'
   id: totrans-266
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`integer`。对于策略，使用与`self.datas`可迭代对象中相应`data`相同的时区（`0`将使用来自`data0`的时区）'
 - en: add_timer(when, offset=datetime.timedelta(0), repeat=datetime.timedelta(0),
     weekdays=[], weekcarry=False, monthdays=[], monthcarry=True, allow=None, tzdata=None,
     strats=False, cheat=False, *args, **kwargs)
@@ -1611,44 +1615,54 @@
   prefs:
   - PREF_H4
   type: TYPE_NORMAL
+  zh: add_timer(when, offset=datetime.timedelta(0), repeat=datetime.timedelta(0),
+    weekdays=[], weekcarry=False, monthdays=[], monthcarry=True, allow=None, tzdata=None,
+    strats=False, cheat=False, *args, **kwargs)
 - en: Schedules a timer to invoke `notify_timer`
   id: totrans-268
   prefs: []
   type: TYPE_NORMAL
+  zh: 安排定时器以调用`notify_timer`
 - en: '**Parameters**'
   id: totrans-269
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**参数**'
 - en: '**when** (*-*) – can be'
   id: totrans-270
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: '**when** (*-*) – 可以是'
 - en: '`datetime.time` instance (see below `tzdata`)'
   id: totrans-271
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`datetime.time`实例（见下文`tzdata`）'
 - en: '`bt.timer.SESSION_START` to reference a session start'
   id: totrans-272
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`bt.timer.SESSION_START`表示会话开始'
 - en: '`bt.timer.SESSION_END` to reference a session end'
   id: totrans-273
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`bt.timer.SESSION_END`表示会话结束'
 - en: '`offset` which must be a `datetime.timedelta` instance'
   id: totrans-274
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 必须是`datetime.timedelta`实例的`offset`
 - en: Used to offset the value `when`. It has a meaningful use in combination with
     `SESSION_START` and `SESSION_END`, to indicated things like a timer being called
     `15 minutes` after the session start.
@@ -1656,12 +1670,14 @@
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 用于偏移值`when`。与`SESSION_START`和`SESSION_END`结合使用时，它具有有意义的用途，用于指示诸如在会话开始后`15分钟`调用定时器之类的事情。
 - en: '`repeat` which must be a `datetime.timedelta` instance'
   id: totrans-276
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 必须是`datetime.timedelta`实例的`repeat`
 - en: Indicates if after a 1^(st) call, further calls will be scheduled within the
     same session at the scheduled `repeat` delta
   id: totrans-277
@@ -1669,6 +1685,7 @@
   - PREF_IND
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 指示如果在第1次调用后，后续调用将在同一会话中按计划的`repeat`增量中安排
 - en: Once the timer goes over the end of the session it is reset to the original
     value for `when`
   id: totrans-278
@@ -1676,6 +1693,7 @@
   - PREF_IND
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 一旦定时器超过会话结束，它将被重置为`when`的原始值
 - en: '`weekdays`: a **sorted** iterable with integers indicating on which days (iso
     codes, Monday is 1, Sunday is 7) the timers can be actually invoked'
   id: totrans-279
@@ -1683,12 +1701,14 @@
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`weekdays`：一个**排序**的可迭代对象，其中的整数表示可以实际调用定时器的日期（ISO代码，星期一为1，星期日为7）'
 - en: If not specified, the timer will be active on all days
   id: totrans-280
   prefs:
   - PREF_IND
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 如果未指定，定时器将在所有日期上都处于活动状态。
 - en: '`weekcarry` (default: `False`). If `True` and the weekday was not seen (ex:
     trading holiday), the timer will be executed on the next day (even if in a new
     week)'
@@ -1697,6 +1717,7 @@
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`weekcarry`（默认值：`False`）。如果为`True`且周几未见（例如：交易假期），则定时器将在下一天执行（即使在新的一周中）'
 - en: '`monthdays`: a **sorted** iterable with integers indicating on which days of
     the month a timer has to be executed. For example always on day *15* of the month'
   id: totrans-282
@@ -1704,12 +1725,14 @@
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`monthdays`：一个**排序**的可迭代对象，其中的整数表示定时器必须执行的月份中的哪一天。例如，每个月的第*15*天始终执行'
 - en: If not specified, the timer will be active on all days
   id: totrans-283
   prefs:
   - PREF_IND
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 如果未指定，定时器将在所有日期上都处于活动状态
 - en: '`monthcarry` (default: `True`). If the day was not seen (weekend, trading holiday),
     the timer will be executed on the next available day.'
   id: totrans-284
@@ -1717,6 +1740,7 @@
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`monthcarry`（默认值：`True`）。如果当天没有看到（周末、交易假期），则定时器将在下一个可用日期执行。'
 - en: '`allow` (default: `None`). A callback which receives a datetime.date` instance
     and returns `True` if the date is allowed for timers or else returns `False`'
   id: totrans-285
@@ -1724,6 +1748,7 @@
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`allow`（默认值：`None`）。一个回调函数，接收一个`datetime.date`实例，并返回`True`如果该日期允许定时器，否则返回`False`'
 - en: '`tzdata` which can be either `None` (default), a `pytz` instance or a `data
     feed` instance.'
   id: totrans-286
@@ -1731,6 +1756,7 @@
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`tzdata`可以是`None`（默认值），一个`pytz`实例或一个`data feed`实例。'
 - en: '`None`: `when` is interpreted at face value (which translates to handling it
     as if it where UTC even if it’s not)'
   id: totrans-287
@@ -1738,6 +1764,7 @@
   - PREF_IND
   - PREF_IND
   type: TYPE_NORMAL
+  zh: '`None`：`when`按面值解释（即使它不是UTC，也会处理它）'
 - en: '`pytz` instance: `when` will be interpreted as being specified in the local
     time specified by the timezone instance.'
   id: totrans-288
@@ -1745,6 +1772,7 @@
   - PREF_IND
   - PREF_IND
   type: TYPE_NORMAL
+  zh: '`pytz`实例：`when`将被解释为时区实例指定的本地时间。'
 - en: '`data feed` instance: `when` will be interpreted as being specified in the
     local time specified by the `tz` parameter of the data feed instance.'
   id: totrans-289
@@ -1752,12 +1780,14 @@
   - PREF_IND
   - PREF_IND
   type: TYPE_NORMAL
+  zh: '`data feed`实例：`when`将被解释为数据源实例的`tz`参数指定的本地时间。'
 - en: Note
   id: totrans-290
   prefs:
   - PREF_IND
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 注意
 - en: If `when` is either `SESSION_START` or `SESSION_END` and `tzdata` is `None`,
     the 1^(st) *data feed* in the system (aka `self.data0`) will be used as the reference
     to find out the session times.
@@ -1766,12 +1796,14 @@
   - PREF_IND
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 如果`when`是`SESSION_START`或`SESSION_END`且`tzdata`为`None`，则系统中的第1个*数据源*（也称为`self.data0`）将用作查找会话时间的参考。
 - en: '`strats` (default: `False`) call also the `notify_timer` of strategies'
   id: totrans-292
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`strats`（默认值：`False`）还会调用策略的`notify_timer`'
 - en: '`cheat` (default `False`) if `True` the timer will be called before the broker
     has a chance to evaluate the orders. This opens the chance to issue orders based
     on opening price for example right before the session starts'
@@ -1780,53 +1812,64 @@
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`cheat`（默认为 `False`）如果为 `True`，则会在经纪人有机会评估订单之前调用计时器。例如，在交易会话开始之前，可以根据开盘价下订单。'
 - en: '`*args`: any extra args will be passed to `notify_timer`'
   id: totrans-294
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`*args`: 任何额外的参数都将传递给 `notify_timer`。'
 - en: '`**kwargs`: any extra kwargs will be passed to `notify_timer`'
   id: totrans-295
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`**kwargs`: 任何额外的关键字参数都将传递给 `notify_timer`。'
 - en: 'Return Value:'
   id: totrans-296
   prefs: []
   type: TYPE_NORMAL
+  zh: 返回值：
 - en: The created timer
   id: totrans-297
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 创建的计时器
 - en: notify_timer(timer, when, *args, **kwargs)
   id: totrans-298
   prefs:
   - PREF_H4
   type: TYPE_NORMAL
+  zh: notify_timer(timer, when, *args, **kwargs)
 - en: Receives a timer notification where `timer` is the timer which was returned
     by `add_timer`, and `when` is the calling time. `args` and `kwargs` are any additional
     arguments passed to `add_timer`
   id: totrans-299
   prefs: []
   type: TYPE_NORMAL
+  zh: 接收计时器通知，其中 `timer` 是由 `add_timer` 返回的计时器，`when` 是调用时间。`args` 和 `kwargs` 是传递给
+    `add_timer` 的任何额外参数。
 - en: The actual `when` time can be later, but the system may have not be able to
     call the timer before. This value is the timer value and no the system time.
   id: totrans-300
   prefs: []
   type: TYPE_NORMAL
+  zh: 实际的 `when` 时间可能会晚一些，但系统可能无法在之前调用计时器。该值是计时器值，而不是系统时间。
 - en: add_order_history(orders, notify=True)
   id: totrans-301
   prefs:
   - PREF_H4
   type: TYPE_NORMAL
+  zh: add_order_history(orders, notify=True)
 - en: Add a history of orders to be directly executed in the broker for performance
     evaluation
   id: totrans-302
   prefs: []
   type: TYPE_NORMAL
+  zh: 将订单历史记录添加到经纪人中，以供性能评估直接执行
 - en: '`orders`: is an iterable (ex: list, tuple, iterator, generator) in which each
     element will be also an iterable (with length) with the following sub-elements
     (2 formats are possible)'
@@ -1834,26 +1877,31 @@
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`orders`: 是一个可迭代对象（例如列表、元组、迭代器、生成器），其中每个元素也将是一个具有以下子元素的可迭代对象（有 2 种格式）'
 - en: '`[datetime, size, price]` or `[datetime, size, price, data]`'
   id: totrans-304
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: '`[datetime, size, price]` 或 `[datetime, size, price, data]`'
 - en: Note
   id: totrans-305
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 注意
 - en: it must be sorted (or produce sorted elements) by datetime ascending
   id: totrans-306
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 必须按照日期时间升序排序（或生成排序的元素）。
 - en: 'where:'
   id: totrans-307
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 其中：
 - en: '`datetime` is a python `date/datetime` instance or a string with format YYYY-MM-DD[THH:MM:SS[.us]]
     where the elements in brackets are optional'
   id: totrans-308
@@ -1861,24 +1909,29 @@
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`datetime` 是一个 python `date/datetime` 实例，或者是一个格式为 YYYY-MM-DD[THH:MM:SS[.us]]
+    的字符串，方括号中的元素是可选的。'
 - en: '`size` is an integer (positive to *buy*, negative to *sell*)'
   id: totrans-309
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`size` 是一个整数（买入为正，卖出为负）'
 - en: '`price` is a float/integer'
   id: totrans-310
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`price` 是一个浮点数/整数'
 - en: '`data` if present can take any of the following values'
   id: totrans-311
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 如果存在 `data`，则可以采用以下任何值
 - en: '*None* - The 1^(st) data feed will be used as target'
   id: totrans-312
   prefs:
@@ -1886,6 +1939,7 @@
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '*None* - 将使用第 1 个数据源作为目标。'
 - en: '*integer* - The data with that index (insertion order in **Cerebro**) will
     be used'
   id: totrans-313
@@ -1894,6 +1948,7 @@
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '*integer* - 将使用该索引对应的数据（在**Cerebro**中的插入顺序）。'
 - en: '*string* - a data with that name, assigned for example with `cerebro.addata(data,
     name=value)`, will be the target'
   id: totrans-314
@@ -1902,24 +1957,29 @@
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '*string* - 该名称的数据，例如通过 `cerebro.addata(data, name=value)` 分配，将作为目标。'
 - en: '`notify` (default: *True*)'
   id: totrans-315
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`notify`（默认值：*True*）'
 - en: If `True` the 1^(st) strategy inserted in the system will be notified of the
     artificial orders created following the information from each order in `orders`
   id: totrans-316
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 如果设为 `True`，则会通知系统中插入的第 1 个策略，其会根据每个订单中的信息创建人工订单。
 - en: Note
   id: totrans-317
   prefs: []
   type: TYPE_NORMAL
+  zh: 注意
 - en: Implicit in the description is the need to add a data feed which is the target
     of the orders. This is for example needed by analyzers which track for example
     the returns
   id: totrans-318
   prefs: []
   type: TYPE_NORMAL
+  zh: 隐含在描述中的是需要添加一个数据源，该数据源是订单的目标。例如，分析器需要追踪回报率。

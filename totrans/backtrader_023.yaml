@@ -1,44 +1,54 @@
 - en: Saving Memory
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
 - en: 原文：[https://www.backtrader.com/docu/memory-savings/memory-savings/](https://www.backtrader.com/docu/memory-savings/memory-savings/)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
 - en: '[Release 1.3.1.92](https://github.com/mementum/backtrader/releases/tag/1.3.1.92)
     has reworked and fully implemented the memory saving schemes that were previously
     in place, although not much touted and less used.'
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
 - en: '`backtrader` was (and will be further) developed in machines with nice amounts
     of RAM and that put together with the fact that visual feedback through plotting
     is a nice to have and almost a must have, mde it easy for a design decision: keep
     everything in memory.'
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
 - en: 'This decision has some drawbacks:'
+  id: totrans-4
   prefs: []
   type: TYPE_NORMAL
 - en: '`array.array` which is used for data storage has to allocate and move data
     when some bounds are exceeded'
+  id: totrans-5
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: Machines with low amounts of RAM may suffer
+  id: totrans-6
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: Connection to a live data feed which can be online for weeks/months feeded thousands
     of seconds/minutes resolution ticks into the system
+  id: totrans-7
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: 'The latter being even more important than the 1^(st) due to another design
     decision which was made for `backtrader`:'
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
 - en: Be pure Python to allow to run in embedded systems if needed be
+  id: totrans-9
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
@@ -46,28 +56,34 @@
     which provides the live feed, whilst `backtrader` itself runs inside a *Raspberry
     Pi* or something even more limited like an ADSL Router (AVM Frit!Box 7490 with
     a *Freetz* image)
+  id: totrans-10
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
 - en: 'Hence the need to have `backtrader` support dynamic memory schemes. Now `Cerebro`
     can be instantiated or `run` with the following semantics:'
+  id: totrans-11
   prefs: []
   type: TYPE_NORMAL
 - en: 'exactbars (default: False)'
+  id: totrans-12
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: With the default `False` value each and every value stored in a line is kept
     in memory
+  id: totrans-13
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
 - en: 'Possible values:'
+  id: totrans-14
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
 - en: '`True` or `1`: all “lines” objects reduce memory usage to the automatically
     calculated minimum period.'
+  id: totrans-15
   prefs:
   - PREF_IND
   - PREF_UL
@@ -75,17 +91,20 @@
 - en: If a Simple Moving Average has a period of 30, the underlying data will have
     always a running buffer of 30 bars to allow the calculation of the Simple Moving
     Average
+  id: totrans-16
   prefs:
   - PREF_IND
   - PREF_IND
   type: TYPE_NORMAL
 - en: This setting will deactivate `preload` and `runonce`
+  id: totrans-17
   prefs:
   - PREF_IND
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
 - en: Using this setting also deactivates **plotting**
+  id: totrans-18
   prefs:
   - PREF_IND
   - PREF_IND
@@ -93,23 +112,27 @@
   type: TYPE_NORMAL
 - en: '`-1`: datas and indicators/operations at strategy level will keep all data
     in memory.'
+  id: totrans-19
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
 - en: 'For example: a `RSI` internally uses the indicator `UpDay` to make calculations.
     This subindicator will not keep all data in memory'
+  id: totrans-20
   prefs:
   - PREF_IND
   - PREF_IND
   type: TYPE_NORMAL
 - en: This allows to keep `plotting` and `preloading` active.
+  id: totrans-21
   prefs:
   - PREF_IND
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
 - en: '`runonce` will be deactivated'
+  id: totrans-22
   prefs:
   - PREF_IND
   - PREF_IND
@@ -117,29 +140,34 @@
   type: TYPE_NORMAL
 - en: '`-2`: datas and indicators kept as attributes of the strategy will keep all
     data in memory.'
+  id: totrans-23
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
 - en: 'For example: a `RSI` internally uses the indicator `UpDay` to make calculations.
     This subindicator will not keep all data in memory'
+  id: totrans-24
   prefs:
   - PREF_IND
   - PREF_IND
   type: TYPE_NORMAL
 - en: If in the `__init__` something like `a = self.data.close - self.data.high` is
     defined, then `a` will not keep all data in memory
+  id: totrans-25
   prefs:
   - PREF_IND
   - PREF_IND
   type: TYPE_NORMAL
 - en: This allows to keep `plotting` and `preloading` active.
+  id: totrans-26
   prefs:
   - PREF_IND
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
 - en: '`runonce` will be deactivated'
+  id: totrans-27
   prefs:
   - PREF_IND
   - PREF_IND
@@ -148,175 +176,236 @@
 - en: As always, an example is worth a thousand words. A sample script shows the differences.
     It runs against the *Yahoo* daily data for the years 1996 to 2015, for a total
     of `4965` days.
+  id: totrans-28
   prefs: []
   type: TYPE_NORMAL
 - en: Note
+  id: totrans-29
   prefs: []
   type: TYPE_NORMAL
 - en: This is a small sample. The EuroStoxx50 future which trades 14 hours a day,
     would produce approximately 18000 1-minute bars in just 1 month of trading.
+  id: totrans-30
   prefs: []
   type: TYPE_NORMAL
 - en: 'The script 1^(st) executed to see how many memory positions are used when no
     memory savings are requested:'
+  id: totrans-31
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE0]'
+  id: totrans-32
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: 'For level 1 (total savings):'
+  id: totrans-33
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE1]'
+  id: totrans-34
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE1]'
 - en: 'OMG!!! Down from *half-a-million* to `2041`. Indeed. Each an every *lines*
     object in the system uses a `collections.deque` as buffer (instead of `array.array`)
     and is length-bounding to the absolute needed minimum for the requested operations.
     Example:'
+  id: totrans-35
   prefs: []
   type: TYPE_NORMAL
 - en: A Strategy using a `SimpleMovingAverage` of period `30` on the data feed.
+  id: totrans-36
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: 'In this case the following adjustments would be made:'
+  id: totrans-37
   prefs: []
   type: TYPE_NORMAL
 - en: The *data feed* will have a buffer of `30` positions, the amount needed by the
     `SimpleMovingAverage` to produce the next value
+  id: totrans-38
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: The `SimpleMovingAverage` will have a buffer of `1` position, because unless
     needed by other *indicator* (which would rely on the moving average) there is
     no need to keep a larger buffer in place.
+  id: totrans-39
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: Note
+  id: totrans-40
   prefs: []
   type: TYPE_NORMAL
 - en: The most attractive and probably important feature of this mode is that the
     amount of memory used remains constant throughout the entire life of a script.
+  id: totrans-41
   prefs: []
   type: TYPE_NORMAL
 - en: Regardless of the size of the data feed.
+  id: totrans-42
   prefs: []
   type: TYPE_NORMAL
 - en: This would be of great use if for example connected to a live feed for a long
     period of time.
+  id: totrans-43
   prefs: []
   type: TYPE_NORMAL
 - en: 'But take into account:'
+  id: totrans-44
   prefs: []
   type: TYPE_NORMAL
 - en: '*Plotting* is not available'
+  id: totrans-45
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
 - en: There are other sources of memory consumption which would accumulate over time
     like `orders` generated by the strategy.
+  id: totrans-46
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
 - en: This mode can only be used with `runonce=False` in `cerebro`. This would also
     be compulsory for a live data feed, but in case of simple backtesting this is
     slower than `runonce=True`.
+  id: totrans-47
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
 - en: There is for sure a trade off point from which memory management is more expensive
     than the step-by-step execution of the backtesting, but this can only be judged
     by the end-user of the platform on a case by case basis.
+  id: totrans-48
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
 - en: 'Now the negative levels. These are meant to keep *plotting* available whilst
     still saving a decent amount of memory. First level `-1`:'
+  id: totrans-49
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE2]'
+  id: totrans-50
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE2]'
 - en: 'In this case the 1^(st) level of *indicators* (those declared in the strategy)
     keep its full length buffers. But if this indicators rely on others (which is
     the case) to do its work, the subobjects will be length-bounded. In this case
     we have gone from:'
+  id: totrans-51
   prefs: []
   type: TYPE_NORMAL
 - en: '`506430` memory positions to -> `184623`'
+  id: totrans-52
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: Over 50% savings.
+  id: totrans-53
   prefs: []
   type: TYPE_NORMAL
 - en: Note
+  id: totrans-54
   prefs: []
   type: TYPE_NORMAL
 - en: Of course `array.array` objects have been traded for `collections.deque` which
     are more expensive in memory terms although faster in operation terms. But the
     `collection.deque` objects are rather small and the savings approach the roughly
     counted memory positions used.
+  id: totrans-55
   prefs: []
   type: TYPE_NORMAL
 - en: 'Level `-2` now, which is meant to also save on the indicators declared at the
     strategy level which have been marked as no to be plotted:'
+  id: totrans-56
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE3]'
+  id: totrans-57
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE3]'
 - en: 'Not much has been saved now. This being because a single indicator has been
     tagged as not be plotted: `TestInd().plotinfo.plot = False`'
+  id: totrans-58
   prefs: []
   type: TYPE_NORMAL
 - en: 'Let’s see the plotting from this last example:'
+  id: totrans-59
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE4]'
+  id: totrans-60
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE4]'
 - en: '![image](../Images/ea905c9dcd8efce89b20c85b8a4b058e.png)'
+  id: totrans-61
   prefs: []
   type: TYPE_IMG
 - en: 'For the interested reader, the sample script can produce a detailed analysis
     of each *lines* object traversed in the hierarchy of *indicators*. Running with
     *plotting* enabled (saving at `-1`):'
+  id: totrans-62
   prefs: []
   type: TYPE_NORMAL
+  zh: 对于感兴趣的读者，示例脚本可以生成对*指标*层次结构中遍历的每个*行*对象的详细分析。运行时启用*绘图*（保存在`-1`）：
 - en: '[PRE5]'
+  id: totrans-63
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE5]'
 - en: 'The same but with maximum savings (`1`) enabled:'
+  id: totrans-64
   prefs: []
   type: TYPE_NORMAL
+  zh: 同样的，但启用了最大节省（`1`）：
 - en: '[PRE6]'
+  id: totrans-65
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE6]'
 - en: The 2^(nd) output immediately shows how the lines in the *data feed* have been
     capped to `38` memory positions instead of the `4965` which comprises the full
     data source length.
+  id: totrans-66
   prefs: []
   type: TYPE_NORMAL
+  zh: 第二个输出立即显示了*数据源*中的行数被限制为`38`个内存位置，而不是完整数据源长度`4965`。
 - en: And *indicators* and *observers* have been when possible capped to `1` as seen
     in the last lines of the output.
+  id: totrans-67
   prefs: []
   type: TYPE_NORMAL
+  zh: 并且*指标*和*观察者*在可能的情况下被限制为`1`，如输出的最后几行所示。
 - en: Script Code and Usage
+  id: totrans-68
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 脚本代码和用法
 - en: 'Available as sample in the sources of `backtrader`. Usage:'
+  id: totrans-69
   prefs: []
   type: TYPE_NORMAL
+  zh: 在`backtrader`的源代码中可作为示例使用。用法：
 - en: '[PRE7]'
+  id: totrans-70
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE7]'
 - en: 'The code:'
+  id: totrans-71
   prefs: []
   type: TYPE_NORMAL
+  zh: 代码：
 - en: '[PRE8]'
+  id: totrans-72
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE8]'
