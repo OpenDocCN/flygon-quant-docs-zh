@@ -1,503 +1,679 @@
 - en: Analyzers Reference
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
 - en: 原文：[https://www.backtrader.com/docu/analyzers-reference/](https://www.backtrader.com/docu/analyzers-reference/)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
 - en: AnnualReturn
+  id: totrans-2
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
 - en: class backtrader.analyzers.AnnualReturn()
+  id: totrans-3
   prefs:
   - PREF_H4
   type: TYPE_NORMAL
 - en: This analyzer calculates the AnnualReturns by looking at the beginning and end
     of the year
+  id: totrans-4
   prefs: []
   type: TYPE_NORMAL
 - en: 'Params:'
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
 - en: (None)
+  id: totrans-6
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: 'Member Attributes:'
+  id: totrans-7
   prefs: []
   type: TYPE_NORMAL
 - en: '`rets`: list of calculated annual returns'
+  id: totrans-8
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: '`ret`: dictionary (key: year) of annual returns'
+  id: totrans-9
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: '**get_analysis**:'
+  id: totrans-10
   prefs: []
   type: TYPE_NORMAL
 - en: 'Returns a dictionary of annual returns (key: year)'
+  id: totrans-11
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: Calmar
+  id: totrans-12
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
 - en: class backtrader.analyzers.Calmar()
+  id: totrans-13
   prefs:
   - PREF_H4
   type: TYPE_NORMAL
 - en: 'This analyzer calculates the CalmarRatio timeframe which can be different from
     the one used in the underlying data Params:'
+  id: totrans-14
   prefs: []
   type: TYPE_NORMAL
 - en: '`timeframe` (default: `None`) If `None` the `timeframe` of the 1^(st) data
     in the system will be used'
+  id: totrans-15
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: Pass `TimeFrame.NoTimeFrame` to consider the entire dataset with no time constraints
+  id: totrans-16
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
 - en: '`compression` (default: `None`)'
+  id: totrans-17
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: Only used for sub-day timeframes to for example work on an hourly timeframe
     by specifying “TimeFrame.Minutes” and 60 as compression
+  id: totrans-18
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
 - en: If `None` then the compression of the 1^(st) data of the system will be used
+  id: totrans-19
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
 - en: '*None*'
+  id: totrans-20
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: '`fund` (default: `None`)'
+  id: totrans-21
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: If `None` the actual mode of the broker (fundmode - True/False) will be autodetected
     to decide if the returns are based on the total net asset value or on the fund
     value. See `set_fundmode` in the broker documentation
+  id: totrans-22
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
 - en: Set it to `True` or `False` for a specific behavior
+  id: totrans-23
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
 - en: '- ``get_analysis``()'
+  id: totrans-24
   prefs:
   - PREF_H4
   type: TYPE_NORMAL
 - en: Returns a OrderedDict with a key for the time period and the corresponding rolling
     Calmar ratio
+  id: totrans-25
   prefs: []
   type: TYPE_NORMAL
 - en: '- ``calmar`` the latest calculated calmar ratio()'
+  id: totrans-26
   prefs:
   - PREF_H4
   type: TYPE_NORMAL
 - en: DrawDown
+  id: totrans-27
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
 - en: class backtrader.analyzers.DrawDown()
+  id: totrans-28
   prefs:
   - PREF_H4
   type: TYPE_NORMAL
 - en: This analyzer calculates trading system drawdowns stats such as drawdown values
     in %s and in dollars, max drawdown in %s and in dollars, drawdown length and drawdown
     max length
+  id: totrans-29
   prefs: []
   type: TYPE_NORMAL
 - en: 'Params:'
+  id: totrans-30
   prefs: []
   type: TYPE_NORMAL
 - en: '`fund` (default: `None`)'
+  id: totrans-31
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: If `None` the actual mode of the broker (fundmode - True/False) will be autodetected
     to decide if the returns are based on the total net asset value or on the fund
     value. See `set_fundmode` in the broker documentation
+  id: totrans-32
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
 - en: Set it to `True` or `False` for a specific behavior
+  id: totrans-33
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
 - en: '- ``get_analysis``()'
+  id: totrans-34
   prefs:
   - PREF_H4
   type: TYPE_NORMAL
 - en: 'Returns a dictionary (with . notation support and subdctionaries) with drawdown
     stats as values, the following keys/attributes are available:'
+  id: totrans-35
   prefs: []
   type: TYPE_NORMAL
 - en: '`drawdown` - drawdown value in 0.xx %'
+  id: totrans-36
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: '`moneydown` - drawdown value in monetary units'
+  id: totrans-37
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: '`len` - drawdown length'
+  id: totrans-38
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: '`max.drawdown` - max drawdown value in 0.xx %'
+  id: totrans-39
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: '`max.moneydown` - max drawdown value in monetary units'
+  id: totrans-40
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: '`max.len` - max drawdown length'
+  id: totrans-41
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: TimeDrawDown
+  id: totrans-42
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
 - en: class backtrader.analyzers.TimeDrawDown()
+  id: totrans-43
   prefs:
   - PREF_H4
   type: TYPE_NORMAL
 - en: 'This analyzer calculates trading system drawdowns on the chosen timeframe which
     can be different from the one used in the underlying data Params:'
+  id: totrans-44
   prefs: []
   type: TYPE_NORMAL
 - en: '`timeframe` (default: `None`) If `None` the `timeframe` of the 1^(st) data
     in the system will be used'
+  id: totrans-45
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: Pass `TimeFrame.NoTimeFrame` to consider the entire dataset with no time constraints
+  id: totrans-46
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
 - en: '`compression` (default: `None`)'
+  id: totrans-47
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: Only used for sub-day timeframes to for example work on an hourly timeframe
     by specifying “TimeFrame.Minutes” and 60 as compression
+  id: totrans-48
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 仅用于亚日时间框架，例如通过指定“TimeFrame.Minutes”和60作为压缩来在小时时间框架上工作
 - en: If `None` then the compression of the 1^(st) data of the system will be used
+  id: totrans-49
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 如果为`None`，则将使用系统第一条数据的压缩
 - en: '*None*'
+  id: totrans-50
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '*None*'
 - en: '`fund` (default: `None`)'
+  id: totrans-51
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`fund`（默认：`None`）'
 - en: If `None` the actual mode of the broker (fundmode - True/False) will be autodetected
     to decide if the returns are based on the total net asset value or on the fund
     value. See `set_fundmode` in the broker documentation
+  id: totrans-52
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 如果为`None`，则将自动检测经纪人的实际模式（fundmode - True/False），以决定收益是基于总净资产价值还是基金价值。请参阅经纪人文档中的`set_fundmode`
 - en: Set it to `True` or `False` for a specific behavior
+  id: totrans-53
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 将其设置为`True`或`False`以获得特定行为
 - en: '- ``get_analysis``()'
+  id: totrans-54
   prefs:
   - PREF_H4
   type: TYPE_NORMAL
+  zh: '- ``get_analysis``()'
 - en: 'Returns a dictionary (with . notation support and subdctionaries) with drawdown
     stats as values, the following keys/attributes are available:'
+  id: totrans-55
   prefs: []
   type: TYPE_NORMAL
+  zh: 返回一个字典（支持`.`表示法和子字典）作为值的回撤统计信息，可用的键/属性如下：
 - en: '`drawdown` - drawdown value in 0.xx %'
+  id: totrans-56
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`drawdown` - 回撤值为 0.xx %'
 - en: '`maxdrawdown` - drawdown value in monetary units'
+  id: totrans-57
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`maxdrawdown` - 回撤值为货币单位'
 - en: '`maxdrawdownperiod` - drawdown length'
+  id: totrans-58
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`maxdrawdownperiod` - 回撤长度'
 - en: '- Those are available during runs as attributes()'
+  id: totrans-59
   prefs:
   - PREF_H4
   type: TYPE_NORMAL
+  zh: '- 这些在运行时作为属性可用()'
 - en: '`dd`'
+  id: totrans-60
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`dd`'
 - en: '`maxdd`'
+  id: totrans-61
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`maxdd`'
 - en: '`maxddlen`'
+  id: totrans-62
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`maxddlen`'
 - en: GrossLeverage
+  id: totrans-63
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 总杠杆
 - en: class backtrader.analyzers.GrossLeverage()
+  id: totrans-64
   prefs:
   - PREF_H4
   type: TYPE_NORMAL
+  zh: 类`backtrader.analyzers.GrossLeverage()`
 - en: This analyzer calculates the Gross Leverage of the current strategy on a timeframe
     basis
+  id: totrans-65
   prefs: []
   type: TYPE_NORMAL
+  zh: 此分析器按时间框架计算当前策略的总杠杆
 - en: 'Params:'
+  id: totrans-66
   prefs: []
   type: TYPE_NORMAL
+  zh: 参数：
 - en: '`fund` (default: `None`)'
+  id: totrans-67
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`fund`（默认：`None`）'
 - en: If `None` the actual mode of the broker (fundmode - True/False) will be autodetected
     to decide if the returns are based on the total net asset value or on the fund
     value. See `set_fundmode` in the broker documentation
+  id: totrans-68
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 如果为`None`，则将自动检测经纪人的实际模式（fundmode - True/False），以决定收益是基于总净资产价值还是基金价值。请参阅经纪人文档中的`set_fundmode`
 - en: Set it to `True` or `False` for a specific behavior
+  id: totrans-69
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 将其设置为`True`或`False`以获得特定行为
 - en: '- get_analysis()'
+  id: totrans-70
   prefs:
   - PREF_H4
   type: TYPE_NORMAL
+  zh: '- `get_analysis()`'
 - en: Returns a dictionary with returns as values and the datetime points for each
     return as keys
+  id: totrans-71
   prefs: []
   type: TYPE_NORMAL
+  zh: 返回一个字典，其中值为收益，键为每个收益的日期时间点
 - en: PositionsValue
+  id: totrans-72
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: PositionsValue
 - en: class backtrader.analyzers.PositionsValue()
+  id: totrans-73
   prefs:
   - PREF_H4
   type: TYPE_NORMAL
+  zh: 类`backtrader.analyzers.PositionsValue()`
 - en: This analyzer reports the value of the positions of the current set of datas
+  id: totrans-74
   prefs: []
   type: TYPE_NORMAL
+  zh: 此分析器报告当前数据集的持仓价值
 - en: 'Params:'
+  id: totrans-75
   prefs: []
   type: TYPE_NORMAL
+  zh: 参数：
 - en: 'timeframe (default: `None`) If `None` then the timeframe of the 1^(st) data
     of the system will be used'
+  id: totrans-76
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 时间框架（默认：`None`）如果为`None`，则将使用系统第一条数据的时间框架
 - en: 'compression (default: `None`)'
+  id: totrans-77
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 压缩（默认：`None`）
 - en: Only used for sub-day timeframes to for example work on an hourly timeframe
     by specifying “TimeFrame.Minutes” and 60 as compression
+  id: totrans-78
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 仅用于亚日时间框架，例如通过指定“TimeFrame.Minutes”和60作为压缩来在小时时间框架上工作
 - en: If `None` then the compression of the 1^(st) data of the system will be used
+  id: totrans-79
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 如果为`None`，则将使用系统第一条数据的压缩
 - en: 'headers (default: `False`)'
+  id: totrans-80
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: headers（默认：`False`）
 - en: Add an initial key to the dictionary holding the results with the names of the
     datas (‘Datetime’ as key
+  id: totrans-81
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 向字典添加一个初始键，其中包含结果的名称（“Datetime”作为键
 - en: 'cash (default: `False`)'
+  id: totrans-82
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 现金（默认：`False`）
 - en: Include the actual cash as an extra position (for the header ‘cash’ will be
     used as name)
+  id: totrans-83
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 将实际现金作为额外头寸包含（对于标题，将使用“cash”作为名称）
 - en: '- get_analysis()'
+  id: totrans-84
   prefs:
   - PREF_H4
   type: TYPE_NORMAL
+  zh: '- `get_analysis()`'
 - en: Returns a dictionary with returns as values and the datetime points for each
     return as keys
+  id: totrans-85
   prefs: []
   type: TYPE_NORMAL
+  zh: 返回一个字典，其中值为收益，键为每个收益的日期时间点
 - en: PyFolio
+  id: totrans-86
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: PyFolio
 - en: class backtrader.analyzers.PyFolio()
+  id: totrans-87
   prefs:
   - PREF_H4
   type: TYPE_NORMAL
+  zh: 类`backtrader.analyzers.PyFolio()`
 - en: This analyzer uses 4 children analyzers to collect data and transforms it in
     to a data set compatible with `pyfolio`
+  id: totrans-88
   prefs: []
   type: TYPE_NORMAL
+  zh: 此分析器使用4个子分析器收集数据并将其转换为与`pyfolio`兼容的数据集
 - en: Children Analyzer
+  id: totrans-89
   prefs: []
   type: TYPE_NORMAL
+  zh: 子分析器
 - en: '`TimeReturn`'
+  id: totrans-90
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`TimeReturn`'
 - en: Used to calculate the returns of the global portfolio value
+  id: totrans-91
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 用于计算全局投资组合价值的收益
 - en: '`PositionsValue`'
+  id: totrans-92
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`PositionsValue`'
 - en: Used to calculate the value of the positions per data. It sets the `headers`
     and `cash` parameters to `True`
+  id: totrans-93
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 用于计算每个数据的持仓价值。它将`headers`和`cash`参数设置为`True`
 - en: '`Transactions`'
+  id: totrans-94
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`Transactions`'
 - en: Used to record each transaction on a data (size, price, value). Sets the `headers`
     parameter to `True`
+  id: totrans-95
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 用于记录每笔交易的数据（大小，价格，价值）。将`headers`参数设置为`True`
 - en: '`GrossLeverage`'
+  id: totrans-96
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`GrossLeverage`'
 - en: Keeps track of the gross leverage (how much the strategy is invested)
+  id: totrans-97
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 跟踪总杠杆（策略投资了多少）
 - en: 'Params:'
+  id: totrans-98
   prefs: []
   type: TYPE_NORMAL
+  zh: 参数：
 - en: '[PRE0]'
+  id: totrans-99
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: Both `timeframe` and `compression` are set following the default behavior of
     `pyfolio` which is working with *daily* data and upsample it to obtaine values
     like yearly returns.
+  id: totrans-100
   prefs: []
   type: TYPE_NORMAL
 - en: '- get_analysis()'
+  id: totrans-101
   prefs:
   - PREF_H4
   type: TYPE_NORMAL
 - en: Returns a dictionary with returns as values and the datetime points for each
     return as keys
+  id: totrans-102
   prefs: []
   type: TYPE_NORMAL
 - en: get_pf_items()
+  id: totrans-103
   prefs:
   - PREF_H4
   type: TYPE_NORMAL
 - en: Returns a tuple of 4 elements which can be used for further processing with
+  id: totrans-104
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE1]'
+  id: totrans-105
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE1]'
 - en: Because the objects are meant to be used as direct input to `pyfolio` this method
     makes a local import of `pandas` to convert the internal *backtrader* results
     to *pandas DataFrames* which is the expected input by, for example, `pyfolio.create_full_tear_sheet`
+  id: totrans-106
   prefs: []
   type: TYPE_NORMAL
 - en: The method will break if `pandas` is not installed
+  id: totrans-107
   prefs: []
   type: TYPE_NORMAL
 - en: LogReturnsRolling
+  id: totrans-108
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
 - en: class backtrader.analyzers.LogReturnsRolling()
+  id: totrans-109
   prefs:
   - PREF_H4
   type: TYPE_NORMAL
 - en: This analyzer calculates rolling returns for a given timeframe and compression
+  id: totrans-110
   prefs: []
   type: TYPE_NORMAL
 - en: 'Params:'
+  id: totrans-111
   prefs: []
   type: TYPE_NORMAL
 - en: '`timeframe` (default: `None`) If `None` the `timeframe` of the 1^(st) data
     in the system will be used'
+  id: totrans-112
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: Pass `TimeFrame.NoTimeFrame` to consider the entire dataset with no time constraints
+  id: totrans-113
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
 - en: '`compression` (default: `None`)'
+  id: totrans-114
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: Only used for sub-day timeframes to for example work on an hourly timeframe
     by specifying “TimeFrame.Minutes” and 60 as compression
+  id: totrans-115
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
 - en: If `None` then the compression of the 1^(st) data of the system will be used
+  id: totrans-116
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
 - en: '`data` (default: `None`)'
+  id: totrans-117
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: Reference asset to track instead of the portfolio value.
+  id: totrans-118
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
 - en: '**NOTE**: this data must have been added to a `cerebro` instance with `addata`,
     `resampledata` or `replaydata`'
+  id: totrans-119
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
 - en: '`firstopen` (default: `True`)'
+  id: totrans-120
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: 'When tracking the returns of a `data` the following is done when crossing a
     timeframe boundary, for example `Years`:'
+  id: totrans-121
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
 - en: Last `close` of previous year is used as the reference price to see the return
     in the current year
+  id: totrans-122
   prefs:
   - PREF_IND
   - PREF_UL
@@ -505,323 +681,400 @@
 - en: The problem is the 1^(st) calculation, because the data has** no previous**
     closing price. As such and when this parameter is `True` the *opening* price will
     be used for the 1^(st) calculation.
+  id: totrans-123
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
 - en: This requires the data feed to have an `open` price (for `close` the standard
     [0] notation will be used without reference to a field price)
+  id: totrans-124
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
 - en: Else the initial close will be used.
+  id: totrans-125
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
 - en: '`fund` (default: `None`)'
+  id: totrans-126
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: If `None` the actual mode of the broker (fundmode - True/False) will be autodetected
     to decide if the returns are based on the total net asset value or on the fund
     value. See `set_fundmode` in the broker documentation
+  id: totrans-127
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
 - en: Set it to `True` or `False` for a specific behavior
+  id: totrans-128
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
 - en: '- get_analysis()'
+  id: totrans-129
   prefs:
   - PREF_H4
   type: TYPE_NORMAL
 - en: Returns a dictionary with returns as values and the datetime points for each
     return as keys
+  id: totrans-130
   prefs: []
   type: TYPE_NORMAL
 - en: PeriodStats
+  id: totrans-131
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
 - en: class backtrader.analyzers.PeriodStats()
+  id: totrans-132
   prefs:
   - PREF_H4
   type: TYPE_NORMAL
 - en: Calculates basic statistics for given timeframe
+  id: totrans-133
   prefs: []
   type: TYPE_NORMAL
 - en: 'Params:'
+  id: totrans-134
   prefs: []
   type: TYPE_NORMAL
 - en: '`timeframe` (default: `Years`) If `None` the `timeframe` of the 1^(st) data
     in the system will be used'
+  id: totrans-135
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: Pass `TimeFrame.NoTimeFrame` to consider the entire dataset with no time constraints
+  id: totrans-136
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
 - en: '`compression` (default: `1`)'
+  id: totrans-137
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: Only used for sub-day timeframes to for example work on an hourly timeframe
     by specifying “TimeFrame.Minutes” and 60 as compression
+  id: totrans-138
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
 - en: If `None` then the compression of the 1^(st) data of the system will be used
+  id: totrans-139
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
 - en: '`fund` (default: `None`)'
+  id: totrans-140
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: If `None` the actual mode of the broker (fundmode - True/False) will be autodetected
     to decide if the returns are based on the total net asset value or on the fund
     value. See `set_fundmode` in the broker documentation
+  id: totrans-141
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
 - en: Set it to `True` or `False` for a specific behavior
+  id: totrans-142
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
 - en: '`get_analysis` returns a dictionary containing the keys:'
+  id: totrans-143
   prefs: []
   type: TYPE_NORMAL
 - en: '`average`'
+  id: totrans-144
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: '`stddev`'
+  id: totrans-145
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: '`positive`'
+  id: totrans-146
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: '`negative`'
+  id: totrans-147
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: '`nochange`'
+  id: totrans-148
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: '`best`'
+  id: totrans-149
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: '`worst`'
+  id: totrans-150
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: If the parameter `zeroispos` is set to `True`, periods with no change will be
     counted as positive
+  id: totrans-151
   prefs: []
   type: TYPE_NORMAL
 - en: Returns
+  id: totrans-152
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
 - en: class backtrader.analyzers.Returns()
+  id: totrans-153
   prefs:
   - PREF_H4
   type: TYPE_NORMAL
 - en: Total, Average, Compound and Annualized Returns calculated using a logarithmic
     approach
+  id: totrans-154
   prefs: []
   type: TYPE_NORMAL
 - en: 'See:'
+  id: totrans-155
   prefs: []
   type: TYPE_NORMAL
 - en: '[https://www.crystalbull.com/sharpe-ratio-better-with-log-returns/](https://www.crystalbull.com/sharpe-ratio-better-with-log-returns/)'
+  id: totrans-156
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: 'Params:'
+  id: totrans-157
   prefs: []
   type: TYPE_NORMAL
 - en: '`timeframe` (default: `None`)'
+  id: totrans-158
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: If `None` the `timeframe` of the 1^(st) data in the system will be used
+  id: totrans-159
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
 - en: Pass `TimeFrame.NoTimeFrame` to consider the entire dataset with no time constraints
+  id: totrans-160
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
 - en: '`compression` (default: `None`)'
+  id: totrans-161
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: Only used for sub-day timeframes to for example work on an hourly timeframe
     by specifying “TimeFrame.Minutes” and 60 as compression
+  id: totrans-162
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
 - en: If `None` then the compression of the 1^(st) data of the system will be used
+  id: totrans-163
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
 - en: '`tann` (default: `None`)'
+  id: totrans-164
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: Number of periods to use for the annualization (normalization) of the
+  id: totrans-165
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
 - en: 'namely:'
+  id: totrans-166
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
 - en: '`days: 252`'
+  id: totrans-167
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
 - en: '`weeks: 52`'
+  id: totrans-168
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
 - en: '`months: 12`'
+  id: totrans-169
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
 - en: '`years: 1`'
+  id: totrans-170
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
 - en: '`fund` (default: `None`)'
+  id: totrans-171
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: If `None` the actual mode of the broker (fundmode - True/False) will be autodetected
     to decide if the returns are based on the total net asset value or on the fund
     value. See `set_fundmode` in the broker documentation
+  id: totrans-172
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
 - en: Set it to `True` or `False` for a specific behavior
+  id: totrans-173
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
 - en: '- get_analysis()'
+  id: totrans-174
   prefs:
   - PREF_H4
   type: TYPE_NORMAL
 - en: Returns a dictionary with returns as values and the datetime points for each
     return as keys
+  id: totrans-175
   prefs: []
   type: TYPE_NORMAL
 - en: 'The returned dict the following keys:'
+  id: totrans-176
   prefs: []
   type: TYPE_NORMAL
 - en: '`rtot`: Total compound return'
+  id: totrans-177
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: '`ravg`: Average return for the entire period (timeframe specific)'
+  id: totrans-178
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: '`rnorm`: Annualized/Normalized return'
+  id: totrans-179
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: '`rnorm100`: Annualized/Normalized return expressed in 100%'
+  id: totrans-180
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: SharpeRatio
+  id: totrans-181
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
 - en: class backtrader.analyzers.SharpeRatio()
+  id: totrans-182
   prefs:
   - PREF_H4
   type: TYPE_NORMAL
 - en: This analyzer calculates the SharpeRatio of a strategy using a risk free asset
     which is simply an interest rate
+  id: totrans-183
   prefs: []
   type: TYPE_NORMAL
 - en: 'Params:'
+  id: totrans-184
   prefs: []
   type: TYPE_NORMAL
 - en: '`timeframe`: (default: `TimeFrame.Years`)'
+  id: totrans-185
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: '`compression` (default: `1`)'
+  id: totrans-186
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: Only used for sub-day timeframes to for example work on an hourly timeframe
     by specifying “TimeFrame.Minutes” and 60 as compression
+  id: totrans-187
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
 - en: '`riskfreerate` (default: 0.01 -> 1%)'
+  id: totrans-188
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: Expressed in annual terms (see `convertrate` below)
+  id: totrans-189
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
 - en: '`convertrate` (default: `True`)'
+  id: totrans-190
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: Convert the `riskfreerate` from annual to monthly, weekly or daily rate. Sub-day
     conversions are not supported
+  id: totrans-191
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
 - en: '`factor` (default: `None`)'
+  id: totrans-192
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: If `None`, the conversion factor for the riskfree rate from *annual* to the
     chosen timeframe will be chosen from a predefined table
+  id: totrans-193
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
 - en: 'Days: 252, Weeks: 52, Months: 12, Years: 1'
+  id: totrans-194
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
 - en: Else the specified value will be used
+  id: totrans-195
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
 - en: '`annualize` (default: `False`)'
+  id: totrans-196
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: If `convertrate` is `True`, the *SharpeRatio* will be delivered in the `timeframe`
     of choice.
+  id: totrans-197
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
 - en: In most occasions the SharpeRatio is delivered in annualized form. Convert the
     `riskfreerate` from annual to monthly, weekly or daily rate. Sub-day conversions
     are not supported
+  id: totrans-198
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
 - en: '`stddev_sample` (default: `False`)'
+  id: totrans-199
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
@@ -829,181 +1082,225 @@
     the denominator in the mean by `1`. This is used when calculating the *standard
     deviation* if it’s considered that not all samples are used for the calculation.
     This is known as the *Bessels’ correction*
+  id: totrans-200
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
 - en: '`daysfactor` (default: `None`)'
+  id: totrans-201
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: Old naming for `factor`. If set to anything else than `None` and the `timeframe`
     is `TimeFrame.Days` it will be assumed this is old code and the value will be
     used
+  id: totrans-202
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
 - en: '`legacyannual` (default: `False`)'
+  id: totrans-203
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: Use the `AnnualReturn` return analyzer, which as the name implies only works
     on years
+  id: totrans-204
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
 - en: '`fund` (default: `None`)'
+  id: totrans-205
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: If `None` the actual mode of the broker (fundmode - True/False) will be autodetected
     to decide if the returns are based on the total net asset value or on the fund
     value. See `set_fundmode` in the broker documentation
+  id: totrans-206
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
 - en: Set it to `True` or `False` for a specific behavior
+  id: totrans-207
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
 - en: '- get_analysis()'
+  id: totrans-208
   prefs:
   - PREF_H4
   type: TYPE_NORMAL
 - en: Returns a dictionary with key “sharperatio” holding the ratio
+  id: totrans-209
   prefs: []
   type: TYPE_NORMAL
 - en: SharpeRatio_A
+  id: totrans-210
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
 - en: class backtrader.analyzers.SharpeRatio_A()
+  id: totrans-211
   prefs:
   - PREF_H4
   type: TYPE_NORMAL
 - en: Extension of the SharpeRatio which returns the Sharpe Ratio directly in annualized
     form
+  id: totrans-212
   prefs: []
   type: TYPE_NORMAL
 - en: The following param has been changed from `SharpeRatio`
+  id: totrans-213
   prefs: []
   type: TYPE_NORMAL
 - en: '`annualize` (default: `True`)'
+  id: totrans-214
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: SQN
+  id: totrans-215
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
 - en: class backtrader.analyzers.SQN()
+  id: totrans-216
   prefs:
   - PREF_H4
   type: TYPE_NORMAL
 - en: SQN or SystemQualityNumber. Defined by Van K. Tharp to categorize trading systems.
+  id: totrans-217
   prefs: []
   type: TYPE_NORMAL
 - en: 1.6 - 1.9 Below average
+  id: totrans-218
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: 2.0 - 2.4 Average
+  id: totrans-219
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: 2.5 - 2.9 Good
+  id: totrans-220
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: 3.0 - 5.0 Excellent
+  id: totrans-221
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: 5.1 - 6.9 Superb
+  id: totrans-222
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: 7.0 - Holy Grail?
+  id: totrans-223
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: 'The formula:'
+  id: totrans-224
   prefs: []
   type: TYPE_NORMAL
 - en: SquareRoot(NumberTrades) * Average(TradesProfit) / StdDev(TradesProfit)
+  id: totrans-225
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: The sqn value should be deemed reliable when the number of trades >= 30
+  id: totrans-226
   prefs: []
   type: TYPE_NORMAL
 - en: '- get_analysis()'
+  id: totrans-227
   prefs:
   - PREF_H4
   type: TYPE_NORMAL
 - en: Returns a dictionary with keys “sqn” and “trades” (number of considered trades)
+  id: totrans-228
   prefs: []
   type: TYPE_NORMAL
 - en: TimeReturn
+  id: totrans-229
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
 - en: class backtrader.analyzers.TimeReturn()
+  id: totrans-230
   prefs:
   - PREF_H4
   type: TYPE_NORMAL
 - en: This analyzer calculates the Returns by looking at the beginning and end of
     the timeframe
+  id: totrans-231
   prefs: []
   type: TYPE_NORMAL
 - en: 'Params:'
+  id: totrans-232
   prefs: []
   type: TYPE_NORMAL
 - en: '`timeframe` (default: `None`) If `None` the `timeframe` of the 1^(st) data
     in the system will be used'
+  id: totrans-233
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: Pass `TimeFrame.NoTimeFrame` to consider the entire dataset with no time constraints
+  id: totrans-234
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
 - en: '`compression` (default: `None`)'
+  id: totrans-235
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: Only used for sub-day timeframes to for example work on an hourly timeframe
     by specifying “TimeFrame.Minutes” and 60 as compression
+  id: totrans-236
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
 - en: If `None` then the compression of the 1^(st) data of the system will be used
+  id: totrans-237
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
 - en: '`data` (default: `None`)'
+  id: totrans-238
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: Reference asset to track instead of the portfolio value.
+  id: totrans-239
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
 - en: '**NOTE**: this data must have been added to a `cerebro` instance with `addata`,
     `resampledata` or `replaydata`'
+  id: totrans-240
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
 - en: '`firstopen` (default: `True`)'
+  id: totrans-241
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: 'When tracking the returns of a `data` the following is done when crossing a
     timeframe boundary, for example `Years`:'
+  id: totrans-242
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
 - en: Last `close` of previous year is used as the reference price to see the return
     in the current year
+  id: totrans-243
   prefs:
   - PREF_IND
   - PREF_UL
@@ -1011,282 +1308,369 @@
 - en: The problem is the 1^(st) calculation, because the data has** no previous**
     closing price. As such and when this parameter is `True` the *opening* price will
     be used for the 1^(st) calculation.
+  id: totrans-244
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
 - en: This requires the data feed to have an `open` price (for `close` the standard
     [0] notation will be used without reference to a field price)
+  id: totrans-245
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
 - en: Else the initial close will be used.
+  id: totrans-246
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
 - en: '`fund` (default: `None`)'
+  id: totrans-247
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: If `None` the actual mode of the broker (fundmode - True/False) will be autodetected
     to decide if the returns are based on the total net asset value or on the fund
     value. See `set_fundmode` in the broker documentation
+  id: totrans-248
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
 - en: Set it to `True` or `False` for a specific behavior
+  id: totrans-249
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
 - en: '- get_analysis()'
+  id: totrans-250
   prefs:
   - PREF_H4
   type: TYPE_NORMAL
 - en: Returns a dictionary with returns as values and the datetime points for each
     return as keys
+  id: totrans-251
   prefs: []
   type: TYPE_NORMAL
 - en: TradeAnalyzer
+  id: totrans-252
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
 - en: class backtrader.analyzers.TradeAnalyzer()
+  id: totrans-253
   prefs:
   - PREF_H4
   type: TYPE_NORMAL
 - en: Provides statistics on closed trades (keeps also the count of open ones)
+  id: totrans-254
   prefs: []
   type: TYPE_NORMAL
 - en: Total Open/Closed Trades
+  id: totrans-255
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: Streak Won/Lost Current/Longest
+  id: totrans-256
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: ProfitAndLoss Total/Average
+  id: totrans-257
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: Won/Lost Count/ Total PNL/ Average PNL / Max PNL
+  id: totrans-258
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: Long/Short Count/ Total PNL / Average PNL / Max PNL
+  id: totrans-259
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: Won/Lost Count/ Total PNL/ Average PNL / Max PNL
+  id: totrans-260
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
 - en: Length (bars in the market)
+  id: totrans-261
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: Total/Average/Max/Min
+  id: totrans-262
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
 - en: Won/Lost Total/Average/Max/Min
+  id: totrans-263
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
 - en: Long/Short Total/Average/Max/Min
+  id: totrans-264
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
 - en: Won/Lost Total/Average/Max/Min
+  id: totrans-265
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
 - en: '**NOTE**: The analyzer uses an “auto”dict for the fields, which means that
     if no trades are executed, no statistics will be generated.'
+  id: totrans-266
   prefs: []
   type: TYPE_NORMAL
 - en: 'In that case there will be a single field/subfield in the dictionary returned
     by `get_analysis`, namely:'
+  id: totrans-267
   prefs: []
   type: TYPE_NORMAL
 - en: dictname[‘total’][‘total’] which will have a value of 0 (the field is also reachable
     with dot notation dictname.total.total
+  id: totrans-268
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: Transactions
+  id: totrans-269
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
 - en: class backtrader.analyzers.Transactions()
+  id: totrans-270
   prefs:
   - PREF_H4
   type: TYPE_NORMAL
 - en: This analyzer reports the transactions occurred with each an every data in the
     system
+  id: totrans-271
   prefs: []
   type: TYPE_NORMAL
 - en: It looks at the order execution bits to create a `Position` starting from 0
     during each `next` cycle.
+  id: totrans-272
   prefs: []
   type: TYPE_NORMAL
 - en: The result is used during next to record the transactions
+  id: totrans-273
   prefs: []
   type: TYPE_NORMAL
 - en: 'Params:'
+  id: totrans-274
   prefs: []
   type: TYPE_NORMAL
 - en: 'headers (default: `True`)'
+  id: totrans-275
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: Add an initial key to the dictionary holding the results with the names of the
     datas
+  id: totrans-276
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
 - en: 'This analyzer was modeled to facilitate the integration with `pyfolio` and
     the header names are taken from the samples used for it:'
+  id: totrans-277
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
 - en: '[PRE2]'
+  id: totrans-278
   prefs:
   - PREF_IND
   type: TYPE_PRE
+  zh: '[PRE2]'
 - en: '- get_analysis()'
+  id: totrans-279
   prefs:
   - PREF_H4
   type: TYPE_NORMAL
 - en: Returns a dictionary with returns as values and the datetime points for each
     return as keys
+  id: totrans-280
   prefs: []
   type: TYPE_NORMAL
 - en: VWR
+  id: totrans-281
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
 - en: class backtrader.analyzers.VWR()
+  id: totrans-282
   prefs:
   - PREF_H4
   type: TYPE_NORMAL
 - en: 'Variability-Weighted Return: Better SharpeRatio with Log Returns'
+  id: totrans-283
   prefs: []
   type: TYPE_NORMAL
 - en: 'Alias:'
+  id: totrans-284
   prefs: []
   type: TYPE_NORMAL
 - en: VariabilityWeightedReturn
+  id: totrans-285
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: 'See:'
+  id: totrans-286
   prefs: []
   type: TYPE_NORMAL
 - en: '[https://www.crystalbull.com/sharpe-ratio-better-with-log-returns/](https://www.crystalbull.com/sharpe-ratio-better-with-log-returns/)'
+  id: totrans-287
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: 'Params:'
+  id: totrans-288
   prefs: []
   type: TYPE_NORMAL
 - en: '`timeframe` (default: `None`) If `None` then the complete return over the entire
     backtested period will be reported'
+  id: totrans-289
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: Pass `TimeFrame.NoTimeFrame` to consider the entire dataset with no time constraints
+  id: totrans-290
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
 - en: '`compression` (default: `None`)'
+  id: totrans-291
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: Only used for sub-day timeframes to for example work on an hourly timeframe
     by specifying “TimeFrame.Minutes” and 60 as compression
+  id: totrans-292
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 仅用于亚日时间框架，例如通过指定“TimeFrame.Minutes”和60作为压缩来处理小时时间框架
 - en: If `None` then the compression of the 1^(st) data of the system will be used
+  id: totrans-293
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 如果为`None`，则将使用系统第一个数据的压缩
 - en: '`tann` (default: `None`)'
+  id: totrans-294
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`tann`（默认值：`None`）'
 - en: 'Number of periods to use for the annualization (normalization) of the average
     returns. If `None`, then standard `t` values will be used, namely:'
+  id: totrans-295
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 用于计算平均收益的年化（标准化）周期数。如果为`None`，则将使用标准的`t`值，即：
 - en: '`days: 252`'
+  id: totrans-296
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`days: 252`'
 - en: '`weeks: 52`'
+  id: totrans-297
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`weeks: 52`'
 - en: '`months: 12`'
+  id: totrans-298
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`months: 12`'
 - en: '`years: 1`'
+  id: totrans-299
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`years: 1`'
 - en: '`tau` (default: `2.0`)'
+  id: totrans-300
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`tau`（默认值：`2.0`）'
 - en: factor for the calculation (see the literature)
+  id: totrans-301
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 计算的因子（参见文献）
 - en: '`sdev_max` (default: `0.20`)'
+  id: totrans-302
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`sdev_max`（默认值：`0.20`）'
 - en: max standard deviation (see the literature)
+  id: totrans-303
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 最大标准偏差（参见文献）
 - en: '`fund` (default: `None`)'
+  id: totrans-304
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`fund`（默认值：`None`）'
 - en: If `None` the actual mode of the broker (fundmode - True/False) will be autodetected
     to decide if the returns are based on the total net asset value or on the fund
     value. See `set_fundmode` in the broker documentation
+  id: totrans-305
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 如果为`None`，则会自动检测经纪人的实际模式（fundmode - True/False），以决定收益是基于总净资产值还是基金价值。请参阅经纪人文档中的`set_fundmode`
 - en: Set it to `True` or `False` for a specific behavior
+  id: totrans-306
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 将其设置为`True`或`False`以获得特定的行为
 - en: '- get_analysis()'
+  id: totrans-307
   prefs:
   - PREF_H4
   type: TYPE_NORMAL
+  zh: '- 获取分析()'
 - en: Returns a dictionary with returns as values and the datetime points for each
     return as keys
+  id: totrans-308
   prefs: []
   type: TYPE_NORMAL
+  zh: 返回一个字典，其中收益作为值，每个收益对应的日期时间点作为键
 - en: 'The returned dict contains the following keys:'
+  id: totrans-309
   prefs: []
   type: TYPE_NORMAL
+  zh: 返回的字典包含以下键：
 - en: '`vwr`: Variability-Weighted Return'
+  id: totrans-310
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`vwr`: 变异权重收益'

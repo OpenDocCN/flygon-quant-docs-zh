@@ -1,152 +1,238 @@
 - en: Pyfolio Integration
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: Pyfolio 集成
 - en: 原文：[https://www.backtrader.com/docu/analyzers/pyfolio-integration/pyfolio-integration/](https://www.backtrader.com/docu/analyzers/pyfolio-integration/pyfolio-integration/)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.backtrader.com/docu/analyzers/pyfolio-integration/pyfolio-integration/](https://www.backtrader.com/docu/analyzers/pyfolio-integration/pyfolio-integration/)
 - en: 'The integration of a *portfolio* tool, namely `pyfolio`, came up with in [Ticket
     #108](https://github.com/mementum/backtrader/issues/108).'
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: '*portfolio* 工具的集成，即 `pyfolio`，是在 [Ticket #108](https://github.com/mementum/backtrader/issues/108)
+    中提出的。'
 - en: A first look at the tutorial deemed it as difficult, given the tight integration
     amongst `zipline` and `pyfolio`, but the sample *test* data available with `pyfolio`
     for some other uses is actually pretty useful to decode what’s running behind
     the scenes and hence the wonder of integration.
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: 对教程的第一次尝试被认为很难，考虑到 `zipline` 和 `pyfolio` 之间的紧密集成，但是 `pyfolio` 提供的用于其他用途的样本*测试*数据实际上非常有用，可以解码背后发生的事情，从而实现了集成的奇迹。
 - en: 'Most of the pieces were already in-place in *backtrader*:'
+  id: totrans-4
   prefs: []
   type: TYPE_NORMAL
+  zh: 大部分组件已经在 *backtrader* 中就位：
 - en: Analyzer infrastructure
+  id: totrans-5
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 分析器基础设施
 - en: Children analyzer
+  id: totrans-6
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 子分析器
 - en: A TimeReturn analyzer
+  id: totrans-7
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 一个 TimeReturn 分析器
 - en: Only a main `PyFolio` analyzer and 3 easy *children* analyzer are needed. Plus
     a method that relies on one of the dependencies already needed by `pyfolio` which
     is `pandas`.
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: 只需要一个主`PyFolio`分析器和 3 个简单的*子*分析器。再加上一个依赖于`pyfolio`的依赖项中的方法，即`pandas`。
 - en: The most challenging part … “getting all the dependencies right”.
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: 最具挑战性的部分...“确保所有依赖项正确”
 - en: Update of `pandas`
+  id: totrans-10
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`pandas` 的更新'
 - en: Update of `numpy`
+  id: totrans-11
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`numpy` 的更新'
 - en: Update of `scikit-lean`
+  id: totrans-12
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`scikit-learn` 的更新'
 - en: Update of `seaborn`
+  id: totrans-13
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`seaborn` 的更新'
 - en: 'Under Unix-like environments with a *C* compiler it’s all about time. Under
     Windows and even with the specific *Microsoft* compiler installed (in this case
     the chain for *Python 2.7*) things failed. But a well known site with a collection
     of up-to-date packages for *Windows* helped. Visit it if you ever need it:'
+  id: totrans-14
   prefs: []
   type: TYPE_NORMAL
+  zh: 在类 Unix 环境下使用 *C* 编译器，一切都取决于时间。在 Windows 下，即使安装了特定的 *Microsoft* 编译器（在这种情况下是用于
+    *Python 2.7* 的链），事情也会失败。但是一个众所周知的拥有最新包的 *Windows* 站点却有所帮助。如果你需要的话，请访问它：
 - en: '[http://www.lfd.uci.edu/~gohlke/pythonlibs/](http://www.lfd.uci.edu/~gohlke/pythonlibs/)'
+  id: totrans-15
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[http://www.lfd.uci.edu/~gohlke/pythonlibs/](http://www.lfd.uci.edu/~gohlke/pythonlibs/)'
 - en: The integration wouldn’t be complete if it wasn’t tested and that’s why the
     usual sample is as always present.
+  id: totrans-16
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果没有经过测试，集成就不完整，这就是为什么通常的样本总是存在。
 - en: No PyFolio
+  id: totrans-17
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 没有 PyFolio
 - en: 'The sample uses `random.randint` to decide when to *buy*/*sell*, so this is
     simply a check that things are working:'
+  id: totrans-18
   prefs: []
   type: TYPE_NORMAL
+  zh: 样本使用`random.randint`来决定何时*买入*/*卖出*，所以这只是一个检查是否工作的简单检查：
 - en: '[PRE0]'
+  id: totrans-19
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: 'Output:'
+  id: totrans-20
   prefs: []
   type: TYPE_NORMAL
+  zh: 输出：
 - en: '[PRE1]'
+  id: totrans-21
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE1]'
 - en: '![image](../Images/6590d4b5b999ca99374182ff16e6fbe6.png)'
+  id: totrans-22
   prefs: []
   type: TYPE_IMG
+  zh: '![image](../Images/6590d4b5b999ca99374182ff16e6fbe6.png)'
 - en: There a 3 datas and several *buy* and *sell* operations are randomly chosen
     and scattered over the 2 year default life of the test run
+  id: totrans-23
   prefs: []
   type: TYPE_NORMAL
+  zh: 有 3 个数据，几个*买入*和*卖出*操作被随机选择并散布在测试运行的默认 2 年生命周期内
 - en: A PyFolio run
+  id: totrans-24
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 一个 PyFolio 运行
 - en: '`pyfolio` things work well when running inside a *Jupyter Notebook* including
     inline plotting. Here is the *notebook*'
+  id: totrans-25
   prefs: []
   type: TYPE_NORMAL
+  zh: 运行在 *Jupyter Notebook* 中时，`pyfolio` 的工作非常顺利，包括内联绘图。这就是*笔记本*
 - en: Note
+  id: totrans-26
   prefs: []
   type: TYPE_NORMAL
+  zh: 注意
 - en: '`runstrat` gets here [] as argument to run with default arguments and skip
     arguments passed by the *notebook* itself'
+  id: totrans-27
   prefs: []
   type: TYPE_NORMAL
+  zh: '`runstrat` 在此处使用[]作为参数运行，默认参数并跳过*笔记本*本身传递的参数'
 - en: '[PRE2]'
+  id: totrans-28
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE2]'
 - en: '[PRE3]'
+  id: totrans-29
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE3]'
 - en: '[PRE4]'
+  id: totrans-30
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE4]'
 - en: '[PRE5]'
+  id: totrans-31
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE5]'
 - en: '[PRE6]'
+  id: totrans-32
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE6]'
 - en: '![image](../Images/f294045046f7426c2da90377918d6922.png)'
+  id: totrans-33
   prefs: []
   type: TYPE_IMG
+  zh: '![image](../Images/f294045046f7426c2da90377918d6922.png)'
 - en: '![image](../Images/2597f4b2389847503fa55f16cbbabf76.png)'
+  id: totrans-34
   prefs: []
   type: TYPE_IMG
+  zh: '![image](../Images/2597f4b2389847503fa55f16cbbabf76.png)'
 - en: '![image](../Images/7eccfc571305f671a20e0b095569d4c4.png)'
+  id: totrans-35
   prefs: []
   type: TYPE_IMG
+  zh: '![image](../Images/7eccfc571305f671a20e0b095569d4c4.png)'
 - en: '[PRE7]'
+  id: totrans-36
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE7]'
 - en: '![image](../Images/defc3b507734c37f4c41a5d900f95d95.png)'
+  id: totrans-37
   prefs: []
   type: TYPE_IMG
+  zh: '![image](../Images/defc3b507734c37f4c41a5d900f95d95.png)'
 - en: '[PRE8]'
+  id: totrans-38
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE8]'
 - en: '![image](../Images/a2b2f399d20c481ab001d7f83a44605b.png)'
+  id: totrans-39
   prefs: []
   type: TYPE_IMG
+  zh: '![image](../Images/a2b2f399d20c481ab001d7f83a44605b.png)'
 - en: 'Usage of the sample:'
+  id: totrans-40
   prefs: []
   type: TYPE_NORMAL
+  zh: 样本的使用：
 - en: '[PRE9]'
+  id: totrans-41
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE9]'
