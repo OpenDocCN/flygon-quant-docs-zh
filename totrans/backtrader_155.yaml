@@ -1,0 +1,369 @@
+- en: MACD Settings
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.backtrader.com/blog/posts/2016-07-30-macd-settings/macd-settings/](https://www.backtrader.com/blog/posts/2016-07-30-macd-settings/macd-settings/)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: In the *Algotrading* site of *Reddit* a thread about optimizing MACD settings
+    was found.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[How to determine best MACD settings?](https://www.reddit.com/r/algotrading/comments/4s832w/how_to_determine_best_macd_settings/)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Having started the *backtrader* quest because of [Trading Your Way To Financial
+    Freedom - Amazon Link](https://www.amazon.com/Trade-Your-Way-Financial-Freedom/dp/007147871X)
+    I had no other choice but to post an answer and craft a sample.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'The strategy approach is loosely based on some of the ideas presented in the
+    book. Nothing new under the sun. And the parameters have been quickly set. No
+    overfitting, no optimization, no nothing. Roughly:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Enter if the `macd` line crosses the `signal` line to the upside and a control
+    `Simple Moving Average` has had a net negative direction in the last x periods
+    (current *SMA* value below the value *x* periods ago)
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Set a `stop` price `N x ATR` times away from the `close` price
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Exit the market if the `close` price goes below the `stop` price
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: If still in the market, update the `stop` price only if it’s greater than the
+    actual one
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'The staking is done by:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Having a `Sizer` allocate a *percentage* of the available cash to the operation.
+    The more the strategy wins, the more it stakes … and the more it loses the less
+    it stakes.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: There is a *commision* included. Because the tests will be done with *stocks*
+    a percentage commission has been chosen with a value `0.0033` (aka `0.33%` per
+    round trip.
+  prefs: []
+  type: TYPE_NORMAL
+- en: To put this into play, there will be 3 runs with 3 datas (for a total of 9 runs)
+  prefs: []
+  type: TYPE_NORMAL
+- en: The standard parameters which have been chosen manually
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Increase cash allocation perentage from `0.20` to `0.50`
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Increase ATR distance for the stop from `3.0` to `4.0` to try to avoid being
+    whipped
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: 'The manually chosen parameters for the strategy:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'And system wide:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: The date range will be from `2005-01-01` to `2014-12-31` for a total of 10 years.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Analyzers
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: 'To get some *objective* data 3 analyzers will be added to the system:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Two `TimeReturn` for the entire period
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: For the strategy itself
+  prefs:
+  - PREF_IND
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: For the data being operated upon as benchmark
+  prefs:
+  - PREF_IND
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Effectively benchmarking the strategy against the asset
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: A `TimeReturn` to measure *annual returns*
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: A `SharpeRatio` to see how the strategy performs against a risk-free asset
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: The value is set at `1%`, can be changed with the sample options
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: A `SQN` (*System Quality Number*) to analyze the quality of the trades using
+    this performance indicator defined by Van K. Tharp
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Additonally a `DrawDown` observer will be added to the mix.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Run 1: Standard Parameters'
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: YHOO
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![image](../Images/47b5367760ce780e98f9c40d98b79493.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: ORCL
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[PRE3]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![image](../Images/278bb8cecab092fb70f817d5be7fde98.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: NVDA
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[PRE4]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![image](../Images/3d510dca85f3683a0edf93748a6cfcf6.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Analysis of Run 1
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '*YHOO*'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: The 1^(st) and 2^(nd) `TimeReturn` analyzers (the strategy and the asset itself)
+    show that The strategy has lost `7.11%` whilst the asset in question has appreciated
+    `31.67%`.
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: Not even worth having a look at the other analyzers
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '*ORCL*'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: A `24.89%` for the strategy, but paled by the `223.99%` return of the asset
+    itself.
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: The *SharpeRatio* at `0.35` is still away from the usual minimum target of `1`.
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: 'The *SQN* returns a `1.76` which at least gets a grading in the *Van K. Tharp*
+    scale: `1.6 - 1.9 Below Average`.'
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '*NVDA*'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: In this case a `-1.78%` for the strategy and a `-17.76%` for the asset. The
+    SharpeRatio, with `-0.10` shows that even if the strategy has outperformed the
+    asset, it would have been better to go with a `1%` bank account.
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: The *SQN* is obviously not even at the bottom of the scale.
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: Conclusions of Run 1
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '*1 great loss, a tie and a win which underperforms the asset*. Not that successful.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'Run 2: CashAlloc to 0.50'
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: YHOO
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[PRE5]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![image](../Images/186afda5652f4ebe4ccfe66ddcd8e428.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: ORCL
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[PRE6]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![image](../Images/85e8d1e6047a6086a5144570886714f3.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: NVDA
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[PRE7]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![image](../Images/4087e3427d905414be4d49d540029d5b.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Conclusions of Run 2
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Increasing the percentage cash allocation in each operation from `20%` to `50%`
+    has increased the effect of the previous results
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: The strategy on *YHOO* and *NVDA* has lost more than before
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: And the strategy on *ORCL* has won more than before, still not close to the
+    over *220%* of the asset.
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'Run 3: ATR Distance to 4.0'
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: Still keeping the previous increase in cash allocation to `50%`. The idea is
+    to avoid getting too early out of the market.
+  prefs: []
+  type: TYPE_NORMAL
+- en: YHOO
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[PRE8]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![image](../Images/91ae6a1c373ec19df0d8f696d8c8bfb6.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: ORCL
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[PRE9]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![image](../Images/e2204da21578c987dc1b943e52531fdc.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: NVDA
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[PRE10]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![image](../Images/1191866a3afdee367833d3665bfcb9dd.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Conclusions of Run 3
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '**Chicken, Chicken, Winner Dinner!!**'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: The strategy makes money on the 3 assets
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '*YHOO*: `1.19%` vs the `31.67%` return of the asset itself'
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '*ORCL*: `21.90%` vs the `223.99%` of the asset'
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: In this case increasing the `ATRDist` parameter has decreased the previous returns
+    of *Run 2* which were at `69.01%`
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '*NVDA*: `48.84%` vs `-17.76%` of the asset.'
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: The surprising thing here is that the *SharpeRatio* and *SQN* are telling that
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: Usage of the sample
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '[PRE11]'
+  prefs: []
+  type: TYPE_PRE
+- en: And the code itself
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '[PRE12]'
+  prefs: []
+  type: TYPE_PRE

@@ -1,0 +1,222 @@
+- en: Trading Cryptocurrency Fractional Sizes in backtrader
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.backtrader.com/blog/posts/2019-08-29-fractional-sizes/fractional-sizes/](https://www.backtrader.com/blog/posts/2019-08-29-fractional-sizes/fractional-sizes/)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: 'To start with, let''s summarize in two lines how the approach to *backtrader*
+    works:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: It is like a construction kit with a basic building block (`Cerebro`) into which
+    many different pieces can be plugged in
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: The basic distribution contains many pieces like *Indicators*, *Analyzers*,
+    *Observers*, *Sizers*, *Filters*, *Data Feeds*, *Brokers*, *Commission/Asset Info
+    Schemes*, ...
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: New building blocks can be easily constructed from scratch or based on existing
+    building block
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: The basic building block (`Cerebro`) does already some automatic *"plugging
+    in"* to make it easier to work with the framework without having to worry about
+    all the details.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'As such the framework is pre-configured to offer a behavior with defaults such
+    as:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Work with a single/main data feed
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`1-day` timeframe/compression combination'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 10,000 units of monetary currency
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Stock trading
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'This may of may not fit everyone, but the important thing is: **it can be customized
+    to the individual needs of each trader/programmer**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Trading Stocks: *Integers*'
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: 'As stated above, the default configuration is for *stock* trading and when
+    one is trading stocks one buys/sells complete shares, (i.e.: 1, 2 ... 50 ... 1000,
+    and not amounts like `1.5` or `1001.7589` shares.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'This means that when a user does the following in the default configuration:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'The following happens:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The system calculates how many shares of the asset are needed, so that the value
+    in the portfolio of the given asset is as close as possible to `50%`
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'But because the default configuration is to work with **shares** the resulting
+    number of shares will be an whole number, i.e.: **an integer**'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Note
+  prefs: []
+  type: TYPE_NORMAL
+- en: Notice that the default configuration is to work with a single/main data feed,
+    and that's why the actual data is not specified in the call to `order_percent_target`.
+    When operating with multiple data feeds, one has to specify which data to acquire/sell
+    (unless the main data is meant)
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Trading Cryptocurrencies: *Fractions*'
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: It is obvious that when trading cryptocurrencies, with even 20 decimals, one
+    can buy *"half of a bitcoin"*.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The good thing is that one can actually change the information pertaining to
+    the asset. This is achieved through the `CommissionInfo` family of pluggable pieces.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Some documentation: [Docs - Commission Schemes - https://www.backtrader.com/docu/commission-schemes/commission-schemes/](https://www.backtrader.com/docu/commission-schemes/commission-schemes/)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Note
+  prefs: []
+  type: TYPE_NORMAL
+- en: It has to be admitted that the name is unfortunate, because the schemes do not
+    only contain information about *commission*, but also about other things.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'In the fractional scenario, the interest is this method of the scheme: `getsize(price,
+    cash)`, which has the following docstring'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: The schemes are intimately related to the broker and through the broker api,
+    the schemes can be added in the system.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'The broker docs are at: [Docs - Broker - https://www.backtrader.com/docu/broker/](https://www.backtrader.com/docu/broker/)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'And the relevant method is: `addcommissioninfo(comminfo, name=None)`. Where
+    in addition to adding a scheme which applies to all assets (when `name` is `None`),
+    one can set schemes which apply only to assets with specific names.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Implementing the fractional scheme
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: This can be easily achieved by extending the existing basis scheme, named `CommissionInfo`.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Ditto and done. Subclassing `CommissionInfo` and writing a one line method,
+    the objective is achieved. Because the original scheme definition supports `leverage`,
+    this is taken into account into the calculation, just in case cryptocurrencies
+    can be bought with leverage (for which the default value is `1.0`, i.e.: no leverage)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Later in the code, the scheme will be added (controlled via a command line parameter)
+    like this
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE3]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'I.e.: an instance (notice the `()` to instantiate) of the subclassed scheme
+    is added. As explained above, the `name` parameter is not set and this means it
+    will apply to all assets in the system.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Testing the Beast
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: A full script implementing a trivial moving average crossover for long/short
+    positions is provided below which can be directly used in the shell. The default
+    data feed for the test is one of the data feeds from the *backtrader* repository.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Integer Run: No Fractions - No Fun**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE4]'
+  prefs: []
+  type: TYPE_PRE
+- en: A short trade with a size of `16` units has been opened. The entire log, not
+    shown for obvious reasons, contains many other operations all with trades with
+    whole sizes.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![No Fractions](../Images/c0f6fafbaff624fd7d6a7d0cf683f187.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '**Fractional Run**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: After the hard subclassing and one-lining work for the fractions ...
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE5]'
+  prefs: []
+  type: TYPE_PRE
+- en: '`V` for Victory. The short trade has been opened with the same crossover, but
+    this time with a fractional size of `-16.457437774427774`'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Fractions](../Images/897e89aac416a5c324af136d4f693189.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Notice that the final portfolio value in the charts is different and that is
+    because the actual trades sizes are different.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Conclusion
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: Yes, *backtrader* can. With the pluggable/extensible construction kit approach,
+    it is easy to customize the behavior to the particular needs of the trader programmer.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The script
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: '[PRE6]'
+  prefs: []
+  type: TYPE_PRE

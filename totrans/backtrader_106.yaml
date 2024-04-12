@@ -1,0 +1,183 @@
+- en: MFI Generic
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.backtrader.com/blog/2019-07-17-mfi-generic/mfi-generic/](https://www.backtrader.com/blog/2019-07-17-mfi-generic/mfi-generic/)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: In the recent [Canonical vs Non-Canonical](../../2019-07-08-canonical-or-not/canonical-or-not/)
+    post, the `MFI` (aka `MoneyFlowIndicator`) was developed.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Although it is developed in the *canonical* way, it does still offer some room
+    for improvement and becoming generic.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Let's focus of the 1^(st) lines of the implementation, the ones which create
+    the typical price
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: A typical instantiation would look like this
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'The problem here should be obvious: *"One needs an input for the indicator
+    which features `close`, `low`, `high` and `volume` components (aka *lines* in
+    the *backtrader* ecosystem)"*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: It may, of course, be the case that one wishes to create a `MoneyFlowIndicator`
+    using components from different data sources (lines from data feeds or lines from
+    other indicators) As simple as wanting to give the `close` a lot more weight,
+    without having to develop a specific indicator. Considering the industry-standard
+    `OHLCV` field ordering, a multiple inputs, extra weight for `close`, instantiation
+    could look like this
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: Or because the user previously worked with `ta-lib` and fancies the multiple
+    inputs style.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Supporting multiple inputs
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '*backtrader* tries to be as *pythonic* as possible and the `self.datas` array
+    containing the list of data feeds in the system (and which is auto-magically provided
+    to your strategy) can be queried for its length. Let''s use this to discriminate
+    what the caller wants and properly calculate `tprice` and `mfraw`'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE3]'
+  prefs: []
+  type: TYPE_PRE
+- en: '`def __init__(self):'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'if len(self.datas) == 1:'
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: 1 data feed passed, must have components
+  prefs:
+  - PREF_IND
+  - PREF_IND
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: tprice = (self.data.close + self.data.low + self.data.high) / 3.0
+  prefs:
+  - PREF_IND
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: mfraw = tprice * self.data.volume
+  prefs:
+  - PREF_IND
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: 'else:'
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: if more than 1 data feed, individual components in OHLCV order
+  prefs:
+  - PREF_IND
+  - PREF_IND
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: tprice = (self.data0 + self.data1 + self.data2) / 3.0
+  prefs:
+  - PREF_IND
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: mfraw = tprice * self.data3
+  prefs:
+  - PREF_IND
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: No changes with regards to previous implementation
+  prefs:
+  - PREF_IND
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: flowpos = bt.ind.SumN(mfraw * (tprice > tprice(-1)), period=self.p.period)
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: flowneg = bt.ind.SumN(mfraw * (tprice < tprice(-1)), period=self.p.period)
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: mfiratio = bt.ind.DivByZero(flowpos, flowneg, zero=100.0)
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: self.l.mfi = 100.0 - 100.0 / (1.0 + mfiratio)`
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '[PRE4]'
+  prefs: []
+  type: TYPE_PRE
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**NOTE**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Notice how the individual components are referenced as `self.dataX` (such as
+    `self.data0`, `self.data1`)
+  prefs: []
+  type: TYPE_NORMAL
+- en: This is the same as using `self.datas[x]`, as in `self.datas[0]` ...
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Let's see graphically that this indicator produces the same results as the *canonical*
+    one, and the same results when the multiple inputs correspond to the original
+    components of the data feed. To do so, it will be run in a strategy as this
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE5]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![MFI Results Check](../Images/732d038551706e59f094b96adfcf5bf3.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Without having to resort to check each value, it should be obvious from the
+    picture that the results are the same for the three.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Let's finally see what happens if put a lot more weight on to the `close`. Let's
+    run like this.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE6]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![MFI Close * 5.0](../Images/c266b4a4b9e54f726e00c6370528d1cf.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Whether this makes sense or not is left to the reader, but one can clearly see
+    that adding weight to the `close` has altered the pattern.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Conclusion
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: By simple using the pythonic `len`, one can transform an indicator which uses
+    a data feed with multiple components (and fixed names) into an indicator which
+    accepts multiple generic inputs.
+  prefs: []
+  type: TYPE_NORMAL

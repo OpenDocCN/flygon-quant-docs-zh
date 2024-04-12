@@ -1,0 +1,1292 @@
+- en: Analyzers Reference
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.backtrader.com/docu/analyzers-reference/](https://www.backtrader.com/docu/analyzers-reference/)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: AnnualReturn
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: class backtrader.analyzers.AnnualReturn()
+  prefs:
+  - PREF_H4
+  type: TYPE_NORMAL
+- en: This analyzer calculates the AnnualReturns by looking at the beginning and end
+    of the year
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Params:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: (None)
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'Member Attributes:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`rets`: list of calculated annual returns'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`ret`: dictionary (key: year) of annual returns'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**get_analysis**:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Returns a dictionary of annual returns (key: year)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Calmar
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: class backtrader.analyzers.Calmar()
+  prefs:
+  - PREF_H4
+  type: TYPE_NORMAL
+- en: 'This analyzer calculates the CalmarRatio timeframe which can be different from
+    the one used in the underlying data Params:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`timeframe` (default: `None`) If `None` the `timeframe` of the 1^(st) data
+    in the system will be used'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Pass `TimeFrame.NoTimeFrame` to consider the entire dataset with no time constraints
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '`compression` (default: `None`)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Only used for sub-day timeframes to for example work on an hourly timeframe
+    by specifying “TimeFrame.Minutes” and 60 as compression
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: If `None` then the compression of the 1^(st) data of the system will be used
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '*None*'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`fund` (default: `None`)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: If `None` the actual mode of the broker (fundmode - True/False) will be autodetected
+    to decide if the returns are based on the total net asset value or on the fund
+    value. See `set_fundmode` in the broker documentation
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: Set it to `True` or `False` for a specific behavior
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '- ``get_analysis``()'
+  prefs:
+  - PREF_H4
+  type: TYPE_NORMAL
+- en: Returns a OrderedDict with a key for the time period and the corresponding rolling
+    Calmar ratio
+  prefs: []
+  type: TYPE_NORMAL
+- en: '- ``calmar`` the latest calculated calmar ratio()'
+  prefs:
+  - PREF_H4
+  type: TYPE_NORMAL
+- en: DrawDown
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: class backtrader.analyzers.DrawDown()
+  prefs:
+  - PREF_H4
+  type: TYPE_NORMAL
+- en: This analyzer calculates trading system drawdowns stats such as drawdown values
+    in %s and in dollars, max drawdown in %s and in dollars, drawdown length and drawdown
+    max length
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Params:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`fund` (default: `None`)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: If `None` the actual mode of the broker (fundmode - True/False) will be autodetected
+    to decide if the returns are based on the total net asset value or on the fund
+    value. See `set_fundmode` in the broker documentation
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: Set it to `True` or `False` for a specific behavior
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '- ``get_analysis``()'
+  prefs:
+  - PREF_H4
+  type: TYPE_NORMAL
+- en: 'Returns a dictionary (with . notation support and subdctionaries) with drawdown
+    stats as values, the following keys/attributes are available:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`drawdown` - drawdown value in 0.xx %'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`moneydown` - drawdown value in monetary units'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`len` - drawdown length'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`max.drawdown` - max drawdown value in 0.xx %'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`max.moneydown` - max drawdown value in monetary units'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`max.len` - max drawdown length'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: TimeDrawDown
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: class backtrader.analyzers.TimeDrawDown()
+  prefs:
+  - PREF_H4
+  type: TYPE_NORMAL
+- en: 'This analyzer calculates trading system drawdowns on the chosen timeframe which
+    can be different from the one used in the underlying data Params:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`timeframe` (default: `None`) If `None` the `timeframe` of the 1^(st) data
+    in the system will be used'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Pass `TimeFrame.NoTimeFrame` to consider the entire dataset with no time constraints
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '`compression` (default: `None`)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Only used for sub-day timeframes to for example work on an hourly timeframe
+    by specifying “TimeFrame.Minutes” and 60 as compression
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: If `None` then the compression of the 1^(st) data of the system will be used
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '*None*'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`fund` (default: `None`)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: If `None` the actual mode of the broker (fundmode - True/False) will be autodetected
+    to decide if the returns are based on the total net asset value or on the fund
+    value. See `set_fundmode` in the broker documentation
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: Set it to `True` or `False` for a specific behavior
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '- ``get_analysis``()'
+  prefs:
+  - PREF_H4
+  type: TYPE_NORMAL
+- en: 'Returns a dictionary (with . notation support and subdctionaries) with drawdown
+    stats as values, the following keys/attributes are available:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`drawdown` - drawdown value in 0.xx %'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`maxdrawdown` - drawdown value in monetary units'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`maxdrawdownperiod` - drawdown length'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '- Those are available during runs as attributes()'
+  prefs:
+  - PREF_H4
+  type: TYPE_NORMAL
+- en: '`dd`'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`maxdd`'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`maxddlen`'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: GrossLeverage
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: class backtrader.analyzers.GrossLeverage()
+  prefs:
+  - PREF_H4
+  type: TYPE_NORMAL
+- en: This analyzer calculates the Gross Leverage of the current strategy on a timeframe
+    basis
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Params:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`fund` (default: `None`)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: If `None` the actual mode of the broker (fundmode - True/False) will be autodetected
+    to decide if the returns are based on the total net asset value or on the fund
+    value. See `set_fundmode` in the broker documentation
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: Set it to `True` or `False` for a specific behavior
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '- get_analysis()'
+  prefs:
+  - PREF_H4
+  type: TYPE_NORMAL
+- en: Returns a dictionary with returns as values and the datetime points for each
+    return as keys
+  prefs: []
+  type: TYPE_NORMAL
+- en: PositionsValue
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: class backtrader.analyzers.PositionsValue()
+  prefs:
+  - PREF_H4
+  type: TYPE_NORMAL
+- en: This analyzer reports the value of the positions of the current set of datas
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Params:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'timeframe (default: `None`) If `None` then the timeframe of the 1^(st) data
+    of the system will be used'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'compression (default: `None`)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Only used for sub-day timeframes to for example work on an hourly timeframe
+    by specifying “TimeFrame.Minutes” and 60 as compression
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: If `None` then the compression of the 1^(st) data of the system will be used
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: 'headers (default: `False`)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Add an initial key to the dictionary holding the results with the names of the
+    datas (‘Datetime’ as key
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: 'cash (default: `False`)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Include the actual cash as an extra position (for the header ‘cash’ will be
+    used as name)
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '- get_analysis()'
+  prefs:
+  - PREF_H4
+  type: TYPE_NORMAL
+- en: Returns a dictionary with returns as values and the datetime points for each
+    return as keys
+  prefs: []
+  type: TYPE_NORMAL
+- en: PyFolio
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: class backtrader.analyzers.PyFolio()
+  prefs:
+  - PREF_H4
+  type: TYPE_NORMAL
+- en: This analyzer uses 4 children analyzers to collect data and transforms it in
+    to a data set compatible with `pyfolio`
+  prefs: []
+  type: TYPE_NORMAL
+- en: Children Analyzer
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`TimeReturn`'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Used to calculate the returns of the global portfolio value
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '`PositionsValue`'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Used to calculate the value of the positions per data. It sets the `headers`
+    and `cash` parameters to `True`
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '`Transactions`'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Used to record each transaction on a data (size, price, value). Sets the `headers`
+    parameter to `True`
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '`GrossLeverage`'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Keeps track of the gross leverage (how much the strategy is invested)
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: 'Params:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: Both `timeframe` and `compression` are set following the default behavior of
+    `pyfolio` which is working with *daily* data and upsample it to obtaine values
+    like yearly returns.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '- get_analysis()'
+  prefs:
+  - PREF_H4
+  type: TYPE_NORMAL
+- en: Returns a dictionary with returns as values and the datetime points for each
+    return as keys
+  prefs: []
+  type: TYPE_NORMAL
+- en: get_pf_items()
+  prefs:
+  - PREF_H4
+  type: TYPE_NORMAL
+- en: Returns a tuple of 4 elements which can be used for further processing with
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: Because the objects are meant to be used as direct input to `pyfolio` this method
+    makes a local import of `pandas` to convert the internal *backtrader* results
+    to *pandas DataFrames* which is the expected input by, for example, `pyfolio.create_full_tear_sheet`
+  prefs: []
+  type: TYPE_NORMAL
+- en: The method will break if `pandas` is not installed
+  prefs: []
+  type: TYPE_NORMAL
+- en: LogReturnsRolling
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: class backtrader.analyzers.LogReturnsRolling()
+  prefs:
+  - PREF_H4
+  type: TYPE_NORMAL
+- en: This analyzer calculates rolling returns for a given timeframe and compression
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Params:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`timeframe` (default: `None`) If `None` the `timeframe` of the 1^(st) data
+    in the system will be used'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Pass `TimeFrame.NoTimeFrame` to consider the entire dataset with no time constraints
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '`compression` (default: `None`)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Only used for sub-day timeframes to for example work on an hourly timeframe
+    by specifying “TimeFrame.Minutes” and 60 as compression
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: If `None` then the compression of the 1^(st) data of the system will be used
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '`data` (default: `None`)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Reference asset to track instead of the portfolio value.
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '**NOTE**: this data must have been added to a `cerebro` instance with `addata`,
+    `resampledata` or `replaydata`'
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '`firstopen` (default: `True`)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'When tracking the returns of a `data` the following is done when crossing a
+    timeframe boundary, for example `Years`:'
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: Last `close` of previous year is used as the reference price to see the return
+    in the current year
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: The problem is the 1^(st) calculation, because the data has** no previous**
+    closing price. As such and when this parameter is `True` the *opening* price will
+    be used for the 1^(st) calculation.
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: This requires the data feed to have an `open` price (for `close` the standard
+    [0] notation will be used without reference to a field price)
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: Else the initial close will be used.
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '`fund` (default: `None`)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: If `None` the actual mode of the broker (fundmode - True/False) will be autodetected
+    to decide if the returns are based on the total net asset value or on the fund
+    value. See `set_fundmode` in the broker documentation
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: Set it to `True` or `False` for a specific behavior
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '- get_analysis()'
+  prefs:
+  - PREF_H4
+  type: TYPE_NORMAL
+- en: Returns a dictionary with returns as values and the datetime points for each
+    return as keys
+  prefs: []
+  type: TYPE_NORMAL
+- en: PeriodStats
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: class backtrader.analyzers.PeriodStats()
+  prefs:
+  - PREF_H4
+  type: TYPE_NORMAL
+- en: Calculates basic statistics for given timeframe
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Params:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`timeframe` (default: `Years`) If `None` the `timeframe` of the 1^(st) data
+    in the system will be used'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Pass `TimeFrame.NoTimeFrame` to consider the entire dataset with no time constraints
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '`compression` (default: `1`)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Only used for sub-day timeframes to for example work on an hourly timeframe
+    by specifying “TimeFrame.Minutes” and 60 as compression
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: If `None` then the compression of the 1^(st) data of the system will be used
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '`fund` (default: `None`)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: If `None` the actual mode of the broker (fundmode - True/False) will be autodetected
+    to decide if the returns are based on the total net asset value or on the fund
+    value. See `set_fundmode` in the broker documentation
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: Set it to `True` or `False` for a specific behavior
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '`get_analysis` returns a dictionary containing the keys:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`average`'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`stddev`'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`positive`'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`negative`'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`nochange`'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`best`'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`worst`'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: If the parameter `zeroispos` is set to `True`, periods with no change will be
+    counted as positive
+  prefs: []
+  type: TYPE_NORMAL
+- en: Returns
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: class backtrader.analyzers.Returns()
+  prefs:
+  - PREF_H4
+  type: TYPE_NORMAL
+- en: Total, Average, Compound and Annualized Returns calculated using a logarithmic
+    approach
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'See:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[https://www.crystalbull.com/sharpe-ratio-better-with-log-returns/](https://www.crystalbull.com/sharpe-ratio-better-with-log-returns/)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'Params:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`timeframe` (default: `None`)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: If `None` the `timeframe` of the 1^(st) data in the system will be used
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: Pass `TimeFrame.NoTimeFrame` to consider the entire dataset with no time constraints
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '`compression` (default: `None`)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Only used for sub-day timeframes to for example work on an hourly timeframe
+    by specifying “TimeFrame.Minutes” and 60 as compression
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: If `None` then the compression of the 1^(st) data of the system will be used
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '`tann` (default: `None`)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Number of periods to use for the annualization (normalization) of the
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: 'namely:'
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '`days: 252`'
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`weeks: 52`'
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`months: 12`'
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`years: 1`'
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`fund` (default: `None`)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: If `None` the actual mode of the broker (fundmode - True/False) will be autodetected
+    to decide if the returns are based on the total net asset value or on the fund
+    value. See `set_fundmode` in the broker documentation
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: Set it to `True` or `False` for a specific behavior
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '- get_analysis()'
+  prefs:
+  - PREF_H4
+  type: TYPE_NORMAL
+- en: Returns a dictionary with returns as values and the datetime points for each
+    return as keys
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'The returned dict the following keys:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`rtot`: Total compound return'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`ravg`: Average return for the entire period (timeframe specific)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`rnorm`: Annualized/Normalized return'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`rnorm100`: Annualized/Normalized return expressed in 100%'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: SharpeRatio
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: class backtrader.analyzers.SharpeRatio()
+  prefs:
+  - PREF_H4
+  type: TYPE_NORMAL
+- en: This analyzer calculates the SharpeRatio of a strategy using a risk free asset
+    which is simply an interest rate
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Params:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`timeframe`: (default: `TimeFrame.Years`)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`compression` (default: `1`)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Only used for sub-day timeframes to for example work on an hourly timeframe
+    by specifying “TimeFrame.Minutes” and 60 as compression
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '`riskfreerate` (default: 0.01 -> 1%)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Expressed in annual terms (see `convertrate` below)
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '`convertrate` (default: `True`)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Convert the `riskfreerate` from annual to monthly, weekly or daily rate. Sub-day
+    conversions are not supported
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '`factor` (default: `None`)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: If `None`, the conversion factor for the riskfree rate from *annual* to the
+    chosen timeframe will be chosen from a predefined table
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: 'Days: 252, Weeks: 52, Months: 12, Years: 1'
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: Else the specified value will be used
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '`annualize` (default: `False`)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: If `convertrate` is `True`, the *SharpeRatio* will be delivered in the `timeframe`
+    of choice.
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: In most occasions the SharpeRatio is delivered in annualized form. Convert the
+    `riskfreerate` from annual to monthly, weekly or daily rate. Sub-day conversions
+    are not supported
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '`stddev_sample` (default: `False`)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: If this is set to `True` the *standard deviation* will be calculated decreasing
+    the denominator in the mean by `1`. This is used when calculating the *standard
+    deviation* if it’s considered that not all samples are used for the calculation.
+    This is known as the *Bessels’ correction*
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '`daysfactor` (default: `None`)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Old naming for `factor`. If set to anything else than `None` and the `timeframe`
+    is `TimeFrame.Days` it will be assumed this is old code and the value will be
+    used
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '`legacyannual` (default: `False`)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Use the `AnnualReturn` return analyzer, which as the name implies only works
+    on years
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '`fund` (default: `None`)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: If `None` the actual mode of the broker (fundmode - True/False) will be autodetected
+    to decide if the returns are based on the total net asset value or on the fund
+    value. See `set_fundmode` in the broker documentation
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: Set it to `True` or `False` for a specific behavior
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '- get_analysis()'
+  prefs:
+  - PREF_H4
+  type: TYPE_NORMAL
+- en: Returns a dictionary with key “sharperatio” holding the ratio
+  prefs: []
+  type: TYPE_NORMAL
+- en: SharpeRatio_A
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: class backtrader.analyzers.SharpeRatio_A()
+  prefs:
+  - PREF_H4
+  type: TYPE_NORMAL
+- en: Extension of the SharpeRatio which returns the Sharpe Ratio directly in annualized
+    form
+  prefs: []
+  type: TYPE_NORMAL
+- en: The following param has been changed from `SharpeRatio`
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`annualize` (default: `True`)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: SQN
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: class backtrader.analyzers.SQN()
+  prefs:
+  - PREF_H4
+  type: TYPE_NORMAL
+- en: SQN or SystemQualityNumber. Defined by Van K. Tharp to categorize trading systems.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 1.6 - 1.9 Below average
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 2.0 - 2.4 Average
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 2.5 - 2.9 Good
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 3.0 - 5.0 Excellent
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 5.1 - 6.9 Superb
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 7.0 - Holy Grail?
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'The formula:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: SquareRoot(NumberTrades) * Average(TradesProfit) / StdDev(TradesProfit)
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: The sqn value should be deemed reliable when the number of trades >= 30
+  prefs: []
+  type: TYPE_NORMAL
+- en: '- get_analysis()'
+  prefs:
+  - PREF_H4
+  type: TYPE_NORMAL
+- en: Returns a dictionary with keys “sqn” and “trades” (number of considered trades)
+  prefs: []
+  type: TYPE_NORMAL
+- en: TimeReturn
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: class backtrader.analyzers.TimeReturn()
+  prefs:
+  - PREF_H4
+  type: TYPE_NORMAL
+- en: This analyzer calculates the Returns by looking at the beginning and end of
+    the timeframe
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Params:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`timeframe` (default: `None`) If `None` the `timeframe` of the 1^(st) data
+    in the system will be used'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Pass `TimeFrame.NoTimeFrame` to consider the entire dataset with no time constraints
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '`compression` (default: `None`)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Only used for sub-day timeframes to for example work on an hourly timeframe
+    by specifying “TimeFrame.Minutes” and 60 as compression
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: If `None` then the compression of the 1^(st) data of the system will be used
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '`data` (default: `None`)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Reference asset to track instead of the portfolio value.
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '**NOTE**: this data must have been added to a `cerebro` instance with `addata`,
+    `resampledata` or `replaydata`'
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '`firstopen` (default: `True`)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'When tracking the returns of a `data` the following is done when crossing a
+    timeframe boundary, for example `Years`:'
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: Last `close` of previous year is used as the reference price to see the return
+    in the current year
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: The problem is the 1^(st) calculation, because the data has** no previous**
+    closing price. As such and when this parameter is `True` the *opening* price will
+    be used for the 1^(st) calculation.
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: This requires the data feed to have an `open` price (for `close` the standard
+    [0] notation will be used without reference to a field price)
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: Else the initial close will be used.
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '`fund` (default: `None`)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: If `None` the actual mode of the broker (fundmode - True/False) will be autodetected
+    to decide if the returns are based on the total net asset value or on the fund
+    value. See `set_fundmode` in the broker documentation
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: Set it to `True` or `False` for a specific behavior
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '- get_analysis()'
+  prefs:
+  - PREF_H4
+  type: TYPE_NORMAL
+- en: Returns a dictionary with returns as values and the datetime points for each
+    return as keys
+  prefs: []
+  type: TYPE_NORMAL
+- en: TradeAnalyzer
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: class backtrader.analyzers.TradeAnalyzer()
+  prefs:
+  - PREF_H4
+  type: TYPE_NORMAL
+- en: Provides statistics on closed trades (keeps also the count of open ones)
+  prefs: []
+  type: TYPE_NORMAL
+- en: Total Open/Closed Trades
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Streak Won/Lost Current/Longest
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: ProfitAndLoss Total/Average
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Won/Lost Count/ Total PNL/ Average PNL / Max PNL
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Long/Short Count/ Total PNL / Average PNL / Max PNL
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Won/Lost Count/ Total PNL/ Average PNL / Max PNL
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Length (bars in the market)
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Total/Average/Max/Min
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Won/Lost Total/Average/Max/Min
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Long/Short Total/Average/Max/Min
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Won/Lost Total/Average/Max/Min
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**NOTE**: The analyzer uses an “auto”dict for the fields, which means that
+    if no trades are executed, no statistics will be generated.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'In that case there will be a single field/subfield in the dictionary returned
+    by `get_analysis`, namely:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: dictname[‘total’][‘total’] which will have a value of 0 (the field is also reachable
+    with dot notation dictname.total.total
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Transactions
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: class backtrader.analyzers.Transactions()
+  prefs:
+  - PREF_H4
+  type: TYPE_NORMAL
+- en: This analyzer reports the transactions occurred with each an every data in the
+    system
+  prefs: []
+  type: TYPE_NORMAL
+- en: It looks at the order execution bits to create a `Position` starting from 0
+    during each `next` cycle.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The result is used during next to record the transactions
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Params:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'headers (default: `True`)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Add an initial key to the dictionary holding the results with the names of the
+    datas
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: 'This analyzer was modeled to facilitate the integration with `pyfolio` and
+    the header names are taken from the samples used for it:'
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs:
+  - PREF_IND
+  type: TYPE_PRE
+- en: '- get_analysis()'
+  prefs:
+  - PREF_H4
+  type: TYPE_NORMAL
+- en: Returns a dictionary with returns as values and the datetime points for each
+    return as keys
+  prefs: []
+  type: TYPE_NORMAL
+- en: VWR
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: class backtrader.analyzers.VWR()
+  prefs:
+  - PREF_H4
+  type: TYPE_NORMAL
+- en: 'Variability-Weighted Return: Better SharpeRatio with Log Returns'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Alias:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: VariabilityWeightedReturn
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'See:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[https://www.crystalbull.com/sharpe-ratio-better-with-log-returns/](https://www.crystalbull.com/sharpe-ratio-better-with-log-returns/)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'Params:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`timeframe` (default: `None`) If `None` then the complete return over the entire
+    backtested period will be reported'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Pass `TimeFrame.NoTimeFrame` to consider the entire dataset with no time constraints
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '`compression` (default: `None`)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Only used for sub-day timeframes to for example work on an hourly timeframe
+    by specifying “TimeFrame.Minutes” and 60 as compression
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: If `None` then the compression of the 1^(st) data of the system will be used
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '`tann` (default: `None`)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'Number of periods to use for the annualization (normalization) of the average
+    returns. If `None`, then standard `t` values will be used, namely:'
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '`days: 252`'
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`weeks: 52`'
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`months: 12`'
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`years: 1`'
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`tau` (default: `2.0`)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: factor for the calculation (see the literature)
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '`sdev_max` (default: `0.20`)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: max standard deviation (see the literature)
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '`fund` (default: `None`)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: If `None` the actual mode of the broker (fundmode - True/False) will be autodetected
+    to decide if the returns are based on the total net asset value or on the fund
+    value. See `set_fundmode` in the broker documentation
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: Set it to `True` or `False` for a specific behavior
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '- get_analysis()'
+  prefs:
+  - PREF_H4
+  type: TYPE_NORMAL
+- en: Returns a dictionary with returns as values and the datetime points for each
+    return as keys
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'The returned dict contains the following keys:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`vwr`: Variability-Weighted Return'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

@@ -1,0 +1,268 @@
+- en: Binary Datafeed Development
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.backtrader.com/docu/datafeed-develop-general/datafeed-develop-general/](https://www.backtrader.com/docu/datafeed-develop-general/datafeed-develop-general/)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: Note
+  prefs: []
+  type: TYPE_NORMAL
+- en: The binary file used in the examples `goog.fd` belongs to VisualChart and cannot
+    be distributed with `backtrader`.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[VisualChart](http://www.visualchart.com) can be downloaded free of charge
+    for those interested in directly using the binary files.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'CSV Data feed development has shown how to add new CSV based data feeds. The
+    existing base class CSVDataBase provides the framework taking most of the work
+    off the subclasses which in most cases can simply do:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: The base class takes care of the parameters, initialization, opening of files,
+    reading lines, splitting the lines in tokens and additional things like skipping
+    lines which don’t fit into the date range (`fromdate`, `todate`) which the end
+    user may have defined.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Developing a non-CSV datafeed follows the same pattern without going down to
+    the already splitted line tokens.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Things to do:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Derive from backtrader.feed.DataBase
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Add any parameters you may need
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Should initialization be needed, override `__init__(self)` and/or `start(self)`
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Should any clean-up code be needed, override `stop(self)`
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'The work happens inside the method which MUST always be overriden: `_load(self)`'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'Let’s the parameters already provided by `backtrader.feed.DataBase`:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Having the following meanings:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`dataname` is what allows the data feed to identify how to fetch the data.
+    In the case of the `CSVDataBase` this parameter is meant to be a path to a file
+    or already a file-like object.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`fromdate` and `todate` define the date range which will be passed to strategies.
+    Any value provided by the feed outside of this range will be ignored'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`name` is cosmetic for plotting purposes'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`timeframe` indicates the temporal working reference'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'Potential values: `Ticks`, `Seconds`, `Minutes`, `Days`, `Weeks`, `Months`
+    and `Years`'
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '`compression` (default: 1)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Number of actual bars per bar. Informative. Only effective in Data Resampling/Replaying.
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '`compression`'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`sessionend` if passed (a datetime.time object) will be added to the datafeed
+    `datetime` line which allows identifying the end of the session'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Sample binary datafeed
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '`backtrader` already defines a CSV datafeed (`VChartCSVData`) for the exports
+    of [VisualChart](http://www.visualchart.com), but it is also possible to directly
+    read the binary data files.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Let’s do it (full data feed code can be found at the bottom)
+  prefs: []
+  type: TYPE_NORMAL
+- en: Initialization
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: The binary VisualChart data files can contain either daily (.fd extension) or
+    intraday data (.min extension). Here the parameter `timeframe` will be used to
+    distinguish which type of file is being read.
+  prefs: []
+  type: TYPE_NORMAL
+- en: During `__init__` constants which differ for each type are set up.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: Start
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: The Datafeed will be *started* when backtesting commences (it can actually be
+    started several times during optimizations)
+  prefs: []
+  type: TYPE_NORMAL
+- en: In the `start` method the binary file is open unless a file-like object has
+    been passed.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE3]'
+  prefs: []
+  type: TYPE_PRE
+- en: Stop
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Called when backtesting is finished.
+  prefs: []
+  type: TYPE_NORMAL
+- en: If a file was open, it will be closed
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE4]'
+  prefs: []
+  type: TYPE_PRE
+- en: Actual Loading
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'The actual work is done in `_load`. Called to load the next set of data, in
+    this case the next : datetime, open, high, low, close, volume, openinterest. In
+    `backtrader` the “actual” moment corresponds to index 0.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'A number of bytes will be read from the open file (determined by the constants
+    set up during `__init__`), parsed with the `struct` module, further processed
+    if needed (like with divmod operations for date and time) and stored in the `lines`
+    of the data feed: datetime, open, high, low, close, volume, openinterest.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: If no data can be read from the file it is assumed that the End Of File (EOF)
+    has been reached
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`False` is returned to indicate the fact no more data is available'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'Else if data has been loaded and parsed:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`True` is returned to indicate the loading of the data set was a success'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[PRE5]'
+  prefs: []
+  type: TYPE_PRE
+- en: Other Binary Formats
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: 'The same model can be applied to any other binary source:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Database
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Hierarchical data storage
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Online source
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'The steps again:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`__init__` -> Any init code for the instance, only once'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`start` -> start of backtesting (one or more times if optimization will be
+    run)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: This would for example open the connection to the database or a socket to an
+    online service
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '`stop` -> clean-up like closing the database connection or open sockets'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`_load` -> query the database or online source for the next set of data and
+    load it into the `lines` of the object. The standard fields being: datetime, open,
+    high, low, close, volume, openinterest'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: VChartData Test
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: The `VCharData` loading data from a local “.fd” file for Google for the year
+    2006.
+  prefs: []
+  type: TYPE_NORMAL
+- en: It’s only about loading the data, so not even a subclass of `Strategy` is needed.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE6]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![image](../Images/529e2848164db330489108c0f003179e.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: VChartData Full Code
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '[PRE7]'
+  prefs: []
+  type: TYPE_PRE

@@ -1,0 +1,210 @@
+- en: Data Synchronization Rework
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.backtrader.com/blog/posts/2016-09-17-data-synchronization/data-synchronization/](https://www.backtrader.com/blog/posts/2016-09-17-data-synchronization/data-synchronization/)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: In the latest release the *minor* number has been moved from 8 to 9 to indicate
+    a change which may have some behavioral impact, regardless, even if compatibility
+    has been taken into account.
+  prefs: []
+  type: TYPE_NORMAL
+- en: With release 1.9.0.99 the entire mechanism to synchronize multiple datas using
+    *datetime* has been reworked (for both *next* and *once* modes).
+  prefs: []
+  type: TYPE_NORMAL
+- en: Note
+  prefs: []
+  type: TYPE_NORMAL
+- en: All standard test cases get a nice OK from `nosetests`, but complex uses cases
+    might uncover corner cases not covered.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The previous behavior was discussed in tickets [#39](https://github.com/mementum/backtrader/issues/39),
+    [#76](https://github.com/mementum/backtrader/issues/76), [#115](https://github.com/mementum/backtrader/issues/115)
+    and [#129](https://github.com/mementum/backtrader/issues/129) and this has been
+    the basis to deprecate the old behavior.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Now, the *datetime* timestamp of the incoming prices is checked to align datas
+    and deliver what’s new (older bars first). Benefits:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Non time aligned data can now be used.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: In live feeds the behavior improves because the re-synchronizes automatically
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Let’s recall that the old behavior used the 1^(st) data introduced in the system
+    as a master for time synchronization and no other data could be faster. The order
+    of introduction of datas in the system plays no role now.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Part of the rework has addressed plotting which naively assumed all datas ended
+    up having the same length, being this a consequence of having a time master. The
+    new plotting code allows datas of different length.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Note
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'The old behavior is still available by using:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'or:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: Seeing it with a sample
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: The `multidata-strategy` sample has been used as the basis for the `multidata-strategy-unaligned`
+    sample (in the same folder). Two data samples have been manually altered to remove
+    some bars. Both had `756` bars and have been capped down to `753` at two different
+    points in time
+  prefs: []
+  type: TYPE_NORMAL
+- en: End of 2004, beginning of 2005 for `YHOO`
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: End of 2005 for `ORCL`
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: As always, a execution is worth a thousand words.
+  prefs: []
+  type: TYPE_NORMAL
+- en: First the old behavior
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'The execution:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'From the output, the important part is right at the end:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE3]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'To notice:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The *strategy* has a length of `753`
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: The 1^(st) data (time master) also has `753`
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: The 2^(nd) data (time slave) has `750`
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: It’s not obvious from the output but the `YHOO` file contains data up to `2005-12-30`,
+    which is not being processed by the system.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The visual chart
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![image](../Images/26a9b39e8a20c14c4b9ecd16a600dd65.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: The new behavior
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'The execution:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE4]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'From the output, the important part is right at the end:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE5]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'The behavior has obvioulsy improved:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The *strategy* goes to a length of `756` and each of the datas to the full `753`
+    data points.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Because the removed data points don’t overlap the strategy ends up being `3`
+    units longer than the datas.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`2005-12-30` has been reached with `data1` (it’s one of the data points removed
+    for `data0`), so all datas have been processed to the very end'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: The visual chart
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![image](../Images/e4719c23c68c7e5bb567b10ba6ca1f45.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Although the charts do not exhibit major differences, they are actually different
+    behind the scenes.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Another check
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: For the interested user, the `data-multitimeframe` sample has been updated to
+    also support a `--oldsync` parameter. Because now different length datas are being
+    plotted, the visual aspect of the larger time frame is better.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Execution with new synchronization model
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '![image](../Images/59cb91285c7a84cbf50dbe88f5a5f9a0.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Execution with old synchronization model
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '![image](../Images/1d6ccaae943d049f89bbeaa553609beb.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Sample Usage
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '[PRE6]'
+  prefs: []
+  type: TYPE_PRE
+- en: Sample Code
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '[PRE7]'
+  prefs: []
+  type: TYPE_PRE

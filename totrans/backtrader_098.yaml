@@ -1,0 +1,478 @@
+- en: Automating BackTesting
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.backtrader.com/docu/automated-bt-run/automated-bt-run/](https://www.backtrader.com/docu/automated-bt-run/automated-bt-run/)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: So far all `backtrader` examples and working samples have started from scratch
+    creating a main **Python** module which loads datas, strategies, observers and
+    prepares cash and commission schemes.
+  prefs: []
+  type: TYPE_NORMAL
+- en: One of the goals of *algorithmic trading* is the automation of trading and given
+    that backtrader is a *backtesting* platform intented to check trading algorithms
+    (hence is an *algotrading* platform), automating the use of backtrader was an
+    obvious goal.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'When installed `backtrader` provides 2 entry points in the form of scripts/executables
+    which which automates most tasks:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`bt-run-py` a script which uses the codebase from the next item'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: and
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`btrun` (executable)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Entry point created by `setuptools` during packaging. The executable offers
+    advantages under Windows where in theory no errors about “path/file not found”
+    will happen.
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: The description below applies equally to both tools.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`btrun` allows the end user to:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Say which data feeds have to be loaded
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Set the format to load the datas
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Specify the date range for the datas
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Pass parameters to Cerebro
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Disable standard observers
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: This was an original extra switch before the “Cerebro” parameters were implemented.
+    As such and if a parameter to cerebro with regards to Standard Observers is passed,
+    this will be ignored (parameter `stdstats` to Cerebro)
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: 'Load one or more observers (example: `DrawDown`) from the built-in ones or
+    from a python module'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Set the cash and commission scheme parameters for the broker (commission, margin,
+    mult)
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Enable plotting, controlling the amount of charts and style to present the data
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Add a parametrized writer to the system
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'And finally what should be the core competence:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Load a strategy (a built-in one or from a Python module)
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Pass parameters to the loaded strategy
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: See below for the **Usage** of the script.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Applying a User Defined Strategy
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: 'Let’s consider the following strategy which:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Simply loads a SimpleMovingAverage (default period 15)
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Prints outs
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Is in a file named `mymod.py`
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Executing the strategy with the usual testing sample is easy: easy:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: The chart output
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![image](../Images/a524490035d20f2863d012beb92780a8.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'The console output:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Same strategy but:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Setting the parameter `period` to 50
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'The command line:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE3]'
+  prefs: []
+  type: TYPE_PRE
+- en: The chart output.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![image](../Images/fe3b0459f251dabfb378ac3c308ff7bf.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Note
+  prefs: []
+  type: TYPE_NORMAL
+- en: if no `.py` extension is given, bt-run will add it.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Using a built-in Strategy
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '`backtrader` will slowly be including sample (textbook) strategies. Along with
+    the `bt-run.py` script a standard *Simple Moving Average CrossOver* strategy is
+    included. The name:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`SMA_CrossOver`'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Parameters
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`fast` (default `10`) period of the fast moving average'
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`slow` (default `30`) period of the slow moving average'
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: The strategy buys if the fast moving average crosses up the fast and sells (only
+    if it has bought before) upon the fast moving average crossing down the slow moving
+    average.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The code
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE4]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Standard execution:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE5]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Notice the `:`. The standard notation (see below) to load a strategy is:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`module:stragegy:kwargs`'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'With the following rules:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: If module is there and strategy is specified, then that strategy will be used
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: If module is there but no strategy is specified, the 1^(st) strategy found in
+    the module will be returned
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: If no module is specified, “strategy” is assumed to refer to a strategy in the
+    `backtrader` package
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: If module and/or strategy are there, if kwargs are present they will be passed
+    to the corresponding strategy
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Note
+  prefs: []
+  type: TYPE_NORMAL
+- en: The same notation and rules apply to `--observer`, `--analyzer` and `--indicator`
+    options
+  prefs: []
+  type: TYPE_NORMAL
+- en: Obviously for the corresponding object types
+  prefs: []
+  type: TYPE_NORMAL
+- en: The output
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![image](../Images/3b04cb8aad6316d847b760b0183cae12.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'One last example adding commission schemes, cash and changing the parameters:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE6]'
+  prefs: []
+  type: TYPE_PRE
+- en: The output
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![image](../Images/ab27199138a32cb7a404d0ef2f807779.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'We have backtested the strategy:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Changing the moving average periods
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Setting a new starting cash
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Putting a commission scheme in place for a futures-like instrument
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: See the continuous variations in cash with each bar, as cash is adjusted for
+    the futures-like instrument daily changes
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: Using no Strategy
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: This is a an over-statement. A strategy will be applied, but you can ommit any
+    kind of strategy and a default backtrader.Strategy will be added.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Analyzers, Observers and Indicators will be automatically injected in the strategy.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'An example:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE7]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'This will do not much but serves the purpose:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: A default backtrader.Strategy is added in the background
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Cerebro will not instantiate the regular `stdstats` observers (Broker, BuySell,
+    Trades)
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: A `Broker` observer is added manually
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'As mentioned above, the `nostdstats` is a legacy parameter. Newer versions
+    of `btrun` can pass parameters directly to `Cerebro`. An equivalent invocation
+    would be:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE8]'
+  prefs: []
+  type: TYPE_PRE
+- en: Adding Analyzers
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '`btrun` also supports adding `Analyzers` with the same syntax used for the
+    strategies to choose between internal/external analyzers.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Example with a `SharpeRatio` analysis for the years 2005-2006:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE9]'
+  prefs: []
+  type: TYPE_PRE
+- en: The console output is **nothing**.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'If a printout of the `Analyzer` results is wished, it must be specified with:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`--pranalyzer` which defaults to calling the next one (unless the Analyzer
+    has overriden the proper method)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`--ppranalyzer` which uses the `pprint` module to print the results'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Note
+  prefs: []
+  type: TYPE_NORMAL
+- en: The two printing options were implemented before `writers` were part of backtrader.
+    Adding a writer without csv output will achieve the same (and the output has been
+    improved)
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Extending the example from above:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE10]'
+  prefs: []
+  type: TYPE_PRE
+- en: Good strategy!!! (Pure luck for the example actually which also bears no commissions)
+  prefs: []
+  type: TYPE_NORMAL
+- en: The chart (which simply shows the Analyzer is not in the plot, because Analyzers
+    cannot be plotted, they aren’t lines objects)
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![image](../Images/6f56849fe7ed18a423987a62d0453be0.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'The same example but using a `writer` argument:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE11]'
+  prefs: []
+  type: TYPE_PRE
+- en: Adding Indicators and Observers
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: 'As with `Strategies` and `Analyzers` btrun can also add:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`Indicators`'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: and
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`Observers`'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: The syntax is exactly the same as seen above when adding a `Broker` observer.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Let’s repeat the example but adding a `Stochastic`, the `Broker` and having
+    a look at the plot (we’ll change some parameters):'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE12]'
+  prefs: []
+  type: TYPE_PRE
+- en: The chart
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![image](../Images/f2bb5e94576b2e172870a0921d2db187.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Plotting Control
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: 'Most of the above examples have used the following option:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`--plot` which has activated the creation a default plot'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: More control can be achieved by adding `kwargs` to the `--plot` option
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`--plot style="candle"` for example to plot with candlesticks instead of plotting
+    with a `LineOnClose` style (which is the plotting default)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'The invocation:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE13]'
+  prefs: []
+  type: TYPE_PRE
+- en: Note
+  prefs: []
+  type: TYPE_NORMAL
+- en: The quotes around `candle` are quoted with backslashed `\\` because the example
+    is being run in a bash shell which removes that before passing the arguments to
+    the script.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Backslash quoting is needed in this case to ensure “bar” makes it to the script
+    and can be evaluated as a string
+  prefs: []
+  type: TYPE_NORMAL
+- en: The chart
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![image](../Images/7490f8db479810714e92f43702a3097e.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Usage of the script
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: 'Directly from the script:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE14]'
+  prefs: []
+  type: TYPE_PRE

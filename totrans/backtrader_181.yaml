@@ -1,0 +1,266 @@
+- en: Writers - Write it down
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.backtrader.com/blog/posts/2015-09-14-write-it-down/write-it-down/](https://www.backtrader.com/blog/posts/2015-09-14-write-it-down/write-it-down/)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: 'With the 1.1.7.88 release backtrader gets a new addition: writers'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'This is probably long due and should have been there and the discussion in
+    [Issue #14](https://github.com/mementum/backtrader/issues/14) should also have
+    kicked started the development.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: But better late than never.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The `Writer` implementation tries to remain in line with the other objects in
+    the `backtrader` environment
+  prefs: []
+  type: TYPE_NORMAL
+- en: Get added over Cerebro
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Provide the most resonable defaults
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Don’t force the user to do much
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'Of course and of much more importance is to understand what the writer actually
+    writes. And that is:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: A CSV output of
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs:
+  - PREF_IND
+  type: TYPE_PRE
+- en: 'Once the backtesting phase is over, `Writers` add a new section for the `Cerebro`
+    instance and the following subsections are added:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Properties of `datas` in the system (name, compression, timeframe)
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Properties of `strategies` in the system (lines, params)
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Properties of `indicators` in the strategies (lines, params)
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Properties of `observers` in the strategies (lines, params)
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Analyzers with the following properties
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Params
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Analysis
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: With all that in mind, an example may be the easiest way to show the power (or
+    weakness) or the `writers`.
+  prefs: []
+  type: TYPE_NORMAL
+- en: But before how to add them to cerebro.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Using the `writer` param to `cerebro`:'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs:
+  - PREF_IND
+  type: TYPE_PRE
+- en: This creates a default instance.
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: 'Specific addition:'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs:
+  - PREF_IND
+  type: TYPE_PRE
+- en: Adds (right now the only writer) a `WriterFile` class to the writer list to
+    be later instantiated with `csv=False` (no csv stream will be generated in the
+    output.
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: 'The long due example with a **long-short** strategy (see below for the full
+    code) using a Close-SMA crossover as the signal by executing:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE3]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'The chart:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![image](../Images/8fbc9dd707eaa46f510262d8c478635c.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'With the following output:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE4]'
+  prefs: []
+  type: TYPE_PRE
+- en: After the run we have a complete summary of how the system is setup and at the
+    end what the analzyers say. In this case the analyzers are
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`Value` which is a fake analyzer inside the strategy which collects the starting
+    and ending values of the portfolio'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`SQN` (or SystemQualityNumber) defined by Van K. Tharp (addition to `backtrader`
+    1.1.7.88 which is telling us that it has seen 22 trades and has calculated a `sqn`
+    of 0.05.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: This is actually pretty low. We could have figured it out by looking at the
+    small profit after a full year (luckily the system loses no money)
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: 'The test script allows us to tune the strategy to become **long-only**:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE5]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'The chart:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![image](../Images/1d6eb8cb2bdedfb5e403a16310ad5d5e.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'The output being now:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE6]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'The changes in the “params” to the strategy can be seen (onlylong has turned
+    to True) and the Analyzers tell a different story:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Ending value improved from 100826.1 to 102795.0
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Trades seen by SQN down to 11 from 22
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: The SQN score grows from 0.05 to 0.91 which is much much better
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'But still there is no CSV output to be seen. Let’s run the script to turn it
+    on:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE7]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'With renewed output:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE8]'
+  prefs: []
+  type: TYPE_PRE
+- en: We can skip most of the csv stream and the already seen summaries. The CSV stream
+    has printe out the following
+  prefs: []
+  type: TYPE_NORMAL
+- en: A section line separator at the beginning
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: A header row
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: The corresponding data
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Note how each object gets its “length” printed. Although in this case it doesn’t
+    offer much information, it will if multi-timeframe datas are used or data is replayed.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'The `writer` defaults do the following:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: No indicators are printed (neither the Simple Moving Average nor the CrossOver)
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: The obsevers are printed
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'Let’s run the script with an additional parameter to have the CrossOver indicator
+    added to the CSV stream:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE9]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'The output:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE10]'
+  prefs: []
+  type: TYPE_PRE
+- en: This has shown some of the powers of the writers. Further documentation of the
+    class is still a to-do.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Meanwhile the execution possibilities and code used for the example.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Usage:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE11]'
+  prefs: []
+  type: TYPE_PRE
+- en: And the test script.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE12]'
+  prefs: []
+  type: TYPE_PRE

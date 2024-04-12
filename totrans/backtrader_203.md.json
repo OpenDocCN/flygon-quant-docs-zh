@@ -1,0 +1,1 @@
+["```py\n    `from myfile import TheIndicator` \n    ```", "```py\n    `class MyStrategy(bt.Strategy):\n        def __init__(self):\n            self.myind = TheIndicator(self.data, param1=value1, ...)` \n    ```"]

@@ -1,0 +1,187 @@
+- en: PercentRank reloaded
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.backtrader.com/blog/posts/2017-02-05-percentrank-reloaded/percentrank-reloaded/](https://www.backtrader.com/blog/posts/2017-02-05-percentrank-reloaded/percentrank-reloaded/)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: The community user `@randyt` has been able to stretch *backtrader* to its limits.
+    Finding some of the obscure corners, even adding `pdb` statements here and there,
+    and has been the driving force behind getting a much more refined synchronization
+    of resampled streams.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Lately, `@randyt` added a pull request to integrate a new indicator named `PercentRank`.
+    Here is the original code
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'It really shows how someone has got into the source code of *backtrader*, fired
+    some questions, and grasped some concepts. This is really good:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: Unexpected, because end users wouldn’t be expected to even know that someone
+    can use that API call in a *lines* objects. This call tells the machinery to make
+    sure that the indicator will have at least `self.p.period` samples of the *data
+    feeds* available, because they are needed for the calculation.
+  prefs: []
+  type: TYPE_NORMAL
+- en: In the original code a `self.data.get(size=self.p.period)` can be seen, which
+    will only work if the background engine has made sure that those many samples
+    are available before making the 1^(st) ever calculation (and if `exactbars` is
+    used to reduce memory usage, that those many samples are always there)
+  prefs: []
+  type: TYPE_NORMAL
+- en: Initial Reload
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: The code can be reworked to take advantage of pre-existing utilities that are
+    intended to alleviate the development. Nothing end users have to be aware of,
+    but good to know if one is constantly developing or prototyping indicators.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: Reusing `PeriodN` is key to remove the `self.addminperiod` magic and make the
+    indicator somehow more amenable. `PeriodN` already features a `period` params
+    and will make the call for the user (remember to call `super(cls, self).__init__()`
+    if `__init__` is overridden.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The calculation has been broken into 3 lines to cache dictionary and array lookups
+    in the first place and make it more readable (although the latter is just a matter
+    of taste)
+  prefs: []
+  type: TYPE_NORMAL
+- en: The code has also gone down from 13 to 8 lines. This usually helps when reading.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Reloading via OperationN
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: Existing indicators like `SumN`, which sums the values of a data source over
+    a period, do not build directly upon `PeriodN` like above, but on a subclass of
+    it named `OperationN`. Like its parent class it still defines no *lines* and has
+    a class attribute named `func`.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`func` will be called with an array which contains the data of the period the
+    host function hast to operate on. The signature basically is: `func(data[0:period])`
+    and returns something suitable to be stored in a *line*, i.e.: a float value.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Knowing that, we can try the obvious
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE3]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Down to 4 lines. But this will fail with (only last line needed):'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE4]'
+  prefs: []
+  type: TYPE_PRE
+- en: (Use `--strat n1=True` to make the sample fail)
+  prefs: []
+  type: TYPE_NORMAL
+- en: By putting our unnamed function inside `func` it seems to have been turned into
+    a method, because it’s taking two parameters. This can be quickly cured.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE5]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'And it works. But there is something ugly: this is not how one would be expecting
+    most of the time to pass a function, i.e.: taking `self` as a parameter. In this
+    case, we have control of the function, but this may not always be the case (a
+    wrapper would be needed to work around it)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Syntactic sugar in Python comes to the rescue with `staticmethod`, but before
+    we even do that, we know the reference to `self.p.period` will no longer be possible
+    in a `staticmethod`, losing the ability to make the average calculation as before.
+  prefs: []
+  type: TYPE_NORMAL
+- en: But since `func` receives an iterable with a fixed length, `len` can be used.
+  prefs: []
+  type: TYPE_NORMAL
+- en: And now the new code.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE6]'
+  prefs: []
+  type: TYPE_PRE
+- en: All good and fine, but this has put some thinking into why it wasn’t thought
+    before to give users the chance to pass their own function. Subclassing `OperationN`
+    is a good option, but something better can be around the corner avoiding the need
+    to use `staticmethod` or take `self` as a parameter and building upon the machinery
+    in *backtrader*.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Let’s define a handy subclass of `OperationN`.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE7]'
+  prefs: []
+  type: TYPE_PRE
+- en: This should probably have been in the platform already a long time ago. The
+    only real discern here would be if the `lines = ('apply',)` has to be there or
+    users should be free to define that line and some others. Something to consider
+    before integration.
+  prefs: []
+  type: TYPE_NORMAL
+- en: With `ApplyN` in hand the final versions of `PercentRank` fully comply with
+    all things we expected. First, the version with manual average calculation.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE8]'
+  prefs: []
+  type: TYPE_PRE
+- en: Without breaking `PEP-8` we could still reformat both to fit in 3 lines … Good!
+  prefs: []
+  type: TYPE_NORMAL
+- en: Let’s run the sample
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: The sample which can be seen below has the usual skeleton boilerplate, but is
+    intended to show a visual comparison of the different `PercentRank` implementations.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Note
+  prefs: []
+  type: TYPE_NORMAL
+- en: Execute it with `--strat n1=True` to try the `PercentRank_OperationN1` version
+    which doesn’t work
+  prefs: []
+  type: TYPE_NORMAL
+- en: Graphic output.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![image](../Images/d51300b6208096f1d6329adfcebab6f9.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Sample Usage
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '[PRE9]'
+  prefs: []
+  type: TYPE_PRE
+- en: Sample Code
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '[PRE10]'
+  prefs: []
+  type: TYPE_PRE

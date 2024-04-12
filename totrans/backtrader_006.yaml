@@ -1,0 +1,84 @@
+- en: Who is using it
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.backtrader.com/home/references/who-is-using-it/](https://www.backtrader.com/home/references/who-is-using-it/)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: See the sections after this for references of usage.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Old Website References
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: 'The original website stated that *backtrader* is used in (at least):'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 2 Eurostoxx50 Banks
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 6 Quantitative Trading Firms
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: That was long ago and a lot more are known to the author, including other type
+    of trading companies in sectors like *"Energy Trading"*.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Why were no names given?
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: I never asked
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: They never asked
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Can you then sustain those claims?
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: Already asked (and answered) in [Reddit - [Question] How popular is Backtrader
+    on this sub?](https://www.reddit.com/r/algotrading/comments/9k51kt/question_how_popular_is_backtrader_on_this_sub/)
+  prefs: []
+  type: TYPE_NORMAL
+- en: Let's quote the answer from that thread.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Quote
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'No. There is not a list. This is actually outdated: the number of banks remains
+    at `2` (there may be more, but I don''t know it), but there are more than 6 firms
+    using it for internal purposes, including for example companies working in energy
+    markets, due to the `compensation` feature which allows buying and selling different
+    assets which compensate each other (this is probably not available in `zipline`)
+    which allows to model using spot and futures prices (this is a particularity of
+    energy markets to avoid having the actual goods delivered to you)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'The thing here is that one would have to define **usage**. I can for example
+    quote what someone from one of those banks told me: *"we use backtrader to quickly
+    prototype our ideas and backtest them. If they prove to be what we expected and
+    after further refinement, they will be rewritten in Java and put into our production
+    system"*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'This is actually the same scheme which one of the Quant firms (which I personally
+    visited) used: prototyping in *backtrader* and production in *Java*.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: As you may imagine I don't track the lifes of those using *backtrader*, so it
+    may also be that some of the banks and companies decided to no longer use *backtrader*.
+  prefs: []
+  type: TYPE_NORMAL
+- en: I do also guess that some banks and quant firms use `zipline` following the
+    same scheme.
+  prefs: []
+  type: TYPE_NORMAL

@@ -1,0 +1,219 @@
+- en: Evaluating external historical performance
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.backtrader.com/blog/posts/2017-07-05-order-history/order-history/](https://www.backtrader.com/blog/posts/2017-07-05-order-history/order-history/)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: 'With release `1.9.55.122`, *backtrader* can now be used to evaluate the performance
+    of an external set of orders. This can be used for example:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'To evaluate a set of orders/trades which for which judgmental trading (i.e.:
+    human discretional decision) was used'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: To evaluate orders created in another platform and verify the analyzers of that
+    platform
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: And obviously in the other direction to evaluate the things returned by *backtrader*
+    against well-known results from other platforms
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Usage pattern
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'The obvious question here is how `orders` has to look like. Let’s quote the
+    docs:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`orders`: is an iterable (ex: list, tuple, iterator, generator) in which each
+    element will be also an iterable (with length) with the following sub-elements
+    (2 formats are possible)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`[datetime, size, price]` or `[datetime, size, price, data]`'
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '**Note**: it must be sorted (or produce sorted elements) by'
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs:
+  - PREF_IND
+  type: TYPE_PRE
+- en: 'where:'
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '`datetime` is a python `date/datetime` instance or a string with format YYYY-MM-DD[THH:MM:SS[.us]]
+    where the elements in brackets are optional'
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`size` is an integer (positive to *buy*, negative to *sell*)'
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`price` is a float/integer'
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`data` if present can take any of the following values'
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '*None* - The 1^(st) data feed will be used as target'
+  prefs:
+  - PREF_IND
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '*integer* - The data with that index (insertion order in **Cerebro**) will
+    be used'
+  prefs:
+  - PREF_IND
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '*string* - a data with that name, assigned for example with `cerebro.addata(data,
+    name=value)`, will be the target'
+  prefs:
+  - PREF_IND
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'In the case of `notify`:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`notify` (default: *True*)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: If `True` the 1^(st) strategy inserted in the system will be notified of the
+    artificial orders created following the information from each order in `orders`
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: Note
+  prefs: []
+  type: TYPE_NORMAL
+- en: Notice how the example above is adding a *data feed*. **Yes** this is needed.
+  prefs: []
+  type: TYPE_NORMAL
+- en: A practical example of how orders could look like
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: An iterable with 3 elements, which could have been perfectly loaded from a *CSV*
+    file.
+  prefs: []
+  type: TYPE_NORMAL
+- en: An example
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: 'The sample below does two things:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Execute a simple *SMA Crossover* strategy
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Add a history of orders which executes the same operations as the *SMA CrossOver*
+    strategy
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: In this 2^(nd) case an empty strategy is added to receive order and trade notifications
+    over `notify_order` and `notify_trade`
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: In both cases a set of *analyzers* (`TimeReturn` in *Months* and *Years* and
+    a `TradeAnalyzer`) are loaded … and they should return the same values.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Run 1: SMA Crossover'
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '[PRE3]'
+  prefs: []
+  type: TYPE_PRE
+- en: Which produces a chart
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![image](../Images/0332127316faec4812438636b9b9ac16.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'And some textual output (capped for brevity):'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE4]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Run 2: Order history'
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '[PRE5]'
+  prefs: []
+  type: TYPE_PRE
+- en: Which produces a chart which seems to have no differences
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![image](../Images/3261cb5c0d3ae78f66067f7d345c812c.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'And some textual output (capped again for brevity):'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE6]'
+  prefs: []
+  type: TYPE_PRE
+- en: And the values as expected match those of the reference.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Conclusion
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: Measuring the performance of judgmental trading can be measured for example.
+    This is sometimes used in combination with algotrading, where the algo generates
+    signals, but the human has the final decision on whether the signal has to translate
+    into an actual trade.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Sample Usage
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '[PRE7]'
+  prefs: []
+  type: TYPE_PRE
+- en: Sample Code
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '[PRE8]'
+  prefs: []
+  type: TYPE_PRE

@@ -1,0 +1,35 @@
+- en: Introduction
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.backtrader.com/recipes/indicators/intro/](https://www.backtrader.com/recipes/indicators/intro/)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: This section hosts a collection of *Indicator* implementations which are not
+    part of the *backtrader* core.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'To use them:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Copy the code to a file of your choice or directly above your strategy
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: If copied to a file, import it from the file
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs:
+  - PREF_IND
+  type: TYPE_PRE
+- en: And use it in your strategy
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs:
+  - PREF_IND
+  type: TYPE_PRE

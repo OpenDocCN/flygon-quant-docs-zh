@@ -1,0 +1,162 @@
+- en: MultiData Strategy
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.backtrader.com/blog/posts/2015-09-03-multidata-strategy/multidata-strategy/](https://www.backtrader.com/blog/posts/2015-09-03-multidata-strategy/multidata-strategy/)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: Because nothing in the world lives in isolation it can well be that the trigger
+    to buy an asset is actually another asset.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Using different analysis techniques a correlation may have been found between
+    two different datas.
+  prefs: []
+  type: TYPE_NORMAL
+- en: backtrader supports using different data sources simultaneously so it can possibly
+    be used for the purpose in most cases.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Let’s assume that a correlation has been found between the following companies:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`Oracle`'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`Yahoo`'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: One could imagine that when things go well for Yahoo, the company buys more
+    servers, more databases and more professional services from Oracle, which in turn
+    pushes the stock prices up.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'As such and having run a profound analysis a strategy is devised:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: If the close price of `Yahoo` goes over the Simple Moving Average (period 15)
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Buy `Oracle`
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'To exit the position:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Use the crossing downwards of the close price
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'Order Execution Type:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Market
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'In summary what’s needed to set this up with `backtrader`:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Create a `cerebro`
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Load the Data Source 1 (Oracle) and add it to cerebro
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Load the Data Source 2 (Yahoo) and add it to cerebro
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Load the Strategy we have devised
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'The details of the strategy:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Create a Simple Moving Average on Data Source 2 (Yahoo)
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Create a CrossOver indicator using Yahoo’s close price and the Moving Average
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: And then execute the buy/sell orders on Data Source 1 (Oracle) as described
+    above.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'The script below uses the following defaults:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Oracle (Data Source 1)
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Yahoo (Data Source 2)
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'Cash: 10000 (system default)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'Stake: 10 shares'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'Commission: 0.5% for each round (expressed as 0.005)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'Period: 15 trading days'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'Period: 2003, 2004 and 2005'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'The script can take arguments to modify the above settings as seen in the help
+    text:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'The result of a standard execution:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'After two complete years of execution the Strategy:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Has lost 40.74 monetary units
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**So much for the correlation between Yahoo and Oracle**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The Visual Ouput (add `--plot` to produce a chart)
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![image](../Images/cb7c9b30783a1fbe41e59058abf781db.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: And the script (which has been added to the source distribution of `backtrader`
+    under the `samples/multidata-strategy` directory.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE

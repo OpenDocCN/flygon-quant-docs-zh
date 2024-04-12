@@ -1,0 +1,124 @@
+- en: Installation
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.backtrader.com/docu/installation/](https://www.backtrader.com/docu/installation/)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: Requirements and versions
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '`backtrader` is self-contained with no external dependencies (except if you
+    want to plot)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Basic requirements are:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Python 2.7
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Python 3.2 / 3.3/ 3.4 / 3.5
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: pypy/pypy3
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'Additional requirements if plotting is wished:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Matplotlib >= 1.4.1
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: It may work with previous versions, but this the one used for development
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '**NOTE**: At the time of writing Matplotlib is not supported under *pypy/pypy3*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Python 2.x/3.x compatibility
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Development takes place under Python 2.7 and sometimes under 3.4\. Tests are
+    run locally with both versions.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Compatibility with 3.2 / 3.3 / 3.5 and pypy/pyp3 is checked with continuous
+    integration under Travis
+  prefs: []
+  type: TYPE_NORMAL
+- en: Install from pypi
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: 'For example using pip:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: '*easy_install* with the same syntax can also be applied'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Install from pypi (including *matplotlib*)
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: 'Use this if plotting capabilities are wished:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: This pulls in matplotlib which will in turn pull in other dependencies.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Again you may prefer (or only have access to …) `easy_install`
+  prefs: []
+  type: TYPE_NORMAL
+- en: Install from source
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: 'First downloading a release or the latest tarball from the github site:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[https://github.com/mementum/backtrader](https://github.com/mementum/backtrader)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'And after unpacking run the command:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: Run from source in your project
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: 'Download a release or the latest tarball from the github site:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[https://github.com/mementum/backtrader](https://github.com/mementum/backtrader)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'And then copy the *backtrader* package directory to your own project. Under
+    a Unix-like OS for example:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE3]'
+  prefs: []
+  type: TYPE_PRE
+- en: Remember that you would then need to manually install `matplotlib` for plotting.
+  prefs: []
+  type: TYPE_NORMAL

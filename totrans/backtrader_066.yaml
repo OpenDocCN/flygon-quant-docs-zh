@@ -1,0 +1,58 @@
+- en: Position
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.backtrader.com/docu/position/](https://www.backtrader.com/docu/position/)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: 'Position on an asset is usually checked from within a Strategy with:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`position` (a property) or `getposition(data=None, broker=None)`'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Which will return the position on `datas[0]` of the strategy in the default
+    `broker` provided by cerebro
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: 'A position is simply the indication of:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: An asset is being held with `size`
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: The average price is `price`
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'It serves as a status and can for example be used in deciding if an order has
+    to be issued or not (example: long positions are only entered if no position is
+    open)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Reference: Position'
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: class backtrader.position.Position(size=0, price=0.0)
+  prefs:
+  - PREF_H4
+  type: TYPE_NORMAL
+- en: Keeps and updates the size and price of a position. The object has no relationship
+    to any asset. It only keeps size and price.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Member Attributes:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: The Position instances can be tested using len(position) to see if size is not
+    null
+  prefs: []
+  type: TYPE_NORMAL

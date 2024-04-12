@@ -1,0 +1,210 @@
+- en: Plotting on the same axis
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.backtrader.com/blog/posts/2015-09-21-plotting-same-axis/plotting-same-axis/](https://www.backtrader.com/blog/posts/2015-09-21-plotting-same-axis/plotting-same-axis/)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: Following a comment on the blog a slight addition (luckily just a few lines
+    of code) has been made to plotting.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The abilitiy to plot any indicator on any other indicator
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'A potential use case:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Saving precious screen real estate by plotting some indicators together and
+    having more room to appreciate the OHLC bars
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'Example: join Stochastic and RSI plots'
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: 'Of course something has to be taken into account:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: If the scaling of the indicators is too different, some of the indicators would
+    not be visible.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'Example: a MACD oscillating around 0.0 plus/minus 0.5 plotted over a Stochastic
+    which moves across the 0-100 range.'
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: The first implementation is in the development branch on commit […14252c6](https://github.com/mementum/backtrader/commit/6991c0995ddc5097ccd14bffef91d5c8114252c6)
+  prefs: []
+  type: TYPE_NORMAL
+- en: A sample script (see below for the full code) let us see the effects
+  prefs: []
+  type: TYPE_NORMAL
+- en: Note
+  prefs: []
+  type: TYPE_NORMAL
+- en: Because the sample strategy does nothing, the standards observers are removed
+    unless activated via a command line switch.
+  prefs: []
+  type: TYPE_NORMAL
+- en: First the script run with no switches.
+  prefs: []
+  type: TYPE_NORMAL
+- en: A Simple Moving Average is plotted over the data
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: A MACD, Stochastic and RSI are plotted on own axis/subplots
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'Execution:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: And the chart.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![image](../Images/9657732538ab1960cc4c0c0baaba5870.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'The second execution changes the panorama:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The Simple Moving Average is moved to a subplot
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: The MACD is hidden
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'The RSI is plotted over the Stochastic (the y-axis range is compatible: 0-100)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: This is achieved by setting the `plotinfo.plotmaster` value of the indicator
+    to the other indicator to be plotted onto.
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: 'In this case and because the local variables in `__init__` are named `stoc`
+    for Stochastic and `rsi` for RSI, it looks like:'
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs:
+  - PREF_IND
+  type: TYPE_PRE
+- en: 'Execution:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: The chart.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![image](../Images/22e20de65834b251167bb459d40784cc.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'And to check the incompatibility of scales, let’s try plotting the rsi over
+    the SMA:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE3]'
+  prefs: []
+  type: TYPE_PRE
+- en: The chart.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![image](../Images/be12082216a4b0d6ee551e7435947724.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: The RSI label shows up with the data and the SMA, but the scale is in the 3400-4200
+    range and hence … no traces of the RSI.
+  prefs: []
+  type: TYPE_NORMAL
+- en: A further futile attempt is to place the SMA on a subplot and again plot the
+    RSI on the SMA
+  prefs: []
+  type: TYPE_NORMAL
+- en: $ ./plot-same-axis.py –rsiovermacd –smasubplot
+  prefs: []
+  type: TYPE_NORMAL
+- en: The chart.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![image](../Images/4429c406fe1a7794b0d5dd0433e458a4.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: The label is clear but all that remains from the RSI is a faint blue line at
+    the bottom of the SMA plot.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Note
+  prefs: []
+  type: TYPE_NORMAL
+- en: Added multi-line indicator plotted over another indicator
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Going in the other direction, let’s plot a multi-line indicator on another
+    indicator. Let’s plot the Stochastic on the RSI:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE4]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![image](../Images/6d724766dd27849b572ad23391dc3bc4.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: It works. The `Stochastic` label shows up and the 2 lines `K%` and `D%` too.
+    But the lines are not “named” because we have got the name of the indicator.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'In the code, the current setting would be:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE5]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'To have the names of the Stochastic lines displayed instead of the name, we
+    would additionally need:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE6]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'This has been parametrized and a new execution shows it:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE7]'
+  prefs: []
+  type: TYPE_PRE
+- en: With the chart now showing the name of the Stochasti lines below the name of
+    the RSI line.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![image](../Images/cb4b5cc50ae13fe7062901453d95b4d4.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'The script usage:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE8]'
+  prefs: []
+  type: TYPE_PRE
+- en: And the code.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE9]'
+  prefs: []
+  type: TYPE_PRE

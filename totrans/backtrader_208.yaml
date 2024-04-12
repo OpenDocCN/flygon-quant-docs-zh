@@ -1,0 +1,49 @@
+- en: Stochastic (Generic)
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.backtrader.com/recipes/indicators/stochastic/stochastic/](https://www.backtrader.com/recipes/indicators/stochastic/stochastic/)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '*backtrader* already includes a `Stochastic` indicator (including a variant
+    which displays the three calculated lines and not just the usual two `%k` and
+    `%d` lines)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: But such indicator assumes that the data source for the calculations has `high`,
+    `low` and `close` components. This is so because the original definition uses
+    those components.
+  prefs: []
+  type: TYPE_NORMAL
+- en: If one wants to use different components, a first approach could be creating
+    a data feed which stores the different components in the `high`, `low` and `close`
+    lines of the data feed.
+  prefs: []
+  type: TYPE_NORMAL
+- en: But a much more straightforward approach is to have a *Generic* `Stochastic`
+    indicator which takes three (3) data components and uses them as if they were
+    the `high`, `low` and `close` components.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The code below does that and adds a nice touch by allowing customization of
+    the moving average for the 2^(nd) smoothing.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: Of course, one needs to verify that this indicator does actually yield the same
+    results as the standard indicator when given the same set of inputs. The chart
+    below is created with this set of instructions
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: And here a view of how the indicator works
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Generic Stochastic View](../Images/4919bda0d0bcda338e19901f6d0dd897.png)'
+  prefs: []
+  type: TYPE_IMG

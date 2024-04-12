@@ -1,0 +1,12 @@
+- en: Introduction
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.backtrader.com/recipes/intro/](https://www.backtrader.com/recipes/intro/)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: This section contains recipes and resources which can be directly applied to
+    *backtrader*, such as indicators or 3^(rd) party stores, brokes or data feeds.
+  prefs: []
+  type: TYPE_NORMAL

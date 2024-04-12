@@ -1,0 +1,228 @@
+- en: Mixing Timeframes in Indicators
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.backtrader.com/docu/mixing-timeframes/indicators-mixing-timeframes/](https://www.backtrader.com/docu/mixing-timeframes/indicators-mixing-timeframes/)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '[Release 1.3.0.92](https://github.com/mementum/backtrader/releases/tag/1.3.0.92)
+    brings up the possibility to have data (from either data feeds and/or indicators)
+    from different timeframes mixed.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Background: *Indicators are smart dumb objects.*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: They are smart because they can make complex calculations.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: They are dumb because they operate with no knowledge of what sources are providing
+    the data for the calculations
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'As such:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: If the data sources providing the values have different timeframes, different
+    lengths inside the `Cerebro` engine, the indicator will break.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'Example of a calculation, in which `data0` has a timeframe of days and `data1`
+    has a timeframe of `months`:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: Here a *sell signal* is sought when the close is below the `s1` line (*1^(st)
+    support*)
+  prefs: []
+  type: TYPE_NORMAL
+- en: Note
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`PivotPoint` works in a larger timeframe by definition'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'This will in the past with the following error:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'And for a good reason: `self.data.close` provides values from the very 1^(st)
+    instant, but `PivotPoint` (and hence the `s1` line) will only deliver values once
+    a **full month** has gone by, which is roughly equivalent to 22 values of `self.data0.close`.
+    During this 22 *closes* there isn’t yet a value for `s1` and the attempt to fetch
+    it from the underlying array fails.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*Lines* objects support the `(ago)` operator (`__call__` special method in
+    *Python*) for deliver a delayed version of itself:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'In this example the object `close1` (when accessed via `[0]`) always contains
+    the previous value (`-1`) delivered by `close`. The syntax has been reused to
+    accomodate adapting timeframes. Let’s rewrite the above `pivotpoint` snippet:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE3]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'See how the `()` is executed with no arguments (in the background a `None`
+    is being supplied). The following is happening:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`pivotpoint.s1()` is returning an internal `LinesCoupler` object which follows
+    the rhythm of the larger scope. This coupler fills itself with the latest delivered
+    value from the real `s1` (starting with a default value of `NaN`)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'But something extra is needed to make the magic work. `Cerebro` has to be created
+    with:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE4]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'or executed with:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE5]'
+  prefs: []
+  type: TYPE_PRE
+- en: In this mode the indicators and late-evaluated automatic *lines* objects are
+    executed step by step rather than in tight loops. This makes the entire operation
+    slower, but it makes it **possible**
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'The sample script at the bottom which was breaking above, now runs:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE6]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'With output:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE7]'
+  prefs: []
+  type: TYPE_PRE
+- en: At line 74 the 1^(st) instance of `close < s1` takes place.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'The script also provides insight into the additional possiblity: *couple all
+    lines of an indicator*. Before we had:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE8]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Being the alternative:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE9]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Now the entire `PivotPoint` indicator has been coupled and any of its lines
+    can be accessed (namely `p`, `r1`, `r2`, `s1`, `s2`). The script has only interest
+    in `s1` and the access is direct.:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE10]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'The output:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE11]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'No surprises here. The same as before. The “coupled” object can even be plotted:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE12]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![image](../Images/89385648179dd20fa0a0e1e79014526a.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Full coupling syntax
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: 'For *lines* objects with multiple lines (for example *Indicators* like `PivotPoint`):'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`obj(clockref=None, line=-1)`'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`clockref` If `clockref` is `None`, the surrounding object (in the examples
+    a `Strategy`) will be the reference to adapt larger timeframes (for example: `Months`)
+    to smaller/faster timeframes (for example: `Days`)'
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Another reference can be used if desired
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '`line`'
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '[PRE13]python'
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: coupled_s1 = pp(line='s1')
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '[PRE14]'
+  prefs:
+  - PREF_IND
+  type: TYPE_PRE
+- en: 'For *lines* objects with a single line (for example line `s1` from the indicator
+    `PivotPoint`):'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`obj(clockref=None)` (see above for `clockref`)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Conclusion
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: Integrated in the regular `()` syntax, data feeds from different timeframes
+    can be mixed in indicators, always taking into account that `cerebro` needs to
+    be instantiated or created with `runonce=False`.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Script Code and Usage
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: 'Available as sample in the sources of `backtrader`. Usage:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE15]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'The code:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE16]'
+  prefs: []
+  type: TYPE_PRE

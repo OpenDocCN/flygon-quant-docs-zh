@@ -1,0 +1,25 @@
+- en: Hello Algotrading!
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.backtrader.com/home/helloalgotrading/](https://www.backtrader.com/home/helloalgotrading/)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: A classic *Simple Moving Average Crossover* strategy, can be easily implemented
+    and in different ways. The results and the chart are the same for the three snippets
+    presented below.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![image](../Images/80e7046cb8ec40277514e948183e2afa.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE

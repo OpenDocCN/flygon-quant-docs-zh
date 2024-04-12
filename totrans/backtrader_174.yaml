@@ -1,0 +1,281 @@
+- en: Data Filters
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.backtrader.com/blog/posts/2015-11-21-data-filters/data-filling-filtering/](https://www.backtrader.com/blog/posts/2015-11-21-data-filters/data-filling-filtering/)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: 'Some time ago Ticket #23 got me thinking about a potential improvement for
+    the discussion which was held in the context of that ticket.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'To ticket #23: [https://github.com/mementum/backtrader/issues/23](https://github.com/mementum/backtrader/issues/23)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Within the ticket I added a `DataFilter` class, but this was overly complicated.
+    Actually reminiscent of the complexity which was built in `DataResampler` and
+    `DataReplayer`, the classes used to implement the functionalities of the same
+    names.
+  prefs: []
+  type: TYPE_NORMAL
+- en: As such and since a couple of versions, `backtrader` supports adding a `filter`
+    (call it `processor` if you wish) to data feeds. Resampling and Replaying were
+    internally reimplemented using the functionality and everything seems less complicated
+    (although it still is)
+  prefs: []
+  type: TYPE_NORMAL
+- en: Filters at work
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: 'Given an existing data feed/source you use the `addfilter` method of the data
+    feed:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Obviously the `filter` must conform to a given interface, being this:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'A callable which accepts this signature:'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs:
+  - PREF_IND
+  type: TYPE_PRE
+- en: or
+  prefs: []
+  type: TYPE_NORMAL
+- en: A class which can be instantiated and called
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'During instantiation the **init** method must support the signature:'
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs:
+  - PREF_IND
+  type: TYPE_PRE
+- en: 'The **call** and last methods this one:'
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[PRE3]'
+  prefs:
+  - PREF_IND
+  type: TYPE_PRE
+- en: The callable/instance will be called for each data the data source is producing.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'A better solution for Ticket #23'
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: 'That ticket wanted:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: A RelativeVolumeIndicator on an intraday basis
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Intraday data may be missing
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Pre/Post Session data could arrive
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Implementing a couple of filters alleviates the situation for a backtesting
+    environment.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Filtering out Pre/Post Market Data
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'The following filter (already available in `backtrader`) comes to the rescue:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE4]'
+  prefs: []
+  type: TYPE_PRE
+- en: The filter uses the in-the-data embedded session start/end times to filter bars
+  prefs: []
+  type: TYPE_NORMAL
+- en: If the datetime of the new data is within the session times `False` is returned
+    to indicate the data is untouched
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: If the datatime falls outside of the range, the data source is sent `backwards`
+    effectively erasing the last produced data. And `True` is returned to indicate
+    the data stream was manipulated.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Note
+  prefs: []
+  type: TYPE_NORMAL
+- en: Calling `data.backwards()` is possibly/probably low level and the filters should
+    have an API which deals with the internals of the data stream
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'The sample code at the end of the script can be run with and without filter.
+    The first run is 100% unfiltered and without specifying session times:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE5]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Looking at the start and end of the 1^(st) day:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE6]'
+  prefs: []
+  type: TYPE_PRE
+- en: The session run from 09:01:00 to 20:04:00 on the 2^(nd) of January of 2006.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Now a run with a `SessionFilter` and telling the script to use 09:30 and 17:30
+    as the start/end times of the session:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE7]'
+  prefs: []
+  type: TYPE_PRE
+- en: The data output starts now at 09:30 and ends at 17:30\. Pre/Post-Market Data
+    has been filtered out.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Filling in Missing Data
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'A deeper examination of the output shows the following:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE8]'
+  prefs: []
+  type: TYPE_PRE
+- en: Data for minutes 10:32 and 10:33 is missing. Being the 1^(st) trading day of
+    the year there may have been no negotiation at all. Or the data feed may have
+    failed to capture that data.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'For the purposes of Ticket #23 and to be able to compare the volume of a given
+    minute with the same minute of the previous day, we’ll be filling in the missing
+    data.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Already in `backtrader` there is a `SessionFiller` which as expected fills
+    in missing data. The code is long and bears more complexities than that of a filter
+    (see at the end for the full implementation), but let’s see the class/params definition:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE9]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'The sample script can now filter and fill data:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE10]'
+  prefs: []
+  type: TYPE_PRE
+- en: Minutes 10:32 and 10:33 are there. The script uses the last known “close” price
+    to fill the price values and sets the volume and openinterest fields to 0\. The
+    script accepts a `--fvol` argument to set the volume to anything (including ‘NaN’)
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Completing Ticket #23'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'With the `SessionFilter` and `SessionFiller` the following has been completed:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Pre/Post Market Data is not delivered
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: No Data (for the given timeframe) is missing
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Now the “synchronization” discussed in Ticket 23 to implement a `RelativeVolume`
+    indicator is no longer needed, because all days have exactly the same number of
+    bars (in the example all minutes from 09:30 to 17:30 both included)
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Remembering that the default is to set the missing volume to `0` an easy `RelativeVolume`
+    indicator can be developed:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE11]'
+  prefs: []
+  type: TYPE_PRE
+- en: Which is smart enough to avoid a division by zero by using a built-in aid in
+    `backtrader`.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Putting all pieces together in the next invocation of the script:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE12]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'The `RelativeVolume` indicator produces no output, as expected, during the
+    1^(st) bars. The period is calculated in the script as: (17:30 - 09:30 * 60) +
+    1\. Let’s directly look at how the relative volume looks for 10:32 and 10:33 in
+    the second day, given that the 1^(st) day, the volume value was filled with `0`:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE13]'
+  prefs: []
+  type: TYPE_PRE
+- en: It is set to `0` as expected for both.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Conclusion
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: The `filter` mechanism in data sources opens the possibility to fully manipulate
+    the data stream. Use with caution.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Script Code and Usage
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'Available as sample in the sources of `backtrader`:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE14]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'The code:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE15]'
+  prefs: []
+  type: TYPE_PRE
+- en: SessionFiller
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'From the `backtrader` sources:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE16]'
+  prefs: []
+  type: TYPE_PRE

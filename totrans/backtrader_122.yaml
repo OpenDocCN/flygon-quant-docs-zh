@@ -1,0 +1,541 @@
+- en: Timers
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.backtrader.com/blog/posts/2017-05-03-timers/timers/](https://www.backtrader.com/blog/posts/2017-05-03-timers/timers/)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: Release `1.9.44.116` added *timers* to the arsenal of tools available in *backtrader*.
+    This functionality allows to get a call back to the `notify_timer` (available
+    in `Cerebro` and `Strategy`) at given points in time, with a fine grained end-user
+    control.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Note
+  prefs: []
+  type: TYPE_NORMAL
+- en: Some corrections have been made in `1.9.46.116`
+  prefs: []
+  type: TYPE_NORMAL
+- en: Options
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: Timer based in absolute time input or with regards to session start/end times
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Timezone specification for the time specification, be it directly or via *pytz*
+    compatible objects or via data feed session end times
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Starting offset with regards to the specified time
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Repetitions intervals
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Weekdays filter (with carry over option)
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Monthdays filter (with carry over option)
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Custom callback filter
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Usage pattern
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: Both in `Cerebro` and `Strategy` subclasses the timer callback will be received
+    in the following method.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: Adding timers - Via Strategy
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Done with the method
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: It returns the created `Timer` instance.
+  prefs: []
+  type: TYPE_NORMAL
+- en: See below for an explanation of the parameters.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Adding timers - Via Cerebro
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Done with the same method and just the addition of the parameter `strats`. If
+    set to `True` the timer will not only be notified to the *cerebro*, it will also
+    be notified to all strategies running in the system.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: It returns the created `Timer` instance.
+  prefs: []
+  type: TYPE_NORMAL
+- en: When are timers called
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: If `cheat=False`
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'This is the default. In this case a timer will be called:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: After the data feeds have loaded the new values for the current bar
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: After the broker has evaluated orders and recalculated the portfolio value
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Before indicators have been recalculated (because this is triggered by the strategies)
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Before any `next` method of any strategy is called
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: If `cheat=True`
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'In this case a timer will be called:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: After the data feeds have loaded the new values for the current bar
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Before** the broker has evaluated orders and recalculated the portfolio value'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: And consequently before indicators have been recalculated and `next` method
+    of any strategy is called
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'Which allows for example the following scenario with daily bars:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Before the new bar is evaluated by the broker the timer is called
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: The indicators have the value from the previous day at the close and can be
+    used to generate an entry/exit signal (or a flag may have been set during the
+    last evaluation of `next`)
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Because the new prices are available, the stake can be calculated using the
+    opening price. This assumes that one is for example getting a good indication
+    about the `open` from watching the opening auction.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Running with daily bars
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: The sample `scheduled.py` defaults to running with the standard daily bars available
+    in the *backtrader* distribution. The parameters to the strategy
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE3]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'And the data has the following session times:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'start: 09:00'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'end: 17:30'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Running with just a time
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE4]'
+  prefs: []
+  type: TYPE_PRE
+- en: As specified the timer is ticking at `15:30`. No surprises there. Let’s add
+    an offset of 30 minutes.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE5]'
+  prefs: []
+  type: TYPE_PRE
+- en: And the time has changed from `15:30` to `16:00` for the timer. No surprises.
+    Let’s do the same but referencing the start of the session.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE6]'
+  prefs: []
+  type: TYPE_PRE
+- en: Et voilá! The time at which the callback is called is `09:30`. And the session
+    start, see above, is `09:00`. This gives the ability to simply say that one wants
+    to execute an action *30 minutes* after the start of the session.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Let’s add a repetition:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE7]'
+  prefs: []
+  type: TYPE_PRE
+- en: '**There is no repetition**. The reason being that the resolution of the prices
+    is daily. The timer is called for the 1^(st) time at `09:30` like in the previous
+    example. But when the system get the next batch of prices, they are happening
+    on the next day. And the timer can only, obviously, be called once. A lower resolution
+    is needed.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: But before moving on to a lower resolution, let’s cheat by having the timer
+    called before the end of the session.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE8]'
+  prefs: []
+  type: TYPE_PRE
+- en: The strategy adds a 2^(nd) timer with `cheat=True`. This is added 2^(nd) and
+    will therefore received the 2^(nd) `tid` (*timer id*) which is `1` (see in the
+    above examples that the assigned `tid` was `0`)
+  prefs: []
+  type: TYPE_NORMAL
+- en: And `1` is called before `0`, because that timer is *cheating* and is being
+    called before many events in the system happen (see above for the explanation)
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Due to the *daily* resolution of the prices it doesn’t make much of a difference
+    except that:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The strategy also issues an order right before the open … and it is being matched
+    with the opening price the next day
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: This, even if cheating by acting before the open, is still the normal behavior,
+    because *cheating-on-open* has also not been activated in the broker.
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: The same but with `coo=True` for the broker
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE9]'
+  prefs: []
+  type: TYPE_PRE
+- en: And something has changed.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The order is issued on `2005-01-03` in the cheating timer
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: The order is executed on `2005-01-03` with the opening price
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Effectively like if one had acted on the opening auction price seconds before
+    the real opening of the market.
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: Running with 5-minute bars
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: The sample `scheduled-min.py` defaults to running with the standard 5-minute
+    bars available in the *backtrader* distribution. The parameters to the strategy
+    are extended to include `monthdays` and the *carry* options
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE10]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'The data has the same session times:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'start: 09:00'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'end: 17:30'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Let’s do some experiments. First a single timer.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE11]'
+  prefs: []
+  type: TYPE_PRE
+- en: The timer kicks in as requested at `15:30`. The log shows how it does that during
+    the 1^(st) two days.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Adding a `repeat` of `15 minutes` to the mix
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE12]'
+  prefs: []
+  type: TYPE_PRE
+- en: As expected the 1^(st) call is triggered at `15:30` and then starts repeating
+    every 15 minutes until the end of the session at `17:30`. When the new session
+    kicks in, the timer has been reset to `15:30` again.
+  prefs: []
+  type: TYPE_NORMAL
+- en: And now with cheating before the session start
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE13]'
+  prefs: []
+  type: TYPE_PRE
+- en: Order creation is t `09:05:00` and execution at `09:10:00` because the broker
+    is not in *cheat-on-open* mode. Let’s set it …
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE14]'
+  prefs: []
+  type: TYPE_PRE
+- en: And the issuing time and execution time are `09:05:00` with the execution price
+    being the opening price at `09:05:00`.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Additional scenarios
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: Timers allow specifying on which days they have to be executed by passing a
+    list of days (integers following the iso spec, where Mon=1 and Sun=7) as in
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`weekdays=[5]` which would ask for the timer to only be valid on Fridays'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: In case a Friday is a non-trading day and the timer should kick-in on the next
+    trading day, one can add `weekcarry=True`
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: 'Similar to it, one can decide to act on the 15^(th) day of each month with:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`monthdays=[15]`'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: In case the 15^(th) happens to be non-trading day and the timer should kick-in
+    on the next trading day, one can add `monthcarry=True`
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: 'There isn’t an implementation for things like: *the 3^(rd) Friday of March,
+    June, September and December* (futures/options expirations), but there is a possibility
+    to implement rules by passing:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`allow=callable` where the callable accepts `datetime.date` instance. Notice
+    this is not a `datetime.datetime` instance, because the *allow* callable is only
+    meant to decide if a given day is suitable for timers or not.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'To implement something like the rule laid out above:'
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '[PRE15]'
+  prefs:
+  - PREF_IND
+  type: TYPE_PRE
+- en: And one would pass `allow=FutOpeExp()` to the creation of the timer
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: This would allow a timer to kick in on the 3^(rd) Friday of those months and
+    may be close positions before the futures expire.
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: Parameters to `add_timer`
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '[PRE16]'
+  prefs: []
+  type: TYPE_PRE
+- en: '`offset` which must be a `datetime.timedelta` instance'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Used to offset the value `when`. It has a meaningful use in combination with
+    `SESSION_START` and `SESSION_END`, to indicated things like a timer being called
+    `15 minutes` after the session start.
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '`repeat` which must be a `datetime.timedelta` instance'
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Indicates if after a 1^(st) call, further calls will be scheduled within the
+    same session at the scheduled `repeat` delta
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: Once the timer goes over the end of the session it is reset to the original
+    value for `when`
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '`weekdays`: a **sorted** iterable with integers indicating on which days (iso
+    codes, Monday is 1, Sunday is 7) the timers can be actually invoked'
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: If not specified, the timer will be active on all days
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '`weekcarry` (default: `False`). If `True` and the weekday was not seen (ex:
+    trading holiday), the timer will be executed on the next day (even if in a new
+    week)'
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`monthdays`: a **sorted** iterable with integers indicating on which days of
+    the month a timer has to be executed. For example always on day *15* of the month'
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: If not specified, the timer will be active on all days
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '`monthcarry` (default: `True`). If the day was not seen (weekend, trading holiday),
+    the timer will be executed on the next available day.'
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`allow` (default: `None`). A callback which receives a datetime.date` instance
+    and returns `True` if the date is allowed for timers or else returns `False`'
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`tzdata` which can be either `None` (default), a `pytz` instance or a `data
+    feed` instance.'
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`None`: `when` is interpreted at face value (which translates to handling it
+    as if it where UTC even if it’s not)'
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '`pytz` instance: `when` will be interpreted as being specified in the local
+    time specified by the timezone instance.'
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '`data feed` instance: `when` will be interpreted as being specified in the
+    local time specified by the `tz` parameter of the data feed instance.'
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '**Note**: If `when` is either `SESSION_START` or'
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '[PRE17]'
+  prefs:
+  - PREF_IND
+  type: TYPE_PRE
+- en: '`strats` (default: `False`) call also the `notify_timer` of strategies'
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`cheat` (default `False`) if `True` the timer will be called before the broker
+    has a chance to evaluate the orders. This opens the chance to issue orders based
+    on opening price for example right before the session starts'
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`\*args`: any extra args will be passed to `notify_timer`'
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`\*\*kwargs`: any extra kwargs will be passed to `notify_timer`'
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Sample usage `scheduled.py`
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '[PRE18]'
+  prefs: []
+  type: TYPE_PRE
+- en: Sample usage `scheduled-min.py`
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '[PRE19]'
+  prefs: []
+  type: TYPE_PRE
+- en: Sample source `scheduled.py`
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '[PRE20]'
+  prefs: []
+  type: TYPE_PRE
+- en: Sample source `scheduled-min.py`
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '[PRE21]'
+  prefs: []
+  type: TYPE_PRE

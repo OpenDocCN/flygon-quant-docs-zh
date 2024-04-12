@@ -1,0 +1,294 @@
+- en: Target Orders
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.backtrader.com/blog/posts/2016-09-02-target-orders/target-orders/](https://www.backtrader.com/blog/posts/2016-09-02-target-orders/target-orders/)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: 'Until version 1.8.10.96 smart staking was possible with *backtrader* over the
+    *Strategy* methods: buy and sell. It was all about adding a Sizer to the equation
+    which is responsible for the size of the stake.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: What a *Sizer* cannot do is decide if the operation has to be a *buy* or a *sell*.
+    And that means that a new concept is needed in which a small intelligence layer
+    is added to make such decision.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Here is where the family of `order_target_xxx` methods in the *Strategy* come
+    into play. Inspired by the ones in `zipline`, the methods offer the chance to
+    simply specify the final *target*, be the target:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`size` -> amount of shares, contracts in the portfolio of a specific asset'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`value` -> value in monetary units of the asset in the portfolio'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`percent` -> percentage (from current portfolio) value of the asset in the
+    current portfolio'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Note
+  prefs: []
+  type: TYPE_NORMAL
+- en: The reference for the methods can be found in Strategy reference. The summary
+    is that the methods use the same *signature* as `buy` and `sell` except for the
+    parameter `size` which is replaced by the parameter `target`
+  prefs: []
+  type: TYPE_NORMAL
+- en: In this case it is all about specifying the final *target* and the method decides
+    if an operation will be a *buy* or a *sell*. The same logic applies to the 3 methods.
+    Let’s tart with `order_target_size`
+  prefs: []
+  type: TYPE_NORMAL
+- en: If the *target* is greater than the position a *buy* is issued, with the difference
+    `target - position_size`
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'Examples:'
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: 'Pos: `0`, *target*: `7` -> *buy(size=7 - 0)* -> *buy(size=7)*'
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'Pos: `3`, *target*: `7` -> *buy(size=7 - 3)* -> *buy(size=4)*'
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'Pos: `-3`, *target*: `7` -> *buy(size=7 - -3)* -> *buy(size=10)*'
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'Pos: `-3`, *target*: `-2` -> *buy(size=-2 - -3)* -> *buy(size=1)*'
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: If the *target* is smaller than the position a *sell* is issued with the difference
+    `position_size - target`
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'Examples:'
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: 'Pos: `0`, *target*: `-7` -> *sell(size=0 - -7)* -> *sell(size=7)*'
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'Pos: `3`, *target*: `-7` -> *sell(size=3 - -7)* -> *sell(size=10)*'
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'Pos: `-3`, *target*: `-7` -> *sell(size=-3 - -7)* -> *sell(size=4)*'
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'Pos: `3`, *target*: `2` -> *sell(size=3 - 2)* -> *sell(size=1)*'
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'When targetting a value with `order_target_value`, the current *value* of the
+    asset in the portfolio and the *position size* are both taken into account to
+    decide what the final underlying operation will be. The reasoning:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'If *position size* is negative (*short*) and the *target value* has to be greater
+    than the current value, this means: *sell* more'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'As such the logic works as follows:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: If `target > value` and `size >=0` -> *buy*
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: If `target > value` and `size < 0` -> *sell*
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: If `target < value` and `size >= 0` -> *sell*
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: If `target < value` and `size\* < 0` -> *buy*
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: The logic for `order_target_percent` is the same as that of `order_target_value`.
+    This method simply takes into account the current total value of the portfolio
+    to determine the *target value* for the asset.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The Sample
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '*backtrader* tries to have a sample for each new functionality and this is
+    no exception. No bells and whistles, just something to test the results are as
+    expected. This one is under the `order_target` directory in the samples.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'The logic in the sample is rather dumb and only meaant for testing:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: During *odd months* (Jan, Mar, …), use the *day* as target (in the case of `order_target_value`
+    multiplying the day by `1000`)
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: This mimics an increasing *target*
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: During *even months* (Feb, Apr, …) use `31 - day` as the *target*
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: This mimics an decreasing *target*
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: order_target_size
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Let’s see what happens in *Jan* and *Feb*.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: In *Jan* the *target* starts at `3` with the 1^(st) trading day of the year
+    and increases. And the *position* size moves initially from `0` to `3` and then
+    in increments of `1`.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Finishing *Jan* the last *order_target* is for `31` and that *position size*
+    is reported when entering the 1^(st) day of *Feb*, when the new *target side*
+    is requested to be `30` and goes changing along with the position in decrements
+    of ´1`.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![image](../Images/1d76b4ae8e0f69da95168a9fc63950a5.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: order_target_value
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: A similar behavior is expected from *target values*
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: There is an extra line of information telling what the actual *data value* (in
+    the portfolio) is. This helps in finding out if the *target value* has been reachec.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The initial target is `3000.0` and the reported initial value is `2853.24`.
+    The question here is whether this is *close enough*. And the answer is *Yes*
+  prefs: []
+  type: TYPE_NORMAL
+- en: The sample uses a `Market` order at the end of a daily bar and the last available
+    price to calculate a *target size* which meets the *target value*
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: The execution uses then the `open` price of the next day and this is unlikely
+    to be the previous `close`
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Doing it in any other way would mean one is *cheating* him/herfself.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'The next *target value* and *final value* are much closer: `4000` and `3938.17`.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'When changing into *Feb* the *target value* starts decreasing from `31000`
+    to `30000` and `29000\`. So does the *data value* with from ``30580.00`to`30706.56`and
+    then to`28633.44`. Wait:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`30580` -> `30706.56` is a positive change'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Indeed. In this case the calculated *size* for the *target value* met an *opening
+    price* which bumped the value to `30706.56`
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: 'How this effect can be avoided:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The sample uses a `Market` type execution for the orders and this effect cannot
+    be avoided
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: The methods `order_target_xxx` allow specifying the *execution type* and *price*.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: One could specify `Limit` as the execution order and let the price be the *close*
+    price (chosen by the method if nothing else be provided) or even provide specific
+    pricing
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '![image](../Images/68aa1b5cae67269b84206e99cdc0ac2d.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: order_target_value
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: In this case it is simply a percentage of the current portfolio value.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: And the information has been changed to see the `%` the data represents in the
+    portfolio.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![image](../Images/54c3f32e2f2ad9a5cb6fc972b4aeb5e7.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Sample Usage
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '[PRE3]'
+  prefs: []
+  type: TYPE_PRE
+- en: Sample Code
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '[PRE4]'
+  prefs: []
+  type: TYPE_PRE

@@ -1,0 +1,111 @@
+- en: The DJI 10 day streak
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.backtrader.com/blog/posts/2017-08-08-dow-10-day-streak/dow-10-day-streak/](https://www.backtrader.com/blog/posts/2017-08-08-dow-10-day-streak/dow-10-day-streak/)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: 'It has hit the news. The DJI is hitting all time highs with already 10 consecutive
+    updays and 9 all time highs. See for example:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[ZeroHedge - Dow Rises To 9^(th) Straight Record Close On Lowest Volume In
+    Years](http://www.zerohedge.com/news/2017-08-07/dow-rises-9th-straight-record-close-lowest-volume-years)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'Many had already, for sure, noticed that the Dow was on such a streak and the
+    article just tells us it’s becoming *mainstream*. But some questions arise:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*Is this normal or extraordinary*?'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '*What happens afterwards*?'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'Let’s put *backtrader* in motion to answer the questions by crafting an *Analyzer*
+    to do that: analyze the situation and answer the questions (See below for the
+    code)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our sample data contains `5923` trading sessions. Let’s see where the current
+    streak fits in.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Is this normal or extraordinary?
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: 'Executing our code shows that `10` such days in a row is something at least
+    remarkable if not extraordinary.:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'The current streak, yet to come to an end, is ranked (tied) in 4^(th) position.
+    To notice:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The upleg in % is the smallest when the streak is 10 days or longer
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Three (3) of the days with a streak of 9 updays are slightly smaller in % terms,
+    dating back to 1955, 1964 and 1965
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: This year has another long streak ranked as number 2 with 12 days
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: What happens afterwards?
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: Even if the table already shows the drawdown after the streak ended and the
+    relative drawdown (taken from the start of the streak, hence it can be > 100%),
+    the question is better answered visually.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![image](../Images/269c7d712fdbe1e4b8bc3fdf8069fd1e.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '![image](../Images/6b9e616303be1ced2cdb73e93bc6f692.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'And the charts quickly show that:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Such long streaks seem to indicate strength with no large drawdowns really to
+    be expected as the reaction
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: But wait!!!
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: 'Ranked as number 1 and also ranked as number 2 we have remarkable dates:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Indeed, because `1987` and `1929` had later really large bear legs. But not
+    immediately after the streak as shown by the statistics: the relative drawdown
+    didn’t go over 100%, hence new highs followed the end of those streaks.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The code
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE

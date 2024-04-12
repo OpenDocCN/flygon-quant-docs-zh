@@ -1,0 +1,906 @@
+- en: Platform Concepts
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.backtrader.com/docu/concepts/](https://www.backtrader.com/docu/concepts/)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: This is a collection of some of the concepts of the platform. It tries to gather
+    information bits which can be useful in using the platform.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Before Starting
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: 'All mini-code examples assume the following imports are available:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: Note
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'An alternative syntax for accessing sub-modules like *indicators* and *feeds*:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'And then:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: Data Feeds - Passing them around
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: 'The basis of the work with the platform will be done with *Strategies*. And
+    these will get passed *Data Feeds*. The platform end user does not need to care
+    about receiving them:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*Data Feeds are automagically provided member variables to the strategy in
+    the form of an array and shortcuts to the array positions*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Quick preview of a Strategy derived class declaration and running the platform:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE3]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Notice the following:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: No `*args` or `**kwargs` are being received by the strategy’s `__init__` method
+    (they may still be used)
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: A member variable `self.datas` exists which is array/list/iterable holding at
+    least one item (hopefully or else an exception will be raised)
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: So it is. *Data Feeds* get added to the platform and they will show up inside
+    the strategy in the sequential order in which they were added to the system.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Note
+  prefs: []
+  type: TYPE_NORMAL
+- en: This also applies to `Indicators`, should the end user develop his own custom
+    Indicator or when having a look at the source code for some of the existing Indicator
+    Reference
+  prefs: []
+  type: TYPE_NORMAL
+- en: Shortcuts for Data Feeds
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'The self.datas array items can be directly accessed with additional automatic
+    member variables:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`self.data` targets `self.datas[0]`'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`self.dataX` targets `self.datas[X]`'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'The example then:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE4]'
+  prefs: []
+  type: TYPE_PRE
+- en: Omitting the Data Feeds
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'The example above can be further simplified to:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE5]'
+  prefs: []
+  type: TYPE_PRE
+- en: '`self.data` has been completely removed from the invocation of `SimpleMovingAverage`.
+    If this is done, the indicator (in this case the `SimpleMovingAverage`) receives
+    the first data of the object in which is being created (the *Strategy*), which
+    is `self.data` (aka `self.data0` or `self.datas[0]`)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Almost everything is a *Data Feed*
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Not only Data Feeds are data and can be passed around. `Indicators` and results
+    of `Operations` are also data.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'In the previous example the `SimpleMovingAverage` was receiving `self.datas[0]`
+    as input to operate on. An example with operations and extra indicators:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE6]'
+  prefs: []
+  type: TYPE_PRE
+- en: Basically everything gets transformed into an object which can be used as a
+    data feed once it has been operated upon.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Parameters
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: Mostly every other `class` in the platform supports the notion of *parameters*.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Parameters along with default values are declared as a class attribute (tuple
+    of tuples or dict-like object)
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Keywords args (`**kwargs`) are scanned for matching parameters, removing them
+    from `**kwargs` if found and assigning the value to the corresponding parameter
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'And parameters can be finally used in instances of the class by accessing the
+    member variable `self.params` (shorthand: `self.p`)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'The previous quick Strategy preview already contains a parameters example,
+    but for the sake of redundancy, again, focusing only on the parameters. Using
+    *tuples*:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE7]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'And using a `dict`:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE8]'
+  prefs: []
+  type: TYPE_PRE
+- en: Lines
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: 'Again mostly every other object in the platform is a `Lines` enabled object.
+    From a end user point of view this means:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: It can hold one of more line series, being a line series an array of values
+    were the values put together in a chart they would form a line.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: A good example of a *line* (or *lineseries*) is the line formed by the closing
+    prices of a stock. This is actually a well-known chart representation of the evolution
+    of prices (known as *Line on Close*)
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Regular use of the platform is only concerned with **accessing** `lines`. The
+    previous mini-strategy example, lightly extended, comes in handy again:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE9]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Two objects with `lines` have been exposed:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`self.data` It has a `lines` attribute which contains a `close` attribute in
+    turn'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`self.movav` which is a `SimpleMovingAverage` indicator It has a `lines` attribute
+    which contains a `sma` attribute in turn'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Note
+  prefs: []
+  type: TYPE_NORMAL
+- en: It should be obvious from this, that `lines` are named. They can also be accessed
+    sequentially following the declaration order, but this should only be used in
+    `Indicator` development
+  prefs: []
+  type: TYPE_NORMAL
+- en: And both *lines*, namely `close` and `sma` can be queried for a point (*index
+    0*) to compare the values.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Shorthand access to lines do exist:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`xxx.lines` can be shortened to `xxx.l`'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`xxx.lines.name` can be shortened to `xxx.lines_name`'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Complex objects like Strategies and Indicators offer quick access to data’s
+    lines
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`self.data_name` offers a direct access to `self.data.lines.name`'
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'Which also applies to the numbered data variables: `self.data1_name` -> `self.data1.lines.name`'
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'Additionally the line names are directly accessible with:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`self.data.close` and `self.movav.sma`'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: But the notation doesn’t make as clear as the previous one if *lines* are actually
+    being accessed.
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: Not
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Setting**/**Assigning** the lines with these two later notations is not supported'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*Lines* declaration'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: If an *Indicator* is being developed, the *lines* which the indicator has must
+    be declared.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Just as with *params* this takes place as a class attribute this time *ONLY*
+    as a tuple. Dictionaries are not supported because they do not store things following
+    insertion order.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'For the Simple Moving Average it would be done like this:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE10]'
+  prefs: []
+  type: TYPE_PRE
+- en: Note
+  prefs: []
+  type: TYPE_NORMAL
+- en: The *comma* following the declaration is needed in tuples if you pass a single
+    string to the tuple or else each letter in the string would be interpreted as
+    an item to be added to the tuple. Possibly one of the few spots where Python’s
+    syntax got it wrong.
+  prefs: []
+  type: TYPE_NORMAL
+- en: As seen in the previous example this declaration creates a `sma` line in the
+    *Indicator* that can be later accessed in the Strategy’s logic (and possibly by
+    other indicators to create more complex indicators)
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'For development is sometimes useful to access the lines in a generic non-named
+    manner and this is where numbered access comes in handy:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`self.lines[0]` points to `self.lines.sma`'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Had more lines been defined they would be accessed with index 1, 2, and higher.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'And of course, extra shorthand versions do exist:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`self.line` points to `self.lines[0]`'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`self.lineX` point to `self.lines[X]`'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`self.line_X` point to `self.lines[X]`'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'Inside objects which are receiving *datas feeds* the lines below these data
+    feeds can also be quickly accessed by number:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`self.dataY` points to `self.data.lines[Y]`'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`self.dataX_Y` points to `self.dataX.lines[X]` which is a full shorthard version
+    of `self.datas[X].lines[Y]`'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Accessing `lines` in *Data Feeds*
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Inside *data feeds* the `lines` can also be accessed omitting the `lines`. This
+    makes it more natural to work with thinks like `close` prices.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'For example:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE11]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Which seems more natural than the also valid: `if self.data.lines.close[0]
+    > 30.0:`. The same doesn’t apply to `Indicators` with the reasoning being:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: An `Indicator` could have an attribute `close` which holds an intermediate calculation,
+    which is later delivered to the actual `lines` also named `close`
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: In the case of *Data Feeds*, no calculation takes place, because it is only
+    a data source.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*Lines* len'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '*Lines* have a set of points and grow dynamically during execution, therefore
+    the length can be measured at any time by invoking the standard Python `len` function.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'This applies to for example:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Data Feeds
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Strategies
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Indicators
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'An additional property applies to *Data Feeds* when the data is **preloaded**:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Method `buflen`
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: The method returns the actual number of bars the *Data Feed* has available.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The difference between `len` and `buflen`
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`len` reports how many bars have been processed'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`buflen` reports the total number of bars which have been loaded for the Data
+    Feed'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: If both return the same value, either no data has been preloaded or the processing
+    of bars has consumed all preloaded bars (and unless the system is connected to
+    a live feed, this will mean the end of processing)
+  prefs: []
+  type: TYPE_NORMAL
+- en: Inheritance of Lines and Params
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: A kind of metalanguage is in place to support declaration of *Params* and *Lines*.
+    Every effort has been made to make it compatible with standard Python inheritance
+    rules.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Params inheritance
+  prefs:
+  - PREF_H4
+  type: TYPE_NORMAL
+- en: 'Inheritance should work as expected:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Multiple inheritance is supported
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Params from base classes are inherited
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: If multiple base classes define the same param the default value of the last
+    class in the inheritance list is used
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: If the same param is redefined in a child class, the new default value takes
+    over that of the base class
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Lines Inheritance
+  prefs:
+  - PREF_H4
+  type: TYPE_NORMAL
+- en: Multiple inheritance is supported
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Lines from all base classes are inherited. Being *named* lines there will only
+    be one version of a line if the same name has been used more than once in base
+    classes
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'Indexing: 0 and -1'
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '*Lines* as seen before are line series and have a set of points that conform
+    a line when drawn together (like when joining all closing prices together along
+    a time axis)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: To access those points in regular code, the choice has been to use a **0** based
+    approach for the current *get/set* instant.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Strategies do only *get* values. Indicators do also *set* values.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'From the previous quick strategy example where the `next` method was briefly
+    seen:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE12]'
+  prefs: []
+  type: TYPE_PRE
+- en: The logic is *getting* the current value of the moving average and the current
+    closing price by applying index `0`.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Note
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Actually for index `0` and when applying logic/arithmetic operators the comparison
+    can be made directly as in:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE13]'
+  prefs: []
+  type: TYPE_PRE
+- en: See later in the document the explanation for operators.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Setting is meant to be used when developing, for example, an Indicator, because
+    the current output value has to be set by the indicator.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'A SimpleMovingAverage can be calculated for the current get/set point as follows:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE14]'
+  prefs: []
+  type: TYPE_PRE
+- en: Accessing previous set points has been modeled following the definition Python
+    makes for `-1` when accessing an array/iterable
+  prefs: []
+  type: TYPE_NORMAL
+- en: It points to the last item of the array
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: The platform consider the last set item (before the current live get/set point)
+    to be `-1`.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'As such comparing the current `close` to the *previous* `close` is a `0` vs
+    `-1` thing. In a strategy, for example:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE15]'
+  prefs: []
+  type: TYPE_PRE
+- en: Of course and logically, prices *set* before `-1` will be accessed with `-2,
+    -3, ...`.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Slicing
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '*backtrader* doesn’t support slicing for *lines* objects and this is a design
+    decision following the `[0]` and `[-1]` indexing scheme. With regular indexable
+    Python objects you would do things like:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE16]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'But remember that with the choice for `0` … it is actually the currently delivered
+    value, there is nothing after it. Also:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE17]'
+  prefs: []
+  type: TYPE_PRE
+- en: Again … `0` is the current value and `-1` is the latest (previous) delivered
+    value. That’s why a slice from `0` -> `-1` makes no sense in the *backtrader*
+    ecosystem.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'If slicing were ever to be supported, it would look like:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE18]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'or:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE19]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'or:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE20]'
+  prefs: []
+  type: TYPE_PRE
+- en: Getting a slice
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'An array with the latest values can still be gotten. The syntax:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE21]'
+  prefs: []
+  type: TYPE_PRE
+- en: That would have returned an arry with `1` value (`size=1`) with the current
+    moment `0` as the staring point to look backwards.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'To get 10 values from the current point in time (i.e.: the last 10 values):'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE22]'
+  prefs: []
+  type: TYPE_PRE
+- en: Of course the array has the ordering you would expect. The leftmost value is
+    the oldest one and the rightmost value is the most current (it is a regular python
+    array and not a *lines* object)
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'To get the last 10 values skipping only the current point:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE23]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Lines: DELAYED indexing'
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: The `[]` operator syntax is there to extract individual values during the `next`
+    logic phase. *Lines* objects support an additional notation to address values
+    through a *delayed lines object* during the `__init__` phase.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Let’s say that the interest in the logic is to compare the previous *close*
+    value to the actual value of a *simple moving average*. Rather than doing it manually
+    in each `next` iteration a pre-canned *lines* object can be generated:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE24]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Here the `(delay)` notation is being used:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: This delivers a replica of the `close` prices but delayed by `-1`.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: And the comparison `self.data.close(-1) > self.sma` generates another *lines*
+    object which returns either `1` if the condition is `True` or `0` if `False`
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: Lines Coupling
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: The operator `()` can be used as shown above with `delay` value to provide a
+    delayed version of a *lines* object.
+  prefs: []
+  type: TYPE_NORMAL
+- en: If the syntax is used *WITHOUT* providing a `delay` value, then a `LinesCoupler`
+    *lines* object is returned. This is meant to establish a coupling between indicators
+    that operate on *datas* with different timeframes.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Data Feeds with different timeframes have different *lengths*, and the indicators
+    operating on them replicate the length of the data. Example:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: A daily data feed has around 250 bars per year
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: A weekly data feed has 52 bars per year
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Trying to create an operation (for example) which compares 2 *simple moving
+    averages*, each operating on the datas quoted above would break. It would be unclear
+    how to match the 250 bars from the daily timeframe to the 52 bars of the weekly
+    timeframe.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'The reader could imagine a `date` comparison taking place in the background
+    to find out a day - week correspondence, but:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`Indicators` are just mathematical formulas and have no *datetime* information'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: They know nothing about the environment, just that if the data provides enough
+    values, a calculation can take place.
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: 'The `()` (empty call) notation comes to the rescue:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE25]'
+  prefs: []
+  type: TYPE_PRE
+- en: Here the larger timeframe indicator, `sma1` is *coupled* to the daily timeframe
+    with `sma1()`. This returns an object which is compatible with the larger numbers
+    of bars of `sma0` and copies the values produced by `sma1`, effectively spreading
+    the 52 weekly bars in 250 daily bars
+  prefs: []
+  type: TYPE_NORMAL
+- en: Operators, using natural constructs
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: In order to achieve the “ease of use” goal the platform allows (within the constraints
+    of Python) the use of operators. And to further enhance this goal , the use of
+    operators has been broken in two stages.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Stage 1 - Operators Create Objects
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: An example has already been seen even if not explicitly meant for this. During
+    the initialization phase (`__init__` method) of objects like Indicators and Strategies,
+    operators create objects that can be operated upon, assigned or kept as reference
+    for later using during the evaluation phase of the Strategy’s logic.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Once again a potential implementation of a SimpleMovingAverage, further broken
+    down into steps.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'The code inside the SimpleMovingAverage indicator `__init__` could look like:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE26]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'A more complete use case is shown during the initialization of a Strategy:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE27]'
+  prefs: []
+  type: TYPE_PRE
+- en: After the above operations have taken place, *sell_sig* is a *Lines* object
+    which can be later used in the logic of the Strategy, indicating if the conditions
+    are met or not.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Stage 2 - Operators true to nature
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'Let’s first remember that a strategy has a `next` method which is called for
+    every bar the system processes. This is where operators are actually in the stage
+    2 mode. Building on the previous example:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE28]'
+  prefs: []
+  type: TYPE_PRE
+- en: Not a very useful strategy, just an example. During Stage 2 operators return
+    the expected values (boolean if testing for truth and floats if comparing them
+    to floats) and also arithmetic operations do.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Note
+  prefs: []
+  type: TYPE_NORMAL
+- en: Notice that comparisons are actually not using the [] operator. This is meant
+    to further simplify things.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`if self.sma > 30.0:` … compares `self.sma[0]` to `30.0` (1^(st) line and current
+    value)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`if self.sma > self.data.close:` … compares `self.sma[0]` to `self.data.close[0]`'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Some non-overriden operators/functions
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Python will not allow overriding everything and thus some functions are provided
+    to cope with the cases.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Note
+  prefs: []
+  type: TYPE_NORMAL
+- en: Only meant to be used during Stage 1, to create objects which later provide
+    values.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Operators:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`and` -> `And`'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`or` -> `Or`'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'Logic Control:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`if` -> `If`'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'Functions:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`any` -> `Any`'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`all` -> `All`'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`cmp` -> `Cmp`'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`max` -> `Max`'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`min` -> `Min`'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`sum` -> `Sum`'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`Sum` actually uses `math.fsum` as the underlying operation because the platform
+    works with floating point numbers and applying a regular `sum` may have an impact
+    on precision.'
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '`reduce` -> `Reduce`'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: These utility operators/functions operate on iterables. The elements in the
+    iterables can be regular Python numeric types (ints, floats, …) and also objects
+    with *Lines*.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'An example generating a very dumb buy signal:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE29]'
+  prefs: []
+  type: TYPE_PRE
+- en: It is obvious that if the `sma1` is higher than the high, it must be higher
+    than the close. But the point is illustrating the use of `bt.And`.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Using `bt.If`:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE30]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Breakdown:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Generate a `SMA` on `data.close` of `period=15`
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: And then
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`bt.If` the value of the *sma* is larger than `close`, return `low`, else return
+    `high`'
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Remember that no actual value is being returned when `bt.If` is being invoked.
+    It returns a *Lines* object which is just like a *SimpleMovingAverage*.
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: The values will be calculated later when the system runs
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: The generated `bt.If` *Lines* object is then fed to a 2^(nd) `SMA` which will
+    sometimes use the `low` prices and sometimes the `high` prices for the calculation
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'Those **functions** take also numeric values. The same example with a modification:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE31]'
+  prefs: []
+  type: TYPE_PRE
+- en: Now the 2^(nd) moving average uses either `30.0` or the `high` prices to perform
+    the calculation, depending on the logic status of `sma` vs `close`
+  prefs: []
+  type: TYPE_NORMAL
+- en: Note
+  prefs: []
+  type: TYPE_NORMAL
+- en: The value `30` is transformed internally into a pseudo-iterable which always
+    returns `30`
+  prefs: []
+  type: TYPE_NORMAL

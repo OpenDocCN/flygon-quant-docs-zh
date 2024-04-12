@@ -1,0 +1,178 @@
+- en: Cross-Backtesting Pitfalls
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.backtrader.com/blog/posts/2019-09-04-donchian-across-platforms/donchian-across-platforms/](https://www.backtrader.com/blog/posts/2019-09-04-donchian-across-platforms/donchian-across-platforms/)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: Somethings that tends to repeat itself in the [backtrader community](https://community.backtrader.com)
+    is that a user explains the will to replicate the backtesting results attained
+    in, for example, [TradingView](https://www.tradingview.com/) , quite popular these
+    days, or some other backtesting platform.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Without really knowing the language used in *TradingView*, named `Pinescript`,
+    and having null exposure to the internal of the backtesting engine, there is still
+    a way to let users know, that coding across platform has to be taken with pinch
+    of salt.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Indicators: Not always faithful to the sources'
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: When a new indicator is being implemented for *backtrader*, either directly
+    for the distribution or as a snippet for the website, a lot of emphasis is taken
+    in respecting the original definition. The `RSI` is a good example.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Welles Wilder designed the `RSI` using the `Modified Moving Average` (aka `Smoothed
+    Moving Average`, see [Wikipedia - Modified Moving Average](https://en.wikipedia.org/wiki/Moving_average#Modified_moving_average)
+    )
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: In spite of which, a number of platforms give the users something called `RSI`
+    but using a classic `Exponential Moving Average` and not what the book says.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Given that both averages are exponential, the differences are not huge, but
+    it is **NOT** what Welles Wilder defined. It may still be useful, it may even
+    be better, but it is **NOT** the `RSI`. And the documentation (when available)
+    fails to mentions that.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: The default configuration for the `RSI` in *backtrader* is to use the `MMA`
+    to be faithful to the sources, but which moving average to use is a parameter
+    which can be changed via subclassing or during run-time instantiation to use the
+    `EMA` or even a *Simple Moving Average*.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'An example: The Donchian Channels'
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: 'The Wikipedia definition: [Wikipedia - Donchian Channel](https://en.wikipedia.org/wiki/Donchian_channel)
+    ). It is just text and it makes no mention of using channel breakouts as a trading
+    signal.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Another two definitions:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[StockCharts - School - Price Channels](https://school.stockcharts.com/doku.php?id=technical_indicators:price_channels)
+    ).'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[IncredibleCharts - Donchian Channels](https://www.incrediblecharts.com/indicators/donchian_channels.php)
+    )'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: These two references explicitly state, that the data for the calculation of
+    the channel does not include the current bar, because if it did ... breakouts
+    would not be reflected. Here is a sample chart from *StockCharts*
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![StockCharts - Donchian Channels- Breakouts](../Images/512c85750a80fc209a258ad68dc0244c.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Going now to *TradingView*. First the link
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[TradingView - Wiki - Donchian Channels](https://www.tradingview.com/wiki/Donchian_Channels_(DC))
+    )'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: And a chart from that page.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![TradingView - Donchian Channels - No'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Breakouts](../Images/1f22b391934c6b4235b98301ff2faa53.png)
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Even *Investopedia* uses a chart from *TradingView* that shows **no breakout**.
+    Here: [Investopedia - Donchian Channels - https://www.investopedia.com/terms/d/donchianchannels.asp](https://www.investopedia.com/terms/d/donchianchannels.asp)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: As some people would put it ... **Blistering Barnacles!!!!**. Because there
+    are **no** breakouts to be seen in the *TradingView* charts. This means that the
+    implementation of the indicator is using the **current** price bar for the calculation
+    of the channels.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The Donchian Channels in *backtrader*
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: There is no `DonchianChannels` implementation in the standard *backtrader* distribution,
+    but it can be quickly crafted. A parameter will be the deciding factor as to whether
+    the current bar will be used for the channel calculation or not.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: Using it with `lookback=-1` a sample chart looks like this (zoomed in)
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Backtrader - Donchian Channels -'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Breakouts](../Images/67b221ded88718787c4a004f6b1c1a95.png)
+  prefs: []
+  type: TYPE_NORMAL
+- en: One can clearly see the breakouts, whereas there are no breakouts in the `lookback=0`
+    version.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Backtrader - Donchian Channels -'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Breakouts](../Images/bb0156d82aa9eb5ad1bc84813d12ab01.png)
+  prefs: []
+  type: TYPE_NORMAL
+- en: Coding Implications
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: The programmer first goes to the commercial platform and implements a strategy
+    using *The Donchian Channels*. Because the chart does not show breakouts, a comparison
+    of the current price value has to be done against the previous channel value.
+    Something as
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'The current price, i.e.: `price0` is being compared to the high/low channel
+    values of `1` period ago (hence the `_1` suffix)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Being a cautious programmer and unaware that the implementation of the *Donchian
+    Channels* in *backtrader* defaults to having breakout, the code is ported and
+    looks like this
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Which is wrong!!! Because the breakout happens at the same moment of the comparison.
+    The correct code:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE3]'
+  prefs: []
+  type: TYPE_PRE
+- en: Although this is just a small example, it shows how backtesting results may
+    differ because an indicator has been coded with a `1` bar difference. It may not
+    seem much, but it will for sure make a difference when the wrong trade is started.
+  prefs: []
+  type: TYPE_NORMAL

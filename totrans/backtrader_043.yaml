@@ -1,0 +1,1522 @@
+- en: Strategy
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.backtrader.com/docu/strategy/](https://www.backtrader.com/docu/strategy/)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: A `Cerebro` instance is the pumping heart and controlling brain of `backtrader`.
+    A `Strategy` is the same for the platform user.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The *Strategy’s* expressed lifecycle in methods
+  prefs: []
+  type: TYPE_NORMAL
+- en: Note
+  prefs: []
+  type: TYPE_NORMAL
+- en: A strategy can be interrupted during *birth* by raising a `StrategySkipError`
+    exception from the module `backtrader.errors`
+  prefs: []
+  type: TYPE_NORMAL
+- en: This will avoid going through the strategy during a backtesting. See the section
+    `Exceptions`
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Conception: `__init__`'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: 'This is obviously invoked during instantiation: `indicators` will be created
+    here and other needed attribute. Example:'
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs:
+  - PREF_IND
+  type: TYPE_PRE
+- en: 'Birth: `start`'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: The world (`cerebro`) tells the strategy is time to start kicking. A default
+    empty method exists.
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: 'Childhood: `prenext`'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: '`indicators` declared during conception will have put constraints on how long
+    the strategy needs to mature: this is called the `minimum period`. Above `__init__`
+    created a *SimpleMovingAverage* with a `period=15`.'
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: As long as the system has seen less than `15` bars, `prenext` will be called
+    (the default implementation is a no-op)
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: 'Adulthood: `next`'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Once the system has seen `15` bars and the `SimpleMovingAverage` has a buffer
+    large enough to start producing values, the strategy is mature enough to really
+    execute.
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: There is a `nextstart` method which is called exactly *once*, to mark the switch
+    from `prenext` to `next`. The default implementation of `nextstart` is to simply
+    call `next`
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: 'Reproduction: `None`'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Ok, strategies do not really reproduce. But in a sense they do, because the
+    system will instantiate them several times if *optimizing* (with different parameters)
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: 'Death: `stop`'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: The system tells the strategy the time to come to a reset and put things in
+    order has come. A default empty method exists.
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: 'In most cases and for regular usage patterns this will look like:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'In this snippet:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: During `__init__` an attribute is assigned an indicator
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: The default empty `start` method is not overriden
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`prenext` and `nexstart` are not overriden'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: In `next` the value of the indicator is compared against the closing price to
+    do something
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: The default empty `stop` method is not overriden
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'Strategies, like a trader in the real world, will get notified when events
+    take place. Actually once per `next` cycle in the backtesting process. The strategy
+    will:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: be notified through `notify_order(order)` of any status change in an order
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: be notified through `notify_trade(trade)` of any opening/updating/closing trade
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: be notified through `notify_cashvalue(cash, value)` of the current cash and
+    portfolio in the broker
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: be notified through `notify_fund(cash, value, fundvalue, shares)` of the current
+    cash and portfolio in the broker and tradking of fundvalue and shares
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Events (implementation specific) via `notify_store(msg, *args, **kwargs)`
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: See Cerebro for an explanation on the *store* notifications. These will delivered
+    to the strategy even if they have also been delivered to a `cerebro` instance
+    (with an overriden `notify_store` method or via a *callback*)
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: And *Strategies* also like traders have the chance to operate in the market
+    during the `next` method to try to achieve profit with
+  prefs: []
+  type: TYPE_NORMAL
+- en: the `buy` method to go long or reduce/close a short position
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: the `sell` method to go short or reduce/close a long position
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: the `close` method to obviously close an existing position
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: the `cancel` method to cancel a not yet executed order
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: How to Buy/Sell/Close
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: The `Buy` and `Sell` methods generate orders. When invoked they return an `Order`
+    (or subclass) instance that can be used as a reference. This order has a unique
+    `ref` identifier that can be used for comparison
+  prefs: []
+  type: TYPE_NORMAL
+- en: Note
+  prefs: []
+  type: TYPE_NORMAL
+- en: Subclasses of `Order` for speficic broker implementations may carry additional
+    *unique identifiers* provided by the broker.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'To create the order use the following parameters:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`data` (default: `None`)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: For which data the order has to be created. If `None` then the first data in
+    the system, `self.datas[0] or self.data0` (aka `self.data`) will be used
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '`size` (default: `None`)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Size to use (positive) of units of data to use for the order.
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: If `None` the `sizer` instance retrieved via `getsizer` will be used to determine
+    the size.
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '`price` (default: `None`)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Price to use (live brokers may place restrictions on the actual format if it
+    does not comply to minimum tick size requirements)
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '`None` is valid for `Market` and `Close` orders (the market determines the
+    price)'
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: For `Limit`, `Stop` and `StopLimit` orders this value determines the trigger
+    point (in the case of `Limit` the trigger is obviously at which price the order
+    should be matched)
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '`plimit` (default: `None`)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Only applicable to `StopLimit` orders. This is the price at which to set the
+    implicit *Limit* order, once the *Stop* has been triggered (for which `price`
+    has been used)
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '`exectype` (default: `None`)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'Possible values:'
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '`Order.Market` or `None`. A market order will be executed with the next available
+    price. In backtesting it will be the opening price of the next bar'
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`Order.Limit`. An order which can only be executed at the given `price` or
+    better'
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`Order.Stop`. An order which is triggered at `price` and executed like an `Order.Market`
+    order'
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`Order.StopLimit`. An order which is triggered at `price` and executed as an
+    implicit *Limit* order with price given by `pricelimit`'
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`valid` (default: `None`)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'Possible values:'
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '`None`: this generates an order that will not expire (aka *Good til cancel*)
+    and remain in the market until matched or canceled. In reality brokers tend to
+    impose a temporal limit, but this is usually so far away in time to consider it
+    as not expiring'
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`datetime.datetime` or `datetime.date` instance: the date will be used to generate
+    an order valid until the given datetime (aka *good til date*)'
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`Order.DAY` or `0` or `timedelta()`: a day valid until the *End of the Session*
+    (aka *day* order) will be generated'
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`numeric value`: This is assumed to be a value corresponding to a datetime
+    in `matplotlib` coding (the one used by `backtrader`) and will used to generate
+    an order valid until that time (*good til date*)'
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`tradeid` (default: `0`)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: This is an internal value applied by `backtrader` to keep track of overlapping
+    trades on the same asset. This `tradeid` is sent back to the *strategy* when notifying
+    changes to the status of the orders.
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '`**kwargs`: additional broker implementations may support extra parameters.
+    `backtrader` will pass the *kwargs* down to the created order objects'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'Example: if the 4 order execution types directly supported by `backtrader`
+    are not enough, in the case of for example *Interactive Brokers* the following
+    could be passed as *kwargs*:'
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs:
+  - PREF_IND
+  type: TYPE_PRE
+- en: This would override the settings created by `backtrader` and generate a `LIMIT
+    IF TOUCHED` order with a *touched* price of 9.8 and a *limit* price of 10.0.
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: 'Information Bits:'
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: A Strategy has a *length* which is always equal to that of the main data (`datas[0]`)
+    and can of course be gotten with `len(self)`
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`next` can be called without changes in *length* if data is being replayed
+    or a live feed is being passed and new ticks for the same point in time (length)
+    are arriving'
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: 'Member Attributes:'
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '`env`: the cerebro entity in which this Strategy lives'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`datas`: array of data feeds which have been passed to cerebro'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`data/data0` is an alias for datas[0]'
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`dataX` is an alias for datas[X]'
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '*data feeds* can also be accessed by name (see the reference) if one has been
+    assigned to it'
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '`dnames`: an alternative to reach the data feeds by name (either with `[name]`
+    or with `.name` notation)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'For example if resampling a data like this:'
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '[PRE3]'
+  prefs:
+  - PREF_IND
+  type: TYPE_PRE
+- en: 'Later in the strategy one can create indicators on each like this:'
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '[PRE4]'
+  prefs:
+  - PREF_IND
+  type: TYPE_PRE
+- en: '`broker`: reference to the broker associated to this strategy (received from
+    cerebro)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`stats`: list/named tuple-like sequence holding the Observers created by cerebro
+    for this strategy'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`analyzers`: list/named tuple-like sequence holding the Analyzers created by
+    cerebro for this strategy'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`position`: actually a property which gives the current position for `data0`.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Methods to retrieve all possitions are available (see the reference)
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: 'Member Attributes (meant for statistics/observers/analyzers):'
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '`_orderspending`: list of orders which will be notified to the strategy before
+    `next` is called'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`_tradespending`: list of trades which will be notified to the strategy before
+    `next` is called'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`_orders`: list of order which have been already notified. An order can be
+    several times in the list with different statuses and different execution bits.
+    The list is menat to keep the history.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`_trades`: list of order which have been already notified. A trade can be several
+    times in the list just like an order.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Note
+  prefs: []
+  type: TYPE_NORMAL
+- en: Bear in mind that `prenext`, `nextstart` and `next` can be called several times
+    for the same point in time (ticks updating prices for the daily bar, when a daily
+    timeframe is in use)
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Reference: Strategy'
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: class backtrader.Strategy(*args, **kwargs)
+  prefs:
+  - PREF_H4
+  type: TYPE_NORMAL
+- en: Base class to be subclassed for user defined strategies.
+  prefs: []
+  type: TYPE_NORMAL
+- en: next()
+  prefs:
+  - PREF_H4
+  type: TYPE_NORMAL
+- en: This method will be called for all remaining data points when the minimum period
+    for all datas/indicators have been meet.
+  prefs: []
+  type: TYPE_NORMAL
+- en: nextstart()
+  prefs:
+  - PREF_H4
+  type: TYPE_NORMAL
+- en: This method will be called once, exactly when the minimum period for all datas/indicators
+    have been meet. The default behavior is to call next
+  prefs: []
+  type: TYPE_NORMAL
+- en: prenext()
+  prefs:
+  - PREF_H4
+  type: TYPE_NORMAL
+- en: This method will be called before the minimum period of all datas/indicators
+    have been meet for the strategy to start executing
+  prefs: []
+  type: TYPE_NORMAL
+- en: start()
+  prefs:
+  - PREF_H4
+  type: TYPE_NORMAL
+- en: Called right before the backtesting is about to be started.
+  prefs: []
+  type: TYPE_NORMAL
+- en: stop()
+  prefs:
+  - PREF_H4
+  type: TYPE_NORMAL
+- en: Called right before the backtesting is about to be stopped
+  prefs: []
+  type: TYPE_NORMAL
+- en: notify_order(order)
+  prefs:
+  - PREF_H4
+  type: TYPE_NORMAL
+- en: Receives an order whenever there has been a change in one
+  prefs: []
+  type: TYPE_NORMAL
+- en: notify_trade(trade)
+  prefs:
+  - PREF_H4
+  type: TYPE_NORMAL
+- en: Receives a trade whenever there has been a change in one
+  prefs: []
+  type: TYPE_NORMAL
+- en: notify_cashvalue(cash, value)
+  prefs:
+  - PREF_H4
+  type: TYPE_NORMAL
+- en: Receives the current fund value, value status of the strategy’s broker
+  prefs: []
+  type: TYPE_NORMAL
+- en: notify_fund(cash, value, fundvalue, shares)
+  prefs:
+  - PREF_H4
+  type: TYPE_NORMAL
+- en: Receives the current cash, value, fundvalue and fund shares
+  prefs: []
+  type: TYPE_NORMAL
+- en: notify_store(msg, *args, **kwargs)
+  prefs:
+  - PREF_H4
+  type: TYPE_NORMAL
+- en: Receives a notification from a store provider
+  prefs: []
+  type: TYPE_NORMAL
+- en: buy(data=None, size=None, price=None, plimit=None, exectype=None, valid=None,
+    tradeid=0, oco=None, trailamount=None, trailpercent=None, parent=None, transmit=True,
+    **kwargs)
+  prefs:
+  - PREF_H4
+  type: TYPE_NORMAL
+- en: Create a buy (long) order and send it to the broker
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`data` (default: `None`)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: For which data the order has to be created. If `None` then the first data in
+    the system, `self.datas[0] or self.data0` (aka `self.data`) will be used
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '`size` (default: `None`)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Size to use (positive) of units of data to use for the order.
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: If `None` the `sizer` instance retrieved via `getsizer` will be used to determine
+    the size.
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '`price` (default: `None`)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Price to use (live brokers may place restrictions on the actual format if it
+    does not comply to minimum tick size requirements)
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '`None` is valid for `Market` and `Close` orders (the market determines the
+    price)'
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: For `Limit`, `Stop` and `StopLimit` orders this value determines the trigger
+    point (in the case of `Limit` the trigger is obviously at which price the order
+    should be matched)
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '`plimit` (default: `None`)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Only applicable to `StopLimit` orders. This is the price at which to set the
+    implicit *Limit* order, once the *Stop* has been triggered (for which `price`
+    has been used)
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '`trailamount` (default: `None`)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: If the order type is StopTrail or StopTrailLimit, this is an absolute amount
+    which determines the distance to the price (below for a Sell order and above for
+    a buy order) to keep the trailing stop
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '`trailpercent` (default: `None`)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: If the order type is StopTrail or StopTrailLimit, this is a percentage amount
+    which determines the distance to the price (below for a Sell order and above for
+    a buy order) to keep the trailing stop (if `trailamount` is also specified it
+    will be used)
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '`exectype` (default: `None`)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'Possible values:'
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '`Order.Market` or `None`. A market order will be executed with the next available
+    price. In backtesting it will be the opening price of the next bar'
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`Order.Limit`. An order which can only be executed at the given `price` or
+    better'
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`Order.Stop`. An order which is triggered at `price` and executed like an `Order.Market`
+    order'
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`Order.StopLimit`. An order which is triggered at `price` and executed as an
+    implicit *Limit* order with price given by `pricelimit`'
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`Order.Close`. An order which can only be executed with the closing price of
+    the session (usually during a closing auction)'
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`Order.StopTrail`. An order which is triggered at `price` minus `trailamount`
+    (or `trailpercent`) and which is updated if the price moves away from the stop'
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`Order.StopTrailLimit`. An order which is triggered at `price` minus `trailamount`
+    (or `trailpercent`) and which is updated if the price moves away from the stop'
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`valid` (default: `None`)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'Possible values:'
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '`None`: this generates an order that will not expire (aka *Good till cancel*)
+    and remain in the market until matched or canceled. In reality brokers tend to
+    impose a temporal limit, but this is usually so far away in time to consider it
+    as not expiring'
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`datetime.datetime` or `datetime.date` instance: the date will be used to generate
+    an order valid until the given datetime (aka *good till date*)'
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`Order.DAY` or `0` or `timedelta()`: a day valid until the *End of the Session*
+    (aka *day* order) will be generated'
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`numeric value`: This is assumed to be a value corresponding to a datetime
+    in `matplotlib` coding (the one used by `backtrader`) and will used to generate
+    an order valid until that time (*good till date*)'
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`tradeid` (default: `0`)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: This is an internal value applied by `backtrader` to keep track of overlapping
+    trades on the same asset. This `tradeid` is sent back to the *strategy* when notifying
+    changes to the status of the orders.
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '`oco` (default: `None`)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Another `order` instance. This order will become part of an OCO (Order Cancel
+    Others) group. The execution of one of the orders, immediately cancels all others
+    in the same group
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '`parent` (default: `None`)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Controls the relationship of a group of orders, for example a buy which is bracketed
+    by a high-side limit sell and a low side stop sell. The high/low side orders remain
+    inactive until the parent order has been either executed (they become active)
+    or is canceled/expires (the children are also canceled) bracket orders have the
+    same size
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '`transmit` (default: `True`)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'Indicates if the order has to be **transmitted**, ie: not only placed in the
+    broker but also issued. This is meant for example to control bracket orders, in
+    which one disables the transmission for the parent and 1^(st) set of children
+    and activates it for the last children, which triggers the full placement of all
+    bracket orders.'
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '`**kwargs`: additional broker implementations may support extra parameters.
+    `backtrader` will pass the *kwargs* down to the created order objects'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'Example: if the 4 order execution types directly supported by `backtrader`
+    are not enough, in the case of for example *Interactive Brokers* the following
+    could be passed as *kwargs*:'
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '[PRE5]'
+  prefs:
+  - PREF_IND
+  type: TYPE_PRE
+- en: This would override the settings created by `backtrader` and generate a `LIMIT
+    IF TOUCHED` order with a *touched* price of 9.8 and a *limit* price of 10.0.
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '**Returns**'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: the submitted order
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: sell(data=None, size=None, price=None, plimit=None, exectype=None, valid=None,
+    tradeid=0, oco=None, trailamount=None, trailpercent=None, parent=None, transmit=True,
+    **kwargs)
+  prefs:
+  - PREF_H4
+  type: TYPE_NORMAL
+- en: To create a selll (short) order and send it to the broker
+  prefs: []
+  type: TYPE_NORMAL
+- en: See the documentation for `buy` for an explanation of the parameters
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Returns: the submitted order'
+  prefs: []
+  type: TYPE_NORMAL
+- en: close(data=None, size=None, **kwargs)
+  prefs:
+  - PREF_H4
+  type: TYPE_NORMAL
+- en: Counters a long/short position closing it
+  prefs: []
+  type: TYPE_NORMAL
+- en: See the documentation for `buy` for an explanation of the parameters
+  prefs: []
+  type: TYPE_NORMAL
+- en: Note
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`size`: automatically calculated from the existing position if not provided
+    (default: `None`) by the caller'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'Returns: the submitted order'
+  prefs: []
+  type: TYPE_NORMAL
+- en: cancel(order)
+  prefs:
+  - PREF_H4
+  type: TYPE_NORMAL
+- en: Cancels the order in the broker
+  prefs: []
+  type: TYPE_NORMAL
+- en: buy_bracket(data=None, size=None, price=None, plimit=None, exectype=2, valid=None,
+    tradeid=0, trailamount=None, trailpercent=None, oargs={}, stopprice=None, stopexec=3,
+    stopargs={}, limitprice=None, limitexec=2, limitargs={}, **kwargs)
+  prefs:
+  - PREF_H4
+  type: TYPE_NORMAL
+- en: 'Create a bracket order group (low side - buy order - high side). The default
+    behavior is as follows:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Issue a **buy** order with execution `Limit`
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Issue a *low side* bracket **sell** order with execution `Stop`
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Issue a *high side* bracket **sell** order with execution `Limit`.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: See below for the different parameters
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`data` (default: `None`)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: For which data the order has to be created. If `None` then the first data in
+    the system, `self.datas[0] or self.data0` (aka `self.data`) will be used
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '`size` (default: `None`)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Size to use (positive) of units of data to use for the order.
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: If `None` the `sizer` instance retrieved via `getsizer` will be used to determine
+    the size.
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: Note
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: The same size is applied to all 3 orders of the bracket
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '`price` (default: `None`)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Price to use (live brokers may place restrictions on the actual format if it
+    does not comply to minimum tick size requirements)
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '`None` is valid for `Market` and `Close` orders (the market determines the
+    price)'
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: For `Limit`, `Stop` and `StopLimit` orders this value determines the trigger
+    point (in the case of `Limit` the trigger is obviously at which price the order
+    should be matched)
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '`plimit` (default: `None`)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Only applicable to `StopLimit` orders. This is the price at which to set the
+    implicit *Limit* order, once the *Stop* has been triggered (for which `price`
+    has been used)
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '`trailamount` (default: `None`)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: If the order type is StopTrail or StopTrailLimit, this is an absolute amount
+    which determines the distance to the price (below for a Sell order and above for
+    a buy order) to keep the trailing stop
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '`trailpercent` (default: `None`)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: If the order type is StopTrail or StopTrailLimit, this is a percentage amount
+    which determines the distance to the price (below for a Sell order and above for
+    a buy order) to keep the trailing stop (if `trailamount` is also specified it
+    will be used)
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '`exectype` (default: `bt.Order.Limit`)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'Possible values: (see the documentation for the method `buy`'
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '`valid` (default: `None`)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'Possible values: (see the documentation for the method `buy`'
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '`tradeid` (default: `0`)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'Possible values: (see the documentation for the method `buy`'
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '`oargs` (default: `{}`)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Specific keyword arguments (in a `dict`) to pass to the main side order. Arguments
+    from the default `**kwargs` will be applied on top of this.
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '`**kwargs`: additional broker implementations may support extra parameters.
+    `backtrader` will pass the *kwargs* down to the created order objects'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'Possible values: (see the documentation for the method `buy`'
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: Note
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: This `kwargs` will be applied to the 3 orders of a bracket. See below for specific
+    keyword arguments for the low and high side orders
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '`stopprice` (default: `None`)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Specific price for the *low side* stop order
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '`stopexec` (default: `bt.Order.Stop`)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Specific execution type for the *low side* order
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '`stopargs` (default: `{}`)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Specific keyword arguments (in a `dict`) to pass to the low side order. Arguments
+    from the default `**kwargs` will be applied on top of this.
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '`limitprice` (default: `None`)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Specific price for the *high side* stop order
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '`stopexec` (default: `bt.Order.Limit`)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Specific execution type for the *high side* order
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '`limitargs` (default: `{}`)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Specific keyword arguments (in a `dict`) to pass to the high side order. Arguments
+    from the default `**kwargs` will be applied on top of this.
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: 'High/Low Side orders can be suppressed by using:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`limitexec=None` to suppress the *high side*'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`stopexec=None` to suppress the *low side*'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Returns**'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: A list containing the 3 orders [order, stop side, limit side]
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: If high/low orders have been suppressed the return value will still contain
+    3 orders, but those suppressed will have a value of `None`
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: sell_bracket(data=None, size=None, price=None, plimit=None, exectype=2, valid=None,
+    tradeid=0, trailamount=None, trailpercent=None, oargs={}, stopprice=None, stopexec=3,
+    stopargs={}, limitprice=None, limitexec=2, limitargs={}, **kwargs)
+  prefs:
+  - PREF_H4
+  type: TYPE_NORMAL
+- en: 'Create a bracket order group (low side - buy order - high side). The default
+    behavior is as follows:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Issue a **sell** order with execution `Limit`
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Issue a *high side* bracket **buy** order with execution `Stop`
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Issue a *low side* bracket **buy** order with execution `Limit`.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: See `bracket_buy` for the meaning of the parameters
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'High/Low Side orders can be suppressed by using:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`stopexec=None` to suppress the *high side*'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`limitexec=None` to suppress the *low side*'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Returns**'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: A list containing the 3 orders [order, stop side, limit side]
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: If high/low orders have been suppressed the return value will still contain
+    3 orders, but those suppressed will have a value of `None`
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: order_target_size(data=None, target=0, **kwargs)
+  prefs:
+  - PREF_H4
+  type: TYPE_NORMAL
+- en: Place an order to rebalance a position to have final size of `target`
+  prefs: []
+  type: TYPE_NORMAL
+- en: The current `position` size is taken into account as the start point to achieve
+    `target`
+  prefs: []
+  type: TYPE_NORMAL
+- en: If `target` > `pos.size` -> buy `target - pos.size`
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: If `target` < `pos.size` -> sell `pos.size - target`
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'It returns either:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The generated order
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: or
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`None` if no order has been issued (`target == position.size`)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: order_target_value(data=None, target=0.0, price=None, **kwargs)
+  prefs:
+  - PREF_H4
+  type: TYPE_NORMAL
+- en: Place an order to rebalance a position to have final value of `target`
+  prefs: []
+  type: TYPE_NORMAL
+- en: The current `value` is taken into account as the start point to achieve `target`
+  prefs: []
+  type: TYPE_NORMAL
+- en: If no `target` then close postion on data
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: If `target` > `value` then buy on data
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: If `target` < `value` then sell on data
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'It returns either:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The generated order
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: or
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`None` if no order has been issued'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: order_target_percent(data=None, target=0.0, **kwargs)
+  prefs:
+  - PREF_H4
+  type: TYPE_NORMAL
+- en: Place an order to rebalance a position to have final value of `target` percentage
+    of current portfolio `value`
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`target` is expressed in decimal: `0.05` -> `5%`'
+  prefs: []
+  type: TYPE_NORMAL
+- en: It uses `order_target_value` to execute the order.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*Example*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`target=0.05` and portfolio value is `100`'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: The `value` to be reached is `0.05 * 100 = 5`
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`5` is passed as the `target` value to `order_target_value`'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: The current `value` is taken into account as the start point to achieve `target`
+  prefs: []
+  type: TYPE_NORMAL
+- en: The `position.size` is used to determine if a position is `long` / `short`
+  prefs: []
+  type: TYPE_NORMAL
+- en: If `target` > `value`
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: buy if `pos.size >= 0` (Increase a long position)
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: sell if `pos.size < 0` (Increase a short position)
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: If `target` < `value`
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: sell if `pos.size >= 0` (Decrease a long position)
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: buy if `pos.size < 0` (Decrease a short position)
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'It returns either:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The generated order
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: or
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`None` if no order has been issued (`target == position.size`)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: getsizer()
+  prefs:
+  - PREF_H4
+  type: TYPE_NORMAL
+- en: Returns the sizer which is in used if automatic statke calculation is used
+  prefs: []
+  type: TYPE_NORMAL
+- en: Also available as `sizer`
+  prefs: []
+  type: TYPE_NORMAL
+- en: setsizer(sizer)
+  prefs:
+  - PREF_H4
+  type: TYPE_NORMAL
+- en: Replace the default (fixed stake) sizer
+  prefs: []
+  type: TYPE_NORMAL
+- en: getsizing(data=None, isbuy=True)
+  prefs:
+  - PREF_H4
+  type: TYPE_NORMAL
+- en: Return the stake calculated by the sizer instance for the current situation
+  prefs: []
+  type: TYPE_NORMAL
+- en: getposition(data=None, broker=None)
+  prefs:
+  - PREF_H4
+  type: TYPE_NORMAL
+- en: Returns the current position for a given data in a given broker.
+  prefs: []
+  type: TYPE_NORMAL
+- en: If both are None, the main data and the default broker will be used
+  prefs: []
+  type: TYPE_NORMAL
+- en: A property `position` is also available
+  prefs: []
+  type: TYPE_NORMAL
+- en: getpositionbyname(name=None, broker=None)
+  prefs:
+  - PREF_H4
+  type: TYPE_NORMAL
+- en: Returns the current position for a given name in a given broker.
+  prefs: []
+  type: TYPE_NORMAL
+- en: If both are None, the main data and the default broker will be used
+  prefs: []
+  type: TYPE_NORMAL
+- en: A property `positionbyname` is also available
+  prefs: []
+  type: TYPE_NORMAL
+- en: getpositionsbyname(broker=None)
+  prefs:
+  - PREF_H4
+  type: TYPE_NORMAL
+- en: Returns the current by name positions directly from the broker
+  prefs: []
+  type: TYPE_NORMAL
+- en: If the given `broker` is None, the default broker will be used
+  prefs: []
+  type: TYPE_NORMAL
+- en: A property `positionsbyname` is also available
+  prefs: []
+  type: TYPE_NORMAL
+- en: getdatanames()
+  prefs:
+  - PREF_H4
+  type: TYPE_NORMAL
+- en: Returns a list of the existing data names
+  prefs: []
+  type: TYPE_NORMAL
+- en: getdatabyname(name)
+  prefs:
+  - PREF_H4
+  type: TYPE_NORMAL
+- en: Returns a given data by name using the environment (cerebro)
+  prefs: []
+  type: TYPE_NORMAL
+- en: add_timer(when, offset=datetime.timedelta(0), repeat=datetime.timedelta(0),
+    weekdays=[], weekcarry=False, monthdays=[], monthcarry=True, allow=None, tzdata=None,
+    cheat=False, *args, **kwargs)
+  prefs:
+  - PREF_H4
+  type: TYPE_NORMAL
+- en: Note
+  prefs: []
+  type: TYPE_NORMAL
+- en: Can be called during `__init__` or `start`
+  prefs: []
+  type: TYPE_NORMAL
+- en: Schedules a timer to invoke either a specified callback or the `notify_timer`
+    of one or more strategies.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Parameters**'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**when** (*-*) – can be'
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '`datetime.time` instance (see below `tzdata`)'
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`bt.timer.SESSION_START` to reference a session start'
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`bt.timer.SESSION_END` to reference a session end'
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`offset` which must be a `datetime.timedelta` instance'
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Used to offset the value `when`. It has a meaningful use in combination with
+    `SESSION_START` and `SESSION_END`, to indicated things like a timer being called
+    `15 minutes` after the session start.
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '`repeat` which must be a `datetime.timedelta` instance'
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Indicates if after a 1^(st) call, further calls will be scheduled within the
+    same session at the scheduled `repeat` delta
+  prefs:
+  - PREF_IND
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: Once the timer goes over the end of the session it is reset to the original
+    value for `when`
+  prefs:
+  - PREF_IND
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '`weekdays`: a **sorted** iterable with integers indicating on which days (iso
+    codes, Monday is 1, Sunday is 7) the timers can be actually invoked'
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: If not specified, the timer will be active on all days
+  prefs:
+  - PREF_IND
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '`weekcarry` (default: `False`). If `True` and the weekday was not seen (ex:
+    trading holiday), the timer will be executed on the next day (even if in a new
+    week)'
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`monthdays`: a **sorted** iterable with integers indicating on which days of
+    the month a timer has to be executed. For example always on day *15* of the month'
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: If not specified, the timer will be active on all days
+  prefs:
+  - PREF_IND
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '`monthcarry` (default: `True`). If the day was not seen (weekend, trading holiday),
+    the timer will be executed on the next available day.'
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`allow` (default: `None`). A callback which receives a datetime.date` instance
+    and returns `True` if the date is allowed for timers or else returns `False`'
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`tzdata` which can be either `None` (default), a `pytz` instance or a `data
+    feed` instance.'
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`None`: `when` is interpreted at face value (which translates to handling it
+    as if it where UTC even if it’s not)'
+  prefs:
+  - PREF_IND
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '`pytz` instance: `when` will be interpreted as being specified in the local
+    time specified by the timezone instance.'
+  prefs:
+  - PREF_IND
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '`data feed` instance: `when` will be interpreted as being specified in the
+    local time specified by the `tz` parameter of the data feed instance.'
+  prefs:
+  - PREF_IND
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: Note
+  prefs:
+  - PREF_IND
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: If `when` is either `SESSION_START` or `SESSION_END` and `tzdata` is `None`,
+    the 1^(st) *data feed* in the system (aka `self.data0`) will be used as the reference
+    to find out the session times.
+  prefs:
+  - PREF_IND
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '`cheat` (default `False`) if `True` the timer will be called before the broker
+    has a chance to evaluate the orders. This opens the chance to issue orders based
+    on opening price for example right before the session starts'
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`*args`: any extra args will be passed to `notify_timer`'
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`**kwargs`: any extra kwargs will be passed to `notify_timer`'
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'Return Value:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The created timer
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: notify_timer(timer, when, *args, **kwargs)
+  prefs:
+  - PREF_H4
+  type: TYPE_NORMAL
+- en: Receives a timer notification where `timer` is the timer which was returned
+    by `add_timer`, and `when` is the calling time. `args` and `kwargs` are any additional
+    arguments passed to `add_timer`
+  prefs: []
+  type: TYPE_NORMAL
+- en: The actual `when` time can be later, but the system may have not be able to
+    call the timer before. This value is the timer value and no the system time.
+  prefs: []
+  type: TYPE_NORMAL

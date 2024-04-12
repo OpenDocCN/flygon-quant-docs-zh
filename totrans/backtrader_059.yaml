@@ -1,0 +1,188 @@
+- en: Futures and Spot Compensation
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.backtrader.com/docu/order-creation-execution/futurespot/future-vs-spot/](https://www.backtrader.com/docu/order-creation-execution/futurespot/future-vs-spot/)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: Release `1.9.32.116` adds support for an interesting use case presented in the
+    [Community](https://community.backtrader.com/)
+  prefs: []
+  type: TYPE_NORMAL
+- en: Start a trade with a future, which includes **physical delivery**
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Have an indicator tell you something
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: If needed be, close the position by operating on the spot price, effectively
+    canceling the physical delivery, be it for receiving the goods or for having to
+    deliver them (and hopefully making a profit)
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: The future expires on the same day the operation on the spot price takes place
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: 'That means:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The platform is fed with data points from two different assets
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: The platform has to somehow understand the assets are related and that operations
+    on the *spot* price will close positions open on the *future*
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: In reality, the future is not closed, only the physical delivery is *compensated*
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: Using that *compensation* concept, `backtrader` adds a way to let the user communicate
+    to the platform that things on one data feed will have compensating effects on
+    another. The usage pattern
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: Putting it all together
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: An example is always worth a thousand posts, so let’s put all the pieces together
+    for it.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Use one of the standard sample feeds from the `backtrader` sources. This will
+    be the future
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'Simulate a similar but distinct price, by reusing the same feed and adding
+    a filter which will randomly move the price some points above/below, to create
+    a spread. As simple as:'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs:
+  - PREF_IND
+  type: TYPE_PRE
+- en: Plotting on the same axis will mix the default included `BuyObserver` markers
+    and therefore the standard observers will be disabled and manually readded to
+    plot with different per-data markers
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Positions will be entered randomly and exited 10 days later
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: This doesn’t match future expiration periods, but this is just putting the functionality
+    in place and not checking a trading calendar
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '!!! note'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: Notice that the strategy
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`buy` operations are executed on `data0`'
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`sell` operations are executed on `data1`'
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[PRE3]'
+  prefs:
+  - PREF_IND
+  type: TYPE_PRE
+- en: 'The execution:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE4]'
+  prefs: []
+  type: TYPE_PRE
+- en: With this graphical output.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![image](../Images/a6204d4e6c557f947ffc6c19bf64c75b.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'And it works:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`buy` operations are signaled with a green triangle pointing upwards and the
+    legend tells us they belong to `data0` as expected'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`sell` operations are signaled with an arrow pointing downwards and the legend
+    tells us they belong to `data1` as expected'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Trades are being closed, even if they are being open with `data0` and being
+    closed with `data1`, achieving the desired effect (which in real life is avoiding
+    the physical delivery of the goods acquired by means of the *future*)
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'One could only imagine what would happen if the same logic is applied without
+    the *compensation* taking place. Let’s do it:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE5]'
+  prefs: []
+  type: TYPE_PRE
+- en: And the output
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![image](../Images/7c47768a70258cb8ad6b6954d6621046.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'It should be quite obvious that this fails miserably:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The logic expects positions on `data0` to be closed by the operations on `data1`
+    and to only open positions on `data0` when not in the market
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: But *compensation* has been deactivated and the intial operation on `data0`
+    (green triangle) is never closed, so no other operation can never be initiated
+    and short positions on `data1` start accumulating.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Sample Usage
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '[PRE6]'
+  prefs: []
+  type: TYPE_PRE
+- en: Sample Code
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '[PRE7]'
+  prefs: []
+  type: TYPE_PRE

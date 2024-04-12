@@ -1,0 +1,363 @@
+- en: Observers Reference
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.backtrader.com/docu/observers-reference/](https://www.backtrader.com/docu/observers-reference/)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: Benchmark
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: class backtrader.observers.Benchmark()
+  prefs:
+  - PREF_H4
+  type: TYPE_NORMAL
+- en: This observer stores the *returns* of the strategy and the *return* of a reference
+    asset which is one of the datas passed to the system.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Params:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`timeframe` (default: `None`) If `None` then the complete return over the entire
+    backtested period will be reported'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`compression` (default: `None`)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Only used for sub-day timeframes to for example work on an hourly timeframe
+    by specifying “TimeFrame.Minutes” and 60 as compression
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '`data` (default: `None`)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Reference asset to track to allow for comparison.
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '**NOTE**: this data must have been added to a `cerebro` instance with `addata`,
+    `resampledata` or `replaydata`.'
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '`_doprenext` (default: `False`)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'Benchmarking will take place from the point at which the strategy kicks in
+    (i.e.: when the minimum period of the strategy has been met).'
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: Setting this to `True` will record benchmarking values from the starting point
+    of the data feeds
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '`firstopen` (default: `False`)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Keepint it as `False` ensures that the 1^(st) comparison point between the value
+    and the benchmark starts at 0%, because the benchmark will not use its opening
+    price.
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: See the `TimeReturn` analyzer reference for a full explanation of the meaning
+    of the parameter
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '`fund` (default: `None`)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: If `None` the actual mode of the broker (fundmode - True/False) will be autodetected
+    to decide if the returns are based on the total net asset value or on the fund
+    value. See `set_fundmode` in the broker documentation
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: Set it to `True` or `False` for a specific behavior
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: Remember that at any moment of a `run` the current values can be checked by
+    looking at the *lines* by name at index `0`.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Broker
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: class backtrader.observers.Broker(*args, **kwargs)
+  prefs:
+  - PREF_H4
+  type: TYPE_NORMAL
+- en: This observer keeps track of the current cash amount and portfolio value in
+    the broker (including the cash)
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Params: None'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Broker - Cash
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: class backtrader.observers.Cash(*args, **kwargs)
+  prefs:
+  - PREF_H4
+  type: TYPE_NORMAL
+- en: This observer keeps track of the current amount of cash in the broker
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Params: None'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Broker - Value
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: class backtrader.observers.Value(*args, **kwargs)
+  prefs:
+  - PREF_H4
+  type: TYPE_NORMAL
+- en: This observer keeps track of the current portfolio value in the broker including
+    the cash
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Params:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`fund` (default: `None`)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: If `None` the actual mode of the broker (fundmode - True/False) will be autodetected
+    to decide if the returns are based on the total net asset value or on the fund
+    value. See `set_fundmode` in the broker documentation
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: Set it to `True` or `False` for a specific behavior
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: BuySell
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: class backtrader.observers.BuySell(*args, **kwargs)
+  prefs:
+  - PREF_H4
+  type: TYPE_NORMAL
+- en: This observer keeps track of the individual buy/sell orders (individual executions)
+    and will plot them on the chart along the data around the execution price level
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Params:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: DrawDown
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: class backtrader.observers.DrawDown()
+  prefs:
+  - PREF_H4
+  type: TYPE_NORMAL
+- en: This observer keeps track of the current drawdown level (plotted) and the maxdrawdown
+    (not plotted) levels
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Params:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`fund` (default: `None`)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: If `None` the actual mode of the broker (fundmode - True/False) will be autodetected
+    to decide if the returns are based on the total net asset value or on the fund
+    value. See `set_fundmode` in the broker documentation
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: Set it to `True` or `False` for a specific behavior
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: TimeReturn
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: class backtrader.observers.TimeReturn()
+  prefs:
+  - PREF_H4
+  type: TYPE_NORMAL
+- en: This observer stores the *returns* of the strategy.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Params:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`timeframe` (default: `None`) If `None` then the complete return over the entire
+    backtested period will be reported'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Pass `TimeFrame.NoTimeFrame` to consider the entire dataset with no time constraints
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '`compression` (default: `None`)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Only used for sub-day timeframes to for example work on an hourly timeframe
+    by specifying “TimeFrame.Minutes” and 60 as compression
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '`fund` (default: `None`)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: If `None` the actual mode of the broker (fundmode - True/False) will be autodetected
+    to decide if the returns are based on the total net asset value or on the fund
+    value. See `set_fundmode` in the broker documentation
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: Set it to `True` or `False` for a specific behavior
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: Remember that at any moment of a `run` the current values can be checked by
+    looking at the *lines* by name at index `0`.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Trades
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: class backtrader.observers.Trades()
+  prefs:
+  - PREF_H4
+  type: TYPE_NORMAL
+- en: This observer keeps track of full trades and plot the PnL level achieved when
+    a trade is closed.
+  prefs: []
+  type: TYPE_NORMAL
+- en: A trade is open when a position goes from 0 (or crossing over 0) to X and is
+    then closed when it goes back to 0 (or crosses over 0 in the opposite direction)
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Params:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: LogReturns
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: class backtrader.observers.LogReturns()
+  prefs:
+  - PREF_H4
+  type: TYPE_NORMAL
+- en: This observer stores the *log returns* of the strategy or a
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Params:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`timeframe` (default: `None`) If `None` then the complete return over the entire
+    backtested period will be reported'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Pass `TimeFrame.NoTimeFrame` to consider the entire dataset with no time constraints
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '`compression` (default: `None`)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Only used for sub-day timeframes to for example work on an hourly timeframe
+    by specifying “TimeFrame.Minutes” and 60 as compression
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '`fund` (default: `None`)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: If `None` the actual mode of the broker (fundmode - True/False) will be autodetected
+    to decide if the returns are based on the total net asset value or on the fund
+    value. See `set_fundmode` in the broker documentation
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: Set it to `True` or `False` for a specific behavior
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: Remember that at any moment of a `run` the current values can be checked by
+    looking at the *lines* by name at index `0`.
+  prefs: []
+  type: TYPE_NORMAL
+- en: LogReturns2
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: class backtrader.observers.LogReturns2()
+  prefs:
+  - PREF_H4
+  type: TYPE_NORMAL
+- en: Extends the observer LogReturns to show two instruments
+  prefs: []
+  type: TYPE_NORMAL
+- en: FundValue
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: class backtrader.observers.FundValue(*args, **kwargs)
+  prefs:
+  - PREF_H4
+  type: TYPE_NORMAL
+- en: This observer keeps track of the current fund-like value
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Params: None'
+  prefs: []
+  type: TYPE_NORMAL
+- en: FundShares
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: class backtrader.observers.FundShares(*args, **kwargs)
+  prefs:
+  - PREF_H4
+  type: TYPE_NORMAL
+- en: This observer keeps track of the current fund-like shares
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Params: None'
+  prefs: []
+  type: TYPE_NORMAL

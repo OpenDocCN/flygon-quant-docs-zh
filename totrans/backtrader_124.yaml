@@ -1,0 +1,301 @@
+- en: Trading Calendar
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.backtrader.com/blog/posts/2017-04-16-trading-calendar/tradingcalendar/](https://www.backtrader.com/blog/posts/2017-04-16-trading-calendar/tradingcalendar/)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: 'Release `1.9.42.116` adds support for *Trading Calendars*. This is useful when
+    resampling in for example the following scenarios:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Daily to Weekly resampling can now deliver the weekly bar together with the
+    last bar of the week.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: This is so because the trading calendar identifies the *next trading* day and
+    the *last trading day* of the week can be identified in advance
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: Sub-daily to Daily resampling when the end of the session is not the regular
+    one (which can already be specified to the data feed)
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Trading Calendar Interface
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: 'There is a base class `TradingCalendarBase` which is used as a base for any
+    trading calendar. It defines two (2) methods which have to be overridden:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: Implementations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: PandasMarketCalendar
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'This implementation is based on a neat package which is a spin-off of initial
+    functionality available from Quantopian. The packages is at: [pandas_market_calendars](https://github.com/rsheftel/pandas_market_calendars)
+    and can be easily installed:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'The implementation features the following interface:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: TradingCalendar
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'This implementation allows to construct a calendar using self-gathered information
+    by specifying the holidays, early days, non-trading weekdays and the opening and
+    closing session times:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE3]'
+  prefs: []
+  type: TYPE_PRE
+- en: Usage pattern
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: Global Trading Calendar
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'Via `Cerebro` one can add a global calendar which is the default for all data
+    feeds, unless one is specified for the data feed:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE4]'
+  prefs: []
+  type: TYPE_PRE
+- en: Per data-feed
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: By specifying a `calendar` parameter following the same conventions as described
+    above in `addcalendar`.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'For example:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE5]'
+  prefs: []
+  type: TYPE_PRE
+- en: Examples
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: Daily to Weekly
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Let’s have a look at a sample run of the code that can be found below. In 2016,
+    Easter Friday (2016-03-25) was a holiday also in the `NYSE`. If the sample is
+    run with no trading calendar, let’s see what happens around that date.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'In this case the resampling is being done from daily to weekly (using `YHOO`
+    and the daily data for 2016):'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE6]'
+  prefs: []
+  type: TYPE_PRE
+- en: In this output, the 1^(st) date is the accounting made by the strategy. The
+    2^(nd) date is that of the daily
+  prefs: []
+  type: TYPE_NORMAL
+- en: The week ends, as expected, on 2016-03-24 (Thursday), but without a trading
+    calendar the resampling code cannot know it and the resampled bar with date 2016-03-18
+    (the week before) is delivered. When the trading moves on to 2016-03-28 (Monday),
+    the resampler detects the week change and delivers a resampled bar for 2016-03-24.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The same but run with a `PandasMarketCalendar` for `NYSE` (and adding a plot)
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE7]'
+  prefs: []
+  type: TYPE_PRE
+- en: There is a change! Thanks to the calendar the resampler knows the week is over
+    on 2016-03-24 and delivers the corresponding weekly resampled bar for 2016-03-24
+    on the same day.
+  prefs: []
+  type: TYPE_NORMAL
+- en: And the plot.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![image](../Images/7a35b0c503a75e774c0ebf1a4a0e2f82.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'Since the information may not necessarily be available for each and every market,
+    one can also craft the calendar. For the `NYSE` and `2016` it looks like:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE8]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Easter Friday (2016-03-25) is listed as one of the holidays. Running the sample
+    now:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE9]'
+  prefs: []
+  type: TYPE_PRE
+- en: And the same result has been obtained with the crafted calendar definition.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Minutes to Daily
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Using some private intraday data and the knowledge that the market closed early
+    on 2016-11-25 (the day after Thanksgiving the market closed at 13:00 in `US/Eastern`
+    timezone), another test run, this time with the 2^(nd) sample.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Note
+  prefs: []
+  type: TYPE_NORMAL
+- en: The source data is taken directly from the displayed data and is in `CET` timeozone
+    even if the asset in question, `YHOO` trades in the USA. The `tzinput='CET'` and
+    `tz='US/Eastern'` is used in the code for the data feed to let the platform appropriately
+    transform the input and display the output
+  prefs: []
+  type: TYPE_NORMAL
+- en: First with no trading calendar
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE10]'
+  prefs: []
+  type: TYPE_PRE
+- en: As expected the day closes early at `13:00`, but the resampler doesn’t know
+    it (the official session ends at `16:00`) and keeps on delivering the resampled
+    daily bar from the previous day (2016-11-23) and the new resampled daily bar is
+    first delivered during the next trading day (2016-11-28) with a date of 2016-11-25.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Note
+  prefs: []
+  type: TYPE_NORMAL
+- en: The data has an extra minute bar at `13:01` which is probably due to the auction
+    process offering a last price after the market closing time.
+  prefs: []
+  type: TYPE_NORMAL
+- en: We could add a filter to the stream to filter out the bars outside of the session
+    times (the filter would find it out from the trading calendar)
+  prefs: []
+  type: TYPE_NORMAL
+- en: But that’s not the point of this sample.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'The same run with a `PandasMarketCalendar` instance:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE11]'
+  prefs: []
+  type: TYPE_PRE
+- en: And now the daily bar for 2016-11-25 is delivered when the intraday 1-minute
+    feed hits 2016-11-25 at 13:00 (let’s disregard the 13:01 bar), because the trading
+    calendar is telling the resampling code that the day is over.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Let’s add a crafted definition. The same as before but extending it with some
+    `earlydays`
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE12]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'The run:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE13]'
+  prefs: []
+  type: TYPE_PRE
+- en: The avid reader will notice that the crafted definition contains has defined
+    `13:01` (with `datetime.time(13, 1)`) as the end of session for our short day
+    of 2016-11-25\. This is only to show how the crafted `TradingCalendar` can help
+    into fitting things.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Now the daily resampled bar for 2016-11-25 is delivered together with the 1-minute
+    bar at 13:01.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Extra bonus for the strategy
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: The first `datetime`, the one belonging to the strategy, is always in a different
+    timezone which is actually `UTC`. Also with this release `1.9.42.116` this can
+    be synchronized. The following parameter has been added to `Cerebro` (use either
+    during instantiation or with `cerebro.run`
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE14]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'It is also supported with the `cerebro.addtz` method:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE15]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Repeating the last run of the intraday sample and using `0` for `tz` (synchronize
+    with the timezone of `data0`) the following is the output focusing on the same
+    dates and times as above:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE16]'
+  prefs: []
+  type: TYPE_PRE
+- en: The timestamp is now timezone aligned.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Sample usage (tcal.py)
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '[PRE17]'
+  prefs: []
+  type: TYPE_PRE
+- en: Sample usage (tcal-intra.py)
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '[PRE18]'
+  prefs: []
+  type: TYPE_PRE
+- en: Sample Code (tcal.py)
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '[PRE19]'
+  prefs: []
+  type: TYPE_PRE
+- en: Sample Code (tcal-intra.py)
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '[PRE20]'
+  prefs: []
+  type: TYPE_PRE

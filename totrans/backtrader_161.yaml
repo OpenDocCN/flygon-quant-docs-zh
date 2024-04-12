@@ -1,0 +1,307 @@
+- en: Volume Filling
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.backtrader.com/blog/posts/2016-07-14-volume-filling/volume-filling/](https://www.backtrader.com/blog/posts/2016-07-14-volume-filling/volume-filling/)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: 'Up until now the default volume filling strategy in *backtrader* has been rather
+    simple and straightforward:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Ignore volume
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Note
+  prefs: []
+  type: TYPE_NORMAL
+- en: Jul 15, 2016
+  prefs: []
+  type: TYPE_NORMAL
+- en: Corrected a bug in the implementation and updated the sample to `close` the
+    position and repeat after a break.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The last test run below (and the corresponding chart) are from the update sample
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'This is based on 2 premises:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Trade in markets liquid enough to fully absorb *buy/sell* orders in one go
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Real volume matching requires a real wolrd
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: A quick example is a `Fill or Kill` order. Even down to the *tick* resolution
+    and with enough volume for a *fill*, the *backtrader* broker cannot know how many
+    extra actors happen to be in the market to discriminate if such an order would
+    be or would not be matched to stick to the `Fill` part or if the order should
+    be `Kill`
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: 'But with release `1.5.2.93` it is possible to specify a `filler` for the *broker*
+    to take *Volume* into account when executing an order. Additionally 3 initial
+    fillers have made it into the release:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`FixedSize`: uses a fixed matching size (for example: 1000 units) each day,
+    provided the current bar has at least 1000 units'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`FixedBarPerc`: uses a percentage of the total bar volume to try to match the
+    order'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`BarPointPerc`: does a uniform distribution of the bar volume across the price
+    range high-low and uses a percentage of the volume that would correspond to a
+    single price point'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Creating a filler
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: 'A *filler* in the *backtrader* ecosystem can be any *callable* which matches
+    the following signature:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Where:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`order` is the order which is going to be executed'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: This object gives access to the `data` object which is the target of the operation,
+    creation sizes/prices, execution prices/sizes/remaining sizes and other details
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '`price` at which the order is going to be executed'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`ago` is the index to the `data` in the *order* in which to look for the volume
+    and price elements'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: In almost all cases this will be `0` (current point in time) but in a corner
+    case to cover `Close` orders this may be `-1`
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: 'To for example access the bar volume do:'
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs:
+  - PREF_IND
+  type: TYPE_PRE
+- en: 'The callable can be a function or for example an instance of a class supporting
+    the `__call__` method, like in:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: Adding a Filler to the broker
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: 'The most straightforward method is to use the `set_filler`:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE3]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'The second choice is to completely replace the `broker`, although this is probably
+    only meant for subclasses of `BrokerBack` which have rewritten portions of the
+    functionality:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE4]'
+  prefs: []
+  type: TYPE_PRE
+- en: The sample
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: The *backtrader* sources contain a sample named `volumefilling` which allows
+    to test some of the integrated `fillers` (initially all)
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'The sample uses a default data sample in the sources named: `datas/2006-volume-day-001.txt`.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'For example a run with no filler:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE5]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Output:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE6]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Much of the input has been skipped because it is rather verbose, but the summary
+    is:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Upon seeing the 1^(st) bar `20%` (*–stakeperc 20.0*) will be used to issue a
+    *buy* order
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: As seen in the output and with the default behaviour of *backtrader* the order
+    has been completely matched in a single shot. No look at the volume has been performed
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Note
+  prefs: []
+  type: TYPE_NORMAL
+- en: The broker has an insane amount of cash allocated in the sample to make sure
+    it can withstand many test situations
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Another run with the `FixedSize` volume filler and a maximum of `1000` units
+    per bar:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE7]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Ouutput:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE8]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Now:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The chosen volume remains the same at `32958`
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Execution is completed at bar `34` which seems reasonable because from bar 2
+    to 34 … 33 bars have been seen. With `\`1000` units matched per bar 33 bars are
+    obviously needed to complete the execution
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'This is not a great achievement, so let’s go for `FixedBarPerc`:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE9]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Output:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE10]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'This time:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Skipping the start, still `32958` units for the order
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: The execution uses 0.75% of the bar volume to match the request.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: It takes from bar 2 to 11 (10 bars) to complete.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'This is more interesting, but let’s see what happens now with a more dynamic
+    volume allocation with `BarPointPerc`:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE11]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Output:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE12]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'What happens is:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Same initial allocation (skipped) to the order of `32958` as size
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: It takes from 2 to 22 to fully execute (21 bars)
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: The *filler* has used a `minmov` of `1.0` (*minimum price movement of the asset*)
+    to uniformly distribute the volume amongst the high-low range
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: A `10%` of the volumed assigned to a given price point is used for order matching
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: For anyone interested in how the order is being matched partially at each bar,
+    examining the full output of a run may be worth the time.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Note
+  prefs: []
+  type: TYPE_NORMAL
+- en: Run with corrected bug in 1.5.3.93 and updated sample to `close` the operation
+    after a break
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'The cash is increased to an even insaner amount to avoid margin calls and plotting
+    is enabled:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE13]'
+  prefs: []
+  type: TYPE_PRE
+- en: Rather than looking at the output which is extremely verbose, let’s look at
+    the chart which already tells the story.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![image](../Images/f9974f0e158f1781d0f605dc56edc4d5.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'Usage of the sample:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE14]'
+  prefs: []
+  type: TYPE_PRE
+- en: The code
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[PRE15]'
+  prefs: []
+  type: TYPE_PRE

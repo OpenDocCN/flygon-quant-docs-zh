@@ -1,0 +1,532 @@
+- en: Order Management and Execution
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.backtrader.com/docu/order-creation-execution/order-creation-execution/](https://www.backtrader.com/docu/order-creation-execution/order-creation-execution/)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: Backtesting, and hence `backtrader`, would not be complete if orders could not
+    be simulated. To do so, the following is available in the platform.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'For order management 3 primitives:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`buy`'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`sell`'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`cancel`'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Note
+  prefs: []
+  type: TYPE_NORMAL
+- en: An `update` primitive is obviously something logic but common sense dictates
+    that such a method is mostly used by manual operators working with a judgmental
+    trading approach.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'For order execution logic the following execution types:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`Market`'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`Close`'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`Limit`'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`Stop`'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`StopLimit`'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Order Management
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: 'Some examples:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: Note
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'All order types can be create by creating an `Order` instance (or one of its
+    subclasses) and then passed to to the broker with:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: Note
+  prefs: []
+  type: TYPE_NORMAL
+- en: There are `buy` and `sell` primitives in the `broker` itself, but they are less
+    forgiving with regards to default parameters.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Order Execution Logic
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: The `broker` uses 2 main guidelines (assumptions?) for order execution.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The current data has already happened and cannot be used to execcute an order.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'If the logic in the strategy is something like:'
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs:
+  - PREF_IND
+  type: TYPE_PRE
+- en: The expectation CANNOT be that the order will be executed with the `close` price
+    which is being examined in the logic BECAUSE it has already happened.
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: The order CAN BE 1^(st) EXECUTED withing the bounds of the next set of Open/High/Low/Close
+    price points (and the conditions set forth herein by the order)
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: Volume does not play a role
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: It actually does in real trading if the trader goes for non-liquid assets or
+    precisely the extremes (high/low) of a price bar are hit.
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: But hitting the high/low points is a seldom occurrence (if you do … you don’t
+    need `backtrader`) and the chosen assets will have enough liquidity to absorb
+    the orders of any regular trading
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: Market
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'Execution:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Opening price of the next set of Open/High/Low/Close prices (commonly referred
+    as *bar*)
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'Rationale:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: If the logic has executed at point X in time and issued a `Market` order, the
+    next price spot that will happen is the upcoming `open` price
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Note
+  prefs: []
+  type: TYPE_NORMAL
+- en: This order executes always and disregards any `price` and `valid` parameters
+    used to create it
+  prefs: []
+  type: TYPE_NORMAL
+- en: Close
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'Execution:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Using the `close` price of the next barwhen the next bar actually CLOSES
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'Rationale:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Most **backtesting** feeds contain already **closed** bars and the order will
+    execute immediately with the `close` price of the next bar. A daily data feed
+    is the most common example.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: But the system could be fed with “tick” prices and the actual bar (time/date
+    wise) is being udpated constantly with the new ticks, without actually moving
+    to the **next** bar (because time and/or date have not changed)
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: Only when the time or date changes, the bar has actually been closed and the
+    order gets executed
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: Limit
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'Execution:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The `price` set at order creation if the `data` touches it, starting with the
+    next price bar.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: The order will be canceled if `valid` is set and the time point is reached
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: 'Price Matching:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`backtrader` tries to provide **most realistic execution price** for `Limit`
+    orders.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Using the 4 price spots (Open/High/Low/Close) it can be partially inferred if
+    the requested `price` can be improved.
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: For `Buy` Orders
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: 'Case 1:'
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: If the `open` price of the bar is below the limit price the order executes immediately
+    with the `open` price. The order has been swept during the opening phase of the
+    session
+  prefs:
+  - PREF_IND
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: 'Case 2:'
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: If the `open` price has not penetrated below the limit price but the `low` price
+    is below the limit price, then the limit price has been seen during the session
+    and the order can be executed
+  prefs:
+  - PREF_IND
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: The logic is obviously inverted for `Sell` orders.
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: Stop
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'Execution:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The trigger `price` set at order creation if the `data` touches it, starting
+    with the next price bar.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: The order will be canceled if `valid` is set and the time point is reached
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: 'Price Matching:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`backtrader` tries to provide **most realistic trigger price** for `Stop` orders.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Using the 4 price spots (Open/High/Low/Close) it can be partially inferred if
+    the requested `price` can be improved.
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: For `\`Stop`orders which`Buy`
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: 'Case 1:'
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: If the `open` price of the bar is above the stop price the order is executed
+    immediately with the `open` price.
+  prefs:
+  - PREF_IND
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: Intended to stop a loss if the price is moving upwards against an existing short
+    position
+  prefs:
+  - PREF_IND
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: 'Case 2:'
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: If the `open` price has not penetrated above the stop price but the `high` price
+    is above the stop price, then the stop price has been seen during the session
+    and the order can be executed
+  prefs:
+  - PREF_IND
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: The logic is obviously inverted for `Stop` orders which `Sell`.
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: StopLimit
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'Execution:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The trigger `price` sets the order in motion starting with the next price bar.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'Price Matching:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Trigger**: Uses the `Stop` matching logic (but only triggers and turns the
+    order into a `Limit` order)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Limit**: Uses the `Limit` price matching logic'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Some samples
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: As always pictures (with code) are worth several million long explanations.
+    Please note that the snippets concentrate on the order creation part. The full
+    code is at the bottom.
+  prefs: []
+  type: TYPE_NORMAL
+- en: A *price closes above/below a simple moving average* strategy will be used for
+    the generation of the buy/sell signals
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'The signal is seen at the bottom of the charts: the `CrossOver` using the crossover
+    indicator.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: A reference to generated “buy” orders will be kept to only allow one simultaneous
+    order at most in the system.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Execution Type: Market'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: See in the chart how how the orders are executed one bar after the signal is
+    generated with the opening price.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE3]'
+  prefs: []
+  type: TYPE_PRE
+- en: The output chart.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![image](../Images/49e4b0a5cc967a235fb702dd7aae0493.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'The command line and output:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE4]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Execution Type: Close'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Now the orders are also executed one bar after the signal but with the closing
+    price.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE5]'
+  prefs: []
+  type: TYPE_PRE
+- en: The output chart.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![image](../Images/1dbc2cab1a8ab906cdec7e3815a25176.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'The command line and output:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE6]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Execution Type: Limit'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Validity is being calculated some lines before in case it has been passed as
+    argument.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE7]'
+  prefs: []
+  type: TYPE_PRE
+- en: A limit price 1% below the signal generation price (the close at the signal
+    bar) is set. Notice how this prevents many from the orders above from being executed.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE8]'
+  prefs: []
+  type: TYPE_PRE
+- en: The output chart.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![image](../Images/a434dcfb692928920f86c0215979eda2.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Just 4 orders have been issued. Limiting the price trying to catch a small dip
+    has completly changed the output.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'The command line and output:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE9]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Execution Type: Limit with validity'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: To not wait forever on a limit order which may only execute when the price is
+    moving against the “buy” order, the order will only be valid 4 (calendar) days.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The output chart.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![image](../Images/c7b066ee145c106a14747fc867a57b45.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: More orders have been generated, but all but one “buy” order expired, further
+    limiting the amount of operations.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'The command line and output:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE10]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Execution Type: Stop'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: A stop price 1% above the signal price is set. That means that the strategy
+    only buys if the signal is generated and the price continues climbing up, which
+    could be intrepreted as a signal of strength.
+  prefs: []
+  type: TYPE_NORMAL
+- en: This completely alters the execution panorama.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE11]'
+  prefs: []
+  type: TYPE_PRE
+- en: The output chart.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![image](../Images/528f7c2458f68051aad69e4e4621f66d.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'The command line and output:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE12]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Execution Type: StopLimit'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'A stop price 1% above the signal price is set. But the limit price is set 0.5%
+    above the signal (close) price which could be interpreted as: wait for the strength
+    to show up but do not buy the peak. Wait for a dip.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Validity is capped at 20 (calendar) days
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE13]'
+  prefs: []
+  type: TYPE_PRE
+- en: The output chart.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![image](../Images/add7ad262cc016b1f0aaf6ca7080460b.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'The command line and output:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE14]'
+  prefs: []
+  type: TYPE_PRE
+- en: Test Script Execution
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'Detailed in the command line `help`:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE15]'
+  prefs: []
+  type: TYPE_PRE
+- en: The full code
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[PRE16]'
+  prefs: []
+  type: TYPE_PRE

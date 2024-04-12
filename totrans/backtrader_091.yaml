@@ -1,0 +1,690 @@
+- en: Plotting
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.backtrader.com/docu/plotting/plotting/](https://www.backtrader.com/docu/plotting/plotting/)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: Although *backtesting* is meant to be an automated process based on mathematical
+    calculations, it is often the case that one wants to actually visualize what’s
+    going on. Be it with an existing algorithm which has undergone a backtesting run
+    or looking at what really indicators (built-in or custom) deliver with the data.
+  prefs: []
+  type: TYPE_NORMAL
+- en: And because everything has a human being behind it, charting the data feeds,
+    indicators, operations, evolution of cash and portfolio value can help the humans
+    to better appreciate what’s going on, discard/modify/create ideas and whatever
+    the human looking at the chart may do with the visual information.
+  prefs: []
+  type: TYPE_NORMAL
+- en: That’s why *backtrader*, using the facilities provided by `matplotlib`, provides
+    built-in charting facilities.
+  prefs: []
+  type: TYPE_NORMAL
+- en: How to plot
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: 'Any backtesting run can be plotted with the invocation of a single method:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: Of course this is usually the last command issued like in this simple code which
+    uses one of the sample data from the *backtrader* sources.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: And this yields the following chart.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![image](../Images/4ca14fa975bdb1afea474900b29ff9c6.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: The chart includes 3 *Observers* which in this case and given the lack of any
+    trading are mostly pointless
+  prefs: []
+  type: TYPE_NORMAL
+- en: A `CashValue` observer which as the name implies keeps track of the `Cash` and
+    total portolio `Value` (including cash) during the life of the backtesting run
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: A `Trade` Observer which shows, at the end of a trade, the actual *Profit and
+    Loss*
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: A trade is defined as opening a position and taking the position back to `0`
+    (directly or crossing over from long to short or short to long)
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: A `BuySell` observer which plots (on top of the prices) where *buy* and *sell*
+    operations have taken place
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'These *3 Observers* are automatically added by `cerebro`, and are controlled
+    with the `stdstats` parameter (default: `True`). Do the following to disable them
+    if you wish:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'or later when *running* as in:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE3]'
+  prefs: []
+  type: TYPE_PRE
+- en: Plotted Elements
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: 'Although the `Observers` have already been mentioned above in the introduction,
+    they are not the only elements to get plotted. These 3 things get plotted:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*Data Feeds* added to Cerebro with `adddata`, `replaydata` and `resampledata`'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '*Indicators* declared at strategy level (or added to cerebro with `addindicator`
+    which is purely meant for experimentation purposes and has the indicator added
+    to a dummy strategy)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '*Observers* added to cerebro with `addobserver`'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: The Observers are *lines* objects which run in sync with the *strategy* and
+    have access to the entire ecosystem, to be able to track things like `Cash` and
+    `Value`
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: Plotting Options
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '*Indicators* and *Observers* have several options that control how they have
+    to be plotted on the chart. There are 3 big groups:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Options affecting the plotting behavior of the entire object
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Options affecting the plotting behavior of individual lines
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Options affecting the SYSTEM wide plotting options
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Object-wide plotting options
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'These are controlled by this data set in *Indicators* and *Observers*:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE4]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Although `plotinfo` is shown as a `dict` during class definition, the metaclass
+    machinery of *backtrader* turns that into an object which is inherited and can
+    undergo even multiple inheritance. Than means:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: If a subclass changes for example a value like `subplot=True` to `subplot=False`,
+    subclasses further down the hierarchy will have the latter as the default value
+    for `subplot`
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'There are 2 methods of giving value to these parameters. Let’s look at a `SimpleMovingAverage`
+    instantiation for the 1^(st) method:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE5]'
+  prefs: []
+  type: TYPE_PRE
+- en: As can be inferred from the example, any `**kwargs` not consumed by the `SimpleMovingAverage`
+    constructor will be parsed (if possible) as `plotinfo` values. The `SimpleMovingAverage`
+    has a single parameter defined which is `period`. And this means that `plotname`
+    will be matched against the parameter of the same name in `plotinfo`.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'The 2^(nd) method:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE6]'
+  prefs: []
+  type: TYPE_PRE
+- en: The `plotinfo` object instantiated along the *SimpleMovingAverage* can be accessed
+    and the parameters inside can also be accessed with the standard *Python* dot
+    notation. Easy and possibly clearer than the syntax abve.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The meaning of the options
+  prefs:
+  - PREF_H4
+  type: TYPE_NORMAL
+- en: '`plot`: whether the object has to be plotted'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`subplot`: whether to plot along the data or in an independent subchart. *Moving
+    Averages* are an example of plotting over the data. *Stochastic* and *RSI* are
+    examples of things plotted in a subchart on a different scale.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`plotname`: name to use on the chart instead of the *class* name. As in the
+    example above `mysma` instead of `SimpleMovingAverage`'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`plotskip` (**deprecated**): and old alias of `plot`'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`plotabove`: whether to plot above the data. Else plot below. This has only
+    effect if `subplot=True`'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`plotlinelabels`: whether to plot the names of the individudal lines along
+    the data in the legend on the chart when `subplot=False`'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'Example: The *Bollinger Bands* have 3 lines but the indicator is plotted on
+    top of the data. It seems sensible to have the legend only display a single name
+    like `BollingerBands` rather than having the name of the 3 individual lines displayed
+    (`mid`, `top`, `bot`)'
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: 'A use case for this is the `BuySell` observer for which it makes sense to display
+    the name of the 2 lines and its markers: `Buy` and `Sell` to make it clear for
+    the end user what is what.'
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '`plotlinevalues`: controls whether the legend for the lines in indicators and
+    observers has the last plotted value. Can be controlled on a per-line basis with
+    `_plotvalue` for each line'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`plotvaluetags`: controls whether a value tag with the last value is plotted
+    on the right hand side of the line. Can be controlled on a per-line basis with
+    `_plotvaluetag` for each line'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`plotymargin`: margin to add to the top and bottom of individual subcharts
+    on the graph'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'It is a percentage but 1 based. For example: 0.05 -> 5%'
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '`plothlines`: an *iterable* containing values (within the scale) at which *horizontal*
+    lines have to be plotted.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: This for example helps for the classical indicators with *overbought*, *oversold*
+    areas like the `RSI` which usually has lines plotted at `70` and `30`
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '`plotyticks`: an *iterable* containing values (within the scale) at which value
+    ticks have to specifically be placed on the scale'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: For example to force the scale to have a `50` to identify the mid point of the
+    scale. Although this seems obvious, the indicators use an auto-scaling mechanism
+    and the `50` may not be obviously be in the centre if an indicator with a `0-100`
+    scale moves between 30-95 on a regular basis.
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '`plotyhlines`: an *iterable* containing values (within the scale) at which
+    *horizontal* lines have to be plotted.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: This can take over both `plothlines` and `plotyticks`.
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: If none of the above are defined, then where to place *horizontal* lines and
+    *ticks* will be entirely controlled by this value
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: If any of the above are defined they have precedence over the values present
+    in this option
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '`plotforce`: sometimes and thus the complex process of matching data feeds
+    to indicators and bla, bla, bla … a custom indicator may fail to plot. This is
+    a last resort mechanism to try to enforce plotting.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Use it if all else fails
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '`plotmaster`: an *Indicator*/*Observer* has a master which is the *data* on
+    which is working. In some cases plotting it with a different master may be wished
+    needed.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: A use case is the `PivotPoint` indicator which is calculated on **Monthly**
+    data but is meant for **Daily** data. It only makes sense to plot it on the *daily*
+    data which is where the indicator makes sense.
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '`plotylimited`: currently only applies to data feeds. If `True` (default),
+    other lines on the data plot don’t change the scale. Example: Bollinger Bands
+    (top and bottom) may be far away from the actual absolute minimum/maximum of the
+    data feed. With `\`plotlimited=True`, those bands remain out of the chart, because
+    the data controls the scaling. If set to`False`, the bands affects the y-scale
+    and become visible on the chart'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: A use case is the `PivotPoint` indicator which is calculated on **Monthly**
+    data but is meant for **Daily** data. It only makes sense to plot it on the *daily*
+    data which is where the indicator makes sense.
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: Line specific plotting options
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '*Indicators*/*Observers* have *lines* and how this *lines* are plotted can
+    be influenced with the `plotlines` object. Most of options specified in `plotlines`
+    are meant to be directly passed over to `matplotlib` when plotting. The documentation
+    relies therefore on examples of things that have been done.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**IMPORTANT**: The options are specified on a per-line basis.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Some of the options are controlled directly by *backtrader*. These all start
+    with an underscore (`_`):'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`_plotskip` (*boolean*) which indicates that plotting of a specific line has
+    to be skipped if set to `True`'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`_plotvalue` (*boolean*) to control if the legend of this line will contain
+    the last plotted value (default is `True`)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`_plotvaluetag` (*boolean*) to control if a righ hand side tag with the last
+    value is plotted (default is `True`)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`_name` (*string*) which changes the plot name of a specific line'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`_skipnan` (*bool*, default: False): to skip `NaN` values when plotting and
+    allowing for example to draw a line between 2 distant points generated by an indicator,
+    which has all intermediate values as `NaN` (default value for new created data
+    points)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`_samecolor` (*boolean*) this forces the next line to have the same color as
+    the previous one avoiding the `matplotlib` default mechanism of cycling trough
+    a color map for each new plotted element'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`_method` (*string*) which chooses the plotting method `matplotlib` will use
+    for the element. If this is not specified, then the most basic `plot` method will
+    be chosen.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'Example from `MACDHisto`. Here the `histo` line is plotted as a `bar` which
+    is the industry de-facto standard. The following definition can be found in the
+    definition of `MACDHisto`:'
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '[PRE7]'
+  prefs:
+  - PREF_IND
+  type: TYPE_PRE
+- en: '`alpha` and `width` are options for *matplotlib*'
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '`_fill_gt` / `_fill_lt`'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'Allow filling between the given line and:'
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: Another line
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: A numeric value
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'The arguments is an iterable of 2 elements in which:'
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: The 1^(st) argument is a *string* (name of reference line) or a numeric value
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: The filling will be done in between the own values and the values of the line
+    or the numeric value
+  prefs:
+  - PREF_IND
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: 'The 2^(nd) argument is either:'
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: A string with a colour name (*matplotlib* compatible) or hex specification (see
+    *matloplit* examples)
+  prefs:
+  - PREF_IND
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: or
+  prefs:
+  - PREF_IND
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: 'An iterable where the 1^(st) element is the string/hex value for the colour
+    and the second element is a numeric value specifying the alpha transparency (default:
+    `0.20` controlled with `fillalpha` in a plotting scheme)'
+  prefs:
+  - PREF_IND
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'Examples:'
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '[PRE8]'
+  prefs:
+  - PREF_IND
+  type: TYPE_PRE
+- en: Passing options to a not yet known line
+  prefs:
+  - PREF_H4
+  type: TYPE_NORMAL
+- en: Ue the name `_X` where `X` stands for a digit in a zero-based index. This means
+    that the options are for line `X`
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'A use case from `OscillatorMixIn`:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE9]'
+  prefs: []
+  type: TYPE_PRE
+- en: As the name implies, this is a *mixin* class intended to be used in multiple
+    inheritance schemes (specifically on the right hand side). The *mixin* has no
+    knowledge of the actual name of the 1^(st) line (index is zero-based) from the
+    other indicator that will be part of the multiple inheritance mix.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'And that’s why the options are specified to be for: `_0`. After the subclassing
+    has taken place the 1^(st) line of the resulting class will have the name `osc`
+    in plot.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Some plotlines examples
+  prefs:
+  - PREF_H4
+  type: TYPE_NORMAL
+- en: 'The `BuySell` observer has the following:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE10]'
+  prefs: []
+  type: TYPE_PRE
+- en: The `buy` and `sell` lines have options which are passed directly to `matplotlib`
+    to define *marker*, *markersize*, *color* and *fillstyle*. All these options are
+    defined in *matplotlib*
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'The `Trades` observer has the following:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE11]'
+  prefs: []
+  type: TYPE_PRE
+- en: Here the names of the lines have been redefined from for example `pnlplus` to
+    `Positive` by using `_name`. The rest of the options are for *matplotlib*
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'The `DrawDown` observer:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE12]'
+  prefs: []
+  type: TYPE_PRE
+- en: This one defines two lines to let the end users access not only the value of
+    the current `drawdown` but also its maximum value (`maxdrawdown`). But the latter
+    is not plotted due to `_plotskip=True`
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'The `BollingerBands` indicator:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE13]'
+  prefs: []
+  type: TYPE_PRE
+- en: Here the `mid` line will have a *dashed* style and the `top` and `bot` lines
+    will have the same color as the `mid` line.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'The `Stochastic` (defined in `_StochasticBase` and inherited):'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE14]'
+  prefs: []
+  type: TYPE_PRE
+- en: The slower line `percD` is plotted with a *dashed* style. And the names of the
+    lines are changed to include fancy `%` signs (`%K` and `%D`) which cannot be used
+    in name definitions in *Python*
+  prefs: []
+  type: TYPE_NORMAL
+- en: Methods controlling plotting
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'When dealing with *Indicators* and *Observers* the following methods are supported
+    to further control plotting:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`_plotlabel(self)`'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Which should return a list of things to conform the labels which will be placed
+    in between parentheses after the name of the *Indicators* or *Observer*
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: 'An example from the `RSI` indicator:'
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '[PRE15]'
+  prefs:
+  - PREF_IND
+  type: TYPE_PRE
+- en: 'As can be seen this method returns:'
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: An `int` which indicates the period configured for the `RSI` and if the default
+    moving average has been changed, the specific class
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: In the background both will be converted to a string. In the case of the *class*
+    an effort will be made to just print the name of the class rather than the complete
+    `module.name` combination.
+  prefs:
+  - PREF_IND
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '`_plotinit(self)`'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'Which is called at the beginning of plotting to do whatever specific initialization
+    the indicator may need. Again, an example from `RSI`:'
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '[PRE16]'
+  prefs:
+  - PREF_IND
+  type: TYPE_PRE
+- en: Here the code assigns a value to `plotyhlines` to have horizontal lines (the
+    `hlines` part) plotted at specific `y` values.
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: The values of the parameters `upperband` and `lowerband` are used for this,
+    which cannot be known in advance, because the parameters can be changed by the
+    end user
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: System-wide plotting options
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'First the *signature* of `plot` within cerebro:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE17]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Which means:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`plotter`: an object/class containing as attributes the options controlling
+    the system wide plotting'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: If `None` is passed a default `PlotScheme` object (see below) will be instantiated
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '`numfigs`: in how many independent charts a plot has to be broken'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Sometimes a chart contains too many bars and will not be easily readable if
+    packed in a single figure. This breaks it down in as many pieces as requested
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '`iplot`: automatically plot inline if running inside a Jupyter Notebook'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`**kwargs`: the args will be used to change the values of the attributes of
+    `plotter` or the default `PlotScheme` object created if no `plotter` is passed.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: PlotScheme
+  prefs:
+  - PREF_H4
+  type: TYPE_NORMAL
+- en: 'This object contains all the options that contol system-wide plotting. The
+    options are documented in the code:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE18]'
+  prefs: []
+  type: TYPE_PRE
+- en: Colors in PlotScheme
+  prefs:
+  - PREF_H4
+  type: TYPE_NORMAL
+- en: 'The `PlotScheme` class defines a method which can be overriden in subclasses
+    which returns the next color to be used:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE19]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Where `idx` is the current index to the line being plotted on a individual
+    subchart. The `MACD` for example plots 3 lines and hence the `idx` variable will
+    only have the following values: `0`, `1` and `2`. The next chart (maybe another
+    indicator) will star the count again at `0`.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'The default color scheme used in *backtrader* uses (as seen above) is the `Tableau
+    10 Color Palette` with the index modified to be:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE20]'
+  prefs: []
+  type: TYPE_PRE
+- en: By overriding the `color` method or passing a `lcolors` variable to `plot` (or
+    in a subclass of `PlotScheme`) the colouring can be completely changed.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The source code contains also the defintions for the `Tableau 10 Light` and
+    the `Tableau 20` color palettes.
+  prefs: []
+  type: TYPE_NORMAL

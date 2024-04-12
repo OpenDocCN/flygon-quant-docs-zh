@@ -1,0 +1,3420 @@
+- en: Quickstart
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.backtrader.com/docu/quickstart/quickstart/](https://www.backtrader.com/docu/quickstart/quickstart/)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: Note
+  prefs: []
+  type: TYPE_NORMAL
+- en: The data files used in the quickstart guide are updated from time to time, which
+    means that the `adjusted close` changes and with it the `close` (and the other
+    components). That means that the actual output may be different to what was put
+    in the documentation at the time of writing.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Using the platform
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: Let’s run through a series of examples (from almost an empty one to a fully
+    fledged strategy) but not without before roughly explaining 2 basic concepts when
+    working with **backtrader**
+  prefs: []
+  type: TYPE_NORMAL
+- en: Lines
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Data Feeds, Indicators and Strategies have *lines*.
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: 'A line is a succession of points that when joined together form this line.
+    When talking about the markets, a Data Feed has usually the following set of points
+    per day:'
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: Open, High, Low, Close, Volume, OpenInterest
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: The series of “Open”s along time is a Line. And therefore a Data Feed has usually
+    6 lines.
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: If we also consider “DateTime” (which is the actual reference for a single point),
+    we could count 7 lines.
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: Index 0 Approach
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: 'When accessing the values in a line, the current value is accessed with index:
+    *0*'
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: And the “last” output value is accessed with *-1*. This in line with Python
+    conventions for iterables (and a line can be iterated and is therefore an iterable)
+    where index *-1* is used to access the “last” item of the iterable/array.
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: In our case is the last **output** value what’s getting accessed.
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: As such and being index *0* right after *-1*, it is used to access the current
+    moment in line.
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: 'With that in mind and if we imagine a Strategy featuring a Simple Moving average
+    created during initialization:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'The easiest and simplest way to access the current value of this moving average:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: There is no need to know how many bars/minutes/days/months have been processed,
+    because “0” uniquely identifies the current instant.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Following pythonic tradition, the “last” output value is accessed using *-1*:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: Of course earlier output values can be accessed with -2, -3, …
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'From 0 to 100: the samples'
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: Basic Setup
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Let’s get running.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE3]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'After the execution the output is:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE4]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'In this example:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: backtrader was imported
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: The Cerebro engine was instantiated
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: The resulting *cerebro* instance was told to *run* (loop over data)
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: And the resulting outcome was printed out
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'Although it doesn’t seem much, let’s point out something explicitly shown:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The Cerebro engine has created a *broker* instance in the background
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: The instance already has some cash to start with
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: This behind the scenes broker instantiation is a constant trait in the platform
+    to simplify the life of the user. If no broker is set by the user, a default one
+    is put in place.
+  prefs: []
+  type: TYPE_NORMAL
+- en: And 10K monetary units is a usual value with some brokers to begin with.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Setting the Cash
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: In the world of finance, for sure only “losers” start with 10k. Let’s change
+    the cash and run the example again.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE5]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'After the execution the output is:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE6]'
+  prefs: []
+  type: TYPE_PRE
+- en: Mission accomplished. Let’s move to tempestuous waters.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Adding a Data Feed
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Having cash is fun, but the purpose behind all this is to let an automated strategy
+    multiply the cash without moving a finger by operating on an asset which we see
+    as a *Data Feed*
+  prefs: []
+  type: TYPE_NORMAL
+- en: Ergo … No *Data Feed* -> **No Fun**. Let’s add one to the ever growing example.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE7]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'After the execution the output is:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE8]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'The amount of boilerplate has grown slightly, because we added:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Finding out where our example script is to be able to locate the sample *Data
+    Feed* file
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Having *datetime* objects to filter on which data from the *Data Feed* we will
+    be operating
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Aside from that, the *Data Feed* is created and added to **cerebro**.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The output has not changed and it would be a miracle if it had.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Note
+  prefs: []
+  type: TYPE_NORMAL
+- en: Yahoo Online sends the CSV data in date descending order, which is not the standard
+    convention. The *reversed=True* prameter takes into account that the CSV data
+    in the file has already been **reversed** and has the standard expected date ascending
+    order.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our First Strategy
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: The cash is in the *broker* and the *Data Feed* is there. It seems like risky
+    business is just around the corner.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Let’s put a Strategy into the equation and print the “Close” price of each day
+    (bar).
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**DataSeries** (the underlying class in *Data Feeds*) objects have aliases
+    to access the well known OHLC (Open High Low Close) daily values. This should
+    ease up the creation of our printing logic.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE9]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'After the execution the output is:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE10]'
+  prefs: []
+  type: TYPE_PRE
+- en: Someone said the stockmarket was risky business, but it doesn’t seem so.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Let’s explain some of the magic:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Upon **init** being called the strategy already has a list of datas that are
+    present in the platform
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: This is a standard Python *list* and datas can be accessed in the order they
+    were inserted.
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: The first data in the list self.datas[0] is the default data for trading operations
+    and to keep all strategy elements synchronized (*it’s the system clock*)
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: self.dataclose = self.datas[0].close keeps a reference to the *close line*.
+    Only one level of indirection is later needed to access the close values.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: The strategy next method will be called on each bar of the system clock (self.datas[0]).
+    This is true until other things come into play like *indicators*, which need some
+    bars to start producing an output. More on that later.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Adding some Logic to the Strategy
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Let’s try some crazy idea we had by looking at some charts
+  prefs: []
+  type: TYPE_NORMAL
+- en: If the price has been falling 3 sessions in a row … BUY BUY BUY!!!
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[PRE11]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'After the execution the output is:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE12]'
+  prefs: []
+  type: TYPE_PRE
+- en: Several “BUY” creation orders were issued, our porftolio value was decremented.
+    A couple of important things are clearly missing.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The order was created but it is unknown if it was executed, when and at what
+    price.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: The next example will build upon that by listening to notifications of order
+    status.
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: 'The curious reader may ask how many shares are being bought, what asset is
+    being bought and how are orders being executed. Where possible (and in this case
+    it is) the platform fills in the gaps:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: self.datas[0] (the main data aka system clock) is the target asset if no other
+    one is specified
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: The stake is provided behind the scenes by a *position sizer* which uses a fixed
+    stake, being the default “1”. It will be modified in a later example
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: The order is executed “At Market”. The broker (shown in previous examples) executes
+    this using the opening price of the next bar, because that’s the 1^(st) tick after
+    the current under examination bar.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: The order is executed so far without any commission (more on that later)
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Do not only buy … but SELL
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: After knowing how to enter the market (long), an “exit concept” is needed and
+    also understanding whether the strategy is in the market.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Luckily a Strategy object offers access to a *position* attribute for the default
+    *data feed*
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Methods *buy* and *sell* return the **created** (not yet executed) order
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Changes in orders’ status will be notified to the strategy via a *notify* method
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'The *“exit concept”* will be an easy one:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Exit after 5 bars (on the 6^(th) bar) have elapsed for good or for worse
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'Please notice that there is no “time” or “timeframe” implied: number of bars.
+    The bars can represent 1 minute, 1 hour, 1 day, 1 week or any other time period.'
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: Although we know the data source is a daily one, the strategy makes no assumption
+    about that.
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: 'Additionally and to simplify:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Do only allow a Buy order if not yet in the market
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Note
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'The *next* method gets no “bar index” passed and therefore it seems obscure
+    how to understand when 5 bars may have elapsed, but this has been modeled in pythonic
+    way: call *len* on an object and it will tell you the length of its *lines*. Just
+    write down (save in a variable) at which length in an operation took place and
+    see if the current length is 5 bars away.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE13]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'After the execution the output is:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE14]'
+  prefs: []
+  type: TYPE_PRE
+- en: Blistering Barnacles!!! The system made money … something must be wrong
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'The broker says: Show me the money!'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: And the money is called “commission”.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Let’s add a reasonable *0.1%* commision rate per operation (both for buying
+    and selling … yes the broker is avid …)
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'A single line will suffice for it:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE15]'
+  prefs: []
+  type: TYPE_PRE
+- en: Being experienced with the platform we want to see the profit or loss after
+    a buy/sell cycle, with and without commission.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE16]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'After the execution the output is:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE17]'
+  prefs: []
+  type: TYPE_PRE
+- en: God Save the Queen!!! The system still made money.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Before moving on, let’s notice something by filtering the “OPERATION PROFIT”
+    lines:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE18]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Adding up the “NET” profits the final figure is:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE19]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'But the system said the following at the end:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE20]'
+  prefs: []
+  type: TYPE_PRE
+- en: And obviously *15.83* is not *16.98*. There is no error whatsoever. The “NET”
+    profit of *15.83* is already cash in the bag.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Unfortunately (or fortunately to better understand the platform) there is an
+    open position on the last day of the *Data Feed*. Even if a SELL operation has
+    been sent … IT HAS NOT YET BEEN EXECUTED.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'The “Final Portfolio Value” calculated by the broker takes into account the
+    “Close” price on 2000-12-29\. The actual execution price would have been set on
+    the next trading day which happened to be 2001-01-02\. Extending the *Data Feed*”
+    to take into account this day the output is:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE21]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Now adding the previous NET profit to the completed operation’s net profit:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE22]'
+  prefs: []
+  type: TYPE_PRE
+- en: Which (discarding rounding errors in the “print” statements) is the extra Portfolio
+    above the initial 100000 monetary units the strategy started with.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Customizing the Strategy: Parameters'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: It would a bit unpractical to hardcode some of the values in the strategy and
+    have no chance to change them easily. *Parameters* come in handy to help.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Definition of parameters is easy and looks like:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE23]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Being this a standard Python tuple with some tuples inside it, the following
+    may look more appealling to some:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE24]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'With either formatting parametrization of the strategy is allowed when adding
+    the strategy to the Cerebro engine:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE25]'
+  prefs: []
+  type: TYPE_PRE
+- en: Note
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'The `setsizing` method below is deprecated. This content is kept here for anyone
+    looking at old samples of the sources. The sources have been update to use:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE26]'
+  prefs: []
+  type: TYPE_PRE
+- en: '[PRE27]'
+  prefs: []
+  type: TYPE_PRE
+- en: '`# Set the sizer stake from the params'
+  prefs: []
+  type: TYPE_NORMAL
+- en: self.sizer.setsizing(self.params.stake)`
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE28]'
+  prefs: []
+  type: TYPE_PRE
+- en: '`# Already in the market ... we might sell'
+  prefs: []
+  type: TYPE_NORMAL
+- en: if len(self) >= (self.bar_executed + self.params.exitbars):`
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE29]'
+  prefs: []
+  type: TYPE_PRE
+- en: '`from __future__ import (absolute_import, division, print_function,'
+  prefs: []
+  type: TYPE_NORMAL
+- en: unicode_literals)
+  prefs:
+  - PREF_IND
+  - PREF_IND
+  - PREF_IND
+  - PREF_IND
+  - PREF_IND
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: 'import datetime  # For datetime objects'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'import os.path  # To manage paths'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'import sys  # To find out the script name (in argv[0])'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Import the backtrader platform
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: import backtrader as bt
+  prefs: []
+  type: TYPE_NORMAL
+- en: Create a Stratey
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 'class TestStrategy(bt.Strategy):'
+  prefs: []
+  type: TYPE_NORMAL
+- en: params = (
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: ('exitbars', 5),
+  prefs:
+  - PREF_IND
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: )
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: 'def log(self, txt, dt=None):'
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: ''''''' Logging function fot this strategy'''''''
+  prefs: []
+  type: TYPE_NORMAL
+- en: dt = dt or self.datas[0].datetime.date(0)
+  prefs:
+  - PREF_IND
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: print('%s, %s' % (dt.isoformat(), txt))
+  prefs:
+  - PREF_IND
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: 'def __init__(self):'
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: Keep a reference to the "close" line in the data[0] dataseries
+  prefs:
+  - PREF_IND
+  - PREF_IND
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: self.dataclose = self.datas[0].close
+  prefs:
+  - PREF_IND
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: To keep track of pending orders and buy price/commission
+  prefs:
+  - PREF_IND
+  - PREF_IND
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: self.order = None
+  prefs:
+  - PREF_IND
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: self.buyprice = None
+  prefs:
+  - PREF_IND
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: self.buycomm = None
+  prefs:
+  - PREF_IND
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: 'def notify_order(self, order):'
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: 'if order.status in [order.Submitted, order.Accepted]:'
+  prefs:
+  - PREF_IND
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: Buy/Sell order submitted/accepted to/by broker - Nothing to do
+  prefs:
+  - PREF_IND
+  - PREF_IND
+  - PREF_IND
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: return
+  prefs:
+  - PREF_IND
+  - PREF_IND
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: Check if an order has been completed
+  prefs:
+  - PREF_IND
+  - PREF_IND
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 'Attention: broker could reject order if not enough cash'
+  prefs:
+  - PREF_IND
+  - PREF_IND
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 'if order.status in [order.Completed]:'
+  prefs:
+  - PREF_IND
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: 'if order.isbuy():'
+  prefs:
+  - PREF_IND
+  - PREF_IND
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: self.log(
+  prefs:
+  - PREF_IND
+  - PREF_IND
+  - PREF_IND
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '''BUY EXECUTED, Price: %.2f, Cost: %.2f, Comm %.2f'' %'
+  prefs:
+  - PREF_IND
+  - PREF_IND
+  - PREF_IND
+  - PREF_IND
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: (order.executed.price,
+  prefs:
+  - PREF_IND
+  - PREF_IND
+  - PREF_IND
+  - PREF_IND
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: order.executed.value,
+  prefs:
+  - PREF_IND
+  - PREF_IND
+  - PREF_IND
+  - PREF_IND
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: order.executed.comm))
+  prefs:
+  - PREF_IND
+  - PREF_IND
+  - PREF_IND
+  - PREF_IND
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: self.buyprice = order.executed.price
+  prefs:
+  - PREF_IND
+  - PREF_IND
+  - PREF_IND
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: self.buycomm = order.executed.comm
+  prefs:
+  - PREF_IND
+  - PREF_IND
+  - PREF_IND
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: 'else:  # Sell'
+  prefs:
+  - PREF_IND
+  - PREF_IND
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: 'self.log(''SELL EXECUTED, Price: %.2f, Cost: %.2f, Comm %.2f'' %'
+  prefs:
+  - PREF_IND
+  - PREF_IND
+  - PREF_IND
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: (order.executed.price,
+  prefs:
+  - PREF_IND
+  - PREF_IND
+  - PREF_IND
+  - PREF_IND
+  - PREF_IND
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: order.executed.value,
+  prefs:
+  - PREF_IND
+  - PREF_IND
+  - PREF_IND
+  - PREF_IND
+  - PREF_IND
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: order.executed.comm))
+  prefs:
+  - PREF_IND
+  - PREF_IND
+  - PREF_IND
+  - PREF_IND
+  - PREF_IND
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: self.bar_executed = len(self)
+  prefs:
+  - PREF_IND
+  - PREF_IND
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: 'elif order.status in [order.Canceled, order.Margin, order.Rejected]:'
+  prefs:
+  - PREF_IND
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: self.log('Order Canceled/Margin/Rejected')
+  prefs:
+  - PREF_IND
+  - PREF_IND
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: self.order = None
+  prefs:
+  - PREF_IND
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: 'def notify_trade(self, trade):'
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: 'if not trade.isclosed:'
+  prefs:
+  - PREF_IND
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: return
+  prefs:
+  - PREF_IND
+  - PREF_IND
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: self.log('OPERATION PROFIT, GROSS %.2f, NET %.2f' %
+  prefs:
+  - PREF_IND
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: (trade.pnl, trade.pnlcomm))
+  prefs:
+  - PREF_IND
+  - PREF_IND
+  - PREF_IND
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: 'def next(self):'
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: Simply log the closing price of the series from the reference
+  prefs:
+  - PREF_IND
+  - PREF_IND
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: self.log('Close, %.2f' % self.dataclose[0])
+  prefs:
+  - PREF_IND
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: Check if an order is pending ... if yes, we cannot send a 2nd one
+  prefs:
+  - PREF_IND
+  - PREF_IND
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 'if self.order:'
+  prefs:
+  - PREF_IND
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: return
+  prefs:
+  - PREF_IND
+  - PREF_IND
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: Check if we are in the market
+  prefs:
+  - PREF_IND
+  - PREF_IND
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 'if not self.position:'
+  prefs:
+  - PREF_IND
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: Not yet ... we MIGHT BUY if ...
+  prefs:
+  - PREF_IND
+  - PREF_IND
+  - PREF_IND
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 'if self.dataclose[0] < self.dataclose[-1]:'
+  prefs:
+  - PREF_IND
+  - PREF_IND
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: current close less than previous close
+  prefs:
+  - PREF_IND
+  - PREF_IND
+  - PREF_IND
+  - PREF_IND
+  - PREF_IND
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 'if self.dataclose[-1] < self.dataclose[-2]:'
+  prefs:
+  - PREF_IND
+  - PREF_IND
+  - PREF_IND
+  - PREF_IND
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: previous close less than the previous close
+  prefs:
+  - PREF_IND
+  - PREF_IND
+  - PREF_IND
+  - PREF_IND
+  - PREF_IND
+  - PREF_IND
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: BUY, BUY, BUY!!! (with default parameters)
+  prefs:
+  - PREF_IND
+  - PREF_IND
+  - PREF_IND
+  - PREF_IND
+  - PREF_IND
+  - PREF_IND
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: self.log('BUY CREATE, %.2f' % self.dataclose[0])
+  prefs:
+  - PREF_IND
+  - PREF_IND
+  - PREF_IND
+  - PREF_IND
+  - PREF_IND
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: Keep track of the created order to avoid a 2nd order
+  prefs:
+  - PREF_IND
+  - PREF_IND
+  - PREF_IND
+  - PREF_IND
+  - PREF_IND
+  - PREF_IND
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: self.order = self.buy()
+  prefs:
+  - PREF_IND
+  - PREF_IND
+  - PREF_IND
+  - PREF_IND
+  - PREF_IND
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: 'else:'
+  prefs:
+  - PREF_IND
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: Already in the market ... we might sell
+  prefs:
+  - PREF_IND
+  - PREF_IND
+  - PREF_IND
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 'if len(self) >= (self.bar_executed + self.params.exitbars):'
+  prefs:
+  - PREF_IND
+  - PREF_IND
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: SELL, SELL, SELL!!! (with all possible default parameters)
+  prefs:
+  - PREF_IND
+  - PREF_IND
+  - PREF_IND
+  - PREF_IND
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: self.log('SELL CREATE, %.2f' % self.dataclose[0])
+  prefs:
+  - PREF_IND
+  - PREF_IND
+  - PREF_IND
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: Keep track of the created order to avoid a 2nd order
+  prefs:
+  - PREF_IND
+  - PREF_IND
+  - PREF_IND
+  - PREF_IND
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: self.order = self.sell()
+  prefs:
+  - PREF_IND
+  - PREF_IND
+  - PREF_IND
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: 'if __name__ == ''__main__'':'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Create a cerebro entity
+  prefs:
+  - PREF_IND
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: cerebro = bt.Cerebro()
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: Add a strategy
+  prefs:
+  - PREF_IND
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: cerebro.addstrategy(TestStrategy)
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: Datas are in a subfolder of the samples. Need to find where the script is
+  prefs:
+  - PREF_IND
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: because it could have been called from anywhere
+  prefs:
+  - PREF_IND
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: modpath = os.path.dirname(os.path.abspath(sys.argv[0]))
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: datapath = os.path.join(modpath, '../../datas/orcl-1995-2014.txt')
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: Create a Data Feed
+  prefs:
+  - PREF_IND
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: data = bt.feeds.YahooFinanceCSVData(
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: dataname=datapath,
+  prefs:
+  - PREF_IND
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: Do not pass values before this date
+  prefs:
+  - PREF_IND
+  - PREF_IND
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: fromdate=datetime.datetime(2000, 1, 1),
+  prefs:
+  - PREF_IND
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: Do not pass values before this date
+  prefs:
+  - PREF_IND
+  - PREF_IND
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: todate=datetime.datetime(2000, 12, 31),
+  prefs:
+  - PREF_IND
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: Do not pass values after this date
+  prefs:
+  - PREF_IND
+  - PREF_IND
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: reverse=False)
+  prefs:
+  - PREF_IND
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: Add the Data Feed to Cerebro
+  prefs:
+  - PREF_IND
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: cerebro.adddata(data)
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: Set our desired cash start
+  prefs:
+  - PREF_IND
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: cerebro.broker.setcash(100000.0)
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: Add a FixedSize sizer according to the stake
+  prefs:
+  - PREF_IND
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: cerebro.addsizer(bt.sizers.FixedSize, stake=10)
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: Set the commission - 0.1% ... divide by 100 to remove the %
+  prefs:
+  - PREF_IND
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: cerebro.broker.setcommission(commission=0.001)
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: Print out the starting conditions
+  prefs:
+  - PREF_IND
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 'print(''Starting Portfolio Value: %.2f'' % cerebro.broker.getvalue())'
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: Run over everything
+  prefs:
+  - PREF_IND
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: cerebro.run()
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: Print out the final result
+  prefs:
+  - PREF_IND
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 'print(''Final Portfolio Value: %.2f'' % cerebro.broker.getvalue())`'
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '[PRE30]'
+  prefs: []
+  type: TYPE_PRE
+- en: '`Starting Portfolio Value: 100000.00'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 2000-01-03T00:00:00, Close, 27.85
+  prefs: []
+  type: TYPE_NORMAL
+- en: 2000-01-04T00:00:00, Close, 25.39
+  prefs: []
+  type: TYPE_NORMAL
+- en: 2000-01-05T00:00:00, Close, 24.05
+  prefs: []
+  type: TYPE_NORMAL
+- en: 2000-01-05T00:00:00, BUY CREATE, 24.05
+  prefs: []
+  type: TYPE_NORMAL
+- en: '2000-01-06T00:00:00, BUY EXECUTED, Size 10, Price: 23.61, Cost: 236.10, Commission
+    0.24'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 2000-01-06T00:00:00, Close, 22.63
+  prefs: []
+  type: TYPE_NORMAL
+- en: '...'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '...'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '...'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 2000-12-20T00:00:00, BUY CREATE, 26.88
+  prefs: []
+  type: TYPE_NORMAL
+- en: '2000-12-21T00:00:00, BUY EXECUTED, Size 10, Price: 26.23, Cost: 262.30, Commission
+    0.26'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 2000-12-21T00:00:00, Close, 27.82
+  prefs: []
+  type: TYPE_NORMAL
+- en: 2000-12-22T00:00:00, Close, 30.06
+  prefs: []
+  type: TYPE_NORMAL
+- en: 2000-12-26T00:00:00, Close, 29.17
+  prefs: []
+  type: TYPE_NORMAL
+- en: 2000-12-27T00:00:00, Close, 28.94
+  prefs: []
+  type: TYPE_NORMAL
+- en: 2000-12-28T00:00:00, Close, 29.29
+  prefs: []
+  type: TYPE_NORMAL
+- en: 2000-12-29T00:00:00, Close, 27.41
+  prefs: []
+  type: TYPE_NORMAL
+- en: 2000-12-29T00:00:00, SELL CREATE, 27.41
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Final Portfolio Value: 100169.80`'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE31]'
+  prefs: []
+  type: TYPE_PRE
+- en: '`self.sma = bt.indicators.MovingAverageSimple(self.datas[0], period=self.params.maperiod)`'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE32]'
+  prefs: []
+  type: TYPE_PRE
+- en: '`from __future__ import (absolute_import, division, print_function,'
+  prefs: []
+  type: TYPE_NORMAL
+- en: unicode_literals)
+  prefs:
+  - PREF_IND
+  - PREF_IND
+  - PREF_IND
+  - PREF_IND
+  - PREF_IND
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: 'import datetime  # For datetime objects'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'import os.path  # To manage paths'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'import sys  # To find out the script name (in argv[0])'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Import the backtrader platform
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: import backtrader as bt
+  prefs: []
+  type: TYPE_NORMAL
+- en: Create a Stratey
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 'class TestStrategy(bt.Strategy):'
+  prefs: []
+  type: TYPE_NORMAL
+- en: params = (
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: ('maperiod', 15),
+  prefs:
+  - PREF_IND
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: )
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: 'def log(self, txt, dt=None):'
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: ''''''' Logging function fot this strategy'''''''
+  prefs: []
+  type: TYPE_NORMAL
+- en: dt = dt or self.datas[0].datetime.date(0)
+  prefs:
+  - PREF_IND
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: print('%s, %s' % (dt.isoformat(), txt))
+  prefs:
+  - PREF_IND
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: 'def __init__(self):'
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: Keep a reference to the "close" line in the data[0] dataseries
+  prefs:
+  - PREF_IND
+  - PREF_IND
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: self.dataclose = self.datas[0].close
+  prefs:
+  - PREF_IND
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: To keep track of pending orders and buy price/commission
+  prefs:
+  - PREF_IND
+  - PREF_IND
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: self.order = None
+  prefs:
+  - PREF_IND
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: self.buyprice = None
+  prefs:
+  - PREF_IND
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: self.buycomm = None
+  prefs:
+  - PREF_IND
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: Add a MovingAverageSimple indicator
+  prefs:
+  - PREF_IND
+  - PREF_IND
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: self.sma = bt.indicators.SimpleMovingAverage(
+  prefs:
+  - PREF_IND
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: self.datas[0], period=self.params.maperiod)
+  prefs:
+  - PREF_IND
+  - PREF_IND
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: 'def notify_order(self, order):'
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: 'if order.status in [order.Submitted, order.Accepted]:'
+  prefs:
+  - PREF_IND
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: Buy/Sell order submitted/accepted to/by broker - Nothing to do
+  prefs:
+  - PREF_IND
+  - PREF_IND
+  - PREF_IND
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: return
+  prefs:
+  - PREF_IND
+  - PREF_IND
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: Check if an order has been completed
+  prefs:
+  - PREF_IND
+  - PREF_IND
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 'Attention: broker could reject order if not enough cash'
+  prefs:
+  - PREF_IND
+  - PREF_IND
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 'if order.status in [order.Completed]:'
+  prefs:
+  - PREF_IND
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: 'if order.isbuy():'
+  prefs:
+  - PREF_IND
+  - PREF_IND
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: self.log(
+  prefs:
+  - PREF_IND
+  - PREF_IND
+  - PREF_IND
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '''BUY EXECUTED, Price: %.2f, Cost: %.2f, Comm %.2f'' %'
+  prefs:
+  - PREF_IND
+  - PREF_IND
+  - PREF_IND
+  - PREF_IND
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: (order.executed.price,
+  prefs:
+  - PREF_IND
+  - PREF_IND
+  - PREF_IND
+  - PREF_IND
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: order.executed.value,
+  prefs:
+  - PREF_IND
+  - PREF_IND
+  - PREF_IND
+  - PREF_IND
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: order.executed.comm))
+  prefs:
+  - PREF_IND
+  - PREF_IND
+  - PREF_IND
+  - PREF_IND
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: self.buyprice = order.executed.price
+  prefs:
+  - PREF_IND
+  - PREF_IND
+  - PREF_IND
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: self.buycomm = order.executed.comm
+  prefs:
+  - PREF_IND
+  - PREF_IND
+  - PREF_IND
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: 'else:  # Sell'
+  prefs:
+  - PREF_IND
+  - PREF_IND
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: 'self.log(''SELL EXECUTED, Price: %.2f, Cost: %.2f, Comm %.2f'' %'
+  prefs:
+  - PREF_IND
+  - PREF_IND
+  - PREF_IND
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: (order.executed.price,
+  prefs:
+  - PREF_IND
+  - PREF_IND
+  - PREF_IND
+  - PREF_IND
+  - PREF_IND
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: order.executed.value,
+  prefs:
+  - PREF_IND
+  - PREF_IND
+  - PREF_IND
+  - PREF_IND
+  - PREF_IND
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: order.executed.comm))
+  prefs:
+  - PREF_IND
+  - PREF_IND
+  - PREF_IND
+  - PREF_IND
+  - PREF_IND
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: self.bar_executed = len(self)
+  prefs:
+  - PREF_IND
+  - PREF_IND
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: 'elif order.status in [order.Canceled, order.Margin, order.Rejected]:'
+  prefs:
+  - PREF_IND
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: self.log('Order Canceled/Margin/Rejected')
+  prefs:
+  - PREF_IND
+  - PREF_IND
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: self.order = None
+  prefs:
+  - PREF_IND
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: 'def notify_trade(self, trade):'
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: 'if not trade.isclosed:'
+  prefs:
+  - PREF_IND
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: return
+  prefs:
+  - PREF_IND
+  - PREF_IND
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: self.log('OPERATION PROFIT, GROSS %.2f, NET %.2f' %
+  prefs:
+  - PREF_IND
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: (trade.pnl, trade.pnlcomm))
+  prefs:
+  - PREF_IND
+  - PREF_IND
+  - PREF_IND
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: 'def next(self):'
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: Simply log the closing price of the series from the reference
+  prefs:
+  - PREF_IND
+  - PREF_IND
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: self.log('Close, %.2f' % self.dataclose[0])
+  prefs:
+  - PREF_IND
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: Check if an order is pending ... if yes, we cannot send a 2nd one
+  prefs:
+  - PREF_IND
+  - PREF_IND
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 'if self.order:'
+  prefs:
+  - PREF_IND
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: return
+  prefs:
+  - PREF_IND
+  - PREF_IND
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: Check if we are in the market
+  prefs:
+  - PREF_IND
+  - PREF_IND
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 'if not self.position:'
+  prefs:
+  - PREF_IND
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: Not yet ... we MIGHT BUY if ...
+  prefs:
+  - PREF_IND
+  - PREF_IND
+  - PREF_IND
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 'if self.dataclose[0] > self.sma[0]:'
+  prefs:
+  - PREF_IND
+  - PREF_IND
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: BUY, BUY, BUY!!! (with all possible default parameters)
+  prefs:
+  - PREF_IND
+  - PREF_IND
+  - PREF_IND
+  - PREF_IND
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: self.log('BUY CREATE, %.2f' % self.dataclose[0])
+  prefs:
+  - PREF_IND
+  - PREF_IND
+  - PREF_IND
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: Keep track of the created order to avoid a 2nd order
+  prefs:
+  - PREF_IND
+  - PREF_IND
+  - PREF_IND
+  - PREF_IND
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: self.order = self.buy()
+  prefs:
+  - PREF_IND
+  - PREF_IND
+  - PREF_IND
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: 'else:'
+  prefs:
+  - PREF_IND
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: 'if self.dataclose[0] < self.sma[0]:'
+  prefs:
+  - PREF_IND
+  - PREF_IND
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: SELL, SELL, SELL!!! (with all possible default parameters)
+  prefs:
+  - PREF_IND
+  - PREF_IND
+  - PREF_IND
+  - PREF_IND
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: self.log('SELL CREATE, %.2f' % self.dataclose[0])
+  prefs:
+  - PREF_IND
+  - PREF_IND
+  - PREF_IND
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: Keep track of the created order to avoid a 2nd order
+  prefs:
+  - PREF_IND
+  - PREF_IND
+  - PREF_IND
+  - PREF_IND
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: self.order = self.sell()
+  prefs:
+  - PREF_IND
+  - PREF_IND
+  - PREF_IND
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: 'if __name__ == ''__main__'':'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Create a cerebro entity
+  prefs:
+  - PREF_IND
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: cerebro = bt.Cerebro()
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: Add a strategy
+  prefs:
+  - PREF_IND
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: cerebro.addstrategy(TestStrategy)
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: Datas are in a subfolder of the samples. Need to find where the script is
+  prefs:
+  - PREF_IND
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: because it could have been called from anywhere
+  prefs:
+  - PREF_IND
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: modpath = os.path.dirname(os.path.abspath(sys.argv[0]))
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: datapath = os.path.join(modpath, '../../datas/orcl-1995-2014.txt')
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: Create a Data Feed
+  prefs:
+  - PREF_IND
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: data = bt.feeds.YahooFinanceCSVData(
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: dataname=datapath,
+  prefs:
+  - PREF_IND
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: Do not pass values before this date
+  prefs:
+  - PREF_IND
+  - PREF_IND
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: fromdate=datetime.datetime(2000, 1, 1),
+  prefs:
+  - PREF_IND
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: Do not pass values before this date
+  prefs:
+  - PREF_IND
+  - PREF_IND
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: todate=datetime.datetime(2000, 12, 31),
+  prefs:
+  - PREF_IND
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: Do not pass values after this date
+  prefs:
+  - PREF_IND
+  - PREF_IND
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: reverse=False)
+  prefs:
+  - PREF_IND
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: Add the Data Feed to Cerebro
+  prefs:
+  - PREF_IND
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: cerebro.adddata(data)
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: Set our desired cash start
+  prefs:
+  - PREF_IND
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: cerebro.broker.setcash(1000.0)
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: Add a FixedSize sizer according to the stake
+  prefs:
+  - PREF_IND
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: cerebro.addsizer(bt.sizers.FixedSize, stake=10)
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: Set the commission
+  prefs:
+  - PREF_IND
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: cerebro.broker.setcommission(commission=0.0)
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: Print out the starting conditions
+  prefs:
+  - PREF_IND
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 'print(''Starting Portfolio Value: %.2f'' % cerebro.broker.getvalue())'
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: Run over everything
+  prefs:
+  - PREF_IND
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: cerebro.run()
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: Print out the final result
+  prefs:
+  - PREF_IND
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 'print(''Final Portfolio Value: %.2f'' % cerebro.broker.getvalue())`'
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '[PRE33]'
+  prefs: []
+  type: TYPE_PRE
+- en: '`Starting Portfolio Value: 1000.00'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 2000-01-24T00:00:00, Close, 25.55
+  prefs: []
+  type: TYPE_NORMAL
+- en: 2000-01-25T00:00:00, Close, 26.61
+  prefs: []
+  type: TYPE_NORMAL
+- en: 2000-01-25T00:00:00, BUY CREATE, 26.61
+  prefs: []
+  type: TYPE_NORMAL
+- en: '2000-01-26T00:00:00, BUY EXECUTED, Size 10, Price: 26.76, Cost: 267.60, Commission
+    0.00'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 2000-01-26T00:00:00, Close, 25.96
+  prefs: []
+  type: TYPE_NORMAL
+- en: 2000-01-27T00:00:00, Close, 24.43
+  prefs: []
+  type: TYPE_NORMAL
+- en: 2000-01-27T00:00:00, SELL CREATE, 24.43
+  prefs: []
+  type: TYPE_NORMAL
+- en: '2000-01-28T00:00:00, SELL EXECUTED, Size 10, Price: 24.28, Cost: 242.80, Commission
+    0.00'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 2000-01-28T00:00:00, OPERATION PROFIT, GROSS -24.80, NET -24.80
+  prefs: []
+  type: TYPE_NORMAL
+- en: 2000-01-28T00:00:00, Close, 22.34
+  prefs: []
+  type: TYPE_NORMAL
+- en: 2000-01-31T00:00:00, Close, 23.55
+  prefs: []
+  type: TYPE_NORMAL
+- en: 2000-02-01T00:00:00, Close, 25.46
+  prefs: []
+  type: TYPE_NORMAL
+- en: 2000-02-02T00:00:00, Close, 25.61
+  prefs: []
+  type: TYPE_NORMAL
+- en: 2000-02-02T00:00:00, BUY CREATE, 25.61
+  prefs: []
+  type: TYPE_NORMAL
+- en: '2000-02-03T00:00:00, BUY EXECUTED, Size 10, Price: 26.11, Cost: 261.10, Commission
+    0.00'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '...'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '...'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '...'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 2000-12-20T00:00:00, SELL CREATE, 26.88
+  prefs: []
+  type: TYPE_NORMAL
+- en: '2000-12-21T00:00:00, SELL EXECUTED, Size 10, Price: 26.23, Cost: 262.30, Commission
+    0.00'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 2000-12-21T00:00:00, OPERATION PROFIT, GROSS -20.60, NET -20.60
+  prefs: []
+  type: TYPE_NORMAL
+- en: 2000-12-21T00:00:00, Close, 27.82
+  prefs: []
+  type: TYPE_NORMAL
+- en: 2000-12-21T00:00:00, BUY CREATE, 27.82
+  prefs: []
+  type: TYPE_NORMAL
+- en: '2000-12-22T00:00:00, BUY EXECUTED, Size 10, Price: 28.65, Cost: 286.50, Commission
+    0.00'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 2000-12-22T00:00:00, Close, 30.06
+  prefs: []
+  type: TYPE_NORMAL
+- en: 2000-12-26T00:00:00, Close, 29.17
+  prefs: []
+  type: TYPE_NORMAL
+- en: 2000-12-27T00:00:00, Close, 28.94
+  prefs: []
+  type: TYPE_NORMAL
+- en: 2000-12-28T00:00:00, Close, 29.29
+  prefs: []
+  type: TYPE_NORMAL
+- en: 2000-12-29T00:00:00, Close, 27.41
+  prefs: []
+  type: TYPE_NORMAL
+- en: 2000-12-29T00:00:00, SELL CREATE, 27.41
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Final Portfolio Value: 973.90`'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE34]'
+  prefs: []
+  type: TYPE_PRE
+- en: '`cerebro.plot()`'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE35]'
+  prefs: []
+  type: TYPE_PRE
+- en: '`# Indicators for the plotting show'
+  prefs: []
+  type: TYPE_NORMAL
+- en: bt.indicators.ExponentialMovingAverage(self.datas[0], period=25)
+  prefs: []
+  type: TYPE_NORMAL
+- en: bt.indicators.WeightedMovingAverage(self.datas[0], period=25).subplot = True
+  prefs: []
+  type: TYPE_NORMAL
+- en: bt.indicators.StochasticSlow(self.datas[0])
+  prefs: []
+  type: TYPE_NORMAL
+- en: bt.indicators.MACDHisto(self.datas[0])
+  prefs: []
+  type: TYPE_NORMAL
+- en: rsi = bt.indicators.RSI(self.datas[0])
+  prefs: []
+  type: TYPE_NORMAL
+- en: bt.indicators.SmoothedMovingAverage(rsi, period=10)
+  prefs: []
+  type: TYPE_NORMAL
+- en: bt.indicators.ATR(self.datas[0]).plot = False`
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE36]'
+  prefs: []
+  type: TYPE_PRE
+- en: '`from __future__ import (absolute_import, division, print_function,'
+  prefs: []
+  type: TYPE_NORMAL
+- en: unicode_literals)
+  prefs:
+  - PREF_IND
+  - PREF_IND
+  - PREF_IND
+  - PREF_IND
+  - PREF_IND
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: 'import datetime  # For datetime objects'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'import os.path  # To manage paths'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'import sys  # To find out the script name (in argv[0])'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Import the backtrader platform
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: import backtrader as bt
+  prefs: []
+  type: TYPE_NORMAL
+- en: Create a Stratey
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 'class TestStrategy(bt.Strategy):'
+  prefs: []
+  type: TYPE_NORMAL
+- en: params = (
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: ('maperiod', 15),
+  prefs:
+  - PREF_IND
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: )
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: 'def log(self, txt, dt=None):'
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: ''''''' Logging function fot this strategy'''''''
+  prefs: []
+  type: TYPE_NORMAL
+- en: dt = dt or self.datas[0].datetime.date(0)
+  prefs:
+  - PREF_IND
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: print('%s, %s' % (dt.isoformat(), txt))
+  prefs:
+  - PREF_IND
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: 'def __init__(self):'
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: Keep a reference to the "close" line in the data[0] dataseries
+  prefs:
+  - PREF_IND
+  - PREF_IND
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: self.dataclose = self.datas[0].close
+  prefs:
+  - PREF_IND
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: To keep track of pending orders and buy price/commission
+  prefs:
+  - PREF_IND
+  - PREF_IND
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: self.order = None
+  prefs:
+  - PREF_IND
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: self.buyprice = None
+  prefs:
+  - PREF_IND
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: self.buycomm = None
+  prefs:
+  - PREF_IND
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: Add a MovingAverageSimple indicator
+  prefs:
+  - PREF_IND
+  - PREF_IND
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: self.sma = bt.indicators.SimpleMovingAverage(
+  prefs:
+  - PREF_IND
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: self.datas[0], period=self.params.maperiod)
+  prefs:
+  - PREF_IND
+  - PREF_IND
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: Indicators for the plotting show
+  prefs:
+  - PREF_IND
+  - PREF_IND
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: bt.indicators.ExponentialMovingAverage(self.datas[0], period=25)
+  prefs:
+  - PREF_IND
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: bt.indicators.WeightedMovingAverage(self.datas[0], period=25,
+  prefs:
+  - PREF_IND
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: subplot=True)
+  prefs:
+  - PREF_IND
+  - PREF_IND
+  - PREF_IND
+  - PREF_IND
+  - PREF_IND
+  - PREF_IND
+  - PREF_IND
+  - PREF_IND
+  - PREF_IND
+  - PREF_IND
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: bt.indicators.StochasticSlow(self.datas[0])
+  prefs:
+  - PREF_IND
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: bt.indicators.MACDHisto(self.datas[0])
+  prefs:
+  - PREF_IND
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: rsi = bt.indicators.RSI(self.datas[0])
+  prefs:
+  - PREF_IND
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: bt.indicators.SmoothedMovingAverage(rsi, period=10)
+  prefs:
+  - PREF_IND
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: bt.indicators.ATR(self.datas[0], plot=False)
+  prefs:
+  - PREF_IND
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: 'def notify_order(self, order):'
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: 'if order.status in [order.Submitted, order.Accepted]:'
+  prefs:
+  - PREF_IND
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: Buy/Sell order submitted/accepted to/by broker - Nothing to do
+  prefs:
+  - PREF_IND
+  - PREF_IND
+  - PREF_IND
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: return
+  prefs:
+  - PREF_IND
+  - PREF_IND
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: Check if an order has been completed
+  prefs:
+  - PREF_IND
+  - PREF_IND
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 'Attention: broker could reject order if not enough cash'
+  prefs:
+  - PREF_IND
+  - PREF_IND
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 'if order.status in [order.Completed]:'
+  prefs:
+  - PREF_IND
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: 'if order.isbuy():'
+  prefs:
+  - PREF_IND
+  - PREF_IND
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: self.log(
+  prefs:
+  - PREF_IND
+  - PREF_IND
+  - PREF_IND
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '''BUY EXECUTED, Price: %.2f, Cost: %.2f, Comm %.2f'' %'
+  prefs:
+  - PREF_IND
+  - PREF_IND
+  - PREF_IND
+  - PREF_IND
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: (order.executed.price,
+  prefs:
+  - PREF_IND
+  - PREF_IND
+  - PREF_IND
+  - PREF_IND
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: order.executed.value,
+  prefs:
+  - PREF_IND
+  - PREF_IND
+  - PREF_IND
+  - PREF_IND
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: order.executed.comm))
+  prefs:
+  - PREF_IND
+  - PREF_IND
+  - PREF_IND
+  - PREF_IND
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: self.buyprice = order.executed.price
+  prefs:
+  - PREF_IND
+  - PREF_IND
+  - PREF_IND
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: self.buycomm = order.executed.comm
+  prefs:
+  - PREF_IND
+  - PREF_IND
+  - PREF_IND
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: 'else:  # Sell'
+  prefs:
+  - PREF_IND
+  - PREF_IND
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: 'self.log(''SELL EXECUTED, Price: %.2f, Cost: %.2f, Comm %.2f'' %'
+  prefs:
+  - PREF_IND
+  - PREF_IND
+  - PREF_IND
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: (order.executed.price,
+  prefs:
+  - PREF_IND
+  - PREF_IND
+  - PREF_IND
+  - PREF_IND
+  - PREF_IND
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: order.executed.value,
+  prefs:
+  - PREF_IND
+  - PREF_IND
+  - PREF_IND
+  - PREF_IND
+  - PREF_IND
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: order.executed.comm))
+  prefs:
+  - PREF_IND
+  - PREF_IND
+  - PREF_IND
+  - PREF_IND
+  - PREF_IND
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: self.bar_executed = len(self)
+  prefs:
+  - PREF_IND
+  - PREF_IND
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: 'elif order.status in [order.Canceled, order.Margin, order.Rejected]:'
+  prefs:
+  - PREF_IND
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: self.log('Order Canceled/Margin/Rejected')
+  prefs:
+  - PREF_IND
+  - PREF_IND
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: 'Write down: no pending order'
+  prefs:
+  - PREF_IND
+  - PREF_IND
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: self.order = None
+  prefs:
+  - PREF_IND
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: 'def notify_trade(self, trade):'
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: 'if not trade.isclosed:'
+  prefs:
+  - PREF_IND
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: return
+  prefs:
+  - PREF_IND
+  - PREF_IND
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: self.log('OPERATION PROFIT, GROSS %.2f, NET %.2f' %
+  prefs:
+  - PREF_IND
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: (trade.pnl, trade.pnlcomm))
+  prefs:
+  - PREF_IND
+  - PREF_IND
+  - PREF_IND
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: 'def next(self):'
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: Simply log the closing price of the series from the reference
+  prefs:
+  - PREF_IND
+  - PREF_IND
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: self.log('Close, %.2f' % self.dataclose[0])
+  prefs:
+  - PREF_IND
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: Check if an order is pending ... if yes, we cannot send a 2nd one
+  prefs:
+  - PREF_IND
+  - PREF_IND
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 'if self.order:'
+  prefs:
+  - PREF_IND
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: return
+  prefs:
+  - PREF_IND
+  - PREF_IND
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: Check if we are in the market
+  prefs:
+  - PREF_IND
+  - PREF_IND
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 'if not self.position:'
+  prefs:
+  - PREF_IND
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: Not yet ... we MIGHT BUY if ...
+  prefs:
+  - PREF_IND
+  - PREF_IND
+  - PREF_IND
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 'if self.dataclose[0] > self.sma[0]:'
+  prefs:
+  - PREF_IND
+  - PREF_IND
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: BUY, BUY, BUY!!! (with all possible default parameters)
+  prefs:
+  - PREF_IND
+  - PREF_IND
+  - PREF_IND
+  - PREF_IND
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: self.log('BUY CREATE, %.2f' % self.dataclose[0])
+  prefs:
+  - PREF_IND
+  - PREF_IND
+  - PREF_IND
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: Keep track of the created order to avoid a 2nd order
+  prefs:
+  - PREF_IND
+  - PREF_IND
+  - PREF_IND
+  - PREF_IND
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: self.order = self.buy()
+  prefs:
+  - PREF_IND
+  - PREF_IND
+  - PREF_IND
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: 'else:'
+  prefs:
+  - PREF_IND
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: 'if self.dataclose[0] < self.sma[0]:'
+  prefs:
+  - PREF_IND
+  - PREF_IND
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: SELL, SELL, SELL!!! (with all possible default parameters)
+  prefs:
+  - PREF_IND
+  - PREF_IND
+  - PREF_IND
+  - PREF_IND
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: self.log('SELL CREATE, %.2f' % self.dataclose[0])
+  prefs:
+  - PREF_IND
+  - PREF_IND
+  - PREF_IND
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: Keep track of the created order to avoid a 2nd order
+  prefs:
+  - PREF_IND
+  - PREF_IND
+  - PREF_IND
+  - PREF_IND
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: self.order = self.sell()
+  prefs:
+  - PREF_IND
+  - PREF_IND
+  - PREF_IND
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: 'if __name__ == ''__main__'':'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Create a cerebro entity
+  prefs:
+  - PREF_IND
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: cerebro = bt.Cerebro()
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: Add a strategy
+  prefs:
+  - PREF_IND
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: cerebro.addstrategy(TestStrategy)
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: Datas are in a subfolder of the samples. Need to find where the script is
+  prefs:
+  - PREF_IND
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: because it could have been called from anywhere
+  prefs:
+  - PREF_IND
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: modpath = os.path.dirname(os.path.abspath(sys.argv[0]))
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: datapath = os.path.join(modpath, '../../datas/orcl-1995-2014.txt')
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: Create a Data Feed
+  prefs:
+  - PREF_IND
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: data = bt.feeds.YahooFinanceCSVData(
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: dataname=datapath,
+  prefs:
+  - PREF_IND
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: Do not pass values before this date
+  prefs:
+  - PREF_IND
+  - PREF_IND
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: fromdate=datetime.datetime(2000, 1, 1),
+  prefs:
+  - PREF_IND
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: Do not pass values before this date
+  prefs:
+  - PREF_IND
+  - PREF_IND
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: todate=datetime.datetime(2000, 12, 31),
+  prefs:
+  - PREF_IND
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: Do not pass values after this date
+  prefs:
+  - PREF_IND
+  - PREF_IND
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: reverse=False)
+  prefs:
+  - PREF_IND
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: Add the Data Feed to Cerebro
+  prefs:
+  - PREF_IND
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: cerebro.adddata(data)
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: Set our desired cash start
+  prefs:
+  - PREF_IND
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: cerebro.broker.setcash(1000.0)
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: Add a FixedSize sizer according to the stake
+  prefs:
+  - PREF_IND
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: cerebro.addsizer(bt.sizers.FixedSize, stake=10)
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: Set the commission
+  prefs:
+  - PREF_IND
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: cerebro.broker.setcommission(commission=0.0)
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: Print out the starting conditions
+  prefs:
+  - PREF_IND
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 'print(''Starting Portfolio Value: %.2f'' % cerebro.broker.getvalue())'
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: Run over everything
+  prefs:
+  - PREF_IND
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: cerebro.run()
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: Print out the final result
+  prefs:
+  - PREF_IND
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 'print(''Final Portfolio Value: %.2f'' % cerebro.broker.getvalue())'
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: Plot the result
+  prefs:
+  - PREF_IND
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: cerebro.plot()`
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '[PRE37]'
+  prefs: []
+  type: TYPE_PRE
+- en: '`Starting Portfolio Value: 1000.00'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 2000-02-18T00:00:00, Close, 27.61
+  prefs: []
+  type: TYPE_NORMAL
+- en: 2000-02-22T00:00:00, Close, 27.97
+  prefs: []
+  type: TYPE_NORMAL
+- en: 2000-02-22T00:00:00, BUY CREATE, 27.97
+  prefs: []
+  type: TYPE_NORMAL
+- en: '2000-02-23T00:00:00, BUY EXECUTED, Size 10, Price: 28.38, Cost: 283.80, Commission
+    0.00'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 2000-02-23T00:00:00, Close, 29.73
+  prefs: []
+  type: TYPE_NORMAL
+- en: '...'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '...'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '...'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 2000-12-21T00:00:00, BUY CREATE, 27.82
+  prefs: []
+  type: TYPE_NORMAL
+- en: '2000-12-22T00:00:00, BUY EXECUTED, Size 10, Price: 28.65, Cost: 286.50, Commission
+    0.00'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 2000-12-22T00:00:00, Close, 30.06
+  prefs: []
+  type: TYPE_NORMAL
+- en: 2000-12-26T00:00:00, Close, 29.17
+  prefs: []
+  type: TYPE_NORMAL
+- en: 2000-12-27T00:00:00, Close, 28.94
+  prefs: []
+  type: TYPE_NORMAL
+- en: 2000-12-28T00:00:00, Close, 29.29
+  prefs: []
+  type: TYPE_NORMAL
+- en: 2000-12-29T00:00:00, Close, 27.41
+  prefs: []
+  type: TYPE_NORMAL
+- en: 2000-12-29T00:00:00, SELL CREATE, 27.41
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Final Portfolio Value: 981.00`'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE38]'
+  prefs: []
+  type: TYPE_PRE
+- en: '`from __future__ import (absolute_import, division, print_function,'
+  prefs: []
+  type: TYPE_NORMAL
+- en: unicode_literals)
+  prefs:
+  - PREF_IND
+  - PREF_IND
+  - PREF_IND
+  - PREF_IND
+  - PREF_IND
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: 'import datetime  # For datetime objects'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'import os.path  # To manage paths'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'import sys  # To find out the script name (in argv[0])'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Import the backtrader platform
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: import backtrader as bt
+  prefs: []
+  type: TYPE_NORMAL
+- en: Create a Stratey
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 'class TestStrategy(bt.Strategy):'
+  prefs: []
+  type: TYPE_NORMAL
+- en: params = (
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: ('maperiod', 15),
+  prefs:
+  - PREF_IND
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: ('printlog', False),
+  prefs:
+  - PREF_IND
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: )
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: 'def log(self, txt, dt=None, doprint=False):'
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: ''''''' Logging function fot this strategy'''''''
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'if self.params.printlog or doprint:'
+  prefs:
+  - PREF_IND
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: dt = dt or self.datas[0].datetime.date(0)
+  prefs:
+  - PREF_IND
+  - PREF_IND
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: print('%s, %s' % (dt.isoformat(), txt))
+  prefs:
+  - PREF_IND
+  - PREF_IND
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: 'def __init__(self):'
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: Keep a reference to the "close" line in the data[0] dataseries
+  prefs:
+  - PREF_IND
+  - PREF_IND
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: self.dataclose = self.datas[0].close
+  prefs:
+  - PREF_IND
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: To keep track of pending orders and buy price/commission
+  prefs:
+  - PREF_IND
+  - PREF_IND
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: self.order = None
+  prefs:
+  - PREF_IND
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: self.buyprice = None
+  prefs:
+  - PREF_IND
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: self.buycomm = None
+  prefs:
+  - PREF_IND
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: Add a MovingAverageSimple indicator
+  prefs:
+  - PREF_IND
+  - PREF_IND
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: self.sma = bt.indicators.SimpleMovingAverage(
+  prefs:
+  - PREF_IND
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: self.datas[0], period=self.params.maperiod)
+  prefs:
+  - PREF_IND
+  - PREF_IND
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: 'def notify_order(self, order):'
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: 'if order.status in [order.Submitted, order.Accepted]:'
+  prefs:
+  - PREF_IND
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: Buy/Sell order submitted/accepted to/by broker - Nothing to do
+  prefs:
+  - PREF_IND
+  - PREF_IND
+  - PREF_IND
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: return
+  prefs:
+  - PREF_IND
+  - PREF_IND
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: Check if an order has been completed
+  prefs:
+  - PREF_IND
+  - PREF_IND
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 'Attention: broker could reject order if not enough cash'
+  prefs:
+  - PREF_IND
+  - PREF_IND
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 'if order.status in [order.Completed]:'
+  prefs:
+  - PREF_IND
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: 'if order.isbuy():'
+  prefs:
+  - PREF_IND
+  - PREF_IND
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: self.log(
+  prefs:
+  - PREF_IND
+  - PREF_IND
+  - PREF_IND
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '''BUY EXECUTED, Price: %.2f, Cost: %.2f, Comm %.2f'' %'
+  prefs:
+  - PREF_IND
+  - PREF_IND
+  - PREF_IND
+  - PREF_IND
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: (order.executed.price,
+  prefs:
+  - PREF_IND
+  - PREF_IND
+  - PREF_IND
+  - PREF_IND
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: order.executed.value,
+  prefs:
+  - PREF_IND
+  - PREF_IND
+  - PREF_IND
+  - PREF_IND
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: order.executed.comm))
+  prefs:
+  - PREF_IND
+  - PREF_IND
+  - PREF_IND
+  - PREF_IND
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: self.buyprice = order.executed.price
+  prefs:
+  - PREF_IND
+  - PREF_IND
+  - PREF_IND
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: self.buycomm = order.executed.comm
+  prefs:
+  - PREF_IND
+  - PREF_IND
+  - PREF_IND
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: 'else:  # Sell'
+  prefs:
+  - PREF_IND
+  - PREF_IND
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: 'self.log(''SELL EXECUTED, Price: %.2f, Cost: %.2f, Comm %.2f'' %'
+  prefs:
+  - PREF_IND
+  - PREF_IND
+  - PREF_IND
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: (order.executed.price,
+  prefs:
+  - PREF_IND
+  - PREF_IND
+  - PREF_IND
+  - PREF_IND
+  - PREF_IND
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: order.executed.value,
+  prefs:
+  - PREF_IND
+  - PREF_IND
+  - PREF_IND
+  - PREF_IND
+  - PREF_IND
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: order.executed.comm))
+  prefs:
+  - PREF_IND
+  - PREF_IND
+  - PREF_IND
+  - PREF_IND
+  - PREF_IND
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: self.bar_executed = len(self)
+  prefs:
+  - PREF_IND
+  - PREF_IND
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: 'elif order.status in [order.Canceled, order.Margin, order.Rejected]:'
+  prefs:
+  - PREF_IND
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: self.log('Order Canceled/Margin/Rejected')
+  prefs:
+  - PREF_IND
+  - PREF_IND
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: 'Write down: no pending order'
+  prefs:
+  - PREF_IND
+  - PREF_IND
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: self.order = None
+  prefs:
+  - PREF_IND
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: 'def notify_trade(self, trade):'
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: 'if not trade.isclosed:'
+  prefs:
+  - PREF_IND
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: return
+  prefs:
+  - PREF_IND
+  - PREF_IND
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: self.log('OPERATION PROFIT, GROSS %.2f, NET %.2f' %
+  prefs:
+  - PREF_IND
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: (trade.pnl, trade.pnlcomm))
+  prefs:
+  - PREF_IND
+  - PREF_IND
+  - PREF_IND
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: 'def next(self):'
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: Simply log the closing price of the series from the reference
+  prefs:
+  - PREF_IND
+  - PREF_IND
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: self.log('Close, %.2f' % self.dataclose[0])
+  prefs:
+  - PREF_IND
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: Check if an order is pending ... if yes, we cannot send a 2nd one
+  prefs:
+  - PREF_IND
+  - PREF_IND
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 'if self.order:'
+  prefs:
+  - PREF_IND
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: return
+  prefs:
+  - PREF_IND
+  - PREF_IND
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: Check if we are in the market
+  prefs:
+  - PREF_IND
+  - PREF_IND
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 'if not self.position:'
+  prefs:
+  - PREF_IND
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: Not yet ... we MIGHT BUY if ...
+  prefs:
+  - PREF_IND
+  - PREF_IND
+  - PREF_IND
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 'if self.dataclose[0] > self.sma[0]:'
+  prefs:
+  - PREF_IND
+  - PREF_IND
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: BUY, BUY, BUY!!! (with all possible default parameters)
+  prefs:
+  - PREF_IND
+  - PREF_IND
+  - PREF_IND
+  - PREF_IND
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: self.log('BUY CREATE, %.2f' % self.dataclose[0])
+  prefs:
+  - PREF_IND
+  - PREF_IND
+  - PREF_IND
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: Keep track of the created order to avoid a 2nd order
+  prefs:
+  - PREF_IND
+  - PREF_IND
+  - PREF_IND
+  - PREF_IND
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: self.order = self.buy()
+  prefs:
+  - PREF_IND
+  - PREF_IND
+  - PREF_IND
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: 'else:'
+  prefs:
+  - PREF_IND
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: 'if self.dataclose[0] < self.sma[0]:'
+  prefs:
+  - PREF_IND
+  - PREF_IND
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: SELL, SELL, SELL!!! (with all possible default parameters)
+  prefs:
+  - PREF_IND
+  - PREF_IND
+  - PREF_IND
+  - PREF_IND
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: self.log('SELL CREATE, %.2f' % self.dataclose[0])
+  prefs:
+  - PREF_IND
+  - PREF_IND
+  - PREF_IND
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: Keep track of the created order to avoid a 2nd order
+  prefs:
+  - PREF_IND
+  - PREF_IND
+  - PREF_IND
+  - PREF_IND
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: self.order = self.sell()
+  prefs:
+  - PREF_IND
+  - PREF_IND
+  - PREF_IND
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: 'def stop(self):'
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: self.log('(MA Period %2d) Ending Value %.2f' %
+  prefs:
+  - PREF_IND
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: (self.params.maperiod, self.broker.getvalue()), doprint=True)
+  prefs:
+  - PREF_IND
+  - PREF_IND
+  - PREF_IND
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: 'if __name__ == ''__main__'':'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Create a cerebro entity
+  prefs:
+  - PREF_IND
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: cerebro = bt.Cerebro()
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: Add a strategy
+  prefs:
+  - PREF_IND
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: strats = cerebro.optstrategy(
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: TestStrategy,
+  prefs:
+  - PREF_IND
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: maperiod=range(10, 31))
+  prefs:
+  - PREF_IND
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: Datas are in a subfolder of the samples. Need to find where the script is
+  prefs:
+  - PREF_IND
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: because it could have been called from anywhere
+  prefs:
+  - PREF_IND
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: modpath = os.path.dirname(os.path.abspath(sys.argv[0]))
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: datapath = os.path.join(modpath, '../../datas/orcl-1995-2014.txt')
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: Create a Data Feed
+  prefs:
+  - PREF_IND
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: data = bt.feeds.YahooFinanceCSVData(
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: dataname=datapath,
+  prefs:
+  - PREF_IND
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: Do not pass values before this date
+  prefs:
+  - PREF_IND
+  - PREF_IND
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: fromdate=datetime.datetime(2000, 1, 1),
+  prefs:
+  - PREF_IND
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: Do not pass values before this date
+  prefs:
+  - PREF_IND
+  - PREF_IND
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: todate=datetime.datetime(2000, 12, 31),
+  prefs:
+  - PREF_IND
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: Do not pass values after this date
+  prefs:
+  - PREF_IND
+  - PREF_IND
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: reverse=False)
+  prefs:
+  - PREF_IND
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: Add the Data Feed to Cerebro
+  prefs:
+  - PREF_IND
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: cerebro.adddata(data)
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: Set our desired cash start
+  prefs:
+  - PREF_IND
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: cerebro.broker.setcash(1000.0)
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: Add a FixedSize sizer according to the stake
+  prefs:
+  - PREF_IND
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: cerebro.addsizer(bt.sizers.FixedSize, stake=10)
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: Set the commission
+  prefs:
+  - PREF_IND
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: cerebro.broker.setcommission(commission=0.0)
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: Run over everything
+  prefs:
+  - PREF_IND
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: cerebro.run(maxcpus=1)`
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '[PRE39]'
+  prefs: []
+  type: TYPE_PRE
+- en: '`2000-12-29, (MA Period 10) Ending Value 880.30'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 2000-12-29, (MA Period 11) Ending Value 880.00
+  prefs: []
+  type: TYPE_NORMAL
+- en: 2000-12-29, (MA Period 12) Ending Value 830.30
+  prefs: []
+  type: TYPE_NORMAL
+- en: 2000-12-29, (MA Period 13) Ending Value 893.90
+  prefs: []
+  type: TYPE_NORMAL
+- en: 2000-12-29, (MA Period 14) Ending Value 896.90
+  prefs: []
+  type: TYPE_NORMAL
+- en: 2000-12-29, (MA Period 15) Ending Value 973.90
+  prefs: []
+  type: TYPE_NORMAL
+- en: 2000-12-29, (MA Period 16) Ending Value 959.40
+  prefs: []
+  type: TYPE_NORMAL
+- en: 2000-12-29, (MA Period 17) Ending Value 949.80
+  prefs: []
+  type: TYPE_NORMAL
+- en: 2000-12-29, (MA Period 18) Ending Value 1011.90
+  prefs: []
+  type: TYPE_NORMAL
+- en: 2000-12-29, (MA Period 19) Ending Value 1041.90
+  prefs: []
+  type: TYPE_NORMAL
+- en: 2000-12-29, (MA Period 20) Ending Value 1078.00
+  prefs: []
+  type: TYPE_NORMAL
+- en: 2000-12-29, (MA Period 21) Ending Value 1058.80
+  prefs: []
+  type: TYPE_NORMAL
+- en: 2000-12-29, (MA Period 22) Ending Value 1061.50
+  prefs: []
+  type: TYPE_NORMAL
+- en: 2000-12-29, (MA Period 23) Ending Value 1023.00
+  prefs: []
+  type: TYPE_NORMAL
+- en: 2000-12-29, (MA Period 24) Ending Value 1020.10
+  prefs: []
+  type: TYPE_NORMAL
+- en: 2000-12-29, (MA Period 25) Ending Value 1013.30
+  prefs: []
+  type: TYPE_NORMAL
+- en: 2000-12-29, (MA Period 26) Ending Value 998.30
+  prefs: []
+  type: TYPE_NORMAL
+- en: 2000-12-29, (MA Period 27) Ending Value 982.20
+  prefs: []
+  type: TYPE_NORMAL
+- en: 2000-12-29, (MA Period 28) Ending Value 975.70
+  prefs: []
+  type: TYPE_NORMAL
+- en: 2000-12-29, (MA Period 29) Ending Value 983.30
+  prefs: []
+  type: TYPE_NORMAL
+- en: 2000-12-29, (MA Period 30) Ending Value 979.80`
+  prefs: []
+  type: TYPE_NORMAL
+- en: '```'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Results:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: For periods below 18 the strategy (commissionless) loses money.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: For periods between 18 and 26 (both included) the strategy makes money.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Above 26 money is lost again.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'And the winning period for this strategy and the given data set is:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 20 bars, which wins 78.00 units over 1000 $/€ (a 7.8%)
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Note
+  prefs: []
+  type: TYPE_NORMAL
+- en: The extra indicators from the plotting example have been removed and the start
+    of operations is only influenced by the Simple Moving Average which is being optimized.
+    Hence the slightly different results for period 15
+  prefs: []
+  type: TYPE_NORMAL
+- en: Conclusion
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: The incremental samples have shown how to go from a barebones script to a fully
+    working trading system which even plots the results and can be optimized.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'A lot more can be done to try to improve the chances of winning:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Self defined Indicators
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Creating an indicator is easy (and even plotting them is easy)
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: Sizers
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Money Management is for many the key to success
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: Order Types (limit, stop, stoplimit)
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Some others
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: To ensure all the above items can be fully utilized the documentation provides
+    an insight into them (and other topics)
+  prefs: []
+  type: TYPE_NORMAL
+- en: Look in the table of contents and keep on reading … and developing.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Best of luck
+  prefs: []
+  type: TYPE_NORMAL

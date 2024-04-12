@@ -1,0 +1,61 @@
+- en: Release 1.2.1.88
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.backtrader.com/blog/posts/2016-03-07-release-1.2.1.88/release-1.2.1.88/](https://www.backtrader.com/blog/posts/2016-03-07-release-1.2.1.88/release-1.2.1.88/)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: Changing the minor version number from 1 to 2 has taken sometime, but the deprecation
+    of the old DataResampler and DataReplayer have led to it.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The documentation at **readthedocs** has
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'The [Documentation](http://backtrader.readthedocs.org/en/latest/) has been
+    updated to only reference the modern way to do `resampling` and `replaying`. It
+    is as easy as:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: For *replaying* just change `resampledata` to `replaydata`. There are additional
+    ways to do it, but this is the most straightforward interface and probably the
+    only one that will ever get used by anyone.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Following [Ticket #60](https://github.com/mementum/backtrader/issues/60) it
+    was clear that the extension mechanism which allows adding additional lines to
+    data feeds (actually to any *lines* based object) was not enough to support what
+    was suggested in the ticket.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Hence the implementation of an additional *parameter* to *lines* object which
+    allows the complete redefinition of the lines hierarchy (**Escape from OHLC Land**
+    would be an appropriate film title)
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'A sample named *data-bid-ask* has been added to the sources. From the sample:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: By specifying `linesoverride` the regular *lines* inheritance mechanisme is
+    bypassed and the defined lines in the object supersede any previous lines.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'The release is available from *pypi* and can be installed with usual:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Or if updating:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE3]'
+  prefs: []
+  type: TYPE_PRE

@@ -1,0 +1,439 @@
+- en: Strategy with Signals
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.backtrader.com/blog/posts/2016-08-01-signal-strategy/signal-strategy/](https://www.backtrader.com/blog/posts/2016-08-01-signal-strategy/signal-strategy/)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: Operating *backtrader* is also possible without having to write a *Strategy*.
+    Although this is the preferred way, due to the object hierarchy which makes up
+    the machinery, using *Signals* is also possible.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Note
+  prefs: []
+  type: TYPE_NORMAL
+- en: Available from version `1.8.0.x`
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Quick summary:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Instead of writing a *Strategy* class, instantiating *Indicators*, writing the
+    *buy/sell* logic …
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: The end user add *Signals* (indicators anyhow) and the rest is done in the background
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'Quick example:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: Et voilá!.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Of course the *Signal* itself is missing. Let’s define a very dum *Signal*
+    which yields:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`Long` indication if the `close` price is above a *Simple Moving Average*'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`Short` indication if the `close` price is below a *Simple Moving Average*'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'The definition:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: And now it is really done. When `run` is executed *Cerebro* will take care of
+    instantiating a special *Strategy* instance which knows what to do with the *Signals*.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Initial *FAQ*
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: How is the volume of *buy*/*sell* operations determined?
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: A *cerebro* instance adds automatically a `FixedSize` sizer to strategies. The
+    end user can change the sizer to alter the policy with `cerebro.addsizer`
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: How are orders executed?
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: The execution type is `Market` and the validity is *Good Until Canceled*
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '*Signals* technicalities'
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: 'From a technical and theoretical point of view can be as described:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: A callable that returns another *object* when called (only once)
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: This is in most cases the instantiation of a class, but must not be
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: Supports the `__getitem__` interface. The only requested *key*/*index* will
+    be `0`
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'From a practical point of view and looking at the example above a *Signal*
+    is:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: A *lines* object from the *backtrader* ecosystem, mostly an *Indicator*
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: This helps when using other *Indicators* like when in the example the *Simple
+    Moving Average* is used.
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '*Signals* indications'
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: 'The *signals* delivers indications when queried with `signal[0]` and the meaning
+    is:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`> 0` -> `long indication`'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`´< 0` -> `short indication`'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`´== 0` -> *No indication*'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'The example does simple arithmetic with `self.data - SMA` and:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Issues a `long indication` when the `data` is above the `SMA`
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Issues a `short indication` when the `data` is below the `SMA`
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Note
+  prefs: []
+  type: TYPE_NORMAL
+- en: When no specific price field is indicated for the `data`, the `close` price
+    is the reference price is.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*Signals* Types'
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: 'The *constants* indicated below as seen in the example above, are directly
+    available from the main *bactrader* module as in:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: There are 5 types of *Signals*, broken in 2 groups.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Main Group**:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`LONGSHORT`: both `long` and `short` indications from this signal are taken'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`LONG`:'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`long` indications are taken to go long'
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`short` indications are taken to *close* the long position. But:'
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: If a `LONGEXIT` (see below) signal is in the system it will be used to exit
+    the long
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: If a `SHORT` signal is available and no `LONGEXIT` is available , it will be
+    used to close a `long` before opening a `short`
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`SHORT`:'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`short` indications are taken to go short'
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`long` indications are taken to *close* the short position. But:'
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: If a `SHORTEXIT` (see below) signal is in the system it will be used to exit
+    the short
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: If a `LONG` signal is available and no `SHORTEXIT` is available , it will be
+    used to close a `short` before opening a `long`
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Exit Group**:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: This 2 signals are meant to override others and provide criteria for exitins
+    a `long`/`short` position
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`LONGEXIT`: `short` indications are taken to exit `long` positions'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`SHORTEXIT`: `long` indications are taken to exit `short` positions'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Accumulation and Order Concurrency
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: The sample *Signal* shown above will issue *long* and *short* indications on
+    a constant basis, because it simply substracts the `SMA` value from the `close`
+    price and this will always be either `> 0` and `< 0` (a couple of times `== 0`)
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'This would lead to a continuous generation of *orders* that would produce 2
+    situations:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`Accumulation`: even if already in the market, the *signals* would produce
+    new orders which would increase the possition in the market'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`Concurrency`: new orders would be generated without waiting for the execution
+    of other orders'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'To avoid this the default behavior is:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*To Not Accumulate*'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '*To Not allow Concurrency*'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'Should any of these two behaviors be wished, this can be controlled via `cerebro`
+    with:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`cerebro.signal_accumulate(True)` (or `False` to re-disable it)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`cerebro.signal_concurrency(True)` (or `False` to re-disable it)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: The sample
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: The *backtrader* sources contain a sample to test the functionality.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Main signal to be used.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE3]'
+  prefs: []
+  type: TYPE_PRE
+- en: And the *Exit Signal* in case the option is specified.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE4]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'First run: long and short'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[PRE5]'
+  prefs: []
+  type: TYPE_PRE
+- en: The output
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![image](../Images/384bc5c95cbff878e0ddb88222208df3.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'To notice:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The *Signal* is plotted. This is normal given it is simply an indicator and
+    the plotting rules for it apply
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: The strategy is really `long` and `short`. This can be seen because the *cash*
+    level never goes back to be the *value* level
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'Side note: even for a dumb idea … (and without commission) the strategy hasn’t
+    lost money …'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'Second run: long only'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[PRE6]'
+  prefs: []
+  type: TYPE_PRE
+- en: The output
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![image](../Images/ea8bbc88ab8acf36534b2d3c67e20744.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'To notice:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Here the cash level goes back to be the *value* level after each *sell*, which
+    means the strategy is out of the market
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'Side note: Again no money has been lost …'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'Third run: short only'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[PRE7]'
+  prefs: []
+  type: TYPE_PRE
+- en: The output
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![image](../Images/f88c47031b8b351ead6944a84a9494ad.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'To notice:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The 1^(st) operation is a *sell* as expected and takes place later than the
+    1^(st) operationa in the 2 examples above. Not until the `close` is below the
+    `SMA` and the simple substraction yields a minus
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Here the cash level goes back to be the *value* level after each *buy*, which
+    means the strategy is out of the market
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'Side note: Finally the system loses money'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'Fourth run: long + longexit'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[PRE8]'
+  prefs: []
+  type: TYPE_PRE
+- en: The output
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![image](../Images/3fe49f50b655dec475882d42aa5e25ea.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'To notice:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Many of the trades are the same, but some are interrupted earlier because the
+    fast movin average in the *exit* signal crosses the slow moving average to the
+    downside
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: The system shows its *longonly* property with the cash becoming the value at
+    the end of each trade
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'Side note: Again money … even with some modified trades'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Usage
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[PRE9]'
+  prefs: []
+  type: TYPE_PRE
+- en: The code
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[PRE10]'
+  prefs: []
+  type: TYPE_PRE

@@ -1,0 +1,151 @@
+- en: Bid-Ask Data to OHLC
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.backtrader.com/blog/posts/2016-04-14-bidask-data-to-ohlc/bidask-data-to-ohlc/](https://www.backtrader.com/blog/posts/2016-04-14-bidask-data-to-ohlc/bidask-data-to-ohlc/)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: Lately backtrader executed an escape-from-ohlc-land by implementing line overriding,
+    which allows to redefine the entire hierarchy and for example have data feeds
+    which only feature bid, ask and datetime lines.
+  prefs: []
+  type: TYPE_NORMAL
+- en: (Here to the original Escape from OHLC Land)
+  prefs: []
+  type: TYPE_NORMAL
+- en: This opens the question as to how to visualize such data and this is most effectively
+    done in `OHLC` format (be it a `bar` or a `candlestick`)
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Steps needed:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Define a Data Feed loader which can read the given `bid/ask` format
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: 'Decide to which fields to assign the values, ie: `open`, `high`, `low` and
+    `close` (and maybe `volume`'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Decide on a resampling scheme
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: 'Source data (10 rows of bid-ask data):'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'After which:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Reading the data will not be a major problem, given the end result has to be
+    OHLC and that’s what the built-in data feeds deliver after parsing. Because it
+    is yet another variant from *csv*. We can even reuse the `GenericCSVData` existing
+    feed. Thank God it is *generic*
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'Having only a single *price* element and a single *volume* element per line,
+    the price assignment is clear: *assign the price to the four price elements and
+    the volume to the volume*'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'When it comes down to resampling, rather than upsampling to a larger timeframe
+    the key will be the number of bars, ie: *compression*'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: And the built-in *resampler* can already deliver the same *timeframe* but compressed
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: 'Getting the data into OHLC format with the `GenericCSVData`:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Some of the arguments don’t even need to be changed, namely:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`tmformat`: because the time in the feed already matches the default format'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`datetime`: because the date is in the first position in the csv stream'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'The others:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`time=1`: indicates that time is not in a single field with `date` and which
+    position it has'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`open=5` (and the same for `high`, `low`, `close`): which field in the stream
+    will be used as source for the price'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`volume=7`: same as above'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`openinterest=-1`: a negative value indicates this field is not present'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'Once the data is on board it is about just resampling it:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'We provide the same `timeframe` which the data carries `TimeFrame.Ticks` to
+    make sure that the data is not *upsampled*. And the `compression` is taken as
+    an argument from the command line, hence: `compression=args.compression`'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'A sample execution:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE3]'
+  prefs: []
+  type: TYPE_PRE
+- en: And unsurprisingly we have gone from a *Bid/Ask* format to an *OHLC* format
+    and from `10` to `5` rows of data due to the `2` assigned to compression.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'It should also come to no surprise that `backtrader` cannot make miracles and
+    with a *compression* factor which is not a divisor of the total number of original
+    rows it will deliver `rows / compression + 1` new rows:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE4]'
+  prefs: []
+  type: TYPE_PRE
+- en: In this case `10 / 3 = 3.33333` and that’s why `4` rows are delivered.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Of course now with `OHLC` in the hand the results can be plotted. The chart
+    is not really nice due to the low amount of data and the low variance of the data
+    and how `matplotlib` internally handles this situation.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![image](../Images/85c14ac5921762847465ca04dac151fd.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: The sample code (included in the sources of `backtrader`)
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE5]'
+  prefs: []
+  type: TYPE_PRE

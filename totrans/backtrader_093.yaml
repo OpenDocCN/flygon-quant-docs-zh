@@ -1,0 +1,105 @@
+- en: Plotting on the same axis
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.backtrader.com/docu/plotting/sameaxis/plot-sameaxis/](https://www.backtrader.com/docu/plotting/sameaxis/plot-sameaxis/)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: The previous post future-spot, was plotting the original data and the slightly
+    (randomly) modified data on the same space, but not on the same axis.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Recovering the 1^(st) picture from that post.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![image](../Images/edcb266900eb3bb87615de0c21365c4a.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'One can see:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: There are different scales on the left and right hand sides of the chart
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: This is most obvious when looking at the swinging red line (the randomized data)
+    which oscillates `+- 50` points around the original data.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: On the chart the visual impression is that this randomized data is mostly always
+    above the original data. Which is only a visual impression due to the different
+    scales.
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: Although release `1.9.32.116` already had some initial support to fully plot
+    on the same axis, the legend labels would be duplicated (only the labels, not
+    the data) which was really confusing.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Release `1.9.33.116` cures that effect and allows full plotting on the same
+    axis. The usage pattern is like the one to decide with which other data to plot.
+    From the previous post.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: '`data1` gets some `plotinfo` values to:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Plot on the same space as `plotmaster` which is `data0`
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Get the indication to use the `sameaxis`
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: The reason for this indication is that the platform cannot know in advance if
+    the scales for each data will be compatible. That’s why it will plot them on independent
+    scales
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: 'The previous sample gets an additional option to plot on the `sameaxis`. A
+    sample execution:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: And the resulting chart
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![image](../Images/beb74141e9a847b2bac618c28c5a37cf.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'To notice:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Only one scale on the right hand side
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: And now the randomized data seems to clearly oscillate around the original data
+    which is the expected visual behavior
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Sample Usage
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: Sample Code
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '[PRE3]'
+  prefs: []
+  type: TYPE_PRE

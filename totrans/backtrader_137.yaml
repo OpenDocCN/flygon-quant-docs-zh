@@ -1,0 +1,259 @@
+- en: BTFD (Buy The F… Dip)
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.backtrader.com/blog/posts/2016-12-26-btfd/btfd/](https://www.backtrader.com/blog/posts/2016-12-26-btfd/btfd/)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: Note
+  prefs: []
+  type: TYPE_NORMAL
+- en: Added operations log for the `CloseClose` approach (updated sample below too)
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'A post in *Reddit* calling for replication of a `BTFD` strategy turned out
+    to be the little push needed to add yet another feature to *backtrader*: `leverage`'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'The links:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Reddit Thread](https://www.reddit.com/r/algotrading/comments/5jez2b/can_anyone_replicate_this_strategy/)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Dark Bid BTFD](http://dark-bid.com/BTFD-only-strategy-that-matters.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'In the *Reddit* thread there was finally no full replication of the results
+    from *Dark Bid*. But it can be done. Although one has to point something out from
+    the start:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*Dark Bid* is not showing a true chart and the explanation about the strategy
+    is really lacking and probably would be deemed as *wrong* by most'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Let’s have a direct look at the chart here (remember the chart is from the *Dark
+    Bid BTFD* post)
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![image](../Images/f6156fbbfeb5d73ad80d28f098ae9ae6.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'The interpretation most people would probably do:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*Buy The Close*: this part is clear. Buy during the *closing auction*'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '*When S&P Is Down At Least 1%*: in most cases that means that the *current
+    close* is `1%` below the previous *close*'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '*Hold For 2 Days*: the interpretation here would be to sell *at the close*
+    2 trading sessions later'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '*2x Leverage*: Each *buy* operation is leveraged 2x (or *100%* credit)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'Additionals:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The data seems to run from `1990-01-01` to `2016-09-30`
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: The starting cash value seems to start at `100,000`
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Note
+  prefs: []
+  type: TYPE_NORMAL
+- en: Notice there are no *commissions* or *credit interest* being charged.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The sample below is configured with the *winning settings*, but the first execution
+    will respect the interpreted rules.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: Note
+  prefs: []
+  type: TYPE_NORMAL
+- en: The sample accepts an `--offline` parameter to use a file previously downloaded
+    from *Yahoo* to speed up testing. If not used, the data with the default dates
+    quoted above and the default ticker `^GSPC` will be downloaded each and every
+    time from *Yahoo*
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![image](../Images/07fcfafb3859b2c0915668f1ab7ef435.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'Houston, we have a problem! Although not so big as expected. Observations:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our *asset* has gone from `100,000` to `602,816` and this seems right on spot
+    with the `BTFD` chart above
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Our `100,000` cash, on the other hand, has only gone up to `357,277` which seems
+    `10x` below the expected value over `3,000,000` (or `3M`)
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: In this case `value` and `value_unlever` are equal, which means that the strategy
+    is *NOT IN THE MARKET*
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'But the most interesting thing is: the clear difference in the **red** lines
+    which show the value over time'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our line has very quick *ups* and *downs*
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: This is due to *leverage*. When the strategy is bought the `2x` leverage allows
+    to buy two times the asset.
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: But when the strategy is in cash, the cash is not worth twice its value.
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: The `BTFD` line doesn’t exhibit this behavior and that’s because it is **ALWAYS**
+    leveraged
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Ok. First part of the `BTFD` mystery … *SOLVED*! But we still have a problem
+    and this is matching the performance achieved by *Dark Bid*. Without much ado,
+    a run of the sample with the default winning settings.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: Note
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`approach=highlow` is the default setting if the sample is run with no *approach*
+    argument to the strategy'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![image](../Images/6ce5db65b601d2c12212ec94f1fb9aab.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'In this case:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The difference between the `high` and the `low` is used.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Of course this isn’t *“Is Down At least 1%* as indicated in the `BTFD` chart.
+    This is something different, because the `low` may also have happened before the
+    `high` and many would see this as *being up* rather than *down*
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: Note
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'The strategy allows these approaches: `closeclose`, `highlow`, `highclose`
+    and `openclose`.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'But:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The `value` of the system is `3,184,118`. Ant this is a *winner* because the
+    visual inspection of the `BTFD` chart shows that the final value is over `3M`
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'The *unleveraged value* (`value_unlever`) of the system is: `1,592,608` which
+    is not the above. This simply tells us that the strategy **IS IN THE MARKET**'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Obviously and in about 1 or 2 days, the strategy will sell the position and
+    the real cash value will be around `1,592,608` and by no means close to `3,184,118`.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The `1.5M` value was the best observation achieved by the original *Reddit*
+    poster.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Conclusion
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: 'The complete `BTFD` mystery is solved. The keys:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The `value` line plotted in the chart isn’t real, because it is always *leveraged*
+    and not only when being bought
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: The approach is not really to buy when the asset is *at least 1% down* as commonly
+    understood (*previous close to current close*) but when the asset has *at least
+    a 1% difference between the high and the low*
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: The real gains are roughly `16x` (from `100,000` to roughly `1,592,000`) and
+    in *NO CASE* `31x` (from `100,000` to `3.1M`)
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Sample usage
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: Sample Code
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '[PRE3]'
+  prefs: []
+  type: TYPE_PRE
+- en: Operations Logs
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '`CloseClose` Approach'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'Execution:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE4]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Result:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE5]'
+  prefs: []
+  type: TYPE_PRE

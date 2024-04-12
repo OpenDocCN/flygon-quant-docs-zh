@@ -1,0 +1,85 @@
+- en: Dickson Moving Average
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.backtrader.com/blog/posts/2016-08-18-dickson-moving-average/dickson-moving-average/](https://www.backtrader.com/blog/posts/2016-08-18-dickson-moving-average/dickson-moving-average/)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: The *reddit* post from below names this average the *Dickson Moving Average*
+    after its own author *Nathan Dickson* (*reddit* handle)
+  prefs: []
+  type: TYPE_NORMAL
+- en: In one of the regular visits to [reddit Algotrading](https://www.reddit.com/r/algotrading/)
+    I found a post about a moving average which tries to mimic the Jurik Moving Average
+    (aka *JMA*)
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Dickson Moving Average](https://www.reddit.com/r/algotrading/comments/4xj3vh/dickson_moving_average/)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[JMA on Jurik Research](http://www.jurikres.com/catalog1/ms_ama.htm)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Described as an algorithm in *EasyLanguage* I had to ask about the seed values
+    and the nature of `ec` and this finally led to *Ehlers* and the *Zero Lag Indicator*
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[ZERO LAG](http://www.mesasoftware.com/papers/ZeroLag.pdf)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: In order to implement the *Dickson Moving Average* into *backtrader* and given
+    the dependencies on *Ehlers* and also on the *Hull Moving Average*, those two
+    were also added to the arsenal of moving averages.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'In summary the following has been added with `Release 1.8.7.96`:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`Hull Moving Average`'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`Zero Lag Indicator`'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`Dickson Moving Average`'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'And the results can be seen with a plot using one of the sample datas and `btrun`:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![image](../Images/6e038c70644378e5a556d5c06b6d6192.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Now it’s about getting the *Dickson Moving Average* to produce profit … like
+    with any other indicator.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Note
+  prefs: []
+  type: TYPE_NORMAL
+- en: Notice how the *Hull Moving Average* (aka *HMA*) starts producing values a couple
+    of values later than the rest. This is due to the fact that is uses a *moving
+    average* on *moving average* which delays the initial production.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'And a comparison showing how the *DMA* sits in between the middle of a *ZeroLagIndicator*
+    and a *HullMovingAverage*. The latter with a `period=7` to match the default value
+    inside the *Dickson Moving Average*:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![image](../Images/d67d125f4397f67fac3ef1b29301f55a.png)'
+  prefs: []
+  type: TYPE_IMG

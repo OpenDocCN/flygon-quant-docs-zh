@@ -1,0 +1,975 @@
+- en: Visual Chart
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.backtrader.com/docu/live/vc/vc/](https://www.backtrader.com/docu/live/vc/vc/)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: 'The integration with Visual Chart supports both:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*Live Data* feeding'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '*Live Trading*'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '*Visual Chart* is a complete trading solution:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Integrated Charting, data feed and brokering in a single platform
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'For more information visit: [www.visualchart.com](http://www.visualchart.com)'
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: Requirements
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '*VisualChart 6*'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '*Windows* - the one VisualChart is running on'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`comtypes` fork: [https://github.com/mementum/comtypes](https://github.com/mementum/comtypes)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'Install it with: `pip install https://github.com/mementum/comtypes/archive/master.zip`'
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: The *Visual Chart* API is based on *COM*.
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: The current `comtypes` main branch doesn’t support unpacking of `VT_ARRAYS`
+    of `VT_RECORD`. And this is used by *Visual Chart*
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '[Pull Request #104](https://github.com/enthought/comtypes/pull/104) has been
+    submitted but not yet integrated. As soon as it is integrated, the main branch
+    can be used.'
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '`pytz` (optional but really recommended)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: To make sure each and every data is returned in the market time.
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: This is true for most markets but some are really an exception (`Global Indices`
+    being a good example)
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: Time Management inside *Visual Chart* and its relation with the delivered times
+    over *COM* is complex and having `pytz` tends to simplify things.
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: Sample Code
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: 'The sources contain a full sample under:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`samples/vctest/vctest.py`'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: The sample cannot cover every possible use case but it tries to provide broad
+    insight and should highlight that there is no real difference when it comes to
+    use the backtesting module or the live data module
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'One thing could be pin-pointed:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The sample waits for a `data.LIVE` data status notification before any trading
+    activity takes place.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: This would probably is something to consider in any live strategy
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: VCStore - the store
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: The store is the keystone of the live data feed/trade support, providing a layer
+    of adaptation between the *COM* API and the needs of a data feed and a broker
+    proxy.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Providesaccess to getting a *broker* instance with the method:'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`VCStore.getbroker(*args, **kwargs)`'
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Provides access to getter *data* feed instances
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`VCStore.getedata(*args, **kwargs)`'
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: In this case many of the `**kwargs` are common to data feeds like `dataname`,
+    `fromdate`, `todate`, `sessionstart`, `sessionend`, `timeframe`, `compression`
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: The data may provide other params. Check the reference below.
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: 'The `VCStore` will try to:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Automatically locate *VisualChart* in the system using the *Windows Registry*
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: If found, the installation directory will be scanned for the *COM* DLLs to create
+    the *COM* *typelibs* and be able to instantiate the appropriate objects
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: If not found, then an attempt will be made with known and hardcoded *CLSIDs*
+    to do the same.
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Note
+  prefs: []
+  type: TYPE_NORMAL
+- en: Even if the DLLs can be found by scanning the filesystem, *Visual Chart* itself
+    has to be running. backtrader won’t start *Visual Chart*
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Other responsibilities of the `VCStore`:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Keeping general track of the connectivity status of *Visual Chart* to the server
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: VCData feeds
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: General
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'The data feed offered by *Visual Chart* has some interesting properties:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Resampling** is done by the platform'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'Not in all cases: *Seconds* is not supported and has still to be done by *backtrader*'
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: 'As such and only when doing something with seconds would the end user need
+    to do:'
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs:
+  - PREF_IND
+  type: TYPE_PRE
+- en: 'In all other cases it is enough with:'
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs:
+  - PREF_IND
+  type: TYPE_PRE
+- en: The data will calculate a `timeoffset` internally by comparing the internal
+    equipment clock and the `ticks` delivered by the platform in order to deliver
+    the *automatically* resampled bars as early as possible if no new ticks are coming
+    in.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Instantiating the data:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Pass the symbol seen on the top-left side of *VisualChart* without spaces.
+    For example:'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '*ES-Mini* is displayed as `001 ES`. Instantiate it as:'
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs:
+  - PREF_IND
+  type: TYPE_PRE
+- en: '*EuroStoxx 50* is displayed as `015 ES`. Instantiate it as:'
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[PRE3]'
+  prefs:
+  - PREF_IND
+  type: TYPE_PRE
+- en: Note
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*backtrader* will make an effort and clear out a whitespace located at the
+    fourth position if the name is directly pasted from *Visual Chart*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Time management
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: The time management follow the general rules of *backtrader*
+  prefs: []
+  type: TYPE_NORMAL
+- en: Give the time in *Market* time, to make sure the code is not dependent on DST
+    transitions happening at different times and making local time not reliable for
+    time comparisons.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'This works for most markets in *Visual Chart* but some specific management
+    is done for some markets:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Datas in the exchange `096` which is named `International Indices`.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: These are theoretically reported to be in the timezone `Europe/London` but tests
+    have revealed this seems to be partially true and some internal management is
+    in place to cover for it.
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: The use of real *timezones* for time management can be enabled by passing the
+    parameter `usetimezones=True`. This tries to use `pytz` if available. It is not
+    needed, as for most markets the internal time offsets provided by *Visual Chart*
+    allow for the seamless conversion to the market time.
+  prefs: []
+  type: TYPE_NORMAL
+- en: In any case it would seem to be pointless to report the `096.DJI` in `Europe/London`
+    time when it is actually located in `US/Eastern`. As such `backtrader` will report
+    it in the later. In that case the use of `pytz` is more than recommended.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Note
+  prefs: []
+  type: TYPE_NORMAL
+- en: The *Dow Jones Industrials* index (not the global version) is located at `099I-DJI`
+  prefs: []
+  type: TYPE_NORMAL
+- en: Note
+  prefs: []
+  type: TYPE_NORMAL
+- en: All this time management is pending a real test during a DST transition in which
+    local and remote markets happend to be out of sync with regards to DST.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'List of `International Indices` for which the output *timezone* is defined
+    in `VCDATA`:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE4]'
+  prefs: []
+  type: TYPE_PRE
+- en: Small time problem
+  prefs:
+  - PREF_H4
+  type: TYPE_NORMAL
+- en: Passing `fromdate` or `todate` with a given **time of day** rather than the
+    default `00:00:00` seems to create a filter in the *COM* API and bars for any
+    days will only be delivered after the given time.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'As such:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Please pass only **full dates** to `VCData` as in:'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[PRE5]'
+  prefs:
+  - PREF_IND
+  type: TYPE_PRE
+- en: 'And not::'
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '[PRE6]'
+  prefs:
+  - PREF_IND
+  type: TYPE_PRE
+- en: Backfilling time lengths
+  prefs:
+  - PREF_H4
+  type: TYPE_NORMAL
+- en: 'If no `fromdate` is specified by the end user, the platform will automatically
+    try to backfill and the carry on with live data. The backfilling is timeframe
+    dependent and is:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`Ticks`, `MicroSeconds`, `Seconds`: **1 Day**'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: The same for the 3 timeframes given that *Seconds* and *MicroSeconds* are not
+    directly supported by *Visual Chart* and are done through resampling of *Ticks*
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '`Minutes`: **2 Days**'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`Days`: **1 year**'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`Weeks`: **2 years**'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`Months`: **5 years**'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`Months`: **20 years**'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'The defined backfilling periods are multiplied by the requested `compression`,
+    that is: if the *timeframe* is `Minutes` and the *compression* is 5 the final
+    *backfilling period* will be: `2 days * 5 -> 10 days`'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Trading the data
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '*Visual Chart* offers **continuous futures**. No manual management is needed
+    and the future of your choice can be tracked without interruption. This is an
+    advantage and presents a small challenge:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`ES-Mini` is `001ES`, but the actual trading asset (ex: Sep-2016) is `ESU16`.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'To overcome this and allow a strategy to track the *continuous future* and
+    trade on the *real asset* the following can be specified during data instantiation:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE7]'
+  prefs: []
+  type: TYPE_PRE
+- en: Trades will happen on `ESU16`, but the data feed will be frm `001ES` (the data
+    is the same 3 months long)
+  prefs: []
+  type: TYPE_NORMAL
+- en: Other parameters
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '`qcheck` (default: `0.5` seconds) controls the frequency to wake up to talk
+    to the internal resampler/replayer to avoid late delivery of bars.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'The following logic will be applied to used this parameter:'
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: If internal *resampling/replaying* is detected, the value will be used as it
+    is.
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: If no internal *resampling/replaying* is detected, the data feed will not wake
+    up, because there is nothing to report to.
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: The data feed will still wake up to check the *Visual Chart* built-in resampler,
+    but this is automatically controlled.
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: Data Notifications
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: The data feed will report the current status via one or more of the following
+    (check the *Cerebro* and *Strategy* reference)
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`Cerebro.notify_data` (if overriden)n'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: A callback addded with `Cerebro.adddatacb`
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`Strategy.notify_data` (if overriden)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'An example inside the *strategy*:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE8]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'The following notifications will be sent following changes in the system:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`CONNECTED`'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Sent on successful initial connection
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '`DISCONNECTED`'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'In this case retrieving the data is no longer possible and the data will indicate
+    the system nothing can be done. Possible conditions:'
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: Wrong contract specified
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Interruption during historical download
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Number of reconnection attempts to TWS exceeded
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`CONNBROKEN`'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Connectivity has been lost to either TWS or to the data farms. The data feed
+    will try (via the store) to reconnect and backfill, when needed, and resume operations
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '`NOTSUBSCRIBED`'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Contract and connection are ok, but the data cannot be retrieved due to lack
+    of permissions.
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: The data will indicate to the system that it cannot retrieve the data
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '`DELAYED`'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Signaled to indicate that a *historical*/*backfilling* operation are in progress
+    and the data being processed by the strategy is not real-time data
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '`LIVE`'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Signaled to indicate that the data to be processed from this point onwards by
+    the *strategy* is real-time data
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: Developers of *strategies* should consider which actions to undertake in cases
+    like when a disconnection takes place or when receiving **delayed** data.
+  prefs: []
+  type: TYPE_NORMAL
+- en: VCBroker - Trading Live
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: Using the broker
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: To use the *VCBroker*, the standard broker simulation instance created by *cerebro*
+    has to be replaced.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Using the *Store* model (preferred):'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE9]'
+  prefs: []
+  type: TYPE_PRE
+- en: Broker Parameters
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Be it directly or over `getbroker` the `VCBroker` broker supports no parameters.
+    This is because the broker is just a proxy to the a real *Broker*. And what the
+    real broker gives, shall not be taken away.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Restrictions
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Position
+  prefs:
+  - PREF_H4
+  type: TYPE_NORMAL
+- en: '*Visual Chart* reports **open positions**. This could be used most of the time
+    to control the actual position, but a final event indicating a *Position* has
+    been closed is missing.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: That makes it compulsory for *backtrader* to keep full accounting of the *Position*
+    and separate from any previous existing position in your account
+  prefs: []
+  type: TYPE_NORMAL
+- en: Commission
+  prefs:
+  - PREF_H4
+  type: TYPE_NORMAL
+- en: 'The *COM* trading interface doesn’t report commissions. There is no chance
+    for *backtrader* to make and educated guess, unless:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The *broker* is instantiated with a *Commission* instance indicating which commissions
+    do actually take place.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Trading with it
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Account
+  prefs:
+  - PREF_H4
+  type: TYPE_NORMAL
+- en: '*Visual Chart* supports several accounts at the same time in one broker. The
+    chosen account can be controlled with the parameter:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`account` (default: `None`)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: VisualChart supports several accounts simultaneously on the broker. If the default
+    `None` is in place the 1^(st) account in the ComTrader `Accounts` collection will
+    be used.
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: If an account name is provided, the `Accounts` collection will be checked and
+    used if present
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: Opperations
+  prefs:
+  - PREF_H4
+  type: TYPE_NORMAL
+- en: There is no change with regards to the standar usage. Just use the methods available
+    in the strategy (see the `Strategy` reference for a full explanation)
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`buy`'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`sell`'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`close`'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`cancel`'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Order objects returned
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Standard *backtrader* `Order` objects
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Order Execution Types
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '*Visual Chart* supports the minimum order execution types needed by *backtrader*
+    and as such, anyhing which is backtested can go live.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'As such the order execution types are limited to the ones available in the
+    *broker simulation*:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`Order.Market`'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`Order.Close`'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`Order.Limit`'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`Order.Stop` (when the *Stop* is triggered a *Market* order follows)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`Order.StopLimit` (when the *Stop* is triggered a *Limit* order follows)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Order Validity
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'The same validity notion available during backtesting (with `valid` to `buy`
+    and `sell`) is available and with the same meaning. As such, the `valid` parameter
+    is translated as follows for *Visual Chart Orders* for the following values:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`None` translates to *Good Til Cancelled*'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Because no validity has been specified it is understood that the order must
+    be valid until cancelled
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '`datetime/date` translates to *Good Til Date*'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Note
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: 'Beware: *Visual Chart* does only support “full dates” and the *time* part is
+    discarded.'
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '`timedelta(x)` translates to *Good Til Date* (here `timedelta(x) != timedelta()`)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Note
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: 'Beware: *Visual Chart* does only support **full dates** and the *time* part
+    is discarded.'
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: This is interpreted as a signal to have an order be valid from `now` + `timedelta(x)`
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '`timedelta() or 0` translates to *Session*'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: A value has been passed (instead of `None`) but is *Null* and is interpreted
+    as an order valid for the current *day* (session)
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: Notifications
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: The standard `Order` status will be notified to a *strategy* over the method
+    `notify_order` (if overridden)
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`Submitted` - the order has been sent to TWS'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`Accepted` - the order has been placed'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`Rejected` - order placement failed or was cancelled by the system during its
+    lifetime'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`Partial` - a partial execution has taken place'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`Completed` - the order has been fully executed'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`Canceled` (or `Cancelled`)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`Expired` - Not reported as of yet. An heuristic would be needed to distinguish
+    this status from `Cancelled`'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Reference
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: VCStore
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: class backtrader.stores.VCStore()
+  prefs:
+  - PREF_H4
+  type: TYPE_NORMAL
+- en: Singleton class wrapping an ibpy ibConnection instance.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The parameters can also be specified in the classes which use this store, like
+    `VCData` and `VCBroker`
+  prefs: []
+  type: TYPE_NORMAL
+- en: VCBroker
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: class backtrader.brokers.VCBroker(**kwargs)
+  prefs:
+  - PREF_H4
+  type: TYPE_NORMAL
+- en: Broker implementation for VisualChart.
+  prefs: []
+  type: TYPE_NORMAL
+- en: This class maps the orders/positions from VisualChart to the internal API of
+    `backtrader`.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Params:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`account` (default: None)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: VisualChart supports several accounts simultaneously on the broker. If the default
+    `None` is in place the 1^(st) account in the ComTrader `Accounts` collection will
+    be used.
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: If an account name is provided, the `Accounts` collection will be checked and
+    used if present
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '`commission` (default: None)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: An object will be autogenerated if no commission-scheme is passed as parameter
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: See the notes below for further explanations
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: Notes
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Position
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: VisualChart reports “OpenPositions” updates through the ComTrader interface
+    but only when the position has a “size”. An update to indicate a position has
+    moved to ZERO is reported by the absence of such position. This forces to keep
+    accounting of the positions by looking at the execution events, just like the
+    simulation broker does
+  prefs: []
+  type: TYPE_NORMAL
+- en: Commission
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: The ComTrader interface of VisualChart does not report commissions and as such
+    the auto-generated CommissionInfo object cannot use non-existent commissions to
+    properly account for them. In order to support commissions a `commission` parameter
+    has to be passed with the appropriate commission schemes.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The documentation on Commission Schemes details how to do this
+  prefs: []
+  type: TYPE_NORMAL
+- en: Expiration Timing
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: The ComTrader interface (or is it the comtypes module?) discards `time` information
+    from `datetime` objects and expiration dates are always full dates.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Expiration Reporting
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: At the moment no heuristic is in place to determine when a cancelled order has
+    been cancelled due to expiration. And therefore expired orders are reported as
+    cancelled.
+  prefs: []
+  type: TYPE_NORMAL
+- en: VCData
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: class backtrader.feeds.VCData(**kwargs)
+  prefs:
+  - PREF_H4
+  type: TYPE_NORMAL
+- en: VisualChart Data Feed.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Params:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`qcheck` (default: `0.5`) Default timeout for waking up to let a resampler/replayer
+    that the current bar can be check for due delivery'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: The value is only used if a resampling/replaying filter has been inserted in
+    the data
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '`historical` (default: `False`) If no `todate` parameter is supplied (defined
+    in the base class), this will force a historical only download if set to `True`'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: If `todate` is supplied the same effect is achieved
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '`milliseconds` (default: `True`) The bars constructed by *Visual Chart* have
+    this aspect: HH:MM:59.999000'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'If this parameter is `True` a millisecond will be added to this time to make
+    it look like: HH::MM + 1:00.000000'
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '`tradename` (default: `None`) Continous futures cannot be traded but are ideal
+    for data tracking. If this parameter is supplied it will be the name of the current
+    future which will be the trading asset. Example:'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 001ES -> ES-Mini continuous supplied as `dataname`
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: ESU16 -> ES-Mini 2016-09\. If this is supplied in `tradename` it will be the
+    trading asset.
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`usetimezones` (default: `True`) For most markets the time offset information
+    provided by *Visual Chart* allows for datetime to be converted to market time
+    (*backtrader* choice for representation)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Some markets are special (`096`) and need special internal coverage and timezone
+    support to display in the user expected market time.
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: If this parameter is set to `True` importing `pytz` will be attempted to use
+    timezones (default)
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: Disabling it will remove timezone usage (may help if the load is excesive)
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL

@@ -1,0 +1,12 @@
+- en: Introduction
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.backtrader.com/recipes/storesbrokersdata/intro/](https://www.backtrader.com/recipes/storesbrokersdata/intro/)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: This section host a collection of third-party *Stores* (or individual *Broker*
+    / *Data Feed*) implementations which are not part of the *backtrader* core.
+  prefs: []
+  type: TYPE_NORMAL

@@ -1,0 +1,114 @@
+- en: Developing a Recursive Indicator (with a seed)
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.backtrader.com/blog/posts/2018-01-27-recursive-indicators/recursive-indicator/](https://www.backtrader.com/blog/posts/2018-01-27-recursive-indicators/recursive-indicator/)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: 'One of the initial goals of *backtrader* was:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Being able to quickly prototype indicators to test new ideas
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'It doesn’t have to be a perfect indicator, but being able to quickly and easily
+    develop them does help. To confirm the design was righ, one of the first indicators
+    to be in the standard arsenal of *backtrader* was an *Exponential Moving Average*
+    (aka *EMA*) which by definition is: **recursive**.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Note
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Trivia: as you may imagine the 1^(st) ever indicator was a *SimpleMovingAverage*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Since the question of how to develop a recursive indicator has been posted in
+    the [backtrader community](https://community.backtrader.com/topic/833/indicator-values-before-period-kicks-in)
+    let’s develop a quick `ExponentialMovingAverage` indicators.
+  prefs: []
+  type: TYPE_NORMAL
+- en: A recursive indicator like the
+  prefs: []
+  type: TYPE_NORMAL
+- en: It uses the previous value to calculate the current value
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: You can see the mathematics for example in [Wikipedia - Exponential Moving Average](https://en.wikipedia.org/wiki/Moving_average#Exponential_moving_average)
+  prefs: []
+  type: TYPE_NORMAL
+- en: If you have been brave enough to read it all, you’ll have seen that the period
+    is used to calculate the *Exponential Smoothing*. We’ll use it.
+  prefs: []
+  type: TYPE_NORMAL
+- en: To solve the conundrum for the calculation of the first value the *industry*
+    settled on using a simple average of the previous `period` values.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'As a leverage we are going to use `bt.indicators.PeriodN` which:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Already defines a `period` parameter
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Informs the framework about the actual `period` used by the end user
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'See its definition at: [Docs - Indicator Reference](https://www.backtrader.com/docu/indautoref.html)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Let’s then develop our `EMA`
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: Almost easier done than said. The key being the provision of the seed value
+    in `nextstart`, which
+  prefs: []
+  type: TYPE_NORMAL
+- en: Will be called once, when the minimum warmp up period of the indicator has been
+    met.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: As opposed to `next` which will be then called for each new data value that
+    is delivered into the system
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: The default implementation of `nextstart` simply delegates the job to `next`
+    which for most indicators (for example a *Simple Moving Average*) is the right
+    thing to do. But in this case overriding and providing the seed value is the key.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Plotting it along the data
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: 'Being a moving average, it would be nice if the indicator plotted on the same
+    axis as the data for which it calculates the average. Because we have inherited
+    from `PeriodN` the default value for plotting is (see it in the docs):'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: which of course means that a `subplot` (another axis on the chart) will be created
+    for our indicator. This can be easily overridden.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: And done. If you want to control more plotting options check [Docs - Plotting](https://www.backtrader.com/docu/plotting/plotting.html)
+  prefs: []
+  type: TYPE_NORMAL
+- en: Good Luck!
+  prefs: []
+  type: TYPE_NORMAL

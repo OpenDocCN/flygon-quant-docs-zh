@@ -1,0 +1,242 @@
+- en: Release 1.9.51.121
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.backtrader.com/blog/posts/2017-06-12-release-1.9.51.121/release-1.9.51.121/](https://www.backtrader.com/blog/posts/2017-06-12-release-1.9.51.121/release-1.9.51.121/)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: Even being a minor release, there are some interesting things which probably
+    grant having a dedicated blog post for them.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`linealias`'
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '[Pull-Request #320](https://github.com/mementum/backtrader/pull/320) included
+    the indicator `RelativeMomentumIndex` (or `RMI`) which according to the literature
+    is an evolution of the `RSI`, which:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Considers *up* and *down* periods with a lookback larger than `1`
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'As such and rather than having an indicator repeating most of what the `RSI`
+    does, it seemed useful to do two things:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Extend `RSI` (and sub-indicators like `UpDay` and `DownDay` to support a lookback
+    period larger than *1*. `RMI` can then be implemented as a subclass which simply
+    has some different default values.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: The logical name for the line of the `RMI` indicator is `rmi`, but the `RSI`
+    already has decided the name as `rsi`. This is solved by adding a new functionality
+    named `linealias`
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: 'The `RMI` implementation it looks like this:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: An alias for the line `rsi` from the base class is added, with the name `rmi`.
+    If someone wanted to make a subclass and use the name `rmi` it would now be possible.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Additionally, the plotting name of the `rsi` line is also changed to `rmi`.
+    An alternative implementation was possible:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: Here the existing hierarchy from `RSI` is no longer considered and `lines` is
+    used to define the only line named `rmi`. There is no need to define the plotting
+    name, because the only line has now the expected name.
+  prefs: []
+  type: TYPE_NORMAL
+- en: But the base class would fail to fill in the values, because it is expecting
+    a line with the name `rsi` to be in place. Hence the addition of a reverse alias
+    to let it find the line.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Interactive Brokers for Optimization
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: Using a live connection to *Interactive Brokers* as the data source for optimization
+    was not foreseen. Yet a user tried it and pacing violations started being met.
+    The reason being that the *Interactive Brokers* data feed marks itself as being
+    a `live` feed, allowing the system to bypass some things like for example data
+    preloading.
+  prefs: []
+  type: TYPE_NORMAL
+- en: With no preloading, each instance of the optimization would retry to re-download
+    the same historical data from *Interactive Brokers*. With this in mind it’s obvious
+    that the feed could look to see if the user has requested just a historical download
+    and in this case not report itself as `live`, allowing the platform to preload
+    the data and share it amongst optimization instances.
+  prefs: []
+  type: TYPE_NORMAL
+- en: See the community thread. [Optimizing with IBStore causes redundant connections/downloads](https://community.backtrader.com/topic/401/optimizing-with-ibstore-causes-redundant-connections-downloads/)
+  prefs: []
+  type: TYPE_NORMAL
+- en: Heikin-Ashi Candlesticks
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: 'This other community thread was looking to develop the *Heikin-Ashi* candlesticks
+    as an indicator: [Develop Heikinashi Indicators](https://community.backtrader.com/topic/458/develop-heikinashi-indicators),
+    facing some problems with the recursive definition, because a seed value is needed,
+    which can be done during the `prenext` phase of the indicator.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Being an interesting display alternative to the traditional candlesticks, this
+    has been implemented as a filter, which allows to modify the data source to really
+    deliver *Heikin-Ashi* candlesticks. Just like this:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'A comparison between the candles can quickly be made by anyone with this code:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE3]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'To plot candles, remember to do:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE4]'
+  prefs: []
+  type: TYPE_PRE
+- en: Using the sample daily data for 2005 and 2006 in the sources.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![image](../Images/c466810422fd622c2e203a120de0b7ff.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: And zooming in a bit to better appreciate the differences
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![image](../Images/d7c81984c3f957a8e072287d7fc4f2a5.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Allowing re-scaling of the y-axis by secondary actors
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: The axisfor data feeds have always used the main data feed as the scale-owner,
+    because the data is always the most important part of the view. If we consider
+    for example the `BollingerBands`, it could be that the top band would be far away
+    from the maximum of the data and allowing this band to re-scale the chart, would
+    reduce the size occupied by the data in the chart, which wouldn’t be wished.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'The behavior can be controlled now with `plotylimited` as in:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE5]'
+  prefs: []
+  type: TYPE_PRE
+- en: In the following chart the data feed at the bottom is plotted with `plotylimited=False`.
+    The *BollingerBands* don’t get off the chart, because they contribute to the scaling
+    and everything fits in the chart.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![image](../Images/7293eeff204d81ce97b50943b5d7cf96.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: This was also commented in the community. [How max - min plot boundaries are
+    set?](https://community.backtrader.com/topic/339/how-max-min-plot-boundaries-are-set/)
+  prefs: []
+  type: TYPE_NORMAL
+- en: Semilogarithmic Plot (aka Logarithmic)
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: 'Individual axis can now be plotted with a semilogarithmic scale (the y-scale).
+    For example with:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE6]'
+  prefs: []
+  type: TYPE_PRE
+- en: That means that the axis controlled by this data feed for plotting will use
+    a logarithmic scale, but other won’t and therefore
+  prefs: []
+  type: TYPE_NORMAL
+- en: A moving average plotted over the data will also be plotted with that scale
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: A stochastic (which is in a different axix and has a different scale) will still
+    be plotted linearly
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Note
+  prefs: []
+  type: TYPE_NORMAL
+- en: Notice that `plotylimited=True` is used. This is to let `matplotlib` calculate
+    the limits of the logarithmic chart (because the ticks are a power of 10) properly
+    to fit things into the chart.
+  prefs: []
+  type: TYPE_NORMAL
+- en: A sample simply comparing a long term period of *Yahoo* data.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![image](../Images/251c9a31b8112a63d7d89057b0627124.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Allow plotmaster to point to itself
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: 'Plotting several data feeds on the same axis was already possible, but a small
+    nuisance didn’t allow a clean loop to set the `plotinfo.plotmaster` value. The
+    following had to be done before:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE7]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'And this cleaner loop is possible now:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE8]'
+  prefs: []
+  type: TYPE_PRE
+- en: And `dnames` got documented
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: 'Referencing the data feeds by names was already available, but it had skipped
+    making it to the documentation, so it was a hidden jewel. The `dnames` attribute
+    in the strategy supports *dot-notation* and *[]* notation (it is actually a `dict`
+    subclass). If we first add some data feeds:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE9]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Later in the strategy one can do the following:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE10]'
+  prefs: []
+  type: TYPE_PRE
+- en: Conclusion
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: A small release with small changes which adds some nifty features.
+  prefs: []
+  type: TYPE_NORMAL

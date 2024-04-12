@@ -1,0 +1,170 @@
+- en: Sizers Smart Staking
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.backtrader.com/blog/posts/2016-07-23-sizers-smart-staking/sizers-smart-staking/](https://www.backtrader.com/blog/posts/2016-07-23-sizers-smart-staking/sizers-smart-staking/)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: Release 1.6.4.93 marks a major milestone in *backtrader* even if the change
+    in version numbering is a minor one.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*Position Sizing* is one of the things that actually set the foundation for
+    this project after reading [Trade Your Way To Financial Freedom](https://www.amazon.com/Trade-Your-Way-Financial-Freedom/dp/007147871X)
+    from *Van K. Tharp*.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: This is not the book in which *Van K. Tharp* details his approach to *Position
+    Sizing* but the topic is presented and discussed in the book. One of the examples
+    with regards to this had this setup
+  prefs: []
+  type: TYPE_NORMAL
+- en: If not in the market, toss a coin to decide whether to enter or not
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: If already in the market, control the position with a Stop which is 2 x ATR
+    and which gets updated if the price moves favorably to the taken position
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'The important parts about this:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Entering the market is random
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: The approach is tested with different *Sizing* schemes and this together with
+    having a dynamic stop, makes the system profitable
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: And following the principles to set up your own “system” (wether manual/automated/computerized,
+    technical/fundamental, …) *backtrader* was born to one day test this scenario.
+  prefs: []
+  type: TYPE_NORMAL
+- en: This could have been tested with any of the existing platforms, but there would
+    have been no fun along the way and the many challenges solved, which were not
+    even considered when kick-starting *backtrader*
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*Sizers* were in the platform from the very beginning, but hidden because many
+    other things including *Live Trading* started getting in the way. But this is
+    now over and the *Van K. Tharp* scenario will be tested. Rather sooner than later.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: In the meantime a couple of *Sizers* for a sample test.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*Sizers* to control positioning'
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: The sample shows a potential use case in which *Sizers* alter the behavior of
+    a strategy by controlling the *sizing*. Check the docs at *backtrader.readthedocs.io*
+    to understand the *sizing interface*.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'The 2 sizers:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`LongOnly`: will return a fixed size position if the current position is 0
+    and will return the same fixed size to close it if already in the market.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs:
+  - PREF_IND
+  type: TYPE_PRE
+- en: '`FixedReverser`: will return a fixed size stake if not in the market and a
+    doubled fixed size stake if already in the market to allow for a reversal'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs:
+  - PREF_IND
+  type: TYPE_PRE
+- en: These 2 *Sizers* will be combined with a very simple strategy.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Notice how the strategy uses a *Close-SMA* crossover signal to issue *buy*
+    and *sell* commands with an important thing to consider:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: No check of positioning is done in the *strategy*
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: The same strategy as seen in the executions below changes behavior from *long-only*
+    to *long-short* by simply changing the *sizer* with this code in the sample (controlled
+    with the switch `--longonly`)
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE3]'
+  prefs: []
+  type: TYPE_PRE
+- en: Long-Only Execution
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: 'Done with the command:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE4]'
+  prefs: []
+  type: TYPE_PRE
+- en: And this output.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![image](../Images/5c2317f18076865b4e193cc2106e6495.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Long-Short Execution
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: 'Done with the command:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE5]'
+  prefs: []
+  type: TYPE_PRE
+- en: And this output.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![image](../Images/1c8a1b92bcc63a48fe769976fa98d013.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'Which immediate shows:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The number of trades has doubled
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: The cash (except at the beginning) never equals the *value* because the strategy
+    is always in the market
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Sample Usage
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '[PRE6]'
+  prefs: []
+  type: TYPE_PRE
+- en: The Full code
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[PRE7]'
+  prefs: []
+  type: TYPE_PRE

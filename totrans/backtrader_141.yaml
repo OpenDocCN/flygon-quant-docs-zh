@@ -1,0 +1,225 @@
+- en: Hidden Powers of Python (3)
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.backtrader.com/blog/posts/2016-11-25-hidden-powers-3/hidden-powers/](https://www.backtrader.com/blog/posts/2016-11-25-hidden-powers-3/hidden-powers/)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: Last, but not least, in this series about how the hidden powers of Python are
+    used in *backtrader* is how some of the magic variables show up.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Where do `self.datas` and others come from?
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: The usual suspect classes (or subclasses thereof) `Strategy`, `Indicator`, `Analyzer`,
+    `Observer` have auto-magically defined attributes, like for example the array
+    which contains the *data feeds*.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Data Feeds are added to a `cerebro` instance like this:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Our winning strategy for the example will go long when the `close` goes above
+    a *Simple Moving Average*. We’ll use *Signals* to make the example shorter:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Which gets added to the mix as:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Any reader will notice that:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`__init__` takes no parameters, named or not'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: There is no `super` call so the base class is not being directly asked to do
+    its init
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: The definition of `mysig` references `self.data` which probably has to do with
+    the `YahooFinanceData` instance which is added to `cerebro`
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Indeed it does!**'
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: 'There actually other attributes which are there and not seen in the example.
+    For example:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`self.datas`: an array containing all *data feeds* which are added to `cerebro`'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`self.dataX`: where `X` is a number which reflects the order in which the data
+    was added to cerebro (`data0` would be the data added above)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`self.data`: which points to `self.data0`. Just a ahortcut for convenience
+    since most examples and strategies only target a single data'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'More can be found in the docs:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[https://www.backtrader.com/docu/concepts.html](https://www.backtrader.com/docu/concepts.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[https://www.backtrader.com/docu/datafeed.html](https://www.backtrader.com/docu/datafeed.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: How are those attributes created?
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: In the 2^(nd) article in this series it was seen that the class creation mechanims
+    and instance creation mechanism were intercepted. The latter is used to do that.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`cerebro` receives the *class* via `adstrategy`'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: It will instantiate it when needed and add itself as an attribute
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: The `new` classmethod of the strategy is intercepted during the creation of
+    the `Strategy` instance and examines which *data feeds* are available in `cerebro`
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: And it does creates the *array* and *aliases* mentioned above
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: 'This mechanism is applied to many other objects in the *backtrader* ecosystem,
+    in order to simplifly what the end users have to do. As such:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: There is for example no need to constantly create function prototypes which
+    contain an argument named `datas` and no need to assign it to `self.datas`
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Because it is done auto-magically in the background
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: Another example of this interception
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: 'Let’s define a winning indicator and add it to a winning strategy. We’ll repack
+    the *close over SMA* idea:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE3]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'And now add it to a regular strategy:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE4]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'From the code above there is obviously a calculation taking place in `MyIndicator`:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE5]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'But it seems to be done nowhere. As seen in the 1^(st) article in this series,
+    the operation generates an *object*, which is assigned to `self.lines.signal`
+    and the following happens:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: This object intercepts also its creation process
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: It scans the *stack* to understand the context in which is being created, in
+    this case inside an instance of `MyIndicators`
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: And after its *initialization* is completed, it adds itself to the internal
+    structures of `MyIndicator`
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Later when `MyIndicator` is calculated, it will in turn calculate the operation
+    which is inside the object referenced by `self.lines.signal`
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Good, but who calculates `MyIndicator`
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: 'Exactly the same process is followed:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`MyIndicator` scans the stack during creation and finds the `MyStrategy`'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: And adds itself to the structures of `MyStrategy`
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Right before `next` is called, `MyIndicator` is asked to recalculate itself,
+    which in turns tells `self.lines.signal` to recalculate itself
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: The process can have multiple layers of indirection.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'And the best things for the user:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: No need to add calls like `register_operation` when something is created
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: No need to manually trigger calculations
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Concluding
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: 'The last article in the series shows another example of how class/instance
+    creation interception is used to make the life of the end user easier by:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Adding objects from the ecosystem there where they are needed and creating aliases
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Auto-registering classes and triggering calculations
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

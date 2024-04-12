@@ -1,0 +1,240 @@
+- en: Features
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.backtrader.com/home/features/](https://www.backtrader.com/home/features/)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: Live Trading
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: With Interactive Brokers, Oanda v1, VisualChart and also with external 3^(rd)
+    party brokers (alpaca, Oanda v2, ccxt, ...)
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`0` based indexing'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Use `0` in arrays for the present moment to address the look-ahead bias when
+    accessing values in arrays
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'Use `-1`, `-2` (i.e.: negative values) for the **last** moments, to keep in
+    sync with Python''s definition'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Any positive index means the **future** (test your code in `event-only` mode
+    and it will break)
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Event and Vectorized
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: The trading logic and the broker are always run on an event by event basis
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: The calculation for indicators is vectorized if possible (source data can be
+    preloaded)
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Everything can be run in `event-only` mode with no data preloaded, just like
+    if things were live.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Data Feeds (Live Too)
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'Built-in support for several sources: *CSV*, Database-Sources, YahooFinance,
+    Interactive Brokers, Oanda v1, ...'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Any number of simultaneous data feeds (memory constrained, obviously) can be
+    run simultaneously
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Warning
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: Beware of survivorshipt bias!
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: Multiple timeframes can be mixed and run
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Integrated Resampling and Replaying
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Broker with batteries included
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'Order Types: `Market`, `Limit`, `Stop`, `StopLimit`, `StopTrail`, `StopTrailLimit`,
+    `OCO`, `Bracket`, `MarketOnClose`'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Long Short selling
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Continuous Cash Adjustment for Future-like instruments
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: User defined commission schemes and credit interest
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Fund Mode
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Volume Filling Strategies
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Custom Slippage
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Strategies - Trading Logic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Automatic warm-up period calculation before operating
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Multiple Strategies (against same broker) can run in parallel
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Multiple order generation methods (`buy/sell`, `order_target_xxx`, automated
+    signals)
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'Event notification for: Incoming Data, Data Feed provider, orders, trades,
+    timers.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Indicators
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Over 122 indicators with the usual suspects on board
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Many moving averages (`SMA`, `EMA`, ...), classic: (`MACD`, `Stochastic`, `RSI`,
+    ...) and others'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`ta-lib` integration'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Performance Analyzers
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Several built-in performance analyzers (`TimeReturns`, `TradeAnalyzer`, `SharpeRatio`,
+    `VWR`, `SQN`, ...)
+  prefs: []
+  type: TYPE_NORMAL
+- en: Plotting (extra)
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Automated (customizable) plotting with a single command.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Note
+  prefs: []
+  type: TYPE_NORMAL
+- en: For this to work, `matplotlib` has to be installed
+  prefs: []
+  type: TYPE_NORMAL
+- en: Sizers
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Define and plug smart automated staking policies
+  prefs: []
+  type: TYPE_NORMAL
+- en: Observers
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Agents which will be plotted and can observe everything in the system (usually
+    will be used to plot statistics)
+  prefs: []
+  type: TYPE_NORMAL
+- en: Miscelanea
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Timers for repeated actions over time
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Trading Calendars
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Timezone Support
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Pure Python
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Work with one of the most powerful, yet easy to use, programming languages.
+    No external libraries required.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Uses OO to easily let the pieces of the puzzle be fitted to each other.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'Operators are overloaded, where possible, to provide natural language constructs
+    such as:'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs:
+  - PREF_IND
+  type: TYPE_PRE
+- en: where `av_diff` will contain the difference of the simple moving averages of
+    `30` and `15` periods.
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: For language constructs, cannot be overrideen, like `and`, `or`, `if`, equivalent
+    *functions* are provided to ensure no functionality is missing, such as
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs:
+  - PREF_IND
+  type: TYPE_PRE

@@ -1,0 +1,374 @@
+- en: Filters
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.backtrader.com/docu/filters/](https://www.backtrader.com/docu/filters/)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: This functionality is a relatively late addition to *backtrader* and had to
+    be fitted to the already existing internals. This makes it to be not as flexible
+    and 100% feature full as wished, but it can still serve the purpose in many cases.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Although the implementation tried to allow plug and play filter chaining, the
+    pre-existing internals made it difficult to ensure that could always be achieved.
+    As such, some filters may be chained and some others may not.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Purpose
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: Transform the values provided by a *data feed* to deliver a different *data
+    feed*
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'The implementation was started to simplify the implementation of the two obvious
+    filters which can be directly used via the *cerebro* API. These are:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*Resampling* (`cerebro.resampledata`)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'Here the filter transforms the `timeframe` and `compression` of the incoming
+    *data feed*. For example:'
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs:
+  - PREF_IND
+  type: TYPE_PRE
+- en: That means that the original data feed is delivery bars with a resolution of
+    *1 Second*. The *Resampling* filter intercepts the data and buffers it until it
+    can deliver a *1 Day* bar. This will happen when a *1 Second* bar from the next
+    day is seen.
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '*Replaying* (`cerebro.replaydata`)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: For the same timeframes as above, the filter would use the *1 Second* resolution
+    bars to rebuild the *1 Day* bar.
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: That means that the *1 Day* bar is delivered as many times as *1 Second* bars
+    are seen, updated to contain the latest information.
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: This simulates, for example, how an actual trading day has developed.
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: Note
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: The length of the data, `len(data)` and therefore the length of the strategy
+    remain unchanged as long as the *day* doesn’t change.
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: Filters at work
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: 'Given an existing data feed/source you use the `addfilter` method of the data
+    feed:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'And even if it happens to be compatible to the *resample/replay* filter the
+    following can also be done:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: Filter Interface
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: 'A `filter` must conform to a given interface, being this:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'A callable which accepts this signature:'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[PRE3]'
+  prefs:
+  - PREF_IND
+  type: TYPE_PRE
+- en: or
+  prefs: []
+  type: TYPE_NORMAL
+- en: A class which can be *instantiated* and *called*
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'During instantiation the `__init__` method must support the signature:'
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[PRE4]'
+  prefs:
+  - PREF_IND
+  type: TYPE_PRE
+- en: 'The `__call__` method bears this signature:'
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[PRE5]'
+  prefs:
+  - PREF_IND
+  type: TYPE_PRE
+- en: The instance will be called for each new incoming values from the *data feed*.
+    The `\*args` and `\*kwargs` are the same passed to `__init__`
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '**RETURN VALUES**:'
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '[PRE6]'
+  prefs:
+  - PREF_IND
+  type: TYPE_PRE
+- en: In the case of a class based filter 2 additional methods can be implemented
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '`last` with the following signature:'
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[PRE7]'
+  prefs:
+  - PREF_IND
+  type: TYPE_PRE
+- en: This will be called when the *data feed* is over, allowing the filter to deliver
+    data it may have for example buffered. A typical case is *resampling*, because
+    a bar is buffered until data from the next time period is seen. When the data
+    feed is over, there is no new data to push the buffered data out.
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '`last` offers the chance to push the buffered data out.'
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: Note
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'It is obvious that if the *filter* supports no arguments at all and will be
+    added without any, the signatures can be simplified as in:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE8]'
+  prefs: []
+  type: TYPE_PRE
+- en: A Sample Filter
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: 'A very quick filter implementation:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE9]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'This filter:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Uses `data.p.sessionstart` and `data.p.sessionend` (standard data feed parameters)
+    to decide if a bar is in the session.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: If *in-the-session* the return value is `False` to indicate nothing was done
+    and the processing of the current bar can continue
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: If *not-in-the-session*, the bar is removed from the stream and `True` is returned
+    to indicate a new bar must be fetched.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Note
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: The `data.backwards()` makes uses of the `LineBuffer` interface. This digs deep
+    into the internals of *backtrader*.
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: 'The use of this filter:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Some data feeds contain *out of regular trading hours* data, which may not be
+    of interest to the trader. With this filter only *in-session* bars will be considered.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Data Pseudo-API for Filters
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: 'In the example above it has been shown how the filter invokes `data.backwards()`
+    to remove the current bar from the stream. Useful calls from the data feed objects
+    which are meant as a *pseudo-API for Filters* are:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`data.backwards(size=1, force=False)`: removes *size* bars from the data stream
+    (default is `1`) by moving the logical pointer backwards. If `force=True`, then
+    the physical storage is also removed.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Removing the physical storage is a delicate operation and is only meant as a
+    hack for internal operations.
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '`data.forward(value=float(''NaN''), size=1)`: moves *size* bars the storage
+    forward, increasing the physical storage if needed be and fills with `value`'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`data._addtostack(bar, stash=False)`: adds `bar` to a stack for later processing.
+    `bar` is an iterable containing as many values as `lines` has the data feed.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: If `stash=False` the bar added to the stack will be consumed immediately by
+    the system at the beginning of the next iteration.
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: If `stash=True` the bar will undergo the entire loop processing including potentially
+    being reparsed by filters
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '`data._save2stack(erase=False, force=False)`: saves the current data bar to
+    the stack for later processing. If `erase=True` then `data.backwards` will be
+    invoked and will receive the parameter `force`'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`data._updatebar(bar, forward=False, ago=0)`: uses the values in the iterable
+    `bar` to overwrite the values in the data stream `ago` positions. With the default
+    `ago=0` the current bar will updated. With `-1`, the previous one.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'Another example: Pinkfish Filter'
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: 'This is an example of a filter that can be chained, and is meant so, to another
+    filter, namely the *replay filter*. The *Pinkfish* name is from the library which
+    describes the idea in its main page: using daily data to execute operations which
+    would only be possible with intraday data.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'To achieve the effect:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'A daily bar will be broken in 2 componentes: `OHL` and then `C`.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'Those 2 pieces are chained with *replay* to have the following happening in
+    the stream:'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[PRE10]'
+  prefs:
+  - PREF_IND
+  type: TYPE_PRE
+- en: 'Logic:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'When an `OHLC` bar is received it is copied into an interable and broken down
+    to become:'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: An `OHL` bar. Because this concept doesn’t actually exist the *closing* price
+    is replaced with the *opening* price to really form an `OHLO` bar.
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: An `C` bar whic also doesn’t exist. The reality is that it will be delivered
+    like a tick `CCCC`
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: The volume if distributed between the 2 parts
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: The current bar is removed from the stream
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: The `OHLO` part is put onto the stack for immediate processing
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: The `CCCC` part is put into the stash for processing in the next round
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Because the stack has something for immediate processing the filter can return
+    `False` to indicate it.
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'This filter works together with:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The *replay* filter which puts together the `OHLO` and `CCCC` parts to finally
+    deliver an `OHLC` bar.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'The use case:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Seeing something like if the maximum today is the highest maximum in the last
+    20 sessions an issuing a `Close` order which gets executed with the 2^(nd) tick.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'The code:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE11]'
+  prefs: []
+  type: TYPE_PRE

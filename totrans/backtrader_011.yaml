@@ -1,0 +1,245 @@
+- en: Reviews / Mentions
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.backtrader.com/home/references/reviews/](https://www.backtrader.com/home/references/reviews/)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: 4-chan
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[http://boards.4channel.org/biz/thread/7372143/ai-anon-again-here-a-prediction-from-96-hours-ago](http://boards.4channel.org/biz/thread/7372143/ai-anon-again-here-a-prediction-from-96-hours-ago)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Bitcointalk
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Re: Trading with SMA crosses only, with 1 day chart: infallible ?](https://bitcointalk.org/index.php?topic=1855541.0)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Bogleheads.org
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '["Steelmanning" the case for owning individual stocks](https://www.bogleheads.org/forum/viewtopic.php?t=271184&start=50)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: EliteTrader
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Where do I start?](https://www.elitetrader.com/et/threads/where-do-i-start.310301/)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: GAIN Capital
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[www.backtrader.com integration](http://faq.labs.gaincapital.com/topic/1908-wwwbacktradercom-integration/)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Hacker News
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Fuzzy MA System with GA Optimization for Trading Crude Palm Oil Futures](https://news.ycombinator.com/item?id=18361090)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Anyone designs financial engineering tools as a hobby?](https://news.ycombinator.com/item?id=17088759)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Ian Mobbs
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Backtrader](http://ianmobbs.com/projects/backtrader)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Medium - Hackernoon
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[9 Great Tools for Algotrading](https://hackernoon.com/9-great-tools-for-algo-trading-e0938a6856cd)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Medium - Sten Alferd
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Is Python for Financial App Development the Right fit?](https://medium.com/@stenalferd/everybody-is-talking-about-the-growing-popularity-of-python-in-the-industry-these-days-875cfa7fe7d9)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: NetGuru
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[How Python is Used in Finance and Fintech](https://www.netguru.com/blog/how-python-is-used-in-finance-and-fintech)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: PyConUK 2017
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[https://randomactsofcartography.wordpress.com/2017/11/01/what-i-learned-at-pyconuk-2017/](https://randomactsofcartography.wordpress.com/2017/11/01/what-i-learned-at-pyconuk-2017/)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[https://www.slideshare.net/BrianTsang11/pycon-2017-preevent](https://www.slideshare.net/BrianTsang11/pycon-2017-preevent)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Qiita
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[python algorithm trade library](https://qiita.com/neka-nat@github/items/334a567d13f8a0c34ece)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: QuantLabs
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Ultimate motherload Python packages list for quant trading](http://quantlabs.net/blog/2016/01/ultimate-motherload-python-packages-list-for-quant-trading/)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Quantopian Forums
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Comparing various python live trading platforms](https://www.quantopian.com/posts/comparing-various-python-live-trading-platforms)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[forget about it and use backtrader!](https://www.quantopian.com/posts/contributors-and-reviewers-needed-for-zipline-live)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: QuantStart
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Choosing a Platform for Backtesting and Automated Execution](https://www.quantstart.com/articles/Choosing-a-Platform-for-Backtesting-and-Automated-Execution)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Quora
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[How does Algo trading work? Is there any way for an individual to set it up?
+    Also, what is the tech. and logic behind this?](https://www.quora.com/How-does-Algo-trading-work-Is-there-any-way-for-an-individual-to-set-it-up-Also-what-is-the-tech-and-logic-behind-this)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[What is the best way to learn algorithmic trading in Python and test out models](https://www.quora.com/What-is-the-best-way-to-learn-algorithmic-trading-in-Python-and-test-out-models)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[What are good and bad reasons for getting into algorithmic trading (as an
+    individual, not an employee at a hedge fund)?](https://www.quora.com/What-are-good-and-bad-reasons-for-getting-into-algorithmic-trading-as-an-individual-not-an-employee-at-a-hedge-fund)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[What kind of mathematics do I need to learn for algorithmic trading?](https://www.quora.com/What-kind-of-mathematics-do-I-need-to-learn-for-algorithmic-trading)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[What are some of the common practical uses of R/Python in finance?](https://www.quora.com/What-are-some-of-the-common-practical-uses-of-R-Python-in-finance)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[What would happen to manual trading with the rise of algotrading?](https://www.quora.com/What-would-happen-to-manual-trading-with-the-rise-of-algotrading)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[https://www.quora.com/Which-is-the-best-service-provider-for-algo-trading](https://www.quora.com/Which-is-the-best-service-provider-for-algo-trading)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[What''s the best library to back-test trading strategies in python?](https://www.quora.com/Whats-the-best-library-to-back-test-trading-strategies-in-python)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Is data science/analytics useful for quant/algo trading?](https://www.quora.com/Is-data-science-analytics-useful-for-quant-algo-trading)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Which is the best algorithm trading software?](https://www.quora.com/Which-is-the-best-algorithm-trading-software)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Statsmage
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Current State of Open-Source Backtesting Frameworks in Python](http://statsmage.com/backtesting-frameworks-in-python/)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: The Developers Conference
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: (Portuguese)
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Criando robôs para compra e venda de criptomoedas](http://www.thedevelopersconference.com.br/tdc/2019/belohorizonte/trilha-python#descricao-161)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Slides](https://slides.com/rodrigo73/criptomoedas-tdc-2019#/)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: TODOTrader
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Blog](https://todotrader.com/blog/)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: TopQuant
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '*"China''s Python Quantitative Enlighteners and Trailblazers"*'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Category: backtrader](http://www.topquant.vip/?cat=20)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Traders-Mag
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Cryptotrading Algorítmico – Trading de Criptodivisas con Análisis Técnico](https://www.traders-mag.es/cryptotrading-algoritmico-trading-de-criptodivisas-con-analisis-tecnico/)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: X-trader Forums
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Re: Quantopian](https://www.x-trader.net/foro/viewtopic.php?t=18782)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

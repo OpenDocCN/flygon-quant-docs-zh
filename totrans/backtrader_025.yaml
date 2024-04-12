@@ -1,0 +1,57 @@
+- en: Exceptions
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.backtrader.com/docu/exceptions/](https://www.backtrader.com/docu/exceptions/)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: One of the design goals was to quit as early as possible and let the users have
+    full transparency of what was happening with errors. With the goal to force oneself
+    to have code that would break on exceptions and forced revisiting the affected
+    part.
+  prefs: []
+  type: TYPE_NORMAL
+- en: But the time has come and some exceptions may slowly get added to the platform.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Hierarchy
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: The base class for all exceptions is `BacktraderError` (which is a direct subclass
+    of `Exception`)
+  prefs: []
+  type: TYPE_NORMAL
+- en: Location
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: 'Inside the module `errors` which can be reached as in for example:'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs:
+  - PREF_IND
+  type: TYPE_PRE
+- en: 'Directly from `backtrader` as in:'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs:
+  - PREF_IND
+  type: TYPE_PRE
+- en: Exceptions
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '`StrategySkipError`'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Requests the platform to skip this strategy for backtesting. To be raised during
+    the initialization (`__init__`) phase of the instance
+  prefs: []
+  type: TYPE_NORMAL

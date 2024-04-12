@@ -1,0 +1,24 @@
+- en: Money Flow Indicator
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.backtrader.com/recipes/indicators/mfi/mfi/](https://www.backtrader.com/recipes/indicators/mfi/mfi/)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: Reference
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[https://school.stockcharts.com/doku.php?id=technical_indicators:money_flow_index_mfi](https://school.stockcharts.com/doku.php?id=technical_indicators:money_flow_index_mfi)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: And here a view of how the indicator works
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![MFI View](../Images/20ca39918a52217810921637153b451c.png)'
+  prefs: []
+  type: TYPE_IMG

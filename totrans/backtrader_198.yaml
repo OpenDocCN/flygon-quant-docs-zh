@@ -1,0 +1,105 @@
+- en: Extending an Indicator
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.backtrader.com/blog/posts/2015-07-20-extending-an-indicator/extending-an-indicator/](https://www.backtrader.com/blog/posts/2015-07-20-extending-an-indicator/extending-an-indicator/)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: In Object Oriented Programming, and of course in Python itself, extension of
+    an existing class can be achieved in two ways.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Inheritance (or subclassing)
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Composition (or embedding)
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: In Developing an Indicator, the indicator `Trix` was developed in just a couple
+    lines of code. The [ChartSchool - Trix](http://stockcharts.com/school/doku.php?id=chart_school:technical_indicators:trix)
+    reference literature has a `Trix` with a signal line showing the similarities
+    with MACD.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Let’s “compose” `MyTrixSignal` using the already developed `Trix`
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: Some things had to be repeated in the definition such as the name of the `trix`
+    line and the `period` to use for calculation. A new line `signal` and the corresponding
+    `sigperiod` parameter have been defined.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The 2-liner is a good result.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Now let’s go for *inheritance*, but first recalling how `Trix` looks like:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: Using `Trix` as the base class, this is the aspect of `TrixSignal`
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'The inherited indicator ends up also being a 2-liner but:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: No redefinition of the `trix` line is needed
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: No redefinition of the `period` parameter is needed
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'Both are inherited from the base class `Trix`. And the calculation of the `trix`
+    line is done in the base class `__init__` method:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: super(MyTrixSignalInherited, self).**init**()
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'The choice of **composition** vs **inheritance** is a classic. This example
+    is not meant to clarify which is better but more to show that:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Note
+  prefs: []
+  type: TYPE_NORMAL
+- en: Inheritance works even in the presence of the metadefinitions of **lines** and
+    **params**, which also inherit from the metadefinitions of the base class
+  prefs: []
+  type: TYPE_NORMAL
+- en: And finally the code and charts for both versions when put in action.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The first one shows the **inherited** version
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: '[PRE3]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![image](../Images/5fa99326087f82b641e9122a0b357a80.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: The first one shows the **composed** version
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: '[PRE4]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![image](../Images/6ed94b76514d24a5264cd5970ee8145b.png)'
+  prefs: []
+  type: TYPE_IMG

@@ -1,0 +1,78 @@
+- en: Yahoo Data Feed Notes
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.backtrader.com/docu/datayahoo/](https://www.backtrader.com/docu/datayahoo/)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: In May 2017 Yahoo discontinued the existing API for historical data downloads
+    in *csv* format.
+  prefs: []
+  type: TYPE_NORMAL
+- en: A new API (here named `v7`) was quickly *standardized* and has been implemented.
+  prefs: []
+  type: TYPE_NORMAL
+- en: This also brought a change to the actual CSV download format.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Using the v7 API/format
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: Starting with version `1.9.49.116` this is the default behavior. Choose simply
+    from
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`YahooFinanceData` for online downloads'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`YahooFinanceCSVData` for offline downloaded files'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Using the legacy API/format
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: To use the old API/format
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Instantiate the online Yahoo data feed as:'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs:
+  - PREF_IND
+  type: TYPE_PRE
+- en: 'of the offline Yahoo data feed as:'
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs:
+  - PREF_IND
+  type: TYPE_PRE
+- en: It might be that the online service comes back (the service was *discontinued*
+    without any announcement … it might as well come back)
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: or
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Only for Offline files downloaded before the change happened, the following
+    can also be done:'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs:
+  - PREF_IND
+  type: TYPE_PRE
+- en: The new `YahooLegacyCSV` simply automates using `version=''`
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL

@@ -1,0 +1,142 @@
+- en: Bar Synchronization
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.backtrader.com/blog/posts/2015-10-04-bar-synchronization/bar-synchronization/](https://www.backtrader.com/blog/posts/2015-10-04-bar-synchronization/bar-synchronization/)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: 'The lack of a standard formula in the literature and/or industry is not the
+    problem, because the problem can actually be summarized as:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Bar Synchronization
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Ticket #23](https://github.com/mementum/backtrader/issues/23) raises some
+    questions as to whether `backtrader` can look into calculating a **RelativeVolume**
+    indicator.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'The requester needs to compare the volume of a given moment in time against
+    the same moment in time on the previous trading day. Including:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Some pre-market data of unknown length
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'Having such a requirement invalidates the basic principle on which most indicators
+    are built:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Having a fixed period which is used to look backwards
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'Furthermore and given the comparison is done intraday, something else has to
+    be taken into account:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Some of the “intraday” instants may be missing (be it minutes or seconds)
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: It is unlikely a data source will be missing a daily bar, but missing a minute
+    or second bar is not that uncommon.
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: The main reason being that there may have not been any negotiation at all. Or
+    they might have been a problem at the negotiation exchange which actually prevented
+    the bar from being recorded at all.
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: 'Taking into account all the aforementioned points some conclusions for the
+    development of the indicator:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The **period** is not a period in this case but a buffer to make sure enough
+    bars will be there to have the indicator kick in as soon as possible
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Some bars may be missing
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: The main issue is synchronization
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'Luckily there is a key which comes to the rescue to aid with the synchronization:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Compared bars are “intraday” and hence counting the already seen days and the
+    number of seen “bars” for a given moment of time enables synchronization
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: The previous day values are kept in a dictionary, because the “lookback” period
+    as explained before is unknown.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Some other early ideas can be discarded, like for example implementing a `DataFilter`
+    data source because this would actually bring the data source out of sync with
+    other parts of the systme by removing the pre-market data. And the synchronization
+    problem would also be there.
+  prefs: []
+  type: TYPE_NORMAL
+- en: An idea to be explored would be creating a `DataFiller` which would fill in
+    the missing minutes/seconds by using the last closing price and setting the volume
+    to 0.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Getting hands on has also proven good to identify some extra needs in `backtrader`
+    like a **time2num** function (an addition to the date2num and num2date family)
+    and what will become extra methods for the **lines**:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Extracting the “day” and “fraction” (time) of day parts from the floating point
+    representation of the day
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: To be called “dt” and “tm”
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: In the meantime the code of the `RelativeVolumeByBar` indicator is presented
+    below. Having the”period”/”buffer” calculation inside the indicator is not the
+    preferred pattern, but it serves the purpose in this case.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Invoked through an script, which can be used as follows:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'A test invocation:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Generates this chart:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![image](../Images/1ec92237467276024a1fc10e8e31664c.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: The code for the script.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE3]'
+  prefs: []
+  type: TYPE_PRE

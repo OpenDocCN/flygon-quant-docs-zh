@@ -1,0 +1,160 @@
+- en: Writer
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.backtrader.com/docu/writer/](https://www.backtrader.com/docu/writer/)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: 'Write out to a stream the following contents:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: csv stream with data feeds, strategies, indicators and observers
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Which objects actually go into the csv stream can be controlled with the `csv`
+    attribute of each object (defaults to True for `data feeds` and `observers` /
+    False for `indicators`)
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: A summary of the properties of
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Data Feeds
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Strategies (lines and parameters)
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'Indicators/Observers: (lines and parameters)'
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'Analyzers: (parameters and analysis outcome)'
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'There is only a single Writer defined called `WriterFile`, which can be added
+    to the system:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: By setting the `writer` parameter of cerebro to True
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: A standard `WriterFile` will be instantiated
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: By calling `Cerebro.addwriter(writerclass, **kwargs)`
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`writerclass` will be instantiated during backtesting execution with the givenn
+    `kwargs`'
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: 'Given that a standard `WriterFile` does not ouput `csv` as a default, the following
+    `addwriter` invocation would take care of it:'
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs:
+  - PREF_IND
+  type: TYPE_PRE
+- en: Reference
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: class backtrader.WriterFile()
+  prefs:
+  - PREF_H4
+  type: TYPE_NORMAL
+- en: The system wide writer class.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'It can be parametrized with:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`out` (default: `sys.stdout`): output stream to write to'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: If a string is passed a filename with the content of the parameter will be used
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '`close_out` (default: `False`)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: If `out` is a stream whether it has to be explicitly closed by the writer
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '`csv` (default: `False`)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: If a csv stream of the data feeds, strategies, observers and indicators has
+    to be written to the stream during execution
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: Which objects actually go into the csv stream can be controlled with the `csv`
+    attribute of each object (defaults to `True` for `data feeds` and `observers`
+    / False for `indicators`)
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '`csv_filternan` (default: `True`) whether `nan` values have to be purged out
+    of the csv stream (replaced by an empty field)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`csv_counter` (default: `True`) if the writer shall keep and print out a counter
+    of the lines actually output'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`indent` (default: `2`) indentation spaces for each level'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`separators` (default: `[''='', ''-'', ''+'', ''*'', ''.'', ''~'', ''"'', ''^'',
+    ''#'']`)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Characters used for line separators across section/sub(sub)sections
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '`seplen` (default: `79`)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: total length of a line separator including indentation
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '`rounding` (default: `None`)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Number of decimal places to round floats down to. With `None` no rounding is
+    performed
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL

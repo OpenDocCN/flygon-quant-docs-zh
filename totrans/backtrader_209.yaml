@@ -1,0 +1,71 @@
+- en: Absolute Strengh Histogram
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.backtrader.com/recipes/indicators/stochrsi/stochrsi/](https://www.backtrader.com/recipes/indicators/stochrsi/stochrsi/)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '*Stockcharts* and *Investopedia* have literature on this indicator.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[StockCharts - StochRSI (ChartSchool)](https://stockcharts.com/school/doku.php?id=chart_school:technical_indicators:stochrsi)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Investopedia - Stochastic RSI - StochRSI Definition](https://www.investopedia.com/terms/s/stochrsi.asp)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'With the formula being:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`StochRSI = (RSI - min(RSI, period)) / (max(RSI, period) - min(RSI, period))`'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: In theory the period to calculate the `RSI` is the same that will later be applied
+    to find out the minimum and maximum values of the `RSI`. That means that if the
+    chosen period is `14` (de-facto standard) for the `RSI`, the total look-back period
+    for the indicator will be `28`
+  prefs: []
+  type: TYPE_NORMAL
+- en: Note
+  prefs: []
+  type: TYPE_NORMAL
+- en: The actual look-back period will be a bit longer, because a 14-period `RSI`
+    has a longer effective look-back period of `15`, as the comparison of the closing
+    prices of the 1^(st) two periods is needed to kick-start the calculations
+  prefs: []
+  type: TYPE_NORMAL
+- en: In any case, *backtrader* does calculate all the needed look-back and warm-up
+    periods automatically.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Considering that the following are built-in indicators in *backtrader*:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`RSI`'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`Lowest` (aka `MaxN`)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`Highest` (aka `MinN`)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: developing the `StochRSI` according to the formula seen above is straightforward.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: And here a view of how the indicator works
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![STOCHRSI View](../Images/7920769ed9c1ad01b1adc3765791f002.png)'
+  prefs: []
+  type: TYPE_IMG

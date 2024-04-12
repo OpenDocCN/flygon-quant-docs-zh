@@ -1,0 +1,130 @@
+- en: PyFolio Overview
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.backtrader.com/docu/analyzers/pyfolio/](https://www.backtrader.com/docu/analyzers/pyfolio/)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: Note
+  prefs: []
+  type: TYPE_NORMAL
+- en: As of (at least) 2017-07-25 the `pyfolio` APIs have changed and `create_full_tear_sheet`
+    no longer has a `gross_lev` as a named argument.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Consequently the sample for integration doesn’t work
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Quoting from the main `pyfolio` page at [http://quantopian.github.io/pyfolio/](http://quantopian.github.io/pyfolio/):'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'And now it works also well with *backtrader*. What’s needed:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`pyfolio` obviously'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: And its dependencies (things like `pandas`, `seaborn` …)
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Note
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: During the integration with version `0.5.1`, an update to the most recent packages
+    of the dependencies was needed, like `seaborn` from the previously installed `0.7.0-dev`
+    to `0.7.1`, apparently due to the absence of the method `swarmplot`
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: Usage
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: 'Add the `PyFolio` analyzer to the `cerebro` mix:'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs:
+  - PREF_IND
+  type: TYPE_PRE
+- en: 'Run and retrieve the 1^(st) strategy:'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs:
+  - PREF_IND
+  type: TYPE_PRE
+- en: 'Retrieve the analyzer using whatever name you gave to it or the default name
+    it will be given to it: `pyfolio`. For example:'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: '[PRE3]'
+  prefs:
+  - PREF_IND
+  type: TYPE_PRE
+- en: 'Use the analyzer method `get_pf_items` to retrieve the 4 components later needed
+    for `pyfolio`:'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: '[PRE4]'
+  prefs:
+  - PREF_IND
+  type: TYPE_PRE
+- en: '!!! note'
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '[PRE5]'
+  prefs:
+  - PREF_IND
+  type: TYPE_PRE
+- en: Work with `pyfolio` (this is already outside of the *backtrader* ecosystem)
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Some usage notes not directly related to *backtrader*
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`pyfolio` automatic plotting works outside of a *Jupyter Notebook*, but **it
+    works best** inside'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`pyfolio` data tables’ output seems to barely work outside of a *Jupyter Notebook*.
+    It works inside the *Notebook*'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'The conclusion is easy if working with `pyfolio` is wished: **work inside a
+    Jupyter Notebook**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Sample Code
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: 'The code would look like this:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE6]'
+  prefs: []
+  type: TYPE_PRE
+- en: Reference
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Look into the Analyzers Reference for the `PyFolio` analyzer and which analyzers
+    it uses internally
+  prefs: []
+  type: TYPE_NORMAL

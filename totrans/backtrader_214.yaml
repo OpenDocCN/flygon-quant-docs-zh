@@ -1,0 +1,15 @@
+- en: NorgateData
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.backtrader.com/recipes/storesbrokersdata/norgatedata/norgatedata/](https://www.backtrader.com/recipes/storesbrokersdata/norgatedata/norgatedata/)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: 'Link to the package:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[https://pypi.org/project/norgatedata/](https://pypi.org/project/norgatedata/)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

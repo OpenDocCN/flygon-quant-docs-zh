@@ -1,0 +1,120 @@
+- en: 'Commissions: Credit'
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.backtrader.com/docu/commission-credit/](https://www.backtrader.com/docu/commission-credit/)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: 'In some situations, the cash amount in real brokers may be decreased because
+    the operation on assets includes an interest rate. Examples:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Short selling of stocks
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: ETFs both long and short
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: The charge goes directly against the cash balance in the broker account. But
+    it can still be seen as part of a commission scheme. And as such it has been modeled
+    in *backtrader*.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'The `CommInfoBase` class (and with it also the `CommissionInfo` main interface
+    object) has been extended with:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Two (2) new parameters that allow setting the interest rate and determining
+    if should be applied only to the short side or to both long and short
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Parameters
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '`interest` (def: `0.0`)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: If this is non-zero, this is the yearly interest charged for holding a short
+    selling position. This is mostly meant for stock short-selling
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: 'The default formula applied: `days * price * size * (interest / 365)`'
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: 'It must be specified in absolute terms: 0.05 -> 5%'
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: Note
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: 'the behavior can be changed by overriding the method: `get_credit_interest`'
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '`interest_long` (def: `False`)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Some products like ETFs get charged on interest for short and long positions.
+    If ths is `True` and `interest` is non-zero the interest will be charged on both
+    directions
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: The formula
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: 'The default implementation will use the following formula:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Where:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`days`: number of days elapsed since position was opened or the last credit
+    interest calculation took place'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Overriding the formula
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: 'In order to change the formula subclassing of `CommissionInfo` is needed. The
+    method to be overridden is:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: It might be that the *broker* doesn’t consider weekends or bank holidays when
+    calculating the interest rate. In this case this subclass would do the trick
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'In this case, in the formula:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`days` has been replaced by `1.0`'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Because if weekends/bank holidays do not count, the next calculation will always
+    happen `1` trading da after the previous calculation
+  prefs: []
+  type: TYPE_NORMAL

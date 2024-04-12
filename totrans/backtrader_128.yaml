@@ -1,0 +1,193 @@
+- en: OCO orders
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.backtrader.com/blog/posts/2017-03-19-oco/oco/](https://www.backtrader.com/blog/posts/2017-03-19-oco/oco/)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: Release `1.9.34.116` adds `OCO` (aka *One Cancel Others*) to the backtesting
+    arsenal.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Note
+  prefs: []
+  type: TYPE_NORMAL
+- en: This is only implemented in backtesting and there isn’t yet an implementation
+    for live brokers
+  prefs: []
+  type: TYPE_NORMAL
+- en: Note
+  prefs: []
+  type: TYPE_NORMAL
+- en: Updated with release `1.9.36.116`. Interactive Brokers support for `StopTrail`,
+    `StopTrailLimit` and `OCO`.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`OCO` Specify always the 1^(st) order in a group as parameter `oco`'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`StopTrailLimit`: the broker simulation and the `IB` broker have the asme behavior.
+    Specify: `price` as the initial stop trigger price (specify also `trailamount`)
+    and then `plimi` as the initial limit price. The difference between the two will
+    determine the `limitoffset` (the distance at which the limit price remains from
+    the stop trigger price)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'The usage pattern tries to remain user friendly. As such and if the logic in
+    the strategy has decided it is the moment to issue orders, using `OCO` can be
+    done like this:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: Easy. The 1^(st) order `o1` will something like the group leader. `o2` and `o3`
+    become part of the **OCO Group** by specifying `o1` with the `oco` named argument.
+    See that the comment in the snippet indicates that `o3` could have also become
+    part of the group by specifying `o2` (which as already part of the group)
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'With the group formed the following will happen:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: If any order in the group is executed, cancelled or expires, the other orders
+    will be cancelled
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'The sample below puts the `OCO` concept in play. A standard execution with
+    a plot:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: Note
+  prefs: []
+  type: TYPE_NORMAL
+- en: cash is increased to `50000`, because the asset reaches values of `4000` and
+    3 orders of `1` item would require at least `12000` monetary units (the default
+    in the broker is `10000`)
+  prefs: []
+  type: TYPE_NORMAL
+- en: With the following chart.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![image](../Images/fe3f880e2dd7f509a786b713fbe78c4b.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'which actually doesn’t provide much information (it is a standard `SMA Crossover`
+    strategy). The sample does the following:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: When the fast *SMA* crosses the slow *SMA* to the upside 3 orders are issued
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`order1` is a `Limit` order which will expire in `limdays` days (parameter
+    to the strategy) with the `close` price reduced by a percentage as the limit price'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`order2` is a `Limit` order with a much longer period to expire and a much
+    more reduced limit price.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`order3` is a `Limit` order which further reduces the limit price'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'As such the execution of `order2` and `order3` is not going to happen because:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`order1` will be executed first and this should trigger the cancellation of
+    the others'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: or
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`order1` will expire and this will trigger the the cancellation of the others'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: The system keeps the `ref` identifier of the 3 orders and will only issue new
+    `buy` orders if the three `ref` identifiers are seen in `notify_order` as either
+    `Completed`, `Cancelled`, `Margin` or `Expired`
+  prefs: []
+  type: TYPE_NORMAL
+- en: Exiting is simply done after holding the position for some bars.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'To try to keep track of the actual execution, textual output is produced. Some
+    of it:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'With the following happening:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The 1^(st) batch of orders is issued. Order 1 expires and 2 and 3 are cancelled.
+    As expected.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Some months later another batch of 3 orders is issued. In this case Order 49
+    gets `Completed` and 50 and 51 are immediately cancelled
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: The last batch is just like the 1^(st)
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'Let’s check now the behavior without `OCO`:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE3]'
+  prefs: []
+  type: TYPE_PRE
+- en: And that’s it, which isn’t much (no order execution, not much need for a chart
+    either)
+  prefs: []
+  type: TYPE_NORMAL
+- en: The batch of orders is issued
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Order 1 expires, but because the strategy has gotten the parameter `do_oco=False`,
+    orders 2 and 3 are not made part of the `OCO` group
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Orders 2 and 3 are therefore not cancelled and because the default expiration
+    delta is `1000` days later, they never expire with the available data for the
+    sample (2 years of data)
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: The system never issues a 2^(nd) bath of orders.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Sample usage
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '[PRE4]'
+  prefs: []
+  type: TYPE_PRE
+- en: Sample Code
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '[PRE5]'
+  prefs: []
+  type: TYPE_PRE

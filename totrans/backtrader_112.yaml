@@ -1,0 +1,232 @@
+- en: A Dynamic Indicator
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.backtrader.com/blog/posts/2018-02-06-dynamic-indicator/dynamic-indicator/](https://www.backtrader.com/blog/posts/2018-02-06-dynamic-indicator/dynamic-indicator/)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: Indicators are difficult beasts. Not because they are difficult to code in general,
+    but mostly because the name is misleading and people have different expectations
+    as to what an indicator is.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Let’s try to at least define what an *Indicator* is inside the *backtrader*
+    ecosystem.
+  prefs: []
+  type: TYPE_NORMAL
+- en: It is an object which defines at least one output *line*, may define parameters
+    that influence its behavior and takes one or more data feeds as input.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'In order to keep indicators as general as possible the following design principles
+    were chosen:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'The input data feeds can be anything that looks like a data feed, which brings
+    an immediate advantage: because other indicators look like data feeds, one can
+    pass indicators as the input to other indicators'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: No `datetime` *line* payload is carried. This is so, because the input may have
+    no `datetime` payload itself to synchronize to. And synchronizing to the general
+    system wide `datetime` could be incorrect, because the indicator could be working
+    with data from a *weekly* timeframe whereas the system time may be ticking in
+    *seconds*, because that’s the lowest resolution one of several data feeds bears.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'Operations have to be idempotent, i.e.: if called twice with the same input
+    and without change in the parameters, the output has to be the same.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'Take into account that an indicator can be asked to perform an operation several
+    times at the same point in time with the same input. Although this would seem
+    not needed, it is if the system support *data replaying* (i.e.: building a larger
+    timeframe in real-time from a smaller timeframe)'
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: 'And finally: an *Indicator* writes its output value to the current moment of
+    time, i.e.: index `0`. If not it will named a `Study`. A `Study` will look for
+    patterns and write output values in the past.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: See for example the [Backtrader Community - ZigZag](https://community.backtrader.com/topic/773/zigzag-indicator/)
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: Once the definitions (in the *backtrader* ecosystem) are clear, let’s try to
+    see how we can actually code a *dynamic* indicator. It would seem we cannot, because
+    looking at the aforementioned design principles, the operational procedure of
+    an indicator is more or less … non-mutable.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The Highest High … since …
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: One indicator which is usually put in motion is the `Highest` (alias `MaxN`),
+    to get the *highest* something in a given period. As in
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: In this snippet we instantiate `Highest` to keep track of the highest high along
+    the last 15 periods. Were the highest high greater than `X` something would be
+    done.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'The catch here:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The `period` is fixed at `15`
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Making it dynamic
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: 'Sometimes, we would need the indicator to be dynamic and change its behavior
+    to react to real-time conditions. See for example this question in the *backtrader*
+    community: [Highest high since position was opened](https://community.backtrader.com/topic/850/highest-high-since-position-was-opened/)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: We of course don’t know when a position is going to be opened/closed and setting
+    the `period` to a fixed value like `15` would make no sense. Let’s see how we
+    can do it, packing everything in an indicator
+  prefs: []
+  type: TYPE_NORMAL
+- en: Dynamic params
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: We’ll first be using parameters that we’ll be changing during the life of the
+    indicator, achieving dynamism with it.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: Et voilá! We have it and we have so far not broken the rules laid out for our
+    indicators. Let’s look at the indicator
+  prefs: []
+  type: TYPE_NORMAL
+- en: It defines an output *line* named `dyn_highest`
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: It has one parameter `tradeopen=False`
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: (Yes, it takes data feeds, simply because it subclasses `Indicator`)
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: And if we were to call `next` always with the same input, it would always return
+    the same value
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'The only thing:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: If the value of the parameter changes, the output changes (the rules above said
+    the output remains constant as long as the parameters don’t change)
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: We use this in `notify_trade` to influence our `DynamicHighest`
+  prefs: []
+  type: TYPE_NORMAL
+- en: We use the value `isopen` of the notified `trade` as a flag to know if we have
+    to record the highest point of the input data
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: When the `trade` closes, the value of `isopen` will be `False` and we will stop
+    recording the highest value
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'For reference see: [Backtrader Documentation Trade](https://www.backtrader.com/docu/trade.html)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Easy!!!
+  prefs: []
+  type: TYPE_NORMAL
+- en: Using a method
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Some people would argue against the modification of a `param` which is part
+    of the declaration of the Indicator and should only be set during the instantiation.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Ok, let’s go for a method.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: Not a huge difference, but now the indicator has some extra boilerplate with
+    `__init__` and the method `tradeopen(self, yesno)`. But the dynamics of our `DynamicHighest`
+    are the same.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Bonus: let’s make it general purpose'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Let’s recover the `params` and make the Indicator one that can apply different
+    functions and not only `max`
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE3]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Said and done! We have added:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`params=dict(fn=None)`'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: To collect the function the end user would like to use
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: 'A safeguard to use a placeholder function if the user passes no specific function:'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[PRE4]'
+  prefs:
+  - PREF_IND
+  type: TYPE_PRE
+- en: 'And we use the function (or the placeholder) for the calculation:'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[PRE5]'
+  prefs:
+  - PREF_IND
+  type: TYPE_PRE
+- en: 'Stating in the invocation of our (now named) `DynamicFn` indicator which function
+    we want to use … `max` (no surprises here):'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[PRE6]'
+  prefs:
+  - PREF_IND
+  type: TYPE_PRE
+- en: Not much more left today … Enjoy it!!!
+  prefs: []
+  type: TYPE_NORMAL

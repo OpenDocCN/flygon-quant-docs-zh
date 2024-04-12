@@ -1,0 +1,216 @@
+- en: Pivot Point and Cross Plotting
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.backtrader.com/blog/posts/2016-04-28-pivot-point-cross-plotting/pivotpoint-crossplotting/](https://www.backtrader.com/blog/posts/2016-04-28-pivot-point-cross-plotting/pivotpoint-crossplotting/)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: Note
+  prefs: []
+  type: TYPE_NORMAL
+- en: This post is kept for historical reasons. The indicator and sample have been
+    updated in the sources and `PivotPoint` can now auto-couple itself, removing boilerplate
+    for the user code.
+  prefs: []
+  type: TYPE_NORMAL
+- en: A new post will be written referencing this one. Meanwhile, please check the
+    updated sample in the sources.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'An interesting request came across:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: PivotPoint
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'It is interesting because of how the indicator is defined. Literature can be
+    found at [PivotPoint at StockCharts](http://stockcharts.com/school/doku.php?id=chart_school:technical_indicators:pivot_points).
+    PivotPoints use the `close`, `high` and `low` prices of a past timeframe. For
+    example for the daily timeframe:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*Pivot Points for daily charts use the prior month’s data*'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'This may seem troublesome because for each timeframe there needs to be a definition
+    of what other timeframe has to be used. Looking at the formulas opens up another
+    question:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Even if the text is full of references to *prior period* and *past …* the formulas
+    seem to reference the current point in time. Let’s follow the advice of the *text*
+    and use *previous* in our first attempt at the PivotPoint. But first let’s tackle
+    the problem of the different timeframes by doing this:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The indicator will not tackle the problem
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'Although this may seem confusing, one has to take into account that *indicators*
+    have to remain as stupid as possible and be made up of actual formulas. The problem
+    will be solved as follows:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'And later in the *Strategy*:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: Now it’s clear. The system will have the data, plus an extra input resampled
+    to the needed timeframe. And the `PivotPoint` indicator will work with the resampled
+    data, which is already in the needed *monthly* timeframe for the original data
+    timeframe which is *daily*.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The indicator can be developed. Let’s start by following the text indications
+    and not the formulas and look back 1 period.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE3]'
+  prefs: []
+  type: TYPE_PRE
+- en: The strategy will look at parameter `usepp1` to use this `PivotPoint1`
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE4]'
+  prefs: []
+  type: TYPE_PRE
+- en: And the output is controlled by a simple `next` method
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE5]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Let’s execute:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE6]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'And the output:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE7]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Immediately something is clear: *index 41 already belongs to the 2^(nd) month*.
+    That means we have skipped calculation of the indicator by 1 month. It is now
+    clear why the text in *StockCharts* is always mentioning that the calculation
+    happens with the previous *month* but the formulas seem to reference the current
+    moment.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The developers probably faced the same design decisions with multiple datas
+    with multiple timeframes.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: At the current *daily* point, only the *closed* bar from the previous *month*
+    can be delivered.
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: That’s why the `next` method is looking at index `[0]`. All this has a very
+    easy fix and that’s writing the formulas just like *StockCharts* documents them.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE8]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'An execution without `usepp1`:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE9]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'And the new output is:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE10]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Et voilá! The 1^(st) month had `20` trading days and once complete the indicator
+    has calculated the values and can be delivered. The only printed line is `p` and
+    if the value is the same in the 2 lines is because the value remains fixed for
+    the entire next month. Quoting *StockCharts*:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE11]'
+  prefs: []
+  type: TYPE_PRE
+- en: The indicator can already be used. Let’s go for plotting. A plotting parameter
+    has already been set
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE12]'
+  prefs: []
+  type: TYPE_PRE
+- en: The calculated values are in line with the data scale and just like a *Moving
+    Average* it can be plotted along the data (hence `subplot=False`)
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'An execution with `--plot`:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE13]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![image](../Images/eb298ddb86ba808030c2e73fc49f9912.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: The blistering barnacles are attacking again. The indicator has been plotted
+    on the monthly data (its source), which gives no visual indication on the daily
+    chart, where it would be really helpful.
+  prefs: []
+  type: TYPE_NORMAL
+- en: But `backtrader` supports cross-plotting from one data to another. Although
+    a small addition in `1.2.8.88` was needed to support cross-plotting to a data
+    of a different timeframe.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'This is achieved by having `plotmaster` say which the plot target is, by adding
+    it to the `plotinfo` attribute of the indicator:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE14]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![image](../Images/f93a7e4338901f87003ba1bc56975262.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: The visual feedback is now useful to understand what `PivotPoint` is offering.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Script Code and Usage
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: 'Available as sample in the sources of `backtrader`:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE15]'
+  prefs: []
+  type: TYPE_PRE
+- en: The code for `PivotPoint`
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE16]'
+  prefs: []
+  type: TYPE_PRE
+- en: The code for the script.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE17]'
+  prefs: []
+  type: TYPE_PRE

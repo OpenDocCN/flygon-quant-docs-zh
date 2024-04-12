@@ -1,0 +1,300 @@
+- en: Automating backtrader BackTesting
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.backtrader.com/blog/posts/2015-08-16-backtesting-with-almost-no-programming/backtesting-with-almost-no-programming/](https://www.backtrader.com/blog/posts/2015-08-16-backtesting-with-almost-no-programming/backtesting-with-almost-no-programming/)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: So far all backtrader examples and working samples have started from scratch
+    creating a main **Python** module which loads datas, strategies, observers and
+    prepares cash and commission schemes.
+  prefs: []
+  type: TYPE_NORMAL
+- en: One of the goals of *algorithmic trading* is the automation of trading and given
+    that bactrader is a *backtesting* platform intented to check trading algorithms
+    (hence is an *algotrading* platform), automating the use of backtrader was an
+    obvious goal.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Note
+  prefs: []
+  type: TYPE_NORMAL
+- en: Aug 22, 2015
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`Analyzer` support in `bt-run.py` included'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The development version of `backtrader` now contains the `bt-run.py` script
+    which automates most tasks and will be installed along `backtrader` as part of
+    a regular package.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`bt-run.py` allows the end user to:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Say which datas have to be loaded
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Set the format to load the datas
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Specify the date range for the datas
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Disable standard observers
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'Load one or more observers (example: DrawDown) from the built-in ones or from
+    a python module'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Set the cash and commission scheme parameters for the broker (commission, margin,
+    mult)
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Enable plotting, controlling the amount of charts and style to present the data
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'And finally:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Load a strategy (a built-in one or from a Python module)
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Pass parameters to the loaded strategy
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: See below for the **Usage*** of the script.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Applying a User Defined Strategy
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: 'Let’s consider the following strategy which:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Simply loads a SimpleMovingAverage (default period 15)
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Prints outs
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Is in a fily with the name mymod.py
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Executing the strategy with the usual testing sample is easy: easy:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: The chart output
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![image](../Images/693cb0d9584d9a4aa924666f63b1b76c.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'The console output:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Same strategy but:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Setting the parameter `period` to 50
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'The command line:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE3]'
+  prefs: []
+  type: TYPE_PRE
+- en: The chart output.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![image](../Images/a65a3088e0484b67c8bbe3942c3907e1.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Using a built-in Strategy
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '`backtrader` will slowly be including sample (textbook) strategies. Along with
+    the `bt-run.py` script a standard *Simple Moving Average CrossOver* strategy is
+    included. The name:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`SMA_CrossOver`'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Parameters
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: fast (default 10) period of the fast moving average
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: slow (default 30) period of the slow moving average
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: The strategy buys if the fast moving average crosses up the fast and sells (only
+    if it has bought before) upon the fast moving average crossing down the slow moving
+    average.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The code
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE4]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Standard execution:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE5]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Notice the ‘:’. The standard notation (see below) to load a strategy is:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: module:stragegy
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'With the following rules:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: If module is there and strategy is specified, then that strategy will be used
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: If module is there but no strategy is specified, the 1^(st) strategy found in
+    the module will be returned
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: If no module is specified, “strategy” is assumed to refer to a strategy in the
+    `backtrader` package
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: The latter being our case.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The output.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![image](../Images/1a545394a8a1243eb800fd080611025a.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'One last example adding commission schemes, cash and changing the parameters:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE6]'
+  prefs: []
+  type: TYPE_PRE
+- en: The output.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![image](../Images/c53f9a28e3a40efa6d33fb0be4a89d7d.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'We have backtested the strategy:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Changing the moving average periods
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Setting a new starting cash
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Putting a commission scheme in place for a futures-like instrument
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: See the continuous variations in cash with each bar, as cash is adjusted for
+    the futures-like instrument daily changes
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: Adding Analyzers
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: Note
+  prefs: []
+  type: TYPE_NORMAL
+- en: Added Analyzer example
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`bt-run.py` also supports adding `Analyzers` with the same syntax used for
+    the strategies to choose between internal/external analyzers.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Example with a `SharpeRatio` analysis for the years 2005-2006:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE7]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'The output:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE8]'
+  prefs: []
+  type: TYPE_PRE
+- en: Good strategy!!! (Pure luck for the example actually which also bears no commissions)
+  prefs: []
+  type: TYPE_NORMAL
+- en: The chart (which simply shows the Analyzer is not in the plot, because Analyzers
+    cannot be plotted, they aren’t lines objects)
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![image](../Images/8740716b754260baf410806aa63edd1a.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Usage of the script
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: 'Directly from the script:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE9]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'And the code:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE10]'
+  prefs: []
+  type: TYPE_PRE

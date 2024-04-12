@@ -1,0 +1,199 @@
+- en: Fillers
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.backtrader.com/docu/filler/](https://www.backtrader.com/docu/filler/)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: 'The *backtrader* broker simulation has a default strategy when it comes to
+    using volume for order execution:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Ignore volume
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'This is based on 2 premises:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Trade in markets liquid enough to fully absorb *buy/sell* orders in one go
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Real volume matching requires a real wolrd
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: A quick example is a `Fill or Kill` order. Even down to the *tick* resolution
+    and with enough volume for a *fill*, the *backtrader* broker cannot know how many
+    extra actors happen to be in the market to discriminate if such an order would
+    be or would not be matched to stick to the `Fill` part or if the order should
+    be `Kill`
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: But the *broker* can accept *Volume Fillers* which determine how much of the
+    volume at a given point in time has to be used for *order matching*.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The fillers signature
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: 'A *filler* in the *backtrader* ecosystem can be any *callable* which matches
+    the following signature:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Where:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`order` is the order which is going to be executed'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: This object gives access to the `data` object which is the target of the operation,
+    creation sizes/prices, execution prices/sizes/remaining sizes and other details
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '`price` at which the order is going to be executed'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`ago` is the index to the `data` in the *order* in which to look for the volume
+    and price elements'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: In almost all cases this will be `0` (current point in time) but in a corner
+    case to cover `Close` orders this may be `-1`
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: 'To for example access the bar volume do:'
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs:
+  - PREF_IND
+  type: TYPE_PRE
+- en: 'The callable can be a function or for example an instance of a class supporting
+    the `__call__` method, like in:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: Adding a Filler to the broker
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: 'The most straightforward method is to use the `set_filler`:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE3]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'The second choice is to completely replace the `broker`, although this is probably
+    only meant for subclasses of `BrokerBack` which have rewritten portions of the
+    functionality:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE4]'
+  prefs: []
+  type: TYPE_PRE
+- en: The sample
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: The *backtrader* sources contain a sample named `volumefilling` which allows
+    to test some of the integrated `fillers` (initially all)
+  prefs: []
+  type: TYPE_NORMAL
+- en: Reference
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: class backtrader.fillers.FixedSize()
+  prefs:
+  - PREF_H4
+  type: TYPE_NORMAL
+- en: Returns the execution size for a given order using a *percentage* of the volume
+    in a bar.
+  prefs: []
+  type: TYPE_NORMAL
+- en: This percentage is set with the parameter `perc`
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Params:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`size` (default: `None`) maximum size to be executed. The actual volume of
+    the bar at execution time is also a limit if smaller than the size'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: If the value of this parameter evaluates to False, the entire volume of the
+    bar will be used to match the order
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: class backtrader.fillers.FixedBarPerc()
+  prefs:
+  - PREF_H4
+  type: TYPE_NORMAL
+- en: Returns the execution size for a given order using a *percentage* of the volume
+    in a bar.
+  prefs: []
+  type: TYPE_NORMAL
+- en: This percentage is set with the parameter `perc`
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Params:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`perc` (default: `100.0`) (valied values: `0.0 - 100.0`)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Percentage of the volume bar to use to execute an order
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: class backtrader.fillers.BarPointPerc()
+  prefs:
+  - PREF_H4
+  type: TYPE_NORMAL
+- en: Returns the execution size for a given order. The volume will be distributed
+    uniformly in the range *high*-*low* using `minmov` to partition.
+  prefs: []
+  type: TYPE_NORMAL
+- en: From the allocated volume for the given price, the `perc` percentage will be
+    used
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Params:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`minmov` (default: `0.01`)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Minimum price movement. Used to partition the range *high*-*low* to proportionally
+    distribute the volume amongst possible prices
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '`perc` (default: `100.0`) (valied values: `0.0 - 100.0`)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Percentage of the volume allocated to the order execution price to use for matching
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL

@@ -1,0 +1,126 @@
+- en: 'Improving Commissions: Stocks vs Futures'
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.backtrader.com/blog/posts/2015-07-31-commission-schemes-updated/commission-schemes-updated/](https://www.backtrader.com/blog/posts/2015-07-31-commission-schemes-updated/commission-schemes-updated/)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: 'Posting backtrader usage examples has given me an insight into things that
+    were missing. For starters:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Multicore Optimization
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'Commissions: Stocks vs Futures'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'The latter showed me:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The broker was doing the right things with regards to the calculation of profit
+    and loss and providing the right order notifications to the calling strategy
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: The strategy had no access to `operations` (aka `trades`) which is the result
+    of an order having opened and closed a position (with the latter showing a P&L
+    figure)
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: The plotted `Operation` P&L figures were gathered by an `Observer` and had no
+    access to the actual `commission scheme`, hence rendering the same P&L for a `futures-like`
+    operation and for a `stocks-like` one
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'Clearly a small internal rework was needed to achieve:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`Operation` notification to the strategy'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`Operations` displaying the right P&L figures'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: The `broker` already had all of the needed information and already stuffing
+    most of it into the `order` which was being notified to the `strategy` which had
+    create it. The only decision to make was whether the `broker` would fit an extra
+    information bit into the order or it could calculate the `operations` itself.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Since the strategy already gets the `orders` and keeping the `operations` in
+    a list seems natural, the `broker` just adds the actual P&L when an order has
+    closed partially/totally a position, leaving the responsibility of the calculation
+    to the `strategy`.
+  prefs: []
+  type: TYPE_NORMAL
+- en: In turn this simplifies the actual role of the `Operations Observer` to that
+    of observing newly closed `Operation` and recording it. The role it should always
+    have had.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The code below has been reworked to no longer calculate the P&L figures, but
+    to just pay attention to those notified in `notify_operation`.
+  prefs: []
+  type: TYPE_NORMAL
+- en: And the charts now reflect realistic P&L figures (The `cash` and `value` were
+    alredy realistic)
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'The old logging for futures:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'The new logging for futures:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'The old logging For stocks:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'The new logging for stocks:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE3]'
+  prefs: []
+  type: TYPE_PRE
+- en: And the charts (only the new ones). The difference between `futures-like` operations
+    and `stock-like` operations can now be clearly seen and not only in the evolution
+    of `cash` and `value`.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Commissions for futures
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![image](../Images/c7fac4a655850567f4e077b6fd13a5ad.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Commissions for stocks
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![image](../Images/51b5f90f9665ecb3e5aecbb3d4ad750f.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: The code
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '[PRE4]'
+  prefs: []
+  type: TYPE_PRE

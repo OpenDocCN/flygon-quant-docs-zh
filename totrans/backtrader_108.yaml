@@ -1,0 +1,375 @@
+- en: Buy and Hold with backtrader
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.backtrader.com/blog/2019-06-13-buy-and-hold/buy-and-hold/](https://www.backtrader.com/blog/2019-06-13-buy-and-hold/buy-and-hold/)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: 'This is sometimes one of the baselines which is used to test the performance
+    of a given strategy, i.e.: *"if the carefully crafted logic cannot beat a simple
+    buy and hold approach, the strategy is probably not worth a dime"*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: A simple *"buy and hold"* strategy, would simply buy with the first incoming
+    data point and see what the portfolio value is available with the last data point.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Tip
+  prefs: []
+  type: TYPE_NORMAL
+- en: The snippets below forego the imports and set-up boilerplate. A complete script
+    is available at the end.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Cheating On Close
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: In many cases, an approach like *Buy and Hold* is not meant to yield an exact
+    reproduction of order execution and price matching. It is about evaluating the
+    large numbers. That is why, the `cheat-on-close` mode of the default broker in
+    *backtrader* is going to be activated. This means
+  prefs: []
+  type: TYPE_NORMAL
+- en: As only `Market` orders will be issued, execution will be done against the current
+    `close` price.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Take into account that when a price is available for the trading logic (in this
+    case the `close`), that price is **GONE**. It may or may not be available in a
+    while and in reality execution cannot be guaranteed against it.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Buy and Forget
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'The following is happening here:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: A single go long operation to enter the market is being issued. Either with
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`buy` and a manual calculation of the `size`'
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: All the available `cash` is used to buy a fixed amount of units of the asset.
+    Notice it is being truncated to be an `int`. This is appropriate for things like
+    *stocks*, *futures*.
+  prefs:
+  - PREF_IND
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: or
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '`order_target_value` and letting the system know we want to use all the cash.
+    The method will take care of automatically calculating the size.'
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: In the `start` method, the initial amount of cash is being saved
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: In the `stop` method, the returns are calculated, using the current value of
+    the portfolio and the initial amount of cash
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Note
+  prefs: []
+  type: TYPE_NORMAL
+- en: In *backtrader* the `nextstart` method is called **exactly** once, when the
+    data/indicator buffers can deliver. The default behavior is to delegate the work
+    to `next`. But because we want to buy exactly **once** and do it with the **first**
+    available data, it is the right point to do it.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Tip
+  prefs: []
+  type: TYPE_NORMAL
+- en: As only **1** data feed is being considered, there is no need to specify the
+    target data feed. The first (and only) data feed in the system will be used as
+    the target.
+  prefs: []
+  type: TYPE_NORMAL
+- en: If more than one data feed is present, the target can be selected by using the
+    named argument `data` as in
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: The sample script below can be executed as follows
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE3]'
+  prefs: []
+  type: TYPE_PRE
+- en: '[PRE4]'
+  prefs: []
+  type: TYPE_PRE
+- en: The graphical output is the same for both
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Buy and Hold](../Images/60ee14706b64c22b1a0f9dc6be9a4feb.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Buy and Buy More
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: But an actual regular person does usually have a *day job* and can put an amount
+    of money into the stock market each and every month. This person is not bothered
+    with trends, technical analysis and the likes. The only actual concern is to put
+    the money in the market the 1^(st) day of the month.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Given that the Romans left us with a calendar which has months which differ
+    in the number of days (`28`, `29`, `30`, `31`) and taking into account non-trading
+    days, one cannot for sure use the following simple approach:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Buy each **X** days
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: A method to identify the **first trading day** of the month needs to be used.
+    This can be done with **Timers** in *backtrader*
+  prefs: []
+  type: TYPE_NORMAL
+- en: Note
+  prefs: []
+  type: TYPE_NORMAL
+- en: Only the `order_target_value` method is used in the next examples.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE5]'
+  prefs: []
+  type: TYPE_PRE
+- en: During the `start` phase a timer is added
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE6]'
+  prefs: []
+  type: TYPE_PRE
+- en: Timer which will be called at the end of the session (`bt.timer.SESSION_END`)
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Note
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: For daily bars this is obviously not relevant, because the entire bar is delivered
+    in a single shot.
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: The timer lists only day `1` of the month as the one in which the timer has
+    to be called
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: In case day `1` happens to be a non-trading day, `monthcarry=True` ensures that
+    the timer will still be called on the first trading day of the month.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: The timer received during the `notify_timer` method, which is overridden to
+    perform the market operations.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE7]'
+  prefs: []
+  type: TYPE_PRE
+- en: Tip
+  prefs: []
+  type: TYPE_NORMAL
+- en: Notice that what is bought is not the **monthly cash** influx, but the **total
+    value of the account**, which comprises the current portfolio, plus the money
+    we have added. The reasons
+  prefs: []
+  type: TYPE_NORMAL
+- en: There can be some initial cash to be consumed
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: The monthly operation may not consume all the cash, because a single month may
+    not be enough to buy the stock and because there will be a rest after acquiring
+    the stock
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: In our example it is actually so, because the default monthly cash inflow is
+    `1000` and the asset has a value of over `3000`
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: If the target were to be the available cash, this could be smaller than the
+    actual value
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Execution
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE8]'
+  prefs: []
+  type: TYPE_PRE
+- en: '[PRE9]'
+  prefs: []
+  type: TYPE_PRE
+- en: '**Blistering Barnacles!!!** a `ROI` of `320.96%` for the default `1000` money
+    units and an even greater `ROI` of `1460.99%` for `5000` monetary units. We have
+    probably found a money printing machine ...'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*The more money we add each month ... the more we win ... regardless of what
+    the market does.*'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Of course not ...
+  prefs: []
+  type: TYPE_NORMAL
+- en: The calculation stored in `self.roi` during `stop` is **NO** longer valid. The
+    simple monhtly addition of cash to the broker changes the scales (even if the
+    money were not used for anything, it would still count as an increment)
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: The graphical output with 1000 money units
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Buy and Hold - More - 1000](../Images/d41f7d59fcb4211b4b9e09664c4734d7.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Notice the interval between actual operations in the market, because the `1000`
+    money units are not enough to buy `1` unit of the asset and money has to be accumulated
+    until an operation can succeed.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The graphical output with 5000 money units
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Buy and Hold - More - 5000](../Images/7694386f6e3f1ec63a462d95c0db3da4.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: In this case, `5000` monetary units can always buy `1` unit of the asset and
+    the market operations take place each and every month.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Performance Tracking for *Buy and Buy More*
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: As pointed out above, hen money is added to (and sometimes taken out of) the
+    system, performance has to measured in a different way. There is no need to invent
+    anything, because it was invented a long time ago and it is what is done for *Fund
+    Management*.
+  prefs: []
+  type: TYPE_NORMAL
+- en: A `perf_value` is set as the reference to track the performance. More often
+    than not this will `100`
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'Using that peformance value and the initial amount of cash, a number of `shares`
+    is calculated, i.e.: `shares = cash / perf_value`'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Whenever cash is added to/subsctracted from the system, the number of `shares`
+    changes, but the `perf_value` remains the same.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: The cash will be sometimes invested and the daily `value` will be updated as
+    in `perf_value = portfolio_value / shares`
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: With that approach the actual perfomance can be calculated and it is independent
+    of cash additions to/withdrawals from the system.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Luckily enough, *backtrader* can already do all of that automatically.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE10]'
+  prefs: []
+  type: TYPE_PRE
+- en: During `start`
+  prefs: []
+  type: TYPE_NORMAL
+- en: The fund mode is activated with a default start value of `100.0`
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[PRE11]'
+  prefs:
+  - PREF_IND
+  type: TYPE_PRE
+- en: During `stop`
+  prefs: []
+  type: TYPE_NORMAL
+- en: The fund `ROI` is calculated. Because the start value is `100.0` the operation
+    is rather simple
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[PRE12]'
+  prefs:
+  - PREF_IND
+  type: TYPE_PRE
+- en: The execution
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE13]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'In this case:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The same incredible plain `ROI` as before is achieved which is `1460.99%`
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: The actual `ROI` when considering it as *Fund* is a more modest and realistic
+    `37.31%`, given the sample data.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Note
+  prefs: []
+  type: TYPE_NORMAL
+- en: The output chart is the same as in the previous execution with `5000` money
+    units.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The sample script
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '[PRE14]'
+  prefs: []
+  type: TYPE_PRE
+- en: '[PRE15]'
+  prefs: []
+  type: TYPE_PRE

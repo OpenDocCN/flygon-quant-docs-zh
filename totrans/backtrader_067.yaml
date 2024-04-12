@@ -1,0 +1,167 @@
+- en: Trade
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.backtrader.com/docu/trade/](https://www.backtrader.com/docu/trade/)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: 'Definition of a trade:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: A Trade is open when the a position in a instrument goes from 0 to a size X
+    which may positive/negative for long/short positions)
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: A Trade is closed when a position goes from X to 0.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'The followig two actions:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: positive to negative
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: negative to positive
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'Are actually seen as:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: A trade has been closed (position went to 0 from X)
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: A new trade has been open (position goes from 0 to Y)
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Trades are only informative and have no user callable methods.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Reference: Trade'
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: class backtrader.trade.Trade(data=None, tradeid=0, historyon=False, size=0,
+    price=0.0, value=0.0, commission=0.0)
+  prefs:
+  - PREF_H4
+  type: TYPE_NORMAL
+- en: 'Keeps track of the life of an trade: size, price, commission (and value?)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: An trade starts at 0 can be increased and reduced and can be considered closed
+    if it goes back to 0.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The trade can be long (positive size) or short (negative size)
+  prefs: []
+  type: TYPE_NORMAL
+- en: An trade is not meant to be reversed (no support in the logic for it)
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Member Attributes:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`ref`: unique trade identifier'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`status` (`int`): one of Created, Open, Closed'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`tradeid`: grouping tradeid passed to orders during creation The default in
+    orders is 0'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`size` (`int`): current size of the trade'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`price` (`float`): current price of the trade'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`value` (`float`): current value of the trade'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`commission` (`float`): current accumulated commission'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`pnl` (`float`): current profit and loss of the trade (gross pnl)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`pnlcomm` (`float`): current profit and loss of the trade minus commission
+    (net pnl)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`isclosed` (`bool`): records if the last update closed (set size to null the
+    trade'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`isopen` (`bool`): records if any update has opened the trade'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`justopened` (`bool`): if the trade was just opened'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`baropen` (`int`): bar in which this trade was opened'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`dtopen` (`float`): float coded datetime in which the trade was opened'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Use method `open_datetime` to get a Python datetime.datetime or use the platform
+    provided `num2date` method
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`barclose` (`int`): bar in which this trade was closed'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`dtclose` (`float`): float coded datetime in which the trade was closed'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Use method `close_datetime` to get a Python datetime.datetime or use the platform
+    provided `num2date` method
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`barlen` (`int`): number of bars this trade was open'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`historyon` (`bool`): whether history has to be recorded'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`history` (`list`): holds a list updated with each “update” event containing
+    the resulting status and parameters used in the update'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: The first entry in the history is the Opening Event The last entry in the history
+    is the Closing Event
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL

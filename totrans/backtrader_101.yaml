@@ -1,0 +1,426 @@
+- en: On Backtesting Performance and Out of Core Memory Execution
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.backtrader.com/blog/2019-10-25-on-backtesting-performance-and-out-of-memory/on-backtesting-performance-and-out-of-memory/](https://www.backtrader.com/blog/2019-10-25-on-backtesting-performance-and-out-of-memory/on-backtesting-performance-and-out-of-memory/)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: There have been two recent [https://redit.com/r/algotrading](https://redit.com/r/algotrading)
+    threads which are the inspiration for this article.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'A thread with a bogus claim that *backtrader* cannot cope with 1.6M candles:
+    [reddit/r/algotrading - A performant backtesting system?](https://www.reddit.com/r/algotrading/comments/dlfujr/a_performant_backtesting_system/)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'And another one asking for something which can backtest a universe of 8000
+    stocks: [reddit/r/algotrading - Backtesting libs that supports 1000+ stocks?](https://www.reddit.com/r/algotrading/comments/dmv51t/backtesting_libs_that_supports_1000_stocks/)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: With the author asking about a framework that can backtest '"out-of-core/memory"*,
+    *"because obviously it cannot load all this data into memory"*
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: We'll be of course addressing these concepts with *backtrader*
+  prefs: []
+  type: TYPE_NORMAL
+- en: The 2M Candles
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: In order to do this, the first thing is to generate that amount of candles.
+    Given that the first poster talks about 77 stocks and 1.6M candles, this would
+    amount to 20,779 candles per stock, so we'll do the following to have nice numbers
+  prefs: []
+  type: TYPE_NORMAL
+- en: Generate candles for 100 stocks
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Generate 20,000 candles per stock
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'I.e.: 100 files totaling 2M candles.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The script
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: This generates 100 files, starting with `candles00.csv` and going all the way
+    up to `candles99.csv`. The actual values are not important. Having the standard
+    `datetime`, `OHLCV` components (and `OpenInterest`) is what matters.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The test system
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '*Hardware/OS*: A *Windows 10* 15.6" laptop with an Intel i7 and 32 Gbytes of
+    memory will be used.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '*Python*: CPython `3.6.1` and `pypy3 6.0.0`'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '*Misc*: an application running constantly and taking around 20% of the CPU.
+    The usual suspects like Chrome (102 processes), Edge, Word, Powerpoint, Excel
+    and some minor application are running'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '*backtrader* default configuration'
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: 'Let''s recall what the default run-time configuration for *backtrader* is:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Preload all data feeds if possible
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: If all data feeds can be preloaded, run in batch mode (named `runonce`)
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Precalculate all indicators first
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Go through the strategy logic and broker step-by-step
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Executing the challenge in the default batch `runonce` mode
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: Our test script (see at the bottom for the full source code) will open those
+    100 files and process them with the default *backtrader* configuration.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: '**Memory Usage**: A peak of 348 Mbytes was observed'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Most of the time is actually spent preloading the data (`98.63` seconds), spending
+    the rest in the strategy, which includes going through the broker in each iteration
+    (`73.63` seconds). The total time is `173.26` seconds.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Depending on how you want to calculate it the performance is:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`14,713` candles/second considering the entire run time'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Bottomline**: the claim in the 1^(st) of the two reddit thread above that
+    *backtrader* cannot handle 1.6M candles is *FALSE*.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Doing it with `pypy`
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Since the thread claims that using `pypy` didn't help, let's see what happens
+    when using it.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: Holy Cow! The total time has gone down to `57.19` seconds in total from `135.93`
+    seconds. The performance has more than **doubled**.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'The performance: `34,971` candles/second'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Memory Usage**: a peak of 269 Mbytes was seen.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: This is also an important improvement over the standard CPython interpreter.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Handling the 2M candles out of core memory
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: All of this can be improved if one considers that *backtrader* has several configuration
+    options for the execution of a backtesting session, including optimizing the buffers
+    and working only with the minimum needed set of data (ideally with just buffers
+    of size `1`, which would only happen in ideal scenarios)
+  prefs: []
+  type: TYPE_NORMAL
+- en: The option to be used will be `exactbars=True`. From the documentation for `exactbars`
+    (which is a parameter given to `Cerebro` during either instantiation or when invoking
+    `run`)
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE3]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'For the sake of maximum optimization and because plotting will be disabled,
+    the following will be used too: `stdstats=False`, which disables the standard
+    *Observers* for cash, value and trades (useful for plotting, which is no longer
+    in scope)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE4]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'The performance: `17,494` candles/second'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Memory Usage**: 75 Mbytes (stable from the beginning to the end of the backtesting
+    session)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Let's compare to the previous non-optimized run
+  prefs: []
+  type: TYPE_NORMAL
+- en: Instead of spending over `76` seconds preloading data, backtesting starts immediately,
+    because the data is not preloaded
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: The total time is `114.32` seconds vs `135.93`. An improvement of `15.90%`.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: An improvement in memory usage of `68.5%`.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Note
+  prefs: []
+  type: TYPE_NORMAL
+- en: We could have actually thrown 100M candles to the script and the amount of memory
+    consumed would have remained fixed at `75 Mbytes`
+  prefs: []
+  type: TYPE_NORMAL
+- en: Doing it again with `pypy`
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Now that we know how to optimize, let's do it the `pypy` way.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE5]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'The performance: `30,025` candles/second'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Memory Usage**: constant at `49 Mbytes`'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Comparing it to the previous equivalent run:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`66.61` seconds vs `114.32` or a `41.73%` improvement in run time'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`49 Mbytes` vs `75 Mbytes` or a `34.6%` improvement.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Note
+  prefs: []
+  type: TYPE_NORMAL
+- en: In this case `pypy` has not been able to beat its own time compared to the batch
+    (`runonce`) mode, which was `57.19` seconds. This is to be expected, because when
+    preloading, the calculator indications are done in **vectorized** mode and that's
+    where the JIT of `pypy` excels
+  prefs: []
+  type: TYPE_NORMAL
+- en: It has, in any case, still done a very good job and there is an important **improvement**
+    in memory consumption
+  prefs: []
+  type: TYPE_NORMAL
+- en: A complete run with trading
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: The script can create indicators (moving averages) and execute a *short/long*
+    strategy on the 100 data feeds using the crossover of the moving averages. Let's
+    do it with `pypy`, and knowing that it is better with the batch mode, so be it.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE6]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'The performance: `12,743` candles/second'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Memory Usage**: A peak of `1300 Mbytes` was observed.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The execution time has obviously increased (indicators + trading), but why the
+    memory usage increase?
+  prefs: []
+  type: TYPE_NORMAL
+- en: Before reaching any conclusions, let's run it creating indicators but without
+    trading
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE7]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'The performance: `27,329` candles/second'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Memory Usage**: `600 Mbytes` (doing the same in optimized `exactbars`mode
+    consumes only `60 Mbytes`, but with an increase in the execution time as `pypy`
+    itself cannot optimize so much)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'With that in the hand: **Memory usage increases really when trading**. The
+    reason being that `Order` and `Trade` objects are created, passed around and kept
+    by the broker.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Note
+  prefs: []
+  type: TYPE_NORMAL
+- en: Take into account that the data set contains random values, which generates
+    a huge number of crossovers, hence an enourmous amounts of orders and trades.
+    A similar behavior shall not be expected for a regular data set.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Conclusions
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: The bogus claim
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Already proven above as *bogus*, becase *backtrader* **CAN** handle 1.6 million
+    candles and more.
+  prefs: []
+  type: TYPE_NORMAL
+- en: General
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '*backtrader* can easily handle `2M` candles using the default configuration
+    (with in-memory data pre-loading)'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: '*backtrader* can operate in an non-preloading optimized mode reducing buffers
+    to the minimum for out-of-core-memory backtesting'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: When *backtesting* in optimized non-preloading mode, the increase in memory
+    consumption comes from the administrative overhead which the broker generates.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Even when the trading, using indicators and the broker getting constantly in
+    the way, the performance is `12,473` candles/second
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Use `pypy` where possible (for example if you don't need to plot)
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Using Python and/or *backtrader* for these cases
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'With `pypy`, trading enabled, and the random data set (higher than usual number
+    of trades), the entire 2M bars was processed in a total of:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`156.94` seconds, i.e.: almost `2 minutes and 37 seconds`'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Taking into account that this is done in a laptop running multiple other things
+    simultaneously, it can be concluded that `2M` bars can be done.
+  prefs: []
+  type: TYPE_NORMAL
+- en: What about the `8000` stocks scenario?
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'Execution time would have to be scaled by 80, hence:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`12,560 seconds` (or almost `210 minutes` or `3 hours and 30 minutes`) would
+    be needed to run this random set scenario.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Even assuming a standard data set which would generate far less operations,
+    one would still be talking of backtesting in **hours** (`3 or 4`)
+  prefs: []
+  type: TYPE_NORMAL
+- en: Memory usage would also increase, when **trading** due to the broker actions,
+    and would probably require **some** Gigabytes.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Note
+  prefs: []
+  type: TYPE_NORMAL
+- en: One cannot here simply multiply by 80 again, because the sample scripts trades
+    with random data and as often as possible. In any case the amount of RAM needed
+    would be **IMPORTANT**
+  prefs: []
+  type: TYPE_NORMAL
+- en: As such, a workflow with only *backtrader* as the research and backtesting tool
+    would seem far fetched.
+  prefs: []
+  type: TYPE_NORMAL
+- en: A Discussion about Workflows
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: There are two standard workflows to consider when using *backtrader*
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Do everything with `backtrader`, i.e.: research and backtesting all in one'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Research with `pandas`, get the notion if the ideas are good and then backtest
+    with `backtrader` to verify with as much as accuracy as possible, having possibly
+    reduced huge data-sets to something more palatable for usual RAM scenarios.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Tip
+  prefs: []
+  type: TYPE_NORMAL
+- en: One can imagine replacing `pandas` with something like `dask` for out-of-core-memory
+    execution
+  prefs: []
+  type: TYPE_NORMAL
+- en: The Test Script
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: Here the source code
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE8]'
+  prefs: []
+  type: TYPE_PRE

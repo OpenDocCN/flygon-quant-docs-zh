@@ -1,0 +1,1034 @@
+- en: 'Backtrader: the fund'
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.backtrader.com/blog/posts/2017-06-19-fund-tracking/fund-tracking/](https://www.backtrader.com/blog/posts/2017-06-19-fund-tracking/fund-tracking/)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: Already for a while, *backtrader* has been in use, so to say, *professionally*,
+    besides the the known usage of *backtrader* some banks and trading houses, for
+    the *Backtrader Fund*.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The history
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: 'A group of like-minded and long known to each other individuals decided to
+    go down the road of opening a (Hedge) Fund and use *backtrader* as the foundation
+    stone for the trading ideas. There was one thing which couldn’t be forgone: it
+    had to be 100% regulated (but not in the *Cayman Islands* or a similar place)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Location, heritage and networking put the emphasis first in the European Union
+    and then in Spain, where (as in some other places) the legislation allows for
+    *Umbrella Funds* to host *Sub-Funds*, which enables creating a fully regulated
+    fund with less money and number of participants.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'And … the fund was approved by the *CNMV* (*Comisión Nacional del Mercado de
+    Valores*), the regulating body in Spain with *ISIN*: `ES0131444038`. The links:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Umbrella Fund](https://www.cnmv.es/portal/ANCV/ISIN.aspx?nif=V04856381)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Sub-Fund](https://www.cnmv.es/portal/Consultas/IIC/Fondo.aspx?isin=ES0131444038)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: For those capable of reading Spanish, the usage of *backtrader* is documented
+    in the official Fund leaflet.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'And for those who may, at some point time, decide to go down the road, the
+    most important things:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Bureaucracy is slow and there will be many questions along the road
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Keep track of everything (operations executed, cash/net-asset-value levels,
+    positions, leverage)
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Reporting to the regulating body is a must (hence the need to collect and keep
+    the aforementioned information well organized)
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Keeping within the defined risk/volatility levels is not just a guideline
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'Managing OPM (Other People’s Money) is a real psychological burden. There will
+    be losses and there will be questions. No matter how well intended and naive the
+    questions may be: they have an impact.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '*backtrader* is the foundation for the trading ideas and it has found a new
+    field of application: *reporting*. Custom *Analyzers* and *Indicators* to keep
+    control of the risk/volatility have eased the administrative burden.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Probably because we are old (and old fashioned) we still prefer manual execution
+    (automated execution will sometime in the future take over)
+  prefs: []
+  type: TYPE_NORMAL
+- en: The functionality described below was developed to aid in managing the fund
+    and backtesting scenarios in which money goes in and out and performance is no
+    longer a matter of tracking the net asset value.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Fund Tracking
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 'With version `1.9.52.121`, the broker in *backtrader* keeps track of the accounting
+    not only in *cash*/*value* terms, but also as it would be done in a *Fund*, i.e.:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The value of the fund (of the fund shares actually)
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: The amount of shares
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: With this, one can actually simulate cash deposits and cash withdrawals, whilst
+    still keeping track of the actual performance, which with a regular accounting
+    would be distorted by the cash in/out-flows.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'In addition to the changes in the broker, *Analyzers* and *Observers* have
+    been adapted (those doing something with the net asset value) to support a `fund`
+    parameter, to decide what should actually be tracked. For example `TimeReturn`:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: What is this *fund tracking*?
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: Imagine the use case (later in the sample) of someone who starts with `1000`
+    monetary units and on the 15^(th) of each month adds `100` monetary units. After
+    12 months, the total in the account is `2200`. Returns calculated on a position
+    taking initially
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Calculating the returns in a usual way this would mean that without having
+    executed a single operation, the performance in terms on annual returns is: `120%`.
+    Of course, this isn’t right.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: To alleviate this problem and regardless of the initial value of the account,
+    the value of the fund shares (*fundvalue*) is set to `100.0`. And with that and
+    the starting net asset value (the `1000` monetary units), one calculates the number
+    of fund shares as
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`fundshares = net-asset-value / fundvalue`'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Which in this case is `1000 / 100.0 = 10 shares`
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'With each cash addition, we increase the number of shares with:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`new_fund_shares = cash_addition / fundvalue`'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'Because we are adding `100.0` monetary units and no operation has been executed:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: '`add_cash(cash)`'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE3]'
+  prefs: []
+  type: TYPE_PRE
+- en: '`def next(self):'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'if whatever:'
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: self.broker.add_cash(1000.0)`
+  prefs:
+  - PREF_IND
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '[PRE4]'
+  prefs: []
+  type: TYPE_PRE
+- en: '`...'
+  prefs: []
+  type: TYPE_NORMAL
+- en: cerebro.broker.set_fundmode(True)
+  prefs: []
+  type: TYPE_NORMAL
+- en: '...`'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE5]'
+  prefs: []
+  type: TYPE_PRE
+- en: '`...'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'cerebro.broker.set_fundmode(True, 10.0)  # the default is 100'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '...`'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE6]'
+  prefs: []
+  type: TYPE_PRE
+- en: '`...'
+  prefs: []
+  type: TYPE_NORMAL
+- en: cerebro.broker.set_fundmode(True)
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'cerebro.broker.set_fundstartval(10.0)  # the default is 100'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '...`'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE7]'
+  prefs: []
+  type: TYPE_PRE
+- en: '`...'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '1'
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 'cerebro.addanalyzer(bt.analyzers.TimeReturn)  # auto-detect broker mode'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '2'
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 'cerebro.addanalyzer(bt.analyzers.TimeReturn, fund=True)  # track fund value'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '3'
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 'cerebro.addanalyzer(bt.analyzers.TimeReturn, fund=False)  # track net asset
+    value'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '...`'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE8]'
+  prefs: []
+  type: TYPE_PRE
+- en: '`$ ./fund-tracker.py --broker fundmode=True --strat cash2add=1000 --cerebro
+    writer=True --plot`'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE9]'
+  prefs: []
+  type: TYPE_PRE
+- en: '`- timereturn:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  prefs: []
+  type: TYPE_NORMAL
+- en: '...'
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '- fund: None'
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  prefs: []
+  type: TYPE_NORMAL
+- en: '- Analysis:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '- 2005-12-31: 0.0'
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '- 2006-12-31: 0.0'
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '.......................................................................'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '- timereturn1:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  prefs: []
+  type: TYPE_NORMAL
+- en: '- Params:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '...'
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '- fund: True'
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  prefs: []
+  type: TYPE_NORMAL
+- en: '- Analysis:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '- 2005-12-31: 0.0'
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '- 2006-12-31: 0.0'
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '.......................................................................'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '- timereturn2:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  prefs: []
+  type: TYPE_NORMAL
+- en: '...'
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '- fund: False'
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  prefs: []
+  type: TYPE_NORMAL
+- en: '- Analysis:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '- 2005-12-31: 1.2'
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '- 2006-12-31: 0.545454545455`'
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '[PRE10]'
+  prefs: []
+  type: TYPE_PRE
+- en: '`$ ./fund-tracker.py --broker fundmode=True --strat cash2add=1000,trade=True
+    --cerebro writer=True --plot`'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE11]'
+  prefs: []
+  type: TYPE_PRE
+- en: '`- timereturn:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '...'
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '- fund: None'
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  prefs: []
+  type: TYPE_NORMAL
+- en: '- Analysis:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '- 2005-12-31: -0.00642229824537'
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '- 2006-12-31: 7.78998679263e-05'
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '.......................................................................'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '- timereturn1:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '...'
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '- fund: True'
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  prefs: []
+  type: TYPE_NORMAL
+- en: '- Analysis:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '- 2005-12-31: -0.00642229824537'
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '- 2006-12-31: 7.78998679263e-05'
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '.......................................................................'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '- timereturn2:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  prefs: []
+  type: TYPE_NORMAL
+- en: '...'
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '- fund: False'
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  prefs: []
+  type: TYPE_NORMAL
+- en: '- Analysis:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '- 2005-12-31: 1.19378185337'
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '- 2006-12-31: 0.546479045423`'
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '[PRE12]'
+  prefs: []
+  type: TYPE_PRE
+- en: '`$ ./fund-tracker.py --strat cash2add=1000,trade=True --cerebro writer=True`'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE13]'
+  prefs: []
+  type: TYPE_PRE
+- en: '`- timereturn:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  prefs: []
+  type: TYPE_NORMAL
+- en: '...'
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '- fund: None'
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  prefs: []
+  type: TYPE_NORMAL
+- en: '- Analysis:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '- 2005-12-31: 1.19378185337'
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '- 2006-12-31: 0.546479045423'
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '.......................................................................'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '- timereturn1:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  prefs: []
+  type: TYPE_NORMAL
+- en: '...'
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '- fund: True'
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  prefs: []
+  type: TYPE_NORMAL
+- en: '- Analysis:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '- 2005-12-31: -0.00642229824537'
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '- 2006-12-31: 7.78998679263e-05'
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '.......................................................................'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '- timereturn2:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  prefs: []
+  type: TYPE_NORMAL
+- en: '...'
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '- fund: False'
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  prefs: []
+  type: TYPE_NORMAL
+- en: '- Analysis:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '- 2005-12-31: 1.19378185337'
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '- 2006-12-31: 0.546479045423`'
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '[PRE14]'
+  prefs: []
+  type: TYPE_PRE
+- en: '`$ ./fund-tracker.py --help'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'usage: fund-tracker.py [-h] [--data0 DATA0] [--fromdate FROMDATE]'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[--todate TODATE] [--cerebro kwargs] [--broker kwargs]'
+  prefs:
+  - PREF_IND
+  - PREF_IND
+  - PREF_IND
+  - PREF_IND
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '[--sizer kwargs] [--strat kwargs] [--plot [kwargs]]'
+  prefs:
+  - PREF_IND
+  - PREF_IND
+  - PREF_IND
+  - PREF_IND
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: Fund Tracking Sample
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'optional arguments:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: -h, --help           show this help message and exit
+  prefs: []
+  type: TYPE_NORMAL
+- en: '--data0 DATA0        Data to read in (default:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: ../../datas/2005-2006-day-001.txt)
+  prefs:
+  - PREF_IND
+  - PREF_IND
+  - PREF_IND
+  - PREF_IND
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '--fromdate FROMDATE  Date[time] in YYYY-MM-DD[THH:MM:SS] format (default: )'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '--todate TODATE      Date[time] in YYYY-MM-DD[THH:MM:SS] format (default: )'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '--cerebro kwargs     kwargs in key=value format (default: )'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '--broker kwargs      kwargs in key=value format (default: )'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '--sizer kwargs       kwargs in key=value format (default: )'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '--strat kwargs       kwargs in key=value format (default: )'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '--plot [kwargs]      kwargs in key=value format (default: )`'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE15]'
+  prefs: []
+  type: TYPE_PRE
+- en: '`from __future__ import (absolute_import, division, print_function,'
+  prefs: []
+  type: TYPE_NORMAL
+- en: unicode_literals)
+  prefs:
+  - PREF_IND
+  - PREF_IND
+  - PREF_IND
+  - PREF_IND
+  - PREF_IND
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: import argparse
+  prefs: []
+  type: TYPE_NORMAL
+- en: import datetime
+  prefs: []
+  type: TYPE_NORMAL
+- en: import backtrader as bt
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'class St(bt.SignalStrategy):'
+  prefs: []
+  type: TYPE_NORMAL
+- en: params = dict(
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: cash2add=None,
+  prefs:
+  - PREF_IND
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: cashonday=15,
+  prefs:
+  - PREF_IND
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: pfast=10,
+  prefs:
+  - PREF_IND
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: pslow=30,
+  prefs:
+  - PREF_IND
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: trade=False,
+  prefs:
+  - PREF_IND
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: )
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: 'def __init__(self):'
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: self.add_timer(when=bt.Timer.SESSION_END, monthdays=[self.p.cashonday])
+  prefs:
+  - PREF_IND
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: sma1 = bt.ind.SMA(period=self.p.pfast)
+  prefs:
+  - PREF_IND
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: sma2 = bt.ind.SMA(period=self.p.pslow)
+  prefs:
+  - PREF_IND
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: signal = bt.ind.CrossOver(sma1, sma2)
+  prefs:
+  - PREF_IND
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: 'if self.p.trade:'
+  prefs:
+  - PREF_IND
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: self.signal_add(bt.SIGNAL_LONGSHORT, signal)
+  prefs:
+  - PREF_IND
+  - PREF_IND
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: 'def notify_timer(self, timer, when, *args, **kwargs):'
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: no need to check the timer, there is only one
+  prefs:
+  - PREF_IND
+  - PREF_IND
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 'if self.p.cash2add is not None:'
+  prefs:
+  - PREF_IND
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: self.broker.add_cash(self.p.cash2add)
+  prefs:
+  - PREF_IND
+  - PREF_IND
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: 'def next(self):'
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: pass
+  prefs:
+  - PREF_IND
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: 'def runstrat(args=None):'
+  prefs: []
+  type: TYPE_NORMAL
+- en: args = parse_args(args)
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: cerebro = bt.Cerebro()
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: Data feed kwargs
+  prefs:
+  - PREF_IND
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: kwargs = dict()
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: Parse from/to-date
+  prefs:
+  - PREF_IND
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: dtfmt, tmfmt = '%Y-%m-%d', 'T%H:%M:%S'
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: 'for a, d in ((getattr(args, x), x) for x in [''fromdate'', ''todate'']):'
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: 'if a:'
+  prefs:
+  - PREF_IND
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: strpfmt = dtfmt + tmfmt * ('T' in a)
+  prefs:
+  - PREF_IND
+  - PREF_IND
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: kwargs[d] = datetime.datetime.strptime(a, strpfmt)
+  prefs:
+  - PREF_IND
+  - PREF_IND
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: data0 = bt.feeds.BacktraderCSVData(dataname=args.data0, **kwargs)
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: cerebro.adddata(data0)
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: Broker
+  prefs:
+  - PREF_IND
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: cerebro.broker = bt.brokers.BackBroker(**eval('dict(' + args.broker + ')'))
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: Sizer
+  prefs:
+  - PREF_IND
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: cerebro.addsizer(bt.sizers.PercentSizer,
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '**eval(''dict('' + args.sizer + '')''))'
+  prefs:
+  - PREF_IND
+  - PREF_IND
+  - PREF_IND
+  - PREF_IND
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: Strategy
+  prefs:
+  - PREF_IND
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: cerebro.addstrategy(St, **eval('dict(' + args.strat + ')'))
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: cerebro.addobserver(bt.observers.FundValue)
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: cerebro.addobserver(bt.observers.FundShares)
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: ankwargs = dict(timeframe=bt.TimeFrame.Years)
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: cerebro.addanalyzer(bt.analyzers.TimeReturn, **ankwargs)
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: cerebro.addanalyzer(bt.analyzers.TimeReturn, fund=True, **ankwargs)
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: cerebro.addanalyzer(bt.analyzers.TimeReturn, fund=False, **ankwargs)
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: Execute
+  prefs:
+  - PREF_IND
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: cerebro.run(**eval('dict(' + args.cerebro + ')'))
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: 'if args.plot:  # Plot if requested to'
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: cerebro.plot(**eval('dict(' + args.plot + ')'))
+  prefs:
+  - PREF_IND
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: 'def parse_args(pargs=None):'
+  prefs: []
+  type: TYPE_NORMAL
+- en: parser = argparse.ArgumentParser(
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: formatter_class=argparse.ArgumentDefaultsHelpFormatter,
+  prefs:
+  - PREF_IND
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: description=(
+  prefs:
+  - PREF_IND
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '''Fund Tracking Sample'''
+  prefs:
+  - PREF_IND
+  - PREF_IND
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: )
+  prefs:
+  - PREF_IND
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: )
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: parser.add_argument('--data0', default='../../datas/2005-2006-day-001.txt',
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: required=False, help='Data to read in')
+  prefs:
+  - PREF_IND
+  - PREF_IND
+  - PREF_IND
+  - PREF_IND
+  - PREF_IND
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: Defaults for dates
+  prefs:
+  - PREF_IND
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: parser.add_argument('--fromdate', required=False, default='',
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: help='Date[time] in YYYY-MM-DD[THH:MM:SS] format')
+  prefs:
+  - PREF_IND
+  - PREF_IND
+  - PREF_IND
+  - PREF_IND
+  - PREF_IND
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: parser.add_argument('--todate', required=False, default='',
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: help='Date[time] in YYYY-MM-DD[THH:MM:SS] format')
+  prefs:
+  - PREF_IND
+  - PREF_IND
+  - PREF_IND
+  - PREF_IND
+  - PREF_IND
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: parser.add_argument('--cerebro', required=False, default='',
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: metavar='kwargs', help='kwargs in key=value format')
+  prefs:
+  - PREF_IND
+  - PREF_IND
+  - PREF_IND
+  - PREF_IND
+  - PREF_IND
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: parser.add_argument('--broker', required=False, default='',
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: metavar='kwargs', help='kwargs in key=value format')
+  prefs:
+  - PREF_IND
+  - PREF_IND
+  - PREF_IND
+  - PREF_IND
+  - PREF_IND
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: parser.add_argument('--sizer', required=False, default='',
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: metavar='kwargs', help='kwargs in key=value format')
+  prefs:
+  - PREF_IND
+  - PREF_IND
+  - PREF_IND
+  - PREF_IND
+  - PREF_IND
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: parser.add_argument('--strat', required=False, default='',
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: metavar='kwargs', help='kwargs in key=value format')
+  prefs:
+  - PREF_IND
+  - PREF_IND
+  - PREF_IND
+  - PREF_IND
+  - PREF_IND
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: parser.add_argument('--plot', required=False, default='',
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: nargs='?', const='{}',
+  prefs:
+  - PREF_IND
+  - PREF_IND
+  - PREF_IND
+  - PREF_IND
+  - PREF_IND
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: metavar='kwargs', help='kwargs in key=value format')
+  prefs:
+  - PREF_IND
+  - PREF_IND
+  - PREF_IND
+  - PREF_IND
+  - PREF_IND
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: return parser.parse_args(pargs)
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: 'if __name__ == ''__main__'':'
+  prefs: []
+  type: TYPE_NORMAL
+- en: runstrat()`
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '```'
+  prefs: []
+  type: TYPE_NORMAL

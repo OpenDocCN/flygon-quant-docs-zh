@@ -1,0 +1,198 @@
+- en: User Defined Commissions
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.backtrader.com/docu/user-defined-commissions/commission-schemes-subclassing/](https://www.backtrader.com/docu/user-defined-commissions/commission-schemes-subclassing/)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: 'The most important part of reworking the CommInfo object to the actual incarnation
+    involved:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Retaining the original `CommissionInfo` class and behavior
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Opening the door for easy creation of user defined commissions
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Making the format xx% the default for new commission schemes instead of 0.xx
+    (just a matter of taste), keeping the behavior configurable
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Note
+  prefs: []
+  type: TYPE_NORMAL
+- en: See below the docstring of `CommInfoBase` for parameters reference
+  prefs: []
+  type: TYPE_NORMAL
+- en: Defining a Commission Scheme
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: It involves 1 or 2 steps
+  prefs: []
+  type: TYPE_NORMAL
+- en: Subclassing `CommInfoBase`
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: 'Simply changing the default parameters may be enough. `backtrader` already
+    does this with some definitions present in the module `backtrader.commissions`.
+    The regular industry standard for Futures is a fixed amount per contract and per
+    round. The definition can be done as:'
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs:
+  - PREF_IND
+  type: TYPE_PRE
+- en: 'For stocks and perc-wise commissions:'
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs:
+  - PREF_IND
+  type: TYPE_PRE
+- en: 'As stated above the default for the interpretation of the percentage here (passed
+    as parameter `commission`) is that of: **xx%**. Should the old/other behavior
+    be wished **0.xx**, it can be easily done:'
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs:
+  - PREF_IND
+  type: TYPE_PRE
+- en: Overriding (if needed be) the `_getcommission` method
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: 'Defined as:'
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '[PRE3]'
+  prefs:
+  - PREF_IND
+  type: TYPE_PRE
+- en: More details in a practical example below
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: How to apply this to the platform
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: Once a `CommInfoBase` subclass is in place the trick is to use `broker.addcommissioninfo`
+    rather than the usual `broker.setcommission`. The latter will internally use the
+    legacy `CommissionInfoObject`.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Easier done than said:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE4]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'The `addcommissioninfo` method is defined as follows:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE5]'
+  prefs: []
+  type: TYPE_PRE
+- en: Setting `name` means that the `comminfo` object will only apply to assets with
+    that name. The default value of `None` means it applies to all assets in the system.
+  prefs: []
+  type: TYPE_NORMAL
+- en: A practical example
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '[Ticket #45](https://github.com/mementum/backtrader/issues/45) asks about a
+    commission scheme which applies to Futures, is percentage wise and uses the commission
+    percentage on the entire “virtual” value of the contract. ie: includes the future
+    multiplier in the commission calculation.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'It should be easy:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE6]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Putting it into the system:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE7]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'If the format **0.xx** is preferred as the default, just set param `percabs`
+    to `True`:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE8]'
+  prefs: []
+  type: TYPE_PRE
+- en: This all should do the trick.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Explaining `pseudoexec`
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: 'Let’s recall the definition of `_getcommission`:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE9]'
+  prefs: []
+  type: TYPE_PRE
+- en: The purpose of the `pseudoexec` arg may seem obscure but it serves a purpose.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The platform may call this method to do precalculation of available cash and
+    some other tasks
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: This means that the method may (and it actually will) be called more than once
+    with the same parameters
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`pseudoexec` indicates whether the call corresponds to the actual execution
+    of an order. Although at first sight this may not seem “relevant”, it is if scenarios
+    like the following are considered:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: A broker offers a 50% discount on futures round-trip commission once the amount
+    of negotiated contracts has exceeeded 5000 units
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: In such case and if `pseudoexec` was not there, the multiple non-execution calls
+    to the method would quickly trigger the assumption that the discount is in place.
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: 'Putting the scenario to work:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE10]'
+  prefs: []
+  type: TYPE_PRE
+- en: The purpose and being of `pseudoexec` are hopefully clear now.
+  prefs: []
+  type: TYPE_NORMAL
+- en: CommInfoBase docstring and params
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: 'See Commissions: Stocks vs Futures for the reference of `CommInfoBase`'
+  prefs: []
+  type: TYPE_NORMAL

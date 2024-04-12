@@ -1,0 +1,232 @@
+- en: BTFD - Reality Bites
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.backtrader.com/blog/posts/2016-12-28-btfd-bites/btfd-bites/](https://www.backtrader.com/blog/posts/2016-12-28-btfd-bites/btfd-bites/)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: The previous post managed to replicate the `BTFD` strategy, finding out that
+    the real gains were `16x` rather than `31x`.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'But as pointed out during the replication:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: No commission was charged
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: No interest was charged for using a `2x` leverage
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'And that raises the obvious question:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*How much of that 16x will be there when commission and interest are charged?*'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Luckily the previous sample is flexible enough to experiment with it. To have
+    some visual feedback and verification, the following code will be added to the
+    strategy
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'It’s all about the following:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Seeing how trades are opened and closed (value, profit and loss, value and commission)
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Providing feedback if an order is being rejected with `Margin` due to insufficient
+    funds
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Note
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: Because there will be an adjustment of the amount of money to invest, to leave
+    room for commission, some orders could not be accepted by the broker. This visual
+    feedback allows identifying the situation
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: Verification
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: First a quick test to see that some orders are not accepted.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Notice:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'We apply `target=1.0` which means: *try to invest 100% of the capital*. This
+    is the default, but it is there as a reference.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`commission=0.001` or `0.1%` to ensure we will sometimes meet the margin'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: The 1^(st) two orders are rejected with `Margin`
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: The 3^(rd) order is accepted. This is not an error. The system tries to invest
+    `100%` of the capital, but the asset has a *price* and this is used to calculate
+    the size of the stake. *Size* is rounded down from the actual result of calculating
+    the potential *size* from the actual available *cash*. This rounding down has
+    left room enough for the commission with this 3^(rd) order.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: The trade notifications (`OPEN` and `CLOSE`) show the opening commission and
+    the final total commission an the value which is close to `200k`, showing the
+    `2x` leverage in action.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'The opening commission is `199.3452` which is `0.1%` of the leveraged value
+    which is: `199,345.2`'
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: The remaining tests will be made with `target=0.99x` where `x` will ensure room
+    enough for the selected commission.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Reality Bites
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: Let’s go for some real examples
+  prefs: []
+  type: TYPE_NORMAL
+- en: Target 99.8% - Commission 0.1%
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![image](../Images/c1469fcb970e66b1e6308b288bad3330.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'Blistering Barnacles!!! Not only is the `BTFD` strategy by no means close to
+    the `16x` gains: **IT LOSES MOST OF THE MONEY**.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: From `100,000` down to roughly `4,027`
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Note
+  prefs: []
+  type: TYPE_NORMAL
+- en: The *down to* value is the non-leveraged value, because this is the approximate
+    value that will be back in the system when the position is closed
+  prefs: []
+  type: TYPE_NORMAL
+- en: Target 99.9% - Commission 0.05%
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: It may well have been that the commission is too aggressive. Let’s go for half
+    of it
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE3]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![image](../Images/53135e6fc1bb42bf8182488fc8fedefc.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '**NO, NO**. The commission was not that aggressive, because the system still
+    loses money, going down from `100,000` down to around `69,000` (the non-leverage
+    value)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Target 99.95% - Commission 0.025%
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Commission is divided by two again
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE4]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![image](../Images/9f8d0eb059dc30ae2845e066e3953597.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'Finally the system makes money:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The initial `100,000` are taken up to `331,459` for `3x` gains.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: But this doesn’t match the performance of the asset which has gone up to over
+    `600k`
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Note
+  prefs: []
+  type: TYPE_NORMAL
+- en: The sample accepts `--fromdate YYYY-MM-DD` and `--todate YYYY-MM-DD` to select
+    to which period the strategy has to be applied. This would allow testing similar
+    scenarios for different date ranges.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Conclusion
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: The `16x` gains do not hold when confronted with commission. For the commission
+    offered by some brokers (no cap and %-based) one would need a very good deal to
+    make sure the system makes money.
+  prefs: []
+  type: TYPE_NORMAL
+- en: And in this case in which the strategy is applied to the `S&P500`, the `BTFD`
+    strategy doesn’t match the performance of the index.
+  prefs: []
+  type: TYPE_NORMAL
+- en: No *interest rate* has been applied. Using commissions is enough to see how
+    far away is `16x` from any potential profits. In any case, a run with a `2%` interest
+    rate would be executed like this
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE5]'
+  prefs: []
+  type: TYPE_PRE
+- en: '`interest_long=True` is needed, because the default behavior for charging interest
+    is to do it only for *short* positions'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Sample usage
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '[PRE6]'
+  prefs: []
+  type: TYPE_PRE
+- en: Sample Code
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '[PRE7]'
+  prefs: []
+  type: TYPE_PRE

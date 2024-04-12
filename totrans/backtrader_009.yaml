@@ -1,0 +1,389 @@
+- en: Blogs - Articles
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.backtrader.com/home/references/blogs/](https://www.backtrader.com/home/references/blogs/)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: A list of blogs which have shown backtrader in action.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Aadhunik
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[This is How I Implemented SUPER TREND Indicator in Backtrader (Python)](https://aadhunik.ml/this-is-how-i-implemented-super-trend-indicator-in-backtrader-python/)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[https://aadhunik.ml/this-is-how-i-implemented-super-trend-indicator-in-backtrader-python/](https://aadhunik.ml/this-is-how-i-implemented-super-trend-indicator-in-backtrader-python/)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Actuarial Data Science
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Creating Performance Reports with Backtrader](http://actuarialdatascience.com/backtrader_performance_report.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Alpha Over Beta
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Trading Volatility to Hedge Equity https://www.alphaoverbeta.net/trading-volatility-to-hedge-equity/
+    -](https://www.alphaoverbeta.net/trading-volatility-to-hedge-equity/)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Analyzing Alpha
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Backtrader: Getting Started Backtesting - https://analyzingalpha.com/backtrader-backtesting-trading-strategies](https://analyzingalpha.com/backtrader-backtesting-trading-strategies)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Sector Momentum: Explained & Backtested - https://analyzingalpha.com/sector-momentum](https://analyzingalpha.com/sector-momentum)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Stop Loss: Explained & The Best Strategy - https://analyzingalpha.com/stop-loss-for-stocks](https://analyzingalpha.com/stop-loss-for-stocks)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[The Top 21 Python Trading Tools for 2019 - https://analyzingalpha.com/python-trading-tools](https://analyzingalpha.com/python-trading-tools)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Andreas Clenow - Following the Trend
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Backtesting with Python](https://www.followingthetrend.com/2018/06/backtesting-with-python/)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Angel List - Justin Wagner
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Cryptocurrency Bot with Encoded Strategies and Backtesting](https://angel.co/projects/729346-cryptocurrency-bot-with-encoded-strategies-and-backtesting?src=user_profile)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Backtest Rookies (several posts)
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Backtrader: Data Replay](https://backtest-rookies.com/2017/12/06/backtrader-data-replay/)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: CSDN - Qiantang Xiajiazi
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Backtrader Quantization Platform Tutorial (8) TimeFrame](https://blog.csdn.net/qtlyx/article/details/72716995)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Language**: *Chinese*'
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: DevTo - dennislwm
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[How to Dockerize Backtrader in 4 GIF Steps](https://dev.to/dennislwm/how-to-dockerize-backtrader-in-4-gif-steps-4af2)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[https://dev.to/dennislwm/how-to-dockerize-backtrader-in-4-gif-steps-4af2](https://dev.to/dennislwm/how-to-dockerize-backtrader-in-4-gif-steps-4af2)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: EtherSchtroumpf
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[TOP30 Strategy 1.0e](https://blog.etherschtroumpf.money/2019/06/04/top30-strategy-1-0/)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Finanzas.com
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Cryptotrading algorítmico: diseñando un sistema](http://www.finanzas.com/noticias/mercados/bolsas/20180718/cryptotrading-algoritmico-disenando-sistema-3876840.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Language**: *Spanish*'
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: Intrinio Blog
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[A Quant Quickstart with Intrinio & Backtrader](https://blog.intrinio.com/a-quant-quickstart-with-intrinio-backtrader/)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: LinkedIn - Majid AliAkbar
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Best Python Libraries/Packages for Finance and Financial Data Scientists](https://www.linkedin.com/pulse/best-python-librariespackages-finance-financial-data-majid-aliakbar/)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: LinkedIn - Ali Kokaz
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Exploring a Cross-Sectional Mean Reversion Trading Strategy](https://www.linkedin.com/pulse/exploring-cross-sectional-mean-reversion-trading-strategy-ali-kokaz-1f)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Medium - Chul Lim
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Algo Trading / Program Trading](https://medium.com/@chulla/algo-trading-%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%A8-%ED%8A%B8%EB%A0%88%EC%9D%B4%EB%94%A9-fd7f88c99834)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Language**: Korean'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Medium - Dim Norin
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Test for Klinger Volume Oscillator](https://medium.com/@uachatse/test-for-klinger-volume-oscillator-b234b66a9a84?source=---------2------------------)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Medium - Etienne Brunet
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[My landscape on artificial intelligence quantitative funds and DIY funds](https://medium.com/@etiennebr/my-landscape-on-artificial-intelligence-quantitative-funds-and-diy-funds-13e1b4c25706)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Medium - Sumit Ojha
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Holding vs Smart Holding in cryptocurrency](https://medium.com/@ojhasumit93/holding-vs-smart-holding-in-cryptocurrency-c3c9d89c85f)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Medium - Towards Data Science
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Trading Strategy: Back testing with Backtrader](https://towardsdatascience.com/trading-strategy-back-testing-with-backtrader-6c173f29e37f)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Backtesting Your First Trading Strategy](https://towardsdatascience.com/backtesting-your-first-trading-strategy-ad3977f3f2a)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Algorithmic Trading using Sentiment Analysis on News Articles](https://towardsdatascience.com/https-towardsdatascience-com-algorithmic-trading-using-sentiment-analysis-on-news-articles-83db77966704)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Quant’s Advice on Generating Trading Ideas](https://towardsdatascience.com/quants-advice-on-generating-trading-ideas-580ea62672f3)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Medium - ttamg
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[TradingBot series — Architecture for a trading bot](https://medium.com/@MattGosden/tradingbot-series-architecture-for-a-trading-bot-ac2352508c82)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Medium - Ugur Akyol
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Walk forward worksheet for Backtrader bot](https://medium.com/@UgurAkyol1/walk-forward-worksheet-for-backtrader-81c7571099a1)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Medium - Wen Chang
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Handwriting an AI trading robot](https://medium.com/@meowent/%E5%8B%95%E6%89%8B%E5%AF%AB%E4%B8%80%E9%9A%BBai%E4%BA%A4%E6%98%93%E6%A9%9F%E5%99%A8%E4%BA%BA-e995500b55f7)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Language**: *Chinese*'
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: Medium - You Xie
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Event Study on IGNIS Airdrop](https://medium.com/@xyshell/event-study-on-ignis-airdrop-2f7a93bb24f4)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: My Financial Markets
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Backtest a trading strategy in Python](https://myfinancialmarkets.club/2017/11/23/backtest-a-trading-strategy-in-python/)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: NTGuardian
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Getting Started with Backtrader](https://ntguardian.wordpress.com/2017/06/12/getting-started-with-backtrader/)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Profit Adda
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Creating Performance Reports with Backtrader](http://actuarialdatascience.com/backtrader_performance_report.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Pythonic Finance
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Comparing Python platforms for automated trading](https://randlow.github.io/posts/trading/trading-introduction/)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Optimizing parameters of the trading strategy](https://randlow.github.io/posts/trading/trading-strat-parameter-opt/)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Adding indicators to your trading strategy](https://randlow.github.io/posts/trading/trading-indicators-backtrader/)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Customizing the trading strategy](https://randlow.github.io/posts/trading/trading-custom-backtrader/)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Introduction to automated trading with backtrader](https://randlow.github.io/posts/trading/trading-intro-backtrader/)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: QuantInsti
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Installing Python Packages ;](https://blog.quantinsti.com/installing-python-packages/)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Rankia.com
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Trading de criptodivisas con análisis técnico](https://www.rankia.com/blog/blockchain-criptomonedas-bitcoin-ethereum/3968963-trading-criptodivisas-analisis-tecnico)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Language**: *Spanish*'
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '[Trading de criptomoedas com análise técnica](https://www.rankia.pt/trading-de-criptomoedas-com-analise-tecnica/)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Language**: *Portuguese*'
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: Renbuar Blog
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Mean Reversion Strategy](https://renbuar.blogspot.com/2018/05/backtrader-multiple-data-feeds.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: ScienceWal
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Trading Strategy Backtesting-with-backtrader](https://ms.sciencewal.com/61369-trading-strategy-back-testing-with-backtrader-6c173f29e37f-94)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Language**: *Indonesian*'
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: SeanGTKelly Blog
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[BASIC ALGO-TRADING PART 2 - BACKTRADING](http://seangtkelley.me/blog/2018/08/15/algo-trading-pt2)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: SmudlaTrader
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Faber’s strategy on Daily and Weekly](https://smudlatrader.wordpress.com/tag/backtrader/)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Teddy Koker
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Momentum Strategy from "Stocks on the Move" in Python](https://teddykoker.com/2019/05/momentum-strategy-from-stocks-on-the-move-in-python/)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Improving Cross Sectional Mean Reversion Strategy in Python](https://teddykoker.com/2019/05/improving-cross-sectional-mean-reversion-strategy-in-python/)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Backtesting a Cross-Sectional Mean Reversion Strategy in Python](https://teddykoker.com/2019/04/backtesting-a-cross-sectional-mean-reversion-strategy-in-python/)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Backtesting Portfolios of Leveraged ETFs in Python with Backtrader](https://teddykoker.com/2019/04/backtesting-portfolios-of-leveraged-etfs-in-python-with-backtrader/)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: The Startup - Roman Paolucci
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Creating Profitable Stock Trading Strategies](https://medium.com/swlh/build-a-profitable-stock-trading-bot-6ba376cba955)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: The Lab - swapniljariwala
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Simple example of how to use NSEpy with backtrader](https://swapniljariwala.github.io/2017/11/03/NSEPy-with-backtrader.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

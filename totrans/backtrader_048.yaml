@@ -1,0 +1,325 @@
+- en: Indicator Development
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.backtrader.com/docu/inddev/](https://www.backtrader.com/docu/inddev/)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: If anything (besides one or more winning Strategies) must ever be developed,
+    this something is a custom Indicator.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Such development within the platform is, according to the author, easy.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'The following is needed:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: A class derived from Indicator (either directly or from an already existing
+    subclass)
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Define the *lines* it will hold
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: An indicator must at least have 1 line. If deriving from an existing one, the
+    line(s) may have already be defined
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: Optionally define parameters which can alter the behavior
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Optionally provided/customize some of the elements which enable sensible plotting
+    of the indicators
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Provide a fully defined operation in `__init__` with a binding (assignment)
+    to the line(s) of the indicator or else provide `next` and (optionally) `once`
+    methods
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'If an indicator can be fully defined with logic/arithmetic operations during
+    initialization and the result is assigned to the line: done'
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: Be it not the case, at least a `next` has to be provided where the indicator
+    must assign a value to the line(s) at index 0
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: Optimization of the calculation for the **runonce** mode (batch operation) can
+    be achieved by providing a *once* method.
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: 'Important note: Idempotence'
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: Indicators produce an output for each bar they receive. No assumption has to
+    be made about how many times the same bar will be sent. Operations have to be
+    idempotent.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'The rationale behind this:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The same bar (index-wise) can be sent many times with changing values (namely
+    the changing value is the closing price)
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: This enables, for example, “replaying” a daily session but using intraday data
+    which could be made of 5 minutes bars.
+  prefs: []
+  type: TYPE_NORMAL
+- en: It could also allow the platform to get values from a live feed.
+  prefs: []
+  type: TYPE_NORMAL
+- en: A dummy (but functional) indicator
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'So can it be:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Done! The indicator will output always the same value: either 0.0 or self.params.value
+    if it happens to be greater than 0.0.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'The same indicator but using the next method:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: Done! Same behavior.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Note
+  prefs: []
+  type: TYPE_NORMAL
+- en: Notice how in the `__init__` version `bt.Max` is used to assign to the Line
+    object `self.lines.dummyline`.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`bt.Max` returns an *lines* object that is automatically iterated for each
+    bar passed to the indicator.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Had `max` been used instead, the assigment would have been pointless, because
+    instead of a line, the indicator would have a member variable with a fixed value.
+  prefs: []
+  type: TYPE_NORMAL
+- en: During `next` the work is done directly with floating point values and the standard
+    `max` built-in can be used
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Let’s recall that `self.lines.dummyline` is the long notation and that it can
+    be shortened to:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`self.l.dummyline`'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'and even to:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`self.dummyline`'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: The latter being only possible if the code has not obscured this with a member
+    attribute.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'The 3^(rd) and last version provides an additional `once` method to optimize
+    the calculation:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: A lot more effective but developing the `once` method has forced to scratch
+    beyond the surface. Actually the guts have been looked into.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'The `__init__` version is in any case the best:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Everything is confined to the initialization
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`next` and `once` (both optimized, because `bt.Max` already has them) are provided
+    automatically with no need to play with indices and/or formulas'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'Be it needed for development, the indicator can also override the methods associated
+    to `next` and `once`:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`prenext` and `nexstart`'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`preonce` and `oncestart`'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Manual/Automatic Minimum Period
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: If possible the platform will calculate it, but manual action may be needed.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Here is a potential implementation of a *Simple Moving Average*:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE3]'
+  prefs: []
+  type: TYPE_PRE
+- en: Although it seems sound, the platform doesn’t know what the minimum period is,
+    even if the parameter is named “period” (the name could be misleading and some
+    indicators receive several “period”s which have different usages)
+  prefs: []
+  type: TYPE_NORMAL
+- en: In this case `next` would be called already for the 1^(st) bar and everthing
+    would explode because get cannot return the needed `self.p.period`.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Before solving the situation something has to be taken into account:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The data feeds passed to the indicators may already carry a **minimum period**
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'The sample *SimpleMovingAverage* may be done on for example:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: A regular data feed
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: This has a default mininum period of 1 (just wait for the 1^(st) bar that enters
+    the system)
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: Another Moving Average … and this in turn already has a *period*
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: If this is 20 and again our sample moving average has also 20, we end up with
+    a minimum period of 40 bars
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: Actually the internal calculation says 39 … because as soon as the first moving
+    average has produced a bar this counts for the next moving average, which creates
+    an overlapping bar, thus 39 are needed.
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: Other indicators/objects which also carry periods
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'Alleviating the situation is done as follows:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE4]'
+  prefs: []
+  type: TYPE_PRE
+- en: The `addminperiod` method is telling the system to take into account the extra
+    *period* bars needed by this indicator to whatever minimum period there may be
+    in existence.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Sometimes this is absolutely not needed, if all calculations are done with objects
+    which already communicate its period needs to the system.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'A quick *MACD* implementation with Histogram:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE5]'
+  prefs: []
+  type: TYPE_PRE
+- en: Done! No need to think about mininum periods.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`EMA` stands for *Exponential Moving Average* (a platform built-in alias)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: And this one (already in the platform) already states what it needs
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: The named lines of the indicator “macd” and “signal” are being assigned objects
+    which already carry declared (behind the scenes) periods
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: macd takes the period from the operation “me1 - me2” which has in turn take
+    the maximum from the periods of me1 and me2 (which are both exponential moving
+    averages with different periods)
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: signal takes directly the period of the Exponential Moving Average over macd.
+    This EMA also takes into account the already existing macd period and the needed
+    amount of samples (period_signal) to calculate itself
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: histo takes the maximum of the two operands “signal - macd”. Once both are ready
+    can histo also produce a value
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: A full custom indicator
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: 'Let’s develop a simple custom indicator which “indicates” if a moving average
+    (which can be modified with a parameter) is above the given data:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE6]'
+  prefs: []
+  type: TYPE_PRE
+- en: Done! The indicator will have a value of “1” if the average is above the data
+    and “-1” if below.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Be the data a regular data feed the 1s and -1s would be produced comparing with
+    the close price.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Although more can be seen in the *Plotting* section and to have a behaved and
+    nice citizen in the plotting world, a couple of things can be added:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE7]'
+  prefs: []
+  type: TYPE_PRE

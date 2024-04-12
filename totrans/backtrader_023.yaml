@@ -1,0 +1,322 @@
+- en: Saving Memory
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.backtrader.com/docu/memory-savings/memory-savings/](https://www.backtrader.com/docu/memory-savings/memory-savings/)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '[Release 1.3.1.92](https://github.com/mementum/backtrader/releases/tag/1.3.1.92)
+    has reworked and fully implemented the memory saving schemes that were previously
+    in place, although not much touted and less used.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`backtrader` was (and will be further) developed in machines with nice amounts
+    of RAM and that put together with the fact that visual feedback through plotting
+    is a nice to have and almost a must have, mde it easy for a design decision: keep
+    everything in memory.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'This decision has some drawbacks:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`array.array` which is used for data storage has to allocate and move data
+    when some bounds are exceeded'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Machines with low amounts of RAM may suffer
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Connection to a live data feed which can be online for weeks/months feeded thousands
+    of seconds/minutes resolution ticks into the system
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'The latter being even more important than the 1^(st) due to another design
+    decision which was made for `backtrader`:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Be pure Python to allow to run in embedded systems if needed be
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: A scenario in the future could have `backtrader` connected to a 2^(nd) machine
+    which provides the live feed, whilst `backtrader` itself runs inside a *Raspberry
+    Pi* or something even more limited like an ADSL Router (AVM Frit!Box 7490 with
+    a *Freetz* image)
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: 'Hence the need to have `backtrader` support dynamic memory schemes. Now `Cerebro`
+    can be instantiated or `run` with the following semantics:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'exactbars (default: False)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: With the default `False` value each and every value stored in a line is kept
+    in memory
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: 'Possible values:'
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '`True` or `1`: all “lines” objects reduce memory usage to the automatically
+    calculated minimum period.'
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: If a Simple Moving Average has a period of 30, the underlying data will have
+    always a running buffer of 30 bars to allow the calculation of the Simple Moving
+    Average
+  prefs:
+  - PREF_IND
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: This setting will deactivate `preload` and `runonce`
+  prefs:
+  - PREF_IND
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Using this setting also deactivates **plotting**
+  prefs:
+  - PREF_IND
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`-1`: datas and indicators/operations at strategy level will keep all data
+    in memory.'
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'For example: a `RSI` internally uses the indicator `UpDay` to make calculations.
+    This subindicator will not keep all data in memory'
+  prefs:
+  - PREF_IND
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: This allows to keep `plotting` and `preloading` active.
+  prefs:
+  - PREF_IND
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`runonce` will be deactivated'
+  prefs:
+  - PREF_IND
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`-2`: datas and indicators kept as attributes of the strategy will keep all
+    data in memory.'
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'For example: a `RSI` internally uses the indicator `UpDay` to make calculations.
+    This subindicator will not keep all data in memory'
+  prefs:
+  - PREF_IND
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: If in the `__init__` something like `a = self.data.close - self.data.high` is
+    defined, then `a` will not keep all data in memory
+  prefs:
+  - PREF_IND
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: This allows to keep `plotting` and `preloading` active.
+  prefs:
+  - PREF_IND
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`runonce` will be deactivated'
+  prefs:
+  - PREF_IND
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: As always, an example is worth a thousand words. A sample script shows the differences.
+    It runs against the *Yahoo* daily data for the years 1996 to 2015, for a total
+    of `4965` days.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Note
+  prefs: []
+  type: TYPE_NORMAL
+- en: This is a small sample. The EuroStoxx50 future which trades 14 hours a day,
+    would produce approximately 18000 1-minute bars in just 1 month of trading.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'The script 1^(st) executed to see how many memory positions are used when no
+    memory savings are requested:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'For level 1 (total savings):'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'OMG!!! Down from *half-a-million* to `2041`. Indeed. Each an every *lines*
+    object in the system uses a `collections.deque` as buffer (instead of `array.array`)
+    and is length-bounding to the absolute needed minimum for the requested operations.
+    Example:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: A Strategy using a `SimpleMovingAverage` of period `30` on the data feed.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'In this case the following adjustments would be made:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The *data feed* will have a buffer of `30` positions, the amount needed by the
+    `SimpleMovingAverage` to produce the next value
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: The `SimpleMovingAverage` will have a buffer of `1` position, because unless
+    needed by other *indicator* (which would rely on the moving average) there is
+    no need to keep a larger buffer in place.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Note
+  prefs: []
+  type: TYPE_NORMAL
+- en: The most attractive and probably important feature of this mode is that the
+    amount of memory used remains constant throughout the entire life of a script.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Regardless of the size of the data feed.
+  prefs: []
+  type: TYPE_NORMAL
+- en: This would be of great use if for example connected to a live feed for a long
+    period of time.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'But take into account:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*Plotting* is not available'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: There are other sources of memory consumption which would accumulate over time
+    like `orders` generated by the strategy.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: This mode can only be used with `runonce=False` in `cerebro`. This would also
+    be compulsory for a live data feed, but in case of simple backtesting this is
+    slower than `runonce=True`.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: There is for sure a trade off point from which memory management is more expensive
+    than the step-by-step execution of the backtesting, but this can only be judged
+    by the end-user of the platform on a case by case basis.
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: 'Now the negative levels. These are meant to keep *plotting* available whilst
+    still saving a decent amount of memory. First level `-1`:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'In this case the 1^(st) level of *indicators* (those declared in the strategy)
+    keep its full length buffers. But if this indicators rely on others (which is
+    the case) to do its work, the subobjects will be length-bounded. In this case
+    we have gone from:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`506430` memory positions to -> `184623`'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Over 50% savings.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Note
+  prefs: []
+  type: TYPE_NORMAL
+- en: Of course `array.array` objects have been traded for `collections.deque` which
+    are more expensive in memory terms although faster in operation terms. But the
+    `collection.deque` objects are rather small and the savings approach the roughly
+    counted memory positions used.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Level `-2` now, which is meant to also save on the indicators declared at the
+    strategy level which have been marked as no to be plotted:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE3]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Not much has been saved now. This being because a single indicator has been
+    tagged as not be plotted: `TestInd().plotinfo.plot = False`'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Let’s see the plotting from this last example:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE4]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![image](../Images/ea905c9dcd8efce89b20c85b8a4b058e.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'For the interested reader, the sample script can produce a detailed analysis
+    of each *lines* object traversed in the hierarchy of *indicators*. Running with
+    *plotting* enabled (saving at `-1`):'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE5]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'The same but with maximum savings (`1`) enabled:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE6]'
+  prefs: []
+  type: TYPE_PRE
+- en: The 2^(nd) output immediately shows how the lines in the *data feed* have been
+    capped to `38` memory positions instead of the `4965` which comprises the full
+    data source length.
+  prefs: []
+  type: TYPE_NORMAL
+- en: And *indicators* and *observers* have been when possible capped to `1` as seen
+    in the last lines of the output.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Script Code and Usage
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: 'Available as sample in the sources of `backtrader`. Usage:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE7]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'The code:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE8]'
+  prefs: []
+  type: TYPE_PRE

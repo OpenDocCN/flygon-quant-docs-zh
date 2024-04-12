@@ -1,0 +1,221 @@
+- en: Strategies Reference
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.backtrader.com/docu/strategy-reference/](https://www.backtrader.com/docu/strategy-reference/)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: Reference for the built-in strategies
+  prefs: []
+  type: TYPE_NORMAL
+- en: MA_CrossOver
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'Alias:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: This is a long-only strategy which operates on a moving average cross
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Note:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Buy Logic:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Sell Logic:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE3]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Order Execution Type:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE4]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Lines:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE5]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Params:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE6]'
+  prefs: []
+  type: TYPE_PRE
+- en: SignalStrategy
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: This subclass of `Strategy` is meant to to auto-operate using **signals**.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*Signals* are usually indicators and the expected output values:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`> 0` is a `long` indication'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`< 0` is a `short` indication'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: There are 5 types of *Signals*, broken in 2 groups.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Main Group**:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`LONGSHORT`: both `long` and `short` indications from this signal are taken'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`LONG`:'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`long` indications are taken to go long'
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`short` indications are taken to *close* the long position. But:'
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: If a `LONGEXIT` (see below) signal is in the system it will be used to exit
+    the long
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: If a `SHORT` signal is available and no `LONGEXIT` is available , it will be
+    used to close a `long` before opening a `short`
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`SHORT`:'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`short` indications are taken to go short'
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`long` indications are taken to *close* the short position. But:'
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: If a `SHORTEXIT` (see below) signal is in the system it will be used to exit
+    the short
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: If a `LONG` signal is available and no `SHORTEXIT` is available , it will be
+    used to close a `short` before opening a `long`
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Exit Group**:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: This 2 signals are meant to override others and provide criteria for exitins
+    a `long`/`short` position
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`LONGEXIT`: `short` indications are taken to exit `long` positions'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`SHORTEXIT`: `long` indications are taken to exit `short` positions'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Order Issuing**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Orders execution type is `Market` and validity is `None` (*Good until Canceled*)
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Params:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`signals` (default: `[]`): a list/tuple of lists/tuples that allows the instantiation
+    of the signals and allocation to the right type'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: This parameter is expected to be managed through `cerebro.add_signal`
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '`_accumulate` (default: `False`): allow to enter the market (long/short) even
+    if already in the market'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`_concurrent` (default: `False`): allow orders to be issued even if orders
+    are already pending execution'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`_data` (default: `None`): if multiple datas are present in the system which
+    is the target for orders. This can be'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`None`: The first data in the system will be used'
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'An `int`: indicating the data that was inserted at that position'
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'An `str`: name given to the data when creating it (parameter `name`) or when
+    adding it cerebro with `cerebro.adddata(..., name=)`'
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: A `data` instance
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'Lines:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE7]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Params:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE8]'
+  prefs: []
+  type: TYPE_PRE

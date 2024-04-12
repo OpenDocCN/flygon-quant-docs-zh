@@ -1,0 +1,225 @@
+- en: Multicore Optimization
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.backtrader.com/blog/posts/2015-07-23-multicore-optimization/multicore-optimization/](https://www.backtrader.com/blog/posts/2015-07-23-multicore-optimization/multicore-optimization/)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: Making use of all available cores was something I had in mind for backtrader
+    but never got done. Support of natural operations, removal of array notation,
+    inclusion of new indicators and bla, bla, bla.
+  prefs: []
+  type: TYPE_NORMAL
+- en: In reality I am not a great fan of **optimization** and consequently neither
+    a great fan of utilizing all cores for it. A good idea, imho, is worth a million
+    optimizations.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Note
+  prefs: []
+  type: TYPE_NORMAL
+- en: The initial multicore support is there and has worked for the *well known* set
+    of test cases. Given the behavior exhibited by `pickle` some other adjustments
+    are expected to ensure all indicators and functions can be passed back and forth
+    amongst processes when doing multicore optimization.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Note
+  prefs: []
+  type: TYPE_NORMAL
+- en: Some extra corrections for multicore have been pushed as release 1.0.10.88 to
+    have more “unpickable” things made pickable. Indicators tests have shown no problems
+    so far.
+  prefs: []
+  type: TYPE_NORMAL
+- en: But someone in the BigMikeTrading forum asked about what this platform had to
+    offer in comparison to others and I mentioned some of the features including that
+    [PyAlgoTrade](http://gbeced.github.io/pyalgotrade/), for example, already had
+    (even multi-machine)
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'The small but right push needed to get it done was there. From past experience
+    and because the internet if full of references I already knew: **multihreading**
+    even if the easiest (no matter what GIL lawyers may say) is a no go in Python,
+    regardless of the version. Multithreading is fake in Python in that you have several
+    threads but no parallel execution of code. It may be good to create abstractions
+    and separate code path execution with IO-bound threads but it is really a killer.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Left with only one choice then: the module `multiprocessing` or a similar one.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Looking into the bright future I decided to settle for the modern version:
+    `concurrent.futures` (what later proved to be a wrong choice) Even if this meant
+    adding an external dependency for Python 2.6/2.7 support.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'The history:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Some of the dynamic features of Python do not play nice with sending data back
+    and forth amongst processes
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: The involved module (`pickle`) chokes when **pickling** (serializing) somethings
+    like classes not defined at module level, lambdas, references to instance methods
+    and dynamic classes without unique names (even if the classes are unique themselves)
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: And I had those things scattered over the code. I then found [dill](https://pypi.python.org/pypi/dill)
+    and the sibling from pathos multiprocess [https://pypi.python.org/pypi/multiprocess](https://pypi.python.org/pypi/multiprocess).
+    Apparently they would solve the serialization problems but adding more external
+    dependencies … no no.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Back to the drawing board to see if the non-pickable items could be made pickable
+    even if the `pickle` module produced errors which would have made some of the
+    old GCC developers very happy.
+  prefs: []
+  type: TYPE_NORMAL
+- en: And it got done … or no?
+  prefs: []
+  type: TYPE_NORMAL
+- en: Reworked the non pickable items into pickable things
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Run a test with Python 2.7.9 and run like a breeze … smoothly and refreshing
+    using the 8 cores of my machine
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Run a test with Python 3.4.3 and the 8 cores went into action but after some
+    optimization, the execution of each subsquent strategy would take longer and longer
+    and longer … until it was no longer bearable.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Aparently **pickling** back the result (a complete executed strategy) to the
+    main process was hitting some limit related to memory allocation (and my machine
+    has plenty of free RAM … more than enough for several hours of parallel optimizations)
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: 'Some extra reading took me to consider a simplification of my scenario:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Using `concurrent.futures` seems like future proof
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: But the standard `multiprocessing` module already has what `backtrader` needs
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'Smelling of having been using an overkill, some lines were quickly reworked
+    and:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The test run fine with Python 2.7 (even faster than before)
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: The test run equally fast with Python 3.4
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Time for a clean-up, running a full battery of tests and executing a push and
+    releasing 1.0.9.88\. No new indicators … just plain old **multicore optimization**
+  prefs: []
+  type: TYPE_NORMAL
+- en: Having read all that … it’s time to have a refreshing script about how to control
+    optimization to use multiple cores
+  prefs: []
+  type: TYPE_NORMAL
+- en: Good news … NO NEED TO DO ANYTHING … it’s done without user intervention
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'When the user wishes to optimize a `strategy`, the `Strategy` subclass gets
+    added to a `Cerebro` instance as follows:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'As opposed to the regular way of passing a strategy to a `Cerebro`:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'This was always so and has not changed. The background being:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`Cerebro` needs to understand if a strategy is going to be optimized to properly
+    handle arguments to the strategy which may already be `iterables` for a regular
+    strategy'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Now … **strategies** passed to `cerebro` with `optstrategy` get the added benefit
+    of using all available cores of the machine.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Of course if the end user wishes to have fine grained control of the used cores
+    … it’s possible. Standard way of creating a `Cerebro`:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'cerebro = bt.Cerebro() # runonce is True, preload is True and “new” maxcpus
+    is None'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`maxcpus` (a new parameter with this release) is the control key:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: maxcpus = None -> Use all available CPUs
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: maxcpus = 1 -> Do not run multicore
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: maxcpues = 2 … -> Use the indicated number of cores
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: It’s an opt-out strategy, because multicore is already in.
+  prefs: []
+  type: TYPE_NORMAL
+- en: A comparison on a 4 Core (2x threads per core - total of 8 logical processors)
+    machine with 16 GBytes of RAM, running Windows 8.1 and Python 64bit 2.7.9
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Execution with 1 Core: 326 seconds'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'Execution with 8 Cores: 127 seconds'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Different test runs have shown that the ratio is around 2.75:1 in average.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Unluckily the creation/destruction of processes and the pickling of objects
+    back and forth takes on the potential benefits but the speedup is still significant.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The image shows the 8 cores being used.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![image](../Images/feb7058733a6c39d9a8c77bac5849fa7.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: The code is below. Just change the `maxcpus` parameter `1` to limit the test
+    to 1 core.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE

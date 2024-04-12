@@ -1,0 +1,321 @@
+- en: Pinkfish Challenge
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.backtrader.com/blog/posts/2016-07-29-pinkfish-challenge/pinkfish-challenge/](https://www.backtrader.com/blog/posts/2016-07-29-pinkfish-challenge/pinkfish-challenge/)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: (Sample and changes added to release 1.7.1.93)
+  prefs: []
+  type: TYPE_NORMAL
+- en: Along the way *backtrader* has gotten maturity, new features and of course complexity.
+    Many of the new features have been introduced after requests, comments, questions
+    from users. Small challenges which have proven that most of the design decisions
+    were at least not that wrong even if some things could have been done in many
+    other ways, sometimes probably in a better way.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'As such it seems that those small challenges are pushes to test the flexibility
+    and adaptability of the platform to new unplanned and unpexpected situations and
+    the *pinkfish* challenge is yet another one. *pinkfish* is another Python backtesting
+    framework (listed in the `README`) which can be found under: [pinkfish](http://fja05680.github.io/pinkfish/).
+    The site contains what has been the challenge to solve:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*‘buying on the close’ on the SAME day a ‘new 20 day high is set’ were not
+    allowed*'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'One of the *features* gives a hint as how the platform operates for such a
+    feat:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*uses daily data (vs minute or tick data) for intraday trading*'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: The author was additionally *put off* by the complexity of the, back then, of
+    the existing backtesting libraries. Whether that holds true for *backtrader* (in
+    its infancy back then) is a question to be answered by the *pinkfish* author himself.
+  prefs: []
+  type: TYPE_NORMAL
+- en: No mod solution
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '*backtrader* supports filters for data feeds and one existed that allows'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: This filter tries to make a complete *replay* action without involving the built-in
+    replayer.
+  prefs: []
+  type: TYPE_NORMAL
+- en: An obvious evolution of this filter breaks the daily bar in 2 bars with an (open,
+    high, low) first and then a 2^(nd) complete bar (open, high, low, close).
+  prefs: []
+  type: TYPE_NORMAL
+- en: The *buying on the close* is achieved by issuing an order with `backtrader.Order.Close`
+    as execution type.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'This is in the sample available with `-no-replay`. An execution:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Part of the output:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: It works …
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'After seeing the 1^(st) part of the day (Line: `0955`)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: If a new 20 day high is in place a `Close` order is issued
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'And the order gets executed with the *closing* price of the 2^(nd) part of
+    the day (Line: `0956`)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: The closing price is `28.49` which is the *BUY Price* seen in `notify_order`
+    in the strategy
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: The output contains rather verbose parts simply for identification of the last
+    `20` highs. The sample sells also very quickly, to let the behavior be tested
+    several times. But the holding period can be altered with `--sellafter N`, where
+    `N` is the number of bars to hold before cancelling (see *Usage* at the end)
+  prefs: []
+  type: TYPE_NORMAL
+- en: The problem with the `no mod` solution
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'This is not really a **replay** solution and this can be seen if the *execution
+    type* of the order is changed from `Close` to `Market`. A new execution:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE3]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Now the output for the same period as above:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE4]'
+  prefs: []
+  type: TYPE_PRE
+- en: And the problem can be easily identified
+  prefs: []
+  type: TYPE_NORMAL
+- en: Instead of the *closing* price the order is executing with the *opening* price,
+    because the *Market* order takes the 1^(st) price available in the 2^(nd) bar,
+    namely `27.51`, which is unfortunately the *opening* price of the day and no longer
+    *available*.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: This is due to the fact that the filter is not really *replaying* but rather
+    breaking up the bar in two parts and doing a soft *replaying*
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: The right “mod” solution
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: Getting also the `Market` order to pick the *closing* price.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'This comprises:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: A filter which breaks the bar in two parts
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: And is compatible with the standard *replay* functionality available in *backtrader*
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: In this case the 2^(nd) bar would be made up of just the `close` price and even
+    if the display shows a complete bar, the internal machinery only matches orders
+    against the *tick*
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: 'Chaining filters in *backtrader* was already possible but this use case had
+    not been taken into account:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Made 2 data “heartbeats” out of a single data “heartbeat”
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Before this challenge it was about getting bars *merged* into larger bars.
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: A small extension into the core mechanism loading bars allows for a filter to
+    add the 2^(nd) part of the bar to an internal stash for re-processing before a
+    new data *heartbeat* is taken into account. And because it is an *extension* and
+    not a *modification* it has no impact.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'The challenge has also given the chance to:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Look again into the early-age code written at the very beginning of *backtrader*
+    for `Close` orders.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: And here a couple of lines and `if` conditions have been reworked to make matching
+    `Close` orders more logical and if possible to deliver them instantly to the system
+    (before the delivery of matching would mostly be done with a 1-bar delay, even
+    if matched to the right bar)
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: 'One good thing after these changes:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The logic in the filter is a lot easier, because there is no subtle *replay*
+    attempt. Replay is done by the *replay* filter.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'The anatomy of the filter for the 1^(st) part of the broken bar:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Copy the incoming data bar
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Make a copy as the *OHL* bar (no Close)
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Change the time to be *date* + *sessionstart* time
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Remove part of the volume (specified with parameter *closevol* to the filter)
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Nullify `OpenInterest` (available at the end of the day)
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Remove the `close` price and replace it with the average of *OHL*
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Add the bar to the internal *stack* for immediate processing by the next filter
+    or strategy (the *replay* filter will take over)
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: 'The anatomy for the 2^(nd) part of the broken bar:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Copy the incoming data bar
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Replace OHL prices with the `Close` price
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Change the time to be *date* + *sessionend* time
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Remove the other part of the volume (specified with parameter *closevol* to
+    the filter)
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Set `OpenInterest`
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Add the bar to the internal *stash* for delayed processing as the next data
+    heartbeat, rather than fetching prices from the data
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: 'The code:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE5]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Executing without disabling *replay* and `Close` (let’s add plotting):'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE6]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'The output for the same period:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE7]'
+  prefs: []
+  type: TYPE_PRE
+- en: Everything is ok and the *closing* price of `28.49` has been taken.
+  prefs: []
+  type: TYPE_NORMAL
+- en: And the chart.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![image](../Images/4bb4d88a4928471c62996831c18a5ec7.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'And last but not least to check the modifications have made sense:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE8]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'The output for the same period:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE9]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'And now the `Market` orders are picking the same price of `28.49` as the `Close`
+    orders, which in this particular use case was the expectation, because *replaying*
+    is happening and the 2^(nd) part of the broken daily bar has a single *tick*:
+    `28.49` which is the *closing* price'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Usage of the sample
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '[PRE10]'
+  prefs: []
+  type: TYPE_PRE
+- en: And the code itself
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '[PRE11]'
+  prefs: []
+  type: TYPE_PRE

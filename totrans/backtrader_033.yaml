@@ -1,0 +1,225 @@
+- en: Data Resampling
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.backtrader.com/docu/data-resampling/data-resampling/](https://www.backtrader.com/docu/data-resampling/data-resampling/)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: When data is only available in a single timeframe and the analysis has to be
+    done for a different timeframe, it’s time to do some resampling.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '“Resampling” should actually be called “Upsampling” given that one goes from
+    a source timeframe to a larger time frame (for example: days to weeks)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`backtrader` has built-in support for resampling by passing the original data
+    through a filter object. Although there are several ways to achieve this, a straightforward
+    interface exists to achieve this:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Instead of using `cerebro.adddata(data)` to put a `data` into the system use
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`cerebro.resampledata(data, **kwargs)`'
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: There are two main options that can be controlled
+  prefs: []
+  type: TYPE_NORMAL
+- en: Change the timeframe
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Compress bars
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'To do so, use the following parameters when calling `resampledata`:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`timeframe` (default: bt.TimeFrame.Days)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Destination timeframe which to be useful has to be equal or larger than the
+    source
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '`compression` (default: 1)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Compress the selected value “n” to 1 bar
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: 'Let’s see an example from Daily to Weekly with a handcrafted script:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'The output:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![image](../Images/d663e94f4280a6be53ffbd6fd3f6b80e.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'We can compare it to the original daily data:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'The output:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![image](../Images/3e14efdeed5c582c7e64ff122859ffd3.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'The magic is done by executing the following steps:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Loading the data as usual
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'Feeding the data into cerebro with `resampledata` with the desired parameters:'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`timeframe`'
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`compression`'
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: The code in the sample (the entire script at the bottom).
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'A last example in which we first change the time frame from daily to weekly
+    and then apply a 3 to 1 compression:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE3]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'The output:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![image](../Images/e627e859fd4df09ec16f16603bc912a4.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'From the original 256 daily bars we end up with 18 3-week bars. The breakdown:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 52 weeks
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 52 / 3 = 17.33 and therefore 18 bars
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: It doesn’t take much more. Of course intraday data can also be resampled.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'The resampling filter supports additional parameters, which in most cases should
+    not be touched:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`bar2edge` (default: `True`)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: resamples using time boundaries as the target. For example with a “ticks ->
+    5 seconds” the resulting 5 seconds bars will be aligned to xx:00, xx:05, xx:10
+    …
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '`adjbartime` (default: `True`)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Use the time at the boundary to adjust the time of the delivered resampled bar
+    instead of the last seen timestamp. If resampling to “5 seconds” the time of the
+    bar will be adjusted for example to hh![🇲🇲](../Images/3e6ba424774c41defcb4e0fc29c71826.png
+    ":mm:")05 even if the last seen timestamp was hh![🇲🇲](../Images/3e6ba424774c41defcb4e0fc29c71826.png
+    ":mm:")04.33
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: Note
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: Time will only be adjusted if “bar2edge” is True. It wouldn’t make sense to
+    adjust the time if the bar has not been aligned to a boundary
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '`rightedge` (default: `True`)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Use the right edge of the time boundaries to set the time.
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: If False and compressing to 5 seconds the time of a resampled bar for seconds
+    between hh![🇲🇲](../Images/3e6ba424774c41defcb4e0fc29c71826.png ":mm:")00 and hh![🇲🇲](../Images/3e6ba424774c41defcb4e0fc29c71826.png
+    ":mm:")04 will be hh![🇲🇲](../Images/3e6ba424774c41defcb4e0fc29c71826.png ":mm:")00
+    (the starting boundary
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: If True the used boundary for the time will be hh![🇲🇲](../Images/3e6ba424774c41defcb4e0fc29c71826.png
+    ":mm:")05 (the ending boundary)
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '`boundoff` (default: `0`)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Push the boundary for resampling/replaying by an amount of units.
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: If for example the resampling is from *1 minute* to *15 minutes*, the default
+    behavior is to take the 1-minute bars from *00:01:00* until *00:15:00* to produce
+    a 15-minutes replayed/resampled bar.
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: 'If `boundoff` is set to `1`, then the boundary is pushed `1 unit` forward.
+    In this case the original *unit* is a *1-minute* bar. Consequently the resampling/replaying
+    will now:'
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: Use the bars from *00:00:00* to *00:14:00* for the generation of the 15-minutes
+    bar
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: The sample code for the resampling test script.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE4]'
+  prefs: []
+  type: TYPE_PRE

@@ -1,0 +1,183 @@
+- en: Crossing over numbers
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.backtrader.com/blog/posts/2017-02-04-crossing-over-numbers/crossing-over-numbers/](https://www.backtrader.com/blog/posts/2017-02-04-crossing-over-numbers/crossing-over-numbers/)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: An oversight has been corrected with Release `1.9.27.105` of *backtrader*. It
+    was an oversight because all pieces of the puzzle were in place, but the activation
+    was not made in all corners.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'The mechanism uses an attribute called `_mindatas`, so let’s call it: `mindatas`.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'The community asked and the answer was not really right on spot. See the conversation
+    here:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[https://community.backtrader.com/topic/125/strategy-auto-generation/23](https://community.backtrader.com/topic/125/strategy-auto-generation/23)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'Even if the conversation was about something else, the question could have
+    quickly answered with: *“Hey, it should actually work!”*. But who has time to
+    consider a proper and thoughtful answer these days.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Let’s consider the use case of crossing over a plain old number argument. Something
+    like this
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: Which would break as in
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: Being the last line the most informative, because it is telling us that something
+    got too many arguments. And this means that the `50.0` is hurting us.
+  prefs: []
+  type: TYPE_NORMAL
+- en: To solve the problem at hand, a number wrapper was given as the answer.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Problem solved. But wait, the solution was already on board. There is an internal
+    helper, to solve the problem and it was completely forgotten: `LineNum`. And it
+    does what the name tries to imply: *Takes a num and makes it a line*. The problem
+    solution was there and the solution could have looked like this:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE3]'
+  prefs: []
+  type: TYPE_PRE
+- en: The usual background thread kept anyhow ticking, telling something was still
+    not 100% clear and the solution should be the obvious, without having the user
+    specifying the *wrapper*.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'And here comes the oversight. Even if the `mindatas` mechanism exists and is
+    applied in some parts of the echosystem, it was not being applied to `CrossOver`.
+    It was tried, but humans miserably fail sometimes, believing they have done something
+    only to find out, they didn’t scroll further downwards. And this was the case.
+    A one line addition like this:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE4]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'And now the solution to the question is straightforward:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE5]'
+  prefs: []
+  type: TYPE_PRE
+- en: The way it should have always been in the 1^(st) place (see the sample and chart
+    below)
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`mindatas` at work'
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: 'This is a handy attribute which is meant to be used for specific situations
+    and hence the leading `_`, to indicate it should be used with real caution. The
+    default value for indicators is:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`_mindatas = 1`'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'This tells the system that if **NO** data source has been passed to an indicator,
+    the system should copy the 1^(st) data source from the parent. Without this, instantiating
+    for example the `RelativeStrengthIndicator` should be done like this:'
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '[PRE6]'
+  prefs:
+  - PREF_IND
+  type: TYPE_PRE
+- en: 'But with the default indication given by `_mindatas`, the following is possible:'
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '[PRE7]'
+  prefs:
+  - PREF_IND
+  type: TYPE_PRE
+- en: And the result is exactly the same, because the 1^(st) data source in the strategy,
+    `self.data0` is passed to the instantiation of `RSI`
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: 'An indicator like `CrossOver` needs 2 data feeds, because it’s checking that
+    one thing is crossing over another. In this case and as seen above the default
+    has been set to:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`_mindatas = 2`'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'This tells the system things like:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: If no datas are passed, then copy 2 data feeds from the parent (if possible)
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'If only 1 data has been passed, try to convert the next incoming argument to
+    a *lines* object to have 2 data feeds available. Usseful for the use case of a
+    line crossing over a plain old float. Again for reference:'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[PRE8]'
+  prefs:
+  - PREF_IND
+  type: TYPE_PRE
+- en: If 2 or more data feeds are passed to `CrossOver`, do nothing and proceed further
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'In the community, the mechanism has been lately applied to for example the
+    1^(st) sketches to implement the `KalmanFilter` for pair trading. And when talking
+    about pairs, one needs 2 data feeds and with it: `_mindatas = 2`'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'A small sample (although with a complete skeleton) to test the complete solution:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE9]'
+  prefs: []
+  type: TYPE_PRE
+- en: Which outputs this.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![image](../Images/05dab57577a908e09e880b5a4b63ef3b.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Sample usage
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '[PRE10]'
+  prefs: []
+  type: TYPE_PRE
+- en: Sample Code
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '[PRE11]'
+  prefs: []
+  type: TYPE_PRE

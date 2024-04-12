@@ -1,0 +1,383 @@
+- en: Rebalancing with the Conservative Formula
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.backtrader.com/blog/2019-07-19-rebalancing-conservative/rebalancing-conservative/](https://www.backtrader.com/blog/2019-07-19-rebalancing-conservative/rebalancing-conservative/)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: 'The *Conservative Formula* approach is presented in this paper: [The Conservative
+    Formula in Python: Quantitative Investing made Easy](https://papers.ssrn.com/sol3/papers.cfm?abstract_id=3145152)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'It is one many possible rebalancing approaches, but one that is easy to grasp.
+    A summary of the approach:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`x` stocks are selected from a universe of `Y` (100 of 1000)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: The selection criteria are
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Low volatility
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: High Net Payout Yield
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: High Momentum
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Rebalancing every month
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: With this in mind let's go and present a possible implementation in *backtrader*
+  prefs: []
+  type: TYPE_NORMAL
+- en: The data
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: Even if one has a winning strategy, nothing will be actually won if no data
+    is available for the strategy. Which means that it has to be considered how the
+    data looks like and how to load it.
+  prefs: []
+  type: TYPE_NORMAL
+- en: A set of *CSV* ("comma-separated-values") files is assumed to be available,
+    containing with the following features
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`ohlcv` monthly data'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: With an extra field after the `v` containing the *Net Payout Yield* (`npy`),
+    to have an `ohlcvn` data set.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: The format of the *CSV* data will therefore look like this
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'I.e.: one row per month. The data loader engine can now be prepared for which
+    simple extension of the generic built-in CSV loader delivered with *backtrader*
+    will be created.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: And that is. Notice how easy has been to add a point of fundamental data to
+    the `ohlcv` data stream.
+  prefs: []
+  type: TYPE_NORMAL
+- en: By using the expresion `lines=('npy',)`. The other usual fields (`open`, `high`,
+    ...) are already part of `GenericCSVData`
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: By indicating the loading position with the `params = dict(npy=6)`. The other
+    fields have a predefined position.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: The *timeframe* has also been updated in the parameters to reflect the monthly
+    nature of the data.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Note**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: See [Docs - Data Feeds Reference - GenericCSVData](https://www.backtrader.com/docu/dataautoref/#genericcsvdata)
+    for the actual fields and loading positions (which can all be customized)
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The data loader will have to be properly instantiated with a file name, but
+    that's something for later, when a standard boilerplate is presented below to
+    have a complete script.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The Strategy
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: Let's put the logic into a standard *backtrader* strategy. To make it as generic
+    and customizable as possible, the same same `params` approach will be used, as
+    it was used before with the data.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Before delving into the strategy, let's consider one of the points from the
+    quick summary
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`x` stocks are selected from a universe of `Y`'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'The strategy itself is not in charge of adding stocks to the universe, but
+    it is in charge of the selection. One could be in a situation in which only 50
+    stocks have been added and still try to select 100 if `x` and `Y` are fixed in
+    the code. To cope with such situations, the following will be done:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Have a `selperc` parameter with a value of `0.10` (i.e.: `10%`), to indicate
+    the amount of stocks to be selected from the universe.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: This means that if 1000 are present, only 100 will be selected and if the universe
+    consist of 50 stocks, only 5 will be selected.
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: 'As for the formula ranking the stock, it looks like this:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`(momentum * net payout) / volatility`'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Which means that those with higher momentum, higher payout and lower volatility
+    will have a higher score.
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: For `momentum` the `RateOfChange` indicator (aka `ROC`) will be used, which
+    *measures the ratio of change in prices over a period*.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The `net payout` is already part of the data feed.
+  prefs: []
+  type: TYPE_NORMAL
+- en: To calculate the `volatility`, the `StandardDeviation` of the `n-periods` return
+    of the stock (`n-periods`, because things will be kept as parameters) will be
+    used.
+  prefs: []
+  type: TYPE_NORMAL
+- en: With this information, the strategy can already be *initialize* with the right
+    parameters and the setup of the indicators and calculations which will be later
+    used in each monthly iteration.
+  prefs: []
+  type: TYPE_NORMAL
+- en: First the declaration and the parameters
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: Notice that something not mentioned above has been added, and that is a parameter
+    `reserve=0.05` (i.e. *5%*), which is used to calculated the percentage allocation
+    per stock, keeping a reserve capital in the bank. Although for a simulation one
+    could conceivable want to use 100% of the capital, one can hit the usual problems
+    doing that, such as price gaps, floating point precision and end up missing some
+    of the market entries.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Before anything else, a small logging method is created, which will allow to
+    log how the portfolio is rebalanced.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE3]'
+  prefs: []
+  type: TYPE_PRE
+- en: At the beginning of the `__init__` method, the number of stocks to rank is calculated
+    and the reserve capital parameter is applied to determine the per stock percentage
+    of the bank.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE4]'
+  prefs: []
+  type: TYPE_PRE
+- en: And finally the initialization is over with the calculation of the per stock
+    indicators for volatility and momentum, which are then applied in the per stock
+    ranking formula calculation.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE5]'
+  prefs: []
+  type: TYPE_PRE
+- en: It's now time to iterate each month. The ranking is available in the `self.ranks`
+    dictionary. The *key/value* pairs have to be sorted for each iteration, to get
+    which items have to go and which ones have to be part of the portfolio (remain
+    or be added)
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE6]'
+  prefs: []
+  type: TYPE_PRE
+- en: The iterable is sorted in reverse order, because the ranking formula delivers
+    higher scores for the highest ranked stocks.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Rebalancing is now due.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Rebalancing 1: Get Top Ranked and the stocks with open positions'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[PRE7]'
+  prefs: []
+  type: TYPE_PRE
+- en: A bit of Python trickery is happening here, because a `dict` is being used.
+    The reason is that if the top ranked stocks were put in a `list` the operator
+    `==` would be used internally by *Python* to check for presence with the operator
+    `in`. And although improbable it would be possible for two stocks to have the
+    same value on the same day. When using a `dict` a hash value is used when checking
+    for presence of an item as part of the keys.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Note**: For logging purposes `rbot` (*ranked bottom*) is also created with
+    the stocks not present in `rtop`.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: To later discriminate between stocks that have to leave the portfolio, those
+    which simply have to be rebalanced and the newly top ranked, a current list of
+    stocks in the portfolio is prepared.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE8]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Rebalancing 2: Sell those no longer top ranked'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Just like in real world, in the *backtrader* ecosystem selling before buying
+    is a must to ensure enough cash is there.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE9]'
+  prefs: []
+  type: TYPE_PRE
+- en: Stocks currently with an open position and no longer top ranked are sold (i.e.
+    `target=0.0`).
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Note**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: A simple `self.close(data)` would have sufficed here, rather than explicitly
+    stating the target percentage.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Rebalancing 3: Issue a target order for all top ranked stocks'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: The total portfolio value changes over time and those stocks already in the
+    portfolio may have to slightly increase/reduce the current position to match the
+    expected percentage. `order_target_percent` is an ideal method to enter the market,
+    because it does automatically calculate whether a `buy` or a `sell` order is needed.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE10]'
+  prefs: []
+  type: TYPE_PRE
+- en: Rebalancing the stocks already with a position is done before adding the new
+    ones to the portfolio, as the new one will only issue `buy` orders and consume
+    cash. Having removed the existing stocks from with `rtop[data].pop()` after having
+    re-balanced, the remaining stocks in `rtop` are those which will be newly added
+    to the portfolio.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE11]'
+  prefs: []
+  type: TYPE_PRE
+- en: Running it all and Evaluating it!
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: Having a data loader class and the strategy is not enough. Just like with any
+    other framework, some boilerplate is needed. The following code makes it possible.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE12]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Where the following is done:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Parsing arguments and have this available (this is obviously optional, as everything
+    can be hardcoded, but good practices are good practices)
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Creating a `cerebro` engine instance. Yes, this is Spanish for *"brain"* and
+    is the part of the framework in charge of coordinating the orchestral maneuvers
+    in the dark. Although it can accept several options, the defaults should suffice
+    for most use cases.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Loading the data files, which is done with a simple directory scan of `args.datadir`
+    is done and all files are loaded with `NetPayOutData` and added to the `cerebro`
+    instance
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Adding the strategy
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Setting the cash, which defaults to `1,000,000`. Given that the use case is
+    for `100` stocks in a universe of `500`, it seems fair to have some cash to spare.
+    It is also an argument which can be changed.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: And calling `cerebro.run()`
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Finally the performance is evaluated
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: To make it possible to run things with different parameters straight from the
+    command line, an `argparse` enabled boilerplate is presented below, with the entire
+    code
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Performance Evaluation**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'A naive performance evaluation added in the form of the final resulting value,
+    i.e.: the final net asset value minus the starting cash.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'The *backtrader* ecosystem offers a set of built-in performance analyzers which
+    could also be used, like: `SharpeRatio`, `Variability-Weighted Return`, `SQN`
+    and others. See [Docs - Analyzers Reference](https://www.backtrader.com/docu/analyzers-reference/)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The complete script
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: And finally the bulk of the work presented as whole. Enjoy!
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE13]'
+  prefs: []
+  type: TYPE_PRE

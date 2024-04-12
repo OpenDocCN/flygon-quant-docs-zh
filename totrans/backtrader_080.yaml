@@ -1,0 +1,299 @@
+- en: Benchmarking
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.backtrader.com/docu/observer-benchmark/benchmarking/](https://www.backtrader.com/docu/observer-benchmark/benchmarking/)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '[Ticket #89](https://github.com/mementum/backtrader/issues/89) is about adding
+    benchmarking against an asset. Sensible as one may actually have a strategy that
+    even if positive is below what simply tracking the asset would have delivered.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*backtrader* includes 2 different types of objects which can aid with tracking:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*Observers*'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '*Analyzers*'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'In the realm of *Analyzers* there was already a `TimeReturn` object which tracks
+    the evolution of the returns of the entire portfolio value (i.e: including cash)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: This could have also obviously been an *Observer*, so whilst adding some *benchmarking*
+    some work has also gone into being able to plug together an *Observer* and an
+    *Analyzer* which are meant to track the same thing.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Note
+  prefs: []
+  type: TYPE_NORMAL
+- en: The major difference between *Observers* and *Analyzers* is the *lines* nature
+    of *observers*, which record every value and this makes them suitable
+  prefs: []
+  type: TYPE_NORMAL
+- en: s for plotting and real time querying. This of course consumes memory.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*Analyzers* on the other hand return a set of results via `get_analysis` and
+    the implementation may not deliver any result until the very end of a *run*.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Analyzers - Benchmarking
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: 'The standard `TimeReturn` analyzer has been extended to support tracking a
+    *data feed*. The 2 major parameters invoved:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`timeframe` (default: `None`) If `None` then the complete return over the entire
+    backtested period will be reported'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Pass `TimeFrame.NoTimeFrame` to consider the entire dataset with no time constraints
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '`data` (default: `None`)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Reference asset to track instead of the portfolio value.
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: Note
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: this data must have been added to a `cerebro` instance with `addata`, `resampledata`
+    or `replaydata`
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: 'For more details and parameters: Analyzers Reference'
+  prefs: []
+  type: TYPE_NORMAL
+- en: As such, the returns of the porftolio on a yearly basis can be tracked like
+    this
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: If we wanted to track the returns of a *data*
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: If both are to be tracked, the best is to assign names to the *analyzers*
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: Observers - Benchmarking
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: 'Thanks to the background machinery allowing the usage of *Analyzers* inside
+    *Observers*, 2 new observers have been added:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`TimeReturn`'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`Benchmark`'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Both use the `bt.analyzers.TimeReturn` analyzer to collect results.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Rather than having code snippets like above, a full sample with some runs to
+    show their functionality.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Observing TimeReturn
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'Execution:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE3]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![image](../Images/e086568e069fb9ff5e42b62996eeb40a.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'Notice the execution options:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`--timereturn` telling the sample to do just that'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`--timeframe notimeframe` telling the analyzer to consider the entire data
+    set disregarding timeframe boundaries.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: The last plotted value is `-0.26`.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The starting cash (obvious from the chart) are `50K` monetary units and the
+    strategy ends up with `36,970` monetary units and hence a `-26%` value decrement.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Observing Benchmarking
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'Because *benchmarking* will also display the *timereturn* results, let’s run
+    the same thing but with *benchmarking* active:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE4]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![image](../Images/8b3b9589e9f30bd4f62e0edbf2994b7f.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Hey, hey hey!!!
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'The strategy is better than the asset: `-0.26` vs `-0.33`'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: It shouldn’t be a matter for celebration but at least is clear the strategy
+    is not even as bad as the asset.
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: 'Moving down to track things on a *yearly* basis:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE5]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![image](../Images/078987a451e84da12e1580975eda903e.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Watch out!
+  prefs: []
+  type: TYPE_NORMAL
+- en: The strategy last value has changed very slightly from `-0.26` to `-0.27`
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: The asset on the on the other hand shows a last value of `-0.35` (versus `-0.33`
+    above)
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: The reason for values so close to each other is that when moving from 2005 to
+    2006, both the strategy and the benchmarking asset were almost at the starting
+    level from the beginning of 2005.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Switching to a lower timeframe like *weeks*, the entire picture changes:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE6]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Now:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The `Benchmark` observer shows a much more nervous aspect. Things move up and
+    down, because now `weekly` returns for both the portfolio and the data are being
+    tracked
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: And because no trade was active in the last week of the year and the asset barely
+    moved, the last displayed values are 0.00 (The last closing value before the last
+    week was `25.54` and the sample data closed at `25.55`, and the difference is
+    felt first at the 4^(th) decimal point)
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Observing Benchmarking - Another data
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'The sample allows to benchmark against a different data. The default is to
+    benchmark against *Oracle* when using `--benchdata1`. Considering the entire dataset
+    with `--timeframe notimeframe`:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE7]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![image](../Images/fedf90ae53058d918b191f9b8968fc64.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'It’s clear now why there was no reason for celebration above:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The results of the strategy have not changed for `notimeframe` and remain at
+    `-26%` (`-0.26`)
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: But when benchmarking against another data, this data has a `+23%` (`0.23` )
+    in the same period
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Either the strategy needs a change or another asset better be traded.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Concluding
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: There are now two ways, using the same underlying code/calculations, to track
+    the *TimeReturn* and *Benchmark*
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*Observers* (`TimeReturn` and `Benchmark`)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: and
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*Analyzer* (`TimeReturn` and `TimeReturn` with a `data` parameter)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Of course *benchmarking* doesn’t guarantee profit, just *comparison*.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Usage of the sample:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE8]'
+  prefs: []
+  type: TYPE_PRE
+- en: The code
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[PRE9]'
+  prefs: []
+  type: TYPE_PRE

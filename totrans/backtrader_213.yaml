@@ -1,0 +1,26 @@
+- en: Metaquotes MQL 5 - API
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.backtrader.com/recipes/storesbrokersdata/mql5/mql5/](https://www.backtrader.com/recipes/storesbrokersdata/mql5/mql5/)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: First announced here by user `Nikolai`
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Backtrader Community - Metaquotes MQL 5 - API](https://community.backtrader.com/topic/1767/metaquotes-mql-5-api)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'Links to the repositories:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[https://github.com/khramkov/MQL5-JSON-API](https://github.com/khramkov/MQL5-JSON-API)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[https://github.com/khramkov/Backtrader-MQL5-API](https://github.com/khramkov/Backtrader-MQL5-API)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

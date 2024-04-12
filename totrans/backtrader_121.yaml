@@ -1,0 +1,135 @@
+- en: Strategy Selection Revisited
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.backtrader.com/blog/posts/2017-05-16-stsel-revisited/stsel-revisited/](https://www.backtrader.com/blog/posts/2017-05-16-stsel-revisited/stsel-revisited/)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: The original Strategy Selection approach used two strategies, which were manually
+    registered and a simple `[0, 1]` list to decide which would be the target of the
+    strategy.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Because Python offers a lot of instrospection possibilities with metaclasses,
+    one may actually automate the approach. Let’s do it with a `decorator` approach
+    which is probably the least invasive in this case (no need to define a *metaclass*
+    for the strategies)
+  prefs: []
+  type: TYPE_NORMAL
+- en: Reworking the factory
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 'The factory now:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: is declared before the strategies
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: has an empty `_STRATS` class attribute (it had the strategies to return before)
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: has a `register` classmethod which will be used as decorator and which accepts
+    an argument which will be added to `_STRATS`
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: has a `COUNT` classmethod which will return an iterator (a `range` actually)
+    with the count of the available strategies to be optimized
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'bears no changes to the actual factory method: `__new__`, which keeps on using
+    the `idx` parameter to return whatever is in the `_STRATS` class attribute at
+    the given index'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'As such:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The `StFetcher` strategy factory no longer contains any hardcoded strategies
+    in itself
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Decorating the to-be-optimized strategies
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: The strategies in the example don’t need to be reworked. Decoration with the
+    `register` method of `StFetcher` is enough to have them added to the selection
+    mix.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: and
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: Taking advantage of `COUNT`
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: The manual `[0, 1]` list from the past when adding the strategy factory to the
+    system with `optstrategy` can be fully replaced with a transparent call to `StFetcher.COUNT()`.
+    Hardcoding is over.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE3]'
+  prefs: []
+  type: TYPE_PRE
+- en: A sample run
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '[PRE4]'
+  prefs: []
+  type: TYPE_PRE
+- en: Our 2 strategies have been run and deliver (as expected) different results.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Note
+  prefs: []
+  type: TYPE_NORMAL
+- en: The sample is minimal but has been run with all available CPUs. Executing it
+    with `--maxpcpus=1` will be faster. For more complex scenarios using all CPUs
+    will be useful.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Conclusion
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: Selection has been fully automated. As before one could envision something like
+    querying a database for the number of available strategies and then fetch the
+    strategies one by one.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Sample Usage
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[PRE5]'
+  prefs: []
+  type: TYPE_PRE
+- en: The code
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Which has been included in the sources of backtrader
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE6]'
+  prefs: []
+  type: TYPE_PRE

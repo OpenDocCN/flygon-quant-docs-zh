@@ -1,0 +1,1539 @@
+- en: Interactive Brokers
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.backtrader.com/docu/live/ib/ib/](https://www.backtrader.com/docu/live/ib/ib/)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: 'The integration with Interactive Brokers supports both:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*Live Data* feeding'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '*Live Trading*'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Note
+  prefs: []
+  type: TYPE_NORMAL
+- en: In spite of all attempts to test the maximum number of error conditions and
+    situations, the code could (like any other piece of software) contain bugs.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Test any strategy thoroughly with a **Paper Trading** account or the TWS **Demo**
+    before going in production.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Note
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Interaction with Interactive Brokers is done by using the `IbPy` module and
+    this has to be installed prior to usage. There is no package in Pypi (at the time
+    of writing) but it can be installed using `pip` with the following command:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'If `git` is not available in your system (Windows installation?) the following
+    should also work:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: Sample Code
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: 'The sources contain a full sample under:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: samples/ibtest/ibtest.py
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: The sample cannot cover every possible use case but it tries to provide broad
+    insight and should highlight that there is no real difference when it comes to
+    use the backtesting module or the live data module
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'One thing could be pin-pointed:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The sample waits for a `data.LIVE` data status notification before any trading
+    activity takes place.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: This would probably is something to consider in any live strategy
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: Store Model vs Direct Model
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: 'Interaction with Interactive Brokers is supported through 2 models:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Store Model (*Preferred*)
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Direct interaction with the data feed class and the broker class
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: The store model provides a clear separation pattern when it comes down to creating
+    *brokers* and *datas*. Two code snippets should serve better as an example.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'First with the **Store** model:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Here the parameters:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`host`, `port` and `clientId` are passed to where they belong the `IBStore`
+    which opens a connection using those parameters.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: And then a **data** feed is created with `getdata` and a parameter common to
+    all data feeds in *backtrader*
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`dataname` whic requests the *EUR*/*USD* Forex pair.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'And now with direct usage:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE3]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Here:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Parameters intended for the store are passed to the data.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Those will be used to create a `IBStore` instance in the background
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'The drawback:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: A lot less clarity, because it becomes unclear what belongs to the data and
+    what belongs to the store.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: IBStore - the store
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: The store is the keystone of the live data feed/trade support, providing a layer
+    of adaptation between the `IbPy` module and the needs of a data feed and a broker
+    proxy.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'A *Store* is a concept which covers the following functions:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Being the central shop for an entity: in this case the entity is IB'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Which may or may not require parameters
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: 'Providing access to getting a *broker* instance with the method:'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`IBStore.getbroker(*args, **kwargs)`'
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Providing access to getter *data* feed instances
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`IBStore.getdata(*args, **kwargs)`'
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: In this case many of the `**kwargs` are common to data feeds like `dataname`,
+    `fromdate`, `todate`, `sessionstart`, `sessionend`, `timeframe`, `compression`
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: The data may provide other params. Check the reference below.
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: 'The `IBStore` provides:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Connectivity target (`host` and `port` parameters)
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Identification (`clientId` parameter)
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Re-connectivity control (`reconnect` and `timeout` parameters)
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Time offset check (`timeoffset` parameters, see below)
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Notification and debugging
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`notifyall` (default: `False`): in this case any `error` message (many are
+    simply informative) sent by IB will be relayed to *Cerebro*/*Strategy*'
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '`_debug` (default: `False`): in this case each and every message received from
+    TWS will be print out to standard outpu'
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: IBData feeds
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: Data Options
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'Be it directly or over `getdata` the `IBData` feed supports the following data
+    options:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Historical download requests
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: These will be split over multiple requests if the duration exceeds the limits
+    imposed by IB for a given *timeframe/compression* combination
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: RealTime Data in 3 flavors
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`tickPrice` events (via IB `reqMktData`)'
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Used for *CASH* products (experimentation with at least TWS API 9.70 has shown
+    no support for the other types)
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: Receives a *tick* price event by looking at the `BID` prices, which according
+    to the non-official Internet literature seems to be the way to track the `CASH`
+    market prices.
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: Timestamps are generated locally in the system. An offset to the IB Server time
+    can be used if wished by the end user (calculated from IB `reqCurrentTime`)
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '`tickString` events (aka `RTVolume` (via IB `reqMktData`)'
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Receives a *OHLC/Volume* snapshot from IB approx. every 250ms (or greater if
+    no trading has happened)
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '`RealTimeBars` events (via IB `reqRealTimeBars`)'
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Receives historical 5 seconds bars (duration fixed by IB) every 5 seconds
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: If the chosen *timeframe/combination* is below the level *Seconds/5* this feature
+    will be automatically disabled.
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '!!! note'
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '[PRE4]'
+  prefs:
+  - PREF_IND
+  type: TYPE_PRE
+- en: 'The default behavior is to use: `tickString` in most cases unless the user
+    specifically wants to use `RealTimeBars`'
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '`Backfilling`'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'Unless the user requests to just do a *historical* download, the data feed
+    will automatically backfill:'
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '**At the start**: with the maximum possible duration. Example: for a *Days/1*
+    (*timeframe/compression*) combination the maximum default duration at IB is *1
+    year* and this is the amount of time that will be backfilled'
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**After a data disconnection**: in this case the amount of data downloaded
+    for the backfilling operation will be reduced to the minimum by looking at the
+    latest data received before the disconnection.'
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Note
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Take into account that the final *timeframe/compression* combination taken
+    into account may not be the one specified during *data feed creation* but during
+    *insertion* in the system. See the following example:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE5]'
+  prefs: []
+  type: TYPE_PRE
+- en: As should now be clear, the final *timeframe/compression* combination taken
+    into account is *Minutes/2*
+  prefs: []
+  type: TYPE_NORMAL
+- en: Data Contract Check
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: During the start phase, the *data* feed will try to download the details of
+    the specified contract (see the reference for how to specify it). If no such contract
+    is found or multiple matches are found, the data will refuse to carry on and will
+    notify it to the system. Some examples.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Simple but unambiguous contract specification:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE6]'
+  prefs: []
+  type: TYPE_PRE
+- en: Only one instance will be found (2016-06) because for the default type, `STK`,
+    exchange `SMART` and currency (the default is none) a single contract trading
+    in `USD` will be found.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'A similar approach will fail with `AAPL`:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE7]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Because `SMART` finds contracts in several real exchanges and `AAPL` trades
+    in different currencies in some of them. The following is ok:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE8]'
+  prefs: []
+  type: TYPE_PRE
+- en: Data Notifications
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: The data feed will report the current status via one or more of the following
+    (check the *Cerebro* and *Strategy* reference)
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`Cerebro.notify_data` (if overriden)n'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: A callback addded with `Cerebro.adddatacb`
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`Strategy.notify_data` (if overriden)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'An example inside the *strategy*:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE9]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'The following notifications will be sent following changes in the system:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`CONNECTED`'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Sent on successful initial connection
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '`DISCONNECTED`'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'In this case retrieving the data is no longer possible and the data will indicate
+    the system nothing can be done. Possible conditions:'
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: Wrong contract specified
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Interruption during historical download
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Number of reconnection attempts to TWS exceeded
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`CONNBROKEN`'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Connectivity has been lost to either TWS or to the data farms. The data feed
+    will try (via the store) to reconnect and backfill, when needed, and resume operations
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '`NOTSUBSCRIBED`'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Contract and connection are ok, but the data cannot be retrieved due to lack
+    of permissions.
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: The data will indicate to the system that it cannot retrieve the data
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '`DELAYED`'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Signaled to indicate that a *historical*/*backfilling* operation are in progress
+    and the data being processed by the strategy is not real-time data
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '`LIVE`'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Signaled to indicate that the data to be processed from this point onwards by
+    the *strategy* is real-time data
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: Developers of *strategies* should consider which actions to undertake in cases
+    like when a disconnection takes place or when receiving **delayed** data.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Data TimeFrames and Compressions
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Data feeds in the *backtrader* ecosystem, support the `timeframe` and `compression`
+    parameters during creation. These parameters are also accessible as attributes
+    with `data._timeframe` and `data._compression`
+  prefs: []
+  type: TYPE_NORMAL
+- en: The significance of *timeframe/compression* combinations has a specific purpose
+    whenpassing the data to a `cerebro` instance via `resampledata` or `replaydata`,
+    to let the internal resampler/replayer objects to understand what the intended
+    target is. `._timeframe` and `._compression` will be overwritten in the data when
+    resampled/replayed.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'But in live data feeds on the other hand this information can play an important
+    role. See the following example:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE10]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'The user is requesting **tick** data and this important because:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: No backfilling will take place (the minimum unit supported by IB is *Seconds/1*)
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Even if `RealTimeBars` are requested and supported by the `dataname`, they will
+    not be used because the minimum resolution of a `RealTimeBar` is *Seconds/5*
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'In any case and unless working with a resolution of *Ticks/1*, the data has
+    to be *resampled/replayed*. The case above with realtimebars and working:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE11]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'In this case and as explained above, the `._timeframe` and `._compression`
+    attributes of the data will be overwritten during `resampledata`. This is what
+    will happen:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*backfilling* will happen requesting a resolution of *Seconds/20*'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`RealTimeBars` will be used for real-time data because the resolution is equal/greater
+    than *Seconds/5* and the data supports is (is no *CASH* product)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Events to the system from TWS will happen at most every 5 seconds. This is possibly
+    not important because the system will only send a bar to the strategy every 20
+    seconds.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'The same without `RealTimeBars`:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE12]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'In this case:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*backfilling* will happen requesting a resolution of *Seconds/20*'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`tickString` will be used for real-time data because (is no *CASH* product)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Events to the system from TWS will happen every at most every 250ms. This is
+    possibly not important because the system will only send a bar to the strategy
+    every 20 seconds.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'Finally with a *CASH* product and up to 20 seconds:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE13]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'In this case:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*backfilling* will happen requesting a resolution of *Seconds/20*'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`tickPrice` will be used for real-time data because this is a cash product'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Even if `rtbar=True` is added
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: Events to the system from TWS will happen at most every 250ms. This is possibly
+    not important because the system will only send a bar to the strategy every 20
+    seconds.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Time Management
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: The data feed will automatically determine the timezone from the `ContractDetails`
+    object reported by *TWS*.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Note
+  prefs: []
+  type: TYPE_NORMAL
+- en: This requires that `pytz` be installed. If not installed the user should supply
+    with the `tz` parameter to the data source a `tzinfo` compatible instance for
+    the desired output timezone
+  prefs: []
+  type: TYPE_NORMAL
+- en: Note
+  prefs: []
+  type: TYPE_NORMAL
+- en: If `pytz` is installed and the user feels the automatic timezone determination
+    is not working, the `tz` parameter can contain a string with the name of the timezone.
+    `backtrader` will try to instantiate a `pytz.timezone` with the given name
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'The reported `datetime` will be that of the timezone related to the product.
+    Some examples:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*Product*: EuroStoxxx 50 in the Eurex (ticker: *ESTX50-YYYYMM-DTB*)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: The timezone will be `CET` (*Central European Time*) aka `Europe/Berlin`
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '*Product*: ES-Mini (ticker: *ES-YYYYMM-GLOBEX*)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: The timezone will be `EST5EDT` aka `EST` aka `US/Eastern`
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '*Product*: EUR.JPY forex pair (ticker *EUR.JPY-CASH-IDEALPRO*)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: The timezone will be `EST5EDT` aka `EST` aka `US/Eastern`
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: Actually this is an Interactive Brokers setting, because Forex pairs trade almost
+    24 hours without interruption and as such there wouldn’t be a real timezone for
+    them.
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: This behavior makes sure that trading remains consistent regardless of the actual
+    location of the trader, given that the computer will most likely have the actual
+    location timezone and not the timezone of the trading venue.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Please read the **Time Management** section of the manual.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Note
+  prefs: []
+  type: TYPE_NORMAL
+- en: The TWS Demo is not accurate at reporting timezones for assets for which no
+    data download permissions are available (The EuroStoxx 50 future is an example
+    of those cases)
+  prefs: []
+  type: TYPE_NORMAL
+- en: Live Feeds and Resampling/Replaying
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'A design decision with regards to when to deliver bars for live feeds is:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*Deliver them as much in real-time as possible*'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'This may seem obvious and it is the case for a timeframe of `Ticks`, but if
+    *Resampling/Replaying* play a role, delays can take place. Use case:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Resampling is configured to *Seconds/5* with:'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[PRE14]'
+  prefs:
+  - PREF_IND
+  type: TYPE_PRE
+- en: A tick with time `23:05:27.325000` is delivered
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Trading in the market is slow and the next tick is delivered at `23:05:59.025000`
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: It may not seem obvious but *backtrader* doesn’t know that trading is very slow
+    and the next tick will come in around `32` seconds later. With no provisions in
+    place a resampled bar with time `23:05:30.000000` would be delivered around `29
+    seconds` too late.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'That’s why the live feed wakes up every `x` seconds (*float* value) to go to
+    the *Resampler/Replayer* and let it know that no new data has come in. This is
+    controlled with the parameter `qcheck` (default value: `0.5` seconds) when creating
+    a live data feed.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: That means that the resampler has a chance every `qcheck` seconds to deliver
+    a bar if the local clock says, the resampling period is over. With this in place,
+    the resampled bar for the scenario above (`23:05:30.000000`) would be delivered
+    at most `qcheck` seconds after the reported time.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Because the default valus is `0.5` the latest time would be: `23:05:30.500000`.
+    That is almost 29 seconds earlier as before.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'The drawback:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*Some ticks may come in too late for the already delivered resampled/replayed
+    bar*'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: If after delivering, TWS gets a late message from the server with a timestamp
+    of `23:05:29.995\`000`, this is simply too late for the already reported time
+    to the system of`23:05.30.000000`
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'This happens mostly if:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`timeoffset` *is disabled (set to `False`) in `IBStore\` and the time difference
+    between the *IB* reported time and the local clock is significant.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'The best approach to avoid most of those late samples:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Increase the `qcheck` value, to allow for late messages to be taken into account:'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[PRE15]'
+  prefs:
+  - PREF_IND
+  type: TYPE_PRE
+- en: This should add extra room, even if it delays the delivery of the *resampled/replayed*
+    bar
+  prefs: []
+  type: TYPE_NORMAL
+- en: Note
+  prefs: []
+  type: TYPE_NORMAL
+- en: Of course a delay of 2.0 seconds has a different significance for a resampling
+    of *Seconds/5* than for a resampling of *Minutes/10*
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'If for whatever reason the end-user wishes to disable `timeoffset` and not
+    manage via `qcheck`, the late samples can still be taken:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Use `_latethrough` set to `True` as a parameter to `getdata` / `IBData`:'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[PRE16]'
+  prefs:
+  - PREF_IND
+  type: TYPE_PRE
+- en: 'Use `takelate` set to `True` when *resampling/replaying*:'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[PRE17]'
+  prefs:
+  - PREF_IND
+  type: TYPE_PRE
+- en: IBBroker - Trading Live
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: Note
+  prefs: []
+  type: TYPE_NORMAL
+- en: Following a request a `tradeid` functionality was implemented in the *broker
+    simulation* available in *backtrader*. This allows to keep track of trades being
+    executed in paralled on the same asset correctly allocating commissions to the
+    appropriate `tradeid`
+  prefs: []
+  type: TYPE_NORMAL
+- en: Such notion is not supported in this live broker because commissions are reported
+    by the broker at times at which it would be impossible to separate them for the
+    different `tradeid` values.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`tradeid` can still be specified but it makes no longer sense.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Using the broker
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: To use the *IB Broker*, the standard broker simulation instance created by *cerebro*
+    has to be replaced.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Using the *Store* model (preferred):'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE18]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Using the direct approach:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE19]'
+  prefs: []
+  type: TYPE_PRE
+- en: Broker Parameters
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Be it directly or over `getbroker` the `IBBroker` broker supports no parameters.
+    This is because the broker is just a proxy to the a real *Broker*. And what the
+    real broker gives, shall not be taken away.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Some restrictions
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Cash and Value reporting
+  prefs:
+  - PREF_H4
+  type: TYPE_NORMAL
+- en: Where the internal *backtrader* broker simulation makes a calculation of `value`
+    (net liquidation value) and `cash` before calling the strategy `next` method,
+    the same cannot be guaranteed with a live broker.
+  prefs: []
+  type: TYPE_NORMAL
+- en: If the values were requested, the execution of `next` could be delayed until
+    the answers arrive
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: The broker may not yet have calculated the values
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '*backtrader* tells TWS to provide the updated values as soon as they are changed
+    (*backtrader* subscribes to `accounUpdate` messages), but it doesn’t know when
+    the messages will arrive.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The values reported by the `getcash` and `getvalue` methods of `IBBroker` are
+    always the latest values received from IB.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Note
+  prefs: []
+  type: TYPE_NORMAL
+- en: A further restriction is that the values are reported in the base currency of
+    the account, even if values for more currencies are available. This is a design
+    choise.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Position
+  prefs:
+  - PREF_H4
+  type: TYPE_NORMAL
+- en: '*backtrader* uses the `Position` (price and size) of an asset reported by TWS.
+    Internal calculations could be used following *order execution* and *order status*
+    messages, but if some of these messages were missed (sockets sometimes lose packets)
+    the calculations would not follow.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Of course if upon connecting to TWS the asset on which trades will be executed
+    already has an open position, the calculation of `Trades` made by the strategy
+    will not work as usual because of the initial offset
+  prefs: []
+  type: TYPE_NORMAL
+- en: Trading with it
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: There is no change with regards to the standard usage. Just use the methods
+    available in the strategy (see the `Strategy` reference for a full explanation)
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`buy`'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`sell`'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`close`'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`cancel`'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Order objects returned
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Compatible with the backtrader `Order` objects (subclass in the same hierarchy)
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Order Execution Types
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'IB supports a myriad of execution types, some of them simulated by IB and some
+    of them supported by the exchange itself. The decision as to which order execution
+    types to initially support has a motivation:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Compatibility with the *broker simulation* available in *backtrader*
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: The reasoning being that what has been back-tested is what will go in production.
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: 'As such the order execution types are limited to the ones available in the
+    *broker simulation*:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`Order.Market`'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`Order.Close`'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`Order.Limit`'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`Order.Stop` (when the *Stop* is triggered a *Market* order follows)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`Order.StopLimit` (when the *Stop* is triggered a *Limit* order follows)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Note
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Stop triggering is done following different strategies by IB. *backtrader*
+    does not modify the default setting which is `0`:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE20]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'If the user wishes to modify this, extra `**kwargs` can be supplied to `buy`
+    and `sell` following the IB documentation. For example inside the `next` method
+    of a strategy:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE21]'
+  prefs: []
+  type: TYPE_PRE
+- en: This has changed the policy to `2` (*“last” method, where stop orders are triggered
+    based on the last price.*)
+  prefs: []
+  type: TYPE_NORMAL
+- en: Please consult the IB API docs for any further clarification on stop triggering
+  prefs: []
+  type: TYPE_NORMAL
+- en: Order Validity
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'The same validity notion available during backtesting (with `valid` to `buy`
+    and `sell`) is available and with the same meaning. As such, the `valid` parameter
+    is translated as follows for *IB Orders* for the following values:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`None -> GTC` (Good Til Cancelled)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Because no validity has been specified it is understood that the order must
+    be valid until cancelled
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '`datetime/date` translates to `GTD` (Good Til Date)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Passing a datetime.datetime/datetime.date instance indicates the order must
+    be valid until a given point in time.
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '`timedelta(x)` translates to `GTD` (here `timedelta(x) != timedelta()`)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: This is interpreted as a signal to have an order be valid from `now` + `timedelta(x)`
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '`float` translates to `GTD`'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: If the value has been taken from the raw *float* datetime storage used by *backtrader*
+    the order must valid until the datetime indicated by that *float*
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '`timedelta() or 0` translates to `DAY`'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: A value has been (instead of `None`) but is *Null* and is interpreted as an
+    order valid for the current *day* (session)
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: Notifications
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: The standard `Order` status will be notified to a *strategy* over the method
+    `notify_order` (if overridden)
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`Submitted` - the order has been sent to TWS'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`Accepted` - the order has been placed'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`Rejected` - order placement failed or was cancelled by the system during its
+    lifetime'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`Partial` - a partial execution has taken place'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`Completed` - the order has been fully executed'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`Canceled` (or `Cancelled`)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'This has several meanings under IB:'
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: Manual User Cancellation
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: The Server/Exchange cancelled the order
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Order Validity expired
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: An heuristic will be applied and if an `openOrder` message has been received
+    from TWS with an `orderState` indicating `PendingCancel` or `Canceled`, then the
+    order will be marked as `Expired`
+  prefs:
+  - PREF_IND
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '`Expired` - See above for the explanation'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Reference
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: IBStore
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: class backtrader.stores.IBStore()
+  prefs:
+  - PREF_H4
+  type: TYPE_NORMAL
+- en: Singleton class wrapping an ibpy ibConnection instance.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The parameters can also be specified in the classes which use this store, like
+    `IBData` and `IBBroker`
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Params:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`host` (default:`127.0.0.1`): where IB TWS or IB Gateway are actually running.
+    And although this will usually be the localhost, it must not be'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`port` (default: `7496`): port to connect to. The demo system uses `7497`'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`clientId` (default: `None`): which clientId to use to connect to TWS.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`None`: generates a random id between 1 and 65535 An `integer`: will be passed
+    as the value to use.'
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '`notifyall` (default: `False`)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: If `False` only `error` messages will be sent to the `notify_store` methods
+    of `Cerebro` and `Strategy`.
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: If `True`, each and every message received from TWS will be notified
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '`_debug` (default: `False`)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Print all messages received from TWS to standard output
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '`reconnect` (default: `3`)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Number of attempts to try to reconnect after the 1^(st) connection attempt fails
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: Set it to a `-1` value to keep on reconnecting forever
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '`timeout` (default: `3.0`)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Time in seconds between reconnection attemps
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '`timeoffset` (default: `True`)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: If True, the time obtained from `reqCurrentTime` (IB Server time) will be used
+    to calculate the offset to localtime and this offset will be used for the price
+    notifications (tickPrice events, for example for CASH markets) to modify the locally
+    calculated timestamp.
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: The time offset will propagate to other parts of the `backtrader` ecosystem
+    like the **resampling** to align resampling timestamps using the calculated offset.
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '`timerefresh` (default: `60.0`)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'Time in seconds: how often the time offset has to be refreshed'
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '`indcash` (default: `True`)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Manage IND codes as if they were cash for price retrieval
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: IBBroker
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: class backtrader.brokers.IBBroker(**kwargs)
+  prefs:
+  - PREF_H4
+  type: TYPE_NORMAL
+- en: Broker implementation for Interactive Brokers.
+  prefs: []
+  type: TYPE_NORMAL
+- en: This class maps the orders/positions from Interactive Brokers to the internal
+    API of `backtrader`.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Notes
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '`tradeid` is not really supported, because the profit and loss are taken directly
+    from IB. Because (as expected) calculates it in FIFO manner, the pnl is not accurate
+    for the tradeid.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Position
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: If there is an open position for an asset at the beginning of operaitons or
+    orders given by other means change a position, the trades calculated in the `Strategy`
+    in cerebro will not reflect the reality.
+  prefs: []
+  type: TYPE_NORMAL
+- en: To avoid this, this broker would have to do its own position management which
+    would also allow tradeid with multiple ids (profit and loss would also be calculated
+    locally), but could be considered to be defeating the purpose of working with
+    a live broker
+  prefs: []
+  type: TYPE_NORMAL
+- en: IBData
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: class backtrader.feeds.IBData(**kwargs)
+  prefs:
+  - PREF_H4
+  type: TYPE_NORMAL
+- en: Interactive Brokers Data Feed.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Supports the following contract specifications in parameter `dataname`:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'TICKER # Stock type and SMART exchange'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'TICKER-STK # Stock and SMART exchange'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'TICKER-STK-EXCHANGE # Stock'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'TICKER-STK-EXCHANGE-CURRENCY # Stock'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'TICKER-CFD # CFD and SMART exchange'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'TICKER-CFD-EXCHANGE # CFD'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'TICKER-CDF-EXCHANGE-CURRENCY # Stock'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'TICKER-IND-EXCHANGE # Index'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'TICKER-IND-EXCHANGE-CURRENCY # Index'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'TICKER-YYYYMM-EXCHANGE # Future'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'TICKER-YYYYMM-EXCHANGE-CURRENCY # Future'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'TICKER-YYYYMM-EXCHANGE-CURRENCY-MULT # Future'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'TICKER-FUT-EXCHANGE-CURRENCY-YYYYMM-MULT # Future'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'TICKER-YYYYMM-EXCHANGE-CURRENCY-STRIKE-RIGHT # FOP'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'TICKER-YYYYMM-EXCHANGE-CURRENCY-STRIKE-RIGHT-MULT # FOP'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'TICKER-FOP-EXCHANGE-CURRENCY-YYYYMM-STRIKE-RIGHT # FOP'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'TICKER-FOP-EXCHANGE-CURRENCY-YYYYMM-STRIKE-RIGHT-MULT # FOP'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'CUR1.CUR2-CASH-IDEALPRO # Forex'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'TICKER-YYYYMMDD-EXCHANGE-CURRENCY-STRIKE-RIGHT # OPT'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'TICKER-YYYYMMDD-EXCHANGE-CURRENCY-STRIKE-RIGHT-MULT # OPT'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'TICKER-OPT-EXCHANGE-CURRENCY-YYYYMMDD-STRIKE-RIGHT # OPT'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'TICKER-OPT-EXCHANGE-CURRENCY-YYYYMMDD-STRIKE-RIGHT-MULT # OPT'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'Params:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`sectype` (default: `STK`)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Default value to apply as *security type* if not provided in the `dataname`
+    specification
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '`exchange` (default: `SMART`)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Default value to apply as *exchange* if not provided in the `dataname` specification
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '`currency` (default: `''''`)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Default value to apply as *currency* if not provided in the `dataname` specification
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '`historical` (default: `False`)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: If set to `True` the data feed will stop after doing the first download of data.
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: The standard data feed parameters `fromdate` and `todate` will be used as reference.
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: The data feed will make multiple requests if the requested duration is larger
+    than the one allowed by IB given the timeframe/compression chosen for the data.
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '`what` (default: `None`)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'If `None` the default for different assets types will be used for historical
+    data requests:'
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: ‘BID’ for CASH assets
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: ‘TRADES’ for any other
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Check the IB API docs if another value is wished
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '`rtbar` (default: `False`)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: If `True` the `5 Seconds Realtime bars` provided by Interactive Brokers will
+    be used as the smalles tick. According to the documentation they correspond to
+    real-time values (once collated and curated by IB)
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: If `False` then the `RTVolume` prices will be used, which are based on receiving
+    ticks. In the case of `CASH` assets (like for example EUR.JPY) `RTVolume` will
+    always be used and from it the `bid` price (industry de-facto standard with IB
+    according to the literature scattered over the Internet)
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: Even if set to `True`, if the data is resampled/kept to a timeframe/compression
+    below Seconds/5, no real time bars will be used, because IB doesn’t serve them
+    below that level
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '`qcheck` (default: `0.5`)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Time in seconds to wake up if no data is received to give a chance to resample/replay
+    packets properly and pass notifications up the chain
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '`backfill_start` (default: `True`)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Perform backfilling at the start. The maximum possible historical data will
+    be fetched in a single request.
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '`backfill` (default: `True`)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Perform backfilling after a disconnection/reconnection cycle. The gap duration
+    will be used to download the smallest possible amount of data
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '`backfill_from` (default: `None`)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: An additional data source can be passed to do an initial layer of backfilling.
+    Once the data source is depleted and if requested, backfilling from IB will take
+    place. This is ideally meant to backfill from already stored sources like a file
+    on disk, but not limited to.
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '`latethrough` (default: `False`)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: If the data source is resampled/replayed, some ticks may come in too late for
+    the already delivered resampled/replayed bar. If this is `True` those ticks will
+    bet let through in any case.
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: Check the Resampler documentation to see who to take those ticks into account.
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: This can happen especially if `timeoffset` is set to `False` in the `IBStore`
+    instance and the TWS server time is not in sync with that of the local computer
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '`tradename` (default: `None`) Useful for some specific cases like `CFD` in
+    which prices are offered by one asset and trading happens in a different onel'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: SPY-STK-SMART-USD -> SP500 ETF (will be specified as `dataname`)
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: SPY-CFD-SMART-USD -> which is the corresponding CFD which offers not price tracking
+    but in this case will be the trading asset (specified as `tradename`)
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: The default values in the params are the to allow things like `\`TICKER`, to
+    which the parameter`sectype`(default:`STK`) and`exchange`(default:`SMART`) are
+    applied.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Some assets like `AAPL` need full specification including `currency` (default:
+    ‘’) whereas others like `TWTR` can be simply passed as it is.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`AAPL-STK-SMART-USD` would be the full specification for dataname'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'Or else: `IBData` as `IBData(dataname=''AAPL'', currency=''USD'')` which uses
+    the default values (`STK` and `SMART`) and overrides the currency to be `USD`'
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL

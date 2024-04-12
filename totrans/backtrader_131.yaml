@@ -1,0 +1,81 @@
+- en: Plotting Date Ranges
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.backtrader.com/blog/posts/2017-03-07-plotting-date-ranges/plotting-date-ranges/](https://www.backtrader.com/blog/posts/2017-03-07-plotting-date-ranges/plotting-date-ranges/)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: The release, `1.9.31.x` added the capability to make partial plots.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Either with indices to the full length array of *timestamps* kept in *strategy*
+    instances
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Or with actual `datetime.date` or `datetime.datetime` instances that limit what
+    has to be plotted.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'Everything still over the standard `cerebro.plot`. Example:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Being that the straightforward way to do it for humans. Humans with extended
+    capabilities can actually try indices to the `datetime` timestamps as in:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: A very standard sample containing a *Simple Moving Average* (on-data plotting),
+    a *Stochastic* (independent plotting) and a *CrossOver* of the *Stochastic* lines
+    is presented below. The arguments to `cerebro.plot` are passed as command line
+    arguments.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'An execution with the `date` approach:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: The `eval` magic in python allows to directly write `datetime.date` in the command
+    line and map actually that to something sensible. The output chart
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![image](../Images/bf84e0015a4cc245ce368cc034010d1f.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'Let’s compare it with the full plot to see that data was actually skipped from
+    both ends:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE3]'
+  prefs: []
+  type: TYPE_PRE
+- en: The `eval` magic in python allows to directly write `datetime.date` in the command
+    line and map actually that to something sensible. The output chart
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![image](../Images/923c7fbfdf7bce662b7bbcc0a4b1611a.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Sample Usage
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '[PRE4]'
+  prefs: []
+  type: TYPE_PRE
+- en: Sample Code
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '[PRE5]'
+  prefs: []
+  type: TYPE_PRE

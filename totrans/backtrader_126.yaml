@@ -1,0 +1,280 @@
+- en: Bracket Orders
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.backtrader.com/blog/posts/2017-04-01-bracket/bracket/](https://www.backtrader.com/blog/posts/2017-04-01-bracket/bracket/)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: Release `1.9.37.116` adds `bracket` orders giving a very broad spectrum of orders
+    which are supported by the backtesting broker (`Market`, `Limit`, `Close`, `Stop`,
+    `StopLimit`, `StopTrail`, `StopTrailLimit`, `OCO`)
+  prefs: []
+  type: TYPE_NORMAL
+- en: Note
+  prefs: []
+  type: TYPE_NORMAL
+- en: This is implemented for *backtesting* and for the *Interactivers Brokers* store
+  prefs: []
+  type: TYPE_NORMAL
+- en: A `bracket` order isn’s a single order but it is actually made up of *3* orders.
+    Let’s consider the long side
+  prefs: []
+  type: TYPE_NORMAL
+- en: A main side `buy` order, usually set to be a `Limit` or `StopLimit` order
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: A low side `sell` order, usually set to be a `Stop` order to limit losses
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: A high side `sell` order, usually set to be a `Limit` order to take profit
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: With corresponding `sell` and 2 x `buy` orders for the short side.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The low/high side orders do actually create a bracket around the main side order.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'To put some logic into it, the following rules apply:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The 3 orders are submitted together to avoid having any of them triggered independently
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: The low/high side orders are marked as children of the main side
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: The children are not active until the main side is executed
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: The cancellation of the main side cancels both the low and high side
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: The execution of the main side activates both the low and high side
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Upon being active
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: The execution or cancellation of any of low/high side orders automatically cancels
+    the other
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Usage Pattern
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: There are two possibilities to create the bracket set of orders
+  prefs: []
+  type: TYPE_NORMAL
+- en: Single issuing of the 3 orders
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Manual issuing of the 3 orders
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Single Issuing of a Bracket
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '*backtrader* offers two new methods in the `Strategy` to control *bracket*
+    orders.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`buy_bracket` and `sell_bracket`'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Note
+  prefs: []
+  type: TYPE_NORMAL
+- en: Signature and info below or in the `Strategy` reference section.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'With a single statement a complete set of 3 orders. An example:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: Notice how `stopprice` and `limitprice` wrap the main `price`
+  prefs: []
+  type: TYPE_NORMAL
+- en: This should be enough. The actual target `data` would be `data0` and the `size`
+    would be automatically determined by the default sizer. Of course both and many
+    other parameters can be specified to have a fine control of the execution.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'The return value is:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'A `list` containing the 3 orders in this order: `[main, stop, limit]`'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Because when issuing a `sell_bracket` order, the low and high sides would be
+    turned aound, the parameters are named following convention `stop` and `limit`
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`stop` is meant to stop the losses (low side in a long operation, and high
+    side in a short operation)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`limit` is meant to take the profit (high side in a long operation and low
+    side in a short operation)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Manual Issuing of a Bracket
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: 'This involves the generation of the 3 orders and playing around with the `transmit`
+    and `parent` arguments. The rules:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The main side order must be created 1^(st) and have `transmit=False`
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: The low/high side orders must have `parent=main_side_order`
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: The 1^(st) low/high side order to be created must have `transmit=False`
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: The last order to be created (either the low or high side) sets `transmit=True`
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'A practical example doing what the single command from above did:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Where there is a lot more to do:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Keep track of the `mainside` order to indicate it is the parent of the others
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Control `transmit` to make sure only the last order triggers the joint transmission
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Specify the execution types
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Specify the `size` for the low and high side
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Because the `size` **MUST** be the same. If the parameter were not specified
+    manually and the end user had introduced a sizer, the sizer could actually indicate
+    a different value for the orders. That’s why it has to be manually added to the
+    calls after it has been set for the `mainside` order.
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: A sample of it
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: Running the sample from below produces this output (capped for brevity)
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Where 3 different outcomes are shown:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: In the 1^(st) case the main side order expired and this automatically cancelled
+    the other two
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: In the 2^(nd) case the main side order was completed and the low (stop in the
+    buy case) was executed limiting losses
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: In the 3^(rd) case the main side order was completed and the high side (limit)
+    was executed
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: This can be noticed because the *Completed* ids are `22` and `24` and the **high**
+    side order is being issued last, which means the non-executed low side order has
+    id 23.
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: Visually
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![image](../Images/2c1b300adfad7c6033a468207df452cb.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: It can be immediately seen that the losing trades align around the same value
+    and winning trades too, which is the purpose of the backeting. Controlling both
+    sides.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'The sample as run issues the 3 orders manually, but it can be told to use `buy_bracket`.
+    Let’s see the output:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE3]'
+  prefs: []
+  type: TYPE_PRE
+- en: With the same result
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![image](../Images/e3941ba3d7614308c56035faaf6e7c82.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Some reference
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: See the new `buy_bracket` and `sell_bracket` methods
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE4]'
+  prefs: []
+  type: TYPE_PRE
+- en: Sample usage
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '[PRE5]'
+  prefs: []
+  type: TYPE_PRE
+- en: Sample Code
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '[PRE6]'
+  prefs: []
+  type: TYPE_PRE

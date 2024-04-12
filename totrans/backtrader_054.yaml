@@ -1,0 +1,586 @@
+- en: Orders
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.backtrader.com/docu/order/](https://www.backtrader.com/docu/order/)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '`Cerebro` is the key control system in `backtrader` and `Strategy` (a subclass)
+    is the key control point of the end user. The latter needs a chaining method to
+    other parts of the system and that’s where **orders** play a key role.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*Orders* translate the decisions made by the logic in a `Strategy` into a message
+    suitable for the `Broker` to execute an action. This is done with:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*Creation*'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'Through Strategy’s methods: `buy\``,`sell`and`close`(Strategy) which return
+    an`order` instance as a reference'
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '*Cancellation*'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'Through Strategy’s method: `cancel` (Strategy) which takes an order instance
+    to operate on'
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: And the *orders* serve also as a communication method back to the user, to notify
+    how things are running in the broker.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*Notification*'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'To Strategy method: `notify_order` (Strategy) which reports an `order` instance'
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: Order creation
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: 'When invoking the `buy`, `sell` and `close` the following parameters apply
+    for creation:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`data` (default: `None`)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: For which data the order has to be created. If `None` then the first data in
+    the system, `self.datas[0] or self.data0` (aka `self.data`) will be used
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '`size` (default: `None`)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Size to use (positive) of units of data to use for the order.
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: If `None` the `sizer` instance retrieved via `getsizer` will be used to determine
+    the size.
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '`price` (default: `None`)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Price to use (live brokers may place restrictions on the actual format if it
+    does not comply to minimum tick size requirements)
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '`None` is valid for `Market` and `Close` orders (the market determines the
+    price)'
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: For `Limit`, `Stop` and `StopLimit` orders this value determines the trigger
+    point (in the case of `Limit` the trigger is obviously at which price the order
+    should be matched)
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '`plimit` (default: `None`)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Only applicable to `StopLimit` orders. This is the price at which to set the
+    implicit *Limit* order, once the *Stop* has been triggered (for which `price`
+    has been used)
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '`exectype` (default: `None`)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'Possible values:'
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '`Order.Market` or `None`. A market order will be executed with the next available
+    price. In backtesting it will be the opening price of the next bar'
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`Order.Limit`. An order which can only be executed at the given `price` or
+    better'
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`Order.Stop`. An order which is triggered at `price` and executed like an `Order.Market`
+    order'
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`Order.StopLimit`. An order which is triggered at `price` and executed as an
+    implicit *Limit* order with price given by `pricelimit`'
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`valid` (default: `None`)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'Possible values:'
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '`None`: this generates an order that will not expire (aka *Good till cancel*)
+    and remain in the market until matched or canceled. In reality brokers tend to
+    impose a temporal limit, but this is usually so far away in time to consider it
+    as not expiring'
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`datetime.datetime` or `datetime.date` instance: the date will be used to generate
+    an order valid until the given datetime (aka *good till date*)'
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`Order.DAY` or `0` or `timedelta()`: a day valid until the *End of the Session*
+    (aka *day* order) will be generated'
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`numeric value`: This is assumed to be a value corresponding to a datetime
+    in `matplotlib` coding (the one used by `backtrader`) and will used to generate
+    an order valid until that time (*good till date*)'
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`tradeid` (default: `0`)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: This is an internal value applied by `backtrader` to keep track of overlapping
+    trades on the same asset. This `tradeid` is sent back to the *strategy* when notifying
+    changes to the status of the orders.
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '`**kwargs`: additional broker implementations may support extra parameters.
+    `backtrader` will pass the *kwargs* down to the created order objects'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'Example: if the 4 order execution types directly supported by `backtrader`
+    are not enough, in the case of for example *Interactive Brokers* the following
+    could be passed as *kwargs*:'
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs:
+  - PREF_IND
+  type: TYPE_PRE
+- en: This would override the settings created by `backtrader` and generate a `LIMIT
+    IF TOUCHED` order with a *touched* price of 9.8 and a *limit* price of 10.0.
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: Note
+  prefs: []
+  type: TYPE_NORMAL
+- en: The `close` method will examine the current position and correspondingly use
+    `buy` or `sell` to effectively **close** the position. `size` will also be automatically
+    calculated unless the parameter is an input from the user, in which case a partial
+    *close* or a *reversal* can be achieved
+  prefs: []
+  type: TYPE_NORMAL
+- en: Order notification
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: 'To receive notifications the `notify_order` method has to be overriden in the
+    user subclassed `Strategy` (the default behavior is to do nothing). The following
+    applies to those notifications:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Issued before the strategy’s `next` method is called
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: May (and will) happen several times for the same *order* with the same or different
+    status during the same *next* cycle.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: An *order* may be submitted to the *broker* and be *accepted* and its execution
+    *completed* before `next` will be invoked again.
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: 'In this case at least 3 notifications will happen with the following `status`
+    values:'
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '`Order.Submitted` because the order was sent to the *broker*'
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`Order.Accepted` because the order was taken by the *broker* and awaits potential
+    execution'
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`Order.Completed` because in the example it was quickly matched and completely
+    filled (which may be the case usually for `Market` orders)'
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Notifications may happen even several times for the same status in the case
+    of `Order.Partial`. This status will not be seen in the *backtesting* broker (which
+    doesn’t consider volume when matching) but it will for sure be set by real brokers.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Real brokers may issue one or more executions before updating a position, and
+    this group of executions will make up for an `Order.Partial` notification.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Actual execution data is in the attribute: `order.executed` which is an object
+    of type `OrderData` (see below for the reference), with usual fields as `size`
+    and `price`'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The values at the time of creation are stored in `order.created` which remains
+    unchanged throughout the lifecycle of an `order`
+  prefs: []
+  type: TYPE_NORMAL
+- en: Order Status values
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: 'The following are defined:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`Order.Created`: set when the `Order` instance is created. Never to be seen
+    by end-users unless `order` instances are manually created rather than through
+    `buy`, `sell` and `close`'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`Order.Submitted`: set when the `order` instance has been transmitted to the
+    `broker`. This simply means it has been *sent*. In *backtesting* mode this will
+    be an immediate action, but it may take actual *time* with a real broker, which
+    may receive the order and only first notify when it has been forwarded to an exchange'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`Order.Accepted`: the `broker` has taken the order and it is in the system
+    (or already in a exchange) awaiting execution according to the set parameters
+    like execution type, size, price and validity'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`Order.Partial`: the `order` has been partially executed. `order.executed`
+    contains the current filled `size` and average price.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`order.executed.exbits` contains a complete list of `ExecutionBits` detailing
+    the partial fillings'
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '`Order.Complete`: the `order` has been completely filled average price.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`Order.Rejected`: the `broker` has rejected the order. A parameter (like for
+    example `valid` to determine its lifetime) may not be accepted by the `broker`
+    and the `order` cannot be accepted.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: The reason will be notified via the `notify_store` method of the `strategy`.
+    Although this may seem awkward, the reason is that real life brokers will notify
+    this over an event, which may or may not be direclty related to the order. But
+    the notification from the broker can still be seen in `notify_store`.
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: This status will not be seen in the *backtesting* broker
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '`Order.Margin`: the order execution would imply a margin call and the previously
+    accepted order has been taken off the system'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`Order.Cancelled` (or `Order.Canceled`): confirmation of the user requested
+    cancellation'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: It must be taken into account that a request to *cancel* an order via the `cancel`
+    method of the strategy is no guarantee of cancellation. The order may have been
+    already executed but such execution may not have yet notified by the broker and/or
+    the notification may not have yet been delivered to the strategy
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '`Order.Expired`: a previously accepted *order* which had a time validity has
+    expired and been taken off the system'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'Reference: Order and associated classes'
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: These objects are the generic classes in the `backtrader` ecosystem. They may
+    been extended and/or contain extra embedded information when operating with other
+    brokers. See the reference of the appropriate broker
+  prefs: []
+  type: TYPE_NORMAL
+- en: class backtrader.order.Order()
+  prefs:
+  - PREF_H4
+  type: TYPE_NORMAL
+- en: Class which holds creation/execution data and type of oder.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'The order may have the following status:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Submitted: sent to the broker and awaiting confirmation'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'Accepted: accepted by the broker'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'Partial: partially executed'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'Completed: fully exexcuted'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'Canceled/Cancelled: canceled by the user'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'Expired: expired'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'Margin: not enough cash to execute the order.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'Rejected: Rejected by the broker'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: This can happen during order submission (and therefore the order will not reach
+    the Accepted status) or before execution with each new bar price because cash
+    has been drawn by other sources (future-like instruments may have reduced the
+    cash or orders orders may have been executed)
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: 'Member Attributes:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'ref: unique order identifier'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'created: OrderData holding creation data'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'executed: OrderData holding execution data'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'info: custom information passed over method `addinfo()`. It is kept in the
+    form of an OrderedDict which has been subclassed, so that keys can also be specified
+    using ‘.’ notation'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'User Methods:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'isbuy(): returns bool indicating if the order buys'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'issell(): returns bool indicating if the order sells'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'alive(): returns bool if order is in status Partial or Accepted'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: class backtrader.order.OrderData(dt=None, size=0, price=0.0, pricelimit=0.0,
+    remsize=0, pclose=0.0, trailamount=0.0, trailpercent=0.0)
+  prefs:
+  - PREF_H4
+  type: TYPE_NORMAL
+- en: Holds actual order data for Creation and Execution.
+  prefs: []
+  type: TYPE_NORMAL
+- en: In the case of Creation the request made and in the case of Execution the actual
+    outcome.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Member Attributes:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'exbits : iterable of OrderExecutionBits for this OrderData'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'dt: datetime (float) creation/execution time'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'size: requested/executed size'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'price: execution price Note: if no price is given and no pricelimite is given,
+    the closing price at the time or order creation will be used as reference'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'pricelimit: holds pricelimit for StopLimit (which has trigger first)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'trailamount: absolute price distance in trailing stops'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'trailpercent: percentage price distance in trailing stops'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'value: market value for the entire bit size'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'comm: commission for the entire bit execution'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'pnl: pnl generated by this bit (if something was closed)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'margin: margin incurred by the Order (if any)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'psize: current open position size'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'pprice: current open position price'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: class backtrader.order.OrderExecutionBit(dt=None, size=0, price=0.0, closed=0,
+    closedvalue=0.0, closedcomm=0.0, opened=0, openedvalue=0.0, openedcomm=0.0, pnl=0.0,
+    psize=0, pprice=0.0)
+  prefs:
+  - PREF_H4
+  type: TYPE_NORMAL
+- en: Intended to hold information about order execution. A “bit” does not determine
+    if the order has been fully/partially executed, it just holds information.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Member Attributes:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'dt: datetime (float) execution time'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'size: how much was executed'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'price: execution price'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'closed: how much of the execution closed an existing postion'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'opened: how much of the execution opened a new position'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'openedvalue: market value of the “opened” part'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'closedvalue: market value of the “closed” part'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'closedcomm: commission for the “closed” part'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'openedcomm: commission for the “opened” part'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'value: market value for the entire bit size'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'comm: commission for the entire bit execution'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'pnl: pnl generated by this bit (if something was closed)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'psize: current open position size'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'pprice: current open position price'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

@@ -1,0 +1,442 @@
+- en: TA-Lib
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.backtrader.com/blog/posts/2016-07-26-talib-integration/talib-integration/](https://www.backtrader.com/blog/posts/2016-07-26-talib-integration/talib-integration/)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: 'Even if *backtrader* offers an already high number of built-in indicators and
+    developing an indicator is mostly a matter of defining the inputs, outputs and
+    writing the formula in a natural manner, some people want to use *TA-LIB*. Some
+    of the reasons:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Indicator *X* is in the library and not in *backtrader* (the author would gladly
+    accept a request)
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '*TA-LIB* behavior is well known and people trust good old things'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: In order to satisfy each and every taste, *TA-LIB* integration is offered.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Requirements
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '[Python wrapper for TA-Lib](https://github.com/mrjbq7/ta-lib)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Any dependencies needed by it (for example *numpy*)
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: The installation details are on the *GitHub* repository
+  prefs: []
+  type: TYPE_NORMAL
+- en: Using *ta-lib*
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: 'As easys as using any of the indicators already built-in in *backtrader*. Example
+    of a *Simple Moving Average*. First the backtrader* one:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Now the *ta-lib* example:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: Et voilá! Of course the *params* for the *ta-lib* indicators are defined by
+    the library itself and not by *backtrader*. In this case the *SMA* in *ta-lib*
+    takes a parameter named `timeperiod` to defined the size of the operating window.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'For indicators that require more than one input, for example the *Stochastic*:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: Notice how `high`, `low` and `close` have been individually passed. One could
+    always pass `open` instead of `low` (or any other data series) and experiment.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'The *ta-lib* indicator documentation is automatically parsed and added to the
+    *backtrader* docs. You may also check the *ta-lib* source code/docs. Or adittionally
+    do:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE3]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Which in this case outputs:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE4]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Which offers some information:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Which *Input* is to be expected (*DISREGARD the ``ndarray`` comment* because
+    backtrader manages the conversions in the background)
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Which *parameters* and which default values
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Which outpu *lines* offers the indicator
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Moving Averages and MA_Type
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'To select a specific *moving average* for indicators like `bt.talib.STOCH`,
+    the standard *ta-lib* `MA_Type` is accesible with `bactrader.talib.MA_Type`. For
+    example:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE5]'
+  prefs: []
+  type: TYPE_PRE
+- en: Plotting ta-lib indicators
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: Just as with regular usage, there is nothing special to do to plot the *ta-lib*
+    indicators.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Note
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Indicators which output a *CANDLE* (all those looking for a candlestick pattern)
+    deliver a binary output: either 0 or 100\. In order to avoid adding a `subplot`
+    to the chart, there is an automated plotting translation to plot them over the
+    *data* at the point in time in which the pattern was recognized.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Examples and comparisons
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: 'The following are plots comparing the outputs of some *ta-lib* indicators against
+    the equivalent built-in indicators in *backtrader*. To consider:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The *ta-lib* indicators get a `TA_` prefix on the plot. This is specifically
+    done by the sample to help the user spot which is which
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '*Moving Averages* (if both deliver the same result) will be plotted *ON* top
+    of the other existing *Moving Average*. The two indicators cannot be seen separately
+    and the test is a pass if that’s the case.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: All samples include a `CDLDOJI` indicator as a reference
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: KAMA (Kaufman Moving Average)
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'This is the 1^(st) example because it is the only (from all indicators which
+    the sample directly compare) that has a difference:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The initial values of the the samples are not the same
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: At some point in time, the values converge and both *KAMA* implementations have
+    the same behavior.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'After having analyzed the *ta-lib* source code:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The implementation in *ta-lib* makes a non-industry standard choice for the
+    1^(st) values of the *KAMA*.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'The choice can be seen in the source code quoting from the source code): *The
+    yesterday price is used here as the previous KAMA.*'
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '*backtrader* does the usual choice which is the same as for example the one
+    from *Stockcharts*:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[KAMA at StockCharts](http://stockcharts.com/school/doku.php?id=chart_school:technical_indicators:kaufman_s_adaptive_moving_average)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '*Since we need an initial value to start the calculation, the first KAMA is
+    just a simple moving average*'
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: 'Hence the difference. Furthermore:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The *ta-lib* `KAMA` implementation doesn’t allow specifying the `fast` and `slow`
+    periods for the adjustment of the *scalable constant* defined by *Kaufman*.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'Sample execution:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE6]'
+  prefs: []
+  type: TYPE_PRE
+- en: Output
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![image](../Images/9dda5c463586cabe64749f9e1a8e3ecf.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: SMA
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[PRE7]'
+  prefs: []
+  type: TYPE_PRE
+- en: Output
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![image](../Images/46c18821d469cb87e941eb40de78142b.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: EMA
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[PRE8]'
+  prefs: []
+  type: TYPE_PRE
+- en: Output
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![image](../Images/ac63ead9b3ce496b93df42811a1dc589.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Stochastic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[PRE9]'
+  prefs: []
+  type: TYPE_PRE
+- en: Output
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![image](../Images/d9c807ef44f425b3bfe4f1f040cc6562.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: RSI
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[PRE10]'
+  prefs: []
+  type: TYPE_PRE
+- en: Output
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![image](../Images/a8618d3e75837d58e4bfd0009285fd01.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: MACD
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[PRE11]'
+  prefs: []
+  type: TYPE_PRE
+- en: Output
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![image](../Images/fde2f57cc0ed81e6e511ec49551d8930.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Bollinger Bands
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[PRE12]'
+  prefs: []
+  type: TYPE_PRE
+- en: Output
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![image](../Images/658059d12f9ef87338fa772a171c3e9a.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: AROON
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Note that *ta-lib* chooses to put the *down* line first and the colours are
+    inverted when compared with the *backtrader* built-in indicator.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE13]'
+  prefs: []
+  type: TYPE_PRE
+- en: Output
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![image](../Images/bb11cd74fd351c5ae6d2a37da98de664.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Ultimate Oscillator
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[PRE14]'
+  prefs: []
+  type: TYPE_PRE
+- en: Output
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![image](../Images/8a04b5ad9027e4f5c89e4c20a82ab808.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Trix
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[PRE15]'
+  prefs: []
+  type: TYPE_PRE
+- en: Output
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![image](../Images/3822fac9260404a45f264cce22665f09.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: ADXR
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Here *backtrader* offers both the `ADX` and `ADXR` lines.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE16]'
+  prefs: []
+  type: TYPE_PRE
+- en: Output
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![image](../Images/17263836e95fa3911382b423e9992848.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: DEMA
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[PRE17]'
+  prefs: []
+  type: TYPE_PRE
+- en: Output
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![image](../Images/be99721b0e11ceca6cbe9bbd77095b16.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: TEMA
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[PRE18]'
+  prefs: []
+  type: TYPE_PRE
+- en: Output
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![image](../Images/1570c89d60d66e94d196e6a333a5297c.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: PPO
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Here *backtrader* offers not only the `ppo` line, but a more traditional `macd`
+    approach.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE19]'
+  prefs: []
+  type: TYPE_PRE
+- en: Output
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![image](../Images/9ccaa7b6e99837e1c1b5c84fe21bea29.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: WilliamsR
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[PRE20]'
+  prefs: []
+  type: TYPE_PRE
+- en: Output
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![image](../Images/9ad4a4d205bf0f2f1147fb59b83bbdc0.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: ROC
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: All indicators show have exactly the same shape, but how to track *momentum*
+    or *rate of change* has several definitions
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE21]'
+  prefs: []
+  type: TYPE_PRE
+- en: Output
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![image](../Images/7e0faa10f004e0f2b2809a5c74bdffd9.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Sample Usage
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '[PRE22]'
+  prefs: []
+  type: TYPE_PRE
+- en: Sample Code
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '[PRE23]'
+  prefs: []
+  type: TYPE_PRE

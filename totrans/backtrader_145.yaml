@@ -1,0 +1,29 @@
+- en: Notebook - Automatic Inline Plotting
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.backtrader.com/blog/posts/2016-09-17-notebook-inline/notebook-inline/](https://www.backtrader.com/blog/posts/2016-09-17-notebook-inline/notebook-inline/)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: Release 1.9.1.99 adds automatic inline plotting when running inside a *Jupyter
+    Notebook*.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Some of the questions around backtrader show people using the platform inside
+    a *Notebook* and supporting this and making it the default behavior should make
+    things consistent.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'If the previous behavior is wished and figures must be plotted independently,
+    simply do:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: Of course and if running from a script or interactively, the default plotting
+    backend for `matplotlib` will be used as before, which will plot the charts in
+    separate windows.
+  prefs: []
+  type: TYPE_NORMAL

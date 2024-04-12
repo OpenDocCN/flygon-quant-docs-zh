@@ -1,0 +1,171 @@
+- en: Companies
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.backtrader.com/home/references/companies/](https://www.backtrader.com/home/references/companies/)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: A list of companies which list (or have listed) *backtrader* or for which a
+    public usage reference exists (*Professional Profile*, *Blog Entry*, *Articles*,
+    ...)
+  prefs: []
+  type: TYPE_NORMAL
+- en: Note
+  prefs: []
+  type: TYPE_NORMAL
+- en: This is not any kind of endorsement, proof of work, official sanctioning (and
+    any other disclaimer)
+  prefs: []
+  type: TYPE_NORMAL
+- en: Note
+  prefs: []
+  type: TYPE_NORMAL
+- en: Below "companies" you will find Un*x like distributions which have chosen to
+    have it available
+  prefs: []
+  type: TYPE_NORMAL
+- en: Companies
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: Agora EAFI
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[https://agoraeaf.com/](https://agoraeaf.com/)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: From a LinkedIn profile and the Rankia/Finanzas.com articles
+  prefs: []
+  type: TYPE_NORMAL
+- en: Alpaca
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[https://pypi.org/project/alpaca-backtrader-api/](https://pypi.org/project/alpaca-backtrader-api/)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Alpha Over Beta
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Trading Volatility to Hedge Equity https://www.alphaoverbeta.net/trading-volatility-to-hedge-equity/
+    -](https://www.alphaoverbeta.net/trading-volatility-to-hedge-equity/)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Total
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[https://ch.linkedin.com/in/karl-vernet-599a464/de](https://ch.linkedin.com/in/karl-vernet-599a464/de)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Part of the job of Karl Vernet.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Data Trading
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[https://datatrading.info/](https://datatrading.info/)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Small shop with articles, offering services for algorithmic trading.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Intrinio
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[https://intrinio.com/](https://intrinio.com/)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: NORGATE DATA
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[https://pypi.org/project/norgatedata/](https://pypi.org/project/norgatedata/)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Quantify Capital
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[https://www.quantifycapital.in/](https://www.quantifycapital.in/)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: QuantInsti
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[https://www.quantinsti.com/](https://www.quantinsti.com/)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: From blog entries, job offers ...
+  prefs: []
+  type: TYPE_NORMAL
+- en: StormDealers Ltd.
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[https://www.stormdealers.com/](https://www.stormdealers.com/)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Listed on the website
+  prefs: []
+  type: TYPE_NORMAL
+- en: TradeFab
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[https://tradefab.org/](https://tradefab.org/)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'Quote: *"Backtrader Development Development of Python Backtrader scripts, including
+    backtesting/optimization support."*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: ZuluQuant
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[http://zuluquant.com/ (apparently gone)](http://zuluquant.com/)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Listed *backtrader* as one of the technologies used and posted a job offer in
+    the community
+  prefs: []
+  type: TYPE_NORMAL
+- en: Distributions
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: FreeBSD Ports
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[FreeBSD](https://svnweb.freebsd.org/ports/head/finance/py-backtrader)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: NetBSD
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[NetBSD](https://ftp.netbsd.org/pub/pkgsrc/current/pkgsrc/finance/py-backtrader/README.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

@@ -1,0 +1,173 @@
+- en: Education - Papers
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.backtrader.com/home/references/education/](https://www.backtrader.com/home/references/education/)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: aCubeIT - Institute of Artificial Intelligenge
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Selling a course which includes the use of *backtrader* to make predictive algorithms.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Stock Prediction Based On Sentiment Analysis](https://acubeit.com/stock-prediction-based-on-sentiment-analysis/)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Arxiv.org - Kartikay Gupta (corresponding author), Niladri Chatterjee
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[SELECTING STOCK PAIRS FOR PAIRS TRADING WHILE INCORPORATING LEAD-LAG RELATIONSHIP](https://arxiv.org/ftp/arxiv/papers/1906/1906.05057.pdf)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Brock University
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Using Deep Learning for Predicting Stock Trend](https://dr.library.brocku.ca/bitstream/handle/10464/14506/Brock_Fazeli_Arvand_2019.pdf)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Columbia University
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Masters Program in Mathematics of Finance](http://www.math.columbia.edu/mafn/wp-content/uploads/2018/10/Early-Regular-Summer-Employment-Candidates-10-25-2018.pdf)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Some students in the Columbia University "Masters Program in Mathematics of
+    Finance" list backtrader in the resumes
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: Earlham College
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Examine different neural networks’ efficiency in predicting stock price](https://portfolios.cs.earlham.edu/wp-content/uploads/2017/12/examine-neural-networks-1.pdf)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: ETH Zurich - Alain Glücksmann - Master Thesis
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Backtesting of Trading Strategies for Bitcoin](https://www.ethz.ch/content/dam/ethz/special-interest/mtec/chair-of-entrepreneurial-risks-dam/documents/dissertation/master%20thesis/Master_Thesis_Gl%C3%BCcksmann_13June2019.pdf)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: FACULTY OF INFORMATION TECHNOLOGY DEPARTMENT OF COMPUTER GRAPHICS AND MULTIMEDIA
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '**Brno** - Czech Republic'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[ALGORITHMIC TRADING USING ARTIFICIAL NEURAL NETWORKS](https://core.ac.uk/download/pdf/44404873.pdf)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Master's Thesis
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Language: *Czech*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: (The) Hong Kong University of Science and Technology
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[A System for Comparative Analysis of Different Stock Prediction Methodologies
+    for Beginner Investors http://www.cse.ust.hk/~rossiter/fyp/90_RO3_Final_201819.pdf](http://www.cse.ust.hk/~rossiter/fyp/90_RO3_Final_201819.pdf)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: National Institute of Development Administration (Thailand)
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Robust Financial Trading System with Deep Q Network (DQN)](https://repository.nida.ac.th/bitstream/handle/662723737/4077/b203303.pdf)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: PHD Dissertation
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: NTU - Computer Science & Information Engineering
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '**National Taiwan University**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Python Programming in Finance - 2018](https://www.csie.ntu.edu.tw/~d00922011/python/298/python.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Python Programming in Finance - 2019](https://www.csie.ntu.edu.tw/~d00922011/python.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Recent Advances in Big Data and Deep Learning ...
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Amazon - Recent Advances in Big Data and Deep Learning: Proceedings of the
+    INNS Big Data and Deep Learning Conference INNSBDDL2019, held at Sestri Levante,
+    Genova, ... Neural Networks Society Book 1](https://www.amazon.com/s?k=9783030168414)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Mentioned as the *"specific tool"* used to backtest in page 182
+  prefs: []
+  type: TYPE_NORMAL
+- en: Science Direct
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Technical analysis and sentiment embeddings for market trend prediction](https://www.sciencedirect.com/science/article/pii/S0957417419304142)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'PDF at: [https://sentic.net/market-trend-prediction.pdf](https://sentic.net/market-trend-prediction.pdf)'
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: VTAD (Vereinigung Technischer Analysten Deutschlands e.V.)
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'Translation: *German Association of Technical Analysts (Registered)*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Spreer - Trading mit idiosynkratischem Risiko](https://www.vtad.de/wp-content/uploads/2019/04/AW19-spreer_final.pdf)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '*Language*: German'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Worcester Polytechnic Institute - Digital WPI
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Trading System Development by Maier/Richardson/Gonsalves](https://digitalcommons.wpi.edu/cgi/viewcontent.cgi?article=6334&context=iqp-all)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'World Finance Conference - 2019 Session 25: Investments'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Portfolio selection and trading strategies of cryptocurrencies base on different
+    algorithms](https://www.world-finance-conference.com/papers_wfc/cf8e5e641a354ea66de0d3c09ff59f52.pdf)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

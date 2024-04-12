@@ -1,0 +1,1 @@
+["```py\n`import backtrader as bt\n\n...\n\ncerebro.run()\n\n...\n\ncerebro.plot(iplot=False)` \n```"]

@@ -1,0 +1,123 @@
+- en: Sizers Reference
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.backtrader.com/docu/sizers-reference/](https://www.backtrader.com/docu/sizers-reference/)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: FixedSize
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: class backtrader.sizers.FixedSize()
+  prefs:
+  - PREF_H4
+  type: TYPE_NORMAL
+- en: This sizer simply returns a fixed size for any operation. Size can be controlled
+    by number of tranches that a system wishes to use to scale into trades by specifying
+    the `tranches` parameter.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Params:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: FixedReverser
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: class backtrader.sizers.FixedReverser()
+  prefs:
+  - PREF_H4
+  type: TYPE_NORMAL
+- en: This sizer returns the needes fixed size to reverse an open position or the
+    fixed size to open one
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'To open a position: return the param `stake`'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'To reverse a position: return 2 * `stake`'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'Params:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: PercentSizer
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: class backtrader.sizers.PercentSizer()
+  prefs:
+  - PREF_H4
+  type: TYPE_NORMAL
+- en: This sizer return percents of available cash
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Params:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: AllInSizer
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: class backtrader.sizers.AllInSizer()
+  prefs:
+  - PREF_H4
+  type: TYPE_NORMAL
+- en: This sizer return all available cash of broker
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Params:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE3]'
+  prefs: []
+  type: TYPE_PRE
+- en: PercentSizerInt
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: class backtrader.sizers.PercentSizerInt()
+  prefs:
+  - PREF_H4
+  type: TYPE_NORMAL
+- en: This sizer return percents of available cash in form of size truncated to an
+    int
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Params:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE4]'
+  prefs: []
+  type: TYPE_PRE
+- en: AllInSizerInt
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: class backtrader.sizers.AllInSizerInt()
+  prefs:
+  - PREF_H4
+  type: TYPE_NORMAL
+- en: This sizer return all available cash of broker with the size truncated to an
+    int
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Params:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE5]'
+  prefs: []
+  type: TYPE_PRE

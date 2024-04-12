@@ -1,0 +1,177 @@
+- en: Real World Usage
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.backtrader.com/blog/posts/2015-08-27-real-world-usage/real-world-usage/](https://www.backtrader.com/blog/posts/2015-08-27-real-world-usage/real-world-usage/)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: Finally it seems it pays having gotten down to developing backtrader.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Following what seemed like the end of the world when looking at the European
+    markets in the last weeks, a friend asked if I could have a look at the data in
+    our charting package to see how the falling range compared against previous similar
+    occurrences.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Of course I could, but I said I could do more than looking into the charts,
+    because I could quickly:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Create a quick `LegDown` indicator to measure the range of the fall. It could
+    also have gotten the name of `HighLowRange` or `HiLoRange`. Luckily and in case
+    this would be deemed needed, it can be solved via `alias`
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Create a `LegDownAnalyzer` that would gather the results and sort them
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'This led to an addtional request:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Recovery after the falls in the next 5, 10, 15, 20 days (trading …)
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Solved with a `LegUp` indicator which writes the values back for alignment with
+    the corresponding``LegDown``
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: 'The work was quickly done (within the allowance of my free time) and results
+    shared with the requester. But … being the only problem tha I saw potential for:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Improvements in the automation `bt-run.py`
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Multiple strategies/observers/analyzers with separated kwargs
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Injection of indicators directly into Strategies with kwargs for each indicator
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: single plot argument accepting also kwargs
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Improvements in in the `Analyzer` API to have automated **printing** capabilities
+    for the results (which are returned as a `dict` -like instance) and have direct
+    `data` access aliases
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'Notwithstanding that:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: An obscure bug showed up due to the implementation combination I wrote to align
+    the `LegDown` and `LegUp` values by mixing declaration of and the additional use
+    of `next`
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: The bug had been introduced to simplify the passing of a single data with multiple
+    `Lines`, so that `Indicators` can operate on each of the lines as individual datas
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: 'The latter pushing me into:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Adding a background object opposite to `LineDelay` to “look” into the “future”
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: That actually means that actual values are written into past array positions
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: Once all of the above were in place, it was time to retest how nicely the (small?)
+    challenges posed by the above request could be solved more easily and faster (in
+    implementation time).
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Finally the execution and outcomes for the Eurostoxx 50 Future from 1998 up
+    until today:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: The August 2015 leg down shows up at place 13^(th). Obviously a non-common ocurrence
+    although greater have happened.
+  prefs: []
+  type: TYPE_NORMAL
+- en: What to do out of the follow up legs that point upwards is a lot more for staticians
+    and bright math minds than for me.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Details about the implementation (see the entire module code at the end) of
+    the `LegUpDownAnalyzer`:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'It creates indicators in `__init__` just as other objects do: `Strategies`,
+    `Indicators` being usually the usual suspects'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: These indicators get automatically registered to the strategy to which the analyzer
+    is attached
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: 'Just like strategies the `Analyzer` has `self.datas` (an array of datas) and
+    aliases to it: `self.data`, `self.data0`, `self.data1` …'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'Again like strategies: `nexstart` and `stop` hooks (those are not present in
+    indicators)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'In this case used to:'
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '`nextstart`: record the initial starting point of the strategy'
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`stop`: making the final calculations because things are done'
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'Note: other methods like `start`, `prenext` and `next` are not needed in this
+    case'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: The `LegDownUpAnalyzer` method `print` has been overriden to no longer call
+    the `pprint` method but to create a CSV printout of the calculations
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: After much talk and since we added `--plot` to the mix … the chart.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![image](../Images/810dfdbad965951ec652a05dd8ba9d95.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Finally the `legupdown` module which is being loaded by `bt-run`.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE

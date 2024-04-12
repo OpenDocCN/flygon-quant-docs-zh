@@ -1,0 +1,139 @@
+- en: Data Resampling
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.backtrader.com/blog/posts/2015-08-23-data-resampling/data-resampling/](https://www.backtrader.com/blog/posts/2015-08-23-data-resampling/data-resampling/)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: When data is only available in a single timeframe and the analysis has to be
+    done for a different timeframe, it’s time to do some resampling.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '“Resampling” should actually be called “Upsampling” given that one goes from
+    a source timeframe to a larger time frame (for example: days to weeks)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: “Downsampling” is not yet possible.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`backtrader` has built-in support for resampling by passing the original data
+    through a filter object which has intelligently been named: `DataResampler`.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'The class has two functionalities:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Change the timeframe
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Compress bars
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'To do so the `DataResampler` uses standard `feed.DataBase` parameters during
+    construction:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`timeframe` (default: bt.TimeFrame.Days)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Destination timeframe which to be useful has to be equal or larger than the
+    source
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '`compression` (default: 1)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Compress the selected value “n” to 1 bar
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: 'Let’s see an example from Daily to weekly with a handcrafted script:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'The output:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![image](../Images/d4fb746f392cdd09d8df33d275cac149.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'We can compare it to the original daily data:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'The output:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![image](../Images/15344c8ee6a11e8dcaa02f05f63aa04f.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'The magic is done by executing the following steps:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Loading the data as usual
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Feeding the data into a `DataResampler` with the desired
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: timeframe
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: compression
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: The code in the sample (the entire script at the bottom).
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'A last example in which we first change the time frame from daily to weekly
+    and then apply a 3 to 1 compression:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE3]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'The output:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![image](../Images/4f595a25f1b4ef03bd4d4973e3995791.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'From the original 256 daily bars we end up with 18 3-week bars. The breakdown:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 52 weeks
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 52 / 3 = 17.33 and therefore 18 bars
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: It doesn’t take much more. Of course intraday data can also be resampled.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The sample code for the resampling test script.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE4]'
+  prefs: []
+  type: TYPE_PRE

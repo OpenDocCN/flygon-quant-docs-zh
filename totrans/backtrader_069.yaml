@@ -1,0 +1,623 @@
+- en: 'Commissions: Stocks vs Futures'
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.backtrader.com/docu/commission-schemes/commission-schemes/](https://www.backtrader.com/docu/commission-schemes/commission-schemes/)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: Agnosticity
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: Before going forward let’s remember that `backtrader` tries to remain agnostic
+    as to what the data represents. Different commission schemes can be applied to
+    the same data set.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Let’s see how it can be done.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Using the broker shortcuts
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: 'This keeps the end user away from `CommissionInfo` objects because a commission
+    scheme can be *created/set* with a single function call. Within the regular `cerebro`
+    creation/set-up process, just add a call to `setcommission` over the `broker`
+    member attribute. The following call sets a usual commission scheme for **Eurostoxx50**
+    futures when working with *Interactive Brokers*:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Since most users will usually just test a single instrument, that’s all that’s
+    down to it. If you have given a `name` to your data feed, because several instruments
+    are being considered simultaneously on a chart, this call can be slightly extended
+    to look as follows:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: In this case this on-the-fly commission scheme will only applied to instruments
+    whose name matches `Eurostoxx50`.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The meaning of the setcommission parameters
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '`commission` (default: `0.0`)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Monetary units in absolute or percentage terms each **action** costs.
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: In the above example it is 2.0 euros per contract for a `buy` and again 2.0
+    euros per contract for a `sell`.
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: The important issue here is when to use absolute or percentage values.
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: If `margin` evaluates to `False` (it is False, 0 or None for example) then it
+    will be considered that `commission` expresses a percentage of the `price` times
+    `size` operatin value
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: If `margin` is something else, it is considered the operations are happenning
+    on a `futures` like intstrument and `commission` is a fixed price per `size` contracts
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`margin` (default: `None`)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Margin money needed when operating with `futures` like instruments. As expressed
+    above
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: If a **no** `margin` is set, the `commission` will be understood to be indicated
+    in percentage and applied to `price * size` components of a `buy` or `sell` operation
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: If a `margin` is set, the `commission` will be understood to be a fixed value
+    which is multiplied by the `size` component of `buy` or `sell` operation
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`mult` (default: 1.0)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: For `future` like instruments this determines the multiplicator to apply to
+    profit and loss calculations.
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: This is what makes futures attractive and risky at the same time.
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '`name` (default: None)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Limit the application of the commission scheme to instruments matching `name`
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: This can be set during the creation of a data feed.
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: If left unset, the scheme will apply to any data present in the system.
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: 'Two examples now: stocks vs futures'
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: 'The futures example from above:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'A example for stocks:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE3]'
+  prefs: []
+  type: TYPE_PRE
+- en: Note
+  prefs: []
+  type: TYPE_NORMAL
+- en: The 2^(nd) syntax doesn’t set *margin* and *mult* and *backtrader* attempts
+    a smart approach by considering the commission to be `%` based.
+  prefs: []
+  type: TYPE_NORMAL
+- en: To fully specify commission schemes, a subclass of `CommissionInfo` needs to
+    be created
+  prefs: []
+  type: TYPE_NORMAL
+- en: Creating permanent Commission schemes
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: 'A more permanent commission scheme can be created by working directly with
+    `CommissionInfo` classes. The user could choose to have this definition somewhere:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE4]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'To later apply it in another Python module with `addcommissioninfo`:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE5]'
+  prefs: []
+  type: TYPE_PRE
+- en: '`CommissionInfo` is an object which uses a `params` declaration just like other
+    objects in the `backtrader` environment. As such the above can be also expressed
+    as:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE6]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'And later:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE7]'
+  prefs: []
+  type: TYPE_PRE
+- en: Now a “real” comparison with a SMA Crossover
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: Using a SimpleMovingAverage crossover as the entry/exit signal the same data
+    set is going to be tested with a `futures` like commission scheme and then with
+    a `stocks` like one.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Note
+  prefs: []
+  type: TYPE_NORMAL
+- en: Futures positions could also not only be given the enter/exit behavior but a
+    reversal behavior on each occassion. But this example is about comparing the commission
+    schemes.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The code (see at the bottom for the full strategy) is the same and the scheme
+    can be chosen before the strategy is defined.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE8]'
+  prefs: []
+  type: TYPE_PRE
+- en: Just set `futures_like` to false to run with the `stocks` like scheme.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Some logging code has been added to evaluate the impact of the differrent commission
+    schemes. Let’s concentrate on just the 2 first operations.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'For futures:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE9]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'For stocks:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE10]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'The 1^(st) operation has the following prices:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: BUY (Execution) -> 3754.13 / SELL (Execution) -> 3786.93
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'Futures Profit & Loss (with commission): 324.0'
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'Stocks Profit & Loss (with commission): -4.91'
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Hey!! Commission has fully eaten up any profit on the `stocks` operation but
+    has only meant a small dent to the `futures` one.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'The 2^(nd) operation:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: BUY (Execution) -> `3863.57` / SELL (Execution) -> `3389.24`
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'Futures Profit & Loss (with commission): `-247.30`'
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'Stocks Profit & Loss (with commission): `-62.84`'
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: The bite has been sensibly larger for this negative operation with `futures`
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'But:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Futures accumulated net profit & loss: `324.00 + (-247.30) = 76.70`'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'Stocks accumulated net profit & loss: `(-4.91) + (-62.84) = -67.75`'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: The accumulated effect can be seen on the charts below, where it can also be
+    seen that at the end of the full year, futures have produced a larger profit,
+    but have also suffered a larger drawdown (were deeper underwater)
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'But the important thing: whether `futures` or `stocks` … **it can be backtested.**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Commissions for futures
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![image](../Images/19e3ebda96a829f4c5f4548a9d4cfa53.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Commissions for stocks
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![image](../Images/70824338a3eebb03a9a940386140da24.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: The code
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '[PRE11]'
+  prefs: []
+  type: TYPE_PRE
+- en: Reference
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: class backtrader.CommInfoBase()
+  prefs:
+  - PREF_H4
+  type: TYPE_NORMAL
+- en: Base Class for the Commission Schemes.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Params:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`commission` (def: `0.0`): base commission value in percentage or monetary
+    units'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`mult` (def `1.0`): multiplier applied to the asset for value/profit'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`margin` (def: `None`): amount of monetary units needed to open/hold an operation.
+    It only applies if the final `_stocklike` attribute in the class is set to `False`'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`automargin` (def: `False`): Used by the method `get_margin` to automatically
+    calculate the margin/guarantees needed with the following policy'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Use param `margin` if param `automargin` evaluates to `False`
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Use param `mult` and use `mult * price` if `automargin < 0`
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Use param `automargin` and use `automargin * price` if `automargin > 0`
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`commtype` (def: `None`): Supported values are `CommInfoBase.COMM_PERC` (commission
+    to be understood as %) and `CommInfoBase.COMM_FIXED` (commission to be understood
+    as monetary units)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'The default value of `None` is a supported value to retain compatibility with
+    the legacy `CommissionInfo` object. If `commtype` is set to None, then the following
+    applies:'
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '`margin` is `None`: Internal `_commtype` is set to `COMM_PERC` and `_stocklike`
+    is set to `True` (Operating %-wise with Stocks)'
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`margin` is not `None`: `_commtype` set to `COMM_FIXED` and `_stocklike` set
+    to `False` (Operating with fixed rount-trip commission with Futures)'
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: If this param is set to something else than `None`, then it will be passed to
+    the internal `_commtype` attribute and the same will be done with the param `stocklike`
+    and the internal attribute `_stocklike`
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '`stocklike` (def: `False`): Indicates if the instrument is Stock-like or Futures-like
+    (see the `commtype` discussion above)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`percabs` (def: `False`): when `commtype` is set to COMM_PERC, whether the
+    parameter `commission` has to be understood as XX% or 0.XX'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'If this param is `True`: 0.XX If this param is `False`: XX%'
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '`interest` (def: `0.0`)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: If this is non-zero, this is the yearly interest charged for holding a short
+    selling position. This is mostly meant for stock short-selling
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: 'The formula: `days * price * abs(size) * (interest / 365)`'
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: 'It must be specified in absolute terms: 0.05 -> 5%'
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: Note
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: 'the behavior can be changed by overriding the method: `_get_credit_interest`'
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '`interest_long` (def: `False`)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Some products like ETFs get charged on interest for short and long positions.
+    If ths is `True` and `interest` is non-zero the interest will be charged on both
+    directions
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '`leverage` (def: `1.0`)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Amount of leverage for the asset with regards to the needed cash
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '- ``_stocklike``()'
+  prefs:
+  - PREF_H4
+  type: TYPE_NORMAL
+- en: Final value to use for Stock-like/Futures-like behavior
+  prefs: []
+  type: TYPE_NORMAL
+- en: '- ``_commtype``()'
+  prefs:
+  - PREF_H4
+  type: TYPE_NORMAL
+- en: Final value to use for PERC vs FIXED commissions
+  prefs: []
+  type: TYPE_NORMAL
+- en: This two are used internally instead of the declared params to enable the()
+  prefs:
+  - PREF_H4
+  type: TYPE_NORMAL
+- en: compatibility check described above for the legacy ``CommissionInfo``()
+  prefs:
+  - PREF_H4
+  type: TYPE_NORMAL
+- en: object()
+  prefs:
+  - PREF_H4
+  type: TYPE_NORMAL
+- en: class backtrader.CommissionInfo()
+  prefs:
+  - PREF_H4
+  type: TYPE_NORMAL
+- en: Base Class for the actual Commission Schemes.
+  prefs: []
+  type: TYPE_NORMAL
+- en: CommInfoBase was created to keep suppor for the original, incomplete, support
+    provided by *backtrader*. New commission schemes derive from this class which
+    subclasses `CommInfoBase`.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The default value of `percabs` is also changed to `True`
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Params:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`percabs` (def: True): when `commtype` is set to COMM_PERC, whether the parameter
+    `commission` has to be understood as XX% or 0.XX'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'If this param is True: 0.XX If this param is False: XX%'
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: get_leverage()
+  prefs:
+  - PREF_H4
+  type: TYPE_NORMAL
+- en: Returns the level of leverage allowed for this comission scheme
+  prefs: []
+  type: TYPE_NORMAL
+- en: getsize(price, cash)
+  prefs:
+  - PREF_H4
+  type: TYPE_NORMAL
+- en: Returns the needed size to meet a cash operation at a given price
+  prefs: []
+  type: TYPE_NORMAL
+- en: getoperationcost(size, price)
+  prefs:
+  - PREF_H4
+  type: TYPE_NORMAL
+- en: Returns the needed amount of cash an operation would cost
+  prefs: []
+  type: TYPE_NORMAL
+- en: getvaluesize(size, price)
+  prefs:
+  - PREF_H4
+  type: TYPE_NORMAL
+- en: Returns the value of size for given a price. For future-like objects it is fixed
+    at `size * margin`
+  prefs: []
+  type: TYPE_NORMAL
+- en: getvalue(position, price)
+  prefs:
+  - PREF_H4
+  type: TYPE_NORMAL
+- en: Returns the value of a position given a price. For future-like objects it is
+    fixed at `size * margin`
+  prefs: []
+  type: TYPE_NORMAL
+- en: get_margin(price)
+  prefs:
+  - PREF_H4
+  type: TYPE_NORMAL
+- en: 'Returns the actual margin/guarantees needed for a single item of the asset
+    at the given price. The default implementation has this policy:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Use param `margin` if param `automargin` evaluates to `False`
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Use param `mult`, i.e. `mult * price` if `automargin < 0`
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Use param `automargin`, i.e. `automargin * price` if `automargin > 0`
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: getcommission(size, price)
+  prefs:
+  - PREF_H4
+  type: TYPE_NORMAL
+- en: Calculates the commission of an operation at a given price
+  prefs: []
+  type: TYPE_NORMAL
+- en: _getcommission(size, price, pseudoexec)
+  prefs:
+  - PREF_H4
+  type: TYPE_NORMAL
+- en: Calculates the commission of an operation at a given price
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'pseudoexec: if True the operation has not yet been executed'
+  prefs: []
+  type: TYPE_NORMAL
+- en: profitandloss(size, price, newprice)
+  prefs:
+  - PREF_H4
+  type: TYPE_NORMAL
+- en: Return actual profit and loss a position has
+  prefs: []
+  type: TYPE_NORMAL
+- en: cashadjust(size, price, newprice)
+  prefs:
+  - PREF_H4
+  type: TYPE_NORMAL
+- en: Calculates cash adjustment for a given price difference
+  prefs: []
+  type: TYPE_NORMAL
+- en: get_credit_interest(data, pos, dt)
+  prefs:
+  - PREF_H4
+  type: TYPE_NORMAL
+- en: Calculates the credit due for short selling or product specific
+  prefs: []
+  type: TYPE_NORMAL
+- en: _get_credit_interest(data, size, price, days, dt0, dt1)
+  prefs:
+  - PREF_H4
+  type: TYPE_NORMAL
+- en: This method returns the cost in terms of credit interest charged by the broker.
+  prefs: []
+  type: TYPE_NORMAL
+- en: In the case of `size > 0` this method will only be called if the parameter to
+    the class `interest_long` is `True`
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'The formulat for the calculation of the credit interest rate is:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'The formula: `days * price * abs(size) * (interest / 365)`'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Params:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE12]'
+  prefs: []
+  type: TYPE_PRE
+- en: '`dt0` and `dt1` are not used in the default implementation and are provided
+    as extra input for overridden methods'
+  prefs: []
+  type: TYPE_NORMAL

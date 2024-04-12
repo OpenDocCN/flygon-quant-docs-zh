@@ -1,0 +1,158 @@
+- en: Variability Weighted Return (or VWR)
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.backtrader.com/blog/posts/2016-09-06-vwr/vwr/](https://www.backtrader.com/blog/posts/2016-09-06-vwr/vwr/)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: Following some hints about an *improved* SharpeRatio, *backtrader* has added
+    this *analyzer* to its arsenal.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'The literature is at:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[https://www.crystalbull.com/sharpe-ratio-better-with-log-returns/](https://www.crystalbull.com/sharpe-ratio-better-with-log-returns/)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Starting with the benefits of logarithmic returns and following on the side
+    effects of having the *standard deviation* in the denominator of the SharpeRatio
+    equation, the document develops the formula and expectations of this *analyzer*.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'One of the most important properties may be:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*A consistent value across timeframes*'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: The `SharpeRatio` uses the arithmetic mean of excess returns versus a risk free
+    rate/asset divided by the *standard deviation* of the excess returns versus the
+    risk free rate/asset. This makes the final value dependent on the number of samples
+    and the standard deviation which could even be `0`. In this case the `SharpeRatio`
+    would be infinite.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*backtrader* includes a sample for testing the `SharpeRatio` using the sample
+    data which includes prices for `2005` and `2006`. The returned values for different
+    *timeframes*:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`TimeFrame.Years`: `11.6473`'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`TimeFrame.Months`: `0.5425`'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`TimeFrame.Weeks`: `0.457`'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`TimeFrame.Days`: `0.4274`'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Note
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'For consistency the ratio is annualized. The `sharpe-timereturn` sample and
+    is executed with:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: Where `xxx` stands for `days`, `weeks`, `months` or `years` (default)
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'In this sample there is something clear:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The smaller the *timeframe*, the smaller the value of the `SharpeRatio`
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Which is caused by the number of samples which is larger for the smaller *timeframes*
+    and adds *variability* and hence increases the *standard deviation*, which is
+    the denominator in the `SharpeRatio` equation.
+  prefs: []
+  type: TYPE_NORMAL
+- en: There is a *large sensibility* to changes in the *standard deviation*
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'It is exactly this what the `VWR` tries to solved by offering a consistent
+    value across *timeframes*. The same strategy offers the following values:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`TimeFrame.Years`: `1.5368`'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`TimeFrame.Months`: `1.5163`'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`TimeFrame.Weeks`: `1.5383`'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`TimeFrame.Days`: `1.5221`'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Note
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'The `VWR` is returned (following the literature) always in annualized form.
+    The sample is executed with:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: Where `xxx` stands for `days`, `weeks`, `months` or `years`
+  prefs: []
+  type: TYPE_NORMAL
+- en: The default is `None` which uses the underlying *timeframe* of the data which
+    is `days`
+  prefs: []
+  type: TYPE_NORMAL
+- en: Consistent values which show that the performance of the strategy when it comes
+    to offering consistent returns can be evaluated on any timeframe.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Note
+  prefs: []
+  type: TYPE_NORMAL
+- en: Theoretically the values should be the same, but this would require fine tuning
+    the `tann` parameters (number of periods for annualization) to the exact trading
+    periods. This is not done here, because the purpose is just looking at consistency.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Conclusion
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: A new tool which offers a timeframe independent approach to strategy evaluation
+    is available for the users
+  prefs: []
+  type: TYPE_NORMAL
+- en: Sample Usage
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: Sample Code
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '[PRE3]'
+  prefs: []
+  type: TYPE_PRE

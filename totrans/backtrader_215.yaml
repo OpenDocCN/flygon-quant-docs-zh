@@ -1,0 +1,18 @@
+- en: Oanda v20
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.backtrader.com/recipes/storesbrokersdata/oandav20/oandav20/](https://www.backtrader.com/recipes/storesbrokersdata/oandav20/oandav20/)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: By user `ftomassetti`
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Link to the repository:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[https://github.com/ftomassetti/backtrader-oandav20](https://github.com/ftomassetti/backtrader-oandav20)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

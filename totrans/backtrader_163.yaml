@@ -1,0 +1,304 @@
+- en: Visual Chart Live Data/Trading
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.backtrader.com/blog/posts/2016-07-12-visualchart-feed/visualchart-feed/](https://www.backtrader.com/blog/posts/2016-07-12-visualchart-feed/visualchart-feed/)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: Starting with release *1.5.1.93*, backtrader supports Visual Chart Live Feeds
+    and Live Trading.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Needed things:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*Visual Chart 6* (this one runs on Windows)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`comtypes`, specifically this fork: [https://github.com/mementum/comtypes](https://github.com/mementum/comtypes)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'Install it with: `pip install https://github.com/mementum/comtypes/archive/master.zip`'
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: The *Visual Chart* API is based on *COM* and the current `comtypes` main branch
+    doesn’t support unpacking of `VT_ARRAYS` of `VT_RECORD`. And this is used by *Visual
+    Chart*
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '[Pull Request #104](https://github.com/enthought/comtypes/pull/104) has been
+    submitted but not yet integrated. As soon as it is integrated, the main branch
+    can be used.'
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '`pytz` (optional but strongly recommended)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: In many cases the internal `SymbolInfo.TimeOffset` provided by the data feeds
+    suffices to return data feeds in market time (even if the default configuration
+    is `LocalTime` in *Visual Chart*)
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: 'If you don’t know what’s *Visual Chart* and/or its currently associated broker
+    *Esfera Capital*, then visit the following sites:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Visual Chart](https://www.visualchart.com)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Esfera Capital](https://www.esferacapital.es)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'Initial statement:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: As always and before risking your money, **TEST**, **TEST**, **TEST** and **RE-TEST**
+    a thousand times.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'From *bugs* in this software, to bugs in your own software and the management
+    of unexpected situations: **Anything can go wrong**'
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: 'Some notes about this:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The data feed is rather good and supports built-in resampling. Good, because
+    there is no need to do resampling.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: The data feed doesn’t support *Seconds* resolution. Not good but solvable by
+    the built-in resampling of *backtrader*
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Backfilling is built-in
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Some on the markets in `International Indices` (in exchange `096`) have odd
+    timezones and market offsets.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Some work has gone into this to for example deliver `096.DJI` in the expected
+    `US/Eastern` timezone
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: The data feed offers *continuous futures* which is very handy to have a large
+    history.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: As such a second parameter can be passed to a data to indicate which is the
+    actual trading asset.
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: DateTime for a *Good Til Date* order can only be specified as a *date*. The
+    *time* component is ignored.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: There is no direct way to find the offset from the local equipment to the data
+    server and a heuristic is needed to find this out from *RealTime Ticks* at the
+    start of a session.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'Passing a *datetime* with a *time* component (rather than the default *00:00:00*)
+    seems to create a *time filter* in the *COM* API. For example if you say you want
+    the *Minute* data, starting 3 days ago at *14:30*, you could do:'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs:
+  - PREF_IND
+  type: TYPE_PRE
+- en: Data is then skipped until *14:30* not only 3 days ago, *BUT EVERY OF THE DAYS
+    AFTERWARDS*
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: As such, please pass only *full dates* in the sense that the default *time*
+    component is untouched.
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: The *broker* supports the notion of *Positions* but only when they are *open*.
+    The last event with regards to a *Position* (which is **size is 0**) is not sent.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: As such, *Position* accounting is done entirely by *backtrader*
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: The *broker* doesn’t report commissions.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: The workaround is to supply your own `CommissionInfo` derived class when instantiating
+    the broker. See the *backtader* docs for creating your own class. It is rather
+    easy.
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '`Cancelled` vs `Expired` orders. This distinction doesn’t exist and an heuristic
+    would be needed to try to clear the distinction out.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: As such only `Cancelled` will be reported
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: 'Some additional notes:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*RealTime* ticks are mostly not used. They produce large amounts of unneeded
+    information for *backtrader* purposes. They have 2 main purposes before being
+    completely disconnected by *backtrader*'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Finding out if a Symbol exists.
+  prefs:
+  - PREF_IND
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Calculating the offset to the data server
+  prefs:
+  - PREF_IND
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Of course the information is gathered in realtime for prices but from *DataSource*
+    objects, which provide the historical data at the same time.
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: 'As much as possible has been documented and is available at the usual documentation
+    link:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Read The Docs](http://backtrader.readthedocs.io/en/latest/)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: A couple of runs from the sample `vctest.pye` against the *Visual Chart* and
+    the *Demo Broker*
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'First: `015ES` (*EuroStoxx50* continuous) with resampling to 1 minute and featuring
+    a disconnection and reconnection:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Output:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: Note
+  prefs: []
+  type: TYPE_NORMAL
+- en: The execution environment has `pytz` installed
+  prefs: []
+  type: TYPE_NORMAL
+- en: Note
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Notice the absence of `--resample`: for `Minutes` the resampling is built-in
+    *Visual Chart*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: And finally some trading, buying *2* contract of `015ES` with a single `Market`
+    order and selling them in 2 orders of *1* contract each.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Execution:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE3]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'The output is rather verbose, showing all parts of the order exeuction. Summarising
+    a bit:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE4]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'The following happens:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Data is received as normal
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: A `BUY` for `2` with execution type `Market` is issued
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`Submitted` and `Accepted` notifications are received (only `Submitted` is
+    shown above)'
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: A streak of `Partial` executions (only 1 shown) until `Completed` is received.
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: The actual execution is not shown, but is available in the `order` instance
+    received under `order.executed`
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: Although not shown, 2 x `Market` `SELL` orders are issued to undo the operation
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: The screenshot shows the logs in *Visual Chart* after two different runs across
+    an evening with `015ES` (*EuroStoxx 50*) and `034EURUS` (*EUR.USD Forex Pair*)
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '![image](../Images/0e2daec1d73f0e96f42ee5945056bca1.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: The sample can do much more and is intended as a thorough test of the facilities
+    and if possible to uncover any rough edges.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'The usage:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE5]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'The code:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE6]'
+  prefs: []
+  type: TYPE_PRE

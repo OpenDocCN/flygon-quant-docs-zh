@@ -1,0 +1,23 @@
+- en: Live Data Feeds and Live Trading
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.backtrader.com/docu/live/live/](https://www.backtrader.com/docu/live/live/)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: Starting with release **1.5.0** `backtrader` supports live data and live trading.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Interactive Brokers
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Visual Chart
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Oanda
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

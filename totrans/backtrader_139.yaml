@@ -1,0 +1,108 @@
+- en: Arrows for the BuySell Observer
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.backtrader.com/blog/posts/2016-12-10-buysellarrows/buysellarrows/](https://www.backtrader.com/blog/posts/2016-12-10-buysellarrows/buysellarrows/)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '*backtrader* was conceived to try to deliver ease of use. Creation of *indicators*
+    and other usual suspects should be easy.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: And of course, customizing existing items should also be part of the deal.
+  prefs: []
+  type: TYPE_NORMAL
+- en: A topic in the community, [BuySell Arrows](https://community.backtrader.com/topic/8/change-buysell-to-trade-arrows-in-charts-213),
+    which originates from the migration from issues is a good example.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'The current behavior can be seen by running the sample:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: With following output
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![image](../Images/69133bb7f2c17654588c04d54badc336.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'The sample when using does the following:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Define a subclass of the `BuySell` observer
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Override the `plotlines` definition and simply change the markers which indicate
+    the buy and sell operations
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Monkey patches the existing observer with the custom one
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: In code terms.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'and:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: Note
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Monkey patching is not strictly necesary. One can also go the standard way:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE3]'
+  prefs: []
+  type: TYPE_PRE
+- en: And the custom observer would also be used, but the other regularly instantiated
+    observers would be missing. Hence the monkey patching in the sample to simply
+    modify the observer and keep the look.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Running it again with the reight parameter:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE4]'
+  prefs: []
+  type: TYPE_PRE
+- en: Which then outputs.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![image](../Images/55f20d43beebdeb495d33e2f66efe93f.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'Because `matplotlib` allows the use of *Unicode* characters, the default look
+    of the observer can be changed to anything and nos just arrows. Be my guest. For
+    example from *Wikipedia*:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Arrows (Unicode block)](https://en.wikipedia.org/wiki/Arrows_%28Unicode_block%29)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Sample Usage
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '[PRE5]'
+  prefs: []
+  type: TYPE_PRE
+- en: Sample Code
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '[PRE6]'
+  prefs: []
+  type: TYPE_PRE

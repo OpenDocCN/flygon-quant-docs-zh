@@ -1,0 +1,207 @@
+- en: Stock Screening
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.backtrader.com/blog/posts/2016-08-15-stock-screening/stock-screening/](https://www.backtrader.com/blog/posts/2016-08-15-stock-screening/stock-screening/)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: 'Looking for some other things I came across a question on one of the *StackOverlow*
+    family sites: *Quantitative Finance* aka *Quant StackExchange*. The question:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Open source software for stock screening and scanning using technical analysis?](http://quant.stackexchange.com/questions/27559/open-source-software-for-stock-screening-and-scanning-using-technical-analysis)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: It is tagged as *Python*, so it is worth seeing if *backtrader* is up to the
+    task.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The Analyzer itself
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: The problem seems appropriate for an easy analyzer. Although the problem just
+    wants those above the moving average, we’ll keep extra information like the stocks
+    which don’t meet the criteria, to make sure the grain is being actually separated
+    from the chaff.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: Note
+  prefs: []
+  type: TYPE_NORMAL
+- en: Of course one also needs `import backtrader as bt`
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'That pretty much solves the problem. Analysis of the *Analyzer*:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Have the `period` as a parameter to have a flexible analyzer
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`start` method'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: For each *data* in the system make a *Simple Moving Average* (`SMA`) for it.
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '`stop` method'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Look which *data* (`close` if nothing else is specified) is above its *sma*
+    and store that in a *list* under the key `over` in the returns (`rets`)
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: The member `rets` is standard in *analyzers* and happens to be a `collections.OrderedDict`.
+    Created by the base class.
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: Keep the ones that doesn’t meet the criteria under a key `under`
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: 'The issue now: getting the analyzer up and running.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Note
+  prefs: []
+  type: TYPE_NORMAL
+- en: We assume the code has been put in a file named `st-screener.py`
+  prefs: []
+  type: TYPE_NORMAL
+- en: Approach 1
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '*backtrader* includes, since almost the beginning of time, an automated script
+    running called `btrun`, which can load strategies, indicators, analyzers from
+    python modules, parse arguments and of course plot.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Let’s do a run:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'We have used a set of well known tickers:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`AAPL`, `IBM`, `NVDA`, `ORCL`, `TSLA`, `YHOO`'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: And the only one that happens to be under the `10` days *Simple Moving Average*
+    is `TSLA`.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Let’s try a `50` days period. Yes, this can also be controlled with `btrun`.
+    The run (output shortened):'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Notice how the `50` days period has been specified in the command line:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`st-screener:Screener_SMA:period=50`'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: In the previous run this was `st-screener:Screener_SMA` and the default `10`
+    from the code was used.
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: We also needed to adjust `fromdate` to make sure there were enough bars to consider
+    for the calculation of the *Simple Moving Averages*
+  prefs: []
+  type: TYPE_NORMAL
+- en: In this case all tickers are *above* the `50` days moving average.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Approach 2
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: Craft a small script (see below for the full code) to have finer control of
+    what we do. But the results are the same.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'The core is rather small:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE3]'
+  prefs: []
+  type: TYPE_PRE
+- en: Being the rest about argument parsing mostly.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'For `10` days (again shortening the output):'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE4]'
+  prefs: []
+  type: TYPE_PRE
+- en: Same results. So let’s avoid repeating it for `50` days.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Concluding
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: Both the `btrun` from *Approach 1* and the small script from *Approach 2* use
+    exactly the same *analyzer* and therefore deliver the same results.
+  prefs: []
+  type: TYPE_NORMAL
+- en: And *backtrader* has been able to withstand yet another small challenge
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Two final notes:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Both approaches use the built-in *writer* functionality to deliver the output.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: As parameter to `btrun` with `--writer`
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: As parameter to `cerebro.run` with `writer=True`
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: In both cases `runonce` has been deactivated. This is to make sure the online
+    data keeps synchronized, because the results could have different lengths (one
+    of the stocks could have traded less)
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Script usage
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '[PRE5]'
+  prefs: []
+  type: TYPE_PRE
+- en: The full script
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '[PRE6]'
+  prefs: []
+  type: TYPE_PRE

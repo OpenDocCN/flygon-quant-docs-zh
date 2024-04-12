@@ -1,0 +1,222 @@
+- en: CSV Data Feed Development
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.backtrader.com/docu/datafeed-develop-csv/](https://www.backtrader.com/docu/datafeed-develop-csv/)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '`backtrader` already offers a Generic CSV Data feed and some specific CSV Data
+    Feeds. Summarizing:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: GenericCSVData
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: VisualChartCSVData
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: YahooFinanceData (for online downloads)
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: YahooFinanceCSVData (for already downloaded data)
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: BacktraderCSVData (in-house … for testing purposed, but can be used)
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: But even with that, the end user may wish to develop support for a specific
+    CSV Data Feed.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'The usual motto would be: “It’s easier said than done”. Actually the structure
+    is meant to make it easy.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Steps:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Inherit from `backtrader.CSVDataBase`
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Define any `params` if needed
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Do any initialization in the `start` method
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Do any clean-up in the `stop` method
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Define a `_loadline` method where the actual work happens
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'This method receives a single argument: linetokens.'
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: As the name suggests this contains the tokens after the current line has been
+    splitten according to the `separator` parameter (inherited from the base class)
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: If after doing its work there is new data … fill up the corresponding lines
+    and return `True`
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: 'If nothing is available and therefore the parsing has come to an end: return
+    `False`'
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: Returning `False` may not even be needed if the behind the scenes code which
+    is reading the file lines finds out there are no more lines to parse.
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: 'Things which are already taken into account:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Opening the file (or receiving a file-like object)
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Skipping the headers row if indicated as present
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Reading the lines
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Tokenizing the lines
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Preloading support (to load the entire data feed at once in memory)
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Usually an example is worth a thousand requirement descriptions. Let’s use a
+    simplified version of the in-house defined CSV parsing code from `BacktraderCSVData`.
+    This one needs no initialization or clean-up (this could be opening a socket and
+    closing it later, for example).
+  prefs: []
+  type: TYPE_NORMAL
+- en: Note
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`backtrader` data feeds contain the usual industry standard feeds, which are
+    the ones to be filled. Namely:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: datetime
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: open
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: high
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: low
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: close
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: volume
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: openinterest
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: If your strategy/algorithm or simple data perusal only needs, for example the
+    closing prices you can leave the others untouched (each iteration fills them automatically
+    with a float(‘NaN’) value before the end user code has a chance to do anything.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'In this example only a daily format is supported:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: The code expects all fields to be in place and be convertible to floats, except
+    for the datetime which has a fixed YYYY-MM-DD format and can be parsed without
+    using `datetime.datetime.strptime`.
+  prefs: []
+  type: TYPE_NORMAL
+- en: More complex needs can be covered by adding just a few lines of code to account
+    for null values, date format parsing. The `GenericCSVData` does that.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Caveat Emptor
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: Using the `GenericCSVData` existing feed and inheritance a lot can be acomplished
+    in order to support formats.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Let’s add support for [Sierra Chart](https://www.sierrachart.com) daily format
+    (which is always stored in CSV format).
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Definition (by looking into one of the **‘.dly’** data files:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Fields**: Date, Open, High, Low, Close, Volume, OpenInterest'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: The industry standard ones and the ones already supported by `GenericCSVData`
+    in the same order (which is also industry standard)
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '**Separator**: ,'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Date Format**: YYYY/MM/DD'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'A parser for those files:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: The `params` definition simply redefines one of the existing parameters in the
+    base class. In this case just the formatting string for dates needs a change.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Et voilá … the parser for **Sierra Chart** is finished.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Here below the parameters definition of `GenericCSVData` as a reminder:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE

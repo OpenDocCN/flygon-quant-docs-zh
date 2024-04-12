@@ -1,0 +1,204 @@
+- en: Escape from OHLC Land
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.backtrader.com/blog/posts/2016-03-08-escape-from-ohlc-land/escape-from-ohlc-land/](https://www.backtrader.com/blog/posts/2016-03-08-escape-from-ohlc-land/escape-from-ohlc-land/)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: One of the key concepts applied during the conception and development of backtrader
+    was **flexibility**. The *metaprogramming* and *introspection* capabilities of
+    Python were (and still are) the basis to keep many things flexible whilst still
+    being able to deliver.
+  prefs: []
+  type: TYPE_NORMAL
+- en: An old post shows the extension concept.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Extending a datafeed](http://blog.backtrader.com/posts/2015-08-07/extending-a-datafeed/)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'The basics:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Done. `backtrader` defines in the background the most usual lines: OHLC.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'If we digged into the final aspect of `GenericCSV_PE`, the sum of inherited
+    plus newly defined lines would yield the following lines:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: This can be check at any time with the method `getlinealiases` (applicable to
+    *DataFeeds*, *Indicators*, *Strategies* and *Observers*)
+  prefs: []
+  type: TYPE_NORMAL
+- en: The mechanism is flexible and by poking a bit into the internals you could actually
+    get anything, but it has been proven not to be enough.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Ticket #60](https://github.com/mementum/backtrader/issues/60) asks about supporting
+    *High Frequency Data*, ie: Bid/Ask data. Which implies that the predefined *lines*
+    hierarchy in the form of *OHLC* is not enough. The *Bid* and *Ask* prices, volumes
+    and number of trades can be made to fit into the existing *OHLC* fields, but it
+    wouldn’t feel natural. And if one is only concerned with the *Bid* and *Ask* prices,
+    there would be too many fields left untouched.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'This called for a solution which has been implemented with [Release 1.2.1.88](http://blog.backtrader.com/posts/2016-03-07-release-1.2.1.88/release-1.2.1.88/).
+    The idea can be summarized as:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Now it’s not only possible to *extend* the existing hierarchy, but also to *replace*
+    the hierarchy with a new one
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'Only one constraint in place:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: There must be a `datetime` field present (which will hopefully contain meaningful
+    `datetime` information)
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: This is so because `backtrader` needs something for synchronization (multiple
+    datas, multiple timeframes, resampling, replaying) just like Archimedes needed
+    a lever.
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: 'Here it is how it works:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: Done.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Ok, not fully. But only because we are looking at loading the lines from a *csv*
+    source. The hierarchy has actually already been **replaced** with the *bid, ask
+    datetime* definition thanks to the `linesoverride=True` setting.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'The original `GenericCSVData` class parses a *csv* file and needs a hint as
+    to where the *fields* corresponding to the *lines* are located. The original definition
+    is:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE3]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'The new *hierarchy-redefining-class* can be completed with a light touch:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE4]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Indicating that *Bid* prices are field #1 in the csv stream and *Ask* prices
+    are field #2\. We have left the *datetime* #0 definition untouched from the base
+    class.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Crafting a small data file for the occasion helps:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE5]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Add a small test script to the equation (with some more content for those who
+    just go directly to the samples in the sources) (see full code at the end):'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE6]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'And the output speaks up for itself:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE7]'
+  prefs: []
+  type: TYPE_PRE
+- en: Et voilá! The *Bid*/*Ask* prices have been properly read, parsed and interpreted
+    and the strategy has been able to access the *.bid* and *.ask* lines in the data
+    feed through *self.data*.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Redefining the *lines* hierarchy opens a broad question though and that is the
+    usage of the already predefined *Indicators*.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Example: the *Stochastic* is an indicator which relies on *close*, *high* and
+    *low* prices to calculate its output'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Even if we though about *Bid* as the *close* (because is the first) there is
+    only one other *price* element (*Ask*) and not two more. And conceptually *Ask*
+    has nothing to do with *high* and *low*
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: It is probable that someone working with these fields and operating (or researching)
+    in the *High Frequency Trading* domain is not concerned with *Stochastic* as an
+    indicator of choice
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: 'Other indicators like *moving average* are perfectly fine. They assume nothing
+    about what the fields mean or imply and will happily take anything. As such one
+    can do:'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[PRE8]'
+  prefs:
+  - PREF_IND
+  type: TYPE_PRE
+- en: And an moving average of the last 5 *bid* prices will be delivered
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: 'The test script already supports adding a *SMA*. Let’s execute:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE9]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'The output:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE10]'
+  prefs: []
+  type: TYPE_PRE
+- en: Note
+  prefs: []
+  type: TYPE_NORMAL
+- en: Plotting still relies on `open`, `high`, `low`, `close` and `volume` being present
+    in the *data* feed.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Some cases can be directly covered by simply plotting with a *Line on Close*
+    and taking just the 1^(st) defined line in the object. But a sound model has to
+    be developed. For an upcoming version of `backtrader`
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'The test script usage:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE11]'
+  prefs: []
+  type: TYPE_PRE
+- en: And the test script itself (included in the `backtrader` sources)
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE12]'
+  prefs: []
+  type: TYPE_PRE

@@ -1,0 +1,52 @@
+- en: Welcome to backtrader!
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.backtrader.com/](https://www.backtrader.com/)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '**A feature-rich Python framework for backtesting and trading**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*backtrader* allows you to focus on writing reusable trading strategies, indicators
+    and analyzers instead of having to spend time building infrastructure.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[**Open Source - GitHub**](https://github.com/mementum/backtrader)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Use, modify, audit and share it. The secret is in the sauce and you are the
+    cook. This is just the tool.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[**Docs**](https://www.backtrader.com/docu) & [**Blog**](https://www.backtrader.com/blog)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Check the QuickStart, the extensive documentation, in-depth topics and ideas
+    in the blog.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Community** (~~En~~)**Disabled**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'It was being abused. It may come back in the future. In the meanwhile try for
+    example: [stackoverflow "backtrader"](https://stackoverflow.com/questions/tagged/backtrader)
+    .'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[**Hello Algotrading!**](home/helloalgotrading/)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: See a quick example of a *Simple Moving Average Crossover* strategy (long-only)
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[**Features**](home/features/)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: See a quick overview of all the goodies that *backtrader* has to offer.
+  prefs: []
+  type: TYPE_NORMAL

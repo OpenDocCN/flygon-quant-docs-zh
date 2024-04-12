@@ -1,0 +1,428 @@
+- en: Momentum Strategy
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.backtrader.com/blog/2019-05-20-momentum-strategy/momentum-strategy/](https://www.backtrader.com/blog/2019-05-20-momentum-strategy/momentum-strategy/)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: 'In another great post, *Teddy Koker*, has shown again a path for the development
+    of *algotrading* strategies:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Research first applying `pandas`
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Backtesting then using `backtrader`
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Kudos!!!
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'The post can be found at:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[https://teddykoker.com/2019/05/momentum-strategy-from-stocks-on-the-move-in-python/](https://teddykoker.com/2019/05/momentum-strategy-from-stocks-on-the-move-in-python/)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '*Teddy Koker* dropped me a message, asking if I could comment on the usage
+    of *backtrader*. And my **opinion** can be seen below. It is only my personal
+    humble opinion, because as the author of *backtrader* I am biased as to how the
+    platform could be best used.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: And my personal taste about how to formulate certain constructs, does not have
+    to match how other people prefer to use the platform.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Note
+  prefs: []
+  type: TYPE_NORMAL
+- en: Actually, letting the platform open to plug almost anything and with different
+    ways to do the same thing, was a conscious decision, to let people use it however
+    they see fit (within the constraints of what the platform aims to do, the language
+    possibilities and the failed design decisions I made)
+  prefs: []
+  type: TYPE_NORMAL
+- en: Here, we will just focus on things which could have been done in a different
+    manner. Whether *"different"* is better or not is always a matter of opinion.
+    And the author of *backtrader* does not always have to be right on what it is
+    actually *"better"* for developing with *"backtrader"* (because the actual development
+    has to suit the developer and not the author of *"backtrader"*)
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Params: `dict` vs `tuple of tuples`'
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: 'Many of the samples provided with `backtrader` and also available in the documentation
+    and/or blog, use the `tuple of tuples` pattern for the parameters. For example
+    from the code:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: Together with this paradigm, one has always had the chance to use a `dict`.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: Over time this has turned to be lighter to use and become the preferred pattern
+    for the author.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Note
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'The author prefers the `dict(period=90)`, being easier to type, not needing
+    quotes. But the curly braces notation, `{''period'': 90}`, is preferred by many
+    others.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'The underlying difference between the `dict` and `tuple` approaches:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: With a `tuple of tuples` parameters retain the order of declaration, which can
+    be of importance when enumerating them.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Tip
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: The declaration order should be no problem with default ordered dictionaries
+    in Python `3.7` (and `3.6` if using *CPython* even if it is an implementation
+    detail)
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: In the examples modified by the author below, the `dict` notation will be used.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The `Momentum` indicator
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: In the article, this is how the indicator is defined
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: '**Use the force**, i.e.: use something which is already there like the `PeriodN`
+    indicator, which:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Already defines a `period` parameter and knows how to pass it to the system
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: As such, this could be better
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE3]'
+  prefs: []
+  type: TYPE_PRE
+- en: We are already skipping the need to define `__init__` for the only purpose of
+    using `addminperiod`, which should only be used in exceptional cases.
+  prefs: []
+  type: TYPE_NORMAL
+- en: To carry on, *backtrader* defines an `OperationN` indicator which must have
+    an attribute `func` defined, which will get `period` bars passed as an argument
+    and which will put the return value into the defined line.
+  prefs: []
+  type: TYPE_NORMAL
+- en: With that in mind, one can imagine the following as the potential code
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE4]'
+  prefs: []
+  type: TYPE_PRE
+- en: Which means that we have taken the complexity of the indicator outside of the
+    indicator. We could even be importing `momentum_func` from a external library
+    and the indicator would need no change to reflect a new behavior if the underlying
+    function changes. As a bonus we have **purely** declarative indicator. No `__init__`,
+    no `addminperiod` and no `next`
+  prefs: []
+  type: TYPE_NORMAL
+- en: The Strategy
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: Let's look at the `__init__` part.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE5]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Some things about the style:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Use parameters where possible rather than fixed values
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Use shorter and the shorter names (for imports for example), it will in most
+    cases increase readability
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Use Python to its full extent
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Don't use `close` for a data feed. Pass the data feed generically and it will
+    use close. This may not seem relevant but it does help when trying to keep the
+    code generic everywhere (like in indicators)
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'The first thing that one would/should consider: *keep everything as a parameter
+    if possible*. Hence'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE6]'
+  prefs: []
+  type: TYPE_PRE
+- en: By using `params` and changing a couple of the naming conventions, we have made
+    the `__init__` (and with it the strategy) fully customizable and generic (no `spy`
+    references anyhwere)
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`next` and its `len`'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '*backtrader* tries to use the Python paradigms where possible. It does for
+    sure sometimes fail, but it tries.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Let us see what happens in `next`
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE7]'
+  prefs: []
+  type: TYPE_PRE
+- en: Here is where the Python `len` paradigm helps. Let's use it
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE8]'
+  prefs: []
+  type: TYPE_PRE
+- en: As you may see, there is no need to keep the `self.i` counter. The length of
+    the strategy and of most objects is provided, calculated and updated by the system
+    all along the way.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`next` and `prenext`'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: The code contains this forwarding
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE9]'
+  prefs: []
+  type: TYPE_PRE
+- en: And there **IS NO** safeguard when entering `next`
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE10]'
+  prefs: []
+  type: TYPE_PRE
+- en: Ok, we know that a survivorship bias-free data set is in use, but in general
+    not safeguarding the `prenext => next` forwarding is not a good idea.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*backtrader* calls `next` when all buffers (indicators, data feeds) can deliver
+    at least data point. A `100-bar` moving average will obviously only deliver when
+    it has 100 data points from the data feed.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: This means that when entering `next`, the data feed will have `100 data points`
+    to be examined and the moving average just `1 data point`
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '*backtrader* offers `prenext` as hook to let the developer access things before
+    the aforementioned guarantee can be met. This is useful for example when several
+    data feeds are in play and they start date is different. The developer may want
+    some examination or action be taken, before all guarantees for all data feeds
+    (and associated indicators) are met and `next` is called for the first time.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'In a general case the `prenext => next` forwarding should have a guard such
+    as this:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE11]'
+  prefs: []
+  type: TYPE_PRE
+- en: Which means that only the subset `d_with_len` from `self.datas` can be used
+    with guarantees.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Note
+  prefs: []
+  type: TYPE_NORMAL
+- en: A similar guard has to used for indicators.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Because it would seem pointless to do this calculation for the entire life of
+    a strategy, an optimization is possible such as this
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE12]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'The guard calculation is moved to `prenext` which will stopped being called
+    when the guarantees are met. `nextstart` will be called then and by overriding
+    it we can reset the `list` which holds the data set to work with, to be the full
+    data set, i.e.: `self.datas`'
+  prefs: []
+  type: TYPE_NORMAL
+- en: And with this, all guards have been removed from `next`.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`next` with timers'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Although the intention of the author here is to rebalance (portfolio/positions)
+    each 5/10 days, this is probably meant as a weekly/bi-weekly rebalancing.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'The `len(self) % period` approach will fail if:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The data set did not start on a Monday
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: During trading holidays, which will make the rebalancing move out of alignment
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: To overcome this, one can use the built-in functionalities in *backtrader*
+  prefs: []
+  type: TYPE_NORMAL
+- en: Using [Docs - Timers](https://www.backtrader.com/docu/timers/timers.html)
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Using them will ensure that rebalancing happens when it is meant to happen.
+    Let us imagine that the intention is to rebalance on Fridays
+  prefs: []
+  type: TYPE_NORMAL
+- en: Let's add a bit of magic to the `params` and `__init__` in our strategy
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE13]'
+  prefs: []
+  type: TYPE_PRE
+- en: And now we are ready to know when it is Friday. Even if a Friday happens to
+    be a trading holiday, adding `weekcarry=True` ensures we will be notified on Monday
+    (or Tuesday if Monday is also a holiday or ...)
+  prefs: []
+  type: TYPE_NORMAL
+- en: The notification of the timer is taken in `notify_timer`
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE14]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Because there is also a `rebalance_positions` which happens every `10` bars
+    in the original code, one could:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Add a 2^(nd) timer, also for Fridays
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Use a counter to only act on each 2^(nd) call, which can even be in the timer
+    itself using the `allow=callable` argument
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Note
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Timers could even be better used to achieve patterns like:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`rebalance_portfolio` every on the 2^(nd) and 4^(th) Friday of the month'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`rebalance_positions` only on the 4^(th) Friday of each month'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Some Extras
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Some other things are probably and purely a matter of personal taste.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Personal Taste 1**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Use always a pre-built comparison rather than compare things during `next`.
+    For example from the code (used more than once)
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE15]'
+  prefs: []
+  type: TYPE_PRE
+- en: We could do the following. First during `__init__`
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE16]'
+  prefs: []
+  type: TYPE_PRE
+- en: And later
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE17]'
+  prefs: []
+  type: TYPE_PRE
+- en: With this in mind and if we wanted to alter the `spy_filter` condition, we would
+    only have to do this once in `__init__` and not in multiple positions in the code.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'The same could apply to this other comparison `d < self.inds[d]["sma100"]`
+    here:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE18]'
+  prefs: []
+  type: TYPE_PRE
+- en: Which could also be pre-built during `__init__` and therefore changed to something
+    like this
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE19]'
+  prefs: []
+  type: TYPE_PRE
+- en: '**Personal Taste 2**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Make everything a parameter. In the lines above we for example see a `0.2`
+    which is used in several parts of the code: **make it a parameter**. The same
+    with other values like `0.001` and `100` (which was actually already suggested
+    as a parameter for the creation of moving averages)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Having everything as a parameter allows to pack the code and try different things
+    by just changing the instantiation of the *strategy* and not the strategy itself.
+  prefs: []
+  type: TYPE_NORMAL

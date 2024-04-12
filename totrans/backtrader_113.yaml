@@ -1,0 +1,347 @@
+- en: Stop Trading
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.backtrader.com/blog/posts/2018-02-01-stop-trading/stop-trading/](https://www.backtrader.com/blog/posts/2018-02-01-stop-trading/stop-trading/)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: Trading can be dangerous and trading using stop orders can help into either
+    avoiding big losses or securing profits. *backtrader* provides you with several
+    mechanisms to implement *Stop* - based strategies
+  prefs: []
+  type: TYPE_NORMAL
+- en: Basic Strategy
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: 'A classic `Fast EMA` crosses over a `Slow EMA` approach will be used. But:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Only the up-cross will be taken into account to issue a `buy` order
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'Exiting the market, i.e.: `sell` will be done via a `Stop`'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: The strategy will therefore start with this simple skeleton
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: And using inheritance we’ll work out different approaches as to how to implement
+    the *Stops*
+  prefs: []
+  type: TYPE_NORMAL
+- en: Manual Approach
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'To avoid having too many approaches, this subclass of our basic strategy will
+    allow:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Either having a `Stop` fixed at a percentage below the acquisition price
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Or setting a dynamic `StopTrail` which chases the price as it moves (using points
+    in this case)
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: As you may see, we have added parameters for
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'The percentage: `stop_loss=0.02` (2%)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Or `trail=False`, which when set to a numeric value will tell the strategy to
+    use a `StopTrail`
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'For the documentation on orders see:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Orders](https://www.backtrader.com/docu/order.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Order Management and Execution](https://www.backtrader.com/docu/order-creation-execution/order-creation-execution.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[StopTrail(Limit)](https://www.backtrader.com/docu/order-creation-execution/trail/stoptrail.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'Let’s execute our script with a fixed `Stop`:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: And the chart
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![image](../Images/17c311fc41e246d2c1af16ca91642b62.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'As we see:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: When there is an up-cross a `buy` is issued
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: When this `buy` is notified as `Completed` we issue a `Stop` order with price
+    `stop_loss` percent below the `executed.price`
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'Result:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The first instance is quickly stopped-out
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: But because the sample data is one from a trending market … there is no further
+    instance of the price going below the `stop_loss` percentage
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'Let’s use the same approach but applying a `StopTrail` order:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE3]'
+  prefs: []
+  type: TYPE_PRE
+- en: And the chart
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![image](../Images/c6c9c82b16df91c0aca9aba5564cc105.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Now we see how this, compared to the previous approach, is not so productive.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Although the market is trending, the price drops several times more than `20`
+    points (our *trail* value)
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: And this takes us out of the market
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: And because the market is trending, it takes time for the moving averages to
+    cross again in the desired direction
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Why using `notify_order`?
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Because this ensures that the order that has to be controlled by the `Stop`
+    has actually been executed. This may not be a big deal during *backtesting* but
+    it is when trading live.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Let’s simplify the approach for backtesting, by using the `cheat-on-close` mode
+    available with backtrader.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE4]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'In this case:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The `cheat-on-close` mode is activated in the broker during the `__init__` phase
+    of the strategy
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: The `StopOrder` is issued immediately after the `buy` order. This is because
+    `cheat-on-close` ensures it will be executed without waiting for the next bar
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Notice that the closing price (`self.data.close[0]`) is used for the stop, because
+    there is no execution price yet. And we know that it will be the closing price
+    thanks to `cheat-on-close`
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: The `notify_order` method is now purely a logging method which tells us when
+    things have been bought or sold.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'A sample run with `StopTrail`:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE5]'
+  prefs: []
+  type: TYPE_PRE
+- en: And the chart
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![image](../Images/cc582c68255da8e224a0c450b922618e.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'Notice that:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The results are very similar but not the same as before
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: This is due to `cheat-on-close` giving the strategy the closing price (which
+    is non-realistic, but can be a good approximation) instead of the next available
+    price (which is the next opening price)
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: Automating the approach
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: It would be perfect if the logic for the orders could be kept together in `next`
+    and one didn’t have to use `cheat-on-close`. And it can be done!!!
+  prefs: []
+  type: TYPE_NORMAL
+- en: Let’s use
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*Parent-Child* orders'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Note
+  prefs: []
+  type: TYPE_NORMAL
+- en: This is part of the `Bracket Order` functionality.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'See: [Bracket Orders](https://www.backtrader.com/docu/order-creation-execution/bracket/bracket.html)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE6]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'This new strategy, which still builds on `BaseStrategy`, does:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Add the possibility to issue the `buy` order as a `Limit` order
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: The parameter `buy_limit` (when not `False`) will be a percentage to take off
+    the current price to set the expected buy point.
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: Sets `transmit=False` for the `buy` order. This means the order won’t be transmitted
+    to the broker immediately. It will await the transmission signal from a *child*
+    order
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'Immediately issues a *child* order by using: `parent=buy_order`'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: This will trigger transmitting both orders to the broker
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: And will tag the *child* order for scheduling **when** the parent order has
+    been executed.
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: No risk of the `Stop` order executing before the `buy` order is in place.
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: If the parent order is cancelled, the child order will also be cancelled
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Being this a sample and with a trending market, the `Limit` order may never
+    be executed and still be active when a new signal comes in. In this case the sample
+    will simple cancel the pending `buy` order and carry on with a new one at the
+    current price levels.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: This, as stated above, will cancel the child `Stop` order.
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: Cancelled orders will be logged
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Let’s execute trying to buy `0.5%` below the current close price and with `trail=30`
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'A sample run with `StopTrail`:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE7]'
+  prefs: []
+  type: TYPE_PRE
+- en: And the chart
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![image](../Images/7decd99baf8a1b50fd9f09c561918c97.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: The log and the *buy/sell* signs on the chart show that no `sell` order was
+    executed without having a corresponding `buy` order, and that cancelled `buy`
+    orders where immediately followed by the cancellation of the child `sell` order
+    (without any manual coding)
+  prefs: []
+  type: TYPE_NORMAL
+- en: Conclusion
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: Using different approaches for how to trade with stops has been shown. This
+    can be used to avoid losses or secure profit.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Beware: very tight stop orders could also simply have the effect of getting
+    your positions out of the market, if the stop is set within the normal range of
+    movement of the price.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Script Usage
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '[PRE8]'
+  prefs: []
+  type: TYPE_PRE
+- en: The code
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '[PRE9]'
+  prefs: []
+  type: TYPE_PRE

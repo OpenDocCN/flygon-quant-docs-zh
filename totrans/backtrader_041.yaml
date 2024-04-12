@@ -1,0 +1,1556 @@
+- en: Data Feeds Reference
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.backtrader.com/docu/dataautoref/](https://www.backtrader.com/docu/dataautoref/)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: AbstractDataBase
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'Lines:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Params:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: BacktraderCSVData
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Parses a self-defined CSV Data used for testing.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Specific parameters:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`dataname`: The filename to parse or a file-like object'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'Lines:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Params:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE3]'
+  prefs: []
+  type: TYPE_PRE
+- en: CSVDataBase
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Base class for classes implementing CSV DataFeeds
+  prefs: []
+  type: TYPE_NORMAL
+- en: The class takes care of opening the file, reading the lines and tokenizing them.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Subclasses do only need to override:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: _loadline(tokens)
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: The return value of `_loadline` (True/False) will be the return value of `_load`
+    which has been overriden by this base class
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Lines:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE4]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Params:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE5]'
+  prefs: []
+  type: TYPE_PRE
+- en: Chainer
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Class that chains datas
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Lines:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE6]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Params:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE7]'
+  prefs: []
+  type: TYPE_PRE
+- en: DataClone
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'Lines:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE8]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Params:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE9]'
+  prefs: []
+  type: TYPE_PRE
+- en: DataFiller
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: This class will fill gaps in the source data using the following information
+    bits from the underlying data source
+  prefs: []
+  type: TYPE_NORMAL
+- en: timeframe and compression to dimension the output bars
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: sessionstart and sessionend
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: If a data feed has missing bars in between 10:31 and 10:34 and the timeframe
+    is minutes, the output will be filled with bars for minutes 10:32 and 10:33 using
+    the closing price of the last bar (10:31)
+  prefs: []
+  type: TYPE_NORMAL
+- en: Bars can be missinga amongst other things because
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Params:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE10]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Lines:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE11]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Params:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE12]'
+  prefs: []
+  type: TYPE_PRE
+- en: DataFilter
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: This class filters out bars from a given data source. In addition to the standard
+    parameters of a DataBase it takes a `funcfilter` parameter which can be any callable
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Logic:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`funcfilter` will be called with the underlying data source'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: It can be any callable
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: 'Return value `True`: current data source bar values will used'
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'Return value `False`: current data source bar values will discarded'
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'Lines:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE13]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Params:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE14]'
+  prefs: []
+  type: TYPE_PRE
+- en: GenericCSVData
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Parses a CSV file according to the order and field presence defined by the parameters
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Specific parameters (or specific meaning):'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`dataname`: The filename to parse or a file-like object'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: The lines parameters (datetime, open, high …) take numeric values
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: A value of -1 indicates absence of that field in the CSV source
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: If `time` is present (parameter time >=0) the source contains separated fields
+    for date and time, which will be combined
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`nullvalue`'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Value that will be used if a value which should be there is missing (the CSV
+    field is empty)
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '`dtformat`: Format used to parse the datetime CSV field. See the python strptime/strftime
+    documentation for the format.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: If a numeric value is specified, it will be interpreted as follows
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '`1`: The value is a Unix timestamp of type `int` representing the number of
+    seconds since Jan 1^(st), 1970'
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`2`: The value is a Unix timestamp of type `float`'
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: If a **callable** is passed
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: it will accept a string and return a datetime.datetime python instance
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`tmformat`: Format used to parse the time CSV field if “present” (the default
+    for the “time” CSV field is not to be present)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'Lines:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE15]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Params:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE16]'
+  prefs: []
+  type: TYPE_PRE
+- en: IBData
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Interactive Brokers Data Feed.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Supports the following contract specifications in parameter `dataname`:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'TICKER # Stock type and SMART exchange'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'TICKER-STK # Stock and SMART exchange'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'TICKER-STK-EXCHANGE # Stock'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'TICKER-STK-EXCHANGE-CURRENCY # Stock'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'TICKER-CFD # CFD and SMART exchange'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'TICKER-CFD-EXCHANGE # CFD'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'TICKER-CDF-EXCHANGE-CURRENCY # Stock'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'TICKER-IND-EXCHANGE # Index'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'TICKER-IND-EXCHANGE-CURRENCY # Index'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'TICKER-YYYYMM-EXCHANGE # Future'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'TICKER-YYYYMM-EXCHANGE-CURRENCY # Future'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'TICKER-YYYYMM-EXCHANGE-CURRENCY-MULT # Future'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'TICKER-FUT-EXCHANGE-CURRENCY-YYYYMM-MULT # Future'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'TICKER-YYYYMM-EXCHANGE-CURRENCY-STRIKE-RIGHT # FOP'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'TICKER-YYYYMM-EXCHANGE-CURRENCY-STRIKE-RIGHT-MULT # FOP'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'TICKER-FOP-EXCHANGE-CURRENCY-YYYYMM-STRIKE-RIGHT # FOP'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'TICKER-FOP-EXCHANGE-CURRENCY-YYYYMM-STRIKE-RIGHT-MULT # FOP'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'CUR1.CUR2-CASH-IDEALPRO # Forex'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'TICKER-YYYYMMDD-EXCHANGE-CURRENCY-STRIKE-RIGHT # OPT'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'TICKER-YYYYMMDD-EXCHANGE-CURRENCY-STRIKE-RIGHT-MULT # OPT'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'TICKER-OPT-EXCHANGE-CURRENCY-YYYYMMDD-STRIKE-RIGHT # OPT'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'TICKER-OPT-EXCHANGE-CURRENCY-YYYYMMDD-STRIKE-RIGHT-MULT # OPT'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'Params:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`sectype` (default: `STK`)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Default value to apply as *security type* if not provided in the `dataname`
+    specification
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '`exchange` (default: `SMART`)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Default value to apply as *exchange* if not provided in the `dataname` specification
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '`currency` (default: `''''`)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Default value to apply as *currency* if not provided in the `dataname` specification
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '`historical` (default: `False`)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: If set to `True` the data feed will stop after doing the first download of data.
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: The standard data feed parameters `fromdate` and `todate` will be used as reference.
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: The data feed will make multiple requests if the requested duration is larger
+    than the one allowed by IB given the timeframe/compression chosen for the data.
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '`what` (default: `None`)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'If `None` the default for different assets types will be used for historical
+    data requests:'
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: ‘BID’ for CASH assets
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: ‘TRADES’ for any other
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Check the IB API docs if another value is wished
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '`rtbar` (default: `False`)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: If `True` the `5 Seconds Realtime bars` provided by Interactive Brokers will
+    be used as the smalles tick. According to the documentation they correspond to
+    real-time values (once collated and curated by IB)
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: If `False` then the `RTVolume` prices will be used, which are based on receiving
+    ticks. In the case of `CASH` assets (like for example EUR.JPY) `RTVolume` will
+    always be used and from it the `bid` price (industry de-facto standard with IB
+    according to the literature scattered over the Internet)
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: Even if set to `True`, if the data is resampled/kept to a timeframe/compression
+    below Seconds/5, no real time bars will be used, because IB doesn’t serve them
+    below that level
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '`qcheck` (default: `0.5`)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Time in seconds to wake up if no data is received to give a chance to resample/replay
+    packets properly and pass notifications up the chain
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '`backfill_start` (default: `True`)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Perform backfilling at the start. The maximum possible historical data will
+    be fetched in a single request.
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '`backfill` (default: `True`)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Perform backfilling after a disconnection/reconnection cycle. The gap duration
+    will be used to download the smallest possible amount of data
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '`backfill_from` (default: `None`)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: An additional data source can be passed to do an initial layer of backfilling.
+    Once the data source is depleted and if requested, backfilling from IB will take
+    place. This is ideally meant to backfill from already stored sources like a file
+    on disk, but not limited to.
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '`latethrough` (default: `False`)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: If the data source is resampled/replayed, some ticks may come in too late for
+    the already delivered resampled/replayed bar. If this is `True` those ticks will
+    bet let through in any case.
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: Check the Resampler documentation to see who to take those ticks into account.
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: This can happen especially if `timeoffset` is set to `False` in the `IBStore`
+    instance and the TWS server time is not in sync with that of the local computer
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '`tradename` (default: `None`) Useful for some specific cases like `CFD` in
+    which prices are offered by one asset and trading happens in a different onel'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: SPY-STK-SMART-USD -> SP500 ETF (will be specified as `dataname`)
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: SPY-CFD-SMART-USD -> which is the corresponding CFD which offers not price tracking
+    but in this case will be the trading asset (specified as `tradename`)
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: The default values in the params are the to allow things like `\`TICKER`, to
+    which the parameter`sectype`(default:`STK`) and`exchange`(default:`SMART`) are
+    applied.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Some assets like `AAPL` need full specification including `currency` (default:
+    ‘’) whereas others like `TWTR` can be simply passed as it is.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`AAPL-STK-SMART-USD` would be the full specification for dataname'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'Or else: `IBData` as `IBData(dataname=''AAPL'', currency=''USD'')` which uses
+    the default values (`STK` and `SMART`) and overrides the currency to be `USD`'
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: 'Lines:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE17]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Params:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE18]'
+  prefs: []
+  type: TYPE_PRE
+- en: InfluxDB
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'Lines:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE19]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Params:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE20]'
+  prefs: []
+  type: TYPE_PRE
+- en: MT4CSVData
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Parses a [Metatrader4](https://www.metaquotes.net/en/metatrader4) History center
+    CSV exported file.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Specific parameters (or specific meaning):'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`dataname`: The filename to parse or a file-like object'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Uses GenericCSVData and simply modifies the params
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'Lines:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE21]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Params:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE22]'
+  prefs: []
+  type: TYPE_PRE
+- en: OandaData
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Oanda Data Feed.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Params:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`qcheck` (default: `0.5`)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Time in seconds to wake up if no data is received to give a chance to resample/replay
+    packets properly and pass notifications up the chain
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '`historical` (default: `False`)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: If set to `True` the data feed will stop after doing the first download of data.
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: The standard data feed parameters `fromdate` and `todate` will be used as reference.
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: The data feed will make multiple requests if the requested duration is larger
+    than the one allowed by IB given the timeframe/compression chosen for the data.
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '`backfill_start` (default: `True`)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Perform backfilling at the start. The maximum possible historical data will
+    be fetched in a single request.
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '`backfill` (default: `True`)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Perform backfilling after a disconnection/reconnection cycle. The gap duration
+    will be used to download the smallest possible amount of data
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '`backfill_from` (default: `None`)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: An additional data source can be passed to do an initial layer of backfilling.
+    Once the data source is depleted and if requested, backfilling from IB will take
+    place. This is ideally meant to backfill from already stored sources like a file
+    on disk, but not limited to.
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '`bidask` (default: `True`)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: If `True`, then the historical/backfilling requests will request bid/ask prices
+    from the server
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: If `False`, then *midpoint* will be requested
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '`useask` (default: `False`)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: If `True` the *ask* part of the *bidask* prices will be used instead of the
+    default use of *bid*
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '`includeFirst` (default: `True`)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Influence the delivery of the 1^(st) bar of a historical/backfilling request
+    by setting the parameter directly to the Oanda API calls
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '`reconnect` (default: `True`)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Reconnect when network connection is down
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '`reconnections` (default: `-1`)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'Number of times to attempt reconnections: `-1` means forever'
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '`reconntimeout` (default: `5.0`)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Time in seconds to wait in between reconnection attemps
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: 'This data feed supports only this mapping of `timeframe` and `compression`,
+    which comply with the definitions in the OANDA API Developer’s Guid:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE23]'
+  prefs: []
+  type: TYPE_PRE
+- en: Any other combination will be rejected
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Lines:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE24]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Params:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE25]'
+  prefs: []
+  type: TYPE_PRE
+- en: PandasData
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Uses a Pandas DataFrame as the feed source, using indices into column names
+    (which can be “numeric”)
+  prefs: []
+  type: TYPE_NORMAL
+- en: This means that all parameters related to lines must have numeric values as
+    indices into the tuples
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Params:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`nocase` (default *True*) case insensitive match of column names'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'Note:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The `dataname` parameter is a Pandas DataFrame
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Values possible for datetime
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'None: the index contains the datetime'
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '-1: no index, autodetect column'
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '= 0 or string: specific colum identifier'
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: For other lines parameters
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'None: column not present'
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '-1: autodetect'
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '= 0 or string: specific colum identifier'
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: 'Lines:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE26]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Params:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE27]'
+  prefs: []
+  type: TYPE_PRE
+- en: PandasDirectData
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Uses a Pandas DataFrame as the feed source, iterating directly over the tuples
+    returned by “itertuples”.
+  prefs: []
+  type: TYPE_NORMAL
+- en: This means that all parameters related to lines must have numeric values as
+    indices into the tuples
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Note:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The `dataname` parameter is a Pandas DataFrame
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: A negative value in any of the parameters for the Data lines indicates it’s
+    not present in the DataFrame it is
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'Lines:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE28]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Params:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE29]'
+  prefs: []
+  type: TYPE_PRE
+- en: Quandl
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Executes a direct download of data from Quandl servers for the given time range.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Specific parameters (or specific meaning):'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`dataname`'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: The ticker to download (‘YHOO’ for example)
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '`baseurl`'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: The server url. Someone might decide to open a Quandl compatible service in
+    the future.
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '`proxies`'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'A dict indicating which proxy to go through for the download as in {‘http’:
+    ‘[http://myproxy.com](http://myproxy.com)’} or {‘http’: ‘[http://127.0.0.1:8080](http://127.0.0.1:8080)’}'
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '`buffered`'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: If True the entire socket connection wil be buffered locally before parsing
+    starts.
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '`reverse`'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Quandl returns the value in descending order (newest first). If this is `True`
+    (the default), the request will tell Quandl to return in ascending (oldest to
+    newest) format
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '`adjclose`'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Whether to use the dividend/split adjusted close and adjust all values according
+    to it.
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '`apikey`'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: apikey identification in case it may be needed
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '`dataset`'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: string identifying the dataset to query. Defaults to `WIKI`
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: 'Lines:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE30]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Params:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE31]'
+  prefs: []
+  type: TYPE_PRE
+- en: QuandlCSV
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Parses pre-downloaded Quandl CSV Data Feeds (or locally generated if they comply
+    to the Quandl format)
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Specific parameters:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`dataname`: The filename to parse or a file-like object'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`reverse` (default: `False`)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: It is assumed that locally stored files have already been reversed during the
+    download process
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '`adjclose` (default: `True`)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Whether to use the dividend/split adjusted close and adjust all values according
+    to it.
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '`round` (default: `False`)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Whether to round the values to a specific number of decimals after having adjusted
+    the close
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '`decimals` (default: `2`)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Number of decimals to round to
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: 'Lines:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE32]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Params:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE33]'
+  prefs: []
+  type: TYPE_PRE
+- en: RollOver
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Class that rolls over to the next future when a condition is met
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Params:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`checkdate` (default: `None`)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'This must be a *callable* with the following signature:'
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '[PRE34]'
+  prefs:
+  - PREF_IND
+  type: TYPE_PRE
+- en: 'Where:'
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '`dt` is a `datetime.datetime` object'
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`d` is the current data feed for the active future'
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'Expected Return Values:'
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '`True`: as long as the callable returns this, a switchover can happen to the
+    next future'
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: If a commodity expires on the 3^(rd) Friday of March, `checkdate` could return
+    `True` for the entire week in which the expiration takes place.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE35]'
+  prefs: []
+  type: TYPE_PRE
+- en: '`checkcondition` (default: `None`)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Note**: This will only be called if `checkdate` has returned `True`'
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: If `None` this will evaluate to `True` (execute roll over) internally
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: 'Else this must be a *callable* with this signature:'
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '[PRE36]'
+  prefs:
+  - PREF_IND
+  type: TYPE_PRE
+- en: 'Where:'
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '`d0` is the current data feed for the active future'
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`d1` is the data feed for the next expiration'
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'Expected Return Values:'
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '`True`: roll-over to the next future'
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Following with the example from `checkdate`, this could say that the roll-over
+    can only happend if the *volume* from `d0` is already less than the volume from
+    `d1`
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE37]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Lines:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE38]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Params:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE39]'
+  prefs: []
+  type: TYPE_PRE
+- en: SierraChartCSVData
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Parses a [SierraChart](http://www.sierrachart.com) CSV exported file.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Specific parameters (or specific meaning):'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`dataname`: The filename to parse or a file-like object'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Uses GenericCSVData and simply modifies the dateformat (dtformat) to
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'Lines:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE40]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Params:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE41]'
+  prefs: []
+  type: TYPE_PRE
+- en: VCData
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: VisualChart Data Feed.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Params:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`qcheck` (default: `0.5`) Default timeout for waking up to let a resampler/replayer
+    that the current bar can be check for due delivery'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: The value is only used if a resampling/replaying filter has been inserted in
+    the data
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '`historical` (default: `False`) If no `todate` parameter is supplied (defined
+    in the base class), this will force a historical only download if set to `True`'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: If `todate` is supplied the same effect is achieved
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '`milliseconds` (default: `True`) The bars constructed by *Visual Chart* have
+    this aspect: HH:MM:59.999000'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'If this parameter is `True` a millisecond will be added to this time to make
+    it look like: HH::MM + 1:00.000000'
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '`tradename` (default: `None`) Continous futures cannot be traded but are ideal
+    for data tracking. If this parameter is supplied it will be the name of the current
+    future which will be the trading asset. Example:'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 001ES -> ES-Mini continuous supplied as `dataname`
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: ESU16 -> ES-Mini 2016-09\. If this is supplied in `tradename` it will be the
+    trading asset.
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`usetimezones` (default: `True`) For most markets the time offset information
+    provided by *Visual Chart* allows for datetime to be converted to market time
+    (*backtrader* choice for representation)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Some markets are special (`096`) and need special internal coverage and timezone
+    support to display in the user expected market time.
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: If this parameter is set to `True` importing `pytz` will be attempted to use
+    timezones (default)
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: Disabling it will remove timezone usage (may help if the load is excesive)
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: 'Lines:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE42]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Params:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE43]'
+  prefs: []
+  type: TYPE_PRE
+- en: VChartCSVData
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Parses a [VisualChart](http://www.visualchart.com) CSV exported file.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Specific parameters (or specific meaning):'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`dataname`: The filename to parse or a file-like object'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'Lines:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE44]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Params:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE45]'
+  prefs: []
+  type: TYPE_PRE
+- en: VChartData
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Support for [Visual Chart](https://www.visualchart.com) binary on-disk files
+    for both daily and intradaily formats.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Note:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`dataname`: to file or open file-like object'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: If a file-like object is passed, the `timeframe` parameter will be used to determine
+    which is the actual timeframe.
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: Else the file extension (`.fd` for daily and `.min` for intraday) will be used.
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: 'Lines:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE46]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Params:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE47]'
+  prefs: []
+  type: TYPE_PRE
+- en: VChartFile
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Support for [Visual Chart](https://www.visualchart.com) binary on-disk files
+    for both daily and intradaily formats.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Note:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`dataname`: Market code displayed by Visual Chart. Example: 015ES for EuroStoxx
+    50 continuous future'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'Lines:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE48]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Params:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE49]'
+  prefs: []
+  type: TYPE_PRE
+- en: YahooFinanceCSVData
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Parses pre-downloaded Yahoo CSV Data Feeds (or locally generated if they comply
+    to the Yahoo format)
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Specific parameters:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`dataname`: The filename to parse or a file-like object'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`reverse` (default: `False`)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: It is assumed that locally stored files have already been reversed during the
+    download process
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '`adjclose` (default: `True`)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Whether to use the dividend/split adjusted close and adjust all values according
+    to it.
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '`adjvolume` (default: `True`)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Do also adjust `volume` if `adjclose` is also `True`
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '`round` (default: `True`)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Whether to round the values to a specific number of decimals after having adjusted
+    the close
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '`roundvolume` (default: `0`)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Round the resulting volume to the given number of decimals after having adjusted
+    it
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '`decimals` (default: `2`)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Number of decimals to round to
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '`swapcloses` (default: `False`)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[2018-11-16] It would seem that the order of *close* and *adjusted close* is
+    now fixed. The parameter is retained, in case the need to swap the columns again
+    arose.'
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: 'Lines:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE50]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Params:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE51]'
+  prefs: []
+  type: TYPE_PRE
+- en: YahooFinanceData
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Executes a direct download of data from Yahoo servers for the given time range.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Specific parameters (or specific meaning):'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`dataname`'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: The ticker to download (‘YHOO’ for Yahoo own stock quotes)
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '`proxies`'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'A dict indicating which proxy to go through for the download as in {‘http’:
+    ‘[http://myproxy.com](http://myproxy.com)’} or {‘http’: ‘[http://127.0.0.1:8080](http://127.0.0.1:8080)’}'
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '`period`'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: The timeframe to download data in. Pass ‘w’ for weekly and ‘m’ for monthly.
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '`reverse`'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[2018-11-16] The latest incarnation of Yahoo online downloads returns the data
+    in the proper order. The default value of `reverse` for the online download is
+    therefore set to `False`'
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '`adjclose`'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Whether to use the dividend/split adjusted close and adjust all values according
+    to it.
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '`urlhist`'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: The url of the historical quotes in Yahoo Finance used to gather a `crumb` authorization
+    cookie for the download
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '`urldown`'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: The url of the actual download server
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '`retries`'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Number of times (each) to try to get a `crumb` cookie and download the data
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: 'Lines:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE52]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Params:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE53]'
+  prefs: []
+  type: TYPE_PRE
+- en: YahooLegacyCSV
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: This is intended to load files which were downloaded before Yahoo discontinued
+    the original service in May-2017
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Lines:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE54]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Params:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE55]'
+  prefs: []
+  type: TYPE_PRE

@@ -1,0 +1,175 @@
+- en: A Generic CSV Data Feed
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.backtrader.com/blog/posts/2015-08-04-generic-csv-datafeed/generic-csv-datafeed/](https://www.backtrader.com/blog/posts/2015-08-04-generic-csv-datafeed/generic-csv-datafeed/)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: An issue has led to the implementation of **GenericCSVData** which can be used
+    to parse different CSV formats.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'The issue in GitHub, [Issue #6](https://github.com/mementum/backtrader/issues/6)
+    clearly shows there is a need to have something that can actually handle any incoming
+    CSV data feed.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'The sauce is in the params declaration:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Because the class inherits from CSVDataBase, some standard paramenters are
+    available:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`fromdate` (takes a datetime object to limit the starting date)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`todate` (takes a datetime object) to limit the ending date)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`headers` (default: True, indicating if the CSV data has a headers row)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`separator` (default: “,”, the character separating the fields)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`dataname` (name of the file which has the CSV data or a file-like object)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Some other parameters like `name`, `compression` and `timeframe` are just informative
+    unless you plan to execute resampling.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Of course more importantly, the meaning of the newly define parameters:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`datetime` (default: 0) column containing the date (or datetime) field'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`time` (default: -1) column containing the time field if separate from the
+    datetime field (-1 indicates it’s not present)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`open` (default: 1) , `high` (default: 2), `low` (default: 3), `close` (default:
+    4), `volume` (default: 5), `openinterest` (default: 6)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Index of the columns containing the corresponding fields
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: 'If a negative value is passed (example: -1) it indicates the field is not present
+    in the CSV data'
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '`nullvalue` (default: float(‘NaN’))'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Value that will be used if a value which should be there is missing (the CSV
+    field is empty)
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '`dtformat` (default: %Y-%m-%d %H:%M:%S)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Format used to parse the datetime CSV field
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '`tmformat` (default: %H:%M:%S)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Format used to parse the time CSV field if “present” (the default for the “time”
+    CSV field is not to be present)
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: This should probably suffice to cover many different CSV formats and the absence
+    of values.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'An example usage covering the following requirements:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Limit input to year 2000
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: HLOC order rather than OHLC
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Missing values to be replaced with zero (0.0)
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Daily bars are provided and datetime is just the day with format YYYY-MM-DD
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: No `openinterest` column is present
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'The code:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Slightly modified requirements:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Limit input to year 2000
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: HLOC order rather than OHLC
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Missing values to be replaced with zero (0.0)
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Intraday bars are provided, with separate date and time columns
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Date has format YYYY-MM-DD
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Time has format HH.MM.SS
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: No `openinterest` column is present
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'The code:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE

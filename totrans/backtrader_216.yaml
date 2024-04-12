@@ -1,0 +1,18 @@
+- en: TradingView
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.backtrader.com/recipes/storesbrokersdata/tradingview/tradingview/](https://www.backtrader.com/recipes/storesbrokersdata/tradingview/tradingview/)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: By user `Dave-Vallance`
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Link to the repository:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[https://github.com/Dave-Vallance/tv2bt](https://github.com/Dave-Vallance/tv2bt)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

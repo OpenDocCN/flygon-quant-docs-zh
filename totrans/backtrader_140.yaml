@@ -1,0 +1,106 @@
+- en: Shorting the cash
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.backtrader.com/blog/posts/2016-12-06-shorting-cash/shorting-cash/](https://www.backtrader.com/blog/posts/2016-12-06-shorting-cash/shorting-cash/)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: From the very first moment *backtrader* was enabled for shorting anything, including
+    *stock-like* and *future-like* instruments. When a short was done, the cash was
+    decreased and the value of the shorted asset used for the total net liquidation
+    value.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Removing from one side and adding to the other keeps things in balance.
+  prefs: []
+  type: TYPE_NORMAL
+- en: It seems that people prefer to have *cash* increased, which probably lends to
+    more spending.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'With release `1.9.7.105`, the broker has changed the default behavior to adding
+    cash and removing value. This can be controlled with the parameter `shortcash`
+    which defaults to `True`. Changing it would be done like this:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'or:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: In action
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: 'The sample below uses a standard moving average crossover and can be used to
+    see the differences. Running it without arguments and the new behavior:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![image](../Images/e28f919fa437e7e8e35ae2f211294acf.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'It can be compared with the behavior disabled with:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE3]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![image](../Images/5bf61e8da86b48bf663059fb9f359918.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'Things that remain the same:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Final result
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Trades
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Net Liquidation Value evolution
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: To see this an extra *Observer* is added to make sure the scaling allows seeing
+    the evolution in detail
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: 'What changes:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: When `shortcash` is set to `False` cash never goes above the initial level,
+    because an operation alwasy costs money
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: But with the new default behavior we can already see that the 1^(st) short operation
+    (which happens to be the 1^(st)) adds cash to the system and then how the *longs*
+    deduct cash from the system (the short is 1^(st) closed, obviously)
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: Sample Usage
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '[PRE4]'
+  prefs: []
+  type: TYPE_PRE
+- en: Sample Code
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '[PRE5]'
+  prefs: []
+  type: TYPE_PRE

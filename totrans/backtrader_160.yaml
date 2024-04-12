@@ -1,0 +1,165 @@
+- en: Pyfolio Integration
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.backtrader.com/blog/posts/2016-07-17-pyfolio-integration/pyfolio-integration/](https://www.backtrader.com/blog/posts/2016-07-17-pyfolio-integration/pyfolio-integration/)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: Note
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Feb 2017**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`pyfolio` APIs have changed and `create_full_tear_sheet` no longer has a `gross_lev`
+    as a named argument.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Consequently the sample below doesn’t work
+  prefs: []
+  type: TYPE_NORMAL
+- en: A first look at the tutorial deemed it as difficult, given the tight integration
+    amongst zipline and pyfolio, but the sample *test* data available with pyfolio
+    for some other uses is actually pretty useful to decode what’s running behind
+    the scenes and hence the wonder of integration.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'The integration of a *portfolio* tool, namely `pyfolio`, came up with in [Ticket
+    #108](https://github.com/mementum/backtrader/issues/108).'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Most of the pieces were already in-place in *backtrader*:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Analyzer infrastructure
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Children analyzer
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: A TimeReturn analyzer
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Only a main `PyFolio` analyzer and 3 easy *children* analyzer are needed. Plus
+    a method that relies on one of the dependencies already needed by `pyfolio` which
+    is `pandas`.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The most challenging part … “getting all the dependencies right”.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Update of `pandas`
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Update of `numpy`
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Update of `scikit-lean`
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Update of `seaborn`
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'Under Unix-like environments with a *C* compiler it’s all about time. Under
+    Windows and even with the specific *Microsoft* compiler installed (in this case
+    the chain for *Python 2.7*) things failed. But a well known site with a collection
+    of up-to-date packages for *Windows* helped. Visit it if you ever need it:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[http://www.lfd.uci.edu/~gohlke/pythonlibs/](http://www.lfd.uci.edu/~gohlke/pythonlibs/)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: The integration wouldn’t be complete if it wasn’t tested and that’s why the
+    usual sample is as always present.
+  prefs: []
+  type: TYPE_NORMAL
+- en: No PyFolio
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: 'The sample uses `random.randint` to decide when to *buy*/*sell*, so this is
+    simply a check that things are working:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Output:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![image](../Images/2065abb1e634b5adc14e6c863f425683.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: There a 3 datas and several *buy* and *sell* operations are randomly chosen
+    and scattered over the 2 year default life of the test run
+  prefs: []
+  type: TYPE_NORMAL
+- en: A PyFolio run
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '`pyfolio` things work well when running inside a *Jupyter Notebook* including
+    inline plotting. Here is the *notebook*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Note
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`runstrat` gets here [] as argument to run with default arguments and skip
+    arguments passed by the *notebook* itself'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: '[PRE3]'
+  prefs: []
+  type: TYPE_PRE
+- en: '[PRE4]'
+  prefs: []
+  type: TYPE_PRE
+- en: '[PRE5]'
+  prefs: []
+  type: TYPE_PRE
+- en: '[PRE6]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![image](../Images/9e907c78e596f4812d1a645f7945f889.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '![image](../Images/a34f8f7cacb12651e6a372290e4fef8e.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '![image](../Images/8452c2408ba1795af50c3642991c3838.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '[PRE7]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![image](../Images/f2cc25932652c1c71d99dd12b9020b3c.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '[PRE8]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![image](../Images/306275e8d7f851520c93bc570295e1d5.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'Usage of the sample:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE9]'
+  prefs: []
+  type: TYPE_PRE

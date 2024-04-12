@@ -1,0 +1,231 @@
+- en: Canonical vs Non-Canonical Indicators
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.backtrader.com/blog/2019-07-08-canonical-or-not/canonical-or-not/](https://www.backtrader.com/blog/2019-07-08-canonical-or-not/canonical-or-not/)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: 'The question has shown up several times more or less like this:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: How is this or that best/canonically implemented with *backtrader*?
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'Being one of the goals of *backtrader* to be **flexible** to support as many
+    situations and use cases as possible, the answer is easy: "In at least a couple
+    of ways". Summarized for indicators, for which the question most often happens:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 100% declarative in the `__init__` method
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 100% step-by-step in the `next` method
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Mixing both of the above for complex scenarios in which the declarative part
+    cannot cover all needed calculations
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: A quick view of the built-in indicators in *backtrader* reveals that all of
+    them are implemented in a *declarative* manner. The reasons
+  prefs: []
+  type: TYPE_NORMAL
+- en: Easier to do
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Easier to read
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: More elegant
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Vectorized and even-based implementations are automatically managed
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: What ?!?! Auto-implemented Vectorization??
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: Yes. If an indicator is implemented entirely inside the `__init_` method, the
+    magic of *metaclasses* and operator overloading in Python will deliver the following
+  prefs: []
+  type: TYPE_NORMAL
+- en: A vectorized implementation (default setting when running a backtest)
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: An event-based implementation (for example for live trading)
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'On the other hand and if any part of an indicator which is implemented in the
+    `next` method:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: This is the code directly used for an event-based run.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Vectorization will be simulated by calling the `next` method in the background
+    for each data point
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Note
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: This means that even if a particular indicator does not have a vectorized implementation,
+    all others which have it, will still run vectorized
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: 'Money Flow Index: an Example'
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: Community User *[@Rodrigo Brito](https://community.backtrader.com/user/rodrigo-brito)*
+    posted a version of the *"Money Flow Index*" indicator which used the `next` method
+    for the implementation.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The code
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: Note
+  prefs: []
+  type: TYPE_NORMAL
+- en: Kept as originally posted including the long lines for which one has to scroll
+    horizontally
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*[@Rodrigo Brito](https://community.backtrader.com/user/rodrigo-brito)* already
+    notices that the usage of temporary lines is (all lines except `mfi`) is something
+    which probably admits optimization. Indeed, but in the humble opinion of the author*,
+    actually everything does admit a bit of optimization.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'To have common working grounds, one can use the *"Money Flow Index"* definition
+    by *StockCharts* and see that the implementation above is good. Here is the link:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[https://school.stockcharts.com/doku.php?id=technical_indicators:money_flow_index_mfi](https://school.stockcharts.com/doku.php?id=technical_indicators:money_flow_index_mfi)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: With that in the hand, a quick **Canonical** implementation of the `MFI` indicator
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: One should be able to immediately notice
+  prefs: []
+  type: TYPE_NORMAL
+- en: A single line `mfi` is defined. No temporaries are there.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Things seem cleaner with no need for `[0]` array indexing
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: No single `if` here or there
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: More compact whilst more readable
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Should one plot a graph of both run against the same data set, it would look
+    like this
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![MFI](../Images/f52a94b44874329c0bab85e2f90ecb25.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: The chart shows that both the *Canonical* and *Non-Canonical* versions show
+    the same values and development, except **at the beginning**.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The *Non-Canonical* version is delivering values from the very start
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: It is delivering non-meaningful values (100.0 until it deliver 1 extra value
+    which is also not good) because it cannot properly deliver
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'In contrast:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The *Canonical* version automatically starts delivering values after the **minimum
+    warm-up period** has been reached.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: No human intervention has been needed (it must for sure be *"Articifial Intelligence"*
+    or *"Machine Learning"*, ... **pun intended**)
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: See a close-up picture of the affected area
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![MFI Start Close up](../Images/2a9b9c7c6d51e9242307b3c3ed24b046.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Note
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'One could of course try to alleviate this situation in the *Non-Canonical*
+    version by doing this:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Subclassing from `bt.ind.PeriodN` which already has a `period` param and knows
+    what to do with it (and calling `super` during `__init__`)
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Notice also that the *Canonical* version does also account, like the step-by-step
+    `next` code for a possible *division-by-zero* situation in the formula.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: whereas this is the other way to do it
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE3]'
+  prefs: []
+  type: TYPE_PRE
+- en: Instead of having many lines, a `return` statement and different assignments
+    to the output *line*, there is s single declaration of the `mfiratio` calculation
+    and a single assignment (following the *StockCharts* formula) to the output line
+    `mfi`.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Conclusion
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: 'Hopefully, this sheds some light as to what the differences can be when implementing
+    something in the *Canonical* (i.e.: *declarative* in `__init_`) or *Non-Canonical*
+    way (step by step with array indexing in `next`)'
+  prefs: []
+  type: TYPE_NORMAL

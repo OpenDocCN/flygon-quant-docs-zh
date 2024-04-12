@@ -1,0 +1,97 @@
+- en: Absolute Strengh Histogram
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.backtrader.com/recipes/indicators/ash/ash/](https://www.backtrader.com/recipes/indicators/ash/ash/)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: This is an indicator which seems to originate in the forex world, probably at
+    *[http://fxcodebase.com](http://fxcodebase.com)*, but it seems difficult to track
+    what the actual origin is.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Potentially first implemented in *LUA* here:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[http://fxcodebase.com/code/viewtopic.php?f=17&t=3836](http://fxcodebase.com/code/viewtopic.php?f=17&t=3836)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'Which also says that an updated and revised *LUA* version is available at:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[http://fxcodebase.com/code/viewtopic.php?f=17&t=2987&p=6869&hilit=Absolute+Strength#p6869](http://fxcodebase.com/code/viewtopic.php?f=17&t=2987&p=6869&hilit=Absolute+Strength#p6869)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'The same site hosts a version in `MQL4`:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[http://fxcodebase.com/code/viewtopic.php?f=38&t=61541](http://fxcodebase.com/code/viewtopic.php?f=38&t=61541)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'And another version for `MQL5` can be found at:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[https://www.mql5.com/en/code/21429](https://www.mql5.com/en/code/21429)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'All versions seem complex, due to the language and platform implementation,
+    with a whooping 227 lines in the `MQL5` version (including some comments of course),
+    and have slight differences, so the need arises to settle for a sound definition.
+    The definition in pseudo-code after looking at the different versions:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: The `RSI` / `STOCH` naming was chosen by the original implementors and `pointsize`
+    is also known as `pipsize` which reflects its *Forex* origins. It is unclear if
+    the *smoothing average* has to be the same as the previous moving average and
+    some versions seem to work with an already averaged price rather than with the
+    standard price. And the moving averages are selected using an *integer*.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Some decisions
+  prefs: []
+  type: TYPE_NORMAL
+- en: The indicator will work with the raw priced passed to it in a data feed. If
+    the user wants to run the indicator on an average price it can pass it, instead
+    of passing the raw price.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: The 0.5 multiplier in the `RSI` mode, will be a parameter
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: The moving average won't be selected with any kind of *integer*. In *backtrader*
+    one can pass the actual desired moving average as a parameter.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: The smoothing moving average, unless specified as a parameter, will be the same
+    as the moving average already in use in the indicator
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: The `pointsize` will not be used unless the user specifies a value for it as
+    a parameter.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: And here the implementation
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: And here a view of how the indicator works
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![ASH View](../Images/4ae3bc56070937641c791efa59548b47.png)'
+  prefs: []
+  type: TYPE_IMG

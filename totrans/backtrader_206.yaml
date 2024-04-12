@@ -1,0 +1,11 @@
+- en: Donchian Channels
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.backtrader.com/recipes/indicators/donchian/donchian/](https://www.backtrader.com/recipes/indicators/donchian/donchian/)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE

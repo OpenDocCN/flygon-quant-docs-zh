@@ -1,0 +1,248 @@
+- en: Data - Multiple Timeframes
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.backtrader.com/docu/data-multitimeframe/data-multitimeframe/](https://www.backtrader.com/docu/data-multitimeframe/data-multitimeframe/)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: 'Sometimes investing decisions are taken using different timeframes:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Weekly to evaluate the trend
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Daily to execute the entry
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Or 5 minutes vs 60 minutes.
+  prefs: []
+  type: TYPE_NORMAL
+- en: That implies that combining datas of multiple timeframes in `backtrader` is
+    needed to support such combinations.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Native support for it is already built-in. The end user must only follow these
+    rules:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The data with the smallest timeframe (and thus the larger number of bars) must
+    be the 1^(st) one to be added to the Cerebro instance
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: The datas must be properly date-time aligned for the platform to make any sense
+    out of them
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'Beyond that, the end-user is free to apply indicators as wished on the shorter/larger
+    timeframes. Of course:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Indicators applied to larger timeframes will produce less bars
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: The platform will also have the following into account
+  prefs: []
+  type: TYPE_NORMAL
+- en: The minimum period for larger timeframes
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Minimum period which will probably have the side effect of having to consume
+    several orders of magnitude of the smaller timeframe bars before a Strategy added
+    to Cerebro kicks into action.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The built-in `cerebro.resample` is going to be used to create a larger timeframe.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Some examples below, but first the sauce of the test script.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'The steps:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Load a data
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Resample it according to the user specified arguments
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: The script also allows for loading a 2^(nd) data
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: Add the data to cerebro
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Add the resampled data (larger timeframe) to cerebro
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: run
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Example 1 - Daily and Weekly
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: 'The invocation of the script:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'And the output chart:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![image](../Images/8bb4abad11657edde80f8c36b8317a37.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Example 2 - Daily and Daily Compression (2 bars to 1)
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: 'The invocation of the script:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'And the output chart:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![image](../Images/e27326810000cc0f70b53c3ac773a437.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Example 3 - Strategy with SMA
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: Although plotting is nice, the key issue here is showing how the larger timeframe
+    influences the system, especially when it comes down to the starting point
+  prefs: []
+  type: TYPE_NORMAL
+- en: The script can take a `--indicators` to add a strategy which creates simple
+    moving averages of **period 10** on the smaller an larger timeframe datas.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'If only the smaller timeframe was taken into account:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`next` would be called first after 10 bars, which is the time the Simple Moving
+    Average needs to produce a value'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**NOTE**: Remember that Strategy monitors created indicators and only calls
+    `next` when all indicators have produced a value. The rationale is that the end
+    user has added the indicators to use them in the logic and thus no logic should
+    take place if the indicators have produced no values'
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: But in this case the larger timeframe (weekly) delays the invocation of `next`
+    until the Simple Moving Average oon the weekly data has produced a value, which
+    takes … 10 weeks.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The script overrides `nextstart` which is only called once and which defaults
+    to calling `next` to show when it is first called.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Invocation 1:'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Only the smaller timeframe, daily, gets a Simple Moving Average
+  prefs: []
+  type: TYPE_NORMAL
+- en: The command line and output
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE3]'
+  prefs: []
+  type: TYPE_PRE
+- en: And the chart.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![image](../Images/181458643c242c3f0e4a351940f78ba1.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'Invocation 2:'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Both timeframes get a Simple Moving Average
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'The command line:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE4]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Two things to notice here:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Instead of being called after **10** periods, the strategy is 1^(st) called
+    after 50 periods.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: It is so because the Simple Moving Average applied on the larger (weekly) timeframe
+    produces a value after 10 weeks … and that is `10 weeks * 5 days / week … 50 days`
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '`nextstart` gets called 5 times rather than only 1.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: This is a natural side effect of having mixed the timeframe and having (in this
+    case only one) indicators applied to the larger timeframe.
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: The larger timeframe Simple Moving Average produces 5 times the same value whilst
+    5 daily bars are being consumed.
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: And because the start of the period is being controlled by the larger timeframe
+    `nextstart` gets called 5 times.
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: And the chart.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![image](../Images/52a686646b23252e5954e7940341bf0a.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Conclusion
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: 'Multiple Timeframe Datas can be used in `backtrader` with no special objects
+    or tweaking: just add the smaller timeframes first.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The test script.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE5]'
+  prefs: []
+  type: TYPE_PRE

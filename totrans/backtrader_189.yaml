@@ -1,0 +1,359 @@
+- en: Observers and Statistics
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.backtrader.com/blog/posts/2015-08-12-observers-and-statistics/observers-and-statistics/](https://www.backtrader.com/blog/posts/2015-08-12-observers-and-statistics/observers-and-statistics/)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: Strateties running inside the backtrader do mostly deal with **datas** and **indicators**.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Datas are added to **Cerebro** instances and end up being part of the input
+    of strategies (parsed and served as attributes of the instance) whereas Indicators
+    are declared and managed by the Strategy itself.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'All backtrader sample charts have so far had 3 things which seem to be taken
+    for granted because they are not declared anywhere:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Cash and Value (what’s happening with the money in the broker)
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Trades (aka Operations)
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Buy/Sell Orders
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'They are `Observers` and exist within the submodule `backtrader.observers`.
+    They are there because **Cerebro** supports a parameter to automatically add (or
+    not) them to the Strategy:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`stdstats` (default: True)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'If the default is respected **Cerebro** executes the following equivalent user
+    code:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: Let’s see the usual chart with those 3 default observers (even if no order is
+    issued and therefore no trade happens and there is no change to the cash and portfolio
+    value)
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![image](../Images/a1bdfe860269b8820623dad6ec5465e9.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'Now let’s change the value of `stdstats` to `False` when creating the **Cerebro**
+    instance (can also be done when invoking `run`):'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: The chart is different now.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![image](../Images/f580f3b2cae875a327c5671916607140.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Accesing the Observers
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: 'The Observers as seen above are already there in the default case and collecting
+    information which can be used for statistical purposes and that’s why acess to
+    the observers can be done through an attribute of the strategy called:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`stats`'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'It is simply a placeholder. If we recall the addition of one of the default
+    **Observers** as laid out above:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE3]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'The obvious question would be how to access the `Broker` observer. Here for
+    example how it’s done from the `next` method of a strategy:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE4]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'The `Broker` observer just like a Data, an Indicator and the Strategy itself
+    is also a `Lines` objects. In this case the `Broker` has 2 lines:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`cash`'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`value`'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Observer Implementation
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: 'The implementation is very similar to that of an Indicator:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE5]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Steps:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Derive from `Observer` (and not from `Indicator`)
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Declare lines and params as needed (`Broker` has 2 lines but no params)
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: There will be an automatic attribute `_owner` which is the strategy holding
+    the observer
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'Observers come in action:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: After all Indicators have been calculated
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: After the Strategy `next` method has been executed
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'That means: at the end of the cycle … they **observe** what has happened'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: In the `Broker` case it’s simply blindly recording the broker cash and portfolio
+    values at each point in time.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Adding Observers to the Strategy
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: As already pointed out above, **Cerebro** is using the `stdstats` parameter
+    to decide whether to add 3 default **Observers**, alleviating the work of the
+    end user.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Adding other Observers to the mix is possible, be it along the `stdstats` or
+    removing those.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Let’s go for the usual strategy which buys when the `close` price goes above
+    a `SimpleMovingAverage` and sells if the opposite is true.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'With one “addition”:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**DrawDown** which is an already existing observer in the `backtrader` ecosystem'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[PRE6]'
+  prefs: []
+  type: TYPE_PRE
+- en: The visual output shows the evolution of the drawdown
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![image](../Images/a3c9cda4923c2d3caf6b9860ef332841.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'And part of the text output:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE7]'
+  prefs: []
+  type: TYPE_PRE
+- en: Note
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'As seen in the text output and in the code, the `DrawDown` observer has actually
+    2 lines:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`drawdown`'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`maxdrawdown`'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: The choice is not to plot the `maxdrawdown` line, but make it is still available
+    to the user.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Actually the last value of `maxdrawdown` is also available in a direct attribute
+    (not a line) with the name of `maxdd`
+  prefs: []
+  type: TYPE_NORMAL
+- en: Developing Observers
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: 'The implementation of the `Broker` observer was shown above. To produce a meaningful
+    observer, the implementation can use the following information:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`self._owner` is the currently strategy being executed'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: As such anything within the strategy is available to the observer
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: 'Default internal things available in the strategy which may be useful:'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`broker` -> attribute giving access to the broker instance the strategy creates
+    order against'
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: As seen in `Broker`, cash and portfolio values are collected by invoking the
+    methods `getcash` and `getvalue`
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '`_orderspending` -> list orders created by the strategy and for which the broker
+    has notified an event to the strategy.'
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: The `BuySell` observer traverses the list looking for orders which have executed
+    (totally or partially) to create an average execution price for the given point
+    in time (index 0)
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '`_tradespending` -> list of trades (a set of completed buy/sell or sell/buy
+    pairs) which is compiled from the buy/sell orders'
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: An **Observer** can obviously access other observers over the `self._owner.stats`
+    path.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Custom *OrderObserver*
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: The standard `BuySell` observer does only care about operations which have executed.
+    We can create an observer which shows when orders where created and if they expired.
+  prefs: []
+  type: TYPE_NORMAL
+- en: For the sake of *visibility* the display will not be plotted along the price
+    but on a separate axis.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE8]'
+  prefs: []
+  type: TYPE_PRE
+- en: The custom observer only cares about **buy** orders, because this is a stratey
+    which only buys to try to make a profit. Sell orders are Market orders and will
+    be executed immediately.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'The Close-SMA CrossOver strategy is changed to:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Create a Limit order with a price below 1.0% the close price at the moment of
+    the signal
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: A validity for the order of 7 (calendar) days
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: The resulting chart.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![image](../Images/d3a9ccafcb697371aa508a1878f4f4dc.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Several orders have expired as can be seen in the new subchart (red squares)
+    and we can also appreciate that between “creation” and “execution” several days
+    happen to be.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Note
+  prefs: []
+  type: TYPE_NORMAL
+- en: Starting with commit [1560fa8802](https://github.com/mementum/backtrader/commit/1560fa88021811c85ba94d4b6497d15322cbc1ed)
+    in the `development` branch if price is unset at the time of order creation, the
+    closing price will be used as the reference price.
+  prefs: []
+  type: TYPE_NORMAL
+- en: This has no impact in Market orders but keeps `order.create.price` usable at
+    all times and eases up the usage of `buy`
+  prefs: []
+  type: TYPE_NORMAL
+- en: Finally the code for this strategy which applies the new **observer**
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE9]'
+  prefs: []
+  type: TYPE_PRE
+- en: Saving/Keeping the statistics
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: 'As of now `backtrader` has not implemented any mechanism to track the values
+    of observers storing them into files. The best way to do it:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Open a file in the `start` method of the strategy
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Write the values down in the `next` method of the strategy
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'Considering the `DrawDown` observer, it could be done like this:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE10]'
+  prefs: []
+  type: TYPE_PRE
+- en: To save the values of index 0, once all observers have been processed a custom
+    observer which writes to a file could be added as the last observer to the system
+    to save values to a csv file.
+  prefs: []
+  type: TYPE_NORMAL

@@ -1,0 +1,133 @@
+- en: Trading a Day in Steps
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.backtrader.com/blog/posts/2016-07-13-day-in-steps/day-in-steps/](https://www.backtrader.com/blog/posts/2016-07-13-day-in-steps/day-in-steps/)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: 'It seems that somewhere in the world there is an interest that can be summarized
+    as follows:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*Introduce an order using daily bars but using the opening price*'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: This comes from the conversations in tickets [#105 Order execution logic with
+    current day data](https://github.com/mementum/backtrader/issues/105) and [#101
+    Dynamic stake calculation](https://github.com/mementum/backtrader/issues/101)
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*backtrader* tries to remain as realistic as possible and the following premise
+    applies when working with *daily bars*:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: When a daily bar is being evaluated, the bar is already over
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: It makes sense because all price (*open/high/low/close*) components are known.
+    It would actually seem illogical to allow an action on the `open` price when the
+    `close` price is already known.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The obvious approach to this is to use *intraday* data and enter when the opening
+    prices is known. But it seems *intraday* data is not so widespread.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'This is where adding a *filter* to a data feed can help. A filter that:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*Converts daily data into intraday-like data*'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Blistering barnacles!!! The curious reader will immediately point out that *upsampling*
+    for example `Minutes` to `Days` is logical and works, but that *downsampling*
+    `Days` to `Minutes` cannot be done.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'And it is 100% right. The filter presented below will not try that, but a much
+    humble and simpler goal:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Break a daily bar in 2 parts
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: A bar with only the opening price and no volume
+  prefs:
+  - PREF_IND
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: A 2^(nd) bar which is a copy of the regular daily bar
+  prefs:
+  - PREF_IND
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: 'This can still be held as a logical approach:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Upon seeing the *opening* price, the trader can act
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: The order is matched during the rest of the day (actually may or may not be
+    matched depending on execution type and price constraints)
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'The full code is presented below. Let’s see a sample run with a well known
+    data of `255` *daily* bars:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Output:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'The following happens:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`next` is called: `510 times` which is `255 x 2`'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'The `len` of the *Strategy* and that of the *data* reaches a total of `255`,
+    which is the expected: **the data has only those many bars**'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Every time the `len` of the *data* increases, the 4 price components have the
+    same value, namely the `open` price
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Here a remark is printed out to indicate that during this *opening* phase action
+    could be taken, like for example buying.
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: 'Effectively:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The daily data feed is being *replayed* with 2 steps for each day, giving the
+    option to act in between `open` and the rest of the price components
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: The filter will be added to the default distribution of *backtrader* in the
+    next release.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The sample code including the filter.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE

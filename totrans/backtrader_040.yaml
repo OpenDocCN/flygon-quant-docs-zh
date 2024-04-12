@@ -1,0 +1,147 @@
+- en: Pandas DataFeed Example
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.backtrader.com/docu/pandas-datafeed/pandas-datafeed/](https://www.backtrader.com/docu/pandas-datafeed/pandas-datafeed/)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: Note
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`pandas` and its dependencies have to be installed'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Supporting [Pandas](http://pandas.pydata.org) Dataframes seems to be of concern
+    to lots of people, who rely on the already available parsing code for different
+    data sources (including CSV) and other functionalities offered by Pandas.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The important declarations for the Datafeed.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Note
+  prefs: []
+  type: TYPE_NORMAL
+- en: These are **ONLY** declarations. Don't copy this code blindly. See the actual
+    usage in the example below
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'The above excerpt from the `PandasData` class shows the keys:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The `dataname` parameter to the class during instantiation holds the Pandas
+    Dataframe
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: This parameter is inherited from the base class `feed.DataBase`
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: The new parameters have the names of the regular fields in the `DataSeries`
+    and follow these conventions
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`datetime` (default: None)'
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'None : datetime is the “index” in the Pandas Dataframe'
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '-1 : autodetect position or case-wise equal name'
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '= 0 : numeric index to the colum in the pandas dataframe'
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: 'string : column name (as index) in the pandas dataframe'
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`open`, `high`, `low`, `high`, `close`, `volume`, `openinterest` (default:
+    -1 for all of them)'
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'None : column not present'
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '-1 : autodetect position or case-wise equal name'
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '= 0 : numeric index to the colum in the pandas dataframe'
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: 'string : column name (as index) in the pandas dataframe'
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: A small sample should be able to load the standar 2006 sample, having been parsed
+    by `Pandas`, rather than directly by `backtrader`
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Running the sample to use the exiting “headers” in the CSV data:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'The same but telling the script to skip the headers:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'The 2^(nd) run is using tells `pandas.read_csv`:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: To skip the first input row (`skiprows` keyword argument set to 1)
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Not to look for a headers row (`header` keyword argument set to None)
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: The `backtrader` support for Pandas tries to automatically detect if column
+    names have been used or else numeric indices and acts accordingly, trying to offer
+    a best match.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The following chart is the tribute to success. The Pandas Dataframe has been
+    correctly loaded (in both cases)
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![image](../Images/9b2d8671358192e67e2941332e42329d.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: The sample code for the test.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE3]'
+  prefs: []
+  type: TYPE_PRE

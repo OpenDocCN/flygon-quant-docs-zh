@@ -1,0 +1,224 @@
+- en: Developing an Indicator
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.backtrader.com/blog/posts/2015-07-18-developing-an-indicator/developing-an-indicator/](https://www.backtrader.com/blog/posts/2015-07-18-developing-an-indicator/developing-an-indicator/)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: After much ado in fine tuning backtrader (give it had already been running for
+    a while) I decided to not only share it via GitHub but to also tell the world
+    it was there and posted about its existence in "Reddit".
+  prefs: []
+  type: TYPE_NORMAL
+- en: Following a comment about why trading/algorithmic trading platforms pop up and
+    a private question about the platform supporting live trading for many simultenaous
+    tickers I came to the conclusion that my own child deserved its own blog.
+  prefs: []
+  type: TYPE_NORMAL
+- en: And here we are. But let’s focus on business.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`backtrader` is meant to let me experiment quickly with ideas and check what
+    my eyes may have told me it may be a chance.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`backtrader` (right now) is all about backtesting and has not been connected
+    to any live trading platform and may not even be (although I do believe the technical
+    implementation would allow for it)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'When I use the expression "experimenting with ideas" I mean two things:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Being able to quickly draft an indicator and be able to visually evaluate its
+    behavior
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Be it the case, engage in developing potential strategy around that indicator
+    or a combination with others
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: My personal trading is 100% judgemental in that no single decision is taken
+    by an automated system. But I look at what indicators have to tell. Whether the
+    "indications" are really a signal or not, it’s left to my faulty human mind.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'But let’s experiment. Right after publishing for the 1^(st) time to Reddit
+    I added a well known indicator:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Trix
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'Stockcharts has a nice discussion on Trix at: [ChartSchool - Trix](http://stockcharts.com/school/doku.php?id=chart_school:technical_indicators:trix)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Let’s experiment how to do it, with the minimum possible of lines:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: And the Trix indicator is up and running. Looking at this and as the author
+    of the platform I do truly believe my goal of being able to quickly experiment
+    with new ideas with ease of use … has been reached.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'A breakdown of the development:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**lines = (‘trix’,)**'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: This tuple defines the output lines (just one in this case) of the indicator.
+    This statement at the beginning of the class declaration generates a lot of background
+    action during class creation and object instantiation.
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: Suffice to say that the object has an attribute "lines" which hold the "trix".
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: As a bonus and if the name "trix" is not used inside the indicator itself, the
+    "line" could also be reached with "self.trix". But for clarity I do prefer "self.lines.trix"
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: 'Additional access methods:'
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: self.l.trix
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: self.lines[0] … being the index is the one corresponding to the position in
+    the tuple
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**params = ((‘period’, 15),)**'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: This tuple of tuples (can also be a dict or OrderedDict) defines the parameters
+    the indicator accepted and declares the default values.
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: The burden of parsing kwargs is taken off the shoulders of the users.
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: Parameters can be accessed with the "self.params.xxxxx" notation or with the
+    shorthand "self.p.xxxxx"
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '**The calculation (where EMA stands for ExponentialMovingAverage)**'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**ema1 = btind.EMA(self.data, period=self.p.period)**'
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: A new bonus is shown … "self.data". This seems to come out of the blue but this
+    is again pre-processing done in the background for the indicator.
+  prefs:
+  - PREF_IND
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: Any "data" passed to the indicator for calculation is intercepted and placed
+    in a `self.datas` array, where the usual `self.datas[0]` could be used to reach
+    the first data.
+  prefs:
+  - PREF_IND
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: 'Shorthands do exist and look like: self.data and self.data0 for the first data
+    in the array. From then onwards self.data1, self.data2.'
+  prefs:
+  - PREF_IND
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: Trix only needs one data
+  prefs:
+  - PREF_IND
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '**ema2 = btind.EMA(ema1, period=self.p.period)**'
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Not much to say. EMA uses ema1 as input data
+  prefs:
+  - PREF_IND
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '**ema3 = btind.EMA(ema2, period=self.p.period)**'
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Even less to say
+  prefs:
+  - PREF_IND
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '**self.lines.trix = 100.0 * (ema3 - ema3(-1)) / ema3(-1)**'
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: First and foremost a simple 1-period percentage difference calculation is done.
+  prefs:
+  - PREF_IND
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: 'The magic ema3(-1) is a notation to indicate: the previous value of ema.'
+  prefs:
+  - PREF_IND
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: And the result of the calculation is assigned to the output "line" "trix" defined
+    during class creation.
+  prefs:
+  - PREF_IND
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: Easy Peasy. But "experimenting" would not be done if I didn’t get visual feedback
+    of what Trix is doing (even if Stockcharts has a nice essay on it).
+  prefs: []
+  type: TYPE_NORMAL
+- en: Note
+  prefs: []
+  type: TYPE_NORMAL
+- en: The actual Trix implemenation has some additionals bells and whistles mostly
+    itended to beautify plotting which are of no relevance for this post.
+  prefs: []
+  type: TYPE_NORMAL
+- en: We assume we have put the `MyTrix` indicator in a mytrix.py file.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: And the visual output is below (open the chart in a new window/tab for a full
+    size image), hopefully showing how quickly and easy an indicator can be created
+    and visually evaluated with `backtrader`
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![image](../Images/e5e5453fa22990a6e31f575b2359589d.png)'
+  prefs: []
+  type: TYPE_IMG

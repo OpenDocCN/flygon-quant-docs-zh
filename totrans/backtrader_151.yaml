@@ -1,0 +1,235 @@
+- en: Credit Interest
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.backtrader.com/blog/posts/2016-08-22-credit-interest/credit-interest/](https://www.backtrader.com/blog/posts/2016-08-22-credit-interest/credit-interest/)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: 'In some situations, the cash amount in real brokers may be decreased because
+    the operation on assets includes an interest rate. Examples:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Short selling of stocks
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: ETFs both long and short
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: This means that not only the trades make up the profitability of a system, because
+    the interests on the credit take a bite on the account.
+  prefs: []
+  type: TYPE_NORMAL
+- en: To cover this cases *backtrader* includes (starting with release `1.8.8.96`)
+    functionality to take this into account.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Extending CommissionInfo
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: Even if not associated to any *order/trade*, the discount of cash from the account
+    can be modeled as a commission being charged by the broker. As such and given
+    that *backtrader* already offers a flexible and extensible commission system,
+    this system has been slightly extended to support *credit interest*.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'A `CommissionInfo` can now be instantiated with two new parameters:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`interest` (def: `0.0`)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: If this is non-zero, this is the yearly interest charged for holding a short
+    selling position. This is mostly meant for stock short-selling
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: 'The formula: `days \* price \* abs(size) \* (interest / 365)`'
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: 'It must be specified in absolute terms: 0.05 -> 5%'
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: Note
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: 'the behavior can be changed by overriding the method: `_get_credit_interest`'
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '`interest_long` (def: `False`)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Some products like ETFs get charged on interest for short and long positions.
+    If ths is `True` and `interest` is non-zero the interest will be charged on both
+    directions
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: 'The parameters can also be set via the *broker* using the following method:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: Where `interest` and `interest_long` obviously bear the same meaning as above.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Applying a CommissionInfo
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: For a stock with a commission in percentage a typical use scenario with *credit
+    interest* would be as follows
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: This is mostly useful if th end user has own commission schemes.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'A simpler case with `setcommission`:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: And the rest as in any other usual *backtrader* script.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Some sample scenarios
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: Long only, no exit, No interest
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: To establish a minimum baseline, let’s start without interest and letting the
+    script enter the market only long and avoid exiting.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE3]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![image](../Images/aab6804c68219829704d595573a5bd8d.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: The idea should be clear now. Have a flat cash line away from the total portfolio
+    value and showing no deduction.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Long only, no exit and interest
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Let’s try to add interest and see what happens (we’ll be adding a huge `15%`
+    interest to try to notice the movements)
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE4]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![image](../Images/d0ce920dc1c754919fb336946b4d9e85.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: NOTHING HAS CHANGED! And this is expected. In most cases the interest is applied
+    only to `short` positions (taken with a credit) and this is a a long-only position.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Let’s tell the script to do it for `long` positions too
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE5]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![image](../Images/7947fc049a3af4a9caf33d2419b0db7f.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: And the change is there. There has been a decrement and is huge (given the huge
+    interest which is being taken)
+  prefs: []
+  type: TYPE_NORMAL
+- en: A long-short scenario
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: This would model something like an `ETF` which has a yearly interest and can
+    be a regular one or an inverse one. First let’s establish the baseline.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE6]'
+  prefs: []
+  type: TYPE_PRE
+- en: Plenty more operations and the system is always *in the market*.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![image](../Images/0927d8c10dd53795660d83b38793082c.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'Because the `ETF` will have interest charged on both long and short operations,
+    the interest will be added for both now:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE7]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![image](../Images/b7ac7979c5ba9cd44a9c9b23ce9247fc.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '*ACHTUNG*: `34` operations instead of `35`. It seems something might be broken
+    but … NO …'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The charged *interest* is taking a bit into the cash reserves and this ends
+    up not allowing the last order because *THERE IS NOT ENOUGH CASH*
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Removing the interest charge from *long* operations (even if not real for an
+    *ETF*) will allow the system to come to the end:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE8]'
+  prefs: []
+  type: TYPE_PRE
+- en: Back in business until the `35th` operation.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![image](../Images/740588603e4b742d38921d599e96364c.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: A quick comparison with the original shows that the final cash has changed from
+    `7490` (with no interest) to `5418` (applying interest only to short operations)
+  prefs: []
+  type: TYPE_NORMAL
+- en: Conclusion
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: 'This new functionality allows to simulate with even more fidelity backtesting
+    scenarios to try to achieve the dream: a profitable system'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Sample usage
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '[PRE9]'
+  prefs: []
+  type: TYPE_PRE
+- en: Sample code
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '[PRE10]'
+  prefs: []
+  type: TYPE_PRE

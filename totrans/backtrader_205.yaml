@@ -1,0 +1,67 @@
+- en: Connors RSI
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.backtrader.com/recipes/indicators/crsi/crsi/](https://www.backtrader.com/recipes/indicators/crsi/crsi/)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: 'The literature which Google offers as a reference for this indicator:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Nirvana Systems - Creating the “Ultimate” Indicator - Connors RSI](https://www.nirvanasystems.com/ultimate-indicator-connors-rsi/)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[TradingView - Connors RSI](https://www.tradingview.com/wiki/Connors_RSI_(CRSI))'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'Both sources agree on the formulat, although not on the terminology (see below).
+    The *Connors RSI* shall be calculated as follows:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: Note
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*TradingView* says that the `ROC` (*"Rate of Change"*) has to be used instead
+    of the `PctRank` (*"Percentage Rank"*), which is clearly wrong when looking at
+    the definition which is provided by *TradingView* itself.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`Streak` is something which is non-standard and needs a definition, let''s
+    reference it here from the sources (called *"UpDown"* in the *TradingView* jargon)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Number of consecutive days the price has closed higher/lower than the previous
+    day
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: If a days closes at the same price as the day before, the streak is reset to
+    `0`
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Upwards streaks yield positive values and downwards streaks yield negative values
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: With the formula in the hand, understanding we need to use `PercentRank` and
+    with a clear definition for a `Streak` (or `UpDown`), creating the `ConnorsRSI`
+    indicator should be a child's play.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: And here a view of how the indicator works, including also the `Streak` helper
+    indicator, to have a visual verification that the actual streak is being delivered.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![CRSI View](../Images/7f2657d04f60a9db60a1853cf9dd78c8.png)'
+  prefs: []
+  type: TYPE_IMG

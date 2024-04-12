@@ -1,0 +1,97 @@
+- en: Improving Random Python Internet Study Notes
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.backtrader.com/blog/posts/2018-04-22-improving-code/improving-code/](https://www.backtrader.com/blog/posts/2018-04-22-improving-code/improving-code/)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: 'Every now and then, samples with *backtrader* code pop up in the Internet.
+    There are several in what it looks to me to be Chinese. The latest one is here:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[https://blog.csdn.net/qq_26948675/article/details/80016633](https://blog.csdn.net/qq_26948675/article/details/80016633)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'The title is: *backtrader-学习笔记2*, which apparently (thanks Google) translates
+    to *backtrader- study notes 2*. If those are study notes, let’s try to improve
+    the code there where it can really be improved and in my personal opinion there
+    where *backtrader* shines the most.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: In the `__init__` method of the strategy inside the study notes we find the
+    following
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: Nothing to argue here (style is something very personal, I won’t touch that)
+  prefs: []
+  type: TYPE_NORMAL
+- en: And in the `next` method of the strategy, the following are the logic decisions
+    for buying and selling.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: and
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: These two logic blocks is what one can actually make a lot more better, which
+    will also add to readability, maintainability and tweaking (if needed be)
+  prefs: []
+  type: TYPE_NORMAL
+- en: Instead of having those comparison of moving averages (current point `0` and
+    previous point `-1`) followed by some divisions, let’s look at how to have it
+    precalculated for us.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Let’s tweak `__init__`
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE3]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'And we can now take that to the `next` method and do the following:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE4]'
+  prefs: []
+  type: TYPE_PRE
+- en: Notice that we don’t even have to use `self.buy_sig[0]`, because the boolean
+    test make with `if self.buy_sig` is already translated by the *backtrader* machinery
+    to a check for `[0]`
+  prefs: []
+  type: TYPE_NORMAL
+- en: Imho, a much cleaner approach in which defining the logic in `__init__` with
+    standard arithmetic and logical operations (and using the line delay notation
+    `(-x)`) makes the code much better.
+  prefs: []
+  type: TYPE_NORMAL
+- en: In any case and for closing note, one could have also tried to use the built-in
+    `PercentChange` indicator (aka `PctChange`)
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'See: [backtrader documentation - Indicator Reference](https://www.backtrader.com/docu/indautoref.html)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: As the name suggests it does already calculate the percentage change over a
+    given period of bars. The code in `__init__` would now look like this
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE5]'
+  prefs: []
+  type: TYPE_PRE
+- en: It doesn’t make much of a difference in this case, but it may for sure save
+    you from lots of trouble if the calculations are larger and more complex.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Happy *backtrading*!
+  prefs: []
+  type: TYPE_NORMAL

@@ -1,0 +1,376 @@
+- en: Beating The Random Entry
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.backtrader.com/blog/2019-08-22-practical-backtesting-replication/practical-replication/](https://www.backtrader.com/blog/2019-08-22-practical-backtesting-replication/practical-replication/)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: There have been recently some threads on [reddit/r/algotrading](https://www.reddit.com/r/algotrading/)
+    about the success in replicating published algotrading strategies. First
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[I''ve reproduced 130+ research papers about "predicting the stock market",
+    coded them from scratch and recorded the results. Here''s what I''ve learnt](https://www.reddit.com/r/algotrading/comments/cr7jey/ive_reproduced_130_research_papers_about/)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'Because it has been deleted here a quick summary:'
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: The strategies do not work
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: If the authors claim a given strategy stopped working due to alpha decay, the
+    tests were run against past data and it still did not work
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'Bottomline: It''s all overfitting, p-hacking or a tiny alpha which doesn''t
+    need to decay because commissions do already destroy the alpha.'
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'A replica to the replication problem was written by *Artem Kaznatcheev* in:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Allegory of the replication crisis in algorithmic trading](https://egtheory.wordpress.com/2019/08/17/algotrading-replication/)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'Followed by:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Overfitting](https://www.reddit.com/r/algotrading/comments/cv83yh/overfitting/)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: The first two were theoretical (even if the first mentioned having implemented
+    the 130 strategies), with *"Overfitting"* offering actual code.
+  prefs: []
+  type: TYPE_NORMAL
+- en: With so much going on, what about trying to replicate something which was published
+    but not as a paper, and like in the *"overfitting"* case, with a practical approach.
+    Something published in a well known book.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'The target: *"Trying to Beat Random Entry"*. This is a section in Part 3, Chapter
+    8 of this book:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Amazon - Trade Your Way to Financial Freedom](https://www.amazon.com/Trade-Your-Way-Financial-Freedom/dp/007147871X)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Van Tharp Institute - Trade Your Way to Financial Freedom](https://www.vantharp.com/trade-your-way-to-financial-freedom)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'A structured approach to engage into algotrading is presented in the book with
+    a special emphasis on: **position sizing** and management of the position (i.e.:
+    when to actually exit a trade). This being a lot more important than, for example,
+    the entry setup, which apparently most people consider the main driver.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'In Chapter 8, Van K. Tharp talks to *Tom Basso* and says: *"From what you are
+    saying it sounds like you could make money consistently with a random entry as
+    long as you have good exits and size your positions intelligently.”* to which
+    the answer was that *he probably could*.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Rules**:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Coin-Flip based entry
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Always in the market - Long or Short
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Reentry as soon as the exit signal was given
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Volatility of the market is determined by a 10-day `Exponential Moving Average`
+    of the `Average True Range`
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Trailing stop at distance from the close 3-times the volatility
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: The stop could only move in the direction of the trade
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Fixed Stake (1 contract) or 1% risk model (Chapter 12 in the book)
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Results**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Tested against 10 markets
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'Fixed Stake: made money 80% of the time'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '1% Risk Model: made money 100% of the time'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'Reliability level: 38% (percentage of winning trades)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**The missing bits**:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Tested markets
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Tested periods
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: If always in the market means closing the trade "today" and re-entering "tomorrow"
+    or if it means issuing both a the closing/re-opening orders at the same time.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: This is actually the easiest to overcome.
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: For the last two items, the book says the conversation took place in 1991 and
+    futures were used. To be fair to the book, futures data from before 1991 will
+    be used. 1-day price bars are also assumed, given the mention of the *10-day Exponential
+    Moving Average*
+  prefs: []
+  type: TYPE_NORMAL
+- en: The most obvious problem seems to get the algorithm right, but in this case
+    the book does a good job at describing the simple algorithm and the results. To
+    complete it, let's summarize the *"Percentage Risk Model"* (aka "Model 3" in the
+    book) from *Chapter 12*.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`Maximal Loss`: limited to `x%` of the account value (i.e.: the percentage
+    risk)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`Risk per Contract` : with the given algorithm, it will be the initial stop
+    distance (3 times the volatility) multiplied by the multiplier of the future'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'Amount of contracts: `Maximal Loss / Risk Per Contract`'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: The replication details
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '**The data**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'The `CL` (Crude Oil) futures data from 1985 to 1990 (i.e.: 6 full years) will
+    be used. The contract specification has a:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Tick size: `0.01` (i.e.: 100 ticks per point)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'Cost per tick: `$10`'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: With this in mind, we will use a multiplier of `1000` per `1 point` (100 ticks/point
+    x 10 dollars/tick = 1000 dollars)
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Commission**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: A `2.00` monetary units per contract per trip will be used (IB-like)
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Some implementation Details**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The coin flip is modeled as an indicator, to make it easy to visualize where
+    the flips have taken place (and if several entries, for example, go in the same
+    direction, which is to be expected from randomness)
+  prefs: []
+  type: TYPE_NORMAL
+- en: To also have a good visualization of the stop and how it moves, the stop price
+    calculation and logic are also embedded in a indicator. Notice that the stop calculation
+    logic has two different stages
+  prefs: []
+  type: TYPE_NORMAL
+- en: When a trade starts the stop price has to be set at the given distance from
+    the close with no relation to previous stop prices
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: When a trade is running, the stop price is adjusted if possible to follow the
+    trend.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Charting**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The code produces two types of charts
+  prefs: []
+  type: TYPE_NORMAL
+- en: A chart containing the details a single test run (`--plot`) option. It makes
+    most sense to use it when running a single iteration (`--iterations 1`)
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: A scatter chart showing the Profit and Loss of the runs.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: 'Sample of #1'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Test Run Chart](../Images/3aa117c7ae2a493ce14761cf4cc7d253.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'Sample of #2 for 10 runs'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Scatter Chart of 10 runs](../Images/b2d17bac264deefcf93c09c7f699a803.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Sample invocations of the script
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '**A single run with fixed size stake of 1 and plotting**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: '**100 runs with a 1% risk model, 10 iterations and a scatter chart**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: (The output is shortened for practical purposes)
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: Test Runs Mix
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '10 test runs of 100 iterations were done, mixing the following variables:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Fixed size stake of 1 or percentage risk model with 1%
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Executing entry/exit in the same bar or in consecutive bars
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Summary of results
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: In average, 49% of the runs made a profit. Fixed size remained close to 50%
+    in the test runs and the percentage risk model varied more with a test run scoring
+    a minimum of 39% profitable runs and another scoring a maximum of 65% profitable
+    runs (out of 10)
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: In average, 39% of the trades were profitable (small deviation)
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'Recalling what the book said:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 80% of profitable runs when using a fixed size stake of 1
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 100% of profitable runs with the 1% percentage risk model
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 38% of profitable trades
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'It would therefore seem that:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Only the last of the items was replicated.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Conclusion
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: 'As pointed out by *Artem Kaznatcheev*, the replication crisis can be due to:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Using the wrong data set
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Failing to correctly implement the algorithm
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Or it could well be that the original implementation did not follow its own
+    rules or that not all details were published.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Note
+  prefs: []
+  type: TYPE_NORMAL
+- en: In any case I do still personally recommend reading the book. Failing to replicate
+    that specific case does not mean the book is not a good read and shows a practical
+    approach at algotrading.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The complete script
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: Enjoy!
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Code Also available at**:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[https://gist.github.com/mementum/364173371634b226120dc39708cd9610](https://gist.github.com/mementum/364173371634b226120dc39708cd9610)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE

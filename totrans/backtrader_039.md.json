@@ -1,0 +1,1 @@
+["```py\n    `data = bt.feeds.YahooFinanceData(\n        ...\n        version='',\n        ...\n    )` \n    ```", "```py\n    `data = bt.feeds.YahooFinanceCSVData(\n        ...\n        version='',\n        ...\n    )` \n    ```", "```py\n    `data = bt.feeds.YahooLegacyCSV(\n        ...\n        ...\n    )` \n    ```"]

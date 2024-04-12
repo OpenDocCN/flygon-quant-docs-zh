@@ -1,0 +1,690 @@
+- en: Operating the platform
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.backtrader.com/docu/operating/](https://www.backtrader.com/docu/operating/)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: Line Iterators
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: To engage into operations, the plaftorm uses the notion of line iterators. They
+    have been loosely modeled after Python’s iterators but have actually nothing to
+    do with them.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Strategies and Indicators are line iterators.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'The line iterator concept tries to describe the following:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: A Line Iterator kicks slave line iterators telling them to iterate
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: A Line Iterator then iterates over its own declared named lines setting values
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'The key to iteration, just like with regular Python iterators, is:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The `next` method
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: It will be called for each iteration. The `datas` array which the *line iterator*
+    has and serve as basis for logic/calculations will have already been moved to
+    the next index by the platform (barring data replay)
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: Called when the **minimum period** for the line iterator has been met. A bit
+    more on this below.
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: 'But because they are not regular iterators, two additional methods exist:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`prenext`'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Called before the **minimum period** for the line iterator` has been met.
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '`nextstart`'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Called exactly **ONCE** when the **minimum period** for the line iterator` has
+    been met.
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: The default behavior is to forward the call to `next`, but can of course be
+    overriden if needed.
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: Extra methods for *Indicators*
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: To speed up operations, Indicators support a batch operation mode which has
+    been termed as runonce. It is not strictly needed (a `next` method suffices) but
+    it greatly reduces time.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The runonce methods rules void the get/set point with index 0 and relies on
+    direct access to the underlying arrays holding the data and being passed the right
+    indices for each state.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'The defined methods follow the naming of the next family:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`once(self, start, end)`'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Called when the minimum period has been met. The internal array must be processed
+    between start and end which are zero based from the start of the internal array
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '`preonce(self, start, end)`'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Called before the minimum period has been met.
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '`oncestart(self, start, end)`'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Called exactly **ONCE** when the minimum period has been met.
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: The default behavior is to forward the call to `once`, but can of course be
+    overriden if needed.
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: Minimum Period
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'A picture is worth a thousand words and in this case possibly an example too.
+    A SimpleMovingAverage is capable of explaining it:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'And the instantiation could look like:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Briefly explained:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Assuming the data passed to the moving average is a standard data feed its
+    default period is `1` that is: the data feed produces a bar with no initial delay.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'Then the **“period=25”** instantiated moving average would have its methods
+    called as follows:'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`prenext` 24 times'
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`nextstart` 1 time (in turn calling `next`)'
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`next` n additional times until the *data feed* has been exhausted'
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'Let’s go for the killer indicator: *a SimpleMovingAverage* over another *SimpleMovingAverage*.
+    The instantiation could look like:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'What now goes on:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The same as above for `sma1`
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`sma2` is receiving a **data feed** which has a *minimum period* of 25 which
+    is our `sma1` and therefore'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'The `sma2` methods are called as indicated:'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`prenext` the first 25 + 18 times for a total of 43 times'
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 25 times to let `sma1` produce its 1^(st) sensible value
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 18 times to accumulate extra `sma1` values
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: For a total of 19 values (1 after 25 calls and then 18 more)
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`nextstart` then 1 time (in turn calling `next`)'
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`next` the n additional times until the *data feed* has been exhausted'
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: The platform is calling `next` when the system has already processed 44 bars.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The *minimum period* has been automatically adjusted to the incoming data.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Strategies and Indicators adhere to this behavior:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Only when the automatically calculated minimum period has been reached will
+    `next` be called (barring the initial hook call to `nextstart`)
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Note
+  prefs: []
+  type: TYPE_NORMAL
+- en: The same rules apply to `preonce`, `oncestart` and `once` for the **runonce**
+    batch operation mode
+  prefs: []
+  type: TYPE_NORMAL
+- en: Note
+  prefs: []
+  type: TYPE_NORMAL
+- en: The **minimum period** behavior can be manipulated although it’s not recommended.
+    Should it be wished used the `setminperiod(minperiod)` method in either Strategies
+    or Indicators
+  prefs: []
+  type: TYPE_NORMAL
+- en: Up and Running
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: 'Getting up and running involves at least 3 *Lines* objects:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: A Data feed
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: A Strategy (actually a class derived from Strategy)
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: A Cerebro (*brain* in Spanish)
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Data Feeds
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: These objects, obviously, provide the data which will be backtested by applying
+    calculations (direct and/or with Indicators)
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'The platform provides several data feeds:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Several CSV Format and a Generic CSV reader
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Yahoo online fetcher
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Support for receiving *Pandas DataFrames* and *blaze* objects
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Live Data Feeds with *Interacive Brokers*, *Visual Chart* and *Oanda*
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: The platform makes no assumption about the content of the data feed such as
+    timeframe and compression. Those values, together with a name, can be supplied
+    for informational purposes and advance operations like Data Feed Resampling (turning
+    a for example a 5 minute Data Feed into a Daily Data Feed)
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Example of setting up a Yahoo Finance Data Feed:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE3]'
+  prefs: []
+  type: TYPE_PRE
+- en: The optional `reversed` parameter for Yahoo is shown, because the CSV files
+    directly downloaded from Yahoo start with the latest date, rather than with the
+    oldest.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'If your data spans a large time range, the actual loaded data can be limited
+    as follows:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE4]'
+  prefs: []
+  type: TYPE_PRE
+- en: Both the *fromdate* and the *todate* will be included if present in the data
+    feed.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'As already mentioned timeframe, compression and name can be added:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE5]'
+  prefs: []
+  type: TYPE_PRE
+- en: If the data is plotted, those values will be used.
+  prefs: []
+  type: TYPE_NORMAL
+- en: A Strategy (derived) class
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: Note
+  prefs: []
+  type: TYPE_NORMAL
+- en: Before going on and for a more simplified approach, please check the *Signals*
+    section of the documentation if subclassing a strategy is not wished.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The goal of anyone using the platform is backtesting the data and this is done
+    inside a Strategy (derived class).
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'There are 2 methods which at least need customization:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`__init__`'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`next`'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: During initialization indicators on data and other calculations are created
+    prepared to later apply the logic.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The next method is later called to apply the logic for each and every bar of
+    the data.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Note
+  prefs: []
+  type: TYPE_NORMAL
+- en: If data feeds of different timeframes (and thus different bar counts) are passed
+    the `next` method will be called for the master data (the 1^(st) one passed to
+    cerebro, see below) which must be the the data with the smaller timeframe
+  prefs: []
+  type: TYPE_NORMAL
+- en: Note
+  prefs: []
+  type: TYPE_NORMAL
+- en: If the Data Replay functionality is used, the `next` method will be called several
+    time for the same bar as the development of the bar is replayed.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'A basic Strategy derived class:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE6]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Strategies have other methods (or hook points) which can be overriden:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE7]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'The `start` and `stop` methods should be self-explanatory. As expected and
+    following the text in the print function, the `notify_order` method will be called
+    when the strategy needs a notification. Use case:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: A buy or sell is requested (as seen in next)
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: buy/sell will return an *order* which is submitted to the broker. Keeping a
+    reference to this submitted order is up to the caller.
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: It can for example be used to ensure that no new orders are submitted if an
+    order is still pending.
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: If the order is Accepted/Executed/Canceled/Changed the broker will notify the
+    status change (and for example execution size) back to the strategy via the notify
+    method
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: The QuickStart guide has a complete and functional example of order management
+    in the `notify_order` method.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'More can be done with other Strategy classes:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`buy` / `sell` / `close`'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Use the underlying *broker* and *sizer* to send the broker a buy/sell order
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: The same could be done by manually creating an Order and passing it over to
+    the broker. But the platform is about making it easy for those using it.
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '`close` will get the current market position and close it immediately.'
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '`getposition` (or the property “position”)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Returns the current market position
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '`setsizer`/`getsizer` (or the property “sizer”)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: These allow setting/getting the underlying stake Sizer. The same logic can be
+    checked against Sizers which provide different stakes for the same situation (fixed
+    size, proportional to capital, exponential)
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: There is plenty of literature but Van K. Tharp has excellent books on the subject.
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: 'A Strategy is a *Lines* object and these support parameters, which are collected
+    using the standard Python kwargs argument:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE8]'
+  prefs: []
+  type: TYPE_PRE
+- en: Notice how the `SimpleMovingAverage` is no longer instantiated with a fixed
+    value of 20, but rather with the parameter “period” which has been defined for
+    the strategy.
+  prefs: []
+  type: TYPE_NORMAL
+- en: A Cerebro
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: 'Once Data Feeds are available and the Strategy has been defined, a Cerebro
+    instance is what brings everything together and execute the actions. Instantiating
+    one is easy:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE9]'
+  prefs: []
+  type: TYPE_PRE
+- en: Defaults are taking care of if nothing special is wished.
+  prefs: []
+  type: TYPE_NORMAL
+- en: A default broker is created
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: No commission for the operations
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Data Feeds will be preloaded
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: The default execution mode will be runonce (batch operation) which is the faster
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: All indicators must support the `runonce` mode for full speed. The ones included
+    in the platform do.
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: Custom indicators do not need to implement the runonce functionality. `Cerebro`
+    will simulate it, which means those non-runonce compatible indicators will run
+    slower. But still most of the system will run in batch mode.
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: 'Since a Data feed is already available and a Strategy too (created earlier)
+    the standard way to put it all together and get it up and running is:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE10]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Notice the following:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The Data Feed “instance” is added
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: The MyStrategy “class” is added along with parameters (kwargs) that will be
+    passed to it.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: The instantiation of MyStrategy will be done by cerebro in the background and
+    any kwargs in “addstrategy” will be passed to it
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: The user may add as many Strategies and Data Feeds as wished. How Strategies
+    communicate with each other to achieve coordination (if wished be) is not enforced/restricted
+    by the platform.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Of course a Cerebro offers additional possibilities:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Decide about preloading and operation mode:'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[PRE11]'
+  prefs:
+  - PREF_IND
+  type: TYPE_PRE
+- en: 'There is a constraint here: `runonce` needs preloading (if not, a batch operation
+    cannot be run) Of course preloading Data Feeds does not enforce `runonce`'
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '`setbroker` / `getbroker` (and the *broker* property)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: A custom broker can be set if wished. The actual broker instance can also be
+    accesed
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: 'Plotting. In a regular case as easy as:'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[PRE12]'
+  prefs:
+  - PREF_IND
+  type: TYPE_PRE
+- en: plot takes some arguments for the customization
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '`numfigs=1`'
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: If the plot is too dense it may be broken down into several plots
+  prefs:
+  - PREF_IND
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '`plotter=None`'
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: A customer plotter instance can be passed and cerebro will not instantiate a
+    default one
+  prefs:
+  - PREF_IND
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '`**kwargs` - standard keyword arguments'
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Which will get passed to the plotter.
+  prefs:
+  - PREF_IND
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: Please see the plotting section for more information.
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: Optimization of strategies.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: As mentioned above, Cerebro gets a Strategy derived class (not an instance)
+    and the keyword arguments that will be passed to it upon instantiation, which
+    will happen when “run” is called.
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: This is so to enable optimization. The same Strategy class will be instantiated
+    as many times as needed with new parameters. If an instance had been passed to
+    cerebro … this would not be possible.
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: 'Optimization is requested as follows:'
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '[PRE13]'
+  prefs:
+  - PREF_IND
+  type: TYPE_PRE
+- en: The method `optstrategy` has the same signature as `addstrategy` but does extra
+    housekeeping to ensure optimization runs as expected. A strategy could be expecting
+    a *range* as a normal parameter for a strategy and `addstrategy` will make no
+    assumptions about the passed parameter.
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: On the other hand, `optstrategy` will understand that an iterable is a set of
+    values that has to be passed in sequence to each instantiation of the Strategy
+    class.
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: Notice that instead of a single value a *range* of values is passed. In this
+    simple case 10 values 10 -> 19 (20 is the upper limit) will be tried for this
+    strategy.
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: 'If a more complex strategy is developed with extra parameters they can all
+    be passed to *optstrategy*. Parameters which must not undergo optimization can
+    be passed directly without the end user having to create a dummy iterable of just
+    one value. Example:'
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '[PRE14]'
+  prefs:
+  - PREF_IND
+  type: TYPE_PRE
+- en: The `optstrategy` method sees factor and creates (a needed) dummy iterable in
+    the background for factor which has a single element (in the example 3.5)
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: Note
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: Interactive Python shells and some types of frozen executables under *Windows*
+    have problems with the Python `multiprocessing` module
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: Please read the Python documentation about `multiprocessing`.
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL

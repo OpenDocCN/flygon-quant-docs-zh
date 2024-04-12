@@ -1,0 +1,378 @@
+- en: Rolling over Futures
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.backtrader.com/blog/posts/2016-08-31-rolling-over-futures/rolling-futures-over/](https://www.backtrader.com/blog/posts/2016-08-31-rolling-over-futures/rolling-futures-over/)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: 'Not every provider offers a *continuous* future for the instruments with which
+    one can trade. Sometimes the data offered is that of the still valid expiration
+    dates, i.e.: those still being traded'
+  prefs: []
+  type: TYPE_NORMAL
+- en: This is not so helpful when it comes to *backtesting* because the data is scattered
+    over several different instruments which additionally … *overlap* in time.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Being able to properly join the data of those instruments, from the past, into
+    a continuous stream alleviates the pain. The problem:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: There is no law as to how best join the different expiration dates into a continuous
+    future
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'Some literature, courtesy of *SierraChart* at:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: MyLink
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: The RollOver Data Feed
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '*backtrader* has added with 1.8.10.99` the possibility to join futures’ data
+    from different expiration dates into a continuous future:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: Note
+  prefs: []
+  type: TYPE_NORMAL
+- en: The possible `\*\*kwargs` are explained below
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'It can also be done by directly accessing the `RollOver` feed (which is helpful
+    if subclassing is done):'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: Note
+  prefs: []
+  type: TYPE_NORMAL
+- en: The possible `\*\*kwargs` are explained below
+  prefs: []
+  type: TYPE_NORMAL
+- en: Note
+  prefs: []
+  type: TYPE_NORMAL
+- en: When using `RollOver` the name is assigned using `dataname`. This is the standard
+    parameter used for all data feeds to pass the *name/ticker*. In this case it is
+    reused to assign a common name to the complete set of rolled over futures.
+  prefs: []
+  type: TYPE_NORMAL
+- en: In the case of `cerebro.rolloverdata`, the name is assigned to a feed using
+    `name`, which is already one named argument of that method
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Bottomline:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Data Feeds are created as usual but *ARE NOT* added to `cerebro`
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Those data feeds are given as input to `bt.feeds.RollOver`
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: A `dataname` is also given, mostly for identification purposes.
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: This *roll over* data feed is then added to `cerebro`
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Options for the Roll-Over
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Two parameters are provided to control the roll-over process
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`checkdate` (default: `None`)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'This must be a *callable* with the following signature:'
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs:
+  - PREF_IND
+  type: TYPE_PRE
+- en: 'Where:'
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '`dt` is a `datetime.datetime` object'
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`d` is the current data feed for the active future'
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'Expected Return Values:'
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '`True`: as long as the callable returns this, a switchover can happen to the
+    next future'
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: If a commodity expires on the 3^(rd) Friday of March, `checkdate` could return
+    `True` for the entire week in which the expiration takes place.
+  prefs:
+  - PREF_IND
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '`False`: the expiration cannot take place'
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`checkcondition` (default: `None`)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Note**: This will only be called if `checkdate` has returned `True`'
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: If `None` this will evaluate to `True` (execute roll over) internally
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: 'Else this must be a *callable* with this signature:'
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '[PRE3]'
+  prefs:
+  - PREF_IND
+  type: TYPE_PRE
+- en: 'Where:'
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '`d0` is the current data feed for the active future'
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`d1` is the data feed for the next expiration'
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'Expected Return Values:'
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '`True`: roll-over to the next future'
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Following with the example from `checkdate`, this could say that the roll-over
+    can only happend if the *volume* from `d0` is already less than the volume from
+    `d1`
+  prefs:
+  - PREF_IND
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '`False`: the expiration cannot take place'
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Subclassing `RollOver`
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'If specifying the *callables* isn’t enough, there is always the chance to subclass
+    `RollOver`. The methods to subclass:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`def _checkdate(self, dt, d):`'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Which matches the *signature* of the parameter of the same name above. The expected
+    return values are also the saame.
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '`def _checkcondition(self, d0, d1)`'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Which matches the *signature* of the parameter of the same name above. The expected
+    return values are also the saame.
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: Let’s Roll
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: Note
+  prefs: []
+  type: TYPE_NORMAL
+- en: The default behavior in the sample is to use `cerebro.rolloverdata`. This can
+    be changed by passing the `-no-cerebro` flag. In this case the sample uses `RollOver`
+    and `cerebro.adddata`
+  prefs: []
+  type: TYPE_NORMAL
+- en: The implementation includes a sample which is available in the *backtrader*
+    sources.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Futures concatenation
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Let’s start by looking at a pure concatenation by running the sample with no
+    arguments.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE4]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'This uses `cerebro.chaindata` and the result should be clear:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Whenever a *data feed* is over the next one takes over
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'This happens always between a *Friday* and *Monday*: the futures in the samples
+    always expire on *Friday*'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Futures roll-over with no checks
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Let’s execute with `--rollover`
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE5]'
+  prefs: []
+  type: TYPE_PRE
+- en: The same behavior. It can clearly be seen that contract changes are being made
+    on the 3^(rd) Friday of either Mar, Jun, Sep, Dec.
+  prefs: []
+  type: TYPE_NORMAL
+- en: But this is mostly WRONG. *backtradr* cannot know it, but the author knows that
+    the *EuroStoxx 50* futures stop trading at `12:00` CET. So even if there is a
+    daily bar for the 3^(rd) Friday of the expiration month, the change is happening
+    too late.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![image](../Images/6a192290d8392514b38b58213eaf1af7.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Changing during the Week
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: A `checkdate` callabe is implemented in the sample, which calculates the date
+    of expiration for the currently active contract.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`checkdate` will allow a roll over as soon as the week of the 3^(rd) Friday
+    of the month is reached (it may be *Tuesday* if for example *Monday* is a bank
+    holiday)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE6]'
+  prefs: []
+  type: TYPE_PRE
+- en: '**Much better**. The roll over is now happening *5 days before*. A quick visual
+    inspection of the *Len* indices show it. For example:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`199FESXM4` to `199FESXU4` happens at *len* `171-172`. Without `checkdate`
+    it happened at `176-177`'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: The roll over is happening on the Monday before the 3^(rd) Friday of the expiration
+    month.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![image](../Images/5097c6407fc34c175b5272e2c0b1f446.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Adding a volume condition
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Even with the improvement, the situation can be further improved in that not
+    only the date but also de negotiated *volume* will be taken into account. Do switch
+    when the new contract trades more volume than the currently active one.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Let’s add a `checkcondition` to the mix and run.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE7]'
+  prefs: []
+  type: TYPE_PRE
+- en: '*Even better**. We have moved the switch date to the *Thursday* before the
+    well known *3^(rd) Friday of the expiration month*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: This should come to no surprise because the expiring future trades a lot less
+    hours on that *Friday* and the volume must be small.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Note
+  prefs: []
+  type: TYPE_NORMAL
+- en: The roll over date could have also been set to that *Thursday* by the `checkdate`
+    callable. But that isn’t the point of the sample.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![image](../Images/83ebd0557efec8412789c20df99342aa.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Concluding
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '*backtrader* includes now a flexible mechanism to allow rolling over futures
+    to create a continuous stream.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Sample Usage
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '[PRE8]'
+  prefs: []
+  type: TYPE_PRE
+- en: Sample Code
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '[PRE9]'
+  prefs: []
+  type: TYPE_PRE

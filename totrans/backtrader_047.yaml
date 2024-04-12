@@ -1,0 +1,384 @@
+- en: Using Indicators
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.backtrader.com/docu/induse/](https://www.backtrader.com/docu/induse/)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: 'Indicators can be used in two places in the platform:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Inside Strategies
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Inside other Indicators
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Indicators in action
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: Indicators are always instantiated during `__init__` in the *Strategy*
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Indicator values (or values thereof derived) are used/checked during `next`
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: 'There is an important axiom to take into account:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Any `Indicator` (or value thereof derived) declared during `__init__` will be
+    precalculated before `next` is called.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Let’s go for the differences an operation modes.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`__init__` vs `next`'
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: 'Things works as follows:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Any **operation** involving **lines** objects during `__init__` generates another
+    **lines** object
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Any **operation** involving **lines** objects during `next` yields regular Python
+    types like floats and bools.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: During `__init__`
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'Example of an operation during `__init__`:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: The variable `hilo_diff` holds a reference to a **lines** object which is precalculated
+    before calling `next` and can be accessed using the standard array notation `[]`
+  prefs: []
+  type: TYPE_NORMAL
+- en: It does obviously contains for each bar of the data feed the difference between
+    the high and the low.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'This also works when mixing simple **lines** (like those in the self.data Data
+    Feed) and complex ones like indicators:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: Now `close_sma_diff` contains again a **line** object.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Using logical operatorss:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: Now the generated **lines** object will contain an array of booleans.
+  prefs: []
+  type: TYPE_NORMAL
+- en: During `next`
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'Example of an operation (logical operator):'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE3]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Using the equivalent array (index 0 based notation):'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE4]'
+  prefs: []
+  type: TYPE_PRE
+- en: In this case `close_over_sma` yields a boolen which is the result of comparing
+    two floating point values, the ones returned by the `[0]` operator applied to
+    `self.data.close` and `self.sma`
+  prefs: []
+  type: TYPE_NORMAL
+- en: The `__init__` vs `next` *why*
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Logic simplification (and with it ease of use) is the key. Calculations and
+    most of the associated logic can be declared during `__init__` keeping the actual
+    operational logic to a minimum during `next`.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'There is actually a side benefit: **speed** (due to the precalculation explained
+    at the beginning)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'A complete example which generates a **buy** signal during `__init__`:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE5]'
+  prefs: []
+  type: TYPE_PRE
+- en: Note
+  prefs: []
+  type: TYPE_NORMAL
+- en: Python’s `and` operator cannot be overriden, forcing the platform to define
+    its own `And`. The same applies to other constructs like `Or` and `If`
+  prefs: []
+  type: TYPE_NORMAL
+- en: It should be obvious that the “declarative” approach during `__init__` keeps
+    the bloating of `next` (where the actual strategy work happens) to a minimum.
+  prefs: []
+  type: TYPE_NORMAL
+- en: (Don’t forget there is also a speed up factor)
+  prefs: []
+  type: TYPE_NORMAL
+- en: Note
+  prefs: []
+  type: TYPE_NORMAL
+- en: When the logic gets really complicated and involves several operations it is
+    usually much better to encapsulate that inside an `Indicator`.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Some notes
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: 'In the example above there are two things which have been simplified in `backtrader`
+    when compared to other platforms:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Declared `Indicators` are neither getting a **parent** parameter (like the strategy
+    in which they are being created nor is any kind of “register” method/function
+    being called.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: And in spite of it the strategy will kick the calculation of the `Indicators`
+    and any **lines** object generated because of operations (like `sma - ema`)
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '`ExponentialMovingAverage` is being instantiated without `self.data`'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: This is intentional. If no `data` is passed, the 1^(st) data of the **parent**
+    (in this case the Strategy in which is being created) will be automatically passed
+    in the background
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: Indicator Plotting
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: 'First and foremost:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Declared `Indicators` get automatically plotted (if cerebro.plot is called)
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**lines** objects from operations DO NOT GET plotted (like `close_over_sma
+    = self.data.close > self.sma`)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'There is an auxiliary `LinePlotterIndicator` which plots such operations if
+    wished with the following approach:'
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '[PRE6]'
+  prefs:
+  - PREF_IND
+  type: TYPE_PRE
+- en: The `name` parameter gives name to the **single** line held by this indicator.
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: Controlling plotting
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'During the development of an `Indicator` a `plotinfo` declaration can be added.
+    It can be a tuple of tuples (2 elements), a `dict` or an `OrderedDict`. It looks
+    like:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE7]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'The value can be later accessed (and set) as follows (if needed):'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE8]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'The value can even be set during instantiation:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE9]'
+  prefs: []
+  type: TYPE_PRE
+- en: The `subplot=True` will be passed to the (behind the scenes) intantiated member
+    variable `plotinfo` for the indicator.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'The `plotinfo` offers the following parameters to control plotting behavior:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`plot` (default: `True`)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Whether the indicator is to be plotted or not
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '`subplot` (default: `True`)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Whether to plot the indicator in a different window. For indicators like moving
+    averages the default is changed to `False`
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '`plotname` (default: `''''`)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Sets the plotname to show on the plot. The empty value means the canonical name
+    of the indicator (`class.__name__`) will be used. This has some limitations because
+    Python identifiers cannot use for example arithmetic operators.
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: 'An indicator like DI+ will be declared as follows:'
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '[PRE10]'
+  prefs:
+  - PREF_IND
+  type: TYPE_PRE
+- en: Making the plot “nicer”
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '`plotabove` (default: `False`)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Indicators are usually plotted (those with `subplot=True`) below the data they
+    have operated on. Setting this to `True` will make the indicator be plotted above
+    the data.
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '`plotlinelabels` (default: `False`)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Meant for “indicators” on “indicators”. If one calculates the SimpleMovingAverage
+    of the RSI the plot will usually show the name “SimpleMovingAverage” for the corresponding
+    plotted line. This is the name of the “Indicator” and not the actual line being
+    plotted.
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: This default behavior makes sense because the user wants to usually see that
+    a SimpleMovingAverage has been created using the RSI.
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: if the value is set to `True` the actual name of the line inside the SimpleMovingAverage
+    will be used.
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '`plotymargin` (default: `0.0`)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Amount of margin to leave at the top and bottom of the indicator (`0.15` ->
+    15%). Sometimes the `matplotlib` plots go too far to the top/bottom of the axis
+    and a margin may be wished
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '`plotyticks` (default: `[]`)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Used to control the drawn y scale ticks
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: 'If an empty list is passed the “y ticks” will be automatically calculated.
+    For something like a Stochastic it may make sense to set this to well-known idustry
+    standards like: `[20.0, 50.0, 80.0]`'
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: Some indicators offer parameters like `upperband` and `lowerband` that are actually
+    used to manipulate the y ticks
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '`plothlines` (default: `[]`)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Used to control the drawing of horizontal lines along the indicator axis.
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: If an empty list is passed no horizontal lines will drawn.
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: 'For something like a Stochastic it may make sense to draw lines for well-known
+    idustry standards like: `[20.0, 80.0]`'
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: Some indicators offer parameters like `upperband` and `lowerband` that are actually
+    used to manipulate the horizontal lines
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '`plotyhlines` (default: `[]`)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Used to simultaneously control plotyticks and plothlines using a single parameter.
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '`plotforce` (default: `False`)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: If for some reason you believe an indicator should be plotting and it is not
+    plotting … set this to `True` as a last resort.
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL

@@ -1,0 +1,109 @@
+- en: Tick Data and Resampling
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.backtrader.com/blog/posts/2015-09-25-tickdata-resample/resample-tickdata/](https://www.backtrader.com/blog/posts/2015-09-25-tickdata-resample/resample-tickdata/)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: backtrader could already do resampling up from minute data. Accepting tick data
+    was not a problem, by simply setting the 4 usual fields (open, high, low, close)
+    to the tick value.
+  prefs: []
+  type: TYPE_NORMAL
+- en: But passing the tick data to be resampled produced the same data again. As or
+    release 1.1.11.88 this is no longer so. Now
+  prefs: []
+  type: TYPE_NORMAL
+- en: TimeFrame (backtrader.TimeFrame) has been extended to contain constants and
+    names for “Ticks”, “MicroSeconds” and “Seconds”
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Resampling can manage the 3 aforementioned timeframes and sample them up.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Note
+  prefs: []
+  type: TYPE_NORMAL
+- en: Because tick data is the lowest possible timeframe it can actually be “compressed”
+    (n bars to 1 bar) but not be sampled up from a smallest timeframe.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The new release contains a small `tickdata.csv` sample added to the sources
+    data a new sample script `resample-tickdata.py` to play with it.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Note
+  prefs: []
+  type: TYPE_NORMAL
+- en: Updated the script to use the new `Cerebro.resampledata` method which avoids
+    the need to manually instantiate a `backtrader.DataResampler`
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'The default execution doesn’t touch the data:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Producing this chart:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![image](../Images/f7dc13d78468ec65cb23ba9f8988e598.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'Compressing 3 ticks to 1:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Producing this chart:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![image](../Images/1a4b8759a0f4ad13af08f8a1ab259982.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: After the compression we no longer have single “ticks” but “bars”.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Now compressing to seconds and 5 bars compression:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'With a new chart:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![image](../Images/dfc2858666bc648129399cbfc25ca703.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'And finally to minutes. The sample data contains tick data from 4 different
+    minutes (the last tick in the file is the only tick for the 4^(th) minute):'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE3]'
+  prefs: []
+  type: TYPE_PRE
+- en: With a 4 bars (at the top it can be seen the final price was 3069). The 4^(th)
+    bar is a single point given for this minute a single tick is present in the file.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![image](../Images/9694cb48598ea295f5e6d9ea10aa5a24.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'The script usage:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE4]'
+  prefs: []
+  type: TYPE_PRE
+- en: And the code.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE5]'
+  prefs: []
+  type: TYPE_PRE

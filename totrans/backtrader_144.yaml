@@ -1,0 +1,149 @@
+- en: Strategy Selection
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.backtrader.com/blog/posts/2016-10-29-strategy-selection/strategy-selection/](https://www.backtrader.com/blog/posts/2016-10-29-strategy-selection/strategy-selection/)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: 'Houston we have a problem:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*cerebro* is not meant to be run several times. This is not the 1^(st) time
+    and rather than thinking that users are doing it wrong, it seems it is a use case.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: This interesting use case has come up via [Ticket 177](https://github.com/mementum/backtrader/issues/177).
+    In this case *cerebro* is being used multiple times to evaluate differet strategies
+    which are being fetched from an external data source.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*backtrader* can still support this use case, but not in the direct way it
+    has been attempted.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Optimizing the selection
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 'The buil-in optimization in *backtrader* already does the required thing:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Instantiate several strategy instances and collect the results
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Being the only thing that the *instances* all belong to the same *class*. This
+    is where Python helps by lettings us control the creation of an object.
+  prefs: []
+  type: TYPE_NORMAL
+- en: First, let’s add to very quick strategies to a script using the *Signal* technology
+    built in *backtrader*
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: It cannot get easier.
+  prefs: []
+  type: TYPE_NORMAL
+- en: And now let’s do the magic of delivering those two strategies.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Et voilá! When the class `StFetcher` is being instantiated, method `__new__`
+    takes control of instance creation. In this case:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Gets the `idx` param which is passed to it
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Uses this param to get a strategy from the `_STRATS` list in which our previous
+    sample strategies have been stored
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Note
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: Nothing would prevent using this `idx` value to fetch strategies from a server
+    and/or a database.
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: Instantiate and return the *fecthed* strategy
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Running the show
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: Indeed! Optimiization it is! Rather than `addstrategy` we use `optstrategy`
+    and pass an array of values for `idx`. Those values will be iterated over by the
+    optimization engine.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Because `cerebro` can host several strategies in each optimization pass, the
+    result will contain a *list of lists*. Each sublist is the result of each optimization
+    pass.
+  prefs: []
+  type: TYPE_NORMAL
+- en: In our case and with only 1 strategy per pass, we can quickly flatten the results
+    and extract the values of the analyzer we have added.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE3]'
+  prefs: []
+  type: TYPE_PRE
+- en: A sample run
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '[PRE4]'
+  prefs: []
+  type: TYPE_PRE
+- en: Our 2 strategies have been run and deliver (as expected) different results.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Note
+  prefs: []
+  type: TYPE_NORMAL
+- en: The sample is minimal but has been run with all available CPUs. Executing it
+    with `--maxpcpus=1` will be faster. For more complex scenarios using all CPUs
+    will be useful.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Conclusion
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: The *Strategy Selection* use case is possible and doesn’t need circumventing
+    any of the built-in facilities in either *backtrader* or *Python* itself.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Sample Usage
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[PRE5]'
+  prefs: []
+  type: TYPE_PRE
+- en: The code
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Which has been included in the sources of backtrader
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE6]'
+  prefs: []
+  type: TYPE_PRE

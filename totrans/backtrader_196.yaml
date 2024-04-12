@@ -1,0 +1,332 @@
+- en: 'Commissions: Stocks vs Futures'
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.backtrader.com/blog/posts/2015-07-26-commission-schemes/commission-schemes/](https://www.backtrader.com/blog/posts/2015-07-26-commission-schemes/commission-schemes/)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: backtrader has been born out of necessity. My own … to have the feeling I control
+    my own backtesting platform and can experiment new ideas. But in doing so and
+    fully open sourcing it from the very beginning it was clear it has to have a way
+    to fulfill the needs and wishes of others.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Being a traders future I could have chosen to code point based calculations
+    and fixed price per round commissions, but it would have been a mistake.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Note
+  prefs: []
+  type: TYPE_NORMAL
+- en: Jul 31, 2015
+  prefs: []
+  type: TYPE_NORMAL
+- en: Follow up post with newly added operations/trades notifications, fixing the
+    plotting of trades P&L figures and avoiding manual calculation like in the example
+    below
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Improving Commissions: Stocks vs Futures'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Instead, `backtrader` offers the possibility to play with regular % size/price
+    based schemes and fixed price/point schemes. The choice is yours.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Agnosticity
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: Before going forward let’s remember that `backtrader` tries to remain agnostic
+    as to what the data represents. Different commission schemes can be applied to
+    the same data set.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Let’s see how it can be done.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Using the broker shortcuts
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: 'This keeps the end user away from `CommissionInfo` objects because a commission
+    scheme can be created/set with a single function call. Within the regular `cerebro`
+    creation/set-up process, just add a call to `setcomission` over the `broker` member
+    variable. The following call sets a usual commission scheme for **Eurostoxx50**
+    futures when working with *InteractiveBrokers*:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Since most users will usually just test a single instrument, that’s all that’s
+    down to it. If you have given a `name` to your data feed, because several instruments
+    are being considered simultaneously on a chart, this call can be slightly extended
+    to look as follows:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: In this case this on-the-fly commission scheme will only applied to instruments
+    whose name matches `Eurostoxx50`.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The meaning of the setcommission parameters
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '`commission` (default: 0.0)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Monetary units in absolute or percentage terms each **action** costs.
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: In the above example it is 2.0 euros per contract for a `buy` and again 2.0
+    euros per contract for a `sell`.
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: The important issue here is when to use absolute or percentage values.
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: If `margin` evaluates to `False` (it is False, 0 or None for example) then it
+    will be considered that `commission` expresses a percentage of the `price` times
+    `size` operatin value
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: If `margin` is something else, it is considered the operations are happenning
+    on a `futures` like intstrument and `commission` is a fixed price per `size` contracts
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`margin` (default: None)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Margin money needed when operating with `futures` like instruments. As expressed
+    above
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: If a **no** `margin` is set, the `commission` will be understood to be indicated
+    in percentage and applied to `price \* size` components of a `buy` or `sell` operation
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: If a `margin` is set, the `commission` will be understood to be a fixed value
+    which is multiplied by the `size` component of `buy` or `sell` operation
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`mult` (default: 1.0)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: For `future` like instruments this determines the multiplicator to apply to
+    profit and loss calculations.
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: This is what makes futures attractive and risky at the same time.
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '`name` (default: None)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Limit the application of the commission scheme to instruments matching `name`
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: This can be set during the creation of a data feed.
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: If left unset, the scheme will apply to any data present in the system.
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: 'Two examples now: stocks vs futures'
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: 'The futures example from above:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'A example for stocks:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE3]'
+  prefs: []
+  type: TYPE_PRE
+- en: Creating permanent Commission schemes
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: 'A more permanent commission scheme can be created by working directly with
+    `CommissionInfo` classes. The user could choose to have this definition somewhere:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE4]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'To later apply it in another Python module with `addcommissioninfo`:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE5]'
+  prefs: []
+  type: TYPE_PRE
+- en: '`CommissionInfo` is an object which uses a `params` declaration just like other
+    objects in the `backtrader` environment. As such the above can be also expressed
+    as:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE6]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'And later:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE7]'
+  prefs: []
+  type: TYPE_PRE
+- en: Now a “real” comparison with a SMA Crossover
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: Using a SimpleMovingAverage crossover as the entry/exit signal the same data
+    set is going to be tested with a `futures` like commission scheme and then with
+    a `stocks` like one.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Note
+  prefs: []
+  type: TYPE_NORMAL
+- en: Futures positions could also not only be given the enter/exit behavior but a
+    reversal behavior on each occassion. But this example is about comparing the commission
+    schemes.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The code (see at the bottom for the full strategy) is the same and the scheme
+    can be chosen before the strategy is defined.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE8]'
+  prefs: []
+  type: TYPE_PRE
+- en: Just set `futures_like` to false to run with the `stocks` like scheme.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Some logging code has been added to evaluate the impact of the differrent commission
+    schemes. Let’s concentrate on just the 2 first operations.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'For futures:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE9]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'For stocks:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE10]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'The 1^(st) operation has the following prices:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: BUY (Execution) -> 3754.13 / SELL (Execution) -> 3786.93
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'Futures Profit & Loss (with comission): 324.0'
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'Stocks Profit & Loss (with commission): -4.91'
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Hey!! Commission has fully eaten up any profit on the `stocks` operation but
+    has only meant a small dent to the `futures` one.
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: 'The 2^(nd) operation:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: BUY (Execution) -> 3863.57 / SELL (Execution) -> 3389.24
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'Futures Profit & Loss (with commission): -247.30'
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'Stocks Profit & Loss (with commission): -62.84'
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: The bite has been sensibly larger for this negative operation with `futures`
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: 'But:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Futures accumulated net profit & loss: 324.00 + (-247.30) = 76.70'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'Stocks accumulated net profit & loss: (-4.91) + (-62.84) = -67.75'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: The accumulated effect can be seen on the charts below, where it can also be
+    seen that at the end of the full year, futures have produced a larger profit,
+    but have also suffered a larger drawdown (were deeper underwater)
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'But the important thing: whether `futures` or `stocks` … **it can be backtested.**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Commissions for futures
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![image](../Images/f4f184d1460cac9cf88bfe47d794e6d0.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Commissions for stocks
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![image](../Images/797882c944026027761b25c28daf70da.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: The code
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '[PRE11]'
+  prefs: []
+  type: TYPE_PRE

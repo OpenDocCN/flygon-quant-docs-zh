@@ -1,0 +1,81 @@
+- en: Renko Bricks
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.backtrader.com/blog/posts/2017-06-26-renko-bricks/renko-bricks/](https://www.backtrader.com/blog/posts/2017-06-26-renko-bricks/renko-bricks/)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: The *Renko Bricks* is a different way to present the evolution of prices in
+    which price plays a more important role than time. This has been introduced as
+    a *filter* in release `1.9.54.122` of *backtrader*
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*Stockcharts* has a good reference on the *Renko Bricks*. See [Renko Bricks
+    @StockCharts](http://stockcharts.com/school/doku.php?id=chart_school:chart_analysis:renko)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Some examples
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: Note
+  prefs: []
+  type: TYPE_NORMAL
+- en: The `size=35` and `align=10.0` parameters are appropriate for the sample data
+    in the *backtrader* repository. Those values have to be fine tuned for each data
+    asset.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'First, let’s put the *Renko Bricks* alone in a chart:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: The output
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![image](../Images/81a53e0238ef683116a5daf1c08a95b7.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: One can see that the chart immediately reveals some resistance/support areas,
+    which is one of the main advantages of the *Renko Bricks*. It should also be obvious
+    that the temporal evolution in the X-Axis is no longer constant and is stretched
+    or compressed, depending on whether the price action was more static during the
+    period or moved several bricks.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'To better see and appreciate the effects, let’s put the normal price bars and
+    the *Renko Bricks* together on a chart:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: The output
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![image](../Images/1549cb1cb4b342c94ab57011abf8a358.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: The strechting and compression of time periods is now a lot more obvious. One
+    other factor to consider is how the focus on the price action also has an effect
+    on the indicators which are applied, as shown by the two `RSI` indicators which
+    have been placed on the chart.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Sample Usage
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: Sample Code
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '[PRE3]'
+  prefs: []
+  type: TYPE_PRE

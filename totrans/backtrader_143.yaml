@@ -1,0 +1,188 @@
+- en: Hidden Powers of Python (1)
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.backtrader.com/blog/posts/2016-11-20-python-hidden-powers/hidden-powers/](https://www.backtrader.com/blog/posts/2016-11-20-python-hidden-powers/hidden-powers/)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: It’s only when meeting real users of *backtrader* when one can realize if the
+    abstractions and Python powers used in the platform make sense.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Without leaving the *pythonic* motto aside, *backtrader* tries to give the users
+    as much control as possible, whilst at the same time simplifying the usage by
+    putting into action the *hidden* powers that Python offers.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The first example in this the first post of a series.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Is it an array or what is it?
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: 'A very quick example:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'One of the questions that very quickly pops up is:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Couldn’t one also use the `[]` during `__init__`?.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: The question being asked because the user has already tried and Python has stopped
+    running with an exception.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'The answer:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: No. Using `[]` is not meant during initialization.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'With the next question being then:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: So what’s actually stored in `self.hi_lo_avg` during `__init__` if it’s not
+    an array?
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: And the answer is not puzzling for programmers but it may be for algo traders
+    who went for Python
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'It’s a lazily evaluated object, which will calculate and deliver the values
+    via the `[]` operator during the `cerebro.run` phase, i.e.: in the `next` method
+    of the strategy.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'Bottomline: in the `next` method the array indexing operator `[]` will give
+    you access to the calculated values for past and current time moments.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The secret is in the sauce
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: 'And *operator overriding* is the real sauce. Let’s break down the calculation
+    of the *high-low-average*:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'The components:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`self.data.high` and `self.data.low` are themselves *objects* (*lines* in the
+    *backtrader* naming scheme)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'They are in many cases mistakenly taken for pure *arrays* but they are not.
+    The reasons for them being objects:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Implementation of the `0` and `-1` indexing scheme in place in *backtrader*
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Control of the buffer sizing and linking to other objects
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'And the most important aspect in this case:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Overriding operators to return *objects*
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'And that why the operation below returns a *lines* object. Let’s start:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'The temporary object is then divided by `2.0` and assigned to the member variable:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE3]'
+  prefs: []
+  type: TYPE_PRE
+- en: This agains returns another *lines* object. Because operator overriding does
+    not only apply to operations executed directly amongst *lines* objects, but also
+    to, for example, arithmetic operations like this division.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Which means that `self.hi_lo_avg` has a reference to a *lines* object. This
+    object is useful in the `next` method of the strategy or as input to *indicators*
+    or other calculations.
+  prefs: []
+  type: TYPE_NORMAL
+- en: A *logic operator* example
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: The example above used an arithmetic operator during `__init__` and later the
+    combination of `[0]` and a logic opertor, `>` in `next`.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Because operator overriding is not limited to *arithmetic*, let’s put another
+    example in place, adding an indicator to the mix. A first attempt would be:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE4]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'But in this case there is simply change from `another_value` to `self.sma[0]`.
+    Let’s improve it:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE5]'
+  prefs: []
+  type: TYPE_PRE
+- en: One for the good guys. Operator overriding does also work in `next` and the
+    users can actually drop the `[0]` and directly compare the objects.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'If all that were what’s actually possible it would actually seem an overkill.
+    But the good thing is that there is more. See this example:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE6]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'We have done 2 things:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Create a *lines* object named `self.signal` which compares the *high-low-average*
+    against the value of a *Simple Moving Average*
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: As explained above this object is useful in `next`, when it has been calculated
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: Remove the usage of `[0]` in `next` when checking if `signal` is `True`. This
+    is possible because operators have also been overriden for boolean operations
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Conclusion
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: Hopefully this adds some light to what actually happens when operations are
+    executed in `__init__` and how operator overriding actually happens.
+  prefs: []
+  type: TYPE_NORMAL

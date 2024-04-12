@@ -1,0 +1,180 @@
+- en: Cheat On Open
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.backtrader.com/docu/cerebro/cheat-on-open/cheat-on-open/](https://www.backtrader.com/docu/cerebro/cheat-on-open/cheat-on-open/)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: Release `1.9.44.116` adds support for `Cheat-On-Open`. This seems to be a demanded
+    feature for people who go *all-in*, having made a calculation after the close
+    of a bar, but expecting to be matched against the `open` price.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Such a use case fails when the *opening* price gaps (up or down, depending on
+    whether `buy` or `sell` is in effect) and the cash is not enough for an *all-in*
+    operation. This forces the broker to reject the operation.
+  prefs: []
+  type: TYPE_NORMAL
+- en: And although people can try to look into the future with a positive `[1]` index
+    approach, this requires preloading data which is not always available.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'The pattern:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'This:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Activates an extra cycle in the system which calls the methods in the strategy
+    `next_open`, `nextstart_open` and `prenext_open`
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: The decision to have an additional family of methods has been made to make a
+    clear separation between the regular methods which operate on the basis that the
+    prices being examined are no longer available and the future is unknown and the
+    operation in cheating mode.
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: This also avoids having 2 calls to the regular `next` method.
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: 'The following holds true when inside a `xxx_open` method:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The indicators have not been recalculated and hold the values that were last
+    seen during the previous cycle in the equivalent `xxx` regular methods
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: The broker has not yet evaluated the pending orders for the new cycle and new
+    orders can be introduced which will be evaluated if possible.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'Notice that:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`Cerebro` also has a `broker_coo` (default: `True`) parameter which tells cerebro
+    that if `cheat-on-open` has been activated, it shall try to activate it also in
+    the broker if possible.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'The simulation broker has a parameter named: `coo` and a method to set it named
+    `set_coo`'
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: Trying cheat-on-open
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: 'The sample below has a strategy with 2 different behaviors:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: If *cheat-on-open* is *True*, it will only operate from `next_open`
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: If *cheat-on-open* is *False*, it will only operate from `next`
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: In both cases the matching price must be the **same**
+  prefs: []
+  type: TYPE_NORMAL
+- en: If not cheating, the order is issued at the end of the previous day and will
+    be matched with the next incoming price which is the `open` price
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: If cheating, the order is issued on the same day it is executed. Because the
+    order is issued before the broker has evaluated orders, it will also be matched
+    with the next incoming price, the `open` price.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: This second scenario, allows calculation of exact stakes for *all-in* strategies,
+    because one can directly access the current `open` price.
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: In both cases
+  prefs: []
+  type: TYPE_NORMAL
+- en: The current `open` and `close` prices will be printed from `next`.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'Regular execution:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![image](../Images/0fdbcee754e7caf6d5abcfa1d35f4dbc.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'The order:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Is issued on 2005-04-08 after the *close*
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: It is executed on 2005-04-11 with the `open` price of `3088.47`
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'Cheating execution:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![image](../Images/563421cf98c94af36cb0ecaff39f95ad.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'The order:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Is issued on 2005-04-11 before the *open*
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: It is executed on 2005-04-11 with the `open` price of `3088.47`
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: And the overall result as seen on the chart is also the same.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Conclusion
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: Cheating on the open allows issuing orders before the open which can for example
+    allow the exact calculation of stakes for *all-in* scenarios.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Sample usage
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '[PRE3]'
+  prefs: []
+  type: TYPE_PRE
+- en: Sample source
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '[PRE4]'
+  prefs: []
+  type: TYPE_PRE
