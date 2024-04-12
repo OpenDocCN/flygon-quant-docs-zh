@@ -3,35 +3,42 @@
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: Fillers
 - en: 原文：[https://www.backtrader.com/docu/filler/](https://www.backtrader.com/docu/filler/)
   id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.backtrader.com/docu/filler/](https://www.backtrader.com/docu/filler/)
 - en: 'The *backtrader* broker simulation has a default strategy when it comes to
     using volume for order execution:'
   id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: 当涉及使用成交量执行订单时，*backtrader* 经纪人模拟具有默认策略：
 - en: Ignore volume
   id: totrans-3
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 忽略成交量
 - en: 'This is based on 2 premises:'
   id: totrans-4
   prefs: []
   type: TYPE_NORMAL
+  zh: 这基于两个前提：
 - en: Trade in markets liquid enough to fully absorb *buy/sell* orders in one go
   id: totrans-5
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 在足够流动的市场中进行交易，以完全吸收一次性 *买入/卖出* 订单
 - en: Real volume matching requires a real wolrd
   id: totrans-6
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 真实成交量匹配需要真实世界
 - en: A quick example is a `Fill or Kill` order. Even down to the *tick* resolution
     and with enough volume for a *fill*, the *backtrader* broker cannot know how many
     extra actors happen to be in the market to discriminate if such an order would
@@ -41,21 +48,26 @@
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 快速示例是 `Fill or Kill` 订单。即使到了 *tick* 分辨率并且有足够的 *fill* 量，*backtrader* 经纪人也无法知道市场上有多少额外的参与者，以区分这样一个订单是否会匹配以坚持
+    `Fill` 部分，或者该订单是否应该 `Kill`。
 - en: But the *broker* can accept *Volume Fillers* which determine how much of the
     volume at a given point in time has to be used for *order matching*.
   id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: 但是 *broker* 可以接受 *Volume Fillers*，这些填充器确定在给定时间点使用多少成交量用于 *order matching*。
 - en: The fillers signature
   id: totrans-9
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 填充器的签名
 - en: 'A *filler* in the *backtrader* ecosystem can be any *callable* which matches
     the following signature:'
   id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: '*backtrader* 生态系统中的一个 *filler* 可以是符合以下签名的任何 *callable*：'
 - en: '[PRE0]'
   id: totrans-11
   prefs: []
@@ -65,39 +77,46 @@
   id: totrans-12
   prefs: []
   type: TYPE_NORMAL
+  zh: 其中：
 - en: '`order` is the order which is going to be executed'
   id: totrans-13
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`order` 是将要执行的订单'
 - en: This object gives access to the `data` object which is the target of the operation,
     creation sizes/prices, execution prices/sizes/remaining sizes and other details
   id: totrans-14
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 此对象提供对 `data` 对象的访问，该对象是操作目标，创建大小/价格，执行价格/大小/剩余大小和其他细节
 - en: '`price` at which the order is going to be executed'
   id: totrans-15
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 订单将被执行的 `price`
 - en: '`ago` is the index to the `data` in the *order* in which to look for the volume
     and price elements'
   id: totrans-16
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`ago` 是在其中查找体积和价格元素的 *order* 中的 `data` 的索引'
 - en: In almost all cases this will be `0` (current point in time) but in a corner
     case to cover `Close` orders this may be `-1`
   id: totrans-17
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 在几乎所有情况下，这将是 `0`（当前时间点），但在一种角落情况下，以涵盖 `Close` 订单，这可能是 `-1`
 - en: 'To for example access the bar volume do:'
   id: totrans-18
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 例如，要访问条形图的体积：
 - en: '[PRE1]'
   id: totrans-19
   prefs:
@@ -109,6 +128,7 @@
   id: totrans-20
   prefs: []
   type: TYPE_NORMAL
+  zh: 可调用对象可以是函数，也可以是例如支持 `__call__` 方法的类的实例，如：
 - en: '[PRE2]'
   id: totrans-21
   prefs: []
@@ -119,10 +139,12 @@
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 向经纪人添加一个 Filler
 - en: 'The most straightforward method is to use the `set_filler`:'
   id: totrans-23
   prefs: []
   type: TYPE_NORMAL
+  zh: 最直接的方法是使用 `set_filler`：
 - en: '[PRE3]'
   id: totrans-24
   prefs: []
@@ -134,6 +156,7 @@
   id: totrans-25
   prefs: []
   type: TYPE_NORMAL
+  zh: 第二种选择是完全替换 `broker`，虽然这可能只适用于已重写部分功能的 `BrokerBack` 的子类：
 - en: '[PRE4]'
   id: totrans-26
   prefs: []
@@ -144,84 +167,101 @@
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 示例
 - en: The *backtrader* sources contain a sample named `volumefilling` which allows
     to test some of the integrated `fillers` (initially all)
   id: totrans-28
   prefs: []
   type: TYPE_NORMAL
+  zh: '*backtrader* 源代码中包含一个名为 `volumefilling` 的示例，允许测试一些集成的 `fillers`（最初全部）'
 - en: Reference
   id: totrans-29
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 参考资料
 - en: class backtrader.fillers.FixedSize()
   id: totrans-30
   prefs:
   - PREF_H4
   type: TYPE_NORMAL
+  zh: class backtrader.fillers.FixedSize()
 - en: Returns the execution size for a given order using a *percentage* of the volume
     in a bar.
   id: totrans-31
   prefs: []
   type: TYPE_NORMAL
+  zh: 使用 *百分比* 的体积返回给定订单的执行大小。
 - en: This percentage is set with the parameter `perc`
   id: totrans-32
   prefs: []
   type: TYPE_NORMAL
+  zh: 此百分比通过参数 `perc` 设置
 - en: 'Params:'
   id: totrans-33
   prefs: []
   type: TYPE_NORMAL
+  zh: 参数：
 - en: '`size` (default: `None`) maximum size to be executed. The actual volume of
     the bar at execution time is also a limit if smaller than the size'
   id: totrans-34
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`size`（默认值：`None`）要执行的最大尺寸。如果执行时的实际体积小于大小，则也是限制'
 - en: If the value of this parameter evaluates to False, the entire volume of the
     bar will be used to match the order
   id: totrans-35
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 如果此参数的值计算为 False，则整个条的体积将用于匹配订单
 - en: class backtrader.fillers.FixedBarPerc()
   id: totrans-36
   prefs:
   - PREF_H4
   type: TYPE_NORMAL
+  zh: class backtrader.fillers.FixedBarPerc()
 - en: Returns the execution size for a given order using a *percentage* of the volume
     in a bar.
   id: totrans-37
   prefs: []
   type: TYPE_NORMAL
+  zh: 使用条中体积的 *百分比* 返回给定订单的执行大小。
 - en: This percentage is set with the parameter `perc`
   id: totrans-38
   prefs: []
   type: TYPE_NORMAL
+  zh: 此百分比通过参数 `perc` 设置
 - en: 'Params:'
   id: totrans-39
   prefs: []
   type: TYPE_NORMAL
+  zh: 参数：
 - en: '`perc` (default: `100.0`) (valied values: `0.0 - 100.0`)'
   id: totrans-40
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`perc`（默认值：`100.0`）（有效值：`0.0 - 100.0`）'
 - en: Percentage of the volume bar to use to execute an order
   id: totrans-41
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 用于执行订单的成交量栏的百分比
 - en: class backtrader.fillers.BarPointPerc()
   id: totrans-42
   prefs:
   - PREF_H4
   type: TYPE_NORMAL
+  zh: class backtrader.fillers.BarPointPerc()
 - en: Returns the execution size for a given order. The volume will be distributed
     uniformly in the range *high*-*low* using `minmov` to partition.
   id: totrans-43
   prefs: []
   type: TYPE_NORMAL
+  zh: 返回给定订单的执行大小。成交量将在 *high*-*low* 范围内均匀分布，使用 `minmov` 进行分区。
 - en: From the allocated volume for the given price, the `perc` percentage will be
     used
   id: totrans-44

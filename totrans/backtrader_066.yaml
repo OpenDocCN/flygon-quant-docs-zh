@@ -1,58 +1,88 @@
 - en: Position
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 位置
 - en: 原文：[https://www.backtrader.com/docu/position/](https://www.backtrader.com/docu/position/)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.backtrader.com/docu/position/](https://www.backtrader.com/docu/position/)
 - en: 'Position on an asset is usually checked from within a Strategy with:'
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: 通常在策略内部检查资产的持仓情况：
 - en: '`position` (a property) or `getposition(data=None, broker=None)`'
+  id: totrans-3
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`position`（一种属性）或 `getposition(data=None, broker=None)`'
 - en: Which will return the position on `datas[0]` of the strategy in the default
     `broker` provided by cerebro
+  id: totrans-4
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 这将返回由 cerebro 提供的默认 `broker` 中策略的 `datas[0]` 上的位置
 - en: 'A position is simply the indication of:'
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: 一个持仓只是指：
 - en: An asset is being held with `size`
+  id: totrans-6
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 资产持有 `size`
 - en: The average price is `price`
+  id: totrans-7
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 平均价格为 `price`
 - en: 'It serves as a status and can for example be used in deciding if an order has
     to be issued or not (example: long positions are only entered if no position is
     open)'
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: 它作为一种状态，并且例如可以用来决定是否要发出订单（例如：仅在没有持仓时才进入多头持仓）
 - en: 'Reference: Position'
+  id: totrans-9
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 参考：Position
 - en: class backtrader.position.Position(size=0, price=0.0)
+  id: totrans-10
   prefs:
   - PREF_H4
   type: TYPE_NORMAL
+  zh: 类 backtrader.position.Position(size=0, price=0.0)
 - en: Keeps and updates the size and price of a position. The object has no relationship
     to any asset. It only keeps size and price.
+  id: totrans-11
   prefs: []
   type: TYPE_NORMAL
+  zh: 保持并更新持仓的大小和价格。该对象与任何资产无关，仅保留大小和价格。
 - en: 'Member Attributes:'
+  id: totrans-12
   prefs: []
   type: TYPE_NORMAL
+  zh: 成员属性：
 - en: '[PRE0]'
+  id: totrans-13
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: The Position instances can be tested using len(position) to see if size is not
     null
+  id: totrans-14
   prefs: []
   type: TYPE_NORMAL
+  zh: Position 实例可以使用 len(position) 进行测试，以查看大小是否为空
