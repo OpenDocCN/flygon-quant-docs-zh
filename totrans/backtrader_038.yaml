@@ -1,301 +1,451 @@
 - en: Filters Reference
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: Filters Reference
 - en: 原文：[https://www.backtrader.com/docu/filters-reference/](https://www.backtrader.com/docu/filters-reference/)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.backtrader.com/docu/filters-reference/](https://www.backtrader.com/docu/filters-reference/)
 - en: SessionFilter
+  id: totrans-2
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: SessionFilter
 - en: class backtrader.filters.SessionFilter(data)
+  id: totrans-3
   prefs:
   - PREF_H4
   type: TYPE_NORMAL
+  zh: class backtrader.filters.SessionFilter(data)
 - en: 'This class can be applied to a data source as a filter and will filter out
     intraday bars which fall outside of the regular session times (ie: pre/post market
     data)'
+  id: totrans-4
   prefs: []
   type: TYPE_NORMAL
+  zh: 此类可以作为过滤器应用于数据源，并将过滤掉超出常规会话时间的盘中 bar（即：盘前/盘后市场数据）
 - en: This is a “non-simple” filter and must manage the stack of the data (passed
     during init and **call**)
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: 这是一个“非简单”的过滤器，必须管理数据的堆栈（在初始化和 **call** 期间传递）
 - en: It needs no “last” method because it has nothing to deliver
+  id: totrans-6
   prefs: []
   type: TYPE_NORMAL
+  zh: 它不需要“last”方法，因为它没有需要传递的内容
 - en: SessionFilterSimple
+  id: totrans-7
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: SessionFilterSimple
 - en: class backtrader.filters.SessionFilterSimple(data)
+  id: totrans-8
   prefs:
   - PREF_H4
   type: TYPE_NORMAL
+  zh: class backtrader.filters.SessionFilterSimple(data)
 - en: 'This class can be applied to a data source as a filter and will filter out
     intraday bars which fall outside of the regular session times (ie: pre/post market
     data)'
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: 此类可以作为过滤器应用于数据源，并将过滤掉超出常规会话时间的盘中 bar（即：盘前/盘后市场数据）
 - en: This is a “simple” filter and must NOT manage the stack of the data (passed
     during init and **call**)
+  id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: 这是一个“简单”过滤器，不必管理数据的堆栈（在初始化和 **call** 期间传递）
 - en: It needs no “last” method because it has nothing to deliver
+  id: totrans-11
   prefs: []
   type: TYPE_NORMAL
+  zh: 它不需要“last”方法，因为它没有需要传递的内容
 - en: Bar Management will be done by the SimpleFilterWrapper class made which is added
     durint the DataBase.addfilter_simple call
+  id: totrans-12
   prefs: []
   type: TYPE_NORMAL
+  zh: Bar 管理将由 SimpleFilterWrapper 类完成，该类在 DataBase.addfilter_simple 调用时添加
 - en: SessionFilller
+  id: totrans-13
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: SessionFilller
 - en: class backtrader.filters.SessionFiller(data)
+  id: totrans-14
   prefs:
   - PREF_H4
   type: TYPE_NORMAL
+  zh: class backtrader.filters.SessionFiller(data)
 - en: Bar Filler for a Data Source inside the declared session start/end times.
+  id: totrans-15
   prefs: []
   type: TYPE_NORMAL
+  zh: 声明会话开始/结束时间内的数据源的 Bar Filler。
 - en: The fill bars are constructed using the declared Data Source `timeframe` and
     `compression` (used to calculate the intervening missing times)
+  id: totrans-16
   prefs: []
   type: TYPE_NORMAL
+  zh: 填充 bar 是使用声明的 Data Source `timeframe` 和 `compression` 构建的（用于计算中间缺失的时间）
 - en: 'Params:'
+  id: totrans-17
   prefs: []
   type: TYPE_NORMAL
+  zh: 参数：
 - en: 'fill_price (def: None):'
+  id: totrans-18
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 'fill_price (def: None):'
 - en: If None is passed, the closing price of the previous bar will be used. To end
     up with a bar which for example takes time but it is not displayed in a plot …
     use float(‘Nan’)
+  id: totrans-19
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 如果传递了 None，则将使用前一个 bar 的收盘价。例如，要得到一个 bar，该 bar 需要时间，但不会在图表中显示... 使用 float(‘Nan’)
 - en: 'fill_vol (def: float(‘NaN’)):'
+  id: totrans-20
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 'fill_vol (def: float(‘NaN’)):'
 - en: Value to use to fill the missing volume
+  id: totrans-21
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 用于填充缺失的 volume 的值
 - en: 'fill_oi (def: float(‘NaN’)):'
+  id: totrans-22
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 'fill_oi (def: float(‘NaN’)):'
 - en: Value to use to fill the missing Open Interest
+  id: totrans-23
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 用于填充缺失的持仓量的值
 - en: 'skip_first_fill (def: True):'
+  id: totrans-24
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 'skip_first_fill (def: True):'
 - en: Upon seeing the 1^(st) valid bar do not fill from the sessionstart up to that
     bar
+  id: totrans-25
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 在看到第一个有效 bar 时，不要从 sessionstart 填充到该 bar
 - en: CalendarDays
+  id: totrans-26
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: CalendarDays
 - en: class backtrader.filters.CalendarDays(data)
+  id: totrans-27
   prefs:
   - PREF_H4
   type: TYPE_NORMAL
+  zh: class backtrader.filters.CalendarDays(data)
 - en: Bar Filler to add missing calendar days to trading days
+  id: totrans-28
   prefs: []
   type: TYPE_NORMAL
+  zh: 在交易日中添加缺失的日历天的 Bar Filler
 - en: 'Params:'
+  id: totrans-29
   prefs: []
   type: TYPE_NORMAL
+  zh: 参数：
 - en: 'fill_price (def: None):'
+  id: totrans-30
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 'fill_price (def: None):'
 - en: '0: The given value to fill 0 or None: Use the last known closing price -1:
     Use the midpoint of the last bar (High-Low average)'
+  id: totrans-31
   prefs:
   - PREF_IND
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 0：用于填充 0 或 None 的给定值：使用最后已知的收盘价 -1：使用最后一个 bar 的中点（High-Low 平均值）
 - en: 'fill_vol (def: float(‘NaN’)):'
+  id: totrans-32
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 'fill_vol (def: float(‘NaN’)):'
 - en: Value to use to fill the missing volume
+  id: totrans-33
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 用于填充缺失的 volume 的值
 - en: 'fill_oi (def: float(‘NaN’)):'
+  id: totrans-34
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 'fill_oi (def: float(‘NaN’)):'
 - en: Value to use to fill the missing Open Interest
+  id: totrans-35
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 用于填充缺失的持仓量的值
 - en: BarReplayer_Open
+  id: totrans-36
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: BarReplayer_Open
 - en: class backtrader.filters.BarReplayer_Open(data)
+  id: totrans-37
   prefs:
   - PREF_H4
   type: TYPE_NORMAL
+  zh: class backtrader.filters.BarReplayer_Open(data)
 - en: 'This filters splits a bar in two parts:'
+  id: totrans-38
   prefs: []
   type: TYPE_NORMAL
+  zh: 此过滤器将一个 bar 拆分为两部分：
 - en: '`Open`: the opening price of the bar will be used to deliver an initial price
     bar in which the four components (OHLC) are equal'
+  id: totrans-39
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`Open`：将使用 bar 的开盘价提供一个初始价格 bar，在该 bar 中，四个组件（OHLC）相等'
 - en: The volume/openinterest fields are 0 for this initial bar
+  id: totrans-40
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 该初始 bar 的 volume/openinterest 字段为 0
 - en: '`OHLC`: the original bar is delivered complete with the original `volume`/`openinterest`'
+  id: totrans-41
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`OHLC`：原始 bar 包含原始的 `volume`/`openinterest`'
 - en: The split simulates a replay without the need to use the *replay* filter.
+  id: totrans-42
   prefs: []
   type: TYPE_NORMAL
+  zh: 拆分模拟了一次回放，无需使用 *replay* 过滤器。
 - en: DaySplitter_Close
+  id: totrans-43
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: DaySplitter_Close
 - en: class backtrader.filters.DaySplitter_Close(data)
+  id: totrans-44
   prefs:
   - PREF_H4
   type: TYPE_NORMAL
+  zh: class backtrader.filters.DaySplitter_Close(data)
 - en: 'Splits a daily bar in two parts simulating 2 ticks which will be used to replay
     the data:'
+  id: totrans-45
   prefs: []
   type: TYPE_NORMAL
+  zh: 将每日 bar 拆分为两部分，模拟用于重放数据的 2 个 tick：
 - en: 'First tick: `OHLX`'
+  id: totrans-46
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 第一个 tick：`OHLX`
 - en: The `Close` will be replaced by the *average* of `Open`, `High` and `Low`
+  id: totrans-47
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: '`Close` 将被替换为 `Open`、`High` 和 `Low` 的 *平均值*'
 - en: The session opening time is used for this tick
+  id: totrans-48
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 此 tick 使用会话开放时间
 - en: and
+  id: totrans-49
   prefs: []
   type: TYPE_NORMAL
+  zh: 和
 - en: 'Second tick: `CCCC`'
+  id: totrans-50
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 第二个 tick：`CCCC`
 - en: The `Close` price will be used for the four components of the price
+  id: totrans-51
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: '`Close`价格将用于价格的四个组成部分'
 - en: The session closing time is used for this tick
+  id: totrans-52
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 会话结束时间用于此点
 - en: 'The volume will be split amongst the 2 ticks using the parameters:'
+  id: totrans-53
   prefs: []
   type: TYPE_NORMAL
+  zh: 体积将根据以下参数分配给 2 个点：
 - en: '`closevol` (default: `0.5`) The value indicate which percentage, in absolute
     terms from 0.0 to 1.0, has to be assigned to the *closing* tick. The rest will
     be assigned to the `OHLX` tick.'
+  id: totrans-54
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`closevol`（默认：`0.5`）该值表示从 0.0 到 1.0 的绝对比例，应分配给*收盘*点。其余将分配给`OHLX`点。'
 - en: '**This filter is meant to be used together with** `cerebro.replaydata`'
+  id: totrans-55
   prefs: []
   type: TYPE_NORMAL
+  zh: '**此过滤器意在与** `cerebro.replaydata` **一同使用**'
 - en: HeikinAshi
+  id: totrans-56
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 平均趋势烛（HeikinAshi）
 - en: class backtrader.filters.HeikinAshi(data)
+  id: totrans-57
   prefs:
   - PREF_H4
   type: TYPE_NORMAL
+  zh: 类 backtrader.filters.HeikinAshi(data)
 - en: The filter remodels the open, high, low, close to make HeikinAshi candlesticks
+  id: totrans-58
   prefs: []
   type: TYPE_NORMAL
+  zh: 此过滤器重新构建开盘价、最高价、最低价、收盘价以绘制平均趋势烛
 - en: 'See:'
+  id: totrans-59
   prefs: []
   type: TYPE_NORMAL
+  zh: 参见：
 - en: '[PRE0]'
+  id: totrans-60
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: Renko
+  id: totrans-61
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 砖形图（Renko）
 - en: class backtrader.filters.Renko(data)
+  id: totrans-62
   prefs:
   - PREF_H4
   type: TYPE_NORMAL
+  zh: 类 backtrader.filters.Renko(data)
 - en: Modify the data stream to draw Renko bars (or bricks)
+  id: totrans-63
   prefs: []
   type: TYPE_NORMAL
+  zh: 修改数据流以绘制砖形图（或砖块）
 - en: 'Params:'
+  id: totrans-64
   prefs: []
   type: TYPE_NORMAL
+  zh: 参数：
 - en: '`hilo` (default: *False*) Use high and low instead of close to decide if a
     new brick is needed'
+  id: totrans-65
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`hilo`（默认：*False*）使用最高价和最低价而不是收盘价来决定是否需要新砖'
 - en: '`size` (default: *None*) The size to consider for each brick'
+  id: totrans-66
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`size`（默认：*None*）每个砖的考虑大小'
 - en: '`autosize` (default: *20.0*) If *size* is *None*, this will be used to autocalculate
     the size of the bricks (simply dividing the current price by the given value)'
+  id: totrans-67
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`autosize`（默认：*20.0*）如果*size*为*None*，则将用于自动计算砖的大小（简单地将当前价格除以给定值）'
 - en: '`dynamic` (default: *False*) If *True* and using *autosize*, the size of the
     bricks will be recalculated when moving to a new brick. This will of course eliminate
     the perfect alignment of Renko bricks.'
+  id: totrans-68
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`dynamic`（默认：*False*）如果*True*并使用*autosize*，则移至新砖时将重新计算砖的大小。这当然会消除砖的完美对齐。'
 - en: '`align` (default: *1.0*) Factor use to align the price boundaries of the bricks.
     If the price is for example *3563.25* and *align* is *10.0*, the resulting aligned
     price will be *3560*. The calculation:'
+  id: totrans-69
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`align`（默认：*1.0*）用于对齐砖的价格边界的因子。例如，如果价格为*3563.25*，而*align*为*10.0*，则得到的对齐价格将为*3560*。计算方式：'
 - en: 3563.25 / 10.0 = 356.325
+  id: totrans-70
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 3563.25 / 10.0 = 356.325
 - en: round it and remove the decimals -> 356
+  id: totrans-71
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 四舍五入并去除小数 -> 356
 - en: 356 * 10.0 -> 3560
+  id: totrans-72
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 356 * 10.0 -> 3560
 - en: 'See:'
+  id: totrans-73
   prefs: []
   type: TYPE_NORMAL
+  zh: 参见：
 - en: '[PRE1]'
+  id: totrans-74
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE1]'

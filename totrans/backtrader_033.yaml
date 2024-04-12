@@ -1,225 +1,342 @@
 - en: Data Resampling
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 数据重新采样
 - en: 原文：[https://www.backtrader.com/docu/data-resampling/data-resampling/](https://www.backtrader.com/docu/data-resampling/data-resampling/)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.backtrader.com/docu/data-resampling/data-resampling/](https://www.backtrader.com/docu/data-resampling/data-resampling/)
 - en: When data is only available in a single timeframe and the analysis has to be
     done for a different timeframe, it’s time to do some resampling.
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: 当数据仅在单个时间框架中可用并且必须为不同时间框架进行分析时，是进行一些重新采样的时候了。
 - en: '“Resampling” should actually be called “Upsampling” given that one goes from
     a source timeframe to a larger time frame (for example: days to weeks)'
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: “重新取样”实际上应该称为“上取样”，因为从一个源时间框架到一个更大的时间框架（例如：从天到周）
 - en: '`backtrader` has built-in support for resampling by passing the original data
     through a filter object. Although there are several ways to achieve this, a straightforward
     interface exists to achieve this:'
+  id: totrans-4
   prefs: []
   type: TYPE_NORMAL
+  zh: 通过将原始数据通过过滤器对象传递给backtrader来支持重新采样。虽然有几种实现方法，但存在一种简单的接口来实现：
 - en: Instead of using `cerebro.adddata(data)` to put a `data` into the system use
+  id: totrans-5
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 使用`cerebro.adddata(data)`将`data`放入系统中，而不是
 - en: '`cerebro.resampledata(data, **kwargs)`'
+  id: totrans-6
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: '`cerebro.resampledata(data, **kwargs)`'
 - en: There are two main options that can be controlled
+  id: totrans-7
   prefs: []
   type: TYPE_NORMAL
+  zh: 有两个主要选项可以控制
 - en: Change the timeframe
+  id: totrans-8
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 调整时间范围
 - en: Compress bars
+  id: totrans-9
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 压缩条
 - en: 'To do so, use the following parameters when calling `resampledata`:'
+  id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: 要这样做，请在调用`resampledata`时使用以下参数：
 - en: '`timeframe` (default: bt.TimeFrame.Days)'
+  id: totrans-11
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`timeframe`（默认：bt.TimeFrame.Days）'
 - en: Destination timeframe which to be useful has to be equal or larger than the
     source
+  id: totrans-12
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 目标时间范围，必须等于或大于源时间
 - en: '`compression` (default: 1)'
+  id: totrans-13
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`compression`（默认：1）'
 - en: Compress the selected value “n” to 1 bar
+  id: totrans-14
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 将选定值“n”压缩为1条
 - en: 'Let’s see an example from Daily to Weekly with a handcrafted script:'
+  id: totrans-15
   prefs: []
   type: TYPE_NORMAL
+  zh: 让我们看一个从每日到每周的手工脚本示例：
 - en: '[PRE0]'
+  id: totrans-16
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: 'The output:'
+  id: totrans-17
   prefs: []
   type: TYPE_NORMAL
+  zh: 输出：
 - en: '![image](../Images/d663e94f4280a6be53ffbd6fd3f6b80e.png)'
+  id: totrans-18
   prefs: []
   type: TYPE_IMG
+  zh: '![image](../Images/d663e94f4280a6be53ffbd6fd3f6b80e.png)'
 - en: 'We can compare it to the original daily data:'
+  id: totrans-19
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们可以将其与原始的每日数据进行比较：
 - en: '[PRE1]'
+  id: totrans-20
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE1]'
 - en: 'The output:'
+  id: totrans-21
   prefs: []
   type: TYPE_NORMAL
+  zh: 输出：
 - en: '![image](../Images/3e14efdeed5c582c7e64ff122859ffd3.png)'
+  id: totrans-22
   prefs: []
   type: TYPE_IMG
+  zh: '![image](../Images/3e14efdeed5c582c7e64ff122859ffd3.png)'
 - en: 'The magic is done by executing the following steps:'
+  id: totrans-23
   prefs: []
   type: TYPE_NORMAL
+  zh: 通过执行以下步骤完成魔术：
 - en: Loading the data as usual
+  id: totrans-24
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 像往常一样加载数据
 - en: 'Feeding the data into cerebro with `resampledata` with the desired parameters:'
+  id: totrans-25
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 将数据使用`resampledata`与所需参数输入到cerebro中：
 - en: '`timeframe`'
+  id: totrans-26
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`timeframe`'
 - en: '`compression`'
+  id: totrans-27
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`compression`'
 - en: The code in the sample (the entire script at the bottom).
+  id: totrans-28
   prefs: []
   type: TYPE_NORMAL
+  zh: 样本中的代码（整个脚本在底部）。
 - en: '[PRE2]'
+  id: totrans-29
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE2]'
 - en: 'A last example in which we first change the time frame from daily to weekly
     and then apply a 3 to 1 compression:'
+  id: totrans-30
   prefs: []
   type: TYPE_NORMAL
+  zh: 最后一个示例，我们首先将时间框架从每日更改为每周，然后应用3比1的压缩：
 - en: '[PRE3]'
+  id: totrans-31
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE3]'
 - en: 'The output:'
+  id: totrans-32
   prefs: []
   type: TYPE_NORMAL
+  zh: 输出：
 - en: '![image](../Images/e627e859fd4df09ec16f16603bc912a4.png)'
+  id: totrans-33
   prefs: []
   type: TYPE_IMG
+  zh: '![image](../Images/e627e859fd4df09ec16f16603bc912a4.png)'
 - en: 'From the original 256 daily bars we end up with 18 3-week bars. The breakdown:'
+  id: totrans-34
   prefs: []
   type: TYPE_NORMAL
+  zh: 从原始的256个每日条到18个3周条。拆分：
 - en: 52 weeks
+  id: totrans-35
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 52周
 - en: 52 / 3 = 17.33 and therefore 18 bars
+  id: totrans-36
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 52 / 3 = 17.33，因此18个条
 - en: It doesn’t take much more. Of course intraday data can also be resampled.
+  id: totrans-37
   prefs: []
   type: TYPE_NORMAL
+  zh: 也不需要更多。当然，分时数据也可以重新采样。
 - en: 'The resampling filter supports additional parameters, which in most cases should
     not be touched:'
+  id: totrans-38
   prefs: []
   type: TYPE_NORMAL
+  zh: 重新采样过滤器支持附加参数，在大多数情况下不应该触及：
 - en: '`bar2edge` (default: `True`)'
+  id: totrans-39
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`bar2edge`（默认：`True`）'
 - en: resamples using time boundaries as the target. For example with a “ticks ->
     5 seconds” the resulting 5 seconds bars will be aligned to xx:00, xx:05, xx:10
     …
+  id: totrans-40
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 使用时间边界作为目标的重新采样。例如，使用“ticks -> 5秒”，结果为5秒的条将与xx:00、xx:05、xx:10对齐...
 - en: '`adjbartime` (default: `True`)'
+  id: totrans-41
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`adjbartime`（默认：`True`）'
 - en: Use the time at the boundary to adjust the time of the delivered resampled bar
     instead of the last seen timestamp. If resampling to “5 seconds” the time of the
     bar will be adjusted for example to hh![🇲🇲](../Images/3e6ba424774c41defcb4e0fc29c71826.png
     ":mm:")05 even if the last seen timestamp was hh![🇲🇲](../Images/3e6ba424774c41defcb4e0fc29c71826.png
     ":mm:")04.33
+  id: totrans-42
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 使用边界时间来调整传递的重新采样条的时间，而不是最后一次看到的时间戳。例如，如果重新采样到“5秒”，则条的时间将被调整为hh![🇲🇲](../Images/3e6ba424774c41defcb4e0fc29c71826.png
+    ":mm:")05，即使最后一次看到的时间戳是hh![🇲🇲](../Images/3e6ba424774c41defcb4e0fc29c71826.png
+    ":mm:")04.33。
 - en: Note
+  id: totrans-43
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 注意
 - en: Time will only be adjusted if “bar2edge” is True. It wouldn’t make sense to
     adjust the time if the bar has not been aligned to a boundary
+  id: totrans-44
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 如果“bar2edge”为True，只会调整时间。如果条未对齐到边界，调整时间是没有意义的
 - en: '`rightedge` (default: `True`)'
+  id: totrans-45
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`rightedge`（默认：`True`）'
 - en: Use the right edge of the time boundaries to set the time.
+  id: totrans-46
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 使用时间边界的右边来设置时间。
 - en: If False and compressing to 5 seconds the time of a resampled bar for seconds
     between hh![🇲🇲](../Images/3e6ba424774c41defcb4e0fc29c71826.png ":mm:")00 and hh![🇲🇲](../Images/3e6ba424774c41defcb4e0fc29c71826.png
     ":mm:")04 will be hh![🇲🇲](../Images/3e6ba424774c41defcb4e0fc29c71826.png ":mm:")00
     (the starting boundary
+  id: totrans-47
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 如果为 False 并且将重采样的间隔压缩到 5 秒，则在 hh![🇲🇲](../Images/3e6ba424774c41defcb4e0fc29c71826.png
+    ":mm:")00 和 hh![🇲🇲](../Images/3e6ba424774c41defcb4e0fc29c71826.png ":mm:")04 之间的秒钟的情况下，重采样条的时间将为
+    hh![🇲🇲](../Images/3e6ba424774c41defcb4e0fc29c71826.png ":mm:")00（起始边界
 - en: If True the used boundary for the time will be hh![🇲🇲](../Images/3e6ba424774c41defcb4e0fc29c71826.png
     ":mm:")05 (the ending boundary)
+  id: totrans-48
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 如果为 True，则时间的使用边界将为 hh![🇲🇲](../Images/3e6ba424774c41defcb4e0fc29c71826.png ":mm:")05（结束边界）
 - en: '`boundoff` (default: `0`)'
+  id: totrans-49
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`boundoff`（默认值：`0`）'
 - en: Push the boundary for resampling/replaying by an amount of units.
+  id: totrans-50
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 将重采样/重播的边界推进单位数量。
 - en: If for example the resampling is from *1 minute* to *15 minutes*, the default
     behavior is to take the 1-minute bars from *00:01:00* until *00:15:00* to produce
     a 15-minutes replayed/resampled bar.
+  id: totrans-51
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 例如，如果重采样的时间从 *1 分钟* 到 *15 分钟*，则默认行为是从 *00:01:00* 到 *00:15:00* 取 1 分钟的条来生成一个
+    15 分钟的重播/重采样条。
 - en: 'If `boundoff` is set to `1`, then the boundary is pushed `1 unit` forward.
     In this case the original *unit* is a *1-minute* bar. Consequently the resampling/replaying
     will now:'
+  id: totrans-52
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 如果 `boundoff` 设置为 `1`，则边界向前推进 `1 个单位`。 在这种情况下，原始的 *单位* 是一个 *1 分钟* 的条。 因此，现在重采样/重播将会：
 - en: Use the bars from *00:00:00* to *00:14:00* for the generation of the 15-minutes
     bar
+  id: totrans-53
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 使用从 *00:00:00* 到 *00:14:00* 的条来生成 15 分钟的条
 - en: The sample code for the resampling test script.
+  id: totrans-54
   prefs: []
   type: TYPE_NORMAL
+  zh: 重采样测试脚本的示例代码。
 - en: '[PRE4]'
+  id: totrans-55
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE4]'

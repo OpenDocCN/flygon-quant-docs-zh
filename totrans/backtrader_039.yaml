@@ -1,78 +1,118 @@
 - en: Yahoo Data Feed Notes
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 雅虎数据源注意事项
 - en: 原文：[https://www.backtrader.com/docu/datayahoo/](https://www.backtrader.com/docu/datayahoo/)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.backtrader.com/docu/datayahoo/](https://www.backtrader.com/docu/datayahoo/)
 - en: In May 2017 Yahoo discontinued the existing API for historical data downloads
     in *csv* format.
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: 2017 年 5 月，雅虎停止了用于历史数据下载的现有 *csv* 格式的 API。
 - en: A new API (here named `v7`) was quickly *standardized* and has been implemented.
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: 一个新的 API（此处命名为 `v7`）迅速被*标准化*并已实施。
 - en: This also brought a change to the actual CSV download format.
+  id: totrans-4
   prefs: []
   type: TYPE_NORMAL
+  zh: 这也带来了实际 CSV 下载格式的更改。
 - en: Using the v7 API/format
+  id: totrans-5
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 使用 v7 API/格式
 - en: Starting with version `1.9.49.116` this is the default behavior. Choose simply
     from
+  id: totrans-6
   prefs: []
   type: TYPE_NORMAL
+  zh: 从版本 `1.9.49.116` 开始，这是默认行为。只需简单选择
 - en: '`YahooFinanceData` for online downloads'
+  id: totrans-7
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`YahooFinanceData` 用于在线下载'
 - en: '`YahooFinanceCSVData` for offline downloaded files'
+  id: totrans-8
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`YahooFinanceCSVData` 用于离线下载的文件'
 - en: Using the legacy API/format
+  id: totrans-9
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 使用传统的 API/格式
 - en: To use the old API/format
+  id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: 要使用旧的 API/格式
 - en: 'Instantiate the online Yahoo data feed as:'
+  id: totrans-11
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 将在线雅虎数据源实例化为：
 - en: '[PRE0]'
+  id: totrans-12
   prefs:
   - PREF_IND
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: 'of the offline Yahoo data feed as:'
+  id: totrans-13
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 离线雅虎数据源为：
 - en: '[PRE1]'
+  id: totrans-14
   prefs:
   - PREF_IND
   type: TYPE_PRE
+  zh: '[PRE1]'
 - en: It might be that the online service comes back (the service was *discontinued*
     without any announcement … it might as well come back)
+  id: totrans-15
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 可能在线服务会回来（该服务没有任何公告地*停止*了… 也有可能会回来）
 - en: or
+  id: totrans-16
   prefs: []
   type: TYPE_NORMAL
+  zh: 或者
 - en: 'Only for Offline files downloaded before the change happened, the following
     can also be done:'
+  id: totrans-17
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 仅对在更改发生之前下载的离线文件，也可以进行以下操作：
 - en: '[PRE2]'
+  id: totrans-18
   prefs:
   - PREF_IND
   type: TYPE_PRE
+  zh: '[PRE2]'
 - en: The new `YahooLegacyCSV` simply automates using `version=''`
+  id: totrans-19
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 新的 `YahooLegacyCSV` 简单地使用 `version=''` 进行自动化。

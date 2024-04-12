@@ -1,253 +1,383 @@
 - en: Optimization improvements
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 优化改进
 - en: 原文：[https://www.backtrader.com/docu/optimization-improvements/](https://www.backtrader.com/docu/optimization-improvements/)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.backtrader.com/docu/optimization-improvements/](https://www.backtrader.com/docu/optimization-improvements/)
 - en: Version `1.8.12.99` of *backtrader* includes an improvement in how *data feeds*
     and *results* are managed during multiprocessing.
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: '*backtrader* 版本 `1.8.12.99` 包括了 *数据源* 和 *结果* 在多进程中的管理改进。'
 - en: Note
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: 注意
 - en: The behavior for both has been made
+  id: totrans-4
   prefs: []
   type: TYPE_NORMAL
+  zh: 对两者的行为进行了调整
 - en: 'The behavior of these options can be controlled through two new *Cerebro* parameters:'
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: 这些选项的行为可以通过两个新的 *Cerebro* 参数进行控制：
 - en: '`optdatas` (default: `True`)'
+  id: totrans-6
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`optdatas`（默认：`True`）'
 - en: If `True` and optimizing (and the system can `preload` and use `runonce`, data
     preloading will be done only once in the main process to save time and resources.
+  id: totrans-7
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 如果为 `True` 并且正在优化（并且系统可以 `preload` 并使用 `runonce`，数据预加载将仅在主进程中执行一次，以节省时间和资源。
 - en: '`optreturn` (default: `True`)'
+  id: totrans-8
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`optreturn`（默认：`True`）'
 - en: 'If `True` the optimization results will not be full `Strategy` objects (and
     all *datas*, *indicators*, *observers* …) but and object with the following attributes
     (same as in `Strategy`):'
+  id: totrans-9
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 如果为 `True`，则优化结果将不是完整的 `Strategy` 对象（以及所有 *数据*，*指标*，*观察器*等），而是具有以下属性的对象（与 `Strategy`
+    中相同）：
 - en: '`params` (or `p`) the strategy had for the execution'
+  id: totrans-10
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`params`（或 `p`）执行策略时的参数'
 - en: '`analyzers` the strategy has executed'
+  id: totrans-11
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`analyzers` 执行的策略'
 - en: In most occassions, only the *analyzers* and with which *params* are the things
     needed to evaluate a the performance of a strategy. If detailed analysis of the
     generated values for (for example) *indicators* is needed, turn this off
+  id: totrans-12
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 在大多数情况下，只需要 *analyzers* 和使用哪些 *params* 来评估策略的表现。如果需要对生成的值（例如 *指标*）进行详细分析，请关闭此选项。
 - en: Data Feed Management
+  id: totrans-13
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 数据源管理
 - en: 'In a *Optimization* scenario this is a likely combination of *Cerebro* parameters:'
+  id: totrans-14
   prefs: []
   type: TYPE_NORMAL
+  zh: 在 *优化* 场景中，这是 *Cerebro* 参数的可能组合：
 - en: '`preload=True` (default)'
+  id: totrans-15
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`preload=True`（默认）'
 - en: Data Feeeds will be preloaded before running any backtesting code
+  id: totrans-16
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 在运行任何回测代码之前，数据源将被预加载
 - en: '`runonce=True` (default)'
+  id: totrans-17
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`runonce=True`（默认）'
 - en: '*Indicators* will be calculated in batch mode a tight *for* loop, instead of
     step by step.'
+  id: totrans-18
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: '*指标* 将以批处理模式计算在一个紧密的 *for* 循环中，而不是逐步进行。'
 - en: 'If both conditions are `True` and `optdatas=True`, then:'
+  id: totrans-19
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果两个条件都为 `True` 并且 `optdatas=True`，则：
 - en: The *Data Feeds* will be preloaded in the main process before spawning new subprocesses
     (the ones in charge of executing the *backtesting*)
+  id: totrans-20
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 在生成新子进程（负责执行 *回测* 的子进程）之前，*数据源* 将在主进程中预加载
 - en: Results management
+  id: totrans-21
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 结果管理
 - en: 'In a *Optimization* scenario two things should play the most important role
     when evaluating the different parameters with which each *Strategy* was run:'
+  id: totrans-22
   prefs: []
   type: TYPE_NORMAL
+  zh: 在 *优化* 场景中，评估每个 *策略* 运行时使用的不同参数时，两件事应该起到最重要的作用：
 - en: '`strategy.params` (or `strategy.p`)'
+  id: totrans-23
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`strategy.params`（或 `strategy.p`）'
 - en: The actual set of values used for the backtesting
+  id: totrans-24
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 回测中使用的实际值集
 - en: '`strategy.analyzers`'
+  id: totrans-25
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`strategy.analyzers`'
 - en: 'The objects in charge of providing the evaluation of how the *Strategy* has
     actually performed. Example:'
+  id: totrans-26
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 负责提供 *策略* 实际表现评估的对象。示例：
 - en: '`SharpeRatio_A` (the annualized *SharpeRatio*)'
+  id: totrans-27
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: '`SharpeRatio_A`（年化 *SharpeRatio*）'
 - en: When `optreturn=True`, instead of returning full *strategy* instances, placeholder
     objects will be created which carry the two attributes aforementioned to let the
     evaluation take place.
+  id: totrans-28
   prefs: []
   type: TYPE_NORMAL
+  zh: 当 `optreturn=True` 时，将创建占位符对象，而不是返回完整的 *策略* 实例，这些对象携带上述两个属性，以便进行评估。
 - en: This avoids passing back lots of generated data like for example the values
     generated by indicators during the *backtesting*
+  id: totrans-29
   prefs: []
   type: TYPE_NORMAL
+  zh: 这样可以避免传递大量生成的数据，例如 *回测* 期间指标生成的值
 - en: Should the *full strategy objects* be wished, simply set `optreturn=False` during
     cerebro *instantiation* or when doing `cerebro.run`.
+  id: totrans-30
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果希望使用 *完整的策略对象*，只需在 cerebro *实例化* 期间或进行 `cerebro.run` 时将 `optreturn=False`。
 - en: Some test runs
+  id: totrans-31
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 一些测试运行
 - en: The *optimization* sample in the *backtrader* sources has been extended to add
     control for `optdatas` and `optreturn` (actually to disable them)
+  id: totrans-32
   prefs: []
   type: TYPE_NORMAL
+  zh: '*backtrader* 源代码中的 *优化* 示例已经扩展，以添加对 `optdatas` 和 `optreturn` 的控制（实际上是禁用它们）'
 - en: Single Core Run
+  id: totrans-33
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 单核运行
 - en: 'As a reference what happens when the amount of CPUs is limited to `1` and the
     `multiprocessing` module is not used:'
+  id: totrans-34
   prefs: []
   type: TYPE_NORMAL
+  zh: 作为参考，当 CPU 数量限制为 `1` 且未使用 `multiprocessing` 模块时发生了什么：
 - en: '[PRE0]'
+  id: totrans-35
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: Multiple Core Runs
+  id: totrans-36
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 多核运行
 - en: Without limiting the number of CPUs, the Python `multiprocessing` module will
     try to use all of them. `optdatas` and `optreturn` will be disabled
+  id: totrans-37
   prefs: []
   type: TYPE_NORMAL
+  zh: 不限制 CPU 数量时，Python 的 `multiprocessing` 模块将尝试使用所有 CPU。`optdatas` 和 `optreturn`
+    将被禁用。
 - en: Both `optdata` and `optreturn` active
+  id: totrans-38
   prefs:
   - PREF_H4
   type: TYPE_NORMAL
+  zh: '`optdata`和`optreturn`均处于激活状态'
 - en: 'The default behavior:'
+  id: totrans-39
   prefs: []
   type: TYPE_NORMAL
+  zh: 默认行为：
 - en: '[PRE1]'
+  id: totrans-40
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE1]'
 - en: The total improvement by having multicore and the *data feed* and *results*
     improvements means going down from `184.92` to `56.58` seconds.
+  id: totrans-41
   prefs: []
   type: TYPE_NORMAL
+  zh: 多核和*数据提供*以及*结果*改进带来的总改进意味着从`184.92`秒降至`56.58`秒。
 - en: Take into account that the sample is using `252` bars and the indicators generate
     only values with a length of `252` points. This is just an example.
+  id: totrans-42
   prefs: []
   type: TYPE_NORMAL
+  zh: 请注意，示例使用`252`根柱和指标仅生成长度为`252`点的值。这只是一个例子。
 - en: The real question is how much of this is attributable to the new behavior.
+  id: totrans-43
   prefs: []
   type: TYPE_NORMAL
+  zh: 真正的问题是这有多少归因于新行为。
 - en: '`optreturn` deactivated'
+  id: totrans-44
   prefs:
   - PREF_H4
   type: TYPE_NORMAL
+  zh: '`optreturn`已停用'
 - en: 'Let’s pass full *strategy* objects back to the caller:'
+  id: totrans-45
   prefs: []
   type: TYPE_NORMAL
+  zh: 让我们将完整的*策略*对象传递给调用者：
 - en: '[PRE2]'
+  id: totrans-46
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE2]'
 - en: The execution time has increased `18.50%` (or a speed-up of `15.62%`) is in
     place.
+  id: totrans-47
   prefs: []
   type: TYPE_NORMAL
+  zh: 执行时间增加了`18.50%`（或加速比为`15.62%`）。
 - en: '`optdatas` deactivated'
+  id: totrans-48
   prefs:
   - PREF_H4
   type: TYPE_NORMAL
+  zh: '`optdatas`已停用'
 - en: 'Each subproccess is forced to load its own set of values for the *data feeds*:'
+  id: totrans-49
   prefs: []
   type: TYPE_NORMAL
+  zh: 每个子进程被强制加载其自己的*数据提供*值集：
 - en: '[PRE3]'
+  id: totrans-50
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE3]'
 - en: The execution time has increased `28.52%` (or a speed-up of `22.19%`) is in
     place.
+  id: totrans-51
   prefs: []
   type: TYPE_NORMAL
+  zh: 执行时间增加了`28.52%`（或加速比为`22.19%`）。
 - en: Both deactivated
+  id: totrans-52
   prefs:
   - PREF_H4
   type: TYPE_NORMAL
+  zh: 两者均已停用
 - en: 'Still using multicore but with the old non-improved behavior:'
+  id: totrans-53
   prefs: []
   type: TYPE_NORMAL
+  zh: 仍然使用多核但保持旧的非改进行为：
 - en: '[PRE4]'
+  id: totrans-54
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE4]'
 - en: The execution time has increased `47.79%` (or a speed-up of `32.34%`) is in
     place.
+  id: totrans-55
   prefs: []
   type: TYPE_NORMAL
+  zh: 执行时间增加了`47.79%`（或加速比为`32.34%`）。
 - en: This shows that the used of multiple cores is the major contributor to the time
     improvement.
+  id: totrans-56
   prefs: []
   type: TYPE_NORMAL
+  zh: 这表明使用多核是时间改进的主要贡献者。
 - en: Note
+  id: totrans-57
   prefs: []
   type: TYPE_NORMAL
+  zh: 注意
 - en: The executions have been done in a Laptop with a `i7-4710HQ` (4-core / 8 logical)
     with 16 GBytes of RAM under Windows 10 64bit. The mileage may vary under other
     conditions
+  id: totrans-58
   prefs: []
   type: TYPE_NORMAL
+  zh: 执行是在装有`i7-4710HQ`（4核/8逻辑）和16 GBytes RAM的Windows 10 64位笔记本电脑上进行的。在其他条件下情况可能会有所不同
 - en: Concluding
+  id: totrans-59
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 结论
 - en: The greatest factor in time reduction during optimization is the use of the
     multiple cores
+  id: totrans-60
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 优化期间减少时间的最大因素是使用多核
 - en: The sample runs with `optdatas` and `optreturn` show speed-ups of around `22.19%`
     and `15.62%` each (`32.34%` both together in the test)
+  id: totrans-61
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 使用`optdatas`和`optreturn`的示例运行显示每个的加速比约为`22.19%`和`15.62%`（在测试中两者一起为`32.34%`）
 - en: Sample Usage
+  id: totrans-62
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 示例用法
 - en: '[PRE5]'
+  id: totrans-63
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE5]'

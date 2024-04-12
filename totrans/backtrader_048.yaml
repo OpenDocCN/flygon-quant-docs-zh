@@ -1,325 +1,487 @@
 - en: Indicator Development
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 指标开发
 - en: 原文：[https://www.backtrader.com/docu/inddev/](https://www.backtrader.com/docu/inddev/)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.backtrader.com/docu/inddev/](https://www.backtrader.com/docu/inddev/)
 - en: If anything (besides one or more winning Strategies) must ever be developed,
     this something is a custom Indicator.
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果除了一个或多个获胜策略之外，还必须开发其他内容，则此内容是自定义指标。
 - en: Such development within the platform is, according to the author, easy.
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: 根据作者的说法，平台内的这种开发是简单的。
 - en: 'The following is needed:'
+  id: totrans-4
   prefs: []
   type: TYPE_NORMAL
+  zh: 需要以下内容：
 - en: A class derived from Indicator (either directly or from an already existing
     subclass)
+  id: totrans-5
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 从指标派生的类（直接或从已经存在的子类）
 - en: Define the *lines* it will hold
+  id: totrans-6
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 定义它将保持的*线条*
 - en: An indicator must at least have 1 line. If deriving from an existing one, the
     line(s) may have already be defined
+  id: totrans-7
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 指标必须至少有一条线。如果是从现有指标派生的，则可能已经定义了线条（们）
 - en: Optionally define parameters which can alter the behavior
+  id: totrans-8
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 可选地定义可以更改行为的参数
 - en: Optionally provided/customize some of the elements which enable sensible plotting
     of the indicators
+  id: totrans-9
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 可选地提供/自定义一些元素，以便合理地绘制指标
 - en: Provide a fully defined operation in `__init__` with a binding (assignment)
     to the line(s) of the indicator or else provide `next` and (optionally) `once`
     methods
+  id: totrans-10
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 在`__init__`中提供完全定义的操作，并将其绑定（分配）到指标的线条（们）上，否则提供`next`和（可选）`once`方法
 - en: 'If an indicator can be fully defined with logic/arithmetic operations during
     initialization and the result is assigned to the line: done'
+  id: totrans-11
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 如果可以在初始化期间使用逻辑/算术运算完全定义指标，并将结果分配给线条：完成
 - en: Be it not the case, at least a `next` has to be provided where the indicator
     must assign a value to the line(s) at index 0
+  id: totrans-12
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 如果不是这种情况，至少必须提供一个`next`，在该方法中指标必须将一个值分配给索引为0的线条（们）
 - en: Optimization of the calculation for the **runonce** mode (batch operation) can
     be achieved by providing a *once* method.
+  id: totrans-13
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 可以通过提供*once*方法来实现对**runonce**模式（批量操作）的计算优化。
 - en: 'Important note: Idempotence'
+  id: totrans-14
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 重要提示：幂等性
 - en: Indicators produce an output for each bar they receive. No assumption has to
     be made about how many times the same bar will be sent. Operations have to be
     idempotent.
+  id: totrans-15
   prefs: []
   type: TYPE_NORMAL
+  zh: 指标为它们接收的每个柱状图生成输出。不必假设同一柱状图将被发送多少次。操作必须是幂等的。
 - en: 'The rationale behind this:'
+  id: totrans-16
   prefs: []
   type: TYPE_NORMAL
+  zh: 其背后的原理是：
 - en: The same bar (index-wise) can be sent many times with changing values (namely
     the changing value is the closing price)
+  id: totrans-17
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 同一柱状图（索引）可以多次发送，其值会发生变化（即变化的值是收盘价）
 - en: This enables, for example, “replaying” a daily session but using intraday data
     which could be made of 5 minutes bars.
+  id: totrans-18
   prefs: []
   type: TYPE_NORMAL
+  zh: 这使得例如，“重播”每日会话，但使用可能由5分钟柱状图组成的股票数据成为可能。
 - en: It could also allow the platform to get values from a live feed.
+  id: totrans-19
   prefs: []
   type: TYPE_NORMAL
+  zh: 这也可以使平台从实时数据源获取值。
 - en: A dummy (but functional) indicator
+  id: totrans-20
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 一个虚拟（但功能性的）指标
 - en: 'So can it be:'
+  id: totrans-21
   prefs: []
   type: TYPE_NORMAL
+  zh: 所以它可以是：
 - en: '[PRE0]'
+  id: totrans-22
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: 'Done! The indicator will output always the same value: either 0.0 or self.params.value
     if it happens to be greater than 0.0.'
+  id: totrans-23
   prefs: []
   type: TYPE_NORMAL
+  zh: 完成！指标将始终输出相同的值：如果大于0.0，则为0.0或self.params.value。
 - en: 'The same indicator but using the next method:'
+  id: totrans-24
   prefs: []
   type: TYPE_NORMAL
+  zh: 相同的指标，但使用了下一个方法：
 - en: '[PRE1]'
+  id: totrans-25
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE1]'
 - en: Done! Same behavior.
+  id: totrans-26
   prefs: []
   type: TYPE_NORMAL
+  zh: 完成！相同的行为。
 - en: Note
+  id: totrans-27
   prefs: []
   type: TYPE_NORMAL
+  zh: 注意
 - en: Notice how in the `__init__` version `bt.Max` is used to assign to the Line
     object `self.lines.dummyline`.
+  id: totrans-28
   prefs: []
   type: TYPE_NORMAL
+  zh: 注意在`__init__`版本中如何使用`bt.Max`将其分配给Line对象`self.lines.dummyline`。
 - en: '`bt.Max` returns an *lines* object that is automatically iterated for each
     bar passed to the indicator.'
+  id: totrans-29
   prefs: []
   type: TYPE_NORMAL
+  zh: '`bt.Max`返回一个*lines*对象，该对象会自动为传递给指标的每个柱状图迭代。'
 - en: Had `max` been used instead, the assigment would have been pointless, because
     instead of a line, the indicator would have a member variable with a fixed value.
+  id: totrans-30
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果使用`max`，则赋值将毫无意义，因为指标将具有具有固定值的成员变量，而不是线条。
 - en: During `next` the work is done directly with floating point values and the standard
     `max` built-in can be used
+  id: totrans-31
   prefs: []
   type: TYPE_NORMAL
+  zh: 在`next`过程中，直接使用浮点值进行工作，并且可以使用标准的`max`内置函数
 - en: 'Let’s recall that `self.lines.dummyline` is the long notation and that it can
     be shortened to:'
+  id: totrans-32
   prefs: []
   type: TYPE_NORMAL
+  zh: 让我们回顾一下`self.lines.dummyline`是长格式的，可以缩写为：
 - en: '`self.l.dummyline`'
+  id: totrans-33
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`self.l.dummyline`'
 - en: 'and even to:'
+  id: totrans-34
   prefs: []
   type: TYPE_NORMAL
+  zh: 甚至可以：
 - en: '`self.dummyline`'
+  id: totrans-35
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`self.dummyline`'
 - en: The latter being only possible if the code has not obscured this with a member
     attribute.
+  id: totrans-36
   prefs: []
   type: TYPE_NORMAL
+  zh: 后者仅在代码没有将其与成员属性混淆时才可能存在。
 - en: 'The 3^(rd) and last version provides an additional `once` method to optimize
     the calculation:'
+  id: totrans-37
   prefs: []
   type: TYPE_NORMAL
+  zh: 第三个版本提供了一个额外的`once`方法来优化计算：
 - en: '[PRE2]'
+  id: totrans-38
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE2]'
 - en: A lot more effective but developing the `once` method has forced to scratch
     beyond the surface. Actually the guts have been looked into.
+  id: totrans-39
   prefs: []
   type: TYPE_NORMAL
+  zh: 更有效，但开发`once`方法已迫使深入挖掘。实际上已经查看了内部情况。
 - en: 'The `__init__` version is in any case the best:'
+  id: totrans-40
   prefs: []
   type: TYPE_NORMAL
+  zh: '`__init__` 版本无论如何都是最好的：'
 - en: Everything is confined to the initialization
+  id: totrans-41
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 一切都限于初始化
 - en: '`next` and `once` (both optimized, because `bt.Max` already has them) are provided
     automatically with no need to play with indices and/or formulas'
+  id: totrans-42
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`next` 和 `once`（都经过优化，因为 `bt.Max` 已经包含了它们）会自动提供，无需操作索引和/或公式'
 - en: 'Be it needed for development, the indicator can also override the methods associated
     to `next` and `once`:'
+  id: totrans-43
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果需要开发，指标还可以覆盖与 `next` 和 `once` 关联的方法：
 - en: '`prenext` and `nexstart`'
+  id: totrans-44
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`prenext` 和 `nexstart`'
 - en: '`preonce` and `oncestart`'
+  id: totrans-45
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`preonce` 和 `oncestart`'
 - en: Manual/Automatic Minimum Period
+  id: totrans-46
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 手动/自动最小周期
 - en: If possible the platform will calculate it, but manual action may be needed.
+  id: totrans-47
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果可能的话，平台会计算，但可能需要手动操作。
 - en: 'Here is a potential implementation of a *Simple Moving Average*:'
+  id: totrans-48
   prefs: []
   type: TYPE_NORMAL
+  zh: 这是一个*简单移动平均*的潜在实现：
 - en: '[PRE3]'
+  id: totrans-49
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE3]'
 - en: Although it seems sound, the platform doesn’t know what the minimum period is,
     even if the parameter is named “period” (the name could be misleading and some
     indicators receive several “period”s which have different usages)
+  id: totrans-50
   prefs: []
   type: TYPE_NORMAL
+  zh: 尽管看起来合理，但平台并不知道最小周期是多少，即使参数被命名为“period”（名称可能会误导，并且一些指标接收到多个具有不同用途的“period”）
 - en: In this case `next` would be called already for the 1^(st) bar and everthing
     would explode because get cannot return the needed `self.p.period`.
+  id: totrans-51
   prefs: []
   type: TYPE_NORMAL
+  zh: 在这种情况下，`next`将被调用，已经为第 1 个柱，一切都将爆炸，因为 get 不能返回所需的 `self.p.period`。
 - en: 'Before solving the situation something has to be taken into account:'
+  id: totrans-52
   prefs: []
   type: TYPE_NORMAL
+  zh: 在解决这种情况之前，必须考虑以下事项：
 - en: The data feeds passed to the indicators may already carry a **minimum period**
+  id: totrans-53
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 提供给指标的数据源可能已经具有**最小周期**
 - en: 'The sample *SimpleMovingAverage* may be done on for example:'
+  id: totrans-54
   prefs: []
   type: TYPE_NORMAL
+  zh: 例如，可以对样本*SimpleMovingAverage*进行处理：
 - en: A regular data feed
+  id: totrans-55
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 一个常规数据源
 - en: This has a default mininum period of 1 (just wait for the 1^(st) bar that enters
     the system)
+  id: totrans-56
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 这有一个默认的最小周期为 1（只需等待进入系统的第 1 个柱形图）
 - en: Another Moving Average … and this in turn already has a *period*
+  id: totrans-57
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 另一个移动平均……而这又已经有一个*周期*
 - en: If this is 20 and again our sample moving average has also 20, we end up with
     a minimum period of 40 bars
+  id: totrans-58
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 如果这是 20，再次我们的示例移动平均值也是 20，我们最终会得到一个最小周期为 40 个柱的周期
 - en: Actually the internal calculation says 39 … because as soon as the first moving
     average has produced a bar this counts for the next moving average, which creates
     an overlapping bar, thus 39 are needed.
+  id: totrans-59
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 实际上，内部计算说 39 …… 因为一旦第一个移动平均产生了一个柱，这就计为下一个移动平均，从而创建了一个重叠的柱，因此需要 39 个。
 - en: Other indicators/objects which also carry periods
+  id: totrans-60
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 其他也携带周期的指标/对象
 - en: 'Alleviating the situation is done as follows:'
+  id: totrans-61
   prefs: []
   type: TYPE_NORMAL
+  zh: 缓解情况的方法如下：
 - en: '[PRE4]'
+  id: totrans-62
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE4]'
 - en: The `addminperiod` method is telling the system to take into account the extra
     *period* bars needed by this indicator to whatever minimum period there may be
     in existence.
+  id: totrans-63
   prefs: []
   type: TYPE_NORMAL
+  zh: '`addminperiod` 方法告诉系统考虑该指标所需的额外*周期*柱到任何可能存在的最小周期。'
 - en: Sometimes this is absolutely not needed, if all calculations are done with objects
     which already communicate its period needs to the system.
+  id: totrans-64
   prefs: []
   type: TYPE_NORMAL
+  zh: 有时这绝对不是必要的，如果所有计算都是使用已经向系统传达其周期需求的对象完成的。
 - en: 'A quick *MACD* implementation with Histogram:'
+  id: totrans-65
   prefs: []
   type: TYPE_NORMAL
+  zh: 带有直方图的快速*MACD*实现：
 - en: '[PRE5]'
+  id: totrans-66
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE5]'
 - en: Done! No need to think about mininum periods.
+  id: totrans-67
   prefs: []
   type: TYPE_NORMAL
+  zh: 完成！不需要考虑最小周期。
 - en: '`EMA` stands for *Exponential Moving Average* (a platform built-in alias)'
+  id: totrans-68
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`EMA`代表*指数移动平均*（一个平台内置的别名）'
 - en: And this one (already in the platform) already states what it needs
+  id: totrans-69
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 这个（已经在平台上）已经说明了它需要什么
 - en: The named lines of the indicator “macd” and “signal” are being assigned objects
     which already carry declared (behind the scenes) periods
+  id: totrans-70
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 指标“macd”和“signal”的命名线被分配了已经携带声明的对象（在幕后）周期的对象
 - en: macd takes the period from the operation “me1 - me2” which has in turn take
     the maximum from the periods of me1 and me2 (which are both exponential moving
     averages with different periods)
+  id: totrans-71
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: macd 取自“me1 - me2”操作的周期，这又取自 me1 和 me2 的周期的最大值（它们都是具有不同周期的指数移动平均值）
 - en: signal takes directly the period of the Exponential Moving Average over macd.
     This EMA also takes into account the already existing macd period and the needed
     amount of samples (period_signal) to calculate itself
+  id: totrans-72
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: signal 直接取 Exponential Moving Average 在 macd 上的周期。这个 EMA 还考虑了已经存在的 macd 周期和计算自身所需样本（period_signal）的数量
 - en: histo takes the maximum of the two operands “signal - macd”. Once both are ready
     can histo also produce a value
+  id: totrans-73
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: histo 取两个操作数“signal - macd”的最大值。一旦两者准备好了，histo 也可以生成一个值
 - en: A full custom indicator
+  id: totrans-74
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 一个完全定制的指标
 - en: 'Let’s develop a simple custom indicator which “indicates” if a moving average
     (which can be modified with a parameter) is above the given data:'
+  id: totrans-75
   prefs: []
   type: TYPE_NORMAL
+  zh: 让我们开发一个简单的自定义指标，用于“指示”移动平均线（可以通过参数进行修改）是否高于给定数据：
 - en: '[PRE6]'
+  id: totrans-76
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE6]'
 - en: Done! The indicator will have a value of “1” if the average is above the data
     and “-1” if below.
+  id: totrans-77
   prefs: []
   type: TYPE_NORMAL
+  zh: 完成！如果平均值高于数据，则指标将具有“1”值，如果低于数据，则为“-1”。
 - en: Be the data a regular data feed the 1s and -1s would be produced comparing with
     the close price.
+  id: totrans-78
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果数据是定期数据源，与收盘价进行比较会产生1和-1。
 - en: 'Although more can be seen in the *Plotting* section and to have a behaved and
     nice citizen in the plotting world, a couple of things can be added:'
+  id: totrans-79
   prefs: []
   type: TYPE_NORMAL
+  zh: 尽管在*绘图*部分可以看到更多内容，并且为了在绘图世界中表现良好，可以添加一些内容：
 - en: '[PRE7]'
+  id: totrans-80
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE7]'

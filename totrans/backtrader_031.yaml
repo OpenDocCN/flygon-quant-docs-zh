@@ -1,268 +1,404 @@
 - en: Binary Datafeed Development
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 二进制数据源开发
 - en: 原文：[https://www.backtrader.com/docu/datafeed-develop-general/datafeed-develop-general/](https://www.backtrader.com/docu/datafeed-develop-general/datafeed-develop-general/)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.backtrader.com/docu/datafeed-develop-general/datafeed-develop-general/](https://www.backtrader.com/docu/datafeed-develop-general/datafeed-develop-general/)
 - en: Note
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: 注意
 - en: The binary file used in the examples `goog.fd` belongs to VisualChart and cannot
     be distributed with `backtrader`.
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: 示例中使用的二进制文件`goog.fd`属于VisualChart，不能与`backtrader`一起分发。
 - en: '[VisualChart](http://www.visualchart.com) can be downloaded free of charge
     for those interested in directly using the binary files.'
+  id: totrans-4
   prefs: []
   type: TYPE_NORMAL
+  zh: '[VisualChart](http://www.visualchart.com)可以免费下载，供有兴趣直接使用二进制文件的人使用。'
 - en: 'CSV Data feed development has shown how to add new CSV based data feeds. The
     existing base class CSVDataBase provides the framework taking most of the work
     off the subclasses which in most cases can simply do:'
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: CSV数据源开发展示了如何添加新的基于CSV的数据源。现有的基类CSVDataBase提供了框架，大多数情况下子类可以简单地执行以下操作：
 - en: '[PRE0]'
+  id: totrans-6
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: The base class takes care of the parameters, initialization, opening of files,
     reading lines, splitting the lines in tokens and additional things like skipping
     lines which don’t fit into the date range (`fromdate`, `todate`) which the end
     user may have defined.
+  id: totrans-7
   prefs: []
   type: TYPE_NORMAL
+  zh: 基类负责参数、初始化、文件打开、读取行、拆分行为标记和其他额外的事情，比如跳过不符合用户可能已定义的日期范围（`fromdate`、`todate`）的行。
 - en: Developing a non-CSV datafeed follows the same pattern without going down to
     the already splitted line tokens.
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: 开发非CSV数据源遵循相同的模式，而不是下降到已分割的行标记。
 - en: 'Things to do:'
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: 要做的事情：
 - en: Derive from backtrader.feed.DataBase
+  id: totrans-10
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 派生自`backtrader.feed.DataBase`。
 - en: Add any parameters you may need
+  id: totrans-11
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 添加任何你可能需要的参数
 - en: Should initialization be needed, override `__init__(self)` and/or `start(self)`
+  id: totrans-12
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 如果需要初始化，请覆盖`__init__(self)`和/或`start(self)`。
 - en: Should any clean-up code be needed, override `stop(self)`
+  id: totrans-13
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 如果需要任何清理代码，覆盖`stop(self)`。
 - en: 'The work happens inside the method which MUST always be overriden: `_load(self)`'
+  id: totrans-14
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 工作发生在必须始终被覆盖的方法内：`_load(self)`
 - en: 'Let’s the parameters already provided by `backtrader.feed.DataBase`:'
+  id: totrans-15
   prefs: []
   type: TYPE_NORMAL
+  zh: 让我们使用`backtrader.feed.DataBase`已提供的参数：
 - en: '[PRE1]'
+  id: totrans-16
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE1]'
 - en: 'Having the following meanings:'
+  id: totrans-17
   prefs: []
   type: TYPE_NORMAL
+  zh: 具有以下含义：
 - en: '`dataname` is what allows the data feed to identify how to fetch the data.
     In the case of the `CSVDataBase` this parameter is meant to be a path to a file
     or already a file-like object.'
+  id: totrans-18
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`dataname`是数据源识别如何获取数据的参数。在`CSVDataBase`的情况下，此参数应为文件路径或已经是类似文件的对象。'
 - en: '`fromdate` and `todate` define the date range which will be passed to strategies.
     Any value provided by the feed outside of this range will be ignored'
+  id: totrans-19
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`fromdate`和`todate`定义将传递给策略的日期范围。提供的任何值超出此范围的数据将被忽略。'
 - en: '`name` is cosmetic for plotting purposes'
+  id: totrans-20
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`name`是为了绘图目的而设计的。'
 - en: '`timeframe` indicates the temporal working reference'
+  id: totrans-21
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`timeframe`指示时间工作参考'
 - en: 'Potential values: `Ticks`, `Seconds`, `Minutes`, `Days`, `Weeks`, `Months`
     and `Years`'
+  id: totrans-22
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 可能的值：`Ticks`、`Seconds`、`Minutes`、`Days`、`Weeks`、`Months`和`Years`。
 - en: '`compression` (default: 1)'
+  id: totrans-23
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`compression`（默认值：1）'
 - en: Number of actual bars per bar. Informative. Only effective in Data Resampling/Replaying.
+  id: totrans-24
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 每个柱子的实际条数。提供信息。仅在数据重采样/重播中有效。
 - en: '`compression`'
+  id: totrans-25
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`compression`'
 - en: '`sessionend` if passed (a datetime.time object) will be added to the datafeed
     `datetime` line which allows identifying the end of the session'
+  id: totrans-26
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 如果传递了`sessionend`（一个datetime.time对象），将会添加到数据源`datetime`行中，以便识别会话结束。
 - en: Sample binary datafeed
+  id: totrans-27
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 样本二进制数据源
 - en: '`backtrader` already defines a CSV datafeed (`VChartCSVData`) for the exports
     of [VisualChart](http://www.visualchart.com), but it is also possible to directly
     read the binary data files.'
+  id: totrans-28
   prefs: []
   type: TYPE_NORMAL
+  zh: '`backtrader`已经为[VisualChart](http://www.visualchart.com)的导出定义了一个CSV数据源(`VChartCSVData`)，但也可以直接读取二进制数据文件。'
 - en: Let’s do it (full data feed code can be found at the bottom)
+  id: totrans-29
   prefs: []
   type: TYPE_NORMAL
+  zh: 让我们做吧（完整的数据源代码可以在底部找到）
 - en: Initialization
+  id: totrans-30
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 初始化
 - en: The binary VisualChart data files can contain either daily (.fd extension) or
     intraday data (.min extension). Here the parameter `timeframe` will be used to
     distinguish which type of file is being read.
+  id: totrans-31
   prefs: []
   type: TYPE_NORMAL
+  zh: 二进制的VisualChart数据文件可以包含每日数据（.fd扩展名）或分钟数据（.min扩展名）。在这里，参数`timeframe`将用于区分正在读取的文件类型。
 - en: During `__init__` constants which differ for each type are set up.
+  id: totrans-32
   prefs: []
   type: TYPE_NORMAL
+  zh: 在`__init__`中，为每种类型设置不同的常量。
 - en: '[PRE2]'
+  id: totrans-33
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE2]'
 - en: Start
+  id: totrans-34
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 开始
 - en: The Datafeed will be *started* when backtesting commences (it can actually be
     started several times during optimizations)
+  id: totrans-35
   prefs: []
   type: TYPE_NORMAL
+  zh: 当回测开始时（在优化过程中实际上可以多次启动），数据源将会*启动*。
 - en: In the `start` method the binary file is open unless a file-like object has
     been passed.
+  id: totrans-36
   prefs: []
   type: TYPE_NORMAL
+  zh: 在`start`方法中，打开二进制文件，除非已传递了类似文件的对象。
 - en: '[PRE3]'
+  id: totrans-37
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE3]'
 - en: Stop
+  id: totrans-38
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 停止
 - en: Called when backtesting is finished.
+  id: totrans-39
   prefs: []
   type: TYPE_NORMAL
+  zh: 在回测完成时调用。
 - en: If a file was open, it will be closed
+  id: totrans-40
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果文件已打开，则将其关闭
 - en: '[PRE4]'
+  id: totrans-41
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE4]'
 - en: Actual Loading
+  id: totrans-42
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 实际加载
 - en: 'The actual work is done in `_load`. Called to load the next set of data, in
     this case the next : datetime, open, high, low, close, volume, openinterest. In
     `backtrader` the “actual” moment corresponds to index 0.'
+  id: totrans-43
   prefs: []
   type: TYPE_NORMAL
+  zh: 实际工作是在`_load`中完成的。调用以加载下一组数据，这种情况下的下一个数据是：datetime、open、high、low、close、volume、openinterest。在`backtrader`中，“实际”时刻对应于索引0。
 - en: 'A number of bytes will be read from the open file (determined by the constants
     set up during `__init__`), parsed with the `struct` module, further processed
     if needed (like with divmod operations for date and time) and stored in the `lines`
     of the data feed: datetime, open, high, low, close, volume, openinterest.'
+  id: totrans-44
   prefs: []
   type: TYPE_NORMAL
+  zh: 从打开的文件中读取一定数量的字节（由`__init__`期间设置的常量确定），使用`struct`模块解析，如果需要进一步处理（例如使用divmod操作处理日期和时间），然后存储在数据源的`lines`中：datetime、open、high、low、close、volume、openinterest。
 - en: If no data can be read from the file it is assumed that the End Of File (EOF)
     has been reached
+  id: totrans-45
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果无法从文件中读取数据，则假定已到达文件结束（EOF）。
 - en: '`False` is returned to indicate the fact no more data is available'
+  id: totrans-46
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 返回`False`表示没有更多数据可用
 - en: 'Else if data has been loaded and parsed:'
+  id: totrans-47
   prefs: []
   type: TYPE_NORMAL
+  zh: 或者如果数据已加载并解析：
 - en: '`True` is returned to indicate the loading of the data set was a success'
+  id: totrans-48
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 返回`True`表示数据集加载成功
 - en: '[PRE5]'
+  id: totrans-49
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE5]'
 - en: Other Binary Formats
+  id: totrans-50
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 其他二进制格式
 - en: 'The same model can be applied to any other binary source:'
+  id: totrans-51
   prefs: []
   type: TYPE_NORMAL
+  zh: 可以将相同的模型应用于任何其他二进制源：
 - en: Database
+  id: totrans-52
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 数据库
 - en: Hierarchical data storage
+  id: totrans-53
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 分层数据存储
 - en: Online source
+  id: totrans-54
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 在线来源
 - en: 'The steps again:'
+  id: totrans-55
   prefs: []
   type: TYPE_NORMAL
+  zh: 再次执行以下步骤：
 - en: '`__init__` -> Any init code for the instance, only once'
+  id: totrans-56
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`__init__` -> 实例的任何初始化代码，仅一次'
 - en: '`start` -> start of backtesting (one or more times if optimization will be
     run)'
+  id: totrans-57
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`start` -> 开始回测（如果将进行优化，则一次或多次）'
 - en: This would for example open the connection to the database or a socket to an
     online service
+  id: totrans-58
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 例如，这将打开到数据库的连接或到在线服务的套接字
 - en: '`stop` -> clean-up like closing the database connection or open sockets'
+  id: totrans-59
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`stop` -> 清理工作，如关闭数据库连接或打开的套接字'
 - en: '`_load` -> query the database or online source for the next set of data and
     load it into the `lines` of the object. The standard fields being: datetime, open,
     high, low, close, volume, openinterest'
+  id: totrans-60
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`_load` -> 查询数据库或在线源以获取下一组数据，并将其加载到对象的`lines`中。标准字段包括：datetime、open、high、low、close、volume、openinterest'
 - en: VChartData Test
+  id: totrans-61
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: VChartData 测试
 - en: The `VCharData` loading data from a local “.fd” file for Google for the year
     2006.
+  id: totrans-62
   prefs: []
   type: TYPE_NORMAL
+  zh: '`VCharData` 从本地“.fd”文件加载谷歌2006年的数据。'
 - en: It’s only about loading the data, so not even a subclass of `Strategy` is needed.
+  id: totrans-63
   prefs: []
   type: TYPE_NORMAL
+  zh: 这只涉及加载数据，因此甚至不需要`Strategy`的子类。
 - en: '[PRE6]'
+  id: totrans-64
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE6]'
 - en: '![image](../Images/529e2848164db330489108c0f003179e.png)'
+  id: totrans-65
   prefs: []
   type: TYPE_IMG
+  zh: '![image](../Images/529e2848164db330489108c0f003179e.png)'
 - en: VChartData Full Code
+  id: totrans-66
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: VChartData 完整代码
 - en: '[PRE7]'
+  id: totrans-67
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE7]'

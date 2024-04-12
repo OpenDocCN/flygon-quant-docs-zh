@@ -1,1522 +1,2231 @@
 - en: Strategy
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 策略
 - en: 原文：[https://www.backtrader.com/docu/strategy/](https://www.backtrader.com/docu/strategy/)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.backtrader.com/docu/strategy/](https://www.backtrader.com/docu/strategy/)
 - en: A `Cerebro` instance is the pumping heart and controlling brain of `backtrader`.
     A `Strategy` is the same for the platform user.
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: '`Cerebro` 实例是 `backtrader` 的泵心和控制大脑。对于平台用户来说，`Strategy` 是相同的。'
 - en: The *Strategy’s* expressed lifecycle in methods
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: '*策略* 在方法中表达的生命周期'
 - en: Note
+  id: totrans-4
   prefs: []
   type: TYPE_NORMAL
+  zh: 注意
 - en: A strategy can be interrupted during *birth* by raising a `StrategySkipError`
     exception from the module `backtrader.errors`
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: 策略可以通过从模块 `backtrader.errors` 中引发 `StrategySkipError` 异常来在*出生*期间中断
 - en: This will avoid going through the strategy during a backtesting. See the section
     `Exceptions`
+  id: totrans-6
   prefs: []
   type: TYPE_NORMAL
+  zh: 这将避免在回测过程中执行策略。请参阅`Exceptions` 部分
 - en: 'Conception: `__init__`'
+  id: totrans-7
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 概念：`__init__`
 - en: 'This is obviously invoked during instantiation: `indicators` will be created
     here and other needed attribute. Example:'
+  id: totrans-8
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 显然这是在实例化期间调用的：`indicators` 将在此处创建以及其他所需的属性。例如：
 - en: '[PRE0]'
+  id: totrans-9
   prefs:
   - PREF_IND
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: 'Birth: `start`'
+  id: totrans-10
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 出生：`start`
 - en: The world (`cerebro`) tells the strategy is time to start kicking. A default
     empty method exists.
+  id: totrans-11
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 世界（`cerebro`）告诉策略是时候开始行动了。存在一个默认的空方法。
 - en: 'Childhood: `prenext`'
+  id: totrans-12
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 童年期：`prenext`
 - en: '`indicators` declared during conception will have put constraints on how long
     the strategy needs to mature: this is called the `minimum period`. Above `__init__`
     created a *SimpleMovingAverage* with a `period=15`.'
+  id: totrans-13
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 在概念阶段声明的 `indicators` 将对策略需要成熟的时间施加限制：这称为`最小周期`。在 `__init__` 中创建了一个带有 `period=15`
+    的 *SimpleMovingAverage*。
 - en: As long as the system has seen less than `15` bars, `prenext` will be called
     (the default implementation is a no-op)
+  id: totrans-14
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 只要系统看到的条数少于 `15` 条，将调用 `prenext`（默认实现是空操作）
 - en: 'Adulthood: `next`'
+  id: totrans-15
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 成年期：`next`
 - en: Once the system has seen `15` bars and the `SimpleMovingAverage` has a buffer
     large enough to start producing values, the strategy is mature enough to really
     execute.
+  id: totrans-16
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 一旦系统看到了 `15` 条数据，并且 `SimpleMovingAverage` 有足够大的缓冲区开始产生值，策略就足够成熟以实际执行。
 - en: There is a `nextstart` method which is called exactly *once*, to mark the switch
     from `prenext` to `next`. The default implementation of `nextstart` is to simply
     call `next`
+  id: totrans-17
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 有一个 `nextstart` 方法，它被调用*一次*，标记从 `prenext` 到 `next` 的切换。`nextstart` 的默认实现只是调用
+    `next`
 - en: 'Reproduction: `None`'
+  id: totrans-18
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 繁殖：`None`
 - en: Ok, strategies do not really reproduce. But in a sense they do, because the
     system will instantiate them several times if *optimizing* (with different parameters)
+  id: totrans-19
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 好的，策略实际上并没有繁殖。但从某种意义上来说，它们确实如此，因为系统将会多次实例化它们（使用不同的参数）如果*优化*
 - en: 'Death: `stop`'
+  id: totrans-20
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 死亡：`stop`
 - en: The system tells the strategy the time to come to a reset and put things in
     order has come. A default empty method exists.
+  id: totrans-21
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 系统告诉策略，已经到了整理事务并做好准备的时间。存在一个默认的空方法。
 - en: 'In most cases and for regular usage patterns this will look like:'
+  id: totrans-22
   prefs: []
   type: TYPE_NORMAL
+  zh: 对于大多数情况和常规使用模式，这将是这样的：
 - en: '[PRE1]'
+  id: totrans-23
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE1]'
 - en: 'In this snippet:'
+  id: totrans-24
   prefs: []
   type: TYPE_NORMAL
+  zh: 在这个片段中：
 - en: During `__init__` an attribute is assigned an indicator
+  id: totrans-25
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 在 `__init__` 期间，一个属性被分配了一个指标
 - en: The default empty `start` method is not overriden
+  id: totrans-26
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 默认的空 `start` 方法没有被覆盖
 - en: '`prenext` and `nexstart` are not overriden'
+  id: totrans-27
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`prenext` 和 `nexstart` 没有被覆盖'
 - en: In `next` the value of the indicator is compared against the closing price to
     do something
+  id: totrans-28
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 在 `next` 中，指标的值与收盘价进行比较以执行某些操作
 - en: The default empty `stop` method is not overriden
+  id: totrans-29
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 默认的空 `stop` 方法没有被覆盖
 - en: 'Strategies, like a trader in the real world, will get notified when events
     take place. Actually once per `next` cycle in the backtesting process. The strategy
     will:'
+  id: totrans-30
   prefs: []
   type: TYPE_NORMAL
+  zh: 策略，就像现实世界中的交易员一样，会在事件发生时收到通知。实际上，每个`next`周期在回测过程中都会发生一次。策略将：
 - en: be notified through `notify_order(order)` of any status change in an order
+  id: totrans-31
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 通过 `notify_order(order)` 通知订单状态变化
 - en: be notified through `notify_trade(trade)` of any opening/updating/closing trade
+  id: totrans-32
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 通过 `notify_trade(trade)` 通知任何开仓/更新/关闭交易
 - en: be notified through `notify_cashvalue(cash, value)` of the current cash and
     portfolio in the broker
+  id: totrans-33
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 通过 `notify_cashvalue(cash, value)` 通知经纪人当前现金和投资组合
 - en: be notified through `notify_fund(cash, value, fundvalue, shares)` of the current
     cash and portfolio in the broker and tradking of fundvalue and shares
+  id: totrans-34
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 通过 `notify_fund(cash, value, fundvalue, shares)` 通知经纪人当前现金和投资组合以及基金价值和份额的交易跟踪
 - en: Events (implementation specific) via `notify_store(msg, *args, **kwargs)`
+  id: totrans-35
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 通过 `notify_store(msg, *args, **kwargs)` 通知事件（具体实现）
 - en: See Cerebro for an explanation on the *store* notifications. These will delivered
     to the strategy even if they have also been delivered to a `cerebro` instance
     (with an overriden `notify_store` method or via a *callback*)
+  id: totrans-36
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 请参阅Cerebro以了解*store*通知的说明。即使它们也已经传递给了一个`cerebro`实例（通过覆盖`notify_store`方法或通过*回调*传递），这些通知也将传递给策略
 - en: And *Strategies* also like traders have the chance to operate in the market
     during the `next` method to try to achieve profit with
+  id: totrans-37
   prefs: []
   type: TYPE_NORMAL
+  zh: 而且*策略*也像交易员一样在`next`方法期间有机会在市场中操作，以尝试获得利润
 - en: the `buy` method to go long or reduce/close a short position
+  id: totrans-38
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`buy`方法，用于做多或减少/平仓空头头寸'
 - en: the `sell` method to go short or reduce/close a long position
+  id: totrans-39
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`sell`方法，用于做空或减少/平仓多头头寸'
 - en: the `close` method to obviously close an existing position
+  id: totrans-40
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`close`方法，显然关闭现有头寸'
 - en: the `cancel` method to cancel a not yet executed order
+  id: totrans-41
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`cancel`方法，用于取消尚未执行的订单'
 - en: How to Buy/Sell/Close
+  id: totrans-42
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 如何购买/出售/平仓
 - en: The `Buy` and `Sell` methods generate orders. When invoked they return an `Order`
     (or subclass) instance that can be used as a reference. This order has a unique
     `ref` identifier that can be used for comparison
+  id: totrans-43
   prefs: []
   type: TYPE_NORMAL
+  zh: '`Buy`和`Sell`方法生成订单。调用时，它们返回一个`Order`（或子类）实例，可用作引用。此订单具有唯一的`ref`标识符，可用于比较'
 - en: Note
+  id: totrans-44
   prefs: []
   type: TYPE_NORMAL
+  zh: 注意
 - en: Subclasses of `Order` for speficic broker implementations may carry additional
     *unique identifiers* provided by the broker.
+  id: totrans-45
   prefs: []
   type: TYPE_NORMAL
+  zh: 特定经纪人实现的`Order`子类可能携带经纪人提供的其他*唯一标识符*。
 - en: 'To create the order use the following parameters:'
+  id: totrans-46
   prefs: []
   type: TYPE_NORMAL
+  zh: 要创建订单，请使用以下参数：
 - en: '`data` (default: `None`)'
+  id: totrans-47
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`data`（默认值：`None`）'
 - en: For which data the order has to be created. If `None` then the first data in
     the system, `self.datas[0] or self.data0` (aka `self.data`) will be used
+  id: totrans-48
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 必须为其创建订单的数据。如果是`None`，那么系统中的第一个数据，`self.datas[0] or self.data0`（又名`self.data`）将被使用
 - en: '`size` (default: `None`)'
+  id: totrans-49
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`size`（默认值：`None`）'
 - en: Size to use (positive) of units of data to use for the order.
+  id: totrans-50
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 要使用的数据单位（正数）的大小，用于订单
 - en: If `None` the `sizer` instance retrieved via `getsizer` will be used to determine
     the size.
+  id: totrans-51
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 如果是`None`，则将使用通过`getsizer`检索的`sizer`实例来确定大小。
 - en: '`price` (default: `None`)'
+  id: totrans-52
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`price`（默认值：`None`）'
 - en: Price to use (live brokers may place restrictions on the actual format if it
     does not comply to minimum tick size requirements)
+  id: totrans-53
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 要使用的价格（现实经纪人可能对实际格式施加限制，如果不符合最低跳动大小要求）
 - en: '`None` is valid for `Market` and `Close` orders (the market determines the
     price)'
+  id: totrans-54
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 对于`Market`和`Close`订单，`None`是有效的（市场确定价格）
 - en: For `Limit`, `Stop` and `StopLimit` orders this value determines the trigger
     point (in the case of `Limit` the trigger is obviously at which price the order
     should be matched)
+  id: totrans-55
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 对于`Limit`、`Stop`和`StopLimit`订单，此值确定触发点（在`Limit`的情况下，触发显然是订单应该匹配的价格）
 - en: '`plimit` (default: `None`)'
+  id: totrans-56
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`plimit`（默认值：`None`）'
 - en: Only applicable to `StopLimit` orders. This is the price at which to set the
     implicit *Limit* order, once the *Stop* has been triggered (for which `price`
     has been used)
+  id: totrans-57
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 仅适用于`StopLimit`订单。这是触发*Limit*订单的价格，一旦*Stop*被触发（使用了`price`）
 - en: '`exectype` (default: `None`)'
+  id: totrans-58
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`exectype`（默认值：`None`）'
 - en: 'Possible values:'
+  id: totrans-59
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 可能的值：
 - en: '`Order.Market` or `None`. A market order will be executed with the next available
     price. In backtesting it will be the opening price of the next bar'
+  id: totrans-60
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`Order.Market`或`None`。市价单将以下一个可用价格执行。在回测中，它将是下一个柱的开盘价'
 - en: '`Order.Limit`. An order which can only be executed at the given `price` or
     better'
+  id: totrans-61
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`Order.Limit`。只能以给定的`price`或更好的价格执行的订单'
 - en: '`Order.Stop`. An order which is triggered at `price` and executed like an `Order.Market`
     order'
+  id: totrans-62
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`Order.Stop`。当价格达到`price`时触发的订单，并像`Order.Market`订单一样执行'
 - en: '`Order.StopLimit`. An order which is triggered at `price` and executed as an
     implicit *Limit* order with price given by `pricelimit`'
+  id: totrans-63
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`Order.StopLimit`。当价格达到`price`时触发的订单，并作为隐式*Limit*订单以由`pricelimit`给出的价格执行'
 - en: '`valid` (default: `None`)'
+  id: totrans-64
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`valid`（默认值：`None`）'
 - en: 'Possible values:'
+  id: totrans-65
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 可能的值：
 - en: '`None`: this generates an order that will not expire (aka *Good til cancel*)
     and remain in the market until matched or canceled. In reality brokers tend to
     impose a temporal limit, but this is usually so far away in time to consider it
     as not expiring'
+  id: totrans-66
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`None`：这将生成一个不会过期的订单（又称*Good til cancel*），并保持在市场上直到匹配或取消。实际上，经纪人倾向于强加一个时间限制，但通常是在很远的时间内，可以考虑它不会过期'
 - en: '`datetime.datetime` or `datetime.date` instance: the date will be used to generate
     an order valid until the given datetime (aka *good til date*)'
+  id: totrans-67
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`datetime.datetime`或`datetime.date`实例：将使用该日期生成订单，有效期直到给定的日期时间（又称*截止日期*）'
 - en: '`Order.DAY` or `0` or `timedelta()`: a day valid until the *End of the Session*
     (aka *day* order) will be generated'
+  id: totrans-68
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`Order.DAY` 或 `0` 或 `timedelta()`: 生成到 *Session End*（又名 *day* 订单）为止的一天有效订单'
 - en: '`numeric value`: This is assumed to be a value corresponding to a datetime
     in `matplotlib` coding (the one used by `backtrader`) and will used to generate
     an order valid until that time (*good til date*)'
+  id: totrans-69
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`numeric value`: 假设这是对应于 `matplotlib` 编码中的日期时间的值（`backtrader` 使用的日期时间编码），将用于生成直到该时间有效的订单（*good
+    til date*）'
 - en: '`tradeid` (default: `0`)'
+  id: totrans-70
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`tradeid`（默认值： `0`）'
 - en: This is an internal value applied by `backtrader` to keep track of overlapping
     trades on the same asset. This `tradeid` is sent back to the *strategy* when notifying
     changes to the status of the orders.
+  id: totrans-71
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 这是 `backtrader` 应用的内部值，用于跟踪同一资产上的重叠交易。当通知订单状态变化时，此 `tradeid` 将发送回 *strategy*。
 - en: '`**kwargs`: additional broker implementations may support extra parameters.
     `backtrader` will pass the *kwargs* down to the created order objects'
+  id: totrans-72
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`**kwargs`: 其他经纪人实现可能支持额外的参数。 `backtrader` 将这些 *kwargs* 传递给创建的订单对象'
 - en: 'Example: if the 4 order execution types directly supported by `backtrader`
     are not enough, in the case of for example *Interactive Brokers* the following
     could be passed as *kwargs*:'
+  id: totrans-73
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: '例如: 如果 `backtrader` 直接支持的 4 种订单执行类型不够用，例如 *Interactive Brokers* 的情况下可以将以下内容作为
+    *kwargs* 传递:'
 - en: '[PRE2]'
+  id: totrans-74
   prefs:
   - PREF_IND
   type: TYPE_PRE
+  zh: '[PRE2]'
 - en: This would override the settings created by `backtrader` and generate a `LIMIT
     IF TOUCHED` order with a *touched* price of 9.8 and a *limit* price of 10.0.
+  id: totrans-75
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 这将覆盖 `backtrader` 创建的设置，并生成一个 *touched* 价格为 9.8， *limit* 价格为 10.0 的 `LIMIT IF
+    TOUCHED` 订单。
 - en: 'Information Bits:'
+  id: totrans-76
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: '信息位:'
 - en: A Strategy has a *length* which is always equal to that of the main data (`datas[0]`)
     and can of course be gotten with `len(self)`
+  id: totrans-77
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 策略具有与主数据（`datas[0]`）长度相等的 *length*，当然可以用 `len(self)` 获得
 - en: '`next` can be called without changes in *length* if data is being replayed
     or a live feed is being passed and new ticks for the same point in time (length)
     are arriving'
+  id: totrans-78
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 如果正在重播数据或传递了实时数据，并且新的数据到达相同时间点（长度）的话，可以调用 `next` 而不更改 *长度*
 - en: 'Member Attributes:'
+  id: totrans-79
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: '成员属性:'
 - en: '`env`: the cerebro entity in which this Strategy lives'
+  id: totrans-80
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`env`: 此策略所在的cerebro实体'
 - en: '`datas`: array of data feeds which have been passed to cerebro'
+  id: totrans-81
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`datas`: 已传递给cerebro的数据源数组'
 - en: '`data/data0` is an alias for datas[0]'
+  id: totrans-82
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`data/data0` 是 datas[0] 的别名'
 - en: '`dataX` is an alias for datas[X]'
+  id: totrans-83
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`dataX` 是 datas[X] 的别名'
 - en: '*data feeds* can also be accessed by name (see the reference) if one has been
     assigned to it'
+  id: totrans-84
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: '*数据源* 也可以通过名称访问（参见参考资料），如果已为其分配了名称'
 - en: '`dnames`: an alternative to reach the data feeds by name (either with `[name]`
     or with `.name` notation)'
+  id: totrans-85
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`dnames`: 通过名称访问数据源的另一种方式（可以使用 `[name]` 或 `.name` 符号）'
 - en: 'For example if resampling a data like this:'
+  id: totrans-86
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: '例如如果对数据进行重采样如下:'
 - en: '[PRE3]'
+  id: totrans-87
   prefs:
   - PREF_IND
   type: TYPE_PRE
+  zh: '[PRE3]'
 - en: 'Later in the strategy one can create indicators on each like this:'
+  id: totrans-88
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: '策略中可以像这样为每个创建指标:'
 - en: '[PRE4]'
+  id: totrans-89
   prefs:
   - PREF_IND
   type: TYPE_PRE
+  zh: '[PRE4]'
 - en: '`broker`: reference to the broker associated to this strategy (received from
     cerebro)'
+  id: totrans-90
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`broker`: 引用与此策略相关联的经纪人（从cerebro接收）'
 - en: '`stats`: list/named tuple-like sequence holding the Observers created by cerebro
     for this strategy'
+  id: totrans-91
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`stats`: 保存由cerebro为该策略创建的观察者的列表/类似命名元组序列'
 - en: '`analyzers`: list/named tuple-like sequence holding the Analyzers created by
     cerebro for this strategy'
+  id: totrans-92
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`analyzers`: 保存由cerebro为该策略创建的分析器的列表/类似命名元组序列'
 - en: '`position`: actually a property which gives the current position for `data0`.'
+  id: totrans-93
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`position`: 实际上是一个属性，用于给出 `data0` 的当前持仓。'
 - en: Methods to retrieve all possitions are available (see the reference)
+  id: totrans-94
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 有用于检索所有仓位的方法（参见参考资料）
 - en: 'Member Attributes (meant for statistics/observers/analyzers):'
+  id: totrans-95
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: '成员属性（用于统计/观察者/分析器）:'
 - en: '`_orderspending`: list of orders which will be notified to the strategy before
     `next` is called'
+  id: totrans-96
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`_orderspending`: 将在调用 `next` 之前通知给策略的订单列表'
 - en: '`_tradespending`: list of trades which will be notified to the strategy before
     `next` is called'
+  id: totrans-97
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`_tradespending`: 将在调用 `next` 之前通知给策略的交易列表'
 - en: '`_orders`: list of order which have been already notified. An order can be
     several times in the list with different statuses and different execution bits.
     The list is menat to keep the history.'
+  id: totrans-98
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`_orders`: 已经通知的订单列表。订单可以以不同的状态和不同的执行位多次出现在列表中。此列表用于保留历史记录。'
 - en: '`_trades`: list of order which have been already notified. A trade can be several
     times in the list just like an order.'
+  id: totrans-99
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`_trades`: 已通知的订单列表。交易可以像订单一样多次出现在列表中。'
 - en: Note
+  id: totrans-100
   prefs: []
   type: TYPE_NORMAL
+  zh: 注意
 - en: Bear in mind that `prenext`, `nextstart` and `next` can be called several times
     for the same point in time (ticks updating prices for the daily bar, when a daily
     timeframe is in use)
+  id: totrans-101
   prefs: []
   type: TYPE_NORMAL
+  zh: 请记住，`prenext`、`nextstart` 和 `next` 可能会针对同一时间点被多次调用（当使用日线时，每次 ticks 更新价格时）
 - en: 'Reference: Strategy'
+  id: totrans-102
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 参考：Strategy
 - en: class backtrader.Strategy(*args, **kwargs)
+  id: totrans-103
   prefs:
   - PREF_H4
   type: TYPE_NORMAL
+  zh: 类 backtrader.Strategy(*args, **kwargs)
 - en: Base class to be subclassed for user defined strategies.
+  id: totrans-104
   prefs: []
   type: TYPE_NORMAL
+  zh: 用于用户定义策略的基类。
 - en: next()
+  id: totrans-105
   prefs:
   - PREF_H4
   type: TYPE_NORMAL
+  zh: next()
 - en: This method will be called for all remaining data points when the minimum period
     for all datas/indicators have been meet.
+  id: totrans-106
   prefs: []
   type: TYPE_NORMAL
+  zh: 此方法将在满足所有数据/指标的最小期限后，为所有剩余数据点调用。
 - en: nextstart()
+  id: totrans-107
   prefs:
   - PREF_H4
   type: TYPE_NORMAL
+  zh: nextstart()
 - en: This method will be called once, exactly when the minimum period for all datas/indicators
     have been meet. The default behavior is to call next
+  id: totrans-108
   prefs: []
   type: TYPE_NORMAL
+  zh: 此方法将被调用一次，确切地在所有数据/指标的最小期限已满足时。默认行为是调用 next
 - en: prenext()
+  id: totrans-109
   prefs:
   - PREF_H4
   type: TYPE_NORMAL
+  zh: prenext()
 - en: This method will be called before the minimum period of all datas/indicators
     have been meet for the strategy to start executing
+  id: totrans-110
   prefs: []
   type: TYPE_NORMAL
+  zh: 此方法将在策略开始执行之前，所有数据/指标的最小期限已满足时调用
 - en: start()
+  id: totrans-111
   prefs:
   - PREF_H4
   type: TYPE_NORMAL
+  zh: start()
 - en: Called right before the backtesting is about to be started.
+  id: totrans-112
   prefs: []
   type: TYPE_NORMAL
+  zh: 在回测即将开始之前调用。
 - en: stop()
+  id: totrans-113
   prefs:
   - PREF_H4
   type: TYPE_NORMAL
+  zh: stop()
 - en: Called right before the backtesting is about to be stopped
+  id: totrans-114
   prefs: []
   type: TYPE_NORMAL
+  zh: 在回测即将停止之前调用
 - en: notify_order(order)
+  id: totrans-115
   prefs:
   - PREF_H4
   type: TYPE_NORMAL
+  zh: notify_order(order)
 - en: Receives an order whenever there has been a change in one
+  id: totrans-116
   prefs: []
   type: TYPE_NORMAL
+  zh: 每当有变化时接收订单
 - en: notify_trade(trade)
+  id: totrans-117
   prefs:
   - PREF_H4
   type: TYPE_NORMAL
+  zh: notify_trade(trade)
 - en: Receives a trade whenever there has been a change in one
+  id: totrans-118
   prefs: []
   type: TYPE_NORMAL
+  zh: 每当有变化时接收交易
 - en: notify_cashvalue(cash, value)
+  id: totrans-119
   prefs:
   - PREF_H4
   type: TYPE_NORMAL
+  zh: notify_cashvalue(cash, value)
 - en: Receives the current fund value, value status of the strategy’s broker
+  id: totrans-120
   prefs: []
   type: TYPE_NORMAL
+  zh: 接收策略经纪人的当前基金价值、价值状态
 - en: notify_fund(cash, value, fundvalue, shares)
+  id: totrans-121
   prefs:
   - PREF_H4
   type: TYPE_NORMAL
+  zh: notify_fund(cash, value, fundvalue, shares)
 - en: Receives the current cash, value, fundvalue and fund shares
+  id: totrans-122
   prefs: []
   type: TYPE_NORMAL
+  zh: 接收当前现金、价值、基金价值和基金份额
 - en: notify_store(msg, *args, **kwargs)
+  id: totrans-123
   prefs:
   - PREF_H4
   type: TYPE_NORMAL
+  zh: notify_store(msg, *args, **kwargs)
 - en: Receives a notification from a store provider
+  id: totrans-124
   prefs: []
   type: TYPE_NORMAL
+  zh: 接收来自存储提供程序的通知
 - en: buy(data=None, size=None, price=None, plimit=None, exectype=None, valid=None,
     tradeid=0, oco=None, trailamount=None, trailpercent=None, parent=None, transmit=True,
     **kwargs)
+  id: totrans-125
   prefs:
   - PREF_H4
   type: TYPE_NORMAL
+  zh: buy(data=None, size=None, price=None, plimit=None, exectype=None, valid=None,
+    tradeid=0, oco=None, trailamount=None, trailpercent=None, parent=None, transmit=True,
+    **kwargs)
 - en: Create a buy (long) order and send it to the broker
+  id: totrans-126
   prefs: []
   type: TYPE_NORMAL
+  zh: 创建买入（做多）订单并发送到经纪人
 - en: '`data` (default: `None`)'
+  id: totrans-127
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`data`（默认为 `None`）'
 - en: For which data the order has to be created. If `None` then the first data in
     the system, `self.datas[0] or self.data0` (aka `self.data`) will be used
+  id: totrans-128
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 为哪个数据创建订单。如果为 `None`，则系统中的第一个数据，`self.datas[0] 或 self.data0`（又名 `self.data`）将被使用
 - en: '`size` (default: `None`)'
+  id: totrans-129
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`size`（默认为 `None`）'
 - en: Size to use (positive) of units of data to use for the order.
+  id: totrans-130
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 要使用的数据单位（正数）来用于订单。
 - en: If `None` the `sizer` instance retrieved via `getsizer` will be used to determine
     the size.
+  id: totrans-131
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 如果为 `None`，则将使用通过 `getsizer` 获取的 `sizer` 实例来确定大小。
 - en: '`price` (default: `None`)'
+  id: totrans-132
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`price`（默认为 `None`）'
 - en: Price to use (live brokers may place restrictions on the actual format if it
     does not comply to minimum tick size requirements)
+  id: totrans-133
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 用于价格（实时经纪人可能对实际格式施加限制，如果不符合最小 tick 大小要求）
 - en: '`None` is valid for `Market` and `Close` orders (the market determines the
     price)'
+  id: totrans-134
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 对于 `Market` 和 `Close` 订单，`None` 是有效的（市场决定价格）
 - en: For `Limit`, `Stop` and `StopLimit` orders this value determines the trigger
     point (in the case of `Limit` the trigger is obviously at which price the order
     should be matched)
+  id: totrans-135
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 对于 `Limit`、`Stop` 和 `StopLimit` 订单，此值确定触发点（在 `Limit` 的情况下，触发显然是订单应匹配的价格）
 - en: '`plimit` (default: `None`)'
+  id: totrans-136
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`plimit`（默认为 `None`）'
 - en: Only applicable to `StopLimit` orders. This is the price at which to set the
     implicit *Limit* order, once the *Stop* has been triggered (for which `price`
     has been used)
+  id: totrans-137
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 仅适用于 `StopLimit` 订单。这是触发隐含 *Limit* 订单的价格，一旦 *Stop* 被触发（`price` 已被使用）
 - en: '`trailamount` (default: `None`)'
+  id: totrans-138
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`trailamount`（默认为 `None`）'
 - en: If the order type is StopTrail or StopTrailLimit, this is an absolute amount
     which determines the distance to the price (below for a Sell order and above for
     a buy order) to keep the trailing stop
+  id: totrans-139
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 如果订单类型是 `StopTrail` 或 `StopTrailLimit`，这是一个绝对数值，用于确定距离价格的距离（对于卖单是下方，对于买单是上方）以保持跟踪止损
 - en: '`trailpercent` (default: `None`)'
+  id: totrans-140
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`trailpercent`（默认为 `None`）'
 - en: If the order type is StopTrail or StopTrailLimit, this is a percentage amount
     which determines the distance to the price (below for a Sell order and above for
     a buy order) to keep the trailing stop (if `trailamount` is also specified it
     will be used)
+  id: totrans-141
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 如果订单类型是 `StopTrail` 或 `StopTrailLimit`，这是一个百分比数值，用于确定距离价格的距离（对于卖单是下方，对于买单是上方）以保持跟踪止损（如果还指定了
+    `trailamount`，它将被使用）
 - en: '`exectype` (default: `None`)'
+  id: totrans-142
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`exectype` (默认值: `None`)'
 - en: 'Possible values:'
+  id: totrans-143
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: '可能的值:'
 - en: '`Order.Market` or `None`. A market order will be executed with the next available
     price. In backtesting it will be the opening price of the next bar'
+  id: totrans-144
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`Order.Market` 或 `None`. 一个市价订单将以下一个可用价格执行。 在回测中，它将是下一个bar的开盘价'
 - en: '`Order.Limit`. An order which can only be executed at the given `price` or
     better'
+  id: totrans-145
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`Order.Limit`. 一个只能以给定的`price`或更好的价格执行的订单'
 - en: '`Order.Stop`. An order which is triggered at `price` and executed like an `Order.Market`
     order'
+  id: totrans-146
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`Order.Stop`. 一个在`price`处触发并像`Order.Market`订单一样执行的订单'
 - en: '`Order.StopLimit`. An order which is triggered at `price` and executed as an
     implicit *Limit* order with price given by `pricelimit`'
+  id: totrans-147
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`Order.StopLimit`. 一个在`price`处触发并以隐式*Limit*订单形式执行的订单，价格由`pricelimit`给出'
 - en: '`Order.Close`. An order which can only be executed with the closing price of
     the session (usually during a closing auction)'
+  id: totrans-148
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`Order.Close`. 一个只能在会话结束时（通常在收盘竞价时）执行的订单'
 - en: '`Order.StopTrail`. An order which is triggered at `price` minus `trailamount`
     (or `trailpercent`) and which is updated if the price moves away from the stop'
+  id: totrans-149
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`Order.StopTrail`. 一个在`price`减去`trailamount`（或`trailpercent`）处触发并在价格远离停止时更新的订单'
 - en: '`Order.StopTrailLimit`. An order which is triggered at `price` minus `trailamount`
     (or `trailpercent`) and which is updated if the price moves away from the stop'
+  id: totrans-150
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`Order.StopTrailLimit`. 一个在`price`减去`trailamount`（或`trailpercent`）处触发并在价格远离停止时更新的订单'
 - en: '`valid` (default: `None`)'
+  id: totrans-151
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`valid` (默认值: `None`)'
 - en: 'Possible values:'
+  id: totrans-152
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: '可能的值:'
 - en: '`None`: this generates an order that will not expire (aka *Good till cancel*)
     and remain in the market until matched or canceled. In reality brokers tend to
     impose a temporal limit, but this is usually so far away in time to consider it
     as not expiring'
+  id: totrans-153
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`None`: 这将生成一个不会过期的订单（又称*Good till cancel*），并保持在市场上直到匹配或取消。 实际上，经纪人往往会强加一个时间限制，但这通常是如此遥远的时间，以至于可以视为不会过期。'
 - en: '`datetime.datetime` or `datetime.date` instance: the date will be used to generate
     an order valid until the given datetime (aka *good till date*)'
+  id: totrans-154
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`datetime.datetime` 或 `datetime.date` 实例：日期将用于生成一个直到给定日期时间（又称*good till date*）的有效订单'
 - en: '`Order.DAY` or `0` or `timedelta()`: a day valid until the *End of the Session*
     (aka *day* order) will be generated'
+  id: totrans-155
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`Order.DAY` 或 `0` 或 `timedelta()`: 一个有效期至*会话结束*（又称*day*订单）的订单将被生成'
 - en: '`numeric value`: This is assumed to be a value corresponding to a datetime
     in `matplotlib` coding (the one used by `backtrader`) and will used to generate
     an order valid until that time (*good till date*)'
+  id: totrans-156
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`numeric value`: 这被假设为与`matplotlib`编码中的日期时间对应的值（`backtrader`使用的编码方式），并将用于生成一个有效订单，直到该时间（*good
+    till date*）'
 - en: '`tradeid` (default: `0`)'
+  id: totrans-157
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`tradeid` (默认值: `0`)'
 - en: This is an internal value applied by `backtrader` to keep track of overlapping
     trades on the same asset. This `tradeid` is sent back to the *strategy* when notifying
     changes to the status of the orders.
+  id: totrans-158
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 这是`backtrader`应用的内部值，用于跟踪同一资产上的重叠交易。 当通知订单状态变化时，此`tradeid`将发送回*strategy*。
 - en: '`oco` (default: `None`)'
+  id: totrans-159
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`oco` (默认值: `None`)'
 - en: Another `order` instance. This order will become part of an OCO (Order Cancel
     Others) group. The execution of one of the orders, immediately cancels all others
     in the same group
+  id: totrans-160
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 另一个`order`实例。 这个订单将成为OCO（Order Cancel Others）组的一部分。 一个订单的执行会立即取消同一组中的所有其他订单
 - en: '`parent` (default: `None`)'
+  id: totrans-161
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`parent` (默认值: `None`)'
 - en: Controls the relationship of a group of orders, for example a buy which is bracketed
     by a high-side limit sell and a low side stop sell. The high/low side orders remain
     inactive until the parent order has been either executed (they become active)
     or is canceled/expires (the children are also canceled) bracket orders have the
     same size
+  id: totrans-162
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 控制一组订单的关系，例如一个由高限价卖出和低止损卖出所包围的买入订单。高/低侧订单保持不活跃，直到父订单被执行（它们变为活动状态）或取消/过期（子订单也取消）bracket订单具有相同的大小
 - en: '`transmit` (default: `True`)'
+  id: totrans-163
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`transmit` (默认值: `True`)'
 - en: 'Indicates if the order has to be **transmitted**, ie: not only placed in the
     broker but also issued. This is meant for example to control bracket orders, in
     which one disables the transmission for the parent and 1^(st) set of children
     and activates it for the last children, which triggers the full placement of all
     bracket orders.'
+  id: totrans-164
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 指示订单是否必须**发送**，即不仅在经纪人处放置，而且发出。 例如，这用于控制bracket订单，其中一个禁用父订单和第1组子订单的传输，并激活最后一组子订单的传输，这会触发所有bracket订单的完全放置。
 - en: '`**kwargs`: additional broker implementations may support extra parameters.
     `backtrader` will pass the *kwargs* down to the created order objects'
+  id: totrans-165
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`**kwargs`：其他经纪人实现可能支持额外的参数。`backtrader`将*kwargs*传递给创建的订单对象'
 - en: 'Example: if the 4 order execution types directly supported by `backtrader`
     are not enough, in the case of for example *Interactive Brokers* the following
     could be passed as *kwargs*:'
+  id: totrans-166
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 示例：如果直接由`backtrader`支持的4种订单执行类型不够，例如*Interactive Brokers*的情况下，可以将以下内容作为*kwargs*传递：
 - en: '[PRE5]'
+  id: totrans-167
   prefs:
   - PREF_IND
   type: TYPE_PRE
+  zh: '[PRE5]'
 - en: This would override the settings created by `backtrader` and generate a `LIMIT
     IF TOUCHED` order with a *touched* price of 9.8 and a *limit* price of 10.0.
+  id: totrans-168
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 这将覆盖`backtrader`创建的设置，并生成一个*touched*价格为9.8，*limit*价格为10.0的`LIMIT IF TOUCHED`订单。
 - en: '**Returns**'
+  id: totrans-169
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**返回**'
 - en: the submitted order
+  id: totrans-170
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 提交的订单
 - en: sell(data=None, size=None, price=None, plimit=None, exectype=None, valid=None,
     tradeid=0, oco=None, trailamount=None, trailpercent=None, parent=None, transmit=True,
     **kwargs)
+  id: totrans-171
   prefs:
   - PREF_H4
   type: TYPE_NORMAL
+  zh: sell(data=None, size=None, price=None, plimit=None, exectype=None, valid=None,
+    tradeid=0, oco=None, trailamount=None, trailpercent=None, parent=None, transmit=True,
+    **kwargs)
 - en: To create a selll (short) order and send it to the broker
+  id: totrans-172
   prefs: []
   type: TYPE_NORMAL
+  zh: 创建一个卖出（做空）订单并将其发送给经纪人
 - en: See the documentation for `buy` for an explanation of the parameters
+  id: totrans-173
   prefs: []
   type: TYPE_NORMAL
+  zh: 查看`buy`的文档以了解参数的解释
 - en: 'Returns: the submitted order'
+  id: totrans-174
   prefs: []
   type: TYPE_NORMAL
+  zh: 返回：提交的订单
 - en: close(data=None, size=None, **kwargs)
+  id: totrans-175
   prefs:
   - PREF_H4
   type: TYPE_NORMAL
+  zh: close(data=None, size=None, **kwargs)
 - en: Counters a long/short position closing it
+  id: totrans-176
   prefs: []
   type: TYPE_NORMAL
+  zh: 抵消长/短持仓
 - en: See the documentation for `buy` for an explanation of the parameters
+  id: totrans-177
   prefs: []
   type: TYPE_NORMAL
+  zh: 查看`buy`的文档以了解参数的解释
 - en: Note
+  id: totrans-178
   prefs: []
   type: TYPE_NORMAL
+  zh: 注意
 - en: '`size`: automatically calculated from the existing position if not provided
     (default: `None`) by the caller'
+  id: totrans-179
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`size`: 如果调用者没有提供，则自动从现有位置计算（默认值：`None`）'
 - en: 'Returns: the submitted order'
+  id: totrans-180
   prefs: []
   type: TYPE_NORMAL
+  zh: 返回：提交的订单
 - en: cancel(order)
+  id: totrans-181
   prefs:
   - PREF_H4
   type: TYPE_NORMAL
+  zh: cancel(order)
 - en: Cancels the order in the broker
+  id: totrans-182
   prefs: []
   type: TYPE_NORMAL
+  zh: 在经纪人处取消订单
 - en: buy_bracket(data=None, size=None, price=None, plimit=None, exectype=2, valid=None,
     tradeid=0, trailamount=None, trailpercent=None, oargs={}, stopprice=None, stopexec=3,
     stopargs={}, limitprice=None, limitexec=2, limitargs={}, **kwargs)
+  id: totrans-183
   prefs:
   - PREF_H4
   type: TYPE_NORMAL
+  zh: buy_bracket(data=None, size=None, price=None, plimit=None, exectype=2, valid=None,
+    tradeid=0, trailamount=None, trailpercent=None, oargs={}, stopprice=None, stopexec=3,
+    stopargs={}, limitprice=None, limitexec=2, limitargs={}, **kwargs)
 - en: 'Create a bracket order group (low side - buy order - high side). The default
     behavior is as follows:'
+  id: totrans-184
   prefs: []
   type: TYPE_NORMAL
+  zh: 创建一个支架订单组（低端 - 买单 - 高端）。默认行为如下：
 - en: Issue a **buy** order with execution `Limit`
+  id: totrans-185
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 发出**buy**带有执行`Limit`的订单
 - en: Issue a *low side* bracket **sell** order with execution `Stop`
+  id: totrans-186
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 发出一个*low side*支架**sell**带有执行`Stop`的订单
 - en: Issue a *high side* bracket **sell** order with execution `Limit`.
+  id: totrans-187
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 发出一个*high side*支架**sell**带有执行`Limit`的订单。
 - en: See below for the different parameters
+  id: totrans-188
   prefs: []
   type: TYPE_NORMAL
+  zh: 有关不同参数的详细信息，请参见下文
 - en: '`data` (default: `None`)'
+  id: totrans-189
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`data`（默认值：`None`）'
 - en: For which data the order has to be created. If `None` then the first data in
     the system, `self.datas[0] or self.data0` (aka `self.data`) will be used
+  id: totrans-190
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 要为哪些数据创建订单。如果为`None`，则将使用系统中的第一个数据，`self.datas[0]或self.data0`（又名`self.data`）
 - en: '`size` (default: `None`)'
+  id: totrans-191
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`size`（默认值：`None`）'
 - en: Size to use (positive) of units of data to use for the order.
+  id: totrans-192
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 要使用的大小（正）以用于订单的数据单位。
 - en: If `None` the `sizer` instance retrieved via `getsizer` will be used to determine
     the size.
+  id: totrans-193
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 如果为`None`，则将使用通过`getsizer`检索到的`sizer`实例确定大小。
 - en: Note
+  id: totrans-194
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 注意
 - en: The same size is applied to all 3 orders of the bracket
+  id: totrans-195
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 同样的大小适用于支架的所有3个订单
 - en: '`price` (default: `None`)'
+  id: totrans-196
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`price`（默认值：`None`）'
 - en: Price to use (live brokers may place restrictions on the actual format if it
     does not comply to minimum tick size requirements)
+  id: totrans-197
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 使用价格（实时经纪人可能会对实际格式施加限制，如果不符合最小跳动大小要求）
 - en: '`None` is valid for `Market` and `Close` orders (the market determines the
     price)'
+  id: totrans-198
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: '`None`适用于`Market`和`Close`订单（市场确定价格）'
 - en: For `Limit`, `Stop` and `StopLimit` orders this value determines the trigger
     point (in the case of `Limit` the trigger is obviously at which price the order
     should be matched)
+  id: totrans-199
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 对于`Limit`、`Stop`和`StopLimit`订单，此值确定触发点（在`Limit`情况下，触发显然是订单应匹配的价格）
 - en: '`plimit` (default: `None`)'
+  id: totrans-200
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`plimit`（默认值：`None`）'
 - en: Only applicable to `StopLimit` orders. This is the price at which to set the
     implicit *Limit* order, once the *Stop* has been triggered (for which `price`
     has been used)
+  id: totrans-201
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 仅适用于`StopLimit`订单。这是设置隐含*Limit*订单的价格，一旦*Stop*已被触发（已使用`price`）
 - en: '`trailamount` (default: `None`)'
+  id: totrans-202
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`trailamount`（默认值：`None`）'
 - en: If the order type is StopTrail or StopTrailLimit, this is an absolute amount
     which determines the distance to the price (below for a Sell order and above for
     a buy order) to keep the trailing stop
+  id: totrans-203
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 如果订单类型为StopTrail或StopTrailLimit，则此值是一个绝对金额，用于确定保持跟踪止损的价格距离（对于卖出订单为下方，对于买入订单为上方）
 - en: '`trailpercent` (default: `None`)'
+  id: totrans-204
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`trailpercent`（默认值：`None`）'
 - en: If the order type is StopTrail or StopTrailLimit, this is a percentage amount
     which determines the distance to the price (below for a Sell order and above for
     a buy order) to keep the trailing stop (if `trailamount` is also specified it
     will be used)
+  id: totrans-205
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 如果订单类型为StopTrail或StopTrailLimit，则此处为一个百分比值，确定保持跟踪止损的距离（对于卖出订单下方，对于买入订单上方）（如果还指定了`trailamount`，则将使用它）
 - en: '`exectype` (default: `bt.Order.Limit`)'
+  id: totrans-206
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`exectype`（默认值：`bt.Order.Limit`）'
 - en: 'Possible values: (see the documentation for the method `buy`'
+  id: totrans-207
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 可能的取值：（查看方法`buy`的文档）
 - en: '`valid` (default: `None`)'
+  id: totrans-208
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`valid`（默认值：`None`）'
 - en: 'Possible values: (see the documentation for the method `buy`'
+  id: totrans-209
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 可能的取值：（查看方法`buy`的文档）
 - en: '`tradeid` (default: `0`)'
+  id: totrans-210
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`tradeid`（默认值：`0`）'
 - en: 'Possible values: (see the documentation for the method `buy`'
+  id: totrans-211
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 可能的取值：（查看方法`buy`的文档）
 - en: '`oargs` (default: `{}`)'
+  id: totrans-212
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`oargs`（默认值：`{}`）'
 - en: Specific keyword arguments (in a `dict`) to pass to the main side order. Arguments
     from the default `**kwargs` will be applied on top of this.
+  id: totrans-213
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 将特定的关键字参数（在`dict`中）传递给主侧订单。默认的`**kwargs`中的参数将在此基础上应用。
 - en: '`**kwargs`: additional broker implementations may support extra parameters.
     `backtrader` will pass the *kwargs* down to the created order objects'
+  id: totrans-214
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`**kwargs`：其他经纪人实现可能支持额外的参数。`backtrader`将把*kwargs*传递给创建的订单对象'
 - en: 'Possible values: (see the documentation for the method `buy`'
+  id: totrans-215
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 可能的取值：（查看方法`buy`的文档）
 - en: Note
+  id: totrans-216
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 注意
 - en: This `kwargs` will be applied to the 3 orders of a bracket. See below for specific
     keyword arguments for the low and high side orders
+  id: totrans-217
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 这个`kwargs`将应用于一个括号的3个订单。有关低侧和高侧订单的特定关键字参数，请参见下文
 - en: '`stopprice` (default: `None`)'
+  id: totrans-218
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`stopprice`（默认值：`None`）'
 - en: Specific price for the *low side* stop order
+  id: totrans-219
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 低侧停止订单的具体价格
 - en: '`stopexec` (default: `bt.Order.Stop`)'
+  id: totrans-220
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`stopexec`（默认值：`bt.Order.Stop`）'
 - en: Specific execution type for the *low side* order
+  id: totrans-221
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 低侧订单的具体执行类型
 - en: '`stopargs` (default: `{}`)'
+  id: totrans-222
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`stopargs`（默认值：`{}`）'
 - en: Specific keyword arguments (in a `dict`) to pass to the low side order. Arguments
     from the default `**kwargs` will be applied on top of this.
+  id: totrans-223
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 将特定的关键字参数（在`dict`中）传递给低侧订单。默认的`**kwargs`中的参数将在此基础上应用。
 - en: '`limitprice` (default: `None`)'
+  id: totrans-224
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`limitprice`（默认值：`None`）'
 - en: Specific price for the *high side* stop order
+  id: totrans-225
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 高侧停止订单的具体价格
 - en: '`stopexec` (default: `bt.Order.Limit`)'
+  id: totrans-226
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`stopexec`（默认值：`bt.Order.Limit`）'
 - en: Specific execution type for the *high side* order
+  id: totrans-227
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 高侧订单的具体执行类型
 - en: '`limitargs` (default: `{}`)'
+  id: totrans-228
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`limitargs`（默认值：`{}`）'
 - en: Specific keyword arguments (in a `dict`) to pass to the high side order. Arguments
     from the default `**kwargs` will be applied on top of this.
+  id: totrans-229
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 将特定的关键字参数（在`dict`中）传递给高侧订单。默认的`**kwargs`中的参数将在此基础上应用。
 - en: 'High/Low Side orders can be suppressed by using:'
+  id: totrans-230
   prefs: []
   type: TYPE_NORMAL
+  zh: 可以通过以下方式抑制高/低侧订单：
 - en: '`limitexec=None` to suppress the *high side*'
+  id: totrans-231
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`limitexec=None`以抑制*高侧*'
 - en: '`stopexec=None` to suppress the *low side*'
+  id: totrans-232
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`stopexec=None`以抑制*低侧*'
 - en: '**Returns**'
+  id: totrans-233
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**返回**'
 - en: A list containing the 3 orders [order, stop side, limit side]
+  id: totrans-234
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 包含3个订单的列表[订单，停止侧，限价侧]
 - en: If high/low orders have been suppressed the return value will still contain
     3 orders, but those suppressed will have a value of `None`
+  id: totrans-235
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 如果高/低订单已被抑制，则返回值仍将包含3个订单，但被抑制的订单将值为`None`
 - en: sell_bracket(data=None, size=None, price=None, plimit=None, exectype=2, valid=None,
     tradeid=0, trailamount=None, trailpercent=None, oargs={}, stopprice=None, stopexec=3,
     stopargs={}, limitprice=None, limitexec=2, limitargs={}, **kwargs)
+  id: totrans-236
   prefs:
   - PREF_H4
   type: TYPE_NORMAL
+  zh: sell_bracket(data=None, size=None, price=None, plimit=None, exectype=2, valid=None,
+    tradeid=0, trailamount=None, trailpercent=None, oargs={}, stopprice=None, stopexec=3,
+    stopargs={}, limitprice=None, limitexec=2, limitargs={}, **kwargs)
 - en: 'Create a bracket order group (low side - buy order - high side). The default
     behavior is as follows:'
+  id: totrans-237
   prefs: []
   type: TYPE_NORMAL
+  zh: 创建一个括号订单组（低侧 - 买入订单 - 高侧）。默认行为如下：
 - en: Issue a **sell** order with execution `Limit`
+  id: totrans-238
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 发出一个**卖出**订单，执行`限价`
 - en: Issue a *high side* bracket **buy** order with execution `Stop`
+  id: totrans-239
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 发出一个*高侧*括号**买入**订单，执行`停止`
 - en: Issue a *low side* bracket **buy** order with execution `Limit`.
+  id: totrans-240
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 发出一个*低侧*括号**买入**订单，执行`限价`。
 - en: See `bracket_buy` for the meaning of the parameters
+  id: totrans-241
   prefs: []
   type: TYPE_NORMAL
+  zh: 查看`bracket_buy`以了解参数的含义
 - en: 'High/Low Side orders can be suppressed by using:'
+  id: totrans-242
   prefs: []
   type: TYPE_NORMAL
+  zh: 可以通过以下方式抑制高/低侧订单：
 - en: '`stopexec=None` to suppress the *high side*'
+  id: totrans-243
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`stopexec=None`以抑制*高侧*'
 - en: '`limitexec=None` to suppress the *low side*'
+  id: totrans-244
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`limitexec=None`以抑制*低侧*'
 - en: '**Returns**'
+  id: totrans-245
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**返回**'
 - en: A list containing the 3 orders [order, stop side, limit side]
+  id: totrans-246
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 包含3个订单的列表[订单，停止侧，限价侧]
 - en: If high/low orders have been suppressed the return value will still contain
     3 orders, but those suppressed will have a value of `None`
+  id: totrans-247
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 如果高/低订单已被抑制，则返回值仍将包含3个订单，但被抑制的订单将值为`None`
 - en: order_target_size(data=None, target=0, **kwargs)
+  id: totrans-248
   prefs:
   - PREF_H4
   type: TYPE_NORMAL
+  zh: order_target_size(data=None, target=0, **kwargs)
 - en: Place an order to rebalance a position to have final size of `target`
+  id: totrans-249
   prefs: []
   type: TYPE_NORMAL
+  zh: 下达订单以将头寸重新平衡为`target`的最终大小
 - en: The current `position` size is taken into account as the start point to achieve
     `target`
+  id: totrans-250
   prefs: []
   type: TYPE_NORMAL
+  zh: 当前`position`大小被视为实现`target`的起始点
 - en: If `target` > `pos.size` -> buy `target - pos.size`
+  id: totrans-251
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 如果`target` > `pos.size` -> 买入 `target - pos.size`
 - en: If `target` < `pos.size` -> sell `pos.size - target`
+  id: totrans-252
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 如果`target` < `pos.size` -> 卖出 `pos.size - target`
 - en: 'It returns either:'
+  id: totrans-253
   prefs: []
   type: TYPE_NORMAL
+  zh: 它返回以下之一：
 - en: The generated order
+  id: totrans-254
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 生成的订单
 - en: or
+  id: totrans-255
   prefs: []
   type: TYPE_NORMAL
+  zh: 或
 - en: '`None` if no order has been issued (`target == position.size`)'
+  id: totrans-256
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 如果没有下达订单则为`None`（`target == position.size`)
 - en: order_target_value(data=None, target=0.0, price=None, **kwargs)
+  id: totrans-257
   prefs:
   - PREF_H4
   type: TYPE_NORMAL
+  zh: order_target_value(data=None, target=0.0, price=None, **kwargs)
 - en: Place an order to rebalance a position to have final value of `target`
+  id: totrans-258
   prefs: []
   type: TYPE_NORMAL
+  zh: 下达订单以将头寸重新平衡为`target`的最终价值
 - en: The current `value` is taken into account as the start point to achieve `target`
+  id: totrans-259
   prefs: []
   type: TYPE_NORMAL
+  zh: 当前`value`被视为实现`target`的起始点
 - en: If no `target` then close postion on data
+  id: totrans-260
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 如果没有`target`，则在数据上关闭头寸
 - en: If `target` > `value` then buy on data
+  id: totrans-261
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 如果`target` > `value`则在数据上买入
 - en: If `target` < `value` then sell on data
+  id: totrans-262
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 如果`target` < `value`则在数据上卖出
 - en: 'It returns either:'
+  id: totrans-263
   prefs: []
   type: TYPE_NORMAL
+  zh: 它返回以下之一：
 - en: The generated order
+  id: totrans-264
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 生成的订单
 - en: or
+  id: totrans-265
   prefs: []
   type: TYPE_NORMAL
+  zh: 或
 - en: '`None` if no order has been issued'
+  id: totrans-266
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 如果没有下达订单则为`None`
 - en: order_target_percent(data=None, target=0.0, **kwargs)
+  id: totrans-267
   prefs:
   - PREF_H4
   type: TYPE_NORMAL
+  zh: order_target_percent(data=None, target=0.0, **kwargs)
 - en: Place an order to rebalance a position to have final value of `target` percentage
     of current portfolio `value`
+  id: totrans-268
   prefs: []
   type: TYPE_NORMAL
+  zh: 下达订单以将头寸重新平衡为当前投资组合`value`的`target`百分比的最终价值
 - en: '`target` is expressed in decimal: `0.05` -> `5%`'
+  id: totrans-269
   prefs: []
   type: TYPE_NORMAL
+  zh: '`target`以小数表示：`0.05` -> `5%`'
 - en: It uses `order_target_value` to execute the order.
+  id: totrans-270
   prefs: []
   type: TYPE_NORMAL
+  zh: 它使用`order_target_value`来执行订单。
 - en: '*Example*'
+  id: totrans-271
   prefs: []
   type: TYPE_NORMAL
+  zh: '*示例*'
 - en: '`target=0.05` and portfolio value is `100`'
+  id: totrans-272
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`target=0.05`且投资组合价值为`100`'
 - en: The `value` to be reached is `0.05 * 100 = 5`
+  id: totrans-273
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 要达到的`value`为`0.05 * 100 = 5`
 - en: '`5` is passed as the `target` value to `order_target_value`'
+  id: totrans-274
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`5`作为`target`值传递给`order_target_value`'
 - en: The current `value` is taken into account as the start point to achieve `target`
+  id: totrans-275
   prefs: []
   type: TYPE_NORMAL
+  zh: 当前`value`被视为实现`target`的起始点
 - en: The `position.size` is used to determine if a position is `long` / `short`
+  id: totrans-276
   prefs: []
   type: TYPE_NORMAL
+  zh: 使用`position.size`来确定头寸是`多头`/`空头`
 - en: If `target` > `value`
+  id: totrans-277
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 如果`target` > `value`
 - en: buy if `pos.size >= 0` (Increase a long position)
+  id: totrans-278
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 如果`pos.size >= 0`则买入（增加多头头寸）
 - en: sell if `pos.size < 0` (Increase a short position)
+  id: totrans-279
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 如果`pos.size < 0`则卖出（增加空头头寸）
 - en: If `target` < `value`
+  id: totrans-280
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 如果`target` < `value`
 - en: sell if `pos.size >= 0` (Decrease a long position)
+  id: totrans-281
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 如果`pos.size >= 0`则卖出（减少多头头寸）
 - en: buy if `pos.size < 0` (Decrease a short position)
+  id: totrans-282
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 如果`pos.size < 0`则买入（减少空头头寸）
 - en: 'It returns either:'
+  id: totrans-283
   prefs: []
   type: TYPE_NORMAL
+  zh: 它返回以下之一：
 - en: The generated order
+  id: totrans-284
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 生成的订单
 - en: or
+  id: totrans-285
   prefs: []
   type: TYPE_NORMAL
+  zh: 或
 - en: '`None` if no order has been issued (`target == position.size`)'
+  id: totrans-286
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 如果没有下达订单，则为`None`（`target == position.size`）
 - en: getsizer()
+  id: totrans-287
   prefs:
   - PREF_H4
   type: TYPE_NORMAL
+  zh: getsizer()
 - en: Returns the sizer which is in used if automatic statke calculation is used
+  id: totrans-288
   prefs: []
   type: TYPE_NORMAL
+  zh: 返回正在使用的sizer，如果使用自动��注计算
 - en: Also available as `sizer`
+  id: totrans-289
   prefs: []
   type: TYPE_NORMAL
+  zh: 也可用作`sizer`
 - en: setsizer(sizer)
+  id: totrans-290
   prefs:
   - PREF_H4
   type: TYPE_NORMAL
+  zh: setsizer(sizer)
 - en: Replace the default (fixed stake) sizer
+  id: totrans-291
   prefs: []
   type: TYPE_NORMAL
+  zh: 替换默认（固定赌注）sizer
 - en: getsizing(data=None, isbuy=True)
+  id: totrans-292
   prefs:
   - PREF_H4
   type: TYPE_NORMAL
+  zh: getsizing(data=None, isbuy=True)
 - en: Return the stake calculated by the sizer instance for the current situation
+  id: totrans-293
   prefs: []
   type: TYPE_NORMAL
+  zh: 返回由sizer实例计算的当前情况下的赌注
 - en: getposition(data=None, broker=None)
+  id: totrans-294
   prefs:
   - PREF_H4
   type: TYPE_NORMAL
+  zh: getposition(data=None, broker=None)
 - en: Returns the current position for a given data in a given broker.
+  id: totrans-295
   prefs: []
   type: TYPE_NORMAL
+  zh: 返回给定经纪人中给定数据的当前头寸。
 - en: If both are None, the main data and the default broker will be used
+  id: totrans-296
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果两者都为None，则将使用主要数据和默认经纪人
 - en: A property `position` is also available
+  id: totrans-297
   prefs: []
   type: TYPE_NORMAL
+  zh: 也可用的属性`position`
 - en: getpositionbyname(name=None, broker=None)
+  id: totrans-298
   prefs:
   - PREF_H4
   type: TYPE_NORMAL
+  zh: getpositionbyname(name=None, broker=None)
 - en: Returns the current position for a given name in a given broker.
+  id: totrans-299
   prefs: []
   type: TYPE_NORMAL
+  zh: 返回给定经纪人中给定名称的当前头寸。
 - en: If both are None, the main data and the default broker will be used
+  id: totrans-300
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果两者都为None，则将使用主要数据和默认经纪人
 - en: A property `positionbyname` is also available
+  id: totrans-301
   prefs: []
   type: TYPE_NORMAL
+  zh: 也可用的属性`positionbyname`
 - en: getpositionsbyname(broker=None)
+  id: totrans-302
   prefs:
   - PREF_H4
   type: TYPE_NORMAL
+  zh: getpositionsbyname(broker=None)
 - en: Returns the current by name positions directly from the broker
+  id: totrans-303
   prefs: []
   type: TYPE_NORMAL
+  zh: 直接从经纪人那里返回当前名称的头寸
 - en: If the given `broker` is None, the default broker will be used
+  id: totrans-304
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果给定的`broker`为None，则将使用默认经纪人
 - en: A property `positionsbyname` is also available
+  id: totrans-305
   prefs: []
   type: TYPE_NORMAL
+  zh: 也可用的属性`positionsbyname`
 - en: getdatanames()
+  id: totrans-306
   prefs:
   - PREF_H4
   type: TYPE_NORMAL
+  zh: getdatanames()
 - en: Returns a list of the existing data names
+  id: totrans-307
   prefs: []
   type: TYPE_NORMAL
+  zh: 返回现有数据名称的列表
 - en: getdatabyname(name)
+  id: totrans-308
   prefs:
   - PREF_H4
   type: TYPE_NORMAL
+  zh: getdatabyname(name)
 - en: Returns a given data by name using the environment (cerebro)
+  id: totrans-309
   prefs: []
   type: TYPE_NORMAL
+  zh: 通过名称使用环境（cerebro）返回给定数据
 - en: add_timer(when, offset=datetime.timedelta(0), repeat=datetime.timedelta(0),
     weekdays=[], weekcarry=False, monthdays=[], monthcarry=True, allow=None, tzdata=None,
     cheat=False, *args, **kwargs)
+  id: totrans-310
   prefs:
   - PREF_H4
   type: TYPE_NORMAL
+  zh: '`add_timer(when, offset=datetime.timedelta(0), repeat=datetime.timedelta(0),
+    weekdays=[], weekcarry=False, monthdays=[], monthcarry=True, allow=None, tzdata=None,
+    cheat=False, *args, **kwargs)`'
 - en: Note
+  id: totrans-311
   prefs: []
   type: TYPE_NORMAL
+  zh: 注意
 - en: Can be called during `__init__` or `start`
+  id: totrans-312
   prefs: []
   type: TYPE_NORMAL
+  zh: 可以在 `__init__` 或 `start` 期间调用
 - en: Schedules a timer to invoke either a specified callback or the `notify_timer`
     of one or more strategies.
+  id: totrans-313
   prefs: []
   type: TYPE_NORMAL
+  zh: 安排一个计时器来调用一个或多个策略的指定回调函数或 `notify_timer`。
 - en: '**Parameters**'
+  id: totrans-314
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**参数**'
 - en: '**when** (*-*) – can be'
+  id: totrans-315
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: '**when** (*-*) – 可以是'
 - en: '`datetime.time` instance (see below `tzdata`)'
+  id: totrans-316
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`datetime.time` 实例（参见下面的 `tzdata`）'
 - en: '`bt.timer.SESSION_START` to reference a session start'
+  id: totrans-317
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`bt.timer.SESSION_START` 用于引用会话开始'
 - en: '`bt.timer.SESSION_END` to reference a session end'
+  id: totrans-318
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`bt.timer.SESSION_END` 用于引用会话结束'
 - en: '`offset` which must be a `datetime.timedelta` instance'
+  id: totrans-319
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`offset` 必须是一个 `datetime.timedelta` 实例'
 - en: Used to offset the value `when`. It has a meaningful use in combination with
     `SESSION_START` and `SESSION_END`, to indicated things like a timer being called
     `15 minutes` after the session start.
+  id: totrans-320
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 用于偏移值 `when`。与 `SESSION_START` 和 `SESSION_END` 结合使用具有有意义的用途，以指示会话开始后 `15 分钟`
+    调用计时器的情况。
 - en: '`repeat` which must be a `datetime.timedelta` instance'
+  id: totrans-321
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`repeat` 必须是一个 `datetime.timedelta` 实例'
 - en: Indicates if after a 1^(st) call, further calls will be scheduled within the
     same session at the scheduled `repeat` delta
+  id: totrans-322
   prefs:
   - PREF_IND
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 指示在第一次调用后，进一步的调用是否会在同一会话中按计划的 `repeat` 间隔进行安排
 - en: Once the timer goes over the end of the session it is reset to the original
     value for `when`
+  id: totrans-323
   prefs:
   - PREF_IND
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 一旦计时器超过会话结束，它将被重置为 `when` 的原始值
 - en: '`weekdays`: a **sorted** iterable with integers indicating on which days (iso
     codes, Monday is 1, Sunday is 7) the timers can be actually invoked'
+  id: totrans-324
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`weekdays`：一个**排序的**可迭代对象，其中的整数表示可以实际调用计时器的日期（ISO代码，星期一为1，星期日为7）'
 - en: If not specified, the timer will be active on all days
+  id: totrans-325
   prefs:
   - PREF_IND
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 如果未指定，则计时器将在所有日期都处于活动状态
 - en: '`weekcarry` (default: `False`). If `True` and the weekday was not seen (ex:
     trading holiday), the timer will be executed on the next day (even if in a new
     week)'
+  id: totrans-326
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`weekcarry`（默认：`False`）。如果为 `True` 并且没有看到周几（例如：交易假期），则计时器将在下一天执行（即使是在新的一周）'
 - en: '`monthdays`: a **sorted** iterable with integers indicating on which days of
     the month a timer has to be executed. For example always on day *15* of the month'
+  id: totrans-327
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`monthdays`：一个**排序的**可迭代对象，其中的整数表示要执行计时器的月份中的哪些日期。例如，每月的第15天'
 - en: If not specified, the timer will be active on all days
+  id: totrans-328
   prefs:
   - PREF_IND
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 如果未指定，则计时器将在所有日期都处于活动状态
 - en: '`monthcarry` (default: `True`). If the day was not seen (weekend, trading holiday),
     the timer will be executed on the next available day.'
+  id: totrans-329
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`monthcarry`（默认：`True`）。如果未看到该天（周末，交易假期），则计时器将在下一个可用日期执行。'
 - en: '`allow` (default: `None`). A callback which receives a datetime.date` instance
     and returns `True` if the date is allowed for timers or else returns `False`'
+  id: totrans-330
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`allow`（默认：`None`）。一个回调函数，接收一个 `datetime.date` 实例，如果日期允许计时器，则返回`True`，否则返回`False`'
 - en: '`tzdata` which can be either `None` (default), a `pytz` instance or a `data
     feed` instance.'
+  id: totrans-331
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`tzdata` 可以是 `None`（默认值），一个 `pytz` 实例或一个数据源实例。'
 - en: '`None`: `when` is interpreted at face value (which translates to handling it
     as if it where UTC even if it’s not)'
+  id: totrans-332
   prefs:
   - PREF_IND
   - PREF_IND
   type: TYPE_NORMAL
+  zh: '`None`：`when`按照面值解释（即使它不是UTC时间也会被处理为UTC时间）'
 - en: '`pytz` instance: `when` will be interpreted as being specified in the local
     time specified by the timezone instance.'
+  id: totrans-333
   prefs:
   - PREF_IND
   - PREF_IND
   type: TYPE_NORMAL
+  zh: '`pytz` 实例：`when` 将被解释为由时区实例指定的本地时间。'
 - en: '`data feed` instance: `when` will be interpreted as being specified in the
     local time specified by the `tz` parameter of the data feed instance.'
+  id: totrans-334
   prefs:
   - PREF_IND
   - PREF_IND
   type: TYPE_NORMAL
+  zh: '`data feed` 实例：`when` 将被解释为数据源实例参数 `tz` 指定的本地时间。'
 - en: Note
+  id: totrans-335
   prefs:
   - PREF_IND
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 注意
 - en: If `when` is either `SESSION_START` or `SESSION_END` and `tzdata` is `None`,
     the 1^(st) *data feed* in the system (aka `self.data0`) will be used as the reference
     to find out the session times.
+  id: totrans-336
   prefs:
   - PREF_IND
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 如果 `when` 是 `SESSION_START` 或 `SESSION_END`，并且 `tzdata` 是 `None`，则系统中的第一个数据源（即
+    `self.data0`）将被用作查找会话时间的参考。
 - en: '`cheat` (default `False`) if `True` the timer will be called before the broker
     has a chance to evaluate the orders. This opens the chance to issue orders based
     on opening price for example right before the session starts'
+  id: totrans-337
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`cheat`（默认为 `False`）如果为 `True`，则在经纪人有机会评估订单之前将调用计时器。这打开了在会话开始之前根据开盘价发出订单的可能性'
 - en: '`*args`: any extra args will be passed to `notify_timer`'
+  id: totrans-338
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`*args`：任何额外的参数将被传递给 `notify_timer`'
 - en: '`**kwargs`: any extra kwargs will be passed to `notify_timer`'
+  id: totrans-339
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`**kwargs`：任何额外的 kwargs 将被传递给 `notify_timer`'
 - en: 'Return Value:'
+  id: totrans-340
   prefs: []
   type: TYPE_NORMAL
+  zh: 返回值：
 - en: The created timer
+  id: totrans-341
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 创建的计时器
 - en: notify_timer(timer, when, *args, **kwargs)
+  id: totrans-342
   prefs:
   - PREF_H4
   type: TYPE_NORMAL
+  zh: notify_timer(timer, when, *args, **kwargs)
 - en: Receives a timer notification where `timer` is the timer which was returned
     by `add_timer`, and `when` is the calling time. `args` and `kwargs` are any additional
     arguments passed to `add_timer`
+  id: totrans-343
   prefs: []
   type: TYPE_NORMAL
+  zh: 接收定时器通知，其中`timer`是由`add_timer`返回的定时器，`when`是调用时间。`args`和`kwargs`是传递给`add_timer`的任何额外参数。
 - en: The actual `when` time can be later, but the system may have not be able to
     call the timer before. This value is the timer value and no the system time.
+  id: totrans-344
   prefs: []
   type: TYPE_NORMAL
+  zh: 实际的`when`时间可能会晚一些，但系统可能在之前无法调用定时器。这个值是定时器值，而不是系统时间。

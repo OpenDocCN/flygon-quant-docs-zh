@@ -1,221 +1,335 @@
 - en: Strategies Reference
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 策略参考
 - en: 原文：[https://www.backtrader.com/docu/strategy-reference/](https://www.backtrader.com/docu/strategy-reference/)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.backtrader.com/docu/strategy-reference/](https://www.backtrader.com/docu/strategy-reference/)
 - en: Reference for the built-in strategies
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: 内置策略的参考
 - en: MA_CrossOver
+  id: totrans-3
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: MA_CrossOver
 - en: 'Alias:'
+  id: totrans-4
   prefs: []
   type: TYPE_NORMAL
+  zh: 别名：
 - en: '[PRE0]'
+  id: totrans-5
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: This is a long-only strategy which operates on a moving average cross
+  id: totrans-6
   prefs: []
   type: TYPE_NORMAL
+  zh: 这是一个仅限开多头的策略，基于移动平均线交叉
 - en: 'Note:'
+  id: totrans-7
   prefs: []
   type: TYPE_NORMAL
+  zh: 注意：
 - en: '[PRE1]'
+  id: totrans-8
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE1]'
 - en: 'Buy Logic:'
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: 买入逻辑：
 - en: '[PRE2]'
+  id: totrans-10
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE2]'
 - en: 'Sell Logic:'
+  id: totrans-11
   prefs: []
   type: TYPE_NORMAL
+  zh: 卖出逻辑：
 - en: '[PRE3]'
+  id: totrans-12
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE3]'
 - en: 'Order Execution Type:'
+  id: totrans-13
   prefs: []
   type: TYPE_NORMAL
+  zh: 订单执行类型：
 - en: '[PRE4]'
+  id: totrans-14
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE4]'
 - en: 'Lines:'
+  id: totrans-15
   prefs: []
   type: TYPE_NORMAL
+  zh: 线：
 - en: '[PRE5]'
+  id: totrans-16
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE5]'
 - en: 'Params:'
+  id: totrans-17
   prefs: []
   type: TYPE_NORMAL
+  zh: 参数：
 - en: '[PRE6]'
+  id: totrans-18
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE6]'
 - en: SignalStrategy
+  id: totrans-19
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: SignalStrategy
 - en: This subclass of `Strategy` is meant to to auto-operate using **signals**.
+  id: totrans-20
   prefs: []
   type: TYPE_NORMAL
+  zh: 这个`Strategy`的子类旨在使用**信号**自动运行。
 - en: '*Signals* are usually indicators and the expected output values:'
+  id: totrans-21
   prefs: []
   type: TYPE_NORMAL
+  zh: '*信号*通常是指标，预期输出值为：'
 - en: '`> 0` is a `long` indication'
+  id: totrans-22
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`> 0`是一个`long`指示'
 - en: '`< 0` is a `short` indication'
+  id: totrans-23
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`< 0`是一个`short`指示'
 - en: There are 5 types of *Signals*, broken in 2 groups.
+  id: totrans-24
   prefs: []
   type: TYPE_NORMAL
+  zh: 有5种*信号*类型，分为2组。
 - en: '**Main Group**:'
+  id: totrans-25
   prefs: []
   type: TYPE_NORMAL
+  zh: '**主要组**：'
 - en: '`LONGSHORT`: both `long` and `short` indications from this signal are taken'
+  id: totrans-26
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`LONGSHORT`：此信号的`long`和`short`指示都会被采纳'
 - en: '`LONG`:'
+  id: totrans-27
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`LONG`：'
 - en: '`long` indications are taken to go long'
+  id: totrans-28
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`long`指示被认为是开多头'
 - en: '`short` indications are taken to *close* the long position. But:'
+  id: totrans-29
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`short`指示被认为是用于*关闭*多头仓位。但是：'
 - en: If a `LONGEXIT` (see below) signal is in the system it will be used to exit
     the long
+  id: totrans-30
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 如果系统中存在`LONGEXIT`（见下文）信号，则会用于退出多头
 - en: If a `SHORT` signal is available and no `LONGEXIT` is available , it will be
     used to close a `long` before opening a `short`
+  id: totrans-31
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 如果有`SHORT`信号可用且没有`LONGEXIT`可用，则会用于在开启`short`之前关闭`long`
 - en: '`SHORT`:'
+  id: totrans-32
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`SHORT`：'
 - en: '`short` indications are taken to go short'
+  id: totrans-33
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`short`指示被认为是开空头'
 - en: '`long` indications are taken to *close* the short position. But:'
+  id: totrans-34
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`long`指示被认为是用于*关闭*空头仓位。但是：'
 - en: If a `SHORTEXIT` (see below) signal is in the system it will be used to exit
     the short
+  id: totrans-35
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 如果系统中存在`SHORTEXIT`（见下文）信号，则会用于退出空头
 - en: If a `LONG` signal is available and no `SHORTEXIT` is available , it will be
     used to close a `short` before opening a `long`
+  id: totrans-36
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 如果有`LONG`信号可用且没有`SHORTEXIT`可用，则会用于在开启`long`之前关闭`short`
 - en: '**Exit Group**:'
+  id: totrans-37
   prefs: []
   type: TYPE_NORMAL
+  zh: '**退出组**：'
 - en: This 2 signals are meant to override others and provide criteria for exitins
     a `long`/`short` position
+  id: totrans-38
   prefs: []
   type: TYPE_NORMAL
+  zh: 这两个信号旨在覆盖其他信号并提供退出`long`/`short`仓位的标准。
 - en: '`LONGEXIT`: `short` indications are taken to exit `long` positions'
+  id: totrans-39
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`LONGEXIT`：`short`指示被认为是用于退出`long`仓位'
 - en: '`SHORTEXIT`: `long` indications are taken to exit `short` positions'
+  id: totrans-40
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`SHORTEXIT`：`long`指示被认为是用于退出`short`仓位'
 - en: '**Order Issuing**'
+  id: totrans-41
   prefs: []
   type: TYPE_NORMAL
+  zh: '**订单发出**'
 - en: Orders execution type is `Market` and validity is `None` (*Good until Canceled*)
+  id: totrans-42
   prefs: []
   type: TYPE_NORMAL
+  zh: 订单执行类型为`Market`，有效性为`None`（*直到取消为止*）
 - en: 'Params:'
+  id: totrans-43
   prefs: []
   type: TYPE_NORMAL
+  zh: 参数：
 - en: '`signals` (default: `[]`): a list/tuple of lists/tuples that allows the instantiation
     of the signals and allocation to the right type'
+  id: totrans-44
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`signals`（默认：`[]`）：一个列表/元组的列表/元组，允许实例化信号并分配到正确的类型'
 - en: This parameter is expected to be managed through `cerebro.add_signal`
+  id: totrans-45
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 预计通过`cerebro.add_signal`来管理此参数
 - en: '`_accumulate` (default: `False`): allow to enter the market (long/short) even
     if already in the market'
+  id: totrans-46
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`_accumulate`（默认：`False`）：允许进入市场（多头/空头），即使已经在市场中'
 - en: '`_concurrent` (default: `False`): allow orders to be issued even if orders
     are already pending execution'
+  id: totrans-47
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`_concurrent`（默认：`False`）：允许即使有订单正在等待执行，也可以发出订单'
 - en: '`_data` (default: `None`): if multiple datas are present in the system which
     is the target for orders. This can be'
+  id: totrans-48
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`_data`（默认：`None`）：如果系统中存在多个数据，这是订单的目标。这可以是'
 - en: '`None`: The first data in the system will be used'
+  id: totrans-49
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`None`：系统中的第一个数据将被使用'
 - en: 'An `int`: indicating the data that was inserted at that position'
+  id: totrans-50
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 一个`int`：表示在该位置插入的数据
 - en: 'An `str`: name given to the data when creating it (parameter `name`) or when
     adding it cerebro with `cerebro.adddata(..., name=)`'
+  id: totrans-51
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 一个`str`：在创建数据时给定的名称（参数`name`）或在使用`cerebro.adddata(..., name=)`将其添加到cerebro时给定的名称
 - en: A `data` instance
+  id: totrans-52
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 一个`data`实例
 - en: 'Lines:'
+  id: totrans-53
   prefs: []
   type: TYPE_NORMAL
+  zh: 线：
 - en: '[PRE7]'
+  id: totrans-54
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE7]'
 - en: 'Params:'
+  id: totrans-55
   prefs: []
   type: TYPE_NORMAL
+  zh: 参数：
 - en: '[PRE8]'
+  id: totrans-56
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE8]'

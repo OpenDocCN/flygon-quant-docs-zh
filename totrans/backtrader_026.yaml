@@ -1,160 +1,234 @@
 - en: Writer
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 写入器
 - en: 原文：[https://www.backtrader.com/docu/writer/](https://www.backtrader.com/docu/writer/)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.backtrader.com/docu/writer/](https://www.backtrader.com/docu/writer/)
 - en: 'Write out to a stream the following contents:'
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: 将以下内容写入流：
 - en: csv stream with data feeds, strategies, indicators and observers
+  id: totrans-3
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 包含数据源、策略、指标和观察器的 csv 流
 - en: Which objects actually go into the csv stream can be controlled with the `csv`
     attribute of each object (defaults to True for `data feeds` and `observers` /
     False for `indicators`)
+  id: totrans-4
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 可以通过每个对象的 `csv` 属性控制哪些对象实际进入 csv 流（对于 `数据源` 和 `观察器` 默认为 True / 对于 `指标` 默认为 False）
 - en: A summary of the properties of
+  id: totrans-5
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 属性摘要
 - en: Data Feeds
+  id: totrans-6
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 数据源
 - en: Strategies (lines and parameters)
+  id: totrans-7
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 策略（行数和参数）
 - en: 'Indicators/Observers: (lines and parameters)'
+  id: totrans-8
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 指标/观察器：（行数和参数）
 - en: 'Analyzers: (parameters and analysis outcome)'
+  id: totrans-9
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 分析器：（参数和分析结果）
 - en: 'There is only a single Writer defined called `WriterFile`, which can be added
     to the system:'
+  id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: 只定义了一个称为 `WriterFile` 的写入器，可以添加到系统中：
 - en: By setting the `writer` parameter of cerebro to True
+  id: totrans-11
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 通过将 cerebro 的 `writer` 参数设置为 True
 - en: A standard `WriterFile` will be instantiated
+  id: totrans-12
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 将实例化标准的 `WriterFile`
 - en: By calling `Cerebro.addwriter(writerclass, **kwargs)`
+  id: totrans-13
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 通过调用 `Cerebro.addwriter(writerclass, **kwargs)`
 - en: '`writerclass` will be instantiated during backtesting execution with the givenn
     `kwargs`'
+  id: totrans-14
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: '`writerclass` 将在回测执行期间使用给定的 `kwargs` 实例化'
 - en: 'Given that a standard `WriterFile` does not ouput `csv` as a default, the following
     `addwriter` invocation would take care of it:'
+  id: totrans-15
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 鉴于标准的 `WriterFile` 不会默认输出 `csv`，以下 `addwriter` 调用将负责处理：
 - en: '[PRE0]'
+  id: totrans-16
   prefs:
   - PREF_IND
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: Reference
+  id: totrans-17
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 参考文献
 - en: class backtrader.WriterFile()
+  id: totrans-18
   prefs:
   - PREF_H4
   type: TYPE_NORMAL
+  zh: backtrader.WriterFile 类
 - en: The system wide writer class.
+  id: totrans-19
   prefs: []
   type: TYPE_NORMAL
+  zh: 系统范围的写入器类。
 - en: 'It can be parametrized with:'
+  id: totrans-20
   prefs: []
   type: TYPE_NORMAL
+  zh: 可以用以下方式进行参数化：
 - en: '`out` (default: `sys.stdout`): output stream to write to'
+  id: totrans-21
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`out`（默认：`sys.stdout`）：要写入的输出流'
 - en: If a string is passed a filename with the content of the parameter will be used
+  id: totrans-22
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 如果传递了字符串，则将使用参数内容的文件名
 - en: '`close_out` (default: `False`)'
+  id: totrans-23
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`close_out`（默认：`False`）'
 - en: If `out` is a stream whether it has to be explicitly closed by the writer
+  id: totrans-24
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 如果 `out` 是一个流，则是否需要写入器显式关闭它
 - en: '`csv` (default: `False`)'
+  id: totrans-25
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`csv`（默认：`False`）'
 - en: If a csv stream of the data feeds, strategies, observers and indicators has
     to be written to the stream during execution
+  id: totrans-26
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 如果在执行期间需要将数据源、策略、观察器和指标的 csv 流写入流
 - en: Which objects actually go into the csv stream can be controlled with the `csv`
     attribute of each object (defaults to `True` for `data feeds` and `observers`
     / False for `indicators`)
+  id: totrans-27
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 可以通过每个对象的 `csv` 属性控制哪些对象实际进入 csv 流（对于 `数据源` 和 `观察器` 默认为 True / 对于 `指标` 默认为 False）
 - en: '`csv_filternan` (default: `True`) whether `nan` values have to be purged out
     of the csv stream (replaced by an empty field)'
+  id: totrans-28
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`csv_filternan`（默认：`True`）是否需要将 `nan` 值从 csv 流中清除（替换为空字段）'
 - en: '`csv_counter` (default: `True`) if the writer shall keep and print out a counter
     of the lines actually output'
+  id: totrans-29
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`csv_counter`（默认：`True`）如果写入器应该保留并打印实际输出的行数计数器'
 - en: '`indent` (default: `2`) indentation spaces for each level'
+  id: totrans-30
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`indent`（默认：`2`）每个级别的缩进空格数'
 - en: '`separators` (default: `[''='', ''-'', ''+'', ''*'', ''.'', ''~'', ''"'', ''^'',
     ''#'']`)'
+  id: totrans-31
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`separators`（默认：`[''='', ''-'', ''+'', ''*'', ''.'', ''~'', ''"'', ''^'', ''#'']`）'
 - en: Characters used for line separators across section/sub(sub)sections
+  id: totrans-32
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 用于各个部分/子（子）部分的行分隔符使用的字符
 - en: '`seplen` (default: `79`)'
+  id: totrans-33
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`seplen`（默认：`79`）'
 - en: total length of a line separator including indentation
+  id: totrans-34
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 包括缩进在内的一行分隔符的总长度
 - en: '`rounding` (default: `None`)'
+  id: totrans-35
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`rounding`（默认：`None`）'
 - en: Number of decimal places to round floats down to. With `None` no rounding is
     performed
+  id: totrans-36
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 要将浮点数舍入到的小数位数。使用 `None` 时不执行舍入

@@ -1,1556 +1,2357 @@
 - en: Data Feeds Reference
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 数据源参考
 - en: 原文：[https://www.backtrader.com/docu/dataautoref/](https://www.backtrader.com/docu/dataautoref/)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 译文：[https://www.backtrader.com/docu/dataautoref/](https://www.backtrader.com/docu/dataautoref/)
 - en: AbstractDataBase
+  id: totrans-2
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: AbstractDataBase
 - en: 'Lines:'
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: 行：
 - en: '[PRE0]'
+  id: totrans-4
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: 'Params:'
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: 参数：
 - en: '[PRE1]'
+  id: totrans-6
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE1]'
 - en: BacktraderCSVData
+  id: totrans-7
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: BacktraderCSVData
 - en: Parses a self-defined CSV Data used for testing.
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: 解析用于测试的自定义CSV数据。
 - en: 'Specific parameters:'
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: 特定参数：
 - en: '`dataname`: The filename to parse or a file-like object'
+  id: totrans-10
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`dataname`：要解析的文件名或类似文件的对象'
 - en: 'Lines:'
+  id: totrans-11
   prefs: []
   type: TYPE_NORMAL
+  zh: 行：
 - en: '[PRE2]'
+  id: totrans-12
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE2]'
 - en: 'Params:'
+  id: totrans-13
   prefs: []
   type: TYPE_NORMAL
+  zh: 参数：
 - en: '[PRE3]'
+  id: totrans-14
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE3]'
 - en: CSVDataBase
+  id: totrans-15
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: CSVDataBase
 - en: Base class for classes implementing CSV DataFeeds
+  id: totrans-16
   prefs: []
   type: TYPE_NORMAL
+  zh: 实现CSV数据源的类的基类
 - en: The class takes care of opening the file, reading the lines and tokenizing them.
+  id: totrans-17
   prefs: []
   type: TYPE_NORMAL
+  zh: 该类负责打开文件，读取行并对其进行标记
 - en: 'Subclasses do only need to override:'
+  id: totrans-18
   prefs: []
   type: TYPE_NORMAL
+  zh: 子类只需要覆盖：
 - en: _loadline(tokens)
+  id: totrans-19
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: _loadline(tokens)
 - en: The return value of `_loadline` (True/False) will be the return value of `_load`
     which has been overriden by this base class
+  id: totrans-20
   prefs: []
   type: TYPE_NORMAL
+  zh: '`_loadline`的返回值（True/False）将是由此基类覆盖的`_load`的返回值'
 - en: 'Lines:'
+  id: totrans-21
   prefs: []
   type: TYPE_NORMAL
+  zh: 行：
 - en: '[PRE4]'
+  id: totrans-22
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE4]'
 - en: 'Params:'
+  id: totrans-23
   prefs: []
   type: TYPE_NORMAL
+  zh: 参数：
 - en: '[PRE5]'
+  id: totrans-24
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE5]'
 - en: Chainer
+  id: totrans-25
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: Chainer
 - en: Class that chains datas
+  id: totrans-26
   prefs: []
   type: TYPE_NORMAL
+  zh: 链接数据的类
 - en: 'Lines:'
+  id: totrans-27
   prefs: []
   type: TYPE_NORMAL
+  zh: 行：
 - en: '[PRE6]'
+  id: totrans-28
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE6]'
 - en: 'Params:'
+  id: totrans-29
   prefs: []
   type: TYPE_NORMAL
+  zh: 参数：
 - en: '[PRE7]'
+  id: totrans-30
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE7]'
 - en: DataClone
+  id: totrans-31
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: DataClone
 - en: 'Lines:'
+  id: totrans-32
   prefs: []
   type: TYPE_NORMAL
+  zh: 行：
 - en: '[PRE8]'
+  id: totrans-33
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE8]'
 - en: 'Params:'
+  id: totrans-34
   prefs: []
   type: TYPE_NORMAL
+  zh: 参数：
 - en: '[PRE9]'
+  id: totrans-35
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE9]'
 - en: DataFiller
+  id: totrans-36
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: DataFiller
 - en: This class will fill gaps in the source data using the following information
     bits from the underlying data source
+  id: totrans-37
   prefs: []
   type: TYPE_NORMAL
+  zh: 此类将使用来自基础数据源的以下信息位填充源数据中的间隙
 - en: timeframe and compression to dimension the output bars
+  id: totrans-38
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 时间框架和压缩以确定输出条的维度
 - en: sessionstart and sessionend
+  id: totrans-39
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: sessionstart和sessionend
 - en: If a data feed has missing bars in between 10:31 and 10:34 and the timeframe
     is minutes, the output will be filled with bars for minutes 10:32 and 10:33 using
     the closing price of the last bar (10:31)
+  id: totrans-40
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果数据源在10:31和10:34之间缺少���，且时间框架为分钟，则输出将使用最后一条条的收盘价（10:31）填充10:32和10:33分钟的条
 - en: Bars can be missinga amongst other things because
+  id: totrans-41
   prefs: []
   type: TYPE_NORMAL
+  zh: 条可能会缺失，因为其他原因
 - en: 'Params:'
+  id: totrans-42
   prefs: []
   type: TYPE_NORMAL
+  zh: 参数：
 - en: '[PRE10]'
+  id: totrans-43
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE10]'
 - en: 'Lines:'
+  id: totrans-44
   prefs: []
   type: TYPE_NORMAL
+  zh: 行：
 - en: '[PRE11]'
+  id: totrans-45
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE11]'
 - en: 'Params:'
+  id: totrans-46
   prefs: []
   type: TYPE_NORMAL
+  zh: 参数：
 - en: '[PRE12]'
+  id: totrans-47
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE12]'
 - en: DataFilter
+  id: totrans-48
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: DataFilter
 - en: This class filters out bars from a given data source. In addition to the standard
     parameters of a DataBase it takes a `funcfilter` parameter which can be any callable
+  id: totrans-49
   prefs: []
   type: TYPE_NORMAL
+  zh: 此类从给定数据源中过滤条。除了DataBase的标准参数外，它还接受一个`funcfilter`参数，该参数可以是任何可调用对象
 - en: 'Logic:'
+  id: totrans-50
   prefs: []
   type: TYPE_NORMAL
+  zh: 逻辑：
 - en: '`funcfilter` will be called with the underlying data source'
+  id: totrans-51
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`funcfilter`将与基础数据源一起调用'
 - en: It can be any callable
+  id: totrans-52
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 它可以是任何可调用对象
 - en: 'Return value `True`: current data source bar values will used'
+  id: totrans-53
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 返回值 `True`：将使用当前数据源的条形值
 - en: 'Return value `False`: current data source bar values will discarded'
+  id: totrans-54
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 返回值 `False`：将丢弃当前数据源的条形值
 - en: 'Lines:'
+  id: totrans-55
   prefs: []
   type: TYPE_NORMAL
+  zh: 行：
 - en: '[PRE13]'
+  id: totrans-56
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE13]'
 - en: 'Params:'
+  id: totrans-57
   prefs: []
   type: TYPE_NORMAL
+  zh: 参数：
 - en: '[PRE14]'
+  id: totrans-58
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE14]'
 - en: GenericCSVData
+  id: totrans-59
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: GenericCSVData
 - en: Parses a CSV file according to the order and field presence defined by the parameters
+  id: totrans-60
   prefs: []
   type: TYPE_NORMAL
+  zh: 根据参数定义的顺序和字段存在性解析CSV文件
 - en: 'Specific parameters (or specific meaning):'
+  id: totrans-61
   prefs: []
   type: TYPE_NORMAL
+  zh: 特定参数（或特定含义）：
 - en: '`dataname`: The filename to parse or a file-like object'
+  id: totrans-62
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`dataname`：要解析的文件名或类似文件的对象'
 - en: The lines parameters (datetime, open, high …) take numeric values
+  id: totrans-63
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 行参数（日期时间，开盘价，最高价...）采用数值
 - en: A value of -1 indicates absence of that field in the CSV source
+  id: totrans-64
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: -1的值表示CSV源中该字段的缺失
 - en: If `time` is present (parameter time >=0) the source contains separated fields
     for date and time, which will be combined
+  id: totrans-65
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 如果`time`存在（参数time >=0），则源包含分开的日期和时间字段，这些字段将被组合
 - en: '`nullvalue`'
+  id: totrans-66
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`nullvalue`'
 - en: Value that will be used if a value which should be there is missing (the CSV
     field is empty)
+  id: totrans-67
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 如果应该存在的值缺失（CSV字段为空），将使用的值
 - en: '`dtformat`: Format used to parse the datetime CSV field. See the python strptime/strftime
     documentation for the format.'
+  id: totrans-68
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`dtformat`：用于解析日期时间CSV字段的格式。有关格式，请参阅python strptime/strftime文档。'
 - en: If a numeric value is specified, it will be interpreted as follows
+  id: totrans-69
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 如果指定了数值，则将按以下方式解释
 - en: '`1`: The value is a Unix timestamp of type `int` representing the number of
     seconds since Jan 1^(st), 1970'
+  id: totrans-70
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`1`：值是`int`类型的Unix时间戳，表示自1970年1月1日起的秒数'
 - en: '`2`: The value is a Unix timestamp of type `float`'
+  id: totrans-71
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`2`：值是`float`类型的Unix时间戳'
 - en: If a **callable** is passed
+  id: totrans-72
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 如果传递了**可调用**对象
 - en: it will accept a string and return a datetime.datetime python instance
+  id: totrans-73
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 它将接受一个字符串并返回一个datetime.datetime的python实例
 - en: '`tmformat`: Format used to parse the time CSV field if “present” (the default
     for the “time” CSV field is not to be present)'
+  id: totrans-74
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`tmformat`：如果“存在”，则用于解析时间CSV字段的格式（“时间”CSV字段的默认值是不存在）'
 - en: 'Lines:'
+  id: totrans-75
   prefs: []
   type: TYPE_NORMAL
+  zh: 行：
 - en: '[PRE15]'
+  id: totrans-76
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE15]'
 - en: 'Params:'
+  id: totrans-77
   prefs: []
   type: TYPE_NORMAL
+  zh: 参数：
 - en: '[PRE16]'
+  id: totrans-78
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE16]'
 - en: IBData
+  id: totrans-79
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: IBData
 - en: Interactive Brokers Data Feed.
+  id: totrans-80
   prefs: []
   type: TYPE_NORMAL
+  zh: 交互经纪人数据源。
 - en: 'Supports the following contract specifications in parameter `dataname`:'
+  id: totrans-81
   prefs: []
   type: TYPE_NORMAL
+  zh: 支持参数`dataname`中的以下合同规范：
 - en: 'TICKER # Stock type and SMART exchange'
+  id: totrans-82
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 'TICKER # 股票类型和SMART交易所'
 - en: 'TICKER-STK # Stock and SMART exchange'
+  id: totrans-83
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 'TICKER-STK # 股票和SMART交易所'
 - en: 'TICKER-STK-EXCHANGE # Stock'
+  id: totrans-84
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 'TICKER-STK-EXCHANGE # 股票'
 - en: 'TICKER-STK-EXCHANGE-CURRENCY # Stock'
+  id: totrans-85
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 'TICKER-STK-EXCHANGE-CURRENCY # 股票'
 - en: 'TICKER-CFD # CFD and SMART exchange'
+  id: totrans-86
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 'TICKER-CFD # 差价合约和SMART交易所'
 - en: 'TICKER-CFD-EXCHANGE # CFD'
+  id: totrans-87
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 'TICKER-CFD-EXCHANGE # 差价合约'
 - en: 'TICKER-CDF-EXCHANGE-CURRENCY # Stock'
+  id: totrans-88
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 'TICKER-CDF-EXCHANGE-CURRENCY # 股票'
 - en: 'TICKER-IND-EXCHANGE # Index'
+  id: totrans-89
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 'TICKER-IND-EXCHANGE # 指数'
 - en: 'TICKER-IND-EXCHANGE-CURRENCY # Index'
+  id: totrans-90
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 'TICKER-IND-EXCHANGE-CURRENCY # 指数'
 - en: 'TICKER-YYYYMM-EXCHANGE # Future'
+  id: totrans-91
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 'TICKER-YYYYMM-EXCHANGE # 期货'
 - en: 'TICKER-YYYYMM-EXCHANGE-CURRENCY # Future'
+  id: totrans-92
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 'TICKER-YYYYMM-EXCHANGE-CURRENCY # 期货'
 - en: 'TICKER-YYYYMM-EXCHANGE-CURRENCY-MULT # Future'
+  id: totrans-93
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 'TICKER-YYYYMM-EXCHANGE-CURRENCY-MULT # 期货'
 - en: 'TICKER-FUT-EXCHANGE-CURRENCY-YYYYMM-MULT # Future'
+  id: totrans-94
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 'TICKER-FUT-EXCHANGE-CURRENCY-YYYYMM-MULT # 期货'
 - en: 'TICKER-YYYYMM-EXCHANGE-CURRENCY-STRIKE-RIGHT # FOP'
+  id: totrans-95
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 'TICKER-YYYYMM-EXCHANGE-CURRENCY-STRIKE-RIGHT # 期权'
 - en: 'TICKER-YYYYMM-EXCHANGE-CURRENCY-STRIKE-RIGHT-MULT # FOP'
+  id: totrans-96
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 'TICKER-YYYYMM-EXCHANGE-CURRENCY-STRIKE-RIGHT-MULT # 期权'
 - en: 'TICKER-FOP-EXCHANGE-CURRENCY-YYYYMM-STRIKE-RIGHT # FOP'
+  id: totrans-97
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 'TICKER-FOP-EXCHANGE-CURRENCY-YYYYMM-STRIKE-RIGHT # 期权'
 - en: 'TICKER-FOP-EXCHANGE-CURRENCY-YYYYMM-STRIKE-RIGHT-MULT # FOP'
+  id: totrans-98
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 'TICKER-FOP-EXCHANGE-CURRENCY-YYYYMM-STRIKE-RIGHT-MULT # 期权'
 - en: 'CUR1.CUR2-CASH-IDEALPRO # Forex'
+  id: totrans-99
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 'CUR1.CUR2-CASH-IDEALPRO # 外汇'
 - en: 'TICKER-YYYYMMDD-EXCHANGE-CURRENCY-STRIKE-RIGHT # OPT'
+  id: totrans-100
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 'TICKER-YYYYMMDD-EXCHANGE-CURRENCY-STRIKE-RIGHT # 期权'
 - en: 'TICKER-YYYYMMDD-EXCHANGE-CURRENCY-STRIKE-RIGHT-MULT # OPT'
+  id: totrans-101
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 'TICKER-YYYYMMDD-EXCHANGE-CURRENCY-STRIKE-RIGHT-MULT # 期权'
 - en: 'TICKER-OPT-EXCHANGE-CURRENCY-YYYYMMDD-STRIKE-RIGHT # OPT'
+  id: totrans-102
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 'TICKER-OPT-EXCHANGE-CURRENCY-YYYYMMDD-STRIKE-RIGHT # 期权'
 - en: 'TICKER-OPT-EXCHANGE-CURRENCY-YYYYMMDD-STRIKE-RIGHT-MULT # OPT'
+  id: totrans-103
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 'TICKER-OPT-EXCHANGE-CURRENCY-YYYYMMDD-STRIKE-RIGHT-MULT # 期权'
 - en: 'Params:'
+  id: totrans-104
   prefs: []
   type: TYPE_NORMAL
+  zh: 参数：
 - en: '`sectype` (default: `STK`)'
+  id: totrans-105
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`sectype`（默认值：`STK`）'
 - en: Default value to apply as *security type* if not provided in the `dataname`
     specification
+  id: totrans-106
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 如果在`dataname`规范中未提供，应用的默认值为*security type*
 - en: '`exchange` (default: `SMART`)'
+  id: totrans-107
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`exchange`（默认值：`SMART`）'
 - en: Default value to apply as *exchange* if not provided in the `dataname` specification
+  id: totrans-108
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 如果在`dataname`规范中未提供，应用的默认值为*exchange*
 - en: '`currency` (default: `''''`)'
+  id: totrans-109
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`currency`（默认值：`''''`）'
 - en: Default value to apply as *currency* if not provided in the `dataname` specification
+  id: totrans-110
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 如果在`dataname`规范中未提供，应用的默认值为*currency*
 - en: '`historical` (default: `False`)'
+  id: totrans-111
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`historical`（默认值：`False`）'
 - en: If set to `True` the data feed will stop after doing the first download of data.
+  id: totrans-112
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 如果设置为`True`，数据源将在首次下载数据后停止。
 - en: The standard data feed parameters `fromdate` and `todate` will be used as reference.
+  id: totrans-113
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 标准数据源参数`fromdate`和`todate`将被用作参考。
 - en: The data feed will make multiple requests if the requested duration is larger
     than the one allowed by IB given the timeframe/compression chosen for the data.
+  id: totrans-114
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 如果请求的持续时间大于IB根据所选数据的时间框架/压缩允许的持续时间，则数据源将进行多次请求。
 - en: '`what` (default: `None`)'
+  id: totrans-115
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`what`（默认值：`None`）'
 - en: 'If `None` the default for different assets types will be used for historical
     data requests:'
+  id: totrans-116
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 如果为`None`，则将为历史数据请求使用不同资产类型的默认值：
 - en: ‘BID’ for CASH assets
+  id: totrans-117
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 对于现金资产‘BID’
 - en: ‘TRADES’ for any other
+  id: totrans-118
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 对于任何其他‘交易’
 - en: Check the IB API docs if another value is wished
+  id: totrans-119
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 如果希望使用其他值，请查阅IB API文档
 - en: '`rtbar` (default: `False`)'
+  id: totrans-120
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`rtbar`（默认值：`False`）'
 - en: If `True` the `5 Seconds Realtime bars` provided by Interactive Brokers will
     be used as the smalles tick. According to the documentation they correspond to
     real-time values (once collated and curated by IB)
+  id: totrans-121
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 如果设置为`True`，则使用Interactive Brokers提供的`5秒实时数据条`作为最小跳动。根据文档，它们对应实时值（一旦被IB收集和整理）
 - en: If `False` then the `RTVolume` prices will be used, which are based on receiving
     ticks. In the case of `CASH` assets (like for example EUR.JPY) `RTVolume` will
     always be used and from it the `bid` price (industry de-facto standard with IB
     according to the literature scattered over the Internet)
+  id: totrans-122
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 如果为`False`，则将使用基于接收到的跳动的`RTVolume`价格。在`CASH`资产的情况下（例如EUR.JPY），将始终使用`RTVolume`，并从中获取`bid`价格（根据散布在互联网上的文献，这是IB的行业事实标准）
 - en: Even if set to `True`, if the data is resampled/kept to a timeframe/compression
     below Seconds/5, no real time bars will be used, because IB doesn’t serve them
     below that level
+  id: totrans-123
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 即使设置为`True`，如果数据被重新采样/保持到低于Seconds/5的时间框架/压缩，将不会使用实时条，因为IB不会在该水平以下提供它们
 - en: '`qcheck` (default: `0.5`)'
+  id: totrans-124
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`qcheck`（默认值：`0.5`）'
 - en: Time in seconds to wake up if no data is received to give a chance to resample/replay
     packets properly and pass notifications up the chain
+  id: totrans-125
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 以秒为单位的时间，如果未收到数据，则唤醒以正确重新采样/回放数据包并将通知传递给链路上游的机会
 - en: '`backfill_start` (default: `True`)'
+  id: totrans-126
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`backfill_start`（默认值：`True`）'
 - en: Perform backfilling at the start. The maximum possible historical data will
     be fetched in a single request.
+  id: totrans-127
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 在开始时执行回填。将在单个请求中获取最大可能的历史数据。
 - en: '`backfill` (default: `True`)'
+  id: totrans-128
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`backfill`（默认值：`True`）'
 - en: Perform backfilling after a disconnection/reconnection cycle. The gap duration
     will be used to download the smallest possible amount of data
+  id: totrans-129
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 在断开/重新连接周期后执行回填。间隙持续时间将用于下载尽可能少的数据量
 - en: '`backfill_from` (default: `None`)'
+  id: totrans-130
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`backfill_from`（默认值：`None`）'
 - en: An additional data source can be passed to do an initial layer of backfilling.
     Once the data source is depleted and if requested, backfilling from IB will take
     place. This is ideally meant to backfill from already stored sources like a file
     on disk, but not limited to.
+  id: totrans-131
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 可以传递一个额外的数据源来进行初始层次的回填。一旦数据源耗尽并且如果需要，将从 IB 进行回填。理想情况下，这是为了从已存储的源（如磁盘上的文件）回填，但不限于此。
 - en: '`latethrough` (default: `False`)'
+  id: totrans-132
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`latethrough`（默认：`False`）'
 - en: If the data source is resampled/replayed, some ticks may come in too late for
     the already delivered resampled/replayed bar. If this is `True` those ticks will
     bet let through in any case.
+  id: totrans-133
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 如果数据源被重新采样/回放，一些 ticks 可能会因为已经交付的重新采样/回放的 bar 而来得太晚。如果这是 `True`，那些 ticks 将无论如何都会被放过。
 - en: Check the Resampler documentation to see who to take those ticks into account.
+  id: totrans-134
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 检查 Resampler 文档以查看如何考虑这些 ticks。
 - en: This can happen especially if `timeoffset` is set to `False` in the `IBStore`
     instance and the TWS server time is not in sync with that of the local computer
+  id: totrans-135
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 如果在 `IBStore` 实例中设置 `timeoffset` 为 `False`，并且 TWS 服务器时间与本地计算机时间不同步，则可能会发生这种情况。
 - en: '`tradename` (default: `None`) Useful for some specific cases like `CFD` in
     which prices are offered by one asset and trading happens in a different onel'
+  id: totrans-136
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`tradename`（默认：`None`）对某些特定情况（如 `CFD`，其中价格由一种资产提供，交易发生在另一种资产上）很有用'
 - en: SPY-STK-SMART-USD -> SP500 ETF (will be specified as `dataname`)
+  id: totrans-137
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: SPY-STK-SMART-USD -> SP500 ETF（将被指定为 `dataname`）
 - en: SPY-CFD-SMART-USD -> which is the corresponding CFD which offers not price tracking
     but in this case will be the trading asset (specified as `tradename`)
+  id: totrans-138
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: SPY-CFD-SMART-USD -> 这是对应的 CFD，它提供的不是价格跟踪，而是在这种情况下将是交易资产（指定为 `tradename`）
 - en: The default values in the params are the to allow things like `\`TICKER`, to
     which the parameter`sectype`(default:`STK`) and`exchange`(default:`SMART`) are
     applied.
+  id: totrans-139
   prefs: []
   type: TYPE_NORMAL
+  zh: 参数中的默认值是为了允许类似 `\`TICKER` 这样的东西，其中参数 `sectype`（默认：`STK`）和 `exchange`（默认：`SMART`）被应用。
 - en: 'Some assets like `AAPL` need full specification including `currency` (default:
     ‘’) whereas others like `TWTR` can be simply passed as it is.'
+  id: totrans-140
   prefs: []
   type: TYPE_NORMAL
+  zh: 一些资产如 `AAPL` 需要包括 `currency` 的完整规范（默认：‘’），而像 `TWTR` 这样的其他资产可以直接传递。
 - en: '`AAPL-STK-SMART-USD` would be the full specification for dataname'
+  id: totrans-141
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`AAPL-STK-SMART-USD` 是 dataname 的完整规范。'
 - en: 'Or else: `IBData` as `IBData(dataname=''AAPL'', currency=''USD'')` which uses
     the default values (`STK` and `SMART`) and overrides the currency to be `USD`'
+  id: totrans-142
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 或者：`IBData` 作为 `IBData(dataname='AAPL', currency='USD')`，它使用默认值（`STK` 和 `SMART`）并覆盖货币为
+    `USD`
 - en: 'Lines:'
+  id: totrans-143
   prefs: []
   type: TYPE_NORMAL
+  zh: 'Lines:'
 - en: '[PRE17]'
+  id: totrans-144
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE17]'
 - en: 'Params:'
+  id: totrans-145
   prefs: []
   type: TYPE_NORMAL
+  zh: 参数：
 - en: '[PRE18]'
+  id: totrans-146
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE18]'
 - en: InfluxDB
+  id: totrans-147
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: InfluxDB
 - en: 'Lines:'
+  id: totrans-148
   prefs: []
   type: TYPE_NORMAL
+  zh: 'Lines:'
 - en: '[PRE19]'
+  id: totrans-149
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE19]'
 - en: 'Params:'
+  id: totrans-150
   prefs: []
   type: TYPE_NORMAL
+  zh: 参数：
 - en: '[PRE20]'
+  id: totrans-151
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE20]'
 - en: MT4CSVData
+  id: totrans-152
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: MT4CSVData
 - en: Parses a [Metatrader4](https://www.metaquotes.net/en/metatrader4) History center
     CSV exported file.
+  id: totrans-153
   prefs: []
   type: TYPE_NORMAL
+  zh: 解析 [Metatrader4](https://www.metaquotes.net/en/metatrader4) 历史中心的 CSV 导出文件。
 - en: 'Specific parameters (or specific meaning):'
+  id: totrans-154
   prefs: []
   type: TYPE_NORMAL
+  zh: 特定参数（或特定含义）：
 - en: '`dataname`: The filename to parse or a file-like object'
+  id: totrans-155
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`dataname`：要解析的文件名或文件对象'
 - en: Uses GenericCSVData and simply modifies the params
+  id: totrans-156
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 使用 GenericCSVData 并简单修改参数
 - en: 'Lines:'
+  id: totrans-157
   prefs: []
   type: TYPE_NORMAL
+  zh: 'Lines:'
 - en: '[PRE21]'
+  id: totrans-158
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE21]'
 - en: 'Params:'
+  id: totrans-159
   prefs: []
   type: TYPE_NORMAL
+  zh: 参数：
 - en: '[PRE22]'
+  id: totrans-160
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE22]'
 - en: OandaData
+  id: totrans-161
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: OandaData
 - en: Oanda Data Feed.
+  id: totrans-162
   prefs: []
   type: TYPE_NORMAL
+  zh: Oanda 数据源。
 - en: 'Params:'
+  id: totrans-163
   prefs: []
   type: TYPE_NORMAL
+  zh: 参数：
 - en: '`qcheck` (default: `0.5`)'
+  id: totrans-164
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`qcheck`（默认：`0.5`）'
 - en: Time in seconds to wake up if no data is received to give a chance to resample/replay
     packets properly and pass notifications up the chain
+  id: totrans-165
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 在未收到数据时唤醒的时间，以便充分重新采样/回放数据包并将通知传递给上游链。
 - en: '`historical` (default: `False`)'
+  id: totrans-166
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`historical`（默认：`False`）'
 - en: If set to `True` the data feed will stop after doing the first download of data.
+  id: totrans-167
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 如果设置为 `True`，数据源在完成首次数据下载后将停止。
 - en: The standard data feed parameters `fromdate` and `todate` will be used as reference.
+  id: totrans-168
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 标准数据源参数 `fromdate` 和 `todate` 将作为参考。
 - en: The data feed will make multiple requests if the requested duration is larger
     than the one allowed by IB given the timeframe/compression chosen for the data.
+  id: totrans-169
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 如果所请求的持续时间大于 IB 根据数据所选的时间框架/压缩允许的持续时间，则数据源将发出多个请求。
 - en: '`backfill_start` (default: `True`)'
+  id: totrans-170
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`backfill_start`（默认：`True`）'
 - en: Perform backfilling at the start. The maximum possible historical data will
     be fetched in a single request.
+  id: totrans-171
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 在开始时执行回填。将在单个请求中获取最大可能的历史数据。
 - en: '`backfill` (default: `True`)'
+  id: totrans-172
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`backfill`（默认：`True`）'
 - en: Perform backfilling after a disconnection/reconnection cycle. The gap duration
     will be used to download the smallest possible amount of data
+  id: totrans-173
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 在断开/重新连接周期后执行回填。将使用间隙持续时间来下载可能的最小数据量
 - en: '`backfill_from` (default: `None`)'
+  id: totrans-174
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`backfill_from`（默认：`None`）'
 - en: An additional data source can be passed to do an initial layer of backfilling.
     Once the data source is depleted and if requested, backfilling from IB will take
     place. This is ideally meant to backfill from already stored sources like a file
     on disk, but not limited to.
+  id: totrans-175
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 可以传递附加数据源来执行初始层的补充。一旦数据源耗尽并且如果需要，将从IB进行补充。这最理想地用于从已存储的源（如磁盘上的文件）进行补充，但不限于此。
 - en: '`bidask` (default: `True`)'
+  id: totrans-176
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`bidask`（默认：`True`）'
 - en: If `True`, then the historical/backfilling requests will request bid/ask prices
     from the server
+  id: totrans-177
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 如果为`True`，则历史/补偿请求将从服务器请求买入/卖出价格
 - en: If `False`, then *midpoint* will be requested
+  id: totrans-178
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 如果为`False`，则将请求*midpoint*
 - en: '`useask` (default: `False`)'
+  id: totrans-179
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`useask`（默认：`False`）'
 - en: If `True` the *ask* part of the *bidask* prices will be used instead of the
     default use of *bid*
+  id: totrans-180
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 如果为`True`，则将使用*bidask*价格的*ask*部分，而不是默认使用*bid*
 - en: '`includeFirst` (default: `True`)'
+  id: totrans-181
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`includeFirst`（默认：`True`）'
 - en: Influence the delivery of the 1^(st) bar of a historical/backfilling request
     by setting the parameter directly to the Oanda API calls
+  id: totrans-182
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 通过直接将参数直接设置为Oanda API调用来影响历史/补偿请求的第1个栏条的交付
 - en: '`reconnect` (default: `True`)'
+  id: totrans-183
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`reconnect`（默认：`True`）'
 - en: Reconnect when network connection is down
+  id: totrans-184
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 当网络连接中断时重新连接
 - en: '`reconnections` (default: `-1`)'
+  id: totrans-185
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`reconnections`（默认：`-1`）'
 - en: 'Number of times to attempt reconnections: `-1` means forever'
+  id: totrans-186
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 重新连接尝试次数：`-1` 表示永远
 - en: '`reconntimeout` (default: `5.0`)'
+  id: totrans-187
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`reconntimeout`（默认：`5.0`）'
 - en: Time in seconds to wait in between reconnection attemps
+  id: totrans-188
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 重新连接尝试之间等待的秒数
 - en: 'This data feed supports only this mapping of `timeframe` and `compression`,
     which comply with the definitions in the OANDA API Developer’s Guid:'
+  id: totrans-189
   prefs: []
   type: TYPE_NORMAL
+  zh: 此数据源仅支持与OANDA API开发人员指南中的定义相符的`timeframe`和`compression`的此映射：
 - en: '[PRE23]'
+  id: totrans-190
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE23]'
 - en: Any other combination will be rejected
+  id: totrans-191
   prefs: []
   type: TYPE_NORMAL
+  zh: 任何其他组合都将被拒绝
 - en: 'Lines:'
+  id: totrans-192
   prefs: []
   type: TYPE_NORMAL
+  zh: 行：
 - en: '[PRE24]'
+  id: totrans-193
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE24]'
 - en: 'Params:'
+  id: totrans-194
   prefs: []
   type: TYPE_NORMAL
+  zh: 参数：
 - en: '[PRE25]'
+  id: totrans-195
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE25]'
 - en: PandasData
+  id: totrans-196
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: PandasData
 - en: Uses a Pandas DataFrame as the feed source, using indices into column names
     (which can be “numeric”)
+  id: totrans-197
   prefs: []
   type: TYPE_NORMAL
+  zh: 使用Pandas DataFrame作为数据源，使用列名的索引（可以是“数字”）
 - en: This means that all parameters related to lines must have numeric values as
     indices into the tuples
+  id: totrans-198
   prefs: []
   type: TYPE_NORMAL
+  zh: 这意味着所有与行相关的参数都必须具有数值作为元组的索引
 - en: 'Params:'
+  id: totrans-199
   prefs: []
   type: TYPE_NORMAL
+  zh: 参数：
 - en: '`nocase` (default *True*) case insensitive match of column names'
+  id: totrans-200
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`nocase` （默认 *True*）不区分列名大小写的匹配'
 - en: 'Note:'
+  id: totrans-201
   prefs: []
   type: TYPE_NORMAL
+  zh: 注：
 - en: The `dataname` parameter is a Pandas DataFrame
+  id: totrans-202
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`dataname`参数是一个Pandas DataFrame'
 - en: Values possible for datetime
+  id: totrans-203
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 可用于日期时间的值
 - en: 'None: the index contains the datetime'
+  id: totrans-204
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: None：索引包含日期时间
 - en: '-1: no index, autodetect column'
+  id: totrans-205
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: -1：无索引，自动检测列
 - en: '= 0 or string: specific colum identifier'
+  id: totrans-206
   prefs:
   - PREF_IND
   - PREF_UL
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: = 0 或字符串：具体的列标识符
 - en: For other lines parameters
+  id: totrans-207
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 对于其他行参数
 - en: 'None: column not present'
+  id: totrans-208
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: None：列不存在
 - en: '-1: autodetect'
+  id: totrans-209
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: -1：自动检测
 - en: '= 0 or string: specific colum identifier'
+  id: totrans-210
   prefs:
   - PREF_IND
   - PREF_UL
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: = 0 或字符串：具体的列标识符
 - en: 'Lines:'
+  id: totrans-211
   prefs: []
   type: TYPE_NORMAL
+  zh: 行：
 - en: '[PRE26]'
+  id: totrans-212
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE26]'
 - en: 'Params:'
+  id: totrans-213
   prefs: []
   type: TYPE_NORMAL
+  zh: 参数：
 - en: '[PRE27]'
+  id: totrans-214
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE27]'
 - en: PandasDirectData
+  id: totrans-215
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: PandasDirectData
 - en: Uses a Pandas DataFrame as the feed source, iterating directly over the tuples
     returned by “itertuples”.
+  id: totrans-216
   prefs: []
   type: TYPE_NORMAL
+  zh: 使用Pandas DataFrame作为数据源，直接迭代“itertuples”返回的元组。
 - en: This means that all parameters related to lines must have numeric values as
     indices into the tuples
+  id: totrans-217
   prefs: []
   type: TYPE_NORMAL
+  zh: 这意味着所有与行相关的参数都必须具有数值作为元组的索引
 - en: 'Note:'
+  id: totrans-218
   prefs: []
   type: TYPE_NORMAL
+  zh: 注：
 - en: The `dataname` parameter is a Pandas DataFrame
+  id: totrans-219
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`dataname`参数是一个Pandas DataFrame'
 - en: A negative value in any of the parameters for the Data lines indicates it’s
     not present in the DataFrame it is
+  id: totrans-220
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 数据行中任何参数的负值表示它不存在于DataFrame中
 - en: 'Lines:'
+  id: totrans-221
   prefs: []
   type: TYPE_NORMAL
+  zh: 行：
 - en: '[PRE28]'
+  id: totrans-222
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE28]'
 - en: 'Params:'
+  id: totrans-223
   prefs: []
   type: TYPE_NORMAL
+  zh: 参数：
 - en: '[PRE29]'
+  id: totrans-224
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE29]'
 - en: Quandl
+  id: totrans-225
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: Quandl
 - en: Executes a direct download of data from Quandl servers for the given time range.
+  id: totrans-226
   prefs: []
   type: TYPE_NORMAL
+  zh: 对给定时间范围内的数据执行从Quandl服务器的直接下载。
 - en: 'Specific parameters (or specific meaning):'
+  id: totrans-227
   prefs: []
   type: TYPE_NORMAL
+  zh: 特定参数（或特定含义）：
 - en: '`dataname`'
+  id: totrans-228
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`dataname`'
 - en: The ticker to download (‘YHOO’ for example)
+  id: totrans-229
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 要下载的股票代码（例如‘YHOO’）
 - en: '`baseurl`'
+  id: totrans-230
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`baseurl`'
 - en: The server url. Someone might decide to open a Quandl compatible service in
     the future.
+  id: totrans-231
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 服务器URL。未来可能有人决定开放与Quandl兼容的服务。
 - en: '`proxies`'
+  id: totrans-232
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`proxies`'
 - en: 'A dict indicating which proxy to go through for the download as in {‘http’:
     ‘[http://myproxy.com](http://myproxy.com)’} or {‘http’: ‘[http://127.0.0.1:8080](http://127.0.0.1:8080)’}'
+  id: totrans-233
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: '一个字典，指示下载要经过的代理，如{‘http’: ‘[http://myproxy.com](http://myproxy.com)’}或{‘http’:
+    ‘[http://127.0.0.1:8080](http://127.0.0.1:8080)’}'
 - en: '`buffered`'
+  id: totrans-234
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`buffered`'
 - en: If True the entire socket connection wil be buffered locally before parsing
     starts.
+  id: totrans-235
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 如果为True，则在解析开始前，整个套接字连接将在本地缓冲。
 - en: '`reverse`'
+  id: totrans-236
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`reverse`'
 - en: Quandl returns the value in descending order (newest first). If this is `True`
     (the default), the request will tell Quandl to return in ascending (oldest to
     newest) format
+  id: totrans-237
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: Quandl以降序返回值（最新的先）。如果这是`True`（默认值），请求将告诉Quandl以升序（从旧到新）格式返回
 - en: '`adjclose`'
+  id: totrans-238
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`adjclose`'
 - en: Whether to use the dividend/split adjusted close and adjust all values according
     to it.
+  id: totrans-239
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 是否使用股息/拆分调整后的收盘价，并根据其调整所有值。
 - en: '`apikey`'
+  id: totrans-240
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`apikey`'
 - en: apikey identification in case it may be needed
+  id: totrans-241
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 在可能需要时的 apikey 标识
 - en: '`dataset`'
+  id: totrans-242
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`dataset`'
 - en: string identifying the dataset to query. Defaults to `WIKI`
+  id: totrans-243
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 标识要查询的数据集的字符串。默认为 `WIKI`
 - en: 'Lines:'
+  id: totrans-244
   prefs: []
   type: TYPE_NORMAL
+  zh: 行：
 - en: '[PRE30]'
+  id: totrans-245
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE30]'
 - en: 'Params:'
+  id: totrans-246
   prefs: []
   type: TYPE_NORMAL
+  zh: 参数：
 - en: '[PRE31]'
+  id: totrans-247
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE31]'
 - en: QuandlCSV
+  id: totrans-248
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: QuandlCSV
 - en: Parses pre-downloaded Quandl CSV Data Feeds (or locally generated if they comply
     to the Quandl format)
+  id: totrans-249
   prefs: []
   type: TYPE_NORMAL
+  zh: 解析预先下载的 Quandl CSV 数据源（或者如果它们符合 Quandl 格式则是本地生成的）
 - en: 'Specific parameters:'
+  id: totrans-250
   prefs: []
   type: TYPE_NORMAL
+  zh: 特定参数：
 - en: '`dataname`: The filename to parse or a file-like object'
+  id: totrans-251
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`dataname`：要解析的文件名或类似文件的对象'
 - en: '`reverse` (default: `False`)'
+  id: totrans-252
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`reverse`（默认值：`False`）'
 - en: It is assumed that locally stored files have already been reversed during the
     download process
+  id: totrans-253
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 假定本地存储的文件已在下载过程中进行了反转
 - en: '`adjclose` (default: `True`)'
+  id: totrans-254
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`adjclose`（默认值：`True`）'
 - en: Whether to use the dividend/split adjusted close and adjust all values according
     to it.
+  id: totrans-255
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 是否使用股息/拆分调整后的收盘价，并根据其调整所有值。
 - en: '`round` (default: `False`)'
+  id: totrans-256
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`round`（默认值：`False`）'
 - en: Whether to round the values to a specific number of decimals after having adjusted
     the close
+  id: totrans-257
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 是否在调整收盘价后将值四舍五入到特定小数位数
 - en: '`decimals` (default: `2`)'
+  id: totrans-258
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`decimals`（默认值：`2`）'
 - en: Number of decimals to round to
+  id: totrans-259
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 要四舍五入的小数位数
 - en: 'Lines:'
+  id: totrans-260
   prefs: []
   type: TYPE_NORMAL
+  zh: 行：
 - en: '[PRE32]'
+  id: totrans-261
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE32]'
 - en: 'Params:'
+  id: totrans-262
   prefs: []
   type: TYPE_NORMAL
+  zh: 参数：
 - en: '[PRE33]'
+  id: totrans-263
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE33]'
 - en: RollOver
+  id: totrans-264
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: RollOver
 - en: Class that rolls over to the next future when a condition is met
+  id: totrans-265
   prefs: []
   type: TYPE_NORMAL
+  zh: 当满足条件时转到下一个未来的类
 - en: 'Params:'
+  id: totrans-266
   prefs: []
   type: TYPE_NORMAL
+  zh: 参数：
 - en: '`checkdate` (default: `None`)'
+  id: totrans-267
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`checkdate`（默认值：`None`）'
 - en: 'This must be a *callable* with the following signature:'
+  id: totrans-268
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 这必须是一个*可调用对象*，具有以下签名：
 - en: '[PRE34]'
+  id: totrans-269
   prefs:
   - PREF_IND
   type: TYPE_PRE
+  zh: '[PRE34]'
 - en: 'Where:'
+  id: totrans-270
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 在哪里：
 - en: '`dt` is a `datetime.datetime` object'
+  id: totrans-271
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`dt` 是一个 `datetime.datetime` 对象'
 - en: '`d` is the current data feed for the active future'
+  id: totrans-272
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`d` 是当前活动期货的当前数据源'
 - en: 'Expected Return Values:'
+  id: totrans-273
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 期望返回值：
 - en: '`True`: as long as the callable returns this, a switchover can happen to the
     next future'
+  id: totrans-274
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`True`：只要可调用返回此值，就可以切换到下一个未来'
 - en: If a commodity expires on the 3^(rd) Friday of March, `checkdate` could return
     `True` for the entire week in which the expiration takes place.
+  id: totrans-275
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果商品在三月的第三个星期五到期，`checkdate` 可能会在到期周的整个周返回 `True`。
 - en: '[PRE35]'
+  id: totrans-276
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE35]'
 - en: '`checkcondition` (default: `None`)'
+  id: totrans-277
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`checkcondition`（默认值：`None`）'
 - en: '**Note**: This will only be called if `checkdate` has returned `True`'
+  id: totrans-278
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: '**注意**：仅当 `checkdate` 返回 `True` 时才会调用此函数'
 - en: If `None` this will evaluate to `True` (execute roll over) internally
+  id: totrans-279
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 如果为 `None`，则会在内部评估为 `True`（执行滚动）
 - en: 'Else this must be a *callable* with this signature:'
+  id: totrans-280
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 否则，这必须是一个*可调用对象*，具有以下签名：
 - en: '[PRE36]'
+  id: totrans-281
   prefs:
   - PREF_IND
   type: TYPE_PRE
+  zh: '[PRE36]'
 - en: 'Where:'
+  id: totrans-282
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 在哪里：
 - en: '`d0` is the current data feed for the active future'
+  id: totrans-283
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`d0` 是当前活动期货的当前数据源'
 - en: '`d1` is the data feed for the next expiration'
+  id: totrans-284
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`d1` 是下一个到期的数据源'
 - en: 'Expected Return Values:'
+  id: totrans-285
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 期望返回值：
 - en: '`True`: roll-over to the next future'
+  id: totrans-286
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`True`：切换到下一个未来'
 - en: Following with the example from `checkdate`, this could say that the roll-over
     can only happend if the *volume* from `d0` is already less than the volume from
     `d1`
+  id: totrans-287
   prefs: []
   type: TYPE_NORMAL
+  zh: 跟随 `checkdate` 的示例，这可能表示仅当 `d0` 中的 *volume* 已经小于 `d1` 中的 volume 时，才能发生滚动
 - en: '[PRE37]'
+  id: totrans-288
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE37]'
 - en: 'Lines:'
+  id: totrans-289
   prefs: []
   type: TYPE_NORMAL
+  zh: 行：
 - en: '[PRE38]'
+  id: totrans-290
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE38]'
 - en: 'Params:'
+  id: totrans-291
   prefs: []
   type: TYPE_NORMAL
+  zh: 参数：
 - en: '[PRE39]'
+  id: totrans-292
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE39]'
 - en: SierraChartCSVData
+  id: totrans-293
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: SierraChartCSVData
 - en: Parses a [SierraChart](http://www.sierrachart.com) CSV exported file.
+  id: totrans-294
   prefs: []
   type: TYPE_NORMAL
+  zh: 解析 [SierraChart](http://www.sierrachart.com) 导出的 CSV 文件。
 - en: 'Specific parameters (or specific meaning):'
+  id: totrans-295
   prefs: []
   type: TYPE_NORMAL
+  zh: 特定参数（或特定含义）：
 - en: '`dataname`: The filename to parse or a file-like object'
+  id: totrans-296
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`dataname`：要解析的文件名或类似文件的对象'
 - en: Uses GenericCSVData and simply modifies the dateformat (dtformat) to
+  id: totrans-297
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 使用 GenericCSVData 并简单修改日期格式（dtformat）为
 - en: 'Lines:'
+  id: totrans-298
   prefs: []
   type: TYPE_NORMAL
+  zh: 行：
 - en: '[PRE40]'
+  id: totrans-299
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE40]'
 - en: 'Params:'
+  id: totrans-300
   prefs: []
   type: TYPE_NORMAL
+  zh: 参数：
 - en: '[PRE41]'
+  id: totrans-301
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE41]'
 - en: VCData
+  id: totrans-302
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: VCData
 - en: VisualChart Data Feed.
+  id: totrans-303
   prefs: []
   type: TYPE_NORMAL
+  zh: VisualChart 数据源。
 - en: 'Params:'
+  id: totrans-304
   prefs: []
   type: TYPE_NORMAL
+  zh: 参数：
 - en: '`qcheck` (default: `0.5`) Default timeout for waking up to let a resampler/replayer
     that the current bar can be check for due delivery'
+  id: totrans-305
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`qcheck`（默认值：`0.5`）唤醒重新采样器/重播器检查当前柱状图是否可交付的默认超时时间'
 - en: The value is only used if a resampling/replaying filter has been inserted in
     the data
+  id: totrans-306
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 仅当在数据中插入了重新采样/重播过滤器时才使用该值
 - en: '`historical` (default: `False`) If no `todate` parameter is supplied (defined
     in the base class), this will force a historical only download if set to `True`'
+  id: totrans-307
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`historical`（默认值：`False`）如果没有提供 `todate` 参数（在基类中定义），则设置为 `True` 将强制进行历史下载'
 - en: If `todate` is supplied the same effect is achieved
+  id: totrans-308
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 如果提供了 `todate`，则会实现相同的效果
 - en: '`milliseconds` (default: `True`) The bars constructed by *Visual Chart* have
     this aspect: HH:MM:59.999000'
+  id: totrans-309
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`milliseconds`（默认值：`True`）由 *Visual Chart* 构造的柱状图如下所示：HH:MM:59.999000'
 - en: 'If this parameter is `True` a millisecond will be added to this time to make
     it look like: HH::MM + 1:00.000000'
+  id: totrans-310
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 如果此参数为 `True`，则会添加一毫秒到此时间，使其看起来像这样：HH::MM + 1:00.000000
 - en: '`tradename` (default: `None`) Continous futures cannot be traded but are ideal
     for data tracking. If this parameter is supplied it will be the name of the current
     future which will be the trading asset. Example:'
+  id: totrans-311
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`tradename`（默认：`None`）连续期货不能交易，但非常适合数据跟踪。如果提供了此参数，则它将是当前期货的名称，这将是交易资产。例如：'
 - en: 001ES -> ES-Mini continuous supplied as `dataname`
+  id: totrans-312
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 001ES -> ES迷你连续作为`dataname`提供
 - en: ESU16 -> ES-Mini 2016-09\. If this is supplied in `tradename` it will be the
     trading asset.
+  id: totrans-313
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: ESU16 -> ES迷你2016-09\. 如果在`tradename`中提供，它将是交易资产。
 - en: '`usetimezones` (default: `True`) For most markets the time offset information
     provided by *Visual Chart* allows for datetime to be converted to market time
     (*backtrader* choice for representation)'
+  id: totrans-314
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`usetimezones`（默认：`True`）对于大多数市场，*Visual Chart*提供的时间偏移信息允许将日期时间转换为市场时间（*backtrader*表示的选择）'
 - en: Some markets are special (`096`) and need special internal coverage and timezone
     support to display in the user expected market time.
+  id: totrans-315
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 一些市场是特殊的（`096`），需要特殊的内部覆盖和时区支持，以显示用户期望的市场时间。
 - en: If this parameter is set to `True` importing `pytz` will be attempted to use
     timezones (default)
+  id: totrans-316
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 如果将此参数设置为`True`，将尝试导入`pytz`以使用时区（默认）
 - en: Disabling it will remove timezone usage (may help if the load is excesive)
+  id: totrans-317
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 禁用它将删除时区使用（如果负载过大可能有所帮助）
 - en: 'Lines:'
+  id: totrans-318
   prefs: []
   type: TYPE_NORMAL
+  zh: 行数：
 - en: '[PRE42]'
+  id: totrans-319
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE42]'
 - en: 'Params:'
+  id: totrans-320
   prefs: []
   type: TYPE_NORMAL
+  zh: 参数：
 - en: '[PRE43]'
+  id: totrans-321
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE43]'
 - en: VChartCSVData
+  id: totrans-322
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: VChartCSVData
 - en: Parses a [VisualChart](http://www.visualchart.com) CSV exported file.
+  id: totrans-323
   prefs: []
   type: TYPE_NORMAL
+  zh: 解析[VisualChart](http://www.visualchart.com)导出的CSV文件。
 - en: 'Specific parameters (or specific meaning):'
+  id: totrans-324
   prefs: []
   type: TYPE_NORMAL
+  zh: 特定参数（或特定含义）：
 - en: '`dataname`: The filename to parse or a file-like object'
+  id: totrans-325
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`dataname`：要解析的文件名或文件类对象'
 - en: 'Lines:'
+  id: totrans-326
   prefs: []
   type: TYPE_NORMAL
+  zh: 行数：
 - en: '[PRE44]'
+  id: totrans-327
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE44]'
 - en: 'Params:'
+  id: totrans-328
   prefs: []
   type: TYPE_NORMAL
+  zh: 参数：
 - en: '[PRE45]'
+  id: totrans-329
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE45]'
 - en: VChartData
+  id: totrans-330
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: VChartData
 - en: Support for [Visual Chart](https://www.visualchart.com) binary on-disk files
     for both daily and intradaily formats.
+  id: totrans-331
   prefs: []
   type: TYPE_NORMAL
+  zh: 支持[Visual Chart](https://www.visualchart.com)的二进制磁盘文件，包括每日和日内格式。
 - en: 'Note:'
+  id: totrans-332
   prefs: []
   type: TYPE_NORMAL
+  zh: 注意：
 - en: '`dataname`: to file or open file-like object'
+  id: totrans-333
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`dataname`：文件或打开的类文件对象'
 - en: If a file-like object is passed, the `timeframe` parameter will be used to determine
     which is the actual timeframe.
+  id: totrans-334
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 如果传递了类文件对象，将使用`timeframe`参数来确定实际时间范围。
 - en: Else the file extension (`.fd` for daily and `.min` for intraday) will be used.
+  id: totrans-335
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 否则，将使用文件扩展名（`.fd`表示每日，`.min`表示日内）。
 - en: 'Lines:'
+  id: totrans-336
   prefs: []
   type: TYPE_NORMAL
+  zh: 行数：
 - en: '[PRE46]'
+  id: totrans-337
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE46]'
 - en: 'Params:'
+  id: totrans-338
   prefs: []
   type: TYPE_NORMAL
+  zh: 参数：
 - en: '[PRE47]'
+  id: totrans-339
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE47]'
 - en: VChartFile
+  id: totrans-340
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: VChartFile
 - en: Support for [Visual Chart](https://www.visualchart.com) binary on-disk files
     for both daily and intradaily formats.
+  id: totrans-341
   prefs: []
   type: TYPE_NORMAL
+  zh: 支持[Visual Chart](https://www.visualchart.com)的二进制磁盘文件，包括每日和日内格式。
 - en: 'Note:'
+  id: totrans-342
   prefs: []
   type: TYPE_NORMAL
+  zh: 注意：
 - en: '`dataname`: Market code displayed by Visual Chart. Example: 015ES for EuroStoxx
     50 continuous future'
+  id: totrans-343
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`dataname`：由Visual Chart显示的市场代码。例如：015ES代表EuroStoxx 50连续期货'
 - en: 'Lines:'
+  id: totrans-344
   prefs: []
   type: TYPE_NORMAL
+  zh: 行数：
 - en: '[PRE48]'
+  id: totrans-345
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE48]'
 - en: 'Params:'
+  id: totrans-346
   prefs: []
   type: TYPE_NORMAL
+  zh: 参数：
 - en: '[PRE49]'
+  id: totrans-347
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE49]'
 - en: YahooFinanceCSVData
+  id: totrans-348
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: YahooFinanceCSVData
 - en: Parses pre-downloaded Yahoo CSV Data Feeds (or locally generated if they comply
     to the Yahoo format)
+  id: totrans-349
   prefs: []
   type: TYPE_NORMAL
+  zh: 解析预先下载的Yahoo CSV数据源（或者如果它们符合Yahoo格式，可以是本地生成的）。
 - en: 'Specific parameters:'
+  id: totrans-350
   prefs: []
   type: TYPE_NORMAL
+  zh: 特定参数：
 - en: '`dataname`: The filename to parse or a file-like object'
+  id: totrans-351
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`dataname`：要解析的文件名或文件类对象'
 - en: '`reverse` (default: `False`)'
+  id: totrans-352
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`reverse`（默认：`False`）'
 - en: It is assumed that locally stored files have already been reversed during the
     download process
+  id: totrans-353
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 假设在下载过程中本地存储的文件已经被反转。
 - en: '`adjclose` (default: `True`)'
+  id: totrans-354
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`adjclose`（默认：`True`）'
 - en: Whether to use the dividend/split adjusted close and adjust all values according
     to it.
+  id: totrans-355
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 是否使用股息/拆分调整后的收盘价，并根据其调整所有值。
 - en: '`adjvolume` (default: `True`)'
+  id: totrans-356
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`adjvolume`（默认：`True`）'
 - en: Do also adjust `volume` if `adjclose` is also `True`
+  id: totrans-357
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 如果`adjclose`也为`True`，还需调整`volume`。
 - en: '`round` (default: `True`)'
+  id: totrans-358
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`round`（默认：`True`）'
 - en: Whether to round the values to a specific number of decimals after having adjusted
     the close
+  id: totrans-359
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 在调整收盘价后，是否要将值四舍五入到特定的小数位数。
 - en: '`roundvolume` (default: `0`)'
+  id: totrans-360
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`roundvolume`（默认：`0`）'
 - en: Round the resulting volume to the given number of decimals after having adjusted
     it
+  id: totrans-361
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 调整后，将结果体积四舍五入到指定的小数位数。
 - en: '`decimals` (default: `2`)'
+  id: totrans-362
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`decimals`（默认：`2`）'
 - en: Number of decimals to round to
+  id: totrans-363
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 要四舍五入的小数位数
 - en: '`swapcloses` (default: `False`)'
+  id: totrans-364
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`swapcloses`（默认：`False`）'
 - en: '[2018-11-16] It would seem that the order of *close* and *adjusted close* is
     now fixed. The parameter is retained, in case the need to swap the columns again
     arose.'
+  id: totrans-365
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: '[2018-11-16] 看起来*close*和*adjusted close*的顺序现在已经固定。参数被保留，以防需要再次交换列。'
 - en: 'Lines:'
+  id: totrans-366
   prefs: []
   type: TYPE_NORMAL
+  zh: 行数：
 - en: '[PRE50]'
+  id: totrans-367
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE50]'
 - en: 'Params:'
+  id: totrans-368
   prefs: []
   type: TYPE_NORMAL
+  zh: 参数：
 - en: '[PRE51]'
+  id: totrans-369
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE51]'
 - en: YahooFinanceData
+  id: totrans-370
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: YahooFinanceData
 - en: Executes a direct download of data from Yahoo servers for the given time range.
+  id: totrans-371
   prefs: []
   type: TYPE_NORMAL
+  zh: 对给定时间范围从Yahoo服务器直接下载数据。
 - en: 'Specific parameters (or specific meaning):'
+  id: totrans-372
   prefs: []
   type: TYPE_NORMAL
+  zh: 特定参数（或特定含义）：
 - en: '`dataname`'
+  id: totrans-373
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`dataname`'
 - en: The ticker to download (‘YHOO’ for Yahoo own stock quotes)
+  id: totrans-374
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 要下载的股票代码（‘YHOO’用于Yahoo自有股票报价）
 - en: '`proxies`'
+  id: totrans-375
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`proxies`'
 - en: 'A dict indicating which proxy to go through for the download as in {‘http’:
     ‘[http://myproxy.com](http://myproxy.com)’} or {‘http’: ‘[http://127.0.0.1:8080](http://127.0.0.1:8080)’}'
+  id: totrans-376
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: '一个字典，指示要通过的代理，如{‘http’: ‘[http://myproxy.com](http://myproxy.com)’}或{‘http’:
+    ‘[http://127.0.0.1:8080](http://127.0.0.1:8080)’}'
 - en: '`period`'
+  id: totrans-377
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`period`'
 - en: The timeframe to download data in. Pass ‘w’ for weekly and ‘m’ for monthly.
+  id: totrans-378
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 下载数据的时间范围。传递‘w’表示每周，‘m’表示每月。
 - en: '`reverse`'
+  id: totrans-379
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`reverse`'
 - en: '[2018-11-16] The latest incarnation of Yahoo online downloads returns the data
     in the proper order. The default value of `reverse` for the online download is
     therefore set to `False`'
+  id: totrans-380
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: '[2018-11-16] 雅虎在线下载的最新版本按正确顺序返回数据。因此，在线下载的`reverse`默认值设置为`False`。'
 - en: '`adjclose`'
+  id: totrans-381
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`adjclose`'
 - en: Whether to use the dividend/split adjusted close and adjust all values according
     to it.
+  id: totrans-382
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 是否使用股息/拆分调整后的收盘价，并根据其调整所有值。
 - en: '`urlhist`'
+  id: totrans-383
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`urlhist`'
 - en: The url of the historical quotes in Yahoo Finance used to gather a `crumb` authorization
     cookie for the download
+  id: totrans-384
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 用于获取下载的`crumb`授权cookie的雅虎财经历史行情的URL
 - en: '`urldown`'
+  id: totrans-385
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`urldown`'
 - en: The url of the actual download server
+  id: totrans-386
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 实际下载服务器的URL
 - en: '`retries`'
+  id: totrans-387
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`retries`'
 - en: Number of times (each) to try to get a `crumb` cookie and download the data
+  id: totrans-388
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 尝试获取`crumb` cookie并下载数据的次数（每次）
 - en: 'Lines:'
+  id: totrans-389
   prefs: []
   type: TYPE_NORMAL
+  zh: 行：
 - en: '[PRE52]'
+  id: totrans-390
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE52]'
 - en: 'Params:'
+  id: totrans-391
   prefs: []
   type: TYPE_NORMAL
+  zh: 参数：
 - en: '[PRE53]'
+  id: totrans-392
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE53]'
 - en: YahooLegacyCSV
+  id: totrans-393
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: YahooLegacyCSV
 - en: This is intended to load files which were downloaded before Yahoo discontinued
     the original service in May-2017
+  id: totrans-394
   prefs: []
   type: TYPE_NORMAL
+  zh: 这旨在加载在2017年5月雅虎停止原始服务之前下载的文件。
 - en: 'Lines:'
+  id: totrans-395
   prefs: []
   type: TYPE_NORMAL
+  zh: 行：
 - en: '[PRE54]'
+  id: totrans-396
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE54]'
 - en: 'Params:'
+  id: totrans-397
   prefs: []
   type: TYPE_NORMAL
+  zh: 参数：
 - en: '[PRE55]'
+  id: totrans-398
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE55]'

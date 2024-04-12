@@ -1,147 +1,220 @@
 - en: Pandas DataFeed Example
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: Pandas 数据源示例
 - en: 原文：[https://www.backtrader.com/docu/pandas-datafeed/pandas-datafeed/](https://www.backtrader.com/docu/pandas-datafeed/pandas-datafeed/)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.backtrader.com/docu/pandas-datafeed/pandas-datafeed/](https://www.backtrader.com/docu/pandas-datafeed/pandas-datafeed/)
 - en: Note
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: 注意
 - en: '`pandas` and its dependencies have to be installed'
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: 必须安装 `pandas` 及其依赖项
 - en: Supporting [Pandas](http://pandas.pydata.org) Dataframes seems to be of concern
     to lots of people, who rely on the already available parsing code for different
     data sources (including CSV) and other functionalities offered by Pandas.
+  id: totrans-4
   prefs: []
   type: TYPE_NORMAL
+  zh: 支持 [Pandas](http://pandas.pydata.org) Dataframes 似乎是许多人关注的问题，他们依赖于已经可用的用于不同数据源（包括
+    CSV）的解析代码以及 Pandas 提供的其他功能。
 - en: The important declarations for the Datafeed.
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: 数据源的重要声明。
 - en: Note
+  id: totrans-6
   prefs: []
   type: TYPE_NORMAL
+  zh: 注意
 - en: These are **ONLY** declarations. Don't copy this code blindly. See the actual
     usage in the example below
+  id: totrans-7
   prefs: []
   type: TYPE_NORMAL
+  zh: 这些只是声明。不要盲目复制此代码。请参见下面示例中的实际用法
 - en: '[PRE0]'
+  id: totrans-8
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: 'The above excerpt from the `PandasData` class shows the keys:'
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: 上述从 `PandasData` 类中摘录的片段显示了键：
 - en: The `dataname` parameter to the class during instantiation holds the Pandas
     Dataframe
+  id: totrans-10
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 实例化期间传递给类的 `dataname` 参数保存了 Pandas Dataframe
 - en: This parameter is inherited from the base class `feed.DataBase`
+  id: totrans-11
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 此参数从基类 `feed.DataBase` 继承
 - en: The new parameters have the names of the regular fields in the `DataSeries`
     and follow these conventions
+  id: totrans-12
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 新参数使用 `DataSeries` 中常规字段的名称，并遵循以下约定
 - en: '`datetime` (default: None)'
+  id: totrans-13
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`datetime`（默认值：无）'
 - en: 'None : datetime is the “index” in the Pandas Dataframe'
+  id: totrans-14
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: None：datetime 是 Pandas Dataframe 中的“索引”
 - en: '-1 : autodetect position or case-wise equal name'
+  id: totrans-15
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: -1：自动检测位置或大小写相等的名称
 - en: '= 0 : numeric index to the colum in the pandas dataframe'
+  id: totrans-16
   prefs:
   - PREF_IND
   - PREF_UL
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: = 0：对应 pandas 数据帧中的列的数字索引
 - en: 'string : column name (as index) in the pandas dataframe'
+  id: totrans-17
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: string：pandas 数据帧中的列名（作为索引）
 - en: '`open`, `high`, `low`, `high`, `close`, `volume`, `openinterest` (default:
     -1 for all of them)'
+  id: totrans-18
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`open`, `high`, `low`, `high`, `close`, `volume`, `openinterest`（默认值：全部为 -1）'
 - en: 'None : column not present'
+  id: totrans-19
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: None：列不存在
 - en: '-1 : autodetect position or case-wise equal name'
+  id: totrans-20
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: -1：自动检测位置或大小写相等的名称
 - en: '= 0 : numeric index to the colum in the pandas dataframe'
+  id: totrans-21
   prefs:
   - PREF_IND
   - PREF_UL
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: = 0：对应 pandas 数据帧中的列的数字索引
 - en: 'string : column name (as index) in the pandas dataframe'
+  id: totrans-22
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: string：pandas 数据帧中的列名（作为索引）
 - en: A small sample should be able to load the standar 2006 sample, having been parsed
     by `Pandas`, rather than directly by `backtrader`
+  id: totrans-23
   prefs: []
   type: TYPE_NORMAL
+  zh: 一个小示例应该能够加载标准的 2006 示例，已由 `Pandas` 解析，而不是直接由 `backtrader` 解析
 - en: 'Running the sample to use the exiting “headers” in the CSV data:'
+  id: totrans-24
   prefs: []
   type: TYPE_NORMAL
+  zh: 运行示例以使用 CSV 数据中的现有“标题”：
 - en: '[PRE1]'
+  id: totrans-25
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE1]'
 - en: 'The same but telling the script to skip the headers:'
+  id: totrans-26
   prefs: []
   type: TYPE_NORMAL
+  zh: 相同但告诉脚本跳过标题：
 - en: '[PRE2]'
+  id: totrans-27
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE2]'
 - en: 'The 2^(nd) run is using tells `pandas.read_csv`:'
+  id: totrans-28
   prefs: []
   type: TYPE_NORMAL
+  zh: 第 2 次运行使用的是 tells `pandas.read_csv`：
 - en: To skip the first input row (`skiprows` keyword argument set to 1)
+  id: totrans-29
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 跳过第一行输入（将 `skiprows` 关键字参数设置为 1）
 - en: Not to look for a headers row (`header` keyword argument set to None)
+  id: totrans-30
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 不查找标题行（将 `header` 关键字参数设置为 None）
 - en: The `backtrader` support for Pandas tries to automatically detect if column
     names have been used or else numeric indices and acts accordingly, trying to offer
     a best match.
+  id: totrans-31
   prefs: []
   type: TYPE_NORMAL
+  zh: '`backtrader` 对 Pandas 的支持尝试自动检测是否使用了列名，否则使用数字索引，并相应地采取行动，尝试提供最佳匹配。'
 - en: The following chart is the tribute to success. The Pandas Dataframe has been
     correctly loaded (in both cases)
+  id: totrans-32
   prefs: []
   type: TYPE_NORMAL
+  zh: 下图是对成功的致敬。Pandas Dataframe 已正确加载（在两种情况下）
 - en: '![image](../Images/9b2d8671358192e67e2941332e42329d.png)'
+  id: totrans-33
   prefs: []
   type: TYPE_IMG
+  zh: '![image](../Images/9b2d8671358192e67e2941332e42329d.png)'
 - en: The sample code for the test.
+  id: totrans-34
   prefs: []
   type: TYPE_NORMAL
+  zh: 测试的示例代码。
 - en: '[PRE3]'
+  id: totrans-35
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE3]'

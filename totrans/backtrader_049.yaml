@@ -1,228 +1,352 @@
 - en: Mixing Timeframes in Indicators
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 指标中的混合时间框架
 - en: 原文：[https://www.backtrader.com/docu/mixing-timeframes/indicators-mixing-timeframes/](https://www.backtrader.com/docu/mixing-timeframes/indicators-mixing-timeframes/)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.backtrader.com/docu/mixing-timeframes/indicators-mixing-timeframes/](https://www.backtrader.com/docu/mixing-timeframes/indicators-mixing-timeframes/)
 - en: '[Release 1.3.0.92](https://github.com/mementum/backtrader/releases/tag/1.3.0.92)
     brings up the possibility to have data (from either data feeds and/or indicators)
     from different timeframes mixed.'
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: '[发布 1.3.0.92](https://github.com/mementum/backtrader/releases/tag/1.3.0.92)
+    带来了可能性，使不同时间框架的数据（来自数据源和/或指标）混合。'
 - en: 'Background: *Indicators are smart dumb objects.*'
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: 背景：*指标是聪明的愚蠢对象。*
 - en: They are smart because they can make complex calculations.
+  id: totrans-4
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 他们之所以聪明，是因为他们能进行复杂的计算。
 - en: They are dumb because they operate with no knowledge of what sources are providing
     the data for the calculations
+  id: totrans-5
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 他们之所以愚蠢，是因为他们在没有了解提供计算数据的来源的情况下进行操作
 - en: 'As such:'
+  id: totrans-6
   prefs: []
   type: TYPE_NORMAL
+  zh: 就这样：
 - en: If the data sources providing the values have different timeframes, different
     lengths inside the `Cerebro` engine, the indicator will break.
+  id: totrans-7
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 如果提供值的数据源具有不同的时间框架，在`Cerebro`引擎内部的不同长度，指标将会中断。
 - en: 'Example of a calculation, in which `data0` has a timeframe of days and `data1`
     has a timeframe of `months`:'
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: 计算示例，在该示例中，`data0` 的时间框架为天，而 `data1` 的时间框架为`月`：
 - en: '[PRE0]'
+  id: totrans-9
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: Here a *sell signal* is sought when the close is below the `s1` line (*1^(st)
     support*)
+  id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: 在这里寻找*卖出信号*当收盘价低于`s1`线时（*1^(st) support*）
 - en: Note
+  id: totrans-11
   prefs: []
   type: TYPE_NORMAL
+  zh: 注意
 - en: '`PivotPoint` works in a larger timeframe by definition'
+  id: totrans-12
   prefs: []
   type: TYPE_NORMAL
+  zh: '`PivotPoint`的定义上在一个较大的时间框架内运行'
 - en: 'This will in the past with the following error:'
+  id: totrans-13
   prefs: []
   type: TYPE_NORMAL
+  zh: 这将导致以下错误：
 - en: '[PRE1]'
+  id: totrans-14
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE1]'
 - en: 'And for a good reason: `self.data.close` provides values from the very 1^(st)
     instant, but `PivotPoint` (and hence the `s1` line) will only deliver values once
     a **full month** has gone by, which is roughly equivalent to 22 values of `self.data0.close`.
     During this 22 *closes* there isn’t yet a value for `s1` and the attempt to fetch
     it from the underlying array fails.'
+  id: totrans-15
   prefs: []
   type: TYPE_NORMAL
+  zh: 出于一个很好的原因：`self.data.close` 提供了来自第一个瞬间的值，但是`PivotPoint`（因此`s1`线）只会在一个**完整的月份**过去后才会提供值，大致相当于`self.data0.close`的22个值。在这22个
+    *收盘价* 中还没有`s1`的值，并且尝试从底层数组中获取它失败。
 - en: '*Lines* objects support the `(ago)` operator (`__call__` special method in
     *Python*) for deliver a delayed version of itself:'
+  id: totrans-16
   prefs: []
   type: TYPE_NORMAL
+  zh: '*Lines* 对象支持 `(ago)` 操作符（*Python* 中的 `__call__` 特殊方法）以提供其自身的延迟版本：'
 - en: '[PRE2]'
+  id: totrans-17
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE2]'
 - en: 'In this example the object `close1` (when accessed via `[0]`) always contains
     the previous value (`-1`) delivered by `close`. The syntax has been reused to
     accomodate adapting timeframes. Let’s rewrite the above `pivotpoint` snippet:'
+  id: totrans-18
   prefs: []
   type: TYPE_NORMAL
+  zh: 在此示例中，对象 `close1`（通过`[0]`访问）始终包含由`close`交付的前一个值（`-1`）。语法已经被重用以适应不同的时间框架。让我们重写上面的`pivotpoint`片段：
 - en: '[PRE3]'
+  id: totrans-19
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE3]'
 - en: 'See how the `()` is executed with no arguments (in the background a `None`
     is being supplied). The following is happening:'
+  id: totrans-20
   prefs: []
   type: TYPE_NORMAL
+  zh: 注意看`()` 是如何执行的，不带参数（在后台提供一个`None`）。以下是正在发生的：
 - en: '`pivotpoint.s1()` is returning an internal `LinesCoupler` object which follows
     the rhythm of the larger scope. This coupler fills itself with the latest delivered
     value from the real `s1` (starting with a default value of `NaN`)'
+  id: totrans-21
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`pivotpoint.s1()` 返回一个内部的 `LinesCoupler` 对象，该对象遵循较大范围的节奏。该耦合器用最新交付的真实`s1`值填充自己（从`NaN`的默认值开始）'
 - en: 'But something extra is needed to make the magic work. `Cerebro` has to be created
     with:'
+  id: totrans-22
   prefs: []
   type: TYPE_NORMAL
+  zh: 但是要使魔术生效，需要一些额外的东西。 `Cerebro` 必须以以下方式创建：
 - en: '[PRE4]'
+  id: totrans-23
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE4]'
 - en: 'or executed with:'
+  id: totrans-24
   prefs: []
   type: TYPE_NORMAL
+  zh: 或者执行：
 - en: '[PRE5]'
+  id: totrans-25
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE5]'
 - en: In this mode the indicators and late-evaluated automatic *lines* objects are
     executed step by step rather than in tight loops. This makes the entire operation
     slower, but it makes it **possible**
+  id: totrans-26
   prefs: []
   type: TYPE_NORMAL
+  zh: 在这种模式下，指标和晚评估的自动 *lines* 对象是逐步执行而不是在紧密循环中执行。这使整个操作变慢，但这使其**可能**
 - en: 'The sample script at the bottom which was breaking above, now runs:'
+  id: totrans-27
   prefs: []
   type: TYPE_NORMAL
+  zh: 上面断开的底部的示例脚本，现在可以运行：
 - en: '[PRE6]'
+  id: totrans-28
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE6]'
 - en: 'With output:'
+  id: totrans-29
   prefs: []
   type: TYPE_NORMAL
+  zh: 有输出：
 - en: '[PRE7]'
+  id: totrans-30
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE7]'
 - en: At line 74 the 1^(st) instance of `close < s1` takes place.
+  id: totrans-31
   prefs: []
   type: TYPE_NORMAL
+  zh: 在第74行，发生了`close < s1`的第1个实例。
 - en: 'The script also provides insight into the additional possiblity: *couple all
     lines of an indicator*. Before we had:'
+  id: totrans-32
   prefs: []
   type: TYPE_NORMAL
+  zh: 脚本还提供了对其他可能性的见解：*耦合指标的所有线*。之前我们有：
 - en: '[PRE8]'
+  id: totrans-33
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE8]'
 - en: 'Being the alternative:'
+  id: totrans-34
   prefs: []
   type: TYPE_NORMAL
+  zh: 作为替代：
 - en: '[PRE9]'
+  id: totrans-35
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE9]'
 - en: 'Now the entire `PivotPoint` indicator has been coupled and any of its lines
     can be accessed (namely `p`, `r1`, `r2`, `s1`, `s2`). The script has only interest
     in `s1` and the access is direct.:'
+  id: totrans-36
   prefs: []
   type: TYPE_NORMAL
+  zh: '现在整个`PivotPoint`指标已经耦合，可以访问其任何线（即 `p`, `r1`, `r2`, `s1`, `s2`）。脚本只对`s1`感兴趣，并且访问是直接的。:'
 - en: '[PRE10]'
+  id: totrans-37
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE10]'
 - en: 'The output:'
+  id: totrans-38
   prefs: []
   type: TYPE_NORMAL
+  zh: 输出：
 - en: '[PRE11]'
+  id: totrans-39
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE11]'
 - en: 'No surprises here. The same as before. The “coupled” object can even be plotted:'
+  id: totrans-40
   prefs: []
   type: TYPE_NORMAL
+  zh: 这里没有什么意外。与以前相同。甚至可以绘制“耦合”对象：
 - en: '[PRE12]'
+  id: totrans-41
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE12]'
 - en: '![image](../Images/89385648179dd20fa0a0e1e79014526a.png)'
+  id: totrans-42
   prefs: []
   type: TYPE_IMG
+  zh: '![image](../Images/89385648179dd20fa0a0e1e79014526a.png)'
 - en: Full coupling syntax
+  id: totrans-43
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 完整的耦合语法
 - en: 'For *lines* objects with multiple lines (for example *Indicators* like `PivotPoint`):'
+  id: totrans-44
   prefs: []
   type: TYPE_NORMAL
+  zh: 对于具有多行的*lines*对象（例如*Indicators*，如`PivotPoint`）：
 - en: '`obj(clockref=None, line=-1)`'
+  id: totrans-45
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`obj(clockref=None, line=-1)`'
 - en: '`clockref` If `clockref` is `None`, the surrounding object (in the examples
     a `Strategy`) will be the reference to adapt larger timeframes (for example: `Months`)
     to smaller/faster timeframes (for example: `Days`)'
+  id: totrans-46
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`clockref` 如果`clockref`是`None`，则周围的对象（在示例中为`Strategy`）将是调整较大时间框架（例如：`Months`）到较小/更快时间框架（例如：`Days`）的参考'
 - en: Another reference can be used if desired
+  id: totrans-47
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 如果需要，可以使用另一个参考
 - en: '`line`'
+  id: totrans-48
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: '`line`'
 - en: '[PRE13]python'
+  id: totrans-49
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: '[PRE13]python'
 - en: coupled_s1 = pp(line='s1')
+  id: totrans-50
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: coupled_s1 = pp(line='s1')
 - en: '[PRE14]'
+  id: totrans-51
   prefs:
   - PREF_IND
   type: TYPE_PRE
+  zh: '[PRE14]'
 - en: 'For *lines* objects with a single line (for example line `s1` from the indicator
     `PivotPoint`):'
+  id: totrans-52
   prefs: []
   type: TYPE_NORMAL
+  zh: 对于具有单行的*lines*对象（例如来自指标`PivotPoint`的线`s1`）：
 - en: '`obj(clockref=None)` (see above for `clockref`)'
+  id: totrans-53
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`obj(clockref=None)`（参见上文的`clockref`）'
 - en: Conclusion
+  id: totrans-54
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 结论
 - en: Integrated in the regular `()` syntax, data feeds from different timeframes
     can be mixed in indicators, always taking into account that `cerebro` needs to
     be instantiated or created with `runonce=False`.
+  id: totrans-55
   prefs: []
   type: TYPE_NORMAL
+  zh: 在常规`()`语法中集成，来自不同时间框架的数据馈送可以在指标中混合使用，始终注意`cerebro`需要被实例化或者创建，并且`runonce=False`。
 - en: Script Code and Usage
+  id: totrans-56
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 脚本代码和用法
 - en: 'Available as sample in the sources of `backtrader`. Usage:'
+  id: totrans-57
   prefs: []
   type: TYPE_NORMAL
+  zh: 在`backtrader`源代码中作为示例提供。用法：
 - en: '[PRE15]'
+  id: totrans-58
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE15]'
 - en: 'The code:'
+  id: totrans-59
   prefs: []
   type: TYPE_NORMAL
+  zh: 代码：
 - en: '[PRE16]'
+  id: totrans-60
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE16]'

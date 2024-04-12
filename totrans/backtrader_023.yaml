@@ -3,17 +3,20 @@
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 节省内存
 - en: 原文：[https://www.backtrader.com/docu/memory-savings/memory-savings/](https://www.backtrader.com/docu/memory-savings/memory-savings/)
   id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: '[https://www.backtrader.com/docu/memory-savings/memory-savings/](https://www.backtrader.com/docu/memory-savings/memory-savings/)'
 - en: '[Release 1.3.1.92](https://github.com/mementum/backtrader/releases/tag/1.3.1.92)
     has reworked and fully implemented the memory saving schemes that were previously
     in place, although not much touted and less used.'
   id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: '[发布版本 1.3.1.92](https://github.com/mementum/backtrader/releases/tag/1.3.1.92)已经重新设计并完全实现了先前存在的节省内存方案，尽管没有受到太多宣传并且使用较少。'
 - en: '`backtrader` was (and will be further) developed in machines with nice amounts
     of RAM and that put together with the fact that visual feedback through plotting
     is a nice to have and almost a must have, mde it easy for a design decision: keep
@@ -21,37 +24,44 @@
   id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: '`backtrader`曾经（并将继续）在内存较大的机器上开发，并且与通过绘图提供的视觉反馈是一个必需的美好事物相结合，使得设计决策变得容易：将所有内容保存在内存中。'
 - en: 'This decision has some drawbacks:'
   id: totrans-4
   prefs: []
   type: TYPE_NORMAL
+  zh: 这个决定有一些缺点：
 - en: '`array.array` which is used for data storage has to allocate and move data
     when some bounds are exceeded'
   id: totrans-5
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 用于数据存储的`array.array`在超过某些限制时必须分配和移动数据。
 - en: Machines with low amounts of RAM may suffer
   id: totrans-6
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: RAM 较少的机器可能会受到影响。
 - en: Connection to a live data feed which can be online for weeks/months feeded thousands
     of seconds/minutes resolution ticks into the system
   id: totrans-7
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 连接到可以在线运行数周/数月、提供数千秒/分钟分辨率 ticks 的实时数据源
 - en: 'The latter being even more important than the 1^(st) due to another design
     decision which was made for `backtrader`:'
   id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: 后者比第一点更加重要，因为另一个设计决定是为了 `backtrader`：
 - en: Be pure Python to allow to run in embedded systems if needed be
   id: totrans-9
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 必须是纯 Python，以便在需要时在嵌入式系统中运行。
 - en: A scenario in the future could have `backtrader` connected to a 2^(nd) machine
     which provides the live feed, whilst `backtrader` itself runs inside a *Raspberry
     Pi* or something even more limited like an ADSL Router (AVM Frit!Box 7490 with
@@ -60,27 +70,33 @@
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 将来的一个场景可能是 `backtrader` 连接到第二台机器，该机器提供实时数据源，而 `backtrader` 本身运行在类似 *Raspberry
+    Pi* 或甚至更有限的设备上，如 ADSL 路由器（AVM Frit!Box 7490，带有 *Freetz* 映像）
 - en: 'Hence the need to have `backtrader` support dynamic memory schemes. Now `Cerebro`
     can be instantiated or `run` with the following semantics:'
   id: totrans-11
   prefs: []
   type: TYPE_NORMAL
+  zh: 因此需要 `backtrader` 支持动态内存方案。现在 `Cerebro` 可以使用以下语义进行实例化或`run`：
 - en: 'exactbars (default: False)'
   id: totrans-12
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: exactbars（默认值：False）
 - en: With the default `False` value each and every value stored in a line is kept
     in memory
   id: totrans-13
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 默认值为`False`，每个存储在一行中的值都会保存在内存中。
 - en: 'Possible values:'
   id: totrans-14
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 可能的值：
 - en: '`True` or `1`: all “lines” objects reduce memory usage to the automatically
     calculated minimum period.'
   id: totrans-15
@@ -88,6 +104,7 @@
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`True`或`1`：所有“lines”对象将内存使用量减少到自动计算的最小周期。'
 - en: If a Simple Moving Average has a period of 30, the underlying data will have
     always a running buffer of 30 bars to allow the calculation of the Simple Moving
     Average
@@ -96,6 +113,7 @@
   - PREF_IND
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 如果简单移动平均值的周期为 30，底层数据将始终具有 30 个条形图的运行缓冲区，以允许计算简单移动平均值
 - en: This setting will deactivate `preload` and `runonce`
   id: totrans-17
   prefs:
@@ -103,6 +121,7 @@
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 此设置将停用`preload`和`runonce`。
 - en: Using this setting also deactivates **plotting**
   id: totrans-18
   prefs:
@@ -110,6 +129,7 @@
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 使用此设置还会停用**plotting**。
 - en: '`-1`: datas and indicators/operations at strategy level will keep all data
     in memory.'
   id: totrans-19
@@ -117,6 +137,7 @@
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`-1`：在策略级别，数据和指标/操作将保留所有数据在内存中。'
 - en: 'For example: a `RSI` internally uses the indicator `UpDay` to make calculations.
     This subindicator will not keep all data in memory'
   id: totrans-20
@@ -124,6 +145,7 @@
   - PREF_IND
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 例如：`RSI`在内部使用指标`UpDay`进行计算。此子指标将不会将所有数据保存在内存中。
 - en: This allows to keep `plotting` and `preloading` active.
   id: totrans-21
   prefs:
@@ -131,6 +153,7 @@
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 这允许保持`plotting`和`preloading`处于活动状态。
 - en: '`runonce` will be deactivated'
   id: totrans-22
   prefs:
@@ -138,6 +161,7 @@
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`runonce`将被停用。'
 - en: '`-2`: datas and indicators kept as attributes of the strategy will keep all
     data in memory.'
   id: totrans-23
@@ -145,6 +169,7 @@
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`-2`：作为策略属性保留的数据和指标将在内存中保存所有数据。'
 - en: 'For example: a `RSI` internally uses the indicator `UpDay` to make calculations.
     This subindicator will not keep all data in memory'
   id: totrans-24
@@ -152,6 +177,7 @@
   - PREF_IND
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 例如：`RSI`在内部使用指标`UpDay`进行计算。此子指标将不会将所有数据保存在内存中。
 - en: If in the `__init__` something like `a = self.data.close - self.data.high` is
     defined, then `a` will not keep all data in memory
   id: totrans-25
@@ -159,6 +185,7 @@
   - PREF_IND
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 如果在`__init__`中定义了类似 `a = self.data.close - self.data.high` 这样的内容，则`a`将不会将所有数据保存在内存中。
 - en: This allows to keep `plotting` and `preloading` active.
   id: totrans-26
   prefs:
@@ -166,6 +193,7 @@
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 这允许保持`plotting`和`preloading`处于活动状态。
 - en: '`runonce` will be deactivated'
   id: totrans-27
   prefs:
@@ -173,26 +201,31 @@
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`runonce`将被停用。'
 - en: As always, an example is worth a thousand words. A sample script shows the differences.
     It runs against the *Yahoo* daily data for the years 1996 to 2015, for a total
     of `4965` days.
   id: totrans-28
   prefs: []
   type: TYPE_NORMAL
+  zh: 一如既往，一个例子胜过千言万语。一个示例脚本显示了差异。它针对 1996 年至 2015 年的 *Yahoo* 每日数据运行，总共 `4965` 天。
 - en: Note
   id: totrans-29
   prefs: []
   type: TYPE_NORMAL
+  zh: 注意
 - en: This is a small sample. The EuroStoxx50 future which trades 14 hours a day,
     would produce approximately 18000 1-minute bars in just 1 month of trading.
   id: totrans-30
   prefs: []
   type: TYPE_NORMAL
+  zh: 这只是一个小样本。每天交易14小时的EuroStoxx50期货，在仅1个月的交易中将产生大约18000个1分钟的K线。
 - en: 'The script 1^(st) executed to see how many memory positions are used when no
     memory savings are requested:'
   id: totrans-31
   prefs: []
   type: TYPE_NORMAL
+  zh: 执行脚本1^(st)以查看在不请求内存节省时使用了多少内存位置：
 - en: '[PRE0]'
   id: totrans-32
   prefs: []
@@ -202,6 +235,7 @@
   id: totrans-33
   prefs: []
   type: TYPE_NORMAL
+  zh: 对于1级（总储蓄）：
 - en: '[PRE1]'
   id: totrans-34
   prefs: []
@@ -214,21 +248,25 @@
   id: totrans-35
   prefs: []
   type: TYPE_NORMAL
+  zh: 天啊！！！从*五十万*跌至`2041`。确实。系统中的每个*lines*对象都使用`collections.deque`作为缓冲区（而不是`array.array`），并且长度被限制在绝对需要的最小值以进行请求的操作。例如：
 - en: A Strategy using a `SimpleMovingAverage` of period `30` on the data feed.
   id: totrans-36
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 在数据源上使用期间为`30`的`SimpleMovingAverage`策略。
 - en: 'In this case the following adjustments would be made:'
   id: totrans-37
   prefs: []
   type: TYPE_NORMAL
+  zh: 在这种情况下，将进行以下调整：
 - en: The *data feed* will have a buffer of `30` positions, the amount needed by the
     `SimpleMovingAverage` to produce the next value
   id: totrans-38
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '*数据源*将具有`30`个位置的缓冲区，这是`SimpleMovingAverage`产生下一个值所需的数量'
 - en: The `SimpleMovingAverage` will have a buffer of `1` position, because unless
     needed by other *indicator* (which would rely on the moving average) there is
     no need to keep a larger buffer in place.
@@ -236,39 +274,47 @@
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`SimpleMovingAverage`将有一个`1`位置的缓冲区，因为除非其他*指标*需要（这些指标将依赖于移动平均线），否则不需要保留较大的缓冲区。'
 - en: Note
   id: totrans-40
   prefs: []
   type: TYPE_NORMAL
+  zh: 注意
 - en: The most attractive and probably important feature of this mode is that the
     amount of memory used remains constant throughout the entire life of a script.
   id: totrans-41
   prefs: []
   type: TYPE_NORMAL
+  zh: 这种模式最吸引人且可能最重要的功能是，所使用的内存量在脚本的整个生命周期内保持不变。
 - en: Regardless of the size of the data feed.
   id: totrans-42
   prefs: []
   type: TYPE_NORMAL
+  zh: 无论数据源的大小如何。
 - en: This would be of great use if for example connected to a live feed for a long
     period of time.
   id: totrans-43
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果例如连接到长时间的实时数据源，则这将非常有用。
 - en: 'But take into account:'
   id: totrans-44
   prefs: []
   type: TYPE_NORMAL
+  zh: 但请注意：
 - en: '*Plotting* is not available'
   id: totrans-45
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: '*绘图*不可用'
 - en: There are other sources of memory consumption which would accumulate over time
     like `orders` generated by the strategy.
   id: totrans-46
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 还有其他的内存消耗来源，随着时间的推移会积累，比如策略生成的`orders`。
 - en: This mode can only be used with `runonce=False` in `cerebro`. This would also
     be compulsory for a live data feed, but in case of simple backtesting this is
     slower than `runonce=True`.
@@ -276,6 +322,7 @@
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 此模式只能在`cerebro`中的`runonce=False`时使用。对于实时数据源，这也是强制性的，但在简单回测的情况下，这比`runonce=True`慢。
 - en: There is for sure a trade off point from which memory management is more expensive
     than the step-by-step execution of the backtesting, but this can only be judged
     by the end-user of the platform on a case by case basis.
@@ -283,11 +330,13 @@
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 肯定有一个权衡点，从而内存管理比逐步执行回测更昂贵，但这只能由平台的最终用户在每个案例中进行判断。
 - en: 'Now the negative levels. These are meant to keep *plotting* available whilst
     still saving a decent amount of memory. First level `-1`:'
   id: totrans-49
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在是负级别。这些级别旨在在仍然节省相当数量的内存的同时保持*绘图*可用。第一级别`-1`：
 - en: '[PRE2]'
   id: totrans-50
   prefs: []
@@ -300,19 +349,23 @@
   id: totrans-51
   prefs: []
   type: TYPE_NORMAL
+  zh: 在这种情况下，*指标*的第1级别（在策略中声明的那些）保持其完整长度的缓冲区。但是如果这些指标依赖于其他指标（这就是情况），则子对象将被长度限制。在这种情况下，我们已经从：
 - en: '`506430` memory positions to -> `184623`'
   id: totrans-52
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`506430`个内存位置到-> `184623`'
 - en: Over 50% savings.
   id: totrans-53
   prefs: []
   type: TYPE_NORMAL
+  zh: 超过50%的节省。
 - en: Note
   id: totrans-54
   prefs: []
   type: TYPE_NORMAL
+  zh: 注意
 - en: Of course `array.array` objects have been traded for `collections.deque` which
     are more expensive in memory terms although faster in operation terms. But the
     `collection.deque` objects are rather small and the savings approach the roughly
@@ -320,11 +373,13 @@
   id: totrans-55
   prefs: []
   type: TYPE_NORMAL
+  zh: 当然，`array.array`对象已被`collections.deque`所取代，这在内存方面更昂贵，尽管在操作方面更快。但是`collections.deque`对象相当小，并且节省了大致计算的内存位置的使用。
 - en: 'Level `-2` now, which is meant to also save on the indicators declared at the
     strategy level which have been marked as no to be plotted:'
   id: totrans-56
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在是级别`-2`，这也是为了节省在策略级别上声明的指标的内存，这些指标已被标记为不需要绘制：
 - en: '[PRE3]'
   id: totrans-57
   prefs: []
@@ -335,10 +390,12 @@
   id: totrans-58
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在没有保存太多。这是因为一个单独的指标已被标记为不需要绘制：`TestInd().plotinfo.plot = False`
 - en: 'Let’s see the plotting from this last example:'
   id: totrans-59
   prefs: []
   type: TYPE_NORMAL
+  zh: 让我们看看来自最后一个示例的绘图：
 - en: '[PRE4]'
   id: totrans-60
   prefs: []
@@ -348,6 +405,7 @@
   id: totrans-61
   prefs: []
   type: TYPE_IMG
+  zh: '![image](../Images/ea905c9dcd8efce89b20c85b8a4b058e.png)'
 - en: 'For the interested reader, the sample script can produce a detailed analysis
     of each *lines* object traversed in the hierarchy of *indicators*. Running with
     *plotting* enabled (saving at `-1`):'

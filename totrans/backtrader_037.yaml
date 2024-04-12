@@ -1,374 +1,545 @@
 - en: Filters
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 过滤器
 - en: 原文：[https://www.backtrader.com/docu/filters/](https://www.backtrader.com/docu/filters/)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.backtrader.com/docu/filters/](https://www.backtrader.com/docu/filters/)
 - en: This functionality is a relatively late addition to *backtrader* and had to
     be fitted to the already existing internals. This makes it to be not as flexible
     and 100% feature full as wished, but it can still serve the purpose in many cases.
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: 此功能是相对较晚添加到*backtrader*中的，并且必须适应已经存在的内部结构。这使得它不像希望的那样灵活和100%功能齐全，但在许多情况下仍然可以实现目的。
 - en: Although the implementation tried to allow plug and play filter chaining, the
     pre-existing internals made it difficult to ensure that could always be achieved.
     As such, some filters may be chained and some others may not.
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: 尽管实现尝试允许即插即用的过滤器链接，但是现有的内部结构使得很难确保总是可以实现。因此，一些过滤器可能被链接，而另一些则可能没有。
 - en: Purpose
+  id: totrans-4
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 目的
 - en: Transform the values provided by a *data feed* to deliver a different *data
     feed*
+  id: totrans-5
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 转换由*数据源*提供的值以提供不同的*数据源*
 - en: 'The implementation was started to simplify the implementation of the two obvious
     filters which can be directly used via the *cerebro* API. These are:'
+  id: totrans-6
   prefs: []
   type: TYPE_NORMAL
+  zh: 实现是为了简化可以通过*cerebro* API直接使用的两个明显过滤器的实现。这些是：
 - en: '*Resampling* (`cerebro.resampledata`)'
+  id: totrans-7
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '*重新采样*（`cerebro.resampledata`）'
 - en: 'Here the filter transforms the `timeframe` and `compression` of the incoming
     *data feed*. For example:'
+  id: totrans-8
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 在这里，过滤器转换了传入*数据源*的`时间框架`和`压缩`。例如：
 - en: '[PRE0]'
+  id: totrans-9
   prefs:
   - PREF_IND
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: That means that the original data feed is delivery bars with a resolution of
     *1 Second*. The *Resampling* filter intercepts the data and buffers it until it
     can deliver a *1 Day* bar. This will happen when a *1 Second* bar from the next
     day is seen.
+  id: totrans-10
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 这意味着原始数据提供的是分辨率为*1秒*的柱状图。 *重新采样*过滤器拦截数据并将其缓冲，直到可以提供*1天*柱状图。当看到下一天的*1秒*柱状图时，将会发生这种情况。
 - en: '*Replaying* (`cerebro.replaydata`)'
+  id: totrans-11
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '*重播*（`cerebro.replaydata`）'
 - en: For the same timeframes as above, the filter would use the *1 Second* resolution
     bars to rebuild the *1 Day* bar.
+  id: totrans-12
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 对于上述相同的时间段，该过滤器将使用*1秒*分辨率的柱状图来重建*1天*柱状图。
 - en: That means that the *1 Day* bar is delivered as many times as *1 Second* bars
     are seen, updated to contain the latest information.
+  id: totrans-13
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 这意味着*1天*柱状图会被提供与看到的*1秒*柱状图一样多次，并更新以包含最新信息。
 - en: This simulates, for example, how an actual trading day has developed.
+  id: totrans-14
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 例如，这模拟了实际交易日的发展方式。
 - en: Note
+  id: totrans-15
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 注意
 - en: The length of the data, `len(data)` and therefore the length of the strategy
     remain unchanged as long as the *day* doesn’t change.
+  id: totrans-16
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 数据的长度，`len(data)`以及策略的长度在*天*不变的情况下保持不变。
 - en: Filters at work
+  id: totrans-17
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 过滤器工作中
 - en: 'Given an existing data feed/source you use the `addfilter` method of the data
     feed:'
+  id: totrans-18
   prefs: []
   type: TYPE_NORMAL
+  zh: 给定现有的数据源，您可以使用数据源的`addfilter`方法：
 - en: '[PRE1]'
+  id: totrans-19
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE1]'
 - en: 'And even if it happens to be compatible to the *resample/replay* filter the
     following can also be done:'
+  id: totrans-20
   prefs: []
   type: TYPE_NORMAL
+  zh: 即使它恰好与*重新采样/重播*过滤器兼容，也可以执行以下操作：
 - en: '[PRE2]'
+  id: totrans-21
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE2]'
 - en: Filter Interface
+  id: totrans-22
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 过滤器接口
 - en: 'A `filter` must conform to a given interface, being this:'
+  id: totrans-23
   prefs: []
   type: TYPE_NORMAL
+  zh: 一个`filter`必须符合给定的接口，即：
 - en: 'A callable which accepts this signature:'
+  id: totrans-24
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 一个可调用的函数，接受此签名：
 - en: '[PRE3]'
+  id: totrans-25
   prefs:
   - PREF_IND
   type: TYPE_PRE
+  zh: '[PRE3]'
 - en: or
+  id: totrans-26
   prefs: []
   type: TYPE_NORMAL
+  zh: 或者
 - en: A class which can be *instantiated* and *called*
+  id: totrans-27
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 一个可以*实例化*和*调用*的类
 - en: 'During instantiation the `__init__` method must support the signature:'
+  id: totrans-28
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 在实例化期间，`__init__`方法必须支持此签名：
 - en: '[PRE4]'
+  id: totrans-29
   prefs:
   - PREF_IND
   type: TYPE_PRE
+  zh: '[PRE4]'
 - en: 'The `__call__` method bears this signature:'
+  id: totrans-30
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`__call__`方法具有以下签名：'
 - en: '[PRE5]'
+  id: totrans-31
   prefs:
   - PREF_IND
   type: TYPE_PRE
+  zh: '[PRE5]'
 - en: The instance will be called for each new incoming values from the *data feed*.
     The `\*args` and `\*kwargs` are the same passed to `__init__`
+  id: totrans-32
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 对于来自*数据源*的每个新输入值，将调用该实例。 `\*args`和`\*kwargs`与`__init__`传递的相同。
 - en: '**RETURN VALUES**:'
+  id: totrans-33
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: '**返回值**：'
 - en: '[PRE6]'
+  id: totrans-34
   prefs:
   - PREF_IND
   type: TYPE_PRE
+  zh: '[PRE6]'
 - en: In the case of a class based filter 2 additional methods can be implemented
+  id: totrans-35
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 在基于类的过滤器的情况下，可以实现2个附加方法
 - en: '`last` with the following signature:'
+  id: totrans-36
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 具有以下签名的`last`：
 - en: '[PRE7]'
+  id: totrans-37
   prefs:
   - PREF_IND
   type: TYPE_PRE
+  zh: '[PRE7]'
 - en: This will be called when the *data feed* is over, allowing the filter to deliver
     data it may have for example buffered. A typical case is *resampling*, because
     a bar is buffered until data from the next time period is seen. When the data
     feed is over, there is no new data to push the buffered data out.
+  id: totrans-38
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 当*数据源*结束时，将调用此方法，允许过滤器传递它可能已经缓冲的数据。一个典型的情况是*重新采样*，因为柱状图被缓冲，直到看到下一个时间段的数据。当数据源结束时，没有新数据来推送缓冲的数据出去。
 - en: '`last` offers the chance to push the buffered data out.'
+  id: totrans-39
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: '`last`提供了将缓冲数据推送出去的机会。'
 - en: Note
+  id: totrans-40
   prefs: []
   type: TYPE_NORMAL
+  zh: 注意
 - en: 'It is obvious that if the *filter* supports no arguments at all and will be
     added without any, the signatures can be simplified as in:'
+  id: totrans-41
   prefs: []
   type: TYPE_NORMAL
+  zh: 很明显，如果*过滤器*根本不支持任何参数，并且将添加而无任何参数，则签名可以简化为：
 - en: '[PRE8]'
+  id: totrans-42
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE8]'
 - en: A Sample Filter
+  id: totrans-43
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 一个示例过滤器
 - en: 'A very quick filter implementation:'
+  id: totrans-44
   prefs: []
   type: TYPE_NORMAL
+  zh: 一个非常快速的过滤器实现：
 - en: '[PRE9]'
+  id: totrans-45
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE9]'
 - en: 'This filter:'
+  id: totrans-46
   prefs: []
   type: TYPE_NORMAL
+  zh: 这个过滤器：
 - en: Uses `data.p.sessionstart` and `data.p.sessionend` (standard data feed parameters)
     to decide if a bar is in the session.
+  id: totrans-47
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 使用`data.p.sessionstart`和`data.p.sessionend`（标准数据源参数）来判断条是否在会话中。
 - en: If *in-the-session* the return value is `False` to indicate nothing was done
     and the processing of the current bar can continue
+  id: totrans-48
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 如果*在会话中*，返回值为`False`，以指示未执行任何操作，可以继续处理当前条目
 - en: If *not-in-the-session*, the bar is removed from the stream and `True` is returned
     to indicate a new bar must be fetched.
+  id: totrans-49
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 如果*不在会话中*，则从流中移除该条，并返回`True`以指示必须获取新条。
 - en: Note
+  id: totrans-50
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 注意
 - en: The `data.backwards()` makes uses of the `LineBuffer` interface. This digs deep
     into the internals of *backtrader*.
+  id: totrans-51
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: '`data.backwards()`利用`LineBuffer`接口。 这深入到*backtrader*的内部。'
 - en: 'The use of this filter:'
+  id: totrans-52
   prefs: []
   type: TYPE_NORMAL
+  zh: 这种过滤器的用法：
 - en: Some data feeds contain *out of regular trading hours* data, which may not be
     of interest to the trader. With this filter only *in-session* bars will be considered.
+  id: totrans-53
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 一些数据源包含*非常规交易时间外*的数据，这些数据可能不受交易者的关注。 使用此过滤器仅将*会话内*条考虑在内。
 - en: Data Pseudo-API for Filters
+  id: totrans-54
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 用于过滤器的数据伪-API
 - en: 'In the example above it has been shown how the filter invokes `data.backwards()`
     to remove the current bar from the stream. Useful calls from the data feed objects
     which are meant as a *pseudo-API for Filters* are:'
+  id: totrans-55
   prefs: []
   type: TYPE_NORMAL
+  zh: 在上述示例中，已经展示了过滤器如何调用`data.backwards()`以从流中移除当前条。 数据源对象的有用调用，旨在作为*过滤器的伪-API*：
 - en: '`data.backwards(size=1, force=False)`: removes *size* bars from the data stream
     (default is `1`) by moving the logical pointer backwards. If `force=True`, then
     the physical storage is also removed.'
+  id: totrans-56
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`data.backwards(size=1, force=False)`：通过将逻辑指针向后移动来从数据流中删除*size*条（默认为`1`）。 如果`force=True`，则物理存储也将被删除。'
 - en: Removing the physical storage is a delicate operation and is only meant as a
     hack for internal operations.
+  id: totrans-57
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 移除物理存储是一项细致的操作，仅用作内部操作的黑客方法。
 - en: '`data.forward(value=float(''NaN''), size=1)`: moves *size* bars the storage
     forward, increasing the physical storage if needed be and fills with `value`'
+  id: totrans-58
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`data.forward(value=float(''NaN''), size=1)`：将*size*条移动到存储区向前移动，必要时增加物理存储并用`value`填充。'
 - en: '`data._addtostack(bar, stash=False)`: adds `bar` to a stack for later processing.
     `bar` is an iterable containing as many values as `lines` has the data feed.'
+  id: totrans-59
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`data._addtostack(bar, stash=False)`：将`bar`添加到堆栈以供以后处理。 `bar`是一个包含与数据源的`lines`一样多的值的可迭代对象。'
 - en: If `stash=False` the bar added to the stack will be consumed immediately by
     the system at the beginning of the next iteration.
+  id: totrans-60
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 如果`stash=False`，则添加到堆栈的条将立即被系统消耗，在下一次迭代开始时。
 - en: If `stash=True` the bar will undergo the entire loop processing including potentially
     being reparsed by filters
+  id: totrans-61
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 如果`stash=True`，则条将经历整个循环处理，包括可能被过滤器重新解析
 - en: '`data._save2stack(erase=False, force=False)`: saves the current data bar to
     the stack for later processing. If `erase=True` then `data.backwards` will be
     invoked and will receive the parameter `force`'
+  id: totrans-62
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`data._save2stack(erase=False, force=False)`：将当前数据条保存到堆栈以供以后处理。 如果`erase=True`，则将调用`data.backwards`并将接收参数`force`。'
 - en: '`data._updatebar(bar, forward=False, ago=0)`: uses the values in the iterable
     `bar` to overwrite the values in the data stream `ago` positions. With the default
     `ago=0` the current bar will updated. With `-1`, the previous one.'
+  id: totrans-63
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`data._updatebar(bar, forward=False, ago=0)`：使用可迭代对象`bar`中的值来覆盖数据流中`ago`位置的值。
+    默认情况下，`ago=0`将更新当前条。 如果是`-1`，则是前一个。'
 - en: 'Another example: Pinkfish Filter'
+  id: totrans-64
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 另一个示例：粉鱼过滤器
 - en: 'This is an example of a filter that can be chained, and is meant so, to another
     filter, namely the *replay filter*. The *Pinkfish* name is from the library which
     describes the idea in its main page: using daily data to execute operations which
     would only be possible with intraday data.'
+  id: totrans-65
   prefs: []
   type: TYPE_NORMAL
+  zh: 这是一个可以链接的过滤器的示例，并且旨在如此，以连接到另一个过滤器，即*replay过滤器*。 *Pinkfish*名称来自于其主页描述该想法的库：使用每日数据执行仅在分时数据中才可能的操作。
 - en: 'To achieve the effect:'
+  id: totrans-66
   prefs: []
   type: TYPE_NORMAL
+  zh: 要实现效果：
 - en: 'A daily bar will be broken in 2 componentes: `OHL` and then `C`.'
+  id: totrans-67
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 每日条将分解为2个组件：`OHL`然后是`C`。
 - en: 'Those 2 pieces are chained with *replay* to have the following happening in
     the stream:'
+  id: totrans-68
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 这两个部分通过*重播*链接以在流中发生以下情况：
 - en: '[PRE10]'
+  id: totrans-69
   prefs:
   - PREF_IND
   type: TYPE_PRE
+  zh: '[PRE10]'
 - en: 'Logic:'
+  id: totrans-70
   prefs: []
   type: TYPE_NORMAL
+  zh: 逻辑：
 - en: 'When an `OHLC` bar is received it is copied into an interable and broken down
     to become:'
+  id: totrans-71
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 收到`OHLC`条时，将其复制到一个可迭代对象中，并分解为以下内容：
 - en: An `OHL` bar. Because this concept doesn’t actually exist the *closing* price
     is replaced with the *opening* price to really form an `OHLO` bar.
+  id: totrans-72
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 一个`OHL`条。 由于这个概念实际上并不存在，*收盘*价格被替换为*开盘*价格以真正形成一个`OHLO`条。
 - en: An `C` bar whic also doesn’t exist. The reality is that it will be delivered
     like a tick `CCCC`
+  id: totrans-73
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 一个不存在的 `C` 条，实际上会被传递为一个刻度 `CCCC`
 - en: The volume if distributed between the 2 parts
+  id: totrans-74
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 成交量在这两部分之间分配
 - en: The current bar is removed from the stream
+  id: totrans-75
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 当前条被从流中移除
 - en: The `OHLO` part is put onto the stack for immediate processing
+  id: totrans-76
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`OHLO` 部分被放入堆栈中进行即时处理'
 - en: The `CCCC` part is put into the stash for processing in the next round
+  id: totrans-77
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`CCCC` 部分被放入存储区，在下一轮处理中处理'
 - en: Because the stack has something for immediate processing the filter can return
     `False` to indicate it.
+  id: totrans-78
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 因为堆栈中有一些需要立即处理的内容，过滤器可以返回 `False` 来指示这一点。
 - en: 'This filter works together with:'
+  id: totrans-79
   prefs: []
   type: TYPE_NORMAL
+  zh: 这个过滤器与以下内容一起工作：
 - en: The *replay* filter which puts together the `OHLO` and `CCCC` parts to finally
     deliver an `OHLC` bar.
+  id: totrans-80
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '*重播* 过滤器将 `OHLO` 和 `CCCC` 部分组合在一起，最终生成一个 `OHLC` 条。'
 - en: 'The use case:'
+  id: totrans-81
   prefs: []
   type: TYPE_NORMAL
+  zh: 使用案例：
 - en: Seeing something like if the maximum today is the highest maximum in the last
     20 sessions an issuing a `Close` order which gets executed with the 2^(nd) tick.
+  id: totrans-82
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 看到像是如果今天的最大值是过去 20 个交易日中的最高最大值，就发出一个 `Close` 订单，该订单在第 2 个刻度执行。
 - en: 'The code:'
+  id: totrans-83
   prefs: []
   type: TYPE_NORMAL
+  zh: 代码：
 - en: '[PRE11]'
+  id: totrans-84
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE11]'

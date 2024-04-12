@@ -1,384 +1,575 @@
 - en: Using Indicators
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 使用指标
 - en: 原文：[https://www.backtrader.com/docu/induse/](https://www.backtrader.com/docu/induse/)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.backtrader.com/docu/induse/](https://www.backtrader.com/docu/induse/)
 - en: 'Indicators can be used in two places in the platform:'
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: 在平台中，指标可以在两个地方使用：
 - en: Inside Strategies
+  id: totrans-3
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 在策略内部
 - en: Inside other Indicators
+  id: totrans-4
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 在其他指标内部
 - en: Indicators in action
+  id: totrans-5
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 指标的作用
 - en: Indicators are always instantiated during `__init__` in the *Strategy*
+  id: totrans-6
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: '`Indicators`始终在*Strategy*中的`__init__`期间实例化'
 - en: Indicator values (or values thereof derived) are used/checked during `next`
+  id: totrans-7
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 在`next`期间使用/检查指标值（或其派生的值）
 - en: 'There is an important axiom to take into account:'
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: 有一个重要的公理需要考虑：
 - en: Any `Indicator` (or value thereof derived) declared during `__init__` will be
     precalculated before `next` is called.
+  id: totrans-9
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 在`__init__`期间声明的任何`Indicator`（或派生值）将在调用`next`之前预先计算。
 - en: Let’s go for the differences an operation modes.
+  id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: 让我们来看一下差异和操作模式。
 - en: '`__init__` vs `next`'
+  id: totrans-11
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: '`__init__`与`next`'
 - en: 'Things works as follows:'
+  id: totrans-12
   prefs: []
   type: TYPE_NORMAL
+  zh: 事情的工作方式如下：
 - en: Any **operation** involving **lines** objects during `__init__` generates another
     **lines** object
+  id: totrans-13
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 在`__init__`期间涉及**lines**对象的任何**操作**都会生成另一个**lines**对象
 - en: Any **operation** involving **lines** objects during `next` yields regular Python
     types like floats and bools.
+  id: totrans-14
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 在`next`期间涉及**lines**对象的任何**操作**都会产生常规的Python类型，如浮点数和布尔值。
 - en: During `__init__`
+  id: totrans-15
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 在`__init__`期间
 - en: 'Example of an operation during `__init__`:'
+  id: totrans-16
   prefs: []
   type: TYPE_NORMAL
+  zh: 在`__init__`期间操作的示例：
 - en: '[PRE0]'
+  id: totrans-17
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: The variable `hilo_diff` holds a reference to a **lines** object which is precalculated
     before calling `next` and can be accessed using the standard array notation `[]`
+  id: totrans-18
   prefs: []
   type: TYPE_NORMAL
+  zh: 变量`hilo_diff`保存对在调用`next`之前预先计算的**lines**对象的引用，并且可以使用标准数组表示法`[]`访问
 - en: It does obviously contains for each bar of the data feed the difference between
     the high and the low.
+  id: totrans-19
   prefs: []
   type: TYPE_NORMAL
+  zh: 很明显，对于数据源的每个条数据，它包含了高低之间的差异。
 - en: 'This also works when mixing simple **lines** (like those in the self.data Data
     Feed) and complex ones like indicators:'
+  id: totrans-20
   prefs: []
   type: TYPE_NORMAL
+  zh: 这也适用于将简单的**lines**（如self.data数据源中的lines）与复杂的指标混合使用时：
 - en: '[PRE1]'
+  id: totrans-21
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE1]'
 - en: Now `close_sma_diff` contains again a **line** object.
+  id: totrans-22
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在`close_sma_diff`再次包含一个**line**对象。
 - en: 'Using logical operatorss:'
+  id: totrans-23
   prefs: []
   type: TYPE_NORMAL
+  zh: 使用逻辑运算符：
 - en: '[PRE2]'
+  id: totrans-24
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE2]'
 - en: Now the generated **lines** object will contain an array of booleans.
+  id: totrans-25
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在生成的**lines**对象将包含一个布尔数组。
 - en: During `next`
+  id: totrans-26
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 在`next`期间
 - en: 'Example of an operation (logical operator):'
+  id: totrans-27
   prefs: []
   type: TYPE_NORMAL
+  zh: 操作示例（逻辑运算符）：
 - en: '[PRE3]'
+  id: totrans-28
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE3]'
 - en: 'Using the equivalent array (index 0 based notation):'
+  id: totrans-29
   prefs: []
   type: TYPE_NORMAL
+  zh: 使用等效数组（索引从0开始的表示法）：
 - en: '[PRE4]'
+  id: totrans-30
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE4]'
 - en: In this case `close_over_sma` yields a boolen which is the result of comparing
     two floating point values, the ones returned by the `[0]` operator applied to
     `self.data.close` and `self.sma`
+  id: totrans-31
   prefs: []
   type: TYPE_NORMAL
+  zh: 在这种情况下，`close_over_sma`产生一个布尔值，该值是通过将`self.data.close`和`self.sma`应用到`[0]`运算符返回的两个浮点值进行比较的结果
 - en: The `__init__` vs `next` *why*
+  id: totrans-32
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: '`__init__`与`next`*为什么*'
 - en: Logic simplification (and with it ease of use) is the key. Calculations and
     most of the associated logic can be declared during `__init__` keeping the actual
     operational logic to a minimum during `next`.
+  id: totrans-33
   prefs: []
   type: TYPE_NORMAL
+  zh: 逻辑简化（以及随之的易用性）是关键。计算和大部分相关逻辑可以在`__init__`期间声明，在`next`期间将实际操作逻辑保持最小化。
 - en: 'There is actually a side benefit: **speed** (due to the precalculation explained
     at the beginning)'
+  id: totrans-34
   prefs: []
   type: TYPE_NORMAL
+  zh: 实际上还有一个附加好处：**速度**（由于在开头解释的预计算）
 - en: 'A complete example which generates a **buy** signal during `__init__`:'
+  id: totrans-35
   prefs: []
   type: TYPE_NORMAL
+  zh: 一个完整的示例，在`__init__`期间生成一个**buy**信号：
 - en: '[PRE5]'
+  id: totrans-36
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE5]'
 - en: Note
+  id: totrans-37
   prefs: []
   type: TYPE_NORMAL
+  zh: 注意
 - en: Python’s `and` operator cannot be overriden, forcing the platform to define
     its own `And`. The same applies to other constructs like `Or` and `If`
+  id: totrans-38
   prefs: []
   type: TYPE_NORMAL
+  zh: Python的`and`运算符不能被重载，迫使平台定义自己的`And`。其他构造也是如此，比如`Or`和`If`
 - en: It should be obvious that the “declarative” approach during `__init__` keeps
     the bloating of `next` (where the actual strategy work happens) to a minimum.
+  id: totrans-39
   prefs: []
   type: TYPE_NORMAL
+  zh: 显然，`__init__`期间的“声明式”方法将`next`的膨胀（其中实际策略工作发生）最小化。
 - en: (Don’t forget there is also a speed up factor)
+  id: totrans-40
   prefs: []
   type: TYPE_NORMAL
+  zh: （不要忘记还有一个加速因素）
 - en: Note
+  id: totrans-41
   prefs: []
   type: TYPE_NORMAL
+  zh: 注意
 - en: When the logic gets really complicated and involves several operations it is
     usually much better to encapsulate that inside an `Indicator`.
+  id: totrans-42
   prefs: []
   type: TYPE_NORMAL
+  zh: 当逻辑变得非常复杂并涉及多个操作时，通常更好的做法是将其封装在一个`Indicator`内部。
 - en: Some notes
+  id: totrans-43
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 一些注意事项
 - en: 'In the example above there are two things which have been simplified in `backtrader`
     when compared to other platforms:'
+  id: totrans-44
   prefs: []
   type: TYPE_NORMAL
+  zh: 在上面的示例中，与其他平台相比，`backtrader`中已经简化了两件事情：
 - en: Declared `Indicators` are neither getting a **parent** parameter (like the strategy
     in which they are being created nor is any kind of “register” method/function
     being called.
+  id: totrans-45
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 声明的`Indicators`既不会得到一个**parent**参数（就像它们被创建的策略一样），也不会调用任何类型的“register”方法/函数。
 - en: And in spite of it the strategy will kick the calculation of the `Indicators`
     and any **lines** object generated because of operations (like `sma - ema`)
+  id: totrans-46
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 尽管如此，策略仍将触发 `Indicators` 的计算和因操作而生成的任何 **lines** 对象（如 `sma - ema`）
 - en: '`ExponentialMovingAverage` is being instantiated without `self.data`'
+  id: totrans-47
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`ExponentialMovingAverage` 在没有 `self.data` 的情况下被实例化'
 - en: This is intentional. If no `data` is passed, the 1^(st) data of the **parent**
     (in this case the Strategy in which is being created) will be automatically passed
     in the background
+  id: totrans-48
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 这是故意的。如果没有传递 `data`，则将自动传递父级的第一个数据（在本例中，正在创建的策略）
 - en: Indicator Plotting
+  id: totrans-49
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 指标绘图
 - en: 'First and foremost:'
+  id: totrans-50
   prefs: []
   type: TYPE_NORMAL
+  zh: 首先和最重要的是：
 - en: Declared `Indicators` get automatically plotted (if cerebro.plot is called)
+  id: totrans-51
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 声明的 `Indicators` 将自动绘制（如果调用了 cerebro.plot）
 - en: '**lines** objects from operations DO NOT GET plotted (like `close_over_sma
     = self.data.close > self.sma`)'
+  id: totrans-52
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 来自操作的 **lines** 对象不会被绘制（如 `close_over_sma = self.data.close > self.sma`）
 - en: 'There is an auxiliary `LinePlotterIndicator` which plots such operations if
     wished with the following approach:'
+  id: totrans-53
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 如果需要，有一个辅助的 `LinePlotterIndicator`，它可以使用以下方法绘制此类操作：
 - en: '[PRE6]'
+  id: totrans-54
   prefs:
   - PREF_IND
   type: TYPE_PRE
+  zh: '[PRE6]'
 - en: The `name` parameter gives name to the **single** line held by this indicator.
+  id: totrans-55
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: '`name` 参数为此指标持有的 **单个** 线条命名。'
 - en: Controlling plotting
+  id: totrans-56
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 控制绘图
 - en: 'During the development of an `Indicator` a `plotinfo` declaration can be added.
     It can be a tuple of tuples (2 elements), a `dict` or an `OrderedDict`. It looks
     like:'
+  id: totrans-57
   prefs: []
   type: TYPE_NORMAL
+  zh: 在开发 `Indicator` 时，可以添加一个 `plotinfo` 声明。它可以是元组的元组（2 个元素）、一个 `dict` 或一个 `OrderedDict`。它看起来像：
 - en: '[PRE7]'
+  id: totrans-58
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE7]'
 - en: 'The value can be later accessed (and set) as follows (if needed):'
+  id: totrans-59
   prefs: []
   type: TYPE_NORMAL
+  zh: 该值稍后可以按如下方式访问（和设置）（如果需要的话）：
 - en: '[PRE8]'
+  id: totrans-60
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE8]'
 - en: 'The value can even be set during instantiation:'
+  id: totrans-61
   prefs: []
   type: TYPE_NORMAL
+  zh: 该值甚至可以在实例化期间设置：
 - en: '[PRE9]'
+  id: totrans-62
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE9]'
 - en: The `subplot=True` will be passed to the (behind the scenes) intantiated member
     variable `plotinfo` for the indicator.
+  id: totrans-63
   prefs: []
   type: TYPE_NORMAL
+  zh: '`subplot=True` 将传递给（幕后）实例化的成员变量 `plotinfo`，用于指标。'
 - en: 'The `plotinfo` offers the following parameters to control plotting behavior:'
+  id: totrans-64
   prefs: []
   type: TYPE_NORMAL
+  zh: '`plotinfo` 提供以下参数来控制绘图行为：'
 - en: '`plot` (default: `True`)'
+  id: totrans-65
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`plot`（默认值：`True`）'
 - en: Whether the indicator is to be plotted or not
+  id: totrans-66
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 指标是否要绘制或不绘制
 - en: '`subplot` (default: `True`)'
+  id: totrans-67
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`subplot`（默认值：`True`）'
 - en: Whether to plot the indicator in a different window. For indicators like moving
     averages the default is changed to `False`
+  id: totrans-68
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 是否在不同窗口中绘制指标。对于像移动平均这样的指标，默认值更改为 `False`
 - en: '`plotname` (default: `''''`)'
+  id: totrans-69
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`plotname`（默认值：`''''`）'
 - en: Sets the plotname to show on the plot. The empty value means the canonical name
     of the indicator (`class.__name__`) will be used. This has some limitations because
     Python identifiers cannot use for example arithmetic operators.
+  id: totrans-70
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 将绘图名称设置为显示在图表上。空值意味着将使用指标的规范名称（`class.__name__`）。这有一些限制，因为 Python 标识符不能使用例如算术运算符。
 - en: 'An indicator like DI+ will be declared as follows:'
+  id: totrans-71
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 像 DI+ 这样的指标将声明如下：
 - en: '[PRE10]'
+  id: totrans-72
   prefs:
   - PREF_IND
   type: TYPE_PRE
+  zh: '[PRE10]'
 - en: Making the plot “nicer”
+  id: totrans-73
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 使图表“更美观”
 - en: '`plotabove` (default: `False`)'
+  id: totrans-74
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`plotabove`（默认值：`False`）'
 - en: Indicators are usually plotted (those with `subplot=True`) below the data they
     have operated on. Setting this to `True` will make the indicator be plotted above
     the data.
+  id: totrans-75
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 通常将指标绘制在它们操作的数据下方（那些 `subplot=True` 的指标）。将此设置为 `True` 将使指标绘制在数据之上。
 - en: '`plotlinelabels` (default: `False`)'
+  id: totrans-76
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`plotlinelabels`（默认值：`False`）'
 - en: Meant for “indicators” on “indicators”. If one calculates the SimpleMovingAverage
     of the RSI the plot will usually show the name “SimpleMovingAverage” for the corresponding
     plotted line. This is the name of the “Indicator” and not the actual line being
     plotted.
+  id: totrans-77
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 用于“指标”上的“指标”。如果计算 RSI 的 SimpleMovingAverage，则绘图通常会显示相应绘制线的名称“SimpleMovingAverage”。这是“Indicator”的名称，而不是实际绘制的线的名称。
 - en: This default behavior makes sense because the user wants to usually see that
     a SimpleMovingAverage has been created using the RSI.
+  id: totrans-78
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 这种默认行为是有意义的，因为用户通常希望看到使用 RSI 创建了 SimpleMovingAverage。
 - en: if the value is set to `True` the actual name of the line inside the SimpleMovingAverage
     will be used.
+  id: totrans-79
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 如果将值设置为 `True`，则将使用 SimpleMovingAverage 中线的实际名称。
 - en: '`plotymargin` (default: `0.0`)'
+  id: totrans-80
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`plotymargin`（默认值：`0.0`）'
 - en: Amount of margin to leave at the top and bottom of the indicator (`0.15` ->
     15%). Sometimes the `matplotlib` plots go too far to the top/bottom of the axis
     and a margin may be wished
+  id: totrans-81
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 要在指标的顶部和底部留下的边距量（`0.15` -> 15%）。有时 `matplotlib` 绘图会延伸到轴的顶部/底部，可能希望有一些边距
 - en: '`plotyticks` (default: `[]`)'
+  id: totrans-82
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`plotyticks`（默认值：`[]`）'
 - en: Used to control the drawn y scale ticks
+  id: totrans-83
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 用于控制绘制的 y 轴刻度
 - en: 'If an empty list is passed the “y ticks” will be automatically calculated.
     For something like a Stochastic it may make sense to set this to well-known idustry
     standards like: `[20.0, 50.0, 80.0]`'
+  id: totrans-84
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 如果传递了一个空列表，“y ticks”将自动计算。对于像随机指标这样的指标，将其设置为已知的行业标准可能是有意义的，例如：`[20.0, 50.0,
+    80.0]`。
 - en: Some indicators offer parameters like `upperband` and `lowerband` that are actually
     used to manipulate the y ticks
+  id: totrans-85
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 一些指标提供诸如`upperband`和`lowerband`之类的参数，实际上用于操作y ticks。
 - en: '`plothlines` (default: `[]`)'
+  id: totrans-86
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`plothlines`（默认值：`[]`）'
 - en: Used to control the drawing of horizontal lines along the indicator axis.
+  id: totrans-87
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 用于控制沿指标轴绘制水平线。
 - en: If an empty list is passed no horizontal lines will drawn.
+  id: totrans-88
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 如果传递了一个空列表，将不会绘制任何水平线。
 - en: 'For something like a Stochastic it may make sense to draw lines for well-known
     idustry standards like: `[20.0, 80.0]`'
+  id: totrans-89
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 对于像随机指标这样的指标，绘制已知的行业标准线可能是有意义的，例如：`[20.0, 80.0]`。
 - en: Some indicators offer parameters like `upperband` and `lowerband` that are actually
     used to manipulate the horizontal lines
+  id: totrans-90
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 一些指标提供诸如`upperband`和`lowerband`之类的参数，实际上用于操作水平线。
 - en: '`plotyhlines` (default: `[]`)'
+  id: totrans-91
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`plotyhlines`（默认值：`[]`）'
 - en: Used to simultaneously control plotyticks and plothlines using a single parameter.
+  id: totrans-92
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 用于同时使用单个参数控制plotyticks和plothlines。
 - en: '`plotforce` (default: `False`)'
+  id: totrans-93
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`plotforce`（默认值：`False`）'
 - en: If for some reason you believe an indicator should be plotting and it is not
     plotting … set this to `True` as a last resort.
+  id: totrans-94
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 如果由于某种原因你认为某个指标应该绘制但却没有绘制……将此设置为`True`作为最后的手段。

@@ -1,434 +1,654 @@
 - en: Strategy with Signals
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 带信号的策略
 - en: 原文：[https://www.backtrader.com/docu/signal_strategy/signal_strategy/](https://www.backtrader.com/docu/signal_strategy/signal_strategy/)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.backtrader.com/docu/signal_strategy/signal_strategy/](https://www.backtrader.com/docu/signal_strategy/signal_strategy/)
 - en: Operating *backtrader* is also possible without having to write a *Strategy*.
     Although this is the preferred way, due to the object hierarchy which makes up
     the machinery, using *Signals* is also possible.
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: 也可以操作*backtrader*而不必编写*Strategy*。尽管这是首选方法，但由于构成机器的对象层次结构，使用*Signals*也是可能的。
 - en: 'Quick summary:'
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: 快速摘要：
 - en: Instead of writing a *Strategy* class, instantiating *Indicators*, writing the
     *buy/sell* logic …
+  id: totrans-4
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 不是编写*Strategy*类，实例化*Indicators*，编写*buy/sell*逻辑...
 - en: The end user add *Signals* (indicators anyhow) and the rest is done in the background
+  id: totrans-5
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 最终用户添加*Signals*（无论如何是指示器），其余操作由后台完成
 - en: 'Quick example:'
+  id: totrans-6
   prefs: []
   type: TYPE_NORMAL
+  zh: 快速示例：
 - en: '[PRE0]'
+  id: totrans-7
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: Et voilá!.
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: 完成！。
 - en: 'Of course the *Signal* itself is missing. Let’s define a very dumb *Signal*
     which yields:'
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: 当然，*Signal*本身是缺失的。让我们定义一个非常愚蠢的*Signal*，产生：
 - en: '`Long` indication if the `close` price is above a *Simple Moving Average*'
+  id: totrans-10
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 如果`close`价格高于*Simple Moving Average*，则发出`Long`指示。
 - en: '`Short` indication if the `close` price is below a *Simple Moving Average*'
+  id: totrans-11
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 如果`close`价格低于*Simple Moving Average*，则发出`Short`指示。
 - en: 'The definition:'
+  id: totrans-12
   prefs: []
   type: TYPE_NORMAL
+  zh: 定义为：
 - en: '[PRE1]'
+  id: totrans-13
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE1]'
 - en: And now it is really done. When `run` is executed *Cerebro* will take care of
     instantiating a special *Strategy* instance which knows what to do with the *Signals*.
+  id: totrans-14
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在真的完成了。当执行`run`时，*Cerebro*将负责实例化一个特殊的*Strategy*实例，该实例知道如何处理*Signals*。
 - en: Initial *FAQ*
+  id: totrans-15
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 初始*FAQ*
 - en: How is the volume of *buy*/*sell* operations determined?
+  id: totrans-16
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '*买*/*卖*操作的数量如何确定？'
 - en: A *cerebro* instance adds automatically a `FixedSize` sizer to strategies. The
     end user can change the sizer to alter the policy with `cerebro.addsizer`
+  id: totrans-17
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: '*cerebro*实例自动为策略添加了`FixedSize`大小器。最终用户可以使用`cerebro.addsizer`更改大小器以改变策略。'
 - en: How are orders executed?
+  id: totrans-18
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 订单是如何执行的？
 - en: The execution type is `Market` and the validity is *Good Until Canceled*
+  id: totrans-19
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 执行类型为`Market`，有效性为*Good Until Canceled*。
 - en: '*Signals* technicalities'
+  id: totrans-20
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: '*Signals*技术细节'
 - en: 'From a technical and theoretical point of view can be as described:'
+  id: totrans-21
   prefs: []
   type: TYPE_NORMAL
+  zh: 从技术和理论角度描述如下：
 - en: A callable that returns another *object* when called (only once)
+  id: totrans-22
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 当被调用时返回另一个*对象*的可调用对象（仅一次）
 - en: This is in most cases the instantiation of a class, but must not be
+  id: totrans-23
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 这在大多数情况下是类的实例化，但不一定是。
 - en: Supports the `__getitem__` interface. The only requested *key*/*index* will
     be `0`
+  id: totrans-24
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 支持`__getitem__`接口。唯一请求的*key*/*index*将为`0`。
 - en: 'From a practical point of view and looking at the example above a *Signal*
     is:'
+  id: totrans-25
   prefs: []
   type: TYPE_NORMAL
+  zh: 从实际角度和上述示例来看，*Signal*是：
 - en: A *lines* object from the *backtrader* ecosystem, mostly an *Indicator*
+  id: totrans-26
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 来自*backtrader*生态系统的*lines*对象，主要是*Indicator*。
 - en: This helps when using other *Indicators* like when in the example the *Simple
     Moving Average* is used.
+  id: totrans-27
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 当使用其他*Indicators*时，如示例中使用*Simple Moving Average*时，这很有帮助。
 - en: '*Signals* indications'
+  id: totrans-28
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: '*信号* 指示'
 - en: 'The *signals* delivers indications when queried with `signal[0]` and the meaning
     is:'
+  id: totrans-29
   prefs: []
   type: TYPE_NORMAL
+  zh: 当用`signal[0]`查询*signals*时，*signals*提供指示，意思是：
 - en: '`> 0` -> `long indication`'
+  id: totrans-30
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`> 0` -> `long indication`'
 - en: '`< 0` -> `short indication`'
+  id: totrans-31
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`< 0` -> `short indication`'
 - en: '`== 0` -> *No indication*'
+  id: totrans-32
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`== 0` -> *无指示*'
 - en: 'The example does simple arithmetic with `self.data - SMA` and:'
+  id: totrans-33
   prefs: []
   type: TYPE_NORMAL
+  zh: 该示例对`self.data - SMA`进行了简单的算术运算，并且：
 - en: Issues a `long indication` when the `data` is above the `SMA`
+  id: totrans-34
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 当`data`高于`SMA`时发出`long indication`。
 - en: Issues a `short indication` when the `data` is below the `SMA`
+  id: totrans-35
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 当`data`低于`SMA`时发出`short indication`。
 - en: Note
+  id: totrans-36
   prefs: []
   type: TYPE_NORMAL
+  zh: 注意
 - en: When no specific price field is indicated for the `data`, the `close` price
     is the reference price is.
+  id: totrans-37
   prefs: []
   type: TYPE_NORMAL
+  zh: 当 `data` 没有指定特定的价格字段时，参考价格为 `close` 价格。
 - en: '*Signals* Types'
+  id: totrans-38
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: '*信号*类型'
 - en: 'The *constants* indicated below as seen in the example above, are directly
     available from the main *backtrader* module as in:'
+  id: totrans-39
   prefs: []
   type: TYPE_NORMAL
+  zh: 如上例所示，下面指示的*常量*直接来自主要的*backtrader*模块，如下所示：
 - en: '[PRE2]'
+  id: totrans-40
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE2]'
 - en: There are 5 types of *Signals*, broken in 2 groups.
+  id: totrans-41
   prefs: []
   type: TYPE_NORMAL
+  zh: 共有5种*Signals*类型，分为2组。
 - en: '**Main Group**:'
+  id: totrans-42
   prefs: []
   type: TYPE_NORMAL
+  zh: '**主要组**：'
 - en: '`LONGSHORT`: both `long` and `short` indications from this signal are taken'
+  id: totrans-43
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`LONGSHORT`: 此信号的`long`和`short`指示均被采纳。'
 - en: '`LONG`:'
+  id: totrans-44
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`LONG`：'
 - en: '`long` indications are taken to go long'
+  id: totrans-45
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 采用`long`指示进入`long`
 - en: '`short` indications are taken to *close* the long position. But:'
+  id: totrans-46
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 采用`short`指示来*close*长头寸。但是：
 - en: If a `LONGEXIT` (see below) signal is in the system it will be used to exit
     the long
+  id: totrans-47
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 如果系统中存在`LONGEXIT`（见下文）信号，则将用于退出长头寸
 - en: If a `SHORT` signal is available and no `LONGEXIT` is available , it will be
     used to close a `long` before opening a `short`
+  id: totrans-48
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 如果有`SHORT`信号可用，但没有`LONGEXIT`可用，则会在开放`short`之前关闭`long`。
 - en: '`SHORT`:'
+  id: totrans-49
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`SHORT`：'
 - en: '`short` indications are taken to go short'
+  id: totrans-50
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`short`指示用于开空头寸'
 - en: '`long` indications are taken to *close* the short position. But:'
+  id: totrans-51
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`long`指示用于*关闭*空头寸。但是：'
 - en: If a `SHORTEXIT` (see below) signal is in the system it will be used to exit
     the short
+  id: totrans-52
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 如果系统中存在一个`SHORTEXIT`（见下文）信号，它将被用于退出短头寸
 - en: If a `LONG` signal is available and no `SHORTEXIT` is available , it will be
     used to close a `short` before opening a `long`
+  id: totrans-53
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 如果有`LONG`信号可用且没有`SHORTEXIT`可用，则将用于在开仓`long`之前关闭`short`
 - en: '**Exit Group**:'
+  id: totrans-54
   prefs: []
   type: TYPE_NORMAL
+  zh: '**退出组**：'
 - en: This 2 signals are meant to override others and provide criteria for exitins
     a `long` / `short` position
+  id: totrans-55
   prefs: []
   type: TYPE_NORMAL
+  zh: 这两个信号旨在覆盖其他信号，并提供退出`long` / `short`头寸的标准
 - en: '`LONGEXIT`: `short` indications are taken to exit `long` positions'
+  id: totrans-56
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`LONGEXIT`：`short`指示用于退出`long`头寸'
 - en: '`SHORTEXIT`: `long` indications are taken to exit `short` positions'
+  id: totrans-57
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`SHORTEXIT`：*长*指示被视为退出*短*头寸'
 - en: Accumulation and Order Concurrency
+  id: totrans-58
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 累积和订单并发
 - en: The sample *Signal* shown above will issue *long* and *short* indications on
     a constant basis, because it simply substracts the `SMA` value from the `close`
     price and this will always be either `> 0` and `< 0` ( `0` is mathematically possible,
     but unlikely to really happen)
+  id: totrans-59
   prefs: []
   type: TYPE_NORMAL
+  zh: 上面显示的示例*信号*会定期发出*长*和*短*指示，因为它只是从`close`价格中减去`SMA`值，而这总是会是`> 0`和`< 0`（数学上可能为`0`，但实际上不太可能发生）
 - en: 'This would lead to a continuous generation of *orders* that would produce 2
     situations:'
+  id: totrans-60
   prefs: []
   type: TYPE_NORMAL
+  zh: 这将导致连续生成*订单*，会产生2种情况：
 - en: '`Accumulation`: even if already in the market, the *signals* would produce
     new orders which would increase the possition in the market'
+  id: totrans-61
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`Accumulation`：即使已经在市场上，*信号*也会产生新订单，这将增加市场上的仓位'
 - en: '`Concurrency`: new orders would be generated without waiting for the execution
     of other orders'
+  id: totrans-62
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`Concurrency`：新订单将生成，而无需等待其他订单的执行'
 - en: 'To avoid this the default behavior is:'
+  id: totrans-63
   prefs: []
   type: TYPE_NORMAL
+  zh: 为了避免这种情况，默认行为是：
 - en: '*To Not Accumulate*'
+  id: totrans-64
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '*不累积*'
 - en: '*To Not allow Concurrency*'
+  id: totrans-65
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '*不允许并发*'
 - en: 'Should any of these two behaviors be wished, this can be controlled via `cerebro`
     with:'
+  id: totrans-66
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果希望这两种行为之一，可以通过`cerebro`控制：
 - en: '`cerebro.signal_accumulate(True)` (or `False` to re-disable it)'
+  id: totrans-67
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`cerebro.signal_accumulate(True)`（或`False`以重新禁用它）'
 - en: '`cerebro.signal_concurrency(True)` (or `False` to re-disable it)'
+  id: totrans-68
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`cerebro.signal_concurrency(True)`（或`False`以重新禁用它）'
 - en: The sample
+  id: totrans-69
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 示例
 - en: The *backtrader* sources contain a sample to test the functionality.
+  id: totrans-70
   prefs: []
   type: TYPE_NORMAL
+  zh: '*backtrader*源代码包含一个用于测试功能的示例。'
 - en: Main signal to be used.
+  id: totrans-71
   prefs: []
   type: TYPE_NORMAL
+  zh: 要使用的主要信号。
 - en: '[PRE3]'
+  id: totrans-72
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE3]'
 - en: And the *Exit Signal* in case the option is specified.
+  id: totrans-73
   prefs: []
   type: TYPE_NORMAL
+  zh: 并且在指定选项的情况下*退出信号*
 - en: '[PRE4]'
+  id: totrans-74
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE4]'
 - en: 'First run: long and short'
+  id: totrans-75
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 第一次运行：长和短
 - en: '[PRE5]'
+  id: totrans-76
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE5]'
 - en: The output
+  id: totrans-77
   prefs: []
   type: TYPE_NORMAL
+  zh: 输出
 - en: '![image](../Images/00548b7fab1aa770518d06844cb8501f.png)'
+  id: totrans-78
   prefs: []
   type: TYPE_IMG
+  zh: '![image](../Images/00548b7fab1aa770518d06844cb8501f.png)'
 - en: 'To notice:'
+  id: totrans-79
   prefs: []
   type: TYPE_NORMAL
+  zh: 注意：
 - en: The *Signal* is plotted. This is normal given it is simply an indicator and
     the plotting rules for it apply
+  id: totrans-80
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '*信号*被绘制出来。这是正常的，因为它只是一个指标，适用于它的绘图规则'
 - en: The strategy is really `long` and `short`. This can be seen because the *cash*
     level never goes back to be the *value* level
+  id: totrans-81
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 策略实际上是`long`和`short`的。这可以看出，因为*现金*水平从未回到*值*水平
 - en: 'Side note: even for a dumb idea … (and without commission) the strategy hasn’t
     lost money …'
+  id: totrans-82
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 旁注：即使是一个愚蠢的想法...（没有佣金）策略也没有亏钱...
 - en: 'Second run: long only'
+  id: totrans-83
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 第二次运行：仅限长头寸
 - en: '[PRE6]'
+  id: totrans-84
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE6]'
 - en: The output
+  id: totrans-85
   prefs: []
   type: TYPE_NORMAL
+  zh: 输出
 - en: '![image](../Images/782d019f7ff78bcdd6f504808e3345a2.png)'
+  id: totrans-86
   prefs: []
   type: TYPE_IMG
+  zh: '![image](../Images/782d019f7ff78bcdd6f504808e3345a2.png)'
 - en: 'To notice:'
+  id: totrans-87
   prefs: []
   type: TYPE_NORMAL
+  zh: 注意：
 - en: Here the cash level goes back to be the *value* level after each *sell*, which
     means the strategy is out of the market
+  id: totrans-88
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 在每次*卖出*后，现金水平都会回到*值*水平，这意味着策略已经退出市场
 - en: 'Side note: Again no money has been lost …'
+  id: totrans-89
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 旁注：再次没有损失金钱……
 - en: 'Third run: short only'
+  id: totrans-90
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 第三次运行：仅限短头寸
 - en: '[PRE7]'
+  id: totrans-91
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE7]'
 - en: The output
+  id: totrans-92
   prefs: []
   type: TYPE_NORMAL
+  zh: 输出
 - en: '![image](../Images/ef38179669ebe343c32971cef9eb3ea8.png)'
+  id: totrans-93
   prefs: []
   type: TYPE_IMG
+  zh: '![image](../Images/ef38179669ebe343c32971cef9eb3ea8.png)'
 - en: 'To notice:'
+  id: totrans-94
   prefs: []
   type: TYPE_NORMAL
+  zh: 注意：
 - en: The 1^(st) operation is a *sell* as expected and takes place later than the
     1^(st) operation in the 2 examples above. Not until the `close` is below the `SMA`
     and the simple substraction yields a minus
+  id: totrans-95
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 第1次操作是*卖出*，符合预期，并且发生在上述两个示例中的第1次操作之后。只有在`close`低于`SMA`并且简单的减法得到负数时才会发生
 - en: Here the cash level goes back to be the *value* level after each *buy*, which
     means the strategy is out of the market
+  id: totrans-96
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 在每次*买入*后，现金水平都会回到*值*水平，这意味着策略已经退出市场
 - en: 'Side note: Finally the system loses money'
+  id: totrans-97
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 旁注：最终系统亏损
 - en: 'Fourth run: long + longexit'
+  id: totrans-98
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 第四次运行：长+长退出
 - en: '[PRE8]'
+  id: totrans-99
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE8]'
 - en: The output
+  id: totrans-100
   prefs: []
   type: TYPE_NORMAL
+  zh: 输出
 - en: '![image](../Images/5fd0fb3792846bbe2c0a610014165399.png)'
+  id: totrans-101
   prefs: []
   type: TYPE_IMG
+  zh: '![image](../Images/5fd0fb3792846bbe2c0a610014165399.png)'
 - en: 'To notice:'
+  id: totrans-102
   prefs: []
   type: TYPE_NORMAL
+  zh: 注意：
 - en: Many of the trades are the same, but some are interrupted earlier because the
     fast moving average in the *exit* signal crosses the slow moving average to the
     downside
+  id: totrans-103
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 许多交易都是相同的，但有些会在快速移动平均线在*退出*信号中向下穿过慢速移动平均线时中断
 - en: The system shows its *longonly* property with the cash becoming the value at
     the end of each trade
+  id: totrans-104
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 该系统展示了其*仅做多*属性，现金在每次交易结束时的价值。
 - en: 'Side note: Again money is made … even with some modified trades'
+  id: totrans-105
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 旁注：再次赚钱……甚至有些修改后的交易也能获利
 - en: Usage
+  id: totrans-106
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 使用方法
 - en: '[PRE9]'
+  id: totrans-107
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE9]'
 - en: The code
+  id: totrans-108
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 该代码
 - en: '[PRE10]'
+  id: totrans-109
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE10]'

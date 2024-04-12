@@ -1,57 +1,85 @@
 - en: Exceptions
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 异常
 - en: 原文：[https://www.backtrader.com/docu/exceptions/](https://www.backtrader.com/docu/exceptions/)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.backtrader.com/docu/exceptions/](https://www.backtrader.com/docu/exceptions/)
 - en: One of the design goals was to quit as early as possible and let the users have
     full transparency of what was happening with errors. With the goal to force oneself
     to have code that would break on exceptions and forced revisiting the affected
     part.
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: 设计目标之一是尽早退出，并让用户完全透明地了解错误的发生情况。目标是迫使自己拥有会在异常情况下中断并强制重新访问受影响部分的代码。
 - en: But the time has come and some exceptions may slowly get added to the platform.
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: 但时机已经成熟，一些异常可能会慢慢添加到平台中。
 - en: Hierarchy
+  id: totrans-4
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 层次结构
 - en: The base class for all exceptions is `BacktraderError` (which is a direct subclass
     of `Exception`)
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: 所有异常的基类是`BacktraderError`（它是`Exception`的直接子类）
 - en: Location
+  id: totrans-6
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 位置
 - en: 'Inside the module `errors` which can be reached as in for example:'
+  id: totrans-7
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 在模块`errors`内，例如可以通过以下方式访问：
 - en: '[PRE0]'
+  id: totrans-8
   prefs:
   - PREF_IND
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: 'Directly from `backtrader` as in:'
+  id: totrans-9
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 直接来自`backtrader`，如下所示：
 - en: '[PRE1]'
+  id: totrans-10
   prefs:
   - PREF_IND
   type: TYPE_PRE
+  zh: '[PRE1]'
 - en: Exceptions
+  id: totrans-11
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 异常
 - en: '`StrategySkipError`'
+  id: totrans-12
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: '`StrategySkipError`'
 - en: Requests the platform to skip this strategy for backtesting. To be raised during
     the initialization (`__init__`) phase of the instance
+  id: totrans-13
   prefs: []
   type: TYPE_NORMAL
+  zh: 请求平台跳过此策略进行回测。在实例化（`__init__`）阶段引发
