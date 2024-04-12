@@ -1,193 +1,289 @@
 - en: OCO orders
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: OCO订单
 - en: 原文：[https://www.backtrader.com/docu/order-creation-execution/oco/oco/](https://www.backtrader.com/docu/order-creation-execution/oco/oco/)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.backtrader.com/docu/order-creation-execution/oco/oco/](https://www.backtrader.com/docu/order-creation-execution/oco/oco/)
 - en: Release `1.9.34.116` adds `OCO` (aka *One Cancel Others*) to the backtesting
     arsenal.
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: 版本`1.9.34.116`添加了`OCO`（也称为*One Cancel Others*）到回测工具中。
 - en: Note
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: 注意
 - en: This is only implemented in backtesting and there isn’t yet an implementation
     for live brokers
+  id: totrans-4
   prefs: []
   type: TYPE_NORMAL
+  zh: 这仅在回测中实现，尚未为实时经纪人实现
 - en: Note
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: 注意
 - en: Updated with release `1.9.36.116`. Interactive Brokers support for `StopTrail`,
     `StopTrailLimit` and `OCO`.
+  id: totrans-6
   prefs: []
   type: TYPE_NORMAL
+  zh: 更新至版本`1.9.36.116`。交互经纪人支持`StopTrail`、`StopTrailLimit`和`OCO`。
 - en: '`OCO` Specify always the 1^(st) order in a group as parameter `oco`'
+  id: totrans-7
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`OCO`总是将组中的第1个订单指定为参数`oco`'
 - en: '`StopTrailLimit`: the broker simulation and the `IB` broker have the asme behavior.
     Specify: `price` as the initial stop trigger price (specify also `trailamount`)
     and then `plimi` as the initial limit price. The difference between the two will
     determine the `limitoffset` (the distance at which the limit price remains from
     the stop trigger price)'
+  id: totrans-8
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`StopTrailLimit`: 经纪人模拟和`IB`经纪人具有相同的行为。指定：`price`作为初始止损触发价格（还要指定`trailamount`），然后`plimi`作为初始限价。两者之间的差异将确定`limitoffset`（限价与止损触发价格之间的距离）'
 - en: 'The usage pattern tries to remain user friendly. As such and if the logic in
     the strategy has decided it is the moment to issue orders, using `OCO` can be
     done like this:'
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: 使用模式尽量保持用户友好。因此，如果策略中的逻辑决定发出订单，使用`OCO`可以这样做：
 - en: '[PRE0]'
+  id: totrans-10
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: Easy. The 1^(st) order `o1` will something like the group leader. `o2` and `o3`
     become part of the **OCO Group** by specifying `o1` with the `oco` named argument.
     See that the comment in the snippet indicates that `o3` could have also become
     part of the group by specifying `o2` (which as already part of the group)
+  id: totrans-11
   prefs: []
   type: TYPE_NORMAL
+  zh: 简单。第1个订单`o1`将成为组长。`o2`和`o3`通过指定`o1`的`oco`命名参数成为**OCO组**的一部分。请注意代码片段中的注释指出，`o3`也可以通过指定`o2`（已经是组的一部分）成为组的一部分
 - en: 'With the group formed the following will happen:'
+  id: totrans-12
   prefs: []
   type: TYPE_NORMAL
+  zh: 组成后将发生以下情况：
 - en: If any order in the group is executed, cancelled or expires, the other orders
     will be cancelled
+  id: totrans-13
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 如果组中的任何订单被执行、取消或到期，其他订单将被取消
 - en: 'The sample below puts the `OCO` concept in play. A standard execution with
     a plot:'
+  id: totrans-14
   prefs: []
   type: TYPE_NORMAL
+  zh: 下面的示例展示了`OCO`概念的运用。一个带有绘图的标准执行：
 - en: '[PRE1]'
+  id: totrans-15
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE1]'
 - en: Note
+  id: totrans-16
   prefs: []
   type: TYPE_NORMAL
+  zh: 注意
 - en: cash is increased to `50000`, because the asset reaches values of `4000` and
     3 orders of `1` item would require at least `12000` monetary units (the default
     in the broker is `10000`)
+  id: totrans-17
   prefs: []
   type: TYPE_NORMAL
+  zh: 现金增加到`50000`，因为资产达到`4000`的值，3个`1`个项目的订单至少需要`12000`货币单位（经纪人的默认值为`10000`）
 - en: With the following chart.
+  id: totrans-18
   prefs: []
   type: TYPE_NORMAL
+  zh: 使用以下图表。
 - en: '![image](../Images/d6cfc1d24973c9d8903b0588447168bd.png)'
+  id: totrans-19
   prefs: []
   type: TYPE_IMG
+  zh: '![image](../Images/d6cfc1d24973c9d8903b0588447168bd.png)'
 - en: 'which actually doesn’t provide much information (it is a standard `SMA Crossover`
     strategy). The sample does the following:'
+  id: totrans-20
   prefs: []
   type: TYPE_NORMAL
+  zh: 实际上并没有提供太多信息（这是一个标准的`SMA Crossover`策略）。示例执行以下操作：
 - en: When the fast *SMA* crosses the slow *SMA* to the upside 3 orders are issued
+  id: totrans-21
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 当快速*SMA*向上穿越慢速*SMA*时，将发出3个订单
 - en: '`order1` is a `Limit` order which will expire in `limdays` days (parameter
     to the strategy) with the `close` price reduced by a percentage as the limit price'
+  id: totrans-22
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`order1`是一个`Limit`订单，将在`limdays`天（策略的参数）内到期，限价为`close`价格减少的百分比'
 - en: '`order2` is a `Limit` order with a much longer period to expire and a much
     more reduced limit price.'
+  id: totrans-23
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`order2`是一个`Limit`订单，具有更长的到期时间和更低的限价。'
 - en: '`order3` is a `Limit` order which further reduces the limit price'
+  id: totrans-24
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`order3`是一个`Limit`订单，进一步降低了限价'
 - en: 'As such the execution of `order2` and `order3` is not going to happen because:'
+  id: totrans-25
   prefs: []
   type: TYPE_NORMAL
+  zh: 因此，`order2`和`order3`的执行不会发生，因为：
 - en: '`order1` will be executed first and this should trigger the cancellation of
     the others'
+  id: totrans-26
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`order1`将首先执行，这应该触发其他订单的取消'
 - en: or
+  id: totrans-27
   prefs: []
   type: TYPE_NORMAL
+  zh: 或
 - en: '`order1` will expire and this will trigger the the cancellation of the others'
+  id: totrans-28
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`order1`将到期，这将触发其他订单的取消'
 - en: The system keeps the `ref` identifier of the 3 orders and will only issue new
     `buy` orders if the three `ref` identifiers are seen in `notify_order` as either
     `Completed`, `Cancelled`, `Margin` or `Expired`
+  id: totrans-29
   prefs: []
   type: TYPE_NORMAL
+  zh: 系统保留3个订单的`ref`标识符，并且只有在`notify_order`中看到这三个`ref`标识符为`Completed`、`Cancelled`、`Margin`或`Expired`时才会发出新的`buy`订单
 - en: Exiting is simply done after holding the position for some bars.
+  id: totrans-30
   prefs: []
   type: TYPE_NORMAL
+  zh: 退出只需在持有头寸一段时间后进行。
 - en: 'To try to keep track of the actual execution, textual output is produced. Some
     of it:'
+  id: totrans-31
   prefs: []
   type: TYPE_NORMAL
+  zh: 为了尝试跟踪实际执行情况，会产生文本输出。其中一些内容：
 - en: '[PRE2]'
+  id: totrans-32
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE2]'
 - en: 'With the following happening:'
+  id: totrans-33
   prefs: []
   type: TYPE_NORMAL
+  zh: 出现了以下情况：
 - en: The 1^(st) batch of orders is issued. Order 1 expires and 2 and 3 are cancelled.
     As expected.
+  id: totrans-34
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 第 1 个订单批次被下发。订单 1 到期，而 2 和 3 被取消。正如预期的那样。
 - en: Some months later another batch of 3 orders is issued. In this case Order 49
     gets `Completed` and 50 and 51 are immediately cancelled
+  id: totrans-35
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 几个月后，又下发了另一批 3 个订单。在这种情况下，订单 49 被标记为`已完成`，而 50 和 51 则立即被取消。
 - en: The last batch is just like the 1^(st)
+  id: totrans-36
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 最后一个批次与第 1 个批次完全相同
 - en: 'Let’s check now the behavior without `OCO`:'
+  id: totrans-37
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在让我们来检查一下没有`OCO`时的行为：
 - en: '[PRE3]'
+  id: totrans-38
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE3]'
 - en: And that’s it, which isn’t much (no order execution, not much need for a chart
     either)
+  id: totrans-39
   prefs: []
   type: TYPE_NORMAL
+  zh: 这就是全部，其实并不多（没有顺序执行，也不需要太多图表）
 - en: The batch of orders is issued
+  id: totrans-40
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 订单批次被下发
 - en: Order 1 expires, but because the strategy has gotten the parameter `do_oco=False`,
     orders 2 and 3 are not made part of the `OCO` group
+  id: totrans-41
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 订单 1 到期了，但是因为策略已经设置了参数`do_oco=False`，订单 2 和 3 没有被纳入`OCO`组
 - en: Orders 2 and 3 are therefore not cancelled and because the default expiration
     delta is `1000` days later, they never expire with the available data for the
     sample (2 years of data)
+  id: totrans-42
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 因此，订单 2 和 3 并没有被取消，而且由于默认到期时间差为`1000`天后，根据样本数据（2 年的数据）它们永远不会到期。
 - en: The system never issues a 2^(nd) bath of orders.
+  id: totrans-43
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 系统从未下发第 2 批订单。
 - en: Sample usage
+  id: totrans-44
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 使用示例
 - en: '[PRE4]'
+  id: totrans-45
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE4]'
 - en: Sample Code
+  id: totrans-46
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 代码示例
 - en: '[PRE5]'
+  id: totrans-47
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE5]'

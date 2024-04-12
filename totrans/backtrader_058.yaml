@@ -1,280 +1,385 @@
 - en: Bracket Orders
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
 - en: 原文：[https://www.backtrader.com/docu/order-creation-execution/bracket/bracket/](https://www.backtrader.com/docu/order-creation-execution/bracket/bracket/)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
 - en: Release `1.9.37.116` adds `bracket` orders giving a very broad spectrum of orders
     which are supported by the backtesting broker (`Market`, `Limit`, `Close`, `Stop`,
     `StopLimit`, `StopTrail`, `StopTrailLimit`, `OCO`)
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
 - en: Note
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
 - en: This is implemented for *backtesting* and for the *Interactivers Brokers* store
+  id: totrans-4
   prefs: []
   type: TYPE_NORMAL
 - en: A `bracket` order isn’s a single order but it is actually made up of *3* orders.
     Let’s consider the long side
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
 - en: A main side `buy` order, usually set to be a `Limit` or `StopLimit` order
+  id: totrans-6
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: A low side `sell` order, usually set to be a `Stop` order to limit losses
+  id: totrans-7
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: A high side `sell` order, usually set to be a `Limit` order to take profit
+  id: totrans-8
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: With corresponding `sell` and 2 x `buy` orders for the short side.
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
 - en: The low/high side orders do actually create a bracket around the main side order.
+  id: totrans-10
   prefs: []
   type: TYPE_NORMAL
 - en: 'To put some logic into it, the following rules apply:'
+  id: totrans-11
   prefs: []
   type: TYPE_NORMAL
 - en: The 3 orders are submitted together to avoid having any of them triggered independently
+  id: totrans-12
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: The low/high side orders are marked as children of the main side
+  id: totrans-13
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: The children are not active until the main side is executed
+  id: totrans-14
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: The cancellation of the main side cancels both the low and high side
+  id: totrans-15
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: The execution of the main side activates both the low and high side
+  id: totrans-16
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: Upon being active
+  id: totrans-17
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: The execution or cancellation of any of low/high side orders automatically cancels
     the other
+  id: totrans-18
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
 - en: Usage Pattern
+  id: totrans-19
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
 - en: There are two possibilities to create the bracket set of orders
+  id: totrans-20
   prefs: []
   type: TYPE_NORMAL
 - en: Single issuing of the 3 orders
+  id: totrans-21
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: Manual issuing of the 3 orders
+  id: totrans-22
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: Single Issuing of a Bracket
+  id: totrans-23
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
 - en: '*backtrader* offers two new methods in the `Strategy` to control *bracket*
     orders.'
+  id: totrans-24
   prefs: []
   type: TYPE_NORMAL
 - en: '`buy_bracket` and `sell_bracket`'
+  id: totrans-25
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: Note
+  id: totrans-26
   prefs: []
   type: TYPE_NORMAL
 - en: Signature and info below or in the `Strategy` reference section.
+  id: totrans-27
   prefs: []
   type: TYPE_NORMAL
 - en: 'With a single statement a complete set of 3 orders. An example:'
+  id: totrans-28
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE0]'
+  id: totrans-29
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: Notice how `stopprice` and `limitprice` wrap the main `price`
+  id: totrans-30
   prefs: []
   type: TYPE_NORMAL
 - en: This should be enough. The actual target `data` would be `data0` and the `size`
     would be automatically determined by the default sizer. Of course both and many
     other parameters can be specified to have a fine control of the execution.
+  id: totrans-31
   prefs: []
   type: TYPE_NORMAL
 - en: 'The return value is:'
+  id: totrans-32
   prefs: []
   type: TYPE_NORMAL
 - en: 'A `list` containing the 3 orders in this order: `[main, stop, limit]`'
+  id: totrans-33
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: Because when issuing a `sell_bracket` order, the low and high sides would be
     turned aound, the parameters are named following convention `stop` and `limit`
+  id: totrans-34
   prefs: []
   type: TYPE_NORMAL
 - en: '`stop` is meant to stop the losses (low side in a long operation, and high
     side in a short operation)'
+  id: totrans-35
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: '`limit` is meant to take the profit (high side in a long operation and low
     side in a short operation)'
+  id: totrans-36
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: Manual Issuing of a Bracket
+  id: totrans-37
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
 - en: 'This involves the generation of the 3 orders and playing around with the `transmit`
     and `parent` arguments. The rules:'
+  id: totrans-38
   prefs: []
   type: TYPE_NORMAL
 - en: The main side order must be created 1^(st) and have `transmit=False`
+  id: totrans-39
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: The low/high side orders must have `parent=main_side_order`
+  id: totrans-40
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: The 1^(st) low/high side order to be created must have `transmit=False`
+  id: totrans-41
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: The last order to be created (either the low or high side) sets `transmit=True`
+  id: totrans-42
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 最后创建的订单（无论是低端还是高端）设置`transmit=True`
 - en: 'A practical example doing what the single command from above did:'
+  id: totrans-43
   prefs: []
   type: TYPE_NORMAL
+  zh: 执行上面单个命令的实际示例：
 - en: '[PRE1]'
+  id: totrans-44
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE1]'
 - en: 'Where there is a lot more to do:'
+  id: totrans-45
   prefs: []
   type: TYPE_NORMAL
+  zh: 还有很多工作要做的地方：
 - en: Keep track of the `mainside` order to indicate it is the parent of the others
+  id: totrans-46
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 跟踪`mainside`订单以指示它是其他订单的父订单
 - en: Control `transmit` to make sure only the last order triggers the joint transmission
+  id: totrans-47
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 控制`transmit`以确保只有最后一个订单触发联合传输
 - en: Specify the execution types
+  id: totrans-48
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 指定执行类型
 - en: Specify the `size` for the low and high side
+  id: totrans-49
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 为低端和高端指定`size`
 - en: Because the `size` **MUST** be the same. If the parameter were not specified
     manually and the end user had introduced a sizer, the sizer could actually indicate
     a different value for the orders. That’s why it has to be manually added to the
     calls after it has been set for the `mainside` order.
+  id: totrans-50
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 因为`size`**必须**相同。如果未手动指定参数并且最终用户已引入调整器，则调整器实际上可以指示订单的不同值。这就是为什么在为`mainside`订单设置后必须手动将其添加到调用中的原因。
 - en: A sample of it
+  id: totrans-51
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 其中的一个样本
 - en: Running the sample from below produces this output (capped for brevity)
+  id: totrans-52
   prefs: []
   type: TYPE_NORMAL
+  zh: 从下面的示例运行产生了这个输出（为简洁起见截断）
 - en: '[PRE2]'
+  id: totrans-53
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE2]'
 - en: 'Where 3 different outcomes are shown:'
+  id: totrans-54
   prefs: []
   type: TYPE_NORMAL
+  zh: 显示了3种不同的结果：
 - en: In the 1^(st) case the main side order expired and this automatically cancelled
     the other two
+  id: totrans-55
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 在第一种情况下，主要的副作用已经过期，这自动取消了其他两个
 - en: In the 2^(nd) case the main side order was completed and the low (stop in the
     buy case) was executed limiting losses
+  id: totrans-56
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 在第二种情况下，主要的副作用已经完成，低（在购买情况下停止）被执行以限制损失
 - en: In the 3^(rd) case the main side order was completed and the high side (limit)
     was executed
+  id: totrans-57
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 在第三种情况下，主要的副作用已经完成，而高侧（限制）被执行
 - en: This can be noticed because the *Completed* ids are `22` and `24` and the **high**
     side order is being issued last, which means the non-executed low side order has
     id 23.
+  id: totrans-58
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 这可以注意到，因为*已完成*的ids是`22`和`24`，**高**端订单最后被发出，这意味着未执行的低端订单的id为23。
 - en: Visually
+  id: totrans-59
   prefs: []
   type: TYPE_NORMAL
+  zh: 视觉上
 - en: '![image](../Images/8ed7bc300e77e4cf942de56bbccab3c6.png)'
+  id: totrans-60
   prefs: []
   type: TYPE_IMG
+  zh: '![image](../Images/8ed7bc300e77e4cf942de56bbccab3c6.png)'
 - en: It can be immediately seen that the losing trades align around the same value
     and winning trades too, which is the purpose of the backeting. Controlling both
     sides.
+  id: totrans-61
   prefs: []
   type: TYPE_NORMAL
+  zh: 可以立即看到，失败的交易围绕着相同的值以及成功的交易，这就是背书的目的。控制两侧。
 - en: 'The sample as run issues the 3 orders manually, but it can be told to use `buy_bracket`.
     Let’s see the output:'
+  id: totrans-62
   prefs: []
   type: TYPE_NORMAL
+  zh: 正在运行的示例手动发出了3个订单，但可以告诉它使用`buy_bracket`。让我们看看输出：
 - en: '[PRE3]'
+  id: totrans-63
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE3]'
 - en: With the same result
+  id: totrans-64
   prefs: []
   type: TYPE_NORMAL
+  zh: 具有相同结果
 - en: '![image](../Images/ab650b9e892a3880fd8974e3730c0af5.png)'
+  id: totrans-65
   prefs: []
   type: TYPE_IMG
+  zh: '![image](../Images/ab650b9e892a3880fd8974e3730c0af5.png)'
 - en: Some reference
+  id: totrans-66
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 一些参考资料
 - en: See the new `buy_bracket` and `sell_bracket` methods
+  id: totrans-67
   prefs: []
   type: TYPE_NORMAL
+  zh: 查看新的`buy_bracket`和`sell_bracket`方法
 - en: '[PRE4]'
+  id: totrans-68
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE4]'
 - en: Sample usage
+  id: totrans-69
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 样本用法
 - en: '[PRE5]'
+  id: totrans-70
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE5]'
 - en: Sample Code
+  id: totrans-71
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 样本代码
 - en: '[PRE6]'
+  id: totrans-72
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE6]'
