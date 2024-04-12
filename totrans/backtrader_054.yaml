@@ -234,6 +234,7 @@
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`Order.DAY`或`0`或`timedelta()`: 将生成一个直到*Session结束*（又称*day*订单）有效的订单'
 - en: '`numeric value`: This is assumed to be a value corresponding to a datetime
     in `matplotlib` coding (the one used by `backtrader`) and will used to generate
     an order valid until that time (*good till date*)'
@@ -242,11 +243,14 @@
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`numeric value`: 假定这是与`matplotlib`编码中的日期时间相对应的值（`backtrader`使用的编码），并将用于生成直到那个时间点有效的订单（*good
+    till date*）。'
 - en: '`tradeid` (default: `0`)'
   id: totrans-36
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`tradeid`（默认：`0`）'
 - en: This is an internal value applied by `backtrader` to keep track of overlapping
     trades on the same asset. This `tradeid` is sent back to the *strategy* when notifying
     changes to the status of the orders.
@@ -254,12 +258,14 @@
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 这是`backtrader`用来跟踪同一资产上重叠交易的内部值。当订单状态发生变化时，该`tradeid`会发送回*策略*。
 - en: '`**kwargs`: additional broker implementations may support extra parameters.
     `backtrader` will pass the *kwargs* down to the created order objects'
   id: totrans-38
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`**kwargs`：其他经纪人实现可能支持额外的参数。`backtrader`将*kwargs*传递给创建的订单对象'
 - en: 'Example: if the 4 order execution types directly supported by `backtrader`
     are not enough, in the case of for example *Interactive Brokers* the following
     could be passed as *kwargs*:'
@@ -267,6 +273,7 @@
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 例如：如果`backtrader`直接支持的4种订单执行类型不够用，例如*Interactive Brokers*的情况下，可以将以下内容作为*kwargs*传递：
 - en: '[PRE0]'
   id: totrans-40
   prefs:
@@ -279,10 +286,12 @@
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 这将覆盖由`backtrader`创建的设置，并生成具有*touched*价格为9.8和*limit*价格为10.0的`LIMIT IF TOUCHED`订单。
 - en: Note
   id: totrans-42
   prefs: []
   type: TYPE_NORMAL
+  zh: 注意
 - en: The `close` method will examine the current position and correspondingly use
     `buy` or `sell` to effectively **close** the position. `size` will also be automatically
     calculated unless the parameter is an input from the user, in which case a partial
@@ -290,46 +299,54 @@
   id: totrans-43
   prefs: []
   type: TYPE_NORMAL
+  zh: '`close`方法将检查当前仓位，并相应地使用`buy`或`sell`来有效地**close**该仓位。 `size`也将自动计算，除非参数是来自用户的输入，在这种情况下可以实现部分*close*或*reversal*。'
 - en: Order notification
   id: totrans-44
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 订单通知
 - en: 'To receive notifications the `notify_order` method has to be overriden in the
     user subclassed `Strategy` (the default behavior is to do nothing). The following
     applies to those notifications:'
   id: totrans-45
   prefs: []
   type: TYPE_NORMAL
+  zh: 要接收通知，用户子类的`Strategy`必须重写`notify_order`方法（默认行为是什么也不做）。以下内容适用于这些通知：
 - en: Issued before the strategy’s `next` method is called
   id: totrans-46
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 在调用策略的`next`方法之前发出
 - en: May (and will) happen several times for the same *order* with the same or different
     status during the same *next* cycle.
   id: totrans-47
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 可能（并且将）在相同的*next*周期内多次发生对于相同或不同状态的相同*order*。
 - en: An *order* may be submitted to the *broker* and be *accepted* and its execution
     *completed* before `next` will be invoked again.
   id: totrans-48
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: '*订单*可能在`next`再次被调用之前提交给*经纪人*并*接受*并且其执行*完成*。'
 - en: 'In this case at least 3 notifications will happen with the following `status`
     values:'
   id: totrans-49
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 在这种情况下，至少会有3个通知，其`status`值如下：
 - en: '`Order.Submitted` because the order was sent to the *broker*'
   id: totrans-50
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`Order.Submitted`因为订单已发送给*经纪人*'
 - en: '`Order.Accepted` because the order was taken by the *broker* and awaits potential
     execution'
   id: totrans-51
@@ -337,6 +354,7 @@
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`Order.Accepted`因为订单已被*经纪人*接受并等待可能的执行。'
 - en: '`Order.Completed` because in the example it was quickly matched and completely
     filled (which may be the case usually for `Market` orders)'
   id: totrans-52
@@ -344,37 +362,44 @@
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`Order.Completed`因为在示例中它被迅速匹配和完全填充（这在`Market`订单通常情况下可能是发生的）。'
 - en: Notifications may happen even several times for the same status in the case
     of `Order.Partial`. This status will not be seen in the *backtesting* broker (which
     doesn’t consider volume when matching) but it will for sure be set by real brokers.
   id: totrans-53
   prefs: []
   type: TYPE_NORMAL
+  zh: 即使在相同的状态下，通知也可能多次发生在`Order.Partial`的情况下。这个状态不会在*backtesting*经纪人（不考虑匹配时的成交量）中看到，但是肯定会被真实的经纪人设置。
 - en: Real brokers may issue one or more executions before updating a position, and
     this group of executions will make up for an `Order.Partial` notification.
   id: totrans-54
   prefs: []
   type: TYPE_NORMAL
+  zh: 真实的经纪人可能在更新仓位之前发出一个或多个执行，这组执行将组成`Order.Partial`通知。
 - en: 'Actual execution data is in the attribute: `order.executed` which is an object
     of type `OrderData` (see below for the reference), with usual fields as `size`
     and `price`'
   id: totrans-55
   prefs: []
   type: TYPE_NORMAL
+  zh: 实际执行数据在属性中：`order.executed`，它是`OrderData`类型的对象（参见下文的引用），具有常见的字段如`size`和`price`
 - en: The values at the time of creation are stored in `order.created` which remains
     unchanged throughout the lifecycle of an `order`
   id: totrans-56
   prefs: []
   type: TYPE_NORMAL
+  zh: 创建时的值存储在`order.created`中，在`order`的整个生命周期内保持不变。
 - en: Order Status values
   id: totrans-57
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 订单状态值
 - en: 'The following are defined:'
   id: totrans-58
   prefs: []
   type: TYPE_NORMAL
+  zh: 以下内容已定义：
 - en: '`Order.Created`: set when the `Order` instance is created. Never to be seen
     by end-users unless `order` instances are manually created rather than through
     `buy`, `sell` and `close`'
@@ -382,6 +407,7 @@
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`Order.Created`：在创建`Order`实例时设置。 除非`订单`实例是手动创建而不是通过`买入`，`卖出`和`关闭`，否则永远不会被最终用户看到。'
 - en: '`Order.Submitted`: set when the `order` instance has been transmitted to the
     `broker`. This simply means it has been *sent*. In *backtesting* mode this will
     be an immediate action, but it may take actual *time* with a real broker, which
@@ -390,6 +416,7 @@
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`Order.Submitted`：在`订单`实例已传输到`经纪人`时设置。 这只意味着它已经*发送*。 在*回测*模式下，这将是一个立即的动作，但是在实际的*时间*中，这可能需要一段时间才能与真正的经纪人完成，这可能会接收订单，只有在转发到交易所时才会首次通知。'
 - en: '`Order.Accepted`: the `broker` has taken the order and it is in the system
     (or already in a exchange) awaiting execution according to the set parameters
     like execution type, size, price and validity'
@@ -397,23 +424,27 @@
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`Order.Accepted`：`broker`已接受订单并且已经在系统中（或已经在交易所中）等待根据设置的参数（如执行类型，大小，价格和有效性）执行'
 - en: '`Order.Partial`: the `order` has been partially executed. `order.executed`
     contains the current filled `size` and average price.'
   id: totrans-62
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`Order.Partial`：订单已部分执行。 `order.executed`包含当前填充的`size`和平均价格。'
 - en: '`order.executed.exbits` contains a complete list of `ExecutionBits` detailing
     the partial fillings'
   id: totrans-63
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: '`order.executed.exbits`包含一个详细的`ExecutionBits`列表，详细说明了部分填充情况'
 - en: '`Order.Complete`: the `order` has been completely filled average price.'
   id: totrans-64
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`Order.Complete`：订单已完全填充的平均价格。'
 - en: '`Order.Rejected`: the `broker` has rejected the order. A parameter (like for
     example `valid` to determine its lifetime) may not be accepted by the `broker`
     and the `order` cannot be accepted.'
@@ -421,6 +452,7 @@
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`Order.Rejected`：经纪人已拒绝订单。 一个参数（例如确定其生存期的`valid`）可能不被经纪人接受，订单将无法被接受。'
 - en: The reason will be notified via the `notify_store` method of the `strategy`.
     Although this may seem awkward, the reason is that real life brokers will notify
     this over an event, which may or may not be direclty related to the order. But
@@ -429,23 +461,28 @@
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 原因将通过`strategy`的`notify_store`方法通知。 尽管这可能看起来很奇怪，但原因是真实生活的经纪人将通过事件通知这一点，该事件可能与订单直接相关也可能与订单无关。
+    但是来自经纪人的通知仍然可以在`notify_store`中看到。
 - en: This status will not be seen in the *backtesting* broker
   id: totrans-67
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 此状态将不会在*回测*经纪人中看到
 - en: '`Order.Margin`: the order execution would imply a margin call and the previously
     accepted order has been taken off the system'
   id: totrans-68
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`Order.Margin`：订单执行将意味着保证金调用，并且先前接受的订单已从系统中移除'
 - en: '`Order.Cancelled` (or `Order.Canceled`): confirmation of the user requested
     cancellation'
   id: totrans-69
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`Order.Cancelled`（或`Order.Canceled`）：用户请求取消的确认'
 - en: It must be taken into account that a request to *cancel* an order via the `cancel`
     method of the strategy is no guarantee of cancellation. The order may have been
     already executed but such execution may not have yet notified by the broker and/or
@@ -454,76 +491,91 @@
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 必须考虑到通过策略的`cancel`方法取消订单的请求不是取消的保证。 订单可能已经被执行，但是经纪人可能尚未通知，和/或通知可能尚未传递给策略。
 - en: '`Order.Expired`: a previously accepted *order* which had a time validity has
     expired and been taken off the system'
   id: totrans-71
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`Order.Expired`：先前接受的*订单*其具有时间有效性已过期并已从系统中移除'
 - en: 'Reference: Order and associated classes'
   id: totrans-72
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 参考：订单和相关类
 - en: These objects are the generic classes in the `backtrader` ecosystem. They may
     been extended and/or contain extra embedded information when operating with other
     brokers. See the reference of the appropriate broker
   id: totrans-73
   prefs: []
   type: TYPE_NORMAL
+  zh: 这些对象是`backtrader`生态系统中的通用类。 在与其他经纪人操作时，它们可以被扩展和/或包含额外的嵌入信息。 请参阅适当经纪人的参考资料。
 - en: class backtrader.order.Order()
   id: totrans-74
   prefs:
   - PREF_H4
   type: TYPE_NORMAL
+  zh: 类`backtrader.order.Order()`
 - en: Class which holds creation/execution data and type of oder.
   id: totrans-75
   prefs: []
   type: TYPE_NORMAL
+  zh: 持有创建/执行数据和订单类型的类。
 - en: 'The order may have the following status:'
   id: totrans-76
   prefs: []
   type: TYPE_NORMAL
+  zh: 订单可能具有以下状态：
 - en: 'Submitted: sent to the broker and awaiting confirmation'
   id: totrans-77
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 已提交：已发送到经纪人并等待确认
 - en: 'Accepted: accepted by the broker'
   id: totrans-78
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 已接受：经纪人接受的
 - en: 'Partial: partially executed'
   id: totrans-79
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 部分：部分执行
 - en: 'Completed: fully exexcuted'
   id: totrans-80
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 已完成：已完全执行
 - en: 'Canceled/Cancelled: canceled by the user'
   id: totrans-81
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 已取消：用户取消的已取消
 - en: 'Expired: expired'
   id: totrans-82
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 已过期：已过期
 - en: 'Margin: not enough cash to execute the order.'
   id: totrans-83
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 保证金：没有足够的现金执行订单。
 - en: 'Rejected: Rejected by the broker'
   id: totrans-84
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 被拒绝：被经纪人拒绝
 - en: This can happen during order submission (and therefore the order will not reach
     the Accepted status) or before execution with each new bar price because cash
     has been drawn by other sources (future-like instruments may have reduced the
@@ -532,25 +584,30 @@
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 这可能发生在订单提交时（因此订单不会达到已接受的状态）或在执行之前，每个新的条价格因为现金已经被其他来源提取（类似期货的工具可能会减少现金或订单已经被执行）
 - en: 'Member Attributes:'
   id: totrans-86
   prefs: []
   type: TYPE_NORMAL
+  zh: 成员属性：
 - en: 'ref: unique order identifier'
   id: totrans-87
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: ref：唯一的订单标识符
 - en: 'created: OrderData holding creation data'
   id: totrans-88
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: created：持有创建数据的OrderData
 - en: 'executed: OrderData holding execution data'
   id: totrans-89
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: executed：持有执行数据的订单数据
 - en: 'info: custom information passed over method `addinfo()`. It is kept in the
     form of an OrderedDict which has been subclassed, so that keys can also be specified
     using ‘.’ notation'
@@ -558,110 +615,133 @@
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: info：通过方法 `addinfo()` 传递的自定义信息。它以OrderedDict的形式保留，已经被子类化，因此还可以使用‘.’符号指定键
 - en: 'User Methods:'
   id: totrans-91
   prefs: []
   type: TYPE_NORMAL
+  zh: 用户方法：
 - en: 'isbuy(): returns bool indicating if the order buys'
   id: totrans-92
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: isbuy()：返回一个布尔值，指示订单是否购买
 - en: 'issell(): returns bool indicating if the order sells'
   id: totrans-93
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: issell()：返回一个布尔值，指示订单是否卖出
 - en: 'alive(): returns bool if order is in status Partial or Accepted'
   id: totrans-94
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: alive()：如果订单处于部分或已接受状态，则返回布尔值
 - en: class backtrader.order.OrderData(dt=None, size=0, price=0.0, pricelimit=0.0,
     remsize=0, pclose=0.0, trailamount=0.0, trailpercent=0.0)
   id: totrans-95
   prefs:
   - PREF_H4
   type: TYPE_NORMAL
+  zh: 类 backtrader.order.OrderData(dt=None, size=0, price=0.0, pricelimit=0.0, remsize=0,
+    pclose=0.0, trailamount=0.0, trailpercent=0.0)
 - en: Holds actual order data for Creation and Execution.
   id: totrans-96
   prefs: []
   type: TYPE_NORMAL
+  zh: 包含创建和执行的实际订单数据。
 - en: In the case of Creation the request made and in the case of Execution the actual
     outcome.
   id: totrans-97
   prefs: []
   type: TYPE_NORMAL
+  zh: 在创建时进行的请求，在执行时进行的实际结果。
 - en: 'Member Attributes:'
   id: totrans-98
   prefs: []
   type: TYPE_NORMAL
+  zh: 成员属性：
 - en: 'exbits : iterable of OrderExecutionBits for this OrderData'
   id: totrans-99
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: exbits：此OrderData的OrderExecutionBits的可迭代对象
 - en: 'dt: datetime (float) creation/execution time'
   id: totrans-100
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: dt：日期时间（浮点数）创建/执行时间
 - en: 'size: requested/executed size'
   id: totrans-101
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: size：请求/执行大小
 - en: 'price: execution price Note: if no price is given and no pricelimite is given,
     the closing price at the time or order creation will be used as reference'
   id: totrans-102
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: price：执行价格注意：如果未给出价格且未给出价格限制，则将在订单创建时使用当前收盘价作为参考
 - en: 'pricelimit: holds pricelimit for StopLimit (which has trigger first)'
   id: totrans-103
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: pricelimit：保存StopLimit的价格限制（先触发）
 - en: 'trailamount: absolute price distance in trailing stops'
   id: totrans-104
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: trailamount：追踪止损的绝对价格距离
 - en: 'trailpercent: percentage price distance in trailing stops'
   id: totrans-105
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: trailpercent：追踪止损的百分比价格距离
 - en: 'value: market value for the entire bit size'
   id: totrans-106
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: value：整个比特大小的市场价值
 - en: 'comm: commission for the entire bit execution'
   id: totrans-107
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: comm：整个比特执行的佣金
 - en: 'pnl: pnl generated by this bit (if something was closed)'
   id: totrans-108
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: pnl：由此比特生成的pnl（如果有东西被关闭）
 - en: 'margin: margin incurred by the Order (if any)'
   id: totrans-109
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: margin：订单所产生的保证金（如果有）
 - en: 'psize: current open position size'
   id: totrans-110
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: psize：当前开放位置大小
 - en: 'pprice: current open position price'
   id: totrans-111
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: pprice：当前开放位置价格
 - en: class backtrader.order.OrderExecutionBit(dt=None, size=0, price=0.0, closed=0,
     closedvalue=0.0, closedcomm=0.0, opened=0, openedvalue=0.0, openedcomm=0.0, pnl=0.0,
     psize=0, pprice=0.0)
@@ -669,82 +749,100 @@
   prefs:
   - PREF_H4
   type: TYPE_NORMAL
+  zh: 类 backtrader.order.OrderExecutionBit(dt=None, size=0, price=0.0, closed=0, closedvalue=0.0,
+    closedcomm=0.0, opened=0, openedvalue=0.0, openedcomm=0.0, pnl=0.0, psize=0, pprice=0.0)
 - en: Intended to hold information about order execution. A “bit” does not determine
     if the order has been fully/partially executed, it just holds information.
   id: totrans-113
   prefs: []
   type: TYPE_NORMAL
+  zh: 用于保存订单执行信息。 “比特” 不确定订单是否已完全/部分执行，它只是保存信息。
 - en: 'Member Attributes:'
   id: totrans-114
   prefs: []
   type: TYPE_NORMAL
+  zh: 成员属性：
 - en: 'dt: datetime (float) execution time'
   id: totrans-115
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: dt：日期时间（浮点数）执行时间
 - en: 'size: how much was executed'
   id: totrans-116
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: size：执行了多少
 - en: 'price: execution price'
   id: totrans-117
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: price：执行价格
 - en: 'closed: how much of the execution closed an existing postion'
   id: totrans-118
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: closed：执行关闭了现有的位置多少
 - en: 'opened: how much of the execution opened a new position'
   id: totrans-119
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: opened：执行打开了多少新的位置
 - en: 'openedvalue: market value of the “opened” part'
   id: totrans-120
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: openedvalue：打开部分的市值
 - en: 'closedvalue: market value of the “closed” part'
   id: totrans-121
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: closedvalue：关闭部分的市值
 - en: 'closedcomm: commission for the “closed” part'
   id: totrans-122
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: closedcomm：关闭部分的佣金
 - en: 'openedcomm: commission for the “opened” part'
   id: totrans-123
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: openedcomm：打开部分的佣金
 - en: 'value: market value for the entire bit size'
   id: totrans-124
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: value：整个比特大小的市场价值
 - en: 'comm: commission for the entire bit execution'
   id: totrans-125
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: comm：整个比特执行的佣金
 - en: 'pnl: pnl generated by this bit (if something was closed)'
   id: totrans-126
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: pnl：由此比特生成的pnl（如果有东西被关闭）
 - en: 'psize: current open position size'
   id: totrans-127
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: psize：当前开放位置大小
 - en: 'pprice: current open position price'
   id: totrans-128
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: pprice：当前开放位置价格

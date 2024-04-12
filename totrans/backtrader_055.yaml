@@ -1,224 +1,283 @@
 - en: Order Management and Execution
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
 - en: 原文：[https://www.backtrader.com/docu/order-creation-execution/order-creation-execution/](https://www.backtrader.com/docu/order-creation-execution/order-creation-execution/)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
 - en: Backtesting, and hence `backtrader`, would not be complete if orders could not
     be simulated. To do so, the following is available in the platform.
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
 - en: 'For order management 3 primitives:'
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
 - en: '`buy`'
+  id: totrans-4
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: '`sell`'
+  id: totrans-5
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: '`cancel`'
+  id: totrans-6
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: Note
+  id: totrans-7
   prefs: []
   type: TYPE_NORMAL
 - en: An `update` primitive is obviously something logic but common sense dictates
     that such a method is mostly used by manual operators working with a judgmental
     trading approach.
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
 - en: 'For order execution logic the following execution types:'
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
 - en: '`Market`'
+  id: totrans-10
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: '`Close`'
+  id: totrans-11
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: '`Limit`'
+  id: totrans-12
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: '`Stop`'
+  id: totrans-13
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: '`StopLimit`'
+  id: totrans-14
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: Order Management
+  id: totrans-15
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
 - en: 'Some examples:'
+  id: totrans-16
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE0]'
+  id: totrans-17
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: Note
+  id: totrans-18
   prefs: []
   type: TYPE_NORMAL
 - en: 'All order types can be create by creating an `Order` instance (or one of its
     subclasses) and then passed to to the broker with:'
+  id: totrans-19
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE1]'
+  id: totrans-20
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE1]'
 - en: Note
+  id: totrans-21
   prefs: []
   type: TYPE_NORMAL
 - en: There are `buy` and `sell` primitives in the `broker` itself, but they are less
     forgiving with regards to default parameters.
+  id: totrans-22
   prefs: []
   type: TYPE_NORMAL
 - en: Order Execution Logic
+  id: totrans-23
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
 - en: The `broker` uses 2 main guidelines (assumptions?) for order execution.
+  id: totrans-24
   prefs: []
   type: TYPE_NORMAL
 - en: The current data has already happened and cannot be used to execcute an order.
+  id: totrans-25
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: 'If the logic in the strategy is something like:'
+  id: totrans-26
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
 - en: '[PRE2]'
+  id: totrans-27
   prefs:
   - PREF_IND
   type: TYPE_PRE
+  zh: '[PRE2]'
 - en: The expectation CANNOT be that the order will be executed with the `close` price
     which is being examined in the logic BECAUSE it has already happened.
+  id: totrans-28
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
 - en: The order CAN BE 1^(st) EXECUTED withing the bounds of the next set of Open/High/Low/Close
     price points (and the conditions set forth herein by the order)
+  id: totrans-29
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
 - en: Volume does not play a role
+  id: totrans-30
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: It actually does in real trading if the trader goes for non-liquid assets or
     precisely the extremes (high/low) of a price bar are hit.
+  id: totrans-31
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
 - en: But hitting the high/low points is a seldom occurrence (if you do … you don’t
     need `backtrader`) and the chosen assets will have enough liquidity to absorb
     the orders of any regular trading
+  id: totrans-32
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
 - en: Market
+  id: totrans-33
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
 - en: 'Execution:'
+  id: totrans-34
   prefs: []
   type: TYPE_NORMAL
 - en: Opening price of the next set of Open/High/Low/Close prices (commonly referred
     as *bar*)
+  id: totrans-35
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: 'Rationale:'
+  id: totrans-36
   prefs: []
   type: TYPE_NORMAL
 - en: If the logic has executed at point X in time and issued a `Market` order, the
     next price spot that will happen is the upcoming `open` price
+  id: totrans-37
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: Note
+  id: totrans-38
   prefs: []
   type: TYPE_NORMAL
 - en: This order executes always and disregards any `price` and `valid` parameters
     used to create it
+  id: totrans-39
   prefs: []
   type: TYPE_NORMAL
 - en: Close
+  id: totrans-40
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
 - en: 'Execution:'
+  id: totrans-41
   prefs: []
   type: TYPE_NORMAL
 - en: Using the `close` price of the next barwhen the next bar actually CLOSES
+  id: totrans-42
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: 'Rationale:'
+  id: totrans-43
   prefs: []
   type: TYPE_NORMAL
 - en: Most **backtesting** feeds contain already **closed** bars and the order will
     execute immediately with the `close` price of the next bar. A daily data feed
     is the most common example.
+  id: totrans-44
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: But the system could be fed with “tick” prices and the actual bar (time/date
     wise) is being udpated constantly with the new ticks, without actually moving
     to the **next** bar (because time and/or date have not changed)
+  id: totrans-45
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
 - en: Only when the time or date changes, the bar has actually been closed and the
     order gets executed
+  id: totrans-46
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
 - en: Limit
+  id: totrans-47
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
 - en: 'Execution:'
+  id: totrans-48
   prefs: []
   type: TYPE_NORMAL
 - en: The `price` set at order creation if the `data` touches it, starting with the
     next price bar.
+  id: totrans-49
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: The order will be canceled if `valid` is set and the time point is reached
+  id: totrans-50
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
 - en: 'Price Matching:'
+  id: totrans-51
   prefs: []
   type: TYPE_NORMAL
 - en: '`backtrader` tries to provide **most realistic execution price** for `Limit`
     orders.'
+  id: totrans-52
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: Using the 4 price spots (Open/High/Low/Close) it can be partially inferred if
     the requested `price` can be improved.
+  id: totrans-53
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
 - en: For `Buy` Orders
+  id: totrans-54
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
 - en: 'Case 1:'
+  id: totrans-55
   prefs:
   - PREF_IND
   - PREF_UL
@@ -226,11 +285,13 @@
 - en: If the `open` price of the bar is below the limit price the order executes immediately
     with the `open` price. The order has been swept during the opening phase of the
     session
+  id: totrans-56
   prefs:
   - PREF_IND
   - PREF_IND
   type: TYPE_NORMAL
 - en: 'Case 2:'
+  id: totrans-57
   prefs:
   - PREF_IND
   - PREF_UL
@@ -238,64 +299,78 @@
 - en: If the `open` price has not penetrated below the limit price but the `low` price
     is below the limit price, then the limit price has been seen during the session
     and the order can be executed
+  id: totrans-58
   prefs:
   - PREF_IND
   - PREF_IND
   type: TYPE_NORMAL
 - en: The logic is obviously inverted for `Sell` orders.
+  id: totrans-59
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
 - en: Stop
+  id: totrans-60
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
 - en: 'Execution:'
+  id: totrans-61
   prefs: []
   type: TYPE_NORMAL
 - en: The trigger `price` set at order creation if the `data` touches it, starting
     with the next price bar.
+  id: totrans-62
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: The order will be canceled if `valid` is set and the time point is reached
+  id: totrans-63
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
 - en: 'Price Matching:'
+  id: totrans-64
   prefs: []
   type: TYPE_NORMAL
 - en: '`backtrader` tries to provide **most realistic trigger price** for `Stop` orders.'
+  id: totrans-65
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: Using the 4 price spots (Open/High/Low/Close) it can be partially inferred if
     the requested `price` can be improved.
+  id: totrans-66
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
 - en: For `\`Stop`orders which`Buy`
+  id: totrans-67
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
 - en: 'Case 1:'
+  id: totrans-68
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
 - en: If the `open` price of the bar is above the stop price the order is executed
     immediately with the `open` price.
+  id: totrans-69
   prefs:
   - PREF_IND
   - PREF_IND
   type: TYPE_NORMAL
 - en: Intended to stop a loss if the price is moving upwards against an existing short
     position
+  id: totrans-70
   prefs:
   - PREF_IND
   - PREF_IND
   type: TYPE_NORMAL
 - en: 'Case 2:'
+  id: totrans-71
   prefs:
   - PREF_IND
   - PREF_UL
@@ -303,230 +378,335 @@
 - en: If the `open` price has not penetrated above the stop price but the `high` price
     is above the stop price, then the stop price has been seen during the session
     and the order can be executed
+  id: totrans-72
   prefs:
   - PREF_IND
   - PREF_IND
   type: TYPE_NORMAL
 - en: The logic is obviously inverted for `Stop` orders which `Sell`.
+  id: totrans-73
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
 - en: StopLimit
+  id: totrans-74
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
 - en: 'Execution:'
+  id: totrans-75
   prefs: []
   type: TYPE_NORMAL
 - en: The trigger `price` sets the order in motion starting with the next price bar.
+  id: totrans-76
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: 'Price Matching:'
+  id: totrans-77
   prefs: []
   type: TYPE_NORMAL
 - en: '**Trigger**: Uses the `Stop` matching logic (but only triggers and turns the
     order into a `Limit` order)'
+  id: totrans-78
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: '**Limit**: Uses the `Limit` price matching logic'
+  id: totrans-79
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: Some samples
+  id: totrans-80
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
 - en: As always pictures (with code) are worth several million long explanations.
     Please note that the snippets concentrate on the order creation part. The full
     code is at the bottom.
+  id: totrans-81
   prefs: []
   type: TYPE_NORMAL
 - en: A *price closes above/below a simple moving average* strategy will be used for
     the generation of the buy/sell signals
+  id: totrans-82
   prefs: []
   type: TYPE_NORMAL
 - en: 'The signal is seen at the bottom of the charts: the `CrossOver` using the crossover
     indicator.'
+  id: totrans-83
   prefs: []
   type: TYPE_NORMAL
 - en: A reference to generated “buy” orders will be kept to only allow one simultaneous
     order at most in the system.
+  id: totrans-84
   prefs: []
   type: TYPE_NORMAL
 - en: 'Execution Type: Market'
+  id: totrans-85
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
 - en: See in the chart how how the orders are executed one bar after the signal is
     generated with the opening price.
+  id: totrans-86
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE3]'
+  id: totrans-87
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE3]'
 - en: The output chart.
+  id: totrans-88
   prefs: []
   type: TYPE_NORMAL
 - en: '![image](../Images/49e4b0a5cc967a235fb702dd7aae0493.png)'
+  id: totrans-89
   prefs: []
   type: TYPE_IMG
 - en: 'The command line and output:'
+  id: totrans-90
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE4]'
+  id: totrans-91
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE4]'
 - en: 'Execution Type: Close'
+  id: totrans-92
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
 - en: Now the orders are also executed one bar after the signal but with the closing
     price.
+  id: totrans-93
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE5]'
+  id: totrans-94
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE5]'
 - en: The output chart.
+  id: totrans-95
   prefs: []
   type: TYPE_NORMAL
 - en: '![image](../Images/1dbc2cab1a8ab906cdec7e3815a25176.png)'
+  id: totrans-96
   prefs: []
   type: TYPE_IMG
 - en: 'The command line and output:'
+  id: totrans-97
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE6]'
+  id: totrans-98
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE6]'
 - en: 'Execution Type: Limit'
+  id: totrans-99
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
 - en: Validity is being calculated some lines before in case it has been passed as
     argument.
+  id: totrans-100
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE7]'
+  id: totrans-101
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE7]'
 - en: A limit price 1% below the signal generation price (the close at the signal
     bar) is set. Notice how this prevents many from the orders above from being executed.
+  id: totrans-102
   prefs: []
   type: TYPE_NORMAL
+  zh: 设置了比信号生成价格（信号栏收盘价）低1%的限价。请注意，这样可以防止上述许多订单被执行。
 - en: '[PRE8]'
+  id: totrans-103
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE8]'
 - en: The output chart.
+  id: totrans-104
   prefs: []
   type: TYPE_NORMAL
+  zh: 输出图表。
 - en: '![image](../Images/a434dcfb692928920f86c0215979eda2.png)'
+  id: totrans-105
   prefs: []
   type: TYPE_IMG
+  zh: '![image](../Images/a434dcfb692928920f86c0215979eda2.png)'
 - en: Just 4 orders have been issued. Limiting the price trying to catch a small dip
     has completly changed the output.
+  id: totrans-106
   prefs: []
   type: TYPE_NORMAL
+  zh: 仅发出了4个订单。试图捕捉小幅下跌的价格限制完全改变了输出结果。
 - en: 'The command line and output:'
+  id: totrans-107
   prefs: []
   type: TYPE_NORMAL
+  zh: 命令行和输出：
 - en: '[PRE9]'
+  id: totrans-108
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE9]'
 - en: 'Execution Type: Limit with validity'
+  id: totrans-109
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 执行类型：带有效期的限价
 - en: To not wait forever on a limit order which may only execute when the price is
     moving against the “buy” order, the order will only be valid 4 (calendar) days.
+  id: totrans-110
   prefs: []
   type: TYPE_NORMAL
+  zh: 为了不永远等待限价订单，该订单仅在4（日历）天内有效，而这可能只有在价格对“买入”订单不利时才能执行。
 - en: The output chart.
+  id: totrans-111
   prefs: []
   type: TYPE_NORMAL
+  zh: 输出图表。
 - en: '![image](../Images/c7b066ee145c106a14747fc867a57b45.png)'
+  id: totrans-112
   prefs: []
   type: TYPE_IMG
+  zh: '![image](../Images/c7b066ee145c106a14747fc867a57b45.png)'
 - en: More orders have been generated, but all but one “buy” order expired, further
     limiting the amount of operations.
+  id: totrans-113
   prefs: []
   type: TYPE_NORMAL
+  zh: 生成了更多订单，但除了一个“买入”订单外，所有订单均已到期，进一步限制了操作数量。
 - en: 'The command line and output:'
+  id: totrans-114
   prefs: []
   type: TYPE_NORMAL
+  zh: 命令行和输出：
 - en: '[PRE10]'
+  id: totrans-115
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE10]'
 - en: 'Execution Type: Stop'
+  id: totrans-116
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 执行类型：Stop
 - en: A stop price 1% above the signal price is set. That means that the strategy
     only buys if the signal is generated and the price continues climbing up, which
     could be intrepreted as a signal of strength.
+  id: totrans-117
   prefs: []
   type: TYPE_NORMAL
+  zh: 设置了比信号价格高1%的停止价格。这意味着策略只有在信号产生且价格继续上涨时才会购买，这可能被解释为一种强势信号。
 - en: This completely alters the execution panorama.
+  id: totrans-118
   prefs: []
   type: TYPE_NORMAL
+  zh: 这完全改变了执行全景。
 - en: '[PRE11]'
+  id: totrans-119
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE11]'
 - en: The output chart.
+  id: totrans-120
   prefs: []
   type: TYPE_NORMAL
+  zh: 输出图表。
 - en: '![image](../Images/528f7c2458f68051aad69e4e4621f66d.png)'
+  id: totrans-121
   prefs: []
   type: TYPE_IMG
+  zh: '![image](../Images/528f7c2458f68051aad69e4e4621f66d.png)'
 - en: 'The command line and output:'
+  id: totrans-122
   prefs: []
   type: TYPE_NORMAL
+  zh: 命令行和输出：
 - en: '[PRE12]'
+  id: totrans-123
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE12]'
 - en: 'Execution Type: StopLimit'
+  id: totrans-124
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 执行类型：StopLimit
 - en: 'A stop price 1% above the signal price is set. But the limit price is set 0.5%
     above the signal (close) price which could be interpreted as: wait for the strength
     to show up but do not buy the peak. Wait for a dip.'
+  id: totrans-125
   prefs: []
   type: TYPE_NORMAL
+  zh: 设置了比信号价格高1%的停止价格。但限价设置在信号（收盘）价格的0.5%以上，这可能被解释为：等待力量显现，但不要买入顶峰。等待下跌。
 - en: Validity is capped at 20 (calendar) days
+  id: totrans-126
   prefs: []
   type: TYPE_NORMAL
+  zh: 有效期限制为20（日历）天
 - en: '[PRE13]'
+  id: totrans-127
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE13]'
 - en: The output chart.
+  id: totrans-128
   prefs: []
   type: TYPE_NORMAL
+  zh: 输出图表。
 - en: '![image](../Images/add7ad262cc016b1f0aaf6ca7080460b.png)'
+  id: totrans-129
   prefs: []
   type: TYPE_IMG
+  zh: '![image](../Images/add7ad262cc016b1f0aaf6ca7080460b.png)'
 - en: 'The command line and output:'
+  id: totrans-130
   prefs: []
   type: TYPE_NORMAL
+  zh: 命令行和输出：
 - en: '[PRE14]'
+  id: totrans-131
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE14]'
 - en: Test Script Execution
+  id: totrans-132
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 测试脚本执行
 - en: 'Detailed in the command line `help`:'
+  id: totrans-133
   prefs: []
   type: TYPE_NORMAL
+  zh: 在命令行`help`中详细说明：
 - en: '[PRE15]'
+  id: totrans-134
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE15]'
 - en: The full code
+  id: totrans-135
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 完整代码
 - en: '[PRE16]'
+  id: totrans-136
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE16]'
