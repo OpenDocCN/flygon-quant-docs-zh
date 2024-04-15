@@ -1,1 +1,0 @@
-["```py\n`pip install backtrader` \n```", "```py\n`pip install backtrader[plotting]` \n```", "```py\n`python setup.py install` \n```", "```py\n`tar xzf backtrader.tgz\ncd backtrader\ncp -r backtrader project_directory` \n```"]

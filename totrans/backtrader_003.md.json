@@ -1,1 +1,0 @@
-["```py\n    `av_diff = bt.ind.SMA(period=30) - bt.ind.SMA(period=15)` \n    ```", "```py\n    `av_and = bt.And(av_diff > 0, self.data.close < bt.ind.SMA(period=30))` \n    ```"]
