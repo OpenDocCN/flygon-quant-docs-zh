@@ -1,3 +1,3 @@
-# BackTrader 文档
+# BackTrader 中文文档
 
-来源：[`www.backtrader.com/`](https://www.backtrader.com/)
+> 原文：[`www.backtrader.com/`](https://www.backtrader.com/)
