@@ -1,222 +1,334 @@
 - en: CSV Data Feed Development
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: CSV数据源开发
 - en: 原文：[https://www.backtrader.com/blog/posts/2015-08-06-csv-data-feed-development/csv-data-feed-development/](https://www.backtrader.com/blog/posts/2015-08-06-csv-data-feed-development/csv-data-feed-development/)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.backtrader.com/blog/posts/2015-08-06-csv-data-feed-development/csv-data-feed-development/](https://www.backtrader.com/blog/posts/2015-08-06-csv-data-feed-development/csv-data-feed-development/)
 - en: 'backtrader already offers a Generic CSV Data feed and some specific CSV Data
     Feeds. Summarizing:'
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: backtrader已经提供了一个通用的CSV数据源和一些特定的CSV数据源。总结如下：
 - en: GenericCSVData
+  id: totrans-3
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: GenericCSVData
 - en: VisualChartCSVData
+  id: totrans-4
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: VisualChartCSVData
 - en: YahooFinanceData (for online downloads)
+  id: totrans-5
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: YahooFinanceData（用于在线下载）
 - en: YahooFinanceCSVData (for already downloaded data)
+  id: totrans-6
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: YahooFinanceCSVData（用于已下载的数据）
 - en: BacktraderCSVData (in-house … for testing purposed, but can be used)
+  id: totrans-7
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: BacktraderCSVData（内部…用于测试目的，但可以使用）
 - en: But even with that, the end user may wish to develop support for a specific
     CSV Data Feed.
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: 但即使如此，最终用户可能希望为特定的CSV数据源开发支持。
 - en: 'The usual motto would be: “It’s easier said than done”. Actually the structure
     is meant to make it easy.'
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: 通常的格言是：“说起来容易做起来难”。实际上，结构设计得很简单。
 - en: 'Steps:'
+  id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: 步骤：
 - en: Inherit from `backtrader.CSVDataBase`
+  id: totrans-11
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 继承自`backtrader.CSVDataBase`
 - en: Define any `params` if needed
+  id: totrans-12
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 如果需要，定义任何`params`
 - en: Do any initialization in the `start` method
+  id: totrans-13
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 在`start`方法中进行任何初始化
 - en: Do any clean-up in the `stop` method
+  id: totrans-14
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 在`stop`方法中进行任何清理
 - en: Define a `_loadline` method where the actual work happens
+  id: totrans-15
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 定义一个`_loadline`方法，其中实际工作发生
 - en: 'This method receives a single argument: linetokens.'
+  id: totrans-16
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 此方法接收一个参数：linetokens。
 - en: As the name suggests this contains the tokens after the current line has been
     splitten according to the `separator` parameter (inherited from the base class)
+  id: totrans-17
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 正如名称所示，这包含了在根据`separator`参数（从基类继承）分割当前行后的令牌。
 - en: If after doing its work there is new data … fill up the corresponding lines
     and return `True`
+  id: totrans-18
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 如果在完成其工作后有新数据... 填充相应的行并返回`True`
 - en: 'If nothing is available and therefore the parsing has come to an end: return
     `False`'
+  id: totrans-19
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 如果没有可用的数据，因此解析已经结束：返回`False`
 - en: Returning `False` may not even be needed if the behind the scenes code which
     is reading the file lines finds out there are no more lines to parse.
+  id: totrans-20
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 如果在幕后读取文件行的代码发现没有更多可解析的行，则可能甚至不需要返回`False`。
 - en: 'Things which are already taken into account:'
+  id: totrans-21
   prefs: []
   type: TYPE_NORMAL
+  zh: 已经考虑到的事项：
 - en: Opening the file (or receiving a file-like object)
+  id: totrans-22
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 打开文件（或接收类似文件的对象）
 - en: Skipping the headers row if indicated as present
+  id: totrans-23
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 如果存在，则跳过标题行
 - en: Reading the lines
+  id: totrans-24
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 读取行
 - en: Tokenizing the lines
+  id: totrans-25
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 对行进行标记
 - en: Preloading support (to load the entire data feed at once in memory)
+  id: totrans-26
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 预加载支持（一次性将整个数据源加载到内存中）
 - en: Usually an example is worth a thousand requirement descriptions. Let’s use a
     simplified version of the in-house defined CSV parsing code from `BacktraderCSVData`.
     This one needs no initialization or clean-up (this could be opening a socket and
     closing it later, for example).
+  id: totrans-27
   prefs: []
   type: TYPE_NORMAL
+  zh: 通常，一个例子胜过千言万语的要求描述。让我们使用从`BacktraderCSVData`定义的简化版本的内部定义的CSV解析代码。这个不需要初始化或清理（例如，可以稍后打开套接字并关闭）。
 - en: Note
+  id: totrans-28
   prefs: []
   type: TYPE_NORMAL
+  zh: 注意
 - en: '`backtrader` data feeds contain the usual industry standard feeds, which are
     the ones to be filled. Namely:'
+  id: totrans-29
   prefs: []
   type: TYPE_NORMAL
+  zh: '`backtrader`数据源包含常见的行业标准数据源，这些是需要填充的。即：'
 - en: datetime
+  id: totrans-30
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 日期时间
 - en: open
+  id: totrans-31
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 打开
 - en: high
+  id: totrans-32
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 高
 - en: low
+  id: totrans-33
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 低
 - en: close
+  id: totrans-34
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 关闭
 - en: volume
+  id: totrans-35
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 成交量
 - en: openinterest
+  id: totrans-36
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 持仓量
 - en: If your strategy/algorithm or simple data perusal only needs, for example the
     closing prices you can leave the others untouched (each iteration fills them automatically
     with a float(‘NaN’) value before the end user code has a chance to do anything.
+  id: totrans-37
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果您的策略/算法或简单的数据查阅只需要，例如收盘价，您可以将其他内容保持不变（每次迭代都会在最终用户代码有机会执行任何操作之前自动使用float（'NaN'）值填充它们。
 - en: 'In this example only a daily format is supported:'
+  id: totrans-38
   prefs: []
   type: TYPE_NORMAL
+  zh: 在本例中仅支持每日格式：
 - en: '[PRE0]'
+  id: totrans-39
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: The code expects all fields to be in place and be convertible to floats, except
     for the datetime which has a fixed YYYY-MM-DD format and can be parsed without
     using `datetime.datetime.strptime`.
+  id: totrans-40
   prefs: []
   type: TYPE_NORMAL
+  zh: 代码期望所有字段都就位，并且可转换为浮点数，除了日期时间之外，它具有固定的YYYY-MM-DD格式，并且可以在不使用`datetime.datetime.strptime`的情况下解析。
 - en: More complex needs can be covered by adding just a few lines of code to account
     for null values, date format parsing. The `GenericCSVData` does that.
+  id: totrans-41
   prefs: []
   type: TYPE_NORMAL
+  zh: 只需添加几行代码即可满足更复杂的需求，以处理空值，日期格式解析。`GenericCSVData`就是这样做的。
 - en: Caveat Emptor
+  id: totrans-42
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 买方注意事项
 - en: Using the `GenericCSVData` existing feed and inheritance a lot can be acomplished
     in order to support formats.
+  id: totrans-43
   prefs: []
   type: TYPE_NORMAL
+  zh: 使用`GenericCSVData`现有的数据源和继承可以实现很多支持格式的功能。
 - en: Let’s add support for [Sierra Chart](https://www.sierrachart.com) daily format
     (which is always stored in CSV format).
+  id: totrans-44
   prefs: []
   type: TYPE_NORMAL
+  zh: 让我们为[Sierra Chart](https://www.sierrachart.com)的每日格式添加支持（该格式始终以CSV格式存储）。
 - en: 'Definition (by looking into one of the **‘.dly’** data files:'
+  id: totrans-45
   prefs: []
   type: TYPE_NORMAL
+  zh: 定义（通过查看一个**‘.dly’**数据文件）：
 - en: '**Fields**: Date, Open, High, Low, Close, Volume, OpenInterest'
+  id: totrans-46
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**字段**：日期、开盘价、最高价、最低价、收盘价、成交量、持仓量'
 - en: The industry standard ones and the ones already supported by `GenericCSVData`
     in the same order (which is also industry standard)
+  id: totrans-47
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 行业标准和已由 `GenericCSVData` 支持的那些文件，按相同顺序（这也是行业标准）
 - en: '**Separator**: ,'
+  id: totrans-48
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**分隔符**：,'
 - en: '**Date Format**: YYYY/MM/DD'
+  id: totrans-49
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**日期格式**：YYYY/MM/DD'
 - en: 'A parser for those files:'
+  id: totrans-50
   prefs: []
   type: TYPE_NORMAL
+  zh: 针对这些文件的解析器：
 - en: '[PRE1]'
+  id: totrans-51
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE1]'
 - en: The `params` definition simply redefines one of the existing parameters in the
     base class. In this case just the formatting string for dates needs a change.
+  id: totrans-52
   prefs: []
   type: TYPE_NORMAL
+  zh: '`params` 的定义只是重新定义基类中的一个现有参数。在这种情况下，只需更改日期的格式化字符串。'
 - en: Et voilá … the parser for **Sierra Chart** is finished.
+  id: totrans-53
   prefs: []
   type: TYPE_NORMAL
+  zh: 哎呀……**Sierra Chart** 的解析器完成了。
 - en: 'Here below the parameters definition of `GenericCSVData` as a reminder:'
+  id: totrans-54
   prefs: []
   type: TYPE_NORMAL
+  zh: 这里是 `GenericCSVData` 的参数定义作为提醒：
 - en: '[PRE2]'
+  id: totrans-55
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE2]'

@@ -1,323 +1,498 @@
 - en: Synchronizing different markets
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 同步不同的市场
 - en: 原文：[https://www.backtrader.com/blog/posts/2016-04-19-sync-different-markets/sync-different-markets/](https://www.backtrader.com/blog/posts/2016-04-19-sync-different-markets/sync-different-markets/)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.backtrader.com/blog/posts/2016-04-19-sync-different-markets/sync-different-markets/](https://www.backtrader.com/blog/posts/2016-04-19-sync-different-markets/sync-different-markets/)
 - en: The more the usage the more the mix of ideas and unexpected scenarios that backtrader
     has to face. And with each new one, a challenge to see if the platform can live
     up to the expectations set forth when development started, flexibility and ease
     of use were the targets and *Python* was chosen as the cornerstone.
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: 使用越多，backtrader 面对的想法和意外情况就越多。随着每一个新的想法，都是一个挑战，看看平台是否能够实现开发时设定的期望，灵活性和易用性是目标，*Python*
+    被选择为基石。
 - en: '[Ticket #76](https://github.com/mementum/backtrader/issues/76) raises the question
     as to whether synchronizing markets with different trading calendars can be done.
     Direct attempts to do so fail and the issue creator wonders why `backtrader` is
     not looking at the date.'
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: '[Ticket #76](https://github.com/mementum/backtrader/issues/76) 提出了一个问题，即是否可以同步具有不同交易日历的市场。直接尝试这样做会失败，问题的创建者想知道为什么
+    `backtrader` 没有查看日期。'
 - en: 'Before any answer is delivered some thought has to be put into:'
+  id: totrans-4
   prefs: []
   type: TYPE_NORMAL
+  zh: 在做出任何答复之前，必须考虑一些想法：
 - en: Behavior of indicators for the days which do not align
+  id: totrans-5
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 对于不对齐的日子指标的行为
 - en: 'The answer to the latter is:'
+  id: totrans-6
   prefs: []
   type: TYPE_NORMAL
+  zh: 后者的答案是：
 - en: The platform is as much as possible `date` and `time` agnostic and will not
     look at the contents of the fields to evaluate those concepts
+  id: totrans-7
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 该平台尽可能是`日期`和`时间`不可知的，并且不会查看字段的内容来评估这些概念
 - en: 'Taken into account the fact that stock market prices are `datetime` series
     the above can hold up true up to certain limits. In the case of multiple datas
     the following design considerations apply:'
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: 考虑到股票市场价格是 `datetime` 系列，上述情况在一定程度上是成立的。在多个数据的情况下，以下设计考虑因素适用：
 - en: The 1^(st) data added to `cerebro` is the `datamaster`
+  id: totrans-9
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 添加到 `cerebro` 的第一条数据是 `datamaster`
 - en: All other datas have to be time aligned/synchronized with it never being able
     to overtake (in `datetime` terms) the `datamaster`
+  id: totrans-10
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 所有其他数据都必须与其进行时间对齐/同步，永远不能超过（在 `datetime` 方面）`datamaster`
 - en: 'Putting together the 3 bullet points from above delivers the mix experienced
     by the issue creator. The scenario:'
+  id: totrans-11
   prefs: []
   type: TYPE_NORMAL
+  zh: 将上述的三个要点组合在一起，得到了问题创建者所经历的混合体。情景如下：
 - en: 'Calendar Year: `2012`'
+  id: totrans-12
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 日历年份：`2012`
 - en: 'Data 0: `^GSPC` (or S&P 500 for friends)'
+  id: totrans-13
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '数据 0: `^GSPC`（或者朋友们称之为标普 500 指数）'
 - en: 'Data 1: `^GDAXI` (or Dax Index for friends)'
+  id: totrans-14
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '数据 1: `^GDAXI`（或者朋友们称之为德国 DAX 指数）'
 - en: 'Running a custom script to see how the data is synchronized by `backtrader`:'
+  id: totrans-15
   prefs: []
   type: TYPE_NORMAL
+  zh: 运行一个自定义脚本，查看`backtrader`如何同步数据：
 - en: '[PRE0]'
+  id: totrans-16
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: 'And the output:'
+  id: totrans-17
   prefs: []
   type: TYPE_NORMAL
+  zh: 输出如下：
 - en: '[PRE1]'
+  id: totrans-18
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE1]'
 - en: As soon as `2012-01-16` the trading calendars diverge. The `data0` is the `datamaster`
     (`^GSPC`) and even if `data1` (`^GDAXI`) would have a bar to deliver on `2012-01-16`,
     **this wasn’t a trading day** for the *S&P 500*.
+  id: totrans-19
   prefs: []
   type: TYPE_NORMAL
+  zh: 一旦到达 `2012-01-16`，交易日历就开始分歧。`data0` 是 `datamaster`（`^GSPC`），即使 `data1`（`^GDAXI`）在
+    `2012-01-16` 有一根柱子要交付，**这对于*S&P 500* 来说并不是一个交易日**。
 - en: The best that `backtrader` can do with the aforementioned design restrictions
     when the next trading day for the `^GSPC` comes in, the `2012-01-17` is deliver
     the next not yet processed date for `^GDAXI` which is the `2012-01-16`.
+  id: totrans-20
   prefs: []
   type: TYPE_NORMAL
+  zh: 当 `^GSPC` 的下一个交易日到来时，backtrader`在上述设计限制下能做的最好的事情是，提供 `^GDAXI` 的下一个尚未处理的日期，即
+    `2012-01-16`。
 - en: 'And the synchronization problem accumulates with each diverging day. At the
     end of `2012` it looks like follows:'
+  id: totrans-21
   prefs: []
   type: TYPE_NORMAL
+  zh: 随着每一天的分歧，同步问题逐渐累积。在 `2012` 年末，情况如下：
 - en: '[PRE2]'
+  id: totrans-22
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE2]'
 - en: 'The reason should be obvious: *the Europeans trade more days than the Americans*.'
+  id: totrans-23
   prefs: []
   type: TYPE_NORMAL
+  zh: 原因应该是显而易见的：*欧洲人交易的日子比美国人多*。
 - en: 'In the Ticket #76 [https://github.com/mementum/backtrader/issues/76](https://github.com/mementum/backtrader/issues/76)
     the poster shows what `zipline` does. Let’s look at the `2012-01-13` - `2012-01-17`
     conundrum:'
+  id: totrans-24
   prefs: []
   type: TYPE_NORMAL
+  zh: '在 Ticket #76 [https://github.com/mementum/backtrader/issues/76](https://github.com/mementum/backtrader/issues/76)
+    中，作者展示了 `zipline` 的操作。让我们来看看 `2012-01-13` - `2012-01-17` 的难题：'
 - en: '[PRE3]'
+  id: totrans-25
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE3]'
 - en: Blistering barnacles! The data for `2012-01-13` has been simply **duplicated**
     without apparently asking the user for permission. Imho, this shouldn’t be because
     the end user of the platform cannot undo this spontaneous addition.
+  id: totrans-26
   prefs: []
   type: TYPE_NORMAL
+  zh: 需要注意！`2012-01-13` 的数据已经被简单地**复制**，似乎没有征求用户的许可。在我看来，这不应该发生，因为平台的最终用户无法撤销这种自发添加。
 - en: Note
+  id: totrans-27
   prefs: []
   type: TYPE_NORMAL
+  zh: 注意
 - en: Except for a brief look at `zipline`, the author doesn’t know if this is the
     standard behavior, configured by the script developer and if it can be undone
+  id: totrans-28
   prefs: []
   type: TYPE_NORMAL
+  zh: 除了简要查看`zipline`，作者不知道这是否是标准行为，由脚本开发者配置，以及是否可以撤消。
 - en: 'Once we have seen that the *others* let’s try again with `backtrader` using
     the accumulated wisdom: *the Europeans trade more often than the Americans*. Let’s
     reverse the roles of `^GSPC` and `^GDAXI` and see the outcome:'
+  id: totrans-29
   prefs: []
   type: TYPE_NORMAL
+  zh: 一旦我们已经看到*其他内容*，让我们再次尝试使用累积的智慧，使用`backtrader`：*欧洲人比美国人交易频繁*。让我们颠倒`^GSPC`和`^GDAXI`的角色，看看结果：
 - en: '[PRE4]'
+  id: totrans-30
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE4]'
 - en: 'The output (skipping to `2012-01-13` directly):'
+  id: totrans-31
   prefs: []
   type: TYPE_NORMAL
+  zh: 输出（直接跳转到`2012-01-13`）：
 - en: '[PRE5]'
+  id: totrans-32
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE5]'
 - en: Blistering barnacles again! `backtrader` has also *duplicated* the `2012-01-13`
     value for `data1` (in this case `^GSPC`) as a match for `data0` (now `^GDAXI`)
     delivery of `2012-01-16`.
+  id: totrans-33
   prefs: []
   type: TYPE_NORMAL
+  zh: 该死的！`backtrader`也*复制了*`2012-01-13`值作为`data0`（现在为`^GDAXI`）的交付，以匹配`data1`（在此情况下为`^GSPC`）的交付，这是`2012-01-16`。
 - en: 'And even better:'
+  id: totrans-34
   prefs: []
   type: TYPE_NORMAL
+  zh: 更好的是：
 - en: 'Synchronization is reachieved with the next date: `2012-01-17`'
+  id: totrans-35
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 同步已经在下一个日期`2012-01-17`中达到
 - en: 'The same re-synchronization is seen again soon:'
+  id: totrans-36
   prefs: []
   type: TYPE_NORMAL
+  zh: 不久之后再次看到相同的重新同步：
 - en: '[PRE6]'
+  id: totrans-37
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE6]'
 - en: 'Followed by not such an easy re-sync:'
+  id: totrans-38
   prefs: []
   type: TYPE_NORMAL
+  zh: 紧接着是不那么容易的重新同步：
 - en: '[PRE7]'
+  id: totrans-39
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE7]'
 - en: 'Such episodes keep repeating until the last bar for `^GDAXI` is delivered:'
+  id: totrans-40
   prefs: []
   type: TYPE_NORMAL
+  zh: 这种情节会一直重复，直到最后一个`^GDAXI`柱形图被提供：
 - en: '[PRE8]'
+  id: totrans-41
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE8]'
 - en: The reason for this *synchronization* issues is that `backtrader` does NOT duplicate
     the data.
+  id: totrans-42
   prefs: []
   type: TYPE_NORMAL
+  zh: 这种*同步*问题的原因是`backtrader`不会复制数据。
 - en: Once the `datamaster` has delivered a new bar the other `datas` are asked to
     deliver
+  id: totrans-43
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 一旦`datamaster`提供了一个新的柱形图，其他`数据`就会被要求提供
 - en: If no bar can be delivered for the current `datetime` of the `datamaster` (because
     it, for example, would be overtaken) the next best data is, so to say, *re-delivered*
+  id: totrans-44
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 如果对于`datamaster`当前的`datetime`来说没有柱形图可提供（例如，因为它被超越了），那么就会提供下一个最佳数据，可以说是*重新提供*
 - en: And this is a bar with an already seen `date`
+  id: totrans-45
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 这是一个已经见过的`日期`的柱形图
 - en: Proper Synchronization
+  id: totrans-46
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 正确的同步
 - en: But not all hope is lost. `backtrader` can deliver. Let’s use **filters**. This
     piece of technology in `backtrader` allows manipulating the data before it hits
     the deepest parts of the platform and for example *indicators* are calculated.
+  id: totrans-47
   prefs: []
   type: TYPE_NORMAL
+  zh: 但并非一切希望都已消失。`backtrader` 可以实现。让我们使用**过滤器**。`backtrader` 中的这项技术允许在数据到达平台最深层之前对其进行操作，例如计算*指标*。
 - en: Note
+  id: totrans-48
   prefs: []
   type: TYPE_NORMAL
+  zh: 注意
 - en: '`delivering` is a perception matter and therefore what `backtrader` delivers
     may not be what the recipient is expecting as the `delivery`'
+  id: totrans-49
   prefs: []
   type: TYPE_NORMAL
+  zh: “交付”是一个感知问题，因此`backtrader`提供的可能不是接收者所期望的`交付`
 - en: The actual code
+  id: totrans-50
   prefs: []
   type: TYPE_NORMAL
+  zh: 实际代码如下
 - en: '[PRE9]'
+  id: totrans-51
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE9]'
 - en: 'The test script is already fitted with the capability to use it:'
+  id: totrans-52
   prefs: []
   type: TYPE_NORMAL
+  zh: 测试脚本已经具备使用它的能力：
 - en: '[PRE10]'
+  id: totrans-53
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE10]'
 - en: 'With `--filler` the `WeekDaysFiller` is added to both `data0` and `data1`.
     And the output:'
+  id: totrans-54
   prefs: []
   type: TYPE_NORMAL
+  zh: 使用`--filler`，`WeekDaysFiller`被添加到`data0`和`data1`。并且输出：
 - en: '[PRE11]'
+  id: totrans-55
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE11]'
 - en: 'The 1^(st) *conundrum* at `2012-01-13` - `2012-01-17` is gone. And the entire
     set is *synchronized*:'
+  id: totrans-56
   prefs: []
   type: TYPE_NORMAL
+  zh: 在`2012-01-13`至`2012-01-17`期间的第1个*难题*已经解决。并且整个集合已经*同步*：
 - en: '[PRE12]'
+  id: totrans-57
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE12]'
 - en: 'Something worth noticing:'
+  id: totrans-58
   prefs: []
   type: TYPE_NORMAL
+  zh: 值得注意的是：
 - en: With `^GSPC` as `data0` we had `250` lines (the index traded `250` days in `2012`)
+  id: totrans-59
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 使用`^GSPC`作为`data0`，我们有`250`行（该指数在`2012`年交易了`250`天）
 - en: With `^GDAXI` we `data0` had `256` lines (the index traded `256` days in `2012`)
+  id: totrans-60
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 使用`^GDAXI`，我们`data0`有`256`行（该指数在`2012`年交易了`256`天）
 - en: And with the `WeekDaysFiller` in place the length of both *datas* has been extended
     to `260`
+  id: totrans-61
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 并且通过放置`WeekDaysFiller`，两个*数据集*的长度已经扩展到`260`。
 - en: Adding `52` * `2` (weekends and days in a weekend), we would end up with `364`.
     The remaining day until the regular `365` days in a year was for sure a *Saturday*
     or a *Sunday*.
+  id: totrans-62
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 添加`52` * `2`（周末和周末的天数），我们会得到`364`。一年中剩余的一天肯定是一个*星期六*或一个*星期天*。
 - en: 'The *filter* is *filling* with `NaN` values for the days in which no trading
     took place for the given data. Let’s plot it:'
+  id: totrans-63
   prefs: []
   type: TYPE_NORMAL
+  zh: '*过滤器*正在用`NaN`值进行*填充*，用于给定数据中没有交易发生的日子。让我们来绘制它：'
 - en: '[PRE13]'
+  id: totrans-64
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE13]'
 - en: '![image](../Images/52cbd847e4685be8fedc6dbfb9938df4.png)'
+  id: totrans-65
   prefs: []
   type: TYPE_IMG
+  zh: '![image](../Images/52cbd847e4685be8fedc6dbfb9938df4.png)'
 - en: 'Filled days are quite obvious:'
+  id: totrans-66
   prefs: []
   type: TYPE_NORMAL
+  zh: 填充的日子相当明显：
 - en: The gap in between bars is there
+  id: totrans-67
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 条之间的间隙还在
 - en: The gap is even more obvious for the *volume* plot
+  id: totrans-68
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 对于*成交量*图来说，这个间隙更加明显
 - en: 'A 2^(nd) plot will try to answer the question at the top: *what happens with
     indicators?*. Remember that the new bars have been given a value of `NaN` (that’s
     why they are not displayed):'
+  id: totrans-69
   prefs: []
   type: TYPE_NORMAL
+  zh: 第2个绘图将尝试回答顶部的问题：*指标会发生什么情况？*请记住，新的柱形图已经被赋予了`NaN`的值（这就是它们没有显示的原因）：
 - en: '[PRE14]'
+  id: totrans-70
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE14]'
 - en: '![image](../Images/83d5c0836f090ea5ab87d3f558256ae6.png)'
+  id: totrans-71
   prefs: []
   type: TYPE_IMG
+  zh: '![image](../Images/83d5c0836f090ea5ab87d3f558256ae6.png)'
 - en: 'Re-blistering barnacles! The *Simple Moving Average* has broken the space time
     continuum and jumps some bars with no solution of continuity. This is of course
     the effect of filling up with *Not a Number* aka `NaN`: *mathematic operations
     no longer make sense*.'
+  id: totrans-72
   prefs: []
   type: TYPE_NORMAL
+  zh: 重新贴上船壳！*简单移动平均* 打破了时空连续体，并跳过一些柱，没有连续解。这当然是 *Not a Number*（`NaN`）填充的效果：*数学运算不再有意义*。
 - en: 'If instead of `NaN` the last seen closing price is used:'
+  id: totrans-73
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果使用的不是 `NaN` 而是上次观察到的收盘价：
 - en: '[PRE15]'
+  id: totrans-74
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE15]'
 - en: The plot looks a lot nicer with a regular *SMA* for the entire 260 days
+  id: totrans-75
   prefs: []
   type: TYPE_NORMAL
+  zh: 整个 260 天使用正常 *SMA* 绘制的图表看起来更加漂亮。
 - en: '![image](../Images/dc9ed3b7dcc240548ad5370f2a12c2ee.png)'
+  id: totrans-76
   prefs: []
   type: TYPE_IMG
+  zh: '![image](../Images/dc9ed3b7dcc240548ad5370f2a12c2ee.png)'
 - en: Conclusion
+  id: totrans-77
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 结论
 - en: Synchronizing two instruments with different trading calendars is a matter of
     making decisions and compromises. `backtrader` needs time aligned data to work
     with multiple datas and different trading calendars don’t help.
+  id: totrans-78
   prefs: []
   type: TYPE_NORMAL
+  zh: 同步两个具有不同交易日历的工具是一个做出决策和妥协的问题。`backtrader` 需要时间对齐的数据来处理多个数据和不同的交易日历并不会有所帮助。
 - en: The use of the `WeekDaysFiller` described here can alleviate the situation but
     it is by no means a universal panacea, because with which values to fill is a
     matter of long and prolonged consideration.
+  id: totrans-79
   prefs: []
   type: TYPE_NORMAL
+  zh: 此处描述的 `WeekDaysFiller` 的使用可以缓解这种情况，但这绝不是一种普遍的灵丹妙药，因为用什么值来填充是一个长期而且长时间的考虑问题。
 - en: Script Code and Usage
+  id: totrans-80
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 脚本代码和用法
 - en: 'Available as sample in the sources of `backtrader`:'
+  id: totrans-81
   prefs: []
   type: TYPE_NORMAL
+  zh: 在 `backtrader` 源码中可用作示例：
 - en: '[PRE16]'
+  id: totrans-82
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE16]'
 - en: 'The code:'
+  id: totrans-83
   prefs: []
   type: TYPE_NORMAL
+  zh: 代码：
 - en: '[PRE17]'
+  id: totrans-84
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE17]'

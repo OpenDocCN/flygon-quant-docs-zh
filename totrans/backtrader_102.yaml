@@ -1,178 +1,270 @@
 - en: Cross-Backtesting Pitfalls
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 交叉回测陷阱
 - en: 原文：[https://www.backtrader.com/blog/posts/2019-09-04-donchian-across-platforms/donchian-across-platforms/](https://www.backtrader.com/blog/posts/2019-09-04-donchian-across-platforms/donchian-across-platforms/)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.backtrader.com/blog/posts/2019-09-04-donchian-across-platforms/donchian-across-platforms/](https://www.backtrader.com/blog/posts/2019-09-04-donchian-across-platforms/donchian-across-platforms/)
 - en: Somethings that tends to repeat itself in the [backtrader community](https://community.backtrader.com)
     is that a user explains the will to replicate the backtesting results attained
     in, for example, [TradingView](https://www.tradingview.com/) , quite popular these
     days, or some other backtesting platform.
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: 在 [backtrader 社区](https://community.backtrader.com) 中经常出现的一件事是，用户解释了希望复制在例如
+    [TradingView](https://www.tradingview.com/) 中获得的回测结果，这在当今非常流行，或者其他一些回测平台。
 - en: Without really knowing the language used in *TradingView*, named `Pinescript`,
     and having null exposure to the internal of the backtesting engine, there is still
     a way to let users know, that coding across platform has to be taken with pinch
     of salt.
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: 即使不真正了解 *TradingView* 中使用的语言 `Pinescript`，并且对回测引擎的内部没有任何了解，仍然有一种方法可以让用户知道，跨平台编码必须谨慎对待。
 - en: 'Indicators: Not always faithful to the sources'
+  id: totrans-4
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 指标：并非始终忠实于来源
 - en: When a new indicator is being implemented for *backtrader*, either directly
     for the distribution or as a snippet for the website, a lot of emphasis is taken
     in respecting the original definition. The `RSI` is a good example.
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: 当为 *backtrader* 实现新的指标时，无论是直接用于分发还是作为网站的片段，都会非常强调尊重原始定义。 `RSI` 就是一个很好的例子。
 - en: Welles Wilder designed the `RSI` using the `Modified Moving Average` (aka `Smoothed
     Moving Average`, see [Wikipedia - Modified Moving Average](https://en.wikipedia.org/wiki/Moving_average#Modified_moving_average)
     )
+  id: totrans-6
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 韦尔斯·怀尔德设计 `RSI` 时使用的是 `Modified Moving Average`（又称 `Smoothed Moving Average`，参见
+    [Wikipedia - Modified Moving Average](https://en.wikipedia.org/wiki/Moving_average#Modified_moving_average)
+    )
 - en: In spite of which, a number of platforms give the users something called `RSI`
     but using a classic `Exponential Moving Average` and not what the book says.
+  id: totrans-7
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 尽管如此，许多平台给用户提供了所谓的 `RSI`，但使用的是经典的 `指数移动平均线` 而不是书中所说的。
 - en: Given that both averages are exponential, the differences are not huge, but
     it is **NOT** what Welles Wilder defined. It may still be useful, it may even
     be better, but it is **NOT** the `RSI`. And the documentation (when available)
     fails to mentions that.
+  id: totrans-8
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 鉴于这两个平均值都是指数型的，差异并不是很大，但这**并不是**韦尔斯·怀尔德定义的。它可能仍然有用，甚至可能更好，但这**不是** `RSI`。而且文档（如果有的话）也没有提到这一点。
 - en: The default configuration for the `RSI` in *backtrader* is to use the `MMA`
     to be faithful to the sources, but which moving average to use is a parameter
     which can be changed via subclassing or during run-time instantiation to use the
     `EMA` or even a *Simple Moving Average*.
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: '*backtrader* 中 `RSI` 的默认配置是使用 `MMA` 以忠实于来源，但要使用哪种移动平均线是可以通过子类化或在运行时实例化期间更改的参数，以使用
+    `EMA` 或甚至 *简单移动平均线*。'
 - en: 'An example: The Donchian Channels'
+  id: totrans-10
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 一个例子：唐奇安通道
 - en: 'The Wikipedia definition: [Wikipedia - Donchian Channel](https://en.wikipedia.org/wiki/Donchian_channel)
     ). It is just text and it makes no mention of using channel breakouts as a trading
     signal.'
+  id: totrans-11
   prefs: []
   type: TYPE_NORMAL
+  zh: 维基百科的定义：[维基百科 - 唐奇安通道](https://en.wikipedia.org/wiki/Donchian_channel) ). 这只是文本，没有提到使用通道突破作为交易信号。
 - en: 'Another two definitions:'
+  id: totrans-12
   prefs: []
   type: TYPE_NORMAL
+  zh: 另外两个定义：
 - en: '[StockCharts - School - Price Channels](https://school.stockcharts.com/doku.php?id=technical_indicators:price_channels)
     ).'
+  id: totrans-13
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[StockCharts - 学校 - 价格通道](https://school.stockcharts.com/doku.php?id=technical_indicators:price_channels)
+    ).'
 - en: '[IncredibleCharts - Donchian Channels](https://www.incrediblecharts.com/indicators/donchian_channels.php)
     )'
+  id: totrans-14
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[IncredibleCharts - 唐奇安通道](https://www.incrediblecharts.com/indicators/donchian_channels.php)
+    )'
 - en: These two references explicitly state, that the data for the calculation of
     the channel does not include the current bar, because if it did ... breakouts
     would not be reflected. Here is a sample chart from *StockCharts*
+  id: totrans-15
   prefs: []
   type: TYPE_NORMAL
+  zh: 这两个参考资料明确指出，用于计算通道的数据不包括当前柱，因为如果包括...突破将不会反映。这里是 *StockCharts* 的一个示例图表
 - en: '![StockCharts - Donchian Channels- Breakouts](../Images/512c85750a80fc209a258ad68dc0244c.png)'
+  id: totrans-16
   prefs: []
   type: TYPE_IMG
+  zh: '![StockCharts - 唐奇安通道- 突破](../Images/512c85750a80fc209a258ad68dc0244c.png)'
 - en: Going now to *TradingView*. First the link
+  id: totrans-17
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在转向 *TradingView*。首先是链接
 - en: '[TradingView - Wiki - Donchian Channels](https://www.tradingview.com/wiki/Donchian_Channels_(DC))
     )'
+  id: totrans-18
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[TradingView - Wiki - 唐奇安通道](https://www.tradingview.com/wiki/Donchian_Channels_(DC))
+    )'
 - en: And a chart from that page.
+  id: totrans-19
   prefs: []
   type: TYPE_NORMAL
+  zh: 该页面上的一个图表。
 - en: '![TradingView - Donchian Channels - No'
+  id: totrans-20
   prefs: []
   type: TYPE_NORMAL
+  zh: '![TradingView - 唐奇安通道 - 无'
 - en: Breakouts](../Images/1f22b391934c6b4235b98301ff2faa53.png)
+  id: totrans-21
   prefs: []
   type: TYPE_NORMAL
+  zh: 突破](../Images/1f22b391934c6b4235b98301ff2faa53.png)
 - en: 'Even *Investopedia* uses a chart from *TradingView* that shows **no breakout**.
     Here: [Investopedia - Donchian Channels - https://www.investopedia.com/terms/d/donchianchannels.asp](https://www.investopedia.com/terms/d/donchianchannels.asp)'
+  id: totrans-22
   prefs: []
   type: TYPE_NORMAL
+  zh: 即使*Investopedia*也使用了一张*TradingView*图表，显示**没有突破**。这里：[Investopedia - 唐奇安通道 -
+    https://www.investopedia.com/terms/d/donchianchannels.asp](https://www.investopedia.com/terms/d/donchianchannels.asp)
 - en: As some people would put it ... **Blistering Barnacles!!!!**. Because there
     are **no** breakouts to be seen in the *TradingView* charts. This means that the
     implementation of the indicator is using the **current** price bar for the calculation
     of the channels.
+  id: totrans-23
   prefs: []
   type: TYPE_NORMAL
+  zh: 正如一些人所说... **天啊！！！** 因为*TradingView*的图表中**没有**突破可见。这意味着指标的实现是使用**当前**价格栏来计算通道。
 - en: The Donchian Channels in *backtrader*
+  id: totrans-24
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: '*backtrader*中的唐奇安通道'
 - en: There is no `DonchianChannels` implementation in the standard *backtrader* distribution,
     but it can be quickly crafted. A parameter will be the deciding factor as to whether
     the current bar will be used for the channel calculation or not.
+  id: totrans-25
   prefs: []
   type: TYPE_NORMAL
+  zh: 标准*backtrader*发行版中没有`DonchianChannels`的实现，但可以很快制作。一个参数将决定当前栏是否用于通道计算。
 - en: '[PRE0]'
+  id: totrans-26
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: Using it with `lookback=-1` a sample chart looks like this (zoomed in)
+  id: totrans-27
   prefs: []
   type: TYPE_NORMAL
+  zh: 使用`lookback=-1`参数，一个示例图表看起来像这样（放大后）
 - en: '![Backtrader - Donchian Channels -'
+  id: totrans-28
   prefs: []
   type: TYPE_NORMAL
+  zh: '![Backtrader - 唐奇安通道 -'
 - en: Breakouts](../Images/67b221ded88718787c4a004f6b1c1a95.png)
+  id: totrans-29
   prefs: []
   type: TYPE_NORMAL
+  zh: 突破](../Images/67b221ded88718787c4a004f6b1c1a95.png)
 - en: One can clearly see the breakouts, whereas there are no breakouts in the `lookback=0`
     version.
+  id: totrans-30
   prefs: []
   type: TYPE_NORMAL
+  zh: 人们可以清楚地看到突破，而在`lookback=0`版本中没有突破。
 - en: '![Backtrader - Donchian Channels -'
+  id: totrans-31
   prefs: []
   type: TYPE_NORMAL
+  zh: '![Backtrader - 唐奇安通道 -'
 - en: Breakouts](../Images/bb0156d82aa9eb5ad1bc84813d12ab01.png)
+  id: totrans-32
   prefs: []
   type: TYPE_NORMAL
+  zh: 突破](../Images/bb0156d82aa9eb5ad1bc84813d12ab01.png)
 - en: Coding Implications
+  id: totrans-33
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 编码影响
 - en: The programmer first goes to the commercial platform and implements a strategy
     using *The Donchian Channels*. Because the chart does not show breakouts, a comparison
     of the current price value has to be done against the previous channel value.
     Something as
+  id: totrans-34
   prefs: []
   type: TYPE_NORMAL
+  zh: 程序员首先去商业平台，并使用*唐奇安通道*实现一个策略。因为图表上没有显示突破，所以必须将当前价格值与前一个通道值进行比较。如下所示
 - en: '[PRE1]'
+  id: totrans-35
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE1]'
 - en: 'The current price, i.e.: `price0` is being compared to the high/low channel
     values of `1` period ago (hence the `_1` suffix)'
+  id: totrans-36
   prefs: []
   type: TYPE_NORMAL
+  zh: 当前价格，即：`price0`与`1`周期前的高/低通道值进行比较（因此有`_1`后缀）
 - en: Being a cautious programmer and unaware that the implementation of the *Donchian
     Channels* in *backtrader* defaults to having breakout, the code is ported and
     looks like this
+  id: totrans-37
   prefs: []
   type: TYPE_NORMAL
+  zh: 作为一个谨慎的程序员，不知道*backtrader*中*唐奇安通道*的默认设置是有突破的，代码被移植过来，如下所示
 - en: '[PRE2]'
+  id: totrans-38
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE2]'
 - en: 'Which is wrong!!! Because the breakout happens at the same moment of the comparison.
     The correct code:'
+  id: totrans-39
   prefs: []
   type: TYPE_NORMAL
+  zh: 这是错误的！！！因为突破发生在比较的同时。正确的代码：
 - en: '[PRE3]'
+  id: totrans-40
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE3]'
 - en: Although this is just a small example, it shows how backtesting results may
     differ because an indicator has been coded with a `1` bar difference. It may not
     seem much, but it will for sure make a difference when the wrong trade is started.
+  id: totrans-41
   prefs: []
   type: TYPE_NORMAL
+  zh: 虽然这只是一个小例子，但它展示了由于指标被编码为`1`栏差异而导致的回测结果可能会有所不同。这看起来可能并不多，但当错误的交易开始时，它肯定会产生影响。

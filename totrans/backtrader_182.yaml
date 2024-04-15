@@ -1,162 +1,250 @@
 - en: MultiData Strategy
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 多数据策略
 - en: 原文：[https://www.backtrader.com/blog/posts/2015-09-03-multidata-strategy/multidata-strategy/](https://www.backtrader.com/blog/posts/2015-09-03-multidata-strategy/multidata-strategy/)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.backtrader.com/blog/posts/2015-09-03-multidata-strategy/multidata-strategy/](https://www.backtrader.com/blog/posts/2015-09-03-multidata-strategy/multidata-strategy/)
 - en: Because nothing in the world lives in isolation it can well be that the trigger
     to buy an asset is actually another asset.
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: 因为世界上没有任何事物是孤立存在的，很可能购买某项资产的触发因素实际上是另一项资产。
 - en: Using different analysis techniques a correlation may have been found between
     two different datas.
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: 使用不同的分析技术可能会发现两个不同数据之间的相关性。
 - en: backtrader supports using different data sources simultaneously so it can possibly
     be used for the purpose in most cases.
+  id: totrans-4
   prefs: []
   type: TYPE_NORMAL
+  zh: backtrader支持同时使用不同数据源，因此在大多数情况下可能会用于此目的。
 - en: 'Let’s assume that a correlation has been found between the following companies:'
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: 让我们假设已经发现了以下公司之间的相关性：
 - en: '`Oracle`'
+  id: totrans-6
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`Oracle`'
 - en: '`Yahoo`'
+  id: totrans-7
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`Yahoo`'
 - en: One could imagine that when things go well for Yahoo, the company buys more
     servers, more databases and more professional services from Oracle, which in turn
     pushes the stock prices up.
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: 人们可以想象，当雅虎公司运营良好时，该公司会从Oracle购买更多服务器、更多数据库和更多专业服务，从而推动股价上涨。
 - en: 'As such and having run a profound analysis a strategy is devised:'
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: 因此，经过深入分析后制定了一项策略：
 - en: If the close price of `Yahoo` goes over the Simple Moving Average (period 15)
+  id: totrans-10
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 如果`Yahoo`的收盘价超过简单移动平均线（周期15）
 - en: Buy `Oracle`
+  id: totrans-11
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 买入`Oracle`
 - en: 'To exit the position:'
+  id: totrans-12
   prefs: []
   type: TYPE_NORMAL
+  zh: 退出头寸：
 - en: Use the crossing downwards of the close price
+  id: totrans-13
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 使用收盘价的下穿
 - en: 'Order Execution Type:'
+  id: totrans-14
   prefs: []
   type: TYPE_NORMAL
+  zh: 订单执行类型：
 - en: Market
+  id: totrans-15
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 市场
 - en: 'In summary what’s needed to set this up with `backtrader`:'
+  id: totrans-16
   prefs: []
   type: TYPE_NORMAL
+  zh: 总结一下使用`backtrader`设置所需的内容：
 - en: Create a `cerebro`
+  id: totrans-17
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 创建一个`cerebro`
 - en: Load the Data Source 1 (Oracle) and add it to cerebro
+  id: totrans-18
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 加载数据源1（Oracle）并将其添加到cerebro
 - en: Load the Data Source 2 (Yahoo) and add it to cerebro
+  id: totrans-19
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 加载数据源2（Yahoo）并将其添加到cerebro
 - en: Load the Strategy we have devised
+  id: totrans-20
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 加载我们设计的策略
 - en: 'The details of the strategy:'
+  id: totrans-21
   prefs: []
   type: TYPE_NORMAL
+  zh: 策略的详细信息：
 - en: Create a Simple Moving Average on Data Source 2 (Yahoo)
+  id: totrans-22
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 在数据源2（Yahoo）上创建一个简单移动平均线
 - en: Create a CrossOver indicator using Yahoo’s close price and the Moving Average
+  id: totrans-23
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 使用雅虎��收盘价和移动平均��创建一个CrossOver指标
 - en: And then execute the buy/sell orders on Data Source 1 (Oracle) as described
     above.
+  id: totrans-24
   prefs: []
   type: TYPE_NORMAL
+  zh: 然后按照上述描述在数据源1（Oracle）上执行买入/卖出订单。
 - en: 'The script below uses the following defaults:'
+  id: totrans-25
   prefs: []
   type: TYPE_NORMAL
+  zh: 下面的脚本使用以下默认值：
 - en: Oracle (Data Source 1)
+  id: totrans-26
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: Oracle（数据源1）
 - en: Yahoo (Data Source 2)
+  id: totrans-27
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 雅虎（数据源2）
 - en: 'Cash: 10000 (system default)'
+  id: totrans-28
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 现金：10000（系统默认值）
 - en: 'Stake: 10 shares'
+  id: totrans-29
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 股份：10股
 - en: 'Commission: 0.5% for each round (expressed as 0.005)'
+  id: totrans-30
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 佣金：每轮0.5%（表示为0.005）
 - en: 'Period: 15 trading days'
+  id: totrans-31
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 周期：15个交易日
 - en: 'Period: 2003, 2004 and 2005'
+  id: totrans-32
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 周期：2003年、2004年和2005年
 - en: 'The script can take arguments to modify the above settings as seen in the help
     text:'
+  id: totrans-33
   prefs: []
   type: TYPE_NORMAL
+  zh: 该脚本可以接受参数以修改上述设置，如帮助文本中所示：
 - en: '[PRE0]'
+  id: totrans-34
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: 'The result of a standard execution:'
+  id: totrans-35
   prefs: []
   type: TYPE_NORMAL
+  zh: 标准执行结果：
 - en: '[PRE1]'
+  id: totrans-36
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE1]'
 - en: 'After two complete years of execution the Strategy:'
+  id: totrans-37
   prefs: []
   type: TYPE_NORMAL
+  zh: 经过两年的执行后，该策略：
 - en: Has lost 40.74 monetary units
+  id: totrans-38
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 损失了40.74货币单位
 - en: '**So much for the correlation between Yahoo and Oracle**'
+  id: totrans-39
   prefs: []
   type: TYPE_NORMAL
+  zh: '**至于雅虎和Oracle之间的相关性**'
 - en: The Visual Ouput (add `--plot` to produce a chart)
+  id: totrans-40
   prefs: []
   type: TYPE_NORMAL
+  zh: 可视化输出（添加`--plot`以生成图表）
 - en: '![image](../Images/cb7c9b30783a1fbe41e59058abf781db.png)'
+  id: totrans-41
   prefs: []
   type: TYPE_IMG
+  zh: '![图片](../Images/cb7c9b30783a1fbe41e59058abf781db.png)'
 - en: And the script (which has been added to the source distribution of `backtrader`
     under the `samples/multidata-strategy` directory.
+  id: totrans-42
   prefs: []
   type: TYPE_NORMAL
+  zh: 以及脚本（已添加到`backtrader`源分发的`samples/multidata-strategy`目录下。
 - en: '[PRE2]'
+  id: totrans-43
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE2]'

@@ -1,85 +1,130 @@
 - en: Dickson Moving Average
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 迪克森移动平均线
 - en: 原文：[https://www.backtrader.com/blog/posts/2016-08-18-dickson-moving-average/dickson-moving-average/](https://www.backtrader.com/blog/posts/2016-08-18-dickson-moving-average/dickson-moving-average/)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.backtrader.com/blog/posts/2016-08-18-dickson-moving-average/dickson-moving-average/](https://www.backtrader.com/blog/posts/2016-08-18-dickson-moving-average/dickson-moving-average/)
 - en: The *reddit* post from below names this average the *Dickson Moving Average*
     after its own author *Nathan Dickson* (*reddit* handle)
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: 下面的*reddit*帖子将这种平均线称为*迪克森移动平均线*，以其作者*内森·迪克森*（*reddit*用户名）的名字命名。
 - en: In one of the regular visits to [reddit Algotrading](https://www.reddit.com/r/algotrading/)
     I found a post about a moving average which tries to mimic the Jurik Moving Average
     (aka *JMA*)
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: 在定期访问[reddit Algotrading](https://www.reddit.com/r/algotrading/)时，我发现了一篇关于一种试图模拟Jurik
+    Moving Average（又称*JMA*）的移动平均线的帖子
 - en: '[Dickson Moving Average](https://www.reddit.com/r/algotrading/comments/4xj3vh/dickson_moving_average/)'
+  id: totrans-4
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[迪克森移动平均线](https://www.reddit.com/r/algotrading/comments/4xj3vh/dickson_moving_average/)'
 - en: '[JMA on Jurik Research](http://www.jurikres.com/catalog1/ms_ama.htm)'
+  id: totrans-5
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[Jurik Research的JMA](http://www.jurikres.com/catalog1/ms_ama.htm)'
 - en: Described as an algorithm in *EasyLanguage* I had to ask about the seed values
     and the nature of `ec` and this finally led to *Ehlers* and the *Zero Lag Indicator*
+  id: totrans-6
   prefs: []
   type: TYPE_NORMAL
+  zh: 描述为*EasyLanguage*中的算法，我不得不询问种子值和`ec`的性质，最终导致了*Ehlers*和*零滞后指标*
 - en: '[ZERO LAG](http://www.mesasoftware.com/papers/ZeroLag.pdf)'
+  id: totrans-7
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[零滞后](http://www.mesasoftware.com/papers/ZeroLag.pdf)'
 - en: In order to implement the *Dickson Moving Average* into *backtrader* and given
     the dependencies on *Ehlers* and also on the *Hull Moving Average*, those two
     were also added to the arsenal of moving averages.
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: 为了将*迪克森移动平均线*实现到*backtrader*中，并且考虑到对*Ehlers*和*Hull移动平均线*的依赖，这两者也被添加到了移动平均线的工具中。
 - en: 'In summary the following has been added with `Release 1.8.7.96`:'
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: 总结一下，以下内容已添加到`Release 1.8.7.96`中：
 - en: '`Hull Moving Average`'
+  id: totrans-10
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`Hull移动平均线`'
 - en: '`Zero Lag Indicator`'
+  id: totrans-11
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`零滞后指标`'
 - en: '`Dickson Moving Average`'
+  id: totrans-12
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`迪克森移动平均线`'
 - en: 'And the results can be seen with a plot using one of the sample datas and `btrun`:'
+  id: totrans-13
   prefs: []
   type: TYPE_NORMAL
+  zh: 结果可以通过使用样本数据和`btrun`绘制图表来观察：
 - en: '[PRE0]'
+  id: totrans-14
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: '![image](../Images/6e038c70644378e5a556d5c06b6d6192.png)'
+  id: totrans-15
   prefs: []
   type: TYPE_IMG
+  zh: '![image](../Images/6e038c70644378e5a556d5c06b6d6192.png)'
 - en: Now it’s about getting the *Dickson Moving Average* to produce profit … like
     with any other indicator.
+  id: totrans-16
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在的问题在于让*迪克森移动平均线*产生利润……就像任何其他指标一样。
 - en: Note
+  id: totrans-17
   prefs: []
   type: TYPE_NORMAL
+  zh: 注意
 - en: Notice how the *Hull Moving Average* (aka *HMA*) starts producing values a couple
     of values later than the rest. This is due to the fact that is uses a *moving
     average* on *moving average* which delays the initial production.
+  id: totrans-18
   prefs: []
   type: TYPE_NORMAL
+  zh: 注意*Hull移动平均线*（又名*HMA*）开始比其他几个值晚几个值产生。这是因为它使用了*移动平均*延迟了初始产生。
 - en: 'And a comparison showing how the *DMA* sits in between the middle of a *ZeroLagIndicator*
     and a *HullMovingAverage*. The latter with a `period=7` to match the default value
     inside the *Dickson Moving Average*:'
+  id: totrans-19
   prefs: []
   type: TYPE_NORMAL
+  zh: 通过比较显示*DMA*如何处于*ZeroLagIndicator*和*HullMovingAverage*之间的中间位置。后者的`period=7`与*迪克森移动平均线*内部的默认值匹配：
 - en: '[PRE1]'
+  id: totrans-20
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE1]'
 - en: '![image](../Images/d67d125f4397f67fac3ef1b29301f55a.png)'
+  id: totrans-21
   prefs: []
   type: TYPE_IMG
+  zh: '![image](../Images/d67d125f4397f67fac3ef1b29301f55a.png)'

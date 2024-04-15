@@ -1,187 +1,282 @@
 - en: Ultimate Oscillator
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 终极振荡器
 - en: 原文：[https://www.backtrader.com/blog/posts/2016-06-22-ultimate-oscillator/ultimate-oscillator/](https://www.backtrader.com/blog/posts/2016-06-22-ultimate-oscillator/ultimate-oscillator/)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.backtrader.com/blog/posts/2016-06-22-ultimate-oscillator/ultimate-oscillator/](https://www.backtrader.com/blog/posts/2016-06-22-ultimate-oscillator/ultimate-oscillator/)
 - en: One of the goals when the development of *backtrader* was kickstarted was to
     make it very easy (at least for the author himself) to develop new *Indicators*
     to test ideas both mathematically and visually.
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: 当启动*backtrader*的开发时，其中一个目标是使其非常容易（至少对于作者本人来说）开发新的*Indicators*以测试数学和视觉上的想法。
 - en: '[Ticket #102](https://github.com/mementum/backtrader/issues/102) is about adding
     the **UltimateOscillator** to the arsenal of *backtrader*'
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: '[Ticket #102](https://github.com/mementum/backtrader/issues/102)是关于将**UltimateOscillator**添加到*backtrader*的武器库中'
 - en: Note
+  id: totrans-4
   prefs: []
   type: TYPE_NORMAL
+  zh: 注意
 - en: It will be added in the next release, meanwhile it can be used, using the code
     below.
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: 它将在下一个版本中添加，同时可以使用下面的代码来使用它。
 - en: 'The reference as indicated in the ticket:'
+  id: totrans-6
   prefs: []
   type: TYPE_NORMAL
+  zh: 如票号中所示的参考资料：
 - en: '[http://stockcharts.com/school/doku.php?id=chart_school:technical_indicators:ultimate_oscillator](http://stockcharts.com/school/doku.php?id=chart_school:technical_indicators:ultimate_oscillator)'
+  id: totrans-7
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[http://stockcharts.com/school/doku.php?id=chart_school:technical_indicators:ultimate_oscillator](http://stockcharts.com/school/doku.php?id=chart_school:technical_indicators:ultimate_oscillator)'
 - en: 'and also at:'
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: 以及在：
 - en: '[https://en.wikipedia.org/wiki/Ultimate_oscillator](https://en.wikipedia.org/wiki/Ultimate_oscillator)'
+  id: totrans-9
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[https://en.wikipedia.org/wiki/Ultimate_oscillator](https://en.wikipedia.org/wiki/Ultimate_oscillator)'
 - en: No need to repeat it here.
+  id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: 这里不需要重复。
 - en: 'Quoting from the reference:'
+  id: totrans-11
   prefs: []
   type: TYPE_NORMAL
+  zh: 引用自参考资料：
 - en: '[PRE0]'
+  id: totrans-12
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: 'Summary:'
+  id: totrans-13
   prefs: []
   type: TYPE_NORMAL
+  zh: 摘要：
 - en: 'First subclass from `bt.Indicator` to make sure the entire machinery works:'
+  id: totrans-14
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 首先从`bt.Indicator`中派生子类，以确保整个机制运作正常：
 - en: '[PRE1]'
+  id: totrans-15
   prefs:
   - PREF_IND
   type: TYPE_PRE
+  zh: '[PRE1]'
 - en: 'It has 1 output line: we’ll name it `uo`:'
+  id: totrans-16
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 它有1个输出行：我们将命名为`uo`：
 - en: '[PRE2]'
+  id: totrans-17
   prefs:
   - PREF_IND
   type: TYPE_PRE
+  zh: '[PRE2]'
 - en: 'It has 3 parameters which define 3 periods with default values `7`, `14` and
     `28`. To be named `p1`, `p2` and `p3`:'
+  id: totrans-18
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 它有3个参数，定义了3个周期，默认值为`7`、`14`和`28`。将命名为`p1`、`p2`和`p3`：
 - en: '[PRE3]'
+  id: totrans-19
   prefs:
   - PREF_IND
   type: TYPE_PRE
+  zh: '[PRE3]'
 - en: The calculations use some things already built-in *backtrader*
+  id: totrans-20
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 计算使用了*backtrader*中已经内置的一些东西
 - en: '`Minimum(Low or Prior Close)`: this is `TrueLow` as defined by *Welles Wilder*
     for the `RSI` indicator. As such the `BP` or *Buying Pressure* can be calculated:'
+  id: totrans-21
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`最小（低价或前收盘价）`：这是由*Welles Wilder*为`RSI`指标定义的`TrueLow`。因此，可以计算出`BP`或*买入压力*：'
 - en: '[PRE4]'
+  id: totrans-22
   prefs:
   - PREF_IND
   type: TYPE_PRE
+  zh: '[PRE4]'
 - en: '`Maximum(Low or Prior Close) - Minimum(Low or Prior Close)`: this is `TrueRange`
     as defined by *Welles Wilder* for the `RSI` indicator (which can be expressed
     as `TrueHigh - TrueLow`. The next calculation is therefore as easy as:'
+  id: totrans-23
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`最大（低价或前收盘价） - 最小（低价或前收盘价）`：这是由*Welles Wilder*为`RSI`指标定义的`TrueRange`（可以表示为`TrueHigh
+    - TrueLow`）。因此，下一个计算就像这样简单：'
 - en: '[PRE5]'
+  id: totrans-24
   prefs:
   - PREF_IND
   type: TYPE_PRE
+  zh: '[PRE5]'
 - en: 'The rest are pure math operations, using `SumN` to add up the latest `p1`,
     `p2`, `p3` periods of `bp` and `tr`, plus the weighted calculation:'
+  id: totrans-25
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 其余部分都是纯数学运算，使用`SumN`来加上最新的`p1`、`p2`、`p3`周期的`bp`和`tr`，加上加权计算：
 - en: '[PRE6]'
+  id: totrans-26
   prefs:
   - PREF_IND
   type: TYPE_PRE
+  zh: '[PRE6]'
 - en: 'Finally the assignment of the calculation to the defined `uo` line:'
+  id: totrans-27
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 最后将计算分配给定义的`uo`线：
 - en: '[PRE7]'
+  id: totrans-28
   prefs:
   - PREF_IND
   type: TYPE_PRE
+  zh: '[PRE7]'
 - en: It seems longer than it actually is (the full code, including imports) at the
     bottom.
+  id: totrans-29
   prefs: []
   type: TYPE_NORMAL
+  zh: 看起来比实际长度长（包括导入的全部代码）位于底部。
 - en: 'Since we want not only the values but also a nice looking plot, like the ones
     provided by *Stockcharts*, we’ll be adding 2 extra touches:'
+  id: totrans-30
   prefs: []
   type: TYPE_NORMAL
+  zh: 由于我们不仅想要值，还想要一个漂亮的图表，就像*Stockcharts*提供的图表一样，我们将添加两个额外的触摸：
 - en: '2 parameters which determine where to place the horizontal lines that delimit
     the *overbought* and *oversold* areas (ala `RSI` or `Stochastic`):'
+  id: totrans-31
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 2个参数确定放置水平线的位置，以限定*超买*和*超卖*区域（类似于`RSI`或`Stochastic`）：
 - en: '[PRE8]'
+  id: totrans-32
   prefs:
   - PREF_IND
   type: TYPE_PRE
+  zh: '[PRE8]'
 - en: 'And plot initialization code to use the parameters. Ticks at `10`, `50` and
     `90` like in the *Stockcharts* plots will be added:'
+  id: totrans-33
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 以及绘图初始化代码以使用参数。像*Stockcharts*中的绘图一样，在`10`、`50`和`90`处添加刻度：
 - en: '[PRE9]'
+  id: totrans-34
   prefs:
   - PREF_IND
   type: TYPE_PRE
+  zh: '[PRE9]'
 - en: To test and to further use existing facilities provided by *backtrader*, the
     `btrun` executable installed along with *backtrader* will be used.
+  id: totrans-35
   prefs: []
   type: TYPE_NORMAL
+  zh: 为了测试和进一步使用*backtrader*提供的现有工具，将使用与*backtrader*一起安装的`btrun`可执行文件。
 - en: The indicator is stored in a file named `ultimateoscillator.py`
+  id: totrans-36
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 指标存储在名为`ultimateoscillator.py`的文件中
 - en: The data used is one of the data samples available in the sources of *backtrader*
+  id: totrans-37
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 使用的数据是*backtrader*源代码中可用的数据样本之一
 - en: The indicator will be added twice with the default parameters and with shorter
     term parameters
+  id: totrans-38
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 该指标将使用默认参数添加两次，并使用较短期的参数添加两次
 - en: 'Execution:'
+  id: totrans-39
   prefs: []
   type: TYPE_NORMAL
+  zh: 执行：
 - en: '[PRE10]'
+  id: totrans-40
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE10]'
 - en: Note
+  id: totrans-41
   prefs: []
   type: TYPE_NORMAL
+  zh: 注意
 - en: Using –nostdstats to remove some observers from the chart. No need to track
     cash and value in this case
+  id: totrans-42
   prefs: []
   type: TYPE_NORMAL
+  zh: 使用`–nostdstats`来移除图表中的一些观察者。在这种情况下，无需跟踪现金和价值
 - en: The output is simply a chart showing the evolution of the `UltimateOscillator`.
+  id: totrans-43
   prefs: []
   type: TYPE_NORMAL
+  zh: 输出只是显示 `UltimateOscillator` 演变的图表。
 - en: '![image](../Images/0a620a681b25795fda979adcebc6054d.png)'
+  id: totrans-44
   prefs: []
   type: TYPE_IMG
+  zh: '![image](../Images/0a620a681b25795fda979adcebc6054d.png)'
 - en: 'The `UltimateOscillator` code:'
+  id: totrans-45
   prefs: []
   type: TYPE_NORMAL
+  zh: '`UltimateOscillator` 代码：'
 - en: '[PRE11]'
+  id: totrans-46
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE11]'

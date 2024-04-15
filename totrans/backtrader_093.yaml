@@ -1,105 +1,159 @@
 - en: Plotting on the same axis
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 在同一轴上绘制
 - en: 原文：[https://www.backtrader.com/docu/plotting/sameaxis/plot-sameaxis/](https://www.backtrader.com/docu/plotting/sameaxis/plot-sameaxis/)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.backtrader.com/docu/plotting/sameaxis/plot-sameaxis/](https://www.backtrader.com/docu/plotting/sameaxis/plot-sameaxis/)
 - en: The previous post future-spot, was plotting the original data and the slightly
     (randomly) modified data on the same space, but not on the same axis.
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: 前一篇帖子中的未来点，是在同一空间上绘制了原始数据和略微（随机）修改的数据，但没有在同一轴上。
 - en: Recovering the 1^(st) picture from that post.
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: 从那篇帖子中恢复第一张图片。
 - en: '![image](../Images/edcb266900eb3bb87615de0c21365c4a.png)'
+  id: totrans-4
   prefs: []
   type: TYPE_IMG
+  zh: '![image](../Images/edcb266900eb3bb87615de0c21365c4a.png)'
 - en: 'One can see:'
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: 人们可以看到：
 - en: There are different scales on the left and right hand sides of the chart
+  id: totrans-6
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 图表的左右两侧有不同的比例尺
 - en: This is most obvious when looking at the swinging red line (the randomized data)
     which oscillates `+- 50` points around the original data.
+  id: totrans-7
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 当观察摆动的红线（随机数据）围绕原始数据振荡 `+- 50` 点时，这一点最为明显。
 - en: On the chart the visual impression is that this randomized data is mostly always
     above the original data. Which is only a visual impression due to the different
     scales.
+  id: totrans-8
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 在图表上的视觉印象是，这些随机数据大多数时候都在原始数据之上。这只是由于不同的比例尺造成的视觉印象。
 - en: Although release `1.9.32.116` already had some initial support to fully plot
     on the same axis, the legend labels would be duplicated (only the labels, not
     the data) which was really confusing.
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: 尽管发行版 `1.9.32.116` 已经初步支持在同一轴上完全绘制，但图例标签会重复（只有标签，没有数据），这真的很令人困惑。
 - en: Release `1.9.33.116` cures that effect and allows full plotting on the same
     axis. The usage pattern is like the one to decide with which other data to plot.
     From the previous post.
+  id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: 发行版 `1.9.33.116` 解决了这个效果，并允许完全在同一轴上绘制。用法模式与决定与哪些其他数据一起绘制的模式相似。从前一篇帖子中。
 - en: '[PRE0]'
+  id: totrans-11
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: '`data1` gets some `plotinfo` values to:'
+  id: totrans-12
   prefs: []
   type: TYPE_NORMAL
+  zh: '`data1` 获得一些 `plotinfo` 值以：'
 - en: Plot on the same space as `plotmaster` which is `data0`
+  id: totrans-13
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 在与 `plotmaster`（即 `data0`）相同的空间中绘制
 - en: Get the indication to use the `sameaxis`
+  id: totrans-14
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 获得使用 `sameaxis` 的指示
 - en: The reason for this indication is that the platform cannot know in advance if
     the scales for each data will be compatible. That’s why it will plot them on independent
     scales
+  id: totrans-15
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 这种指示的原因是平台无法预先知道每个数据的比例尺是否兼容。这就是为什么它会在独立的比例尺上绘制它们的原因。
 - en: 'The previous sample gets an additional option to plot on the `sameaxis`. A
     sample execution:'
+  id: totrans-16
   prefs: []
   type: TYPE_NORMAL
+  zh: 前面的示例获取了一个额外的选项，以在 `sameaxis` 上绘制。一个示例执行：
 - en: '[PRE1]'
+  id: totrans-17
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE1]'
 - en: And the resulting chart
+  id: totrans-18
   prefs: []
   type: TYPE_NORMAL
+  zh: 以及产生的图表
 - en: '![image](../Images/beb74141e9a847b2bac618c28c5a37cf.png)'
+  id: totrans-19
   prefs: []
   type: TYPE_IMG
+  zh: '![image](../Images/beb74141e9a847b2bac618c28c5a37cf.png)'
 - en: 'To notice:'
+  id: totrans-20
   prefs: []
   type: TYPE_NORMAL
+  zh: 要注意：
 - en: Only one scale on the right hand side
+  id: totrans-21
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 右侧只有一个比例尺
 - en: And now the randomized data seems to clearly oscillate around the original data
     which is the expected visual behavior
+  id: totrans-22
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 现在随机数据似乎明显围绕着原始数据振荡，这是预期的视觉行为
 - en: Sample Usage
+  id: totrans-23
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 示例用法
 - en: '[PRE2]'
+  id: totrans-24
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE2]'
 - en: Sample Code
+  id: totrans-25
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 示例代码
 - en: '[PRE3]'
+  id: totrans-26
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE3]'

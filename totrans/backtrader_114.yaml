@@ -1,114 +1,174 @@
 - en: Developing a Recursive Indicator (with a seed)
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 开发递归指标（带种子）
 - en: 原文：[https://www.backtrader.com/blog/posts/2018-01-27-recursive-indicators/recursive-indicator/](https://www.backtrader.com/blog/posts/2018-01-27-recursive-indicators/recursive-indicator/)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.backtrader.com/blog/posts/2018-01-27-recursive-indicators/recursive-indicator/](https://www.backtrader.com/blog/posts/2018-01-27-recursive-indicators/recursive-indicator/)
 - en: 'One of the initial goals of *backtrader* was:'
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: '*backtrader* 的最初目标之一是：'
 - en: Being able to quickly prototype indicators to test new ideas
+  id: totrans-3
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 能够快速原型化指标以测试新想法
 - en: 'It doesn’t have to be a perfect indicator, but being able to quickly and easily
     develop them does help. To confirm the design was righ, one of the first indicators
     to be in the standard arsenal of *backtrader* was an *Exponential Moving Average*
     (aka *EMA*) which by definition is: **recursive**.'
+  id: totrans-4
   prefs: []
   type: TYPE_NORMAL
+  zh: 它不必是一个完美的指标，但能够快速轻松地开发它们确实有所帮助。为了确认设计是正确的，*backtrader*标准武器库中的第一个指标之一是*指数移动平均线*（又称*EMA*），根据定义是：**递归**。
 - en: Note
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: 注意
 - en: 'Trivia: as you may imagine the 1^(st) ever indicator was a *SimpleMovingAverage*'
+  id: totrans-6
   prefs: []
   type: TYPE_NORMAL
+  zh: 小知识：您可能会想象第一个指标是*简单移动平均线*
 - en: Since the question of how to develop a recursive indicator has been posted in
     the [backtrader community](https://community.backtrader.com/topic/833/indicator-values-before-period-kicks-in)
     let’s develop a quick `ExponentialMovingAverage` indicators.
+  id: totrans-7
   prefs: []
   type: TYPE_NORMAL
+  zh: 由于在[backtrader社区](https://community.backtrader.com/topic/833/indicator-values-before-period-kicks-in)中发布了如何开发递归指标的问题，让我们快速开发一个`ExponentialMovingAverage`指标。
 - en: A recursive indicator like the
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: 像这样的递归指标
 - en: It uses the previous value to calculate the current value
+  id: totrans-9
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 它使用先前的值来计算当前值
 - en: You can see the mathematics for example in [Wikipedia - Exponential Moving Average](https://en.wikipedia.org/wiki/Moving_average#Exponential_moving_average)
+  id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: 您可以在[Wikipedia - 指数移动平均线](https://en.wikipedia.org/wiki/Moving_average#Exponential_moving_average)中看到数学示例
 - en: If you have been brave enough to read it all, you’ll have seen that the period
     is used to calculate the *Exponential Smoothing*. We’ll use it.
+  id: totrans-11
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果您足够勇敢读完所有内容，您会发现期间用于计算*指数平滑*。我们将使用它。
 - en: To solve the conundrum for the calculation of the first value the *industry*
     settled on using a simple average of the previous `period` values.
+  id: totrans-12
   prefs: []
   type: TYPE_NORMAL
+  zh: 为了解决计算第一个值的难题，*行业*决定使用前`period`个值的简单平均值。
 - en: 'As a leverage we are going to use `bt.indicators.PeriodN` which:'
+  id: totrans-13
   prefs: []
   type: TYPE_NORMAL
+  zh: 作为杠杆，我们将使用`bt.indicators.PeriodN`，它：
 - en: Already defines a `period` parameter
+  id: totrans-14
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 已经定义了一个`period`参数
 - en: Informs the framework about the actual `period` used by the end user
+  id: totrans-15
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 通知框架关于最终用户使用的实际`period`
 - en: 'See its definition at: [Docs - Indicator Reference](https://www.backtrader.com/docu/indautoref.html)'
+  id: totrans-16
   prefs: []
   type: TYPE_NORMAL
+  zh: 在此处查看其定义：[文档 - 指标参考](https://www.backtrader.com/docu/indautoref.html)
 - en: Let’s then develop our `EMA`
+  id: totrans-17
   prefs: []
   type: TYPE_NORMAL
+  zh: 然后让我们开发我们的`EMA`
 - en: '[PRE0]'
+  id: totrans-18
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: Almost easier done than said. The key being the provision of the seed value
     in `nextstart`, which
+  id: totrans-19
   prefs: []
   type: TYPE_NORMAL
+  zh: 几乎比说更容易。关键在于在`nextstart`中提供种子值，其中
 - en: Will be called once, when the minimum warmp up period of the indicator has been
     met.
+  id: totrans-20
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 当指标的最小预热期满足时将被调用一次。
 - en: As opposed to `next` which will be then called for each new data value that
     is delivered into the system
+  id: totrans-21
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 与`next`相反，它将为系统传递的每个新数据值调用
 - en: The default implementation of `nextstart` simply delegates the job to `next`
     which for most indicators (for example a *Simple Moving Average*) is the right
     thing to do. But in this case overriding and providing the seed value is the key.
+  id: totrans-22
   prefs: []
   type: TYPE_NORMAL
+  zh: '`nextstart`的默认实现只是将工作委托给`next`，对于大多数指标（例如*简单移动平均线*）来说，这是正确的做法。但在这种情况下，重写并提供种子值是关键。'
 - en: Plotting it along the data
+  id: totrans-23
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 将其与数据一起绘制
 - en: 'Being a moving average, it would be nice if the indicator plotted on the same
     axis as the data for which it calculates the average. Because we have inherited
     from `PeriodN` the default value for plotting is (see it in the docs):'
+  id: totrans-24
   prefs: []
   type: TYPE_NORMAL
+  zh: 作为一个移动平均线，如果指标绘制在计算平均值的数据的同一轴上会很好。因为我们从`PeriodN`继承了绘图的默认值（在文档中查看）：
 - en: '[PRE1]'
+  id: totrans-25
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE1]'
 - en: which of course means that a `subplot` (another axis on the chart) will be created
     for our indicator. This can be easily overridden.
+  id: totrans-26
   prefs: []
   type: TYPE_NORMAL
+  zh: 这当然意味着我们的指标将创建一个`subplot`（图表上的另一个轴）。这可以很容易地被覆盖。
 - en: '[PRE2]'
+  id: totrans-27
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE2]'
 - en: And done. If you want to control more plotting options check [Docs - Plotting](https://www.backtrader.com/docu/plotting/plotting.html)
+  id: totrans-28
   prefs: []
   type: TYPE_NORMAL
+  zh: 完成。如果您想控制更多绘图选项，请查看[文档 - 绘图](https://www.backtrader.com/docu/plotting/plotting.html)
 - en: Good Luck!
+  id: totrans-29
   prefs: []
   type: TYPE_NORMAL
+  zh: 祝你好运！

@@ -1,133 +1,200 @@
 - en: Trading a Day in Steps
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 以步骤方式交易一天
 - en: 原文：[https://www.backtrader.com/blog/posts/2016-07-13-day-in-steps/day-in-steps/](https://www.backtrader.com/blog/posts/2016-07-13-day-in-steps/day-in-steps/)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.backtrader.com/blog/posts/2016-07-13-day-in-steps/day-in-steps/](https://www.backtrader.com/blog/posts/2016-07-13-day-in-steps/day-in-steps/)
 - en: 'It seems that somewhere in the world there is an interest that can be summarized
     as follows:'
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: 看起来世界上的某个地方存在一种可以总结如下的兴趣：
 - en: '*Introduce an order using daily bars but using the opening price*'
+  id: totrans-3
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '*使用每日柱状图但使用开盘价引入订单*'
 - en: This comes from the conversations in tickets [#105 Order execution logic with
     current day data](https://github.com/mementum/backtrader/issues/105) and [#101
     Dynamic stake calculation](https://github.com/mementum/backtrader/issues/101)
+  id: totrans-4
   prefs: []
   type: TYPE_NORMAL
+  zh: 这来自于票证交流中的对话[#105 Order execution logic with current day data](https://github.com/mementum/backtrader/issues/105)和[#101
+    Dynamic stake calculation](https://github.com/mementum/backtrader/issues/101)
 - en: '*backtrader* tries to remain as realistic as possible and the following premise
     applies when working with *daily bars*:'
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: '*backtrader*在处理*每日柱状图*时尽可能保持真实，并且在使用*每日柱状图*时适用以下前提：'
 - en: When a daily bar is being evaluated, the bar is already over
+  id: totrans-6
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 当评估每日柱状图时，柱状图已经结束
 - en: It makes sense because all price (*open/high/low/close*) components are known.
     It would actually seem illogical to allow an action on the `open` price when the
     `close` price is already known.
+  id: totrans-7
   prefs: []
   type: TYPE_NORMAL
+  zh: 这是有道理的，因为所有价格（*open/high/low/close*）组件都是已知的。当已知`close`价格时允许在`open`价格上采取行动似乎是不合逻辑的。
 - en: The obvious approach to this is to use *intraday* data and enter when the opening
     prices is known. But it seems *intraday* data is not so widespread.
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: 这个问题的明显解决方案是使用*日内*数据，在已知开盘价时进入。但是似乎*日内*数据并不那么普遍。
 - en: 'This is where adding a *filter* to a data feed can help. A filter that:'
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: 这就是在数据源中添加*过滤器*可以帮助的地方。一个过滤器：
 - en: '*Converts daily data into intraday-like data*'
+  id: totrans-10
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '*将每日数据转换为类似日内数据的数据*'
 - en: Blistering barnacles!!! The curious reader will immediately point out that *upsampling*
     for example `Minutes` to `Days` is logical and works, but that *downsampling*
     `Days` to `Minutes` cannot be done.
+  id: totrans-11
   prefs: []
   type: TYPE_NORMAL
+  zh: 碧海蓝天！！！好奇的读者会立即指出，例如从`Minutes`到`Days`的*上采样*是合乎逻辑且有效的，但是*从`Days`到`Minutes`的下采样*是不可能的。
 - en: 'And it is 100% right. The filter presented below will not try that, but a much
     humble and simpler goal:'
+  id: totrans-12
   prefs: []
   type: TYPE_NORMAL
+  zh: 而且百分百正确。下面呈现的过滤器不会尝试这样做，但是一个更加谦卑和简单的目标：
 - en: Break a daily bar in 2 parts
+  id: totrans-13
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 将每日柱状图分解为2部分
 - en: A bar with only the opening price and no volume
+  id: totrans-14
   prefs:
   - PREF_IND
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 一个只有开盘价而没有成交量的柱状图
 - en: A 2^(nd) bar which is a copy of the regular daily bar
+  id: totrans-15
   prefs:
   - PREF_IND
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 一个是正常的每日柱状图的副本
 - en: 'This can still be held as a logical approach:'
+  id: totrans-16
   prefs: []
   type: TYPE_NORMAL
+  zh: 这仍然可以被视为一种合乎逻辑的方法：
 - en: Upon seeing the *opening* price, the trader can act
+  id: totrans-17
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 看到*开盘*价时，交易员可以采取行动
 - en: The order is matched during the rest of the day (actually may or may not be
     matched depending on execution type and price constraints)
+  id: totrans-18
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 订单在一天的其余时间匹配（实际上可能匹配也可能不匹配，取决于执行类型和价格限制）
 - en: 'The full code is presented below. Let’s see a sample run with a well known
     data of `255` *daily* bars:'
+  id: totrans-19
   prefs: []
   type: TYPE_NORMAL
+  zh: 下面呈现了完整的代码。让我们看一个使用`255`个*每日*柱状图的众所周知的数据的示例运行：
 - en: '[PRE0]'
+  id: totrans-20
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: 'Output:'
+  id: totrans-21
   prefs: []
   type: TYPE_NORMAL
+  zh: 输出：
 - en: '[PRE1]'
+  id: totrans-22
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE1]'
 - en: 'The following happens:'
+  id: totrans-23
   prefs: []
   type: TYPE_NORMAL
+  zh: 以下情况发生：
 - en: '`next` is called: `510 times` which is `255 x 2`'
+  id: totrans-24
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`next`被调用：`510次`，即`255 x 2`'
 - en: 'The `len` of the *Strategy* and that of the *data* reaches a total of `255`,
     which is the expected: **the data has only those many bars**'
+  id: totrans-25
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '*策略*和*数据*的`len`总共达到了`255`，这是预期的：**数据只有这么多根柱状图**'
 - en: Every time the `len` of the *data* increases, the 4 price components have the
     same value, namely the `open` price
+  id: totrans-26
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 每当*数据*的`len`增加时，4个价格组件具有相同的值，即`open`价格
 - en: Here a remark is printed out to indicate that during this *opening* phase action
     could be taken, like for example buying.
+  id: totrans-27
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 这里打印出一条备注，指示在这个*开盘*阶段可以采取行动，例如购买。
 - en: 'Effectively:'
+  id: totrans-28
   prefs: []
   type: TYPE_NORMAL
+  zh: 实际上：
 - en: The daily data feed is being *replayed* with 2 steps for each day, giving the
     option to act in between `open` and the rest of the price components
+  id: totrans-29
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 每日数据源正在使用每天2步*重播*，在`open`和其余价格组件之间提供操作选项
 - en: The filter will be added to the default distribution of *backtrader* in the
     next release.
+  id: totrans-30
   prefs: []
   type: TYPE_NORMAL
+  zh: 过滤器将在下一个版本中添加到*backtrader*的默认分发中。
 - en: The sample code including the filter.
+  id: totrans-31
   prefs: []
   type: TYPE_NORMAL
+  zh: 包括过滤器的示例代码。
 - en: '[PRE2]'
+  id: totrans-32
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE2]'

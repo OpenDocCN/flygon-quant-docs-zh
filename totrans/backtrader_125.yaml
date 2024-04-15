@@ -1,174 +1,259 @@
 - en: Multi Example
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 多个示例
 - en: 原文：[https://www.backtrader.com/blog/posts/2017-04-09-multi-example/multi-example/](https://www.backtrader.com/blog/posts/2017-04-09-multi-example/multi-example/)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.backtrader.com/blog/posts/2017-04-09-multi-example/multi-example/](https://www.backtrader.com/blog/posts/2017-04-09-multi-example/multi-example/)
 - en: A couple of topics in the [Community](https://community.backtrader.com) seem
     to be oriented as to how to keep track of orders, especially when several data
     feeds are in play and also including when multiple orders are working together
     like in the case of *bracket orders*
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: 一些[社区](https://community.backtrader.com)中的主题似乎是如何跟踪订单，特别是当有多个数据源在运行时，以及包括多个订单共同工作的情况，如*bracket
+    orders*的情况
 - en: 'The script below tries to serve as a sample by allowing the user to:'
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: 下面的脚本试图作为示例，允许用户：
 - en: Use 3 data feeds
+  id: totrans-4
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 使用3个数据源
 - en: Use either
+  id: totrans-5
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 选择使用
 - en: A single *buy* order of type `Market` when `usebracket=False`
+  id: totrans-6
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 当`usebracket=False`时，只包含类型为`Market`的单个*buy*订单
 - en: or
+  id: totrans-7
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 或
 - en: A *bracket* order set (`usebracket=True`
+  id: totrans-8
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 设置*bracket*订单（`usebracket=True`
 - en: In this case how the bracket set is created can be specified
+  id: totrans-9
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 在这种情况下，可以指定如何创建*bracket set*
 - en: Issuing 3 orders (1 parent + 2 children) when `rawbracket=True`
+  id: totrans-10
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 当`rawbracket=True`时，发出3个订单（1个父级+2个子级）
 - en: Making a call to `buy_bracket` when `rawbracket=False`
+  id: totrans-11
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 当`rawbracket=False`时调用`buy_bracket`
 - en: The main bracket order has an expiry period after `valid` days (default is `10`)
+  id: totrans-12
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 主要*bracket*订单在`valid`天后具有到期时间（默认为`10`）
 - en: A position will be entered (or at least attempted to enter) when the `weekday`
     matches the `enter` value defined for each data feed which defaults to `[1, 3,
     4]`
+  id: totrans-13
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 当`weekday`与为每个数据源定义的`enter`值匹配时，将进入（或至少尝试进入）一个仓位，默认为`[1, 3, 4]`
 - en: A open position will be exited
+  id: totrans-14
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 将退出一个开放的仓位
 - en: With a regular `close` after a `holding` period. The period is defined individually
     for each of the data feeds in a list with the parameter `hold` which defaults
     to `[7, 10, 15]`
+  id: totrans-15
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 在`holding`期后正常`close`。期间为每个数据源分别定义，参数`hold`默认为`[7, 10, 15]`
 - en: This will trigger the cancelation of the `stop` side of any *bracket* order
     if present (which will automatically cancel the other side)
+  id: totrans-16
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 如果存在*bracket*订单的`stop`方被触发，则会触发*bracket*订单的取消（这将自动取消另一方）
 - en: Or if *brackets* are in use, when either the `stop` (limit losses) or the `limit`
     (take profit) side gets executed (the system will automatically cancel the other
     side)
+  id: totrans-17
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 或者如果使用*brackets*，则在执行`stop`（限制损失）或`limit`（获利）方之一时（系统将自动取消另一方）
 - en: Orders are kept in
+  id: totrans-18
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 订单保留在
 - en: '`dict` which uses the `data` as the key'
+  id: totrans-19
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`dict`中，使用`data`作为键'
 - en: contains a `list` per `data` entry with the orders which are open for each `data`
+  id: totrans-20
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 包含每个`data`条目的订单的`list`，这些订单对每个`data`都是打开的
 - en: Once the orders have been issued, the management is done in `notify_order`
+  id: totrans-21
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 一旦订单已发出，管理就在`notify_order`中完成
 - en: 'Additionally:'
+  id: totrans-22
   prefs: []
   type: TYPE_NORMAL
+  zh: 此外：
 - en: A `TestSizer` is used which will return different values for `buy` and `sell`
     orders as a test
+  id: totrans-23
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 使用`TestSizer`，它将为`buy`和`sell`订单返回不同的值作为测试
 - en: Because only *long* operations are initiated, only the `buy` sizing will be
     returned and the output log will contain no traces of the `sell` sizing.
+  id: totrans-24
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 因为只有*long*操作被启动，所以只返回`buy`大小，并且输出日志中不包含`sell`大小的痕迹。
 - en: A profuse log of operations, positions and order management is created to aid
     in understanding what’s happening.
+  id: totrans-25
   prefs: []
   type: TYPE_NORMAL
+  zh: 创建丰富的操作、持仓和订单管理日志，以帮助理解发生了什么。
 - en: 'Let’s see a sample execution with the default values of `usebracket=True` and
     `rawbracket=True` (to ease the plot, volume will be removed):'
+  id: totrans-26
   prefs: []
   type: TYPE_NORMAL
+  zh: 让我们看一个带有`usebracket=True`和`rawbracket=True`默认值的示例执行（为了简化图表，将删除音量）：
 - en: '[PRE0]'
+  id: totrans-27
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: '![image](../Images/c33c44402b58012a4e07f3e0a1929f5b.png)'
+  id: totrans-28
   prefs: []
   type: TYPE_IMG
+  zh: '![image](../Images/c33c44402b58012a4e07f3e0a1929f5b.png)'
 - en: A 2^(nd) execution sets `rawbracket=False`
+  id: totrans-29
   prefs: []
   type: TYPE_NORMAL
+  zh: 第二个执行设置`rawbracket=False`
 - en: '[PRE1]'
+  id: totrans-30
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE1]'
 - en: Which outputs exactly the same result, this time having used `buy_bracket`.
+  id: totrans-31
   prefs: []
   type: TYPE_NORMAL
+  zh: 这将输出完全相同的结果，这次使用了`buy_bracket`。
 - en: '![image](../Images/43d5dcc72727e9b70e60d8b20793f81b.png)'
+  id: totrans-32
   prefs: []
   type: TYPE_IMG
+  zh: '![image](../Images/43d5dcc72727e9b70e60d8b20793f81b.png)'
 - en: 'And finally disabling bracket usage:'
+  id: totrans-33
   prefs: []
   type: TYPE_NORMAL
+  zh: 最后禁用括号使用：
 - en: '[PRE2]'
+  id: totrans-34
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE2]'
 - en: '![image](../Images/88007dbea907e091bf7507b28a5964f9.png)'
+  id: totrans-35
   prefs: []
   type: TYPE_IMG
+  zh: '![image](../Images/88007dbea907e091bf7507b28a5964f9.png)'
 - en: Conclusion
+  id: totrans-36
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 结论
 - en: This should serve as a good example of order management, with multiple data
     feeds and order sets.
+  id: totrans-37
   prefs: []
   type: TYPE_NORMAL
+  zh: 这应该作为订单管理的良好示例，具有多个数据源和订单集。
 - en: Sample usage
+  id: totrans-38
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 示例用法
 - en: '[PRE3]'
+  id: totrans-39
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE3]'
 - en: Sample Code
+  id: totrans-40
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 示例代码
 - en: '[PRE4]'
+  id: totrans-41
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE4]'

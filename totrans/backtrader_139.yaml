@@ -1,108 +1,170 @@
 - en: Arrows for the BuySell Observer
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 为BuySell观察者的箭头
 - en: 原文：[https://www.backtrader.com/blog/posts/2016-12-10-buysellarrows/buysellarrows/](https://www.backtrader.com/blog/posts/2016-12-10-buysellarrows/buysellarrows/)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.backtrader.com/blog/posts/2016-12-10-buysellarrows/buysellarrows/](https://www.backtrader.com/blog/posts/2016-12-10-buysellarrows/buysellarrows/)
 - en: '*backtrader* was conceived to try to deliver ease of use. Creation of *indicators*
     and other usual suspects should be easy.'
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: '*backtrader*的构想是为了提供易用性。创建*指标*和其他常见的对象应该很容易。'
 - en: And of course, customizing existing items should also be part of the deal.
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: 当然，定制现有项目也应该是交易的一部分。
 - en: A topic in the community, [BuySell Arrows](https://community.backtrader.com/topic/8/change-buysell-to-trade-arrows-in-charts-213),
     which originates from the migration from issues is a good example.
+  id: totrans-4
   prefs: []
   type: TYPE_NORMAL
+  zh: 社区中的一个话题，[BuySell Arrows](https://community.backtrader.com/topic/8/change-buysell-to-trade-arrows-in-charts-213)，源自从问题迁移而来，是一个很好的例子。
 - en: 'The current behavior can be seen by running the sample:'
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: 可通过运行示例查看当前行为：
 - en: '[PRE0]'
+  id: totrans-6
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: With following output
+  id: totrans-7
   prefs: []
   type: TYPE_NORMAL
+  zh: 具有以下输出
 - en: '![image](../Images/69133bb7f2c17654588c04d54badc336.png)'
+  id: totrans-8
   prefs: []
   type: TYPE_IMG
+  zh: '![image](../Images/69133bb7f2c17654588c04d54badc336.png)'
 - en: 'The sample when using does the following:'
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: 使用时示例执行以下操作：
 - en: Define a subclass of the `BuySell` observer
+  id: totrans-10
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 定义`BuySell`观察者的子类
 - en: Override the `plotlines` definition and simply change the markers which indicate
     the buy and sell operations
+  id: totrans-11
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 重写`plotlines`定义，简单地更改指示买入和卖出操作的标记
 - en: Monkey patches the existing observer with the custom one
+  id: totrans-12
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 用自定义的观察者猴子补丁现有的观察者
 - en: In code terms.
+  id: totrans-13
   prefs: []
   type: TYPE_NORMAL
+  zh: 以代码术语表示。
 - en: '[PRE1]'
+  id: totrans-14
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE1]'
 - en: 'and:'
+  id: totrans-15
   prefs: []
   type: TYPE_NORMAL
+  zh: 和：
 - en: '[PRE2]'
+  id: totrans-16
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE2]'
 - en: Note
+  id: totrans-17
   prefs: []
   type: TYPE_NORMAL
+  zh: 注意
 - en: 'Monkey patching is not strictly necesary. One can also go the standard way:'
+  id: totrans-18
   prefs: []
   type: TYPE_NORMAL
+  zh: 猴子补丁并不是绝对必要的。也可以按照标准方式进行：
 - en: '[PRE3]'
+  id: totrans-19
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE3]'
 - en: And the custom observer would also be used, but the other regularly instantiated
     observers would be missing. Hence the monkey patching in the sample to simply
     modify the observer and keep the look.
+  id: totrans-20
   prefs: []
   type: TYPE_NORMAL
+  zh: 并且将使用自定义观察者，但其他常规实例化的观察者将缺失。因此，在示例中进行猴子补丁，简单地修改观察者并保持外观。
 - en: 'Running it again with the reight parameter:'
+  id: totrans-21
   prefs: []
   type: TYPE_NORMAL
+  zh: 再次运行时使用正确参数：
 - en: '[PRE4]'
+  id: totrans-22
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE4]'
 - en: Which then outputs.
+  id: totrans-23
   prefs: []
   type: TYPE_NORMAL
+  zh: 然后输出。
 - en: '![image](../Images/55f20d43beebdeb495d33e2f66efe93f.png)'
+  id: totrans-24
   prefs: []
   type: TYPE_IMG
+  zh: '![image](../Images/55f20d43beebdeb495d33e2f66efe93f.png)'
 - en: 'Because `matplotlib` allows the use of *Unicode* characters, the default look
     of the observer can be changed to anything and nos just arrows. Be my guest. For
     example from *Wikipedia*:'
+  id: totrans-25
   prefs: []
   type: TYPE_NORMAL
+  zh: 因为`matplotlib`允许使用*Unicode*字符，观察者的默认外观可以更改为任何形式，而不仅仅是箭头。随意发挥。例如来自*维基百科*：
 - en: '[Arrows (Unicode block)](https://en.wikipedia.org/wiki/Arrows_%28Unicode_block%29)'
+  id: totrans-26
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[箭头（Unicode块）](https://en.wikipedia.org/wiki/Arrows_%28Unicode_block%29)'
 - en: Sample Usage
+  id: totrans-27
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 示例用法
 - en: '[PRE5]'
+  id: totrans-28
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE5]'
 - en: Sample Code
+  id: totrans-29
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 示例代码
 - en: '[PRE6]'
+  id: totrans-30
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE6]'

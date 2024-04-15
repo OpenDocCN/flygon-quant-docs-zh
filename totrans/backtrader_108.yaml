@@ -1,375 +1,561 @@
 - en: Buy and Hold with backtrader
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 使用backtrader进行买入并持有
 - en: 原文：[https://www.backtrader.com/blog/2019-06-13-buy-and-hold/buy-and-hold/](https://www.backtrader.com/blog/2019-06-13-buy-and-hold/buy-and-hold/)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.backtrader.com/blog/2019-06-13-buy-and-hold/buy-and-hold/](https://www.backtrader.com/blog/2019-06-13-buy-and-hold/buy-and-hold/)
 - en: 'This is sometimes one of the baselines which is used to test the performance
     of a given strategy, i.e.: *"if the carefully crafted logic cannot beat a simple
     buy and hold approach, the strategy is probably not worth a dime"*'
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: 这有时是用来测试给定策略表现的基线之一，即：“如果精心设计的逻辑无法击败简单的买入并持有方法，那么该策略可能不值一文”
 - en: A simple *"buy and hold"* strategy, would simply buy with the first incoming
     data point and see what the portfolio value is available with the last data point.
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: 一个简单的“买入并持有”策略，只需在第一个传入的数据点上买入，并查看最后一个数据点可用的投资组合价值。
 - en: Tip
+  id: totrans-4
   prefs: []
   type: TYPE_NORMAL
+  zh: 提示
 - en: The snippets below forego the imports and set-up boilerplate. A complete script
     is available at the end.
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: 下面的代码片段省略了导入和设置样板。完整脚本在末尾可用。
 - en: Cheating On Close
+  id: totrans-6
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 在收盘时作弊
 - en: In many cases, an approach like *Buy and Hold* is not meant to yield an exact
     reproduction of order execution and price matching. It is about evaluating the
     large numbers. That is why, the `cheat-on-close` mode of the default broker in
     *backtrader* is going to be activated. This means
+  id: totrans-7
   prefs: []
   type: TYPE_NORMAL
+  zh: 在许多情况下，像*买入并持有*这样的方法并不意味着要精确复制订单执行和价格匹配。这是关于评估大量数据。这就是为什么*backtrader*中默认经纪人的`cheat-on-close`模式将被激活。这意味着
 - en: As only `Market` orders will be issued, execution will be done against the current
     `close` price.
+  id: totrans-8
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 由于只会发出`Market`订单，执行将根据当前的`close`价格进行。
 - en: Take into account that when a price is available for the trading logic (in this
     case the `close`), that price is **GONE**. It may or may not be available in a
     while and in reality execution cannot be guaranteed against it.
+  id: totrans-9
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 请注意，当价格可用于交易逻辑（在本例中为`close`）时，该价格已经**消失**。它可能会在一段时间内可用，但实际上无法保证执行。
 - en: Buy and Forget
+  id: totrans-10
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 买入并忘记
 - en: '[PRE0]'
+  id: totrans-11
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: '[PRE1]'
+  id: totrans-12
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE1]'
 - en: 'The following is happening here:'
+  id: totrans-13
   prefs: []
   type: TYPE_NORMAL
+  zh: 这里发生了以下情况：
 - en: A single go long operation to enter the market is being issued. Either with
+  id: totrans-14
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 发出了一个单独的做多操作以进入市场。可以是
 - en: '`buy` and a manual calculation of the `size`'
+  id: totrans-15
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`buy`和手动计算`size`'
 - en: All the available `cash` is used to buy a fixed amount of units of the asset.
     Notice it is being truncated to be an `int`. This is appropriate for things like
     *stocks*, *futures*.
+  id: totrans-16
   prefs:
   - PREF_IND
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 所有可用的`cash`都用于购买资产的固定单位数量。请注意，它被截断为`int`。这适用于*股票*、*期货*等。
 - en: or
+  id: totrans-17
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 或者
 - en: '`order_target_value` and letting the system know we want to use all the cash.
     The method will take care of automatically calculating the size.'
+  id: totrans-18
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`order_target_value`并让系统知道我们要使用所有现金。该方法将自动计算大小。'
 - en: In the `start` method, the initial amount of cash is being saved
+  id: totrans-19
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 在`start`方法中，初始现金金额被保存
 - en: In the `stop` method, the returns are calculated, using the current value of
     the portfolio and the initial amount of cash
+  id: totrans-20
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 在`stop`方法中，通过当前投资组合价值和初始现金金额计算回报
 - en: Note
+  id: totrans-21
   prefs: []
   type: TYPE_NORMAL
+  zh: 注意
 - en: In *backtrader* the `nextstart` method is called **exactly** once, when the
     data/indicator buffers can deliver. The default behavior is to delegate the work
     to `next`. But because we want to buy exactly **once** and do it with the **first**
     available data, it is the right point to do it.
+  id: totrans-22
   prefs: []
   type: TYPE_NORMAL
+  zh: 在*backtrader*中，当数据/指标缓冲区可以提供数据时，将**精确地**调用`nextstart`方法。默认行为是将工作委托给`next`。但是因为我们想要**仅一次**购买，并且使用**第一个**可用数据，这是正确的时机。
 - en: Tip
+  id: totrans-23
   prefs: []
   type: TYPE_NORMAL
+  zh: 提示
 - en: As only **1** data feed is being considered, there is no need to specify the
     target data feed. The first (and only) data feed in the system will be used as
     the target.
+  id: totrans-24
   prefs: []
   type: TYPE_NORMAL
+  zh: 由于只考虑了**1**个数据源，因此无需指定目标数据源。系统中的第一个（也是唯一的）数据源将被用作目标。
 - en: If more than one data feed is present, the target can be selected by using the
     named argument `data` as in
+  id: totrans-25
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果存在多个数据源，则可以使用命名参数`data`来选择目标，如下所示
 - en: '[PRE2]'
+  id: totrans-26
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE2]'
 - en: The sample script below can be executed as follows
+  id: totrans-27
   prefs: []
   type: TYPE_NORMAL
+  zh: 下面的示例脚本可以按以下方式执行
 - en: '[PRE3]'
+  id: totrans-28
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE3]'
 - en: '[PRE4]'
+  id: totrans-29
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE4]'
 - en: The graphical output is the same for both
+  id: totrans-30
   prefs: []
   type: TYPE_NORMAL
+  zh: 图形输出对于两者都是相同的
 - en: '![Buy and Hold](../Images/60ee14706b64c22b1a0f9dc6be9a4feb.png)'
+  id: totrans-31
   prefs: []
   type: TYPE_IMG
+  zh: '![买入并持有](../Images/60ee14706b64c22b1a0f9dc6be9a4feb.png)'
 - en: Buy and Buy More
+  id: totrans-32
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 买入和再买入
 - en: But an actual regular person does usually have a *day job* and can put an amount
     of money into the stock market each and every month. This person is not bothered
     with trends, technical analysis and the likes. The only actual concern is to put
     the money in the market the 1^(st) day of the month.
+  id: totrans-33
   prefs: []
   type: TYPE_NORMAL
+  zh: 但实际上，普通人通常有一份*日常工作*，可以每个月将一定金额投入股市。这个人不关心趋势、技术分析等。唯一的关注点是在每个月的第1天将资金投入市场。
 - en: 'Given that the Romans left us with a calendar which has months which differ
     in the number of days (`28`, `29`, `30`, `31`) and taking into account non-trading
     days, one cannot for sure use the following simple approach:'
+  id: totrans-34
   prefs: []
   type: TYPE_NORMAL
+  zh: 鉴于罗马人留给我们的日历中月份的天数不同（`28`、`29`、`30`、`31`），并考虑到非交易日，不能确定使用以下简单方法：
 - en: Buy each **X** days
+  id: totrans-35
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 每隔**X**天购买
 - en: A method to identify the **first trading day** of the month needs to be used.
     This can be done with **Timers** in *backtrader*
+  id: totrans-36
   prefs: []
   type: TYPE_NORMAL
+  zh: 需要使用一种方法来识别月份的**第一个交易日**。这可以通过*backtrader*中的**计时器**来完成
 - en: Note
+  id: totrans-37
   prefs: []
   type: TYPE_NORMAL
+  zh: 注意
 - en: Only the `order_target_value` method is used in the next examples.
+  id: totrans-38
   prefs: []
   type: TYPE_NORMAL
+  zh: 下面的示例中只使用`order_target_value`方法。
 - en: '[PRE5]'
+  id: totrans-39
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE5]'
 - en: During the `start` phase a timer is added
+  id: totrans-40
   prefs: []
   type: TYPE_NORMAL
+  zh: 在`start`阶段添加了一个计时器
 - en: '[PRE6]'
+  id: totrans-41
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE6]'
 - en: Timer which will be called at the end of the session (`bt.timer.SESSION_END`)
+  id: totrans-42
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 将在会话结束时调用的计时器（`bt.timer.SESSION_END`）
 - en: Note
+  id: totrans-43
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 注意
 - en: For daily bars this is obviously not relevant, because the entire bar is delivered
     in a single shot.
+  id: totrans-44
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 对于日线图表来说，这显然不相关，因为整个柱状图一次性交付。
 - en: The timer lists only day `1` of the month as the one in which the timer has
     to be called
+  id: totrans-45
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 计时器仅将每个月的第`1`天列为必须调用计时器的日期
 - en: In case day `1` happens to be a non-trading day, `monthcarry=True` ensures that
     the timer will still be called on the first trading day of the month.
+  id: totrans-46
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 如果第`1`天恰好是非交易日，则`monthcarry=True`确保计时器仍将在月的第一个交易日被调用。
 - en: The timer received during the `notify_timer` method, which is overridden to
     perform the market operations.
+  id: totrans-47
   prefs: []
   type: TYPE_NORMAL
+  zh: 计时器在`notify_timer`方法中接收，该方法被重写以执行市场操作。
 - en: '[PRE7]'
+  id: totrans-48
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE7]'
 - en: Tip
+  id: totrans-49
   prefs: []
   type: TYPE_NORMAL
+  zh: 提示
 - en: Notice that what is bought is not the **monthly cash** influx, but the **total
     value of the account**, which comprises the current portfolio, plus the money
     we have added. The reasons
+  id: totrans-50
   prefs: []
   type: TYPE_NORMAL
+  zh: 注意，购买的不是**每月现金**流入，而是**账户的总价值**，包括当前投资组合和我们添加的资金。原因
 - en: There can be some initial cash to be consumed
+  id: totrans-51
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 可能有一些初始现金要消耗
 - en: The monthly operation may not consume all the cash, because a single month may
     not be enough to buy the stock and because there will be a rest after acquiring
     the stock
+  id: totrans-52
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 月度操作可能不会消耗所有现金，因为一个月可能不足以购买股票，而且在购买股票后会有余额
 - en: In our example it is actually so, because the default monthly cash inflow is
     `1000` and the asset has a value of over `3000`
+  id: totrans-53
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 在我们的示例中，实际上是这样的，因为默认的每月现金流入额为`1000`，而资产的价值超过`3000`
 - en: If the target were to be the available cash, this could be smaller than the
     actual value
+  id: totrans-54
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 如果目标是可用现金，那么这可能小于实际价值
 - en: Execution
+  id: totrans-55
   prefs: []
   type: TYPE_NORMAL
+  zh: 执行
 - en: '[PRE8]'
+  id: totrans-56
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE8]'
 - en: '[PRE9]'
+  id: totrans-57
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE9]'
 - en: '**Blistering Barnacles!!!** a `ROI` of `320.96%` for the default `1000` money
     units and an even greater `ROI` of `1460.99%` for `5000` monetary units. We have
     probably found a money printing machine ...'
+  id: totrans-58
   prefs: []
   type: TYPE_NORMAL
+  zh: '**雷霆万钧！！！**默认的`1000`货币单位的`ROI`为`320.96%`，而`5000`货币单位的`ROI`更高，为`1460.99%`。我们可能找到了一台印钞机...'
 - en: '*The more money we add each month ... the more we win ... regardless of what
     the market does.*'
+  id: totrans-59
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '*每个月我们添加的资金越多...我们赚的就越多...无论市场如何。*'
 - en: Of course not ...
+  id: totrans-60
   prefs: []
   type: TYPE_NORMAL
+  zh: 当然不是...
 - en: The calculation stored in `self.roi` during `stop` is **NO** longer valid. The
     simple monhtly addition of cash to the broker changes the scales (even if the
     money were not used for anything, it would still count as an increment)
+  id: totrans-61
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 在`stop`期间存储在`self.roi`中的计算**不再**有效。每月简单地向经纪人添加现金会改变规模（即使这些资金没有用于任何事情，它仍然会被计算为增量）
 - en: The graphical output with 1000 money units
+  id: totrans-62
   prefs: []
   type: TYPE_NORMAL
+  zh: 以1000货币单位的图形输出
 - en: '![Buy and Hold - More - 1000](../Images/d41f7d59fcb4211b4b9e09664c4734d7.png)'
+  id: totrans-63
   prefs: []
   type: TYPE_IMG
+  zh: '![买入并持有 - 更多 - 1000](../Images/d41f7d59fcb4211b4b9e09664c4734d7.png)'
 - en: Notice the interval between actual operations in the market, because the `1000`
     money units are not enough to buy `1` unit of the asset and money has to be accumulated
     until an operation can succeed.
+  id: totrans-64
   prefs: []
   type: TYPE_NORMAL
+  zh: 注意市场实际操作之间的间隔，因为`1000`货币单位不足以购买`1`单位的资产，必须积累资金直到操作成功。
 - en: The graphical output with 5000 money units
+  id: totrans-65
   prefs: []
   type: TYPE_NORMAL
+  zh: 以5000货币单位的图形输出
 - en: '![Buy and Hold - More - 5000](../Images/7694386f6e3f1ec63a462d95c0db3da4.png)'
+  id: totrans-66
   prefs: []
   type: TYPE_IMG
+  zh: '![买入并持有 - 更多 - 5000](../Images/7694386f6e3f1ec63a462d95c0db3da4.png)'
 - en: In this case, `5000` monetary units can always buy `1` unit of the asset and
     the market operations take place each and every month.
+  id: totrans-67
   prefs: []
   type: TYPE_NORMAL
+  zh: 在这种情况下，`5000`货币单位始终可以购买`1`单位的资产，市场操作每个月都会发生。
 - en: Performance Tracking for *Buy and Buy More*
+  id: totrans-68
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: '*购买和增加购买*的绩效跟踪'
 - en: As pointed out above, hen money is added to (and sometimes taken out of) the
     system, performance has to measured in a different way. There is no need to invent
     anything, because it was invented a long time ago and it is what is done for *Fund
     Management*.
+  id: totrans-69
   prefs: []
   type: TYPE_NORMAL
+  zh: 如上所述，当现金被添加到（有时从中提取出）系统时，绩效必须以不同的方式进行衡量。没有必要发明什么，因为很久以前就已经发明了，这就是*基金管理*所做的事情。
 - en: A `perf_value` is set as the reference to track the performance. More often
     than not this will `100`
+  id: totrans-70
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`perf_value`被设置为跟踪绩效的参考值。很多时候，这将是`100`'
 - en: 'Using that peformance value and the initial amount of cash, a number of `shares`
     is calculated, i.e.: `shares = cash / perf_value`'
+  id: totrans-71
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 使用该绩效值和初始现金金额，计算一定数量的`股份`，即：`shares = cash / perf_value`
 - en: Whenever cash is added to/subsctracted from the system, the number of `shares`
     changes, but the `perf_value` remains the same.
+  id: totrans-72
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 每当现金被添加到/从系统中减去时，`股份`的数量会发生变化，但`perf_value`保持不变。
 - en: The cash will be sometimes invested and the daily `value` will be updated as
     in `perf_value = portfolio_value / shares`
+  id: totrans-73
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 有时将现金投资，并更新每日的`value`，如`perf_value = portfolio_value / shares`
 - en: With that approach the actual perfomance can be calculated and it is independent
     of cash additions to/withdrawals from the system.
+  id: totrans-74
   prefs: []
   type: TYPE_NORMAL
+  zh: 使用该方法可以计算实际的绩效，并且不受对系统的现金添加/提取的影响。
 - en: Luckily enough, *backtrader* can already do all of that automatically.
+  id: totrans-75
   prefs: []
   type: TYPE_NORMAL
+  zh: 幸运的是，*backtrader*已经可以自动完成所有这些。
 - en: '[PRE10]'
+  id: totrans-76
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE10]'
 - en: During `start`
+  id: totrans-77
   prefs: []
   type: TYPE_NORMAL
+  zh: 在`start`期间
 - en: The fund mode is activated with a default start value of `100.0`
+  id: totrans-78
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 使用默认的起始值`100.0`激活基金模式。
 - en: '[PRE11]'
+  id: totrans-79
   prefs:
   - PREF_IND
   type: TYPE_PRE
+  zh: '[PRE11]'
 - en: During `stop`
+  id: totrans-80
   prefs: []
   type: TYPE_NORMAL
+  zh: 在`stop`期间
 - en: The fund `ROI` is calculated. Because the start value is `100.0` the operation
     is rather simple
+  id: totrans-81
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 计算基金的`ROI`。因为起始值为`100.0`，所以操作相当简单
 - en: '[PRE12]'
+  id: totrans-82
   prefs:
   - PREF_IND
   type: TYPE_PRE
+  zh: '[PRE12]'
 - en: The execution
+  id: totrans-83
   prefs: []
   type: TYPE_NORMAL
+  zh: 执行
 - en: '[PRE13]'
+  id: totrans-84
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE13]'
 - en: 'In this case:'
+  id: totrans-85
   prefs: []
   type: TYPE_NORMAL
+  zh: 在这种情况下：
 - en: The same incredible plain `ROI` as before is achieved which is `1460.99%`
+  id: totrans-86
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 与以前一样，实现了同样令人难以置信的纯`ROI`，即`1460.99%`
 - en: The actual `ROI` when considering it as *Fund* is a more modest and realistic
     `37.31%`, given the sample data.
+  id: totrans-87
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 将其视为*基金*时，考虑到示例数据，实际的`ROI`更为适度和现实，为`37.31%`。
 - en: Note
+  id: totrans-88
   prefs: []
   type: TYPE_NORMAL
+  zh: 注意
 - en: The output chart is the same as in the previous execution with `5000` money
     units.
+  id: totrans-89
   prefs: []
   type: TYPE_NORMAL
+  zh: 输出图表与之前执行的图表相同，使用了`5000`货币单位。
 - en: The sample script
+  id: totrans-90
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 示例脚本
 - en: '[PRE14]'
+  id: totrans-91
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE14]'
 - en: '[PRE15]'
+  id: totrans-92
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE15]'

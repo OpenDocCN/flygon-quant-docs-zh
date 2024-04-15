@@ -1,149 +1,227 @@
 - en: Strategy Selection
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 策略选择
 - en: 原文：[https://www.backtrader.com/blog/posts/2016-10-29-strategy-selection/strategy-selection/](https://www.backtrader.com/blog/posts/2016-10-29-strategy-selection/strategy-selection/)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.backtrader.com/blog/posts/2016-10-29-strategy-selection/strategy-selection/](https://www.backtrader.com/blog/posts/2016-10-29-strategy-selection/strategy-selection/)
 - en: 'Houston we have a problem:'
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: 休斯顿，我们有问题：
 - en: '*cerebro* is not meant to be run several times. This is not the 1^(st) time
     and rather than thinking that users are doing it wrong, it seems it is a use case.'
+  id: totrans-3
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '*cerebro*不打算多次运行。这不是第1次，而不是认为用户做错了，似乎这是一个用例。'
 - en: This interesting use case has come up via [Ticket 177](https://github.com/mementum/backtrader/issues/177).
     In this case *cerebro* is being used multiple times to evaluate differet strategies
     which are being fetched from an external data source.
+  id: totrans-4
   prefs: []
   type: TYPE_NORMAL
+  zh: 这个有趣的用例是通过[Ticket 177](https://github.com/mementum/backtrader/issues/177)提出的。在这种情况下，*cerebro*被多次使用来评估从外部数据源获取的不同策略。
 - en: '*backtrader* can still support this use case, but not in the direct way it
     has been attempted.'
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: '*backtrader*仍然可以支持这种用例，但不是以尝试的直接方式。'
 - en: Optimizing the selection
+  id: totrans-6
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 优化选择
 - en: 'The buil-in optimization in *backtrader* already does the required thing:'
+  id: totrans-7
   prefs: []
   type: TYPE_NORMAL
+  zh: '*backtrader*中内置的优化已经做了所需的事情：'
 - en: Instantiate several strategy instances and collect the results
+  id: totrans-8
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 实例化多个策略实例并收集结果
 - en: Being the only thing that the *instances* all belong to the same *class*. This
     is where Python helps by lettings us control the creation of an object.
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: 唯一的一件事是*instances*都属于同一个*class*。这就是Python帮助我们控制对象创建的地方。
 - en: First, let’s add to very quick strategies to a script using the *Signal* technology
     built in *backtrader*
+  id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: 首先，让我们使用*backtrader*内置的*Signal*技术将两个非常快速的策略添加到脚本中
 - en: '[PRE0]'
+  id: totrans-11
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: It cannot get easier.
+  id: totrans-12
   prefs: []
   type: TYPE_NORMAL
+  zh: 这再也不能更简单了。
 - en: And now let’s do the magic of delivering those two strategies.
+  id: totrans-13
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在让我们来展示这两个策略的魔力。
 - en: '[PRE1]'
+  id: totrans-14
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE1]'
 - en: 'Et voilá! When the class `StFetcher` is being instantiated, method `__new__`
     takes control of instance creation. In this case:'
+  id: totrans-15
   prefs: []
   type: TYPE_NORMAL
+  zh: Et voilá！当类`StFetcher`被实例化时，方法`__new__`控制实例的创建。在这种情况下：
 - en: Gets the `idx` param which is passed to it
+  id: totrans-16
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 获取传递给它的`idx`参数
 - en: Uses this param to get a strategy from the `_STRATS` list in which our previous
     sample strategies have been stored
+  id: totrans-17
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 使用这个参数从存储我们之前示例策略的`_STRATS`列表中获取策略
 - en: Note
+  id: totrans-18
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 注意
 - en: Nothing would prevent using this `idx` value to fetch strategies from a server
     and/or a database.
+  id: totrans-19
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 没有什么能阻止使用这个`idx`值从服务器和/或数据库中获取策略。
 - en: Instantiate and return the *fecthed* strategy
+  id: totrans-20
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 实例化并返回*fecthed*策略
 - en: Running the show
+  id: totrans-21
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 运行展示
 - en: '[PRE2]'
+  id: totrans-22
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE2]'
 - en: Indeed! Optimiization it is! Rather than `addstrategy` we use `optstrategy`
     and pass an array of values for `idx`. Those values will be iterated over by the
     optimization engine.
+  id: totrans-23
   prefs: []
   type: TYPE_NORMAL
+  zh: 确实！优化就是这样！我们不再使用`addstrategy`，而是使用`optstrategy`并传递一个`idx`值的数组。这些值将被优化引擎迭代。
 - en: Because `cerebro` can host several strategies in each optimization pass, the
     result will contain a *list of lists*. Each sublist is the result of each optimization
     pass.
+  id: totrans-24
   prefs: []
   type: TYPE_NORMAL
+  zh: 因为`cerebro`可以在每次优化中托管多个策略，结果将包含一个*列表的列表*。每个子列表是每次优化的结果。
 - en: In our case and with only 1 strategy per pass, we can quickly flatten the results
     and extract the values of the analyzer we have added.
+  id: totrans-25
   prefs: []
   type: TYPE_NORMAL
+  zh: 在我们的情况下，每次只有1个策略，我们可以快速展平结果并提取我们添加的分析器的值。
 - en: '[PRE3]'
+  id: totrans-26
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE3]'
 - en: A sample run
+  id: totrans-27
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 一个示例运行
 - en: '[PRE4]'
+  id: totrans-28
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE4]'
 - en: Our 2 strategies have been run and deliver (as expected) different results.
+  id: totrans-29
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们的2个策略已经运行并交付了（如预期的）不同的结果。
 - en: Note
+  id: totrans-30
   prefs: []
   type: TYPE_NORMAL
+  zh: 注意
 - en: The sample is minimal but has been run with all available CPUs. Executing it
     with `--maxpcpus=1` will be faster. For more complex scenarios using all CPUs
     will be useful.
+  id: totrans-31
   prefs: []
   type: TYPE_NORMAL
+  zh: 这个示例很简单，但已经在所有可用的CPU上运行过。使用`--maxpcpus=1`来执行会更快。对于更复杂的场景，使用所有CPU将会很有用。
 - en: Conclusion
+  id: totrans-32
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 结论
 - en: The *Strategy Selection* use case is possible and doesn’t need circumventing
     any of the built-in facilities in either *backtrader* or *Python* itself.
+  id: totrans-33
   prefs: []
   type: TYPE_NORMAL
+  zh: '*策略选择*用例是可能的，不需要绕过*backtrader*或*Python*本身的任何内置设施。'
 - en: Sample Usage
+  id: totrans-34
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 示例用法
 - en: '[PRE5]'
+  id: totrans-35
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE5]'
 - en: The code
+  id: totrans-36
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 代码
 - en: Which has been included in the sources of backtrader
+  id: totrans-37
   prefs: []
   type: TYPE_NORMAL
+  zh: 这已经包含在backtrader的源代码中
 - en: '[PRE6]'
+  id: totrans-38
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE6]'

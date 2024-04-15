@@ -1,71 +1,109 @@
 - en: Absolute Strengh Histogram
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 绝对强度柱
 - en: 原文：[https://www.backtrader.com/recipes/indicators/stochrsi/stochrsi/](https://www.backtrader.com/recipes/indicators/stochrsi/stochrsi/)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.backtrader.com/recipes/indicators/stochrsi/stochrsi/](https://www.backtrader.com/recipes/indicators/stochrsi/stochrsi/)
 - en: '*Stockcharts* and *Investopedia* have literature on this indicator.'
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: '*Stockcharts* 和 *Investopedia* 关于此指标有文献。'
 - en: '[StockCharts - StochRSI (ChartSchool)](https://stockcharts.com/school/doku.php?id=chart_school:technical_indicators:stochrsi)'
+  id: totrans-3
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[StockCharts - StochRSI (ChartSchool)](https://stockcharts.com/school/doku.php?id=chart_school:technical_indicators:stochrsi)'
 - en: '[Investopedia - Stochastic RSI - StochRSI Definition](https://www.investopedia.com/terms/s/stochrsi.asp)'
+  id: totrans-4
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[Investopedia - Stochastic RSI - StochRSI 定义](https://www.investopedia.com/terms/s/stochrsi.asp)'
 - en: 'With the formula being:'
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: 公式如下：
 - en: '`StochRSI = (RSI - min(RSI, period)) / (max(RSI, period) - min(RSI, period))`'
+  id: totrans-6
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`StochRSI = (RSI - min(RSI, period)) / (max(RSI, period) - min(RSI, period))`'
 - en: In theory the period to calculate the `RSI` is the same that will later be applied
     to find out the minimum and maximum values of the `RSI`. That means that if the
     chosen period is `14` (de-facto standard) for the `RSI`, the total look-back period
     for the indicator will be `28`
+  id: totrans-7
   prefs: []
   type: TYPE_NORMAL
+  zh: 理论上，用于计算`RSI`的周期与随后用于查找`RSI`的最小值和最大值的周期相同。这意味着如果选择的周期是`14`（事实上的标准）用于`RSI`，则指标的总回溯期将为`28`
 - en: Note
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: 注意
 - en: The actual look-back period will be a bit longer, because a 14-period `RSI`
     has a longer effective look-back period of `15`, as the comparison of the closing
     prices of the 1^(st) two periods is needed to kick-start the calculations
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: 实际回溯期将稍长，因为 `14` 期`RSI` 的有效回溯期为 `15`，因为需要比较前两个周期的收盘价格来启动计算
 - en: In any case, *backtrader* does calculate all the needed look-back and warm-up
     periods automatically.
+  id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: 在任何情况下，*backtrader* 会自动计算所有必需的回溯期和预热期。
 - en: 'Considering that the following are built-in indicators in *backtrader*:'
+  id: totrans-11
   prefs: []
   type: TYPE_NORMAL
+  zh: 考虑到以下是 *backtrader* 中的内置指标：
 - en: '`RSI`'
+  id: totrans-12
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`RSI`'
 - en: '`Lowest` (aka `MaxN`)'
+  id: totrans-13
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`Lowest`（又称`MaxN`）'
 - en: '`Highest` (aka `MinN`)'
+  id: totrans-14
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`Highest`（又称`MinN`）'
 - en: developing the `StochRSI` according to the formula seen above is straightforward.
+  id: totrans-15
   prefs: []
   type: TYPE_NORMAL
+  zh: 根据上述公式开发`StochRSI`是直接的。
 - en: '[PRE0]'
+  id: totrans-16
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: And here a view of how the indicator works
+  id: totrans-17
   prefs: []
   type: TYPE_NORMAL
+  zh: 这里是指标工作原理的一瞥
 - en: '![STOCHRSI View](../Images/7920769ed9c1ad01b1adc3765791f002.png)'
+  id: totrans-18
   prefs: []
   type: TYPE_IMG
+  zh: '![STOCHRSI 视图](../Images/7920769ed9c1ad01b1adc3765791f002.png)'

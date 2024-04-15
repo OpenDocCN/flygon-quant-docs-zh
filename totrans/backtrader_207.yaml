@@ -1,24 +1,38 @@
 - en: Money Flow Indicator
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 资金流动指标
 - en: 原文：[https://www.backtrader.com/recipes/indicators/mfi/mfi/](https://www.backtrader.com/recipes/indicators/mfi/mfi/)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.backtrader.com/recipes/indicators/mfi/mfi/](https://www.backtrader.com/recipes/indicators/mfi/mfi/)
 - en: Reference
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: 参考
 - en: '[https://school.stockcharts.com/doku.php?id=technical_indicators:money_flow_index_mfi](https://school.stockcharts.com/doku.php?id=technical_indicators:money_flow_index_mfi)'
+  id: totrans-3
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[https://school.stockcharts.com/doku.php?id=technical_indicators:money_flow_index_mfi](https://school.stockcharts.com/doku.php?id=technical_indicators:money_flow_index_mfi)'
 - en: '[PRE0]'
+  id: totrans-4
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: And here a view of how the indicator works
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: 这是指标运作的一个视角
 - en: '![MFI View](../Images/20ca39918a52217810921637153b451c.png)'
+  id: totrans-6
   prefs: []
   type: TYPE_IMG
+  zh: '![MFI 视图](../Images/20ca39918a52217810921637153b451c.png)'

@@ -1,266 +1,406 @@
 - en: Writers - Write it down
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: Writers - 写下来
 - en: 原文：[https://www.backtrader.com/blog/posts/2015-09-14-write-it-down/write-it-down/](https://www.backtrader.com/blog/posts/2015-09-14-write-it-down/write-it-down/)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.backtrader.com/blog/posts/2015-09-14-write-it-down/write-it-down/](https://www.backtrader.com/blog/posts/2015-09-14-write-it-down/write-it-down/)
 - en: 'With the 1.1.7.88 release backtrader gets a new addition: writers'
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: 随着1.1.7.88版本的发布，backtrader增加了一个新的功能：writers
 - en: 'This is probably long due and should have been there and the discussion in
     [Issue #14](https://github.com/mementum/backtrader/issues/14) should also have
     kicked started the development.'
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: 这可能是早该做的事情，应该一直都有，并且在[问题＃14](https://github.com/mementum/backtrader/issues/14)的讨论中也应该促进了发展。
 - en: But better late than never.
+  id: totrans-4
   prefs: []
   type: TYPE_NORMAL
+  zh: 迟做总比不做好。
 - en: The `Writer` implementation tries to remain in line with the other objects in
     the `backtrader` environment
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: '`Writer`实现试图与`backtrader`环境中的其他对象保持一致'
 - en: Get added over Cerebro
+  id: totrans-6
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 添加到Cerebro
 - en: Provide the most resonable defaults
+  id: totrans-7
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 提供最合理的默认值
 - en: Don’t force the user to do much
+  id: totrans-8
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 不要强迫用户做太多事情
 - en: 'Of course and of much more importance is to understand what the writer actually
     writes. And that is:'
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: 当然，更重要的是理解写手实际上写了什么。 这就是：
 - en: A CSV output of
+  id: totrans-10
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: CSV输出
 - en: '[PRE0]'
+  id: totrans-11
   prefs:
   - PREF_IND
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: 'Once the backtesting phase is over, `Writers` add a new section for the `Cerebro`
     instance and the following subsections are added:'
+  id: totrans-12
   prefs: []
   type: TYPE_NORMAL
+  zh: 一旦回测阶段结束，`Writers`为`Cerebro`实例添加一个新的部分，并添加以下子部分：
 - en: Properties of `datas` in the system (name, compression, timeframe)
+  id: totrans-13
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 系统中`datas`的属性（名称、压缩、时间框架）
 - en: Properties of `strategies` in the system (lines, params)
+  id: totrans-14
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 系统中`strategies`的属性（行、参数）
 - en: Properties of `indicators` in the strategies (lines, params)
+  id: totrans-15
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 策略中`indicators`的属性（行、参数）
 - en: Properties of `observers` in the strategies (lines, params)
+  id: totrans-16
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 策略中`observers`的属性（行、参数）
 - en: Analyzers with the following properties
+  id: totrans-17
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 具有以下特性的分析器
 - en: Params
+  id: totrans-18
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 参数
 - en: Analysis
+  id: totrans-19
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 分析
 - en: With all that in mind, an example may be the easiest way to show the power (or
     weakness) or the `writers`.
+  id: totrans-20
   prefs: []
   type: TYPE_NORMAL
+  zh: 在考虑所有这些的同时，一个例子可能是展示`writers`的功能（或弱点）的最简单方法。
 - en: But before how to add them to cerebro.
+  id: totrans-21
   prefs: []
   type: TYPE_NORMAL
+  zh: 但是在了解如何将它们添加到cerebro之前。
 - en: 'Using the `writer` param to `cerebro`:'
+  id: totrans-22
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 使用`writer`参数到`cerebro`：
 - en: '[PRE1]'
+  id: totrans-23
   prefs:
   - PREF_IND
   type: TYPE_PRE
+  zh: '[PRE1]'
 - en: This creates a default instance.
+  id: totrans-24
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 这创建了一个默认实例。
 - en: 'Specific addition:'
+  id: totrans-25
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 具体添加：
 - en: '[PRE2]'
+  id: totrans-26
   prefs:
   - PREF_IND
   type: TYPE_PRE
+  zh: '[PRE2]'
 - en: Adds (right now the only writer) a `WriterFile` class to the writer list to
     be later instantiated with `csv=False` (no csv stream will be generated in the
     output.
+  id: totrans-27
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 添加（现在是唯一的作者）一个`WriterFile`类到作者列表中，稍后用`csv=False`实例化（输出中不会生成csv流。
 - en: 'The long due example with a **long-short** strategy (see below for the full
     code) using a Close-SMA crossover as the signal by executing:'
+  id: totrans-28
   prefs: []
   type: TYPE_NORMAL
+  zh: 具有**多空**策略的长期示例（请参阅下面的完整代码），使用Close-SMA交叉作为信号进行执行：
 - en: '[PRE3]'
+  id: totrans-29
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE3]'
 - en: 'The chart:'
+  id: totrans-30
   prefs: []
   type: TYPE_NORMAL
+  zh: 图表：
 - en: '![image](../Images/8fbc9dd707eaa46f510262d8c478635c.png)'
+  id: totrans-31
   prefs: []
   type: TYPE_IMG
+  zh: '![image](../Images/8fbc9dd707eaa46f510262d8c478635c.png)'
 - en: 'With the following output:'
+  id: totrans-32
   prefs: []
   type: TYPE_NORMAL
+  zh: 具有以下输出：
 - en: '[PRE4]'
+  id: totrans-33
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE4]'
 - en: After the run we have a complete summary of how the system is setup and at the
     end what the analzyers say. In this case the analyzers are
+  id: totrans-34
   prefs: []
   type: TYPE_NORMAL
+  zh: 运行后，我们有了一个完整的摘要，显示系统的设置以及分析器的意见。 在这种情况下，分析器是
 - en: '`Value` which is a fake analyzer inside the strategy which collects the starting
     and ending values of the portfolio'
+  id: totrans-35
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`Value`是策略内部的一个虚拟分析器，它收集了组合的起始值和结束值'
 - en: '`SQN` (or SystemQualityNumber) defined by Van K. Tharp (addition to `backtrader`
     1.1.7.88 which is telling us that it has seen 22 trades and has calculated a `sqn`
     of 0.05.'
+  id: totrans-36
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`SQN`（或SystemQualityNumber）由Van K. Tharp定义（增加到`backtrader` 1.1.7.88，告诉我们它已经看到了22笔交易，并且计算了`sqn`为0.05。'
 - en: This is actually pretty low. We could have figured it out by looking at the
     small profit after a full year (luckily the system loses no money)
+  id: totrans-37
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 这实际上相当低。 我们本可以通过观察完整一年后的微薄利润来发现这一点（幸运的是，系统不会亏损）
 - en: 'The test script allows us to tune the strategy to become **long-only**:'
+  id: totrans-38
   prefs: []
   type: TYPE_NORMAL
+  zh: 测试脚本允许我们调整策略以变为**仅多头**：
 - en: '[PRE5]'
+  id: totrans-39
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE5]'
 - en: 'The chart:'
+  id: totrans-40
   prefs: []
   type: TYPE_NORMAL
+  zh: 图表：
 - en: '![image](../Images/1d6eb8cb2bdedfb5e403a16310ad5d5e.png)'
+  id: totrans-41
   prefs: []
   type: TYPE_IMG
+  zh: '![image](../Images/1d6eb8cb2bdedfb5e403a16310ad5d5e.png)'
 - en: 'The output being now:'
+  id: totrans-42
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在的输出是：
 - en: '[PRE6]'
+  id: totrans-43
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE6]'
 - en: 'The changes in the “params” to the strategy can be seen (onlylong has turned
     to True) and the Analyzers tell a different story:'
+  id: totrans-44
   prefs: []
   type: TYPE_NORMAL
+  zh: “params”对策略的更改可见（onlylong已转为True），分析器讲述了一个不同的故事：
 - en: Ending value improved from 100826.1 to 102795.0
+  id: totrans-45
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 结束值从100826.1提高到102795.0
 - en: Trades seen by SQN down to 11 from 22
+  id: totrans-46
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: SQN看到的交易从22减少到11
 - en: The SQN score grows from 0.05 to 0.91 which is much much better
+  id: totrans-47
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: SQN分数从0.05增长到0.91，好得多得多
 - en: 'But still there is no CSV output to be seen. Let’s run the script to turn it
     on:'
+  id: totrans-48
   prefs: []
   type: TYPE_NORMAL
+  zh: 但是仍然看不到CSV输出。 让我们运行脚本来打开它：
 - en: '[PRE7]'
+  id: totrans-49
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE7]'
 - en: 'With renewed output:'
+  id: totrans-50
   prefs: []
   type: TYPE_NORMAL
+  zh: 带有更新的输出：
 - en: '[PRE8]'
+  id: totrans-51
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE8]'
 - en: We can skip most of the csv stream and the already seen summaries. The CSV stream
     has printe out the following
+  id: totrans-52
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们可以跳过大部分的 CSV 流和已经看过的摘要。CSV 流已经打印出以下内容
 - en: A section line separator at the beginning
+  id: totrans-53
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 一个部分线分隔符在开头
 - en: A header row
+  id: totrans-54
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 一个标题行
 - en: The corresponding data
+  id: totrans-55
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 相应的数据
 - en: Note how each object gets its “length” printed. Although in this case it doesn’t
     offer much information, it will if multi-timeframe datas are used or data is replayed.
+  id: totrans-56
   prefs: []
   type: TYPE_NORMAL
+  zh: 注意每个对象的“长度”是如何被打印出来的。虽然在这种情况下它并没有提供太多信息，但如果使用了多时间框数据或者数据被重播，它将提供信息。
 - en: 'The `writer` defaults do the following:'
+  id: totrans-57
   prefs: []
   type: TYPE_NORMAL
+  zh: '`writer` 的默认设置如下：'
 - en: No indicators are printed (neither the Simple Moving Average nor the CrossOver)
+  id: totrans-58
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 没有指标被打印出来（既没有简单移动平均线也没有交叉点）
 - en: The obsevers are printed
+  id: totrans-59
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 观察者被打印出来
 - en: 'Let’s run the script with an additional parameter to have the CrossOver indicator
     added to the CSV stream:'
+  id: totrans-60
   prefs: []
   type: TYPE_NORMAL
+  zh: 让我们运行脚本并附加一个参数，将 CrossOver 指示器添加到 CSV 流中：
 - en: '[PRE9]'
+  id: totrans-61
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE9]'
 - en: 'The output:'
+  id: totrans-62
   prefs: []
   type: TYPE_NORMAL
+  zh: 输出：
 - en: '[PRE10]'
+  id: totrans-63
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE10]'
 - en: This has shown some of the powers of the writers. Further documentation of the
     class is still a to-do.
+  id: totrans-64
   prefs: []
   type: TYPE_NORMAL
+  zh: 这展示了写入器的一些功能。该类的进一步文档仍然是一个待办事项。
 - en: Meanwhile the execution possibilities and code used for the example.
+  id: totrans-65
   prefs: []
   type: TYPE_NORMAL
+  zh: 与此同时是执行可能性和用于示例的代码。
 - en: 'Usage:'
+  id: totrans-66
   prefs: []
   type: TYPE_NORMAL
+  zh: 用法：
 - en: '[PRE11]'
+  id: totrans-67
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE11]'
 - en: And the test script.
+  id: totrans-68
   prefs: []
   type: TYPE_NORMAL
+  zh: 和测试脚本。
 - en: '[PRE12]'
+  id: totrans-69
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE12]'

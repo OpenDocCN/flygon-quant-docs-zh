@@ -1,478 +1,740 @@
 - en: Automating BackTesting
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 自动化回测
 - en: 原文：[https://www.backtrader.com/docu/automated-bt-run/automated-bt-run/](https://www.backtrader.com/docu/automated-bt-run/automated-bt-run/)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.backtrader.com/docu/automated-bt-run/automated-bt-run/](https://www.backtrader.com/docu/automated-bt-run/automated-bt-run/)
 - en: So far all `backtrader` examples and working samples have started from scratch
     creating a main **Python** module which loads datas, strategies, observers and
     prepares cash and commission schemes.
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: 到目前为止，所有的`backtrader`示例和工作样本都是从头开始创建一个主要的**Python**模块，该模块加载数据、策略、观察器，并准备好现金和佣金方案。
 - en: One of the goals of *algorithmic trading* is the automation of trading and given
     that backtrader is a *backtesting* platform intented to check trading algorithms
     (hence is an *algotrading* platform), automating the use of backtrader was an
     obvious goal.
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: '*算法交易*的一个目标之一是交易的自动化，鉴于 backtrader 是一个用于检查交易算法的*回测*平台（因此是一个*算法交易*平台），自动化使用
+    backtrader 是一个明显的目标。'
 - en: 'When installed `backtrader` provides 2 entry points in the form of scripts/executables
     which which automates most tasks:'
+  id: totrans-4
   prefs: []
   type: TYPE_NORMAL
+  zh: 当安装`backtrader`时，它提供了两个脚本/可执行文件形式的入口点，可以自动化大多数任务：
 - en: '`bt-run-py` a script which uses the codebase from the next item'
+  id: totrans-5
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`bt-run-py` 一个使用下一项中的代码库的脚本'
 - en: and
+  id: totrans-6
   prefs: []
   type: TYPE_NORMAL
+  zh: 和
 - en: '`btrun` (executable)'
+  id: totrans-7
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`btrun`（可执行文件）'
 - en: Entry point created by `setuptools` during packaging. The executable offers
     advantages under Windows where in theory no errors about “path/file not found”
     will happen.
+  id: totrans-8
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 打包过程中由`setuptools`创建的入口点。在理论上，在 Windows 下不会出现“路径/文件未找到”的错误。
 - en: The description below applies equally to both tools.
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: 下面的描述同样适用于这两个工具。
 - en: '`btrun` allows the end user to:'
+  id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: '`btrun` 允许最终用户：'
 - en: Say which data feeds have to be loaded
+  id: totrans-11
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 说出必须加载的数据源
 - en: Set the format to load the datas
+  id: totrans-12
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 设置加载数据的格式
 - en: Specify the date range for the datas
+  id: totrans-13
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 指定数据的日期范围
 - en: Pass parameters to Cerebro
+  id: totrans-14
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 向 Cerebro 传递参数
 - en: Disable standard observers
+  id: totrans-15
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 禁用标准观察器
 - en: This was an original extra switch before the “Cerebro” parameters were implemented.
     As such and if a parameter to cerebro with regards to Standard Observers is passed,
     this will be ignored (parameter `stdstats` to Cerebro)
+  id: totrans-16
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 这是在“Cerebro”参数实现之前的一个原始额外开关。因此，如果向 cerebro 传递关于标准观察器的参数，这将被忽略（参数`stdstats`到
+    Cerebro）
 - en: 'Load one or more observers (example: `DrawDown`) from the built-in ones or
     from a python module'
+  id: totrans-17
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 加载一个或多个观察器（例如：`DrawDown`）从内置的或来自 Python 模块
 - en: Set the cash and commission scheme parameters for the broker (commission, margin,
     mult)
+  id: totrans-18
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 为经纪人设置现金和佣金方案参数（佣金、保证金、倍数）
 - en: Enable plotting, controlling the amount of charts and style to present the data
+  id: totrans-19
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 启用绘图，控制图表的数量和数据呈现的样式
 - en: Add a parametrized writer to the system
+  id: totrans-20
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 向系统添加一个带参数的写入器
 - en: 'And finally what should be the core competence:'
+  id: totrans-21
   prefs: []
   type: TYPE_NORMAL
+  zh: 最后应该是核心能力是什么：
 - en: Load a strategy (a built-in one or from a Python module)
+  id: totrans-22
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 加载一个策略（内置的或来自 Python 模块）
 - en: Pass parameters to the loaded strategy
+  id: totrans-23
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 向加载的策略传递参数
 - en: See below for the **Usage** of the script.
+  id: totrans-24
   prefs: []
   type: TYPE_NORMAL
+  zh: 请参阅下面关于脚本的**使用**。
 - en: Applying a User Defined Strategy
+  id: totrans-25
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 应用用户定义的策略
 - en: 'Let’s consider the following strategy which:'
+  id: totrans-26
   prefs: []
   type: TYPE_NORMAL
+  zh: 让我们考虑以下策略：
 - en: Simply loads a SimpleMovingAverage (default period 15)
+  id: totrans-27
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 简单加载一个 SimpleMovingAverage（默认周期为 15）
 - en: Prints outs
+  id: totrans-28
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 打印输出
 - en: Is in a file named `mymod.py`
+  id: totrans-29
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 存储在一个名为`mymod.py`的文件中
 - en: '[PRE0]'
+  id: totrans-30
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: 'Executing the strategy with the usual testing sample is easy: easy:'
+  id: totrans-31
   prefs: []
   type: TYPE_NORMAL
+  zh: 使用通常的测试样本执行策略很容易：
 - en: '[PRE1]'
+  id: totrans-32
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE1]'
 - en: The chart output
+  id: totrans-33
   prefs: []
   type: TYPE_NORMAL
+  zh: 图表输出
 - en: '![image](../Images/a524490035d20f2863d012beb92780a8.png)'
+  id: totrans-34
   prefs: []
   type: TYPE_IMG
+  zh: '![image](../Images/a524490035d20f2863d012beb92780a8.png)'
 - en: 'The console output:'
+  id: totrans-35
   prefs: []
   type: TYPE_NORMAL
+  zh: 控制台输出：
 - en: '[PRE2]'
+  id: totrans-36
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE2]'
 - en: 'Same strategy but:'
+  id: totrans-37
   prefs: []
   type: TYPE_NORMAL
+  zh: 相同的策略，但：
 - en: Setting the parameter `period` to 50
+  id: totrans-38
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 将参数`period`设置为 50
 - en: 'The command line:'
+  id: totrans-39
   prefs: []
   type: TYPE_NORMAL
+  zh: 命令行：
 - en: '[PRE3]'
+  id: totrans-40
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE3]'
 - en: The chart output.
+  id: totrans-41
   prefs: []
   type: TYPE_NORMAL
+  zh: 图表输出。
 - en: '![image](../Images/fe3b0459f251dabfb378ac3c308ff7bf.png)'
+  id: totrans-42
   prefs: []
   type: TYPE_IMG
+  zh: '![image](../Images/fe3b0459f251dabfb378ac3c308ff7bf.png)'
 - en: Note
+  id: totrans-43
   prefs: []
   type: TYPE_NORMAL
+  zh: 注意
 - en: if no `.py` extension is given, bt-run will add it.
+  id: totrans-44
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果没有给出`.py`扩展名，bt-run 将会添加它。
 - en: Using a built-in Strategy
+  id: totrans-45
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 使用内置策略
 - en: '`backtrader` will slowly be including sample (textbook) strategies. Along with
     the `bt-run.py` script a standard *Simple Moving Average CrossOver* strategy is
     included. The name:'
+  id: totrans-46
   prefs: []
   type: TYPE_NORMAL
+  zh: '`backtrader` 将逐渐包含样例（教科书）策略。与 `bt-run.py` 脚本一起，一个标准的*简单移动平均线交叉*策略已经包含在内。这个名称：'
 - en: '`SMA_CrossOver`'
+  id: totrans-47
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`SMA_CrossOver`'
 - en: Parameters
+  id: totrans-48
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 参数
 - en: '`fast` (default `10`) period of the fast moving average'
+  id: totrans-49
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`fast`（默认 `10`）快速移动平均线的周期'
 - en: '`slow` (default `30`) period of the slow moving average'
+  id: totrans-50
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`slow`（默认 `30`）慢速移动平均线的周期'
 - en: The strategy buys if the fast moving average crosses up the fast and sells (only
     if it has bought before) upon the fast moving average crossing down the slow moving
     average.
+  id: totrans-51
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果快速移动平均线上穿过快速移动平均线，则策略买入，如果它以前已经买入，则在快速移动平均线下穿过慢速移动平均线时卖出。
 - en: The code
+  id: totrans-52
   prefs: []
   type: TYPE_NORMAL
+  zh: 代码
 - en: '[PRE4]'
+  id: totrans-53
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE4]'
 - en: 'Standard execution:'
+  id: totrans-54
   prefs: []
   type: TYPE_NORMAL
+  zh: 标准执行：
 - en: '[PRE5]'
+  id: totrans-55
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE5]'
 - en: 'Notice the `:`. The standard notation (see below) to load a strategy is:'
+  id: totrans-56
   prefs: []
   type: TYPE_NORMAL
+  zh: 请注意 `:`。加载策略的标准表示法（见下文）是：
 - en: '`module:stragegy:kwargs`'
+  id: totrans-57
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`module:stragegy:kwargs`'
 - en: 'With the following rules:'
+  id: totrans-58
   prefs: []
   type: TYPE_NORMAL
+  zh: 使用以下规则：
 - en: If module is there and strategy is specified, then that strategy will be used
+  id: totrans-59
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 如果存在模块和/或策略，则将使用该策略
 - en: If module is there but no strategy is specified, the 1^(st) strategy found in
     the module will be returned
+  id: totrans-60
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 如果模块存在但未指定策略，则将返回模块中找到的第 1 个策略
 - en: If no module is specified, “strategy” is assumed to refer to a strategy in the
     `backtrader` package
+  id: totrans-61
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 如果没有指定模块，则假定“strategy”是指 backtrader 包中的策略
 - en: If module and/or strategy are there, if kwargs are present they will be passed
     to the corresponding strategy
+  id: totrans-62
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 如果存在模块和/或策略，并且存在 kwargs，则将其传递给相应的策略
 - en: Note
+  id: totrans-63
   prefs: []
   type: TYPE_NORMAL
+  zh: 注意
 - en: The same notation and rules apply to `--observer`, `--analyzer` and `--indicator`
     options
+  id: totrans-64
   prefs: []
   type: TYPE_NORMAL
+  zh: 相同的表示法和规则适用于 `--observer`、`--analyzer` 和 `--indicator` 选项
 - en: Obviously for the corresponding object types
+  id: totrans-65
   prefs: []
   type: TYPE_NORMAL
+  zh: 显然，适用于相应的对象类型
 - en: The output
+  id: totrans-66
   prefs: []
   type: TYPE_NORMAL
+  zh: 输出
 - en: '![image](../Images/3b04cb8aad6316d847b760b0183cae12.png)'
+  id: totrans-67
   prefs: []
   type: TYPE_IMG
+  zh: '![image](../Images/3b04cb8aad6316d847b760b0183cae12.png)'
 - en: 'One last example adding commission schemes, cash and changing the parameters:'
+  id: totrans-68
   prefs: []
   type: TYPE_NORMAL
+  zh: 最后一个例子，添加佣金方案，现金和更改参数：
 - en: '[PRE6]'
+  id: totrans-69
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE6]'
 - en: The output
+  id: totrans-70
   prefs: []
   type: TYPE_NORMAL
+  zh: 输出
 - en: '![image](../Images/ab27199138a32cb7a404d0ef2f807779.png)'
+  id: totrans-71
   prefs: []
   type: TYPE_IMG
+  zh: '![image](../Images/ab27199138a32cb7a404d0ef2f807779.png)'
 - en: 'We have backtested the strategy:'
+  id: totrans-72
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们已经对策略进行了回测：
 - en: Changing the moving average periods
+  id: totrans-73
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 更改移动平均周期
 - en: Setting a new starting cash
+  id: totrans-74
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 设置新的起始现金
 - en: Putting a commission scheme in place for a futures-like instrument
+  id: totrans-75
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 为类似期货的工具设置佣金方案
 - en: See the continuous variations in cash with each bar, as cash is adjusted for
     the futures-like instrument daily changes
+  id: totrans-76
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 请注意每个柱状图中现金的连续变化，因为现金会根据类似期货的工具的每日变化进行调整
 - en: Using no Strategy
+  id: totrans-77
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 不使用策略
 - en: This is a an over-statement. A strategy will be applied, but you can ommit any
     kind of strategy and a default backtrader.Strategy will be added.
+  id: totrans-78
   prefs: []
   type: TYPE_NORMAL
+  zh: 这是一种言过其实的说法。将应用一种策略，但您可以忽略任何类型的策略，并添加默认的 backtrader.Strategy。
 - en: Analyzers, Observers and Indicators will be automatically injected in the strategy.
+  id: totrans-79
   prefs: []
   type: TYPE_NORMAL
+  zh: 分析器、观察者和指标将自动注入策略中。
 - en: 'An example:'
+  id: totrans-80
   prefs: []
   type: TYPE_NORMAL
+  zh: 一个例子：
 - en: '[PRE7]'
+  id: totrans-81
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE7]'
 - en: 'This will do not much but serves the purpose:'
+  id: totrans-82
   prefs: []
   type: TYPE_NORMAL
+  zh: 这将没有太大作用，但达到了预期目的：
 - en: A default backtrader.Strategy is added in the background
+  id: totrans-83
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 默认添加了一个 backtrader.Strategy
 - en: Cerebro will not instantiate the regular `stdstats` observers (Broker, BuySell,
     Trades)
+  id: totrans-84
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: Cerebro 不会实例化常规的 `stdstats` 观察者（经纪人、买卖、交易）
 - en: A `Broker` observer is added manually
+  id: totrans-85
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 手动添加一个 `Broker` 观察者
 - en: 'As mentioned above, the `nostdstats` is a legacy parameter. Newer versions
     of `btrun` can pass parameters directly to `Cerebro`. An equivalent invocation
     would be:'
+  id: totrans-86
   prefs: []
   type: TYPE_NORMAL
+  zh: 如上所述，`nostdstats` 是一个遗留参数。较新版本的 `btrun` 可以直接将参数传递给 `Cerebro`。等效的调用将是：
 - en: '[PRE8]'
+  id: totrans-87
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE8]'
 - en: Adding Analyzers
+  id: totrans-88
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 添加分析器
 - en: '`btrun` also supports adding `Analyzers` with the same syntax used for the
     strategies to choose between internal/external analyzers.'
+  id: totrans-89
   prefs: []
   type: TYPE_NORMAL
+  zh: '`btrun` 还支持使用与选择策略相同的语法添加 `Analyzers`。'
 - en: 'Example with a `SharpeRatio` analysis for the years 2005-2006:'
+  id: totrans-90
   prefs: []
   type: TYPE_NORMAL
+  zh: 对于 2005-2006 年的 `SharpeRatio` 分析的示例：
 - en: '[PRE9]'
+  id: totrans-91
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE9]'
 - en: The console output is **nothing**.
+  id: totrans-92
   prefs: []
   type: TYPE_NORMAL
+  zh: 控制台输出为 **nothing**。
 - en: 'If a printout of the `Analyzer` results is wished, it must be specified with:'
+  id: totrans-93
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果希望打印 `Analyzer` 结果，则必须指定：
 - en: '`--pranalyzer` which defaults to calling the next one (unless the Analyzer
     has overriden the proper method)'
+  id: totrans-94
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`--pranalyzer` 默认调用下一个（除非分析器已经覆盖了正确的方法）'
 - en: '`--ppranalyzer` which uses the `pprint` module to print the results'
+  id: totrans-95
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`--ppranalyzer` 使用 `pprint` 模块打印结果'
 - en: Note
+  id: totrans-96
   prefs: []
   type: TYPE_NORMAL
+  zh: 注意
 - en: The two printing options were implemented before `writers` were part of backtrader.
     Adding a writer without csv output will achieve the same (and the output has been
     improved)
+  id: totrans-97
   prefs: []
   type: TYPE_NORMAL
+  zh: 在 `writers` 成为 backtrader 的一部分之前，两个打印选项已经实现。添加一个没有 csv 输出的 writer 将达到相同的效果（输出已经得到改进）
 - en: 'Extending the example from above:'
+  id: totrans-98
   prefs: []
   type: TYPE_NORMAL
+  zh: 扩展上面的示例：
 - en: '[PRE10]'
+  id: totrans-99
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE10]'
 - en: Good strategy!!! (Pure luck for the example actually which also bears no commissions)
+  id: totrans-100
   prefs: []
   type: TYPE_NORMAL
+  zh: 好战略！！！（事实上，这只是一个例子，也没有佣金）
 - en: The chart (which simply shows the Analyzer is not in the plot, because Analyzers
     cannot be plotted, they aren’t lines objects)
+  id: totrans-101
   prefs: []
   type: TYPE_NORMAL
+  zh: 图表（仅显示分析器不在图中，因为分析器不能绘制，它们不是线对象）
 - en: '![image](../Images/6f56849fe7ed18a423987a62d0453be0.png)'
+  id: totrans-102
   prefs: []
   type: TYPE_IMG
+  zh: '![image](../Images/6f56849fe7ed18a423987a62d0453be0.png)'
 - en: 'The same example but using a `writer` argument:'
+  id: totrans-103
   prefs: []
   type: TYPE_NORMAL
+  zh: 相同的例子，但使用了 `writer` 参数：
 - en: '[PRE11]'
+  id: totrans-104
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE11]'
 - en: Adding Indicators and Observers
+  id: totrans-105
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 添加指标和观察者
 - en: 'As with `Strategies` and `Analyzers` btrun can also add:'
+  id: totrans-106
   prefs: []
   type: TYPE_NORMAL
+  zh: 与 `Strategies` 和 `Analyzers` 一样，btrun 也可以添加：
 - en: '`Indicators`'
+  id: totrans-107
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`指标`'
 - en: and
+  id: totrans-108
   prefs: []
   type: TYPE_NORMAL
+  zh: 和
 - en: '`Observers`'
+  id: totrans-109
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`观察者`'
 - en: The syntax is exactly the same as seen above when adding a `Broker` observer.
+  id: totrans-110
   prefs: []
   type: TYPE_NORMAL
+  zh: 当添加 `Broker` 观察者时，语法与上面看到的完全相同。
 - en: 'Let’s repeat the example but adding a `Stochastic`, the `Broker` and having
     a look at the plot (we’ll change some parameters):'
+  id: totrans-111
   prefs: []
   type: TYPE_NORMAL
+  zh: 让我们重复一下例子，但添加一个 `Stochastic`，`Broker` 并查看图表（我们将更改一些参数）：
 - en: '[PRE12]'
+  id: totrans-112
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE12]'
 - en: The chart
+  id: totrans-113
   prefs: []
   type: TYPE_NORMAL
+  zh: 图表
 - en: '![image](../Images/f2bb5e94576b2e172870a0921d2db187.png)'
+  id: totrans-114
   prefs: []
   type: TYPE_IMG
+  zh: '![image](../Images/f2bb5e94576b2e172870a0921d2db187.png)'
 - en: Plotting Control
+  id: totrans-115
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 绘图控制
 - en: 'Most of the above examples have used the following option:'
+  id: totrans-116
   prefs: []
   type: TYPE_NORMAL
+  zh: 上面大部分的例子都使用了以下选项：
 - en: '`--plot` which has activated the creation a default plot'
+  id: totrans-117
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`--plot` 激活了默认图表的创建'
 - en: More control can be achieved by adding `kwargs` to the `--plot` option
+  id: totrans-118
   prefs: []
   type: TYPE_NORMAL
+  zh: 通过向 `--plot` 选项添加 `kwargs` 可以实现更多控制
 - en: '`--plot style="candle"` for example to plot with candlesticks instead of plotting
     with a `LineOnClose` style (which is the plotting default)'
+  id: totrans-119
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 例如，使用 `--plot style="candle"` 来绘制蜡烛图，而不是使用 `LineOnClose` 样式（这是默认的绘图样式）
 - en: 'The invocation:'
+  id: totrans-120
   prefs: []
   type: TYPE_NORMAL
+  zh: 调用：
 - en: '[PRE13]'
+  id: totrans-121
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE13]'
 - en: Note
+  id: totrans-122
   prefs: []
   type: TYPE_NORMAL
+  zh: 注意
 - en: The quotes around `candle` are quoted with backslashed `\\` because the example
     is being run in a bash shell which removes that before passing the arguments to
     the script.
+  id: totrans-123
   prefs: []
   type: TYPE_NORMAL
+  zh: 因为示例在 bash shell 中运行，该 shell 在传递参数给脚本之前会删除反斜杠，所以围绕 `candle` 的引号被反斜杠 `\\` 引用。
 - en: Backslash quoting is needed in this case to ensure “bar” makes it to the script
     and can be evaluated as a string
+  id: totrans-124
   prefs: []
   type: TYPE_NORMAL
+  zh: 在这种情况下需要使用反斜杠引用，以确保“bar”传递到脚本并可以作为字符串进行评估
 - en: The chart
+  id: totrans-125
   prefs: []
   type: TYPE_NORMAL
+  zh: 图表
 - en: '![image](../Images/7490f8db479810714e92f43702a3097e.png)'
+  id: totrans-126
   prefs: []
   type: TYPE_IMG
+  zh: '![image](../Images/7490f8db479810714e92f43702a3097e.png)'
 - en: Usage of the script
+  id: totrans-127
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 脚本的用法
 - en: 'Directly from the script:'
+  id: totrans-128
   prefs: []
   type: TYPE_NORMAL
+  zh: 直接从脚本中：
 - en: '[PRE14]'
+  id: totrans-129
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE14]'

@@ -1,175 +1,263 @@
 - en: A Generic CSV Data Feed
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 通用CSV数据源
 - en: 原文：[https://www.backtrader.com/blog/posts/2015-08-04-generic-csv-datafeed/generic-csv-datafeed/](https://www.backtrader.com/blog/posts/2015-08-04-generic-csv-datafeed/generic-csv-datafeed/)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.backtrader.com/blog/posts/2015-08-04-generic-csv-datafeed/generic-csv-datafeed/](https://www.backtrader.com/blog/posts/2015-08-04-generic-csv-datafeed/generic-csv-datafeed/)
 - en: An issue has led to the implementation of **GenericCSVData** which can be used
     to parse different CSV formats.
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: 一个问题导致实现了**GenericCSVData**，可用于解析不同的CSV格式。
 - en: 'The issue in GitHub, [Issue #6](https://github.com/mementum/backtrader/issues/6)
     clearly shows there is a need to have something that can actually handle any incoming
     CSV data feed.'
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: 'GitHub上的问题，[Issue #6](https://github.com/mementum/backtrader/issues/6)清楚地显示需要有能够处理任何传入CSV数据源的东西。'
 - en: 'The sauce is in the params declaration:'
+  id: totrans-4
   prefs: []
   type: TYPE_NORMAL
+  zh: 参数声明中包含关键信息：
 - en: '[PRE0]'
+  id: totrans-5
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: 'Because the class inherits from CSVDataBase, some standard paramenters are
     available:'
+  id: totrans-6
   prefs: []
   type: TYPE_NORMAL
+  zh: 因为该类继承自CSVDataBase，一些标准参数可用：
 - en: '`fromdate` (takes a datetime object to limit the starting date)'
+  id: totrans-7
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`fromdate`（接受日期时间对象以限制起始日期）'
 - en: '`todate` (takes a datetime object) to limit the ending date)'
+  id: totrans-8
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`todate`（接受日期时间对象）以限制结束日期）'
 - en: '`headers` (default: True, indicating if the CSV data has a headers row)'
+  id: totrans-9
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`headers`（默认值：True，指示CSV数据是否有标题行）'
 - en: '`separator` (default: “,”, the character separating the fields)'
+  id: totrans-10
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`separator`（默认值：“,”，分隔字段的字符）'
 - en: '`dataname` (name of the file which has the CSV data or a file-like object)'
+  id: totrans-11
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`dataname`（包含CSV数据的文件名或类似文件的对象）'
 - en: Some other parameters like `name`, `compression` and `timeframe` are just informative
     unless you plan to execute resampling.
+  id: totrans-12
   prefs: []
   type: TYPE_NORMAL
+  zh: 其他一些参数如`name`，`compression`和`timeframe`仅供参考，除非您计划执行重新采样。
 - en: 'Of course more importantly, the meaning of the newly define parameters:'
+  id: totrans-13
   prefs: []
   type: TYPE_NORMAL
+  zh: 当然更重要的是，新定义参数的含义：
 - en: '`datetime` (default: 0) column containing the date (or datetime) field'
+  id: totrans-14
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`datetime`（默认值：0）列包含日期（或日期时间）字段'
 - en: '`time` (default: -1) column containing the time field if separate from the
     datetime field (-1 indicates it’s not present)'
+  id: totrans-15
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`time`（默认值：-1）列包含时间字段，如果与日期时间字段分开（-1表示不存在）'
 - en: '`open` (default: 1) , `high` (default: 2), `low` (default: 3), `close` (default:
     4), `volume` (default: 5), `openinterest` (default: 6)'
+  id: totrans-16
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`open`（默认值：1），`high`（默认值：2），`low`（默认值：3），`close`（默认值：4），`volume`（默认值：5），`openinterest`（默认值：6）'
 - en: Index of the columns containing the corresponding fields
+  id: totrans-17
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 包含相应字段的列的索引
 - en: 'If a negative value is passed (example: -1) it indicates the field is not present
     in the CSV data'
+  id: totrans-18
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 如果传递负值（例如：-1），表示CSV数据中不存在该字段
 - en: '`nullvalue` (default: float(‘NaN’))'
+  id: totrans-19
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`nullvalue`（默认值：float（''NaN''））'
 - en: Value that will be used if a value which should be there is missing (the CSV
     field is empty)
+  id: totrans-20
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 如果应该存在的值缺失（CSV字段为空），将使用的值
 - en: '`dtformat` (default: %Y-%m-%d %H:%M:%S)'
+  id: totrans-21
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`dtformat`（默认值：%Y-%m-%d %H:%M:%S）'
 - en: Format used to parse the datetime CSV field
+  id: totrans-22
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 用于解析日期时间CSV字段的格式
 - en: '`tmformat` (default: %H:%M:%S)'
+  id: totrans-23
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`tmformat`（默认值：%H:%M:%S）'
 - en: Format used to parse the time CSV field if “present” (the default for the “time”
     CSV field is not to be present)
+  id: totrans-24
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 用于解析时间CSV字段的格式（如果“存在”）（“时间”CSV字段的默认值是不存在）
 - en: This should probably suffice to cover many different CSV formats and the absence
     of values.
+  id: totrans-25
   prefs: []
   type: TYPE_NORMAL
+  zh: 这可能足以涵盖许多不同的CSV格式和值的缺失。
 - en: 'An example usage covering the following requirements:'
+  id: totrans-26
   prefs: []
   type: TYPE_NORMAL
+  zh: 涵盖以下要求的示例用法：
 - en: Limit input to year 2000
+  id: totrans-27
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 限制输入至2000年
 - en: HLOC order rather than OHLC
+  id: totrans-28
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: HLOC顺序而不是OHLC
 - en: Missing values to be replaced with zero (0.0)
+  id: totrans-29
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 缺失值将被替换为零（0.0）
 - en: Daily bars are provided and datetime is just the day with format YYYY-MM-DD
+  id: totrans-30
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 提供每日K线数据，日期时间格式为YYYY-MM-DD
 - en: No `openinterest` column is present
+  id: totrans-31
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 没有`openinterest`列存在
 - en: 'The code:'
+  id: totrans-32
   prefs: []
   type: TYPE_NORMAL
+  zh: 代码：
 - en: '[PRE1]'
+  id: totrans-33
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE1]'
 - en: 'Slightly modified requirements:'
+  id: totrans-34
   prefs: []
   type: TYPE_NORMAL
+  zh: 稍微修改的要求：
 - en: Limit input to year 2000
+  id: totrans-35
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 限制输入至2000年
 - en: HLOC order rather than OHLC
+  id: totrans-36
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: HLOC顺序而不是OHLC
 - en: Missing values to be replaced with zero (0.0)
+  id: totrans-37
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 缺失值将被替换为零（0.0）
 - en: Intraday bars are provided, with separate date and time columns
+  id: totrans-38
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 提供分钟级K线数据，具有单独的日期和时间列
 - en: Date has format YYYY-MM-DD
+  id: totrans-39
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 日期格式为YYYY-MM-DD
 - en: Time has format HH.MM.SS
+  id: totrans-40
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 时间格式为HH.MM.SS
 - en: No `openinterest` column is present
+  id: totrans-41
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 没有`openinterest`列存在
 - en: 'The code:'
+  id: totrans-42
   prefs: []
   type: TYPE_NORMAL
+  zh: 代码：
 - en: '[PRE2]'
+  id: totrans-43
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE2]'

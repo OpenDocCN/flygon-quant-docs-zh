@@ -1,222 +1,334 @@
 - en: Trading Cryptocurrency Fractional Sizes in backtrader
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 在backtrader中交易加密货币的分数大小
 - en: 原文：[https://www.backtrader.com/blog/posts/2019-08-29-fractional-sizes/fractional-sizes/](https://www.backtrader.com/blog/posts/2019-08-29-fractional-sizes/fractional-sizes/)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.backtrader.com/blog/posts/2019-08-29-fractional-sizes/fractional-sizes/](https://www.backtrader.com/blog/posts/2019-08-29-fractional-sizes/fractional-sizes/)
 - en: 'To start with, let''s summarize in two lines how the approach to *backtrader*
     works:'
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: 首先，让我们用两行总结一下*backtrader*的工作方式：
 - en: It is like a construction kit with a basic building block (`Cerebro`) into which
     many different pieces can be plugged in
+  id: totrans-3
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 就像一个基本构建块（`Cerebro`）的构建套件，可以将许多不同的部件插入其中
 - en: The basic distribution contains many pieces like *Indicators*, *Analyzers*,
     *Observers*, *Sizers*, *Filters*, *Data Feeds*, *Brokers*, *Commission/Asset Info
     Schemes*, ...
+  id: totrans-4
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 基本分发包含许多部件，如*指标*、*分析器*、*观察器*、*调整器*、*过滤器*、*数据源*、*经纪人*、*佣金/资产信息方案*，...
 - en: New building blocks can be easily constructed from scratch or based on existing
     building block
+  id: totrans-5
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 新的构建模块可以很容易地从头开始构建，或者基于现有的构建模块
 - en: The basic building block (`Cerebro`) does already some automatic *"plugging
     in"* to make it easier to work with the framework without having to worry about
     all the details.
+  id: totrans-6
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 基本构建块（`Cerebro`）已经自动进行了一些*"插入"*，使得在不必担心所有细节的情况下更容易使用该框架。
 - en: 'As such the framework is pre-configured to offer a behavior with defaults such
     as:'
+  id: totrans-7
   prefs: []
   type: TYPE_NORMAL
+  zh: 因此，该框架预先配置为提供具有默认行为的行为，例如：
 - en: Work with a single/main data feed
+  id: totrans-8
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 使用单个/主数据源
 - en: '`1-day` timeframe/compression combination'
+  id: totrans-9
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`1-day` 时间框架/压缩组合'
 - en: 10,000 units of monetary currency
+  id: totrans-10
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 10,000单位的货币
 - en: Stock trading
+  id: totrans-11
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 股票交易
 - en: 'This may of may not fit everyone, but the important thing is: **it can be customized
     to the individual needs of each trader/programmer**'
+  id: totrans-12
   prefs: []
   type: TYPE_NORMAL
+  zh: 这可能适合或不适合每个人，但重要的是：**它可以根据每个交易者/程序员的个人需求进行定制**
 - en: 'Trading Stocks: *Integers*'
+  id: totrans-13
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 交易股票：*整数*
 - en: 'As stated above, the default configuration is for *stock* trading and when
     one is trading stocks one buys/sells complete shares, (i.e.: 1, 2 ... 50 ... 1000,
     and not amounts like `1.5` or `1001.7589` shares.'
+  id: totrans-14
   prefs: []
   type: TYPE_NORMAL
+  zh: 如上所述，默认配置是用于*股票*交易，当交易股票时，购买/出售完整股票（即：1、2...50...1000，而不是像`1.5`或`1001.7589`股票那样的金额。
 - en: 'This means that when a user does the following in the default configuration:'
+  id: totrans-15
   prefs: []
   type: TYPE_NORMAL
+  zh: 这意味着当用户在默认配置中执行以下操作时：
 - en: '[PRE0]'
+  id: totrans-16
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: 'The following happens:'
+  id: totrans-17
   prefs: []
   type: TYPE_NORMAL
+  zh: 以下发生了：
 - en: The system calculates how many shares of the asset are needed, so that the value
     in the portfolio of the given asset is as close as possible to `50%`
+  id: totrans-18
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 系统计算需要多少份资产股票，以便给定资产组合中的价值尽可能接近`50%`
 - en: 'But because the default configuration is to work with **shares** the resulting
     number of shares will be an whole number, i.e.: **an integer**'
+  id: totrans-19
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 但由于默认配置是使用**股票**进行操作，因此得到的股票数量将是一个整数，即：**一个整数**
 - en: Note
+  id: totrans-20
   prefs: []
   type: TYPE_NORMAL
+  zh: 注意
 - en: Notice that the default configuration is to work with a single/main data feed,
     and that's why the actual data is not specified in the call to `order_percent_target`.
     When operating with multiple data feeds, one has to specify which data to acquire/sell
     (unless the main data is meant)
+  id: totrans-21
   prefs: []
   type: TYPE_NORMAL
+  zh: 请注意，默认配置是使用单个/主数据源进行操作，这就是为什么在调用`order_percent_target`时没有指定实际数据。当操作多个数据源时，必须指定要获取/出售的数据（除非是主要数据）
 - en: 'Trading Cryptocurrencies: *Fractions*'
+  id: totrans-22
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 交易加密货币：*分数*
 - en: It is obvious that when trading cryptocurrencies, with even 20 decimals, one
     can buy *"half of a bitcoin"*.
+  id: totrans-23
   prefs: []
   type: TYPE_NORMAL
+  zh: 很明显，在交易加密货币时，即使有20位小数，也可以购买*"半个比特币"*。
 - en: The good thing is that one can actually change the information pertaining to
     the asset. This is achieved through the `CommissionInfo` family of pluggable pieces.
+  id: totrans-24
   prefs: []
   type: TYPE_NORMAL
+  zh: 好处在于，实际上可以更改有关资产的信息。这是通过可插入的`CommissionInfo`系列实现的。
 - en: 'Some documentation: [Docs - Commission Schemes - https://www.backtrader.com/docu/commission-schemes/commission-schemes/](https://www.backtrader.com/docu/commission-schemes/commission-schemes/)'
+  id: totrans-25
   prefs: []
   type: TYPE_NORMAL
+  zh: 一些文档：[文档 - 佣金方案 - https://www.backtrader.com/docu/commission-schemes/commission-schemes/](https://www.backtrader.com/docu/commission-schemes/commission-schemes/)
 - en: Note
+  id: totrans-26
   prefs: []
   type: TYPE_NORMAL
+  zh: 注意
 - en: It has to be admitted that the name is unfortunate, because the schemes do not
     only contain information about *commission*, but also about other things.
+  id: totrans-27
   prefs: []
   type: TYPE_NORMAL
+  zh: 必须承认这个名字不太幸运，因为这些方案不仅包含有关*佣金*的信息，还包含其他信息。
 - en: 'In the fractional scenario, the interest is this method of the scheme: `getsize(price,
     cash)`, which has the following docstring'
+  id: totrans-28
   prefs: []
   type: TYPE_NORMAL
+  zh: 在分数场景中，该方案的方法是：`getsize(price, cash)`，其具有以下文档字符串
 - en: '[PRE1]'
+  id: totrans-29
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE1]'
 - en: The schemes are intimately related to the broker and through the broker api,
     the schemes can be added in the system.
+  id: totrans-30
   prefs: []
   type: TYPE_NORMAL
+  zh: 方案与经纪人密切相关，通过经纪人 API，可以在系统中添加方案。
 - en: 'The broker docs are at: [Docs - Broker - https://www.backtrader.com/docu/broker/](https://www.backtrader.com/docu/broker/)'
+  id: totrans-31
   prefs: []
   type: TYPE_NORMAL
+  zh: 经纪人文档位于：[文档 - 经纪人 - https://www.backtrader.com/docu/broker/](https://www.backtrader.com/docu/broker/)
 - en: 'And the relevant method is: `addcommissioninfo(comminfo, name=None)`. Where
     in addition to adding a scheme which applies to all assets (when `name` is `None`),
     one can set schemes which apply only to assets with specific names.'
+  id: totrans-32
   prefs: []
   type: TYPE_NORMAL
+  zh: 相关方法为：`addcommissioninfo(comminfo, name=None)`。除了添加一个适用于所有资产的方案（当`name`为`None`时），还可以设置仅适用于具有特定名称资产的方案。
 - en: Implementing the fractional scheme
+  id: totrans-33
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 实施分数方案
 - en: This can be easily achieved by extending the existing basis scheme, named `CommissionInfo`.
+  id: totrans-34
   prefs: []
   type: TYPE_NORMAL
+  zh: 这可以通过扩展现有的基础方案`CommissionInfo`来轻松实现。
 - en: '[PRE2]'
+  id: totrans-35
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE2]'
 - en: 'Ditto and done. Subclassing `CommissionInfo` and writing a one line method,
     the objective is achieved. Because the original scheme definition supports `leverage`,
     this is taken into account into the calculation, just in case cryptocurrencies
     can be bought with leverage (for which the default value is `1.0`, i.e.: no leverage)'
+  id: totrans-36
   prefs: []
   type: TYPE_NORMAL
+  zh: 同上并完成。通过子类化`CommissionInfo`并编写一行方法，实现了目标。因为原始方案定义支持`leverage`，这一点已经考虑在内，以防加密货币可以使用杠杆购买（其中默认值为`1.0`，即：无杠杆）
 - en: Later in the code, the scheme will be added (controlled via a command line parameter)
     like this
+  id: totrans-37
   prefs: []
   type: TYPE_NORMAL
+  zh: 代码后面，该方案将被添加（通过命令行参数控制），如下所示
 - en: '[PRE3]'
+  id: totrans-38
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE3]'
 - en: 'I.e.: an instance (notice the `()` to instantiate) of the subclassed scheme
     is added. As explained above, the `name` parameter is not set and this means it
     will apply to all assets in the system.'
+  id: totrans-39
   prefs: []
   type: TYPE_NORMAL
+  zh: 也就是说：子类方案的一个实例（注意用`()`进行实例化）被添加了。如上所述，未设置`name`参数，这意味着它将应用于系统中的所有资产。
 - en: Testing the Beast
+  id: totrans-40
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 测试野兽
 - en: A full script implementing a trivial moving average crossover for long/short
     positions is provided below which can be directly used in the shell. The default
     data feed for the test is one of the data feeds from the *backtrader* repository.
+  id: totrans-41
   prefs: []
   type: TYPE_NORMAL
+  zh: 下面提供了一个完整的脚本，实现了一个简单的移动平均线交叉策略，用于长/短仓位，可以直接在shell中使用。测试的默认数据源来自*backtrader*仓库中的一个数据源。
 - en: '**Integer Run: No Fractions - No Fun**'
+  id: totrans-42
   prefs: []
   type: TYPE_NORMAL
+  zh: '**整数运行：无分数 - 无趣**'
 - en: '[PRE4]'
+  id: totrans-43
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE4]'
 - en: A short trade with a size of `16` units has been opened. The entire log, not
     shown for obvious reasons, contains many other operations all with trades with
     whole sizes.
+  id: totrans-44
   prefs: []
   type: TYPE_NORMAL
+  zh: 一个大小为`16`单位的短期交易已经开启。由于显而易见的原因，整个日志未显示，其中包含许多其他操作，都是以整数大小进行交易。
 - en: '![No Fractions](../Images/c0f6fafbaff624fd7d6a7d0cf683f187.png)'
+  id: totrans-45
   prefs: []
   type: TYPE_IMG
+  zh: '![无分数](../Images/c0f6fafbaff624fd7d6a7d0cf683f187.png)'
 - en: '**Fractional Run**'
+  id: totrans-46
   prefs: []
   type: TYPE_NORMAL
+  zh: '**分数运行**'
 - en: After the hard subclassing and one-lining work for the fractions ...
+  id: totrans-47
   prefs: []
   type: TYPE_NORMAL
+  zh: 经过分数的艰苦子类化和一行代码的工作后...
 - en: '[PRE5]'
+  id: totrans-48
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE5]'
 - en: '`V` for Victory. The short trade has been opened with the same crossover, but
     this time with a fractional size of `-16.457437774427774`'
+  id: totrans-49
   prefs: []
   type: TYPE_NORMAL
+  zh: '`V` 为胜利。短期交易已经通过相同的交叉方式开启，但这次是以`-16.457437774427774`的分数大小。'
 - en: '![Fractions](../Images/897e89aac416a5c324af136d4f693189.png)'
+  id: totrans-50
   prefs: []
   type: TYPE_IMG
+  zh: '![分数](../Images/897e89aac416a5c324af136d4f693189.png)'
 - en: Notice that the final portfolio value in the charts is different and that is
     because the actual trades sizes are different.
+  id: totrans-51
   prefs: []
   type: TYPE_NORMAL
+  zh: 请注意，图表中的最终投资组合价值不同，这是因为实际交易大小不同。
 - en: Conclusion
+  id: totrans-52
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 结论
 - en: Yes, *backtrader* can. With the pluggable/extensible construction kit approach,
     it is easy to customize the behavior to the particular needs of the trader programmer.
+  id: totrans-53
   prefs: []
   type: TYPE_NORMAL
+  zh: 是的，*backtrader* 可以。采用可插拔/可扩展的构建工具方法，很容易将行为定制为交易程序员的特定需求。
 - en: The script
+  id: totrans-54
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 该脚本
 - en: '[PRE6]'
+  id: totrans-55
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE6]'

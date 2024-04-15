@@ -1,135 +1,205 @@
 - en: Strategy Selection Revisited
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 策略选择再访
 - en: 原文：[https://www.backtrader.com/blog/posts/2017-05-16-stsel-revisited/stsel-revisited/](https://www.backtrader.com/blog/posts/2017-05-16-stsel-revisited/stsel-revisited/)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.backtrader.com/blog/posts/2017-05-16-stsel-revisited/stsel-revisited/](https://www.backtrader.com/blog/posts/2017-05-16-stsel-revisited/stsel-revisited/)
 - en: The original Strategy Selection approach used two strategies, which were manually
     registered and a simple `[0, 1]` list to decide which would be the target of the
     strategy.
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: 最初的策略选择方法使用了两种策略，它们是手动注册的，以及一个简单的 `[0, 1]` 列表来决定哪个是策略的目标。
 - en: Because Python offers a lot of instrospection possibilities with metaclasses,
     one may actually automate the approach. Let’s do it with a `decorator` approach
     which is probably the least invasive in this case (no need to define a *metaclass*
     for the strategies)
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: 由于 Python 提供了许多元类的反射可能性，可以实际上自动化这种方法。让我们使用 `装饰器` 方法来做这件事，在这种情况下可能是最不侵入性的方法（不需要为策略定义
+    *元类*）
 - en: Reworking the factory
+  id: totrans-4
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 重新设计工厂
 - en: 'The factory now:'
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: 工厂现在：
 - en: is declared before the strategies
+  id: totrans-6
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 在策略之前声明
 - en: has an empty `_STRATS` class attribute (it had the strategies to return before)
+  id: totrans-7
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 具有一个空的 `_STRATS` 类属性（之前它包含要返回的策略）
 - en: has a `register` classmethod which will be used as decorator and which accepts
     an argument which will be added to `_STRATS`
+  id: totrans-8
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 具有一个 `register` 类方法，将用作装饰器，并接受一个参数，该参数将添加到 `_STRATS`
 - en: has a `COUNT` classmethod which will return an iterator (a `range` actually)
     with the count of the available strategies to be optimized
+  id: totrans-9
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 具有一个 `COUNT` 类方法，将返回一个迭代器（实际上是一个 `range`），其中包含要优化的可用策略的计数
 - en: 'bears no changes to the actual factory method: `__new__`, which keeps on using
     the `idx` parameter to return whatever is in the `_STRATS` class attribute at
     the given index'
+  id: totrans-10
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 对实际工厂方法没有任何更改：`__new__`，它仍然使用 `idx` 参数来返回 `_STRATS` 类属性中给定索引处的任何内容
 - en: '[PRE0]'
+  id: totrans-11
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: 'As such:'
+  id: totrans-12
   prefs: []
   type: TYPE_NORMAL
+  zh: 如下：
 - en: The `StFetcher` strategy factory no longer contains any hardcoded strategies
     in itself
+  id: totrans-13
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`StFetcher` 策略工厂不再包含任何硬编码的策略'
 - en: Decorating the to-be-optimized strategies
+  id: totrans-14
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 装饰待优化的策略
 - en: The strategies in the example don’t need to be reworked. Decoration with the
     `register` method of `StFetcher` is enough to have them added to the selection
     mix.
+  id: totrans-15
   prefs: []
   type: TYPE_NORMAL
+  zh: 示例中的策略不需要重新设计。使用 `StFetcher` 的 `register` 方法进行装饰就足以将它们添加到选择池中。
 - en: '[PRE1]'
+  id: totrans-16
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE1]'
 - en: and
+  id: totrans-17
   prefs: []
   type: TYPE_NORMAL
+  zh: 和
 - en: '[PRE2]'
+  id: totrans-18
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE2]'
 - en: Taking advantage of `COUNT`
+  id: totrans-19
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 利用 `COUNT`
 - en: The manual `[0, 1]` list from the past when adding the strategy factory to the
     system with `optstrategy` can be fully replaced with a transparent call to `StFetcher.COUNT()`.
     Hardcoding is over.
+  id: totrans-20
   prefs: []
   type: TYPE_NORMAL
+  zh: 在将策略工厂添加到系统中并使用 `optstrategy` 时，过去的手动 `[0, 1]` 列表可以完全替换为对 `StFetcher.COUNT()`
+    的透明调用。硬编码已经结束。
 - en: '[PRE3]'
+  id: totrans-21
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE3]'
 - en: A sample run
+  id: totrans-22
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 一个样本运行
 - en: '[PRE4]'
+  id: totrans-23
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE4]'
 - en: Our 2 strategies have been run and deliver (as expected) different results.
+  id: totrans-24
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们的两种策略已经运行并且（如预期）产生了不同的结果。
 - en: Note
+  id: totrans-25
   prefs: []
   type: TYPE_NORMAL
+  zh: 注意
 - en: The sample is minimal but has been run with all available CPUs. Executing it
     with `--maxpcpus=1` will be faster. For more complex scenarios using all CPUs
     will be useful.
+  id: totrans-26
   prefs: []
   type: TYPE_NORMAL
+  zh: 该示例很简单，但已经在所有可用的 CPU 上运行。使用 `--maxpcpus=1` 执行将更快。对于更复杂的情况，使用所有 CPU 将很有用。
 - en: Conclusion
+  id: totrans-27
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 结论
 - en: Selection has been fully automated. As before one could envision something like
     querying a database for the number of available strategies and then fetch the
     strategies one by one.
+  id: totrans-28
   prefs: []
   type: TYPE_NORMAL
+  zh: 选择已经完全自动化。与之前一样，可以想象类似于查询数据库以获取可用策略数量，然后逐个获取策略的方法。
 - en: Sample Usage
+  id: totrans-29
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 样本用法
 - en: '[PRE5]'
+  id: totrans-30
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE5]'
 - en: The code
+  id: totrans-31
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 代码
 - en: Which has been included in the sources of backtrader
+  id: totrans-32
   prefs: []
   type: TYPE_NORMAL
+  zh: 已经包含在 backtrader 的源代码中
 - en: '[PRE6]'
+  id: totrans-33
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE6]'

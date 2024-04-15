@@ -1,170 +1,261 @@
 - en: Sizers Smart Staking
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: Sizers 智能定额
 - en: 原文：[https://www.backtrader.com/blog/posts/2016-07-23-sizers-smart-staking/sizers-smart-staking/](https://www.backtrader.com/blog/posts/2016-07-23-sizers-smart-staking/sizers-smart-staking/)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.backtrader.com/blog/posts/2016-07-23-sizers-smart-staking/sizers-smart-staking/](https://www.backtrader.com/blog/posts/2016-07-23-sizers-smart-staking/sizers-smart-staking/)
 - en: Release 1.6.4.93 marks a major milestone in *backtrader* even if the change
     in version numbering is a minor one.
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: 发行版 1.6.4.93 标志着 *backtrader* 的一个重要里程碑，即使版本编号的更改只是一个小改变。
 - en: '*Position Sizing* is one of the things that actually set the foundation for
     this project after reading [Trade Your Way To Financial Freedom](https://www.amazon.com/Trade-Your-Way-Financial-Freedom/dp/007147871X)
     from *Van K. Tharp*.'
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: '*Position Sizing* 是阅读 *Van K. Tharp* 的 [Trade Your Way To Financial Freedom](https://www.amazon.com/Trade-Your-Way-Financial-Freedom/dp/007147871X)
+    后，实际上为这个项目奠定了基础的事情之一。'
 - en: This is not the book in which *Van K. Tharp* details his approach to *Position
     Sizing* but the topic is presented and discussed in the book. One of the examples
     with regards to this had this setup
+  id: totrans-4
   prefs: []
   type: TYPE_NORMAL
+  zh: 这不是 *Van K. Tharp* 详细介绍 *Position Sizing* 方法的书，但该主题在书中被介绍和讨论。关于这一点的一个例子有这样的设置。
 - en: If not in the market, toss a coin to decide whether to enter or not
+  id: totrans-5
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 如果市场上没有，抛硬币决定是否进入
 - en: If already in the market, control the position with a Stop which is 2 x ATR
     and which gets updated if the price moves favorably to the taken position
+  id: totrans-6
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 如果已经在市场上，则通过一个 2 倍的 ATR 控制仓位，并且如果价格有利于持有的仓位，则更新该止损
 - en: 'The important parts about this:'
+  id: totrans-7
   prefs: []
   type: TYPE_NORMAL
+  zh: 关于此的重要部分：
 - en: Entering the market is random
+  id: totrans-8
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 进入市场是随机的
 - en: The approach is tested with different *Sizing* schemes and this together with
     having a dynamic stop, makes the system profitable
+  id: totrans-9
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 这种方法经过不同的 *Sizing* 方案测试，并且有一个动态止损，这使得系统具有盈利能力。
 - en: And following the principles to set up your own “system” (wether manual/automated/computerized,
     technical/fundamental, …) *backtrader* was born to one day test this scenario.
+  id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: 并遵循设置自己的“系统”（无论是手动/自动化/计算机化，技术/基本，...）的原则，*backtrader* 有一天将测试这种情景。
 - en: This could have been tested with any of the existing platforms, but there would
     have been no fun along the way and the many challenges solved, which were not
     even considered when kick-starting *backtrader*
+  id: totrans-11
   prefs: []
   type: TYPE_NORMAL
+  zh: 这可以通过任何现有的平台进行测试，但沿途不会有乐趣，也不会解决许多挑战，这些挑战在启动 *backtrader* 时甚至没有考虑过。
 - en: '*Sizers* were in the platform from the very beginning, but hidden because many
     other things including *Live Trading* started getting in the way. But this is
     now over and the *Van K. Tharp* scenario will be tested. Rather sooner than later.'
+  id: totrans-12
   prefs: []
   type: TYPE_NORMAL
+  zh: '*Sizers* 从一开始就在平台上，但被隐藏了，因为许多其他事情，包括 *实时交易* 开始阻碍。但这现在已经结束，*Van K. Tharp* 的情景将被测试。比以往更早。'
 - en: In the meantime a couple of *Sizers* for a sample test.
+  id: totrans-13
   prefs: []
   type: TYPE_NORMAL
+  zh: 同时进行了一些 *Sizers* 的样本测试。
 - en: '*Sizers* to control positioning'
+  id: totrans-14
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: '*Sizers* 控制定位'
 - en: The sample shows a potential use case in which *Sizers* alter the behavior of
     a strategy by controlling the *sizing*. Check the docs at *backtrader.readthedocs.io*
     to understand the *sizing interface*.
+  id: totrans-15
   prefs: []
   type: TYPE_NORMAL
+  zh: 该样本显示了一种潜在的用例，其中 *Sizers* 通过控制 *sizing* 来改变策略的行为。查看 *backtrader.readthedocs.io*
+    上的文档以了解 *sizing interface*。
 - en: 'The 2 sizers:'
+  id: totrans-16
   prefs: []
   type: TYPE_NORMAL
+  zh: 这两个 *Sizers*：
 - en: '`LongOnly`: will return a fixed size position if the current position is 0
     and will return the same fixed size to close it if already in the market.'
+  id: totrans-17
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`LongOnly`：如果当前位置为0，则返回固定大小的仓位，并且如果已经在市场上，则返回相同的固定大小以关闭它。'
 - en: '[PRE0]'
+  id: totrans-18
   prefs:
   - PREF_IND
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: '`FixedReverser`: will return a fixed size stake if not in the market and a
     doubled fixed size stake if already in the market to allow for a reversal'
+  id: totrans-19
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`FixedReverser`：如果市场上没有，将返回固定大小的赌注，如果已经在市场上，则将返回加倍的固定大小的赌注，以便进行逆转'
 - en: '[PRE1]'
+  id: totrans-20
   prefs:
   - PREF_IND
   type: TYPE_PRE
+  zh: '[PRE1]'
 - en: These 2 *Sizers* will be combined with a very simple strategy.
+  id: totrans-21
   prefs: []
   type: TYPE_NORMAL
+  zh: 这两个 *Sizers* 将与一个非常简单的策略结合在一起。
 - en: '[PRE2]'
+  id: totrans-22
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE2]'
 - en: 'Notice how the strategy uses a *Close-SMA* crossover signal to issue *buy*
     and *sell* commands with an important thing to consider:'
+  id: totrans-23
   prefs: []
   type: TYPE_NORMAL
+  zh: 注意策略如何使用 *Close-SMA* 交叉信号发出 *buy* 和 *sell* 命令，并考虑到一个重要的事情：
 - en: No check of positioning is done in the *strategy*
+  id: totrans-24
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 在 *strategy* 中不进行定位的检查
 - en: The same strategy as seen in the executions below changes behavior from *long-only*
     to *long-short* by simply changing the *sizer* with this code in the sample (controlled
     with the switch `--longonly`)
+  id: totrans-25
   prefs: []
   type: TYPE_NORMAL
+  zh: 与下面的执行中看到的相同策略通过在样本中使用此代码（通过开关 `--longonly` 控制）仅通过更改 *sizer* 的行为从 *long-only*
+    变为 *long-short*。
 - en: '[PRE3]'
+  id: totrans-26
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE3]'
 - en: Long-Only Execution
+  id: totrans-27
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 仅限多头执行
 - en: 'Done with the command:'
+  id: totrans-28
   prefs: []
   type: TYPE_NORMAL
+  zh: 用命令完成：
 - en: '[PRE4]'
+  id: totrans-29
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE4]'
 - en: And this output.
+  id: totrans-30
   prefs: []
   type: TYPE_NORMAL
+  zh: 这个输出。
 - en: '![image](../Images/5c2317f18076865b4e193cc2106e6495.png)'
+  id: totrans-31
   prefs: []
   type: TYPE_IMG
+  zh: '![image](../Images/5c2317f18076865b4e193cc2106e6495.png)'
 - en: Long-Short Execution
+  id: totrans-32
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 多空头执行
 - en: 'Done with the command:'
+  id: totrans-33
   prefs: []
   type: TYPE_NORMAL
+  zh: 用命令完成：
 - en: '[PRE5]'
+  id: totrans-34
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE5]'
 - en: And this output.
+  id: totrans-35
   prefs: []
   type: TYPE_NORMAL
+  zh: 并输出如下结果。
 - en: '![image](../Images/1c8a1b92bcc63a48fe769976fa98d013.png)'
+  id: totrans-36
   prefs: []
   type: TYPE_IMG
+  zh: '![图片](../Images/1c8a1b92bcc63a48fe769976fa98d013.png)'
 - en: 'Which immediate shows:'
+  id: totrans-37
   prefs: []
   type: TYPE_NORMAL
+  zh: 立即显示：
 - en: The number of trades has doubled
+  id: totrans-38
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 交易次数翻了一番
 - en: The cash (except at the beginning) never equals the *value* because the strategy
     is always in the market
+  id: totrans-39
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 现金（除了一开始）永远不等于*价值*，因为策略始终在市场上
 - en: Sample Usage
+  id: totrans-40
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 使用示例
 - en: '[PRE6]'
+  id: totrans-41
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE6]'
 - en: The Full code
+  id: totrans-42
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 完整代码
 - en: '[PRE7]'
+  id: totrans-43
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE7]'

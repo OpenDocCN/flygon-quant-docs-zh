@@ -1,177 +1,260 @@
 - en: Real World Usage
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 实际应用
 - en: 原文：[https://www.backtrader.com/blog/posts/2015-08-27-real-world-usage/real-world-usage/](https://www.backtrader.com/blog/posts/2015-08-27-real-world-usage/real-world-usage/)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.backtrader.com/blog/posts/2015-08-27-real-world-usage/real-world-usage/](https://www.backtrader.com/blog/posts/2015-08-27-real-world-usage/real-world-usage/)
 - en: Finally it seems it pays having gotten down to developing backtrader.
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: 最后，似乎将其扎根于开发backtrader是值得的。
 - en: Following what seemed like the end of the world when looking at the European
     markets in the last weeks, a friend asked if I could have a look at the data in
     our charting package to see how the falling range compared against previous similar
     occurrences.
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: 在看到上周欧洲市场的情况看起来像世界末日之后，一个朋友问我是否可以查看我们图表软件中的数据，看看下跌范围与以前类似情况的比较如何。
 - en: 'Of course I could, but I said I could do more than looking into the charts,
     because I could quickly:'
+  id: totrans-4
   prefs: []
   type: TYPE_NORMAL
+  zh: 当然我可以，但我说我可以做的不仅仅是看图表，因为我可以迅速：
 - en: Create a quick `LegDown` indicator to measure the range of the fall. It could
     also have gotten the name of `HighLowRange` or `HiLoRange`. Luckily and in case
     this would be deemed needed, it can be solved via `alias`
+  id: totrans-5
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 创建一个快速的`LegDown`指标来测量下跌的范围。它也可以被命名为`HighLowRange`或`HiLoRange`。幸运的是，如果认为有必要，可以通过`alias`来解决这个问题。
 - en: Create a `LegDownAnalyzer` that would gather the results and sort them
+  id: totrans-6
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 创建一个`LegDownAnalyzer`，它将收集结果并对其进行排序。
 - en: 'This led to an addtional request:'
+  id: totrans-7
   prefs: []
   type: TYPE_NORMAL
+  zh: 这导致了一个额外的请求：
 - en: Recovery after the falls in the next 5, 10, 15, 20 days (trading …)
+  id: totrans-8
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 在接下来的5、10、15、20天内（交易后…）的跌幅后的复苏。
 - en: Solved with a `LegUp` indicator which writes the values back for alignment with
     the corresponding``LegDown``
+  id: totrans-9
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 通过使用`LegUp`指标解决，它会将值写回以与相应的`LegDown`对齐。
 - en: 'The work was quickly done (within the allowance of my free time) and results
     shared with the requester. But … being the only problem tha I saw potential for:'
+  id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: 这项工作很快就完成了（在我空闲时间的允许范围内），并与请求者共享了结果。但是…只有我看到了潜在问题：
 - en: Improvements in the automation `bt-run.py`
+  id: totrans-11
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 改进`bt-run.py`中的自动化程式
 - en: Multiple strategies/observers/analyzers with separated kwargs
+  id: totrans-12
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 多种策略/观察者/分析器以及分开的kwargs
 - en: Injection of indicators directly into Strategies with kwargs for each indicator
+  id: totrans-13
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 直接将指标注入策略中，每个指标都带有kwargs
 - en: single plot argument accepting also kwargs
+  id: totrans-14
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 单一的绘图参数也接受kwargs。
 - en: Improvements in in the `Analyzer` API to have automated **printing** capabilities
     for the results (which are returned as a `dict` -like instance) and have direct
     `data` access aliases
+  id: totrans-15
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 在`Analyzer` API中进行改进，以实现对结果的自动**打印**功能（结果以`dict`-like实例返回），并具有直接的`data`访问别名。
 - en: 'Notwithstanding that:'
+  id: totrans-16
   prefs: []
   type: TYPE_NORMAL
+  zh: 尽管如此：
 - en: An obscure bug showed up due to the implementation combination I wrote to align
     the `LegDown` and `LegUp` values by mixing declaration of and the additional use
     of `next`
+  id: totrans-17
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 由于我编写了一个混合声明并额外使用`next`来对齐`LegDown`和`LegUp`值的实现组合，出现了一个隐晦的错误。
 - en: The bug had been introduced to simplify the passing of a single data with multiple
     `Lines`, so that `Indicators` can operate on each of the lines as individual datas
+  id: totrans-18
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 这个错误是为了简化传递多个`Lines`的单个数据而引入的，以便`Indicators`可以对每条线进行操作作为单独的数据。
 - en: 'The latter pushing me into:'
+  id: totrans-19
   prefs: []
   type: TYPE_NORMAL
+  zh: 后者将我推向：
 - en: Adding a background object opposite to `LineDelay` to “look” into the “future”
+  id: totrans-20
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 添加一个与`LineDelay`相反的背景对象以“看”到“未来”。
 - en: That actually means that actual values are written into past array positions
+  id: totrans-21
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 实际上这意味着实际值被写入过去的数组位置。
 - en: Once all of the above were in place, it was time to retest how nicely the (small?)
     challenges posed by the above request could be solved more easily and faster (in
     implementation time).
+  id: totrans-22
   prefs: []
   type: TYPE_NORMAL
+  zh: 一旦所有这些都就位了，就是重新测试以上请求提出的（小？）挑战，看看如何更轻松地解决以及更快地（在实现时间上）解决的时候了。
 - en: 'Finally the execution and outcomes for the Eurostoxx 50 Future from 1998 up
     until today:'
+  id: totrans-23
   prefs: []
   type: TYPE_NORMAL
+  zh: 最后，执行和结果为从1998年至今的Eurostoxx 50期货：
 - en: '[PRE0]'
+  id: totrans-24
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: The August 2015 leg down shows up at place 13^(th). Obviously a non-common ocurrence
     although greater have happened.
+  id: totrans-25
   prefs: []
   type: TYPE_NORMAL
+  zh: 2015年8月的下跌在第13个位置显示出来。显然是一个不常见的事件，尽管有更大的事件发生过。
 - en: What to do out of the follow up legs that point upwards is a lot more for staticians
     and bright math minds than for me.
+  id: totrans-26
   prefs: []
   type: TYPE_NORMAL
+  zh: 针对指向上升的后续腿要做的事情对于统计学家和聪明的数学头脑来说要多得多，而对我来说则要少得多。
 - en: 'Details about the implementation (see the entire module code at the end) of
     the `LegUpDownAnalyzer`:'
+  id: totrans-27
   prefs: []
   type: TYPE_NORMAL
+  zh: 关于`LegUpDownAnalyzer`的实现细节（在末尾看到整个模块代码）：
 - en: 'It creates indicators in `__init__` just as other objects do: `Strategies`,
     `Indicators` being usually the usual suspects'
+  id: totrans-28
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 它在`__init__`中创建指标，就像其他对象一样：`Strategies`，`Indicators`通常是常见的嫌疑人
 - en: These indicators get automatically registered to the strategy to which the analyzer
     is attached
+  id: totrans-29
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 这些指标会自动注册到附加了分析器的策略中
 - en: 'Just like strategies the `Analyzer` has `self.datas` (an array of datas) and
     aliases to it: `self.data`, `self.data0`, `self.data1` …'
+  id: totrans-30
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 就像策略一样，`Analyzer` 有 `self.datas`（一个数据数组）和它的别名：`self.data`、`self.data0`、`self.data1`
+    …
 - en: 'Again like strategies: `nexstart` and `stop` hooks (those are not present in
     indicators)'
+  id: totrans-31
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 类似策略：`nexstart` 和 `stop` 钩子（这些在指标中不存在）
 - en: 'In this case used to:'
+  id: totrans-32
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 在这种情况下用于：
 - en: '`nextstart`: record the initial starting point of the strategy'
+  id: totrans-33
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`nextstart`: 记录策略的初始起始点'
 - en: '`stop`: making the final calculations because things are done'
+  id: totrans-34
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`stop`: 进行最终的计算，因为事情已经完成'
 - en: 'Note: other methods like `start`, `prenext` and `next` are not needed in this
     case'
+  id: totrans-35
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 注意：在这种情况下不需要其他方法，如 `start`、`prenext` 和 `next`
 - en: The `LegDownUpAnalyzer` method `print` has been overriden to no longer call
     the `pprint` method but to create a CSV printout of the calculations
+  id: totrans-36
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`LegDownUpAnalyzer` 方法 `print` 已经被重写，不再调用 `pprint` 方法，而是创建计算的 CSV 打印输出'
 - en: After much talk and since we added `--plot` to the mix … the chart.
+  id: totrans-37
   prefs: []
   type: TYPE_NORMAL
+  zh: 经过许多讨论，因为我们将 `--plot` 加入了混合中 … 图表。
 - en: '![image](../Images/810dfdbad965951ec652a05dd8ba9d95.png)'
+  id: totrans-38
   prefs: []
   type: TYPE_IMG
+  zh: '![image](../Images/810dfdbad965951ec652a05dd8ba9d95.png)'
 - en: Finally the `legupdown` module which is being loaded by `bt-run`.
+  id: totrans-39
   prefs: []
   type: TYPE_NORMAL
+  zh: 最后是由 `bt-run` 加载的 `legupdown` 模块。
 - en: '[PRE1]'
+  id: totrans-40
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE1]'

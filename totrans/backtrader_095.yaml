@@ -1,174 +1,253 @@
 - en: DateTime Management
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 日期时间管理
 - en: 原文：[https://www.backtrader.com/docu/timemgmt/](https://www.backtrader.com/docu/timemgmt/)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.backtrader.com/docu/timemgmt/](https://www.backtrader.com/docu/timemgmt/)
 - en: Up until release *1.5.0*, *backtrader* used a direct approach to time management
     in that whatever datetime was calculated by *data sources* was simply used at
     face value.
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: 直到*1.5.0*版本发布之前，*backtrader*使用直接方法管理时间，即*数据源*计算的任何日期时间都会直接使用。
 - en: And the same for any user input like in the case of the *parameter* `fromdate`
     (or `sessionstart`) which can be given to any *data source*
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: 并且对于任何用户输入，例如*参数* `fromdate`（或`sessionstart`），都可以提供给任何*数据源*
 - en: The approach was fine given the direct control over frozen data sources for
     backtesting. It was easy to assume that the input datetimes had already been taken
     care of before they entered the system.
+  id: totrans-4
   prefs: []
   type: TYPE_NORMAL
+  zh: 在进行回测时，直接控制冻结数据源是可以的。在数据进入系统之前，很容易假设输入的日期时间已经得到处理。
 - en: 'But with 1.5.0, **live** *data sources* are supported and this forces to take
     into account **datetime management**. Such management would not be needed if the
     following were always *true*:'
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: 但是在1.5.0版本中，**实时** *数据源*被支持了，这就需要考虑**日期时间管理**。如果以下情况始终为*true*，则不需要进行此类管理：
 - en: A trader in New York trades the ES-Mini. The time zone for both in `US/Eastern`
     (or one of the aliases)
+  id: totrans-6
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 纽约的交易员交易ES-Mini。时区为`US/Eastern`（或其中一个别名）
 - en: A trader in Berlin trades the DAX future. In this case for both the `CET` (or
     `Europe/Berling`) timezone applies
+  id: totrans-7
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 柏林的交易员交易DAX期货。在这种情况下，适用于`CET`（或`Europe/Berling`）时区
 - en: 'The direct input-output datetime approach from above would work, becase the
     trader, in Berlin for example, could always do something like this:'
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: 上述的直接输入输出日期时间方法将奏效，例如柏林的交易员可以始终这样做：
 - en: '[PRE0]'
+  id: totrans-9
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: 'The problem with the direct approach surfaces when the same trader in Berlin
     decides to trade the `ES-Mini`. Because the change to from *DST* happens at different
     point in time in the year and this causes the time difference to be out of sync
     a couple of weeks during the year. The following wouldn’t always work:'
+  id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: 直接方法的问题在于当同一位柏林的交易员决定交易`ES-Mini`时会出现。因为夏令时的变化在一年中的不同时间发生，这导致一年中有几周的时间差异不同步。以下情况不会总是奏效：
 - en: '[PRE1]'
+  id: totrans-11
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE1]'
 - en: Operation with timezones
+  id: totrans-12
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 时区操作
 - en: To solve the aforementioned situations and still remain compatible with the
     direct input-output time approach, `backtrader` offers the end user the following
+  id: totrans-13
   prefs: []
   type: TYPE_NORMAL
+  zh: 为了解决上述情况并仍然与直接输入输出时间方法兼容，`backtrader`为最终用户提供了以下选项
 - en: Datetime Input
+  id: totrans-14
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 日期时间输入
 - en: As a default the platform will not touch the *datetime* provided by a data source
+  id: totrans-15
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 作为默认情况下，平台不会修改数据源提供的*日期时间*
 - en: 'The end-user can override this input by:'
+  id: totrans-16
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 最终用户可以通过以下方式覆盖此输入：
 - en: Providing a `tzinput` parameter to the data source. This must be an object compatible
     with the `datetime.tzinfo` interface. Most likely the user will provide a `pytz.timezone`
     instance
+  id: totrans-17
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 为数据源提供一个`tzinput`参数。这必须是与`datetime.tzinfo`接口兼容的对象。最有可能用户会提供一个`pytz.timezone`实例
 - en: 'With this decision the time used internally by `backtrader` is considered to
     be in `UTC-like` format, ie:'
+  id: totrans-18
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 做出这个决定后，`backtrader`内部使用的时间被认为是以`UTC-like`格式，即：
 - en: If the data source has already stored it in `UTC` format
+  id: totrans-19
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 如果数据源已经以`UTC`格式存储它
 - en: After a conversion through `tzinput`
+  id: totrans-20
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 通过`tzinput`转换后
 - en: It’s not really `UTC` but it’s the reference for the user, hence `UTC-like`
+  id: totrans-21
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 它并不真正是`UTC`，但它是用户的参考，因此是`UTC-like`
 - en: Datetime output
+  id: totrans-22
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 日期时间输出
 - en: If the data feed can automatically determine the timezone for the output, this
     will be the default
+  id: totrans-23
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 如果数据源可以自动确定输出的时区，则这将是默认值
 - en: This makes sense in the case of live-feeds and especially in use cases like
     the one in which a trader in Berlin (`CET` timezone), trades products with `US/Eastern`
     timezone.
+  id: totrans-24
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 这在直播信息源的情况下是有意义的，尤其是在柏林（`CET`时区）交易与`US/Eastern`时区的产品的情况下。
 - en: Because the trader gets always the right time and in the example above the *opening*
     time remains constant at `09:30 US/Eastern`, rather than `15:30 CET` most of the
     year, but sometimes `16:30 CET` and sometimes `14:30 CET`.
+  id: totrans-25
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 因为交易员始终获得正确的时间，在上面的示例中，*开盘*时间保持恒定为`09:30 US/Eastern`，而不是大部分时间为`15:30 CET`，但有时为`16:30
+    CET`，有时为`14:30 CET`。
 - en: If it cannot be determined, then the output will be whatever was determined
     during input (the `UTC-like`) time
+  id: totrans-26
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 如果无法确定，则输出将是在输入时确定的任何内容（`UTC-like`）时间
 - en: The end user can override and determine the actual timezone for the output
+  id: totrans-27
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 最终用户可以覆盖并确定输出的实际时区
 - en: Providing a `tz` parameter to the data source. This must be an object compatible
     with the `datetime.tzinfo` interface. Most likely the user will provide a `pytz.timezone`
     instance
+  id: totrans-28
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 为数据源提供一个`tz`参数。这必须是一个与`datetime.tzinfo`接口兼容的对象。最有可能的是用户会提供一个`pytz.timezone`实例。
 - en: Note
+  id: totrans-29
   prefs: []
   type: TYPE_NORMAL
+  zh: 注意
 - en: Input fromt the user like for example the parameters `fromdate` or `sessionstart`
     are expected to be in sync with the actual `tz`, be it automatically calculated
     by the *data source*, supplied by the user or left as default (`None`, which means
     direct input-output of *datetime*)
+  id: totrans-30
   prefs: []
   type: TYPE_NORMAL
+  zh: 用户输入，比如例如`fromdate`或`sessionstart`参数，预计会与实际的`tz`同步，无论是由*数据源*自动计算、用户提供还是保持默认值（`None`，这意味着*datetime*的直接输入输出）。
 - en: 'With all that in mind let’s recall the Berlin trader, trading in `US/Eastern`:'
+  id: totrans-31
   prefs: []
   type: TYPE_NORMAL
+  zh: 考虑到这一切，让我们回想一下在`US/Eastern`时区进行交易的柏林交易员：
 - en: '[PRE2]'
+  id: totrans-32
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE2]'
 - en: 'In the case of a *data source* which can automatically determine the output
     timezone:'
+  id: totrans-33
   prefs: []
   type: TYPE_NORMAL
+  zh: 对于*数据源*可以自动确定输出时区的情况：
 - en: '[PRE3]'
+  id: totrans-34
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE3]'
 - en: Even less work than above.
+  id: totrans-35
   prefs: []
   type: TYPE_NORMAL
+  zh: 比以上工作还要少。
 - en: Obviously `MyFeed` and `MyFeedAuto` in the example above are just dummy names.
+  id: totrans-36
   prefs: []
   type: TYPE_NORMAL
+  zh: 显然，上面示例中的`MyFeed`和`MyFeedAuto`只是虚拟名称。
 - en: Note
+  id: totrans-37
   prefs: []
   type: TYPE_NORMAL
+  zh: 注意
 - en: At the time of writing the only data source included in the distribution which
     can automatically determine the timezone is the one connecting to *Interactive
     Brokers*
+  id: totrans-38
   prefs: []
   type: TYPE_NORMAL
+  zh: 在撰写本文时，分发中唯一能够自动确定时区的数据源是连接到*交互经纪商*的那个。

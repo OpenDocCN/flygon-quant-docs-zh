@@ -1,111 +1,167 @@
 - en: The DJI 10 day streak
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 道琼斯工业平均指数 10 天连涨
 - en: 原文：[https://www.backtrader.com/blog/posts/2017-08-08-dow-10-day-streak/dow-10-day-streak/](https://www.backtrader.com/blog/posts/2017-08-08-dow-10-day-streak/dow-10-day-streak/)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.backtrader.com/blog/posts/2017-08-08-dow-10-day-streak/dow-10-day-streak/](https://www.backtrader.com/blog/posts/2017-08-08-dow-10-day-streak/dow-10-day-streak/)
 - en: 'It has hit the news. The DJI is hitting all time highs with already 10 consecutive
     updays and 9 all time highs. See for example:'
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: 这已经成为新闻了。道琼斯工业平均指数创下了历史新高，已经连续上涨了 10 天，创下了 9 次历史新高。例如：
 - en: '[ZeroHedge - Dow Rises To 9^(th) Straight Record Close On Lowest Volume In
     Years](http://www.zerohedge.com/news/2017-08-07/dow-rises-9th-straight-record-close-lowest-volume-years)'
+  id: totrans-3
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[ZeroHedge - 道指连续第 9 天创新纪录收盘，成交量为年内最低](http://www.zerohedge.com/news/2017-08-07/dow-rises-9th-straight-record-close-lowest-volume-years)'
 - en: 'Many had already, for sure, noticed that the Dow was on such a streak and the
     article just tells us it’s becoming *mainstream*. But some questions arise:'
+  id: totrans-4
   prefs: []
   type: TYPE_NORMAL
+  zh: 许多人肯定已经注意到道琼斯正在经历这样的连涨，文章只是告诉我们这已成为*主流*。但是一些问题出现了：
 - en: '*Is this normal or extraordinary*?'
+  id: totrans-5
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '*这是正常还是非凡的*？'
 - en: '*What happens afterwards*?'
+  id: totrans-6
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '*之后会发生什么*？'
 - en: 'Let’s put *backtrader* in motion to answer the questions by crafting an *Analyzer*
     to do that: analyze the situation and answer the questions (See below for the
     code)'
+  id: totrans-7
   prefs: []
   type: TYPE_NORMAL
+  zh: 让我们通过启动 *backtrader* 来回答这些问题，通过制定一个 *分析器* 来做到这一点：分析情况并回答问题（有关代码，请参见下文）
 - en: Our sample data contains `5923` trading sessions. Let’s see where the current
     streak fits in.
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们的样本数据包含`5923`个交易日。让我们看看当前的连续上涨日在哪里。
 - en: Is this normal or extraordinary?
+  id: totrans-9
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 这是正常还是非凡的？
 - en: 'Executing our code shows that `10` such days in a row is something at least
     remarkable if not extraordinary.:'
+  id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: 执行我们的代码显示，连续`10`天这样的日子至少是非凡的，如果不是特别的话。
 - en: '[PRE0]'
+  id: totrans-11
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: 'The current streak, yet to come to an end, is ranked (tied) in 4^(th) position.
     To notice:'
+  id: totrans-12
   prefs: []
   type: TYPE_NORMAL
+  zh: 当前的连涨，尚未结束，排名（并列）第 4。请注意：
 - en: The upleg in % is the smallest when the streak is 10 days or longer
+  id: totrans-13
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 连涨时期的上涨幅度在连涨 10 天或更长时间时最小
 - en: Three (3) of the days with a streak of 9 updays are slightly smaller in % terms,
     dating back to 1955, 1964 and 1965
+  id: totrans-14
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 三个连续上涨日为 9 天的日子在百分比方面略小，分别是 1955 年、1964 年和 1965 年
 - en: This year has another long streak ranked as number 2 with 12 days
+  id: totrans-15
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 今年有另一个长达 12 天的排名第二的连涨
 - en: What happens afterwards?
+  id: totrans-16
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 之后会发生什么？
 - en: Even if the table already shows the drawdown after the streak ended and the
     relative drawdown (taken from the start of the streak, hence it can be > 100%),
     the question is better answered visually.
+  id: totrans-17
   prefs: []
   type: TYPE_NORMAL
+  zh: 即使表格已经显示了持续上涨日结束后的回撤和相对回撤（从上涨日开始计算，因此可能 > 100%），但最好通过视觉方式来回答问题。
 - en: '![image](../Images/269c7d712fdbe1e4b8bc3fdf8069fd1e.png)'
+  id: totrans-18
   prefs: []
   type: TYPE_IMG
+  zh: '![image](../Images/269c7d712fdbe1e4b8bc3fdf8069fd1e.png)'
 - en: '![image](../Images/6b9e616303be1ced2cdb73e93bc6f692.png)'
+  id: totrans-19
   prefs: []
   type: TYPE_IMG
+  zh: '![image](../Images/6b9e616303be1ced2cdb73e93bc6f692.png)'
 - en: 'And the charts quickly show that:'
+  id: totrans-20
   prefs: []
   type: TYPE_NORMAL
+  zh: 图表很快就会显示出来：
 - en: Such long streaks seem to indicate strength with no large drawdowns really to
     be expected as the reaction
+  id: totrans-21
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 这样的长连涨似乎表明了强劲，不会真的预期到有大的回撤作为反应
 - en: But wait!!!
+  id: totrans-22
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 但是等等！！！
 - en: 'Ranked as number 1 and also ranked as number 2 we have remarkable dates:'
+  id: totrans-23
   prefs: []
   type: TYPE_NORMAL
+  zh: 在排名第 1 和第 2 的 remarkable 日期中，我们有：
 - en: '[PRE1]'
+  id: totrans-24
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE1]'
 - en: 'Indeed, because `1987` and `1929` had later really large bear legs. But not
     immediately after the streak as shown by the statistics: the relative drawdown
     didn’t go over 100%, hence new highs followed the end of those streaks.'
+  id: totrans-25
   prefs: []
   type: TYPE_NORMAL
+  zh: 的确，因为`1987`和`1929`后来确实有非常大的熊市。但是并不是连涨结束后立即发生，如统计数据所示：相对回撤没有超过 100%，因此新高跟随了那些连涨结束后。
 - en: The code
+  id: totrans-26
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 代码
 - en: '[PRE2]'
+  id: totrans-27
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE2]'

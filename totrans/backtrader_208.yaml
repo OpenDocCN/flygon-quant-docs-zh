@@ -1,49 +1,73 @@
 - en: Stochastic (Generic)
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 随机指标（通用）
 - en: 原文：[https://www.backtrader.com/recipes/indicators/stochastic/stochastic/](https://www.backtrader.com/recipes/indicators/stochastic/stochastic/)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.backtrader.com/recipes/indicators/stochastic/stochastic/](https://www.backtrader.com/recipes/indicators/stochastic/stochastic/)
 - en: '*backtrader* already includes a `Stochastic` indicator (including a variant
     which displays the three calculated lines and not just the usual two `%k` and
     `%d` lines)'
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: '*backtrader*已经包含了一个`Stochastic`指标（包括一种显示三条计算线而不仅仅是通常的两条`%k`和`%d`线的变体）'
 - en: But such indicator assumes that the data source for the calculations has `high`,
     `low` and `close` components. This is so because the original definition uses
     those components.
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: 但这种指标假设用于计算的数据源具有`high`、`low`和`close`组件。这是因为原始定义使用了这些组件。
 - en: If one wants to use different components, a first approach could be creating
     a data feed which stores the different components in the `high`, `low` and `close`
     lines of the data feed.
+  id: totrans-4
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果想要使用不同的组件，一个首要的方法可能是创建一个数据源，将不同的组件存储在数据源的`high`、`low`和`close`行中。
 - en: But a much more straightforward approach is to have a *Generic* `Stochastic`
     indicator which takes three (3) data components and uses them as if they were
     the `high`, `low` and `close` components.
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: 但一个更直接的方法是拥有一个*通用*`Stochastic`指标，它接受三（3）个数据组件，并将它们用作如果它们是`high`、`low`和`close`组件。
 - en: The code below does that and adds a nice touch by allowing customization of
     the moving average for the 2^(nd) smoothing.
+  id: totrans-6
   prefs: []
   type: TYPE_NORMAL
+  zh: 下面的代码执行此操作，并通过允许自定义第二次平滑的移动平均值添加了一个不错的功能。
 - en: '[PRE0]'
+  id: totrans-7
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: Of course, one needs to verify that this indicator does actually yield the same
     results as the standard indicator when given the same set of inputs. The chart
     below is created with this set of instructions
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: 当然，需要验证当给定相同的输入集时，该指标是否确实产生与标准指标相同的结果。下面的图表是使用这组指令创建的。
 - en: '[PRE1]'
+  id: totrans-9
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE1]'
 - en: And here a view of how the indicator works
+  id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: 这里是指标如何工作的视图
 - en: '![Generic Stochastic View](../Images/4919bda0d0bcda338e19901f6d0dd897.png)'
+  id: totrans-11
   prefs: []
   type: TYPE_IMG
+  zh: '![通用随机指标视图](../Images/4919bda0d0bcda338e19901f6d0dd897.png)'

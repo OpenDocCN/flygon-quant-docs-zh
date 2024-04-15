@@ -1,219 +1,327 @@
 - en: Evaluating external historical performance
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 评估外部历史表现
 - en: 原文：[https://www.backtrader.com/blog/posts/2017-07-05-order-history/order-history/](https://www.backtrader.com/blog/posts/2017-07-05-order-history/order-history/)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.backtrader.com/blog/posts/2017-07-05-order-history/order-history/](https://www.backtrader.com/blog/posts/2017-07-05-order-history/order-history/)
 - en: 'With release `1.9.55.122`, *backtrader* can now be used to evaluate the performance
     of an external set of orders. This can be used for example:'
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: 使用版本`1.9.55.122`，*backtrader*现在可以用于评估外部一组订单的性能。 例如可以用于：
 - en: 'To evaluate a set of orders/trades which for which judgmental trading (i.e.:
     human discretional decision) was used'
+  id: totrans-3
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 评估一组使用主观交易（即：人为离散决策）的订单/交易
 - en: To evaluate orders created in another platform and verify the analyzers of that
     platform
+  id: totrans-4
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 评估在另一个平台创建的订单并验证该平台的分析器
 - en: And obviously in the other direction to evaluate the things returned by *backtrader*
     against well-known results from other platforms
+  id: totrans-5
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 当然，也要反向评估*backtrader*返回的结果与其他平台的已知结果是否匹配
 - en: Usage pattern
+  id: totrans-6
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 使用模式
 - en: '[PRE0]'
+  id: totrans-7
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: 'The obvious question here is how `orders` has to look like. Let’s quote the
     docs:'
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: 显而易见的问题在于`orders`应该是什么样子。让我们引用文档：
 - en: '`orders`: is an iterable (ex: list, tuple, iterator, generator) in which each
     element will be also an iterable (with length) with the following sub-elements
     (2 formats are possible)'
+  id: totrans-9
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`orders`：是一个可迭代对象（例如：列表、元组、迭代器、生成器），其中每个元素也将是一个具有以下子元素的可迭代对象（有2种格式）'
 - en: '`[datetime, size, price]` or `[datetime, size, price, data]`'
+  id: totrans-10
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: '`[datetime, size, price]`或`[datetime, size, price, data]`'
 - en: '**Note**: it must be sorted (or produce sorted elements) by'
+  id: totrans-11
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: '**注意**：它必须按排序（或产生排序元素）'
 - en: '[PRE1]'
+  id: totrans-12
   prefs:
   - PREF_IND
   type: TYPE_PRE
+  zh: '[PRE1]'
 - en: 'where:'
+  id: totrans-13
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 其中：
 - en: '`datetime` is a python `date/datetime` instance or a string with format YYYY-MM-DD[THH:MM:SS[.us]]
     where the elements in brackets are optional'
+  id: totrans-14
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`datetime`是一个python `date/datetime`实例或具有格式YYYY-MM-DD[THH:MM:SS[.us]]的字符串，其中括号中的元素是可选的'
 - en: '`size` is an integer (positive to *buy*, negative to *sell*)'
+  id: totrans-15
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`size`是一个整数（*买*为正，*卖*为负）'
 - en: '`price` is a float/integer'
+  id: totrans-16
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`price`是一个浮点数/整数'
 - en: '`data` if present can take any of the following values'
+  id: totrans-17
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`data`如果存在，可以取以下任何值'
 - en: '*None* - The 1^(st) data feed will be used as target'
+  id: totrans-18
   prefs:
   - PREF_IND
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '*None* - 将使用第一个数据源作为目标'
 - en: '*integer* - The data with that index (insertion order in **Cerebro**) will
     be used'
+  id: totrans-19
   prefs:
   - PREF_IND
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '*integer* - 将使用具有该索引的数据（**Cerebro**中的插入顺序）'
 - en: '*string* - a data with that name, assigned for example with `cerebro.addata(data,
     name=value)`, will be the target'
+  id: totrans-20
   prefs:
   - PREF_IND
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '*string* - 具有该名称的数据，例如使用`cerebro.addata(data, name=value)`分配的，将是目标'
 - en: 'In the case of `notify`:'
+  id: totrans-21
   prefs: []
   type: TYPE_NORMAL
+  zh: 对于`notify`的情况：
 - en: '`notify` (default: *True*)'
+  id: totrans-22
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`notify`（默认值：*True*）'
 - en: If `True` the 1^(st) strategy inserted in the system will be notified of the
     artificial orders created following the information from each order in `orders`
+  id: totrans-23
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 如果`True`，则系统中插入的第一个策略将收到根据`orders`中每个订单信息创建的人为订单的通知
 - en: Note
+  id: totrans-24
   prefs: []
   type: TYPE_NORMAL
+  zh: 注意
 - en: Notice how the example above is adding a *data feed*. **Yes** this is needed.
+  id: totrans-25
   prefs: []
   type: TYPE_NORMAL
+  zh: 注意上面的示例是如何添加*数据源*的。**是的**，这是必要的。
 - en: A practical example of how orders could look like
+  id: totrans-26
   prefs: []
   type: TYPE_NORMAL
+  zh: orders可能的样子的一个实际例子
 - en: '[PRE2]'
+  id: totrans-27
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE2]'
 - en: An iterable with 3 elements, which could have been perfectly loaded from a *CSV*
     file.
+  id: totrans-28
   prefs: []
   type: TYPE_NORMAL
+  zh: 一个有3个元素的可迭代对象，可以完全从*CSV*文件中加载。
 - en: An example
+  id: totrans-29
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 一个例子
 - en: 'The sample below does two things:'
+  id: totrans-30
   prefs: []
   type: TYPE_NORMAL
+  zh: 下面的示例执行两件事：
 - en: Execute a simple *SMA Crossover* strategy
+  id: totrans-31
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 执行一个简单的*SMA交叉*策略
 - en: Add a history of orders which executes the same operations as the *SMA CrossOver*
     strategy
+  id: totrans-32
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 添加一个执行与*SMA交叉*策略相同操作的订单历史记录
 - en: In this 2^(nd) case an empty strategy is added to receive order and trade notifications
     over `notify_order` and `notify_trade`
+  id: totrans-33
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 在第2种情况下，添加了一个空策略以通过`notify_order`和`notify_trade`接收订单和交易通知
 - en: In both cases a set of *analyzers* (`TimeReturn` in *Months* and *Years* and
     a `TradeAnalyzer`) are loaded … and they should return the same values.
+  id: totrans-34
   prefs: []
   type: TYPE_NORMAL
+  zh: 在两种情况下加载了一组*分析器*（*时间回报*以*月*和*年*计以及一个`TradeAnalyzer`）……它们应该返回相同的值。
 - en: 'Run 1: SMA Crossover'
+  id: totrans-35
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 运行1：SMA交叉
 - en: '[PRE3]'
+  id: totrans-36
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE3]'
 - en: Which produces a chart
+  id: totrans-37
   prefs: []
   type: TYPE_NORMAL
+  zh: 这产生了一个图表
 - en: '![image](../Images/0332127316faec4812438636b9b9ac16.png)'
+  id: totrans-38
   prefs: []
   type: TYPE_IMG
+  zh: '![image](../Images/0332127316faec4812438636b9b9ac16.png)'
 - en: 'And some textual output (capped for brevity):'
+  id: totrans-39
   prefs: []
   type: TYPE_NORMAL
+  zh: 和一些文本输出（为简洁起见截断）：
 - en: '[PRE4]'
+  id: totrans-40
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE4]'
 - en: 'Run 2: Order history'
+  id: totrans-41
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 运行2：订单历史
 - en: '[PRE5]'
+  id: totrans-42
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE5]'
 - en: Which produces a chart which seems to have no differences
+  id: totrans-43
   prefs: []
   type: TYPE_NORMAL
+  zh: 这产生了一个看起来没有差异的图表
 - en: '![image](../Images/3261cb5c0d3ae78f66067f7d345c812c.png)'
+  id: totrans-44
   prefs: []
   type: TYPE_IMG
+  zh: '![image](../Images/3261cb5c0d3ae78f66067f7d345c812c.png)'
 - en: 'And some textual output (capped again for brevity):'
+  id: totrans-45
   prefs: []
   type: TYPE_NORMAL
+  zh: 和一些文本输出（为了简洁起见再次截断）：
 - en: '[PRE6]'
+  id: totrans-46
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE6]'
 - en: And the values as expected match those of the reference.
+  id: totrans-47
   prefs: []
   type: TYPE_NORMAL
+  zh: 并且所期望的值与参考值相匹配。
 - en: Conclusion
+  id: totrans-48
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 结论
 - en: Measuring the performance of judgmental trading can be measured for example.
     This is sometimes used in combination with algotrading, where the algo generates
     signals, but the human has the final decision on whether the signal has to translate
     into an actual trade.
+  id: totrans-49
   prefs: []
   type: TYPE_NORMAL
+  zh: 例如，可以测量判断性交易的表现。有时会与算法交易结合使用，其中算法生成信号，但人类最终决定是否将信号转化为实际交易。
 - en: Sample Usage
+  id: totrans-50
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 示例用法
 - en: '[PRE7]'
+  id: totrans-51
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE7]'
 - en: Sample Code
+  id: totrans-52
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 示例代码
 - en: '[PRE8]'
+  id: totrans-53
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE8]'

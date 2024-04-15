@@ -1,242 +1,365 @@
 - en: Release 1.9.51.121
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 发布版本1.9.51.121
 - en: 原文：[https://www.backtrader.com/blog/posts/2017-06-12-release-1.9.51.121/release-1.9.51.121/](https://www.backtrader.com/blog/posts/2017-06-12-release-1.9.51.121/release-1.9.51.121/)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.backtrader.com/blog/posts/2017-06-12-release-1.9.51.121/release-1.9.51.121/](https://www.backtrader.com/blog/posts/2017-06-12-release-1.9.51.121/release-1.9.51.121/)
 - en: Even being a minor release, there are some interesting things which probably
     grant having a dedicated blog post for them.
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: 即使是一个次要版本，也有一些有趣的东西，可能值得为它们撰写专门的博客文章。
 - en: '`linealias`'
+  id: totrans-3
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: '`linealias`'
 - en: '[Pull-Request #320](https://github.com/mementum/backtrader/pull/320) included
     the indicator `RelativeMomentumIndex` (or `RMI`) which according to the literature
     is an evolution of the `RSI`, which:'
+  id: totrans-4
   prefs: []
   type: TYPE_NORMAL
+  zh: '[Pull-Request #320](https://github.com/mementum/backtrader/pull/320) 包括指标`相对动量指数`（或`RMI`），根据文献，这是`RSI`的演变，它：'
 - en: Considers *up* and *down* periods with a lookback larger than `1`
+  id: totrans-5
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 考虑*up*和*down*周期，回溯期大于`1`
 - en: 'As such and rather than having an indicator repeating most of what the `RSI`
     does, it seemed useful to do two things:'
+  id: totrans-6
   prefs: []
   type: TYPE_NORMAL
+  zh: 因此，与其让一个指标重复`RSI`的大部分内容，做两件事似乎更有用：
 - en: Extend `RSI` (and sub-indicators like `UpDay` and `DownDay` to support a lookback
     period larger than *1*. `RMI` can then be implemented as a subclass which simply
     has some different default values.
+  id: totrans-7
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 扩展`RSI`（以及子指标如`UpDay`和`DownDay`）以支持大于*1*的回溯期。`RMI`可以作为一个简单具有一些不同默认值的子类来实现。
 - en: The logical name for the line of the `RMI` indicator is `rmi`, but the `RSI`
     already has decided the name as `rsi`. This is solved by adding a new functionality
     named `linealias`
+  id: totrans-8
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: '`RMI`指标的逻辑名称是`rmi`，但`RSI`已经决定了名称为`rsi`。通过添加一个名为`linealias`的新功能来解决这个问题'
 - en: 'The `RMI` implementation it looks like this:'
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: '`RMI`的实现看起来是这样的：'
 - en: '[PRE0]'
+  id: totrans-10
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: An alias for the line `rsi` from the base class is added, with the name `rmi`.
     If someone wanted to make a subclass and use the name `rmi` it would now be possible.
+  id: totrans-11
   prefs: []
   type: TYPE_NORMAL
+  zh: 为基类添加了`rsi`线的别名，名称为`rmi`。如果有人想要创建一个子类并使用名称`rmi`，现在是可能的。
 - en: 'Additionally, the plotting name of the `rsi` line is also changed to `rmi`.
     An alternative implementation was possible:'
+  id: totrans-12
   prefs: []
   type: TYPE_NORMAL
+  zh: 此外，`rsi`线的绘图名称也更改为`rmi`。还有一种替代实现方式：
 - en: '[PRE1]'
+  id: totrans-13
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE1]'
 - en: Here the existing hierarchy from `RSI` is no longer considered and `lines` is
     used to define the only line named `rmi`. There is no need to define the plotting
     name, because the only line has now the expected name.
+  id: totrans-14
   prefs: []
   type: TYPE_NORMAL
+  zh: 在这里，不再考虑`RSI`的现有层次结构，而是使用`lines`来定义唯一的名为`rmi`的线。不需要定义绘图名称，因为唯一的线现在具有预期的名称。
 - en: But the base class would fail to fill in the values, because it is expecting
     a line with the name `rsi` to be in place. Hence the addition of a reverse alias
     to let it find the line.
+  id: totrans-15
   prefs: []
   type: TYPE_NORMAL
+  zh: 但基类将无法填充值，因为它期望有一个名为`rsi`的线。因此添加了一个反向别名，让它找到该线。
 - en: Interactive Brokers for Optimization
+  id: totrans-16
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 交互式经纪人优化
 - en: Using a live connection to *Interactive Brokers* as the data source for optimization
     was not foreseen. Yet a user tried it and pacing violations started being met.
     The reason being that the *Interactive Brokers* data feed marks itself as being
     a `live` feed, allowing the system to bypass some things like for example data
     preloading.
+  id: totrans-17
   prefs: []
   type: TYPE_NORMAL
+  zh: 使用*交互式经纪人*作为优化数据源的实时连接并未被预见。然而，有用户尝试了这种方法，导致了出现了速度违规。原因在于*交互式经纪人*数据源标记为`live`数据源，允许系统绕过某些事情，比如数据预加载。
 - en: With no preloading, each instance of the optimization would retry to re-download
     the same historical data from *Interactive Brokers*. With this in mind it’s obvious
     that the feed could look to see if the user has requested just a historical download
     and in this case not report itself as `live`, allowing the platform to preload
     the data and share it amongst optimization instances.
+  id: totrans-18
   prefs: []
   type: TYPE_NORMAL
+  zh: 没有预加载，每次优化实例都会尝试重新从*交互式经纪人*下载相同的历史数据。考虑到这一点，很明显数据源可以查看用户是否只请求历史下载，在这种情况下不报告自己为`live`，允许平台预加载数据并在优化实例之间共享。
 - en: See the community thread. [Optimizing with IBStore causes redundant connections/downloads](https://community.backtrader.com/topic/401/optimizing-with-ibstore-causes-redundant-connections-downloads/)
+  id: totrans-19
   prefs: []
   type: TYPE_NORMAL
+  zh: 查看社区帖子。[使用IBStore进行优化会导致冗余连接/下载](https://community.backtrader.com/topic/401/optimizing-with-ibstore-causes-redundant-connections-downloads/)
 - en: Heikin-Ashi Candlesticks
+  id: totrans-20
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 平均趋势蜡烛图
 - en: 'This other community thread was looking to develop the *Heikin-Ashi* candlesticks
     as an indicator: [Develop Heikinashi Indicators](https://community.backtrader.com/topic/458/develop-heikinashi-indicators),
     facing some problems with the recursive definition, because a seed value is needed,
     which can be done during the `prenext` phase of the indicator.'
+  id: totrans-21
   prefs: []
   type: TYPE_NORMAL
+  zh: 这个其他社区帖子试图开发*平滑蜡烛图*作为指标：[Develop Heikinashi Indicators](https://community.backtrader.com/topic/458/develop-heikinashi-indicators)，面临着一些问题，因为需要一个种子值，这可以在指标的`prenext`阶段完成。
 - en: 'Being an interesting display alternative to the traditional candlesticks, this
     has been implemented as a filter, which allows to modify the data source to really
     deliver *Heikin-Ashi* candlesticks. Just like this:'
+  id: totrans-22
   prefs: []
   type: TYPE_NORMAL
+  zh: 作为传统蜡烛图的一个有趣的显示替代方案，这已经被实现为一个过滤器，允许修改数据源以真正提供*平滑蜡烛图*。就像这样：
 - en: '[PRE2]'
+  id: totrans-23
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE2]'
 - en: 'A comparison between the candles can quickly be made by anyone with this code:'
+  id: totrans-24
   prefs: []
   type: TYPE_NORMAL
+  zh: 任何人都可以通过这段代码快速比较蜡烛图：
 - en: '[PRE3]'
+  id: totrans-25
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE3]'
 - en: 'To plot candles, remember to do:'
+  id: totrans-26
   prefs: []
   type: TYPE_NORMAL
+  zh: 要绘制蜡烛图，请记住执行：
 - en: '[PRE4]'
+  id: totrans-27
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE4]'
 - en: Using the sample daily data for 2005 and 2006 in the sources.
+  id: totrans-28
   prefs: []
   type: TYPE_NORMAL
+  zh: 使用样本每日数据来自2005年和2006年的来源。
 - en: '![image](../Images/c466810422fd622c2e203a120de0b7ff.png)'
+  id: totrans-29
   prefs: []
   type: TYPE_IMG
+  zh: '![image](../Images/c466810422fd622c2e203a120de0b7ff.png)'
 - en: And zooming in a bit to better appreciate the differences
+  id: totrans-30
   prefs: []
   type: TYPE_NORMAL
+  zh: 并稍微放大以更好地欣赏差异
 - en: '![image](../Images/d7c81984c3f957a8e072287d7fc4f2a5.png)'
+  id: totrans-31
   prefs: []
   type: TYPE_IMG
+  zh: '![image](../Images/d7c81984c3f957a8e072287d7fc4f2a5.png)'
 - en: Allowing re-scaling of the y-axis by secondary actors
+  id: totrans-32
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 允许辅助演员重新调整y轴的比例
 - en: The axisfor data feeds have always used the main data feed as the scale-owner,
     because the data is always the most important part of the view. If we consider
     for example the `BollingerBands`, it could be that the top band would be far away
     from the maximum of the data and allowing this band to re-scale the chart, would
     reduce the size occupied by the data in the chart, which wouldn’t be wished.
+  id: totrans-33
   prefs: []
   type: TYPE_NORMAL
+  zh: 数据源的轴始终将主数据源用作比例所有者，因为数据始终是视图中最重要的部分。例如，考虑一下`布林带`，可能会导致顶部带远离数据的最大值，并且允许此带重新调整图表，将减少数据在图表中占用的空间，这是不希望的。
 - en: 'The behavior can be controlled now with `plotylimited` as in:'
+  id: totrans-34
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在可以使用`plotylimited`来控制行为，例如：
 - en: '[PRE5]'
+  id: totrans-35
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE5]'
 - en: In the following chart the data feed at the bottom is plotted with `plotylimited=False`.
     The *BollingerBands* don’t get off the chart, because they contribute to the scaling
     and everything fits in the chart.
+  id: totrans-36
   prefs: []
   type: TYPE_NORMAL
+  zh: 在下图中，底部的数据源使用了`plotylimited=False`进行绘制。*布林带*不会超出图表，因为它们会影响缩放，并且一切都适合图表中。
 - en: '![image](../Images/7293eeff204d81ce97b50943b5d7cf96.png)'
+  id: totrans-37
   prefs: []
   type: TYPE_IMG
+  zh: '![image](../Images/7293eeff204d81ce97b50943b5d7cf96.png)'
 - en: This was also commented in the community. [How max - min plot boundaries are
     set?](https://community.backtrader.com/topic/339/how-max-min-plot-boundaries-are-set/)
+  id: totrans-38
   prefs: []
   type: TYPE_NORMAL
+  zh: 这在社区中也有所评论。[How max - min plot boundaries are set?](https://community.backtrader.com/topic/339/how-max-min-plot-boundaries-are-set/)
 - en: Semilogarithmic Plot (aka Logarithmic)
+  id: totrans-39
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 半对数图（也称为对数图）
 - en: 'Individual axis can now be plotted with a semilogarithmic scale (the y-scale).
     For example with:'
+  id: totrans-40
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在可以使用半对数刻度（y轴刻度）绘制单个轴。例如：
 - en: '[PRE6]'
+  id: totrans-41
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE6]'
 - en: That means that the axis controlled by this data feed for plotting will use
     a logarithmic scale, but other won’t and therefore
+  id: totrans-42
   prefs: []
   type: TYPE_NORMAL
+  zh: 这意味着由此数据源控制的轴将使用对数刻度，但其他轴不会，因此
 - en: A moving average plotted over the data will also be plotted with that scale
+  id: totrans-43
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 在数据上绘制移动平均线也将使用该刻度进行绘制
 - en: A stochastic (which is in a different axix and has a different scale) will still
     be plotted linearly
+  id: totrans-44
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 随机指标（位于不同轴上且具有不同刻度）仍将以线性方式绘制
 - en: Note
+  id: totrans-45
   prefs: []
   type: TYPE_NORMAL
+  zh: 注意
 - en: Notice that `plotylimited=True` is used. This is to let `matplotlib` calculate
     the limits of the logarithmic chart (because the ticks are a power of 10) properly
     to fit things into the chart.
+  id: totrans-46
   prefs: []
   type: TYPE_NORMAL
+  zh: 请注意，使用了`plotylimited=True`。这是为了让`matplotlib`正确地计算对数图表的限制（因为刻度是10的幂）以适应图表中的内容。
 - en: A sample simply comparing a long term period of *Yahoo* data.
+  id: totrans-47
   prefs: []
   type: TYPE_NORMAL
+  zh: 简单地比较*Yahoo*数据的长期期间的示例。
 - en: '![image](../Images/251c9a31b8112a63d7d89057b0627124.png)'
+  id: totrans-48
   prefs: []
   type: TYPE_IMG
+  zh: '![image](../Images/251c9a31b8112a63d7d89057b0627124.png)'
 - en: Allow plotmaster to point to itself
+  id: totrans-49
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 允许`plotmaster`指向自身
 - en: 'Plotting several data feeds on the same axis was already possible, but a small
     nuisance didn’t allow a clean loop to set the `plotinfo.plotmaster` value. The
     following had to be done before:'
+  id: totrans-50
   prefs: []
   type: TYPE_NORMAL
+  zh: 在同一轴上绘制多个数据源已经是可能的，但是一个小麻烦不允许设置`plotinfo.plotmaster`值的干净循环。之前必须执行以下操作：
 - en: '[PRE7]'
+  id: totrans-51
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE7]'
 - en: 'And this cleaner loop is possible now:'
+  id: totrans-52
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在可以使用更清晰的循环：
 - en: '[PRE8]'
+  id: totrans-53
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE8]'
 - en: And `dnames` got documented
+  id: totrans-54
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 并且`dnames`已经被记录了
 - en: 'Referencing the data feeds by names was already available, but it had skipped
     making it to the documentation, so it was a hidden jewel. The `dnames` attribute
     in the strategy supports *dot-notation* and *[]* notation (it is actually a `dict`
     subclass). If we first add some data feeds:'
+  id: totrans-55
   prefs: []
   type: TYPE_NORMAL
+  zh: 引用数据源的名称已经可用，但它被忽略了，没有出现在文档中，因此它是一个隐藏的宝藏。策略中的 `dnames` 属性支持*点表示法*和*[]*表示法（实际上是一个
+    `dict` 子类）。如果我们首先添加一些数据源：
 - en: '[PRE9]'
+  id: totrans-56
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE9]'
 - en: 'Later in the strategy one can do the following:'
+  id: totrans-57
   prefs: []
   type: TYPE_NORMAL
+  zh: 在策略中稍后可以执行以下操作：
 - en: '[PRE10]'
+  id: totrans-58
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE10]'
 - en: Conclusion
+  id: totrans-59
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 结论
 - en: A small release with small changes which adds some nifty features.
+  id: totrans-60
   prefs: []
   type: TYPE_NORMAL
+  zh: 一个包含小改动的小版本发布，增加了一些巧妙的功能。

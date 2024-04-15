@@ -1,359 +1,544 @@
 - en: Observers and Statistics
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 观察者和统计
 - en: 原文：[https://www.backtrader.com/blog/posts/2015-08-12-observers-and-statistics/observers-and-statistics/](https://www.backtrader.com/blog/posts/2015-08-12-observers-and-statistics/observers-and-statistics/)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.backtrader.com/blog/posts/2015-08-12-observers-and-statistics/observers-and-statistics/](https://www.backtrader.com/blog/posts/2015-08-12-observers-and-statistics/observers-and-statistics/)
 - en: Strateties running inside the backtrader do mostly deal with **datas** and **indicators**.
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: 运行在backtrader内部的策略主要处理**数据**和**指标**。
 - en: Datas are added to **Cerebro** instances and end up being part of the input
     of strategies (parsed and served as attributes of the instance) whereas Indicators
     are declared and managed by the Strategy itself.
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: 数据被添加到**Cerebro**实例中，并最终成为策略的输入的一部分（被解析并作为实例的属性提供），而指标是由策略本身声明和管理的。
 - en: 'All backtrader sample charts have so far had 3 things which seem to be taken
     for granted because they are not declared anywhere:'
+  id: totrans-4
   prefs: []
   type: TYPE_NORMAL
+  zh: 到目前为止，backtrader的所有示例图表都有3个似乎被视为理所当然的东西，因为它们没有在任何地方声明：
 - en: Cash and Value (what’s happening with the money in the broker)
+  id: totrans-5
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 现金和价值（经纪人的资金情况）
 - en: Trades (aka Operations)
+  id: totrans-6
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 交易（也称为操作）
 - en: Buy/Sell Orders
+  id: totrans-7
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 买入/卖出订单
 - en: 'They are `Observers` and exist within the submodule `backtrader.observers`.
     They are there because **Cerebro** supports a parameter to automatically add (or
     not) them to the Strategy:'
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: 它们是`观察者`，存在于子模块`backtrader.observers`中。它们在那里是因为**Cerebro**支持一个参数，可以自动将它们添加（或不添加）到策略中：
 - en: '`stdstats` (default: True)'
+  id: totrans-9
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`stdstats`（默认值：True）'
 - en: 'If the default is respected **Cerebro** executes the following equivalent user
     code:'
+  id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果默认值被遵守，**Cerebro**执行以下等效用户代码：
 - en: '[PRE0]'
+  id: totrans-11
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: Let’s see the usual chart with those 3 default observers (even if no order is
     issued and therefore no trade happens and there is no change to the cash and portfolio
     value)
+  id: totrans-12
   prefs: []
   type: TYPE_NORMAL
+  zh: 让我们看看具有这3个默认观察者的通常图表（即使没有发出订单，因此没有交易发生，也没有现金和投资组合价值的变化）
 - en: '[PRE1]'
+  id: totrans-13
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE1]'
 - en: '![image](../Images/a1bdfe860269b8820623dad6ec5465e9.png)'
+  id: totrans-14
   prefs: []
   type: TYPE_IMG
+  zh: '![image](../Images/a1bdfe860269b8820623dad6ec5465e9.png)'
 - en: 'Now let’s change the value of `stdstats` to `False` when creating the **Cerebro**
     instance (can also be done when invoking `run`):'
+  id: totrans-15
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在让我们在创建**Cerebro**实例时将`stdstats`的值更改为`False`（也可以在调用`run`时完成）：
 - en: '[PRE2]'
+  id: totrans-16
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE2]'
 - en: The chart is different now.
+  id: totrans-17
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在图表不同了。
 - en: '![image](../Images/f580f3b2cae875a327c5671916607140.png)'
+  id: totrans-18
   prefs: []
   type: TYPE_IMG
+  zh: '![image](../Images/f580f3b2cae875a327c5671916607140.png)'
 - en: Accesing the Observers
+  id: totrans-19
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 访问观察者
 - en: 'The Observers as seen above are already there in the default case and collecting
     information which can be used for statistical purposes and that’s why acess to
     the observers can be done through an attribute of the strategy called:'
+  id: totrans-20
   prefs: []
   type: TYPE_NORMAL
+  zh: 如上所述，观察者已经存在于默认情况下，并收集可用于统计目的的信息，这就是为什么可以通过策略的一个属性来访问观察者的原因：
 - en: '`stats`'
+  id: totrans-21
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`stats`'
 - en: 'It is simply a placeholder. If we recall the addition of one of the default
     **Observers** as laid out above:'
+  id: totrans-22
   prefs: []
   type: TYPE_NORMAL
+  zh: 它只是一个占位符。如果我们回想一下如何添加默认**观察者**之一，就像上面描述的那样：
 - en: '[PRE3]'
+  id: totrans-23
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE3]'
 - en: 'The obvious question would be how to access the `Broker` observer. Here for
     example how it’s done from the `next` method of a strategy:'
+  id: totrans-24
   prefs: []
   type: TYPE_NORMAL
+  zh: 显而易见的问题是如何访问`Broker`观察者。以下是一个示例，展示了如何从策略的`next`方法中完成这个操作：
 - en: '[PRE4]'
+  id: totrans-25
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE4]'
 - en: 'The `Broker` observer just like a Data, an Indicator and the Strategy itself
     is also a `Lines` objects. In this case the `Broker` has 2 lines:'
+  id: totrans-26
   prefs: []
   type: TYPE_NORMAL
+  zh: '`Broker`观察者就像一个数据、一个指标和策略本身一样，也是一个`Lines`对象。在这种情况下，`Broker`有2条线：'
 - en: '`cash`'
+  id: totrans-27
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`cash`'
 - en: '`value`'
+  id: totrans-28
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`value`'
 - en: Observer Implementation
+  id: totrans-29
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 观察者实现
 - en: 'The implementation is very similar to that of an Indicator:'
+  id: totrans-30
   prefs: []
   type: TYPE_NORMAL
+  zh: 实现非常类似于指标的实现：
 - en: '[PRE5]'
+  id: totrans-31
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE5]'
 - en: 'Steps:'
+  id: totrans-32
   prefs: []
   type: TYPE_NORMAL
+  zh: 步骤：
 - en: Derive from `Observer` (and not from `Indicator`)
+  id: totrans-33
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 从`Observer`派生（而不是从`Indicator`派生）
 - en: Declare lines and params as needed (`Broker` has 2 lines but no params)
+  id: totrans-34
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 根据需要声明线和参数（`Broker`有2条线但没有参数）
 - en: There will be an automatic attribute `_owner` which is the strategy holding
     the observer
+  id: totrans-35
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 将会有一个自动属性`_owner`，它是持有观察者的策略。
 - en: 'Observers come in action:'
+  id: totrans-36
   prefs: []
   type: TYPE_NORMAL
+  zh: 观察者开始行动：
 - en: After all Indicators have been calculated
+  id: totrans-37
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 所有指标计算完成后
 - en: After the Strategy `next` method has been executed
+  id: totrans-38
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 策略的`next`方法执行完成后
 - en: 'That means: at the end of the cycle … they **observe** what has happened'
+  id: totrans-39
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 这意味着：在周期结束时...他们**观察**发生了什么
 - en: In the `Broker` case it’s simply blindly recording the broker cash and portfolio
     values at each point in time.
+  id: totrans-40
   prefs: []
   type: TYPE_NORMAL
+  zh: 在`Broker`情况下，它只是盲目地记录了每个时间点的经纪人现金和投资组合价值。
 - en: Adding Observers to the Strategy
+  id: totrans-41
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 将观察者添加到策略中
 - en: As already pointed out above, **Cerebro** is using the `stdstats` parameter
     to decide whether to add 3 default **Observers**, alleviating the work of the
     end user.
+  id: totrans-42
   prefs: []
   type: TYPE_NORMAL
+  zh: 如上所指出，**Cerebro** 使用`stdstats`参数来决定是否添加3个默认的**观察者**，减轻了最终用户的工作量。
 - en: Adding other Observers to the mix is possible, be it along the `stdstats` or
     removing those.
+  id: totrans-43
   prefs: []
   type: TYPE_NORMAL
+  zh: 将其他观察者添加到混合中是可能的，无论是沿着`stdstats`还是移除那些。
 - en: Let’s go for the usual strategy which buys when the `close` price goes above
     a `SimpleMovingAverage` and sells if the opposite is true.
+  id: totrans-44
   prefs: []
   type: TYPE_NORMAL
+  zh: 让我们继续使用通常的策略，当`close`价格高于`SimpleMovingAverage`时购买，反之亦然时卖出。
 - en: 'With one “addition”:'
+  id: totrans-45
   prefs: []
   type: TYPE_NORMAL
+  zh: 有一个“添加”：
 - en: '**DrawDown** which is an already existing observer in the `backtrader` ecosystem'
+  id: totrans-46
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**DrawDown**，这是`backtrader`生态系统中已经存在的观察者'
 - en: '[PRE6]'
+  id: totrans-47
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE6]'
 - en: The visual output shows the evolution of the drawdown
+  id: totrans-48
   prefs: []
   type: TYPE_NORMAL
+  zh: 视觉输出显示了回撤的演变
 - en: '![image](../Images/a3c9cda4923c2d3caf6b9860ef332841.png)'
+  id: totrans-49
   prefs: []
   type: TYPE_IMG
+  zh: '![image](../Images/a3c9cda4923c2d3caf6b9860ef332841.png)'
 - en: 'And part of the text output:'
+  id: totrans-50
   prefs: []
   type: TYPE_NORMAL
+  zh: 以及部分文本输出：
 - en: '[PRE7]'
+  id: totrans-51
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE7]'
 - en: Note
+  id: totrans-52
   prefs: []
   type: TYPE_NORMAL
+  zh: 注意
 - en: 'As seen in the text output and in the code, the `DrawDown` observer has actually
     2 lines:'
+  id: totrans-53
   prefs: []
   type: TYPE_NORMAL
+  zh: 如文本输出和代码中所见，`DrawDown`观察者实际上有2行：
 - en: '`drawdown`'
+  id: totrans-54
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`drawdown`'
 - en: '`maxdrawdown`'
+  id: totrans-55
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`maxdrawdown`'
 - en: The choice is not to plot the `maxdrawdown` line, but make it is still available
     to the user.
+  id: totrans-56
   prefs: []
   type: TYPE_NORMAL
+  zh: 选择不绘制`maxdrawdown`线，但仍然使其对用户可用。
 - en: Actually the last value of `maxdrawdown` is also available in a direct attribute
     (not a line) with the name of `maxdd`
+  id: totrans-57
   prefs: []
   type: TYPE_NORMAL
+  zh: 实际上，`maxdrawdown`的最后一个值也可以通过名为`maxdd`的直接属性（而不是一行）获得
 - en: Developing Observers
+  id: totrans-58
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 开发观察者
 - en: 'The implementation of the `Broker` observer was shown above. To produce a meaningful
     observer, the implementation can use the following information:'
+  id: totrans-59
   prefs: []
   type: TYPE_NORMAL
+  zh: 上面展示了`Broker`观察者的实现。为了生成有意义的观察者，实现可以使用以下信息：
 - en: '`self._owner` is the currently strategy being executed'
+  id: totrans-60
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`self._owner`是当前执行的策略'
 - en: As such anything within the strategy is available to the observer
+  id: totrans-61
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 因此，观察者可以访问策略中的任何内容
 - en: 'Default internal things available in the strategy which may be useful:'
+  id: totrans-62
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 策略中可用的默认内部内容可能会有用：
 - en: '`broker` -> attribute giving access to the broker instance the strategy creates
     order against'
+  id: totrans-63
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`broker` -> 属性，提供对策略创建订单的经纪人实例的访问'
 - en: As seen in `Broker`, cash and portfolio values are collected by invoking the
     methods `getcash` and `getvalue`
+  id: totrans-64
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 如在`Broker`中所见，通过调用`getcash`和`getvalue`方法收集现金和投资组合价值
 - en: '`_orderspending` -> list orders created by the strategy and for which the broker
     has notified an event to the strategy.'
+  id: totrans-65
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`_orderspending` -> 列出由策略创建并经纪人已通知策略的事件的订单。'
 - en: The `BuySell` observer traverses the list looking for orders which have executed
     (totally or partially) to create an average execution price for the given point
     in time (index 0)
+  id: totrans-66
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: '`BuySell`观察者遍历列表，寻找已执行（完全或部分）的订单，以创建给定时间点（索引0）的平均执行价格'
 - en: '`_tradespending` -> list of trades (a set of completed buy/sell or sell/buy
     pairs) which is compiled from the buy/sell orders'
+  id: totrans-67
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`_tradespending` -> 交易列表（一组已完成的买入/卖出或卖出/买入对），从买入/卖出订单编译而成'
 - en: An **Observer** can obviously access other observers over the `self._owner.stats`
     path.
+  id: totrans-68
   prefs: []
   type: TYPE_NORMAL
+  zh: '**Observer**显然可以通过`self._owner.stats`路径访问其他观察者。'
 - en: Custom *OrderObserver*
+  id: totrans-69
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 自定义*OrderObserver*
 - en: The standard `BuySell` observer does only care about operations which have executed.
     We can create an observer which shows when orders where created and if they expired.
+  id: totrans-70
   prefs: []
   type: TYPE_NORMAL
+  zh: 标准的`BuySell`观察者只关心已执行的操作。我们可以创建一个观察者，显示订单何时创建以及是否已过期。
 - en: For the sake of *visibility* the display will not be plotted along the price
     but on a separate axis.
+  id: totrans-71
   prefs: []
   type: TYPE_NORMAL
+  zh: 为了*可见性*，显示将不沿价格绘制，而是在单独的轴上。
 - en: '[PRE8]'
+  id: totrans-72
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE8]'
 - en: The custom observer only cares about **buy** orders, because this is a stratey
     which only buys to try to make a profit. Sell orders are Market orders and will
     be executed immediately.
+  id: totrans-73
   prefs: []
   type: TYPE_NORMAL
+  zh: 自定义观察者只关心**买入**订单，因为这是一个只购买以试图获利的策略。卖出订单是市价订单，将立即执行。
 - en: 'The Close-SMA CrossOver strategy is changed to:'
+  id: totrans-74
   prefs: []
   type: TYPE_NORMAL
+  zh: Close-SMA CrossOver策略已更改为：
 - en: Create a Limit order with a price below 1.0% the close price at the moment of
     the signal
+  id: totrans-75
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 创建一个限价订单，价格低于信号时的收盘价的1.0%
 - en: A validity for the order of 7 (calendar) days
+  id: totrans-76
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 订单有效期为7（日历）天
 - en: The resulting chart.
+  id: totrans-77
   prefs: []
   type: TYPE_NORMAL
+  zh: 结果图表。
 - en: '![image](../Images/d3a9ccafcb697371aa508a1878f4f4dc.png)'
+  id: totrans-78
   prefs: []
   type: TYPE_IMG
+  zh: '![image](../Images/d3a9ccafcb697371aa508a1878f4f4dc.png)'
 - en: Several orders have expired as can be seen in the new subchart (red squares)
     and we can also appreciate that between “creation” and “execution” several days
     happen to be.
+  id: totrans-79
   prefs: []
   type: TYPE_NORMAL
+  zh: 如新子图中所见，有几个订单已过期（红色方块），我们还可以看到在“创建”和“执行”之间有几天的时间。
 - en: Note
+  id: totrans-80
   prefs: []
   type: TYPE_NORMAL
+  zh: 注意
 - en: Starting with commit [1560fa8802](https://github.com/mementum/backtrader/commit/1560fa88021811c85ba94d4b6497d15322cbc1ed)
     in the `development` branch if price is unset at the time of order creation, the
     closing price will be used as the reference price.
+  id: totrans-81
   prefs: []
   type: TYPE_NORMAL
+  zh: 从提交 [1560fa8802](https://github.com/mementum/backtrader/commit/1560fa88021811c85ba94d4b6497d15322cbc1ed)
+    开始，在 `development` 分支中，如果在订单创建时价格未设置，则会使用收盘价格作为参考价格。
 - en: This has no impact in Market orders but keeps `order.create.price` usable at
     all times and eases up the usage of `buy`
+  id: totrans-82
   prefs: []
   type: TYPE_NORMAL
+  zh: 这不会影响市场订单，但始终保持 `order.create.price` 可用，并简化了 `buy` 的使用。
 - en: Finally the code for this strategy which applies the new **observer**
+  id: totrans-83
   prefs: []
   type: TYPE_NORMAL
+  zh: 最后，应用新的**观察者**的策略代码。
 - en: '[PRE9]'
+  id: totrans-84
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE9]'
 - en: Saving/Keeping the statistics
+  id: totrans-85
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 保存/保持统计信息。
 - en: 'As of now `backtrader` has not implemented any mechanism to track the values
     of observers storing them into files. The best way to do it:'
+  id: totrans-86
   prefs: []
   type: TYPE_NORMAL
+  zh: 目前为止，`backtrader` 还没有实现任何跟踪观察者值并将它们存储到文件中的机制。最好的方法是：
 - en: Open a file in the `start` method of the strategy
+  id: totrans-87
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 在策略的 `start` 方法中打开一个文件。
 - en: Write the values down in the `next` method of the strategy
+  id: totrans-88
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 在策略的 `next` 方法中写入值。
 - en: 'Considering the `DrawDown` observer, it could be done like this:'
+  id: totrans-89
   prefs: []
   type: TYPE_NORMAL
+  zh: 考虑到 `DrawDown` 观察者，可以这样做：
 - en: '[PRE10]'
+  id: totrans-90
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE10]'
 - en: To save the values of index 0, once all observers have been processed a custom
     observer which writes to a file could be added as the last observer to the system
     to save values to a csv file.
+  id: totrans-91
   prefs: []
   type: TYPE_NORMAL
+  zh: 要保存索引0的值，在所有观察者都被处理后，可以将一个自定义观察者添加到系统中作为最后一个观察者，将值保存到一个 csv 文件中。

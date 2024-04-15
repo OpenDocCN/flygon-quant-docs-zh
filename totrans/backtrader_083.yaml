@@ -1,414 +1,617 @@
 - en: Sizers
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: Sizers
 - en: 原文：[https://www.backtrader.com/docu/sizers/sizers/](https://www.backtrader.com/docu/sizers/sizers/)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.backtrader.com/docu/sizers/sizers/](https://www.backtrader.com/docu/sizers/sizers/)
 - en: Smart Staking
+  id: totrans-2
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 智能押注
 - en: 'A *Strategy* offers methods to trade, namely: `buy`, `sell` and `close`. Let’s
     see the signature of `buy`:'
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: '*Strategy*提供了交易方法，即：`buy`，`sell`和`close`。让我们看看`buy`的签名：'
 - en: '[PRE0]'
+  id: totrans-4
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: 'Notice that `size` has a default value of `None` if the caller does not specify
     it. This is where *Sizers* play an important role:'
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: 注意，如果调用者没有指定，`size`的默认值为`None`。这就是*Sizers*发挥重要作用的地方：
 - en: '`size=None` requests that the *Strategy* asks its *Sizer* for the actual stake'
+  id: totrans-6
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`size=None`请求*Strategy*向其*Sizer*请求实际押注'
 - en: 'This obviously implies that *Strategies* have a *Sizer*: Yes, indeed!. The
     background machinery adds a default sizer to a *Strategy* if the user has not
     added one. The default *Sizer* added to a *strategy* is `SizerFix`. The initial
     lines of the definition:'
+  id: totrans-7
   prefs: []
   type: TYPE_NORMAL
+  zh: 这显然意味着*Strategies*有一个*Sizer*：是的，确实！背景机制会为*Strategy*添加一个默认的*sizer*，如果用户没有添加一个。添加到*strategy*的默认*Sizer*是`SizerFix`。定义的初始行：
 - en: '[PRE1]'
+  id: totrans-8
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE1]'
 - en: It is easy to guess that this *Sizer* simply *buys/sells* using a `stake` of
     `1` units (be it shares, contracts, …)
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: 很容易猜到这个*Sizer*只是使用`1`单位的`stake`*买入/卖出*（无论是股票、合约等）
 - en: Using *Sizers*
+  id: totrans-10
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 使用*Sizers*
 - en: From *Cerebro*
+  id: totrans-11
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 从*Cerebro*
 - en: '*Sizers* can be added via *Cerebro* with 2 different methods:'
+  id: totrans-12
   prefs: []
   type: TYPE_NORMAL
+  zh: '*Sizers*可以通过2种不同的方法通过*Cerebro*添加：'
 - en: '`addsizer(sizercls, *args, **kwargs)`'
+  id: totrans-13
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`addsizer(sizercls, *args, **kwargs)`'
 - en: 'Adds a *Sizer* that will be applied to any strategy added to *cerebro*. This
     is, so to to say, the default *Sizer*. Example:'
+  id: totrans-14
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 添加一个将应用于添加到*cerebro*的任何策略的*Sizer*。这可以说是默认的*Sizer*。例如：
 - en: '[PRE2]'
+  id: totrans-15
   prefs:
   - PREF_IND
   type: TYPE_PRE
+  zh: '[PRE2]'
 - en: '`addsizer_byidx(idx, sizercls, *args, **kwargs)`'
+  id: totrans-16
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`addsizer_byidx(idx, sizercls, *args, **kwargs)`'
 - en: The *Sizer* will only be added to the *Strategy* referenced by `idx`
+  id: totrans-17
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: '*Sizer*只会添加到由`idx`引用的*Strategy*'
 - en: 'This `idx` can be gotten as return value from `addstrategy`. As in:'
+  id: totrans-18
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 这个`idx`可以从`addstrategy`的返回值中获取。就像这样：
 - en: '[PRE3]'
+  id: totrans-19
   prefs:
   - PREF_IND
   type: TYPE_PRE
+  zh: '[PRE3]'
 - en: 'In this example:'
+  id: totrans-20
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 在这个例子中：
 - en: A default *Sizer* has been added to the system. This one applies to all strategies
     which don’t have a specific *Sizer* assigned
+  id: totrans-21
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 系统中已经添加了一个默认的*Sizer*。这适用于所有没有分配特定*Sizer*的策略
 - en: For *MyStrategy* and after collecting its insertion *idx*, a specific sizer
     (changing the `stake` param) is added
+  id: totrans-22
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 对于*MyStrategy*，在收集到其插入*idx*之后，会添加一个特定的调整`sizer`参数的`sizer`
 - en: A 2^(nd) strategy, *MyOtherStrategy*, is added to the system. No specific *Sizer*
     is added for it
+  id: totrans-23
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 第二个策略，*MyOtherStrategy*，被添加到系统中。没有为其添加特定的*Sizer*
 - en: 'This means that:'
+  id: totrans-24
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 这意味着：
 - en: '*MyStrategy* will finally have an internal specific *Sizer*'
+  id: totrans-25
   prefs:
   - PREF_IND
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '*MyStrategy*最终将拥有一个内部特定的*Sizer*'
 - en: '*MyOtherStrategy* will get the default sizer'
+  id: totrans-26
   prefs:
   - PREF_IND
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '*MyOtherStrategy*将获得默认的*sizer*'
 - en: Note
+  id: totrans-27
   prefs: []
   type: TYPE_NORMAL
+  zh: 注意
 - en: '*default* doesn’t mean that that the strategies share a single *Sizer* instance.
     Each *strategy* receives a different instance of the *default* sizer'
+  id: totrans-28
   prefs: []
   type: TYPE_NORMAL
+  zh: '*default*并不意味着策略共享一个单一的*Sizer*实例。每个*strategy*都会收到一个不同的默认*sizer*实例'
 - en: To share a single instance, the sizer to be shared should be a singleton class.
     How to define one is outside of the scope of *backtrader*
+  id: totrans-29
   prefs: []
   type: TYPE_NORMAL
+  zh: 要共享一个单一实例，要共享的*sizer*应该是一个单例类。如何定义一个超出了*backtrader*的范围
 - en: From *Strategy*
+  id: totrans-30
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 从*Strategy*
 - en: 'The *Strategy* class offers an API: `setsizer` and `getsizer` (and a *property*
     `sizer`) to manage the *Sizer*. The signatures:'
+  id: totrans-31
   prefs: []
   type: TYPE_NORMAL
+  zh: '*Strategy*类提供了一个API：`setsizer`和`getsizer`（以及一个*property* `sizer`）来管理*Sizer*。签名如下：'
 - en: '`def setsizer(self, sizer)`: it takes an already instantiated *Sizer*'
+  id: totrans-32
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`def setsizer(self, sizer)`: 接受一个已实例化的*Sizer*'
 - en: '`def getsizer(self)`: returns the current *Sizer* instance'
+  id: totrans-33
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`def getsizer(self)`: 返回当前的*Sizer*实例'
 - en: '`sizer` it is the property which can be directly *get/set*'
+  id: totrans-34
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`sizer`是可以直接*get/set*的属性'
 - en: 'In this scenario the *Sizer* can be for example:'
+  id: totrans-35
   prefs: []
   type: TYPE_NORMAL
+  zh: 在这种情况下，*Sizer*可以是：
 - en: Passed to the strategy as a parameter
+  id: totrans-36
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 作为参数传递给策略
 - en: 'Be set during `__init__` using the property `sizer` or `setsizer` as in:'
+  id: totrans-37
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 在`__init__`期间使用`Sizer`或`setsizer`属性设置，如：
 - en: '[PRE4]'
+  id: totrans-38
   prefs:
   - PREF_IND
   type: TYPE_PRE
+  zh: '[PRE4]'
 - en: This would for example allow to create a *Sizer* at the same level as the *cerebro*
     calls are happening and pass it as a parameter to all strategies that go in the
     system, which effectevily allows sharing a *Sizer*
+  id: totrans-39
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 例如，这将允许在与*cerebro*调用发生在同一级别的*Sizer*并将其作为参数传递给系统中的所有策略，从而有效地实现共享*Sizer*
 - en: '*Sizer* Development'
+  id: totrans-40
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: '*Sizer*开发'
 - en: 'Doing it is easy:'
+  id: totrans-41
   prefs: []
   type: TYPE_NORMAL
+  zh: 这样做很容易：
 - en: Subclass from `backtrader.Sizer`
+  id: totrans-42
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 从`backtrader.Sizer`继承
 - en: This gives you access to `self.strategy` and `self.broker` although it shouldn’t
     be needed in most cases. Things that can be accessed with the `broker`
+  id: totrans-43
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 这使您可以访问`self.strategy`和`self.broker`，尽管在大多数情况下不需要。可以通过`broker`访问的内容
 - en: data’s position with `self.strategy.getposition(data)`
+  id: totrans-44
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 通过 `self.strategy.getposition(data)` 获取数据的持仓
 - en: complete portfolio value through `self.broker.getvalue()`
+  id: totrans-45
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 通过 `self.broker.getvalue()` 获取完整的投资组合价值
 - en: Notice this could of course also be done with `self.strategy.broker.getvalue()`
+  id: totrans-46
   prefs:
   - PREF_IND
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 请注意，当然也可以用 `self.strategy.broker.getvalue()` 来实现
 - en: Some of the other things are already below as arguments
+  id: totrans-47
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 其他一些东西已经作为参数列在下面了
 - en: Override the method `_getsizing(self, comminfo, cash, data, isbuy)`
+  id: totrans-48
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 覆盖方法 `_getsizing(self, comminfo, cash, data, isbuy)`
 - en: '`comminfo`: The CommissionInfo instance that contains information about the
     commission for the data and allows calculation of position value, operation cost,
     commision for the operation'
+  id: totrans-49
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`comminfo`: 包含有关数据委托的委员会信息的 CommissionInfo 实例，并允许计算持仓价值、操作成本和操作的委员会费用'
 - en: '`cash`: current available cash in the *broker*'
+  id: totrans-50
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`cash`: 经纪人当前可用的现金'
 - en: '`data`: target of the operation'
+  id: totrans-51
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`data`: 操作目标'
 - en: '`isbuy`: will be `True` for *buy* operations and `False` for *sell* operations'
+  id: totrans-52
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`isbuy`: 对于 *买入* 操作将为 `True`，对于 *卖出* 操作将为 `False`'
 - en: This method returns the desired `size` for the *buy/sell* operation
+  id: totrans-53
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 该方法返回 *买入/卖出* 操作的期望 `size`
 - en: 'The returned sign is not relevant, ie: if the operation is a *sell* operation
     (`isbuy` will be `False`) the method may return `5` or `-5`. Only the absolute
     value will be used by the *sell* operation.'
+  id: totrans-54
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 返回的符号无关紧要，即：如果操作是 *卖出* 操作（`isbuy` 将为 `False`），则该方法可能返回 `5` 或 `-5`。 *卖出* 操作仅使用绝对值。
 - en: '`Sizer` has already gone to the `broker` and requested the *commission information*
     for the given *data*, the actual *cash* level and provides a direct reference
     to the *data* which is the target of the operation'
+  id: totrans-55
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: '`Sizer` 已经去到 `broker` 并为给定的 *data* 请求了 *委员会信息*，实际的 *现金* 水平，并提供了对操作目标 *data*
+    的直接引用'
 - en: 'Let’s go for the definition of the `FixedSize` sizer:'
+  id: totrans-56
   prefs: []
   type: TYPE_NORMAL
+  zh: 让我们来看一下 `FixedSize` 尺寸器的定义：
 - en: '[PRE5]'
+  id: totrans-57
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE5]'
 - en: This is pretty simple in that the *Sizer* makes no calculations and the parameters
     are just there.
+  id: totrans-58
   prefs: []
   type: TYPE_NORMAL
+  zh: 这很简单，因为 *Sizer* 不做任何计算，参数就在那里。
 - en: But the mechanism should allow the construction of complex *sizing* (aka *positioning*)
     systems to manage the stakes when entering/exiting the market.
+  id: totrans-59
   prefs: []
   type: TYPE_NORMAL
+  zh: 但是这种机制应该允许构建复杂的 *大小*（又称 *定位*）系统，在进入/退出市场时管理利害关系。
 - en: 'Another example: **A position rerverser**:'
+  id: totrans-60
   prefs: []
   type: TYPE_NORMAL
+  zh: 另一个例子：**头寸翻转者**：
 - en: '[PRE6]'
+  id: totrans-61
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE6]'
 - en: 'This one builds on the existing `FixedSize` to inherit the `params` and overrides
     `_getsizing` to:'
+  id: totrans-62
   prefs: []
   type: TYPE_NORMAL
+  zh: 这个构建在现有的 `FixedSize` 基础上，继承了 `params` 并覆盖了 `_getsizing` 以实现：
 - en: Get the `position` of the *data* via the attribute `broker`
+  id: totrans-63
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 通过属性 `broker` 获取 *data* 的 `position`
 - en: Use `position.size` to decide if to double the fixed stake
+  id: totrans-64
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 使用 `position.size` 来决定是否加倍固定赌注
 - en: Return the calculated value
+  id: totrans-65
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 返回计算出的值
 - en: This would remove the burden from the *Strategy* to decide if a position has
     to be reversed or opened, the *Sizer* is in control and can at any time be replaced
     without affecting the logic.
+  id: totrans-66
   prefs: []
   type: TYPE_NORMAL
+  zh: 这将从 *策略* 上卸下决定是否反向或开仓的负担，*Sizer* 控制着，可以随时替换而不影响逻辑。
 - en: Practical *Sizer* Applicability
+  id: totrans-67
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 实际 *Sizer* 应用
 - en: 'Wihtout considering complex sizing algorithms, two different sizers can be
     used to *turn a strategy from Long-Only to Long-Short*. Simply by changing the
     *Sizer* in the *cerebro* execution, the strategy will change behavior. A very
     simple `close` crosses `SMA` algorithm:'
+  id: totrans-68
   prefs: []
   type: TYPE_NORMAL
+  zh: 在不考虑复杂的大小算法的情况下，可以使用两个不同的 *Sizer* 将策略从单向变为双向。只需在 *cerebro* 执行中更改 *Sizer*，策略就会改变行为。一个非常简单的
+    `close` 穿越 `SMA` 算法：
 - en: '[PRE7]'
+  id: totrans-69
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE7]'
 - en: Notice how the strategy doesn’t consider the current *position* (by looking
     at `self.position`) to decide whether a *buy* or *sell* has to actually be done.
     Only the *signal* from the `CrossOver` is considered. The *Sizers* will be in
     charge of everything.
+  id: totrans-70
   prefs: []
   type: TYPE_NORMAL
+  zh: 注意策略不考虑当前的 *持仓*（通过查看 `self.position`）来决定是否实际执行 *买入* 或 *卖出*。只考虑 `CrossOver` 的
+    *信号*。 *Sizers* 将负责一切。
 - en: 'This sizer will take care of only returning a *non-zero* size when selling
     if a position is already open:'
+  id: totrans-71
   prefs: []
   type: TYPE_NORMAL
+  zh: 这个尺寸器将在已经开仓的情况下仅在卖出时返回 *非零* 大小：
 - en: '[PRE8]'
+  id: totrans-72
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE8]'
 - en: 'Putting it all together (and assuming *backtrader* has already been imported
     and a *data* has been added to the system):'
+  id: totrans-73
   prefs: []
   type: TYPE_NORMAL
+  zh: '将所有内容放在一起（并假设 *backtrader* 已经被导入并且一个 *data* 已经被添加到系统中）:'
 - en: '[PRE9]'
+  id: totrans-74
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE9]'
 - en: The chart (from the sample included in the sources to test this).
+  id: totrans-75
   prefs: []
   type: TYPE_NORMAL
+  zh: 图表（从源代码中包含的示例中获取）。
 - en: '![image](../Images/1fba74a1fe51f47571c5f38989d5ca26.png)'
+  id: totrans-76
   prefs: []
   type: TYPE_IMG
+  zh: '![image](../Images/1fba74a1fe51f47571c5f38989d5ca26.png)'
 - en: 'The *Long-Short* version simply changes the *Sizer* to be the `FixedReverser`
     shown above:'
+  id: totrans-77
   prefs: []
   type: TYPE_NORMAL
+  zh: 简单地将 *Sizer* 更改为上面显示的 `FixedReverser` 即可获得 *长-短* 版本：
 - en: '[PRE10]'
+  id: totrans-78
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE10]'
 - en: The output chart.
+  id: totrans-79
   prefs: []
   type: TYPE_NORMAL
+  zh: 输出图表。
 - en: '![image](../Images/168d5183373532bb10e1e57ee4657fde.png)'
+  id: totrans-80
   prefs: []
   type: TYPE_IMG
+  zh: '![image](../Images/168d5183373532bb10e1e57ee4657fde.png)'
 - en: 'Notice the differences:'
+  id: totrans-81
   prefs: []
   type: TYPE_NORMAL
+  zh: 注意区别：
 - en: The number of *trades* has duplicated
+  id: totrans-82
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '*交易*数量已经翻了一番'
 - en: The cash level never goes back to be the *value* because the strategy is *always*
     in the market
+  id: totrans-83
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 现金水平永远不会回到*值*，因为策略*总是*处于市场中
 - en: Both approaches are anyhow negative, but this is only an example.
+  id: totrans-84
   prefs: []
   type: TYPE_NORMAL
+  zh: 两种方法都是负面的，但这只是一个例子。
 - en: '*bt.Sizer* Reference'
+  id: totrans-85
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: '*bt.Sizer* 参考'
 - en: class backtrader.Sizer()
+  id: totrans-86
   prefs:
   - PREF_H4
   type: TYPE_NORMAL
+  zh: 类 backtrader.Sizer()
 - en: This is the base class for *Sizers*. Any *sizer* should subclass this and override
     the `_getsizing` method
+  id: totrans-87
   prefs: []
   type: TYPE_NORMAL
+  zh: 这是*Sizers*的基类。任何*sizer*都应该是这个的子类，并覆盖`_getsizing`方法
 - en: 'Member Attribs:'
+  id: totrans-88
   prefs: []
   type: TYPE_NORMAL
+  zh: 成员属性：
 - en: '`strategy`: will be set by the strategy in which the sizer is working'
+  id: totrans-89
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`strategy`：将由工作在其中的调整器的策略设置'
 - en: 'Gives access to the entire api of the strategy, for example if the actual data
     position would be needed in `_getsizing`:'
+  id: totrans-90
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 提供了策略的整个 api 访问权限，例如如果在`_getsizing`中需要实际数据位置：
 - en: '[PRE11]'
+  id: totrans-91
   prefs:
   - PREF_IND
   type: TYPE_PRE
+  zh: '[PRE11]'
 - en: '`broker`: will be set by the strategy in which the sizer is working'
+  id: totrans-92
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`broker`：将由工作在其中的 Sizer 的策略设置'
 - en: Gives access to information some complex sizers may need like portfolio value,
     ..
+  id: totrans-93
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 提供了一些复杂调整器可能需要的信息，如投资组合价值，..
 - en: _getsizing(comminfo, cash, data, isbuy)
+  id: totrans-94
   prefs:
   - PREF_H4
   type: TYPE_NORMAL
+  zh: _getsizing(comminfo, cash, data, isbuy)
 - en: This method has to be overriden by subclasses of Sizer to provide the sizing
     functionality
+  id: totrans-95
   prefs: []
   type: TYPE_NORMAL
+  zh: 这个方法必须被 Sizer 的子类覆盖，以提供大小调整功能
 - en: 'Params:'
+  id: totrans-96
   prefs: []
   type: TYPE_NORMAL
+  zh: 参数：
 - en: '[PRE12]'
+  id: totrans-97
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE12]'
 - en: The method has to return the actual size (an int) to be executed. If `0` is
     returned nothing will be executed.
+  id: totrans-98
   prefs: []
   type: TYPE_NORMAL
+  zh: 该方法必须返回要执行的实际大小（一个整数）。如果返回`0`，则不会执行任何操作。
 - en: The absolute value of the returned value will be used
+  id: totrans-99
   prefs: []
   type: TYPE_NORMAL
+  zh: 返回值的绝对值将被使用

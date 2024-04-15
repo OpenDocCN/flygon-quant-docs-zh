@@ -1,232 +1,343 @@
 - en: A Dynamic Indicator
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 一个动态指标
 - en: 原文：[https://www.backtrader.com/blog/posts/2018-02-06-dynamic-indicator/dynamic-indicator/](https://www.backtrader.com/blog/posts/2018-02-06-dynamic-indicator/dynamic-indicator/)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.backtrader.com/blog/posts/2018-02-06-dynamic-indicator/dynamic-indicator/](https://www.backtrader.com/blog/posts/2018-02-06-dynamic-indicator/dynamic-indicator/)
 - en: Indicators are difficult beasts. Not because they are difficult to code in general,
     but mostly because the name is misleading and people have different expectations
     as to what an indicator is.
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: 指标是棘手的东西。不是因为它们在一般情况下很难编码，而是因为名称具有误导性，并且人们对指标有不同的期望。
 - en: Let’s try to at least define what an *Indicator* is inside the *backtrader*
     ecosystem.
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: 让我们至少尝试定义在*backtrader*生态系统内什么是*指标*。
 - en: It is an object which defines at least one output *line*, may define parameters
     that influence its behavior and takes one or more data feeds as input.
+  id: totrans-4
   prefs: []
   type: TYPE_NORMAL
+  zh: 它是一个定义了至少一个输出*线*的对象，可能定义影响其行为的参数，并接受一个或多个数据源作为输入。
 - en: 'In order to keep indicators as general as possible the following design principles
     were chosen:'
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: 为了尽可能使指标通用，选择了以下设计原则：
 - en: 'The input data feeds can be anything that looks like a data feed, which brings
     an immediate advantage: because other indicators look like data feeds, one can
     pass indicators as the input to other indicators'
+  id: totrans-6
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 输入数据源可以是任何看起来像数据源的东西，这带来了一个直接的优势：因为其他指标看起来像数据源，所以可以将指标作为输入传递给其他指标。
 - en: No `datetime` *line* payload is carried. This is so, because the input may have
     no `datetime` payload itself to synchronize to. And synchronizing to the general
     system wide `datetime` could be incorrect, because the indicator could be working
     with data from a *weekly* timeframe whereas the system time may be ticking in
     *seconds*, because that’s the lowest resolution one of several data feeds bears.
+  id: totrans-7
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 不携带`datetime` *线*负载。这是因为输入可能没有自己的`datetime`负载进行同步。并且根据系统范围内的通用`datetime`进行同步可能是不正确的，因为指标可能正在使用来自*周*时间框架的数据，而系统时间可能以*秒*为单位进行计时，因为这是多个数据源之一的最低分辨率。
 - en: 'Operations have to be idempotent, i.e.: if called twice with the same input
     and without change in the parameters, the output has to be the same.'
+  id: totrans-8
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 操作必须是幂等的，即：如果使用相同的输入两次调用且参数没有更改，则输出必须相同。
 - en: 'Take into account that an indicator can be asked to perform an operation several
     times at the same point in time with the same input. Although this would seem
     not needed, it is if the system support *data replaying* (i.e.: building a larger
     timeframe in real-time from a smaller timeframe)'
+  id: totrans-9
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 请注意，可以要求指标在相同的时间点使用相同的输入多次执行操作。尽管这似乎是不需要的，但如果系统支持*数据重放*（即：从较小的时间框架实时构建较大的时间框架），则需要这样做。
 - en: 'And finally: an *Indicator* writes its output value to the current moment of
     time, i.e.: index `0`. If not it will named a `Study`. A `Study` will look for
     patterns and write output values in the past.'
+  id: totrans-10
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 最后：*指标*将其输出值写入当前时间的时刻，即：索引`0`。否则它将被命名为`Study`。`Study`将寻找模式并在过去写入输出值。
 - en: See for example the [Backtrader Community - ZigZag](https://community.backtrader.com/topic/773/zigzag-indicator/)
+  id: totrans-11
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 例如请参阅[Backtrader社区 - ZigZag](https://community.backtrader.com/topic/773/zigzag-indicator/)
 - en: Once the definitions (in the *backtrader* ecosystem) are clear, let’s try to
     see how we can actually code a *dynamic* indicator. It would seem we cannot, because
     looking at the aforementioned design principles, the operational procedure of
     an indicator is more or less … non-mutable.
+  id: totrans-12
   prefs: []
   type: TYPE_NORMAL
+  zh: 一旦（在*backtrader*生态系统中）定义清晰，让我们尝试看看如何实际编写一个*动态*指标。似乎我们不能，因为从上述的设计原则来看，指标的操作过程多多少少是……不可变的。
 - en: The Highest High … since …
+  id: totrans-13
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 自从……以来的最高高点
 - en: One indicator which is usually put in motion is the `Highest` (alias `MaxN`),
     to get the *highest* something in a given period. As in
+  id: totrans-14
   prefs: []
   type: TYPE_NORMAL
+  zh: 通常启动的一个指标是`Highest`（别名为`MaxN`），以获得给定周期内的*最高*某物。如
 - en: '[PRE0]'
+  id: totrans-15
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: In this snippet we instantiate `Highest` to keep track of the highest high along
     the last 15 periods. Were the highest high greater than `X` something would be
     done.
+  id: totrans-16
   prefs: []
   type: TYPE_NORMAL
+  zh: 在此代码片段中，我们实例化`Highest`以跟踪最近15个周期内的最高高点。如果最高高点大于`X`，将执行某些操作。
 - en: 'The catch here:'
+  id: totrans-17
   prefs: []
   type: TYPE_NORMAL
+  zh: 这里的关键是：
 - en: The `period` is fixed at `15`
+  id: totrans-18
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '*周期*被固定为`15`'
 - en: Making it dynamic
+  id: totrans-19
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 使其动态
 - en: 'Sometimes, we would need the indicator to be dynamic and change its behavior
     to react to real-time conditions. See for example this question in the *backtrader*
     community: [Highest high since position was opened](https://community.backtrader.com/topic/850/highest-high-since-position-was-opened/)'
+  id: totrans-20
   prefs: []
   type: TYPE_NORMAL
+  zh: 有时，我们需要指标是动态的，并且根据实时条件改变其行为。例如，请参阅 *backtrader* 社区中的这个问题：[自开仓以来的最高高点](https://community.backtrader.com/topic/850/highest-high-since-position-was-opened/)
 - en: We of course don’t know when a position is going to be opened/closed and setting
     the `period` to a fixed value like `15` would make no sense. Let’s see how we
     can do it, packing everything in an indicator
+  id: totrans-21
   prefs: []
   type: TYPE_NORMAL
+  zh: 当然，我们不知道何时会开/平仓，并且将 `period` 设置为固定值如 `15` 是没有意义的。让我们看看我们如何做，将所有东西打包到一个指标中
 - en: Dynamic params
+  id: totrans-22
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 动态参数
 - en: We’ll first be using parameters that we’ll be changing during the life of the
     indicator, achieving dynamism with it.
+  id: totrans-23
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们首先将使用我们将在指标生命周期中更改的参数，通过它实现动态性。
 - en: '[PRE1]'
+  id: totrans-24
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE1]'
 - en: Et voilá! We have it and we have so far not broken the rules laid out for our
     indicators. Let’s look at the indicator
+  id: totrans-25
   prefs: []
   type: TYPE_NORMAL
+  zh: 让我们来吧！我们拥有它，到目前为止我们还没有违反为我们的指标制定的规则。让我们看看指标
 - en: It defines an output *line* named `dyn_highest`
+  id: totrans-26
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 它定义了一个名为 `dyn_highest` 的输出 *line*
 - en: It has one parameter `tradeopen=False`
+  id: totrans-27
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 它有一个参数 `tradeopen=False`
 - en: (Yes, it takes data feeds, simply because it subclasses `Indicator`)
+  id: totrans-28
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: （是的，它接受数据源，只是因为它是 `Indicator` 的子类）
 - en: And if we were to call `next` always with the same input, it would always return
     the same value
+  id: totrans-29
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 如果我们总是使用相同的输入调用 `next`，它将始终返回相同的值
 - en: 'The only thing:'
+  id: totrans-30
   prefs: []
   type: TYPE_NORMAL
+  zh: 唯一的事情：
 - en: If the value of the parameter changes, the output changes (the rules above said
     the output remains constant as long as the parameters don’t change)
+  id: totrans-31
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 如果参数的值发生变化，则输出也会发生变化（上面的规则说，只要参数不发生变化，输出保持不变）
 - en: We use this in `notify_trade` to influence our `DynamicHighest`
+  id: totrans-32
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们在 `notify_trade` 中使用这个来影响我们的 `DynamicHighest`
 - en: We use the value `isopen` of the notified `trade` as a flag to know if we have
     to record the highest point of the input data
+  id: totrans-33
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 我们使用通知的 `trade` 的值 `isopen` 作为一个标志，以知道我们是否需要记录输入数据的最高点
 - en: When the `trade` closes, the value of `isopen` will be `False` and we will stop
     recording the highest value
+  id: totrans-34
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 当 `trade` 关闭时，`isopen` 的值将为 `False`，我们将停止记录最高值
 - en: 'For reference see: [Backtrader Documentation Trade](https://www.backtrader.com/docu/trade.html)'
+  id: totrans-35
   prefs: []
   type: TYPE_NORMAL
+  zh: 供参考：[Backtrader Documentation Trade](https://www.backtrader.com/docu/trade.html)
 - en: Easy!!!
+  id: totrans-36
   prefs: []
   type: TYPE_NORMAL
+  zh: 简单！！！
 - en: Using a method
+  id: totrans-37
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 使用方法
 - en: Some people would argue against the modification of a `param` which is part
     of the declaration of the Indicator and should only be set during the instantiation.
+  id: totrans-38
   prefs: []
   type: TYPE_NORMAL
+  zh: 有些人会反对修改在指标声明中的 `param`，并且应该只在实例化期间设置。
 - en: Ok, let’s go for a method.
+  id: totrans-39
   prefs: []
   type: TYPE_NORMAL
+  zh: 好的，让我们使用一个方法。
 - en: '[PRE2]'
+  id: totrans-40
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE2]'
 - en: Not a huge difference, but now the indicator has some extra boilerplate with
     `__init__` and the method `tradeopen(self, yesno)`. But the dynamics of our `DynamicHighest`
     are the same.
+  id: totrans-41
   prefs: []
   type: TYPE_NORMAL
+  zh: 并没有太大的区别，但现在指标有了一些额外的样板代码，包括 `__init__` 和方法 `tradeopen(self, yesno)`。但是我们的 `DynamicHighest`
+    的动态性是相同的。
 - en: 'Bonus: let’s make it general purpose'
+  id: totrans-42
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 奖励：让它变成通用目的
 - en: Let’s recover the `params` and make the Indicator one that can apply different
     functions and not only `max`
+  id: totrans-43
   prefs: []
   type: TYPE_NORMAL
+  zh: 让我们恢复 `params` 并使指标成为可以应用不同函数而不仅仅是 `max` 的指标
 - en: '[PRE3]'
+  id: totrans-44
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE3]'
 - en: 'Said and done! We have added:'
+  id: totrans-45
   prefs: []
   type: TYPE_NORMAL
+  zh: 说了做到！我们已经添加了：
 - en: '`params=dict(fn=None)`'
+  id: totrans-46
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`params=dict(fn=None)`'
 - en: To collect the function the end user would like to use
+  id: totrans-47
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 收集最终用户想要使用的函数
 - en: 'A safeguard to use a placeholder function if the user passes no specific function:'
+  id: totrans-48
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 如果用户没有传递特定函数，则使用占位符函数的保护措施：
 - en: '[PRE4]'
+  id: totrans-49
   prefs:
   - PREF_IND
   type: TYPE_PRE
+  zh: '[PRE4]'
 - en: 'And we use the function (or the placeholder) for the calculation:'
+  id: totrans-50
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 并且我们使用函数（或占位符）进行计算：
 - en: '[PRE5]'
+  id: totrans-51
   prefs:
   - PREF_IND
   type: TYPE_PRE
+  zh: '[PRE5]'
 - en: 'Stating in the invocation of our (now named) `DynamicFn` indicator which function
     we want to use … `max` (no surprises here):'
+  id: totrans-52
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 在我们（现在命名为）`DynamicFn` 指标的调用中声明我们想要使用的函数… `max`（这里没有惊喜）：
 - en: '[PRE6]'
+  id: totrans-53
   prefs:
   - PREF_IND
   type: TYPE_PRE
+  zh: '[PRE6]'
 - en: Not much more left today … Enjoy it!!!
+  id: totrans-54
   prefs: []
   type: TYPE_NORMAL
+  zh: 今天剩下的不多了…享受它！！！

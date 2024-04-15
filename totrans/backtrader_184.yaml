@@ -1,191 +1,293 @@
 - en: Data - Replay
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 数据 - 重放
 - en: 原文：[https://www.backtrader.com/blog/posts/2015-08-25-data-replay/data-replay/](https://www.backtrader.com/blog/posts/2015-08-25-data-replay/data-replay/)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.backtrader.com/blog/posts/2015-08-25-data-replay/data-replay/](https://www.backtrader.com/blog/posts/2015-08-25-data-replay/data-replay/)
 - en: The time is gone and testing a strategy against a fully formed and closed bar
     is good, but it could be better.
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: 时间已经过去，针对一个完全形成和关闭的柱状图测试策略是好的，但可以更好。
 - en: 'This is where *Data Replay* comes in to help. If:'
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: 这就是*数据重放*的用武之地。如果：
 - en: 'The strategy operates on data with a timeframe X (example: daily)'
+  id: totrans-4
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 策略在时间框架X（例如：每日）上运行
 - en: and
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: 和
 - en: 'Data for a smaller timeframe Y (example: 1 minute) is available'
+  id: totrans-6
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 较小时间框架Y（例如：1分钟）的数据可用
 - en: 'Data replay does exactly what the name implies:'
+  id: totrans-7
   prefs: []
   type: TYPE_NORMAL
+  zh: 数据重放正如其名称所示：
 - en: '[PRE0]'
+  id: totrans-8
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: 'This is of course not exactly how the market developed, but it is far better
     than looking at the daily fully formed and closed bar in isolation:'
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: 当然，这并不是市场实际发展的方式，但比孤立地查看每日完整和关闭的柱状图要好得多：
 - en: '[PRE1]'
+  id: totrans-10
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE1]'
 - en: Putting *Data Replay* into action follows the regular usage patterns of `backtrader`
+  id: totrans-11
   prefs: []
   type: TYPE_NORMAL
+  zh: 将*数据重放*付诸实践遵循`backtrader`的常规使用模式
 - en: Load a data feed
+  id: totrans-12
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 加载数据源
 - en: Pass the data to `DataReplayer` which is yet another data feed that will work
     on the loaded data feed
+  id: totrans-13
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 将数据传递给`DataReplayer`，这是另一个将在加载的数据源上工作的数据源
 - en: Pass the new data feed to cerebro
+  id: totrans-14
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 将新的数据源传递给cerebro
 - en: Add a strategy
+  id: totrans-15
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 添加一个策略
 - en: And run … *WITH PRELOAD DISABLED**
+  id: totrans-16
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 然后运行... *禁用预加载**
 - en: Note
+  id: totrans-17
   prefs: []
   type: TYPE_NORMAL
+  zh: 注意
 - en: Preloading cannot be supported when data is being replayed because each bar
     is actually built in real-time.
+  id: totrans-18
   prefs: []
   type: TYPE_NORMAL
+  zh: 当数据被重放时，无法支持预加载，因为每个柱状图实际上是实时构建的。
 - en: 'For the sake of working with a example the standard 2006 daily data will be
     replayed on a weekly basis. Which means:'
+  id: totrans-19
   prefs: []
   type: TYPE_NORMAL
+  zh: 为了演示，将在每周基础上重放标准的2006年日常数据。这意味着：
 - en: There will finally be 52 bars, one for each week
+  id: totrans-20
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 最终将有52个柱状图，每周一个
 - en: Cerebro will call `prenext` and `next` a total of 255 times, which is the original
     count of daily bars
+  id: totrans-21
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: Cerebro将总共调用`prenext`和`next` 255次，这是每日柱状图的原始计数
 - en: 'The trick:'
+  id: totrans-22
   prefs: []
   type: TYPE_NORMAL
+  zh: 技巧：
 - en: When a weekly bar is forming, the length (`len(self)`) of the strategy will
     remain unchanged.
+  id: totrans-23
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 当每周柱状图形成时，策略的长度（`len(self)`）将保持不变。
 - en: With each new week the length will increase by one
+  id: totrans-24
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 每个新周，长度将增加一
 - en: Some examples below, but first the sauce of the test script in which the data
     is loaded and passed to a replayer … and `run` with `preload=False` to disable
     preloading (COMPULSORY)
+  id: totrans-25
   prefs: []
   type: TYPE_NORMAL
+  zh: 以下是一些示例，但首先是测试脚本的源代码，其中加载数据并传递给重放器...并且使用`preload=False`来禁用预加载（强制）
 - en: '[PRE2]'
+  id: totrans-26
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE2]'
 - en: Example - Replay Daily to Weekly
+  id: totrans-27
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 示例 - 将每日重放为每周
 - en: 'The invocation of the script:'
+  id: totrans-28
   prefs: []
   type: TYPE_NORMAL
+  zh: 脚本的调用：
 - en: '[PRE3]'
+  id: totrans-29
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE3]'
 - en: 'The chart cannot unfortunately show us the real thing happening in the background,
     so let’s have a look at the console output:'
+  id: totrans-30
   prefs: []
   type: TYPE_NORMAL
+  zh: 不幸的是，图表无法向我们展示背景中发生的真实情况，因此让我们看看控制台输出：
 - en: '[PRE4]'
+  id: totrans-31
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE4]'
 - en: As we see the internal `self.counter` variable is keeping track of each call
     to either `prenext` or `next`. The former being called before the applied Simple
     Moving Average produces a value. The latter called when the Simple Moving Average
     is producing values.
+  id: totrans-32
   prefs: []
   type: TYPE_NORMAL
+  zh: 正如我们所看到的，内部的`self.counter`变量正在跟踪每次调用`prenext`或`next`。前者在应用简单移动平均产生值之前调用。后者在简单移动平均产生值时调用。
 - en: 'The key:'
+  id: totrans-33
   prefs: []
   type: TYPE_NORMAL
+  zh: 关键：
 - en: The length (len(self)) of the strategy changes every 5 bars (5 trading days
     in the week)
+  id: totrans-34
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 策略的长度（len(self)）每5个柱状图（每周5个交易日）发生变化
 - en: 'The strategy is effectively seeing:'
+  id: totrans-35
   prefs: []
   type: TYPE_NORMAL
+  zh: 该策略实际上看到：
 - en: How the weekly bar developed in 5 shots.
+  id: totrans-36
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 每周柱状图是如何在5次快照中发展的。
 - en: This, again, doesn’t replicate the actual tick-by-tick (and not even minute,
     hour) development of the market, but it is better than actually seeing a bar.
+  id: totrans-37
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 再次强调，这并不复制市场的实际逐笔（甚至不是分钟、小时）发展，但比实际看到柱状图要好。
 - en: The visual output is that of the weekly chart which is the final outcome the
     system is being tested again.
+  id: totrans-38
   prefs: []
   type: TYPE_NORMAL
+  zh: 可视化输出是周线图表，这是系统正在进行测试的最终结果。
 - en: '![image](../Images/6a15e577f372430eaff45cd9c5fa7d02.png)'
+  id: totrans-39
   prefs: []
   type: TYPE_IMG
+  zh: '![图片](../Images/6a15e577f372430eaff45cd9c5fa7d02.png)'
 - en: Example 2 - Daily to Daily with Compression
+  id: totrans-40
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 示例2 - 每日到每日带压缩
 - en: Of course “Replaying” can be applied to the same timeframe but with a compression.
+  id: totrans-41
   prefs: []
   type: TYPE_NORMAL
+  zh: 当然，“重放”也可以应用于相同的时间框架，但具有压缩。
 - en: 'The console:'
+  id: totrans-42
   prefs: []
   type: TYPE_NORMAL
+  zh: 控制台：
 - en: '[PRE5]'
+  id: totrans-43
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE5]'
 - en: This time we got half the bars as expected because of the factor 2 requested
     compression.
+  id: totrans-44
   prefs: []
   type: TYPE_NORMAL
+  zh: 这次我们得到了预期的一半柱状图，因为请求的压缩因子为2。
 - en: 'The chart:'
+  id: totrans-45
   prefs: []
   type: TYPE_NORMAL
+  zh: 图表：
 - en: '![image](../Images/cf38a0c17f1ac390e19f0f799c7eb042.png)'
+  id: totrans-46
   prefs: []
   type: TYPE_IMG
+  zh: '![图片](../Images/cf38a0c17f1ac390e19f0f799c7eb042.png)'
 - en: Conclusion
+  id: totrans-47
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 结论
 - en: A reconstruction of the market development is possible. Usually a smaller timeframe
     set of data is available and can be used to discretely replay the timeframe which
     the system operates on.
+  id: totrans-48
   prefs: []
   type: TYPE_NORMAL
+  zh: 可以对市场发展进行重建。通常会提供一组较小的时间范围数据，可以用来离散地重播系统运行的时间范围。
 - en: The test script.
+  id: totrans-49
   prefs: []
   type: TYPE_NORMAL
+  zh: 测试脚本。
 - en: '[PRE6]'
+  id: totrans-50
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE6]'

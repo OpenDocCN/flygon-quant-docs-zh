@@ -1,259 +1,391 @@
 - en: BTFD (Buy The F… Dip)
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: BTFD（买入垃圾... Dip）
 - en: 原文：[https://www.backtrader.com/blog/posts/2016-12-26-btfd/btfd/](https://www.backtrader.com/blog/posts/2016-12-26-btfd/btfd/)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.backtrader.com/blog/posts/2016-12-26-btfd/btfd/](https://www.backtrader.com/blog/posts/2016-12-26-btfd/btfd/)
 - en: Note
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: 注意
 - en: Added operations log for the `CloseClose` approach (updated sample below too)
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: 为`CloseClose`方法添加了操作日志（下面的示例也已更新）
 - en: 'A post in *Reddit* calling for replication of a `BTFD` strategy turned out
     to be the little push needed to add yet another feature to *backtrader*: `leverage`'
+  id: totrans-4
   prefs: []
   type: TYPE_NORMAL
+  zh: '*Reddit*上的一篇帖子呼吁复制`BTFD`策略，结果证明这是添加另一个功能到*backtrader*所需的小推动：`杠杆`'
 - en: 'The links:'
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: 这些链接：
 - en: '[Reddit Thread](https://www.reddit.com/r/algotrading/comments/5jez2b/can_anyone_replicate_this_strategy/)'
+  id: totrans-6
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[Reddit帖子](https://www.reddit.com/r/algotrading/comments/5jez2b/can_anyone_replicate_this_strategy/)'
 - en: '[Dark Bid BTFD](http://dark-bid.com/BTFD-only-strategy-that-matters.html)'
+  id: totrans-7
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[Dark Bid BTFD](http://dark-bid.com/BTFD-only-strategy-that-matters.html)'
 - en: 'In the *Reddit* thread there was finally no full replication of the results
     from *Dark Bid*. But it can be done. Although one has to point something out from
     the start:'
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: 在*Reddit*的帖子中最终没有对*Dark Bid*的结果进行完全复制。但是这是可以做到的。尽管从一开始就必须指出一些事情：
 - en: '*Dark Bid* is not showing a true chart and the explanation about the strategy
     is really lacking and probably would be deemed as *wrong* by most'
+  id: totrans-9
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '*Dark Bid*并没有展示真正的图表，并且关于该策略的解释实在是缺乏，大多数人可能会认为它是*错误的*'
 - en: Let’s have a direct look at the chart here (remember the chart is from the *Dark
     Bid BTFD* post)
+  id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: 让我们直接在这里查看图表（请记住，图表来自*Dark Bid BTFD*帖子）
 - en: '![image](../Images/f6156fbbfeb5d73ad80d28f098ae9ae6.png)'
+  id: totrans-11
   prefs: []
   type: TYPE_IMG
+  zh: '![image](../Images/f6156fbbfeb5d73ad80d28f098ae9ae6.png)'
 - en: 'The interpretation most people would probably do:'
+  id: totrans-12
   prefs: []
   type: TYPE_NORMAL
+  zh: 大多数人可能会做出以下解释：
 - en: '*Buy The Close*: this part is clear. Buy during the *closing auction*'
+  id: totrans-13
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '*在收盘时购买*：这部分很清楚。在*收盘竞价*时购买'
 - en: '*When S&P Is Down At Least 1%*: in most cases that means that the *current
     close* is `1%` below the previous *close*'
+  id: totrans-14
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '*当标普至少下跌1%*：在大多数情况下，这意味着*当前收盘价*比前一次*收盘价*低`1%`'
 - en: '*Hold For 2 Days*: the interpretation here would be to sell *at the close*
     2 trading sessions later'
+  id: totrans-15
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '*持有2天*：这里的解释将是在2个交易会话后*在收盘时*卖出'
 - en: '*2x Leverage*: Each *buy* operation is leveraged 2x (or *100%* credit)'
+  id: totrans-16
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '*2x杠杆*：每个*购买*操作都是2倍杠杆（或*100%*信用）'
 - en: 'Additionals:'
+  id: totrans-17
   prefs: []
   type: TYPE_NORMAL
+  zh: 附加信息：
 - en: The data seems to run from `1990-01-01` to `2016-09-30`
+  id: totrans-18
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 数据似乎从`1990-01-01`运行到`2016-09-30`
 - en: The starting cash value seems to start at `100,000`
+  id: totrans-19
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 起始现金价值似乎从`100,000`开始
 - en: Note
+  id: totrans-20
   prefs: []
   type: TYPE_NORMAL
+  zh: 注意
 - en: Notice there are no *commissions* or *credit interest* being charged.
+  id: totrans-21
   prefs: []
   type: TYPE_NORMAL
+  zh: 请注意，没有收取任何*佣金*或*信用利息*。
 - en: The sample below is configured with the *winning settings*, but the first execution
     will respect the interpreted rules.
+  id: totrans-22
   prefs: []
   type: TYPE_NORMAL
+  zh: 下面的示例已配置为*获胜设置*，但第一次执行将遵守解释的规则。
 - en: '[PRE0]'
+  id: totrans-23
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: Note
+  id: totrans-24
   prefs: []
   type: TYPE_NORMAL
+  zh: 注意
 - en: The sample accepts an `--offline` parameter to use a file previously downloaded
     from *Yahoo* to speed up testing. If not used, the data with the default dates
     quoted above and the default ticker `^GSPC` will be downloaded each and every
     time from *Yahoo*
+  id: totrans-25
   prefs: []
   type: TYPE_NORMAL
+  zh: 该示例接受一个`--offline`参数，以使用之前从*Yahoo*下载的文件来加速测试。如果不使用，将每次都从*Yahoo*下载默认日期和默认股票代码为`^GSPC`的数据。
 - en: '![image](../Images/07fcfafb3859b2c0915668f1ab7ef435.png)'
+  id: totrans-26
   prefs: []
   type: TYPE_IMG
+  zh: '![image](../Images/07fcfafb3859b2c0915668f1ab7ef435.png)'
 - en: 'Houston, we have a problem! Although not so big as expected. Observations:'
+  id: totrans-27
   prefs: []
   type: TYPE_NORMAL
+  zh: 休斯顿，我们有问题！尽管没有预期的那么大。观察结果：
 - en: Our *asset* has gone from `100,000` to `602,816` and this seems right on spot
     with the `BTFD` chart above
+  id: totrans-28
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 我们的*资产*已经从`100,000`增加到`602,816`，这似乎与上面的`BTFD`图表完全吻合
 - en: Our `100,000` cash, on the other hand, has only gone up to `357,277` which seems
     `10x` below the expected value over `3,000,000` (or `3M`)
+  id: totrans-29
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 另一方面，我们的`100,000`现金只增加到`357,277`，这似乎低于预期值的`10x`，预期值为`3,000,000`（或`3M`）
 - en: In this case `value` and `value_unlever` are equal, which means that the strategy
     is *NOT IN THE MARKET*
+  id: totrans-30
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 在这种情况下，`value`和`value_unlever`相等，这意味着策略*不在市场中*
 - en: 'But the most interesting thing is: the clear difference in the **red** lines
     which show the value over time'
+  id: totrans-31
   prefs: []
   type: TYPE_NORMAL
+  zh: 但是最有趣的是：**红色**线显示的时间内的价值明显不同
 - en: Our line has very quick *ups* and *downs*
+  id: totrans-32
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 我们的线路有非常快速的*上涨*和*下跌*
 - en: This is due to *leverage*. When the strategy is bought the `2x` leverage allows
     to buy two times the asset.
+  id: totrans-33
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 这是由于*杠杆*。当策略购买时，`2x`杠杆允许购买两倍的资产。
 - en: But when the strategy is in cash, the cash is not worth twice its value.
+  id: totrans-34
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 但是当策略处于现金状态时，现金的价值并不是其价值的两倍。
 - en: The `BTFD` line doesn’t exhibit this behavior and that’s because it is **ALWAYS**
     leveraged
+  id: totrans-35
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`BTFD`行没有展现出这种行为，因为它始终**始终**是杠杆的'
 - en: Ok. First part of the `BTFD` mystery … *SOLVED*! But we still have a problem
     and this is matching the performance achieved by *Dark Bid*. Without much ado,
     a run of the sample with the default winning settings.
+  id: totrans-36
   prefs: []
   type: TYPE_NORMAL
+  zh: 好的。`BTFD`谜题的第一部分… *已解决*！但我们仍然有一个问题，这是匹配*Dark Bid*实现的性能。毫不犹豫，使用默认的获胜设置运行样本。
 - en: '[PRE1]'
+  id: totrans-37
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE1]'
 - en: Note
+  id: totrans-38
   prefs: []
   type: TYPE_NORMAL
+  zh: 注意
 - en: '`approach=highlow` is the default setting if the sample is run with no *approach*
     argument to the strategy'
+  id: totrans-39
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果在策略中没有*approach*参数运行样本，则`approach=highlow`是默认设置
 - en: '![image](../Images/6ce5db65b601d2c12212ec94f1fb9aab.png)'
+  id: totrans-40
   prefs: []
   type: TYPE_IMG
+  zh: '![image](../Images/6ce5db65b601d2c12212ec94f1fb9aab.png)'
 - en: 'In this case:'
+  id: totrans-41
   prefs: []
   type: TYPE_NORMAL
+  zh: 在这种情况下：
 - en: The difference between the `high` and the `low` is used.
+  id: totrans-42
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 使用`high`和`low`之间的差异。
 - en: Of course this isn’t *“Is Down At least 1%* as indicated in the `BTFD` chart.
     This is something different, because the `low` may also have happened before the
     `high` and many would see this as *being up* rather than *down*
+  id: totrans-43
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 当然，这并不是*“下跌至少1%*，如`BTFD`图表所示。这是不同的情况，因为`low`可能也发生在`high`之前，许多人会认为这是*上涨*而不是*下跌*。
 - en: Note
+  id: totrans-44
   prefs: []
   type: TYPE_NORMAL
+  zh: 注意
 - en: 'The strategy allows these approaches: `closeclose`, `highlow`, `highclose`
     and `openclose`.'
+  id: totrans-45
   prefs: []
   type: TYPE_NORMAL
+  zh: 该策略允许这些方法：`closeclose`、`highlow`、`highclose`和`openclose`。
 - en: 'But:'
+  id: totrans-46
   prefs: []
   type: TYPE_NORMAL
+  zh: 但是：
 - en: The `value` of the system is `3,184,118`. Ant this is a *winner* because the
     visual inspection of the `BTFD` chart shows that the final value is over `3M`
+  id: totrans-47
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 该系统的`value`为`3,184,118`。这是一个*赢家*，因为对`BTFD`图表的视觉检查显示最终值超过了`3M`。
 - en: 'The *unleveraged value* (`value_unlever`) of the system is: `1,592,608` which
     is not the above. This simply tells us that the strategy **IS IN THE MARKET**'
+  id: totrans-48
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 系统的*未杠杆价值*（`value_unlever`）是：`1,592,608`，这不是上述情况。这只是告诉我们策略**正在市场上**
 - en: Obviously and in about 1 or 2 days, the strategy will sell the position and
     the real cash value will be around `1,592,608` and by no means close to `3,184,118`.
+  id: totrans-49
   prefs: []
   type: TYPE_NORMAL
+  zh: 显然，在大约1或2天内，该策略将出售头寸，实际现金价值将约为`1,592,608`，绝不接近`3,184,118`。
 - en: The `1.5M` value was the best observation achieved by the original *Reddit*
     poster.
+  id: totrans-50
   prefs: []
   type: TYPE_NORMAL
+  zh: '`1.5M`的值是原始*Reddit*帖子达到的最佳观察结果。'
 - en: Conclusion
+  id: totrans-51
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 结论
 - en: 'The complete `BTFD` mystery is solved. The keys:'
+  id: totrans-52
   prefs: []
   type: TYPE_NORMAL
+  zh: 完整的`BTFD`谜团已解决。关键在于：
 - en: The `value` line plotted in the chart isn’t real, because it is always *leveraged*
     and not only when being bought
+  id: totrans-53
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 图表中绘制的`value`线不是真实的，因为它始终*杠杆*，而不仅仅是在购买时
 - en: The approach is not really to buy when the asset is *at least 1% down* as commonly
     understood (*previous close to current close*) but when the asset has *at least
     a 1% difference between the high and the low*
+  id: totrans-54
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 方法实际上不是在资产*至少下跌1%*时购买，如通常理解的那样（*前一次收盘价到当前收盘价*），而是在资产的`high`和`low`之间至少有1%的差异时购买
 - en: The real gains are roughly `16x` (from `100,000` to roughly `1,592,000`) and
     in *NO CASE* `31x` (from `100,000` to `3.1M`)
+  id: totrans-55
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 实际收益大约为`16倍`（从`100,000`增加到大约`1,592,000`），在*任何情况下*都不会达到`31倍`（从`100,000`增加到`3.1M`）
 - en: Sample usage
+  id: totrans-56
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 样本用法
 - en: '[PRE2]'
+  id: totrans-57
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE2]'
 - en: Sample Code
+  id: totrans-58
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 样本代码
 - en: '[PRE3]'
+  id: totrans-59
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE3]'
 - en: Operations Logs
+  id: totrans-60
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 操作日志
 - en: '`CloseClose` Approach'
+  id: totrans-61
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: '`CloseClose`方法'
 - en: 'Execution:'
+  id: totrans-62
   prefs: []
   type: TYPE_NORMAL
+  zh: 执行：
 - en: '[PRE4]'
+  id: totrans-63
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE4]'
 - en: 'Result:'
+  id: totrans-64
   prefs: []
   type: TYPE_NORMAL
+  zh: 结果：
 - en: '[PRE5]'
+  id: totrans-65
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE5]'

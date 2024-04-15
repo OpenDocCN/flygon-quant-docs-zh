@@ -1,294 +1,434 @@
 - en: Target Orders
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 目标订单
 - en: 原文：[https://www.backtrader.com/blog/posts/2016-09-02-target-orders/target-orders/](https://www.backtrader.com/blog/posts/2016-09-02-target-orders/target-orders/)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.backtrader.com/blog/posts/2016-09-02-target-orders/target-orders/](https://www.backtrader.com/blog/posts/2016-09-02-target-orders/target-orders/)
 - en: 'Until version 1.8.10.96 smart staking was possible with *backtrader* over the
     *Strategy* methods: buy and sell. It was all about adding a Sizer to the equation
     which is responsible for the size of the stake.'
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: 直到版本1.8.10.96，通过*Strategy*方法：买入和卖出，在*backtrader*上实现了智能的投注。一切都是关于向方程中添加一个Sizer，它负责赌注的大小。
 - en: What a *Sizer* cannot do is decide if the operation has to be a *buy* or a *sell*.
     And that means that a new concept is needed in which a small intelligence layer
     is added to make such decision.
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: '*Sizer*无法决定操作是*买入*还是*卖出*。这意味着需要引入一个新概念，在其中添加一个小的智能层来做出这样的决定。'
 - en: 'Here is where the family of `order_target_xxx` methods in the *Strategy* come
     into play. Inspired by the ones in `zipline`, the methods offer the chance to
     simply specify the final *target*, be the target:'
+  id: totrans-4
   prefs: []
   type: TYPE_NORMAL
+  zh: 这就是`Strategy`中的`order_target_xxx`方法家族发挥作用的地方。受到`zipline`中的方法的启发，这些方法提供了简单指定最终*目标*的机会，目标可以是：
 - en: '`size` -> amount of shares, contracts in the portfolio of a specific asset'
+  id: totrans-5
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`size` -> 特定资产组合中的股票、合约数量'
 - en: '`value` -> value in monetary units of the asset in the portfolio'
+  id: totrans-6
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`value` -> 投资组合中资产的货币单位价值'
 - en: '`percent` -> percentage (from current portfolio) value of the asset in the
     current portfolio'
+  id: totrans-7
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`percent` -> 当前投资组合中资产的百分比价值'
 - en: Note
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: 注意
 - en: The reference for the methods can be found in Strategy reference. The summary
     is that the methods use the same *signature* as `buy` and `sell` except for the
     parameter `size` which is replaced by the parameter `target`
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: 方法的参考可以在策略参考中找到。简而言之，这些方法使用与`buy`和`sell`相同的*签名*，除了参数`size`被参数`target`替换。
 - en: In this case it is all about specifying the final *target* and the method decides
     if an operation will be a *buy* or a *sell*. The same logic applies to the 3 methods.
     Let’s tart with `order_target_size`
+  id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: 在这种情况下，重点是指定最终*目标*，方法决定操作是*买入*还是*卖出*。相同的逻辑适用于这3种方法。让我们从`order_target_size`开始
 - en: If the *target* is greater than the position a *buy* is issued, with the difference
     `target - position_size`
+  id: totrans-11
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 如果*目标*大于仓位，则会发出*买入*指令，差额为`目标 - 仓位大小`
 - en: 'Examples:'
+  id: totrans-12
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 示例：
 - en: 'Pos: `0`, *target*: `7` -> *buy(size=7 - 0)* -> *buy(size=7)*'
+  id: totrans-13
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 仓位：`0`，*目标*：`7` -> *买入(size=7 - 0)* -> *买入(size=7)*
 - en: 'Pos: `3`, *target*: `7` -> *buy(size=7 - 3)* -> *buy(size=4)*'
+  id: totrans-14
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 仓位：`3`，*目标*：`7` -> *买入(size=7 - 3)* -> *买入(size=4)*
 - en: 'Pos: `-3`, *target*: `7` -> *buy(size=7 - -3)* -> *buy(size=10)*'
+  id: totrans-15
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 仓位：`-3`，*目标*：`7` -> *买入(size=7 - -3)* -> *买入(size=10)*
 - en: 'Pos: `-3`, *target*: `-2` -> *buy(size=-2 - -3)* -> *buy(size=1)*'
+  id: totrans-16
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 仓位：`-3`，*目标*：`-2` -> *买入(size=-2 - -3)* -> *买入(size=1)*
 - en: If the *target* is smaller than the position a *sell* is issued with the difference
     `position_size - target`
+  id: totrans-17
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 如果*目标*小于仓位，则会发出*卖出*指令，差额为`仓位大小 - 目标`
 - en: 'Examples:'
+  id: totrans-18
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 示例：
 - en: 'Pos: `0`, *target*: `-7` -> *sell(size=0 - -7)* -> *sell(size=7)*'
+  id: totrans-19
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 仓位：`0`，*目标*：`-7` -> *卖出(size=0 - -7)* -> *卖出(size=7)*
 - en: 'Pos: `3`, *target*: `-7` -> *sell(size=3 - -7)* -> *sell(size=10)*'
+  id: totrans-20
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 仓位：`3`，*目标*：`-7` -> *卖出(size=3 - -7)* -> *卖出(size=10)*
 - en: 'Pos: `-3`, *target*: `-7` -> *sell(size=-3 - -7)* -> *sell(size=4)*'
+  id: totrans-21
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 仓位：`-3`，*目标*：`-7` -> *卖出(size=-3 - -7)* -> *卖出(size=4)*
 - en: 'Pos: `3`, *target*: `2` -> *sell(size=3 - 2)* -> *sell(size=1)*'
+  id: totrans-22
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 仓位：`3`，*目标*：`2` -> *卖出(size=3 - 2)* -> *卖出(size=1)*
 - en: 'When targetting a value with `order_target_value`, the current *value* of the
     asset in the portfolio and the *position size* are both taken into account to
     decide what the final underlying operation will be. The reasoning:'
+  id: totrans-23
   prefs: []
   type: TYPE_NORMAL
+  zh: 当使用`order_target_value`来设置目标值时，投资组合中资产的当前价值和仓位大小都会被考虑在内，以决定最终的基础操作。推理如下：
 - en: 'If *position size* is negative (*short*) and the *target value* has to be greater
     than the current value, this means: *sell* more'
+  id: totrans-24
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 如果*仓位大小*为负值（*空头*）且*目标价值*必须大于当前价值，则意味着：*卖出*更多
 - en: 'As such the logic works as follows:'
+  id: totrans-25
   prefs: []
   type: TYPE_NORMAL
+  zh: 因此，逻辑如下：
 - en: If `target > value` and `size >=0` -> *buy*
+  id: totrans-26
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 如果`目标 > 值`且`size >=0` -> *买入*
 - en: If `target > value` and `size < 0` -> *sell*
+  id: totrans-27
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 如果`目标 > 值`且`size < 0` -> *卖出*
 - en: If `target < value` and `size >= 0` -> *sell*
+  id: totrans-28
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 如果`目标 < 值`且`size >= 0` -> *卖出*
 - en: If `target < value` and `size\* < 0` -> *buy*
+  id: totrans-29
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 如果`目标 < 值`且`size\* < 0` -> *买入*
 - en: The logic for `order_target_percent` is the same as that of `order_target_value`.
     This method simply takes into account the current total value of the portfolio
     to determine the *target value* for the asset.
+  id: totrans-30
   prefs: []
   type: TYPE_NORMAL
+  zh: '`order_target_percent`的逻辑与`order_target_value`相同。该方法简单地考虑了投资组合的当前总价值，以确定资产的*目标价值*。'
 - en: The Sample
+  id: totrans-31
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 示例
 - en: '*backtrader* tries to have a sample for each new functionality and this is
     no exception. No bells and whistles, just something to test the results are as
     expected. This one is under the `order_target` directory in the samples.'
+  id: totrans-32
   prefs: []
   type: TYPE_NORMAL
+  zh: '*backtrader*尝试为每个新功能提供一个示例，这不例外。没有花里胡哨，只是为了测试结果是否符合预期。这个示例位于samples中的`order_target`目录下。'
 - en: 'The logic in the sample is rather dumb and only meaant for testing:'
+  id: totrans-33
   prefs: []
   type: TYPE_NORMAL
+  zh: 示例中的逻辑相当愚蠢，只是用于测试：
 - en: During *odd months* (Jan, Mar, …), use the *day* as target (in the case of `order_target_value`
     multiplying the day by `1000`)
+  id: totrans-34
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 在*奇数月*（一月，三月，...）中，使用*日*作为目标（对于`order_target_value`，将日乘以`1000`）
 - en: This mimics an increasing *target*
+  id: totrans-35
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 这模拟了一个递增的*目标*。
 - en: During *even months* (Feb, Apr, …) use `31 - day` as the *target*
+  id: totrans-36
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 在*偶数月*（二月，四月，...）中，使用`31 - 日`作为*目标*
 - en: This mimics an decreasing *target*
+  id: totrans-37
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 这模拟了一个递减的*目标*。
 - en: order_target_size
+  id: totrans-38
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: order_target_size
 - en: Let’s see what happens in *Jan* and *Feb*.
+  id: totrans-39
   prefs: []
   type: TYPE_NORMAL
+  zh: 让我们看看*一月*和*二月*发生了什么。
 - en: '[PRE0]'
+  id: totrans-40
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: In *Jan* the *target* starts at `3` with the 1^(st) trading day of the year
     and increases. And the *position* size moves initially from `0` to `3` and then
     in increments of `1`.
+  id: totrans-41
   prefs: []
   type: TYPE_NORMAL
+  zh: 在*一月*，*目标*从年初的第1个交易日开始为`3`，并逐渐增加。*持仓*大小最初从`0`增加到`3`，然后以`1`的增量移动。
 - en: Finishing *Jan* the last *order_target* is for `31` and that *position size*
     is reported when entering the 1^(st) day of *Feb*, when the new *target side*
     is requested to be `30` and goes changing along with the position in decrements
     of ´1`.
+  id: totrans-42
   prefs: []
   type: TYPE_NORMAL
+  zh: 结束*一月*时，最后的*order_target*为`31`，当进入*二月*的第1天时报告了该*持仓大小*，当新的*目标大小*请求为`30`时，并随着持仓以`1`的递减变化。
 - en: '![image](../Images/1d76b4ae8e0f69da95168a9fc63950a5.png)'
+  id: totrans-43
   prefs: []
   type: TYPE_IMG
+  zh: '![图片](../Images/1d76b4ae8e0f69da95168a9fc63950a5.png)'
 - en: order_target_value
+  id: totrans-44
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: order_target_value
 - en: A similar behavior is expected from *target values*
+  id: totrans-45
   prefs: []
   type: TYPE_NORMAL
+  zh: 预计*目标值*会有类似的行为。
 - en: '[PRE1]'
+  id: totrans-46
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE1]'
 - en: There is an extra line of information telling what the actual *data value* (in
     the portfolio) is. This helps in finding out if the *target value* has been reachec.
+  id: totrans-47
   prefs: []
   type: TYPE_NORMAL
+  zh: 还有一行额外的信息，告诉实际的*数据值*（在投资组合中）是多少。这有助于确定是否已达到*目标值*。
 - en: The initial target is `3000.0` and the reported initial value is `2853.24`.
     The question here is whether this is *close enough*. And the answer is *Yes*
+  id: totrans-48
   prefs: []
   type: TYPE_NORMAL
+  zh: 初始目标为`3000.0`，报告的初始值为`2853.24`。这里的问题是这是否*足够接近*。答案是*是*
 - en: The sample uses a `Market` order at the end of a daily bar and the last available
     price to calculate a *target size* which meets the *target value*
+  id: totrans-49
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 该示例在每日K线结束时使用`Market`订单和最后可用价格来计算*目标大小*，以满足*目标价值*。
 - en: The execution uses then the `open` price of the next day and this is unlikely
     to be the previous `close`
+  id: totrans-50
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 执行然后使用下一天的`open`价格，这不太可能是前一天的`close`。
 - en: Doing it in any other way would mean one is *cheating* him/herfself.
+  id: totrans-51
   prefs: []
   type: TYPE_NORMAL
+  zh: 以任何其他方式进行将意味着在*欺骗*自己。
 - en: 'The next *target value* and *final value* are much closer: `4000` and `3938.17`.'
+  id: totrans-52
   prefs: []
   type: TYPE_NORMAL
+  zh: 下一个*目标值*和*最终值*更接近：`4000`和`3938.17`。
 - en: 'When changing into *Feb* the *target value* starts decreasing from `31000`
     to `30000` and `29000\`. So does the *data value* with from ``30580.00`to`30706.56`and
     then to`28633.44`. Wait:'
+  id: totrans-53
   prefs: []
   type: TYPE_NORMAL
+  zh: 当转变为*二月*时，*目标价值*开始从`31000`减少到`30000`和`29000`。*数据值*也随之从`30580.00`减少到`30706.56`，然后到`28633.44`。等待：
 - en: '`30580` -> `30706.56` is a positive change'
+  id: totrans-54
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`30580` -> `30706.56`是一个正向变化。'
 - en: Indeed. In this case the calculated *size* for the *target value* met an *opening
     price* which bumped the value to `30706.56`
+  id: totrans-55
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 确实。在这种情况下，计算出的*目标值*的*大小*遇到了将值提升到`30706.56`的*开盘价*。
 - en: 'How this effect can be avoided:'
+  id: totrans-56
   prefs: []
   type: TYPE_NORMAL
+  zh: 如何避免这种影响：
 - en: The sample uses a `Market` type execution for the orders and this effect cannot
     be avoided
+  id: totrans-57
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 该示例使用`Market`类型执行订单，这种效果无法避免。
 - en: The methods `order_target_xxx` allow specifying the *execution type* and *price*.
+  id: totrans-58
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 方法`order_target_xxx`允许指定*执行类型*和*价格*。
 - en: One could specify `Limit` as the execution order and let the price be the *close*
     price (chosen by the method if nothing else be provided) or even provide specific
     pricing
+  id: totrans-59
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 可以指定`Limit`作为执行订单，并让价格为*close*价格（如果没有提供其他价格，则由方法选择），甚至提供特定定价。
 - en: '![image](../Images/68aa1b5cae67269b84206e99cdc0ac2d.png)'
+  id: totrans-60
   prefs: []
   type: TYPE_IMG
+  zh: '![图片](../Images/68aa1b5cae67269b84206e99cdc0ac2d.png)'
 - en: order_target_value
+  id: totrans-61
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: order_target_value
 - en: In this case it is simply a percentage of the current portfolio value.
+  id: totrans-62
   prefs: []
   type: TYPE_NORMAL
+  zh: 在这种情况下，它只是当前投资组合价值的一个百分比。
 - en: '[PRE2]'
+  id: totrans-63
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE2]'
 - en: And the information has been changed to see the `%` the data represents in the
     portfolio.
+  id: totrans-64
   prefs: []
   type: TYPE_NORMAL
+  zh: 信息已更改，以查看投资组合中数据代表的`%`。
 - en: '![image](../Images/54c3f32e2f2ad9a5cb6fc972b4aeb5e7.png)'
+  id: totrans-65
   prefs: []
   type: TYPE_IMG
+  zh: '![图片](../Images/54c3f32e2f2ad9a5cb6fc972b4aeb5e7.png)'
 - en: Sample Usage
+  id: totrans-66
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 示例用法
 - en: '[PRE3]'
+  id: totrans-67
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE3]'
 - en: Sample Code
+  id: totrans-68
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 示例代码
 - en: '[PRE4]'
+  id: totrans-69
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE4]'

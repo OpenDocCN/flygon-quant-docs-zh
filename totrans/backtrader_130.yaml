@@ -1,188 +1,280 @@
 - en: Futures and Spot Compensation
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 期货和现货补偿
 - en: 原文：[https://www.backtrader.com/blog/posts/2017-03-15-future-vs-spot/future-vs-spot/](https://www.backtrader.com/blog/posts/2017-03-15-future-vs-spot/future-vs-spot/)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.backtrader.com/blog/posts/2017-03-15-future-vs-spot/future-vs-spot/](https://www.backtrader.com/blog/posts/2017-03-15-future-vs-spot/future-vs-spot/)
 - en: Release `1.9.32.116` adds support for an interesting use case presented in the
     [Community](https://community.backtrader.com/)
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: 发布`1.9.32.116`添加了对[社区](https://community.backtrader.com/)中提出的一个有趣用例的支持
 - en: Start a trade with a future, which includes **physical delivery**
+  id: totrans-3
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 使用期货开始交易，其中包括**实物交付**
 - en: Have an indicator tell you something
+  id: totrans-4
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 让指标告诉你一些信息
 - en: If needed be, close the position by operating on the spot price, effectively
     canceling the physical delivery, be it for receiving the goods or for having to
     deliver them (and hopefully making a profit)
+  id: totrans-5
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 如果需要，通过操作现货价格来关闭持仓，从而有效地取消实物交付，无论是为了收到货物还是为了交付货物（并希望获利）。
 - en: The future expires on the same day the operation on the spot price takes place
+  id: totrans-6
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 期货在同一天到期，与现货价格的操作同时进行。
 - en: 'That means:'
+  id: totrans-7
   prefs: []
   type: TYPE_NORMAL
+  zh: 这意味着：
 - en: The platform is fed with data points from two different assets
+  id: totrans-8
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 平台接收来自两种不同资产的数据点
 - en: The platform has to somehow understand the assets are related and that operations
     on the *spot* price will close positions open on the *future*
+  id: totrans-9
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 平台必须以某种方式理解资产之间的关联，并且现货价格的操作将关闭期货的持仓。
 - en: In reality, the future is not closed, only the physical delivery is *compensated*
+  id: totrans-10
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 实际上，期货并没有关闭，只是实物交付被*补偿*了。
 - en: Using that *compensation* concept, `backtrader` adds a way to let the user communicate
     to the platform that things on one data feed will have compensating effects on
     another. The usage pattern
+  id: totrans-11
   prefs: []
   type: TYPE_NORMAL
+  zh: 使用*补偿*概念，`backtrader`添加了一种让用户与平台通信的方式，即一个数据源上的事物会对另一个数据源产生补偿效果。 使用模式
 - en: '[PRE0]'
+  id: totrans-12
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: Putting it all together
+  id: totrans-13
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 将所有内容放在一起
 - en: An example is always worth a thousand posts, so let’s put all the pieces together
     for it.
+  id: totrans-14
   prefs: []
   type: TYPE_NORMAL
+  zh: 一个例子总比千言万语更有说服力，所以让我们把所有的要点都放在一起。
 - en: Use one of the standard sample feeds from the `backtrader` sources. This will
     be the future
+  id: totrans-15
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 使用`backtrader`源中的标准样本数据源之一。 这将是期货。
 - en: 'Simulate a similar but distinct price, by reusing the same feed and adding
     a filter which will randomly move the price some points above/below, to create
     a spread. As simple as:'
+  id: totrans-16
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 通过重新使用相同的数据源并添加一个过滤器来模拟类似但不同的价格，该过滤器将随机将价格上/下移动一些点，以创建价差。 就像这样简单：
 - en: '[PRE1]'
+  id: totrans-17
   prefs:
   - PREF_IND
   type: TYPE_PRE
+  zh: '[PRE1]'
 - en: Plotting on the same axis will mix the default included `BuyObserver` markers
     and therefore the standard observers will be disabled and manually readded to
     plot with different per-data markers
+  id: totrans-18
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 在同一轴上绘制将混合默认包含的`BuyObserver`标记，因此标准观察者将被禁用，并手动重新添加以使用不同的每个数据标记进行绘制
 - en: Positions will be entered randomly and exited 10 days later
+  id: totrans-19
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 位置将随机进入并在10天后退出。
 - en: This doesn’t match future expiration periods, but this is just putting the functionality
     in place and not checking a trading calendar
+  id: totrans-20
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 这与期货到期期间不匹配，但这只是为了将功能放在那里，而不是检查交易日历
 - en: '!!! note'
+  id: totrans-21
   prefs: []
   type: TYPE_NORMAL
+  zh: '!!! 注意'
 - en: '[PRE2]'
+  id: totrans-22
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE2]'
 - en: Notice that the strategy
+  id: totrans-23
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 注意策略
 - en: '`buy` operations are executed on `data0`'
+  id: totrans-24
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`buy` 操作在`data0`上执行'
 - en: '`sell` operations are executed on `data1`'
+  id: totrans-25
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`sell` 操作在`data1`上执行'
 - en: '[PRE3]'
+  id: totrans-26
   prefs:
   - PREF_IND
   type: TYPE_PRE
+  zh: '[PRE3]'
 - en: 'The execution:'
+  id: totrans-27
   prefs: []
   type: TYPE_NORMAL
+  zh: 执行：
 - en: '[PRE4]'
+  id: totrans-28
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE4]'
 - en: With this graphical output.
+  id: totrans-29
   prefs: []
   type: TYPE_NORMAL
+  zh: 使用这个图形输出。
 - en: '![image](../Images/b4b7fba65df0de8aa5e8ab6d8e5264b4.png)'
+  id: totrans-30
   prefs: []
   type: TYPE_IMG
+  zh: '![image](../Images/b4b7fba65df0de8aa5e8ab6d8e5264b4.png)'
 - en: 'And it works:'
+  id: totrans-31
   prefs: []
   type: TYPE_NORMAL
+  zh: 它有效：
 - en: '`buy` operations are signaled with a green triangle pointing upwards and the
     legend tells us they belong to `data0` as expected'
+  id: totrans-32
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`buy` 操作以绿色向上指的三角形表示，图例告诉我们它们属于`data0`，正如预期的那样。'
 - en: '`sell` operations are signaled with an arrow pointing downwards and the legend
     tells us they belong to `data1` as expected'
+  id: totrans-33
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`sell` 操作通过向下指的箭头表示，图例告诉我们它们属于`data1`，正如预期的那样。'
 - en: Trades are being closed, even if they are being open with `data0` and being
     closed with `data1`, achieving the desired effect (which in real life is avoiding
     the physical delivery of the goods acquired by means of the *future*)
+  id: totrans-34
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 交易正在关闭，即使它们是在`data0`上开启的，并且是在`data1`上关闭的，也能达到期望的效果（在现实生活中，这意味着避免通过*期货*获得的货物的实际交付）。
 - en: 'One could only imagine what would happen if the same logic is applied without
     the *compensation* taking place. Let’s do it:'
+  id: totrans-35
   prefs: []
   type: TYPE_NORMAL
+  zh: 只能想象如果应用相同的逻辑而不进行*补偿*会发生什么。 让我们试试：
 - en: '[PRE5]'
+  id: totrans-36
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE5]'
 - en: And the output
+  id: totrans-37
   prefs: []
   type: TYPE_NORMAL
+  zh: 和输出
 - en: '![image](../Images/554571148d00c948c01509e821c5760e.png)'
+  id: totrans-38
   prefs: []
   type: TYPE_IMG
+  zh: '![image](../Images/554571148d00c948c01509e821c5760e.png)'
 - en: 'It should be quite obvious that this fails miserably:'
+  id: totrans-39
   prefs: []
   type: TYPE_NORMAL
+  zh: 这显然是失败的：
 - en: The logic expects positions on `data0` to be closed by the operations on `data1`
     and to only open positions on `data0` when not in the market
+  id: totrans-40
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 逻辑期望在`data0`上的位置在对`data1`的操作关闭时关闭，并且仅当不在市场上时才打开`data0`上的位置。
 - en: But *compensation* has been deactivated and the intial operation on `data0`
     (green triangle) is never closed, so no other operation can never be initiated
     and short positions on `data1` start accumulating.
+  id: totrans-41
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 但是*补偿*已被停用，并且对`data0`的初始操作（绿色三角形）从未关闭，因此不会启动任何其他操作，而`data1`上的空头头寸开始积累。
 - en: Sample Usage
+  id: totrans-42
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 示例用法
 - en: '[PRE6]'
+  id: totrans-43
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE6]'
 - en: Sample Code
+  id: totrans-44
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 示例代码
 - en: '[PRE7]'
+  id: totrans-45
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE7]'

@@ -1,281 +1,431 @@
 - en: Data Filters
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 数据过滤器
 - en: 原文：[https://www.backtrader.com/blog/posts/2015-11-21-data-filters/data-filling-filtering/](https://www.backtrader.com/blog/posts/2015-11-21-data-filters/data-filling-filtering/)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.backtrader.com/blog/posts/2015-11-21-data-filters/data-filling-filtering/](https://www.backtrader.com/blog/posts/2015-11-21-data-filters/data-filling-filtering/)
 - en: 'Some time ago Ticket #23 got me thinking about a potential improvement for
     the discussion which was held in the context of that ticket.'
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: 一段时间前，票证＃23让我考虑在该票证的上下文中进行的讨论的潜在改进。
 - en: 'To ticket #23: [https://github.com/mementum/backtrader/issues/23](https://github.com/mementum/backtrader/issues/23)'
+  id: totrans-3
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 对票证＃23：[https://github.com/mementum/backtrader/issues/23](https://github.com/mementum/backtrader/issues/23)
 - en: Within the ticket I added a `DataFilter` class, but this was overly complicated.
     Actually reminiscent of the complexity which was built in `DataResampler` and
     `DataReplayer`, the classes used to implement the functionalities of the same
     names.
+  id: totrans-4
   prefs: []
   type: TYPE_NORMAL
+  zh: 在票证中，我添加了一个`DataFilter`类，但这太过复杂。实际上，这让人想起了内置了相同功能的`DataResampler`和`DataReplayer`中构建的复杂性。
 - en: As such and since a couple of versions, `backtrader` supports adding a `filter`
     (call it `processor` if you wish) to data feeds. Resampling and Replaying were
     internally reimplemented using the functionality and everything seems less complicated
     (although it still is)
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: 因此，自几个版本以来，`backtrader`支持向数据源添加一个`filter`（如果愿意，可以称之为`processor`）。重新采样和重播使用该功能进行了内部重新实现，一切似乎变得不那么复杂（尽管仍然是）
 - en: Filters at work
+  id: totrans-6
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 过滤器在起作用
 - en: 'Given an existing data feed/source you use the `addfilter` method of the data
     feed:'
+  id: totrans-7
   prefs: []
   type: TYPE_NORMAL
+  zh: 鉴于现有的数据源，您可以使用数据源的`addfilter`方法：
 - en: '[PRE0]'
+  id: totrans-8
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: 'Obviously the `filter` must conform to a given interface, being this:'
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: 显然，`filter`必须符合给定的接口，即：
 - en: 'A callable which accepts this signature:'
+  id: totrans-10
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 一个接受此签名的可调用对象：
 - en: '[PRE1]'
+  id: totrans-11
   prefs:
   - PREF_IND
   type: TYPE_PRE
+  zh: '[PRE1]'
 - en: or
+  id: totrans-12
   prefs: []
   type: TYPE_NORMAL
+  zh: 或者
 - en: A class which can be instantiated and called
+  id: totrans-13
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 一个可以实例化和调用的类
 - en: 'During instantiation the **init** method must support the signature:'
+  id: totrans-14
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 在实例化期间，**init**方法必须支持以下签名：
 - en: '[PRE2]'
+  id: totrans-15
   prefs:
   - PREF_IND
   type: TYPE_PRE
+  zh: '[PRE2]'
 - en: 'The **call** and last methods this one:'
+  id: totrans-16
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 这个对象的**call**和last方法如下：
 - en: '[PRE3]'
+  id: totrans-17
   prefs:
   - PREF_IND
   type: TYPE_PRE
+  zh: '[PRE3]'
 - en: The callable/instance will be called for each data the data source is producing.
+  id: totrans-18
   prefs: []
   type: TYPE_NORMAL
+  zh: 可调用/实例将被调用以处理数据源产生的每个数据。
 - en: 'A better solution for Ticket #23'
+  id: totrans-19
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 对票证＃23的更好解决方案
 - en: 'That ticket wanted:'
+  id: totrans-20
   prefs: []
   type: TYPE_NORMAL
+  zh: 那张票想要：
 - en: A RelativeVolumeIndicator on an intraday basis
+  id: totrans-21
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 一个基于白天的相对成交量指标
 - en: Intraday data may be missing
+  id: totrans-22
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 白天数据可能丢失
 - en: Pre/Post Session data could arrive
+  id: totrans-23
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 预/后市场数据可能到达
 - en: Implementing a couple of filters alleviates the situation for a backtesting
     environment.
+  id: totrans-24
   prefs: []
   type: TYPE_NORMAL
+  zh: 实施几个过滤器可以缓解回测环境的情况。
 - en: Filtering out Pre/Post Market Data
+  id: totrans-25
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 过滤预/后市场数据
 - en: 'The following filter (already available in `backtrader`) comes to the rescue:'
+  id: totrans-26
   prefs: []
   type: TYPE_NORMAL
+  zh: 以下过滤器（已经在`backtrader`中可用）挺身而出：
 - en: '[PRE4]'
+  id: totrans-27
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE4]'
 - en: The filter uses the in-the-data embedded session start/end times to filter bars
+  id: totrans-28
   prefs: []
   type: TYPE_NORMAL
+  zh: 该过滤器使用数据中嵌入的会话开始/结束时间来过滤条形图
 - en: If the datetime of the new data is within the session times `False` is returned
     to indicate the data is untouched
+  id: totrans-29
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 如果新数据的日期时间在会话时间内，则返回`False`以指示数据未受影响
 - en: If the datatime falls outside of the range, the data source is sent `backwards`
     effectively erasing the last produced data. And `True` is returned to indicate
     the data stream was manipulated.
+  id: totrans-30
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 如果日期时间超出范围，则数据源将向后发送，有效地擦除最后生成的数据。并返回`True`以指示数据流已被操作。
 - en: Note
+  id: totrans-31
   prefs: []
   type: TYPE_NORMAL
+  zh: 注意
 - en: Calling `data.backwards()` is possibly/probably low level and the filters should
     have an API which deals with the internals of the data stream
+  id: totrans-32
   prefs: []
   type: TYPE_NORMAL
+  zh: 调用`data.backwards()`可能/可能是低级的，过滤器应该具有处理数据流内部的API
 - en: 'The sample code at the end of the script can be run with and without filter.
     The first run is 100% unfiltered and without specifying session times:'
+  id: totrans-33
   prefs: []
   type: TYPE_NORMAL
+  zh: 脚本末尾的示例代码可以在有或无过滤的情况下运行。第一次运行是100%未经过滤且未指定会话时间：
 - en: '[PRE5]'
+  id: totrans-34
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE5]'
 - en: 'Looking at the start and end of the 1^(st) day:'
+  id: totrans-35
   prefs: []
   type: TYPE_NORMAL
+  zh: 查看第1天的开始和结束：
 - en: '[PRE6]'
+  id: totrans-36
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE6]'
 - en: The session run from 09:01:00 to 20:04:00 on the 2^(nd) of January of 2006.
+  id: totrans-37
   prefs: []
   type: TYPE_NORMAL
+  zh: 2006年1月2日从09:01:00到20:04:00进行会话运行。
 - en: 'Now a run with a `SessionFilter` and telling the script to use 09:30 and 17:30
     as the start/end times of the session:'
+  id: totrans-38
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在使用`SessionFilter`运行，并告诉脚本使用09:30和17:30作为会话的开始/结束时间：
 - en: '[PRE7]'
+  id: totrans-39
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE7]'
 - en: The data output starts now at 09:30 and ends at 17:30\. Pre/Post-Market Data
     has been filtered out.
+  id: totrans-40
   prefs: []
   type: TYPE_NORMAL
+  zh: 数据输出现在从09:30开始，到17:30结束。已经过滤掉预/后市场数据。
 - en: Filling in Missing Data
+  id: totrans-41
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 填充缺失数据
 - en: 'A deeper examination of the output shows the following:'
+  id: totrans-42
   prefs: []
   type: TYPE_NORMAL
+  zh: 对输出的深入检查显示如下：
 - en: '[PRE8]'
+  id: totrans-43
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE8]'
 - en: Data for minutes 10:32 and 10:33 is missing. Being the 1^(st) trading day of
     the year there may have been no negotiation at all. Or the data feed may have
     failed to capture that data.
+  id: totrans-44
   prefs: []
   type: TYPE_NORMAL
+  zh: 缺少分钟 10:32 和 10:33 的数据。作为一年中的第1个交易日，可能根本没有进行交易。或者数据源可能未能捕获到这些数据。
 - en: 'For the purposes of Ticket #23 and to be able to compare the volume of a given
     minute with the same minute of the previous day, we’ll be filling in the missing
     data.'
+  id: totrans-45
   prefs: []
   type: TYPE_NORMAL
+  zh: '为了解决票号 #23 的问题，并能够将给定分钟的成交量与前一天的同一分钟进行比较，我们将填补缺失的数据。'
 - en: 'Already in `backtrader` there is a `SessionFiller` which as expected fills
     in missing data. The code is long and bears more complexities than that of a filter
     (see at the end for the full implementation), but let’s see the class/params definition:'
+  id: totrans-46
   prefs: []
   type: TYPE_NORMAL
+  zh: '`backtrader`中已经存在一个`SessionFiller`，按预期填补了缺失的数据。代码很长，比过滤器的复杂性更多（请参阅末尾的完整实现），但让我们看看类/参数定义：'
 - en: '[PRE9]'
+  id: totrans-47
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE9]'
 - en: 'The sample script can now filter and fill data:'
+  id: totrans-48
   prefs: []
   type: TYPE_NORMAL
+  zh: 示例脚本现在可以过滤和填充数据了：
 - en: '[PRE10]'
+  id: totrans-49
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE10]'
 - en: Minutes 10:32 and 10:33 are there. The script uses the last known “close” price
     to fill the price values and sets the volume and openinterest fields to 0\. The
     script accepts a `--fvol` argument to set the volume to anything (including ‘NaN’)
+  id: totrans-50
   prefs: []
   type: TYPE_NORMAL
+  zh: 分钟 10:32 和 10:33 已存在。脚本使用最后已知的“收盘”价格填充价格值，并将成交量和持仓量字段设置为 0。脚本接受一个`--fvol`参数，将成交量设置为任何值（包括'NaN'）
 - en: 'Completing Ticket #23'
+  id: totrans-51
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: '完成票号 #23'
 - en: 'With the `SessionFilter` and `SessionFiller` the following has been completed:'
+  id: totrans-52
   prefs: []
   type: TYPE_NORMAL
+  zh: 使用`SessionFilter`和`SessionFiller`完成了以下工作：
 - en: Pre/Post Market Data is not delivered
+  id: totrans-53
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 未提供盘前/盘后市数据
 - en: No Data (for the given timeframe) is missing
+  id: totrans-54
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 不存在数据（在给定时间范围内）丢失
 - en: Now the “synchronization” discussed in Ticket 23 to implement a `RelativeVolume`
     indicator is no longer needed, because all days have exactly the same number of
     bars (in the example all minutes from 09:30 to 17:30 both included)
+  id: totrans-55
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在，在实施`RelativeVolume`指标的 Ticket 23 中讨论的“同步”不再需要，因为所有日期的条形图数量完全相同（在示例中从 09:30
+    到 17:30 的所有分钟都包括在内）
 - en: 'Remembering that the default is to set the missing volume to `0` an easy `RelativeVolume`
     indicator can be developed:'
+  id: totrans-56
   prefs: []
   type: TYPE_NORMAL
+  zh: 请记住，默认情况下将缺失的成交量设置为`0`，可以开发一个简单的`RelativeVolume`指标：
 - en: '[PRE11]'
+  id: totrans-57
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE11]'
 - en: Which is smart enough to avoid a division by zero by using a built-in aid in
     `backtrader`.
+  id: totrans-58
   prefs: []
   type: TYPE_NORMAL
+  zh: 使用`backtrader`中的内置辅助功能，足够聪明，可以避免除零错误。
 - en: 'Putting all pieces together in the next invocation of the script:'
+  id: totrans-59
   prefs: []
   type: TYPE_NORMAL
+  zh: 在下次脚本调用中将所有部分组合起来：
 - en: '[PRE12]'
+  id: totrans-60
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE12]'
 - en: 'The `RelativeVolume` indicator produces no output, as expected, during the
     1^(st) bars. The period is calculated in the script as: (17:30 - 09:30 * 60) +
     1\. Let’s directly look at how the relative volume looks for 10:32 and 10:33 in
     the second day, given that the 1^(st) day, the volume value was filled with `0`:'
+  id: totrans-61
   prefs: []
   type: TYPE_NORMAL
+  zh: '`RelativeVolume`指标在第1个条形图期间产生了预期外的输出。周期在脚本中计算为：(17:30 - 09:30 * 60) + 1。让我们直接看看相对成交量在第二天的
+    10:32 和 10:33 是如何看待的，考虑到第1天，成交量值被填充为`0`：'
 - en: '[PRE13]'
+  id: totrans-62
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE13]'
 - en: It is set to `0` as expected for both.
+  id: totrans-63
   prefs: []
   type: TYPE_NORMAL
+  zh: 如预期那样，它被设置为`0`。
 - en: Conclusion
+  id: totrans-64
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 结论
 - en: The `filter` mechanism in data sources opens the possibility to fully manipulate
     the data stream. Use with caution.
+  id: totrans-65
   prefs: []
   type: TYPE_NORMAL
+  zh: 数据源中的`filter`机制打开了完全操纵数据流的可能性。请谨慎使用。
 - en: Script Code and Usage
+  id: totrans-66
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 脚本代码和用法
 - en: 'Available as sample in the sources of `backtrader`:'
+  id: totrans-67
   prefs: []
   type: TYPE_NORMAL
+  zh: 在`backtrader`的源码中提供了示例：
 - en: '[PRE14]'
+  id: totrans-68
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE14]'
 - en: 'The code:'
+  id: totrans-69
   prefs: []
   type: TYPE_NORMAL
+  zh: 代码：
 - en: '[PRE15]'
+  id: totrans-70
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE15]'
 - en: SessionFiller
+  id: totrans-71
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: SessionFiller
 - en: 'From the `backtrader` sources:'
+  id: totrans-72
   prefs: []
   type: TYPE_NORMAL
+  zh: 来自`backtrader`源码：
 - en: '[PRE16]'
+  id: totrans-73
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE16]'

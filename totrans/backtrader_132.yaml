@@ -1,283 +1,436 @@
 - en: Kalman et al.
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 卡尔曼等人
 - en: 原文：[https://www.backtrader.com/blog/posts/2017-02-14-kalman-et-al/kalman-et-al/](https://www.backtrader.com/blog/posts/2017-02-14-kalman-et-al/kalman-et-al/)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.backtrader.com/blog/posts/2017-02-14-kalman-et-al/kalman-et-al/](https://www.backtrader.com/blog/posts/2017-02-14-kalman-et-al/kalman-et-al/)
 - en: Note
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: 注
 - en: The support for the directives below starts with commit
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: 下面指令的支持始于提交
 - en: 1146c83d9f9832630e97daab3ec7359705dc2c77 in the development branch
+  id: totrans-4
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 在开发分支中的 1146c83d9f9832630e97daab3ec7359705dc2c77
 - en: Release `1.9.30.x` will be the 1^(st) to include it.
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: 发布版本 `1.9.30.x` 将是第 1 个包含它的版本。
 - en: 'One of the original goals of *backtrader* was to be pure python, i.e.: to only
     use packages available in the standard distribution. A single exception was made
     with `matplotlib` to have plotting without reinventing the wheel. Although is
     imported at the latest possible moment to avoid disrupting standard operations
     which may not require plotting at all (and avoiding errors if not installed and
     not wished)'
+  id: totrans-6
   prefs: []
   type: TYPE_NORMAL
+  zh: '*backtrader* 的一个最初目标是保持纯 Python，即：只使用标准发行版中可用的包。与 `matplotlib` 一起做了一个例外，以便在不重新发明轮子的情况下进行绘图。尽管在最后可能的时刻导入以避免干扰可能根本不需要绘图的标准操作（并避免如果没有安装和不希望绘图时出现错误）'
 - en: A 2^(nd) exception was partially made with `pytz` when adding support for timezones
     with the advent of live data feeds which may reside outside of the local timezone.
     Again the *import* action happens in the background and only if `pytz` is available
     (the user may choose to pass `pytz` instances)
+  id: totrans-7
   prefs: []
   type: TYPE_NORMAL
+  zh: 第 2 个例外部分地使用了 `pytz`，当添加对可能位于本地时区之外的实时数据源的时区支持时。同样，*import* 操作在后台进行，仅在 `pytz`
+    可用时才进行（用户可以选择传递 `pytz` 实例）
 - en: But the moment has come to make a full exception, because *backtraders* are
     using well known packages like `numpy`, `pandas`, `statsmodel` and some more modest
     ones like `pykalman`. Or else inclusion in the platform of things which use those
     packages.
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: 但现在是时候做一个完全的例外了，因为 *backtraders* 使用着像 `numpy`、`pandas`、`statsmodel` 这样的著名包，以及一些更谦逊的包，比如
+    `pykalman`。否则，将这些包使用到平台中。
 - en: 'Some examples from the community:'
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: 社区中的一些示例：
 - en: '[Porting a pandas dataframe dependent indicator](https://community.backtrader.com/topic/11/porting-a-pandas-dataframe-dependent-indicator)'
+  id: totrans-10
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[移植一个依赖于 pandas dataframe 的指标](https://community.backtrader.com/topic/11/porting-a-pandas-dataframe-dependent-indicator)'
 - en: '[linear regression and std #211](https://community.backtrader.com/topic/5/linear-regression-and-std-211)'
+  id: totrans-11
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[线性回归和标准差 #211](https://community.backtrader.com/topic/5/linear-regression-and-std-211)'
 - en: '[Machine learning + backtrader](https://community.backtrader.com/topic/102/machine-learning-backtrader)'
+  id: totrans-12
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[机器学习 + backtrader](https://community.backtrader.com/topic/102/machine-learning-backtrader)'
 - en: 'This wish was added to the quick roadmap sketched here:'
+  id: totrans-13
   prefs: []
   type: TYPE_NORMAL
+  zh: 这个愿望已经添加到这里简要规划的快速路线图中：
 - en: '[v1.x -Quick Roadmap](https://community.backtrader.com/topic/195/v1-x-quick-roadmap)'
+  id: totrans-14
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[v1.x - 快速路线图](https://community.backtrader.com/topic/195/v1-x-quick-roadmap)'
 - en: The declarative approach
+  id: totrans-15
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 声明式方法
 - en: Key in keeping the original spirit of *backtrader* and at the same allowing
     the use of those packages is to not **force** pure python users to have to install
     those packages.
+  id: totrans-16
   prefs: []
   type: TYPE_NORMAL
+  zh: 保持 *backtrader* 的原始精神，并同时允许使用这些包的关键是不强制纯 Python 用户必须安装这些包。
 - en: Although this may seem challenging and prone to multiple conditional statements
     here and there, together with exception handling, the approach both internally
     in the platform and externally for users is to **rely on the same principles already
     used to develop other concepts**, like for example **parameters** (named *params*)
     for most objects.
+  id: totrans-17
   prefs: []
   type: TYPE_NORMAL
+  zh: 虽然这可能看起来具有挑战性并且容易出现多个条件语句，但在平台内部和外部用户方面，这种方法都是依赖于已用于开发其他概念的相同原则，例如 *参数*（称为 *params*）。
 - en: 'Let’s recall how one defines an `Indicator` accepting *params* and defining
     *lines*:'
+  id: totrans-18
   prefs: []
   type: TYPE_NORMAL
+  zh: 让我们回顾一下如何定义接受 *params* 并定义 *lines* 的 `Indicator`：
 - en: '[PRE0]'
+  id: totrans-19
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: 'With the parameter `period` later being addressable as `self.params.period`
     or `self.p.period` as in:'
+  id: totrans-20
   prefs: []
   type: TYPE_NORMAL
+  zh: 以及后续可以作为 `self.params.period` 或 `self.p.period` 的参数：
 - en: '[PRE1]'
+  id: totrans-21
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE1]'
 - en: 'and the current value in the line as `self.lines.myline` or `self.l.myline`
     as in:'
+  id: totrans-22
   prefs: []
   type: TYPE_NORMAL
+  zh: 以及作为 `self.lines.myline` 或 `self.l.myline` 的当前值：
 - en: '[PRE2]'
+  id: totrans-23
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE2]'
 - en: This not being particularly useful, just showing the **declarative** approach
     of the **params** background machinery which also features proper support for
     inheritance (including *multiple inheritance*)
+  id: totrans-24
   prefs: []
   type: TYPE_NORMAL
+  zh: 这并不特别有用，只是展示了 **声明式** 方法的 **params** 背景机制，该机制还具有适当的继承支持（包括 *多继承*）
 - en: Introducing `packages`
+  id: totrans-25
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 引入 `packages`
 - en: 'Using the same declarative technique (some would call it *metaprogramming*)
     the support for foreign *packages* is available as:'
+  id: totrans-26
   prefs: []
   type: TYPE_NORMAL
+  zh: 使用相同的声明技术（有些人称之为 *元编程*），支持外部 *包* 可以这样实现：
 - en: '[PRE3]'
+  id: totrans-27
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE3]'
 - en: 'Blistering barnacles!!! It seems just another declaration. The first question
     for the implementer of the indicator would be:'
+  id: totrans-28
   prefs: []
   type: TYPE_NORMAL
+  zh: 天啊！这似乎只是另一个声明。指标的实施者的第一个问题将是：
 - en: '*Do I have to manually import ``pandas``?*'
+  id: totrans-29
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '*我需要手动导入 ``pandas`` 吗？*'
 - en: 'And the answer is a straightforward: **No**. The background machinery will
     import `pandas` and make it available in the module in which `MyIndicator` is
     defined. One could now do the following in `next`:'
+  id: totrans-30
   prefs: []
   type: TYPE_NORMAL
+  zh: 答案很明显：**不**。后台机制将导入 `pandas` 并使其在定义 `MyIndicator` 的模块中可用。现在可以在 `next` 中执行以下操作：
 - en: '[PRE4]'
+  id: totrans-31
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE4]'
 - en: 'The `packages` directive can be used also to:'
+  id: totrans-32
   prefs: []
   type: TYPE_NORMAL
+  zh: '`packages` 指令也可以用于：'
 - en: Import multiple packages in one single declaration
+  id: totrans-33
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 在一个声明中导入多个包
 - en: Assign the import to an alias ala `import pandas as pd`
+  id: totrans-34
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 将导入分配给别名，如 `import pandas as pd`
 - en: 'Let’s say that statsmodel is also wished as `sm` to complete `pandas.SomeFunction`:'
+  id: totrans-35
   prefs: []
   type: TYPE_NORMAL
+  zh: 假设还希望将 statsmodel 命名为 `sm` 以完成 `pandas.SomeFunction`：
 - en: '[PRE5]'
+  id: totrans-36
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE5]'
 - en: '`statsmodel` has been imported as `sm` and is available. It simply takes passing
     an iterable (a `tuple` is the *backtrader* convention) with the name of the package
     and the wished alias.'
+  id: totrans-37
   prefs: []
   type: TYPE_NORMAL
+  zh: '`statsmodel` 已被导入为 `sm` 并可用。只需传递一个可迭代对象（`tuple` 是 *backtrader* 的约定）包含包的名称和所需的别名。'
 - en: Adding `frompackages`
+  id: totrans-38
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 添加 `frompackages`
 - en: Python is well known for the constant lookup for things which is one of the
     reasons for the language to be fantastic with regards to dynamism, introspection
     facilities and metaprogramming. At the same time is also one of the causes for
     not being able to deliver the same performance.
+  id: totrans-39
   prefs: []
   type: TYPE_NORMAL
+  zh: Python 以不断查找事物而闻名，这也是该语言在动态性、内省设施和元编程方面出色的原因之一。同时也是无法提供相同性能的原因之一。
 - en: 'One of the usual speed ups is to remove lookup into modules by directly importing
     symbols from the modules, to have local lookups. With our `SomeFunction` from
     `pandas` this would look like:'
+  id: totrans-40
   prefs: []
   type: TYPE_NORMAL
+  zh: 常见的加速之一是通过直接从模块中导入符号而不是查找模块来实现本地查找。使用我们从 `pandas` 中的 `SomeFunction`，会是这样的：
 - en: '[PRE6]'
+  id: totrans-41
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE6]'
 - en: 'or with an alias:'
+  id: totrans-42
   prefs: []
   type: TYPE_NORMAL
+  zh: 或者使用别名：
 - en: '[PRE7]'
+  id: totrans-43
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE7]'
 - en: '*backtrader* offers support for both with the `frompackages` directive. Let’s
     rework `MyIndicator`:'
+  id: totrans-44
   prefs: []
   type: TYPE_NORMAL
+  zh: '*backtrader* 提供了对 `frompackages` 指令的支持。让我们重新设计 `MyIndicator`：'
 - en: '[PRE8]'
+  id: totrans-45
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE8]'
 - en: 'Of course, this starts adding more parenthesis. For example if two (2) things
     are going to be imported from `pandas`, it would seem like this:'
+  id: totrans-46
   prefs: []
   type: TYPE_NORMAL
+  zh: 当然，这开始增加更多的括号。例如，如果要从 `pandas` 中导入两个（2）个东西，看起来会像这样：
 - en: '[PRE9]'
+  id: totrans-47
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE9]'
 - en: Where for the sake of clarity `SomeFunction` and `SomeFunction2` have been put
     in in a `list` instead of a `tuple`, to have square brackets, `[]` and be able
     to read it it a bit better.
+  id: totrans-48
   prefs: []
   type: TYPE_NORMAL
+  zh: 为了清晰起见，`SomeFunction` 和 `SomeFunction2` 已放在一个 `list` 而不是一个 `tuple` 中，以便使用方括号
+    `[]` 并更好地阅读它。
 - en: 'One can also alias `SomeFunction` to for example `SFunc`. The full example:'
+  id: totrans-49
   prefs: []
   type: TYPE_NORMAL
+  zh: 也可以将 `SomeFunction` 别名为例如 `SFunc`。完整示例：
 - en: '[PRE10]'
+  id: totrans-50
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE10]'
 - en: 'And importing from different packages is possible at the expense of more parenthesis.
     Of course line breaks and indentation do help:'
+  id: totrans-51
   prefs: []
   type: TYPE_NORMAL
+  zh: 从不同的包中导入也是可能的，但会增加更多的括号。当然，换行和缩进会有所帮助：
 - en: '[PRE11]'
+  id: totrans-52
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE11]'
 - en: Using inheritance
+  id: totrans-53
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 使用继承
 - en: 'Both `packages` and `frompackages` support (multiple) inheritance. There could
     for example be a base class which adds `numpy` support to all subclasses:'
+  id: totrans-54
   prefs: []
   type: TYPE_NORMAL
+  zh: '`packages` 和 `frompackages` 都支持（多重）继承。例如，可以有一个基类，为所有子类添加 `numpy` 支持：'
 - en: '[PRE12]'
+  id: totrans-55
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE12]'
 - en: '`MyIndicator` will require from the background machinery the import of both
     `numpy` and `pandas` and will be able to use them.'
+  id: totrans-56
   prefs: []
   type: TYPE_NORMAL
+  zh: '`MyIndicator` 将需要从后台机制中导入 `numpy` 和 `pandas` 并将能够使用它们。'
 - en: Introducing Kalman and friends
+  id: totrans-57
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 介绍 Kalman 和朋友
 - en: Note
+  id: totrans-58
   prefs: []
   type: TYPE_NORMAL
+  zh: 注意
 - en: both indicators below would need peer reviewing to confirm the implementations.
     Use with care.
+  id: totrans-59
   prefs: []
   type: TYPE_NORMAL
+  zh: 下面的两个指标都需要同行审查以确认实现。谨慎使用。
 - en: 'A sample implementing a `KalmanMovingAverage` can be found below. This is modeled
     after a post here: [Quantopian Lecture Series: Kalman Filters](https://www.quantopian.com/posts/quantopian-lecture-series-kalman-filters)'
+  id: totrans-60
   prefs: []
   type: TYPE_NORMAL
+  zh: '下面可以找到一个实现 `KalmanMovingAverage` 的示例。这是模仿这里的一篇文章：[Quantopian Lecture Series:
+    Kalman Filters](https://www.quantopian.com/posts/quantopian-lecture-series-kalman-filters)'
 - en: 'The implementation:'
+  id: totrans-61
   prefs: []
   type: TYPE_NORMAL
+  zh: 实现：
 - en: '[PRE13]'
+  id: totrans-62
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE13]'
 - en: 'And a `KalmanFilter` following a post here: [Kalman Filter-Based Pairs Trading
     Strategy In QSTrader](https://www.quantstart.com/articles/kalman-filter-based-pairs-trading-strategy-in-qstrader)'
+  id: totrans-63
   prefs: []
   type: TYPE_NORMAL
+  zh: 还有一个基于这里的一篇文章的 `KalmanFilter`：[Kalman Filter-Based Pairs Trading Strategy In
+    QSTrader](https://www.quantstart.com/articles/kalman-filter-based-pairs-trading-strategy-in-qstrader)
 - en: '[PRE14]'
+  id: totrans-64
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE14]'
 - en: Which for the sake of it shows how `packages` also work with inheritance (`pandas`
     is not really needed)
+  id: totrans-65
   prefs: []
   type: TYPE_NORMAL
+  zh: 为了说明这一点，展示了 `packages` 如何与继承一起工作（`pandas` 实际上并不是必需的）
 - en: 'An execution of the sample:'
+  id: totrans-66
   prefs: []
   type: TYPE_NORMAL
+  zh: 一个样例的执行：
 - en: '[PRE15]'
+  id: totrans-67
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE15]'
 - en: produces this chart
+  id: totrans-68
   prefs: []
   type: TYPE_NORMAL
+  zh: 生成了这张图表
 - en: '![image](../Images/10ae3c6245499d5f8732240a2bd6e431.png)'
+  id: totrans-69
   prefs: []
   type: TYPE_IMG
+  zh: '![图片](../Images/10ae3c6245499d5f8732240a2bd6e431.png)'
 - en: Sample Usage
+  id: totrans-70
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 样例用法
 - en: '[PRE16]'
+  id: totrans-71
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE16]'
 - en: Sample Code
+  id: totrans-72
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 样例代码
 - en: '[PRE17]'
+  id: totrans-73
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE17]'

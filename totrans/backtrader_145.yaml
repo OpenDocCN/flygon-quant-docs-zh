@@ -1,29 +1,43 @@
 - en: Notebook - Automatic Inline Plotting
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 笔记本 - 自动内联绘图
 - en: 原文：[https://www.backtrader.com/blog/posts/2016-09-17-notebook-inline/notebook-inline/](https://www.backtrader.com/blog/posts/2016-09-17-notebook-inline/notebook-inline/)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.backtrader.com/blog/posts/2016-09-17-notebook-inline/notebook-inline/](https://www.backtrader.com/blog/posts/2016-09-17-notebook-inline/notebook-inline/)
 - en: Release 1.9.1.99 adds automatic inline plotting when running inside a *Jupyter
     Notebook*.
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: 发行版1.9.1.99在*Jupyter Notebook*内运行时添加了自动内联绘图。
 - en: Some of the questions around backtrader show people using the platform inside
     a *Notebook* and supporting this and making it the default behavior should make
     things consistent.
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: 关于backtrader的一些问题显示，人们在*笔记本*中使用该平台，并支持此操作并将其设置为默认行为应该使事情保持一致。
 - en: 'If the previous behavior is wished and figures must be plotted independently,
     simply do:'
+  id: totrans-4
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果希望保留先前的行为并且图形必须独立绘制，请简单执行：
 - en: '[PRE0]'
+  id: totrans-5
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: Of course and if running from a script or interactively, the default plotting
     backend for `matplotlib` will be used as before, which will plot the charts in
     separate windows.
+  id: totrans-6
   prefs: []
   type: TYPE_NORMAL
+  zh: 当然，如果从脚本或交互式运行，`matplotlib`的默认绘图后端将像以前一样使用，这将在单独的窗口中绘制图表。

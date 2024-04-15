@@ -1,109 +1,173 @@
 - en: Tick Data and Resampling
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: Tick数据和重新取样
 - en: 原文：[https://www.backtrader.com/blog/posts/2015-09-25-tickdata-resample/resample-tickdata/](https://www.backtrader.com/blog/posts/2015-09-25-tickdata-resample/resample-tickdata/)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.backtrader.com/blog/posts/2015-09-25-tickdata-resample/resample-tickdata/](https://www.backtrader.com/blog/posts/2015-09-25-tickdata-resample/resample-tickdata/)
 - en: backtrader could already do resampling up from minute data. Accepting tick data
     was not a problem, by simply setting the 4 usual fields (open, high, low, close)
     to the tick value.
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: backtrader已经能够从分钟数据进行重新取样。接受tick数据并不是问题，只需将4个常用字段（open、high、low、close）设置为tick值即可。
 - en: But passing the tick data to be resampled produced the same data again. As or
     release 1.1.11.88 this is no longer so. Now
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: 但是将要重新取样的tick数据传递给产生了相同的数据。从1.1.11.88版本开始不再是这样。现在
 - en: TimeFrame (backtrader.TimeFrame) has been extended to contain constants and
     names for “Ticks”, “MicroSeconds” and “Seconds”
+  id: totrans-4
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: TimeFrame（backtrader.TimeFrame）已经扩展，包含了“Ticks”、“MicroSeconds”和“Seconds”的常量和名称。
 - en: Resampling can manage the 3 aforementioned timeframes and sample them up.
+  id: totrans-5
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 重新取样可以管理这3个前述的时间框架并将其取样。
 - en: Note
+  id: totrans-6
   prefs: []
   type: TYPE_NORMAL
+  zh: 注意
 - en: Because tick data is the lowest possible timeframe it can actually be “compressed”
     (n bars to 1 bar) but not be sampled up from a smallest timeframe.
+  id: totrans-7
   prefs: []
   type: TYPE_NORMAL
+  zh: 因为tick数据是最低可能的时间框架，它实际上可以被“压缩”（n bars to 1 bar），但不能从最小的时间框架进行取样。
 - en: The new release contains a small `tickdata.csv` sample added to the sources
     data a new sample script `resample-tickdata.py` to play with it.
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: 新版本包含了一个小的`tickdata.csv`样本，添加到了源数据中，以及一个新的样本脚本`resample-tickdata.py`来进行测试。
 - en: Note
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: 注意
 - en: Updated the script to use the new `Cerebro.resampledata` method which avoids
     the need to manually instantiate a `backtrader.DataResampler`
+  id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: 更新了脚本以使用新的`Cerebro.resampledata`方法，避免了手动实例化`backtrader.DataResampler`的需要
 - en: 'The default execution doesn’t touch the data:'
+  id: totrans-11
   prefs: []
   type: TYPE_NORMAL
+  zh: 默认执行不会触及数据：
 - en: '[PRE0]'
+  id: totrans-12
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: 'Producing this chart:'
+  id: totrans-13
   prefs: []
   type: TYPE_NORMAL
+  zh: 生成这个图表：
 - en: '![image](../Images/f7dc13d78468ec65cb23ba9f8988e598.png)'
+  id: totrans-14
   prefs: []
   type: TYPE_IMG
+  zh: '![image](../Images/f7dc13d78468ec65cb23ba9f8988e598.png)'
 - en: 'Compressing 3 ticks to 1:'
+  id: totrans-15
   prefs: []
   type: TYPE_NORMAL
+  zh: 将3个tick压缩为1个：
 - en: '[PRE1]'
+  id: totrans-16
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE1]'
 - en: 'Producing this chart:'
+  id: totrans-17
   prefs: []
   type: TYPE_NORMAL
+  zh: 生成这个图表：
 - en: '![image](../Images/1a4b8759a0f4ad13af08f8a1ab259982.png)'
+  id: totrans-18
   prefs: []
   type: TYPE_IMG
+  zh: '![image](../Images/1a4b8759a0f4ad13af08f8a1ab259982.png)'
 - en: After the compression we no longer have single “ticks” but “bars”.
+  id: totrans-19
   prefs: []
   type: TYPE_NORMAL
+  zh: 压缩后，我们不再有单个的“ticks”，而是“bars”。
 - en: 'Now compressing to seconds and 5 bars compression:'
+  id: totrans-20
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在压缩到秒和5个bar的压缩：
 - en: '[PRE2]'
+  id: totrans-21
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE2]'
 - en: 'With a new chart:'
+  id: totrans-22
   prefs: []
   type: TYPE_NORMAL
+  zh: 通过一个新的图表：
 - en: '![image](../Images/dfc2858666bc648129399cbfc25ca703.png)'
+  id: totrans-23
   prefs: []
   type: TYPE_IMG
+  zh: '![image](../Images/dfc2858666bc648129399cbfc25ca703.png)'
 - en: 'And finally to minutes. The sample data contains tick data from 4 different
     minutes (the last tick in the file is the only tick for the 4^(th) minute):'
+  id: totrans-24
   prefs: []
   type: TYPE_NORMAL
+  zh: 最后转换为分钟。样本数据包含来自4个不同分钟的tick数据（文件中的最后一个tick是第4分钟的唯一一个tick）：
 - en: '[PRE3]'
+  id: totrans-25
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE3]'
 - en: With a 4 bars (at the top it can be seen the final price was 3069). The 4^(th)
     bar is a single point given for this minute a single tick is present in the file.
+  id: totrans-26
   prefs: []
   type: TYPE_NORMAL
+  zh: 使用4个bar（顶部可以看到最终价格为3069）。第4个bar是一个单点，因为这一分钟文件中只有一个tick。
 - en: '![image](../Images/9694cb48598ea295f5e6d9ea10aa5a24.png)'
+  id: totrans-27
   prefs: []
   type: TYPE_IMG
+  zh: '![image](../Images/9694cb48598ea295f5e6d9ea10aa5a24.png)'
 - en: 'The script usage:'
+  id: totrans-28
   prefs: []
   type: TYPE_NORMAL
+  zh: 脚本用法：
 - en: '[PRE4]'
+  id: totrans-29
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE4]'
 - en: And the code.
+  id: totrans-30
   prefs: []
   type: TYPE_NORMAL
+  zh: 以及代码。
 - en: '[PRE5]'
+  id: totrans-31
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE5]'

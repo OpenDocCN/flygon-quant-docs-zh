@@ -1497,6 +1497,7 @@
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 上一年的最后一个`close`用作参考价格，以查看当前年度的回报
 - en: The problem is the 1^(st) calculation, because the data has** no previous**
     closing price. As such and when this parameter is `True` the *opening* price will
     be used for the 1^(st) calculation.
@@ -1504,22 +1505,26 @@
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 问题是第一次计算，因为数据没有**先前的**收盘价。 因此，当此参数为`True`时，将使用*开盘*价进行第一次计算。
 - en: This requires the data feed to have an `open` price (for `close` the standard
     [0] notation will be used without reference to a field price)
   id: totrans-245
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 这需要数据源具有`open`价格（对于`close`，将使用标准[0]表示法，而不参考字段价格）
 - en: Else the initial close will be used.
   id: totrans-246
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 否则将使用初始收盘价。
 - en: '`fund` (default: `None`)'
   id: totrans-247
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`fund`（默认值：`None`）'
 - en: If `None` the actual mode of the broker (fundmode - True/False) will be autodetected
     to decide if the returns are based on the total net asset value or on the fund
     value. See `set_fundmode` in the broker documentation
@@ -1527,156 +1532,186 @@
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 如果为`None`，则将自动检测经纪人的实际模式（fundmode - True/False），以决定基于总净资产值还是基金价值的回报。请参阅经纪人文档中的`set_fundmode`
 - en: Set it to `True` or `False` for a specific behavior
   id: totrans-249
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 将其设置为特定行为的`True`或`False`
 - en: '- get_analysis()'
   id: totrans-250
   prefs:
   - PREF_H4
   type: TYPE_NORMAL
+  zh: '- get_analysis()'
 - en: Returns a dictionary with returns as values and the datetime points for each
     return as keys
   id: totrans-251
   prefs: []
   type: TYPE_NORMAL
+  zh: 返回一个带有值作为值的字典，并将每个返回的日期时间点作为键
 - en: TradeAnalyzer
   id: totrans-252
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: TradeAnalyzer
 - en: class backtrader.analyzers.TradeAnalyzer()
   id: totrans-253
   prefs:
   - PREF_H4
   type: TYPE_NORMAL
+  zh: 类 backtrader.analyzers.TradeAnalyzer()
 - en: Provides statistics on closed trades (keeps also the count of open ones)
   id: totrans-254
   prefs: []
   type: TYPE_NORMAL
+  zh: 提供了有关已关闭交易的统计信息（还保留了未平仓交易的计数）
 - en: Total Open/Closed Trades
   id: totrans-255
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 总开/闭交易
 - en: Streak Won/Lost Current/Longest
   id: totrans-256
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: Streak 赢得/失去 当前/最长的
 - en: ProfitAndLoss Total/Average
   id: totrans-257
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 利润与损失 总数/平均数
 - en: Won/Lost Count/ Total PNL/ Average PNL / Max PNL
   id: totrans-258
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 赢得/失去 计数/总PNL/平均PNL/最大PNL
 - en: Long/Short Count/ Total PNL / Average PNL / Max PNL
   id: totrans-259
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 长/空头 计数/ 总PNL / 平均PNL / 最大PNL
 - en: Won/Lost Count/ Total PNL/ Average PNL / Max PNL
   id: totrans-260
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 赢得/失去 计数/总PNL/平均PNL/最大PNL
 - en: Length (bars in the market)
   id: totrans-261
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 长度（市场上的条）
 - en: Total/Average/Max/Min
   id: totrans-262
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 总数/平均数/最大值/最小值
 - en: Won/Lost Total/Average/Max/Min
   id: totrans-263
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 赢得/失去 总数/平均数/最大值/最小值
 - en: Long/Short Total/Average/Max/Min
   id: totrans-264
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 长/短 总数/平均值/最大值/最小值
 - en: Won/Lost Total/Average/Max/Min
   id: totrans-265
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 赢得/失去 总数/平均数/最大值/最小值
 - en: '**NOTE**: The analyzer uses an “auto”dict for the fields, which means that
     if no trades are executed, no statistics will be generated.'
   id: totrans-266
   prefs: []
   type: TYPE_NORMAL
+  zh: '**注意**：分析器使用“自动”字典进行字段处理，这意味着如果没有执行交易，将不会生成任何统计数据。'
 - en: 'In that case there will be a single field/subfield in the dictionary returned
     by `get_analysis`, namely:'
   id: totrans-267
   prefs: []
   type: TYPE_NORMAL
+  zh: 在这种情况下，`get_analysis`返回的字典中将有一个字段/子字段，即：
 - en: dictname[‘total’][‘total’] which will have a value of 0 (the field is also reachable
     with dot notation dictname.total.total
   id: totrans-268
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: dictname[‘total’][‘total’]，其值将为0（该字段还可以使用点表示法dictname.total.total）。
 - en: Transactions
   id: totrans-269
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 交易
 - en: class backtrader.analyzers.Transactions()
   id: totrans-270
   prefs:
   - PREF_H4
   type: TYPE_NORMAL
+  zh: 类 backtrader.analyzers.Transactions()
 - en: This analyzer reports the transactions occurred with each an every data in the
     system
   id: totrans-271
   prefs: []
   type: TYPE_NORMAL
+  zh: 此分析器报告了系统中发生的每笔交易
 - en: It looks at the order execution bits to create a `Position` starting from 0
     during each `next` cycle.
   id: totrans-272
   prefs: []
   type: TYPE_NORMAL
+  zh: 它查看订单执行位以从每个`next`周期开始创建`Position`，初始值为0。
 - en: The result is used during next to record the transactions
   id: totrans-273
   prefs: []
   type: TYPE_NORMAL
+  zh: 结果将在下一个周期记录交易时使用
 - en: 'Params:'
   id: totrans-274
   prefs: []
   type: TYPE_NORMAL
+  zh: 参数：
 - en: 'headers (default: `True`)'
   id: totrans-275
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: headers（默认值：`True`）
 - en: Add an initial key to the dictionary holding the results with the names of the
     datas
   id: totrans-276
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 向字典添加一个初始键，该键包含具有数据名称的结果
 - en: 'This analyzer was modeled to facilitate the integration with `pyfolio` and
     the header names are taken from the samples used for it:'
   id: totrans-277
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 这个分析器的建模是为了方便与`pyfolio`集成，头部名称取自用于它的样本：
 - en: '[PRE2]'
   id: totrans-278
   prefs:
@@ -1688,63 +1723,76 @@
   prefs:
   - PREF_H4
   type: TYPE_NORMAL
+  zh: '- get_analysis()'
 - en: Returns a dictionary with returns as values and the datetime points for each
     return as keys
   id: totrans-280
   prefs: []
   type: TYPE_NORMAL
+  zh: 返回一个带有值作为值的字典，并将每个返回的日期时间点作为键
 - en: VWR
   id: totrans-281
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: VWR
 - en: class backtrader.analyzers.VWR()
   id: totrans-282
   prefs:
   - PREF_H4
   type: TYPE_NORMAL
+  zh: 类 backtrader.analyzers.VWR()
 - en: 'Variability-Weighted Return: Better SharpeRatio with Log Returns'
   id: totrans-283
   prefs: []
   type: TYPE_NORMAL
+  zh: 变异性加权回报：对数收益率的夏普比率更好
 - en: 'Alias:'
   id: totrans-284
   prefs: []
   type: TYPE_NORMAL
+  zh: 别名：
 - en: VariabilityWeightedReturn
   id: totrans-285
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 变异性加权回报
 - en: 'See:'
   id: totrans-286
   prefs: []
   type: TYPE_NORMAL
+  zh: 见：
 - en: '[https://www.crystalbull.com/sharpe-ratio-better-with-log-returns/](https://www.crystalbull.com/sharpe-ratio-better-with-log-returns/)'
   id: totrans-287
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[https://www.crystalbull.com/sharpe-ratio-better-with-log-returns/](https://www.crystalbull.com/sharpe-ratio-better-with-log-returns/)'
 - en: 'Params:'
   id: totrans-288
   prefs: []
   type: TYPE_NORMAL
+  zh: 参数：
 - en: '`timeframe` (default: `None`) If `None` then the complete return over the entire
     backtested period will be reported'
   id: totrans-289
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`timeframe`（默认值：`None`）如果为`None`，则将报告整个回测期间的完整收益'
 - en: Pass `TimeFrame.NoTimeFrame` to consider the entire dataset with no time constraints
   id: totrans-290
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 传递`TimeFrame.NoTimeFrame`以考虑没有时间限制的整个数据集
 - en: '`compression` (default: `None`)'
   id: totrans-291
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`compression`（默认值：`None`）'
 - en: Only used for sub-day timeframes to for example work on an hourly timeframe
     by specifying “TimeFrame.Minutes” and 60 as compression
   id: totrans-292

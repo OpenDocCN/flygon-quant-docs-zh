@@ -1,225 +1,334 @@
 - en: Multicore Optimization
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 多核优化
 - en: 原文：[https://www.backtrader.com/blog/posts/2015-07-23-multicore-optimization/multicore-optimization/](https://www.backtrader.com/blog/posts/2015-07-23-multicore-optimization/multicore-optimization/)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: '[https://www.backtrader.com/blog/posts/2015-07-23-multicore-optimization/multicore-optimization/](https://www.backtrader.com/blog/posts/2015-07-23-multicore-optimization/multicore-optimization/)'
 - en: Making use of all available cores was something I had in mind for backtrader
     but never got done. Support of natural operations, removal of array notation,
     inclusion of new indicators and bla, bla, bla.
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: 利用所有可用核心是我对backtrader有的想法，但从未实现。支持自然操作，移除数组表示法，包含新的指标等等。
 - en: In reality I am not a great fan of **optimization** and consequently neither
     a great fan of utilizing all cores for it. A good idea, imho, is worth a million
     optimizations.
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: 实际上，我并不是**优化**的忠实粉丝，因此对于为此利用所有核心也不是忠实粉丝。在我看来，一个好主意值得百万次优化。
 - en: Note
+  id: totrans-4
   prefs: []
   type: TYPE_NORMAL
+  zh: 注意
 - en: The initial multicore support is there and has worked for the *well known* set
     of test cases. Given the behavior exhibited by `pickle` some other adjustments
     are expected to ensure all indicators and functions can be passed back and forth
     amongst processes when doing multicore optimization.
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: 初始的多核支持已经存在，并且对于*众所周知*的一组测试用例有效。鉴于`pickle`所展示的行为，预计还需要进行一些其他调整，以确保在进行多核优化时可以在进程之间传递所有指标和函数。
 - en: Note
+  id: totrans-6
   prefs: []
   type: TYPE_NORMAL
+  zh: 注意
 - en: Some extra corrections for multicore have been pushed as release 1.0.10.88 to
     have more “unpickable” things made pickable. Indicators tests have shown no problems
     so far.
+  id: totrans-7
   prefs: []
   type: TYPE_NORMAL
+  zh: 针对多核的一些额外校正已经发布为1.0.10.88版本，以使更多的“不可序列化”项变得可序列化。到目前为止，指标测试没有出现任何问题。
 - en: But someone in the BigMikeTrading forum asked about what this platform had to
     offer in comparison to others and I mentioned some of the features including that
     [PyAlgoTrade](http://gbeced.github.io/pyalgotrade/), for example, already had
     (even multi-machine)
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: 但是BigMikeTrading论坛上有人询问这个平台相比其他平台有什么优势，我提到了一些功能，包括[PyAlgoTrade](http://gbeced.github.io/pyalgotrade/)，例如，已经有了（甚至是多机器的）。
 - en: 'The small but right push needed to get it done was there. From past experience
     and because the internet if full of references I already knew: **multihreading**
     even if the easiest (no matter what GIL lawyers may say) is a no go in Python,
     regardless of the version. Multithreading is fake in Python in that you have several
     threads but no parallel execution of code. It may be good to create abstractions
     and separate code path execution with IO-bound threads but it is really a killer.'
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: 这需要做一点小而正确的推动。根据过去的经验以及因为互联网上充满了参考资料，我已经知道：**多线程**即使是最简单的（无论GIL律师们可能说什么），在Python中也是行不通的，无论版本如何。在Python中，多线程是假的，因为你有多个线程，但没有代码的并行执行。在Python中使用多线程可能会创建抽象，并用IO绑定的线程分开代码路径的执行，但这确实是一个致命问题。
 - en: 'Left with only one choice then: the module `multiprocessing` or a similar one.'
+  id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: 那么我只剩下一个选择：模块`multiprocessing`或类似的模块。
 - en: 'Looking into the bright future I decided to settle for the modern version:
     `concurrent.futures` (what later proved to be a wrong choice) Even if this meant
     adding an external dependency for Python 2.6/2.7 support.'
+  id: totrans-11
   prefs: []
   type: TYPE_NORMAL
+  zh: 展望光明的未来，我决定选择现代版本：`concurrent.futures`（后来证明是一个错误的选择）。即使这意味着为Python 2.6/2.7支持添加外部依赖。
 - en: 'The history:'
+  id: totrans-12
   prefs: []
   type: TYPE_NORMAL
+  zh: 历史：
 - en: Some of the dynamic features of Python do not play nice with sending data back
     and forth amongst processes
+  id: totrans-13
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: Python的一些动态特性与在进程之间发送数据不兼容
 - en: The involved module (`pickle`) chokes when **pickling** (serializing) somethings
     like classes not defined at module level, lambdas, references to instance methods
     and dynamic classes without unique names (even if the classes are unique themselves)
+  id: totrans-14
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 当**序列化**一些像类不在模块级别定义、lambda表达式、对实例方法的引用以及没有唯一名称的动态类（即使类本身是唯一的）时，所涉及的模块（`pickle`）会出错。
 - en: And I had those things scattered over the code. I then found [dill](https://pypi.python.org/pypi/dill)
     and the sibling from pathos multiprocess [https://pypi.python.org/pypi/multiprocess](https://pypi.python.org/pypi/multiprocess).
     Apparently they would solve the serialization problems but adding more external
     dependencies … no no.
+  id: totrans-15
   prefs: []
   type: TYPE_NORMAL
+  zh: 我把这些东西散落在代码中。然后我发现了[dill](https://pypi.python.org/pypi/dill)和pathos多进程的兄弟姐妹[https://pypi.python.org/pypi/multiprocess](https://pypi.python.org/pypi/multiprocess)。显然它们可以解决序列化问题，但是添加更多的外部依赖……不行不行。
 - en: Back to the drawing board to see if the non-pickable items could be made pickable
     even if the `pickle` module produced errors which would have made some of the
     old GCC developers very happy.
+  id: totrans-16
   prefs: []
   type: TYPE_NORMAL
+  zh: 回到起点，看看那些不可序列化的项是否可以被序列化，即使`pickle`模块产生了一些错误，这将使一些旧的GCC开发人员非常高兴。
 - en: And it got done … or no?
+  id: totrans-17
   prefs: []
   type: TYPE_NORMAL
+  zh: 它完成了吗……还是没有？
 - en: Reworked the non pickable items into pickable things
+  id: totrans-18
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 将不可选的项目改造为可选项目
 - en: Run a test with Python 2.7.9 and run like a breeze … smoothly and refreshing
     using the 8 cores of my machine
+  id: totrans-19
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 用 Python 2.7.9 进行测试，并像风一样轻松地运行……我的机器的 8 个核心顺畅且令人耳目一新
 - en: Run a test with Python 3.4.3 and the 8 cores went into action but after some
     optimization, the execution of each subsquent strategy would take longer and longer
     and longer … until it was no longer bearable.
+  id: totrans-20
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 使用 Python 3.4.3 进行测试，8 个核心开始运作，但在进行一些优化后，每个后续策略的执行时间会越来越长……直到不堪忍受为止。
 - en: Aparently **pickling** back the result (a complete executed strategy) to the
     main process was hitting some limit related to memory allocation (and my machine
     has plenty of free RAM … more than enough for several hours of parallel optimizations)
+  id: totrans-21
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 显然，将结果（完整的执行策略）反向 *pickling* 到主进程中触及了一些与内存分配相关的限制（我的机器有大量空闲 RAM……足够多以进行几小时的并行优化）
 - en: 'Some extra reading took me to consider a simplification of my scenario:'
+  id: totrans-22
   prefs: []
   type: TYPE_NORMAL
+  zh: 阅读了一些额外的内容后，我考虑简化我的情景：
 - en: Using `concurrent.futures` seems like future proof
+  id: totrans-23
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 使用 `concurrent.futures` 看起来更具未来性
 - en: But the standard `multiprocessing` module already has what `backtrader` needs
+  id: totrans-24
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 但标准的 `multiprocessing` 模块已经具备了 `backtrader` 所需的功能
 - en: 'Smelling of having been using an overkill, some lines were quickly reworked
     and:'
+  id: totrans-25
   prefs: []
   type: TYPE_NORMAL
+  zh: 闻起来好像有点过度，一些行被迅速改写成：
 - en: The test run fine with Python 2.7 (even faster than before)
+  id: totrans-26
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 测试用 Python 2.7 运行正常（甚至比以前更快）
 - en: The test run equally fast with Python 3.4
+  id: totrans-27
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 测试用 Python 3.4 同样快速运行
 - en: Time for a clean-up, running a full battery of tests and executing a push and
     releasing 1.0.9.88\. No new indicators … just plain old **multicore optimization**
+  id: totrans-28
   prefs: []
   type: TYPE_NORMAL
+  zh: 进行清理，运行完整的一系列测试并执行推送，发布 1.0.9.88。没有新的指标……只是**多核优化**的普通旧方式
 - en: Having read all that … it’s time to have a refreshing script about how to control
     optimization to use multiple cores
+  id: totrans-29
   prefs: []
   type: TYPE_NORMAL
+  zh: 读完这些……是时候写一个关于如何控制优化以使用多个核心的清爽脚本了
 - en: Good news … NO NEED TO DO ANYTHING … it’s done without user intervention
+  id: totrans-30
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 好消息……不需要做任何事情……它在用户不介入的情况下完成了
 - en: 'When the user wishes to optimize a `strategy`, the `Strategy` subclass gets
     added to a `Cerebro` instance as follows:'
+  id: totrans-31
   prefs: []
   type: TYPE_NORMAL
+  zh: 当用户希望优化 `strategy` 时，`Strategy` 子类将被添加到 `Cerebro` 实例中，如下所示：
 - en: '[PRE0]'
+  id: totrans-32
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: 'As opposed to the regular way of passing a strategy to a `Cerebro`:'
+  id: totrans-33
   prefs: []
   type: TYPE_NORMAL
+  zh: 与向 `Cerebro` 传递策略的常规方式相反：
 - en: '[PRE1]'
+  id: totrans-34
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE1]'
 - en: 'This was always so and has not changed. The background being:'
+  id: totrans-35
   prefs: []
   type: TYPE_NORMAL
+  zh: 这一直都是这样，没有改变。背景是：
 - en: '`Cerebro` needs to understand if a strategy is going to be optimized to properly
     handle arguments to the strategy which may already be `iterables` for a regular
     strategy'
+  id: totrans-36
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`Cerebro` 需要了解是否要优化策略，以正确处理可能已经是常规策略的策略的参数'
 - en: Now … **strategies** passed to `cerebro` with `optstrategy` get the added benefit
     of using all available cores of the machine.
+  id: totrans-37
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在……通过 `optstrategy` 传递给 `cerebro` 的**策略**将获得使用机器上所有可用核心的额外好处。
 - en: 'Of course if the end user wishes to have fine grained control of the used cores
     … it’s possible. Standard way of creating a `Cerebro`:'
+  id: totrans-38
   prefs: []
   type: TYPE_NORMAL
+  zh: 当然，如果最终用户希望对使用的核心进行精细控制……是可能的。创建 `Cerebro` 的标准方式：
 - en: 'cerebro = bt.Cerebro() # runonce is True, preload is True and “new” maxcpus
     is None'
+  id: totrans-39
   prefs: []
   type: TYPE_NORMAL
+  zh: 'cerebro = bt.Cerebro() # runonce 为 True，preload 为 True，且 “new” maxcpus 为 None'
 - en: '`maxcpus` (a new parameter with this release) is the control key:'
+  id: totrans-40
   prefs: []
   type: TYPE_NORMAL
+  zh: '`maxcpus`（此版本中的新参数）是控制键：'
 - en: maxcpus = None -> Use all available CPUs
+  id: totrans-41
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: maxcpus = None -> 使用所有可用的 CPU
 - en: maxcpus = 1 -> Do not run multicore
+  id: totrans-42
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: maxcpus = 1 -> 不要运行多核
 - en: maxcpues = 2 … -> Use the indicated number of cores
+  id: totrans-43
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: maxcpues = 2 … -> 使用指定数量的核心
 - en: It’s an opt-out strategy, because multicore is already in.
+  id: totrans-44
   prefs: []
   type: TYPE_NORMAL
+  zh: 这是一种选择退出策略，因为多核已经存在。
 - en: A comparison on a 4 Core (2x threads per core - total of 8 logical processors)
     machine with 16 GBytes of RAM, running Windows 8.1 and Python 64bit 2.7.9
+  id: totrans-45
   prefs: []
   type: TYPE_NORMAL
+  zh: 在拥有 16 GBytes RAM 的 4 核（每核 2 个线程 - 总共 8 个逻辑处理器）机器上进行比较，运行 Windows 8.1 和 Python
+    64 位 2.7.9
 - en: 'Execution with 1 Core: 326 seconds'
+  id: totrans-46
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 使用 1 个核心执行：326 秒
 - en: 'Execution with 8 Cores: 127 seconds'
+  id: totrans-47
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 使用 8 个核心执行：127 秒
 - en: Different test runs have shown that the ratio is around 2.75:1 in average.
+  id: totrans-48
   prefs: []
   type: TYPE_NORMAL
+  zh: 不同的测试运行显示，平均比例约为 2.75:1。
 - en: Unluckily the creation/destruction of processes and the pickling of objects
     back and forth takes on the potential benefits but the speedup is still significant.
+  id: totrans-49
   prefs: []
   type: TYPE_NORMAL
+  zh: 不幸的是，进程的创建/销毁和对象的反复 *pickling* 带来了潜在的好处，但加速效果仍然显著。
 - en: The image shows the 8 cores being used.
+  id: totrans-50
   prefs: []
   type: TYPE_NORMAL
+  zh: 图像显示了正在使用的 8 个核心。
 - en: '![image](../Images/feb7058733a6c39d9a8c77bac5849fa7.png)'
+  id: totrans-51
   prefs: []
   type: TYPE_IMG
+  zh: '![image](../Images/feb7058733a6c39d9a8c77bac5849fa7.png)'
 - en: The code is below. Just change the `maxcpus` parameter `1` to limit the test
     to 1 core.
+  id: totrans-52
   prefs: []
   type: TYPE_NORMAL
+  zh: 代码如下。只需将`maxcpus`参数的`1`更改为限制测试为1个核心。
 - en: '[PRE2]'
+  id: totrans-53
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE2]'

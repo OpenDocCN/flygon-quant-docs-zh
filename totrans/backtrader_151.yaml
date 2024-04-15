@@ -1,235 +1,364 @@
 - en: Credit Interest
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 信用利息
 - en: 原文：[https://www.backtrader.com/blog/posts/2016-08-22-credit-interest/credit-interest/](https://www.backtrader.com/blog/posts/2016-08-22-credit-interest/credit-interest/)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.backtrader.com/blog/posts/2016-08-22-credit-interest/credit-interest/](https://www.backtrader.com/blog/posts/2016-08-22-credit-interest/credit-interest/)
 - en: 'In some situations, the cash amount in real brokers may be decreased because
     the operation on assets includes an interest rate. Examples:'
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: 在一些情况下，真实经纪人的现金金额可能会减少，因为资产操作包括利率。例如：
 - en: Short selling of stocks
+  id: totrans-3
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 股票的空头卖出
 - en: ETFs both long and short
+  id: totrans-4
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: ETFs 长和短
 - en: This means that not only the trades make up the profitability of a system, because
     the interests on the credit take a bite on the account.
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: 这意味着不仅交易构成了系统的盈利，因为信用的利息也在消耗账户。
 - en: To cover this cases *backtrader* includes (starting with release `1.8.8.96`)
     functionality to take this into account.
+  id: totrans-6
   prefs: []
   type: TYPE_NORMAL
+  zh: 为了涵盖这种情况，*backtrader*在`1.8.8.96`版本开始（功能）可以考虑到这一点。
 - en: Extending CommissionInfo
+  id: totrans-7
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 扩展 `CommissionInfo`
 - en: Even if not associated to any *order/trade*, the discount of cash from the account
     can be modeled as a commission being charged by the broker. As such and given
     that *backtrader* already offers a flexible and extensible commission system,
     this system has been slightly extended to support *credit interest*.
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: 即使与任何*order/trade*无关，从账户中扣除现金的折扣可以被建模为经纪人收取的佣金。因此，鉴于*backtrader*已经提供了灵活和可扩展的佣金系统，该系统已稍微扩展以支持*credit
+    interest*。
 - en: 'A `CommissionInfo` can now be instantiated with two new parameters:'
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在可以使用两个新参数实例化 `CommissionInfo`：
 - en: '`interest` (def: `0.0`)'
+  id: totrans-10
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`interest`（默认：`0.0`）'
 - en: If this is non-zero, this is the yearly interest charged for holding a short
     selling position. This is mostly meant for stock short-selling
+  id: totrans-11
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 如果这个值不为零，那么这就是持有空头寸时收取的年利率。这主要是为了股票空头卖出
 - en: 'The formula: `days \* price \* abs(size) \* (interest / 365)`'
+  id: totrans-12
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 公式：`days \* price \* abs(size) \* (interest / 365)`
 - en: 'It must be specified in absolute terms: 0.05 -> 5%'
+  id: totrans-13
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 必须以绝对值指定：0.05 -> 5%
 - en: Note
+  id: totrans-14
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 注意
 - en: 'the behavior can be changed by overriding the method: `_get_credit_interest`'
+  id: totrans-15
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 通过覆盖方法 `_get_credit_interest` 可以改变行为
 - en: '`interest_long` (def: `False`)'
+  id: totrans-16
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`interest_long`（默认：`False`）'
 - en: Some products like ETFs get charged on interest for short and long positions.
     If ths is `True` and `interest` is non-zero the interest will be charged on both
     directions
+  id: totrans-17
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 一些产品（如ETFs）无论是空头还是多头都会收取利息。如果这是 `True` 并且 `interest` 不为零，则会对两个方向收取利息。
 - en: 'The parameters can also be set via the *broker* using the following method:'
+  id: totrans-18
   prefs: []
   type: TYPE_NORMAL
+  zh: 参数也可以通过*broker*使用以下方法设置：
 - en: '[PRE0]'
+  id: totrans-19
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: Where `interest` and `interest_long` obviously bear the same meaning as above.
+  id: totrans-20
   prefs: []
   type: TYPE_NORMAL
+  zh: 其中 `interest` 和 `interest_long` 显然与上文的含义相同。
 - en: Applying a CommissionInfo
+  id: totrans-21
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 应用一个 `CommissionInfo`
 - en: For a stock with a commission in percentage a typical use scenario with *credit
     interest* would be as follows
+  id: totrans-22
   prefs: []
   type: TYPE_NORMAL
+  zh: 对于佣金百分比的股票，带有*credit interest*的典型使用场景如下
 - en: '[PRE1]'
+  id: totrans-23
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE1]'
 - en: This is mostly useful if th end user has own commission schemes.
+  id: totrans-24
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果最终用户有自己的佣金方案，这将非常有用。
 - en: 'A simpler case with `setcommission`:'
+  id: totrans-25
   prefs: []
   type: TYPE_NORMAL
+  zh: 一个更简单的案例与`setcommission`：
 - en: '[PRE2]'
+  id: totrans-26
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE2]'
 - en: And the rest as in any other usual *backtrader* script.
+  id: totrans-27
   prefs: []
   type: TYPE_NORMAL
+  zh: 其余的和任何其他常规的*backtrader*脚本一样。
 - en: Some sample scenarios
+  id: totrans-28
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 一些样本场景
 - en: Long only, no exit, No interest
+  id: totrans-29
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 仅限`long`，无退出，无利息
 - en: To establish a minimum baseline, let’s start without interest and letting the
     script enter the market only long and avoid exiting.
+  id: totrans-30
   prefs: []
   type: TYPE_NORMAL
+  zh: 为了建立一个最低基线，让我们先不要利息，只让脚本进入市场并避免退出。
 - en: '[PRE3]'
+  id: totrans-31
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE3]'
 - en: '![image](../Images/aab6804c68219829704d595573a5bd8d.png)'
+  id: totrans-32
   prefs: []
   type: TYPE_IMG
+  zh: '![image](../Images/aab6804c68219829704d595573a5bd8d.png)'
 - en: The idea should be clear now. Have a flat cash line away from the total portfolio
     value and showing no deduction.
+  id: totrans-33
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在应该很清楚了。从总投资组合价值中有一条平直的现金线，不显示任何扣除。
 - en: Long only, no exit and interest
+  id: totrans-34
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 仅限`long`，无退出和利息
 - en: Let’s try to add interest and see what happens (we’ll be adding a huge `15%`
     interest to try to notice the movements)
+  id: totrans-35
   prefs: []
   type: TYPE_NORMAL
+  zh: 让我们尝试添加利息，看看会发生什么（我们将添加一个巨大的`15%`利息来尝试注意到这些动向）
 - en: '[PRE4]'
+  id: totrans-36
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE4]'
 - en: '![image](../Images/d0ce920dc1c754919fb336946b4d9e85.png)'
+  id: totrans-37
   prefs: []
   type: TYPE_IMG
+  zh: '![image](../Images/d0ce920dc1c754919fb336946b4d9e85.png)'
 - en: NOTHING HAS CHANGED! And this is expected. In most cases the interest is applied
     only to `short` positions (taken with a credit) and this is a a long-only position.
+  id: totrans-38
   prefs: []
   type: TYPE_NORMAL
+  zh: 什么都没变！这是意料之中的。在大多数情况下，利息只适用于`short`头寸（使用信用卖出）而这是一个`long-only`头寸。
 - en: Let’s tell the script to do it for `long` positions too
+  id: totrans-39
   prefs: []
   type: TYPE_NORMAL
+  zh: 让我们告诉脚本也要为`long`头寸做这个
 - en: '[PRE5]'
+  id: totrans-40
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE5]'
 - en: '![image](../Images/7947fc049a3af4a9caf33d2419b0db7f.png)'
+  id: totrans-41
   prefs: []
   type: TYPE_IMG
+  zh: '![image](../Images/7947fc049a3af4a9caf33d2419b0db7f.png)'
 - en: And the change is there. There has been a decrement and is huge (given the huge
     interest which is being taken)
+  id: totrans-42
   prefs: []
   type: TYPE_NORMAL
+  zh: 改变已经存在。有一个减少，并且很大（鉴于正在收取的利息很大）
 - en: A long-short scenario
+  id: totrans-43
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 多空头场景
 - en: This would model something like an `ETF` which has a yearly interest and can
     be a regular one or an inverse one. First let’s establish the baseline.
+  id: totrans-44
   prefs: []
   type: TYPE_NORMAL
+  zh: 这将模拟类似于具有年度利息的`ETF`，可以是常规的或反向的。首先让我们建立基线。
 - en: '[PRE6]'
+  id: totrans-45
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE6]'
 - en: Plenty more operations and the system is always *in the market*.
+  id: totrans-46
   prefs: []
   type: TYPE_NORMAL
+  zh: 还有更多操作，系统始终*在市场中*。
 - en: '![image](../Images/0927d8c10dd53795660d83b38793082c.png)'
+  id: totrans-47
   prefs: []
   type: TYPE_IMG
+  zh: '![图片](../Images/0927d8c10dd53795660d83b38793082c.png)'
 - en: 'Because the `ETF` will have interest charged on both long and short operations,
     the interest will be added for both now:'
+  id: totrans-48
   prefs: []
   type: TYPE_NORMAL
+  zh: 由于`ETF`将对多头和空头操作收取利息，现在利息将同时增加：
 - en: '[PRE7]'
+  id: totrans-49
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE7]'
 - en: '![image](../Images/b7ac7979c5ba9cd44a9c9b23ce9247fc.png)'
+  id: totrans-50
   prefs: []
   type: TYPE_IMG
+  zh: '![图片](../Images/b7ac7979c5ba9cd44a9c9b23ce9247fc.png)'
 - en: '*ACHTUNG*: `34` operations instead of `35`. It seems something might be broken
     but … NO …'
+  id: totrans-51
   prefs: []
   type: TYPE_NORMAL
+  zh: '*注意*：`34`次操作而不是`35`。似乎有些地方可能出了问题，但是……没有……'
 - en: The charged *interest* is taking a bit into the cash reserves and this ends
     up not allowing the last order because *THERE IS NOT ENOUGH CASH*
+  id: totrans-52
   prefs: []
   type: TYPE_NORMAL
+  zh: 收取的*利息*会稍微减少现金储备，最终导致最后一个订单无法执行，因为*现金不足*
 - en: 'Removing the interest charge from *long* operations (even if not real for an
     *ETF*) will allow the system to come to the end:'
+  id: totrans-53
   prefs: []
   type: TYPE_NORMAL
+  zh: 从*多头*操作中去除利息费用（即使对于*ETF*来说并非真实）将使系统能够结束：
 - en: '[PRE8]'
+  id: totrans-54
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE8]'
 - en: Back in business until the `35th` operation.
+  id: totrans-55
   prefs: []
   type: TYPE_NORMAL
+  zh: 回到业务，直到第`35`次操作。
 - en: '![image](../Images/740588603e4b742d38921d599e96364c.png)'
+  id: totrans-56
   prefs: []
   type: TYPE_IMG
+  zh: '![图片](../Images/740588603e4b742d38921d599e96364c.png)'
 - en: A quick comparison with the original shows that the final cash has changed from
     `7490` (with no interest) to `5418` (applying interest only to short operations)
+  id: totrans-57
   prefs: []
   type: TYPE_NORMAL
+  zh: 与原始数据快速比较显示，最终现金从`7490`（不计利息）变为`5418`（仅对空头操作应用利息）
 - en: Conclusion
+  id: totrans-58
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 结论
 - en: 'This new functionality allows to simulate with even more fidelity backtesting
     scenarios to try to achieve the dream: a profitable system'
+  id: totrans-59
   prefs: []
   type: TYPE_NORMAL
+  zh: 这种新功能允许更真实地模拟回测场景，以尝试实现梦想：一个盈利系统
 - en: Sample usage
+  id: totrans-60
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 示例用法
 - en: '[PRE9]'
+  id: totrans-61
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE9]'
 - en: Sample code
+  id: totrans-62
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 示例代码
 - en: '[PRE10]'
+  id: totrans-63
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE10]'

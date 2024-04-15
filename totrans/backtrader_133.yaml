@@ -1,187 +1,283 @@
 - en: PercentRank reloaded
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 百分位重加载
 - en: 原文：[https://www.backtrader.com/blog/posts/2017-02-05-percentrank-reloaded/percentrank-reloaded/](https://www.backtrader.com/blog/posts/2017-02-05-percentrank-reloaded/percentrank-reloaded/)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.backtrader.com/blog/posts/2017-02-05-percentrank-reloaded/percentrank-reloaded/](https://www.backtrader.com/blog/posts/2017-02-05-percentrank-reloaded/percentrank-reloaded/)
 - en: The community user `@randyt` has been able to stretch *backtrader* to its limits.
     Finding some of the obscure corners, even adding `pdb` statements here and there,
     and has been the driving force behind getting a much more refined synchronization
     of resampled streams.
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: 社区用户`@randyt`已经能够将*backtrader*推至极限。找到一些晦涩的角落，甚至在那里添加了`pdb`语句，并且一直是获得重新取样流的更精细的同步的推动力。
 - en: Lately, `@randyt` added a pull request to integrate a new indicator named `PercentRank`.
     Here is the original code
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: 最近，`@randyt`提交了一个拉取请求，集成了一个名为`PercentRank`的新指标。以下是原始代码
 - en: '[PRE0]'
+  id: totrans-4
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: 'It really shows how someone has got into the source code of *backtrader*, fired
     some questions, and grasped some concepts. This is really good:'
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: 这真的展示了某人如何深入研究*backtrader*的源代码，提出了一些问题，并理解了一些概念。这真的很棒：
 - en: '[PRE1]'
+  id: totrans-6
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE1]'
 - en: Unexpected, because end users wouldn’t be expected to even know that someone
     can use that API call in a *lines* objects. This call tells the machinery to make
     sure that the indicator will have at least `self.p.period` samples of the *data
     feeds* available, because they are needed for the calculation.
+  id: totrans-7
   prefs: []
   type: TYPE_NORMAL
+  zh: 出乎意料，因为最终用户甚至不会预期到某人可以在*lines*对象中使用该API调用。这个调用告诉机器确保指标至少有`self.p.period`个*data
+    feeds*样本可用，因为它们需要用于计算。
 - en: In the original code a `self.data.get(size=self.p.period)` can be seen, which
     will only work if the background engine has made sure that those many samples
     are available before making the 1^(st) ever calculation (and if `exactbars` is
     used to reduce memory usage, that those many samples are always there)
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: 在原始代码中可以看到`self.data.get(size=self.p.period)`，这只有在后台引擎确保在进行第一次计算之前有那么多样本可用时才能起作用（如果使用`exactbars`来减少内存使用，则始终有那么多样本可用）
 - en: Initial Reload
+  id: totrans-9
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 初始重载
 - en: The code can be reworked to take advantage of pre-existing utilities that are
     intended to alleviate the development. Nothing end users have to be aware of,
     but good to know if one is constantly developing or prototyping indicators.
+  id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: 代码可以重新编写以利用预先存在的旨在减轻开发的实用程序。没有什么最终用户必须知道的，但如果一个人不断开发或原型化指标，则是了解的好时机。
 - en: '[PRE2]'
+  id: totrans-11
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE2]'
 - en: Reusing `PeriodN` is key to remove the `self.addminperiod` magic and make the
     indicator somehow more amenable. `PeriodN` already features a `period` params
     and will make the call for the user (remember to call `super(cls, self).__init__()`
     if `__init__` is overridden.
+  id: totrans-12
   prefs: []
   type: TYPE_NORMAL
+  zh: 重新使用`PeriodN`是关键，以消除`self.addminperiod`的魔术，并使指标在某种程度上更易处理。`PeriodN`已经具有一个`period`参数，并将为用户调用（如果`__init__`被覆盖，则记得调用`super(cls,
+    self).__init__()`）。
 - en: The calculation has been broken into 3 lines to cache dictionary and array lookups
     in the first place and make it more readable (although the latter is just a matter
     of taste)
+  id: totrans-13
   prefs: []
   type: TYPE_NORMAL
+  zh: 计算已被分解为3行，以首先缓存字典和数组查找，并使其更易读（尽管后者只是品味问题）
 - en: The code has also gone down from 13 to 8 lines. This usually helps when reading.
+  id: totrans-14
   prefs: []
   type: TYPE_NORMAL
+  zh: 代码行数也从13减少到了8行。这通常在阅读时会有所帮助。
 - en: Reloading via OperationN
+  id: totrans-15
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 通过OperationN重载
 - en: Existing indicators like `SumN`, which sums the values of a data source over
     a period, do not build directly upon `PeriodN` like above, but on a subclass of
     it named `OperationN`. Like its parent class it still defines no *lines* and has
     a class attribute named `func`.
+  id: totrans-16
   prefs: []
   type: TYPE_NORMAL
+  zh: 像`SumN`这样的现有指标，它对数据源的值在一段时间内求和，不像上面那样直接构建在`PeriodN`上，而是构建在一个名为`OperationN`的子类上。与其父类一样，它仍然不定义*lines*，并且具有一个名为`func`的类属性。
 - en: '`func` will be called with an array which contains the data of the period the
     host function hast to operate on. The signature basically is: `func(data[0:period])`
     and returns something suitable to be stored in a *line*, i.e.: a float value.'
+  id: totrans-17
   prefs: []
   type: TYPE_NORMAL
+  zh: '`func`将被调用，其中包含宿主函数必须操作的期间的数据的数组。签名基本上是：`func(data[0:period])`并返回适合存储在*line*中的内容，即：一个浮点值。'
 - en: Knowing that, we can try the obvious
+  id: totrans-18
   prefs: []
   type: TYPE_NORMAL
+  zh: 知道了这一点，我们可以尝试一下显而易见的
 - en: '[PRE3]'
+  id: totrans-19
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE3]'
 - en: 'Down to 4 lines. But this will fail with (only last line needed):'
+  id: totrans-20
   prefs: []
   type: TYPE_NORMAL
+  zh: 降至4行。但这将失败，只需要最后一行：
 - en: '[PRE4]'
+  id: totrans-21
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE4]'
 - en: (Use `--strat n1=True` to make the sample fail)
+  id: totrans-22
   prefs: []
   type: TYPE_NORMAL
+  zh: （使用`--strat n1=True`使示例失败）
 - en: By putting our unnamed function inside `func` it seems to have been turned into
     a method, because it’s taking two parameters. This can be quickly cured.
+  id: totrans-23
   prefs: []
   type: TYPE_NORMAL
+  zh: 通过将我们的无名函数放入`func`中，似乎已将其转换为方法，因为它需要两个参数。这可以很快解决。
 - en: '[PRE5]'
+  id: totrans-24
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE5]'
 - en: 'And it works. But there is something ugly: this is not how one would be expecting
     most of the time to pass a function, i.e.: taking `self` as a parameter. In this
     case, we have control of the function, but this may not always be the case (a
     wrapper would be needed to work around it)'
+  id: totrans-25
   prefs: []
   type: TYPE_NORMAL
+  zh: 它起作用了。但有一些不好看的地方：这不是大多数情况下人们期望传递函数的方式，即：将`self`作为参数。在这种情况下，我们控制函数，但这并不总是情况（可能需要一个包装器来解决）
 - en: Syntactic sugar in Python comes to the rescue with `staticmethod`, but before
     we even do that, we know the reference to `self.p.period` will no longer be possible
     in a `staticmethod`, losing the ability to make the average calculation as before.
+  id: totrans-26
   prefs: []
   type: TYPE_NORMAL
+  zh: 在Python中的语法糖通过`staticmethod`拯救了我们，但在我们这样做之前，我们知道在`staticmethod`中将不再可能引用`self.p.period`，失去了以前进行平均计算的能力。
 - en: But since `func` receives an iterable with a fixed length, `len` can be used.
+  id: totrans-27
   prefs: []
   type: TYPE_NORMAL
+  zh: 但由于`func`接收一个固定长度的可迭代对象，可以使用`len`。
 - en: And now the new code.
+  id: totrans-28
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在是新代码。
 - en: '[PRE6]'
+  id: totrans-29
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE6]'
 - en: All good and fine, but this has put some thinking into why it wasn’t thought
     before to give users the chance to pass their own function. Subclassing `OperationN`
     is a good option, but something better can be around the corner avoiding the need
     to use `staticmethod` or take `self` as a parameter and building upon the machinery
     in *backtrader*.
+  id: totrans-30
   prefs: []
   type: TYPE_NORMAL
+  zh: 一切都很好，但这让人思考为什么以前没有考虑让用户有机会传递自己的函数。子类化`OperationN`是一个不错的选择，但可能有更好的方法，避免使用`staticmethod`或将`self`作为参数并构建在*backtrader*中的机制之上。
 - en: Let’s define a handy subclass of `OperationN`.
+  id: totrans-31
   prefs: []
   type: TYPE_NORMAL
+  zh: 让我们定义`OperationN`的一个方便的子类。
 - en: '[PRE7]'
+  id: totrans-32
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE7]'
 - en: This should probably have been in the platform already a long time ago. The
     only real discern here would be if the `lines = ('apply',)` has to be there or
     users should be free to define that line and some others. Something to consider
     before integration.
+  id: totrans-33
   prefs: []
   type: TYPE_NORMAL
+  zh: 这应该很久以前就在平台上了。唯一真正需要考虑的是`lines = ('apply',)`是否必须存在，或者用户是否可以自由定义该行和其他一些行。在集成之前需要考虑的事情。
 - en: With `ApplyN` in hand the final versions of `PercentRank` fully comply with
     all things we expected. First, the version with manual average calculation.
+  id: totrans-34
   prefs: []
   type: TYPE_NORMAL
+  zh: 有了`ApplyN`，`PercentRank`的最终版本完全符合我们的所有预期。首先，手动平均计算版本。
 - en: '[PRE8]'
+  id: totrans-35
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE8]'
 - en: Without breaking `PEP-8` we could still reformat both to fit in 3 lines … Good!
+  id: totrans-36
   prefs: []
   type: TYPE_NORMAL
+  zh: 在不违反`PEP-8`的情况下，我们仍然可以重新格式化两者以适应3行... 很好！
 - en: Let’s run the sample
+  id: totrans-37
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 让我们运行示例
 - en: The sample which can be seen below has the usual skeleton boilerplate, but is
     intended to show a visual comparison of the different `PercentRank` implementations.
+  id: totrans-38
   prefs: []
   type: TYPE_NORMAL
+  zh: 下面可以看到的示例具有通常的骨架样板，但旨在展示不同`PercentRank`实现的视觉比较。
 - en: Note
+  id: totrans-39
   prefs: []
   type: TYPE_NORMAL
+  zh: 注意
 - en: Execute it with `--strat n1=True` to try the `PercentRank_OperationN1` version
     which doesn’t work
+  id: totrans-40
   prefs: []
   type: TYPE_NORMAL
+  zh: 使用`--strat n1=True`来执行它，尝试`PercentRank_OperationN1`版本，它不起作用
 - en: Graphic output.
+  id: totrans-41
   prefs: []
   type: TYPE_NORMAL
+  zh: 图形输出。
 - en: '![image](../Images/d51300b6208096f1d6329adfcebab6f9.png)'
+  id: totrans-42
   prefs: []
   type: TYPE_IMG
+  zh: '![图片](../Images/d51300b6208096f1d6329adfcebab6f9.png)'
 - en: Sample Usage
+  id: totrans-43
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 示例用法
 - en: '[PRE9]'
+  id: totrans-44
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE9]'
 - en: Sample Code
+  id: totrans-45
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 示例代码
 - en: '[PRE10]'
+  id: totrans-46
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE10]'

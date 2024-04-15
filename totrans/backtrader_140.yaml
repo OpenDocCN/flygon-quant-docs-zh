@@ -1,106 +1,162 @@
 - en: Shorting the cash
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 做空现金
 - en: 原文：[https://www.backtrader.com/blog/posts/2016-12-06-shorting-cash/shorting-cash/](https://www.backtrader.com/blog/posts/2016-12-06-shorting-cash/shorting-cash/)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.backtrader.com/blog/posts/2016-12-06-shorting-cash/shorting-cash/](https://www.backtrader.com/blog/posts/2016-12-06-shorting-cash/shorting-cash/)
 - en: From the very first moment *backtrader* was enabled for shorting anything, including
     *stock-like* and *future-like* instruments. When a short was done, the cash was
     decreased and the value of the shorted asset used for the total net liquidation
     value.
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: 从一开始*backtrader*就被启用来对任何东西进行做空，包括*类股票*和*类期货*工具。当做空操作时，现金减少，做空资产的价值用于总净清算价值。
 - en: Removing from one side and adding to the other keeps things in balance.
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: 从一边减少，从另一边增加保持事物平衡。
 - en: It seems that people prefer to have *cash* increased, which probably lends to
     more spending.
+  id: totrans-4
   prefs: []
   type: TYPE_NORMAL
+  zh: 似乎人们更喜欢现金增加，这可能导致更多的支出。
 - en: 'With release `1.9.7.105`, the broker has changed the default behavior to adding
     cash and removing value. This can be controlled with the parameter `shortcash`
     which defaults to `True`. Changing it would be done like this:'
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: 在发布`1.9.7.105`时，经纪人已更改了默认行为以增加现金并减少价值。这可以通过参数`shortcash`来控制，默认为`True`。更改方式如下：
 - en: '[PRE0]'
+  id: totrans-6
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: 'or:'
+  id: totrans-7
   prefs: []
   type: TYPE_NORMAL
+  zh: 或者：
 - en: '[PRE1]'
+  id: totrans-8
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE1]'
 - en: In action
+  id: totrans-9
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 行动中
 - en: 'The sample below uses a standard moving average crossover and can be used to
     see the differences. Running it without arguments and the new behavior:'
+  id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: 下面的示例使用标准的移动平均线交叉，并可用于查看差异。不带参数运行它并且新行为：
 - en: '[PRE2]'
+  id: totrans-11
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE2]'
 - en: '![image](../Images/e28f919fa437e7e8e35ae2f211294acf.png)'
+  id: totrans-12
   prefs: []
   type: TYPE_IMG
+  zh: '![图片](../Images/e28f919fa437e7e8e35ae2f211294acf.png)'
 - en: 'It can be compared with the behavior disabled with:'
+  id: totrans-13
   prefs: []
   type: TYPE_NORMAL
+  zh: 可以与以下行为进行比较：
 - en: '[PRE3]'
+  id: totrans-14
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE3]'
 - en: '![image](../Images/5bf61e8da86b48bf663059fb9f359918.png)'
+  id: totrans-15
   prefs: []
   type: TYPE_IMG
+  zh: '![图片](../Images/5bf61e8da86b48bf663059fb9f359918.png)'
 - en: 'Things that remain the same:'
+  id: totrans-16
   prefs: []
   type: TYPE_NORMAL
+  zh: 保持不变的事物：
 - en: Final result
+  id: totrans-17
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 最终结果
 - en: Trades
+  id: totrans-18
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 交易
 - en: Net Liquidation Value evolution
+  id: totrans-19
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 净清算价值演变
 - en: To see this an extra *Observer* is added to make sure the scaling allows seeing
     the evolution in detail
+  id: totrans-20
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 为了看到这一点，添加了额外的*观察者*，以确保缩放允许详细查看演变过程
 - en: 'What changes:'
+  id: totrans-21
   prefs: []
   type: TYPE_NORMAL
+  zh: 变化：
 - en: When `shortcash` is set to `False` cash never goes above the initial level,
     because an operation alwasy costs money
+  id: totrans-22
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 当`shortcash`设置为`False`时，现金永远不会超过初始水平，因为每次操作都会花费资金。
 - en: But with the new default behavior we can already see that the 1^(st) short operation
     (which happens to be the 1^(st)) adds cash to the system and then how the *longs*
     deduct cash from the system (the short is 1^(st) closed, obviously)
+  id: totrans-23
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 但是通过新的默认行为，我们已经可以看到第1个做空操作（恰好是第1个）向系统中添加了现金，然后*多头*从系统中扣除了现金（显然做空是第1个关闭的）
 - en: Sample Usage
+  id: totrans-24
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 使用示例
 - en: '[PRE4]'
+  id: totrans-25
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE4]'
 - en: Sample Code
+  id: totrans-26
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 示例代码
 - en: '[PRE5]'
+  id: totrans-27
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE5]'

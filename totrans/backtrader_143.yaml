@@ -1,188 +1,286 @@
 - en: Hidden Powers of Python (1)
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: Python的隐藏功能（1）
 - en: 原文：[https://www.backtrader.com/blog/posts/2016-11-20-python-hidden-powers/hidden-powers/](https://www.backtrader.com/blog/posts/2016-11-20-python-hidden-powers/hidden-powers/)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.backtrader.com/blog/posts/2016-11-20-python-hidden-powers/hidden-powers/](https://www.backtrader.com/blog/posts/2016-11-20-python-hidden-powers/hidden-powers/)
 - en: It’s only when meeting real users of *backtrader* when one can realize if the
     abstractions and Python powers used in the platform make sense.
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: 只有当真正遇到*backtrader*的实际用户时，才能意识到平台中使用的抽象和Python功能是否有意义。
 - en: Without leaving the *pythonic* motto aside, *backtrader* tries to give the users
     as much control as possible, whilst at the same time simplifying the usage by
     putting into action the *hidden* powers that Python offers.
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: 在不放弃*pythonic*座右铭的情况下，*backtrader*试图尽可能给用户更多的控制权，同时通过利用Python提供的*隐藏*功能来简化使用。
 - en: The first example in this the first post of a series.
+  id: totrans-4
   prefs: []
   type: TYPE_NORMAL
+  zh: 这是系列中第一篇文章中的第一个示例。
 - en: Is it an array or what is it?
+  id: totrans-5
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 它是一个数组还是其他什么？
 - en: 'A very quick example:'
+  id: totrans-6
   prefs: []
   type: TYPE_NORMAL
+  zh: 一个非常快速的例子：
 - en: '[PRE0]'
+  id: totrans-7
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: 'One of the questions that very quickly pops up is:'
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: 很快就会出现的一个问题是：
 - en: Couldn’t one also use the `[]` during `__init__`?.
+  id: totrans-9
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 在`__init__`期间也可以使用`[]`吗？
 - en: The question being asked because the user has already tried and Python has stopped
     running with an exception.
+  id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: 用户已经尝试并且Python因异常而停止运行，所以提出这个问题。
 - en: 'The answer:'
+  id: totrans-11
   prefs: []
   type: TYPE_NORMAL
+  zh: 答案是：
 - en: No. Using `[]` is not meant during initialization.
+  id: totrans-12
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 不，使用`[]`不是在初始化期间使用的。
 - en: 'With the next question being then:'
+  id: totrans-13
   prefs: []
   type: TYPE_NORMAL
+  zh: 接下来的问题是：
 - en: So what’s actually stored in `self.hi_lo_avg` during `__init__` if it’s not
     an array?
+  id: totrans-14
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 那么在`__init__`期间`self.hi_lo_avg`实际存储了什么，如果不是数组？
 - en: And the answer is not puzzling for programmers but it may be for algo traders
     who went for Python
+  id: totrans-15
   prefs: []
   type: TYPE_NORMAL
+  zh: 对程序员来说，答案并不令人困惑，但对选择Python的算法交易员来说可能会令人困惑
 - en: 'It’s a lazily evaluated object, which will calculate and deliver the values
     via the `[]` operator during the `cerebro.run` phase, i.e.: in the `next` method
     of the strategy.'
+  id: totrans-16
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 这是一个惰性计算的对象，在`cerebro.run`阶段通过`[]`运算符计算和传递值，即在策略的`next`方法中。
 - en: 'Bottomline: in the `next` method the array indexing operator `[]` will give
     you access to the calculated values for past and current time moments.'
+  id: totrans-17
   prefs: []
   type: TYPE_NORMAL
+  zh: 要点：在`next`方法中，数组索引运算符`[]`将使您能够访问过去和当前时间点的计算值。
 - en: The secret is in the sauce
+  id: totrans-18
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 秘密就在于这个方法
 - en: 'And *operator overriding* is the real sauce. Let’s break down the calculation
     of the *high-low-average*:'
+  id: totrans-19
   prefs: []
   type: TYPE_NORMAL
+  zh: '*运算符重载*才是真正的方法。让我们分解*高低平均值*的计算：'
 - en: '[PRE1]'
+  id: totrans-20
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE1]'
 - en: 'The components:'
+  id: totrans-21
   prefs: []
   type: TYPE_NORMAL
+  zh: 组件：
 - en: '`self.data.high` and `self.data.low` are themselves *objects* (*lines* in the
     *backtrader* naming scheme)'
+  id: totrans-22
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`self.data.high`和`self.data.low`本身就是*对象*（在*backtrader*命名方案中称为*lines*）'
 - en: 'They are in many cases mistakenly taken for pure *arrays* but they are not.
     The reasons for them being objects:'
+  id: totrans-23
   prefs: []
   type: TYPE_NORMAL
+  zh: 在许多情况下，它们被错误地视为纯*arrays*，但它们并不是。它们被视为对象的原因是：
 - en: Implementation of the `0` and `-1` indexing scheme in place in *backtrader*
+  id: totrans-24
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '*backtrader*中已经实现了`0`和`-1`索引方案'
 - en: Control of the buffer sizing and linking to other objects
+  id: totrans-25
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 控制缓冲区大小并链接到其他对象
 - en: 'And the most important aspect in this case:'
+  id: totrans-26
   prefs: []
   type: TYPE_NORMAL
+  zh: 最重要的一点是：
 - en: Overriding operators to return *objects*
+  id: totrans-27
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 重载运算符以返回*对象*
 - en: 'And that why the operation below returns a *lines* object. Let’s start:'
+  id: totrans-28
   prefs: []
   type: TYPE_NORMAL
+  zh: 为什么下面的操作返回一个*lines*对象。让我们开始：
 - en: '[PRE2]'
+  id: totrans-29
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE2]'
 - en: 'The temporary object is then divided by `2.0` and assigned to the member variable:'
+  id: totrans-30
   prefs: []
   type: TYPE_NORMAL
+  zh: 然后将临时对象除以`2.0`并赋值给成员变量：
 - en: '[PRE3]'
+  id: totrans-31
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE3]'
 - en: This agains returns another *lines* object. Because operator overriding does
     not only apply to operations executed directly amongst *lines* objects, but also
     to, for example, arithmetic operations like this division.
+  id: totrans-32
   prefs: []
   type: TYPE_NORMAL
+  zh: 这再次返回另一个*lines*对象。因为运算符重载不仅适用于直接在*lines*对象之间执行的操作，还适用于例如这种除法的算术运算。
 - en: Which means that `self.hi_lo_avg` has a reference to a *lines* object. This
     object is useful in the `next` method of the strategy or as input to *indicators*
     or other calculations.
+  id: totrans-33
   prefs: []
   type: TYPE_NORMAL
+  zh: 这意味着`self.hi_lo_avg`引用了一个*lines*对象。这个对象在策略的`next`方法中或作为*指标*或其他计算的输入中非常有用。
 - en: A *logic operator* example
+  id: totrans-34
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 一个*逻辑运算符*的例子
 - en: The example above used an arithmetic operator during `__init__` and later the
     combination of `[0]` and a logic opertor, `>` in `next`.
+  id: totrans-35
   prefs: []
   type: TYPE_NORMAL
+  zh: 上面的示例在`__init__`期间使用了一个算术运算符，后来在`next`中结合了`[0]`和逻辑运算符`>`。
 - en: 'Because operator overriding is not limited to *arithmetic*, let’s put another
     example in place, adding an indicator to the mix. A first attempt would be:'
+  id: totrans-36
   prefs: []
   type: TYPE_NORMAL
+  zh: 因为运算符重载不仅限于*算术*，让我们举个例子，将一个指标添加进来。第一次尝试可能是：
 - en: '[PRE4]'
+  id: totrans-37
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE4]'
 - en: 'But in this case there is simply change from `another_value` to `self.sma[0]`.
     Let’s improve it:'
+  id: totrans-38
   prefs: []
   type: TYPE_NORMAL
+  zh: 但在这种情况下，只是从`another_value`改为了`self.sma[0]`。让我们改进一下：
 - en: '[PRE5]'
+  id: totrans-39
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE5]'
 - en: One for the good guys. Operator overriding does also work in `next` and the
     users can actually drop the `[0]` and directly compare the objects.
+  id: totrans-40
   prefs: []
   type: TYPE_NORMAL
+  zh: 为了好处。运算符重载在`next`中也是有效的，用户可以直接删除`[0]`并直接比较对象。
 - en: 'If all that were what’s actually possible it would actually seem an overkill.
     But the good thing is that there is more. See this example:'
+  id: totrans-41
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果所有这些都是实际可能的，那实际上似乎有点过度。但好消息是还有更多。看看这个例子：
 - en: '[PRE6]'
+  id: totrans-42
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE6]'
 - en: 'We have done 2 things:'
+  id: totrans-43
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们已经做了两件事：
 - en: Create a *lines* object named `self.signal` which compares the *high-low-average*
     against the value of a *Simple Moving Average*
+  id: totrans-44
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 创建一个名为`self.signal`的*lines*对象，将*high-low-average*与*Simple Moving Average*的值进行比较。
 - en: As explained above this object is useful in `next`, when it has been calculated
+  id: totrans-45
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 如上所述，当计算完成时，这个对象在`next`中是有用的。
 - en: Remove the usage of `[0]` in `next` when checking if `signal` is `True`. This
     is possible because operators have also been overriden for boolean operations
+  id: totrans-46
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 在检查`signal`是否为`True`时，去掉`next`中对`[0]`的使用。这是因为运算符也已经被重载用于布尔运算。
 - en: Conclusion
+  id: totrans-47
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 结论
 - en: Hopefully this adds some light to what actually happens when operations are
     executed in `__init__` and how operator overriding actually happens.
+  id: totrans-48
   prefs: []
   type: TYPE_NORMAL
+  zh: 希望这能让人们更清楚地了解在`__init__`中执行操作时实际发生了什么，以及运算符重载实际是如何进行的。

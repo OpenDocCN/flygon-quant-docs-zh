@@ -1,347 +1,526 @@
 - en: Stop Trading
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 停止交易
 - en: 原文：[https://www.backtrader.com/blog/posts/2018-02-01-stop-trading/stop-trading/](https://www.backtrader.com/blog/posts/2018-02-01-stop-trading/stop-trading/)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.backtrader.com/blog/posts/2018-02-01-stop-trading/stop-trading/](https://www.backtrader.com/blog/posts/2018-02-01-stop-trading/stop-trading/)
 - en: Trading can be dangerous and trading using stop orders can help into either
     avoiding big losses or securing profits. *backtrader* provides you with several
     mechanisms to implement *Stop* - based strategies
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: 交易可能是危险的，使用止损订单可以帮助您避免巨额损失或确保利润。*backtrader*为您提供了几种实现基于*Stop*的策略的机制
 - en: Basic Strategy
+  id: totrans-3
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 基本策略
 - en: 'A classic `Fast EMA` crosses over a `Slow EMA` approach will be used. But:'
+  id: totrans-4
   prefs: []
   type: TYPE_NORMAL
+  zh: 将使用经典的`Fast EMA`穿过`Slow EMA`的方法。但：
 - en: Only the up-cross will be taken into account to issue a `buy` order
+  id: totrans-5
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 只有上穿会考虑发出`buy`订单
 - en: 'Exiting the market, i.e.: `sell` will be done via a `Stop`'
+  id: totrans-6
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 退出市场，即：`sell`将通过`Stop`进行
 - en: The strategy will therefore start with this simple skeleton
+  id: totrans-7
   prefs: []
   type: TYPE_NORMAL
+  zh: 因此，策略将从这个简单的框架开始
 - en: '[PRE0]'
+  id: totrans-8
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: And using inheritance we’ll work out different approaches as to how to implement
     the *Stops*
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: 并且使用继承，我们将解决如何实现*Stops*的不同方法
 - en: Manual Approach
+  id: totrans-10
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 手动方法
 - en: 'To avoid having too many approaches, this subclass of our basic strategy will
     allow:'
+  id: totrans-11
   prefs: []
   type: TYPE_NORMAL
+  zh: 为了避免太多的方法，我们基本策略的这个子类将允许：
 - en: Either having a `Stop` fixed at a percentage below the acquisition price
+  id: totrans-12
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 要么在收购价格下方的百分比处设置一个固定的`Stop`
 - en: Or setting a dynamic `StopTrail` which chases the price as it moves (using points
     in this case)
+  id: totrans-13
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 或设置一个动态的`StopTrail`，它随着价格的变动而移动（在这种情况下使用点）
 - en: '[PRE1]'
+  id: totrans-14
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE1]'
 - en: As you may see, we have added parameters for
+  id: totrans-15
   prefs: []
   type: TYPE_NORMAL
+  zh: 正如您所见，我们已添加了参数：
 - en: 'The percentage: `stop_loss=0.02` (2%)'
+  id: totrans-16
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 百分比：`stop_loss=0.02`（2%）
 - en: Or `trail=False`, which when set to a numeric value will tell the strategy to
     use a `StopTrail`
+  id: totrans-17
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 或`trail=False`，设置为数值时，策略将使用`StopTrail`
 - en: 'For the documentation on orders see:'
+  id: totrans-18
   prefs: []
   type: TYPE_NORMAL
+  zh: 有关订单的文档，请参见：
 - en: '[Orders](https://www.backtrader.com/docu/order.html)'
+  id: totrans-19
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[订单](https://www.backtrader.com/docu/order.html)'
 - en: '[Order Management and Execution](https://www.backtrader.com/docu/order-creation-execution/order-creation-execution.html)'
+  id: totrans-20
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[订单管理和执行](https://www.backtrader.com/docu/order-creation-execution/order-creation-execution.html)'
 - en: '[StopTrail(Limit)](https://www.backtrader.com/docu/order-creation-execution/trail/stoptrail.html)'
+  id: totrans-21
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[StopTrail(Limit)](https://www.backtrader.com/docu/order-creation-execution/trail/stoptrail.html)'
 - en: 'Let’s execute our script with a fixed `Stop`:'
+  id: totrans-22
   prefs: []
   type: TYPE_NORMAL
+  zh: 让我们使用固定的`Stop`执行我们的脚本：
 - en: '[PRE2]'
+  id: totrans-23
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE2]'
 - en: And the chart
+  id: totrans-24
   prefs: []
   type: TYPE_NORMAL
+  zh: 以及图表
 - en: '![image](../Images/17c311fc41e246d2c1af16ca91642b62.png)'
+  id: totrans-25
   prefs: []
   type: TYPE_IMG
+  zh: '![image](../Images/17c311fc41e246d2c1af16ca91642b62.png)'
 - en: 'As we see:'
+  id: totrans-26
   prefs: []
   type: TYPE_NORMAL
+  zh: 正如我们所见：
 - en: When there is an up-cross a `buy` is issued
+  id: totrans-27
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 当有一个上穿时，会发出一个`buy`
 - en: When this `buy` is notified as `Completed` we issue a `Stop` order with price
     `stop_loss` percent below the `executed.price`
+  id: totrans-28
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 当此`buy`通知为`Completed`时，我们会以执行价格下`stop_loss`百分比发出`Stop`订单。
 - en: 'Result:'
+  id: totrans-29
   prefs: []
   type: TYPE_NORMAL
+  zh: 结果：
 - en: The first instance is quickly stopped-out
+  id: totrans-30
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 第一次实例很快就被止损了
 - en: But because the sample data is one from a trending market … there is no further
     instance of the price going below the `stop_loss` percentage
+  id: totrans-31
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 但由于示例数据是来自趋势市场的数据...价格不会再下跌到`stop_loss`百分比以下
 - en: 'Let’s use the same approach but applying a `StopTrail` order:'
+  id: totrans-32
   prefs: []
   type: TYPE_NORMAL
+  zh: 让我们使用相同的方法，但应用`StopTrail`订单：
 - en: '[PRE3]'
+  id: totrans-33
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE3]'
 - en: And the chart
+  id: totrans-34
   prefs: []
   type: TYPE_NORMAL
+  zh: 以及图表
 - en: '![image](../Images/c6c9c82b16df91c0aca9aba5564cc105.png)'
+  id: totrans-35
   prefs: []
   type: TYPE_IMG
+  zh: '![image](../Images/c6c9c82b16df91c0aca9aba5564cc105.png)'
 - en: Now we see how this, compared to the previous approach, is not so productive.
+  id: totrans-36
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在我们看到，与之前的方法相比，这不是那么有效。
 - en: Although the market is trending, the price drops several times more than `20`
     points (our *trail* value)
+  id: totrans-37
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 尽管市场趋势，价格下跌了超过`20`个点（我们的*trail*值）
 - en: And this takes us out of the market
+  id: totrans-38
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 这让我们退出市场
 - en: And because the market is trending, it takes time for the moving averages to
     cross again in the desired direction
+  id: totrans-39
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 而且因为市场趋势，需要时间才能再次以期望的方向穿越移动平均线
 - en: Why using `notify_order`?
+  id: totrans-40
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 为什么使用`notify_order`？
 - en: Because this ensures that the order that has to be controlled by the `Stop`
     has actually been executed. This may not be a big deal during *backtesting* but
     it is when trading live.
+  id: totrans-41
   prefs: []
   type: TYPE_NORMAL
+  zh: 因为这确保了必须由`Stop`控制的订单实际已被执行。在进行实时交易时，这可能不是一个大问题，但在*回测*时是。
 - en: Let’s simplify the approach for backtesting, by using the `cheat-on-close` mode
     available with backtrader.
+  id: totrans-42
   prefs: []
   type: TYPE_NORMAL
+  zh: 让我们简化回测方法，使用backtrader提供的`cheat-on-close`模式。
 - en: '[PRE4]'
+  id: totrans-43
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE4]'
 - en: 'In this case:'
+  id: totrans-44
   prefs: []
   type: TYPE_NORMAL
+  zh: 在这种情况下：
 - en: The `cheat-on-close` mode is activated in the broker during the `__init__` phase
     of the strategy
+  id: totrans-45
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 在策略的`__init__`阶段，经纪人会激活`cheat-on-close`模式。
 - en: The `StopOrder` is issued immediately after the `buy` order. This is because
     `cheat-on-close` ensures it will be executed without waiting for the next bar
+  id: totrans-46
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`StopOrder` 在 `buy` 订单之后立即发布。这是因为 `cheat-on-close` 确保它将在不等待下一个柱状图的情况下被执行。'
 - en: Notice that the closing price (`self.data.close[0]`) is used for the stop, because
     there is no execution price yet. And we know that it will be the closing price
     thanks to `cheat-on-close`
+  id: totrans-47
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 请注意，使用收盘价格（`self.data.close[0]`）用于止损，因为尚未有执行价格。我们知道它将是收盘价格，这要归功于 `cheat-on-close`
 - en: The `notify_order` method is now purely a logging method which tells us when
     things have been bought or sold.
+  id: totrans-48
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 现在，`notify_order` 方法纯粹是一个记录方法，告诉我们何时购买或出售。
 - en: 'A sample run with `StopTrail`:'
+  id: totrans-49
   prefs: []
   type: TYPE_NORMAL
+  zh: 使用 `StopTrail` 进行示例运行：
 - en: '[PRE5]'
+  id: totrans-50
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE5]'
 - en: And the chart
+  id: totrans-51
   prefs: []
   type: TYPE_NORMAL
+  zh: 和图表
 - en: '![image](../Images/cc582c68255da8e224a0c450b922618e.png)'
+  id: totrans-52
   prefs: []
   type: TYPE_IMG
+  zh: '![image](../Images/cc582c68255da8e224a0c450b922618e.png)'
 - en: 'Notice that:'
+  id: totrans-53
   prefs: []
   type: TYPE_NORMAL
+  zh: 注意：
 - en: The results are very similar but not the same as before
+  id: totrans-54
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 结果与以前非常相似，但并不完全相同
 - en: This is due to `cheat-on-close` giving the strategy the closing price (which
     is non-realistic, but can be a good approximation) instead of the next available
     price (which is the next opening price)
+  id: totrans-55
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 这是由于 `cheat-on-close` 给策略提供了收盘价格（这是不现实的，但可以是一个很好的近似值），而不是下一个可用价格（这是下一个开盘价）
 - en: Automating the approach
+  id: totrans-56
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 自动化方法
 - en: It would be perfect if the logic for the orders could be kept together in `next`
     and one didn’t have to use `cheat-on-close`. And it can be done!!!
+  id: totrans-57
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果可以将订单的逻辑保持在 `next` 中，并且不必使用 `cheat-on-close`，那将是完美的。这是可以实现的！！！
 - en: Let’s use
+  id: totrans-58
   prefs: []
   type: TYPE_NORMAL
+  zh: 让我们使用
 - en: '*Parent-Child* orders'
+  id: totrans-59
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '*父-子* 订单'
 - en: Note
+  id: totrans-60
   prefs: []
   type: TYPE_NORMAL
+  zh: 注意
 - en: This is part of the `Bracket Order` functionality.
+  id: totrans-61
   prefs: []
   type: TYPE_NORMAL
+  zh: 这是 `Bracket Order` 功能的一部分。
 - en: 'See: [Bracket Orders](https://www.backtrader.com/docu/order-creation-execution/bracket/bracket.html)'
+  id: totrans-62
   prefs: []
   type: TYPE_NORMAL
+  zh: 参见：[Bracket Orders](https://www.backtrader.com/docu/order-creation-execution/bracket/bracket.html)
 - en: '[PRE6]'
+  id: totrans-63
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE6]'
 - en: 'This new strategy, which still builds on `BaseStrategy`, does:'
+  id: totrans-64
   prefs: []
   type: TYPE_NORMAL
+  zh: 这种新策略仍然基于 `BaseStrategy`，做了以下工作：
 - en: Add the possibility to issue the `buy` order as a `Limit` order
+  id: totrans-65
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 增加将 `buy` 订单作为 `Limit` 订单发布的可能性
 - en: The parameter `buy_limit` (when not `False`) will be a percentage to take off
     the current price to set the expected buy point.
+  id: totrans-66
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 参数 `buy_limit`（当不为 `False` 时）将是一个百分比，以从当前价格中减去来设置预期的购买点。
 - en: Sets `transmit=False` for the `buy` order. This means the order won’t be transmitted
     to the broker immediately. It will await the transmission signal from a *child*
     order
+  id: totrans-67
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 为 `buy` 订单设置 `transmit=False`。这意味着订单不会立即传输到经纪人。它将等待来自 *子* 订单的传输信号
 - en: 'Immediately issues a *child* order by using: `parent=buy_order`'
+  id: totrans-68
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 通过使用立即发布 *子* 订单：`parent=buy_order`
 - en: This will trigger transmitting both orders to the broker
+  id: totrans-69
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 这将触发将两个订单传输到经纪人
 - en: And will tag the *child* order for scheduling **when** the parent order has
     been executed.
+  id: totrans-70
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 并且将 *子* 订单标记为在父订单执行时进行调度 **when**
 - en: No risk of the `Stop` order executing before the `buy` order is in place.
+  id: totrans-71
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 在 `buy` 订单放置之前，没有 `Stop` 订单执行的风险。
 - en: If the parent order is cancelled, the child order will also be cancelled
+  id: totrans-72
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 如果父订单被取消，则子订单也将被取消
 - en: Being this a sample and with a trending market, the `Limit` order may never
     be executed and still be active when a new signal comes in. In this case the sample
     will simple cancel the pending `buy` order and carry on with a new one at the
     current price levels.
+  id: totrans-73
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 由于这是一个示例，并且是一个趋势市场，`Limit` 订单可能永远不会被执行，并且当新信号出现时仍然处于活动状态。在这种情况下，示例将简单地取消待处理的
+    `buy` 订单，并继续以当前价格水平发出新订单。
 - en: This, as stated above, will cancel the child `Stop` order.
+  id: totrans-74
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 如上所述，这将取消子 `Stop` 订单。
 - en: Cancelled orders will be logged
+  id: totrans-75
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 已取消的订单将被记录
 - en: Let’s execute trying to buy `0.5%` below the current close price and with `trail=30`
+  id: totrans-76
   prefs: []
   type: TYPE_NORMAL
+  zh: 让我们试图在当前收盘价下购买 `0.5%`，并且使用 `trail=30` 来执行
 - en: 'A sample run with `StopTrail`:'
+  id: totrans-77
   prefs: []
   type: TYPE_NORMAL
+  zh: 使用 `StopTrail` 进行示例运行：
 - en: '[PRE7]'
+  id: totrans-78
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE7]'
 - en: And the chart
+  id: totrans-79
   prefs: []
   type: TYPE_NORMAL
+  zh: 和图表
 - en: '![image](../Images/7decd99baf8a1b50fd9f09c561918c97.png)'
+  id: totrans-80
   prefs: []
   type: TYPE_IMG
+  zh: '![image](../Images/7decd99baf8a1b50fd9f09c561918c97.png)'
 - en: The log and the *buy/sell* signs on the chart show that no `sell` order was
     executed without having a corresponding `buy` order, and that cancelled `buy`
     orders where immediately followed by the cancellation of the child `sell` order
     (without any manual coding)
+  id: totrans-81
   prefs: []
   type: TYPE_NORMAL
+  zh: 日志和图表上的 *buy/sell* 标志表明，没有没有对应的 `buy` 订单被执行，并且取消的 `buy` 订单立即被子 `sell` 订单的取消所跟随（无需任何手动编码）
 - en: Conclusion
+  id: totrans-82
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 结论
 - en: Using different approaches for how to trade with stops has been shown. This
     can be used to avoid losses or secure profit.
+  id: totrans-83
   prefs: []
   type: TYPE_NORMAL
+  zh: 已经展示了使用不同方法进行带止损交易。这可以用来避免损失或确保利润。
 - en: 'Beware: very tight stop orders could also simply have the effect of getting
     your positions out of the market, if the stop is set within the normal range of
     movement of the price.'
+  id: totrans-84
   prefs: []
   type: TYPE_NORMAL
+  zh: 警告：非常严格的止损订单也可能只是使您的持仓退出市场的效果，如果止损设置在价格正常波动范围内。
 - en: Script Usage
+  id: totrans-85
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 脚本用法
 - en: '[PRE8]'
+  id: totrans-86
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE8]'
 - en: The code
+  id: totrans-87
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 该代码
 - en: '[PRE9]'
+  id: totrans-88
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE9]'

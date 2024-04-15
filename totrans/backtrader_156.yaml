@@ -1,321 +1,483 @@
 - en: Pinkfish Challenge
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: Pinkfish 挑战
 - en: 原文：[https://www.backtrader.com/blog/posts/2016-07-29-pinkfish-challenge/pinkfish-challenge/](https://www.backtrader.com/blog/posts/2016-07-29-pinkfish-challenge/pinkfish-challenge/)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.backtrader.com/blog/posts/2016-07-29-pinkfish-challenge/pinkfish-challenge/](https://www.backtrader.com/blog/posts/2016-07-29-pinkfish-challenge/pinkfish-challenge/)
 - en: (Sample and changes added to release 1.7.1.93)
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: （样本和更改添加到版本1.7.1.93）
 - en: Along the way *backtrader* has gotten maturity, new features and of course complexity.
     Many of the new features have been introduced after requests, comments, questions
     from users. Small challenges which have proven that most of the design decisions
     were at least not that wrong even if some things could have been done in many
     other ways, sometimes probably in a better way.
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: 在发展过程中，*backtrader* 已经变得更加成熟，新增了功能，当然也变得更加复杂。许多新功能是在用户的请求、评论和问题之后引入的。一些小挑战证明了大多数设计决策至少不是那么错误，即使有些事情可能有很多其他方式来完成，有时可能更好。
 - en: 'As such it seems that those small challenges are pushes to test the flexibility
     and adaptability of the platform to new unplanned and unpexpected situations and
     the *pinkfish* challenge is yet another one. *pinkfish* is another Python backtesting
     framework (listed in the `README`) which can be found under: [pinkfish](http://fja05680.github.io/pinkfish/).
     The site contains what has been the challenge to solve:'
+  id: totrans-4
   prefs: []
   type: TYPE_NORMAL
+  zh: 因此，似乎这些小挑战是为了测试平台对新的未计划和意外情况的灵活性和适应性，*pinkfish*挑战是另一个例子。*pinkfish*是另一个Python回测框架（在`README`中列出），可以在以下网址找到：[pinkfish](http://fja05680.github.io/pinkfish/)。该网站包含了需要解决的挑战：
 - en: '*‘buying on the close’ on the SAME day a ‘new 20 day high is set’ were not
     allowed*'
+  id: totrans-5
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '*‘买入收盘价’在‘新的20日高点设定’的当天是不允许的*'
 - en: 'One of the *features* gives a hint as how the platform operates for such a
     feat:'
+  id: totrans-6
   prefs: []
   type: TYPE_NORMAL
+  zh: 其中一个*特点*提供了平台如何为这样的壮举运作的提示：
 - en: '*uses daily data (vs minute or tick data) for intraday trading*'
+  id: totrans-7
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '*使用每日数据（而不是分钟或tick数据）进行日内交易*'
 - en: The author was additionally *put off* by the complexity of the, back then, of
     the existing backtesting libraries. Whether that holds true for *backtrader* (in
     its infancy back then) is a question to be answered by the *pinkfish* author himself.
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: 作者对当时现有的回测库的复杂性感到*厌烦*。当时的情况是否适用于*backtrader*（当时还处于初期阶段）是由*pinkfish*的作者自己回答的问题。
 - en: No mod solution
+  id: totrans-9
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 无修改解决方案
 - en: '*backtrader* supports filters for data feeds and one existed that allows'
+  id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: '*backtrader* 支持数据源的过滤器，其中一个允许'
 - en: '[PRE0]'
+  id: totrans-11
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: This filter tries to make a complete *replay* action without involving the built-in
     replayer.
+  id: totrans-12
   prefs: []
   type: TYPE_NORMAL
+  zh: 这个筛选器试图进行完整的*重播*操作，而不涉及内置的重播器。
 - en: An obvious evolution of this filter breaks the daily bar in 2 bars with an (open,
     high, low) first and then a 2^(nd) complete bar (open, high, low, close).
+  id: totrans-13
   prefs: []
   type: TYPE_NORMAL
+  zh: 这个筛选器的明显演变将每日柱破解为两根柱，第一根是（开盘价，最高价，最低价），然后是第二根完整的柱（开盘价，最高价，最低价，收盘价）。
 - en: The *buying on the close* is achieved by issuing an order with `backtrader.Order.Close`
     as execution type.
+  id: totrans-14
   prefs: []
   type: TYPE_NORMAL
+  zh: '*买入收盘价*是通过使用`backtrader.Order.Close`作为执行类型来实现的。'
 - en: 'This is in the sample available with `-no-replay`. An execution:'
+  id: totrans-15
   prefs: []
   type: TYPE_NORMAL
+  zh: 这在可用的样本中使用`-no-replay`。一个执行：
 - en: '[PRE1]'
+  id: totrans-16
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE1]'
 - en: 'Part of the output:'
+  id: totrans-17
   prefs: []
   type: TYPE_NORMAL
+  zh: 输出的一部分：
 - en: '[PRE2]'
+  id: totrans-18
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE2]'
 - en: It works …
+  id: totrans-19
   prefs: []
   type: TYPE_NORMAL
+  zh: 它有效…
 - en: 'After seeing the 1^(st) part of the day (Line: `0955`)'
+  id: totrans-20
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 在看到当天第一部分（行：`0955`）之后
 - en: If a new 20 day high is in place a `Close` order is issued
+  id: totrans-21
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 如果有一个新的20日高点，就会发出一个`Close`订单
 - en: 'And the order gets executed with the *closing* price of the 2^(nd) part of
     the day (Line: `0956`)'
+  id: totrans-22
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 订单是通过当天第二部分的*收盘*价格执行的（行：`0956`）
 - en: The closing price is `28.49` which is the *BUY Price* seen in `notify_order`
     in the strategy
+  id: totrans-23
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 收盘价为`28.49`，这是在策略中`notify_order`中看到的*买入价格*。
 - en: The output contains rather verbose parts simply for identification of the last
     `20` highs. The sample sells also very quickly, to let the behavior be tested
     several times. But the holding period can be altered with `--sellafter N`, where
     `N` is the number of bars to hold before cancelling (see *Usage* at the end)
+  id: totrans-24
   prefs: []
   type: TYPE_NORMAL
+  zh: 输出包含相当冗长的部分，仅用于识别最后的`20`个高点。样本也非常快速出售，以便多次测试行为。但持有期可以通过`--sellafter N`进行更改，其中`N`是取消之前持有的柱数（请参见末尾的*用法*）
 - en: The problem with the `no mod` solution
+  id: totrans-25
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: '`no mod`解决方案的问题'
 - en: 'This is not really a **replay** solution and this can be seen if the *execution
     type* of the order is changed from `Close` to `Market`. A new execution:'
+  id: totrans-26
   prefs: []
   type: TYPE_NORMAL
+  zh: 这实际上不是一个**重播**解决方案，如果将订单的*执行类型*从`Close`更改为`Market`，就会看到这一点。一个新的执行：
 - en: '[PRE3]'
+  id: totrans-27
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE3]'
 - en: 'Now the output for the same period as above:'
+  id: totrans-28
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在与上述相同期间的输出：
 - en: '[PRE4]'
+  id: totrans-29
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE4]'
 - en: And the problem can be easily identified
+  id: totrans-30
   prefs: []
   type: TYPE_NORMAL
+  zh: 问题很容易被识别出来
 - en: Instead of the *closing* price the order is executing with the *opening* price,
     because the *Market* order takes the 1^(st) price available in the 2^(nd) bar,
     namely `27.51`, which is unfortunately the *opening* price of the day and no longer
     *available*.
+  id: totrans-31
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 订单执行时，与*收盘*价相反，因为*市价*订单取第二根柱中可用的第一价，即`27.51`，而这恰好是当天的*开盘*价，不再*可用*。
 - en: This is due to the fact that the filter is not really *replaying* but rather
     breaking up the bar in two parts and doing a soft *replaying*
+  id: totrans-32
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 这是因为过滤器实际上并非真正*回放*，而是将柱子分成两部分，并进行软性*回放*。
 - en: The right “mod” solution
+  id: totrans-33
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 正确的“mod”解决方案
 - en: Getting also the `Market` order to pick the *closing* price.
+  id: totrans-34
   prefs: []
   type: TYPE_NORMAL
+  zh: 同样获取`Market`订单以选择*收盘*价。
 - en: 'This comprises:'
+  id: totrans-35
   prefs: []
   type: TYPE_NORMAL
+  zh: 这包括：
 - en: A filter which breaks the bar in two parts
+  id: totrans-36
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 一个将柱子分成两部分的过滤器
 - en: And is compatible with the standard *replay* functionality available in *backtrader*
+  id: totrans-37
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 并且与*backtrader*中可用的标准*回放*功能兼容
 - en: In this case the 2^(nd) bar would be made up of just the `close` price and even
     if the display shows a complete bar, the internal machinery only matches orders
     against the *tick*
+  id: totrans-38
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 在这种情况下，第二根柱仅由`close`价格组成，即使显示显示完整的柱，内部机制也只会将订单与*tick*匹配
 - en: 'Chaining filters in *backtrader* was already possible but this use case had
     not been taken into account:'
+  id: totrans-39
   prefs: []
   type: TYPE_NORMAL
+  zh: '*backtrader*中的链接过滤器已经是可能的，但这种用法尚未考虑：'
 - en: Made 2 data “heartbeats” out of a single data “heartbeat”
+  id: totrans-40
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 将单个数据“心跳”拆分为2个数据“心跳”
 - en: Before this challenge it was about getting bars *merged* into larger bars.
+  id: totrans-41
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 在此挑战之前，主要是将柱子合并为较大的柱子。
 - en: A small extension into the core mechanism loading bars allows for a filter to
     add the 2^(nd) part of the bar to an internal stash for re-processing before a
     new data *heartbeat* is taken into account. And because it is an *extension* and
     not a *modification* it has no impact.
+  id: totrans-42
   prefs: []
   type: TYPE_NORMAL
+  zh: 对核心机制加载柱进行了小扩展，允许过滤器将柱的第二部分添加到内部存储中以进行重新处理，然后再考虑新数据*心跳*。而且因为它是一个*扩展*而不是*修改*，所以没有影响。
 - en: 'The challenge has also given the chance to:'
+  id: totrans-43
   prefs: []
   type: TYPE_NORMAL
+  zh: 此挑战还提供了机会：
 - en: Look again into the early-age code written at the very beginning of *backtrader*
     for `Close` orders.
+  id: totrans-44
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 再次查看*backtrader*最初编写的早期代码以获取`Close`订单。
 - en: And here a couple of lines and `if` conditions have been reworked to make matching
     `Close` orders more logical and if possible to deliver them instantly to the system
     (before the delivery of matching would mostly be done with a 1-bar delay, even
     if matched to the right bar)
+  id: totrans-45
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 在这里，一些代码行和`if`条件已经重新设计，以使匹配`Close`订单更加合乎逻辑，并且如果可能的话，将其立即交付给系统（即使匹配到正确的柱上，交付也通常会延迟1根柱）
 - en: 'One good thing after these changes:'
+  id: totrans-46
   prefs: []
   type: TYPE_NORMAL
+  zh: 在这些变化之后的一个好处是：
 - en: The logic in the filter is a lot easier, because there is no subtle *replay*
     attempt. Replay is done by the *replay* filter.
+  id: totrans-47
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 过滤器中的逻辑更加简单，因为没有微妙的*回放*尝试。 回放由*回放*过滤器完成。
 - en: 'The anatomy of the filter for the 1^(st) part of the broken bar:'
+  id: totrans-48
   prefs: []
   type: TYPE_NORMAL
+  zh: 分解柱子第一部分的过滤器解剖：
 - en: Copy the incoming data bar
+  id: totrans-49
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 复制传入数据柱
 - en: Make a copy as the *OHL* bar (no Close)
+  id: totrans-50
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 将其复制为*OHL*柱（无Close）
 - en: Change the time to be *date* + *sessionstart* time
+  id: totrans-51
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 将时间更改为*日期* + *sessionstart*时间
 - en: Remove part of the volume (specified with parameter *closevol* to the filter)
+  id: totrans-52
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 移除部分体积（由参数*closevol*指定给过滤器）
 - en: Nullify `OpenInterest` (available at the end of the day)
+  id: totrans-53
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 使`OpenInterest`失效（在当天结束时可用）
 - en: Remove the `close` price and replace it with the average of *OHL*
+  id: totrans-54
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 移除`close`价格并用*OHL*的平均值替换它
 - en: Add the bar to the internal *stack* for immediate processing by the next filter
     or strategy (the *replay* filter will take over)
+  id: totrans-55
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 将柱子添加到内部*栈*以供下一个过滤器或策略立即处理（*回放*过滤器将接管）
 - en: 'The anatomy for the 2^(nd) part of the broken bar:'
+  id: totrans-56
   prefs: []
   type: TYPE_NORMAL
+  zh: 分解柱子第二部分的解剖：
 - en: Copy the incoming data bar
+  id: totrans-57
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 复制传入数据柱
 - en: Replace OHL prices with the `Close` price
+  id: totrans-58
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 将OHL价格替换为`Close`价格
 - en: Change the time to be *date* + *sessionend* time
+  id: totrans-59
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 将时间更改为*日期* + *sessionend*时间
 - en: Remove the other part of the volume (specified with parameter *closevol* to
     the filter)
+  id: totrans-60
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 移除体积的其他部分（由参数*closevol*指定给过滤器）
 - en: Set `OpenInterest`
+  id: totrans-61
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 设置`OpenInterest`
 - en: Add the bar to the internal *stash* for delayed processing as the next data
     heartbeat, rather than fetching prices from the data
+  id: totrans-62
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 将柱子添加到内部*stash*以延迟处理为下一个数据心跳，而不是从数据中获取价格
 - en: 'The code:'
+  id: totrans-63
   prefs: []
   type: TYPE_NORMAL
+  zh: 代码：
 - en: '[PRE5]'
+  id: totrans-64
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE5]'
 - en: 'Executing without disabling *replay* and `Close` (let’s add plotting):'
+  id: totrans-65
   prefs: []
   type: TYPE_NORMAL
+  zh: 在不禁用*回放*和`Close`的情况下执行（让我们添加绘图）：
 - en: '[PRE6]'
+  id: totrans-66
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE6]'
 - en: 'The output for the same period:'
+  id: totrans-67
   prefs: []
   type: TYPE_NORMAL
+  zh: 同一时期的输出：
 - en: '[PRE7]'
+  id: totrans-68
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE7]'
 - en: Everything is ok and the *closing* price of `28.49` has been taken.
+  id: totrans-69
   prefs: []
   type: TYPE_NORMAL
+  zh: 一切正常，已记录*收盘*价为`28.49`。
 - en: And the chart.
+  id: totrans-70
   prefs: []
   type: TYPE_NORMAL
+  zh: 以及图表。
 - en: '![image](../Images/4bb4d88a4928471c62996831c18a5ec7.png)'
+  id: totrans-71
   prefs: []
   type: TYPE_IMG
+  zh: '![图片](../Images/4bb4d88a4928471c62996831c18a5ec7.png)'
 - en: 'And last but not least to check the modifications have made sense:'
+  id: totrans-72
   prefs: []
   type: TYPE_NORMAL
+  zh: 最后但同样重要的是检查修改是否有意义：
 - en: '[PRE8]'
+  id: totrans-73
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE8]'
 - en: 'The output for the same period:'
+  id: totrans-74
   prefs: []
   type: TYPE_NORMAL
+  zh: 相同时期的输出：
 - en: '[PRE9]'
+  id: totrans-75
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE9]'
 - en: 'And now the `Market` orders are picking the same price of `28.49` as the `Close`
     orders, which in this particular use case was the expectation, because *replaying*
     is happening and the 2^(nd) part of the broken daily bar has a single *tick*:
     `28.49` which is the *closing* price'
+  id: totrans-76
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在`Market`订单正在以与`Close`订单相同的价格`28.49`拾取，这在这个特定的用例中是预期的，因为*重播*正在发生，而破碎的日线的第二部分有一个单一的*标记*：`28.49`，这是*收盘*价
 - en: Usage of the sample
+  id: totrans-77
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 示例的用法
 - en: '[PRE10]'
+  id: totrans-78
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE10]'
 - en: And the code itself
+  id: totrans-79
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 并且代码本身
 - en: '[PRE11]'
+  id: totrans-80
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE11]'

@@ -1,105 +1,164 @@
 - en: Extending an Indicator
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 扩展一个指标
 - en: 原文：[https://www.backtrader.com/blog/posts/2015-07-20-extending-an-indicator/extending-an-indicator/](https://www.backtrader.com/blog/posts/2015-07-20-extending-an-indicator/extending-an-indicator/)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.backtrader.com/blog/posts/2015-07-20-extending-an-indicator/extending-an-indicator/](https://www.backtrader.com/blog/posts/2015-07-20-extending-an-indicator/extending-an-indicator/)
 - en: In Object Oriented Programming, and of course in Python itself, extension of
     an existing class can be achieved in two ways.
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: 在面向对象编程中，当然也包括Python本身，对现有类的扩展可以通过两种方式实现。
 - en: Inheritance (or subclassing)
+  id: totrans-3
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 继承（或子类化）
 - en: Composition (or embedding)
+  id: totrans-4
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 组合（或嵌入）
 - en: In Developing an Indicator, the indicator `Trix` was developed in just a couple
     lines of code. The [ChartSchool - Trix](http://stockcharts.com/school/doku.php?id=chart_school:technical_indicators:trix)
     reference literature has a `Trix` with a signal line showing the similarities
     with MACD.
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: 在开发一个指标时，指标`Trix`只需几行代码就可以开发完成。[ChartSchool - Trix](http://stockcharts.com/school/doku.php?id=chart_school:technical_indicators:trix)
+    参考文献中有一个带有信号线的`Trix`，显示了与MACD的相似之处。
 - en: Let’s “compose” `MyTrixSignal` using the already developed `Trix`
+  id: totrans-6
   prefs: []
   type: TYPE_NORMAL
+  zh: 让我们使用已经开发的`Trix`“组合”`MyTrixSignal`
 - en: '[PRE0]'
+  id: totrans-7
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: Some things had to be repeated in the definition such as the name of the `trix`
     line and the `period` to use for calculation. A new line `signal` and the corresponding
     `sigperiod` parameter have been defined.
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: 在定义中有一些必须重复的内容，比如`trix`线的名称和用于计算的`period`。定义了一个新的`signal`线和相应的`sigperiod`参数。
 - en: The 2-liner is a good result.
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: 这个两行的结果很好。
 - en: 'Now let’s go for *inheritance*, but first recalling how `Trix` looks like:'
+  id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在让我们来看看*继承*，但首先回顾一下`Trix`的样子：
 - en: '[PRE1]'
+  id: totrans-11
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE1]'
 - en: Using `Trix` as the base class, this is the aspect of `TrixSignal`
+  id: totrans-12
   prefs: []
   type: TYPE_NORMAL
+  zh: 使用`Trix`作为基类，这是`TrixSignal`的外观
 - en: '[PRE2]'
+  id: totrans-13
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE2]'
 - en: 'The inherited indicator ends up also being a 2-liner but:'
+  id: totrans-14
   prefs: []
   type: TYPE_NORMAL
+  zh: 继承的指标最终也是一个两行代码，但是：
 - en: No redefinition of the `trix` line is needed
+  id: totrans-15
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 不需要重新定义`trix`线
 - en: No redefinition of the `period` parameter is needed
+  id: totrans-16
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 不需要重新定义`period`参数
 - en: 'Both are inherited from the base class `Trix`. And the calculation of the `trix`
     line is done in the base class `__init__` method:'
+  id: totrans-17
   prefs: []
   type: TYPE_NORMAL
+  zh: 两者都是从基类`Trix`继承而来。`trix`线的计算是在基类`__init__`方法中完成的：
 - en: super(MyTrixSignalInherited, self).**init**()
+  id: totrans-18
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: super(MyTrixSignalInherited, self).**init**()
 - en: 'The choice of **composition** vs **inheritance** is a classic. This example
     is not meant to clarify which is better but more to show that:'
+  id: totrans-19
   prefs: []
   type: TYPE_NORMAL
+  zh: '**组合**与**继承**的选择是一个经典问题。这个例子并不是为了澄清哪种更好，而更多是为了展示：'
 - en: Note
+  id: totrans-20
   prefs: []
   type: TYPE_NORMAL
+  zh: 注意
 - en: Inheritance works even in the presence of the metadefinitions of **lines** and
     **params**, which also inherit from the metadefinitions of the base class
+  id: totrans-21
   prefs: []
   type: TYPE_NORMAL
+  zh: 即使存在**lines**和**params**的元定义，它们也继承自基类的元定义
 - en: And finally the code and charts for both versions when put in action.
+  id: totrans-22
   prefs: []
   type: TYPE_NORMAL
+  zh: 最后是代码和图表，展示两个版本的运行情况。
 - en: The first one shows the **inherited** version
+  id: totrans-23
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 第一个展示了**继承**版本
 - en: '[PRE3]'
+  id: totrans-24
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE3]'
 - en: '![image](../Images/5fa99326087f82b641e9122a0b357a80.png)'
+  id: totrans-25
   prefs: []
   type: TYPE_IMG
+  zh: '![image](../Images/5fa99326087f82b641e9122a0b357a80.png)'
 - en: The first one shows the **composed** version
+  id: totrans-26
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 第一个展示了**组合**版本
 - en: '[PRE4]'
+  id: totrans-27
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE4]'
 - en: '![image](../Images/6ed94b76514d24a5264cd5970ee8145b.png)'
+  id: totrans-28
   prefs: []
   type: TYPE_IMG
+  zh: '![image](../Images/6ed94b76514d24a5264cd5970ee8145b.png)'

@@ -1,304 +1,452 @@
 - en: Visual Chart Live Data/Trading
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: Visual Chart 实时数据/交易
 - en: 原文：[https://www.backtrader.com/blog/posts/2016-07-12-visualchart-feed/visualchart-feed/](https://www.backtrader.com/blog/posts/2016-07-12-visualchart-feed/visualchart-feed/)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.backtrader.com/blog/posts/2016-07-12-visualchart-feed/visualchart-feed/](https://www.backtrader.com/blog/posts/2016-07-12-visualchart-feed/visualchart-feed/)
 - en: Starting with release *1.5.1.93*, backtrader supports Visual Chart Live Feeds
     and Live Trading.
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: 从版本 *1.5.1.93* 开始，backtrader 支持 Visual Chart 实时数据和实时交易。
 - en: 'Needed things:'
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: 需要的东西：
 - en: '*Visual Chart 6* (this one runs on Windows)'
+  id: totrans-4
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '*Visual Chart 6*（这个版本运行在 Windows 上）'
 - en: '`comtypes`, specifically this fork: [https://github.com/mementum/comtypes](https://github.com/mementum/comtypes)'
+  id: totrans-5
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`comtypes`，具体来说是这个分支：[https://github.com/mementum/comtypes](https://github.com/mementum/comtypes)'
 - en: 'Install it with: `pip install https://github.com/mementum/comtypes/archive/master.zip`'
+  id: totrans-6
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 使用以下命令安装：`pip install https://github.com/mementum/comtypes/archive/master.zip`
 - en: The *Visual Chart* API is based on *COM* and the current `comtypes` main branch
     doesn’t support unpacking of `VT_ARRAYS` of `VT_RECORD`. And this is used by *Visual
     Chart*
+  id: totrans-7
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: '*Visual Chart* 的 API 基于 *COM*，当前的 `comtypes` 主分支不支持对 `VT_RECORD` 的 `VT_ARRAYS`
+    进行解包。而 *Visual Chart* 正是使用了这个。'
 - en: '[Pull Request #104](https://github.com/enthought/comtypes/pull/104) has been
     submitted but not yet integrated. As soon as it is integrated, the main branch
     can be used.'
+  id: totrans-8
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: '[Pull Request #104](https://github.com/enthought/comtypes/pull/104) 已经提交但尚未集成。一旦集成，就可以使用主分支了。'
 - en: '`pytz` (optional but strongly recommended)'
+  id: totrans-9
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`pytz`（可选但强烈建议）'
 - en: In many cases the internal `SymbolInfo.TimeOffset` provided by the data feeds
     suffices to return data feeds in market time (even if the default configuration
     is `LocalTime` in *Visual Chart*)
+  id: totrans-10
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 在许多情况下，数据提供的内部 `SymbolInfo.TimeOffset` 就足以返回市场时间的数据流（即使默认配置是 *Visual Chart*
+    中的 `LocalTime`）
 - en: 'If you don’t know what’s *Visual Chart* and/or its currently associated broker
     *Esfera Capital*, then visit the following sites:'
+  id: totrans-11
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果您不知道什么是 *Visual Chart* 和/或其当前关联的经纪商 *Esfera Capital*，请访问以下网站：
 - en: '[Visual Chart](https://www.visualchart.com)'
+  id: totrans-12
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[Visual Chart](https://www.visualchart.com)'
 - en: '[Esfera Capital](https://www.esferacapital.es)'
+  id: totrans-13
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[Esfera Capital](https://www.esferacapital.es)'
 - en: 'Initial statement:'
+  id: totrans-14
   prefs: []
   type: TYPE_NORMAL
+  zh: 初始声明：
 - en: As always and before risking your money, **TEST**, **TEST**, **TEST** and **RE-TEST**
     a thousand times.
+  id: totrans-15
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 如往常一样，在冒险之前测试，**测试**，**测试** 和 **再次测试** 一千次。
 - en: 'From *bugs* in this software, to bugs in your own software and the management
     of unexpected situations: **Anything can go wrong**'
+  id: totrans-16
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 从这个软件中的 *bugs*，到您自己的软件中的 bug 以及处理意外情况的管理：**任何事情都可能出错**
 - en: 'Some notes about this:'
+  id: totrans-17
   prefs: []
   type: TYPE_NORMAL
+  zh: 关于此的一些说明：
 - en: The data feed is rather good and supports built-in resampling. Good, because
     there is no need to do resampling.
+  id: totrans-18
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 数据提供非常好，并支持内置重采样。好处在于无需进行重采样。
 - en: The data feed doesn’t support *Seconds* resolution. Not good but solvable by
     the built-in resampling of *backtrader*
+  id: totrans-19
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 数据流不支持 *Seconds* 分辨率。这不太好，但可以通过 *backtrader* 的内置重采样解决。
 - en: Backfilling is built-in
+  id: totrans-20
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 内置了回填功能
 - en: Some on the markets in `International Indices` (in exchange `096`) have odd
     timezones and market offsets.
+  id: totrans-21
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 一些国际指数市场（在交易所 `096`）具有奇怪的时区和市场偏移。
 - en: Some work has gone into this to for example deliver `096.DJI` in the expected
     `US/Eastern` timezone
+  id: totrans-22
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 对此进行了一些工作，例如以预期的 `US/Eastern` 时区提供 `096.DJI`。
 - en: The data feed offers *continuous futures* which is very handy to have a large
     history.
+  id: totrans-23
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 数据提供了 *continuous futures*，非常方便拥有大量历史数据。
 - en: As such a second parameter can be passed to a data to indicate which is the
     actual trading asset.
+  id: totrans-24
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 因此，可以向数据传递第二个参数，指示实际的交易资产。
 - en: DateTime for a *Good Til Date* order can only be specified as a *date*. The
     *time* component is ignored.
+  id: totrans-25
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '*Good Til Date* 订单的日期时间只能指定为 *日期*。*时间* 部分会被忽略。'
 - en: There is no direct way to find the offset from the local equipment to the data
     server and a heuristic is needed to find this out from *RealTime Ticks* at the
     start of a session.
+  id: totrans-26
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 没有直接的方法可以找到本地设备到数据服务器的偏移量，需要通过会话开始时的 *实时数据点* 进行启发式分析来找出这一点。
 - en: 'Passing a *datetime* with a *time* component (rather than the default *00:00:00*)
     seems to create a *time filter* in the *COM* API. For example if you say you want
     the *Minute* data, starting 3 days ago at *14:30*, you could do:'
+  id: totrans-27
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 传递带有 *时间* 组件的 *datetime*（而不是默认的 *00:00:00*）似乎会在 *COM* API 中创建一个 *时间过滤器*。例如，如果您想要
+    *Minute* 数据，从 3 天前开始到 *14:30*，您可以这样做：
 - en: '[PRE0]'
+  id: totrans-28
   prefs:
   - PREF_IND
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: Data is then skipped until *14:30* not only 3 days ago, *BUT EVERY OF THE DAYS
     AFTERWARDS*
+  id: totrans-29
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 数据会一直跳过直到 *14:30* 不仅是 3 天前，而是*以后每一天*
 - en: As such, please pass only *full dates* in the sense that the default *time*
     component is untouched.
+  id: totrans-30
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 因此，请只传递*完整日期*，即默认的*时间*部分不受影响。
 - en: The *broker* supports the notion of *Positions* but only when they are *open*.
     The last event with regards to a *Position* (which is **size is 0**) is not sent.
+  id: totrans-31
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '*经纪人* 支持 *Positions* 的概念，但仅在它们是 *open* 时。 关于 *Position* 的最后事件（其 **size 为 0**）不会发送。'
 - en: As such, *Position* accounting is done entirely by *backtrader*
+  id: totrans-32
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 因此，*Position* 记账完全由 *backtrader* 完成。
 - en: The *broker* doesn’t report commissions.
+  id: totrans-33
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '*经纪人* 不报告佣金。'
 - en: The workaround is to supply your own `CommissionInfo` derived class when instantiating
     the broker. See the *backtader* docs for creating your own class. It is rather
     easy.
+  id: totrans-34
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 解决方法是在实例化经纪人时提供自己的 `CommissionInfo` 派生类。 请参阅 *backtader* 文档以创建自己的类。 这相当容易。
 - en: '`Cancelled` vs `Expired` orders. This distinction doesn’t exist and an heuristic
     would be needed to try to clear the distinction out.'
+  id: totrans-35
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`Cancelled` 与 `Expired` 订单。 此区别不存在，需要启发式方法来尝试清除这种区别。'
 - en: As such only `Cancelled` will be reported
+  id: totrans-36
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 因此，只有`Cancelled`将被报告。
 - en: 'Some additional notes:'
+  id: totrans-37
   prefs: []
   type: TYPE_NORMAL
+  zh: 一些额外的说明：
 - en: '*RealTime* ticks are mostly not used. They produce large amounts of unneeded
     information for *backtrader* purposes. They have 2 main purposes before being
     completely disconnected by *backtrader*'
+  id: totrans-38
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '*实时* ticks 大部分情况下不被使用。 它们为 *backtrader* 目的产生大量不需要的信息。 在被 *backtrader* 完全断开连接之前，它们有两个主要目的。'
 - en: Finding out if a Symbol exists.
+  id: totrans-39
   prefs:
   - PREF_IND
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 查找符号是否存在。
 - en: Calculating the offset to the data server
+  id: totrans-40
   prefs:
   - PREF_IND
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 计算到数据服务器的偏移量。
 - en: Of course the information is gathered in realtime for prices but from *DataSource*
     objects, which provide the historical data at the same time.
+  id: totrans-41
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 当然，价格信息是实时收集的，但是来自 *DataSource* 对象，它们同时提供历史数据。
 - en: 'As much as possible has been documented and is available at the usual documentation
     link:'
+  id: totrans-42
   prefs: []
   type: TYPE_NORMAL
+  zh: 尽可能多地记录并在通常的文档链接处提供。
 - en: '[Read The Docs](http://backtrader.readthedocs.io/en/latest/)'
+  id: totrans-43
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[阅读文档](http://backtrader.readthedocs.io/en/latest/)'
 - en: A couple of runs from the sample `vctest.pye` against the *Visual Chart* and
     the *Demo Broker*
+  id: totrans-44
   prefs: []
   type: TYPE_NORMAL
+  zh: 从样本 `vctest.pye` 对 *Visual Chart* 和 *Demo Broker* 进行了一些运行。
 - en: 'First: `015ES` (*EuroStoxx50* continuous) with resampling to 1 minute and featuring
     a disconnection and reconnection:'
+  id: totrans-45
   prefs: []
   type: TYPE_NORMAL
+  zh: 首先：`015ES`（*EuroStoxx50* 连续）重新采样为 1 分钟，并具有断开连接和重新连接：
 - en: '[PRE1]'
+  id: totrans-46
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE1]'
 - en: 'Output:'
+  id: totrans-47
   prefs: []
   type: TYPE_NORMAL
+  zh: 输出：
 - en: '[PRE2]'
+  id: totrans-48
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE2]'
 - en: Note
+  id: totrans-49
   prefs: []
   type: TYPE_NORMAL
+  zh: 注意
 - en: The execution environment has `pytz` installed
+  id: totrans-50
   prefs: []
   type: TYPE_NORMAL
+  zh: 执行环境安装了 `pytz`。
 - en: Note
+  id: totrans-51
   prefs: []
   type: TYPE_NORMAL
+  zh: 注意
 - en: 'Notice the absence of `--resample`: for `Minutes` the resampling is built-in
     *Visual Chart*'
+  id: totrans-52
   prefs: []
   type: TYPE_NORMAL
+  zh: 注意没有 `--resample`：对于 `Minutes`，重新采样是内置于 *Visual Chart* 中的。
 - en: And finally some trading, buying *2* contract of `015ES` with a single `Market`
     order and selling them in 2 orders of *1* contract each.
+  id: totrans-53
   prefs: []
   type: TYPE_NORMAL
+  zh: 最后一些交易，购买 `015ES` 的 *2* 个合约，单个 `Market` 订单，并将它们卖出为 *1* 个合约的 2 个订单。
 - en: 'Execution:'
+  id: totrans-54
   prefs: []
   type: TYPE_NORMAL
+  zh: 执行：
 - en: '[PRE3]'
+  id: totrans-55
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE3]'
 - en: 'The output is rather verbose, showing all parts of the order exeuction. Summarising
     a bit:'
+  id: totrans-56
   prefs: []
   type: TYPE_NORMAL
+  zh: 输出相当冗长，显示了订单执行的所有部分。 简要总结一下：
 - en: '[PRE4]'
+  id: totrans-57
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE4]'
 - en: 'The following happens:'
+  id: totrans-58
   prefs: []
   type: TYPE_NORMAL
+  zh: 以下发生了：
 - en: Data is received as normal
+  id: totrans-59
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 数据正常接收。
 - en: A `BUY` for `2` with execution type `Market` is issued
+  id: totrans-60
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 发出了一个执行类型为 `Market` 的 `BUY`，数量为 `2`。
 - en: '`Submitted` and `Accepted` notifications are received (only `Submitted` is
     shown above)'
+  id: totrans-61
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 收到 `Submitted` 和 `Accepted` 通知（仅显示了 `Submitted`）。
 - en: A streak of `Partial` executions (only 1 shown) until `Completed` is received.
+  id: totrans-62
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 一连串的 `Partial` 执行（仅显示了 1 个）直到收到 `Completed`。
 - en: The actual execution is not shown, but is available in the `order` instance
     received under `order.executed`
+  id: totrans-63
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 实际执行没有显示，但在 `order.executed` 下收到的 `order` 实例中可用。
 - en: Although not shown, 2 x `Market` `SELL` orders are issued to undo the operation
+  id: totrans-64
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 虽然没有显示，但发出了 2 x `Market` `SELL` 订单来撤销操作。
 - en: The screenshot shows the logs in *Visual Chart* after two different runs across
     an evening with `015ES` (*EuroStoxx 50*) and `034EURUS` (*EUR.USD Forex Pair*)
+  id: totrans-65
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 屏幕截图显示了在一个晚上使用 `015ES`（*EuroStoxx 50*）和 `034EURUS`（*EUR.USD 外汇对*）进行两次不同运行后，在
+    *Visual Chart* 中的日志。
 - en: '![image](../Images/0e2daec1d73f0e96f42ee5945056bca1.png)'
+  id: totrans-66
   prefs: []
   type: TYPE_IMG
+  zh: '![image](../Images/0e2daec1d73f0e96f42ee5945056bca1.png)'
 - en: The sample can do much more and is intended as a thorough test of the facilities
     and if possible to uncover any rough edges.
+  id: totrans-67
   prefs: []
   type: TYPE_NORMAL
+  zh: 示例可以做得更多，旨在彻底测试设施，如果可能的话，揭示任何粗糙的边缘。
 - en: 'The usage:'
+  id: totrans-68
   prefs: []
   type: TYPE_NORMAL
+  zh: 使用方式：
 - en: '[PRE5]'
+  id: totrans-69
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE5]'
 - en: 'The code:'
+  id: totrans-70
   prefs: []
   type: TYPE_NORMAL
+  zh: 代码：
 - en: '[PRE6]'
+  id: totrans-71
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE6]'

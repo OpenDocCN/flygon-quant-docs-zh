@@ -1,315 +1,484 @@
 - en: Benchmarking
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 基准测试
 - en: 原文：[https://www.backtrader.com/blog/posts/2016-07-22-benchmarking/benchmarking/](https://www.backtrader.com/blog/posts/2016-07-22-benchmarking/benchmarking/)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.backtrader.com/blog/posts/2016-07-22-benchmarking/benchmarking/](https://www.backtrader.com/blog/posts/2016-07-22-benchmarking/benchmarking/)
 - en: '*backtrader* includes 2 different types of objects which can aid with tracking:'
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: '*backtrader*包括两种不同类型的对象，可以帮助跟踪：'
 - en: '*Observers*'
+  id: totrans-3
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '*观察者*'
 - en: '*Analyzers*'
+  id: totrans-4
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '*分析器*'
 - en: '[Ticket #89](https://github.com/mementum/backtrader/issues/89) is about adding
     benchmarking aginst an asset. Sensible as one may actually have a strategy that
     even if positive is below what simply tracking the asset would have delivered.'
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: '[问题 #89](https://github.com/mementum/backtrader/issues/89)是关于添加针对资产的基准测试。这是合理的，因为一个人可能实际上有一种策略，即使是正的，也低于简单跟踪资产所能提供的回报。'
 - en: 'In the realm of *Analyzers* there was already a `TimeReturn` object which tracks
     the evolution of the returns of the entire portfolio value (i.e: including cash)'
+  id: totrans-6
   prefs: []
   type: TYPE_NORMAL
+  zh: 在*分析器*领域中，已经有一个`TimeReturn`对象，用于跟踪整个投资组合价值的回报演变（即：包括现金）
 - en: This could have also obviously been an *Observer*, so whilst adding some *benchmarking*
     some work has also gone into being able to plug together an *Observer* and an
     *Analyzer* which are meant to track the same thing.
+  id: totrans-7
   prefs: []
   type: TYPE_NORMAL
+  zh: 这显然也可以是一个*观察者*，因此在添加一些*基准测试*的同时，还进行了一些工作，以便能够将*观察者*和*分析器*组合在一起，这两者都旨在跟踪相同的内容。
 - en: Note
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: 注意
 - en: The major difference between *Observers* and *Analyzers* is the *lines* nature
     of *observers*, which is recording every value and makes them suitable for plotting
     and always for real time querying. This of course consumes memory.
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: '*观察者*和*分析器*之间的主要区别是*观察者*的*线*性质，记录每��值并使其适合绘图和实时查询。当然，这会消耗内存。'
 - en: '*Analyzers* on the other hand return a set of results via `get_analysis` and
     the implementation may not deliver any result until the very end of a *run*.'
+  id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: 另一方面，*分析器*通过`get_analysis`返回一组结果，实现可能直到*运行*结束才提供任何结果。
 - en: Analyzers - Benchmarking
+  id: totrans-11
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 分析器 - 基准测试
 - en: 'The standard `TimeReturn` analyzer has been extended to support tracking a
     *data feed*. The 2 major parameters invoved:'
+  id: totrans-12
   prefs: []
   type: TYPE_NORMAL
+  zh: 标准`TimeReturn`分析器已扩展以支持跟踪*数据源*。涉及的两个主要参数：
 - en: '`timeframe` (default: `None`) If `None` then the complete return over the entire
     backtested period will be reported'
+  id: totrans-13
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`timeframe`（默认：`None`）如果为`None`，则将报告整个回测期间的完整回报'
 - en: Pass `TimeFrame.NoTimeFrame` to consider the entire dataset with no time constraints
+  id: totrans-14
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 传递`TimeFrame.NoTimeFrame`以考虑整个数据集而没有时间限制
 - en: '`data` (default: `None`)'
+  id: totrans-15
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`data`（默认：`None`）'
 - en: Reference asset to track instead of the portfolio value.
+  id: totrans-16
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 用于跟踪而不是投资组合价值的参考资产。
 - en: Note
+  id: totrans-17
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 注意
 - en: this data must have been added to a `cerebro` instance with `addata`, `resampledata`
     or `replaydata`
+  id: totrans-18
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 这些数据必须已经通过`addata`、`resampledata`或`replaydata`添加到`cerebro`实例中
 - en: (For more details and parameters go to the reference in the docs)
+  id: totrans-19
   prefs: []
   type: TYPE_NORMAL
+  zh: （有关更多详细信息和参数，请参阅文档中的参考资料）
 - en: 'As such, the returns of the porftolio on a yearly basis can be tracked like
     this:'
+  id: totrans-20
   prefs: []
   type: TYPE_NORMAL
+  zh: 因此，可以像这样跟踪投资组合的年度回报：
 - en: '[PRE0]'
+  id: totrans-21
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: 'If we wanted to track the returns of a *data*:'
+  id: totrans-22
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果我们想要跟踪*数据*的回报：
 - en: '[PRE1]'
+  id: totrans-23
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE1]'
 - en: 'If both are to be tracked, the best is to assign names to the *analyzers*:'
+  id: totrans-24
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果两者都要被跟踪，最好给*分析器*分配名称：
 - en: '[PRE2]'
+  id: totrans-25
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE2]'
 - en: Observers - Benchmarking
+  id: totrans-26
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 观察者 - 基准测试
 - en: 'Thanks to the background machinery allowing the usage of *Analyzers* inside
     *Observers*, 2 new observers have been added:'
+  id: totrans-27
   prefs: []
   type: TYPE_NORMAL
+  zh: 由于背景机制允许在*观察者*内部使用*分析器*，因此添加了2个新的观察者：
 - en: '`TimeReturn`'
+  id: totrans-28
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`TimeReturn`'
 - en: '`Benchmark`'
+  id: totrans-29
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`基准`'
 - en: Both use the `bt.analyzers.TimeReturn` analyzer to collect results.
+  id: totrans-30
   prefs: []
   type: TYPE_NORMAL
+  zh: 两者都使用`bt.analyzers.TimeReturn`分析器来收集结果。
 - en: Rather than having code snippets like above, a full sample with some runs to
     show their functionality.
+  id: totrans-31
   prefs: []
   type: TYPE_NORMAL
+  zh: 而不是像上面那样有代码片段，一个完整的示例带有一些运行来展示它们的功能。
 - en: Observing TimeReturn
+  id: totrans-32
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 观察TimeReturn
 - en: 'Execution:'
+  id: totrans-33
   prefs: []
   type: TYPE_NORMAL
+  zh: 执行：
 - en: '[PRE3]'
+  id: totrans-34
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE3]'
 - en: Output.
+  id: totrans-35
   prefs: []
   type: TYPE_NORMAL
+  zh: 输出。
 - en: '![image](../Images/84f7d58fab0ff293ea4b18d1e0167d79.png)'
+  id: totrans-36
   prefs: []
   type: TYPE_IMG
+  zh: '![图片](../Images/84f7d58fab0ff293ea4b18d1e0167d79.png)'
 - en: 'Notice the execution options:'
+  id: totrans-37
   prefs: []
   type: TYPE_NORMAL
+  zh: 注意执行选项：
 - en: '`--timereturn`: we are telling the sample to do just that'
+  id: totrans-38
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`--timereturn`：我们告诉示例就是这样做的'
 - en: '`--timeframe notimeframe`: telling the analyzer to consider the entire data
     set disregarding timeframe boundaries.'
+  id: totrans-39
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`--timeframe notimeframe`：告诉分析器考虑整个数据集，而不考虑时间范围边界。'
 - en: The last plotted value is `-0.26`.
+  id: totrans-40
   prefs: []
   type: TYPE_NORMAL
+  zh: 最后绘制的数值为`-0.26`。
 - en: The starting cash (obvious from the chart) is `50,000` monetary units and the
     strategy ends up with `36,970` monetary units and hence a `-26%` value decrement.
+  id: totrans-41
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 起始现金（从图表中明显）为`50,000`货币单位，策略最终以`36,970`货币单位结束，因此价值下降了`-26%`。
 - en: Observing Benchmarking
+  id: totrans-42
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 观察基准测试
 - en: 'Because *benchmarking* will also display the *timereturn* results, let’s run
     the same thing but with *benchmarking* active:'
+  id: totrans-43
   prefs: []
   type: TYPE_NORMAL
+  zh: 因为*基准*也会显示*时间回报率*的结果，让我们运行相同的内容，但激活*基准*：
 - en: '[PRE4]'
+  id: totrans-44
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE4]'
 - en: Output.
+  id: totrans-45
   prefs: []
   type: TYPE_NORMAL
+  zh: 输出。
 - en: '![image](../Images/599f7e6eb14dc54f7ae71b698a9891a5.png)'
+  id: totrans-46
   prefs: []
   type: TYPE_IMG
+  zh: '![image](../Images/599f7e6eb14dc54f7ae71b698a9891a5.png)'
 - en: Hey, hey hey!!!
+  id: totrans-47
   prefs: []
   type: TYPE_NORMAL
+  zh: 嘿，嘿，嘿！！！
 - en: 'The strategy is better as the asset: `-0.26` vs `-0.33`'
+  id: totrans-48
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 策略比资产更好：`-0.26` 对 `-0.33`
 - en: It shouldn’t be a matter for celebration but at least is clear the strategy
     is not even as bad as the asset.
+  id: totrans-49
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 这不应该是一个值得庆祝的事情，但至少很明显策略甚至没有资产那么糟糕。
 - en: 'Moving down to track things on a *yearly* basis:'
+  id: totrans-50
   prefs: []
   type: TYPE_NORMAL
+  zh: 转而以*年度*为基础追踪事物：
 - en: '[PRE5]'
+  id: totrans-51
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE5]'
 - en: Output
+  id: totrans-52
   prefs: []
   type: TYPE_NORMAL
+  zh: 输出
 - en: '![image](../Images/8e91b7a2cc651e7201286faa22f81696.png)'
+  id: totrans-53
   prefs: []
   type: TYPE_IMG
+  zh: '![image](../Images/8e91b7a2cc651e7201286faa22f81696.png)'
 - en: Watch out!
+  id: totrans-54
   prefs: []
   type: TYPE_NORMAL
+  zh: 注意！
 - en: The strategy last value has changed very slightly from `-0.26` to `-0.27`
+  id: totrans-55
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 策略的最后一个值从`-0.26`变化到`-0.27`
 - en: The asset on the on the other hand shows a last value of `-0.35` (versus `-0.33`
     above)
+  id: totrans-56
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 另一方面，资产显示的最后一个值是`-0.35`（与上述的`-0.33`相比）
 - en: The reason for values so close to each other is that when moving from 2005 to
     2006, both the strategy and the benchmarking asset were almost at the starting
     level in 2005.
+  id: totrans-57
   prefs: []
   type: TYPE_NORMAL
+  zh: 两者值如此接近的原因是，从2005年到2006年，无论是策略还是基准资产，几乎都处于2005年的起始水平。
 - en: 'Switching to a lower timeframe like *weeks* the entire picture changes:'
+  id: totrans-58
   prefs: []
   type: TYPE_NORMAL
+  zh: 转换到较低的时间范围，比如*周*，整个情况都会改变：
 - en: '[PRE6]'
+  id: totrans-59
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE6]'
 - en: Output
+  id: totrans-60
   prefs: []
   type: TYPE_NORMAL
+  zh: 输出
 - en: '![image](../Images/d13f24938a274d99c6c00678bc7fde7e.png)'
+  id: totrans-61
   prefs: []
   type: TYPE_IMG
+  zh: '![image](../Images/d13f24938a274d99c6c00678bc7fde7e.png)'
 - en: 'Now:'
+  id: totrans-62
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在：
 - en: The `Benchmark` observer shows a much more nervous aspect. Things move up and
     down, because now `weekly` returns for both the portfolio and the data are being
     tracked
+  id: totrans-63
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '*基准* 观察者显示出更加紧张的状态。事物上下移动，因为现在每周都在跟踪组合和数据的回报率'
 - en: And because no trade was active in the last week of the year and the asset barely
     moved, the last displayed values are 0.00 (The last closing value before the last
     week was `25.54` and the sample data closed at `25.55`, and the difference is
     felt first at the 4^(th) decimal point)
+  id: totrans-64
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 因为在年底的最后一周没有交易活动，资产几乎没有变动，所以最后显示的值为0.00（最后一周之前的最后收盘价为`25.54`，样本数据收盘价为`25.55`，差异首先在第4位小数点上感受到）
 - en: Observing Benchmarking - Another data
+  id: totrans-65
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 观察基准 - 另一数据
 - en: 'The sample allows to benchmark against a different data. The default is to
     benchmark against *Oracle* when using `--benchdata1`. Considering the entire dataset
     with `--timeframe notimeframe`:'
+  id: totrans-66
   prefs: []
   type: TYPE_NORMAL
+  zh: 该样本允许针对不同的数据进行基准测试。默认情况下，使用`--benchdata1`时，基准测试的对象是*Oracle*。考虑整个数据集，使用`--timeframe
+    notimeframe`：
 - en: '[PRE7]'
+  id: totrans-67
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE7]'
 - en: 'Output:'
+  id: totrans-68
   prefs: []
   type: TYPE_NORMAL
+  zh: 输出：
 - en: '![image](../Images/0d359f9d3a0be59aa987a9f7102dac15.png)'
+  id: totrans-69
   prefs: []
   type: TYPE_IMG
+  zh: '![image](../Images/0d359f9d3a0be59aa987a9f7102dac15.png)'
 - en: 'It’s clear now why there was no reason for celebration above:'
+  id: totrans-70
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在清楚为什么上面没有值得庆祝的原因了：
 - en: The results of the strategy have not changed for `notimeframe` and remain at
     `-26%` (`-0.26`)
+  id: totrans-71
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 策略的结果对于`notimeframe`没有改变，仍然为`-26%`（`-0.26`）
 - en: But when benchmarking against another data, this data has a `+23%` (`0.23` )
     in the same period
+  id: totrans-72
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 但是当与另一数据进行基准比较时，这个数据在同一时期有`+23%`（`0.23`）的增长
 - en: Either the strategy needs a change or another asset better be traded.
+  id: totrans-73
   prefs: []
   type: TYPE_NORMAL
+  zh: 要么策略需要改变，要么另一种资产最好交易。
 - en: Concluding
+  id: totrans-74
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 结论
 - en: There are now two ways, using the same underlying code/calculations, to track
     the *TimeReturn* and *Benchmark*
+  id: totrans-75
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在有两种方法，使用相同的底层代码/计算，来跟踪*时间回报率*和*基准*
 - en: '*Observers* (`TimeReturn` and `Benchmark`)'
+  id: totrans-76
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '*观察者*（`TimeReturn`和`Benchmark`）'
 - en: and
+  id: totrans-77
   prefs: []
   type: TYPE_NORMAL
+  zh: 而
 - en: '*Analyzer* (`TimeReturn` and `TimeReturn` with a `data` parameter)'
+  id: totrans-78
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '*分析器*（带有`data`参数的`TimeReturn`和`TimeReturn`）'
 - en: Of course *benchmarking* doesn’t guarantee profit, just *comparison*.
+  id: totrans-79
   prefs: []
   type: TYPE_NORMAL
+  zh: 当然，*基准* 不保证盈利，只是*比较*。
 - en: 'Usage of the sample:'
+  id: totrans-80
   prefs: []
   type: TYPE_NORMAL
+  zh: 使用样本的方法：
 - en: '[PRE8]'
+  id: totrans-81
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE8]'
 - en: The code
+  id: totrans-82
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 代码
 - en: '[PRE9]'
+  id: totrans-83
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE9]'

@@ -1,232 +1,351 @@
 - en: BTFD - Reality Bites
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: BTFD - 现实的打击
 - en: 原文：[https://www.backtrader.com/blog/posts/2016-12-28-btfd-bites/btfd-bites/](https://www.backtrader.com/blog/posts/2016-12-28-btfd-bites/btfd-bites/)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.backtrader.com/blog/posts/2016-12-28-btfd-bites/btfd-bites/](https://www.backtrader.com/blog/posts/2016-12-28-btfd-bites/btfd-bites/)
 - en: The previous post managed to replicate the `BTFD` strategy, finding out that
     the real gains were `16x` rather than `31x`.
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: 之前的帖子设法复制了`BTFD`策略，发现真正的收益是`16x`而不是`31x`。
 - en: 'But as pointed out during the replication:'
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: 但正如在复制过程中指出的那样：
 - en: No commission was charged
+  id: totrans-4
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 没有收取任何手续费
 - en: No interest was charged for using a `2x` leverage
+  id: totrans-5
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 使用`2x`杠杆不收取利息
 - en: 'And that raises the obvious question:'
+  id: totrans-6
   prefs: []
   type: TYPE_NORMAL
+  zh: 这引起了一个显而易见的问题：
 - en: '*How much of that 16x will be there when commission and interest are charged?*'
+  id: totrans-7
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '*当收取佣金和利息时，16倍的收益将有多少？*'
 - en: Luckily the previous sample is flexible enough to experiment with it. To have
     some visual feedback and verification, the following code will be added to the
     strategy
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: 幸运的是，之前的样本足够灵活，可以进行实验。 为了得到一些视觉反馈和验证，以下代码将添加到策略中
 - en: '[PRE0]'
+  id: totrans-9
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: 'It’s all about the following:'
+  id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: 关键在于以下内容：
 - en: Seeing how trades are opened and closed (value, profit and loss, value and commission)
+  id: totrans-11
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 查看交易如何开启和关闭（价值，利润和损失，价值和佣金）
 - en: Providing feedback if an order is being rejected with `Margin` due to insufficient
     funds
+  id: totrans-12
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 如果订单因资金不足而被拒绝，则提供反馈`Margin`
 - en: Note
+  id: totrans-13
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 注意
 - en: Because there will be an adjustment of the amount of money to invest, to leave
     room for commission, some orders could not be accepted by the broker. This visual
     feedback allows identifying the situation
+  id: totrans-14
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 因为将有一个调整要投资的金额，以留出佣金的空间，所以一些订单可能无法被经纪人接受。 这种视觉反馈可以帮助识别情况
 - en: Verification
+  id: totrans-15
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 验证
 - en: First a quick test to see that some orders are not accepted.
+  id: totrans-16
   prefs: []
   type: TYPE_NORMAL
+  zh: 首先快速测试以查看某些订单是否被接受。
 - en: '[PRE1]'
+  id: totrans-17
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE1]'
 - en: 'Notice:'
+  id: totrans-18
   prefs: []
   type: TYPE_NORMAL
+  zh: 注意：
 - en: 'We apply `target=1.0` which means: *try to invest 100% of the capital*. This
     is the default, but it is there as a reference.'
+  id: totrans-19
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 我们应用`target=1.0`，意味着：*尝试投资100%的资本*。 这是默认值，但它在这里作为参考。
 - en: '`commission=0.001` or `0.1%` to ensure we will sometimes meet the margin'
+  id: totrans-20
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`commission=0.001`或`0.1%`，以确保我们有时会满足保证金'
 - en: The 1^(st) two orders are rejected with `Margin`
+  id: totrans-21
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 前两个订单被拒绝了，显示`Margin`。
 - en: The 3^(rd) order is accepted. This is not an error. The system tries to invest
     `100%` of the capital, but the asset has a *price* and this is used to calculate
     the size of the stake. *Size* is rounded down from the actual result of calculating
     the potential *size* from the actual available *cash*. This rounding down has
     left room enough for the commission with this 3^(rd) order.
+  id: totrans-22
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 第三个订单被接受了。 这不是错误。 系统试图投资`100%`的资本，但资产有一个*价格*，这是用来计算股份大小的。 *大小*是从实际可用的*现金*计算出的潜在*大小*的结果进行向下舍入。
+    这次向下舍入为这个第三个订单留下了足够的空间。
 - en: The trade notifications (`OPEN` and `CLOSE`) show the opening commission and
     the final total commission an the value which is close to `200k`, showing the
     `2x` leverage in action.
+  id: totrans-23
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 交易通知（`OPEN`和`CLOSE`）显示了开仓手续费和最终总手续费，接近`200k`的价值，展示了`2x`杠杆的实际效果。
 - en: 'The opening commission is `199.3452` which is `0.1%` of the leveraged value
     which is: `199,345.2`'
+  id: totrans-24
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 开仓手续费为`199.3452`，这是杠杆价值的`0.1%`，即`199,345.2`
 - en: The remaining tests will be made with `target=0.99x` where `x` will ensure room
     enough for the selected commission.
+  id: totrans-25
   prefs: []
   type: TYPE_NORMAL
+  zh: 剩余的测试将使用`target=0.99x`进行，其中`x`将确保有足够的空间用于选定的手续费。
 - en: Reality Bites
+  id: totrans-26
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 现实的打击
 - en: Let’s go for some real examples
+  id: totrans-27
   prefs: []
   type: TYPE_NORMAL
+  zh: 让我们举一些真实的例子
 - en: Target 99.8% - Commission 0.1%
+  id: totrans-28
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 目标99.8% - 佣金0.1%
 - en: '[PRE2]'
+  id: totrans-29
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE2]'
 - en: '![image](../Images/c1469fcb970e66b1e6308b288bad3330.png)'
+  id: totrans-30
   prefs: []
   type: TYPE_IMG
+  zh: '![image](../Images/c1469fcb970e66b1e6308b288bad3330.png)'
 - en: 'Blistering Barnacles!!! Not only is the `BTFD` strategy by no means close to
     the `16x` gains: **IT LOSES MOST OF THE MONEY**.'
+  id: totrans-31
   prefs: []
   type: TYPE_NORMAL
+  zh: 霹雳般的！ 不仅`BTFD`策略远未接近`16x`的收益：**它损失了大部分资金**。
 - en: From `100,000` down to roughly `4,027`
+  id: totrans-32
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 从`100,000`下降到大约`4,027`
 - en: Note
+  id: totrans-33
   prefs: []
   type: TYPE_NORMAL
+  zh: 注意
 - en: The *down to* value is the non-leveraged value, because this is the approximate
     value that will be back in the system when the position is closed
+  id: totrans-34
   prefs: []
   type: TYPE_NORMAL
+  zh: '*下降到*值是非杠杆值，因为这是在平仓时将返回系统的大约值'
 - en: Target 99.9% - Commission 0.05%
+  id: totrans-35
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 目标99.9% - 佣金0.05%
 - en: It may well have been that the commission is too aggressive. Let’s go for half
     of it
+  id: totrans-36
   prefs: []
   type: TYPE_NORMAL
+  zh: 很可能是佣金过于激进。 让我们去一半
 - en: '[PRE3]'
+  id: totrans-37
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE3]'
 - en: '![image](../Images/53135e6fc1bb42bf8182488fc8fedefc.png)'
+  id: totrans-38
   prefs: []
   type: TYPE_IMG
+  zh: '![image](../Images/53135e6fc1bb42bf8182488fc8fedefc.png)'
 - en: '**NO, NO**. The commission was not that aggressive, because the system still
     loses money, going down from `100,000` down to around `69,000` (the non-leverage
     value)'
+  id: totrans-39
   prefs: []
   type: TYPE_NORMAL
+  zh: '**NO, NO**。佣金并非如此激进，因为系统仍然亏损，从`100,000`下降到约`69,000`（非杠杆价值）'
 - en: Target 99.95% - Commission 0.025%
+  id: totrans-40
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 目标 99.95% - 佣金 0.025%
 - en: Commission is divided by two again
+  id: totrans-41
   prefs: []
   type: TYPE_NORMAL
+  zh: 佣金再次被除以二
 - en: '[PRE4]'
+  id: totrans-42
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE4]'
 - en: '![image](../Images/9f8d0eb059dc30ae2845e066e3953597.png)'
+  id: totrans-43
   prefs: []
   type: TYPE_IMG
+  zh: '![image](../Images/9f8d0eb059dc30ae2845e066e3953597.png)'
 - en: 'Finally the system makes money:'
+  id: totrans-44
   prefs: []
   type: TYPE_NORMAL
+  zh: 最终系统赚钱了：
 - en: The initial `100,000` are taken up to `331,459` for `3x` gains.
+  id: totrans-45
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 最初的`100,000`被用于`3x`增益，增加到`331,459`。
 - en: But this doesn’t match the performance of the asset which has gone up to over
     `600k`
+  id: totrans-46
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 但这并不符合资产的表现，该资产已经涨到了超过`600k`
 - en: Note
+  id: totrans-47
   prefs: []
   type: TYPE_NORMAL
+  zh: 注意
 - en: The sample accepts `--fromdate YYYY-MM-DD` and `--todate YYYY-MM-DD` to select
     to which period the strategy has to be applied. This would allow testing similar
     scenarios for different date ranges.
+  id: totrans-48
   prefs: []
   type: TYPE_NORMAL
+  zh: 该示例接受`--fromdate YYYY-MM-DD`和`--todate YYYY-MM-DD`来选择应用策略的时间段。这将允许对不同日期范围进行类似的场景测试。
 - en: Conclusion
+  id: totrans-49
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 结论
 - en: The `16x` gains do not hold when confronted with commission. For the commission
     offered by some brokers (no cap and %-based) one would need a very good deal to
     make sure the system makes money.
+  id: totrans-50
   prefs: []
   type: TYPE_NORMAL
+  zh: 当面对佣金时，`16x`的收益无法持续。对于一些经纪人提供的佣金（无上限且按百分比计算），需要非常好的交易才能确保系统赚钱。
 - en: And in this case in which the strategy is applied to the `S&P500`, the `BTFD`
     strategy doesn’t match the performance of the index.
+  id: totrans-51
   prefs: []
   type: TYPE_NORMAL
+  zh: 在这种情况下，策略应用于`标普500`，`BTFD`策略与指数的表现不相匹配。
 - en: No *interest rate* has been applied. Using commissions is enough to see how
     far away is `16x` from any potential profits. In any case, a run with a `2%` interest
     rate would be executed like this
+  id: totrans-52
   prefs: []
   type: TYPE_NORMAL
+  zh: 没有应用*利率*。使用佣金已足以看出`16x`距离任何潜在利润有多远。无论如何，以`2%`的利率运行将执行如下
 - en: '[PRE5]'
+  id: totrans-53
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE5]'
 - en: '`interest_long=True` is needed, because the default behavior for charging interest
     is to do it only for *short* positions'
+  id: totrans-54
   prefs: []
   type: TYPE_NORMAL
+  zh: '`interest_long=True` 是必须的，因为默认情况下收取利息的行为只针对*多头*仓位进行。'
 - en: Sample usage
+  id: totrans-55
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 示例用法
 - en: '[PRE6]'
+  id: totrans-56
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE6]'
 - en: Sample Code
+  id: totrans-57
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 示例代码
 - en: '[PRE7]'
+  id: totrans-58
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE7]'

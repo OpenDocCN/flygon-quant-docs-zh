@@ -1,307 +1,469 @@
 - en: Volume Filling
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 体积填充
 - en: 原文：[https://www.backtrader.com/blog/posts/2016-07-14-volume-filling/volume-filling/](https://www.backtrader.com/blog/posts/2016-07-14-volume-filling/volume-filling/)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.backtrader.com/blog/posts/2016-07-14-volume-filling/volume-filling/](https://www.backtrader.com/blog/posts/2016-07-14-volume-filling/volume-filling/)
 - en: 'Up until now the default volume filling strategy in *backtrader* has been rather
     simple and straightforward:'
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: 到目前为止，*backtrader*中的默认体积填充策略一直相当简单和直接：
 - en: Ignore volume
+  id: totrans-3
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 忽略体积
 - en: Note
+  id: totrans-4
   prefs: []
   type: TYPE_NORMAL
+  zh: 注意
 - en: Jul 15, 2016
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: 2016年7月15日
 - en: Corrected a bug in the implementation and updated the sample to `close` the
     position and repeat after a break.
+  id: totrans-6
   prefs: []
   type: TYPE_NORMAL
+  zh: 更正了实现中的一个错误，并更新了样本以`close`该位置并在休息后重复。
 - en: The last test run below (and the corresponding chart) are from the update sample
+  id: totrans-7
   prefs: []
   type: TYPE_NORMAL
+  zh: 下面的最后一个测试运行（以及相应的图表）来自更新样本
 - en: 'This is based on 2 premises:'
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: 这基于两个前提：
 - en: Trade in markets liquid enough to fully absorb *buy/sell* orders in one go
+  id: totrans-9
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 在足够流动的市场中交易，以完全吸收*buy/sell*订单
 - en: Real volume matching requires a real wolrd
+  id: totrans-10
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 真实的成交量匹配需要真实的世界
 - en: A quick example is a `Fill or Kill` order. Even down to the *tick* resolution
     and with enough volume for a *fill*, the *backtrader* broker cannot know how many
     extra actors happen to be in the market to discriminate if such an order would
     be or would not be matched to stick to the `Fill` part or if the order should
     be `Kill`
+  id: totrans-11
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 一个快速的示例是`Fill or Kill`订单。即使是到*tick*分辨率并且具有足够的*fill*体积，*backtrader*经纪人也无法知道市场中有多少额外的参与者来区分订单是否会匹配以坚持`Fill`部分，或者订单是否应该`Kill`
 - en: 'But with release `1.5.2.93` it is possible to specify a `filler` for the *broker*
     to take *Volume* into account when executing an order. Additionally 3 initial
     fillers have made it into the release:'
+  id: totrans-12
   prefs: []
   type: TYPE_NORMAL
+  zh: 但是随着版本`1.5.2.93`的发布，可以指定*经纪人*采取*Volume*的`filler`以在执行订单时考虑*Volume*。此外，3个初始填充器已经进入发布：
 - en: '`FixedSize`: uses a fixed matching size (for example: 1000 units) each day,
     provided the current bar has at least 1000 units'
+  id: totrans-13
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`FixedSize`：每天使用固定的匹配大小（例如：1000个单位），前提是当前柱状图至少有1000个单位'
 - en: '`FixedBarPerc`: uses a percentage of the total bar volume to try to match the
     order'
+  id: totrans-14
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`FixedBarPerc`：使用总柱状图体积的百分比尝试匹配订单'
 - en: '`BarPointPerc`: does a uniform distribution of the bar volume across the price
     range high-low and uses a percentage of the volume that would correspond to a
     single price point'
+  id: totrans-15
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`BarPointPerc`：在价格范围高低之间进行柱状图体积的均匀分布，并使用相应于单个价格点的体积的百分比'
 - en: Creating a filler
+  id: totrans-16
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 创建填充器
 - en: 'A *filler* in the *backtrader* ecosystem can be any *callable* which matches
     the following signature:'
+  id: totrans-17
   prefs: []
   type: TYPE_NORMAL
+  zh: '*backtrader*生态系统中的*filler*可以是符合以下签名的任何*callable*：'
 - en: '[PRE0]'
+  id: totrans-18
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: 'Where:'
+  id: totrans-19
   prefs: []
   type: TYPE_NORMAL
+  zh: 其中：
 - en: '`order` is the order which is going to be executed'
+  id: totrans-20
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`order`是即将执行的订单'
 - en: This object gives access to the `data` object which is the target of the operation,
     creation sizes/prices, execution prices/sizes/remaining sizes and other details
+  id: totrans-21
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 此对象提供了对操作目标的`data`对象的访问权限，创建大小/价格、执行价格/大小/剩余大小以及其他详细信息
 - en: '`price` at which the order is going to be executed'
+  id: totrans-22
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`price`，订单将以其执行'
 - en: '`ago` is the index to the `data` in the *order* in which to look for the volume
     and price elements'
+  id: totrans-23
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`ago`是在其中查找体积和价格元素的*order*中`data`的索引'
 - en: In almost all cases this will be `0` (current point in time) but in a corner
     case to cover `Close` orders this may be `-1`
+  id: totrans-24
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 在几乎所有情况下，这将是`0`（当前时间点），但在一种特殊情况下，为了涵盖`Close`订单，这可能是`-1`。
 - en: 'To for example access the bar volume do:'
+  id: totrans-25
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 例如，要访问柱状图体积，请执行以下操作：
 - en: '[PRE1]'
+  id: totrans-26
   prefs:
   - PREF_IND
   type: TYPE_PRE
+  zh: '[PRE1]'
 - en: 'The callable can be a function or for example an instance of a class supporting
     the `__call__` method, like in:'
+  id: totrans-27
   prefs: []
   type: TYPE_NORMAL
+  zh: 可调用对象可以是一个函数，或者例如支持`__call__`方法的类的实例，如：
 - en: '[PRE2]'
+  id: totrans-28
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE2]'
 - en: Adding a Filler to the broker
+  id: totrans-29
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 向经纪人添加填充器
 - en: 'The most straightforward method is to use the `set_filler`:'
+  id: totrans-30
   prefs: []
   type: TYPE_NORMAL
+  zh: 最直接的方法是使用`set_filler`：
 - en: '[PRE3]'
+  id: totrans-31
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE3]'
 - en: 'The second choice is to completely replace the `broker`, although this is probably
     only meant for subclasses of `BrokerBack` which have rewritten portions of the
     functionality:'
+  id: totrans-32
   prefs: []
   type: TYPE_NORMAL
+  zh: 第二选择是完全替换`broker`，尽管这可能只适用于已经重写部分功能的`BrokerBack`的子类：
 - en: '[PRE4]'
+  id: totrans-33
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE4]'
 - en: The sample
+  id: totrans-34
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 该样本
 - en: The *backtrader* sources contain a sample named `volumefilling` which allows
     to test some of the integrated `fillers` (initially all)
+  id: totrans-35
   prefs: []
   type: TYPE_NORMAL
+  zh: '*backtrader*源代码包含一个名为`volumefilling`的样本，它允许测试一些集成的`fillers`（最初全部）。'
 - en: 'The sample uses a default data sample in the sources named: `datas/2006-volume-day-001.txt`.'
+  id: totrans-36
   prefs: []
   type: TYPE_NORMAL
+  zh: 该样本在源文件中使用一个默认数据样本命名为：`datas/2006-volume-day-001.txt`。
 - en: 'For example a run with no filler:'
+  id: totrans-37
   prefs: []
   type: TYPE_NORMAL
+  zh: 例如，不使用填充器运行：
 - en: '[PRE5]'
+  id: totrans-38
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE5]'
 - en: 'Output:'
+  id: totrans-39
   prefs: []
   type: TYPE_NORMAL
+  zh: 输出：
 - en: '[PRE6]'
+  id: totrans-40
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE6]'
 - en: 'Much of the input has been skipped because it is rather verbose, but the summary
     is:'
+  id: totrans-41
   prefs: []
   type: TYPE_NORMAL
+  zh: 因为输入相当冗长，所以大部分内容都被跳过了，但总结是：
 - en: Upon seeing the 1^(st) bar `20%` (*–stakeperc 20.0*) will be used to issue a
     *buy* order
+  id: totrans-42
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 看到第`1`条时，将使用`20%`（*–stakeperc 20.0*）发出*买入*订单
 - en: As seen in the output and with the default behaviour of *backtrader* the order
     has been completely matched in a single shot. No look at the volume has been performed
+  id: totrans-43
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 如输出所示，并且根据*backtrader*的默认行为，订单已经在一次交易中完全匹配。没有查看成交量
 - en: Note
+  id: totrans-44
   prefs: []
   type: TYPE_NORMAL
+  zh: 注意
 - en: The broker has an insane amount of cash allocated in the sample to make sure
     it can withstand many test situations
+  id: totrans-45
   prefs: []
   type: TYPE_NORMAL
+  zh: 经纪人在示例中分配了大量的现金，以确保可以应对许多测试情况
 - en: 'Another run with the `FixedSize` volume filler and a maximum of `1000` units
     per bar:'
+  id: totrans-46
   prefs: []
   type: TYPE_NORMAL
+  zh: 另一个运行使用`FixedSize`成交量填充器和每个条的最大`1000`单位：
 - en: '[PRE7]'
+  id: totrans-47
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE7]'
 - en: 'Ouutput:'
+  id: totrans-48
   prefs: []
   type: TYPE_NORMAL
+  zh: 输出：
 - en: '[PRE8]'
+  id: totrans-49
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE8]'
 - en: 'Now:'
+  id: totrans-50
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在：
 - en: The chosen volume remains the same at `32958`
+  id: totrans-51
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 所选的成交量保持不变，为`32958`
 - en: Execution is completed at bar `34` which seems reasonable because from bar 2
     to 34 … 33 bars have been seen. With `\`1000` units matched per bar 33 bars are
     obviously needed to complete the execution
+  id: totrans-52
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 在第`34`条完成执行，这似乎是合理的，因为从第`2`条到第`34`条...已经看到了`33`个条。每条`1000`单位匹配的情况下，显然需要`33`个条来完成执行
 - en: 'This is not a great achievement, so let’s go for `FixedBarPerc`:'
+  id: totrans-53
   prefs: []
   type: TYPE_NORMAL
+  zh: 这并不是一个伟大的成就，所以让我们来看看`FixedBarPerc`：
 - en: '[PRE9]'
+  id: totrans-54
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE9]'
 - en: 'Output:'
+  id: totrans-55
   prefs: []
   type: TYPE_NORMAL
+  zh: 输出：
 - en: '[PRE10]'
+  id: totrans-56
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE10]'
 - en: 'This time:'
+  id: totrans-57
   prefs: []
   type: TYPE_NORMAL
+  zh: 这次：
 - en: Skipping the start, still `32958` units for the order
+  id: totrans-58
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 跳过开始，仍然是`32958`单位的订单
 - en: The execution uses 0.75% of the bar volume to match the request.
+  id: totrans-59
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 执行使用了`0.75%`的条成交量来匹配请求。
 - en: It takes from bar 2 to 11 (10 bars) to complete.
+  id: totrans-60
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 完成需要从第`2`条到第`11`条（`10`条）
 - en: 'This is more interesting, but let’s see what happens now with a more dynamic
     volume allocation with `BarPointPerc`:'
+  id: totrans-61
   prefs: []
   type: TYPE_NORMAL
+  zh: 这更有趣，但让我们看看现在使用`BarPointPerc`更动态的成交量分配会发生什么：
 - en: '[PRE11]'
+  id: totrans-62
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE11]'
 - en: 'Output:'
+  id: totrans-63
   prefs: []
   type: TYPE_NORMAL
+  zh: 输出：
 - en: '[PRE12]'
+  id: totrans-64
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE12]'
 - en: 'What happens is:'
+  id: totrans-65
   prefs: []
   type: TYPE_NORMAL
+  zh: 发生的事情是：
 - en: Same initial allocation (skipped) to the order of `32958` as size
+  id: totrans-66
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 同样的初始分配（跳过）到`32958`的订单大小
 - en: It takes from 2 to 22 to fully execute (21 bars)
+  id: totrans-67
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 完全执行需要从`2`到`22`（21个条）
 - en: The *filler* has used a `minmov` of `1.0` (*minimum price movement of the asset*)
     to uniformly distribute the volume amongst the high-low range
+  id: totrans-68
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '*filler*使用了`1.0`的`minmov`（资产的最小价格变动）来在高低范围内均匀分配成交量'
 - en: A `10%` of the volumed assigned to a given price point is used for order matching
+  id: totrans-69
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`10%`的成交量分配给特定价格点用于订单匹配'
 - en: For anyone interested in how the order is being matched partially at each bar,
     examining the full output of a run may be worth the time.
+  id: totrans-70
   prefs: []
   type: TYPE_NORMAL
+  zh: 对于任何对如何在每个条上部分匹配订单感兴趣的人来说，检查运行的完整输出可能是值得的时间。
 - en: Note
+  id: totrans-71
   prefs: []
   type: TYPE_NORMAL
+  zh: 注意
 - en: Run with corrected bug in 1.5.3.93 and updated sample to `close` the operation
     after a break
+  id: totrans-72
   prefs: []
   type: TYPE_NORMAL
+  zh: 在1.5.3.93中修正了错误并更新示例以在中断后`close`操作
 - en: 'The cash is increased to an even insaner amount to avoid margin calls and plotting
     is enabled:'
+  id: totrans-73
   prefs: []
   type: TYPE_NORMAL
+  zh: 现金增加到一个更多的数量，以避免保证金调用并启用绘图：
 - en: '[PRE13]'
+  id: totrans-74
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE13]'
 - en: Rather than looking at the output which is extremely verbose, let’s look at
     the chart which already tells the story.
+  id: totrans-75
   prefs: []
   type: TYPE_NORMAL
+  zh: 而不是查看输出，因为输出非常冗长，让我们看看图表，它已经讲述了整个故事。
 - en: '![image](../Images/f9974f0e158f1781d0f605dc56edc4d5.png)'
+  id: totrans-76
   prefs: []
   type: TYPE_IMG
+  zh: '![图片](../Images/f9974f0e158f1781d0f605dc56edc4d5.png)'
 - en: 'Usage of the sample:'
+  id: totrans-77
   prefs: []
   type: TYPE_NORMAL
+  zh: 使用示例：
 - en: '[PRE14]'
+  id: totrans-78
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE14]'
 - en: The code
+  id: totrans-79
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 代码
 - en: '[PRE15]'
+  id: totrans-80
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE15]'

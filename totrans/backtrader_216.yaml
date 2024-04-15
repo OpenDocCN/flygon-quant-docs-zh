@@ -1,18 +1,28 @@
 - en: TradingView
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: TradingView
 - en: 原文：[https://www.backtrader.com/recipes/storesbrokersdata/tradingview/tradingview/](https://www.backtrader.com/recipes/storesbrokersdata/tradingview/tradingview/)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.backtrader.com/recipes/storesbrokersdata/tradingview/tradingview/](https://www.backtrader.com/recipes/storesbrokersdata/tradingview/tradingview/)
 - en: By user `Dave-Vallance`
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: 用户为 `Dave-Vallance`
 - en: 'Link to the repository:'
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: 仓库链接：
 - en: '[https://github.com/Dave-Vallance/tv2bt](https://github.com/Dave-Vallance/tv2bt)'
+  id: totrans-4
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[https://github.com/Dave-Vallance/tv2bt](https://github.com/Dave-Vallance/tv2bt)'

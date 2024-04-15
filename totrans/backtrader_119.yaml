@@ -1,557 +1,866 @@
 - en: 'Backtrader: the fund'
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: Backtrader：该基金
 - en: 原文：[https://www.backtrader.com/blog/posts/2017-06-19-fund-tracking/fund-tracking/](https://www.backtrader.com/blog/posts/2017-06-19-fund-tracking/fund-tracking/)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.backtrader.com/blog/posts/2017-06-19-fund-tracking/fund-tracking/](https://www.backtrader.com/blog/posts/2017-06-19-fund-tracking/fund-tracking/)
 - en: Already for a while, *backtrader* has been in use, so to say, *professionally*,
     besides the the known usage of *backtrader* some banks and trading houses, for
     the *Backtrader Fund*.
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: '*backtrader*已经有一段时间被使用，可以说是*专业*使用，除了一些银行和交易公司之外，还有*Backtrader基金*。'
 - en: The history
+  id: totrans-3
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 历史
 - en: 'A group of like-minded and long known to each other individuals decided to
     go down the road of opening a (Hedge) Fund and use *backtrader* as the foundation
     stone for the trading ideas. There was one thing which couldn’t be forgone: it
     had to be 100% regulated (but not in the *Cayman Islands* or a similar place)'
+  id: totrans-4
   prefs: []
   type: TYPE_NORMAL
+  zh: 一群志同道合且相互认识已久的人决定走上开设（避险）基金的道路，并以*backtrader*作为交易理念的基石。有一件事情是不可或缺的：它必须是100%受监管的（但不在开曼群岛或类似地方）
 - en: Location, heritage and networking put the emphasis first in the European Union
     and then in Spain, where (as in some other places) the legislation allows for
     *Umbrella Funds* to host *Sub-Funds*, which enables creating a fully regulated
     fund with less money and number of participants.
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: 位置、传统和网络在欧盟首先，然后在西班牙放置重点，西班牙（以及其他一些地方）的立法允许*伞形基金*托管*子基金*，这使得可以用较少的资金和参与者数量创建一个完全受监管的基金。
 - en: 'And … the fund was approved by the *CNMV* (*Comisión Nacional del Mercado de
     Valores*), the regulating body in Spain with *ISIN*: `ES0131444038`. The links:'
+  id: totrans-6
   prefs: []
   type: TYPE_NORMAL
+  zh: 还有……基金已被西班牙的监管机构*CNMV*（西班牙国家证券市场委员会）批准，*ISIN*为`ES0131444038`。链接：
 - en: '[Umbrella Fund](https://www.cnmv.es/portal/ANCV/ISIN.aspx?nif=V04856381)'
+  id: totrans-7
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[伞形基金](https://www.cnmv.es/portal/ANCV/ISIN.aspx?nif=V04856381)'
 - en: '[Sub-Fund](https://www.cnmv.es/portal/Consultas/IIC/Fondo.aspx?isin=ES0131444038)'
+  id: totrans-8
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[子基金](https://www.cnmv.es/portal/Consultas/IIC/Fondo.aspx?isin=ES0131444038)'
 - en: For those capable of reading Spanish, the usage of *backtrader* is documented
     in the official Fund leaflet.
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: 对于能阅读西班牙语的人，*backtrader*的使用已在官方基金说明书中记录。
 - en: 'And for those who may, at some point time, decide to go down the road, the
     most important things:'
+  id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: 对于那些可能在某个时候决定走这条路的人，最重要的事情是：
 - en: Bureaucracy is slow and there will be many questions along the road
+  id: totrans-11
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 官僚主义很慢，沿途会有很多问题
 - en: Keep track of everything (operations executed, cash/net-asset-value levels,
     positions, leverage)
+  id: totrans-12
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 保持一切的记录（执行的操作、现金/净资产价值水平、头寸、杠杆）
 - en: Reporting to the regulating body is a must (hence the need to collect and keep
     the aforementioned information well organized)
+  id: totrans-13
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 向监管机构报告是必须的（因此需要收集和保持前述信息的良好组织）
 - en: Keeping within the defined risk/volatility levels is not just a guideline
+  id: totrans-14
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 遵循定义的风险/波动性水平不仅仅是一个指导方针
 - en: 'Managing OPM (Other People’s Money) is a real psychological burden. There will
     be losses and there will be questions. No matter how well intended and naive the
     questions may be: they have an impact.'
+  id: totrans-15
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 管理其他人的资金（OPM）是一种真正的心理负担。会有损失，会有问题。无论问题有多么善意和天真：它们都会产生影响。
 - en: '*backtrader* is the foundation for the trading ideas and it has found a new
     field of application: *reporting*. Custom *Analyzers* and *Indicators* to keep
     control of the risk/volatility have eased the administrative burden.'
+  id: totrans-16
   prefs: []
   type: TYPE_NORMAL
+  zh: '*backtrader*是交易理念的基础，并且它已经找到了一个新的应用领域：*报告*。自定义的*分析器*和*指标*可以帮助控制风险/波动性，从而减轻了行政负担。'
 - en: Probably because we are old (and old fashioned) we still prefer manual execution
     (automated execution will sometime in the future take over)
+  id: totrans-17
   prefs: []
   type: TYPE_NORMAL
+  zh: 可能是因为我们年纪大了（而且是老派的），我们仍然更喜欢手动执行（自动执行将在未来某个时候接管）
 - en: The functionality described below was developed to aid in managing the fund
     and backtesting scenarios in which money goes in and out and performance is no
     longer a matter of tracking the net asset value.
+  id: totrans-18
   prefs: []
   type: TYPE_NORMAL
+  zh: 下面描述的功能是为了辅助管理基金和回测资金进出以及绩效不再是追踪净资产价值的问题。
 - en: Fund Tracking
+  id: totrans-19
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 基金跟踪
 - en: 'With version `1.9.52.121`, the broker in *backtrader* keeps track of the accounting
     not only in *cash*/*value* terms, but also as it would be done in a *Fund*, i.e.:'
+  id: totrans-20
   prefs: []
   type: TYPE_NORMAL
+  zh: 在版本`1.9.52.121`中，*backtrader*中的经纪人不仅在*现金*/*价值*方面跟踪会计，而且像在*基金*中一样进行，即：
 - en: The value of the fund (of the fund shares actually)
+  id: totrans-21
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 基金价值（实际基金份额的价值）
 - en: The amount of shares
+  id: totrans-22
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 股份数量
 - en: With this, one can actually simulate cash deposits and cash withdrawals, whilst
     still keeping track of the actual performance, which with a regular accounting
     would be distorted by the cash in/out-flows.
+  id: totrans-23
   prefs: []
   type: TYPE_NORMAL
+  zh: 通过这样做，我们可以模拟现金存款和提款，同时仍然跟踪实际表现，而常规会计会被现金流入/流出所扭曲。
 - en: 'In addition to the changes in the broker, *Analyzers* and *Observers* have
     been adapted (those doing something with the net asset value) to support a `fund`
     parameter, to decide what should actually be tracked. For example `TimeReturn`:'
+  id: totrans-24
   prefs: []
   type: TYPE_NORMAL
+  zh: 除了经纪人的变化外，*分析器*和*观察者*也已经适应（那些与净资产价值有关的）以支持`fund`参数，以决定实际应该追踪什么。例如`TimeReturn`：
 - en: '[PRE0]'
+  id: totrans-25
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: What is this *fund tracking*?
+  id: totrans-26
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 这是什么*基金追踪*？
 - en: Imagine the use case (later in the sample) of someone who starts with `1000`
     monetary units and on the 15^(th) of each month adds `100` monetary units. After
     12 months, the total in the account is `2200`. Returns calculated on a position
     taking initially
+  id: totrans-27
   prefs: []
   type: TYPE_NORMAL
+  zh: 想象一下使用案例（稍后在示例中）：某人从1000货币单位开始，在每个月的15日添加100货币单位。12个月后，账户中的总额为2200。根据最初的持仓计算的回报率为
 - en: 'Calculating the returns in a usual way this would mean that without having
     executed a single operation, the performance in terms on annual returns is: `120%`.
     Of course, this isn’t right.'
+  id: totrans-28
   prefs: []
   type: TYPE_NORMAL
+  zh: 以通常的方式计算回报，这意味着在没有执行任何操作的情况下，年度回报率为`120%`。当然，这是不正确的。
 - en: To alleviate this problem and regardless of the initial value of the account,
     the value of the fund shares (*fundvalue*) is set to `100.0`. And with that and
     the starting net asset value (the `1000` monetary units), one calculates the number
     of fund shares as
+  id: totrans-29
   prefs: []
   type: TYPE_NORMAL
+  zh: 为了缓解这个问题，不管账户的初始值如何，基金份额（*fundvalue*）的价值被设定为`100.0`。并且根据此值和起始净资产价值（`1000`货币单位），计算基金份额数量如下：
 - en: '`fundshares = net-asset-value / fundvalue`'
+  id: totrans-30
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`fundshares = 净资产价值 / 基金价值`'
 - en: Which in this case is `1000 / 100.0 = 10 shares`
+  id: totrans-31
   prefs: []
   type: TYPE_NORMAL
+  zh: 在这种情况下，实际上是`1000 / 100.0 = 10份股份`
 - en: 'With each cash addition, we increase the number of shares with:'
+  id: totrans-32
   prefs: []
   type: TYPE_NORMAL
+  zh: 每次加入现金后，我们都会增加股份数量：
 - en: '`new_fund_shares = cash_addition / fundvalue`'
+  id: totrans-33
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`new_fund_shares = 加入现金 / 基金价值`'
 - en: 'Because we are adding `100.0` monetary units and no operation has been executed:'
+  id: totrans-34
   prefs: []
   type: TYPE_NORMAL
+  zh: 因为我们每次添加`100.0`货币单位且没有执行任何操作：
 - en: '[PRE1]'
+  id: totrans-35
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE1]'
 - en: '[PRE2]'
+  id: totrans-36
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE2]'
 - en: '`add_cash(cash)`'
+  id: totrans-37
   prefs: []
   type: TYPE_NORMAL
+  zh: '`add_cash(cash)`'
 - en: '[PRE3]'
+  id: totrans-38
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE3]'
 - en: '`def next(self):'
+  id: totrans-39
   prefs: []
   type: TYPE_NORMAL
+  zh: '`def next(self):'
 - en: 'if whatever:'
+  id: totrans-40
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 如果条件成立：
 - en: self.broker.add_cash(1000.0)`
+  id: totrans-41
   prefs:
   - PREF_IND
   - PREF_IND
   type: TYPE_NORMAL
+  zh: self.broker.add_cash(1000.0)`
 - en: '[PRE4]'
+  id: totrans-42
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE4]'
 - en: '`...'
+  id: totrans-43
   prefs: []
   type: TYPE_NORMAL
+  zh: '`...'
 - en: cerebro.broker.set_fundmode(True)
+  id: totrans-44
   prefs: []
   type: TYPE_NORMAL
+  zh: cerebro.broker.set_fundmode(True)
 - en: '...`'
+  id: totrans-45
   prefs: []
   type: TYPE_NORMAL
+  zh: '...`'
 - en: '[PRE5]'
+  id: totrans-46
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE5]'
 - en: '`...'
+  id: totrans-47
   prefs: []
   type: TYPE_NORMAL
+  zh: '`...'
 - en: 'cerebro.broker.set_fundmode(True, 10.0)  # the default is 100'
+  id: totrans-48
   prefs: []
   type: TYPE_NORMAL
+  zh: 'cerebro.broker.set_fundmode(True, 10.0)  # 默认为100'
 - en: '...`'
+  id: totrans-49
   prefs: []
   type: TYPE_NORMAL
+  zh: '...`'
 - en: '[PRE6]'
+  id: totrans-50
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE6]'
 - en: '`...'
+  id: totrans-51
   prefs: []
   type: TYPE_NORMAL
+  zh: '`...'
 - en: cerebro.broker.set_fundmode(True)
+  id: totrans-52
   prefs: []
   type: TYPE_NORMAL
+  zh: cerebro.broker.set_fundmode(True)
 - en: 'cerebro.broker.set_fundstartval(10.0)  # the default is 100'
+  id: totrans-53
   prefs: []
   type: TYPE_NORMAL
+  zh: 'cerebro.broker.set_fundstartval(10.0)  # 默认为100'
 - en: '...`'
+  id: totrans-54
   prefs: []
   type: TYPE_NORMAL
+  zh: '...`'
 - en: '[PRE7]'
+  id: totrans-55
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE7]'
 - en: '`...'
+  id: totrans-56
   prefs: []
   type: TYPE_NORMAL
+  zh: '`...'
 - en: '1'
+  id: totrans-57
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: '1'
 - en: 'cerebro.addanalyzer(bt.analyzers.TimeReturn)  # auto-detect broker mode'
+  id: totrans-58
   prefs: []
   type: TYPE_NORMAL
+  zh: 'cerebro.addanalyzer(bt.analyzers.TimeReturn)  # 自动检测经纪人模式'
 - en: '2'
+  id: totrans-59
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: '2'
 - en: 'cerebro.addanalyzer(bt.analyzers.TimeReturn, fund=True)  # track fund value'
+  id: totrans-60
   prefs: []
   type: TYPE_NORMAL
+  zh: 'cerebro.addanalyzer(bt.analyzers.TimeReturn, fund=True)  # 追踪基金价值'
 - en: '3'
+  id: totrans-61
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: '3'
 - en: 'cerebro.addanalyzer(bt.analyzers.TimeReturn, fund=False)  # track net asset
     value'
+  id: totrans-62
   prefs: []
   type: TYPE_NORMAL
+  zh: 'cerebro.addanalyzer(bt.analyzers.TimeReturn, fund=False)  # 追踪净资产价值'
 - en: '...`'
+  id: totrans-63
   prefs: []
   type: TYPE_NORMAL
+  zh: '...`'
 - en: '[PRE8]'
+  id: totrans-64
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE8]'
 - en: '`$ ./fund-tracker.py --broker fundmode=True --strat cash2add=1000 --cerebro
     writer=True --plot`'
+  id: totrans-65
   prefs: []
   type: TYPE_NORMAL
+  zh: '`$ ./fund-tracker.py --broker fundmode=True --strat cash2add=1000 --cerebro
+    writer=True --plot`'
 - en: '[PRE9]'
+  id: totrans-66
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE9]'
 - en: '`- timereturn:'
+  id: totrans-67
   prefs: []
   type: TYPE_NORMAL
+  zh: '`- timereturn:'
 - en: ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  id: totrans-68
   prefs: []
   type: TYPE_NORMAL
+  zh: ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 - en: '...'
+  id: totrans-69
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: '...'
 - en: '- fund: None'
+  id: totrans-70
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: '- 基金：无'
 - en: ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  id: totrans-71
   prefs: []
   type: TYPE_NORMAL
+  zh: ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 - en: '- Analysis:'
+  id: totrans-72
   prefs: []
   type: TYPE_NORMAL
+  zh: '- 分析：'
 - en: '- 2005-12-31: 0.0'
+  id: totrans-73
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: '- 2005-12-31: 0.0'
 - en: '- 2006-12-31: 0.0'
+  id: totrans-74
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: '- 2006-12-31: 0.0'
 - en: '.......................................................................'
+  id: totrans-75
   prefs: []
   type: TYPE_NORMAL
+  zh: '.......................................................................'
 - en: '- timereturn1:'
+  id: totrans-76
   prefs: []
   type: TYPE_NORMAL
+  zh: '- timereturn1:'
 - en: ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  id: totrans-77
   prefs: []
   type: TYPE_NORMAL
+  zh: ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 - en: '- Params:'
+  id: totrans-78
   prefs: []
   type: TYPE_NORMAL
+  zh: '- 参数：'
 - en: '...'
+  id: totrans-79
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: '...'
 - en: '- fund: True'
+  id: totrans-80
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: '- 基金：真'
 - en: ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  id: totrans-81
   prefs: []
   type: TYPE_NORMAL
+  zh: ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 - en: '- Analysis:'
+  id: totrans-82
   prefs: []
   type: TYPE_NORMAL
+  zh: '- 分析：'
 - en: '- 2005-12-31: 0.0'
+  id: totrans-83
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: '- 2005-12-31: 0.0'
 - en: '- 2006-12-31: 0.0'
+  id: totrans-84
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: '- 2006-12-31: 0.0'
 - en: '.......................................................................'
+  id: totrans-85
   prefs: []
   type: TYPE_NORMAL
+  zh: '.......................................................................'
 - en: '- timereturn2:'
+  id: totrans-86
   prefs: []
   type: TYPE_NORMAL
+  zh: '- timereturn2:'
 - en: ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  id: totrans-87
   prefs: []
   type: TYPE_NORMAL
+  zh: ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 - en: '...'
+  id: totrans-88
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: '...'
 - en: '- fund: False'
+  id: totrans-89
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: '- 基金：假'
 - en: ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  id: totrans-90
   prefs: []
   type: TYPE_NORMAL
+  zh: ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 - en: '- Analysis:'
+  id: totrans-91
   prefs: []
   type: TYPE_NORMAL
+  zh: '- 分析：'
 - en: '- 2005-12-31: 1.2'
+  id: totrans-92
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: '- 2005-12-31: 1.2'
 - en: '- 2006-12-31: 0.545454545455`'
+  id: totrans-93
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: '- 2006-12-31: 0.545454545455`'
 - en: '[PRE10]'
+  id: totrans-94
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE10]'
 - en: '`$ ./fund-tracker.py --broker fundmode=True --strat cash2add=1000,trade=True
     --cerebro writer=True --plot`'
+  id: totrans-95
   prefs: []
   type: TYPE_NORMAL
+  zh: '`$ ./fund-tracker.py --broker fundmode=True --strat cash2add=1000,trade=True
+    --cerebro writer=True --plot`'
 - en: '[PRE11]'
+  id: totrans-96
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE11]'
 - en: '`- timereturn:'
+  id: totrans-97
   prefs: []
   type: TYPE_NORMAL
+  zh: '`- timereturn：'
 - en: '...'
+  id: totrans-98
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: '...'
 - en: '- fund: None'
+  id: totrans-99
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: '- 基金：无'
 - en: ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  id: totrans-100
   prefs: []
   type: TYPE_NORMAL
+  zh: ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 - en: '- Analysis:'
+  id: totrans-101
   prefs: []
   type: TYPE_NORMAL
+  zh: '- 分析：'
 - en: '- 2005-12-31: -0.00642229824537'
+  id: totrans-102
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: '- 2005-12-31：-0.00642229824537'
 - en: '- 2006-12-31: 7.78998679263e-05'
+  id: totrans-103
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: '- 2006-12-31：7.78998679263e-05'
 - en: '.......................................................................'
+  id: totrans-104
   prefs: []
   type: TYPE_NORMAL
+  zh: '.......................................................................'
 - en: '- timereturn1:'
+  id: totrans-105
   prefs: []
   type: TYPE_NORMAL
+  zh: '- timereturn1：'
 - en: '...'
+  id: totrans-106
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: '...'
 - en: '- fund: True'
+  id: totrans-107
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: '- 基金：真'
 - en: ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  id: totrans-108
   prefs: []
   type: TYPE_NORMAL
+  zh: ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 - en: '- Analysis:'
+  id: totrans-109
   prefs: []
   type: TYPE_NORMAL
+  zh: '- 分析：'
 - en: '- 2005-12-31: -0.00642229824537'
+  id: totrans-110
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: '- 2005-12-31：-0.00642229824537'
 - en: '- 2006-12-31: 7.78998679263e-05'
+  id: totrans-111
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: '- 2006-12-31：7.78998679263e-05'
 - en: '.......................................................................'
+  id: totrans-112
   prefs: []
   type: TYPE_NORMAL
+  zh: '.......................................................................'
 - en: '- timereturn2:'
+  id: totrans-113
   prefs: []
   type: TYPE_NORMAL
+  zh: '- timereturn2：'
 - en: ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  id: totrans-114
   prefs: []
   type: TYPE_NORMAL
+  zh: ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 - en: '...'
+  id: totrans-115
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: '...'
 - en: '- fund: False'
+  id: totrans-116
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: '- 基金：假'
 - en: ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  id: totrans-117
   prefs: []
   type: TYPE_NORMAL
+  zh: ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 - en: '- Analysis:'
+  id: totrans-118
   prefs: []
   type: TYPE_NORMAL
+  zh: '- 分析：'
 - en: '- 2005-12-31: 1.19378185337'
+  id: totrans-119
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: '- 2005-12-31：1.19378185337'
 - en: '- 2006-12-31: 0.546479045423`'
+  id: totrans-120
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: '- 2006-12-31：0.546479045423`'
 - en: '[PRE12]'
+  id: totrans-121
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE12]'
 - en: '`$ ./fund-tracker.py --strat cash2add=1000,trade=True --cerebro writer=True`'
+  id: totrans-122
   prefs: []
   type: TYPE_NORMAL
+  zh: '`$ ./fund-tracker.py --strat cash2add=1000,trade=True --cerebro writer=True`'
 - en: '[PRE13]'
+  id: totrans-123
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE13]'
 - en: '`- timereturn:'
+  id: totrans-124
   prefs: []
   type: TYPE_NORMAL
+  zh: '`- timereturn：'
 - en: ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  id: totrans-125
   prefs: []
   type: TYPE_NORMAL
+  zh: ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 - en: '...'
+  id: totrans-126
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: '...'
 - en: '- fund: None'
+  id: totrans-127
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: '- 基金：无'
 - en: ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  id: totrans-128
   prefs: []
   type: TYPE_NORMAL
+  zh: ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 - en: '- Analysis:'
+  id: totrans-129
   prefs: []
   type: TYPE_NORMAL
+  zh: '- 分析：'
 - en: '- 2005-12-31: 1.19378185337'
+  id: totrans-130
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: '- 2005-12-31：1.19378185337'
 - en: '- 2006-12-31: 0.546479045423'
+  id: totrans-131
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: '- 2006-12-31：0.546479045423'
 - en: '.......................................................................'
+  id: totrans-132
   prefs: []
   type: TYPE_NORMAL
+  zh: '.......................................................................'
 - en: '- timereturn1:'
+  id: totrans-133
   prefs: []
   type: TYPE_NORMAL
+  zh: '- timereturn1：'
 - en: ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  id: totrans-134
   prefs: []
   type: TYPE_NORMAL
+  zh: ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 - en: '...'
+  id: totrans-135
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: '...'
 - en: '- fund: True'
+  id: totrans-136
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: '- 基金：真'
 - en: ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  id: totrans-137
   prefs: []
   type: TYPE_NORMAL
+  zh: ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 - en: '- Analysis:'
+  id: totrans-138
   prefs: []
   type: TYPE_NORMAL
+  zh: '- 分析：'
 - en: '- 2005-12-31: -0.00642229824537'
+  id: totrans-139
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: '- 2005-12-31：-0.00642229824537'
 - en: '- 2006-12-31: 7.78998679263e-05'
+  id: totrans-140
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: '- 2006-12-31：7.78998679263e-05'
 - en: '.......................................................................'
+  id: totrans-141
   prefs: []
   type: TYPE_NORMAL
+  zh: '.......................................................................'
 - en: '- timereturn2:'
+  id: totrans-142
   prefs: []
   type: TYPE_NORMAL
+  zh: '- timereturn2：'
 - en: ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  id: totrans-143
   prefs: []
   type: TYPE_NORMAL
+  zh: ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 - en: '...'
+  id: totrans-144
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: '...'
 - en: '- fund: False'
+  id: totrans-145
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: '- 基金：假'
 - en: ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  id: totrans-146
   prefs: []
   type: TYPE_NORMAL
+  zh: ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 - en: '- Analysis:'
+  id: totrans-147
   prefs: []
   type: TYPE_NORMAL
+  zh: '- 分析：'
 - en: '- 2005-12-31: 1.19378185337'
+  id: totrans-148
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: '- 2005-12-31：1.19378185337'
 - en: '- 2006-12-31: 0.546479045423`'
+  id: totrans-149
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: '- 2006-12-31：0.546479045423`'
 - en: '[PRE14]'
+  id: totrans-150
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE14]'
 - en: '`$ ./fund-tracker.py --help'
+  id: totrans-151
   prefs: []
   type: TYPE_NORMAL
+  zh: '`$ ./fund-tracker.py --help'
 - en: 'usage: fund-tracker.py [-h] [--data0 DATA0] [--fromdate FROMDATE]'
+  id: totrans-152
   prefs: []
   type: TYPE_NORMAL
+  zh: 用法：fund-tracker.py [-h] [--data0 DATA0] [--fromdate FROMDATE]
 - en: '[--todate TODATE] [--cerebro kwargs] [--broker kwargs]'
+  id: totrans-153
   prefs:
   - PREF_IND
   - PREF_IND
@@ -559,7 +868,9 @@
   - PREF_IND
   - PREF_IND
   type: TYPE_NORMAL
+  zh: '[--todate TODATE] [--cerebro kwargs] [--broker kwargs]'
 - en: '[--sizer kwargs] [--strat kwargs] [--plot [kwargs]]'
+  id: totrans-154
   prefs:
   - PREF_IND
   - PREF_IND
@@ -567,19 +878,29 @@
   - PREF_IND
   - PREF_IND
   type: TYPE_NORMAL
+  zh: '[--sizer kwargs] [--strat kwargs] [--plot [kwargs]]'
 - en: Fund Tracking Sample
+  id: totrans-155
   prefs: []
   type: TYPE_NORMAL
+  zh: 基金跟踪示例
 - en: 'optional arguments:'
+  id: totrans-156
   prefs: []
   type: TYPE_NORMAL
+  zh: 可选参数：
 - en: -h, --help           show this help message and exit
+  id: totrans-157
   prefs: []
   type: TYPE_NORMAL
+  zh: -h，--help           显示此帮助消息并退出
 - en: '--data0 DATA0        Data to read in (default:'
+  id: totrans-158
   prefs: []
   type: TYPE_NORMAL
+  zh: --data0 DATA0        要读取的数据（默认值：
 - en: ../../datas/2005-2006-day-001.txt)
+  id: totrans-159
   prefs:
   - PREF_IND
   - PREF_IND
@@ -587,34 +908,54 @@
   - PREF_IND
   - PREF_IND
   type: TYPE_NORMAL
+  zh: ../../datas/2005-2006-day-001.txt)
 - en: '--fromdate FROMDATE  Date[time] in YYYY-MM-DD[THH:MM:SS] format (default: )'
+  id: totrans-160
   prefs: []
   type: TYPE_NORMAL
+  zh: --fromdate FROMDATE  日期[时间]的格式为YYYY-MM-DD[THH:MM:SS]（默认值：
 - en: '--todate TODATE      Date[time] in YYYY-MM-DD[THH:MM:SS] format (default: )'
+  id: totrans-161
   prefs: []
   type: TYPE_NORMAL
+  zh: --todate TODATE      日期[时间]的格式为YYYY-MM-DD[THH:MM:SS]（默认值：
 - en: '--cerebro kwargs     kwargs in key=value format (default: )'
+  id: totrans-162
   prefs: []
   type: TYPE_NORMAL
+  zh: --cerebro kwargs     以键=值格式的kwargs（默认值：）
 - en: '--broker kwargs      kwargs in key=value format (default: )'
+  id: totrans-163
   prefs: []
   type: TYPE_NORMAL
+  zh: --broker kwargs      以键=值格式的kwargs（默认值：）
 - en: '--sizer kwargs       kwargs in key=value format (default: )'
+  id: totrans-164
   prefs: []
   type: TYPE_NORMAL
+  zh: --sizer kwargs       以键=值格式的kwargs（默认值：）
 - en: '--strat kwargs       kwargs in key=value format (default: )'
+  id: totrans-165
   prefs: []
   type: TYPE_NORMAL
+  zh: --strat kwargs       以键=值格式的kwargs（默认值：）
 - en: '--plot [kwargs]      kwargs in key=value format (default: )`'
+  id: totrans-166
   prefs: []
   type: TYPE_NORMAL
+  zh: --plot [kwargs]      以键=值格式的kwargs（默认值：）`
 - en: '[PRE15]'
+  id: totrans-167
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE15]'
 - en: '`from __future__ import (absolute_import, division, print_function,'
+  id: totrans-168
   prefs: []
   type: TYPE_NORMAL
+  zh: '`from __future__ import (absolute_import, division, print_function,'
 - en: unicode_literals)
+  id: totrans-169
   prefs:
   - PREF_IND
   - PREF_IND
@@ -623,193 +964,277 @@
   - PREF_IND
   - PREF_IND
   type: TYPE_NORMAL
+  zh: unicode_literals）
 - en: import argparse
+  id: totrans-170
   prefs: []
   type: TYPE_NORMAL
+  zh: 导入 argparse
 - en: import datetime
+  id: totrans-171
   prefs: []
   type: TYPE_NORMAL
+  zh: 导入 datetime
 - en: import backtrader as bt
+  id: totrans-172
   prefs: []
   type: TYPE_NORMAL
+  zh: 导入 backtrader as bt
 - en: 'class St(bt.SignalStrategy):'
+  id: totrans-173
   prefs: []
   type: TYPE_NORMAL
+  zh: 类 St(bt.SignalStrategy)：
 - en: params = dict(
+  id: totrans-174
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 参数 = 字典(
 - en: cash2add=None,
+  id: totrans-175
   prefs:
   - PREF_IND
   - PREF_IND
   type: TYPE_NORMAL
+  zh: cash2add=None,
 - en: cashonday=15,
+  id: totrans-176
   prefs:
   - PREF_IND
   - PREF_IND
   type: TYPE_NORMAL
+  zh: cashonday=15,
 - en: pfast=10,
+  id: totrans-177
   prefs:
   - PREF_IND
   - PREF_IND
   type: TYPE_NORMAL
+  zh: pfast=10,
 - en: pslow=30,
+  id: totrans-178
   prefs:
   - PREF_IND
   - PREF_IND
   type: TYPE_NORMAL
+  zh: pslow=30,
 - en: trade=False,
+  id: totrans-179
   prefs:
   - PREF_IND
   - PREF_IND
   type: TYPE_NORMAL
+  zh: trade=False,
 - en: )
+  id: totrans-180
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: )
 - en: 'def __init__(self):'
+  id: totrans-181
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 'def __init__(self):'
 - en: self.add_timer(when=bt.Timer.SESSION_END, monthdays=[self.p.cashonday])
+  id: totrans-182
   prefs:
   - PREF_IND
   - PREF_IND
   type: TYPE_NORMAL
+  zh: self.add_timer(when=bt.Timer.SESSION_END, monthdays=[self.p.cashonday])
 - en: sma1 = bt.ind.SMA(period=self.p.pfast)
+  id: totrans-183
   prefs:
   - PREF_IND
   - PREF_IND
   type: TYPE_NORMAL
+  zh: sma1 = bt.ind.SMA(period=self.p.pfast)
 - en: sma2 = bt.ind.SMA(period=self.p.pslow)
+  id: totrans-184
   prefs:
   - PREF_IND
   - PREF_IND
   type: TYPE_NORMAL
+  zh: sma2 = bt.ind.SMA(period=self.p.pslow)
 - en: signal = bt.ind.CrossOver(sma1, sma2)
+  id: totrans-185
   prefs:
   - PREF_IND
   - PREF_IND
   type: TYPE_NORMAL
+  zh: signal = bt.ind.CrossOver(sma1, sma2)
 - en: 'if self.p.trade:'
+  id: totrans-186
   prefs:
   - PREF_IND
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 'if self.p.trade:'
 - en: self.signal_add(bt.SIGNAL_LONGSHORT, signal)
+  id: totrans-187
   prefs:
   - PREF_IND
   - PREF_IND
   - PREF_IND
   type: TYPE_NORMAL
+  zh: self.signal_add(bt.SIGNAL_LONGSHORT, signal)
 - en: 'def notify_timer(self, timer, when, *args, **kwargs):'
+  id: totrans-188
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 'def notify_timer(self, timer, when, *args, **kwargs):'
 - en: no need to check the timer, there is only one
+  id: totrans-189
   prefs:
   - PREF_IND
   - PREF_IND
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 无需检查计时器，只有一个
 - en: 'if self.p.cash2add is not None:'
+  id: totrans-190
   prefs:
   - PREF_IND
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 'if self.p.cash2add is not None:'
 - en: self.broker.add_cash(self.p.cash2add)
+  id: totrans-191
   prefs:
   - PREF_IND
   - PREF_IND
   - PREF_IND
   type: TYPE_NORMAL
+  zh: self.broker.add_cash(self.p.cash2add)
 - en: 'def next(self):'
+  id: totrans-192
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 'def next(self):'
 - en: pass
+  id: totrans-193
   prefs:
   - PREF_IND
   - PREF_IND
   type: TYPE_NORMAL
+  zh: pass
 - en: 'def runstrat(args=None):'
+  id: totrans-194
   prefs: []
   type: TYPE_NORMAL
+  zh: 'def runstrat(args=None):'
 - en: args = parse_args(args)
+  id: totrans-195
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: args = parse_args(args)
 - en: cerebro = bt.Cerebro()
+  id: totrans-196
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: cerebro = bt.Cerebro()
 - en: Data feed kwargs
+  id: totrans-197
   prefs:
   - PREF_IND
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 数据源关键字参数
 - en: kwargs = dict()
+  id: totrans-198
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: kwargs = dict()
 - en: Parse from/to-date
+  id: totrans-199
   prefs:
   - PREF_IND
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 从/到日期解析
 - en: dtfmt, tmfmt = '%Y-%m-%d', 'T%H:%M:%S'
+  id: totrans-200
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: dtfmt, tmfmt = '%Y-%m-%d', 'T%H:%M:%S'
 - en: 'for a, d in ((getattr(args, x), x) for x in [''fromdate'', ''todate'']):'
+  id: totrans-201
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 'for a, d in ((getattr(args, x), x) for x in [''fromdate'', ''todate'']):'
 - en: 'if a:'
+  id: totrans-202
   prefs:
   - PREF_IND
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 'if a:'
 - en: strpfmt = dtfmt + tmfmt * ('T' in a)
+  id: totrans-203
   prefs:
   - PREF_IND
   - PREF_IND
   - PREF_IND
   type: TYPE_NORMAL
+  zh: strpfmt = dtfmt + tmfmt * ('T' in a)
 - en: kwargs[d] = datetime.datetime.strptime(a, strpfmt)
+  id: totrans-204
   prefs:
   - PREF_IND
   - PREF_IND
   - PREF_IND
   type: TYPE_NORMAL
+  zh: kwargs[d] = datetime.datetime.strptime(a, strpfmt)
 - en: data0 = bt.feeds.BacktraderCSVData(dataname=args.data0, **kwargs)
+  id: totrans-205
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: data0 = bt.feeds.BacktraderCSVData(dataname=args.data0, **kwargs)
 - en: cerebro.adddata(data0)
+  id: totrans-206
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: cerebro.adddata(data0)
 - en: Broker
+  id: totrans-207
   prefs:
   - PREF_IND
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 经纪人
 - en: cerebro.broker = bt.brokers.BackBroker(**eval('dict(' + args.broker + ')'))
+  id: totrans-208
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: cerebro.broker = bt.brokers.BackBroker(**eval('dict(' + args.broker + ')'))
 - en: Sizer
+  id: totrans-209
   prefs:
   - PREF_IND
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 大小规模
 - en: cerebro.addsizer(bt.sizers.PercentSizer,
+  id: totrans-210
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: cerebro.addsizer(bt.sizers.PercentSizer,
 - en: '**eval(''dict('' + args.sizer + '')''))'
+  id: totrans-211
   prefs:
   - PREF_IND
   - PREF_IND
@@ -817,94 +1242,136 @@
   - PREF_IND
   - PREF_IND
   type: TYPE_NORMAL
+  zh: '**eval(''dict('' + args.sizer + '')''))'
 - en: Strategy
+  id: totrans-212
   prefs:
   - PREF_IND
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 策略
 - en: cerebro.addstrategy(St, **eval('dict(' + args.strat + ')'))
+  id: totrans-213
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: cerebro.addstrategy(St, **eval('dict(' + args.strat + ')'))
 - en: cerebro.addobserver(bt.observers.FundValue)
+  id: totrans-214
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: cerebro.addobserver(bt.observers.FundValue)
 - en: cerebro.addobserver(bt.observers.FundShares)
+  id: totrans-215
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: cerebro.addobserver(bt.observers.FundShares)
 - en: ankwargs = dict(timeframe=bt.TimeFrame.Years)
+  id: totrans-216
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: ankwargs = dict(timeframe=bt.TimeFrame.Years)
 - en: cerebro.addanalyzer(bt.analyzers.TimeReturn, **ankwargs)
+  id: totrans-217
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: cerebro.addanalyzer(bt.analyzers.TimeReturn, **ankwargs)
 - en: cerebro.addanalyzer(bt.analyzers.TimeReturn, fund=True, **ankwargs)
+  id: totrans-218
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: cerebro.addanalyzer(bt.analyzers.TimeReturn, fund=True, **ankwargs)
 - en: cerebro.addanalyzer(bt.analyzers.TimeReturn, fund=False, **ankwargs)
+  id: totrans-219
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: cerebro.addanalyzer(bt.analyzers.TimeReturn, fund=False, **ankwargs)
 - en: Execute
+  id: totrans-220
   prefs:
   - PREF_IND
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 执行
 - en: cerebro.run(**eval('dict(' + args.cerebro + ')'))
+  id: totrans-221
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: cerebro.run(**eval('dict(' + args.cerebro + ')'))
 - en: 'if args.plot:  # Plot if requested to'
+  id: totrans-222
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 'if args.plot:  # 如果要求绘图，则绘制'
 - en: cerebro.plot(**eval('dict(' + args.plot + ')'))
+  id: totrans-223
   prefs:
   - PREF_IND
   - PREF_IND
   type: TYPE_NORMAL
+  zh: cerebro.plot(**eval('dict(' + args.plot + ')'))
 - en: 'def parse_args(pargs=None):'
+  id: totrans-224
   prefs: []
   type: TYPE_NORMAL
+  zh: 'def parse_args(pargs=None):'
 - en: parser = argparse.ArgumentParser(
+  id: totrans-225
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: parser = argparse.ArgumentParser(
 - en: formatter_class=argparse.ArgumentDefaultsHelpFormatter,
+  id: totrans-226
   prefs:
   - PREF_IND
   - PREF_IND
   type: TYPE_NORMAL
+  zh: formatter_class=argparse.ArgumentDefaultsHelpFormatter,
 - en: description=(
+  id: totrans-227
   prefs:
   - PREF_IND
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 描述=(
 - en: '''Fund Tracking Sample'''
+  id: totrans-228
   prefs:
   - PREF_IND
   - PREF_IND
   - PREF_IND
   type: TYPE_NORMAL
+  zh: '''基金跟踪示例'''
 - en: )
+  id: totrans-229
   prefs:
   - PREF_IND
   - PREF_IND
   type: TYPE_NORMAL
+  zh: )
 - en: )
+  id: totrans-230
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: )
 - en: parser.add_argument('--data0', default='../../datas/2005-2006-day-001.txt',
+  id: totrans-231
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: parser.add_argument('--data0', default='../../datas/2005-2006-day-001.txt',
 - en: required=False, help='Data to read in')
+  id: totrans-232
   prefs:
   - PREF_IND
   - PREF_IND
@@ -913,16 +1380,22 @@
   - PREF_IND
   - PREF_IND
   type: TYPE_NORMAL
+  zh: required=False, help='要读取的数据')
 - en: Defaults for dates
+  id: totrans-233
   prefs:
   - PREF_IND
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 日期的默认值
 - en: parser.add_argument('--fromdate', required=False, default='',
+  id: totrans-234
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: parser.add_argument('--fromdate', required=False, default='',
 - en: help='Date[time] in YYYY-MM-DD[THH:MM:SS] format')
+  id: totrans-235
   prefs:
   - PREF_IND
   - PREF_IND
@@ -931,11 +1404,15 @@
   - PREF_IND
   - PREF_IND
   type: TYPE_NORMAL
+  zh: help='以 YYYY-MM-DD[THH:MM:SS] 格式的日期[时间]')
 - en: parser.add_argument('--todate', required=False, default='',
+  id: totrans-236
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: parser.add_argument('--todate', required=False, default='',
 - en: help='Date[time] in YYYY-MM-DD[THH:MM:SS] format')
+  id: totrans-237
   prefs:
   - PREF_IND
   - PREF_IND
@@ -944,11 +1421,15 @@
   - PREF_IND
   - PREF_IND
   type: TYPE_NORMAL
+  zh: help='以 YYYY-MM-DD[THH:MM:SS] 格式的日期[时间]')
 - en: parser.add_argument('--cerebro', required=False, default='',
+  id: totrans-238
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: parser.add_argument('--cerebro', required=False, default='',
 - en: metavar='kwargs', help='kwargs in key=value format')
+  id: totrans-239
   prefs:
   - PREF_IND
   - PREF_IND
@@ -957,11 +1438,15 @@
   - PREF_IND
   - PREF_IND
   type: TYPE_NORMAL
+  zh: metavar='kwargs', help='以键=值格式的关键字参数')
 - en: parser.add_argument('--broker', required=False, default='',
+  id: totrans-240
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: parser.add_argument('--broker', required=False, default='',
 - en: metavar='kwargs', help='kwargs in key=value format')
+  id: totrans-241
   prefs:
   - PREF_IND
   - PREF_IND
@@ -970,11 +1455,15 @@
   - PREF_IND
   - PREF_IND
   type: TYPE_NORMAL
+  zh: metavar='kwargs', help='以键=值格式的关键字参数')
 - en: parser.add_argument('--sizer', required=False, default='',
+  id: totrans-242
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: parser.add_argument('--sizer', required=False, default='',
 - en: metavar='kwargs', help='kwargs in key=value format')
+  id: totrans-243
   prefs:
   - PREF_IND
   - PREF_IND
@@ -983,11 +1472,15 @@
   - PREF_IND
   - PREF_IND
   type: TYPE_NORMAL
+  zh: metavar='kwargs', help='以键=值格式的关键字参数')
 - en: parser.add_argument('--strat', required=False, default='',
+  id: totrans-244
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: parser.add_argument('--strat', required=False, default='',
 - en: metavar='kwargs', help='kwargs in key=value format')
+  id: totrans-245
   prefs:
   - PREF_IND
   - PREF_IND
@@ -996,11 +1489,15 @@
   - PREF_IND
   - PREF_IND
   type: TYPE_NORMAL
+  zh: metavar='kwargs', help='以键=值格式的关键字参数')
 - en: parser.add_argument('--plot', required=False, default='',
+  id: totrans-246
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: parser.add_argument('--plot', required=False, default='',
 - en: nargs='?', const='{}',
+  id: totrans-247
   prefs:
   - PREF_IND
   - PREF_IND
@@ -1009,7 +1506,9 @@
   - PREF_IND
   - PREF_IND
   type: TYPE_NORMAL
+  zh: nargs='?', const='{}',
 - en: metavar='kwargs', help='kwargs in key=value format')
+  id: totrans-248
   prefs:
   - PREF_IND
   - PREF_IND
@@ -1018,17 +1517,26 @@
   - PREF_IND
   - PREF_IND
   type: TYPE_NORMAL
+  zh: metavar='kwargs', help='以键=值格式的关键字参数')
 - en: return parser.parse_args(pargs)
+  id: totrans-249
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: return parser.parse_args(pargs)
 - en: 'if __name__ == ''__main__'':'
+  id: totrans-250
   prefs: []
   type: TYPE_NORMAL
+  zh: 'if __name__ == ''__main__'':'
 - en: runstrat()`
+  id: totrans-251
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: runstrat()`
 - en: '```'
+  id: totrans-252
   prefs: []
   type: TYPE_NORMAL
+  zh: '```'

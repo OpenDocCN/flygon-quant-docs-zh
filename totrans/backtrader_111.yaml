@@ -1,97 +1,149 @@
 - en: Improving Random Python Internet Study Notes
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 改进随机的 Python 互联网学习笔记
 - en: 原文：[https://www.backtrader.com/blog/posts/2018-04-22-improving-code/improving-code/](https://www.backtrader.com/blog/posts/2018-04-22-improving-code/improving-code/)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.backtrader.com/blog/posts/2018-04-22-improving-code/improving-code/](https://www.backtrader.com/blog/posts/2018-04-22-improving-code/improving-code/)
 - en: 'Every now and then, samples with *backtrader* code pop up in the Internet.
     There are several in what it looks to me to be Chinese. The latest one is here:'
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: 每隔一段时间，互联网上会出现带有*backtrader*代码的样本。在我看来有几个是中文。最新的一个在这里：
 - en: '[https://blog.csdn.net/qq_26948675/article/details/80016633](https://blog.csdn.net/qq_26948675/article/details/80016633)'
+  id: totrans-3
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[https://blog.csdn.net/qq_26948675/article/details/80016633](https://blog.csdn.net/qq_26948675/article/details/80016633)'
 - en: 'The title is: *backtrader-学习笔记2*, which apparently (thanks Google) translates
     to *backtrader- study notes 2*. If those are study notes, let’s try to improve
     the code there where it can really be improved and in my personal opinion there
     where *backtrader* shines the most.'
+  id: totrans-4
   prefs: []
   type: TYPE_NORMAL
+  zh: 标题是：*backtrader-学习笔记2*，显然（谢谢谷歌）被翻译为*backtrader-学习笔记 2*。如果那些是学习笔记，让我们尝试在那里真正可以改进代码的地方进行改进，在我个人看来，那就是*backtrader*最擅长的地方。
 - en: In the `__init__` method of the strategy inside the study notes we find the
     following
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: 在学习笔记中策略的`__init__`方法中，我们发现以下内容
 - en: '[PRE0]'
+  id: totrans-6
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: Nothing to argue here (style is something very personal, I won’t touch that)
+  id: totrans-7
   prefs: []
   type: TYPE_NORMAL
+  zh: 这里没有什么好争论的（风格是非常个人的事情，我不会触及那方面）
 - en: And in the `next` method of the strategy, the following are the logic decisions
     for buying and selling.
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: 在策略的`next`方法中，以下是买入和卖出的逻辑决策。
 - en: '[PRE1]'
+  id: totrans-9
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE1]'
 - en: and
+  id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: 和
 - en: '[PRE2]'
+  id: totrans-11
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE2]'
 - en: These two logic blocks is what one can actually make a lot more better, which
     will also add to readability, maintainability and tweaking (if needed be)
+  id: totrans-12
   prefs: []
   type: TYPE_NORMAL
+  zh: 这两个逻辑块是可以做得更好的，这样也会增加可读性、可维护性和调整性（如果需要的话）
 - en: Instead of having those comparison of moving averages (current point `0` and
     previous point `-1`) followed by some divisions, let’s look at how to have it
     precalculated for us.
+  id: totrans-13
   prefs: []
   type: TYPE_NORMAL
+  zh: 不是将移动平均值的比较（当前点`0`和上一个点`-1`）后跟一些除法，让我们看看如何让它预先计算。
 - en: Let’s tweak `__init__`
+  id: totrans-14
   prefs: []
   type: TYPE_NORMAL
+  zh: 让我们调整`__init__`
 - en: '[PRE3]'
+  id: totrans-15
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE3]'
 - en: 'And we can now take that to the `next` method and do the following:'
+  id: totrans-16
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在我们可以将其带到`next`方法并执行以下操作：
 - en: '[PRE4]'
+  id: totrans-17
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE4]'
 - en: Notice that we don’t even have to use `self.buy_sig[0]`, because the boolean
     test make with `if self.buy_sig` is already translated by the *backtrader* machinery
     to a check for `[0]`
+  id: totrans-18
   prefs: []
   type: TYPE_NORMAL
+  zh: 注意，我们甚至不必使用`self.buy_sig[0]`，因为通过`if self.buy_sig`进行的布尔测试已经被*backtrader*机制翻译成了对`[0]`的检查
 - en: Imho, a much cleaner approach in which defining the logic in `__init__` with
     standard arithmetic and logical operations (and using the line delay notation
     `(-x)`) makes the code much better.
+  id: totrans-19
   prefs: []
   type: TYPE_NORMAL
+  zh: 在我看来，通过在`__init__`中使用标准算术和逻辑操作来定义逻辑（并使用行延迟符号`(-x)`）使代码变得更好。
 - en: In any case and for closing note, one could have also tried to use the built-in
     `PercentChange` indicator (aka `PctChange`)
+  id: totrans-20
   prefs: []
   type: TYPE_NORMAL
+  zh: 无论如何，作为结束语，人们也可以尝试使用内置的`PercentChange`指标（又名`PctChange`）
 - en: 'See: [backtrader documentation - Indicator Reference](https://www.backtrader.com/docu/indautoref.html)'
+  id: totrans-21
   prefs: []
   type: TYPE_NORMAL
+  zh: 参见：[backtrader 文档 - 指标参考](https://www.backtrader.com/docu/indautoref.html)
 - en: As the name suggests it does already calculate the percentage change over a
     given period of bars. The code in `__init__` would now look like this
+  id: totrans-22
   prefs: []
   type: TYPE_NORMAL
+  zh: 正如名称所示，它已经计算了一定周期内的百分比变化。现在`__init__`中的代码看起来是这样的
 - en: '[PRE5]'
+  id: totrans-23
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE5]'
 - en: It doesn’t make much of a difference in this case, but it may for sure save
     you from lots of trouble if the calculations are larger and more complex.
+  id: totrans-24
   prefs: []
   type: TYPE_NORMAL
+  zh: 在这种情况下，并没有太大的区别，但如果计算更大更复杂的话，这绝对可以为你省下很多麻烦。
 - en: Happy *backtrading*!
+  id: totrans-25
   prefs: []
   type: TYPE_NORMAL
+  zh: 祝愉快的*回溯交易*！

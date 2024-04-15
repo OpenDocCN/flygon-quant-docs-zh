@@ -1,67 +1,102 @@
 - en: Connors RSI
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 康纳斯RSI
 - en: 原文：[https://www.backtrader.com/recipes/indicators/crsi/crsi/](https://www.backtrader.com/recipes/indicators/crsi/crsi/)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.backtrader.com/recipes/indicators/crsi/crsi/](https://www.backtrader.com/recipes/indicators/crsi/crsi/)
 - en: 'The literature which Google offers as a reference for this indicator:'
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: Google 提供的此指标参考文献：
 - en: '[Nirvana Systems - Creating the “Ultimate” Indicator - Connors RSI](https://www.nirvanasystems.com/ultimate-indicator-connors-rsi/)'
+  id: totrans-3
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[Nirvana Systems - 创建“终极”指标 - 康纳斯RSI](https://www.nirvanasystems.com/ultimate-indicator-connors-rsi/)'
 - en: '[TradingView - Connors RSI](https://www.tradingview.com/wiki/Connors_RSI_(CRSI))'
+  id: totrans-4
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[TradingView - 康纳斯RSI](https://www.tradingview.com/wiki/Connors_RSI_(CRSI))'
 - en: 'Both sources agree on the formulat, although not on the terminology (see below).
     The *Connors RSI* shall be calculated as follows:'
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: 两个来源对公式都表示同意，尽管术语不同（见下文）。 应按以下方式计算 *Connors RSI*：
 - en: '[PRE0]'
+  id: totrans-6
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: Note
+  id: totrans-7
   prefs: []
   type: TYPE_NORMAL
+  zh: 注意
 - en: '*TradingView* says that the `ROC` (*"Rate of Change"*) has to be used instead
     of the `PctRank` (*"Percentage Rank"*), which is clearly wrong when looking at
     the definition which is provided by *TradingView* itself.'
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: '*TradingView* 表示 `ROC`（*"变动率"*）必须用于 `PctRank`（*"百分比排名"*）的位置，但从 *TradingView*
+    自身提供的定义来看，显然是错误的。'
 - en: '`Streak` is something which is non-standard and needs a definition, let''s
     reference it here from the sources (called *"UpDown"* in the *TradingView* jargon)'
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: '`Streak` 是一个非标准术语，需要定义，让我们从源（在 *TradingView* 行话中称为 *"UpDown"*) 中参考它。'
 - en: Number of consecutive days the price has closed higher/lower than the previous
     day
+  id: totrans-10
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 每日价格收盘比前一日高/低的连续天数
 - en: If a days closes at the same price as the day before, the streak is reset to
     `0`
+  id: totrans-11
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 如果某日收盘价与前一日相同，则连续数重置为`0`
 - en: Upwards streaks yield positive values and downwards streaks yield negative values
+  id: totrans-12
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 向上连续产生正值，向下连续产生负值
 - en: With the formula in the hand, understanding we need to use `PercentRank` and
     with a clear definition for a `Streak` (or `UpDown`), creating the `ConnorsRSI`
     indicator should be a child's play.
+  id: totrans-13
   prefs: []
   type: TYPE_NORMAL
+  zh: 手头有公式，理解需要使用 `PercentRank` 以及对 `Streak`（或 `UpDown`）有清晰定义，创建 `ConnorsRSI` 指标应该轻而易举。
 - en: '[PRE1]'
+  id: totrans-14
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE1]'
 - en: And here a view of how the indicator works, including also the `Streak` helper
     indicator, to have a visual verification that the actual streak is being delivered.
+  id: totrans-15
   prefs: []
   type: TYPE_NORMAL
+  zh: 这里展示了指标的工作原理，还包括`Streak`辅助指标，以便视觉上验证实际连续数的输出。
 - en: '![CRSI View](../Images/7f2657d04f60a9db60a1853cf9dd78c8.png)'
+  id: totrans-16
   prefs: []
   type: TYPE_IMG
+  zh: '![CRSI 视图](../Images/7f2657d04f60a9db60a1853cf9dd78c8.png)'

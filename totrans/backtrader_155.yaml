@@ -1,369 +1,556 @@
 - en: MACD Settings
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: MACD设置
 - en: 原文：[https://www.backtrader.com/blog/posts/2016-07-30-macd-settings/macd-settings/](https://www.backtrader.com/blog/posts/2016-07-30-macd-settings/macd-settings/)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.backtrader.com/blog/posts/2016-07-30-macd-settings/macd-settings/](https://www.backtrader.com/blog/posts/2016-07-30-macd-settings/macd-settings/)
 - en: In the *Algotrading* site of *Reddit* a thread about optimizing MACD settings
     was found.
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: 在*Reddit*的*Algotrading*网站上发现了一个关于优化MACD设置的帖子。
 - en: '[How to determine best MACD settings?](https://www.reddit.com/r/algotrading/comments/4s832w/how_to_determine_best_macd_settings/)'
+  id: totrans-3
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[如何确定最佳MACD设置？](https://www.reddit.com/r/algotrading/comments/4s832w/how_to_determine_best_macd_settings/)'
 - en: Having started the *backtrader* quest because of [Trading Your Way To Financial
     Freedom - Amazon Link](https://www.amazon.com/Trade-Your-Way-Financial-Freedom/dp/007147871X)
     I had no other choice but to post an answer and craft a sample.
+  id: totrans-4
   prefs: []
   type: TYPE_NORMAL
+  zh: 由于[《走向财务自由的交易》- 亚马逊链接](https://www.amazon.com/Trade-Your-Way-Financial-Freedom/dp/007147871X)，我开始了*backtrader*的探索，我别无选择，只能发布答案并制作一个示例。
 - en: 'The strategy approach is loosely based on some of the ideas presented in the
     book. Nothing new under the sun. And the parameters have been quickly set. No
     overfitting, no optimization, no nothing. Roughly:'
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: 该策略的方法在某种程度上基于该书中提出的一些观点。没有新鲜事。参数已经快速设置。没有过度拟合，没有优化，什么都没有。大致：
 - en: Enter if the `macd` line crosses the `signal` line to the upside and a control
     `Simple Moving Average` has had a net negative direction in the last x periods
     (current *SMA* value below the value *x* periods ago)
+  id: totrans-6
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 如果`macd`线向上穿过`signal`线，并且控制`Simple Moving Average`在最后的x个周期内具有净负方向（当前*SMA*值低于x个周期前的值），则进入市场
 - en: Set a `stop` price `N x ATR` times away from the `close` price
+  id: totrans-7
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 设置`stop`价格，即比`close`价格远`N x ATR`倍
 - en: Exit the market if the `close` price goes below the `stop` price
+  id: totrans-8
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 如果`close`价格低于`stop`价格，则退出市场
 - en: If still in the market, update the `stop` price only if it’s greater than the
     actual one
+  id: totrans-9
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 如果仍然在市场上，则仅在`stop`价格高于实际价格时更新
 - en: 'The staking is done by:'
+  id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: 下注由以下方式完成：
 - en: Having a `Sizer` allocate a *percentage* of the available cash to the operation.
     The more the strategy wins, the more it stakes … and the more it loses the less
     it stakes.
+  id: totrans-11
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 通过`Sizer`分配可用现金的*百分比*给操作。策略赢得越多，押注就越大... 而策略输得越多，押注就越小。
 - en: There is a *commision* included. Because the tests will be done with *stocks*
     a percentage commission has been chosen with a value `0.0033` (aka `0.33%` per
     round trip.
+  id: totrans-12
   prefs: []
   type: TYPE_NORMAL
+  zh: 包含了*佣金*。因为测试将使用*股票*进行，所以选择了百分比佣金，其值为`0.0033`（即每往返交易的`0.33%`）。
 - en: To put this into play, there will be 3 runs with 3 datas (for a total of 9 runs)
+  id: totrans-13
   prefs: []
   type: TYPE_NORMAL
+  zh: 为了付诸实施，将进行3次运行，每次运行3个数据（共9次运行）
 - en: The standard parameters which have been chosen manually
+  id: totrans-14
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 手动选择的标准参数
 - en: Increase cash allocation perentage from `0.20` to `0.50`
+  id: totrans-15
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 将现金分配百分比从`0.20`增加到`0.50`
 - en: Increase ATR distance for the stop from `3.0` to `4.0` to try to avoid being
     whipped
+  id: totrans-16
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 将ATR距离从`3.0`增加到`4.0`，以尝试避免被鞭打
 - en: 'The manually chosen parameters for the strategy:'
+  id: totrans-17
   prefs: []
   type: TYPE_NORMAL
+  zh: 为策略手动选择的参数：
 - en: '[PRE0]'
+  id: totrans-18
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: 'And system wide:'
+  id: totrans-19
   prefs: []
   type: TYPE_NORMAL
+  zh: 并且系统范围内：
 - en: '[PRE1]'
+  id: totrans-20
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE1]'
 - en: The date range will be from `2005-01-01` to `2014-12-31` for a total of 10 years.
+  id: totrans-21
   prefs: []
   type: TYPE_NORMAL
+  zh: 日期范围将从`2005-01-01`到`2014-12-31`，共10年。
 - en: Analyzers
+  id: totrans-22
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 分析器
 - en: 'To get some *objective* data 3 analyzers will be added to the system:'
+  id: totrans-23
   prefs: []
   type: TYPE_NORMAL
+  zh: 为了获得一些*客观*数据，将向系统添加3个分析器：
 - en: Two `TimeReturn` for the entire period
+  id: totrans-24
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 两个用于整个时期的`TimeReturn`
 - en: For the strategy itself
+  id: totrans-25
   prefs:
   - PREF_IND
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 对于策略本身
 - en: For the data being operated upon as benchmark
+  id: totrans-26
   prefs:
   - PREF_IND
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 用作基准操作的数据
 - en: Effectively benchmarking the strategy against the asset
+  id: totrans-27
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 将策略与资产进行有效的基准比较
 - en: A `TimeReturn` to measure *annual returns*
+  id: totrans-28
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 一个用于测量*年度回报率*的`TimeReturn`
 - en: A `SharpeRatio` to see how the strategy performs against a risk-free asset
+  id: totrans-29
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 一个`SharpeRatio`用于查看策略相对于无风险资产的表现如何
 - en: The value is set at `1%`, can be changed with the sample options
+  id: totrans-30
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 该值设置为`1%`，可通过示例选项更改
 - en: A `SQN` (*System Quality Number*) to analyze the quality of the trades using
     this performance indicator defined by Van K. Tharp
+  id: totrans-31
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 一个用于分析交易质量的`SQN`（*系统质量数*），使用Van K. Tharp定义的性能指标
 - en: Additonally a `DrawDown` observer will be added to the mix.
+  id: totrans-32
   prefs: []
   type: TYPE_NORMAL
+  zh: 此外，将添加一个`DrawDown`观察器到混合中。
 - en: 'Run 1: Standard Parameters'
+  id: totrans-33
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: Run 1：标准参数
 - en: YHOO
+  id: totrans-34
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: YHOO
 - en: '[PRE2]'
+  id: totrans-35
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE2]'
 - en: '![image](../Images/47b5367760ce780e98f9c40d98b79493.png)'
+  id: totrans-36
   prefs: []
   type: TYPE_IMG
+  zh: '![图片](../Images/47b5367760ce780e98f9c40d98b79493.png)'
 - en: ORCL
+  id: totrans-37
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: ORCL
 - en: '[PRE3]'
+  id: totrans-38
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE3]'
 - en: '![image](../Images/278bb8cecab092fb70f817d5be7fde98.png)'
+  id: totrans-39
   prefs: []
   type: TYPE_IMG
+  zh: '![图片](../Images/278bb8cecab092fb70f817d5be7fde98.png)'
 - en: NVDA
+  id: totrans-40
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: NVDA
 - en: '[PRE4]'
+  id: totrans-41
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE4]'
 - en: '![image](../Images/3d510dca85f3683a0edf93748a6cfcf6.png)'
+  id: totrans-42
   prefs: []
   type: TYPE_IMG
+  zh: '![图片](../Images/3d510dca85f3683a0edf93748a6cfcf6.png)'
 - en: Analysis of Run 1
+  id: totrans-43
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: Run 1的分析
 - en: '*YHOO*'
+  id: totrans-44
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '*YHOO*'
 - en: The 1^(st) and 2^(nd) `TimeReturn` analyzers (the strategy and the asset itself)
     show that The strategy has lost `7.11%` whilst the asset in question has appreciated
     `31.67%`.
+  id: totrans-45
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 第1^(st)和第2^(nd)个`TimeReturn`分析器（策略和资产本身）表明，策略损失了`7.11%`，而所涉及的资产则升值了`31.67%`。
 - en: Not even worth having a look at the other analyzers
+  id: totrans-46
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 甚至都不值得去看其他的分析器
 - en: '*ORCL*'
+  id: totrans-47
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '*ORCL*'
 - en: A `24.89%` for the strategy, but paled by the `223.99%` return of the asset
     itself.
+  id: totrans-48
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 策略为 `24.89%`，但被资产本身的 `223.99%` 回报所淡化。
 - en: The *SharpeRatio* at `0.35` is still away from the usual minimum target of `1`.
+  id: totrans-49
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: '*SharpeRatio* 为 `0.35`，仍然远离通常的最低目标`1`。'
 - en: 'The *SQN* returns a `1.76` which at least gets a grading in the *Van K. Tharp*
     scale: `1.6 - 1.9 Below Average`.'
+  id: totrans-50
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: '*SQN* 返回了 `1.76`，至少在 *Van K. Tharp* 尺度上获得了评分：`1.6 - 1.9 低于平均水平`。'
 - en: '*NVDA*'
+  id: totrans-51
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '*NVDA*'
 - en: In this case a `-1.78%` for the strategy and a `-17.76%` for the asset. The
     SharpeRatio, with `-0.10` shows that even if the strategy has outperformed the
     asset, it would have been better to go with a `1%` bank account.
+  id: totrans-52
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 在这种情况下，策略为 `-1.78%`，资产为 `-17.76%`。 SharpeRatio 为 `-0.10`，表明即使策略表现优于资产，选择 `1%`
+    的银行账户也更好。
 - en: The *SQN* is obviously not even at the bottom of the scale.
+  id: totrans-53
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: '*SQN* 显然甚至没有达到尺度的底部。'
 - en: Conclusions of Run 1
+  id: totrans-54
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 第1次运行的结论
 - en: '*1 great loss, a tie and a win which underperforms the asset*. Not that successful.'
+  id: totrans-55
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '*1次巨大的损失，一次平局和一次表现不佳的胜利*。并不成功。'
 - en: 'Run 2: CashAlloc to 0.50'
+  id: totrans-56
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 第2次运行：现金分配为 0.50
 - en: YHOO
+  id: totrans-57
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: YHOO
 - en: '[PRE5]'
+  id: totrans-58
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE5]'
 - en: '![image](../Images/186afda5652f4ebe4ccfe66ddcd8e428.png)'
+  id: totrans-59
   prefs: []
   type: TYPE_IMG
+  zh: '![图像](../Images/186afda5652f4ebe4ccfe66ddcd8e428.png)'
 - en: ORCL
+  id: totrans-60
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: ORCL
 - en: '[PRE6]'
+  id: totrans-61
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE6]'
 - en: '![image](../Images/85e8d1e6047a6086a5144570886714f3.png)'
+  id: totrans-62
   prefs: []
   type: TYPE_IMG
+  zh: '![图像](../Images/85e8d1e6047a6086a5144570886714f3.png)'
 - en: NVDA
+  id: totrans-63
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: NVDA
 - en: '[PRE7]'
+  id: totrans-64
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE7]'
 - en: '![image](../Images/4087e3427d905414be4d49d540029d5b.png)'
+  id: totrans-65
   prefs: []
   type: TYPE_IMG
+  zh: '![图像](../Images/4087e3427d905414be4d49d540029d5b.png)'
 - en: Conclusions of Run 2
+  id: totrans-66
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 第2次运行的结论
 - en: Increasing the percentage cash allocation in each operation from `20%` to `50%`
     has increased the effect of the previous results
+  id: totrans-67
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 将每次操作中现金分配的百分比从 `20%` 增加到 `50%`，已增加了先前结果的影响
 - en: The strategy on *YHOO* and *NVDA* has lost more than before
+  id: totrans-68
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 在 *YHOO* 和 *NVDA* 上的策略比以前损失更多
 - en: And the strategy on *ORCL* has won more than before, still not close to the
     over *220%* of the asset.
+  id: totrans-69
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 而在 *ORCL* 上的策略赢得了比以前更多，但仍然不接近资产的超过 *220%*。
 - en: 'Run 3: ATR Distance to 4.0'
+  id: totrans-70
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 第3次运行：ATR 距离为 4.0
 - en: Still keeping the previous increase in cash allocation to `50%`. The idea is
     to avoid getting too early out of the market.
+  id: totrans-71
   prefs: []
   type: TYPE_NORMAL
+  zh: 仍然保持先前将现金分配增加到 `50%`。 这个想法是避免过早离开市场。
 - en: YHOO
+  id: totrans-72
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: YHOO
 - en: '[PRE8]'
+  id: totrans-73
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE8]'
 - en: '![image](../Images/91ae6a1c373ec19df0d8f696d8c8bfb6.png)'
+  id: totrans-74
   prefs: []
   type: TYPE_IMG
+  zh: '![图像](../Images/91ae6a1c373ec19df0d8f696d8c8bfb6.png)'
 - en: ORCL
+  id: totrans-75
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: ORCL
 - en: '[PRE9]'
+  id: totrans-76
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE9]'
 - en: '![image](../Images/e2204da21578c987dc1b943e52531fdc.png)'
+  id: totrans-77
   prefs: []
   type: TYPE_IMG
+  zh: '![图像](../Images/e2204da21578c987dc1b943e52531fdc.png)'
 - en: NVDA
+  id: totrans-78
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: NVDA
 - en: '[PRE10]'
+  id: totrans-79
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE10]'
 - en: '![image](../Images/1191866a3afdee367833d3665bfcb9dd.png)'
+  id: totrans-80
   prefs: []
   type: TYPE_IMG
+  zh: '![图像](../Images/1191866a3afdee367833d3665bfcb9dd.png)'
 - en: Conclusions of Run 3
+  id: totrans-81
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 第3次运行的结论
 - en: '**Chicken, Chicken, Winner Dinner!!**'
+  id: totrans-82
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**鸡，鸡，赢家的晚餐！！**'
 - en: The strategy makes money on the 3 assets
+  id: totrans-83
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 该策略在这3个资产上赚了钱
 - en: '*YHOO*: `1.19%` vs the `31.67%` return of the asset itself'
+  id: totrans-84
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '*YHOO*：`1.19%` 对比资产本身的`31.67%` 回报'
 - en: '*ORCL*: `21.90%` vs the `223.99%` of the asset'
+  id: totrans-85
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '*ORCL*：`21.90%` 对比资产的`223.99%`'
 - en: In this case increasing the `ATRDist` parameter has decreased the previous returns
     of *Run 2* which were at `69.01%`
+  id: totrans-86
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 在这种情况下，增加`ATRDist`参数已经降低了 *第2次运行* 的先前收益，即 `69.01%`
 - en: '*NVDA*: `48.84%` vs `-17.76%` of the asset.'
+  id: totrans-87
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '*NVDA*：`48.84%` 对比资产的`-17.76%`。'
 - en: The surprising thing here is that the *SharpeRatio* and *SQN* are telling that
+  id: totrans-88
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 这里令人惊讶的是 *SharpeRatio* 和 *SQN* 表明
 - en: Usage of the sample
+  id: totrans-89
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 样本的使用
 - en: '[PRE11]'
+  id: totrans-90
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE11]'
 - en: And the code itself
+  id: totrans-91
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 还有代码本身
 - en: '[PRE12]'
+  id: totrans-92
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE12]'

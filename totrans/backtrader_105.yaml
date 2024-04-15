@@ -1,383 +1,567 @@
 - en: Rebalancing with the Conservative Formula
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 使用保守公式重新平衡
 - en: 原文：[https://www.backtrader.com/blog/2019-07-19-rebalancing-conservative/rebalancing-conservative/](https://www.backtrader.com/blog/2019-07-19-rebalancing-conservative/rebalancing-conservative/)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.backtrader.com/blog/2019-07-19-rebalancing-conservative/rebalancing-conservative/](https://www.backtrader.com/blog/2019-07-19-rebalancing-conservative/rebalancing-conservative/)
 - en: 'The *Conservative Formula* approach is presented in this paper: [The Conservative
     Formula in Python: Quantitative Investing made Easy](https://papers.ssrn.com/sol3/papers.cfm?abstract_id=3145152)'
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: '*保守公式*方法在本文中提出：[The Conservative Formula in Python: Quantitative Investing
+    made Easy](https://papers.ssrn.com/sol3/papers.cfm?abstract_id=3145152)'
 - en: 'It is one many possible rebalancing approaches, but one that is easy to grasp.
     A summary of the approach:'
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: 这是许多可能的重新平衡方法之一，但是易于理解。方法概要：
 - en: '`x` stocks are selected from a universe of `Y` (100 of 1000)'
+  id: totrans-4
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 从 `Y`（1000中的100）的宇宙中选取了 `x` 支股票。
 - en: The selection criteria are
+  id: totrans-5
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 选择标准是：
 - en: Low volatility
+  id: totrans-6
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 低波动率
 - en: High Net Payout Yield
+  id: totrans-7
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 高净支付收益
 - en: High Momentum
+  id: totrans-8
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 高动量
 - en: Rebalancing every month
+  id: totrans-9
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 每月重新平衡
 - en: With this in mind let's go and present a possible implementation in *backtrader*
+  id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: 有了这个想法，让我们去提出*backtrader*中的一种可能实现吧。
 - en: The data
+  id: totrans-11
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 数据
 - en: Even if one has a winning strategy, nothing will be actually won if no data
     is available for the strategy. Which means that it has to be considered how the
     data looks like and how to load it.
+  id: totrans-12
   prefs: []
   type: TYPE_NORMAL
+  zh: 即使有一个获胜的策略，如果没有为该策略提供数据，也不会真正获胜。这意味着必须考虑数据的外观以及如何加载数据。
 - en: A set of *CSV* ("comma-separated-values") files is assumed to be available,
     containing with the following features
+  id: totrans-13
   prefs: []
   type: TYPE_NORMAL
+  zh: 假定一组*CSV*（“逗号分隔值”）文件可用，包含以下功能
 - en: '`ohlcv` monthly data'
+  id: totrans-14
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`ohlcv` 月度数据'
 - en: With an extra field after the `v` containing the *Net Payout Yield* (`npy`),
     to have an `ohlcvn` data set.
+  id: totrans-15
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 在 `v` 后增加了一个额外的字段，包含*净支付收益*（`npy`），以获取 `ohlcvn` 数据集。
 - en: The format of the *CSV* data will therefore look like this
+  id: totrans-16
   prefs: []
   type: TYPE_NORMAL
+  zh: 因此，*CSV*数据的格式如下
 - en: '[PRE0]'
+  id: totrans-17
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: 'I.e.: one row per month. The data loader engine can now be prepared for which
     simple extension of the generic built-in CSV loader delivered with *backtrader*
     will be created.'
+  id: totrans-18
   prefs: []
   type: TYPE_NORMAL
+  zh: 即：每月一行。现在数据加载器引擎可以准备好创建一个简单的扩展，与*backtrader*一起提供的通用内置CSV加载器。
 - en: '[PRE1]'
+  id: totrans-19
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE1]'
 - en: And that is. Notice how easy has been to add a point of fundamental data to
     the `ohlcv` data stream.
+  id: totrans-20
   prefs: []
   type: TYPE_NORMAL
+  zh: 那就是。注意添加基本数据到`ohlcv`数据流是多么容易。
 - en: By using the expresion `lines=('npy',)`. The other usual fields (`open`, `high`,
     ...) are already part of `GenericCSVData`
+  id: totrans-21
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 通过使用表达式 `lines=('npy',)`。其他常规字段（`open`、`high`等）已经包含在 `GenericCSVData` 中
 - en: By indicating the loading position with the `params = dict(npy=6)`. The other
     fields have a predefined position.
+  id: totrans-22
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 通过使用`params = dict(npy=6)`指示加载位置。其他字段具有预定义的位置。
 - en: The *timeframe* has also been updated in the parameters to reflect the monthly
     nature of the data.
+  id: totrans-23
   prefs: []
   type: TYPE_NORMAL
+  zh: '*时间框架*也已在参数中更新，以反映数据的每月性质。'
 - en: '* * *'
+  id: totrans-24
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: '**Note**'
+  id: totrans-25
   prefs: []
   type: TYPE_NORMAL
+  zh: '**注意**'
 - en: See [Docs - Data Feeds Reference - GenericCSVData](https://www.backtrader.com/docu/dataautoref/#genericcsvdata)
     for the actual fields and loading positions (which can all be customized)
+  id: totrans-26
   prefs: []
   type: TYPE_NORMAL
+  zh: 请参阅[文档 - 数据源参考 - GenericCSVData](https://www.backtrader.com/docu/dataautoref/#genericcsvdata)以获取实际字段和加载位置（所有这些都可以自定义）
 - en: '* * *'
+  id: totrans-27
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: The data loader will have to be properly instantiated with a file name, but
     that's something for later, when a standard boilerplate is presented below to
     have a complete script.
+  id: totrans-28
   prefs: []
   type: TYPE_NORMAL
+  zh: 数据加载器将必须用文件名正确实例化，但这是稍后的事情，当下面提供标准样板以获得完整的脚本时。
 - en: The Strategy
+  id: totrans-29
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 策略
 - en: Let's put the logic into a standard *backtrader* strategy. To make it as generic
     and customizable as possible, the same same `params` approach will be used, as
     it was used before with the data.
+  id: totrans-30
   prefs: []
   type: TYPE_NORMAL
+  zh: 让我们将逻辑放入标准的*backtrader*策略中。为了尽可能使其通用和可定制化，将使用与数据相同的`params`方法，就像之前用数据一样。
 - en: Before delving into the strategy, let's consider one of the points from the
     quick summary
+  id: totrans-31
   prefs: []
   type: TYPE_NORMAL
+  zh: 在深入研究策略之前，让我们考虑快速摘要中的一个要点
 - en: '`x` stocks are selected from a universe of `Y`'
+  id: totrans-32
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 从 `Y` 的宇宙中选择了 `x` 支股票。
 - en: 'The strategy itself is not in charge of adding stocks to the universe, but
     it is in charge of the selection. One could be in a situation in which only 50
     stocks have been added and still try to select 100 if `x` and `Y` are fixed in
     the code. To cope with such situations, the following will be done:'
+  id: totrans-33
   prefs: []
   type: TYPE_NORMAL
+  zh: 策略本身并不负责向宇宙中添加股票，但负责选择。如果在代码中固定了`x`和`Y`，但宇宙中只添加了50支股票，仍然尝试选择100支股票，就会出现这样的情况。为了应对这种情况，将执行以下操作：
 - en: 'Have a `selperc` parameter with a value of `0.10` (i.e.: `10%`), to indicate
     the amount of stocks to be selected from the universe.'
+  id: totrans-34
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 具有值为`0.10`（即：`10%`）的`selperc`参数，表示从宇宙中选择的股票数量。
 - en: This means that if 1000 are present, only 100 will be selected and if the universe
     consist of 50 stocks, only 5 will be selected.
+  id: totrans-35
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 这意味着如果有1000只股票，只会选择100只，如果宇宙由50只股票组成，则只会选择5只。
 - en: 'As for the formula ranking the stock, it looks like this:'
+  id: totrans-36
   prefs: []
   type: TYPE_NORMAL
+  zh: 至于排名股票的公式，看起来像这样：
 - en: '`(momentum * net payout) / volatility`'
+  id: totrans-37
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`(动量 * 净支付) / 波动率`'
 - en: Which means that those with higher momentum, higher payout and lower volatility
     will have a higher score.
+  id: totrans-38
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 这意味着具有较高动量、较高支付和较低波动率的股票将获得较高的分数。
 - en: For `momentum` the `RateOfChange` indicator (aka `ROC`) will be used, which
     *measures the ratio of change in prices over a period*.
+  id: totrans-39
   prefs: []
   type: TYPE_NORMAL
+  zh: 对于`momentum`，将使用`RateOfChange`指标（又名`ROC`），它*测量一段时间内价格的变化比率*。
 - en: The `net payout` is already part of the data feed.
+  id: totrans-40
   prefs: []
   type: TYPE_NORMAL
+  zh: '`净支付`已经是数据源的一部分。'
 - en: To calculate the `volatility`, the `StandardDeviation` of the `n-periods` return
     of the stock (`n-periods`, because things will be kept as parameters) will be
     used.
+  id: totrans-41
   prefs: []
   type: TYPE_NORMAL
+  zh: 要计算`波动率`，将使用股票的`n-periods`回报的`标准差`（`n-periods`，因为事物将保持为参数）。
 - en: With this information, the strategy can already be *initialize* with the right
     parameters and the setup of the indicators and calculations which will be later
     used in each monthly iteration.
+  id: totrans-42
   prefs: []
   type: TYPE_NORMAL
+  zh: 有了这些信息，策略就可以用正确的参数进行*初始化*，设置指标和计算，这些将在每月迭代中使用。
 - en: First the declaration and the parameters
+  id: totrans-43
   prefs: []
   type: TYPE_NORMAL
+  zh: 首先是声明和参数。
 - en: '[PRE2]'
+  id: totrans-44
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE2]'
 - en: Notice that something not mentioned above has been added, and that is a parameter
     `reserve=0.05` (i.e. *5%*), which is used to calculated the percentage allocation
     per stock, keeping a reserve capital in the bank. Although for a simulation one
     could conceivable want to use 100% of the capital, one can hit the usual problems
     doing that, such as price gaps, floating point precision and end up missing some
     of the market entries.
+  id: totrans-45
   prefs: []
   type: TYPE_NORMAL
+  zh: 注意，上面未提及的内容已添加，即参数`reserve=0.05`（即*5%*），用于计算每只股票的百分比分配，保留一定资金在银行中。虽然对于模拟，人们可能想要使用100%的资本，但这样做可能会遇到一些问题，如价格差距、浮点精度等，最终可能会错过一些市场入场机会。
 - en: Before anything else, a small logging method is created, which will allow to
     log how the portfolio is rebalanced.
+  id: totrans-46
   prefs: []
   type: TYPE_NORMAL
+  zh: 在任何其他事情之前，创建一个小的日志记录方法，它将允许记录组合如何重新平衡。
 - en: '[PRE3]'
+  id: totrans-47
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE3]'
 - en: At the beginning of the `__init__` method, the number of stocks to rank is calculated
     and the reserve capital parameter is applied to determine the per stock percentage
     of the bank.
+  id: totrans-48
   prefs: []
   type: TYPE_NORMAL
+  zh: 在`__init__`方法的开头，计算要排名的股票数量，并应用保留资本参数以确定银行的每只股票百分比。
 - en: '[PRE4]'
+  id: totrans-49
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE4]'
 - en: And finally the initialization is over with the calculation of the per stock
     indicators for volatility and momentum, which are then applied in the per stock
     ranking formula calculation.
+  id: totrans-50
   prefs: []
   type: TYPE_NORMAL
+  zh: 最后，初始化完成，计算每只股票的波动率和动量指标，然后将其应用于每只股票的排名公式计算中。
 - en: '[PRE5]'
+  id: totrans-51
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE5]'
 - en: It's now time to iterate each month. The ranking is available in the `self.ranks`
     dictionary. The *key/value* pairs have to be sorted for each iteration, to get
     which items have to go and which ones have to be part of the portfolio (remain
     or be added)
+  id: totrans-52
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在是每个月迭代的时候了。排名在`self.ranks`字典中可用。每次迭代都必须对键/值对进行排序，以确定哪些项必须离开，哪些项必须成为组合的一部分（保留或添加）。
 - en: '[PRE6]'
+  id: totrans-53
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE6]'
 - en: The iterable is sorted in reverse order, because the ranking formula delivers
     higher scores for the highest ranked stocks.
+  id: totrans-54
   prefs: []
   type: TYPE_NORMAL
+  zh: 可迭代物按照相反顺序排序，因为排名公式为排名靠前的股票提供更高的分数。
 - en: Rebalancing is now due.
+  id: totrans-55
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在是重新平衡的时候了。
 - en: 'Rebalancing 1: Get Top Ranked and the stocks with open positions'
+  id: totrans-56
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 重新平衡1：获取排名靠前和具有开仓头寸的股票。
 - en: '[PRE7]'
+  id: totrans-57
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE7]'
 - en: A bit of Python trickery is happening here, because a `dict` is being used.
     The reason is that if the top ranked stocks were put in a `list` the operator
     `==` would be used internally by *Python* to check for presence with the operator
     `in`. And although improbable it would be possible for two stocks to have the
     same value on the same day. When using a `dict` a hash value is used when checking
     for presence of an item as part of the keys.
+  id: totrans-58
   prefs: []
   type: TYPE_NORMAL
+  zh: 这里发生了一些Python的诡计，因为使用了一个`dict`。原因是，如果将排名靠前的股票放入一个`list`中，*Python*会在内部使用运算符`==`来检查运算符`in`的存在。尽管不太可能，但两只股票可能在同一天具有相同的值。使用`dict`时，检查项存在性时会使用哈希值作为键的一部分。
 - en: '**Note**: For logging purposes `rbot` (*ranked bottom*) is also created with
     the stocks not present in `rtop`.'
+  id: totrans-59
   prefs: []
   type: TYPE_NORMAL
+  zh: '**注意**：出于日志记录目的，还创建了`rbot`（*排名底部*），其中包含未在`rtop`中出现的股票。'
 - en: To later discriminate between stocks that have to leave the portfolio, those
     which simply have to be rebalanced and the newly top ranked, a current list of
     stocks in the portfolio is prepared.
+  id: totrans-60
   prefs: []
   type: TYPE_NORMAL
+  zh: 为了后续区分必须离开投资组合的股票、那些只需重新平衡的股票以及新的排名靠前的股票，准备了投资组合中当前的股票列表。
 - en: '[PRE8]'
+  id: totrans-61
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE8]'
 - en: 'Rebalancing 2: Sell those no longer top ranked'
+  id: totrans-62
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 重新平衡 2：卖出不再排名靠前的股票
 - en: Just like in real world, in the *backtrader* ecosystem selling before buying
     is a must to ensure enough cash is there.
+  id: totrans-63
   prefs: []
   type: TYPE_NORMAL
+  zh: 就像在现实世界中一样，在*backtrader*生态系统中，在买入之前卖出是必须的，以确保有足够的现金。
 - en: '[PRE9]'
+  id: totrans-64
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE9]'
 - en: Stocks currently with an open position and no longer top ranked are sold (i.e.
     `target=0.0`).
+  id: totrans-65
   prefs: []
   type: TYPE_NORMAL
+  zh: 当前拥有仓位但不再排名靠前的股票被出售（即`target=0.0`）。
 - en: '**Note**'
+  id: totrans-66
   prefs: []
   type: TYPE_NORMAL
+  zh: '**注意**'
 - en: A simple `self.close(data)` would have sufficed here, rather than explicitly
     stating the target percentage.
+  id: totrans-67
   prefs: []
   type: TYPE_NORMAL
+  zh: 这里一个简单的`self.close(data)`就足够了，而不是明确说明目标百分比。
 - en: 'Rebalancing 3: Issue a target order for all top ranked stocks'
+  id: totrans-68
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 重新平衡 3：为所有排名靠前的股票发布目标订单
 - en: The total portfolio value changes over time and those stocks already in the
     portfolio may have to slightly increase/reduce the current position to match the
     expected percentage. `order_target_percent` is an ideal method to enter the market,
     because it does automatically calculate whether a `buy` or a `sell` order is needed.
+  id: totrans-69
   prefs: []
   type: TYPE_NORMAL
+  zh: 总投资组合价值随时间变化，已经在投资组合中的股票可能必须略微增加/减少当前仓位以匹配预期的百分比。`order_target_percent`是进入市场的理想方法，因为它会自动计算是否需要`buy`或`sell`订单。
 - en: '[PRE10]'
+  id: totrans-70
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE10]'
 - en: Rebalancing the stocks already with a position is done before adding the new
     ones to the portfolio, as the new one will only issue `buy` orders and consume
     cash. Having removed the existing stocks from with `rtop[data].pop()` after having
     re-balanced, the remaining stocks in `rtop` are those which will be newly added
     to the portfolio.
+  id: totrans-71
   prefs: []
   type: TYPE_NORMAL
+  zh: 在将新股票添加到投资组合之前，重新平衡已有仓位的股票，因为新股票只会发布`buy`订单并消耗现金。在重新平衡后从`rtop[data].pop()`中移除现有股票后，`rtop`中剩余的股票是将新添加到投资组合中的股票。
 - en: '[PRE11]'
+  id: totrans-72
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE11]'
 - en: Running it all and Evaluating it!
+  id: totrans-73
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 运行所有并评估它！
 - en: Having a data loader class and the strategy is not enough. Just like with any
     other framework, some boilerplate is needed. The following code makes it possible.
+  id: totrans-74
   prefs: []
   type: TYPE_NORMAL
+  zh: 拥有数据加载器类和策略是不够的。就像任何其他框架一样，需要一些样板。以下代码使其成为可能。
 - en: '[PRE12]'
+  id: totrans-75
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE12]'
 - en: 'Where the following is done:'
+  id: totrans-76
   prefs: []
   type: TYPE_NORMAL
+  zh: 在以下情况下完成：
 - en: Parsing arguments and have this available (this is obviously optional, as everything
     can be hardcoded, but good practices are good practices)
+  id: totrans-77
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 解析参数并使其可用（这显然是可选的，因为一切都可以硬编码，但是良好的实践是好的实践）
 - en: Creating a `cerebro` engine instance. Yes, this is Spanish for *"brain"* and
     is the part of the framework in charge of coordinating the orchestral maneuvers
     in the dark. Although it can accept several options, the defaults should suffice
     for most use cases.
+  id: totrans-78
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 创建一个`cerebro`引擎实例。是的，这是西班牙语中的“大脑”，是框架的一部分，负责在黑暗中协调编排的操作。虽然它可以接受几个选项，但默认值对于大多数用例来说应该足够了。
 - en: Loading the data files, which is done with a simple directory scan of `args.datadir`
     is done and all files are loaded with `NetPayOutData` and added to the `cerebro`
     instance
+  id: totrans-79
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 加载数据文件，使用`args.datadir`的简单目录扫描完成，并使用`NetPayOutData`加载所有文件，并将其添加到`cerebro`实例中
 - en: Adding the strategy
+  id: totrans-80
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 添加策略
 - en: Setting the cash, which defaults to `1,000,000`. Given that the use case is
     for `100` stocks in a universe of `500`, it seems fair to have some cash to spare.
     It is also an argument which can be changed.
+  id: totrans-81
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 设置现金，默认为`1,000,000`。考虑到使用情况是`100`支股票在`500`支股票的宇宙中，似乎有些现金是可以用的。这也是一个可以更改的参数。
 - en: And calling `cerebro.run()`
+  id: totrans-82
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 并调用`cerebro.run()`
 - en: Finally the performance is evaluated
+  id: totrans-83
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 最后评估性能
 - en: To make it possible to run things with different parameters straight from the
     command line, an `argparse` enabled boilerplate is presented below, with the entire
     code
+  id: totrans-84
   prefs: []
   type: TYPE_NORMAL
+  zh: 为了能够直接从命令行运行具有不同参数的事务，下面提供了一个启用了`argparse`的样板，其中包含了整个代码
 - en: '**Performance Evaluation**'
+  id: totrans-85
   prefs: []
   type: TYPE_NORMAL
+  zh: '**性能评估**'
 - en: 'A naive performance evaluation added in the form of the final resulting value,
     i.e.: the final net asset value minus the starting cash.'
+  id: totrans-86
   prefs: []
   type: TYPE_NORMAL
+  zh: 通过最终结果值的形式添加了一个简单的性能评估，即：最终净资产价值减去起始现金。
 - en: 'The *backtrader* ecosystem offers a set of built-in performance analyzers which
     could also be used, like: `SharpeRatio`, `Variability-Weighted Return`, `SQN`
     and others. See [Docs - Analyzers Reference](https://www.backtrader.com/docu/analyzers-reference/)'
+  id: totrans-87
   prefs: []
   type: TYPE_NORMAL
+  zh: '*backtrader*生态系统提供了一组内置性能分析器，也可以使用，如：`SharpeRatio`、`Variability-Weighted Return`、`SQN`等。参见[文档
+    - 分析器参考](https://www.backtrader.com/docu/analyzers-reference/)'
 - en: The complete script
+  id: totrans-88
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 完整的脚本
 - en: And finally the bulk of the work presented as whole. Enjoy!
+  id: totrans-89
   prefs: []
   type: TYPE_NORMAL
+  zh: 最后，作品的大部分呈现为整体。享受吧！
 - en: '[PRE13]'
+  id: totrans-90
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE13]'

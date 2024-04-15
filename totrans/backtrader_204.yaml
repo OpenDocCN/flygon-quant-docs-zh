@@ -1,97 +1,146 @@
 - en: Absolute Strengh Histogram
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 绝对强度直方图
 - en: 原文：[https://www.backtrader.com/recipes/indicators/ash/ash/](https://www.backtrader.com/recipes/indicators/ash/ash/)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.backtrader.com/recipes/indicators/ash/ash/](https://www.backtrader.com/recipes/indicators/ash/ash/)
 - en: This is an indicator which seems to originate in the forex world, probably at
     *[http://fxcodebase.com](http://fxcodebase.com)*, but it seems difficult to track
     what the actual origin is.
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: 这是一个看起来起源于外汇世界的指标，可能在 *[http://fxcodebase.com](http://fxcodebase.com)*，但似乎很难追踪实际起源是什么。
 - en: 'Potentially first implemented in *LUA* here:'
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: 潜在地首先在 *LUA* 中实现：
 - en: '[http://fxcodebase.com/code/viewtopic.php?f=17&t=3836](http://fxcodebase.com/code/viewtopic.php?f=17&t=3836)'
+  id: totrans-4
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[http://fxcodebase.com/code/viewtopic.php?f=17&t=3836](http://fxcodebase.com/code/viewtopic.php?f=17&t=3836)'
 - en: 'Which also says that an updated and revised *LUA* version is available at:'
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: 同样还提到，更新和修订的 *LUA* 版本可在以下位置找到：
 - en: '[http://fxcodebase.com/code/viewtopic.php?f=17&t=2987&p=6869&hilit=Absolute+Strength#p6869](http://fxcodebase.com/code/viewtopic.php?f=17&t=2987&p=6869&hilit=Absolute+Strength#p6869)'
+  id: totrans-6
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[http://fxcodebase.com/code/viewtopic.php?f=17&t=2987&p=6869&hilit=Absolute+Strength#p6869](http://fxcodebase.com/code/viewtopic.php?f=17&t=2987&p=6869&hilit=Absolute+Strength#p6869)'
 - en: 'The same site hosts a version in `MQL4`:'
+  id: totrans-7
   prefs: []
   type: TYPE_NORMAL
+  zh: 同一站点托管了一个 `MQL4` 版本：
 - en: '[http://fxcodebase.com/code/viewtopic.php?f=38&t=61541](http://fxcodebase.com/code/viewtopic.php?f=38&t=61541)'
+  id: totrans-8
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[http://fxcodebase.com/code/viewtopic.php?f=38&t=61541](http://fxcodebase.com/code/viewtopic.php?f=38&t=61541)'
 - en: 'And another version for `MQL5` can be found at:'
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: 另一个 `MQL5` 版本可以在这里找到：
 - en: '[https://www.mql5.com/en/code/21429](https://www.mql5.com/en/code/21429)'
+  id: totrans-10
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[https://www.mql5.com/en/code/21429](https://www.mql5.com/en/code/21429)'
 - en: 'All versions seem complex, due to the language and platform implementation,
     with a whooping 227 lines in the `MQL5` version (including some comments of course),
     and have slight differences, so the need arises to settle for a sound definition.
     The definition in pseudo-code after looking at the different versions:'
+  id: totrans-11
   prefs: []
   type: TYPE_NORMAL
+  zh: 所有版本都似乎很复杂，由于语言和平台实现的原因，`MQL5` 版本有 227 行代码（当然包括一些注释），并且有轻微的差异，因此有必要确定一个合适的定义。在查看不同版本后的伪代码定义：
 - en: '[PRE0]'
+  id: totrans-12
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: The `RSI` / `STOCH` naming was chosen by the original implementors and `pointsize`
     is also known as `pipsize` which reflects its *Forex* origins. It is unclear if
     the *smoothing average* has to be the same as the previous moving average and
     some versions seem to work with an already averaged price rather than with the
     standard price. And the moving averages are selected using an *integer*.
+  id: totrans-13
   prefs: []
   type: TYPE_NORMAL
+  zh: '`RSI` / `STOCH` 命名是原始实现者选择的，`pointsize` 也被称为 `pipsize`，反映了其 *外汇* 起源。目前尚不清楚
+    *平滑平均值* 是否必须与以前的移动平均值相同，一些版本似乎使用已经平均化的价格而不是标准价格。移动平均线是使用 *整数* 选择的。'
 - en: Some decisions
+  id: totrans-14
   prefs: []
   type: TYPE_NORMAL
+  zh: 一些决定
 - en: The indicator will work with the raw priced passed to it in a data feed. If
     the user wants to run the indicator on an average price it can pass it, instead
     of passing the raw price.
+  id: totrans-15
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 该指标将使用数据提供的原始价格进行计算。如果用户希望在平均价格上运行指标，可以传递它，而不是传递原始价格。
 - en: The 0.5 multiplier in the `RSI` mode, will be a parameter
+  id: totrans-16
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`RSI` 模式中的 0.5 倍乘数将作为参数'
 - en: The moving average won't be selected with any kind of *integer*. In *backtrader*
     one can pass the actual desired moving average as a parameter.
+  id: totrans-17
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 移动平均线不会被任何类型的 *整数* 选择。在 *backtrader* 中，可以将实际所需的移动平均线作为参数传递。
 - en: The smoothing moving average, unless specified as a parameter, will be the same
     as the moving average already in use in the indicator
+  id: totrans-18
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 平滑移动平均线，除非作为参数指定，否则将与指标中已使用的移动平均线相同
 - en: The `pointsize` will not be used unless the user specifies a value for it as
     a parameter.
+  id: totrans-19
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 除非用户将值指定为参数，否则将不使用 `pointsize`。
 - en: And here the implementation
+  id: totrans-20
   prefs: []
   type: TYPE_NORMAL
+  zh: 这里是实现
 - en: '[PRE1]'
+  id: totrans-21
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE1]'
 - en: And here a view of how the indicator works
+  id: totrans-22
   prefs: []
   type: TYPE_NORMAL
+  zh: 这里展示了指标的工作方式
 - en: '![ASH View](../Images/4ae3bc56070937641c791efa59548b47.png)'
+  id: totrans-23
   prefs: []
   type: TYPE_IMG
+  zh: '![ASH View](../Images/4ae3bc56070937641c791efa59548b47.png)'

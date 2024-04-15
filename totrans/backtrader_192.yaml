@@ -1,101 +1,155 @@
 - en: Extending a data feed
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 扩展数据源
 - en: 原文：[https://www.backtrader.com/blog/posts/2015-08-07-extending-a-datafeed/extending-a-datafeed/](https://www.backtrader.com/blog/posts/2015-08-07-extending-a-datafeed/extending-a-datafeed/)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.backtrader.com/blog/posts/2015-08-07-extending-a-datafeed/extending-a-datafeed/](https://www.backtrader.com/blog/posts/2015-08-07-extending-a-datafeed/extending-a-datafeed/)
 - en: Issues in GitHub are actually pushing into finishing documentation parts or
     helping me to understand if backtrader has the ease of use and flexibility I envisioned
     from the first moments and the decisions made along the way.
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: GitHub上的问题实际上正在推动完成文档部分或帮助我了解backtrader是否具有我最初设想的易用性和灵活性，并沿途做出的决定。
 - en: 'In this case is [Issue #9](https://github.com/mementum/backtrader/issues/9).'
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: 在这种情况下是[问题＃9](https://github.com/mementum/backtrader/issues/9)。
 - en: 'The question finally seems to boil down to:'
+  id: totrans-4
   prefs: []
   type: TYPE_NORMAL
+  zh: 最终问题似乎归结为：
 - en: Can the end user easily extend the existing mechanisms to add extra information
     in the form of lines that gets passed along other existing price information spots
     like `open`, `high`, etc?
+  id: totrans-5
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 最终用户是否可以轻松扩展现有机制，以添加额外信息，以行的形式传递到其他现有价格信息点，如`open`，`high`等？
 - en: 'As far as I understand the question the answer is: **Yes**'
+  id: totrans-6
   prefs: []
   type: TYPE_NORMAL
+  zh: 就我理解的问题，答案是：**是的**
 - en: 'The poster seems to have these requirements (from [Issue #6](https://github.com/mementum/backtrader/issues/6)):'
+  id: totrans-7
   prefs: []
   type: TYPE_NORMAL
+  zh: 发帖人似乎有这些要求（来自[问题＃6](https://github.com/mementum/backtrader/issues/6)）：
 - en: A data source which is being parsed into CSV format
+  id: totrans-8
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 一个被解析为CSV格式的数据源
 - en: Using `GenericCSVData` to load the information
+  id: totrans-9
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 使用`GenericCSVData`来加载信息
 - en: 'This generic csv support was developed in response to this [Issue #6](https://github.com/mementum/backtrader/issues/6)'
+  id: totrans-10
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 这种通用的CSV支持是为了响应这个[问题＃6](https://github.com/mementum/backtrader/issues/6)而开发的
 - en: An extra field which apparently contains P/E information which needs to be passed
     along the parsed CSV Data
+  id: totrans-11
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 一个额外字段，显然包含需要传递到解析的CSV数据中的P/E信息
 - en: Let’s build on the CSV Data Feed Development and A Generic CSV Data Feed example
     posts.
+  id: totrans-12
   prefs: []
   type: TYPE_NORMAL
+  zh: 让我们在CSV数据源开发和通用CSV数据源示例帖子的基础上构建。
 - en: 'Steps:'
+  id: totrans-13
   prefs: []
   type: TYPE_NORMAL
+  zh: 步骤：
 - en: Assume the P/E information is being set in the CSV data which is parsed
+  id: totrans-14
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 假设P/E信息被设置在被解析的CSV数据中
 - en: Use `GenericCSVData` as the base class
+  id: totrans-15
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 使用`GenericCSVData`作为基类
 - en: Extend the existng lines (open/high/low/close/volumen/openinterest) with `pe`
+  id: totrans-16
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 将现有线（open/high/low/close/volumen/openinterest）扩展为`pe`
 - en: Add a parameter to let the caller determine the column position of the P/E information
+  id: totrans-17
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 添加一个参数，让调用者确定P/E信息的列位置
 - en: 'The result:'
+  id: totrans-18
   prefs: []
   type: TYPE_NORMAL
+  zh: 结果：
 - en: '[PRE0]'
+  id: totrans-19
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: And the job is done …
+  id: totrans-20
   prefs: []
   type: TYPE_NORMAL
+  zh: 工作完成了...
 - en: 'Later and when using this data feed inside a strategy:'
+  id: totrans-21
   prefs: []
   type: TYPE_NORMAL
+  zh: 稍后，在策略中使用这个数据源时：
 - en: '[PRE1]'
+  id: totrans-22
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE1]'
 - en: Plotting that extra P/E line
+  id: totrans-23
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 绘制额外的P/E线
 - en: There is obviously no automated plot support for that extra line in the data
     feed.
+  id: totrans-24
   prefs: []
   type: TYPE_NORMAL
+  zh: 显然，在数据源中没有对该额外线的自动绘图支持。
 - en: 'The best alternative would be to do a SimpleMovingAverage on that line and
     plot it in a separate axis:'
+  id: totrans-25
   prefs: []
   type: TYPE_NORMAL
+  zh: 最好的选择是对该线进行简单移动平均，并在单独的轴上绘制它：
 - en: '[PRE2]'
+  id: totrans-26
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE2]'

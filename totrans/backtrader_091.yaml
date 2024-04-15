@@ -1,690 +1,1000 @@
 - en: Plotting
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 绘图
 - en: 原文：[https://www.backtrader.com/docu/plotting/plotting/](https://www.backtrader.com/docu/plotting/plotting/)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: '[https://www.backtrader.com/docu/plotting/plotting/](https://www.backtrader.com/docu/plotting/plotting/)的原文：'
 - en: Although *backtesting* is meant to be an automated process based on mathematical
     calculations, it is often the case that one wants to actually visualize what’s
     going on. Be it with an existing algorithm which has undergone a backtesting run
     or looking at what really indicators (built-in or custom) deliver with the data.
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: 尽管*回测*是基于数学计算的自动化过程，但通常情况下，人们希望实际可视化正在发生的情况。 无论是使用经过回测运行的现有算法，还是查看真正的指标（内置或自定义）与数据一起提供了什么。
 - en: And because everything has a human being behind it, charting the data feeds,
     indicators, operations, evolution of cash and portfolio value can help the humans
     to better appreciate what’s going on, discard/modify/create ideas and whatever
     the human looking at the chart may do with the visual information.
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: 而且因为一切都有人类的背后，绘制数据源、指标、操作、现金和组合价值的发展可以帮助人类更好地理解正在发生的事情，丢弃/修改/创建想法以及查看图表的人类可以用视觉信息做的任何事情。
 - en: That’s why *backtrader*, using the facilities provided by `matplotlib`, provides
     built-in charting facilities.
+  id: totrans-4
   prefs: []
   type: TYPE_NORMAL
+  zh: 这就是为什么*backtrader*，利用`matplotlib`提供的便利设施，提供了内置的图表功能。
 - en: How to plot
+  id: totrans-5
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 如何绘制
 - en: 'Any backtesting run can be plotted with the invocation of a single method:'
+  id: totrans-6
   prefs: []
   type: TYPE_NORMAL
+  zh: 任何回测运行都可以通过调用单个方法绘制：
 - en: '[PRE0]'
+  id: totrans-7
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: Of course this is usually the last command issued like in this simple code which
     uses one of the sample data from the *backtrader* sources.
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: 当然，这通常是像这样的最后一个命令，这个简单的代码使用了*backtrader*源之一的样本数据。
 - en: '[PRE1]'
+  id: totrans-9
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE1]'
 - en: And this yields the following chart.
+  id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: 这产生了以下图表。
 - en: '![image](../Images/4ca14fa975bdb1afea474900b29ff9c6.png)'
+  id: totrans-11
   prefs: []
   type: TYPE_IMG
+  zh: '![image](../Images/4ca14fa975bdb1afea474900b29ff9c6.png)'
 - en: The chart includes 3 *Observers* which in this case and given the lack of any
     trading are mostly pointless
+  id: totrans-12
   prefs: []
   type: TYPE_NORMAL
+  zh: 图表包括3个*观察器*，在这种情况下，考虑到没有任何交易，它们基本上是没有意义的
 - en: A `CashValue` observer which as the name implies keeps track of the `Cash` and
     total portolio `Value` (including cash) during the life of the backtesting run
+  id: totrans-13
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 一个`CashValue`观察器，如其名称所示，在回测运行的生命周期内跟踪`Cash`和总投资组合`Value`（包括现金）
 - en: A `Trade` Observer which shows, at the end of a trade, the actual *Profit and
     Loss*
+  id: totrans-14
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 一个`Trade`观察器，在一次交易结束时显示实际的*盈亏*
 - en: A trade is defined as opening a position and taking the position back to `0`
     (directly or crossing over from long to short or short to long)
+  id: totrans-15
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 交易被定义为开仓并将仓位调回`0`（直接或从多头到空头或空头到多头）
 - en: A `BuySell` observer which plots (on top of the prices) where *buy* and *sell*
     operations have taken place
+  id: totrans-16
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 一个`BuySell`观察器，在价格之上绘制*买入*和*卖出*操作的位置
 - en: 'These *3 Observers* are automatically added by `cerebro`, and are controlled
     with the `stdstats` parameter (default: `True`). Do the following to disable them
     if you wish:'
+  id: totrans-17
   prefs: []
   type: TYPE_NORMAL
+  zh: 这*3个观察器*是由`cerebro`自动添加的，并且通过`stdstats`参数（默认为`True`）进行控制。 如果希望禁用它们，请执行以下操作：
 - en: '[PRE2]'
+  id: totrans-18
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE2]'
 - en: 'or later when *running* as in:'
+  id: totrans-19
   prefs: []
   type: TYPE_NORMAL
+  zh: 或者稍后*运行*时，例如：
 - en: '[PRE3]'
+  id: totrans-20
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE3]'
 - en: Plotted Elements
+  id: totrans-21
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 绘制的元素
 - en: 'Although the `Observers` have already been mentioned above in the introduction,
     they are not the only elements to get plotted. These 3 things get plotted:'
+  id: totrans-22
   prefs: []
   type: TYPE_NORMAL
+  zh: 尽管在介绍中已经提到了`Observers`，但它们并不是唯一要绘制的元素。 这三个东西被绘制出来：
 - en: '*Data Feeds* added to Cerebro with `adddata`, `replaydata` and `resampledata`'
+  id: totrans-23
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 使用`adddata`、`replaydata`和`resampledata`将*数据源*添加到Cerebro
 - en: '*Indicators* declared at strategy level (or added to cerebro with `addindicator`
     which is purely meant for experimentation purposes and has the indicator added
     to a dummy strategy)'
+  id: totrans-24
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 在策略级别声明的*指标*（或者使用`addindicator`将其添加到cerebro，这纯粹是为了实验目的，并将指标添加到虚拟策略中）
 - en: '*Observers* added to cerebro with `addobserver`'
+  id: totrans-25
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 使用`addobserver`将*观察器*添加到cerebro的选项
 - en: The Observers are *lines* objects which run in sync with the *strategy* and
     have access to the entire ecosystem, to be able to track things like `Cash` and
     `Value`
+  id: totrans-26
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 观察器是*lines*对象，它们与*strategy*同步运行，并且可以访问整个生态系统，以便跟踪`Cash`和`Value`等情况
 - en: Plotting Options
+  id: totrans-27
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 绘图选项
 - en: '*Indicators* and *Observers* have several options that control how they have
     to be plotted on the chart. There are 3 big groups:'
+  id: totrans-28
   prefs: []
   type: TYPE_NORMAL
+  zh: '*指标*和*观察器*有几个选项，控制它们在图表上的绘制方式。 有三大组：'
 - en: Options affecting the plotting behavior of the entire object
+  id: totrans-29
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 影响整个对象绘图行为的选项
 - en: Options affecting the plotting behavior of individual lines
+  id: totrans-30
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 影响单个线条绘图行为的选项
 - en: Options affecting the SYSTEM wide plotting options
+  id: totrans-31
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 影响系统范围绘图选项的选项
 - en: Object-wide plotting options
+  id: totrans-32
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 对象范围的绘图选项
 - en: 'These are controlled by this data set in *Indicators* and *Observers*:'
+  id: totrans-33
   prefs: []
   type: TYPE_NORMAL
+  zh: 这些由 *Indicators* 和 *Observers* 中的数据集控制：
 - en: '[PRE4]'
+  id: totrans-34
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE4]'
 - en: 'Although `plotinfo` is shown as a `dict` during class definition, the metaclass
     machinery of *backtrader* turns that into an object which is inherited and can
     undergo even multiple inheritance. Than means:'
+  id: totrans-35
   prefs: []
   type: TYPE_NORMAL
+  zh: 尽管在类定义期间 `plotinfo` 显示为 `dict`，但 *backtrader* 的元类机制将其转换为一个对象，该对象被继承并且可以进行多重继承。这意味着：
 - en: If a subclass changes for example a value like `subplot=True` to `subplot=False`,
     subclasses further down the hierarchy will have the latter as the default value
     for `subplot`
+  id: totrans-36
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 如果子类更改了 `subplot=True` 这样的值为 `subplot=False`，则层级结构下面的子类将以后者作为 `subplot` 的默认值。
 - en: 'There are 2 methods of giving value to these parameters. Let’s look at a `SimpleMovingAverage`
     instantiation for the 1^(st) method:'
+  id: totrans-37
   prefs: []
   type: TYPE_NORMAL
+  zh: 给这些参数赋值有两种方法。让我们看一下第 1 种方法的 `SimpleMovingAverage` 实例化：
 - en: '[PRE5]'
+  id: totrans-38
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE5]'
 - en: As can be inferred from the example, any `**kwargs` not consumed by the `SimpleMovingAverage`
     constructor will be parsed (if possible) as `plotinfo` values. The `SimpleMovingAverage`
     has a single parameter defined which is `period`. And this means that `plotname`
     will be matched against the parameter of the same name in `plotinfo`.
+  id: totrans-39
   prefs: []
   type: TYPE_NORMAL
+  zh: 如示例所示，`SimpleMovingAverage` 构造函数未使用的任何 `**kwargs` 将被解析（如果可能）为 `plotinfo` 的值。`SimpleMovingAverage`
+    仅定义了一个名为 `period` 的参数。这意味着 `plotname` 将与 `plotinfo` 中同名的参数相匹配。
 - en: 'The 2^(nd) method:'
+  id: totrans-40
   prefs: []
   type: TYPE_NORMAL
+  zh: 第 2 种方法：
 - en: '[PRE6]'
+  id: totrans-41
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE6]'
 - en: The `plotinfo` object instantiated along the *SimpleMovingAverage* can be accessed
     and the parameters inside can also be accessed with the standard *Python* dot
     notation. Easy and possibly clearer than the syntax abve.
+  id: totrans-42
   prefs: []
   type: TYPE_NORMAL
+  zh: 可以访问沿着 *SimpleMovingAverage* 实例化的 `plotinfo` 对象，也可以使用标准的 *Python* 点符号访问其中的参数。简单且可能比上述语法更清晰。
 - en: The meaning of the options
+  id: totrans-43
   prefs:
   - PREF_H4
   type: TYPE_NORMAL
+  zh: 选项的含义
 - en: '`plot`: whether the object has to be plotted'
+  id: totrans-44
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`plot`：对象是否需要绘制'
 - en: '`subplot`: whether to plot along the data or in an independent subchart. *Moving
     Averages* are an example of plotting over the data. *Stochastic* and *RSI* are
     examples of things plotted in a subchart on a different scale.'
+  id: totrans-45
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`subplot`：是否沿数据绘制或在独立的子图上绘制。*移动平均线* 是在数据上绘制的示例。*随机指标* 和 *RSI* 是在不同比例尺上的子图中绘制的示例。'
 - en: '`plotname`: name to use on the chart instead of the *class* name. As in the
     example above `mysma` instead of `SimpleMovingAverage`'
+  id: totrans-46
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`plotname`：在图表上使用的名称，而不是 *类* 名称。如上例中的 `mysma` 而不是 `SimpleMovingAverage`。'
 - en: '`plotskip` (**deprecated**): and old alias of `plot`'
+  id: totrans-47
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`plotskip`（**已弃用**）：`plot` 的旧别名。'
 - en: '`plotabove`: whether to plot above the data. Else plot below. This has only
     effect if `subplot=True`'
+  id: totrans-48
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`plotabove`：是否在数据的上方绘制。否则在下方绘制。只有当 `subplot=True` 时才有效。'
 - en: '`plotlinelabels`: whether to plot the names of the individudal lines along
     the data in the legend on the chart when `subplot=False`'
+  id: totrans-49
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`plotlinelabels`：当 `subplot=False` 时，是否在图表上绘制单个线条名称的图例。'
 - en: 'Example: The *Bollinger Bands* have 3 lines but the indicator is plotted on
     top of the data. It seems sensible to have the legend only display a single name
     like `BollingerBands` rather than having the name of the 3 individual lines displayed
     (`mid`, `top`, `bot`)'
+  id: totrans-50
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 示例：*布林带* 有 3 条线，但指标是绘制在数据的上方。在图例中仅显示单个名称如 `BollingerBands` 看起来更合理，而不是显示 3 条单独线的名称（`mid`、`top`、`bot`）。
 - en: 'A use case for this is the `BuySell` observer for which it makes sense to display
     the name of the 2 lines and its markers: `Buy` and `Sell` to make it clear for
     the end user what is what.'
+  id: totrans-51
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 对于 `BuySell` 观察者的用例，将显示 2 条线和其标记的名称是有意义的：`Buy` 和 `Sell`，以便清楚地告诉最终用户什么是什么。
 - en: '`plotlinevalues`: controls whether the legend for the lines in indicators and
     observers has the last plotted value. Can be controlled on a per-line basis with
     `_plotvalue` for each line'
+  id: totrans-52
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`plotlinevalues`：控制指标和观察者中的线条图例是否具有最后绘制的值。可以使用每条线的 `_plotvalue` 控制单个线的显示方式。'
 - en: '`plotvaluetags`: controls whether a value tag with the last value is plotted
     on the right hand side of the line. Can be controlled on a per-line basis with
     `_plotvaluetag` for each line'
+  id: totrans-53
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`plotvaluetags`：控制是否在线条右侧绘制带有最后值的值标签。可以使用每条线的 `_plotvaluetag` 控制单个线的显示方式。'
 - en: '`plotymargin`: margin to add to the top and bottom of individual subcharts
     on the graph'
+  id: totrans-54
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`plotymargin`：在图表上单个子图的顶部和底部添加的边距'
 - en: 'It is a percentage but 1 based. For example: 0.05 -> 5%'
+  id: totrans-55
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 这是一个基于 1 的百分比。例如：0.05 -> 5%
 - en: '`plothlines`: an *iterable* containing values (within the scale) at which *horizontal*
     lines have to be plotted.'
+  id: totrans-56
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`plothlines`：包含在比例尺内需要绘制 *水平线* 的值的 *可迭代对象*。'
 - en: This for example helps for the classical indicators with *overbought*, *oversold*
     areas like the `RSI` which usually has lines plotted at `70` and `30`
+  id: totrans-57
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 例如，这有助于经典指标，如`RSI`，通常在`70`和`30`处绘制线条的*超买*，*超卖*区域。
 - en: '`plotyticks`: an *iterable* containing values (within the scale) at which value
     ticks have to specifically be placed on the scale'
+  id: totrans-58
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`plotyticks`：包含在比例尺上必须特别放置值刻度的*可迭代*对象'
 - en: For example to force the scale to have a `50` to identify the mid point of the
     scale. Although this seems obvious, the indicators use an auto-scaling mechanism
     and the `50` may not be obviously be in the centre if an indicator with a `0-100`
     scale moves between 30-95 on a regular basis.
+  id: totrans-59
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 例如，为了强制比例尺具有`50`来识别比例尺的中点。尽管这似乎很明显，指标使用自动缩放机制，如果一个具有`0-100`比例尺的指标在30-95之间定期移动，`50`可能不明显位于中心。
 - en: '`plotyhlines`: an *iterable* containing values (within the scale) at which
     *horizontal* lines have to be plotted.'
+  id: totrans-60
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`plotyhlines`：包含在比例尺上必须绘制*水平*线的值（在比例尺内）。'
 - en: This can take over both `plothlines` and `plotyticks`.
+  id: totrans-61
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 这可以同时控制`plothlines`和`plotyticks`。
 - en: If none of the above are defined, then where to place *horizontal* lines and
     *ticks* will be entirely controlled by this value
+  id: totrans-62
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 如果上述选项都未定义，则*水平*线和*刻度*的放置完全由此值控制
 - en: If any of the above are defined they have precedence over the values present
     in this option
+  id: totrans-63
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 如果上述任何选项被定义，它们将优先于此选项中的值
 - en: '`plotforce`: sometimes and thus the complex process of matching data feeds
     to indicators and bla, bla, bla … a custom indicator may fail to plot. This is
     a last resort mechanism to try to enforce plotting.'
+  id: totrans-64
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`plotforce`：有时候，通过匹配数据源和指标等复杂过程，自定义指标可能无法绘制。这是一种最后的手段机制，试图强制绘制。'
 - en: Use it if all else fails
+  id: totrans-65
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 如果其他方法都失败，请使用它
 - en: '`plotmaster`: an *Indicator*/*Observer* has a master which is the *data* on
     which is working. In some cases plotting it with a different master may be wished
     needed.'
+  id: totrans-66
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`plotmaster`：*指标*/*观察者*有一个主数据，即其工作的*数据*。在某些情况下，可能希望使用不同的主数据来绘制它。'
 - en: A use case is the `PivotPoint` indicator which is calculated on **Monthly**
     data but is meant for **Daily** data. It only makes sense to plot it on the *daily*
     data which is where the indicator makes sense.
+  id: totrans-67
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 一个用例是`PivotPoint`指标，它是在**月度**数据上计算的，但是适用于**每日**数据。只有在*每日*数据上绘制它才有意义，这是指标有意义的地方。
 - en: '`plotylimited`: currently only applies to data feeds. If `True` (default),
     other lines on the data plot don’t change the scale. Example: Bollinger Bands
     (top and bottom) may be far away from the actual absolute minimum/maximum of the
     data feed. With `\`plotlimited=True`, those bands remain out of the chart, because
     the data controls the scaling. If set to`False`, the bands affects the y-scale
     and become visible on the chart'
+  id: totrans-68
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`plotylimited`：目前仅适用于数据源。如果设置为`True`（默认值），数据图上的其他线条不会改变比例尺。例如：布林带（顶部和底部）可能远离实际数据源的绝对最小值/最大值。如果设置为`\`plotlimited=True`，这些带子将保持在图表之外，因为数据控制着比例尺。如果设置为`False`，这些带子会影响y轴比例尺，并在图表上可见。'
 - en: A use case is the `PivotPoint` indicator which is calculated on **Monthly**
     data but is meant for **Daily** data. It only makes sense to plot it on the *daily*
     data which is where the indicator makes sense.
+  id: totrans-69
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 一个用例是`PivotPoint`指标，它是在**月度**数据上计算的，但是适用于**每日**数据。只有在*每日*数据上绘制它才有意义，这是指标有意义的地方。
 - en: Line specific plotting options
+  id: totrans-70
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 线条特定的绘图选项
 - en: '*Indicators*/*Observers* have *lines* and how this *lines* are plotted can
     be influenced with the `plotlines` object. Most of options specified in `plotlines`
     are meant to be directly passed over to `matplotlib` when plotting. The documentation
     relies therefore on examples of things that have been done.'
+  id: totrans-71
   prefs: []
   type: TYPE_NORMAL
+  zh: '*指标*/*观察者*有*线条*，如何绘制这些*线条*可以通过`plotlines`对象进行影响。`plotlines`中指定的大多数选项意味着在绘图时直接传递给`matplotlib`。因此，文档依赖于已完成的示例。'
 - en: '**IMPORTANT**: The options are specified on a per-line basis.'
+  id: totrans-72
   prefs: []
   type: TYPE_NORMAL
+  zh: '**重要**：选项是基于每行指定的。'
 - en: 'Some of the options are controlled directly by *backtrader*. These all start
     with an underscore (`_`):'
+  id: totrans-73
   prefs: []
   type: TYPE_NORMAL
+  zh: 一些选项由*backtrader*直接控制。所有这些选项都以下划线（`_`）开头：
 - en: '`_plotskip` (*boolean*) which indicates that plotting of a specific line has
     to be skipped if set to `True`'
+  id: totrans-74
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`_plotskip`（*布尔值*）指示如果设置为`True`，则必须跳过特定线条的绘制'
 - en: '`_plotvalue` (*boolean*) to control if the legend of this line will contain
     the last plotted value (default is `True`)'
+  id: totrans-75
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`_plotvalue`（*布尔值*）控制是否在此线条的图例中包含最后绘制的值（默认值为`True`）'
 - en: '`_plotvaluetag` (*boolean*) to control if a righ hand side tag with the last
     value is plotted (default is `True`)'
+  id: totrans-76
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`_plotvaluetag`（*布尔值*）控制是否绘制带有最后值的右侧标签（默认为`True`）'
 - en: '`_name` (*string*) which changes the plot name of a specific line'
+  id: totrans-77
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`_name`（*字符串*）用于更改特定线路的绘图名称'
 - en: '`_skipnan` (*bool*, default: False): to skip `NaN` values when plotting and
     allowing for example to draw a line between 2 distant points generated by an indicator,
     which has all intermediate values as `NaN` (default value for new created data
     points)'
+  id: totrans-78
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`_skipnan`（*布尔值*，默认值：False）：在绘图时跳过`NaN`值，例如允许绘制由指标生成的两个远点之间的线，其中所有中间值都为`NaN`（新创建的数据点的默认值）'
 - en: '`_samecolor` (*boolean*) this forces the next line to have the same color as
     the previous one avoiding the `matplotlib` default mechanism of cycling trough
     a color map for each new plotted element'
+  id: totrans-79
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`_samecolor`（*布尔值*）这会强制下一行具有与前一行相同的颜色，避免了`matplotlib`默认的循环遍历颜色映射以绘制每个新绘制的元素的机制'
 - en: '`_method` (*string*) which chooses the plotting method `matplotlib` will use
     for the element. If this is not specified, then the most basic `plot` method will
     be chosen.'
+  id: totrans-80
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`_method`（*字符串*）选择`matplotlib`将用于元素的绘图方法。如果未指定，则将选择最基本的`plot`方法。'
 - en: 'Example from `MACDHisto`. Here the `histo` line is plotted as a `bar` which
     is the industry de-facto standard. The following definition can be found in the
     definition of `MACDHisto`:'
+  id: totrans-81
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 来自`MACDHisto`的示例。这里`histo`线路被绘制为`bar`，这是行业的事实标准。在`MACDHisto`的定义中可以找到以下定义：
 - en: '[PRE7]'
+  id: totrans-82
   prefs:
   - PREF_IND
   type: TYPE_PRE
+  zh: '[PRE7]'
 - en: '`alpha` and `width` are options for *matplotlib*'
+  id: totrans-83
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: '`alpha`和`width`是*matplotlib*的选项'
 - en: '`_fill_gt` / `_fill_lt`'
+  id: totrans-84
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`_fill_gt` / `_fill_lt`'
 - en: 'Allow filling between the given line and:'
+  id: totrans-85
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 允许在给定线路和之间填充：
 - en: Another line
+  id: totrans-86
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 另一条线路
 - en: A numeric value
+  id: totrans-87
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 一个数值
 - en: 'The arguments is an iterable of 2 elements in which:'
+  id: totrans-88
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 参数是一个包含2个元素的可迭代对象，其中：
 - en: The 1^(st) argument is a *string* (name of reference line) or a numeric value
+  id: totrans-89
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 第一个参数是一个*字符串*（参考线路名称）或数值
 - en: The filling will be done in between the own values and the values of the line
     or the numeric value
+  id: totrans-90
   prefs:
   - PREF_IND
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 填充将在自身值和线路或数值的值之间完成
 - en: 'The 2^(nd) argument is either:'
+  id: totrans-91
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 第二个参数是：
 - en: A string with a colour name (*matplotlib* compatible) or hex specification (see
     *matloplit* examples)
+  id: totrans-92
   prefs:
   - PREF_IND
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 一个字符串，带有颜色名称（*matplotlib*兼容）或十六进制规范（参见*matloplit*示例）
 - en: or
+  id: totrans-93
   prefs:
   - PREF_IND
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 或
 - en: 'An iterable where the 1^(st) element is the string/hex value for the colour
     and the second element is a numeric value specifying the alpha transparency (default:
     `0.20` controlled with `fillalpha` in a plotting scheme)'
+  id: totrans-94
   prefs:
   - PREF_IND
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 一个可迭代对象，其中第一个元素是颜色的字符串/十六进制值，第二个元素是指定alpha透明度的数值（默认值：`0.20`，由绘图方案中的`fillalpha`控制）
 - en: 'Examples:'
+  id: totrans-95
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 示例：
 - en: '[PRE8]'
+  id: totrans-96
   prefs:
   - PREF_IND
   type: TYPE_PRE
+  zh: '[PRE8]'
 - en: Passing options to a not yet known line
+  id: totrans-97
   prefs:
   - PREF_H4
   type: TYPE_NORMAL
+  zh: 将选项传递给尚未知道的线路
 - en: Ue the name `_X` where `X` stands for a digit in a zero-based index. This means
     that the options are for line `X`
+  id: totrans-98
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 使用名称`_X`，其中`X`代表零为基础索引中的数字。这意味着选项适用于线路`X`
 - en: 'A use case from `OscillatorMixIn`:'
+  id: totrans-99
   prefs: []
   type: TYPE_NORMAL
+  zh: '`OscillatorMixIn`的一个用例：'
 - en: '[PRE9]'
+  id: totrans-100
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE9]'
 - en: As the name implies, this is a *mixin* class intended to be used in multiple
     inheritance schemes (specifically on the right hand side). The *mixin* has no
     knowledge of the actual name of the 1^(st) line (index is zero-based) from the
     other indicator that will be part of the multiple inheritance mix.
+  id: totrans-101
   prefs: []
   type: TYPE_NORMAL
+  zh: 如名称所示，这是一个*混合*类，旨在在多重继承方案（特别是在右侧）中使用。 *mixin*对来自将成为多重继承混合的其他指标的第一个线路的实际名称（索引从零开始）没有任何了解。
 - en: 'And that’s why the options are specified to be for: `_0`. After the subclassing
     has taken place the 1^(st) line of the resulting class will have the name `osc`
     in plot.'
+  id: totrans-102
   prefs: []
   type: TYPE_NORMAL
+  zh: 这就是为什么选项被指定为：`_0`。子类化完成后，结果类的第一行将在图中具有名称`osc`。
 - en: Some plotlines examples
+  id: totrans-103
   prefs:
   - PREF_H4
   type: TYPE_NORMAL
+  zh: 一些绘图线路示例
 - en: 'The `BuySell` observer has the following:'
+  id: totrans-104
   prefs: []
   type: TYPE_NORMAL
+  zh: '`BuySell`观察器包括以下内容：'
 - en: '[PRE10]'
+  id: totrans-105
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE10]'
 - en: The `buy` and `sell` lines have options which are passed directly to `matplotlib`
     to define *marker*, *markersize*, *color* and *fillstyle*. All these options are
     defined in *matplotlib*
+  id: totrans-106
   prefs: []
   type: TYPE_NORMAL
+  zh: '`buy`和`sell`线路有一些选项，直接传递给`matplotlib`以定义*marker*、*markersize*、*color*和*fillstyle*。所有这些选项都在*matplotlib*中定义。'
 - en: 'The `Trades` observer has the following:'
+  id: totrans-107
   prefs: []
   type: TYPE_NORMAL
+  zh: '`Trades`观察器包括以下内容：'
 - en: '[PRE11]'
+  id: totrans-108
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE11]'
 - en: Here the names of the lines have been redefined from for example `pnlplus` to
     `Positive` by using `_name`. The rest of the options are for *matplotlib*
+  id: totrans-109
   prefs: []
   type: TYPE_NORMAL
+  zh: 这里使用`_name`将线路名称重新定义为例如`pnlplus`变为`Positive`。其余选项用于*matplotlib*
 - en: 'The `DrawDown` observer:'
+  id: totrans-110
   prefs: []
   type: TYPE_NORMAL
+  zh: '`DrawDown`观察器：'
 - en: '[PRE12]'
+  id: totrans-111
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE12]'
 - en: This one defines two lines to let the end users access not only the value of
     the current `drawdown` but also its maximum value (`maxdrawdown`). But the latter
     is not plotted due to `_plotskip=True`
+  id: totrans-112
   prefs: []
   type: TYPE_NORMAL
+  zh: 这个定义了两条线，让最终用户不仅可以访问当前 `drawdown` 的值，还可以访问其最大值 (`maxdrawdown`)。但由于 `_plotskip=True`，后者不会绘制出来
 - en: 'The `BollingerBands` indicator:'
+  id: totrans-113
   prefs: []
   type: TYPE_NORMAL
+  zh: '`BollingerBands` 指标：'
 - en: '[PRE13]'
+  id: totrans-114
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE13]'
 - en: Here the `mid` line will have a *dashed* style and the `top` and `bot` lines
     will have the same color as the `mid` line.
+  id: totrans-115
   prefs: []
   type: TYPE_NORMAL
+  zh: 这里 `mid` 线将以 *虚线* 样式绘制，而 `top` 和 `bot` 线将与 `mid` 线具有相同的颜色。
 - en: 'The `Stochastic` (defined in `_StochasticBase` and inherited):'
+  id: totrans-116
   prefs: []
   type: TYPE_NORMAL
+  zh: '`Stochastic`（在 `_StochasticBase` 中定义并继承）：'
 - en: '[PRE14]'
+  id: totrans-117
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE14]'
 - en: The slower line `percD` is plotted with a *dashed* style. And the names of the
     lines are changed to include fancy `%` signs (`%K` and `%D`) which cannot be used
     in name definitions in *Python*
+  id: totrans-118
   prefs: []
   type: TYPE_NORMAL
+  zh: 较慢的线 `percD` 以 *虚线* 样式绘制。并且线的名称更改为包含花哨的 `%` 符号（`%K` 和 `%D`），在 *Python* 中无法在名称定义中使用
 - en: Methods controlling plotting
+  id: totrans-119
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 控制绘图的方法
 - en: 'When dealing with *Indicators* and *Observers* the following methods are supported
     to further control plotting:'
+  id: totrans-120
   prefs: []
   type: TYPE_NORMAL
+  zh: 处理 *Indicators* 和 *Observers* 时，支持以下方法以进一步控制绘图：
 - en: '`_plotlabel(self)`'
+  id: totrans-121
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`_plotlabel(self)`'
 - en: Which should return a list of things to conform the labels which will be placed
     in between parentheses after the name of the *Indicators* or *Observer*
+  id: totrans-122
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 应该返回一列东西，以符合将在 *Indicators* 或 *Observer* 名称后放置在括号中的标签
 - en: 'An example from the `RSI` indicator:'
+  id: totrans-123
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 从 `RSI` 指标的一个例子：
 - en: '[PRE15]'
+  id: totrans-124
   prefs:
   - PREF_IND
   type: TYPE_PRE
+  zh: '[PRE15]'
 - en: 'As can be seen this method returns:'
+  id: totrans-125
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 可以看到这个方法返回：
 - en: An `int` which indicates the period configured for the `RSI` and if the default
     moving average has been changed, the specific class
+  id: totrans-126
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 一个 `int`，表示为 `RSI` 配置的周期，如果默认移动平均线已更改，则是特定的类
 - en: In the background both will be converted to a string. In the case of the *class*
     an effort will be made to just print the name of the class rather than the complete
     `module.name` combination.
+  id: totrans-127
   prefs:
   - PREF_IND
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 在后台，两者都将转换为字符串。在 *class* 的情况下，将努力只打印类的名称，而不是完整的 `module.name` 组合。
 - en: '`_plotinit(self)`'
+  id: totrans-128
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`_plotinit(self)`'
 - en: 'Which is called at the beginning of plotting to do whatever specific initialization
     the indicator may need. Again, an example from `RSI`:'
+  id: totrans-129
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 在绘图开始时调用，执行指标可能需要的任何特定初始化。再次，来自 `RSI` 的一个例子：
 - en: '[PRE16]'
+  id: totrans-130
   prefs:
   - PREF_IND
   type: TYPE_PRE
+  zh: '[PRE16]'
 - en: Here the code assigns a value to `plotyhlines` to have horizontal lines (the
     `hlines` part) plotted at specific `y` values.
+  id: totrans-131
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 这里的代码为 `plotyhlines` 赋值，以在特定 `y` 值处绘制水平线（`hlines` 部分）。
 - en: The values of the parameters `upperband` and `lowerband` are used for this,
     which cannot be known in advance, because the parameters can be changed by the
     end user
+  id: totrans-132
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 参数 `upperband` 和 `lowerband` 的值将用于此操作，因为参数可以由最终用户更改，所以无法事先知道
 - en: System-wide plotting options
+  id: totrans-133
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 系统范围内的绘图选项
 - en: 'First the *signature* of `plot` within cerebro:'
+  id: totrans-134
   prefs: []
   type: TYPE_NORMAL
+  zh: 首先是在 cerebro 中的 `plot` 的*签名*：
 - en: '[PRE17]'
+  id: totrans-135
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE17]'
 - en: 'Which means:'
+  id: totrans-136
   prefs: []
   type: TYPE_NORMAL
+  zh: 这意味着：
 - en: '`plotter`: an object/class containing as attributes the options controlling
     the system wide plotting'
+  id: totrans-137
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`plotter`：包含作为属性的选项，控制系统范围内绘图的对象/类'
 - en: If `None` is passed a default `PlotScheme` object (see below) will be instantiated
+  id: totrans-138
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 如果传递了 `None`，则将实例化一个默认的 `PlotScheme` 对象（见下文）
 - en: '`numfigs`: in how many independent charts a plot has to be broken'
+  id: totrans-139
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`numfigs`：将绘图分解为多少个独立图表'
 - en: Sometimes a chart contains too many bars and will not be easily readable if
     packed in a single figure. This breaks it down in as many pieces as requested
+  id: totrans-140
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 有时图表包含太多条形，如果在单个图中打包，将不容易阅读。这将根据请求的数量将其分解为相同数量的部分
 - en: '`iplot`: automatically plot inline if running inside a Jupyter Notebook'
+  id: totrans-141
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`iplot`：如果在 Jupyter Notebook 中运行，则自动绘制内联'
 - en: '`**kwargs`: the args will be used to change the values of the attributes of
     `plotter` or the default `PlotScheme` object created if no `plotter` is passed.'
+  id: totrans-142
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`**kwargs`：args 将用于更改 `plotter` 或默认 `PlotScheme` 对象的属性值，如果没有传递 `plotter` 则会创建默认的
+    `PlotScheme` 对象。'
 - en: PlotScheme
+  id: totrans-143
   prefs:
   - PREF_H4
   type: TYPE_NORMAL
+  zh: PlotScheme
 - en: 'This object contains all the options that contol system-wide plotting. The
     options are documented in the code:'
+  id: totrans-144
   prefs: []
   type: TYPE_NORMAL
+  zh: 此对象包含控制系统范围内绘图的所有选项。选项在代码中有文档：
 - en: '[PRE18]'
+  id: totrans-145
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE18]'
 - en: Colors in PlotScheme
+  id: totrans-146
   prefs:
   - PREF_H4
   type: TYPE_NORMAL
+  zh: PlotScheme 中的颜色
 - en: 'The `PlotScheme` class defines a method which can be overriden in subclasses
     which returns the next color to be used:'
+  id: totrans-147
   prefs: []
   type: TYPE_NORMAL
+  zh: '`PlotScheme` 类定义了一个方法，可以在子类中重写，该方法返回下一个要使用的颜色：'
 - en: '[PRE19]'
+  id: totrans-148
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE19]'
 - en: 'Where `idx` is the current index to the line being plotted on a individual
     subchart. The `MACD` for example plots 3 lines and hence the `idx` variable will
     only have the following values: `0`, `1` and `2`. The next chart (maybe another
     indicator) will star the count again at `0`.'
+  id: totrans-149
   prefs: []
   type: TYPE_NORMAL
+  zh: 其中`idx`是当前正在绘制的单个子图上的行的索引。例如，`MACD`绘制了3条线，因此`idx`变量只会有以下值：`0`、`1`和`2`。下一个图表（可能是另一个指标）将从`0`开始重新计数。
 - en: 'The default color scheme used in *backtrader* uses (as seen above) is the `Tableau
     10 Color Palette` with the index modified to be:'
+  id: totrans-150
   prefs: []
   type: TYPE_NORMAL
+  zh: 默认颜色方案使用的是*backtrader*中的（如上所示）`Tableau 10 Color Palette`，其索引修改为：
 - en: '[PRE20]'
+  id: totrans-151
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE20]'
 - en: By overriding the `color` method or passing a `lcolors` variable to `plot` (or
     in a subclass of `PlotScheme`) the colouring can be completely changed.
+  id: totrans-152
   prefs: []
   type: TYPE_NORMAL
+  zh: 通过覆盖`color`方法或将`lcolors`变量传递给`plot`（或在`PlotScheme`的子类中），可以完全改变着色方式。
 - en: The source code contains also the defintions for the `Tableau 10 Light` and
     the `Tableau 20` color palettes.
+  id: totrans-153
   prefs: []
   type: TYPE_NORMAL
+  zh: 源代码还包含了`Tableau 10 Light`和`Tableau 20`颜色调色板的定义。

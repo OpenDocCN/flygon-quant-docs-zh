@@ -1,12 +1,18 @@
 - en: Introduction
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 介绍
 - en: 原文：[https://www.backtrader.com/recipes/intro/](https://www.backtrader.com/recipes/intro/)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.backtrader.com/recipes/intro/](https://www.backtrader.com/recipes/intro/)
 - en: This section contains recipes and resources which can be directly applied to
     *backtrader*, such as indicators or 3^(rd) party stores, brokes or data feeds.
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: 本节包含可直接应用于*backtrader*的配方和资源，例如指标或第三方商店、经纪人或数据源。

@@ -1,378 +1,566 @@
 - en: Rolling over Futures
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 将期货滚动
 - en: 原文：[https://www.backtrader.com/blog/posts/2016-08-31-rolling-over-futures/rolling-futures-over/](https://www.backtrader.com/blog/posts/2016-08-31-rolling-over-futures/rolling-futures-over/)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.backtrader.com/blog/posts/2016-08-31-rolling-over-futures/rolling-futures-over/](https://www.backtrader.com/blog/posts/2016-08-31-rolling-over-futures/rolling-futures-over/)
 - en: 'Not every provider offers a *continuous* future for the instruments with which
     one can trade. Sometimes the data offered is that of the still valid expiration
     dates, i.e.: those still being traded'
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: 并非每个提供商都为可以交易的工具提供*连续*未来数据。有时，提供的数据是仍然有效的到期日期的数据，即：仍在交易的数据
 - en: This is not so helpful when it comes to *backtesting* because the data is scattered
     over several different instruments which additionally … *overlap* in time.
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: 当涉及到*回测*时，这并不是很有帮助，因为数据分散在几个不同的工具中，而且还… *时间上重叠*。
 - en: 'Being able to properly join the data of those instruments, from the past, into
     a continuous stream alleviates the pain. The problem:'
+  id: totrans-4
   prefs: []
   type: TYPE_NORMAL
+  zh: 能够将那些过去的工具数据正确地连接成连续流可以减轻痛苦。问题在于：
 - en: There is no law as to how best join the different expiration dates into a continuous
     future
+  id: totrans-5
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 没有一条法律规定如何最好地将不同到期日期的期货合并成一个连续的期货
 - en: 'Some literature, courtesy of *SierraChart* at:'
+  id: totrans-6
   prefs: []
   type: TYPE_NORMAL
+  zh: 一些文献，由*SierraChart*提供：
 - en: MyLink
+  id: totrans-7
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 我的链接
 - en: The RollOver Data Feed
+  id: totrans-8
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 滚动数据源
 - en: '*backtrader* has added with 1.8.10.99` the possibility to join futures’ data
     from different expiration dates into a continuous future:'
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: '*backtrader*在1.8.10.99版本中添加了一个功能，可以将不同到期日期的期货数据合并成一个连续的期货：'
 - en: '[PRE0]'
+  id: totrans-10
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: Note
+  id: totrans-11
   prefs: []
   type: TYPE_NORMAL
+  zh: 注
 - en: The possible `\*\*kwargs` are explained below
+  id: totrans-12
   prefs: []
   type: TYPE_NORMAL
+  zh: 下面解释了可能的`\*\*kwargs`
 - en: 'It can also be done by directly accessing the `RollOver` feed (which is helpful
     if subclassing is done):'
+  id: totrans-13
   prefs: []
   type: TYPE_NORMAL
+  zh: 也可以通过直接访问`RollOver`数据源来完成（如果进行了子类化，则会有所帮助）：
 - en: '[PRE1]'
+  id: totrans-14
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE1]'
 - en: Note
+  id: totrans-15
   prefs: []
   type: TYPE_NORMAL
+  zh: 注
 - en: The possible `\*\*kwargs` are explained below
+  id: totrans-16
   prefs: []
   type: TYPE_NORMAL
+  zh: 下面解释了可能的`\*\*kwargs`
 - en: Note
+  id: totrans-17
   prefs: []
   type: TYPE_NORMAL
+  zh: 注
 - en: When using `RollOver` the name is assigned using `dataname`. This is the standard
     parameter used for all data feeds to pass the *name/ticker*. In this case it is
     reused to assign a common name to the complete set of rolled over futures.
+  id: totrans-18
   prefs: []
   type: TYPE_NORMAL
+  zh: 使用`RollOver`时，使用`dataname`分配名称。这是所有数据源用于传递*名称/标记*的标准参数。在这种情况下，它被重用以为所有滚动期货分配一个公共名称。
 - en: In the case of `cerebro.rolloverdata`, the name is assigned to a feed using
     `name`, which is already one named argument of that method
+  id: totrans-19
   prefs: []
   type: TYPE_NORMAL
+  zh: 对于`cerebro.rolloverdata`，名称使用`name`分配给一个数据源，这已经是该方法的一个命名参数
 - en: 'Bottomline:'
+  id: totrans-20
   prefs: []
   type: TYPE_NORMAL
+  zh: 底线：
 - en: Data Feeds are created as usual but *ARE NOT* added to `cerebro`
+  id: totrans-21
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 数据源通常创建，但*未*添加到`cerebro`
 - en: Those data feeds are given as input to `bt.feeds.RollOver`
+  id: totrans-22
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 这些数据源作为输入提供给`bt.feeds.RollOver`
 - en: A `dataname` is also given, mostly for identification purposes.
+  id: totrans-23
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 也给出了一个`dataname`，主要用于识别目的。
 - en: This *roll over* data feed is then added to `cerebro`
+  id: totrans-24
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 然后将这个*滚动*数据源添加到`cerebro`中
 - en: Options for the Roll-Over
+  id: totrans-25
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 滚动的选项
 - en: Two parameters are provided to control the roll-over process
+  id: totrans-26
   prefs: []
   type: TYPE_NORMAL
+  zh: 提供了两个参数来控制滚动过程
 - en: '`checkdate` (default: `None`)'
+  id: totrans-27
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`checkdate`（默认值：`None`）'
 - en: 'This must be a *callable* with the following signature:'
+  id: totrans-28
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 这必须是一个*callable*，具有以下签名：
 - en: '[PRE2]'
+  id: totrans-29
   prefs:
   - PREF_IND
   type: TYPE_PRE
+  zh: '[PRE2]'
 - en: 'Where:'
+  id: totrans-30
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 其中：
 - en: '`dt` is a `datetime.datetime` object'
+  id: totrans-31
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`dt`是一个`datetime.datetime`对象'
 - en: '`d` is the current data feed for the active future'
+  id: totrans-32
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`d`是当前活跃期货的数据源'
 - en: 'Expected Return Values:'
+  id: totrans-33
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 预期的返回值：
 - en: '`True`: as long as the callable returns this, a switchover can happen to the
     next future'
+  id: totrans-34
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`True`：只要可调用返回这个，就可以切换到下一个未来'
 - en: If a commodity expires on the 3^(rd) Friday of March, `checkdate` could return
     `True` for the entire week in which the expiration takes place.
+  id: totrans-35
   prefs:
   - PREF_IND
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 如果某种商品在三月的第三个星期五到期，则`checkdate`可以在到期发生的整个周返回`True`。
 - en: '`False`: the expiration cannot take place'
+  id: totrans-36
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`False`：到期无法发生'
 - en: '`checkcondition` (default: `None`)'
+  id: totrans-37
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`checkcondition`（默认值：`None`）'
 - en: '**Note**: This will only be called if `checkdate` has returned `True`'
+  id: totrans-38
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: '**注意**：只有当`checkdate`返回`True`时才会调用此函数'
 - en: If `None` this will evaluate to `True` (execute roll over) internally
+  id: totrans-39
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 如果是`None`，这将内部求值为`True`（执行滚动）
 - en: 'Else this must be a *callable* with this signature:'
+  id: totrans-40
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 否则，这必须是一个*callable*，具有以下签名：
 - en: '[PRE3]'
+  id: totrans-41
   prefs:
   - PREF_IND
   type: TYPE_PRE
+  zh: '[PRE3]'
 - en: 'Where:'
+  id: totrans-42
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 其中：
 - en: '`d0` is the current data feed for the active future'
+  id: totrans-43
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`d0`是当前活跃期货的数据源'
 - en: '`d1` is the data feed for the next expiration'
+  id: totrans-44
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`d1`是下一个到期的数据源'
 - en: 'Expected Return Values:'
+  id: totrans-45
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 预期的返回值：
 - en: '`True`: roll-over to the next future'
+  id: totrans-46
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`True`：滚动到下一个未来'
 - en: Following with the example from `checkdate`, this could say that the roll-over
     can only happend if the *volume* from `d0` is already less than the volume from
     `d1`
+  id: totrans-47
   prefs:
   - PREF_IND
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 继续使用`checkdate`的示例，这可以说明如果`d0`的*volume*已经小于`d1`的volume，则可以进行滚动
 - en: '`False`: the expiration cannot take place'
+  id: totrans-48
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`False`：到期无法发生'
 - en: Subclassing `RollOver`
+  id: totrans-49
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 子类化`RollOver`
 - en: 'If specifying the *callables* isn’t enough, there is always the chance to subclass
     `RollOver`. The methods to subclass:'
+  id: totrans-50
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果指定*可调用对象*不够，总是可以通过子类化`RollOver`。要子类化的方法：
 - en: '`def _checkdate(self, dt, d):`'
+  id: totrans-51
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`def _checkdate(self, dt, d):`'
 - en: Which matches the *signature* of the parameter of the same name above. The expected
     return values are also the saame.
+  id: totrans-52
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 与上面同名参数的*签名*相匹配。预期的返回值也是相同的。
 - en: '`def _checkcondition(self, d0, d1)`'
+  id: totrans-53
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`def _checkcondition(self, d0, d1)`'
 - en: Which matches the *signature* of the parameter of the same name above. The expected
     return values are also the saame.
+  id: totrans-54
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 与上面同名参数的*签名*相匹配。预期的返回值也是相同的。
 - en: Let’s Roll
+  id: totrans-55
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 让我们滚动
 - en: Note
+  id: totrans-56
   prefs: []
   type: TYPE_NORMAL
+  zh: 注意
 - en: The default behavior in the sample is to use `cerebro.rolloverdata`. This can
     be changed by passing the `-no-cerebro` flag. In this case the sample uses `RollOver`
     and `cerebro.adddata`
+  id: totrans-57
   prefs: []
   type: TYPE_NORMAL
+  zh: 示例中的默认行为是使用`cerebro.rolloverdata`。可以通过传递`-no-cerebro`标志来更改。在这种情况下，示例使用`RollOver`和`cerebro.adddata`
 - en: The implementation includes a sample which is available in the *backtrader*
     sources.
+  id: totrans-58
   prefs: []
   type: TYPE_NORMAL
+  zh: 实现包括一个示例，可在*backtrader*源代码中找到。
 - en: Futures concatenation
+  id: totrans-59
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 期货连接
 - en: Let’s start by looking at a pure concatenation by running the sample with no
     arguments.
+  id: totrans-60
   prefs: []
   type: TYPE_NORMAL
+  zh: 让我们从纯连接开始，运行示例而不带任何参数。
 - en: '[PRE4]'
+  id: totrans-61
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE4]'
 - en: 'This uses `cerebro.chaindata` and the result should be clear:'
+  id: totrans-62
   prefs: []
   type: TYPE_NORMAL
+  zh: 这使用`cerebro.chaindata`，结果应该很清楚：
 - en: Whenever a *data feed* is over the next one takes over
+  id: totrans-63
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 每当一个*数据源*结束时，下一个数据源接管
 - en: 'This happens always between a *Friday* and *Monday*: the futures in the samples
     always expire on *Friday*'
+  id: totrans-64
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 这总是在*星期五*和*星期一*之间发生：示例中的期货总是在*星期五*到期
 - en: Futures roll-over with no checks
+  id: totrans-65
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 期货滚动没有检查
 - en: Let’s execute with `--rollover`
+  id: totrans-66
   prefs: []
   type: TYPE_NORMAL
+  zh: 让我们执行`--rollover`
 - en: '[PRE5]'
+  id: totrans-67
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE5]'
 - en: The same behavior. It can clearly be seen that contract changes are being made
     on the 3^(rd) Friday of either Mar, Jun, Sep, Dec.
+  id: totrans-68
   prefs: []
   type: TYPE_NORMAL
+  zh: 相同的行为。可以清楚地看到合同更改是在3月、6月、9月、12月的第3个星期五进行的。
 - en: But this is mostly WRONG. *backtradr* cannot know it, but the author knows that
     the *EuroStoxx 50* futures stop trading at `12:00` CET. So even if there is a
     daily bar for the 3^(rd) Friday of the expiration month, the change is happening
     too late.
+  id: totrans-69
   prefs: []
   type: TYPE_NORMAL
+  zh: 但这大多是错误的。*backtradr*不可能知道，但作者知道*EuroStoxx 50*期货在`12:00` CET停止交易。因此，即使到期月份的第3个星期五有每日条形图，更改发生得太晚。
 - en: '![image](../Images/6a192290d8392514b38b58213eaf1af7.png)'
+  id: totrans-70
   prefs: []
   type: TYPE_IMG
+  zh: '![图片](../Images/6a192290d8392514b38b58213eaf1af7.png)'
 - en: Changing during the Week
+  id: totrans-71
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 在一周内更改
 - en: A `checkdate` callabe is implemented in the sample, which calculates the date
     of expiration for the currently active contract.
+  id: totrans-72
   prefs: []
   type: TYPE_NORMAL
+  zh: 示例中实现了一个`checkdate`可调用对象，用于计算当前活跃合同的到期日期。
 - en: '`checkdate` will allow a roll over as soon as the week of the 3^(rd) Friday
     of the month is reached (it may be *Tuesday* if for example *Monday* is a bank
     holiday)'
+  id: totrans-73
   prefs: []
   type: TYPE_NORMAL
+  zh: '`checkdate`将在月份的第3个星期五到来时（例如，如果*星期一*是银行假日，则可能是*星期二*）进行滚动。'
 - en: '[PRE6]'
+  id: totrans-74
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE6]'
 - en: '**Much better**. The roll over is now happening *5 days before*. A quick visual
     inspection of the *Len* indices show it. For example:'
+  id: totrans-75
   prefs: []
   type: TYPE_NORMAL
+  zh: '**好多了**。现在滚动发生在*5天前*。快速查看*Len*指数就可以看到。例如：'
 - en: '`199FESXM4` to `199FESXU4` happens at *len* `171-172`. Without `checkdate`
     it happened at `176-177`'
+  id: totrans-76
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`199FESXM4`到`199FESXU4`发生在*len* `171-172`。没有`checkdate`时发生在`176-177`'
 - en: The roll over is happening on the Monday before the 3^(rd) Friday of the expiration
     month.
+  id: totrans-77
   prefs: []
   type: TYPE_NORMAL
+  zh: 滚动将在到期月份的第3个星期五之前的星期一发生。
 - en: '![image](../Images/5097c6407fc34c175b5272e2c0b1f446.png)'
+  id: totrans-78
   prefs: []
   type: TYPE_IMG
+  zh: '![图片](../Images/5097c6407fc34c175b5272e2c0b1f446.png)'
 - en: Adding a volume condition
+  id: totrans-79
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 添加成交量条件
 - en: Even with the improvement, the situation can be further improved in that not
     only the date but also de negotiated *volume* will be taken into account. Do switch
     when the new contract trades more volume than the currently active one.
+  id: totrans-80
   prefs: []
   type: TYPE_NORMAL
+  zh: 即使有改进，情况仍然可以进一步改善，不仅日期，而且协商的*成交量*也将被考虑在内。当新合同的交易量超过当前活跃合同时进行切换。
 - en: Let’s add a `checkcondition` to the mix and run.
+  id: totrans-81
   prefs: []
   type: TYPE_NORMAL
+  zh: 让我们添加一个`checkcondition`并运行。
 - en: '[PRE7]'
+  id: totrans-82
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE7]'
 - en: '*Even better**. We have moved the switch date to the *Thursday* before the
     well known *3^(rd) Friday of the expiration month*'
+  id: totrans-83
   prefs: []
   type: TYPE_NORMAL
+  zh: '*更好了**。我们已将切换日期移至众所周知的到期月份第3个星期五之前的*星期四*'
 - en: This should come to no surprise because the expiring future trades a lot less
     hours on that *Friday* and the volume must be small.
+  id: totrans-84
   prefs: []
   type: TYPE_NORMAL
+  zh: 这应该不会让人感到惊讶，因为到期的期货在那个*星期五*交易时间更少，成交量必须很小。
 - en: Note
+  id: totrans-85
   prefs: []
   type: TYPE_NORMAL
+  zh: 注意
 - en: The roll over date could have also been set to that *Thursday* by the `checkdate`
     callable. But that isn’t the point of the sample.
+  id: totrans-86
   prefs: []
   type: TYPE_NORMAL
+  zh: 通过`checkdate`可调用函数，到那个*星期四*也可以设置为滚动日期。但这并不是示例的重点。
 - en: '![image](../Images/83ebd0557efec8412789c20df99342aa.png)'
+  id: totrans-87
   prefs: []
   type: TYPE_IMG
+  zh: '![图片](../Images/83ebd0557efec8412789c20df99342aa.png)'
 - en: Concluding
+  id: totrans-88
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 结论
 - en: '*backtrader* includes now a flexible mechanism to allow rolling over futures
     to create a continuous stream.'
+  id: totrans-89
   prefs: []
   type: TYPE_NORMAL
+  zh: '*backtrader* 现在包含了一个灵活的机制，允许滚动期货以创建连续流。'
 - en: Sample Usage
+  id: totrans-90
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 使用示例
 - en: '[PRE8]'
+  id: totrans-91
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE8]'
 - en: Sample Code
+  id: totrans-92
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 示例代码
 - en: '[PRE9]'
+  id: totrans-93
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE9]'

@@ -1,12 +1,18 @@
 - en: Introduction
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 介绍
 - en: 原文：[https://www.backtrader.com/recipes/storesbrokersdata/intro/](https://www.backtrader.com/recipes/storesbrokersdata/intro/)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.backtrader.com/recipes/storesbrokersdata/intro/](https://www.backtrader.com/recipes/storesbrokersdata/intro/)
 - en: This section host a collection of third-party *Stores* (or individual *Broker*
     / *Data Feed*) implementations which are not part of the *backtrader* core.
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: 这一部分托管了一系列第三方*存储*（或单独的*经纪人* / *数据源*）的实现，它们不是*backtrader*核心的一部分。

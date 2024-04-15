@@ -1,300 +1,468 @@
 - en: Automating backtrader BackTesting
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 自动化 backtrader 回测。
 - en: 原文：[https://www.backtrader.com/blog/posts/2015-08-16-backtesting-with-almost-no-programming/backtesting-with-almost-no-programming/](https://www.backtrader.com/blog/posts/2015-08-16-backtesting-with-almost-no-programming/backtesting-with-almost-no-programming/)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.backtrader.com/blog/posts/2015-08-16-backtesting-with-almost-no-programming/backtesting-with-almost-no-programming/](https://www.backtrader.com/blog/posts/2015-08-16-backtesting-with-almost-no-programming/backtesting-with-almost-no-programming/)
 - en: So far all backtrader examples and working samples have started from scratch
     creating a main **Python** module which loads datas, strategies, observers and
     prepares cash and commission schemes.
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: 到目前为止，所有 backtrader 的示例和工作样本都是从头开始创建一个主要的 **Python** 模块，加载数据、策略、观察者，并准备现金和佣金方案。
 - en: One of the goals of *algorithmic trading* is the automation of trading and given
     that bactrader is a *backtesting* platform intented to check trading algorithms
     (hence is an *algotrading* platform), automating the use of backtrader was an
     obvious goal.
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: '*算法交易*的一个目标是交易的自动化，鉴于 bactrader 是一个用于检查交易算法的回测平台（因此是一个*算法交易*平台），自动化使用 backtrader
+    是一个显而易见的目标。'
 - en: Note
+  id: totrans-4
   prefs: []
   type: TYPE_NORMAL
+  zh: 注意
 - en: Aug 22, 2015
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: 2015 年 8 月 22 日
 - en: '`Analyzer` support in `bt-run.py` included'
+  id: totrans-6
   prefs: []
   type: TYPE_NORMAL
+  zh: '`bt-run.py` 中包含了对 `Analyzer` 的支持。'
 - en: The development version of `backtrader` now contains the `bt-run.py` script
     which automates most tasks and will be installed along `backtrader` as part of
     a regular package.
+  id: totrans-7
   prefs: []
   type: TYPE_NORMAL
+  zh: '`backtrader` 的开发版本现在包含了 `bt-run.py` 脚本，它自动化了大多数任务，并将作为常规软件包的一部分与 `backtrader`
+    一起安装。'
 - en: '`bt-run.py` allows the end user to:'
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: '`bt-run.py` 允许最终用户：'
 - en: Say which datas have to be loaded
+  id: totrans-9
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 指明必须加载的数据。
 - en: Set the format to load the datas
+  id: totrans-10
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 设置加载数据的格式。
 - en: Specify the date range for the datas
+  id: totrans-11
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 指定数据的日期范围
 - en: Disable standard observers
+  id: totrans-12
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 禁用标准观察者。
 - en: 'Load one or more observers (example: DrawDown) from the built-in ones or from
     a python module'
+  id: totrans-13
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 从内置的或 Python 模块中加载一个或多个观察者（例如：回撤）
 - en: Set the cash and commission scheme parameters for the broker (commission, margin,
     mult)
+  id: totrans-14
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 为经纪人设置现金和佣金方案参数（佣金、保证金、倍数）
 - en: Enable plotting, controlling the amount of charts and style to present the data
+  id: totrans-15
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 启用绘图，控制图表数量和数据呈现风格。
 - en: 'And finally:'
+  id: totrans-16
   prefs: []
   type: TYPE_NORMAL
+  zh: 最后：
 - en: Load a strategy (a built-in one or from a Python module)
+  id: totrans-17
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 加载策略（内置的或来自 Python 模块）
 - en: Pass parameters to the loaded strategy
+  id: totrans-18
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 向加载的策略传递参数。
 - en: See below for the **Usage*** of the script.
+  id: totrans-19
   prefs: []
   type: TYPE_NORMAL
+  zh: 请参阅下面关于脚本的**用法***。
 - en: Applying a User Defined Strategy
+  id: totrans-20
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 应用用户定义的策略。
 - en: 'Let’s consider the following strategy which:'
+  id: totrans-21
   prefs: []
   type: TYPE_NORMAL
+  zh: 让我们考虑以下策略：
 - en: Simply loads a SimpleMovingAverage (default period 15)
+  id: totrans-22
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 简单地加载一个 SimpleMovingAverage（默认周期 15）
 - en: Prints outs
+  id: totrans-23
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 打印输出。
 - en: Is in a fily with the name mymod.py
+  id: totrans-24
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 文件名为 mymod.py。
 - en: '[PRE0]'
+  id: totrans-25
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: 'Executing the strategy with the usual testing sample is easy: easy:'
+  id: totrans-26
   prefs: []
   type: TYPE_NORMAL
+  zh: 用通常的测试样本执行策略很容易：简单：
 - en: '[PRE1]'
+  id: totrans-27
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE1]'
 - en: The chart output
+  id: totrans-28
   prefs: []
   type: TYPE_NORMAL
+  zh: 图表输出。
 - en: '![image](../Images/693cb0d9584d9a4aa924666f63b1b76c.png)'
+  id: totrans-29
   prefs: []
   type: TYPE_IMG
+  zh: '![image](../Images/693cb0d9584d9a4aa924666f63b1b76c.png)'
 - en: 'The console output:'
+  id: totrans-30
   prefs: []
   type: TYPE_NORMAL
+  zh: 控制台输出：
 - en: '[PRE2]'
+  id: totrans-31
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE2]'
 - en: 'Same strategy but:'
+  id: totrans-32
   prefs: []
   type: TYPE_NORMAL
+  zh: 同样的策略但是：
 - en: Setting the parameter `period` to 50
+  id: totrans-33
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 将参数 `period` 设置为 50。
 - en: 'The command line:'
+  id: totrans-34
   prefs: []
   type: TYPE_NORMAL
+  zh: 命令行：
 - en: '[PRE3]'
+  id: totrans-35
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE3]'
 - en: The chart output.
+  id: totrans-36
   prefs: []
   type: TYPE_NORMAL
+  zh: 图表输出。
 - en: '![image](../Images/a65a3088e0484b67c8bbe3942c3907e1.png)'
+  id: totrans-37
   prefs: []
   type: TYPE_IMG
+  zh: '![image](../Images/a65a3088e0484b67c8bbe3942c3907e1.png)'
 - en: Using a built-in Strategy
+  id: totrans-38
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 使用内置策略。
 - en: '`backtrader` will slowly be including sample (textbook) strategies. Along with
     the `bt-run.py` script a standard *Simple Moving Average CrossOver* strategy is
     included. The name:'
+  id: totrans-39
   prefs: []
   type: TYPE_NORMAL
+  zh: '`backtrader` 将逐渐包含示例（教科书）策略。随着 `bt-run.py` 脚本一起，一个标准的*简单移动平均线交叉*策略已包含在内。名称：'
 - en: '`SMA_CrossOver`'
+  id: totrans-40
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`SMA_CrossOver`'
 - en: Parameters
+  id: totrans-41
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 参数。
 - en: fast (default 10) period of the fast moving average
+  id: totrans-42
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 快速（默认 10）快速移动平均的周期
 - en: slow (default 30) period of the slow moving average
+  id: totrans-43
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 慢（默认 30）慢速移动平均的周期
 - en: The strategy buys if the fast moving average crosses up the fast and sells (only
     if it has bought before) upon the fast moving average crossing down the slow moving
     average.
+  id: totrans-44
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果快速移动平均线向上穿过快速移动平均线并且在慢速移动平均线向下穿过快速移动平均线后卖出（仅在之前已购买的情况下）。
 - en: The code
+  id: totrans-45
   prefs: []
   type: TYPE_NORMAL
+  zh: 代码。
 - en: '[PRE4]'
+  id: totrans-46
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE4]'
 - en: 'Standard execution:'
+  id: totrans-47
   prefs: []
   type: TYPE_NORMAL
+  zh: 标准执行：
 - en: '[PRE5]'
+  id: totrans-48
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE5]'
 - en: 'Notice the ‘:’. The standard notation (see below) to load a strategy is:'
+  id: totrans-49
   prefs: []
   type: TYPE_NORMAL
+  zh: 注意‘:’。加载策略的标准表示法（见下文）是：
 - en: module:stragegy
+  id: totrans-50
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 模块：策略。
 - en: 'With the following rules:'
+  id: totrans-51
   prefs: []
   type: TYPE_NORMAL
+  zh: 遵循以下规则：
 - en: If module is there and strategy is specified, then that strategy will be used
+  id: totrans-52
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 如果模块存在且指定了策略，则将使用该策略。
 - en: If module is there but no strategy is specified, the 1^(st) strategy found in
     the module will be returned
+  id: totrans-53
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 如果模块存在但未指定策略，则将返回模块中找到的第一个策略。
 - en: If no module is specified, “strategy” is assumed to refer to a strategy in the
     `backtrader` package
+  id: totrans-54
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 如果未指定模块，则假定“strategy”是指 `backtrader` 包中的策略
 - en: The latter being our case.
+  id: totrans-55
   prefs: []
   type: TYPE_NORMAL
+  zh: 后者是我们的情况。
 - en: The output.
+  id: totrans-56
   prefs: []
   type: TYPE_NORMAL
+  zh: 输出。
 - en: '![image](../Images/1a545394a8a1243eb800fd080611025a.png)'
+  id: totrans-57
   prefs: []
   type: TYPE_IMG
+  zh: '![image](../Images/1a545394a8a1243eb800fd080611025a.png)'
 - en: 'One last example adding commission schemes, cash and changing the parameters:'
+  id: totrans-58
   prefs: []
   type: TYPE_NORMAL
+  zh: 最后一个示例添加佣金方案、现金并更改参数：
 - en: '[PRE6]'
+  id: totrans-59
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE6]'
 - en: The output.
+  id: totrans-60
   prefs: []
   type: TYPE_NORMAL
+  zh: 输出。
 - en: '![image](../Images/c53f9a28e3a40efa6d33fb0be4a89d7d.png)'
+  id: totrans-61
   prefs: []
   type: TYPE_IMG
+  zh: '![image](../Images/c53f9a28e3a40efa6d33fb0be4a89d7d.png)'
 - en: 'We have backtested the strategy:'
+  id: totrans-62
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们已经对策略进行了回测：
 - en: Changing the moving average periods
+  id: totrans-63
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 更改移动平均周期
 - en: Setting a new starting cash
+  id: totrans-64
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 设置新的起始资金
 - en: Putting a commission scheme in place for a futures-like instrument
+  id: totrans-65
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 为期货类工具设置佣金方案
 - en: See the continuous variations in cash with each bar, as cash is adjusted for
     the futures-like instrument daily changes
+  id: totrans-66
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 查看每根柱子中现金的连续变化，因为现金会根据期货类工具的每日变动进行调整。
 - en: Adding Analyzers
+  id: totrans-67
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 添加分析器
 - en: Note
+  id: totrans-68
   prefs: []
   type: TYPE_NORMAL
+  zh: 注意
 - en: Added Analyzer example
+  id: totrans-69
   prefs: []
   type: TYPE_NORMAL
+  zh: 添加了分析器示例
 - en: '`bt-run.py` also supports adding `Analyzers` with the same syntax used for
     the strategies to choose between internal/external analyzers.'
+  id: totrans-70
   prefs: []
   type: TYPE_NORMAL
+  zh: '`bt-run.py`还支持使用与策略相同的语法添加`Analyzers`来选择内部/外部分析器。'
 - en: 'Example with a `SharpeRatio` analysis for the years 2005-2006:'
+  id: totrans-71
   prefs: []
   type: TYPE_NORMAL
+  zh: 以`SharpeRatio`分析2005-2006年为例：
 - en: '[PRE7]'
+  id: totrans-72
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE7]'
 - en: 'The output:'
+  id: totrans-73
   prefs: []
   type: TYPE_NORMAL
+  zh: 输出：
 - en: '[PRE8]'
+  id: totrans-74
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE8]'
 - en: Good strategy!!! (Pure luck for the example actually which also bears no commissions)
+  id: totrans-75
   prefs: []
   type: TYPE_NORMAL
+  zh: 良好的策略！！！（实际示例中纯粹是运气，而且也没有佣金）
 - en: The chart (which simply shows the Analyzer is not in the plot, because Analyzers
     cannot be plotted, they aren’t lines objects)
+  id: totrans-76
   prefs: []
   type: TYPE_NORMAL
+  zh: 图表（仅显示分析器不在图表中，因为分析器无法绘制，它们不是线对象）
 - en: '![image](../Images/8740716b754260baf410806aa63edd1a.png)'
+  id: totrans-77
   prefs: []
   type: TYPE_IMG
+  zh: '![image](../Images/8740716b754260baf410806aa63edd1a.png)'
 - en: Usage of the script
+  id: totrans-78
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 脚本的用法
 - en: 'Directly from the script:'
+  id: totrans-79
   prefs: []
   type: TYPE_NORMAL
+  zh: 直接从脚本中：
 - en: '[PRE9]'
+  id: totrans-80
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE9]'
 - en: 'And the code:'
+  id: totrans-81
   prefs: []
   type: TYPE_NORMAL
+  zh: 以及代码：
 - en: '[PRE10]'
+  id: totrans-82
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE10]'

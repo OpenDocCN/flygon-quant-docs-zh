@@ -1,107 +1,167 @@
 - en: MultiTrades
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: MultiTrades
 - en: 原文：[https://www.backtrader.com/blog/posts/2015-10-05-multitrades/multitrades/](https://www.backtrader.com/blog/posts/2015-10-05-multitrades/multitrades/)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.backtrader.com/blog/posts/2015-10-05-multitrades/multitrades/](https://www.backtrader.com/blog/posts/2015-10-05-multitrades/multitrades/)
 - en: One can now add a unique identifier to each trade, even if running on the same
     data.
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在可以为每笔交易添加唯一标识符，即使在相同数据上运行。
 - en: 'Following a request at [Tick Data and Resampling](https://disqus.com/home/discussion/backtrader/tick_data_and_resampling/?utm_source=digest&utm_medium=email&utm_content=replies)
     release 1.1.12.88 of `backtrader` support “MultiTrades”, ie: the ability to assign
     a `tradeid` to orders. This id is passed on to `Trades` which makes it possible
     to have different categories of trades and have them simultaneously open.'
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: 根据[Tick Data and Resampling](https://disqus.com/home/discussion/backtrader/tick_data_and_resampling/?utm_source=digest&utm_medium=email&utm_content=replies)的请求，在`backtrader`的1.1.12.88版本中支持“MultiTrades”，即：为订单分配`tradeid`的能力。此id传递给`Trades`，使得可以拥有不同类别的交易并同时开放。
 - en: 'The `tradeid` can be specified when:'
+  id: totrans-4
   prefs: []
   type: TYPE_NORMAL
+  zh: 当：
 - en: Calling Strategy.buy/sell/close with kwarg `tradeid`
+  id: totrans-5
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 使用带有关键字参数`tradeid`的Calling Strategy.buy/sell/close
 - en: Calling Broker.buy/sell with kwarg `tradeid`
+  id: totrans-6
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 使用带有关键字参数`tradeid`的Calling Broker.buy/sell
 - en: Creating an Order instance with kwarg `tradeid`
+  id: totrans-7
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 创建带有关键字参数`tradeid`的订单实例
 - en: 'If not specified the default value is:'
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果未指定，默认值为：
 - en: '`tradeid = 0`'
+  id: totrans-9
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`tradeid = 0`'
 - en: To test a small script has been implemented, visualizing the result with the
     implementation of a custom `MTradeObserver` which assigns different markers on
     the plot according `tradeid` (for the test values 0, 1 and 2 are used)
+  id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: 已实现了一个小脚本进行测试，通过实现自定义的`MTradeObserver`来可视化结果，根据`tradeid`分配不同的标记在图表上（测试值使用0、1和2）
 - en: The script supports using the three ids (0, 1, 2) or simply use 0 (default)
+  id: totrans-11
   prefs: []
   type: TYPE_NORMAL
+  zh: 该脚本支持使用三个id（0、1、2）或仅使用0（默认值）
 - en: 'An execution without enabling multiple ids:'
+  id: totrans-12
   prefs: []
   type: TYPE_NORMAL
+  zh: 未启用多个id的执行：
 - en: '[PRE0]'
+  id: totrans-13
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: With the resulting chart showing all Trades carry id `0` and therefore cannot
     be diferentiated.
+  id: totrans-14
   prefs: []
   type: TYPE_NORMAL
+  zh: 结果图表显示所有交易都携带id `0`，因此无法区分。
 - en: '![image](../Images/40fd891ccc3bcde6056915b3ccb9276d.png)'
+  id: totrans-15
   prefs: []
   type: TYPE_IMG
+  zh: '![image](../Images/40fd891ccc3bcde6056915b3ccb9276d.png)'
 - en: 'A second execution enables multitrades by cycling amongs 0, 1 and 2:'
+  id: totrans-16
   prefs: []
   type: TYPE_NORMAL
+  zh: 第二次执行通过在0、1和2之间循环实现多交易：
 - en: '[PRE1]'
+  id: totrans-17
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE1]'
 - en: And now 3 different markers alternate showing each Trade can be distinguished
     using the `tradeid` member.
+  id: totrans-18
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在3个不同的标记交替显示，每个交易都可以使用`tradeid`成员进行区分。
 - en: '![image](../Images/594ae51025c1ce1d2b298edb5eb8ce2e.png)'
+  id: totrans-19
   prefs: []
   type: TYPE_IMG
+  zh: '![image](../Images/594ae51025c1ce1d2b298edb5eb8ce2e.png)'
 - en: Note
+  id: totrans-20
   prefs: []
   type: TYPE_NORMAL
+  zh: 注意
 - en: '`backtrader` tries to use models which mimic reality. Therefore “trades” are
     not calculated by the `Broker` instance which only takes care of oders.'
+  id: totrans-21
   prefs: []
   type: TYPE_NORMAL
+  zh: '`backtrader`尝试使用模拟现实的模型。因此，“交易”不是由仅负责订单的`Broker`实例计算的。'
 - en: Trades are calculated by the Strategy.
+  id: totrans-22
   prefs: []
   type: TYPE_NORMAL
+  zh: 交易由策略计算。
 - en: And hence `tradeid` (or something similar) may not be supported by a real life
     broker in which case manually keeping track of the unique orde id assigned by
     the broker would be needed.
+  id: totrans-23
   prefs: []
   type: TYPE_NORMAL
+  zh: 因此，`tradeid`（或类似的内容）可能不会被真实经纪人支持，在这种情况下，需要手动跟踪经纪人分配的唯一订单id。
 - en: Now, the code for the custom observer
+  id: totrans-24
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在，自定义观察者的代码
 - en: '[PRE2]'
+  id: totrans-25
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE2]'
 - en: 'The main script usage:'
+  id: totrans-26
   prefs: []
   type: TYPE_NORMAL
+  zh: 主要脚本用法：
 - en: '[PRE3]'
+  id: totrans-27
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE3]'
 - en: The code for the script.
+  id: totrans-28
   prefs: []
   type: TYPE_NORMAL
+  zh: 脚本的代码。
 - en: '[PRE4]'
+  id: totrans-29
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE4]'

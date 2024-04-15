@@ -1,225 +1,340 @@
 - en: Hidden Powers of Python (3)
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: Python 的隐藏力量（3）
 - en: 原文：[https://www.backtrader.com/blog/posts/2016-11-25-hidden-powers-3/hidden-powers/](https://www.backtrader.com/blog/posts/2016-11-25-hidden-powers-3/hidden-powers/)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.backtrader.com/blog/posts/2016-11-25-hidden-powers-3/hidden-powers/](https://www.backtrader.com/blog/posts/2016-11-25-hidden-powers-3/hidden-powers/)
 - en: Last, but not least, in this series about how the hidden powers of Python are
     used in *backtrader* is how some of the magic variables show up.
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: 最后，在关于如何在 *backtrader* 中使用 Python 的隐藏力量的系列中，一些魔术变量是如何出现的。
 - en: Where do `self.datas` and others come from?
+  id: totrans-3
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: '`self.datas` 和其他属性是从哪里来的？'
 - en: The usual suspect classes (or subclasses thereof) `Strategy`, `Indicator`, `Analyzer`,
     `Observer` have auto-magically defined attributes, like for example the array
     which contains the *data feeds*.
+  id: totrans-4
   prefs: []
   type: TYPE_NORMAL
+  zh: 常见的类（或其子类）`Strategy`、`Indicator`、`Analyzer`、`Observer` 都自动定义了属性，例如包含 *data feeds*
+    的数组。
 - en: 'Data Feeds are added to a `cerebro` instance like this:'
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: 数据源被添加到 `cerebro` 实例中，如下所示：
 - en: '[PRE0]'
+  id: totrans-6
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: 'Our winning strategy for the example will go long when the `close` goes above
     a *Simple Moving Average*. We’ll use *Signals* to make the example shorter:'
+  id: totrans-7
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们的示例中的获胜策略将在 `close` 超过 *Simple Moving Average* 时进行多头操作。我们将使用 *Signals* 来缩短示例：
 - en: '[PRE1]'
+  id: totrans-8
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE1]'
 - en: 'Which gets added to the mix as:'
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: 这些被添加到混合中：
 - en: '[PRE2]'
+  id: totrans-10
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE2]'
 - en: 'Any reader will notice that:'
+  id: totrans-11
   prefs: []
   type: TYPE_NORMAL
+  zh: 任何读者都会注意到：
 - en: '`__init__` takes no parameters, named or not'
+  id: totrans-12
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`__init__` 不带任何参数，无论是否命名'
 - en: There is no `super` call so the base class is not being directly asked to do
     its init
+  id: totrans-13
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 没有 `super` 调用，因此基类没有直接要求执行其初始化
 - en: The definition of `mysig` references `self.data` which probably has to do with
     the `YahooFinanceData` instance which is added to `cerebro`
+  id: totrans-14
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`mysig` 的定义引用了 `self.data`，这可能与添加到 `cerebro` 的 `YahooFinanceData` 实例有关。'
 - en: '**Indeed it does!**'
+  id: totrans-15
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: '**确实如此！**'
 - en: 'There actually other attributes which are there and not seen in the example.
     For example:'
+  id: totrans-16
   prefs: []
   type: TYPE_NORMAL
+  zh: 实际上还有其他属性存在，但在示例中看不到。例如：
 - en: '`self.datas`: an array containing all *data feeds* which are added to `cerebro`'
+  id: totrans-17
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`self.datas`：包含添加到 `cerebro` ��所有 *data feeds* 的数组'
 - en: '`self.dataX`: where `X` is a number which reflects the order in which the data
     was added to cerebro (`data0` would be the data added above)'
+  id: totrans-18
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`self.dataX`：其中 `X` 是一个数字，反映了数据添加到 `cerebro` 中的顺序（`data0` 是上面添加的数据）'
 - en: '`self.data`: which points to `self.data0`. Just a ahortcut for convenience
     since most examples and strategies only target a single data'
+  id: totrans-19
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`self.data`：指向 `self.data0`。只是一个方便的快捷方式，因为大多数示例和策略只针对单个数据'
 - en: 'More can be found in the docs:'
+  id: totrans-20
   prefs: []
   type: TYPE_NORMAL
+  zh: 更多内容请查看文档：
 - en: '[https://www.backtrader.com/docu/concepts.html](https://www.backtrader.com/docu/concepts.html)'
+  id: totrans-21
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[https://www.backtrader.com/docu/concepts.html](https://www.backtrader.com/docu/concepts.html)'
 - en: '[https://www.backtrader.com/docu/datafeed.html](https://www.backtrader.com/docu/datafeed.html)'
+  id: totrans-22
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[https://www.backtrader.com/docu/datafeed.html](https://www.backtrader.com/docu/datafeed.html)'
 - en: How are those attributes created?
+  id: totrans-23
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 这些属性是如何创建的？
 - en: In the 2^(nd) article in this series it was seen that the class creation mechanims
     and instance creation mechanism were intercepted. The latter is used to do that.
+  id: totrans-24
   prefs: []
   type: TYPE_NORMAL
+  zh: 在本系列的第二篇文章中，看到类创建机制和实例创建机制被拦截。后者用于执行此操作。
 - en: '`cerebro` receives the *class* via `adstrategy`'
+  id: totrans-25
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`cerebro` 通过 `adstrategy` 接收 *class*。'
 - en: It will instantiate it when needed and add itself as an attribute
+  id: totrans-26
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 当需要时，它将实例化自身并将自身添加为属性
 - en: The `new` classmethod of the strategy is intercepted during the creation of
     the `Strategy` instance and examines which *data feeds* are available in `cerebro`
+  id: totrans-27
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 在创建 `Strategy` 实例时，策略的 `new` 类方法被拦截，并检查 `cerebro` 中有哪些 *data feeds* 可用。
 - en: And it does creates the *array* and *aliases* mentioned above
+  id: totrans-28
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 它确实创建了上面提到的 *array* 和 *aliases*
 - en: 'This mechanism is applied to many other objects in the *backtrader* ecosystem,
     in order to simplifly what the end users have to do. As such:'
+  id: totrans-29
   prefs: []
   type: TYPE_NORMAL
+  zh: 这种机制应用于 *backtrader* 生态系统中的许多其他对象，以简化最终用户的操作。因此：
 - en: There is for example no need to constantly create function prototypes which
     contain an argument named `datas` and no need to assign it to `self.datas`
+  id: totrans-30
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 例如，没有必要不断创建包含名为 `datas` 的参数的函数原型，也不需要将其分配给 `self.datas`。
 - en: Because it is done auto-magically in the background
+  id: totrans-31
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 因为它在后台自动完成
 - en: Another example of this interception
+  id: totrans-32
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 这种拦截的另一个示例
 - en: 'Let’s define a winning indicator and add it to a winning strategy. We’ll repack
     the *close over SMA* idea:'
+  id: totrans-33
   prefs: []
   type: TYPE_NORMAL
+  zh: 让我们定义一个获胜的指标，并将其添加到一个获胜的策略中。我们将重新包装 *close over SMA* 的概念：
 - en: '[PRE3]'
+  id: totrans-34
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE3]'
 - en: 'And now add it to a regular strategy:'
+  id: totrans-35
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在将其添加到常规策略中：
 - en: '[PRE4]'
+  id: totrans-36
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE4]'
 - en: 'From the code above there is obviously a calculation taking place in `MyIndicator`:'
+  id: totrans-37
   prefs: []
   type: TYPE_NORMAL
+  zh: 从上面的代码中显然在 `MyIndicator` 中进行了计算：
 - en: '[PRE5]'
+  id: totrans-38
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE5]'
 - en: 'But it seems to be done nowhere. As seen in the 1^(st) article in this series,
     the operation generates an *object*, which is assigned to `self.lines.signal`
     and the following happens:'
+  id: totrans-39
   prefs: []
   type: TYPE_NORMAL
+  zh: 但似乎没有地方执行这个操作。正如本系列中的第1篇文章所示，该操作生成一个*对象*，分配给`self.lines.signal`，然后发生以下情况：
 - en: This object intercepts also its creation process
+  id: totrans-40
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 这个对象还拦截了自己的创建过程
 - en: It scans the *stack* to understand the context in which is being created, in
     this case inside an instance of `MyIndicators`
+  id: totrans-41
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 它扫描*堆栈*以了解正在创建的上下文，本例中是在`MyIndicators`的实例内部创建。
 - en: And after its *initialization* is completed, it adds itself to the internal
     structures of `MyIndicator`
+  id: totrans-42
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 在*初始化*完成后，将自身添加到`MyIndicator`的内部结构中
 - en: Later when `MyIndicator` is calculated, it will in turn calculate the operation
     which is inside the object referenced by `self.lines.signal`
+  id: totrans-43
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 稍后当计算`MyIndicator`时，它将反过来计算操作，该操作位于由`self.lines.signal`引用的对象内部
 - en: Good, but who calculates `MyIndicator`
+  id: totrans-44
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 不错，但是谁计算`MyIndicator`
 - en: 'Exactly the same process is followed:'
+  id: totrans-45
   prefs: []
   type: TYPE_NORMAL
+  zh: 完全相同的过程被遵循：
 - en: '`MyIndicator` scans the stack during creation and finds the `MyStrategy`'
+  id: totrans-46
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`MyIndicator`在创建过程中扫描堆栈并找到`MyStrategy`'
 - en: And adds itself to the structures of `MyStrategy`
+  id: totrans-47
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 并将自身添加到`MyStrategy`的结构中
 - en: Right before `next` is called, `MyIndicator` is asked to recalculate itself,
     which in turns tells `self.lines.signal` to recalculate itself
+  id: totrans-48
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 就在调用`next`之前，要求`MyIndicator`重新计算自身，这反过来告诉`self.lines.signal`重新计算自身
 - en: The process can have multiple layers of indirection.
+  id: totrans-49
   prefs: []
   type: TYPE_NORMAL
+  zh: 这个过程可以有多层间接性。
 - en: 'And the best things for the user:'
+  id: totrans-50
   prefs: []
   type: TYPE_NORMAL
+  zh: 对用户来说最好的事情是：
 - en: No need to add calls like `register_operation` when something is created
+  id: totrans-51
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 当创建某物时无需添加像`register_operation`这样的调用
 - en: No need to manually trigger calculations
+  id: totrans-52
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 无需手动触发计算
 - en: Concluding
+  id: totrans-53
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 总结
 - en: 'The last article in the series shows another example of how class/instance
     creation interception is used to make the life of the end user easier by:'
+  id: totrans-54
   prefs: []
   type: TYPE_NORMAL
+  zh: 本系列中的最后一篇文章展示了另一个例子，说明了如何利用类/实例创建拦截来使最终用户的生活更轻松：
 - en: Adding objects from the ecosystem there where they are needed and creating aliases
+  id: totrans-55
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 在需要的地方从生态系统中添加对象并创建别名
 - en: Auto-registering classes and triggering calculations
+  id: totrans-56
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 自动注册类并触发计算

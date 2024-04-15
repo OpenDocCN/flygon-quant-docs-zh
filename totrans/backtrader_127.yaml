@@ -1,247 +1,375 @@
 - en: StopTrail(Limit)
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: StopTrail(Limit)
 - en: 原文：[https://www.backtrader.com/blog/posts/2017-03-22-stoptrail/stoptrail/](https://www.backtrader.com/blog/posts/2017-03-22-stoptrail/stoptrail/)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.backtrader.com/blog/posts/2017-03-22-stoptrail/stoptrail/](https://www.backtrader.com/blog/posts/2017-03-22-stoptrail/stoptrail/)
 - en: Release `1.9.35.116` adds the `StopTrail` and `StopTrailLimit` order execution
     types to the backtesting arsenal.
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: 版本`1.9.35.116`为回测工具库添加了`StopTrail`和`StopTrailLimit`订单执行类型。
 - en: Note
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: 注意
 - en: This is only implemented in backtesting and there isn’t yet an implementation
     for live brokers
+  id: totrans-4
   prefs: []
   type: TYPE_NORMAL
+  zh: 这只在回测中实现了，尚未实现实时经纪人的功能
 - en: Note
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: 注意
 - en: Updated with release `1.9.36.116`. Interactive Brokers support for `StopTrail`,
     `StopTrailLimit` and `OCO`.
+  id: totrans-6
   prefs: []
   type: TYPE_NORMAL
+  zh: 更新至版本`1.9.36.116`。交互式经纪人支持`StopTrail`、`StopTrailLimit`和`OCO`。
 - en: '`OCO` Specify always the 1^(st) order in a group as parameter `oco`'
+  id: totrans-7
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`OCO`始终将一组中的第1个订单指定为参数`oco`'
 - en: '`StopTrailLimit`: the broker simulation and the `IB` broker have the asme behavior.
     Specify: `price` as the initial stop trigger price (specify also `trailamount`)
     and then `plimi` as the initial limit price. The difference between the two will
     determine the `limitoffset` (the distance at which the limit price remains from
     the stop trigger price)'
+  id: totrans-8
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`StopTrailLimit`：经纪人模拟和`IB`经纪人具有相同的行为。指定：`price`作为初始止损触发价格（还要指定`trailamount`），然后`plimi`作为初始限价。两者之间的差异将确定`limitoffset`（限价价格与停止触发价格之间的距离）'
 - en: 'The usage pattern is fully integrated into the standard `buy`, `sell` and `close`
     market operation methods of the strategy instances. To notice:'
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: 使用模式完全集成到了策略实例的标准`buy`、`sell`和`close`市场操作方法中。要注意：
 - en: Indicate which execution type is wished as in `exectype=bt.Order.StopTrail`
+  id: totrans-10
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 指定所需的执行类型，如`exectype=bt.Order.StopTrail`
 - en: And whether the trailing price must be calculated with a fixed distance or with
     a percentage based distance
+  id: totrans-11
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 以及尾随价格是固定距离还是基于百分比的距离计算
 - en: 'Fixed distance: `trailamount=10`'
+  id: totrans-12
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 固定距离：`trailamount=10`
 - en: 'Percentage based distance: `trailpercent=0.02` (i.e.: `2%`)'
+  id: totrans-13
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 基于百分比的距离：`trailpercent=0.02`（即：`2%`）
 - en: 'If one has entered the market long by issuing a `buy`, this is what a `sell`
     with `StopTrail` and `trailamount` does:'
+  id: totrans-14
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果通过发出`buy`进入市场，则使用`StopTrail`和`trailamount`的`sell`就是这样做的操作：
 - en: If no `price` is specified, the latest `close` price is used
+  id: totrans-15
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 如果未指定`price`，则使用最新的`close`价格
 - en: '`trailamount` is substracted from the price to find the `stop` (or trigger)
     price'
+  id: totrans-16
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`trailamount`从价格中减去以找到`stop`（或触发）价格'
 - en: The next iteration of the *broker* checks if the trigger price has been reached
+  id: totrans-17
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '*broker*的下一次迭代将检查触发价格是否已达到'
 - en: 'If **Yes**: the order is executed with a `Market` execution type approach'
+  id: totrans-18
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 如果**是**：订单将以`市价`执行方式执行
 - en: If **No**, the `stop` price is recalculated by using the latest `close` price
     and substracting the `trailamount` distance
+  id: totrans-19
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 如果**否**，则`stop`价格会通过使用最新的`close`价格重新计算，并减去`trailamount`的距离。
 - en: If the new price goes up, it is updated
+  id: totrans-20
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 如果新价格上涨，则会更新
 - en: If the new price would go down (or not change at all), it is discarded
+  id: totrans-21
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 如果新价格会下跌（或保持不变），则将其丢弃
 - en: 'That is: the trailing stop price follows the price upwards, but remains fixed
     if the prices start falling, to potentially secure a profit.'
+  id: totrans-22
   prefs: []
   type: TYPE_NORMAL
+  zh: 也就是说：尾随止损价格会随着价格上涨而上涨，但如果价格开始下跌，价格将保持不变，以潜在地确保利润。
 - en: 'If one had entered the market with a `sell`, then issuing a `buy` order with
     `StopTrail` simply does the opposite, i.e.: prices are followed downwards.'
+  id: totrans-23
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果已经用`sell`进入市场，那么只需使用`StopTrail`发出`buy`订单就可以做相反的操作，即：价格向下跟随。
 - en: Some usage patterns
+  id: totrans-24
   prefs: []
   type: TYPE_NORMAL
+  zh: 一些使用模式
 - en: '[PRE0]'
+  id: totrans-25
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: One can also specify `trailpercent` instead of `trailamount` and the distance
     to the price will be calculated as a percentage of the price
+  id: totrans-26
   prefs: []
   type: TYPE_NORMAL
+  zh: 也可以指定`trailpercent`而不是`trailamount`，并且距离将以价格的百分比计算
 - en: '[PRE1]'
+  id: totrans-27
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE1]'
 - en: For a `StopTrailLimit`
+  id: totrans-28
   prefs: []
   type: TYPE_NORMAL
+  zh: 对于`StopTrailLimit`
 - en: The only difference is what happens when the trailing stop price is triggered.
+  id: totrans-29
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 当触发尾随止损价格时，唯一的区别在于发生了什么。
 - en: In this case the order is executed as a `Limit` order (the same behavior a `StopLimit`
     order has, but in this case with a dynamic triggering price)
+  id: totrans-30
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 在这种情况下，订单将作为`限价`订单执行（与`StopLimit`订单具有相同的行为，但在这种情况下具有动态触发价格）
 - en: Note
+  id: totrans-31
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 注意
 - en: one has to specify `plimit=x.x` to `buy` or `sell`, which will be the *limit*
     price
+  id: totrans-32
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 必须指定`plimit=x.x`来`buy`或`sell`，这将是*限价*。
 - en: Note
+  id: totrans-33
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 注意
 - en: the *limit* price is not changed dynamically like the stop/trigger price
+  id: totrans-34
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: '*限价*价格不像停止/触发价格那样动态更改'
 - en: An example is always worth a thousand words and hence the usual *backtrader*
     sample, which
+  id: totrans-35
   prefs: []
   type: TYPE_NORMAL
+  zh: 例子永远都是值得一千言语的，因此通常的*backtrader*示例，
 - en: Uses a moving average crossing up to enter the market long
+  id: totrans-36
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 使用移动平均线交叉进入市场的方法
 - en: Uses a trailing stop to exit the market
+  id: totrans-37
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 使用跟踪止损退出市场
 - en: The execution with `50` points of fixed price distance
+  id: totrans-38
   prefs: []
   type: TYPE_NORMAL
+  zh: 执行与固定价格距离为`50`点
 - en: '[PRE2]'
+  id: totrans-39
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE2]'
 - en: Which produces the following chart
+  id: totrans-40
   prefs: []
   type: TYPE_NORMAL
+  zh: 产生以下图表
 - en: '![image](../Images/030b1a3d8a6be252026b23ba1c0f7b4e.png)'
+  id: totrans-41
   prefs: []
   type: TYPE_IMG
+  zh: '![图像](../Images/030b1a3d8a6be252026b23ba1c0f7b4e.png)'
 - en: 'And the following output:'
+  id: totrans-42
   prefs: []
   type: TYPE_NORMAL
+  zh: 以及以下输出：
 - en: '[PRE3]'
+  id: totrans-43
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE3]'
 - en: Rather than waiting for the usual cross down pattern the system uses the trailing
     stop to exit the market. Let’s see the 1^(st) operation for example
+  id: totrans-44
   prefs: []
   type: TYPE_NORMAL
+  zh: 而不是等待通常的交叉下行模式，系统使用跟踪止损退出市场。让我们以第1次操作为例
 - en: 'Closing price when entering long: `3075.76`'
+  id: totrans-45
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 进入多头时的收盘价格：`3075.76`
 - en: 'System calculated trail stop price: `3025.76` (which is `50` units away)'
+  id: totrans-46
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 系统计算的跟踪止损价格：`3025.76`（距离`50`个单位）
 - en: 'Sample calculated trail stop price: `3025.76` (last price shown in each line)'
+  id: totrans-47
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 样本计算的跟踪止损价格：`3025.76`（每行显示的最后价格）
 - en: 'After this first calculation:'
+  id: totrans-48
   prefs: []
   type: TYPE_NORMAL
+  zh: 在第一次计算之后：
 - en: The closing price goes up to `3086.95` and the stop price is adjusted to `3036.95`
+  id: totrans-49
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 收盘价上涨至`3086.95`且止损价格调整为`3036.95`
 - en: The following closing prices don’t exceed `3086.95` and the trigger price doesn’t
     change
+  id: totrans-50
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 以下收盘价格均不超过`3086.95`且触发价格不变
 - en: The same pattern can be seen in the other 2 operations.
+  id: totrans-51
   prefs: []
   type: TYPE_NORMAL
+  zh: 在其他2次操作中也可以看到相同的模式。
 - en: For the sake of comparison, an execution with just `30` points of fixed distance
     (just the chart)
+  id: totrans-52
   prefs: []
   type: TYPE_NORMAL
+  zh: 为了比较，使用固定距离为`30`点的执行（只有图表）
 - en: '[PRE4]'
+  id: totrans-53
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE4]'
 - en: And the chart
+  id: totrans-54
   prefs: []
   type: TYPE_NORMAL
+  zh: 以及图表
 - en: '![image](../Images/69e17cf0f258229d01dc367c6a652b3c.png)'
+  id: totrans-55
   prefs: []
   type: TYPE_IMG
+  zh: '![图像](../Images/69e17cf0f258229d01dc367c6a652b3c.png)'
 - en: Followed by one last execution with `trailpercent=0.02`
+  id: totrans-56
   prefs: []
   type: TYPE_NORMAL
+  zh: 接着最后一个执行，使用`trailpercent=0.02`
 - en: '[PRE5]'
+  id: totrans-57
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE5]'
 - en: The corresponding chart.
+  id: totrans-58
   prefs: []
   type: TYPE_NORMAL
+  zh: 相应的图表。
 - en: '![image](../Images/3f77b8d82105da692387c954ace0e992.png)'
+  id: totrans-59
   prefs: []
   type: TYPE_IMG
+  zh: '![图像](../Images/3f77b8d82105da692387c954ace0e992.png)'
 - en: The sample usage
+  id: totrans-60
   prefs: []
   type: TYPE_NORMAL
+  zh: 示例用法
 - en: '[PRE6]'
+  id: totrans-61
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE6]'
 - en: The sample code
+  id: totrans-62
   prefs: []
   type: TYPE_NORMAL
+  zh: 示例代码
 - en: '[PRE7]'
+  id: totrans-63
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE7]'

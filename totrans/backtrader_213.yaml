@@ -1,26 +1,40 @@
 - en: Metaquotes MQL 5 - API
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: Metaquotes MQL 5 - API
 - en: 原文：[https://www.backtrader.com/recipes/storesbrokersdata/mql5/mql5/](https://www.backtrader.com/recipes/storesbrokersdata/mql5/mql5/)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.backtrader.com/recipes/storesbrokersdata/mql5/mql5/](https://www.backtrader.com/recipes/storesbrokersdata/mql5/mql5/)
 - en: First announced here by user `Nikolai`
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: 首次由用户 `Nikolai` 在这里宣布。
 - en: '[Backtrader Community - Metaquotes MQL 5 - API](https://community.backtrader.com/topic/1767/metaquotes-mql-5-api)'
+  id: totrans-3
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[Backtrader 社区 - Metaquotes MQL 5 - API](https://community.backtrader.com/topic/1767/metaquotes-mql-5-api)'
 - en: 'Links to the repositories:'
+  id: totrans-4
   prefs: []
   type: TYPE_NORMAL
+  zh: 仓库链接：
 - en: '[https://github.com/khramkov/MQL5-JSON-API](https://github.com/khramkov/MQL5-JSON-API)'
+  id: totrans-5
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[https://github.com/khramkov/MQL5-JSON-API](https://github.com/khramkov/MQL5-JSON-API)'
 - en: '[https://github.com/khramkov/Backtrader-MQL5-API](https://github.com/khramkov/Backtrader-MQL5-API)'
+  id: totrans-6
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[https://github.com/khramkov/Backtrader-MQL5-API](https://github.com/khramkov/Backtrader-MQL5-API)'

@@ -1,18 +1,28 @@
 - en: Oanda v20
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: Oanda v20
 - en: 原文：[https://www.backtrader.com/recipes/storesbrokersdata/oandav20/oandav20/](https://www.backtrader.com/recipes/storesbrokersdata/oandav20/oandav20/)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.backtrader.com/recipes/storesbrokersdata/oandav20/oandav20/](https://www.backtrader.com/recipes/storesbrokersdata/oandav20/oandav20/)
 - en: By user `ftomassetti`
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: 由用户 `ftomassetti`
 - en: 'Link to the repository:'
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: 仓库链接：
 - en: '[https://github.com/ftomassetti/backtrader-oandav20](https://github.com/ftomassetti/backtrader-oandav20)'
+  id: totrans-4
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[https://github.com/ftomassetti/backtrader-oandav20](https://github.com/ftomassetti/backtrader-oandav20)'

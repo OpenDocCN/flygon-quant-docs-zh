@@ -1,426 +1,644 @@
 - en: On Backtesting Performance and Out of Core Memory Execution
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 关于回测性能和核心内存执行
 - en: 原文：[https://www.backtrader.com/blog/2019-10-25-on-backtesting-performance-and-out-of-memory/on-backtesting-performance-and-out-of-memory/](https://www.backtrader.com/blog/2019-10-25-on-backtesting-performance-and-out-of-memory/on-backtesting-performance-and-out-of-memory/)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.backtrader.com/blog/2019-10-25-on-backtesting-performance-and-out-of-memory/on-backtesting-performance-and-out-of-memory/](https://www.backtrader.com/blog/2019-10-25-on-backtesting-performance-and-out-of-memory/on-backtesting-performance-and-out-of-memory/)
 - en: There have been two recent [https://redit.com/r/algotrading](https://redit.com/r/algotrading)
     threads which are the inspiration for this article.
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: 最近有两个[https://redit.com/r/algotrading](https://redit.com/r/algotrading)帖子启发了本文。
 - en: 'A thread with a bogus claim that *backtrader* cannot cope with 1.6M candles:
     [reddit/r/algotrading - A performant backtesting system?](https://www.reddit.com/r/algotrading/comments/dlfujr/a_performant_backtesting_system/)'
+  id: totrans-3
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 一个声称*backtrader*无法处理 1.6M 根蜡烛的帖子：[reddit/r/algotrading - 一个高性能的回测系统？](https://www.reddit.com/r/algotrading/comments/dlfujr/a_performant_backtesting_system/)
 - en: 'And another one asking for something which can backtest a universe of 8000
     stocks: [reddit/r/algotrading - Backtesting libs that supports 1000+ stocks?](https://www.reddit.com/r/algotrading/comments/dmv51t/backtesting_libs_that_supports_1000_stocks/)'
+  id: totrans-4
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 还有一个要求能够回测 8000 支股票的东西：[reddit/r/algotrading - 支持 1000+ 支股票的回测库？](https://www.reddit.com/r/algotrading/comments/dmv51t/backtesting_libs_that_supports_1000_stocks/)
 - en: With the author asking about a framework that can backtest '"out-of-core/memory"*,
     *"because obviously it cannot load all this data into memory"*
+  id: totrans-5
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 作者询问关于一个可以进行“核心/内存外”回测的框架，*“因为显然无法将所有这些数据加载到内存中”*
 - en: We'll be of course addressing these concepts with *backtrader*
+  id: totrans-6
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们当然将使用*backtrader*来解决这些概念
 - en: The 2M Candles
+  id: totrans-7
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 2M 根蜡烛
 - en: In order to do this, the first thing is to generate that amount of candles.
     Given that the first poster talks about 77 stocks and 1.6M candles, this would
     amount to 20,779 candles per stock, so we'll do the following to have nice numbers
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: 为了做到这一点，首先要生成那么多根蜡烛。考虑到第一个帖子提到了 77 支股票和 1.6M 根蜡烛，这将导致每支股票有 20,779 根蜡烛，因此我们将采取以下措施以获得良好的数字
 - en: Generate candles for 100 stocks
+  id: totrans-9
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 为 100 支股票生成蜡烛
 - en: Generate 20,000 candles per stock
+  id: totrans-10
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 每支股票生成 20,000 根蜡烛
 - en: 'I.e.: 100 files totaling 2M candles.'
+  id: totrans-11
   prefs: []
   type: TYPE_NORMAL
+  zh: 即：共计 2M 根蜡烛的 100 个文件。
 - en: The script
+  id: totrans-12
   prefs: []
   type: TYPE_NORMAL
+  zh: 脚本
 - en: '[PRE0]'
+  id: totrans-13
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: This generates 100 files, starting with `candles00.csv` and going all the way
     up to `candles99.csv`. The actual values are not important. Having the standard
     `datetime`, `OHLCV` components (and `OpenInterest`) is what matters.
+  id: totrans-14
   prefs: []
   type: TYPE_NORMAL
+  zh: 这将生成 100 个文件，从`candles00.csv`开始一直到`candles99.csv`。实际值并不重要。重要的是具有标准的`datetime`、`OHLCV`组件（和`OpenInterest`）。
 - en: The test system
+  id: totrans-15
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 测试系统
 - en: '*Hardware/OS*: A *Windows 10* 15.6" laptop with an Intel i7 and 32 Gbytes of
     memory will be used.'
+  id: totrans-16
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '*硬件/操作系统*：将使用一台配备 Intel i7 和 32 G字节内存的 Windows 10 15.6 英寸笔记本电脑。'
 - en: '*Python*: CPython `3.6.1` and `pypy3 6.0.0`'
+  id: totrans-17
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '*Python*：CPython `3.6.1` 和 `pypy3 6.0.0`'
 - en: '*Misc*: an application running constantly and taking around 20% of the CPU.
     The usual suspects like Chrome (102 processes), Edge, Word, Powerpoint, Excel
     and some minor application are running'
+  id: totrans-18
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '*其他*：一个持续运行并占用大约 20% CPU 的应用程序。常见的嫌疑人如 Chrome（102 个进程）、Edge、Word、Powerpoint、Excel
+    和一些次要应用程序正在运行'
 - en: '*backtrader* default configuration'
+  id: totrans-19
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: '*backtrader* 默认配置'
 - en: 'Let''s recall what the default run-time configuration for *backtrader* is:'
+  id: totrans-20
   prefs: []
   type: TYPE_NORMAL
+  zh: 让我们回想一下*backtrader*的默认运行时配置是什么：
 - en: Preload all data feeds if possible
+  id: totrans-21
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 如有可能，预加载所有数据源
 - en: If all data feeds can be preloaded, run in batch mode (named `runonce`)
+  id: totrans-22
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 如果所有数据源都可以预加载，请在批处理模式（命名为`runonce`）中运行
 - en: Precalculate all indicators first
+  id: totrans-23
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 首先预先计算所有指标
 - en: Go through the strategy logic and broker step-by-step
+  id: totrans-24
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 逐步通过策略逻辑和经纪人
 - en: Executing the challenge in the default batch `runonce` mode
+  id: totrans-25
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 在默认批处理`runonce`模式下执行挑战
 - en: Our test script (see at the bottom for the full source code) will open those
     100 files and process them with the default *backtrader* configuration.
+  id: totrans-26
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们的测试脚本（请查看底部获取完整源代码）将打开这 100 个文件，并使用默认的*backtrader*配置处理它们。
 - en: '[PRE1]'
+  id: totrans-27
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE1]'
 - en: '**Memory Usage**: A peak of 348 Mbytes was observed'
+  id: totrans-28
   prefs: []
   type: TYPE_NORMAL
+  zh: '**内存使用**：观察到峰值为 348 M字节'
 - en: Most of the time is actually spent preloading the data (`98.63` seconds), spending
     the rest in the strategy, which includes going through the broker in each iteration
     (`73.63` seconds). The total time is `173.26` seconds.
+  id: totrans-29
   prefs: []
   type: TYPE_NORMAL
+  zh: 大部分时间实际上是用于预加载数据（`98.63` 秒），其余时间用于策略，其中包括在每次迭代中通过经纪人（`73.63` 秒）。总时间为`173.26`秒。
 - en: 'Depending on how you want to calculate it the performance is:'
+  id: totrans-30
   prefs: []
   type: TYPE_NORMAL
+  zh: 根据您想如何计算，性能为：
 - en: '`14,713` candles/second considering the entire run time'
+  id: totrans-31
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 考虑整个运行时间为每秒`14,713`根蜡烛
 - en: '**Bottomline**: the claim in the 1^(st) of the two reddit thread above that
     *backtrader* cannot handle 1.6M candles is *FALSE*.'
+  id: totrans-32
   prefs: []
   type: TYPE_NORMAL
+  zh: '**底线**：在上面两个Reddit帖子中声称*backtrader*无法处理1.6M根蜡烛的说法是*错误的*。'
 - en: Doing it with `pypy`
+  id: totrans-33
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 使用`pypy`进行操作
 - en: Since the thread claims that using `pypy` didn't help, let's see what happens
     when using it.
+  id: totrans-34
   prefs: []
   type: TYPE_NORMAL
+  zh: 既然该帖子声称使用`pypy`没有帮助，那么我们来看看使用它会发生什么。
 - en: '[PRE2]'
+  id: totrans-35
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE2]'
 - en: Holy Cow! The total time has gone down to `57.19` seconds in total from `135.93`
     seconds. The performance has more than **doubled**.
+  id: totrans-36
   prefs: []
   type: TYPE_NORMAL
+  zh: 天啊！总时间从`135.93`秒降至`57.19`秒。性能**翻了一番**。
 - en: 'The performance: `34,971` candles/second'
+  id: totrans-37
   prefs: []
   type: TYPE_NORMAL
+  zh: 性能：每秒`34,971`根蜡烛
 - en: '**Memory Usage**: a peak of 269 Mbytes was seen.'
+  id: totrans-38
   prefs: []
   type: TYPE_NORMAL
+  zh: '**内存使用**：峰值为269兆字节。'
 - en: This is also an important improvement over the standard CPython interpreter.
+  id: totrans-39
   prefs: []
   type: TYPE_NORMAL
+  zh: 这也是与标准CPython解释器相比的重要改进。
 - en: Handling the 2M candles out of core memory
+  id: totrans-40
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 处理2百万根蜡烛超出核心内存
 - en: All of this can be improved if one considers that *backtrader* has several configuration
     options for the execution of a backtesting session, including optimizing the buffers
     and working only with the minimum needed set of data (ideally with just buffers
     of size `1`, which would only happen in ideal scenarios)
+  id: totrans-41
   prefs: []
   type: TYPE_NORMAL
+  zh: 所有这些都可以改进，如果考虑到*backtrader*有几个配置选项用于执行回测会话，包括优化缓冲区并仅使用最少需要的数据集（理想情况下仅使用大小为`1`的缓冲区，这仅在理想情况下发生）
 - en: The option to be used will be `exactbars=True`. From the documentation for `exactbars`
     (which is a parameter given to `Cerebro` during either instantiation or when invoking
     `run`)
+  id: totrans-42
   prefs: []
   type: TYPE_NORMAL
+  zh: 要使用的选项将是`exactbars=True`。从`exactbars`的文档中（这是在实例化`Cerebro`时或在调用`run`时传递给`Cerebro`的参数）
 - en: '[PRE3]'
+  id: totrans-43
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE3]'
 - en: 'For the sake of maximum optimization and because plotting will be disabled,
     the following will be used too: `stdstats=False`, which disables the standard
     *Observers* for cash, value and trades (useful for plotting, which is no longer
     in scope)'
+  id: totrans-44
   prefs: []
   type: TYPE_NORMAL
+  zh: 为了最大限度地优化，并且因为绘图将被禁用，以下内容也将被使用：`stdstats=False`，它禁用了用于现金、价值和交易的标准*观察者*（对绘图有用，但不再在范围内）
 - en: '[PRE4]'
+  id: totrans-45
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE4]'
 - en: 'The performance: `17,494` candles/second'
+  id: totrans-46
   prefs: []
   type: TYPE_NORMAL
+  zh: 性能：每秒`17,494`根蜡烛
 - en: '**Memory Usage**: 75 Mbytes (stable from the beginning to the end of the backtesting
     session)'
+  id: totrans-47
   prefs: []
   type: TYPE_NORMAL
+  zh: '**内存使用**：75兆字节（在回测会话的整个过程中保持稳定）'
 - en: Let's compare to the previous non-optimized run
+  id: totrans-48
   prefs: []
   type: TYPE_NORMAL
+  zh: 让我们与之前未经优化的运行进行比较
 - en: Instead of spending over `76` seconds preloading data, backtesting starts immediately,
     because the data is not preloaded
+  id: totrans-49
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 而不是花费超过`76`秒预加载数据，因为数据没有预加载，回测立即开始
 - en: The total time is `114.32` seconds vs `135.93`. An improvement of `15.90%`.
+  id: totrans-50
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 总时间为`114.32`秒，比`135.93`秒快了`15.90%`。
 - en: An improvement in memory usage of `68.5%`.
+  id: totrans-51
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 内存使用改进了`68.5%`。
 - en: Note
+  id: totrans-52
   prefs: []
   type: TYPE_NORMAL
+  zh: 注意
 - en: We could have actually thrown 100M candles to the script and the amount of memory
     consumed would have remained fixed at `75 Mbytes`
+  id: totrans-53
   prefs: []
   type: TYPE_NORMAL
+  zh: 实际上，我们可以向脚本输入1亿根蜡烛，内存消耗量仍将保持在`75兆字节`不变
 - en: Doing it again with `pypy`
+  id: totrans-54
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 再次使用`pypy`进行操作
 - en: Now that we know how to optimize, let's do it the `pypy` way.
+  id: totrans-55
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在我们知道如何优化，让我们按照`pypy`的方式来做。
 - en: '[PRE5]'
+  id: totrans-56
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE5]'
 - en: 'The performance: `30,025` candles/second'
+  id: totrans-57
   prefs: []
   type: TYPE_NORMAL
+  zh: 性能：每秒`30,025`根蜡烛
 - en: '**Memory Usage**: constant at `49 Mbytes`'
+  id: totrans-58
   prefs: []
   type: TYPE_NORMAL
+  zh: '**内存使用**：恒定为`49兆字节`'
 - en: 'Comparing it to the previous equivalent run:'
+  id: totrans-59
   prefs: []
   type: TYPE_NORMAL
+  zh: 与之前的等效运行相比：
 - en: '`66.61` seconds vs `114.32` or a `41.73%` improvement in run time'
+  id: totrans-60
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 运行时间为`66.61`秒，比之前的`114.32`秒快了`41.73%`
 - en: '`49 Mbytes` vs `75 Mbytes` or a `34.6%` improvement.'
+  id: totrans-61
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`49兆字节`与`75兆字节`相比，内存使用改善了`34.6%`。'
 - en: Note
+  id: totrans-62
   prefs: []
   type: TYPE_NORMAL
+  zh: 注意
 - en: In this case `pypy` has not been able to beat its own time compared to the batch
     (`runonce`) mode, which was `57.19` seconds. This is to be expected, because when
     preloading, the calculator indications are done in **vectorized** mode and that's
     where the JIT of `pypy` excels
+  id: totrans-63
   prefs: []
   type: TYPE_NORMAL
+  zh: 在这种情况下，`pypy`无法击败其批处理(`runonce`)模式的时间，即`57.19`秒。这是可以预料的，因为在预加载时，计算器指示是以**向量化**模式进行的，而这正是`pypy`的JIT擅长的地方。
 - en: It has, in any case, still done a very good job and there is an important **improvement**
     in memory consumption
+  id: totrans-64
   prefs: []
   type: TYPE_NORMAL
+  zh: 无论如何，它仍然表现出色，并且在内存消耗方面有重要的**改进**
 - en: A complete run with trading
+  id: totrans-65
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 运行完整的交易
 - en: The script can create indicators (moving averages) and execute a *short/long*
     strategy on the 100 data feeds using the crossover of the moving averages. Let's
     do it with `pypy`, and knowing that it is better with the batch mode, so be it.
+  id: totrans-66
   prefs: []
   type: TYPE_NORMAL
+  zh: 该脚本可以创建指标（移动平均线）并在100个数据源上执行*多空*策略，使用移动平均线的交叉。让我们用`pypy`来做，并且知道它与批处理模式更好，就这么办。
 - en: '[PRE6]'
+  id: totrans-67
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE6]'
 - en: 'The performance: `12,743` candles/second'
+  id: totrans-68
   prefs: []
   type: TYPE_NORMAL
+  zh: 性能：每秒`12,743`根蜡烛
 - en: '**Memory Usage**: A peak of `1300 Mbytes` was observed.'
+  id: totrans-69
   prefs: []
   type: TYPE_NORMAL
+  zh: '**内存使用**：观察到峰值为`1300 Mbytes`。'
 - en: The execution time has obviously increased (indicators + trading), but why the
     memory usage increase?
+  id: totrans-70
   prefs: []
   type: TYPE_NORMAL
+  zh: 执行时间显然增加了（指标 + 交易），但为什么内存使用量增加了呢？
 - en: Before reaching any conclusions, let's run it creating indicators but without
     trading
+  id: totrans-71
   prefs: []
   type: TYPE_NORMAL
+  zh: 在得出任何结论之前，让我们运行它创建指标，但不进行交易
 - en: '[PRE7]'
+  id: totrans-72
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE7]'
 - en: 'The performance: `27,329` candles/second'
+  id: totrans-73
   prefs: []
   type: TYPE_NORMAL
+  zh: 性能：`27,329`根蜡烛/秒
 - en: '**Memory Usage**: `600 Mbytes` (doing the same in optimized `exactbars`mode
     consumes only `60 Mbytes`, but with an increase in the execution time as `pypy`
     itself cannot optimize so much)'
+  id: totrans-74
   prefs: []
   type: TYPE_NORMAL
+  zh: '**内存使用**：`600 Mbytes`（在优化的`exactbars`模式下进行相同操作仅消耗`60 Mbytes`，但执行时间增加，因为`pypy`本身不能进行如此大的优化）'
 - en: 'With that in the hand: **Memory usage increases really when trading**. The
     reason being that `Order` and `Trade` objects are created, passed around and kept
     by the broker.'
+  id: totrans-75
   prefs: []
   type: TYPE_NORMAL
+  zh: 有了这个：**交易时内存使用量确实增加了**。原因是`Order`和`Trade`对象被创建、传递并由经纪人保留。
 - en: Note
+  id: totrans-76
   prefs: []
   type: TYPE_NORMAL
+  zh: 注意
 - en: Take into account that the data set contains random values, which generates
     a huge number of crossovers, hence an enourmous amounts of orders and trades.
     A similar behavior shall not be expected for a regular data set.
+  id: totrans-77
   prefs: []
   type: TYPE_NORMAL
+  zh: 要考虑到数据集包含随机值，这会产生大量的交叉，因此会产生大量的订单和交易。不应期望常规数据集有类似的行为。
 - en: Conclusions
+  id: totrans-78
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 结论
 - en: The bogus claim
+  id: totrans-79
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 无效声明
 - en: Already proven above as *bogus*, becase *backtrader* **CAN** handle 1.6 million
     candles and more.
+  id: totrans-80
   prefs: []
   type: TYPE_NORMAL
+  zh: 如上所证明的那样是*虚假的*，因为*backtrader* **能够**处理160万根蜡烛以上。
 - en: General
+  id: totrans-81
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 一般情况
 - en: '*backtrader* can easily handle `2M` candles using the default configuration
     (with in-memory data pre-loading)'
+  id: totrans-82
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: '*backtrader*可以轻松处理`2M`根蜡烛，使用默认配置（内存数据预加载）'
 - en: '*backtrader* can operate in an non-preloading optimized mode reducing buffers
     to the minimum for out-of-core-memory backtesting'
+  id: totrans-83
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: '*backtrader*可以在非预加载优化模式下运行，将缓冲区减少到最小，以进行核心外存内存回测'
 - en: When *backtesting* in optimized non-preloading mode, the increase in memory
     consumption comes from the administrative overhead which the broker generates.
+  id: totrans-84
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 当在优化的非预加载模式下进行*回测*时，内存消耗的增加来自经纪人生成的行政开销。
 - en: Even when the trading, using indicators and the broker getting constantly in
     the way, the performance is `12,473` candles/second
+  id: totrans-85
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 即使在交易时，使用指标并且经纪人不断介入，性能也是`12,473`根蜡烛/秒
 - en: Use `pypy` where possible (for example if you don't need to plot)
+  id: totrans-86
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 在可能的情况下使用`pypy`（例如，如果你不需要绘图）
 - en: Using Python and/or *backtrader* for these cases
+  id: totrans-87
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 对于这些情况使用Python和/或*backtrader*
 - en: 'With `pypy`, trading enabled, and the random data set (higher than usual number
     of trades), the entire 2M bars was processed in a total of:'
+  id: totrans-88
   prefs: []
   type: TYPE_NORMAL
+  zh: 使用`pypy`，启用交易，并且使用随机数据集（比平常更多的交易），整个2M根蜡烛的处理时间为：
 - en: '`156.94` seconds, i.e.: almost `2 minutes and 37 seconds`'
+  id: totrans-89
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`156.94`秒，即：几乎`2分钟37秒`'
 - en: Taking into account that this is done in a laptop running multiple other things
     simultaneously, it can be concluded that `2M` bars can be done.
+  id: totrans-90
   prefs: []
   type: TYPE_NORMAL
+  zh: 考虑到这是在一台同时运行多个其他任务的笔记本电脑上完成的，可以得出结论，可以处理`2M`个条形图。
 - en: What about the `8000` stocks scenario?
+  id: totrans-91
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: '`8000`支股票的情况呢？'
 - en: 'Execution time would have to be scaled by 80, hence:'
+  id: totrans-92
   prefs: []
   type: TYPE_NORMAL
+  zh: 执行时间必须乘以80，因此：
 - en: '`12,560 seconds` (or almost `210 minutes` or `3 hours and 30 minutes`) would
     be needed to run this random set scenario.'
+  id: totrans-93
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 需要运行这个随机集场景的时间为`12,560`秒（或几乎`210分钟`或`3小时30分钟`）。
 - en: Even assuming a standard data set which would generate far less operations,
     one would still be talking of backtesting in **hours** (`3 or 4`)
+  id: totrans-94
   prefs: []
   type: TYPE_NORMAL
+  zh: 即使假设标准数据集会生成远少于操作，也仍然需要谈论**几小时**（`3或4`）的回测时间
 - en: Memory usage would also increase, when **trading** due to the broker actions,
     and would probably require **some** Gigabytes.
+  id: totrans-95
   prefs: []
   type: TYPE_NORMAL
+  zh: 内存使用量也会增加，当**交易**时由于经纪人的操作，并且可能需要**一些**吉字节。
 - en: Note
+  id: totrans-96
   prefs: []
   type: TYPE_NORMAL
+  zh: 注意
 - en: One cannot here simply multiply by 80 again, because the sample scripts trades
     with random data and as often as possible. In any case the amount of RAM needed
     would be **IMPORTANT**
+  id: totrans-97
   prefs: []
   type: TYPE_NORMAL
+  zh: 这里不能简单地再次乘以80，因为示例脚本使用随机数据进行交易，并尽可能频繁。无论如何，所需的RAM量都将是**重要的**
 - en: As such, a workflow with only *backtrader* as the research and backtesting tool
     would seem far fetched.
+  id: totrans-98
   prefs: []
   type: TYPE_NORMAL
+  zh: 因此，仅使用*backtrader*作为研究和回测工具的工作流似乎有些牵强。
 - en: A Discussion about Workflows
+  id: totrans-99
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 关于工作流的讨论
 - en: There are two standard workflows to consider when using *backtrader*
+  id: totrans-100
   prefs: []
   type: TYPE_NORMAL
+  zh: 使用*backtrader*时需要考虑两种标准工作流程
 - en: 'Do everything with `backtrader`, i.e.: research and backtesting all in one'
+  id: totrans-101
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 一切都用`backtrader`完成，即：研究和回测都在一个工具中完成
 - en: Research with `pandas`, get the notion if the ideas are good and then backtest
     with `backtrader` to verify with as much as accuracy as possible, having possibly
     reduced huge data-sets to something more palatable for usual RAM scenarios.
+  id: totrans-102
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 使用 `pandas` 进行研究，获取想法是否良好的概念，然后使用 `backtrader` 进行回测，尽可能准确地验证，可能已将大型数据集缩减为对于常规
+    RAM 场景更易处理的内容。
 - en: Tip
+  id: totrans-103
   prefs: []
   type: TYPE_NORMAL
+  zh: 提示
 - en: One can imagine replacing `pandas` with something like `dask` for out-of-core-memory
     execution
+  id: totrans-104
   prefs: []
   type: TYPE_NORMAL
+  zh: 人们可以想象使用类似 `dask` 进行外存内存执行来替换 `pandas`
 - en: The Test Script
+  id: totrans-105
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 测试脚本
 - en: Here the source code
+  id: totrans-106
   prefs: []
   type: TYPE_NORMAL
+  zh: 这里是源代码
 - en: '[PRE8]'
+  id: totrans-107
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE8]'

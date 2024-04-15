@@ -1,81 +1,126 @@
 - en: Plotting Date Ranges
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 绘制日期范围
 - en: 原文：[https://www.backtrader.com/blog/posts/2017-03-07-plotting-date-ranges/plotting-date-ranges/](https://www.backtrader.com/blog/posts/2017-03-07-plotting-date-ranges/plotting-date-ranges/)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.backtrader.com/blog/posts/2017-03-07-plotting-date-ranges/plotting-date-ranges/](https://www.backtrader.com/blog/posts/2017-03-07-plotting-date-ranges/plotting-date-ranges/)
 - en: The release, `1.9.31.x` added the capability to make partial plots.
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: 发布 `1.9.31.x` 添加了制作部分图形的功能。
 - en: Either with indices to the full length array of *timestamps* kept in *strategy*
     instances
+  id: totrans-3
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 要么使用完整长度数组的索引来获取 *strategy* 实例中保存的 *timestamps*
 - en: Or with actual `datetime.date` or `datetime.datetime` instances that limit what
     has to be plotted.
+  id: totrans-4
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 或者使用实际的 `datetime.date` 或 `datetime.datetime` 实例，限制需要绘制的内容。
 - en: 'Everything still over the standard `cerebro.plot`. Example:'
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: 一切仍然在标准的 `cerebro.plot` 之上。例如：
 - en: '[PRE0]'
+  id: totrans-6
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: 'Being that the straightforward way to do it for humans. Humans with extended
     capabilities can actually try indices to the `datetime` timestamps as in:'
+  id: totrans-7
   prefs: []
   type: TYPE_NORMAL
+  zh: 对于人类而言，这是一种直接的方法。具有扩展功能的人类实际上可以尝试将索引映射到 `datetime` 时间戳，如下所示：
 - en: '[PRE1]'
+  id: totrans-8
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE1]'
 - en: A very standard sample containing a *Simple Moving Average* (on-data plotting),
     a *Stochastic* (independent plotting) and a *CrossOver* of the *Stochastic* lines
     is presented below. The arguments to `cerebro.plot` are passed as command line
     arguments.
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: 一个非常标准的示例包含了 *简单移动平均*（在数据绘图中）、*随机指标*（独立绘图）和 *随机指标* 线的 *交叉*，如下所示。`cerebro.plot`
+    的参数作为命令行参数传递。
 - en: 'An execution with the `date` approach:'
+  id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: 使用 `date` 方法进行执行：
 - en: '[PRE2]'
+  id: totrans-11
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE2]'
 - en: The `eval` magic in python allows to directly write `datetime.date` in the command
     line and map actually that to something sensible. The output chart
+  id: totrans-12
   prefs: []
   type: TYPE_NORMAL
+  zh: Python 中的 `eval` 魔法允许在命令行中直接编写 `datetime.date` 并将其实际映射到合理的内容。输出图表
 - en: '![image](../Images/bf84e0015a4cc245ce368cc034010d1f.png)'
+  id: totrans-13
   prefs: []
   type: TYPE_IMG
+  zh: '![图片](../Images/bf84e0015a4cc245ce368cc034010d1f.png)'
 - en: 'Let’s compare it with the full plot to see that data was actually skipped from
     both ends:'
+  id: totrans-14
   prefs: []
   type: TYPE_NORMAL
+  zh: 让我们与完整的图形进行比较，看看数据实际上是从两端跳过的：
 - en: '[PRE3]'
+  id: totrans-15
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE3]'
 - en: The `eval` magic in python allows to directly write `datetime.date` in the command
     line and map actually that to something sensible. The output chart
+  id: totrans-16
   prefs: []
   type: TYPE_NORMAL
+  zh: Python 中的 `eval` 魔法允许在命令行中直接编写 `datetime.date` 并将其实际映射到合理的内容。输出图表
 - en: '![image](../Images/923c7fbfdf7bce662b7bbcc0a4b1611a.png)'
+  id: totrans-17
   prefs: []
   type: TYPE_IMG
+  zh: '![图片](../Images/923c7fbfdf7bce662b7bbcc0a4b1611a.png)'
 - en: Sample Usage
+  id: totrans-18
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 示例用法
 - en: '[PRE4]'
+  id: totrans-19
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE4]'
 - en: Sample Code
+  id: totrans-20
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 代码示例
 - en: '[PRE5]'
+  id: totrans-21
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE5]'

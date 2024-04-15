@@ -1,123 +1,191 @@
 - en: Sizers Reference
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 调整器参考
 - en: 原文：[https://www.backtrader.com/docu/sizers-reference/](https://www.backtrader.com/docu/sizers-reference/)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: '[https://www.backtrader.com/docu/sizers-reference/](https://www.backtrader.com/docu/sizers-reference/)原文：'
 - en: FixedSize
+  id: totrans-2
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: FixedSize
 - en: class backtrader.sizers.FixedSize()
+  id: totrans-3
   prefs:
   - PREF_H4
   type: TYPE_NORMAL
+  zh: 类 backtrader.sizers.FixedSize()
 - en: This sizer simply returns a fixed size for any operation. Size can be controlled
     by number of tranches that a system wishes to use to scale into trades by specifying
     the `tranches` parameter.
+  id: totrans-4
   prefs: []
   type: TYPE_NORMAL
+  zh: 这个调整器只是为任何操作返回一个固定的大小。大小可以通过系统希望使用的分期数量来控制，方法是通过指定`tranches`参数来缩放到交易中。
 - en: 'Params:'
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: 参数：
 - en: '[PRE0]'
+  id: totrans-6
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: FixedReverser
+  id: totrans-7
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: FixedReverser
 - en: class backtrader.sizers.FixedReverser()
+  id: totrans-8
   prefs:
   - PREF_H4
   type: TYPE_NORMAL
+  zh: 类 backtrader.sizers.FixedReverser()
 - en: This sizer returns the needes fixed size to reverse an open position or the
     fixed size to open one
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: 这个调整器返回需要的固定大小以反转开仓位置或开仓大小。
 - en: 'To open a position: return the param `stake`'
+  id: totrans-10
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 开仓位置：返回参数`stake`。
 - en: 'To reverse a position: return 2 * `stake`'
+  id: totrans-11
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 反转仓位：返回2 * `stake`。
 - en: 'Params:'
+  id: totrans-12
   prefs: []
   type: TYPE_NORMAL
+  zh: 参数：
 - en: '[PRE1]'
+  id: totrans-13
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE1]'
 - en: PercentSizer
+  id: totrans-14
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: PercentSizer
 - en: class backtrader.sizers.PercentSizer()
+  id: totrans-15
   prefs:
   - PREF_H4
   type: TYPE_NORMAL
+  zh: 类 backtrader.sizers.PercentSizer()
 - en: This sizer return percents of available cash
+  id: totrans-16
   prefs: []
   type: TYPE_NORMAL
+  zh: 这个调整器返回可用现金的百分比。
 - en: 'Params:'
+  id: totrans-17
   prefs: []
   type: TYPE_NORMAL
+  zh: 参数：
 - en: '[PRE2]'
+  id: totrans-18
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE2]'
 - en: AllInSizer
+  id: totrans-19
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: AllInSizer
 - en: class backtrader.sizers.AllInSizer()
+  id: totrans-20
   prefs:
   - PREF_H4
   type: TYPE_NORMAL
+  zh: 类 backtrader.sizers.AllInSizer()
 - en: This sizer return all available cash of broker
+  id: totrans-21
   prefs: []
   type: TYPE_NORMAL
+  zh: 这个调整器返回经纪人的所有可用现金。
 - en: 'Params:'
+  id: totrans-22
   prefs: []
   type: TYPE_NORMAL
+  zh: 参数：
 - en: '[PRE3]'
+  id: totrans-23
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE3]'
 - en: PercentSizerInt
+  id: totrans-24
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: PercentSizerInt
 - en: class backtrader.sizers.PercentSizerInt()
+  id: totrans-25
   prefs:
   - PREF_H4
   type: TYPE_NORMAL
+  zh: 类 backtrader.sizers.PercentSizerInt()
 - en: This sizer return percents of available cash in form of size truncated to an
     int
+  id: totrans-26
   prefs: []
   type: TYPE_NORMAL
+  zh: 这个调整器以截断为整数的形式返回可用现金的百分比。
 - en: 'Params:'
+  id: totrans-27
   prefs: []
   type: TYPE_NORMAL
+  zh: 参数：
 - en: '[PRE4]'
+  id: totrans-28
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE4]'
 - en: AllInSizerInt
+  id: totrans-29
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: AllInSizerInt
 - en: class backtrader.sizers.AllInSizerInt()
+  id: totrans-30
   prefs:
   - PREF_H4
   type: TYPE_NORMAL
+  zh: 类 backtrader.sizers.AllInSizerInt()
 - en: This sizer return all available cash of broker with the size truncated to an
     int
+  id: totrans-31
   prefs: []
   type: TYPE_NORMAL
+  zh: 这个调整器将经纪人的所有可用现金返回，并将大小截断为整数。
 - en: 'Params:'
+  id: totrans-32
   prefs: []
   type: TYPE_NORMAL
+  zh: 参数：
 - en: '[PRE5]'
+  id: totrans-33
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE5]'

@@ -1,183 +1,276 @@
 - en: Crossing over numbers
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 数字交叉
 - en: 原文：[https://www.backtrader.com/blog/posts/2017-02-04-crossing-over-numbers/crossing-over-numbers/](https://www.backtrader.com/blog/posts/2017-02-04-crossing-over-numbers/crossing-over-numbers/)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.backtrader.com/blog/posts/2017-02-04-crossing-over-numbers/crossing-over-numbers/](https://www.backtrader.com/blog/posts/2017-02-04-crossing-over-numbers/crossing-over-numbers/)
 - en: An oversight has been corrected with Release `1.9.27.105` of *backtrader*. It
     was an oversight because all pieces of the puzzle were in place, but the activation
     was not made in all corners.
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: 在*backtrader*的`1.9.27.105`版本中已经纠正了一个疏忽。这是一个疏忽，因为所有的拼图都已经就位，但并没有在所有角落进行激活。
 - en: 'The mechanism uses an attribute called `_mindatas`, so let’s call it: `mindatas`.'
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: 该机制使用一个名为`_mindatas`的属性，让我们称之为：`mindatas`。
 - en: 'The community asked and the answer was not really right on spot. See the conversation
     here:'
+  id: totrans-4
   prefs: []
   type: TYPE_NORMAL
+  zh: 社区提出了问题，答案并不完全正确。请查看这里的对话：
 - en: '[https://community.backtrader.com/topic/125/strategy-auto-generation/23](https://community.backtrader.com/topic/125/strategy-auto-generation/23)'
+  id: totrans-5
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[https://community.backtrader.com/topic/125/strategy-auto-generation/23](https://community.backtrader.com/topic/125/strategy-auto-generation/23)'
 - en: 'Even if the conversation was about something else, the question could have
     quickly answered with: *“Hey, it should actually work!”*. But who has time to
     consider a proper and thoughtful answer these days.'
+  id: totrans-6
   prefs: []
   type: TYPE_NORMAL
+  zh: 即使对话是关于其他事情的，问题也可以很快得到回答：“嘿，实际上应该可以工作！”但是现在谁有时间考虑一个恰当而周到的答案呢。
 - en: Let’s consider the use case of crossing over a plain old number argument. Something
     like this
+  id: totrans-7
   prefs: []
   type: TYPE_NORMAL
+  zh: 让我们考虑穿越一个普通的数字参数的用例。类似这样
 - en: '[PRE0]'
+  id: totrans-8
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: Which would break as in
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: 这将会像这样断开
 - en: '[PRE1]'
+  id: totrans-10
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE1]'
 - en: Being the last line the most informative, because it is telling us that something
     got too many arguments. And this means that the `50.0` is hurting us.
+  id: totrans-11
   prefs: []
   type: TYPE_NORMAL
+  zh: 最后一行最具信息性，因为它告诉我们有太多的参数。这意味着`50.0`正在伤害我们。
 - en: To solve the problem at hand, a number wrapper was given as the answer.
+  id: totrans-12
   prefs: []
   type: TYPE_NORMAL
+  zh: 为了解决手头的问题，给出了一个数字包装器作为答案。
 - en: '[PRE2]'
+  id: totrans-13
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE2]'
 - en: 'Problem solved. But wait, the solution was already on board. There is an internal
     helper, to solve the problem and it was completely forgotten: `LineNum`. And it
     does what the name tries to imply: *Takes a num and makes it a line*. The problem
     solution was there and the solution could have looked like this:'
+  id: totrans-14
   prefs: []
   type: TYPE_NORMAL
+  zh: 问题解决了。但等等，解决方案已经在手边。有一个内部助手，用于解决问题，但被完全遗忘了：`LineNum`。它做的就是名字所暗示的：*获取一个数字并将其变成一行*。问题的解决方案就在那里，解决方案可能看起来像这样：
 - en: '[PRE3]'
+  id: totrans-15
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE3]'
 - en: The usual background thread kept anyhow ticking, telling something was still
     not 100% clear and the solution should be the obvious, without having the user
     specifying the *wrapper*.
+  id: totrans-16
   prefs: []
   type: TYPE_NORMAL
+  zh: 通常的后台线程仍在不断地运行，告诉我们仍然有一些地方不是100%清晰，解决方案应该是显而易见的，而不需要用户指定*包装器*。
 - en: 'And here comes the oversight. Even if the `mindatas` mechanism exists and is
     applied in some parts of the echosystem, it was not being applied to `CrossOver`.
     It was tried, but humans miserably fail sometimes, believing they have done something
     only to find out, they didn’t scroll further downwards. And this was the case.
     A one line addition like this:'
+  id: totrans-17
   prefs: []
   type: TYPE_NORMAL
+  zh: 然后出现了疏忽。即使`mindatas`机制存在并应用于系统的某些部分，但并没有应用于`CrossOver`。尝试过，但有时人类会失败，他们相信自己已经做了某事，结果发现他们没有往下滚动。这就是情况。像这样添加一行代码：
 - en: '[PRE4]'
+  id: totrans-18
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE4]'
 - en: 'And now the solution to the question is straightforward:'
+  id: totrans-19
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在问题的解决方案很明显：
 - en: '[PRE5]'
+  id: totrans-20
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE5]'
 - en: The way it should have always been in the 1^(st) place (see the sample and chart
     below)
+  id: totrans-21
   prefs: []
   type: TYPE_NORMAL
+  zh: 应该一直是这样的方式（参见下面的示例和图表）
 - en: '`mindatas` at work'
+  id: totrans-22
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: '`mindatas`在工作'
 - en: 'This is a handy attribute which is meant to be used for specific situations
     and hence the leading `_`, to indicate it should be used with real caution. The
     default value for indicators is:'
+  id: totrans-23
   prefs: []
   type: TYPE_NORMAL
+  zh: 这是一个方便的属性，旨在用于特定情况，因此前面有`_`，表示应该非常谨慎使用。指标的默认值是：
 - en: '`_mindatas = 1`'
+  id: totrans-24
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`_mindatas = 1`'
 - en: 'This tells the system that if **NO** data source has been passed to an indicator,
     the system should copy the 1^(st) data source from the parent. Without this, instantiating
     for example the `RelativeStrengthIndicator` should be done like this:'
+  id: totrans-25
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 这告诉系统，如果没有向指标传递任何数据源，系统应该从父级复制第一个数据源。如果没有这个，例如实例化`RelativeStrengthIndicator`应该这样做：
 - en: '[PRE6]'
+  id: totrans-26
   prefs:
   - PREF_IND
   type: TYPE_PRE
+  zh: '[PRE6]'
 - en: 'But with the default indication given by `_mindatas`, the following is possible:'
+  id: totrans-27
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 但是使用`_mindatas`给出的默认指示，以下是可能的：
 - en: '[PRE7]'
+  id: totrans-28
   prefs:
   - PREF_IND
   type: TYPE_PRE
+  zh: '[PRE7]'
 - en: And the result is exactly the same, because the 1^(st) data source in the strategy,
     `self.data0` is passed to the instantiation of `RSI`
+  id: totrans-29
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 结果完全相同，因为策略中的第一个数据源`self.data0`被传递给`RSI`的实例化
 - en: 'An indicator like `CrossOver` needs 2 data feeds, because it’s checking that
     one thing is crossing over another. In this case and as seen above the default
     has been set to:'
+  id: totrans-30
   prefs: []
   type: TYPE_NORMAL
+  zh: 像 `CrossOver` 这样的指示器需要 2 个数据源，因为它正在检查一件事是否穿过另一件事。在这种情况下，并如上所示，默认值已设置为：
 - en: '`_mindatas = 2`'
+  id: totrans-31
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`_mindatas = 2`'
 - en: 'This tells the system things like:'
+  id: totrans-32
   prefs: []
   type: TYPE_NORMAL
+  zh: 这告诉系统一些信息，比如：
 - en: If no datas are passed, then copy 2 data feeds from the parent (if possible)
+  id: totrans-33
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 如果没有数据被传递，则从父级复制 2 个数据源（如果可能的话）。
 - en: 'If only 1 data has been passed, try to convert the next incoming argument to
     a *lines* object to have 2 data feeds available. Usseful for the use case of a
     line crossing over a plain old float. Again for reference:'
+  id: totrans-34
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 如果只传递了 1 个数据，尝试将下一个传入的参数转换为 *lines* 对象，以便有 2 个数据源可用。对于普通浮点数的线穿越用例很有用。再次参考：
 - en: '[PRE8]'
+  id: totrans-35
   prefs:
   - PREF_IND
   type: TYPE_PRE
+  zh: '[PRE8]'
 - en: If 2 or more data feeds are passed to `CrossOver`, do nothing and proceed further
+  id: totrans-36
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 如果向 `CrossOver` 传递了 2 个或更多个数据源，则不执行任何操作，并继续执行。
 - en: 'In the community, the mechanism has been lately applied to for example the
     1^(st) sketches to implement the `KalmanFilter` for pair trading. And when talking
     about pairs, one needs 2 data feeds and with it: `_mindatas = 2`'
+  id: totrans-37
   prefs: []
   type: TYPE_NORMAL
+  zh: 在社区中，最近已经将该机制应用于例如实现配对交易的 `KalmanFilter` 的第一稿。当谈论到配对时，需要 2 个数据源，因此：`_mindatas
+    = 2`
 - en: 'A small sample (although with a complete skeleton) to test the complete solution:'
+  id: totrans-38
   prefs: []
   type: TYPE_NORMAL
+  zh: 一个小示例（尽管有一个完整的框架）来测试完整的解决方案：
 - en: '[PRE9]'
+  id: totrans-39
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE9]'
 - en: Which outputs this.
+  id: totrans-40
   prefs: []
   type: TYPE_NORMAL
+  zh: 这将产生这样的输出。
 - en: '![image](../Images/05dab57577a908e09e880b5a4b63ef3b.png)'
+  id: totrans-41
   prefs: []
   type: TYPE_IMG
+  zh: '![图像](../Images/05dab57577a908e09e880b5a4b63ef3b.png)'
 - en: Sample usage
+  id: totrans-42
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 示例用法
 - en: '[PRE10]'
+  id: totrans-43
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE10]'
 - en: Sample Code
+  id: totrans-44
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 示例代码
 - en: '[PRE11]'
+  id: totrans-45
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE11]'

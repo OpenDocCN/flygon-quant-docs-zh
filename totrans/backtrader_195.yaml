@@ -1,126 +1,190 @@
 - en: 'Improving Commissions: Stocks vs Futures'
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 改进佣金：股票与期货
 - en: 原文：[https://www.backtrader.com/blog/posts/2015-07-31-commission-schemes-updated/commission-schemes-updated/](https://www.backtrader.com/blog/posts/2015-07-31-commission-schemes-updated/commission-schemes-updated/)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.backtrader.com/blog/posts/2015-07-31-commission-schemes-updated/commission-schemes-updated/](https://www.backtrader.com/blog/posts/2015-07-31-commission-schemes-updated/commission-schemes-updated/)
 - en: 'Posting backtrader usage examples has given me an insight into things that
     were missing. For starters:'
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: 发布backtrader使用示例让我对一些缺失的东西有了了解。首先：
 - en: Multicore Optimization
+  id: totrans-3
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 多核优化
 - en: 'Commissions: Stocks vs Futures'
+  id: totrans-4
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 佣金：股票与期货
 - en: 'The latter showed me:'
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: 后者告诉了我：
 - en: The broker was doing the right things with regards to the calculation of profit
     and loss and providing the right order notifications to the calling strategy
+  id: totrans-6
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 经纪人在利润和损失的计算方面做得很对，向调用策略提供了正确的订单通知
 - en: The strategy had no access to `operations` (aka `trades`) which is the result
     of an order having opened and closed a position (with the latter showing a P&L
     figure)
+  id: totrans-7
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 策略无法访问`operations`（又称`trades`），这是订单已经开仓并关闭头寸的结果（后者显示出盈亏数字）
 - en: The plotted `Operation` P&L figures were gathered by an `Observer` and had no
     access to the actual `commission scheme`, hence rendering the same P&L for a `futures-like`
     operation and for a `stocks-like` one
+  id: totrans-8
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 绘制的`Operation`盈亏数字由一个`Observer`收集，并且无法访问实际的`commission scheme`，因此对于类似于期货的操作和类似于股票的操作，将显示相同的盈亏数字。
 - en: 'Clearly a small internal rework was needed to achieve:'
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: 显然，需要进行一些小的内部重组才能实现：
 - en: '`Operation` notification to the strategy'
+  id: totrans-10
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 向策略发送`Operation`通知
 - en: '`Operations` displaying the right P&L figures'
+  id: totrans-11
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`Operations`显示正确的盈亏数字'
 - en: The `broker` already had all of the needed information and already stuffing
     most of it into the `order` which was being notified to the `strategy` which had
     create it. The only decision to make was whether the `broker` would fit an extra
     information bit into the order or it could calculate the `operations` itself.
+  id: totrans-12
   prefs: []
   type: TYPE_NORMAL
+  zh: '`broker`已经拥有了所有需要的信息，并且已经将大部分信息填入了被通知到`strategy`的`order`中，而`broker`需要做出的唯一决定是是否将额外的信息位放入订单中，或者它可以自己计算`operations`。 '
 - en: Since the strategy already gets the `orders` and keeping the `operations` in
     a list seems natural, the `broker` just adds the actual P&L when an order has
     closed partially/totally a position, leaving the responsibility of the calculation
     to the `strategy`.
+  id: totrans-13
   prefs: []
   type: TYPE_NORMAL
+  zh: 由于策略已经获得了`orders`，并且将`operations`保留在列表中似乎很自然，`broker`只是在订单部分/完全关闭头寸时添加实际的盈亏，将计算责任留给了`strategy`。
 - en: In turn this simplifies the actual role of the `Operations Observer` to that
     of observing newly closed `Operation` and recording it. The role it should always
     have had.
+  id: totrans-14
   prefs: []
   type: TYPE_NORMAL
+  zh: 这进一步简化了`Operations Observer`的实际角色，即观察新关闭的`Operation`并记录下来。这是它一直应该有的角色。
 - en: The code below has been reworked to no longer calculate the P&L figures, but
     to just pay attention to those notified in `notify_operation`.
+  id: totrans-15
   prefs: []
   type: TYPE_NORMAL
+  zh: 下面的代码已经被重新设计，不再计算盈亏数字，而只是注意到`notify_operation`中通知的数字。
 - en: And the charts now reflect realistic P&L figures (The `cash` and `value` were
     alredy realistic)
+  id: totrans-16
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在图表反映出了真实的盈亏数字（`cash`和`value`已经是真实的）
 - en: 'The old logging for futures:'
+  id: totrans-17
   prefs: []
   type: TYPE_NORMAL
+  zh: 旧的期货记录：
 - en: '[PRE0]'
+  id: totrans-18
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: 'The new logging for futures:'
+  id: totrans-19
   prefs: []
   type: TYPE_NORMAL
+  zh: 新的期货记录：
 - en: '[PRE1]'
+  id: totrans-20
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE1]'
 - en: 'The old logging For stocks:'
+  id: totrans-21
   prefs: []
   type: TYPE_NORMAL
+  zh: 旧的股票记录：
 - en: '[PRE2]'
+  id: totrans-22
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE2]'
 - en: 'The new logging for stocks:'
+  id: totrans-23
   prefs: []
   type: TYPE_NORMAL
+  zh: 新的股票记录：
 - en: '[PRE3]'
+  id: totrans-24
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE3]'
 - en: And the charts (only the new ones). The difference between `futures-like` operations
     and `stock-like` operations can now be clearly seen and not only in the evolution
     of `cash` and `value`.
+  id: totrans-25
   prefs: []
   type: TYPE_NORMAL
+  zh: 图表（仅新的图表）。现在可以清楚地看到`futures-like`操作和`stock-like`操作之间的差异，不仅在`cash`和`value`的变化中。
 - en: Commissions for futures
+  id: totrans-26
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 期货佣金
 - en: '![image](../Images/c7fac4a655850567f4e077b6fd13a5ad.png)'
+  id: totrans-27
   prefs: []
   type: TYPE_IMG
+  zh: '![image](../Images/c7fac4a655850567f4e077b6fd13a5ad.png)'
 - en: Commissions for stocks
+  id: totrans-28
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 股票佣金
 - en: '![image](../Images/51b5f90f9665ecb3e5aecbb3d4ad750f.png)'
+  id: totrans-29
   prefs: []
   type: TYPE_IMG
+  zh: '![image](../Images/51b5f90f9665ecb3e5aecbb3d4ad750f.png)'
 - en: The code
+  id: totrans-30
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 代码
 - en: '[PRE4]'
+  id: totrans-31
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE4]'

@@ -1,81 +1,123 @@
 - en: Renko Bricks
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 砖形图
 - en: 原文：[https://www.backtrader.com/blog/posts/2017-06-26-renko-bricks/renko-bricks/](https://www.backtrader.com/blog/posts/2017-06-26-renko-bricks/renko-bricks/)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.backtrader.com/blog/posts/2017-06-26-renko-bricks/renko-bricks/](https://www.backtrader.com/blog/posts/2017-06-26-renko-bricks/renko-bricks/)
 - en: The *Renko Bricks* is a different way to present the evolution of prices in
     which price plays a more important role than time. This has been introduced as
     a *filter* in release `1.9.54.122` of *backtrader*
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: '*砖形图*是一种以价格比时间更重要的方式展示价格演变的方法。这已经在*backtrader*的`1.9.54.122`版本中作为*过滤器*引入了。'
 - en: '*Stockcharts* has a good reference on the *Renko Bricks*. See [Renko Bricks
     @StockCharts](http://stockcharts.com/school/doku.php?id=chart_school:chart_analysis:renko)'
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: '*Stockcharts*对*砖形图*有一个很好的参考。请参阅[StockCharts上的砖形图](http://stockcharts.com/school/doku.php?id=chart_school:chart_analysis:renko)'
 - en: Some examples
+  id: totrans-4
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 一些示例
 - en: Note
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: 注意
 - en: The `size=35` and `align=10.0` parameters are appropriate for the sample data
     in the *backtrader* repository. Those values have to be fine tuned for each data
     asset.
+  id: totrans-6
   prefs: []
   type: TYPE_NORMAL
+  zh: '`size=35`和`align=10.0`参数适用于*backtrader*存储库中的示例数据。这些值必须针对每个数据资产进行微调。'
 - en: 'First, let’s put the *Renko Bricks* alone in a chart:'
+  id: totrans-7
   prefs: []
   type: TYPE_NORMAL
+  zh: 首先，让我们将*砖形图*单独放在一个图表上：
 - en: '[PRE0]'
+  id: totrans-8
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: The output
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: 输出
 - en: '![image](../Images/81a53e0238ef683116a5daf1c08a95b7.png)'
+  id: totrans-10
   prefs: []
   type: TYPE_IMG
+  zh: '![image](../Images/81a53e0238ef683116a5daf1c08a95b7.png)'
 - en: One can see that the chart immediately reveals some resistance/support areas,
     which is one of the main advantages of the *Renko Bricks*. It should also be obvious
     that the temporal evolution in the X-Axis is no longer constant and is stretched
     or compressed, depending on whether the price action was more static during the
     period or moved several bricks.
+  id: totrans-11
   prefs: []
   type: TYPE_NORMAL
+  zh: 人们可以看到图表立即显示出一些支撑/阻力区域，这是*砖形图*的主要优势之一。显然，X轴上的时间演变不再是恒定的，而是被拉伸或压缩，取决于价格行动在期间是更静态还是移动了几个砖块。
 - en: 'To better see and appreciate the effects, let’s put the normal price bars and
     the *Renko Bricks* together on a chart:'
+  id: totrans-12
   prefs: []
   type: TYPE_NORMAL
+  zh: 为了更好地看到和欣赏效果，让我们将普通的价格条和*砖形图*放在一起在一个图表上：
 - en: '[PRE1]'
+  id: totrans-13
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE1]'
 - en: The output
+  id: totrans-14
   prefs: []
   type: TYPE_NORMAL
+  zh: 输出
 - en: '![image](../Images/1549cb1cb4b342c94ab57011abf8a358.png)'
+  id: totrans-15
   prefs: []
   type: TYPE_IMG
+  zh: '![image](../Images/1549cb1cb4b342c94ab57011abf8a358.png)'
 - en: The strechting and compression of time periods is now a lot more obvious. One
     other factor to consider is how the focus on the price action also has an effect
     on the indicators which are applied, as shown by the two `RSI` indicators which
     have been placed on the chart.
+  id: totrans-16
   prefs: []
   type: TYPE_NORMAL
+  zh: 时间周期的拉伸和压缩现在更加明显。另一个要考虑的因素是价格行动的关注如何影响应用的指标，正如图表上显示的两个`RSI`指标所示。
 - en: Sample Usage
+  id: totrans-17
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 示例用法
 - en: '[PRE2]'
+  id: totrans-18
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE2]'
 - en: Sample Code
+  id: totrans-19
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 示例代码
 - en: '[PRE3]'
+  id: totrans-20
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE3]'

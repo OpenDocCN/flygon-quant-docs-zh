@@ -1,35 +1,53 @@
 - en: Introduction
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 简介
 - en: 原文：[https://www.backtrader.com/recipes/indicators/intro/](https://www.backtrader.com/recipes/indicators/intro/)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.backtrader.com/recipes/indicators/intro/](https://www.backtrader.com/recipes/indicators/intro/)
 - en: This section hosts a collection of *Indicator* implementations which are not
     part of the *backtrader* core.
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: 本节收集了一些*指标*实现，它们不是*backtrader*核心的一部分。
 - en: 'To use them:'
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: 使用它们：
 - en: Copy the code to a file of your choice or directly above your strategy
+  id: totrans-4
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 将代码复制到你选择的文件中或直接放在你的策略上方
 - en: If copied to a file, import it from the file
+  id: totrans-5
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 如果复制到文件中，请从文件中导入它
 - en: '[PRE0]'
+  id: totrans-6
   prefs:
   - PREF_IND
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: And use it in your strategy
+  id: totrans-7
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 并将其纳入你的策略中
 - en: '[PRE1]'
+  id: totrans-8
   prefs:
   - PREF_IND
   type: TYPE_PRE
+  zh: '[PRE1]'

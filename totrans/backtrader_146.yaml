@@ -1,210 +1,322 @@
 - en: Data Synchronization Rework
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 数据同步重写
 - en: 原文：[https://www.backtrader.com/blog/posts/2016-09-17-data-synchronization/data-synchronization/](https://www.backtrader.com/blog/posts/2016-09-17-data-synchronization/data-synchronization/)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.backtrader.com/blog/posts/2016-09-17-data-synchronization/data-synchronization/](https://www.backtrader.com/blog/posts/2016-09-17-data-synchronization/data-synchronization/)
 - en: In the latest release the *minor* number has been moved from 8 to 9 to indicate
     a change which may have some behavioral impact, regardless, even if compatibility
     has been taken into account.
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: 在最新版本中，*次要*编号已从8移至9，以指示可能具有一些行为影响的更改，即使已考虑到兼容性。
 - en: With release 1.9.0.99 the entire mechanism to synchronize multiple datas using
     *datetime* has been reworked (for both *next* and *once* modes).
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: 通过发布1.9.0.99版本，使用*日期时间*同步多个数据的整个机制已进行了重写（对于*next*和*once*模式）。
 - en: Note
+  id: totrans-4
   prefs: []
   type: TYPE_NORMAL
+  zh: 注意
 - en: All standard test cases get a nice OK from `nosetests`, but complex uses cases
     might uncover corner cases not covered.
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: 所有标准测试用例都会从`nosetests`中获得很好的OK，但复杂的用例可能会发现未涵盖的边缘情况。
 - en: The previous behavior was discussed in tickets [#39](https://github.com/mementum/backtrader/issues/39),
     [#76](https://github.com/mementum/backtrader/issues/76), [#115](https://github.com/mementum/backtrader/issues/115)
     and [#129](https://github.com/mementum/backtrader/issues/129) and this has been
     the basis to deprecate the old behavior.
+  id: totrans-6
   prefs: []
   type: TYPE_NORMAL
+  zh: 先前的行为在问题[#39](https://github.com/mementum/backtrader/issues/39)、[#76](https://github.com/mementum/backtrader/issues/76)、[#115](https://github.com/mementum/backtrader/issues/115)和[#129](https://github.com/mementum/backtrader/issues/129)中有所讨论，并且这已成为废弃旧行为的基础。
 - en: 'Now, the *datetime* timestamp of the incoming prices is checked to align datas
     and deliver what’s new (older bars first). Benefits:'
+  id: totrans-7
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在，检查传入价格的*日期时间*时间戳以对齐数据，并提供新内容（先前的条形图）。优点：
 - en: Non time aligned data can now be used.
+  id: totrans-8
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 非时间对齐数据现在也可以使用了。
 - en: In live feeds the behavior improves because the re-synchronizes automatically
+  id: totrans-9
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 在实时数据中，行为改善因为重新自动同步
 - en: Let’s recall that the old behavior used the 1^(st) data introduced in the system
     as a master for time synchronization and no other data could be faster. The order
     of introduction of datas in the system plays no role now.
+  id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: 让我们回顾一下，旧行为使用系统中引入的第一个数据作为时间同步的主数据，并且没有其他数据可以更快。现在系统中引入数据的顺序不再起作用。
 - en: Part of the rework has addressed plotting which naively assumed all datas ended
     up having the same length, being this a consequence of having a time master. The
     new plotting code allows datas of different length.
+  id: totrans-11
   prefs: []
   type: TYPE_NORMAL
+  zh: 重写的一部分解决了绘图问题，该问题天真地假设所有数据最终具有相同的长度，这是具有时间主数据的结果。新的绘图代码允许具有不同长度的数据。
 - en: Note
+  id: totrans-12
   prefs: []
   type: TYPE_NORMAL
+  zh: 注意
 - en: 'The old behavior is still available by using:'
+  id: totrans-13
   prefs: []
   type: TYPE_NORMAL
+  zh: 通过使用以下命令仍然可以使用旧行为：
 - en: '[PRE0]'
+  id: totrans-14
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: 'or:'
+  id: totrans-15
   prefs: []
   type: TYPE_NORMAL
+  zh: 或：
 - en: '[PRE1]'
+  id: totrans-16
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE1]'
 - en: Seeing it with a sample
+  id: totrans-17
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 通过示例查看
 - en: The `multidata-strategy` sample has been used as the basis for the `multidata-strategy-unaligned`
     sample (in the same folder). Two data samples have been manually altered to remove
     some bars. Both had `756` bars and have been capped down to `753` at two different
     points in time
+  id: totrans-18
   prefs: []
   type: TYPE_NORMAL
+  zh: '`multidata-strategy`示例已用作`multidata-strategy-unaligned`示例的基础（在相同的文件夹中）。两个数据样本已手动更改以删除一些条形图。两者均为`756`条，已在两个不同时间点上限制为`753`'
 - en: End of 2004, beginning of 2005 for `YHOO`
+  id: totrans-19
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 2004年末，2005年初为`YHOO`
 - en: End of 2005 for `ORCL`
+  id: totrans-20
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 2005年底为`ORCL`
 - en: As always, a execution is worth a thousand words.
+  id: totrans-21
   prefs: []
   type: TYPE_NORMAL
+  zh: 一如既往，执行胜过千言万语。
 - en: First the old behavior
+  id: totrans-22
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 首先是旧行为
 - en: 'The execution:'
+  id: totrans-23
   prefs: []
   type: TYPE_NORMAL
+  zh: 执行：
 - en: '[PRE2]'
+  id: totrans-24
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE2]'
 - en: 'From the output, the important part is right at the end:'
+  id: totrans-25
   prefs: []
   type: TYPE_NORMAL
+  zh: 从输出来看，重要部分就在最后：
 - en: '[PRE3]'
+  id: totrans-26
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE3]'
 - en: 'To notice:'
+  id: totrans-27
   prefs: []
   type: TYPE_NORMAL
+  zh: 注意：
 - en: The *strategy* has a length of `753`
+  id: totrans-28
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '*策略*长度为`753`'
 - en: The 1^(st) data (time master) also has `753`
+  id: totrans-29
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 第一个数据（时间主数据）也为`753`
 - en: The 2^(nd) data (time slave) has `750`
+  id: totrans-30
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 第二个数据（时间从属）为`750`
 - en: It’s not obvious from the output but the `YHOO` file contains data up to `2005-12-30`,
     which is not being processed by the system.
+  id: totrans-31
   prefs: []
   type: TYPE_NORMAL
+  zh: 从输出中并不明显，但`YHOO`文件包含截至`2005-12-30`的数据，系统未对其进行处理。
 - en: The visual chart
+  id: totrans-32
   prefs: []
   type: TYPE_NORMAL
+  zh: 可视化图表
 - en: '![image](../Images/26a9b39e8a20c14c4b9ecd16a600dd65.png)'
+  id: totrans-33
   prefs: []
   type: TYPE_IMG
+  zh: '![image](../Images/26a9b39e8a20c14c4b9ecd16a600dd65.png)'
 - en: The new behavior
+  id: totrans-34
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 新行为
 - en: 'The execution:'
+  id: totrans-35
   prefs: []
   type: TYPE_NORMAL
+  zh: 执行：
 - en: '[PRE4]'
+  id: totrans-36
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE4]'
 - en: 'From the output, the important part is right at the end:'
+  id: totrans-37
   prefs: []
   type: TYPE_NORMAL
+  zh: 从输出来看，重要部分就在最后：
 - en: '[PRE5]'
+  id: totrans-38
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE5]'
 - en: 'The behavior has obvioulsy improved:'
+  id: totrans-39
   prefs: []
   type: TYPE_NORMAL
+  zh: 行为显然已经改善：
 - en: The *strategy* goes to a length of `756` and each of the datas to the full `753`
     data points.
+  id: totrans-40
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '*策略*长度为`756`，每个数据都有完整的`753`个数据点。'
 - en: Because the removed data points don’t overlap the strategy ends up being `3`
     units longer than the datas.
+  id: totrans-41
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 因为移除的数据点不与数据重叠，所以策略最终比数据多`3`个单位。
 - en: '`2005-12-30` has been reached with `data1` (it’s one of the data points removed
     for `data0`), so all datas have been processed to the very end'
+  id: totrans-42
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 已经达到`2005-12-30`，使用了`data1`（它是为了`data0`而删除的数据点之一），所以所有数据都已经处理到最后
 - en: The visual chart
+  id: totrans-43
   prefs: []
   type: TYPE_NORMAL
+  zh: 可视化图表
 - en: '![image](../Images/e4719c23c68c7e5bb567b10ba6ca1f45.png)'
+  id: totrans-44
   prefs: []
   type: TYPE_IMG
+  zh: '![image](../Images/e4719c23c68c7e5bb567b10ba6ca1f45.png)'
 - en: Although the charts do not exhibit major differences, they are actually different
     behind the scenes.
+  id: totrans-45
   prefs: []
   type: TYPE_NORMAL
+  zh: 尽管图表看起来没有明显差异，但实际上它们在幕后是不同的。
 - en: Another check
+  id: totrans-46
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 另一个检查
 - en: For the interested user, the `data-multitimeframe` sample has been updated to
     also support a `--oldsync` parameter. Because now different length datas are being
     plotted, the visual aspect of the larger time frame is better.
+  id: totrans-47
   prefs: []
   type: TYPE_NORMAL
+  zh: 对于感兴趣的用户，`data-multitimeframe` 示例已更新，还支持一个`--oldsync`参数。因为现在正在绘制不同长度的数据，所以较大时间框架的视觉效果更好。
 - en: Execution with new synchronization model
+  id: totrans-48
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 使用新同步模型执行
 - en: '![image](../Images/59cb91285c7a84cbf50dbe88f5a5f9a0.png)'
+  id: totrans-49
   prefs: []
   type: TYPE_IMG
+  zh: '![image](../Images/59cb91285c7a84cbf50dbe88f5a5f9a0.png)'
 - en: Execution with old synchronization model
+  id: totrans-50
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 使用旧同步模型执行
 - en: '![image](../Images/1d6ccaae943d049f89bbeaa553609beb.png)'
+  id: totrans-51
   prefs: []
   type: TYPE_IMG
+  zh: '![image](../Images/1d6ccaae943d049f89bbeaa553609beb.png)'
 - en: Sample Usage
+  id: totrans-52
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 示例用法
 - en: '[PRE6]'
+  id: totrans-53
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE6]'
 - en: Sample Code
+  id: totrans-54
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 示例代码
 - en: '[PRE7]'
+  id: totrans-55
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE7]'

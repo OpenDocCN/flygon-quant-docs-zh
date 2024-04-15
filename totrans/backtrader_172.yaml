@@ -1,61 +1,93 @@
 - en: Release 1.2.1.88
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 发布版本1.2.1.88
 - en: 原文：[https://www.backtrader.com/blog/posts/2016-03-07-release-1.2.1.88/release-1.2.1.88/](https://www.backtrader.com/blog/posts/2016-03-07-release-1.2.1.88/release-1.2.1.88/)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.backtrader.com/blog/posts/2016-03-07-release-1.2.1.88/release-1.2.1.88/](https://www.backtrader.com/blog/posts/2016-03-07-release-1.2.1.88/release-1.2.1.88/)
 - en: Changing the minor version number from 1 to 2 has taken sometime, but the deprecation
     of the old DataResampler and DataReplayer have led to it.
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: 将次版本号从1更改为2花费了一些时间，但旧的DataResampler和DataReplayer的弃用导致了这一变化。
 - en: The documentation at **readthedocs** has
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: '**readthedocs**上的文档'
 - en: 'The [Documentation](http://backtrader.readthedocs.org/en/latest/) has been
     updated to only reference the modern way to do `resampling` and `replaying`. It
     is as easy as:'
+  id: totrans-4
   prefs: []
   type: TYPE_NORMAL
+  zh: '[文档](http://backtrader.readthedocs.org/en/latest/)已更新，只引用了现代化的`resampling`和`replaying`方式。操作如下：'
 - en: '[PRE0]'
+  id: totrans-5
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: For *replaying* just change `resampledata` to `replaydata`. There are additional
     ways to do it, but this is the most straightforward interface and probably the
     only one that will ever get used by anyone.
+  id: totrans-6
   prefs: []
   type: TYPE_NORMAL
+  zh: 对于*replaying*只需将`resampledata`更改为`replaydata`。还有其他方法可以做到，但这是最直接的接口，可能是唯一会被任何人使用的接口。
 - en: 'Following [Ticket #60](https://github.com/mementum/backtrader/issues/60) it
     was clear that the extension mechanism which allows adding additional lines to
     data feeds (actually to any *lines* based object) was not enough to support what
     was suggested in the ticket.'
+  id: totrans-7
   prefs: []
   type: TYPE_NORMAL
+  zh: '根据[Ticket #60](https://github.com/mementum/backtrader/issues/60)，很明显扩展机制允许向数据源（实际上是任何基于*lines*的对象）添加额外行不足以支持票号中建议的内容。'
 - en: Hence the implementation of an additional *parameter* to *lines* object which
     allows the complete redefinition of the lines hierarchy (**Escape from OHLC Land**
     would be an appropriate film title)
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: 因此，实现了一个额外的*parameter*到*lines*对象，允许完全重新定义行层次结构（**逃离OHLC领域**可能是一个合适的电影标题）
 - en: 'A sample named *data-bid-ask* has been added to the sources. From the sample:'
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: 已经添加了一个名为*data-bid-ask*的示例到数据源中。从这个示例中：
 - en: '[PRE1]'
+  id: totrans-10
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE1]'
 - en: By specifying `linesoverride` the regular *lines* inheritance mechanisme is
     bypassed and the defined lines in the object supersede any previous lines.
+  id: totrans-11
   prefs: []
   type: TYPE_NORMAL
+  zh: 通过指定`linesoverride`，常规的*lines*继承机制被绕过，对象中定义的行将取代任何先前的行。
 - en: 'The release is available from *pypi* and can be installed with usual:'
+  id: totrans-12
   prefs: []
   type: TYPE_NORMAL
+  zh: 此版本可从*pypi*获取，并可通过常规方式安装：
 - en: '[PRE2]'
+  id: totrans-13
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE2]'
 - en: 'Or if updating:'
+  id: totrans-14
   prefs: []
   type: TYPE_NORMAL
+  zh: 或者如果更新：
 - en: '[PRE3]'
+  id: totrans-15
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE3]'

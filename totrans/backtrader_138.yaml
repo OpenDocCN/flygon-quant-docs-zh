@@ -1,127 +1,193 @@
 - en: Gold vs SP500
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 黄金 vs. 标普500
 - en: 原文：[https://www.backtrader.com/blog/posts/2016-12-13-gold-vs-sp500/gold-vs-sp500/](https://www.backtrader.com/blog/posts/2016-12-13-gold-vs-sp500/gold-vs-sp500/)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.backtrader.com/blog/posts/2016-12-13-gold-vs-sp500/gold-vs-sp500/](https://www.backtrader.com/blog/posts/2016-12-13-gold-vs-sp500/gold-vs-sp500/)
 - en: Sometimes getting hints about where *backtrader* is in use helps understanding
     what people may be looking for and using the platform for.
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: 有时候了解*backtrader*的使用情况可以帮助理解人们可能正在寻找和使用平台的内容。
 - en: 'The reference:'
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: 参考：
 - en: '[https://estrategiastrading.com/oro-bolsa-estadistica-con-python/](https://estrategiastrading.com/oro-bolsa-estadistica-con-python/)'
+  id: totrans-4
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[https://estrategiastrading.com/oro-bolsa-estadistica-con-python/](https://estrategiastrading.com/oro-bolsa-estadistica-con-python/)'
 - en: 'It is a post (Spanish) analyzing two ETFs: `GLD` vs `SPY` (effectively *Gold*
     vs *S&P500*)'
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: 这是一篇（西班牙语）分析两个 ETF：`GLD` vs `SPY`（实际上是*黄金* vs *标普500*）的文章。
 - en: 'Without going into the translation, let’s concentrate on the important points
     for *backtrader*:'
+  id: totrans-6
   prefs: []
   type: TYPE_NORMAL
+  zh: 不去深入翻译，让我们集中精力在*backtrader*的重要内容上：
 - en: Adding a *Correlation* indicator. For the sake of it `PearsonR` was chosen.
+  id: totrans-7
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 添加一个*相关性*指标。出于这个目的，选择了 `PearsonR`。
 - en: And for the feat of creating it and instead of coding it from scratch, a sample
     of how to do it from a `scipy` function is done. The code
+  id: totrans-8
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 为了完成这一壮举，而不是从头开始编写代码，我们展示了如何使用`scipy`函数来完成。代码如下：
 - en: '[PRE0]'
+  id: totrans-9
   prefs:
   - PREF_IND
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: Adding rolling logarithmic returns
+  id: totrans-10
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 添加滚动对数收益
 - en: The platform already had an analyzer with logarithmic returns, but not *rolling*.
+  id: totrans-11
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 该平台已经有了一个带有对数收益的分析器，但没有*滚动*。
 - en: The analyzer `LogReturnsRolling` has been added, which takes a `timeframe` parameter
     (and `compression`) to use a different timeframe than that of the data (if needed
     be)
+  id: totrans-12
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 添加了分析器 `LogReturnsRolling`，它接受一个 `timeframe` 参数（和 `compression`）来使用与数据不同的时间框架（如果需要的话）。
 - en: And together with it and for visualization (using the *analyzer* internally)
     a `LogReturns` observer
+  id: totrans-13
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 与此同时，为了可视化（内部使用*分析器*），添加了一个 `LogReturns` 观察者。
 - en: Allowing data on data plotting (easily). Just like this
+  id: totrans-14
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 允许在数据绘图中加入数据（轻松）。就像这样：
 - en: '[PRE1]'
+  id: totrans-15
   prefs:
   - PREF_IND
   type: TYPE_PRE
+  zh: '[PRE1]'
 - en: Just using `plotmaster=data0` will plot `data1` on `data0`
+  id: totrans-16
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 只需使用 `plotmaster=data0` 就可以在 `data0` 上绘制 `data1`。
 - en: Plotting the moving averages on its own axis and on each other was supported
     from the very start of the platform.
+  id: totrans-17
   prefs: []
   type: TYPE_NORMAL
+  zh: 从平台的最开始就支持在自己的轴上和彼此之间绘制移动平均线。
 - en: The *analyzer* and *observer* have also been added to the platform, together
     with a sample with the same defaults as those from the blog post.
+  id: totrans-18
   prefs: []
   type: TYPE_NORMAL
+  zh: '*分析器*和*观察者*也已添加到平台上，并且提供了与博客文章中相同默认设置的示例。'
 - en: 'Running the sample:'
+  id: totrans-19
   prefs: []
   type: TYPE_NORMAL
+  zh: 运行示例：
 - en: '[PRE2]'
+  id: totrans-20
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE2]'
 - en: Note
+  id: totrans-21
   prefs: []
   type: TYPE_NORMAL
+  zh: 注意
 - en: '`stdstats=False` and `volume=False` are there to reduce clutter in the chart
     by removing some of the usual things like `CashValue` observer and the *volume*
     subplots.'
+  id: totrans-22
   prefs: []
   type: TYPE_NORMAL
+  zh: '`stdstats=False` 和 `volume=False` 用于通过删除一些常见的内容，如`CashValue`观察者和*volume*子图，来减少图表中的混乱。'
 - en: Produces a chart which mimics most of the output from the article.
+  id: totrans-23
   prefs: []
   type: TYPE_NORMAL
+  zh: 生成一个图表，几乎模拟了文章中的大部分输出。
 - en: '![image](../Images/07fd7b9cbdb70d8e35cf1d9bf6e40005.png)'
+  id: totrans-24
   prefs: []
   type: TYPE_IMG
+  zh: '![image](../Images/07fd7b9cbdb70d8e35cf1d9bf6e40005.png)'
 - en: 'Not included:'
+  id: totrans-25
   prefs: []
   type: TYPE_NORMAL
+  zh: 不包括在内：
 - en: The charts creating distributions of returns.
+  id: totrans-26
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 创建收益分布图表。
 - en: They wouldn’t fit in the chart which has a *datetime* based x axis.
+  id: totrans-27
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 它们无法适应基于*datetime*的 x 轴的图表。
 - en: But having those distributions may come.
+  id: totrans-28
   prefs: []
   type: TYPE_NORMAL
+  zh: 但是拥有这些分布可能是有益的。
 - en: Sample Usage
+  id: totrans-29
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 示例用法
 - en: '[PRE3]'
+  id: totrans-30
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE3]'
 - en: Sample Code
+  id: totrans-31
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 示例代码
 - en: '[PRE4]'
+  id: totrans-32
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE4]'

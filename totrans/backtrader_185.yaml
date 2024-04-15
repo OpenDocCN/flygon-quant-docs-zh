@@ -1,252 +1,386 @@
 - en: Data - Multiple Timeframes
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 数据 - 多个时间框架
 - en: 原文：[https://www.backtrader.com/blog/posts/2015-08-24-data-multitimeframe/data-multitimeframe/](https://www.backtrader.com/blog/posts/2015-08-24-data-multitimeframe/data-multitimeframe/)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.backtrader.com/blog/posts/2015-08-24-data-multitimeframe/data-multitimeframe/](https://www.backtrader.com/blog/posts/2015-08-24-data-multitimeframe/data-multitimeframe/)
 - en: 'Sometimes investing decisions are taken using different timeframes:'
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: 有时，使用不同的时间框架进行投资决策：
 - en: Weekly to evaluate the trend
+  id: totrans-3
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 周线用于评估趋势
 - en: Daily to execute the entry
+  id: totrans-4
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 每日执行进入
 - en: Or 5 minutes vs 60 minutes.
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: 或者5分钟对比60分钟。
 - en: That implies that combining datas of multiple timeframes in backtrader is needed
     to support such combinations.
+  id: totrans-6
   prefs: []
   type: TYPE_NORMAL
+  zh: 这意味着在backtrader中需要组合多个时间框架的数据以支持这样的组合。
 - en: 'Native support for it is already built-in. The end user must only follow these
     rules:'
+  id: totrans-7
   prefs: []
   type: TYPE_NORMAL
+  zh: 本地支持已经内置。最终用户只需遵循以下规则：
 - en: The data with the smallest timeframe (and thus the larger number of bars) must
     be the 1^(st) one to be added to the Cerebro instance
+  id: totrans-8
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 具有最小时间框架的数据（因此是较大数量的条）必须是添加到Cerebro实例的第一个数据
 - en: The datas must be properly date-time aligned for the platform to make any sense
     out of them
+  id: totrans-9
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 数据必须正确地对齐日期时间，以便平台能够理解它们的任何含义
 - en: 'Beyond that, the end-user is free to apply indicators as wished on the shorter/larger
     timeframes. Of course:'
+  id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: 此外，最终用户可以自由地在较短/较大的时间框架上应用指标。当然：
 - en: Indicators applied to larger timeframes will produce less bars
+  id: totrans-11
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 应用于较大时间框架的指标将产生较少的条
 - en: The platform will also have the following into account
+  id: totrans-12
   prefs: []
   type: TYPE_NORMAL
+  zh: 平台也将考虑以下内容
 - en: The minimum period for larger timeframes
+  id: totrans-13
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 较大时间框架的最小周期
 - en: Minimum period which will probably have the side effect of having to consume
     several orders of magnitude of the smaller timeframe bars before a Strategy added
     to Cerebro kicks into action.
+  id: totrans-14
   prefs: []
   type: TYPE_NORMAL
+  zh: 最小周期可能会导致在策略添加到Cerebro之前需要消耗几个数量级的较小时间框架的数据。
 - en: The built-in `DataResampler` is going to be used to create a larger timeframe.
+  id: totrans-15
   prefs: []
   type: TYPE_NORMAL
+  zh: 内置的`DataResampler`将用于创建较大的时间框架。
 - en: Some examples below, but first the sauce of the test script.
+  id: totrans-16
   prefs: []
   type: TYPE_NORMAL
+  zh: 一些示例如下，但首先是测试脚本的来源。
 - en: '[PRE0]'
+  id: totrans-17
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: 'The steps:'
+  id: totrans-18
   prefs: []
   type: TYPE_NORMAL
+  zh: 步骤：
 - en: Load a data
+  id: totrans-19
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 加载数据
 - en: Resample it according to the user specified arguments
+  id: totrans-20
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 根据用户指定的参数重新采样它
 - en: The script also allows for loading a 2^(nd) data
+  id: totrans-21
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 脚本还允许加载第二个数据
 - en: Add the data to cerebro
+  id: totrans-22
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 将数据添加到cerebro
 - en: Add the resampled data (larger timeframe) to cerebro
+  id: totrans-23
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 将重新采样的数据（较大的时间框架）添加到cerebro
 - en: run
+  id: totrans-24
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 运行
 - en: Example 1 - Daily and Weekly
+  id: totrans-25
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 示例1 - 每日和每周
 - en: 'The invocation of the script:'
+  id: totrans-26
   prefs: []
   type: TYPE_NORMAL
+  zh: 脚本的调用：
 - en: '[PRE1]'
+  id: totrans-27
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE1]'
 - en: 'And the output chart:'
+  id: totrans-28
   prefs: []
   type: TYPE_NORMAL
+  zh: 和输出图表：
 - en: '![image](../Images/cbbf6c75d90c0e12f1f6240477becc81.png)'
+  id: totrans-29
   prefs: []
   type: TYPE_IMG
+  zh: '![image](../Images/cbbf6c75d90c0e12f1f6240477becc81.png)'
 - en: Example 2 - Daily and Daily Compression (2 bars to 1)
+  id: totrans-30
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 示例 2 - 日间和日间压缩（2根变成1根）
 - en: 'The invocation of the script:'
+  id: totrans-31
   prefs: []
   type: TYPE_NORMAL
+  zh: 脚本的调用：
 - en: '[PRE2]'
+  id: totrans-32
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE2]'
 - en: 'And the output chart:'
+  id: totrans-33
   prefs: []
   type: TYPE_NORMAL
+  zh: 和输出图表：
 - en: '![image](../Images/096f133f671bb9ca74ee1c03d1d1731c.png)'
+  id: totrans-34
   prefs: []
   type: TYPE_IMG
+  zh: '![image](../Images/096f133f671bb9ca74ee1c03d1d1731c.png)'
 - en: Example 3 - Strategy with SMA
+  id: totrans-35
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 示例3 - 带有SMA的策略
 - en: Although plotting is nice, the key issue here is showing how the larger timeframe
     influences the system, especially when it comes down to the starting point
+  id: totrans-36
   prefs: []
   type: TYPE_NORMAL
+  zh: 虽然绘图很好，但这里的关键问题是显示较大的时间框架如何影响系统，特别是当涉及到起始点时
 - en: The script can take a `--indicators` to add a strategy which creates simple
     moving averages of **period 10** on the smaller an larger timeframe datas.
+  id: totrans-37
   prefs: []
   type: TYPE_NORMAL
+  zh: 脚本可以采用`--indicators`来添加一个策略，该策略在较小时间框架和较大时间框架的数据上创建**10周期**的简单移动平均线。
 - en: 'If only the smaller timeframe was taken into account:'
+  id: totrans-38
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果只考虑较小的时间框架：
 - en: '`next` would be called first after 10 bars, which is the time the Simple Moving
     Average needs to produce a value'
+  id: totrans-39
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`next`将在10个条之后首先被调用，这是简单移动平均需要产生值的时间'
 - en: Note
+  id: totrans-40
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 注意
 - en: Remember that Strategy monitors created indicators and only calls `next` when
     all indicators have produced a value. The rationale is that the end user has added
     the indicators to use them in the logic and thus no logic should take place if
     the indicators have produced no values
+  id: totrans-41
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 请记住，策略监视创建的指标，并且只有在所有指标都产生值时才调用`next`。理由是最终用户已经添加了指标以在逻辑中使用它们，因此如果指标尚未产生值，则不应进行任何逻辑
 - en: But in this case the larger timeframe (weekly) delays the invocation of `next`
     until the Simple Moving Average oon the weekly data has produced a value, which
     takes … 10 weeks.
+  id: totrans-42
   prefs: []
   type: TYPE_NORMAL
+  zh: 但在这种情况下，较大的时间框架（每周）会延迟调用`next`，直到每周数据的简单移动平均产生值为止，这需要... 10周。
 - en: The script overrides `nextstart` which is only called once and which defaults
     to calling `next` to show when it is first called.
+  id: totrans-43
   prefs: []
   type: TYPE_NORMAL
+  zh: 脚本覆盖了`nextstart`，它只被调用一次，默认调用`next`以显示首次调用的时间。
 - en: 'Invocation 1:'
+  id: totrans-44
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 调用1：
 - en: Only the smaller timeframe, daily, gets a Simple Moving Average
+  id: totrans-45
   prefs: []
   type: TYPE_NORMAL
+  zh: 只有较小的时间框架，即每日，才有一个简单移动平均值。
 - en: The command line and output
+  id: totrans-46
   prefs: []
   type: TYPE_NORMAL
+  zh: 命令行和输出
 - en: '[PRE3]'
+  id: totrans-47
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE3]'
 - en: And the chart.
+  id: totrans-48
   prefs: []
   type: TYPE_NORMAL
+  zh: 以及图表。
 - en: '![image](../Images/9788762f422a669cd82b44aeb072e0ac.png)'
+  id: totrans-49
   prefs: []
   type: TYPE_IMG
+  zh: '![图片](../Images/9788762f422a669cd82b44aeb072e0ac.png)'
 - en: 'Invocation 2:'
+  id: totrans-50
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 调用2：
 - en: Both timeframes get a Simple Moving Average
+  id: totrans-51
   prefs: []
   type: TYPE_NORMAL
+  zh: 两个时间框架都有一个简单移动平均。
 - en: 'The command line:'
+  id: totrans-52
   prefs: []
   type: TYPE_NORMAL
+  zh: 命令行：
 - en: '[PRE4]'
+  id: totrans-53
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE4]'
 - en: 'Two things to notice here:'
+  id: totrans-54
   prefs: []
   type: TYPE_NORMAL
+  zh: 注意这里的两件事：
 - en: Instead of being called after **10** periods, the strategy is 1^(st) called
     after 50 periods.
+  id: totrans-55
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 不是在**10**个周期之后被调用，而是在50个周期之后第一次被调用。
 - en: It is so because the Simple Moving Average applied on the larger (weekly) timeframe
     produces a value after 10 weeks … and that is 10 weeks * 5 days / week … 50 days
+  id: totrans-56
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 这是因为在较大（周）时间框架上应用简单移动平均值后产生了一个值，... 这是10周* 5天/周... 50天。
 - en: '`nextstart` gets called 5 times rather than only 1.'
+  id: totrans-57
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`nextstart`被调用了5次，而不是仅1次。'
 - en: This is a natural side effect of having mixed the timeframe and having (in this
     case only one) indicators applied to the larger timeframe.
+  id: totrans-58
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 这是将时间框架混合并（在这种情况下仅有一个）指标应用于较大时间框架的自然副作用。
 - en: The larger timeframe Simple Moving Average produces 5 times the same value whilst
     5 daily bars are being consumed.
+  id: totrans-59
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 较大时间框架的简单移动平均值在消耗5个日间条时产生5倍相同的值。
 - en: And because the start of the period is being controlled by the larger timeframe
     `nextstart` gets called 5 times.
+  id: totrans-60
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 由于周期的开始由较大的时间框架控制，`nextstart`被调用了5次。
 - en: And the chart.
+  id: totrans-61
   prefs: []
   type: TYPE_NORMAL
+  zh: 以及图表。
 - en: '![image](../Images/d7e56d0e27f93d43fc62a0dfc6e0ace5.png)'
+  id: totrans-62
   prefs: []
   type: TYPE_IMG
+  zh: '![图片](../Images/d7e56d0e27f93d43fc62a0dfc6e0ace5.png)'
 - en: Conclusion
+  id: totrans-63
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 结论
 - en: 'Multiple Timeframe Datas can be used in `backtrader` with no special objects
     or tweaking: just add the smaller timeframes first.'
+  id: totrans-64
   prefs: []
   type: TYPE_NORMAL
+  zh: 多时间框架数据可以在`backtrader`中使用，无需特殊对象或调整：只需先添加较小的时间框架。
 - en: The test script.
+  id: totrans-65
   prefs: []
   type: TYPE_NORMAL
+  zh: 测试脚本。
 - en: '[PRE5]'
+  id: totrans-66
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE5]'

@@ -1,224 +1,324 @@
 - en: Developing an Indicator
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 开发一个指标
 - en: 原文：[https://www.backtrader.com/blog/posts/2015-07-18-developing-an-indicator/developing-an-indicator/](https://www.backtrader.com/blog/posts/2015-07-18-developing-an-indicator/developing-an-indicator/)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.backtrader.com/blog/posts/2015-07-18-developing-an-indicator/developing-an-indicator/](https://www.backtrader.com/blog/posts/2015-07-18-developing-an-indicator/developing-an-indicator/)
 - en: After much ado in fine tuning backtrader (give it had already been running for
     a while) I decided to not only share it via GitHub but to also tell the world
     it was there and posted about its existence in "Reddit".
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: 在对backtrader进行了大量的微调之后（因为它已经运行了一段时间），我决定不仅通过GitHub分享它，还要告诉世界它的存在，并在"Reddit"上发布了关于其存在的帖子。
 - en: Following a comment about why trading/algorithmic trading platforms pop up and
     a private question about the platform supporting live trading for many simultenaous
     tickers I came to the conclusion that my own child deserved its own blog.
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: 在关于为什么交易/算法交易平台会突然出现的评论和关于平台是否支持多个同时交易的实时交易的私人问题之后，我得出了结论，我的孩子应该有自己的博客。
 - en: And here we are. But let’s focus on business.
+  id: totrans-4
   prefs: []
   type: TYPE_NORMAL
+  zh: 这就是我们所在的地方。但让我们专注于业务。
 - en: '`backtrader` is meant to let me experiment quickly with ideas and check what
     my eyes may have told me it may be a chance.'
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: '`backtrader`旨在让我快速尝试想法，并检查我的眼睛可能告诉我的是否可能存在机会。'
 - en: '`backtrader` (right now) is all about backtesting and has not been connected
     to any live trading platform and may not even be (although I do believe the technical
     implementation would allow for it)'
+  id: totrans-6
   prefs: []
   type: TYPE_NORMAL
+  zh: '`backtrader`（目前）完全是关于回测的，尚未连接到任何实时交易平台，甚至可能不会（尽管我确实相信技术实现是允许的）'
 - en: 'When I use the expression "experimenting with ideas" I mean two things:'
+  id: totrans-7
   prefs: []
   type: TYPE_NORMAL
+  zh: 当我使用表达式"尝试想法"时，我的意思是两件事：
 - en: Being able to quickly draft an indicator and be able to visually evaluate its
     behavior
+  id: totrans-8
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 能够快速起草一个指标，并能够直观评估其行为
 - en: Be it the case, engage in developing potential strategy around that indicator
     or a combination with others
+  id: totrans-9
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 无论如何，都要参与开发围绕该指标或与其他指标组合的潜在策略
 - en: My personal trading is 100% judgemental in that no single decision is taken
     by an automated system. But I look at what indicators have to tell. Whether the
     "indications" are really a signal or not, it’s left to my faulty human mind.
+  id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: 我个人的交易是100%判断性的，没有一个决定是由自动化系统做出的。但我会看看指标所说的内容。无论"指标"是否真的是一个信号，都留给了我有缺陷的人类思维。
 - en: 'But let’s experiment. Right after publishing for the 1^(st) time to Reddit
     I added a well known indicator:'
+  id: totrans-11
   prefs: []
   type: TYPE_NORMAL
+  zh: 但让我们来尝试一下。在第一次发布到Reddit后，我添加了一个著名的指标：
 - en: Trix
+  id: totrans-12
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: Trix
 - en: 'Stockcharts has a nice discussion on Trix at: [ChartSchool - Trix](http://stockcharts.com/school/doku.php?id=chart_school:technical_indicators:trix)'
+  id: totrans-13
   prefs: []
   type: TYPE_NORMAL
+  zh: Stockcharts在这里有关于Trix的很好的讨论：[ChartSchool - Trix](http://stockcharts.com/school/doku.php?id=chart_school:technical_indicators:trix)
 - en: 'Let’s experiment how to do it, with the minimum possible of lines:'
+  id: totrans-14
   prefs: []
   type: TYPE_NORMAL
+  zh: 让我们尝试如何做到，用尽可能少的行：
 - en: '[PRE0]'
+  id: totrans-15
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: And the Trix indicator is up and running. Looking at this and as the author
     of the platform I do truly believe my goal of being able to quickly experiment
     with new ideas with ease of use … has been reached.
+  id: totrans-16
   prefs: []
   type: TYPE_NORMAL
+  zh: Trix指标已经投入使用。看着这一切，作为该平台的作者，我真的相信我的目标是能够快速地轻松尝试新的想法……已经实现了。
 - en: 'A breakdown of the development:'
+  id: totrans-17
   prefs: []
   type: TYPE_NORMAL
+  zh: 开发的详细过程：
 - en: '**lines = (‘trix’,)**'
+  id: totrans-18
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**lines = (‘trix’,)**'
 - en: This tuple defines the output lines (just one in this case) of the indicator.
     This statement at the beginning of the class declaration generates a lot of background
     action during class creation and object instantiation.
+  id: totrans-19
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 这个元组定义了指标的输出线（在本例中只有一个）。类声明开始时的这个语句在类创建和对象实例化过程中产生了大量的背景操作。
 - en: Suffice to say that the object has an attribute "lines" which hold the "trix".
+  id: totrans-20
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 可以说，该对象具有一个名为"lines"的属性，其中包含"trix"。
 - en: As a bonus and if the name "trix" is not used inside the indicator itself, the
     "line" could also be reached with "self.trix". But for clarity I do prefer "self.lines.trix"
+  id: totrans-21
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 作为额外的奖励，如果指标本身没有使用名为"trix"的名称，则可以通过"self.trix"来获得"line"。但为了清晰起见，我更喜欢"self.lines.trix"
 - en: 'Additional access methods:'
+  id: totrans-22
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 附加访问方法：
 - en: self.l.trix
+  id: totrans-23
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: self.l.trix
 - en: self.lines[0] … being the index is the one corresponding to the position in
     the tuple
+  id: totrans-24
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: self.lines[0] … 作为索引对应于元组中的位置
 - en: '**params = ((‘period’, 15),)**'
+  id: totrans-25
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**params = ((‘period’, 15),)**'
 - en: This tuple of tuples (can also be a dict or OrderedDict) defines the parameters
     the indicator accepted and declares the default values.
+  id: totrans-26
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 这个元组的元组（也可以是dict或OrderedDict）定义了指标接受的参数并声明了默认值。
 - en: The burden of parsing kwargs is taken off the shoulders of the users.
+  id: totrans-27
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 解析kwargs的负担从用户的肩上卸下来了。
 - en: Parameters can be accessed with the "self.params.xxxxx" notation or with the
     shorthand "self.p.xxxxx"
+  id: totrans-28
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 参数可以通过“self.params.xxxxx”表示法或通过速记“self.p.xxxxx”访问。
 - en: '**The calculation (where EMA stands for ExponentialMovingAverage)**'
+  id: totrans-29
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**计算（其中EMA代表指数移动平均）**'
 - en: '**ema1 = btind.EMA(self.data, period=self.p.period)**'
+  id: totrans-30
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**ema1 = btind.EMA(self.data, period=self.p.period)**'
 - en: A new bonus is shown … "self.data". This seems to come out of the blue but this
     is again pre-processing done in the background for the indicator.
+  id: totrans-31
   prefs:
   - PREF_IND
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 新的奖金显示出来了…“self.data”。这似乎突然冒出来，但这又是指标背后进行的预处理。
 - en: Any "data" passed to the indicator for calculation is intercepted and placed
     in a `self.datas` array, where the usual `self.datas[0]` could be used to reach
     the first data.
+  id: totrans-32
   prefs:
   - PREF_IND
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 传递给指标进行计算的任何“数据”都会被拦截并放置在一个`self.datas`数组中，通常可以使用`self.datas[0]`来访问第一个数据。
 - en: 'Shorthands do exist and look like: self.data and self.data0 for the first data
     in the array. From then onwards self.data1, self.data2.'
+  id: totrans-33
   prefs:
   - PREF_IND
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 缩写确实存在，看起来像：self.data和self.data0用于数组中的第一个数据。从那时起，self.data1，self.data2。
 - en: Trix only needs one data
+  id: totrans-34
   prefs:
   - PREF_IND
   - PREF_IND
   type: TYPE_NORMAL
+  zh: Trix只需要一个数据
 - en: '**ema2 = btind.EMA(ema1, period=self.p.period)**'
+  id: totrans-35
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**ema2 = btind.EMA(ema1, period=self.p.period)**'
 - en: Not much to say. EMA uses ema1 as input data
+  id: totrans-36
   prefs:
   - PREF_IND
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 没有太多可说的。EMA使用ema1作为输入数据。
 - en: '**ema3 = btind.EMA(ema2, period=self.p.period)**'
+  id: totrans-37
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**ema3 = btind.EMA(ema2, period=self.p.period)**'
 - en: Even less to say
+  id: totrans-38
   prefs:
   - PREF_IND
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 更少的话可说
 - en: '**self.lines.trix = 100.0 * (ema3 - ema3(-1)) / ema3(-1)**'
+  id: totrans-39
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**self.lines.trix = 100.0 * (ema3 - ema3(-1)) / ema3(-1)**'
 - en: First and foremost a simple 1-period percentage difference calculation is done.
+  id: totrans-40
   prefs:
   - PREF_IND
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 首先，首先进行了简单的1周期百分比差值计算。
 - en: 'The magic ema3(-1) is a notation to indicate: the previous value of ema.'
+  id: totrans-41
   prefs:
   - PREF_IND
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 魔术ema3(-1)是一种表示：ema的上一个值的记法。
 - en: And the result of the calculation is assigned to the output "line" "trix" defined
     during class creation.
+  id: totrans-42
   prefs:
   - PREF_IND
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 计算的结果被分配给了在类创建过程中定义的输出“line”“trix”。
 - en: Easy Peasy. But "experimenting" would not be done if I didn’t get visual feedback
     of what Trix is doing (even if Stockcharts has a nice essay on it).
+  id: totrans-43
   prefs: []
   type: TYPE_NORMAL
+  zh: 轻而易举。但是如果我没有得到Trix正在做什么的视觉反馈（即使Stockcharts上有一篇很好的文章），我就不会进行“实验”。
 - en: Note
+  id: totrans-44
   prefs: []
   type: TYPE_NORMAL
+  zh: 注意
 - en: The actual Trix implemenation has some additionals bells and whistles mostly
     itended to beautify plotting which are of no relevance for this post.
+  id: totrans-45
   prefs: []
   type: TYPE_NORMAL
+  zh: 实际的Trix实现具有一些额外的花哨功能，主要用于美化绘图，对于本帖子没有相关性。
 - en: We assume we have put the `MyTrix` indicator in a mytrix.py file.
+  id: totrans-46
   prefs: []
   type: TYPE_NORMAL
+  zh: 假设我们已经将`MyTrix`指标放在了一个mytrix.py文件中。
 - en: '[PRE1]'
+  id: totrans-47
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE1]'
 - en: And the visual output is below (open the chart in a new window/tab for a full
     size image), hopefully showing how quickly and easy an indicator can be created
     and visually evaluated with `backtrader`
+  id: totrans-48
   prefs: []
   type: TYPE_NORMAL
+  zh: 并且视觉输出如下（在新窗口/标签中打开图表以获取全尺寸图像），希望显示出指标可以多快地创建和通过`backtrader`进行视觉评估的简单性。
 - en: '![image](../Images/e5e5453fa22990a6e31f575b2359589d.png)'
+  id: totrans-49
   prefs: []
   type: TYPE_IMG
+  zh: '![image](../Images/e5e5453fa22990a6e31f575b2359589d.png)'

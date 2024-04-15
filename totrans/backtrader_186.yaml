@@ -1,139 +1,217 @@
 - en: Data Resampling
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 数据重新取样
 - en: 原文：[https://www.backtrader.com/blog/posts/2015-08-23-data-resampling/data-resampling/](https://www.backtrader.com/blog/posts/2015-08-23-data-resampling/data-resampling/)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.backtrader.com/blog/posts/2015-08-23-data-resampling/data-resampling/](https://www.backtrader.com/blog/posts/2015-08-23-data-resampling/data-resampling/)
 - en: When data is only available in a single timeframe and the analysis has to be
     done for a different timeframe, it’s time to do some resampling.
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: 当数据仅在一个时间段可用，而分析必须针对不同的时间段进行时，就是时候进行一些重新取样了。
 - en: '“Resampling” should actually be called “Upsampling” given that one goes from
     a source timeframe to a larger time frame (for example: days to weeks)'
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: “重新取样”实际上应该称为“向上取样”，因为要从一个源时间段转换到一个较大的时间段（例如：从天到周）
 - en: “Downsampling” is not yet possible.
+  id: totrans-4
   prefs: []
   type: TYPE_NORMAL
+  zh: “向下采样”目前还不可能。
 - en: '`backtrader` has built-in support for resampling by passing the original data
     through a filter object which has intelligently been named: `DataResampler`.'
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: '`backtrader` 通过将原始数据传递给一个智能命名为 `DataResampler` 的过滤器对象来支持重新取样。'
 - en: 'The class has two functionalities:'
+  id: totrans-6
   prefs: []
   type: TYPE_NORMAL
+  zh: 该类具有两个功能：
 - en: Change the timeframe
+  id: totrans-7
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 更改时间框架
 - en: Compress bars
+  id: totrans-8
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 压缩条柱
 - en: 'To do so the `DataResampler` uses standard `feed.DataBase` parameters during
     construction:'
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: 为此，`DataResampler` 在构造过程中使用标准的 `feed.DataBase` 参数：
 - en: '`timeframe` (default: bt.TimeFrame.Days)'
+  id: totrans-10
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`timeframe`（默认：bt.TimeFrame.Days）'
 - en: Destination timeframe which to be useful has to be equal or larger than the
     source
+  id: totrans-11
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 目标时间段必须与源时间段相等或更大才能有用
 - en: '`compression` (default: 1)'
+  id: totrans-12
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`compression`（默认：1）'
 - en: Compress the selected value “n” to 1 bar
+  id: totrans-13
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 将所选值 “n” 压缩到 1 条柱
 - en: 'Let’s see an example from Daily to weekly with a handcrafted script:'
+  id: totrans-14
   prefs: []
   type: TYPE_NORMAL
+  zh: 让我们看一个从每日到每周的手工脚本示例：
 - en: '[PRE0]'
+  id: totrans-15
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: 'The output:'
+  id: totrans-16
   prefs: []
   type: TYPE_NORMAL
+  zh: 输出结果：
 - en: '![image](../Images/d4fb746f392cdd09d8df33d275cac149.png)'
+  id: totrans-17
   prefs: []
   type: TYPE_IMG
+  zh: '![image](../Images/d4fb746f392cdd09d8df33d275cac149.png)'
 - en: 'We can compare it to the original daily data:'
+  id: totrans-18
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们可以将其与原始每日数据进行比较：
 - en: '[PRE1]'
+  id: totrans-19
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE1]'
 - en: 'The output:'
+  id: totrans-20
   prefs: []
   type: TYPE_NORMAL
+  zh: 输出结果：
 - en: '![image](../Images/15344c8ee6a11e8dcaa02f05f63aa04f.png)'
+  id: totrans-21
   prefs: []
   type: TYPE_IMG
+  zh: '![image](../Images/15344c8ee6a11e8dcaa02f05f63aa04f.png)'
 - en: 'The magic is done by executing the following steps:'
+  id: totrans-22
   prefs: []
   type: TYPE_NORMAL
+  zh: 这是通过执行以下步骤来完成的魔术：
 - en: Loading the data as usual
+  id: totrans-23
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 像往常一样加载数据
 - en: Feeding the data into a `DataResampler` with the desired
+  id: totrans-24
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 将数据馈送到具有所需的 `DataResampler` 中
 - en: timeframe
+  id: totrans-25
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 时间框架
 - en: compression
+  id: totrans-26
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 压缩
 - en: The code in the sample (the entire script at the bottom).
+  id: totrans-27
   prefs: []
   type: TYPE_NORMAL
+  zh: 示例代码（底部的整个脚本）。
 - en: '[PRE2]'
+  id: totrans-28
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE2]'
 - en: 'A last example in which we first change the time frame from daily to weekly
     and then apply a 3 to 1 compression:'
+  id: totrans-29
   prefs: []
   type: TYPE_NORMAL
+  zh: 最后一个例子中，我们首先将时间框架从每日更改为每周，然后应用 3 到 1 的压缩：
 - en: '[PRE3]'
+  id: totrans-30
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE3]'
 - en: 'The output:'
+  id: totrans-31
   prefs: []
   type: TYPE_NORMAL
+  zh: 输出结果：
 - en: '![image](../Images/4f595a25f1b4ef03bd4d4973e3995791.png)'
+  id: totrans-32
   prefs: []
   type: TYPE_IMG
+  zh: '![image](../Images/4f595a25f1b4ef03bd4d4973e3995791.png)'
 - en: 'From the original 256 daily bars we end up with 18 3-week bars. The breakdown:'
+  id: totrans-33
   prefs: []
   type: TYPE_NORMAL
+  zh: 从原始的 256 个每日条柱变为 18 个 3 周条柱。具体情况如下：
 - en: 52 weeks
+  id: totrans-34
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 52 周
 - en: 52 / 3 = 17.33 and therefore 18 bars
+  id: totrans-35
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 52 / 3 = 17.33 因此为 18 条柱
 - en: It doesn’t take much more. Of course intraday data can also be resampled.
+  id: totrans-36
   prefs: []
   type: TYPE_NORMAL
+  zh: 这不需要太多。当然，分钟数据也可以进行重新取样。
 - en: The sample code for the resampling test script.
+  id: totrans-37
   prefs: []
   type: TYPE_NORMAL
+  zh: 重新取样测试脚本的示例代码。
 - en: '[PRE4]'
+  id: totrans-38
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE4]'

@@ -1,158 +1,240 @@
 - en: Variability Weighted Return (or VWR)
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 变异性加权回报（或VWR）
 - en: 原文：[https://www.backtrader.com/blog/posts/2016-09-06-vwr/vwr/](https://www.backtrader.com/blog/posts/2016-09-06-vwr/vwr/)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.backtrader.com/blog/posts/2016-09-06-vwr/vwr/](https://www.backtrader.com/blog/posts/2016-09-06-vwr/vwr/)
 - en: Following some hints about an *improved* SharpeRatio, *backtrader* has added
     this *analyzer* to its arsenal.
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: 在一些关于*改进*SharpeRatio的提示之后，*backtrader*将这个*分析器*添加到其工具库中。
 - en: 'The literature is at:'
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: 文献位于：
 - en: '[https://www.crystalbull.com/sharpe-ratio-better-with-log-returns/](https://www.crystalbull.com/sharpe-ratio-better-with-log-returns/)'
+  id: totrans-4
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[https://www.crystalbull.com/sharpe-ratio-better-with-log-returns/](https://www.crystalbull.com/sharpe-ratio-better-with-log-returns/)'
 - en: Starting with the benefits of logarithmic returns and following on the side
     effects of having the *standard deviation* in the denominator of the SharpeRatio
     equation, the document develops the formula and expectations of this *analyzer*.
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: 从对数收益的好处开始，然后讨论将*标准差*放在SharpeRatio方程的分母中的副作用，文档展开了这个*分析器*的公式和期望。
 - en: 'One of the most important properties may be:'
+  id: totrans-6
   prefs: []
   type: TYPE_NORMAL
+  zh: 最重要的特性之一可能是：
 - en: '*A consistent value across timeframes*'
+  id: totrans-7
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '*在时间框架上一致的数值*'
 - en: The `SharpeRatio` uses the arithmetic mean of excess returns versus a risk free
     rate/asset divided by the *standard deviation* of the excess returns versus the
     risk free rate/asset. This makes the final value dependent on the number of samples
     and the standard deviation which could even be `0`. In this case the `SharpeRatio`
     would be infinite.
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: '`SharpeRatio`使用超额收益与无风险利率/资产的算术平均值除以超额收益与无风险利率/资产的*标准差*。这使得最终数值取决于样本数量和标准差，甚至可能为`0`。在这种情况下，`SharpeRatio`将为无穷大。'
 - en: '*backtrader* includes a sample for testing the `SharpeRatio` using the sample
     data which includes prices for `2005` and `2006`. The returned values for different
     *timeframes*:'
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: '*backtrader*包含一个用于测试`SharpeRatio`的样本，使用包含`2005`和`2006`价格的样本数据。不同*时间框架*的返回值为：'
 - en: '`TimeFrame.Years`: `11.6473`'
+  id: totrans-10
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`TimeFrame.Years`: `11.6473`'
 - en: '`TimeFrame.Months`: `0.5425`'
+  id: totrans-11
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`TimeFrame.Months`: `0.5425`'
 - en: '`TimeFrame.Weeks`: `0.457`'
+  id: totrans-12
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`TimeFrame.Weeks`: `0.457`'
 - en: '`TimeFrame.Days`: `0.4274`'
+  id: totrans-13
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`TimeFrame.Days`: `0.4274`'
 - en: Note
+  id: totrans-14
   prefs: []
   type: TYPE_NORMAL
+  zh: 注意
 - en: 'For consistency the ratio is annualized. The `sharpe-timereturn` sample and
     is executed with:'
+  id: totrans-15
   prefs: []
   type: TYPE_NORMAL
+  zh: 为了保持一致性，比率是年化的。`sharpe-timereturn`样本并使用以下方式执行：
 - en: '[PRE0]'
+  id: totrans-16
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: Where `xxx` stands for `days`, `weeks`, `months` or `years` (default)
+  id: totrans-17
   prefs: []
   type: TYPE_NORMAL
+  zh: '`xxx`代表`天`、`周`、`月`或`年`（默认）'
 - en: 'In this sample there is something clear:'
+  id: totrans-18
   prefs: []
   type: TYPE_NORMAL
+  zh: 在这个样本中有一点很明显：
 - en: The smaller the *timeframe*, the smaller the value of the `SharpeRatio`
+  id: totrans-19
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '*时间框架*越小，`SharpeRatio`值越小'
 - en: Which is caused by the number of samples which is larger for the smaller *timeframes*
     and adds *variability* and hence increases the *standard deviation*, which is
     the denominator in the `SharpeRatio` equation.
+  id: totrans-20
   prefs: []
   type: TYPE_NORMAL
+  zh: 这是由于较小*时间框架*的样本数量较大，增加了*变异性*，从而增加了`SharpeRatio`方程中的分母——*标准差*。
 - en: There is a *large sensibility* to changes in the *standard deviation*
+  id: totrans-21
   prefs: []
   type: TYPE_NORMAL
+  zh: 对*标准差*的变化非常敏感
 - en: 'It is exactly this what the `VWR` tries to solved by offering a consistent
     value across *timeframes*. The same strategy offers the following values:'
+  id: totrans-22
   prefs: []
   type: TYPE_NORMAL
+  zh: 正是这一点，`VWR`试图通过在*时间框架*上提供一致的数值来解决。同一策略提供以下数值：
 - en: '`TimeFrame.Years`: `1.5368`'
+  id: totrans-23
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`TimeFrame.Years`: `1.5368`'
 - en: '`TimeFrame.Months`: `1.5163`'
+  id: totrans-24
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`TimeFrame.Months`: `1.5163`'
 - en: '`TimeFrame.Weeks`: `1.5383`'
+  id: totrans-25
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`TimeFrame.Weeks`: `1.5383`'
 - en: '`TimeFrame.Days`: `1.5221`'
+  id: totrans-26
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`TimeFrame.Days`: `1.5221`'
 - en: Note
+  id: totrans-27
   prefs: []
   type: TYPE_NORMAL
+  zh: 注意
 - en: 'The `VWR` is returned (following the literature) always in annualized form.
     The sample is executed with:'
+  id: totrans-28
   prefs: []
   type: TYPE_NORMAL
+  zh: '`VWR`（遵循文献）始终以年化形式返回。样本使用以下方式执行：'
 - en: '[PRE1]'
+  id: totrans-29
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE1]'
 - en: Where `xxx` stands for `days`, `weeks`, `months` or `years`
+  id: totrans-30
   prefs: []
   type: TYPE_NORMAL
+  zh: '`xxx`代表`天`、`周`、`月`或`年`'
 - en: The default is `None` which uses the underlying *timeframe* of the data which
     is `days`
+  id: totrans-31
   prefs: []
   type: TYPE_NORMAL
+  zh: 默认值为`None`，使用数据的基础*时间框架*为`天`
 - en: Consistent values which show that the performance of the strategy when it comes
     to offering consistent returns can be evaluated on any timeframe.
+  id: totrans-32
   prefs: []
   type: TYPE_NORMAL
+  zh: 一致的数值表明，当涉及提供一致回报时，策略的表现可以在任何时间框架上进行评估。
 - en: Note
+  id: totrans-33
   prefs: []
   type: TYPE_NORMAL
+  zh: 注意
 - en: Theoretically the values should be the same, but this would require fine tuning
     the `tann` parameters (number of periods for annualization) to the exact trading
     periods. This is not done here, because the purpose is just looking at consistency.
+  id: totrans-34
   prefs: []
   type: TYPE_NORMAL
+  zh: 理论上，数值应该是相同的，但这需要对`tann`参数（年化期数）进行微调，以匹配确切的交易期。这里没有这样做，因为目的只是看一致性。
 - en: Conclusion
+  id: totrans-35
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 结论
 - en: A new tool which offers a timeframe independent approach to strategy evaluation
     is available for the users
+  id: totrans-36
   prefs: []
   type: TYPE_NORMAL
+  zh: 为用户提供了一种独立于时间框架的策略评估方法的新工具
 - en: Sample Usage
+  id: totrans-37
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 样本用法
 - en: '[PRE2]'
+  id: totrans-38
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE2]'
 - en: Sample Code
+  id: totrans-39
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 样本代码
 - en: '[PRE3]'
+  id: totrans-40
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE3]'

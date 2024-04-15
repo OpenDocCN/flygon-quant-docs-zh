@@ -1,541 +1,808 @@
 - en: Timers
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 定时器
 - en: 原文：[https://www.backtrader.com/blog/posts/2017-05-03-timers/timers/](https://www.backtrader.com/blog/posts/2017-05-03-timers/timers/)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.backtrader.com/blog/posts/2017-05-03-timers/timers/](https://www.backtrader.com/blog/posts/2017-05-03-timers/timers/)
 - en: Release `1.9.44.116` added *timers* to the arsenal of tools available in *backtrader*.
     This functionality allows to get a call back to the `notify_timer` (available
     in `Cerebro` and `Strategy`) at given points in time, with a fine grained end-user
     control.
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: 发布 `1.9.44.116` 在 *backtrader* 可用工具中添加了 *timers* 功能。此功能允许在指定时间点收到对 `notify_timer`
+    的回调（在 `Cerebro` 和 `Strategy` 中可用），并且有细粒度的最终用户控制。
 - en: Note
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: 注意
 - en: Some corrections have been made in `1.9.46.116`
+  id: totrans-4
   prefs: []
   type: TYPE_NORMAL
+  zh: 在 `1.9.46.116` 中进行了一些更正
 - en: Options
+  id: totrans-5
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 选项
 - en: Timer based in absolute time input or with regards to session start/end times
+  id: totrans-6
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 基于绝对时间输入或与会话开始/结束时间相关的定时器
 - en: Timezone specification for the time specification, be it directly or via *pytz*
     compatible objects or via data feed session end times
+  id: totrans-7
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 时区规范为时间规范，无论是直接还是通过 *pytz* 兼容对象，还是通过数据源会话结束时间
 - en: Starting offset with regards to the specified time
+  id: totrans-8
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 与指定时间相关的起始偏移量
 - en: Repetitions intervals
+  id: totrans-9
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 重复间隔
 - en: Weekdays filter (with carry over option)
+  id: totrans-10
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 工作日筛选器（带有延续选项）
 - en: Monthdays filter (with carry over option)
+  id: totrans-11
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 月日筛选器（带有延续选项）
 - en: Custom callback filter
+  id: totrans-12
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 自定义回调筛选器
 - en: Usage pattern
+  id: totrans-13
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 使用模式
 - en: Both in `Cerebro` and `Strategy` subclasses the timer callback will be received
     in the following method.
+  id: totrans-14
   prefs: []
   type: TYPE_NORMAL
+  zh: 在 `Cerebro` 和 `Strategy` 子类中，定时器回调将在以下方法中收到。
 - en: '[PRE0]'
+  id: totrans-15
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: Adding timers - Via Strategy
+  id: totrans-16
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 添加定时器 - 通过 Strategy
 - en: Done with the method
+  id: totrans-17
   prefs: []
   type: TYPE_NORMAL
+  zh: 使用该方法完成
 - en: '[PRE1]'
+  id: totrans-18
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE1]'
 - en: It returns the created `Timer` instance.
+  id: totrans-19
   prefs: []
   type: TYPE_NORMAL
+  zh: 返回创建的 `Timer` 实例。
 - en: See below for an explanation of the parameters.
+  id: totrans-20
   prefs: []
   type: TYPE_NORMAL
+  zh: 有关参数解释，请参见下文。
 - en: Adding timers - Via Cerebro
+  id: totrans-21
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 添加定时器 - 通过 Cerebro
 - en: Done with the same method and just the addition of the parameter `strats`. If
     set to `True` the timer will not only be notified to the *cerebro*, it will also
     be notified to all strategies running in the system.
+  id: totrans-22
   prefs: []
   type: TYPE_NORMAL
+  zh: 使用相同的方法完成，只需添加参数 `strats`。如果设置为 `True`，则定时器不仅将通知给 *cerebro*，还将通知给系统中运行的所有策略。
 - en: '[PRE2]'
+  id: totrans-23
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE2]'
 - en: It returns the created `Timer` instance.
+  id: totrans-24
   prefs: []
   type: TYPE_NORMAL
+  zh: 返回创建的 `Timer` 实例。
 - en: When are timers called
+  id: totrans-25
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 定时器何时被调用
 - en: If `cheat=False`
+  id: totrans-26
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 如果 `cheat=False`
 - en: 'This is the default. In this case a timer will be called:'
+  id: totrans-27
   prefs: []
   type: TYPE_NORMAL
+  zh: 这是默认设置。在这种情况下，定时器将被调用：
 - en: After the data feeds have loaded the new values for the current bar
+  id: totrans-28
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 在数据源加载了当前柱形图的新值之后
 - en: After the broker has evaluated orders and recalculated the portfolio value
+  id: totrans-29
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 在经纪人评估订单并重新计算组合价值之后
 - en: Before indicators have been recalculated (because this is triggered by the strategies)
+  id: totrans-30
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 在指标重新计算之前（因为这是由策略触发的）
 - en: Before any `next` method of any strategy is called
+  id: totrans-31
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 在任何策略的 `next` 方法被调用之前
 - en: If `cheat=True`
+  id: totrans-32
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 如果 `cheat=True`
 - en: 'In this case a timer will be called:'
+  id: totrans-33
   prefs: []
   type: TYPE_NORMAL
+  zh: 在这种情况下，将调用定时器：
 - en: After the data feeds have loaded the new values for the current bar
+  id: totrans-34
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 在数据源加载了当前柱形图的新值之后
 - en: '**Before** the broker has evaluated orders and recalculated the portfolio value'
+  id: totrans-35
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**在** 经纪人评估订单并重新计算组合价值之前'
 - en: And consequently before indicators have been recalculated and `next` method
     of any strategy is called
+  id: totrans-36
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 因此在指标被重新计算之前和任何策略的 `next` 方法被调用之前
 - en: 'Which allows for example the following scenario with daily bars:'
+  id: totrans-37
   prefs: []
   type: TYPE_NORMAL
+  zh: 这允许例如以下场景与每日柱形图：
 - en: Before the new bar is evaluated by the broker the timer is called
+  id: totrans-38
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 在经纪人评估新柱形图之前，定时器被调用
 - en: The indicators have the value from the previous day at the close and can be
     used to generate an entry/exit signal (or a flag may have been set during the
     last evaluation of `next`)
+  id: totrans-39
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 指标具有前一天收盘价的值，可以用于生成入场/出场信号（或在上次评估 `next` 时可能已设置了标志）
 - en: Because the new prices are available, the stake can be calculated using the
     opening price. This assumes that one is for example getting a good indication
     about the `open` from watching the opening auction.
+  id: totrans-40
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 因为新价格可用，所以可以使用开盘价计算赌注。这假设例如通过观察开盘竞价可以得到关于 `open` 的良好指示。
 - en: Running with daily bars
+  id: totrans-41
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 使用每日柱形图运行
 - en: The sample `scheduled.py` defaults to running with the standard daily bars available
     in the *backtrader* distribution. The parameters to the strategy
+  id: totrans-42
   prefs: []
   type: TYPE_NORMAL
+  zh: 示例 `scheduled.py` 默认使用 *backtrader* 发行版中提供的标准每日柱形图运行。策略的参数
 - en: '[PRE3]'
+  id: totrans-43
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE3]'
 - en: 'And the data has the following session times:'
+  id: totrans-44
   prefs: []
   type: TYPE_NORMAL
+  zh: 数据具有以下会话时间：
 - en: 'start: 09:00'
+  id: totrans-45
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 开始：09:00
 - en: 'end: 17:30'
+  id: totrans-46
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 结束：17:30
 - en: Running with just a time
+  id: totrans-47
   prefs: []
   type: TYPE_NORMAL
+  zh: 仅使用时间运行
 - en: '[PRE4]'
+  id: totrans-48
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE4]'
 - en: As specified the timer is ticking at `15:30`. No surprises there. Let’s add
     an offset of 30 minutes.
+  id: totrans-49
   prefs: []
   type: TYPE_NORMAL
+  zh: 如指定的，定时器在 `15:30` 滴答。没有意外。让我们添加一个偏移量为30分钟。
 - en: '[PRE5]'
+  id: totrans-50
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE5]'
 - en: And the time has changed from `15:30` to `16:00` for the timer. No surprises.
     Let’s do the same but referencing the start of the session.
+  id: totrans-51
   prefs: []
   type: TYPE_NORMAL
+  zh: 时间从`15:30`更改为`16:00`。没有什么惊喜。让我们做同样的事情，但是引用会话开始。
 - en: '[PRE6]'
+  id: totrans-52
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE6]'
 - en: Et voilá! The time at which the callback is called is `09:30`. And the session
     start, see above, is `09:00`. This gives the ability to simply say that one wants
     to execute an action *30 minutes* after the start of the session.
+  id: totrans-53
   prefs: []
   type: TYPE_NORMAL
+  zh: Et voilá！回调调用的时间是`09:30`。并且会话开始，见上文，是`09:00`。这使得可以简单地说希望在会话开始后*30分钟*执行某个动作。
 - en: 'Let’s add a repetition:'
+  id: totrans-54
   prefs: []
   type: TYPE_NORMAL
+  zh: 让我们添加一个重复：
 - en: '[PRE7]'
+  id: totrans-55
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE7]'
 - en: '**There is no repetition**. The reason being that the resolution of the prices
     is daily. The timer is called for the 1^(st) time at `09:30` like in the previous
     example. But when the system get the next batch of prices, they are happening
     on the next day. And the timer can only, obviously, be called once. A lower resolution
     is needed.'
+  id: totrans-56
   prefs: []
   type: TYPE_NORMAL
+  zh: '**没有重复**。原因是价格的分辨率是每日的。计时器像前一个示例一样在`09:30`首次调用。但是当系统获取下一批价格时，它们发生在下一天。显然，计时器只能被调用一次。需要更低的分辨率。'
 - en: But before moving on to a lower resolution, let’s cheat by having the timer
     called before the end of the session.
+  id: totrans-57
   prefs: []
   type: TYPE_NORMAL
+  zh: 但在转向更低的分辨率之前，让我们通过在会话结束之前调用计时器来作弊。
 - en: '[PRE8]'
+  id: totrans-58
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE8]'
 - en: The strategy adds a 2^(nd) timer with `cheat=True`. This is added 2^(nd) and
     will therefore received the 2^(nd) `tid` (*timer id*) which is `1` (see in the
     above examples that the assigned `tid` was `0`)
+  id: totrans-59
   prefs: []
   type: TYPE_NORMAL
+  zh: 策略添加了一个带有`cheat=True`的第2个计时器。这是添加的第2个，因此将接收到第2个`tid`（*计时器id*），即`1`（请参见上述示例，分配的`tid`为`0`）
 - en: And `1` is called before `0`, because that timer is *cheating* and is being
     called before many events in the system happen (see above for the explanation)
+  id: totrans-60
   prefs: []
   type: TYPE_NORMAL
+  zh: 并且`1`在`0`之前被调用，因为该计时器正在*作弊*，并且在系统中的许多事件发生之前被调用（请参见上文的解释）
 - en: 'Due to the *daily* resolution of the prices it doesn’t make much of a difference
     except that:'
+  id: totrans-61
   prefs: []
   type: TYPE_NORMAL
+  zh: 由于价格的*每日*分辨率，这并没有太大的区别，除了：
 - en: The strategy also issues an order right before the open … and it is being matched
     with the opening price the next day
+  id: totrans-62
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 该策略还在开盘前发出订单……并且在第二天与开盘价匹配。
 - en: This, even if cheating by acting before the open, is still the normal behavior,
     because *cheating-on-open* has also not been activated in the broker.
+  id: totrans-63
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 这，即使在开盘前作弊，仍然是正常的行为，因为经纪人也没有激活*cheating-on-open*。
 - en: The same but with `coo=True` for the broker
+  id: totrans-64
   prefs: []
   type: TYPE_NORMAL
+  zh: 经纪人的`coo=True`相同。
 - en: '[PRE9]'
+  id: totrans-65
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE9]'
 - en: And something has changed.
+  id: totrans-66
   prefs: []
   type: TYPE_NORMAL
+  zh: 有些事情发生了变化。
 - en: The order is issued on `2005-01-03` in the cheating timer
+  id: totrans-67
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 订单在作弊计时器中在`2005-01-03`发出
 - en: The order is executed on `2005-01-03` with the opening price
+  id: totrans-68
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 订单在`2005-01-03`以开盘价执行
 - en: Effectively like if one had acted on the opening auction price seconds before
     the real opening of the market.
+  id: totrans-69
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 实际上就像在市场真正开盘前几秒钟就已经根据开盘竞价行动了一样。
 - en: Running with 5-minute bars
+  id: totrans-70
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 使用5分钟的条形图运行
 - en: The sample `scheduled-min.py` defaults to running with the standard 5-minute
     bars available in the *backtrader* distribution. The parameters to the strategy
     are extended to include `monthdays` and the *carry* options
+  id: totrans-71
   prefs: []
   type: TYPE_NORMAL
+  zh: 示例`scheduled-min.py`默认使用*backtrader*发行的标准5分钟条形图运行。策略的参数被扩展以包括`monthdays`和*carry*选项
 - en: '[PRE10]'
+  id: totrans-72
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE10]'
 - en: 'The data has the same session times:'
+  id: totrans-73
   prefs: []
   type: TYPE_NORMAL
+  zh: 数据具有相同的交易时间：
 - en: 'start: 09:00'
+  id: totrans-74
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 开始时间：09:00
 - en: 'end: 17:30'
+  id: totrans-75
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 结束时间：17:30
 - en: Let’s do some experiments. First a single timer.
+  id: totrans-76
   prefs: []
   type: TYPE_NORMAL
+  zh: 让我们进行一些实验。首先是一个单一的计时器。
 - en: '[PRE11]'
+  id: totrans-77
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE11]'
 - en: The timer kicks in as requested at `15:30`. The log shows how it does that during
     the 1^(st) two days.
+  id: totrans-78
   prefs: []
   type: TYPE_NORMAL
+  zh: 计时器按要求在`15:30`开始工作。日志显示了它在前两天如何工作。
 - en: Adding a `repeat` of `15 minutes` to the mix
+  id: totrans-79
   prefs: []
   type: TYPE_NORMAL
+  zh: 将`15分钟`的`repeat`添加到混合中
 - en: '[PRE12]'
+  id: totrans-80
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE12]'
 - en: As expected the 1^(st) call is triggered at `15:30` and then starts repeating
     every 15 minutes until the end of the session at `17:30`. When the new session
     kicks in, the timer has been reset to `15:30` again.
+  id: totrans-81
   prefs: []
   type: TYPE_NORMAL
+  zh: 预期的是第1次调用在`15:30`触发，然后每隔15分钟重复一次，直到`17:30`会话结束。新会话开始时，计时器再次重置为`15:30`。
 - en: And now with cheating before the session start
+  id: totrans-82
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在在会话开始之前作弊
 - en: '[PRE13]'
+  id: totrans-83
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE13]'
 - en: Order creation is t `09:05:00` and execution at `09:10:00` because the broker
     is not in *cheat-on-open* mode. Let’s set it …
+  id: totrans-84
   prefs: []
   type: TYPE_NORMAL
+  zh: 订单创建时间为`09:05:00`，执行时间为`09:10:00`，因为经纪人不处于*欺骗开盘*模式。让我们设置它……
 - en: '[PRE14]'
+  id: totrans-85
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE14]'
 - en: And the issuing time and execution time are `09:05:00` with the execution price
     being the opening price at `09:05:00`.
+  id: totrans-86
   prefs: []
   type: TYPE_NORMAL
+  zh: 发行时间和执行时间为`09:05:00`，执行价格为`09:05:00`的开盘价。
 - en: Additional scenarios
+  id: totrans-87
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 其他情景
 - en: Timers allow specifying on which days they have to be executed by passing a
     list of days (integers following the iso spec, where Mon=1 and Sun=7) as in
+  id: totrans-88
   prefs: []
   type: TYPE_NORMAL
+  zh: 计时器允许通过传递一个日期列表（按照iso规范，其中Mon=1且Sun=7的整数）来指定它们必须执行的日期，如
 - en: '`weekdays=[5]` which would ask for the timer to only be valid on Fridays'
+  id: totrans-89
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`weekdays=[5]`，这将要求计时器仅在星期五有效'
 - en: In case a Friday is a non-trading day and the timer should kick-in on the next
     trading day, one can add `weekcarry=True`
+  id: totrans-90
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 如果星期五是非交易日，而计时器应在下一个交易日启动，则可以添加 `weekcarry=True`
 - en: 'Similar to it, one can decide to act on the 15^(th) day of each month with:'
+  id: totrans-91
   prefs: []
   type: TYPE_NORMAL
+  zh: 类似于此，可以决定在每个月的第15天采取行动：
 - en: '`monthdays=[15]`'
+  id: totrans-92
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`monthdays=[15]`'
 - en: In case the 15^(th) happens to be non-trading day and the timer should kick-in
     on the next trading day, one can add `monthcarry=True`
+  id: totrans-93
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 如果第15天恰好是非交易日，而计时器应在下一个交易日启动，则可以添加 `monthcarry=True`
 - en: 'There isn’t an implementation for things like: *the 3^(rd) Friday of March,
     June, September and December* (futures/options expirations), but there is a possibility
     to implement rules by passing:'
+  id: totrans-94
   prefs: []
   type: TYPE_NORMAL
+  zh: 对于诸如：*三月、六月、九月和十二月的第3个星期五*（期货/期权到期日）之类的事情并没有实现，但是可以通过传递来实现规则：
 - en: '`allow=callable` where the callable accepts `datetime.date` instance. Notice
     this is not a `datetime.datetime` instance, because the *allow* callable is only
     meant to decide if a given day is suitable for timers or not.'
+  id: totrans-95
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`allow=callable`，其中可调用接受 `datetime.date` 实例。请注意，这不是 `datetime.datetime` 实例，因为
+    *allow* 可调用仅用于确定给定日期是否适合用于计时器。'
 - en: 'To implement something like the rule laid out above:'
+  id: totrans-96
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 要实现类似上面规则的内容：
 - en: '[PRE15]'
+  id: totrans-97
   prefs:
   - PREF_IND
   type: TYPE_PRE
+  zh: '[PRE15]'
 - en: And one would pass `allow=FutOpeExp()` to the creation of the timer
+  id: totrans-98
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 并且一个将 `allow=FutOpeExp()` 传递给计时器的创建
 - en: This would allow a timer to kick in on the 3^(rd) Friday of those months and
     may be close positions before the futures expire.
+  id: totrans-99
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 这将允许计时器在这些月份的第3个星期五启动，并且可能在期货到期前平仓。
 - en: Parameters to `add_timer`
+  id: totrans-100
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: '`add_timer` 的参数'
 - en: '[PRE16]'
+  id: totrans-101
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE16]'
 - en: '`offset` which must be a `datetime.timedelta` instance'
+  id: totrans-102
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`offset` 必须是一个 `datetime.timedelta` 实例'
 - en: Used to offset the value `when`. It has a meaningful use in combination with
     `SESSION_START` and `SESSION_END`, to indicated things like a timer being called
     `15 minutes` after the session start.
+  id: totrans-103
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 用于偏移值 `when` 的值。它与 `SESSION_START` 和 `SESSION_END` 结合使用时具有有意义的用途，例如指示计时器在会话开始后`15分钟`被调用。
 - en: '`repeat` which must be a `datetime.timedelta` instance'
+  id: totrans-104
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`repeat` 必须是一个 `datetime.timedelta` 实例'
 - en: Indicates if after a 1^(st) call, further calls will be scheduled within the
     same session at the scheduled `repeat` delta
+  id: totrans-105
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 表示在第1次调用后，进一步的调用是否将在同一个会话中按计划的`repeat`间隔内安排
 - en: Once the timer goes over the end of the session it is reset to the original
     value for `when`
+  id: totrans-106
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 一旦计时器超过会话结束，它将被重置为 `when` 的原始值
 - en: '`weekdays`: a **sorted** iterable with integers indicating on which days (iso
     codes, Monday is 1, Sunday is 7) the timers can be actually invoked'
+  id: totrans-107
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`weekdays`：一个**排序的**可迭代对象，其中包含指示实际可以调用计时器的日期（ISO代码，星期一为1，星期日为7）的整数'
 - en: If not specified, the timer will be active on all days
+  id: totrans-108
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 如果未指定，计时器将在所有日期上活动
 - en: '`weekcarry` (default: `False`). If `True` and the weekday was not seen (ex:
     trading holiday), the timer will be executed on the next day (even if in a new
     week)'
+  id: totrans-109
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`weekcarry`（默认：`False`）。如果为 `True` 并且没有看到工作日（例如：交易假日），则计时器将在下一天执行（即使是在新的一周）'
 - en: '`monthdays`: a **sorted** iterable with integers indicating on which days of
     the month a timer has to be executed. For example always on day *15* of the month'
+  id: totrans-110
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`monthdays`：一个**排序的**可迭代对象，其中包含指示月份中哪些日期要执行计时器的整数。例如，总是在每个月的第 *15* 天'
 - en: If not specified, the timer will be active on all days
+  id: totrans-111
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 如果未指定，计时器将在所有日期上活动
 - en: '`monthcarry` (default: `True`). If the day was not seen (weekend, trading holiday),
     the timer will be executed on the next available day.'
+  id: totrans-112
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`monthcarry`（默认：`True`）。如果没有看到该天（周末，交易假日），则计时器将在下一个可用日期执行。'
 - en: '`allow` (default: `None`). A callback which receives a datetime.date` instance
     and returns `True` if the date is allowed for timers or else returns `False`'
+  id: totrans-113
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`allow`（默认：`None`）。一个回调函数，接收一个 `datetime.date` 实例，并返回 `True`（如果日期允许计时器）或返回
+    `False`'
 - en: '`tzdata` which can be either `None` (default), a `pytz` instance or a `data
     feed` instance.'
+  id: totrans-114
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`tzdata` 可以是 `None`（默认值），一个 `pytz` 实例或一个 `数据源` 实例。'
 - en: '`None`: `when` is interpreted at face value (which translates to handling it
     as if it where UTC even if it’s not)'
+  id: totrans-115
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: '`None`：`when` 被按字面值解释（即使它不是，也要处理它为UTC）'
 - en: '`pytz` instance: `when` will be interpreted as being specified in the local
     time specified by the timezone instance.'
+  id: totrans-116
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: '`pytz` 实例：`when` 将被解释为由时区实例指定的本地时间。'
 - en: '`data feed` instance: `when` will be interpreted as being specified in the
     local time specified by the `tz` parameter of the data feed instance.'
+  id: totrans-117
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: '`data feed`实例：`when`将被解释为在数据源实例的`tz`参数指定的本地时间中指定。'
 - en: '**Note**: If `when` is either `SESSION_START` or'
+  id: totrans-118
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: '**注意**：如果`when`是`SESSION_START`或者'
 - en: '[PRE17]'
+  id: totrans-119
   prefs:
   - PREF_IND
   type: TYPE_PRE
+  zh: '[PRE17]'
 - en: '`strats` (default: `False`) call also the `notify_timer` of strategies'
+  id: totrans-120
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`strats`（默认为`False`）还会调用策略的`notify_timer`'
 - en: '`cheat` (default `False`) if `True` the timer will be called before the broker
     has a chance to evaluate the orders. This opens the chance to issue orders based
     on opening price for example right before the session starts'
+  id: totrans-121
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`cheat`（默认为`False`）如果为`True`，则计时器将在经纪人有机会评估订单之前被调用。这就打开了在会话开始之前例如根据开盘价发布订单的机会'
 - en: '`\*args`: any extra args will be passed to `notify_timer`'
+  id: totrans-122
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`\*args`：任何额外的参数将传递给`notify_timer`'
 - en: '`\*\*kwargs`: any extra kwargs will be passed to `notify_timer`'
+  id: totrans-123
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`\*\*kwargs`：任何额外的关键字参数将传递给`notify_timer`'
 - en: Sample usage `scheduled.py`
+  id: totrans-124
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 示例用法`scheduled.py`
 - en: '[PRE18]'
+  id: totrans-125
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE18]'
 - en: Sample usage `scheduled-min.py`
+  id: totrans-126
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 示例用法`scheduled-min.py`
 - en: '[PRE19]'
+  id: totrans-127
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE19]'
 - en: Sample source `scheduled.py`
+  id: totrans-128
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 示例源代码`scheduled.py`
 - en: '[PRE20]'
+  id: totrans-129
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE20]'
 - en: Sample source `scheduled-min.py`
+  id: totrans-130
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 示例源代码`scheduled-min.py`
 - en: '[PRE21]'
+  id: totrans-131
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE21]'

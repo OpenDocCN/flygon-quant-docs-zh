@@ -1,210 +1,330 @@
 - en: Plotting on the same axis
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 在同一轴线上绘图。
 - en: 原文：[https://www.backtrader.com/blog/posts/2015-09-21-plotting-same-axis/plotting-same-axis/](https://www.backtrader.com/blog/posts/2015-09-21-plotting-same-axis/plotting-same-axis/)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.backtrader.com/blog/posts/2015-09-21-plotting-same-axis/plotting-same-axis/](https://www.backtrader.com/blog/posts/2015-09-21-plotting-same-axis/plotting-same-axis/)
 - en: Following a comment on the blog a slight addition (luckily just a few lines
     of code) has been made to plotting.
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: 根据博客上的评论稍微增加了一点（幸运的是只是几行代码）来进行绘图。
 - en: The abilitiy to plot any indicator on any other indicator
+  id: totrans-3
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 能够在任何其他指标上绘制任何指标。
 - en: 'A potential use case:'
+  id: totrans-4
   prefs: []
   type: TYPE_NORMAL
+  zh: 一个潜在的用例：
 - en: Saving precious screen real estate by plotting some indicators together and
     having more room to appreciate the OHLC bars
+  id: totrans-5
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 节省宝贵的屏幕空间，将一些指标绘制在一起，有更多的空间来欣赏 OHLC 柱状图。
 - en: 'Example: join Stochastic and RSI plots'
+  id: totrans-6
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 示例：将 Stochastic 和 RSI 绘图合并。
 - en: 'Of course something has to be taken into account:'
+  id: totrans-7
   prefs: []
   type: TYPE_NORMAL
+  zh: 当然，有些事情必须考虑进去：
 - en: If the scaling of the indicators is too different, some of the indicators would
     not be visible.
+  id: totrans-8
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 如果指标的缩放差异太大，一些指标可能不可见。
 - en: 'Example: a MACD oscillating around 0.0 plus/minus 0.5 plotted over a Stochastic
     which moves across the 0-100 range.'
+  id: totrans-9
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 示例：一个围绕 0.0 加/减 0.5 波动的 MACD 绘制在一个横跨 0-100 范围的 Stochastic 上。
 - en: The first implementation is in the development branch on commit […14252c6](https://github.com/mementum/backtrader/commit/6991c0995ddc5097ccd14bffef91d5c8114252c6)
+  id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: 第一个实现在提交的开发分支上是 […14252c6](https://github.com/mementum/backtrader/commit/6991c0995ddc5097ccd14bffef91d5c8114252c6)
 - en: A sample script (see below for the full code) let us see the effects
+  id: totrans-11
   prefs: []
   type: TYPE_NORMAL
+  zh: 一个示例脚本（见下面的完整代码）让我们看到了效果。
 - en: Note
+  id: totrans-12
   prefs: []
   type: TYPE_NORMAL
+  zh: 注意
 - en: Because the sample strategy does nothing, the standards observers are removed
     unless activated via a command line switch.
+  id: totrans-13
   prefs: []
   type: TYPE_NORMAL
+  zh: 因为示例策略什么都不做，标准观察者被移除了，除非通过命令行开关激活。
 - en: First the script run with no switches.
+  id: totrans-14
   prefs: []
   type: TYPE_NORMAL
+  zh: 首先，脚本在没有任何开关的情况下运行。
 - en: A Simple Moving Average is plotted over the data
+  id: totrans-15
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 简单移动平均线绘制在数据上。
 - en: A MACD, Stochastic and RSI are plotted on own axis/subplots
+  id: totrans-16
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: MACD、Stochastic 和 RSI 分别绘制在各自的轴线/子图上。
 - en: 'Execution:'
+  id: totrans-17
   prefs: []
   type: TYPE_NORMAL
+  zh: 执行：
 - en: '[PRE0]'
+  id: totrans-18
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: And the chart.
+  id: totrans-19
   prefs: []
   type: TYPE_NORMAL
+  zh: 和图表。
 - en: '![image](../Images/9657732538ab1960cc4c0c0baaba5870.png)'
+  id: totrans-20
   prefs: []
   type: TYPE_IMG
+  zh: '![image](../Images/9657732538ab1960cc4c0c0baaba5870.png)'
 - en: 'The second execution changes the panorama:'
+  id: totrans-21
   prefs: []
   type: TYPE_NORMAL
+  zh: 第二次执行改变了全景：
 - en: The Simple Moving Average is moved to a subplot
+  id: totrans-22
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 简单移动平均线移动到了一个子图上。
 - en: The MACD is hidden
+  id: totrans-23
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: MACD 被隐藏了。
 - en: 'The RSI is plotted over the Stochastic (the y-axis range is compatible: 0-100)'
+  id: totrans-24
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: RSI 绘制在 Stochastic 之上（y 轴范围兼容：0-100）。
 - en: This is achieved by setting the `plotinfo.plotmaster` value of the indicator
     to the other indicator to be plotted onto.
+  id: totrans-25
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 这通过将指标的`plotinfo.plotmaster`值设置为要绘制到的其他指标来实现。
 - en: 'In this case and because the local variables in `__init__` are named `stoc`
     for Stochastic and `rsi` for RSI, it looks like:'
+  id: totrans-26
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 在这种情况下，由于`__init__`中的局部变量被命名为`stoc`代表 Stochastic 和`rsi`代表 RSI，看起来像是：
 - en: '[PRE1]'
+  id: totrans-27
   prefs:
   - PREF_IND
   type: TYPE_PRE
+  zh: '[PRE1]'
 - en: 'Execution:'
+  id: totrans-28
   prefs: []
   type: TYPE_NORMAL
+  zh: 执行：
 - en: '[PRE2]'
+  id: totrans-29
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE2]'
 - en: The chart.
+  id: totrans-30
   prefs: []
   type: TYPE_NORMAL
+  zh: 图表。
 - en: '![image](../Images/22e20de65834b251167bb459d40784cc.png)'
+  id: totrans-31
   prefs: []
   type: TYPE_IMG
+  zh: '![image](../Images/22e20de65834b251167bb459d40784cc.png)'
 - en: 'And to check the incompatibility of scales, let’s try plotting the rsi over
     the SMA:'
+  id: totrans-32
   prefs: []
   type: TYPE_NORMAL
+  zh: 为了检查尺度的不兼容性，让我们尝试在 SMA 上绘制 RSI：
 - en: '[PRE3]'
+  id: totrans-33
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE3]'
 - en: The chart.
+  id: totrans-34
   prefs: []
   type: TYPE_NORMAL
+  zh: 图表。
 - en: '![image](../Images/be12082216a4b0d6ee551e7435947724.png)'
+  id: totrans-35
   prefs: []
   type: TYPE_IMG
+  zh: '![image](../Images/be12082216a4b0d6ee551e7435947724.png)'
 - en: The RSI label shows up with the data and the SMA, but the scale is in the 3400-4200
     range and hence … no traces of the RSI.
+  id: totrans-36
   prefs: []
   type: TYPE_NORMAL
+  zh: RSI 标签显示出数据和 SMA，但是尺度在 3400-4200 范围内，因此……RSI 没有任何迹象。
 - en: A further futile attempt is to place the SMA on a subplot and again plot the
     RSI on the SMA
+  id: totrans-37
   prefs: []
   type: TYPE_NORMAL
+  zh: 进一步的徒劳尝试是将 SMA 放在一个子图上，然后再次在 SMA 上绘制 RSI。
 - en: $ ./plot-same-axis.py –rsiovermacd –smasubplot
+  id: totrans-38
   prefs: []
   type: TYPE_NORMAL
+  zh: $ ./plot-same-axis.py –rsiovermacd –smasubplot
 - en: The chart.
+  id: totrans-39
   prefs: []
   type: TYPE_NORMAL
+  zh: 图表。
 - en: '![image](../Images/4429c406fe1a7794b0d5dd0433e458a4.png)'
+  id: totrans-40
   prefs: []
   type: TYPE_IMG
+  zh: '![image](../Images/4429c406fe1a7794b0d5dd0433e458a4.png)'
 - en: The label is clear but all that remains from the RSI is a faint blue line at
     the bottom of the SMA plot.
+  id: totrans-41
   prefs: []
   type: TYPE_NORMAL
+  zh: 标签清晰，但是除了 SMA 图中底部的一条淡蓝线外，RSI 的所有东西都消失了。
 - en: Note
+  id: totrans-42
   prefs: []
   type: TYPE_NORMAL
+  zh: 注意
 - en: Added multi-line indicator plotted over another indicator
+  id: totrans-43
   prefs: []
   type: TYPE_NORMAL
+  zh: 添加了在另一个指标上绘制的多行指标。
 - en: 'Going in the other direction, let’s plot a multi-line indicator on another
     indicator. Let’s plot the Stochastic on the RSI:'
+  id: totrans-44
   prefs: []
   type: TYPE_NORMAL
+  zh: 沿着另一个方向，让我们在另一个指标上绘制多行指标。让我们将 Stochastic 绘制在 RSI 上：
 - en: '[PRE4]'
+  id: totrans-45
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE4]'
 - en: '![image](../Images/6d724766dd27849b572ad23391dc3bc4.png)'
+  id: totrans-46
   prefs: []
   type: TYPE_IMG
+  zh: '![image](../Images/6d724766dd27849b572ad23391dc3bc4.png)'
 - en: It works. The `Stochastic` label shows up and the 2 lines `K%` and `D%` too.
     But the lines are not “named” because we have got the name of the indicator.
+  id: totrans-47
   prefs: []
   type: TYPE_NORMAL
+  zh: 它有效。`Stochastic`标签显示出来了，`K%`和`D%`这两条线也是如此。但是这些线没有“名称”，因为我们得到了指标的名称。
 - en: 'In the code, the current setting would be:'
+  id: totrans-48
   prefs: []
   type: TYPE_NORMAL
+  zh: 在代码中，当前的设置将是：
 - en: '[PRE5]'
+  id: totrans-49
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE5]'
 - en: 'To have the names of the Stochastic lines displayed instead of the name, we
     would additionally need:'
+  id: totrans-50
   prefs: []
   type: TYPE_NORMAL
+  zh: 要显示随机线的名称而不是名称，我们还需要：
 - en: '[PRE6]'
+  id: totrans-51
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE6]'
 - en: 'This has been parametrized and a new execution shows it:'
+  id: totrans-52
   prefs: []
   type: TYPE_NORMAL
+  zh: 这已经被参数化，新的执行结果显示如下：
 - en: '[PRE7]'
+  id: totrans-53
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE7]'
 - en: With the chart now showing the name of the Stochasti lines below the name of
     the RSI line.
+  id: totrans-54
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在图表显示了随机线的名称在RSI线的名称下方。
 - en: '![image](../Images/cb4b5cc50ae13fe7062901453d95b4d4.png)'
+  id: totrans-55
   prefs: []
   type: TYPE_IMG
+  zh: '![image](../Images/cb4b5cc50ae13fe7062901453d95b4d4.png)'
 - en: 'The script usage:'
+  id: totrans-56
   prefs: []
   type: TYPE_NORMAL
+  zh: 脚本用法：
 - en: '[PRE8]'
+  id: totrans-57
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE8]'
 - en: And the code.
+  id: totrans-58
   prefs: []
   type: TYPE_NORMAL
+  zh: 以及代码。
 - en: '[PRE9]'
+  id: totrans-59
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE9]'

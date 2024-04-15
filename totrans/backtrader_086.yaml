@@ -1,23 +1,35 @@
 - en: Live Data Feeds and Live Trading
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 实时数据源和实时交易
 - en: 原文：[https://www.backtrader.com/docu/live/live/](https://www.backtrader.com/docu/live/live/)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.backtrader.com/docu/live/live/](https://www.backtrader.com/docu/live/live/)
 - en: Starting with release **1.5.0** `backtrader` supports live data and live trading.
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: 从版本 **1.5.0** 开始，`backtrader` 支持实时数据和实时交易。
 - en: Interactive Brokers
+  id: totrans-3
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 交互经纪商
 - en: Visual Chart
+  id: totrans-4
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 可视化图表
 - en: Oanda
+  id: totrans-5
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: Oanda

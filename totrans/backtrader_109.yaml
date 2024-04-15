@@ -1,428 +1,656 @@
 - en: Momentum Strategy
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 动量策略
 - en: 原文：[https://www.backtrader.com/blog/2019-05-20-momentum-strategy/momentum-strategy/](https://www.backtrader.com/blog/2019-05-20-momentum-strategy/momentum-strategy/)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.backtrader.com/blog/2019-05-20-momentum-strategy/momentum-strategy/](https://www.backtrader.com/blog/2019-05-20-momentum-strategy/momentum-strategy/)
 - en: 'In another great post, *Teddy Koker*, has shown again a path for the development
     of *algotrading* strategies:'
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: 在另一篇很棒的文章中，*Teddy Koker* 再次展示了 *算法交易* 策略的发展路径：
 - en: Research first applying `pandas`
+  id: totrans-3
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 首先应用 `pandas` 进行研究
 - en: Backtesting then using `backtrader`
+  id: totrans-4
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 使用 `backtrader` 进行回测
 - en: Kudos!!!
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: 真棒！！！
 - en: 'The post can be found at:'
+  id: totrans-6
   prefs: []
   type: TYPE_NORMAL
+  zh: 文章可以在以下位置找到：
 - en: '[https://teddykoker.com/2019/05/momentum-strategy-from-stocks-on-the-move-in-python/](https://teddykoker.com/2019/05/momentum-strategy-from-stocks-on-the-move-in-python/)'
+  id: totrans-7
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[https://teddykoker.com/2019/05/momentum-strategy-from-stocks-on-the-move-in-python/](https://teddykoker.com/2019/05/momentum-strategy-from-stocks-on-the-move-in-python/)'
 - en: '*Teddy Koker* dropped me a message, asking if I could comment on the usage
     of *backtrader*. And my **opinion** can be seen below. It is only my personal
     humble opinion, because as the author of *backtrader* I am biased as to how the
     platform could be best used.'
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: '*Teddy Koker* 给我留了言，询问我是否可以评论 *backtrader* 的使用。我的**观点**可以在下面看到。这仅仅是我的个人意见，因为作为
+    *backtrader* 的作者，我对如何最好地使用该平台有偏见。'
 - en: And my personal taste about how to formulate certain constructs, does not have
     to match how other people prefer to use the platform.
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: 我个人对某些结构如何表述的偏好，不必与其他人使用平台的偏好相匹配。
 - en: Note
+  id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: 注意
 - en: Actually, letting the platform open to plug almost anything and with different
     ways to do the same thing, was a conscious decision, to let people use it however
     they see fit (within the constraints of what the platform aims to do, the language
     possibilities and the failed design decisions I made)
+  id: totrans-11
   prefs: []
   type: TYPE_NORMAL
+  zh: 实际上，让平台能够插入几乎任何内容，并以不同的方式执行相同的操作，是一个有意识的决定，让人们按照他们认为合适的方式使用它（在平台旨在实现的约束条件、语言可能性和我所做的失败设计决定的范围内）。
 - en: Here, we will just focus on things which could have been done in a different
     manner. Whether *"different"* is better or not is always a matter of opinion.
     And the author of *backtrader* does not always have to be right on what it is
     actually *"better"* for developing with *"backtrader"* (because the actual development
     has to suit the developer and not the author of *"backtrader"*)
+  id: totrans-12
   prefs: []
   type: TYPE_NORMAL
+  zh: 在这里，我们只关注可以以不同方式完成的事情。是否 *"不同"* 更好总是一个看法问题。而 *backtrader* 的作者并不总是必须在使用 *backtrader*
+    进行开发时始终正确（因为实际的开发必须适合开发者，而不是 *backtrader* 的作者）
 - en: 'Params: `dict` vs `tuple of tuples`'
+  id: totrans-13
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 参数：`dict` vs `tuple of tuples`
 - en: 'Many of the samples provided with `backtrader` and also available in the documentation
     and/or blog, use the `tuple of tuples` pattern for the parameters. For example
     from the code:'
+  id: totrans-14
   prefs: []
   type: TYPE_NORMAL
+  zh: '`backtrader` 提供的许多示例，以及文档和/或博客中提供的示例，都使用 `tuple of tuples` 模式进行参数设置。例如，来自代码的示例：'
 - en: '[PRE0]'
+  id: totrans-15
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: Together with this paradigm, one has always had the chance to use a `dict`.
+  id: totrans-16
   prefs: []
   type: TYPE_NORMAL
+  zh: 在这种范例中，一直有机会使用 `dict`。
 - en: '[PRE1]'
+  id: totrans-17
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE1]'
 - en: Over time this has turned to be lighter to use and become the preferred pattern
     for the author.
+  id: totrans-18
   prefs: []
   type: TYPE_NORMAL
+  zh: 随着时间的推移，这种方式变得更易于使用，并成为作者首选的模式。
 - en: Note
+  id: totrans-19
   prefs: []
   type: TYPE_NORMAL
+  zh: 注意
 - en: 'The author prefers the `dict(period=90)`, being easier to type, not needing
     quotes. But the curly braces notation, `{''period'': 90}`, is preferred by many
     others.'
+  id: totrans-20
   prefs: []
   type: TYPE_NORMAL
+  zh: '作者更喜欢 `dict(period=90)`，因为它更易于输入，不需要引号。但是，许多其他人更喜欢花括号表示法，`{''period'': 90}`。'
 - en: 'The underlying difference between the `dict` and `tuple` approaches:'
+  id: totrans-21
   prefs: []
   type: TYPE_NORMAL
+  zh: '`dict` 和 `tuple` 方法之间的根本区别：'
 - en: With a `tuple of tuples` parameters retain the order of declaration, which can
     be of importance when enumerating them.
+  id: totrans-22
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 使用 `tuple of tuples` 参数保留了声明顺序，这在枚举参数时可能很重要。
 - en: Tip
+  id: totrans-23
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 提示
 - en: The declaration order should be no problem with default ordered dictionaries
     in Python `3.7` (and `3.6` if using *CPython* even if it is an implementation
     detail)
+  id: totrans-24
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 在 Python `3.7`（以及 `3.6`，如果使用 *CPython*，即使这是一个实现细节）中，默认排序字典使声明顺序不会成为问题。
 - en: In the examples modified by the author below, the `dict` notation will be used.
+  id: totrans-25
   prefs: []
   type: TYPE_NORMAL
+  zh: 在下面作者修改的示例中，将使用 `dict` 表示法。
 - en: The `Momentum` indicator
+  id: totrans-26
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: '`Momentum` 指标'
 - en: In the article, this is how the indicator is defined
+  id: totrans-27
   prefs: []
   type: TYPE_NORMAL
+  zh: 在文章中，这就是指标的定义方式
 - en: '[PRE2]'
+  id: totrans-28
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE2]'
 - en: '**Use the force**, i.e.: use something which is already there like the `PeriodN`
     indicator, which:'
+  id: totrans-29
   prefs: []
   type: TYPE_NORMAL
+  zh: '**使用力量**，即使用已经存在的东西，比如 `PeriodN` 指标，它：'
 - en: Already defines a `period` parameter and knows how to pass it to the system
+  id: totrans-30
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 已经定义了一个 `period` 参数，并知道如何将其传递给系统
 - en: As such, this could be better
+  id: totrans-31
   prefs: []
   type: TYPE_NORMAL
+  zh: 因此，这可能更好
 - en: '[PRE3]'
+  id: totrans-32
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE3]'
 - en: We are already skipping the need to define `__init__` for the only purpose of
     using `addminperiod`, which should only be used in exceptional cases.
+  id: totrans-33
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们已经跳过了为了使用 `addminperiod` 而定义 `__init__` 的需要，这只应在特殊情况下使用。
 - en: To carry on, *backtrader* defines an `OperationN` indicator which must have
     an attribute `func` defined, which will get `period` bars passed as an argument
     and which will put the return value into the defined line.
+  id: totrans-34
   prefs: []
   type: TYPE_NORMAL
+  zh: 继续进行，*backtrader* 定义了一个 `OperationN` 指标，它必须具有定义的属性 `func`，该属性将作为参数传递 `period`
+    个 bars，并将返回值放入定义的线中。
 - en: With that in mind, one can imagine the following as the potential code
+  id: totrans-35
   prefs: []
   type: TYPE_NORMAL
+  zh: 有了这个想法，一个人可以将以下内容想象成潜在的代码
 - en: '[PRE4]'
+  id: totrans-36
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE4]'
 - en: Which means that we have taken the complexity of the indicator outside of the
     indicator. We could even be importing `momentum_func` from a external library
     and the indicator would need no change to reflect a new behavior if the underlying
     function changes. As a bonus we have **purely** declarative indicator. No `__init__`,
     no `addminperiod` and no `next`
+  id: totrans-37
   prefs: []
   type: TYPE_NORMAL
+  zh: 这意味着我们已经将指标的复杂性移出了指标。我们甚至可以从外部库导入 `momentum_func`，如果底层函数发生变化，指标就不需要进行任何更改以反映新的行为。作为额外的奖励，我们拥有**纯粹**的声明性指标。没有
+    `__init__`，没有 `addminperiod`，也没有 `next`。
 - en: The Strategy
+  id: totrans-38
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 策略
 - en: Let's look at the `__init__` part.
+  id: totrans-39
   prefs: []
   type: TYPE_NORMAL
+  zh: 让我们看看 `__init__` 部分。
 - en: '[PRE5]'
+  id: totrans-40
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE5]'
 - en: 'Some things about the style:'
+  id: totrans-41
   prefs: []
   type: TYPE_NORMAL
+  zh: 关于风格的一些事情：
 - en: Use parameters where possible rather than fixed values
+  id: totrans-42
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 尽可能使用参数而不是固定值
 - en: Use shorter and the shorter names (for imports for example), it will in most
     cases increase readability
+  id: totrans-43
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 在大多数情况下，使用更短和更简洁的名称（例如用于导入）会增加可读性。
 - en: Use Python to its full extent
+  id: totrans-44
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 充分利用 Python
 - en: Don't use `close` for a data feed. Pass the data feed generically and it will
     use close. This may not seem relevant but it does help when trying to keep the
     code generic everywhere (like in indicators)
+  id: totrans-45
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 不要为数据源使用 `close`。通用地传递数据源，它将使用 close。这可能看起来不相关，但在尝试在各处保持代码的通用性时（比如在指标中），这确实有所帮助。
 - en: 'The first thing that one would/should consider: *keep everything as a parameter
     if possible*. Hence'
+  id: totrans-46
   prefs: []
   type: TYPE_NORMAL
+  zh: 一个人应该考虑的第一件事：*如果可能的话，将一切都保持为参数*。因此
 - en: '[PRE6]'
+  id: totrans-47
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE6]'
 - en: By using `params` and changing a couple of the naming conventions, we have made
     the `__init__` (and with it the strategy) fully customizable and generic (no `spy`
     references anyhwere)
+  id: totrans-48
   prefs: []
   type: TYPE_NORMAL
+  zh: 通过使用 `params` 并更改几个命名约定，我们使 `__init__`（以及策略）完全可定制且通用（任何地方都没有 `spy` 的引用）
 - en: '`next` and its `len`'
+  id: totrans-49
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: '`next` 及其 `len`'
 - en: '*backtrader* tries to use the Python paradigms where possible. It does for
     sure sometimes fail, but it tries.'
+  id: totrans-50
   prefs: []
   type: TYPE_NORMAL
+  zh: '*backtrader* 尽可能使用 Python 范式。它肯定有时会失败，但它会尝试。'
 - en: Let us see what happens in `next`
+  id: totrans-51
   prefs: []
   type: TYPE_NORMAL
+  zh: 让我们看看 `next` 发生了什么
 - en: '[PRE7]'
+  id: totrans-52
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE7]'
 - en: Here is where the Python `len` paradigm helps. Let's use it
+  id: totrans-53
   prefs: []
   type: TYPE_NORMAL
+  zh: Python 的 `len` 范式正是所需之处。让我们来使用它。
 - en: '[PRE8]'
+  id: totrans-54
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE8]'
 - en: As you may see, there is no need to keep the `self.i` counter. The length of
     the strategy and of most objects is provided, calculated and updated by the system
     all along the way.
+  id: totrans-55
   prefs: []
   type: TYPE_NORMAL
+  zh: 正如你所见，没有必要保留 `self.i` 计数器。策略和大多数对象的长度由系统一直提供、计算和更新。
 - en: '`next` and `prenext`'
+  id: totrans-56
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: '`next` 和 `prenext`'
 - en: The code contains this forwarding
+  id: totrans-57
   prefs: []
   type: TYPE_NORMAL
+  zh: 代码包含了这种转发
 - en: '[PRE9]'
+  id: totrans-58
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE9]'
 - en: And there **IS NO** safeguard when entering `next`
+  id: totrans-59
   prefs: []
   type: TYPE_NORMAL
+  zh: 在进入 `next` 时没有保障
 - en: '[PRE10]'
+  id: totrans-60
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE10]'
 - en: Ok, we know that a survivorship bias-free data set is in use, but in general
     not safeguarding the `prenext => next` forwarding is not a good idea.
+  id: totrans-61
   prefs: []
   type: TYPE_NORMAL
+  zh: 好吧，我们知道正在使用一个无幸存者偏差的数据集，但一般来说，不保护 `prenext => next` 转发不是一个好主意。
 - en: '*backtrader* calls `next` when all buffers (indicators, data feeds) can deliver
     at least data point. A `100-bar` moving average will obviously only deliver when
     it has 100 data points from the data feed.'
+  id: totrans-62
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '*backtrader* 在所有缓冲区（指标、数据源）至少可以提供一个数据点时调用 `next`。一个 `100-bar` 移动平均线显然只有在从数据源获取了
+    100 个数据点时才会提供数据。'
 - en: This means that when entering `next`, the data feed will have `100 data points`
     to be examined and the moving average just `1 data point`
+  id: totrans-63
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 这意味着在进入 `next` 时，数据源将有 `100 个数据点` 可供检查，而移动平均值只有 `1 个数据点`
 - en: '*backtrader* offers `prenext` as hook to let the developer access things before
     the aforementioned guarantee can be met. This is useful for example when several
     data feeds are in play and they start date is different. The developer may want
     some examination or action be taken, before all guarantees for all data feeds
     (and associated indicators) are met and `next` is called for the first time.'
+  id: totrans-64
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '*backtrader* 提供 `prenext` 作为钩子，让开发者在上述保证能够实现之前访问事物。例如，当有多个数据源并且它们的开始日期不同时，这是有用的。开发者可能希望在满足所有数据源（和相关指标）的所有保证之前进行一些检查或操作，并且在第一次调用
+    `next` 之前。'
 - en: 'In a general case the `prenext => next` forwarding should have a guard such
     as this:'
+  id: totrans-65
   prefs: []
   type: TYPE_NORMAL
+  zh: 在一般情况下，`prenext => next`转发应该有这样的保护措施：
 - en: '[PRE11]'
+  id: totrans-66
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE11]'
 - en: Which means that only the subset `d_with_len` from `self.datas` can be used
     with guarantees.
+  id: totrans-67
   prefs: []
   type: TYPE_NORMAL
+  zh: 这意味着只有来自`self.datas`的子集`d_with_len`才能得到保证使用。
 - en: Note
+  id: totrans-68
   prefs: []
   type: TYPE_NORMAL
+  zh: 注意
 - en: A similar guard has to used for indicators.
+  id: totrans-69
   prefs: []
   type: TYPE_NORMAL
+  zh: 对于指标也必须使用类似的保护措施。
 - en: Because it would seem pointless to do this calculation for the entire life of
     a strategy, an optimization is possible such as this
+  id: totrans-70
   prefs: []
   type: TYPE_NORMAL
+  zh: 因为对于策略的整个生命周期来说这样做似乎是毫无意义的，可以进行如此优化
 - en: '[PRE12]'
+  id: totrans-71
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE12]'
 - en: 'The guard calculation is moved to `prenext` which will stopped being called
     when the guarantees are met. `nextstart` will be called then and by overriding
     it we can reset the `list` which holds the data set to work with, to be the full
     data set, i.e.: `self.datas`'
+  id: totrans-72
   prefs: []
   type: TYPE_NORMAL
+  zh: 保护计算已移至`prenext`，当保证满足时将停止调用它。然后将调用`nextstart`，通过重写它，我们可以重置数据集的`list`，以便与之一起工作，即：`self.datas`
 - en: And with this, all guards have been removed from `next`.
+  id: totrans-73
   prefs: []
   type: TYPE_NORMAL
+  zh: 并且通过这样做，所有保护措施都已从`next`中删除。
 - en: '`next` with timers'
+  id: totrans-74
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 使用定时器的`next`
 - en: Although the intention of the author here is to rebalance (portfolio/positions)
     each 5/10 days, this is probably meant as a weekly/bi-weekly rebalancing.
+  id: totrans-75
   prefs: []
   type: TYPE_NORMAL
+  zh: 虽然作者的意图是每5/10天重新平衡（投资组合/头寸），但这可能意味着每周/两周重新平衡。
 - en: 'The `len(self) % period` approach will fail if:'
+  id: totrans-76
   prefs: []
   type: TYPE_NORMAL
+  zh: '`len(self) % period`方法在以下情况下会失败：'
 - en: The data set did not start on a Monday
+  id: totrans-77
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 数据集未从星期一开始
 - en: During trading holidays, which will make the rebalancing move out of alignment
+  id: totrans-78
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 在交易假期期间，这将导致重新平衡脱离轨道
 - en: To overcome this, one can use the built-in functionalities in *backtrader*
+  id: totrans-79
   prefs: []
   type: TYPE_NORMAL
+  zh: 为了克服这一点，可以使用*backtrader*中的内置功能。
 - en: Using [Docs - Timers](https://www.backtrader.com/docu/timers/timers.html)
+  id: totrans-80
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 使用[Docs - Timers](https://www.backtrader.com/docu/timers/timers.html)
 - en: Using them will ensure that rebalancing happens when it is meant to happen.
     Let us imagine that the intention is to rebalance on Fridays
+  id: totrans-81
   prefs: []
   type: TYPE_NORMAL
+  zh: 使用它们将确保在应该发生时进行重新平衡。让我们假设意图是在星期五重新平衡
 - en: Let's add a bit of magic to the `params` and `__init__` in our strategy
+  id: totrans-82
   prefs: []
   type: TYPE_NORMAL
+  zh: 让我们在我们的策略中为`params`和`__init__`增加一点魔法
 - en: '[PRE13]'
+  id: totrans-83
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE13]'
 - en: And now we are ready to know when it is Friday. Even if a Friday happens to
     be a trading holiday, adding `weekcarry=True` ensures we will be notified on Monday
     (or Tuesday if Monday is also a holiday or ...)
+  id: totrans-84
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在我们已经准备好知道今天是星期五了。即使星期五恰好是交易日，添加`weekcarry=True`也确保我们会在星期一收到通知（或者如果星期一也是假日则为星期二，等等）
 - en: The notification of the timer is taken in `notify_timer`
+  id: totrans-85
   prefs: []
   type: TYPE_NORMAL
+  zh: 定时器的通知在`notify_timer`中进行
 - en: '[PRE14]'
+  id: totrans-86
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE14]'
 - en: 'Because there is also a `rebalance_positions` which happens every `10` bars
     in the original code, one could:'
+  id: totrans-87
   prefs: []
   type: TYPE_NORMAL
+  zh: 因为原始代码中还有每`10`个条形图进行一次`rebalance_positions`，所以可以：
 - en: Add a 2^(nd) timer, also for Fridays
+  id: totrans-88
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 添加第2个定时器，也适用于星期五
 - en: Use a counter to only act on each 2^(nd) call, which can even be in the timer
     itself using the `allow=callable` argument
+  id: totrans-89
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 使用计数器只在每第2次调用时执行操作，甚至可以在定时器本身使用`allow=callable`参数
 - en: Note
+  id: totrans-90
   prefs: []
   type: TYPE_NORMAL
+  zh: 注意
 - en: 'Timers could even be better used to achieve patterns like:'
+  id: totrans-91
   prefs: []
   type: TYPE_NORMAL
+  zh: 定时器甚至可以更好地用于实现模式，比如：
 - en: '`rebalance_portfolio` every on the 2^(nd) and 4^(th) Friday of the month'
+  id: totrans-92
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 每月的第2和第4个星期五重新平衡投资组合
 - en: '`rebalance_positions` only on the 4^(th) Friday of each month'
+  id: totrans-93
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`rebalance_positions`仅在每个月的第4个星期五进行。'
 - en: Some Extras
+  id: totrans-94
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 一些额外的事项
 - en: Some other things are probably and purely a matter of personal taste.
+  id: totrans-95
   prefs: []
   type: TYPE_NORMAL
+  zh: 其他一些事情可能纯粹是个人喜好的问题。
 - en: '**Personal Taste 1**'
+  id: totrans-96
   prefs: []
   type: TYPE_NORMAL
+  zh: '**个人喜好1**'
 - en: Use always a pre-built comparison rather than compare things during `next`.
     For example from the code (used more than once)
+  id: totrans-97
   prefs: []
   type: TYPE_NORMAL
+  zh: 始终使用预先构建的比较而不是在`next`期间比较事物。例如来自代码（多次使用）
 - en: '[PRE15]'
+  id: totrans-98
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE15]'
 - en: We could do the following. First during `__init__`
+  id: totrans-99
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们可以做以下事情。首先在`__init__`期间
 - en: '[PRE16]'
+  id: totrans-100
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE16]'
 - en: And later
+  id: totrans-101
   prefs: []
   type: TYPE_NORMAL
+  zh: 以后
 - en: '[PRE17]'
+  id: totrans-102
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE17]'
 - en: With this in mind and if we wanted to alter the `spy_filter` condition, we would
     only have to do this once in `__init__` and not in multiple positions in the code.
+  id: totrans-103
   prefs: []
   type: TYPE_NORMAL
+  zh: 考虑到这一点，如果我们想要改变`spy_filter`条件，我们只需在`__init__`中执行一次，而不是在代码中的多个位置执行。
 - en: 'The same could apply to this other comparison `d < self.inds[d]["sma100"]`
     here:'
+  id: totrans-104
   prefs: []
   type: TYPE_NORMAL
+  zh: 同样的情况也可能适用于此处的另一个比较`d < self.inds[d]["sma100"]`：
 - en: '[PRE18]'
+  id: totrans-105
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE18]'
 - en: Which could also be pre-built during `__init__` and therefore changed to something
     like this
+  id: totrans-106
   prefs: []
   type: TYPE_NORMAL
+  zh: 这也可以在`__init__`期间预先构建，并因此更改为如下所示
 - en: '[PRE19]'
+  id: totrans-107
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE19]'
 - en: '**Personal Taste 2**'
+  id: totrans-108
   prefs: []
   type: TYPE_NORMAL
+  zh: '**个人喜好2**'
 - en: 'Make everything a parameter. In the lines above we for example see a `0.2`
     which is used in several parts of the code: **make it a parameter**. The same
     with other values like `0.001` and `100` (which was actually already suggested
     as a parameter for the creation of moving averages)'
+  id: totrans-109
   prefs: []
   type: TYPE_NORMAL
+  zh: 将一切都作为参数。例如，在上面的几行中，我们看到一个`0.2`，它在代码的几个部分中都被使用：**将其作为参数**。同样，还有其他值，如`0.001`和`100`（实际上已经建议将其作为创建移动平均值的参数）。
 - en: Having everything as a parameter allows to pack the code and try different things
     by just changing the instantiation of the *strategy* and not the strategy itself.
+  id: totrans-110
   prefs: []
   type: TYPE_NORMAL
+  zh: 将所有东西都作为参数，可以通过只改变*策略*的实例化而不是策略本身来打包代码并尝试不同的方法。

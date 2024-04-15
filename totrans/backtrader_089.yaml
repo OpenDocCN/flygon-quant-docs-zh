@@ -1,975 +1,1440 @@
 - en: Visual Chart
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: Visual Chart
 - en: 原文：[https://www.backtrader.com/docu/live/vc/vc/](https://www.backtrader.com/docu/live/vc/vc/)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.backtrader.com/docu/live/vc/vc/](https://www.backtrader.com/docu/live/vc/vc/)
 - en: 'The integration with Visual Chart supports both:'
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: '与Visual Chart的集成支持两者： '
 - en: '*Live Data* feeding'
+  id: totrans-3
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '*实时数据*提供'
 - en: '*Live Trading*'
+  id: totrans-4
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '*实时交易*'
 - en: '*Visual Chart* is a complete trading solution:'
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: '*Visual Chart*是完整的交易解决方案：'
 - en: Integrated Charting, data feed and brokering in a single platform
+  id: totrans-6
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 在单个平台上集成图表、数据源和经纪功能
 - en: 'For more information visit: [www.visualchart.com](http://www.visualchart.com)'
+  id: totrans-7
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 更多信息，请访问：[www.visualchart.com](http://www.visualchart.com)
 - en: Requirements
+  id: totrans-8
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 需求
 - en: '*VisualChart 6*'
+  id: totrans-9
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '*VisualChart 6*'
 - en: '*Windows* - the one VisualChart is running on'
+  id: totrans-10
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '*Windows* - VisualChart正在运行的平台'
 - en: '`comtypes` fork: [https://github.com/mementum/comtypes](https://github.com/mementum/comtypes)'
+  id: totrans-11
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`comtypes`分支：[https://github.com/mementum/comtypes](https://github.com/mementum/comtypes)'
 - en: 'Install it with: `pip install https://github.com/mementum/comtypes/archive/master.zip`'
+  id: totrans-12
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 使用以下命令安装：`pip install https://github.com/mementum/comtypes/archive/master.zip`
 - en: The *Visual Chart* API is based on *COM*.
+  id: totrans-13
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: '*Visual Chart* API基于*COM*。'
 - en: The current `comtypes` main branch doesn’t support unpacking of `VT_ARRAYS`
     of `VT_RECORD`. And this is used by *Visual Chart*
+  id: totrans-14
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 当前的`comtypes`主分支不支持对`VT_RECORD`的`VT_ARRAYS`的解包。这是由*Visual Chart*使用的
 - en: '[Pull Request #104](https://github.com/enthought/comtypes/pull/104) has been
     submitted but not yet integrated. As soon as it is integrated, the main branch
     can be used.'
+  id: totrans-15
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: '[Pull Request #104](https://github.com/enthought/comtypes/pull/104)已提交但尚未集成。一旦集成，就可以使用主分支。'
 - en: '`pytz` (optional but really recommended)'
+  id: totrans-16
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`pytz`（可选，但真的很推荐）'
 - en: To make sure each and every data is returned in the market time.
+  id: totrans-17
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 确保每个数据都在市场时间内返回。
 - en: This is true for most markets but some are really an exception (`Global Indices`
     being a good example)
+  id: totrans-18
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 对大多数市场而言这是真实的，但有些市场确实是例外情况（`全球指数`是一个很好的例子）
 - en: Time Management inside *Visual Chart* and its relation with the delivered times
     over *COM* is complex and having `pytz` tends to simplify things.
+  id: totrans-19
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: '*Visual Chart*内部的时间管理及其与*COM*传递的时间的关系是复杂的，并且使用`pytz`倾向于简化事情。'
 - en: Sample Code
+  id: totrans-20
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 示例代码
 - en: 'The sources contain a full sample under:'
+  id: totrans-21
   prefs: []
   type: TYPE_NORMAL
+  zh: 源代码包含一个完整的示例：
 - en: '`samples/vctest/vctest.py`'
+  id: totrans-22
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`samples/vctest/vctest.py`'
 - en: The sample cannot cover every possible use case but it tries to provide broad
     insight and should highlight that there is no real difference when it comes to
     use the backtesting module or the live data module
+  id: totrans-23
   prefs: []
   type: TYPE_NORMAL
+  zh: 示例无法涵盖每种可能的用例，但它试图提供广泛的见解，并应强调在使用回测模块或实时数据模块时没有真正的区别。
 - en: 'One thing could be pin-pointed:'
+  id: totrans-24
   prefs: []
   type: TYPE_NORMAL
+  zh: 可以指出一件事：
 - en: The sample waits for a `data.LIVE` data status notification before any trading
     activity takes place.
+  id: totrans-25
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 在进行任何交易活动之前，示例等待`data.LIVE`数据状态通知。
 - en: This would probably is something to consider in any live strategy
+  id: totrans-26
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 这可能是任何实时策略中需要考虑的事情。
 - en: VCStore - the store
+  id: totrans-27
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: VCStore - 存储库
 - en: The store is the keystone of the live data feed/trade support, providing a layer
     of adaptation between the *COM* API and the needs of a data feed and a broker
     proxy.
+  id: totrans-28
   prefs: []
   type: TYPE_NORMAL
+  zh: 存储库是实时数据源/交易支持的关键，为*COM* API和数据源以及经纪人代理的需求之间提供一层适应性。
 - en: 'Providesaccess to getting a *broker* instance with the method:'
+  id: totrans-29
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 提供获取*经纪人*实例的方法：
 - en: '`VCStore.getbroker(*args, **kwargs)`'
+  id: totrans-30
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`VCStore.getbroker(*args, **kwargs)`'
 - en: Provides access to getter *data* feed instances
+  id: totrans-31
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 提供对获取器*数据*源实例的访问
 - en: '`VCStore.getedata(*args, **kwargs)`'
+  id: totrans-32
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`VCStore.getedata(*args, **kwargs)`'
 - en: In this case many of the `**kwargs` are common to data feeds like `dataname`,
     `fromdate`, `todate`, `sessionstart`, `sessionend`, `timeframe`, `compression`
+  id: totrans-33
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 在这种情况下，许多`**kwargs`对于数据源都是常见的，如`dataname`，`fromdate`，`todate`，`sessionstart`，`sessionend`，`timeframe`，`compression`
 - en: The data may provide other params. Check the reference below.
+  id: totrans-34
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 数据可能提供其他参数。请查看下面的参考资料。
 - en: 'The `VCStore` will try to:'
+  id: totrans-35
   prefs: []
   type: TYPE_NORMAL
+  zh: '`VCStore`将尝试：'
 - en: Automatically locate *VisualChart* in the system using the *Windows Registry*
+  id: totrans-36
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 使用*Windows Registry*自动定位*VisualChart*在系统中的位置
 - en: If found, the installation directory will be scanned for the *COM* DLLs to create
     the *COM* *typelibs* and be able to instantiate the appropriate objects
+  id: totrans-37
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 如果找到，将扫描安装目录以查找*COM* DLL以创建*COM* *typelibs*，并能够实例化适当的对象。
 - en: If not found, then an attempt will be made with known and hardcoded *CLSIDs*
     to do the same.
+  id: totrans-38
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 如果未找到，则将尝试使用已知的和硬编码的*CLSIDs*执行相同操作。
 - en: Note
+  id: totrans-39
   prefs: []
   type: TYPE_NORMAL
+  zh: 注意
 - en: Even if the DLLs can be found by scanning the filesystem, *Visual Chart* itself
     has to be running. backtrader won’t start *Visual Chart*
+  id: totrans-40
   prefs: []
   type: TYPE_NORMAL
+  zh: 即使可以通过扫描文件系统找到DLL，*Visual Chart*本身也必须正在运行。backtrader不会启动*Visual Chart*
 - en: 'Other responsibilities of the `VCStore`:'
+  id: totrans-41
   prefs: []
   type: TYPE_NORMAL
+  zh: '`VCStore`的其他职责：'
 - en: Keeping general track of the connectivity status of *Visual Chart* to the server
+  id: totrans-42
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 保持对 *Visual Chart* 与服务器的连接状态的一般跟踪
 - en: VCData feeds
+  id: totrans-43
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: VCData feeds
 - en: General
+  id: totrans-44
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 通用
 - en: 'The data feed offered by *Visual Chart* has some interesting properties:'
+  id: totrans-45
   prefs: []
   type: TYPE_NORMAL
+  zh: '*Visual Chart* 提供的数据源具有一些有趣的特性：'
 - en: '**Resampling** is done by the platform'
+  id: totrans-46
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**重新采样**由平台完成'
 - en: 'Not in all cases: *Seconds* is not supported and has still to be done by *backtrader*'
+  id: totrans-47
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 并非所有情况：*秒*不受支持，仍需由 *backtrader* 完成
 - en: 'As such and only when doing something with seconds would the end user need
     to do:'
+  id: totrans-48
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 因此，只有在处理秒数时，最终用户才需要执行：
 - en: '[PRE0]'
+  id: totrans-49
   prefs:
   - PREF_IND
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: 'In all other cases it is enough with:'
+  id: totrans-50
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 在所有其他情况下，仅需要：
 - en: '[PRE1]'
+  id: totrans-51
   prefs:
   - PREF_IND
   type: TYPE_PRE
+  zh: '[PRE1]'
 - en: The data will calculate a `timeoffset` internally by comparing the internal
     equipment clock and the `ticks` delivered by the platform in order to deliver
     the *automatically* resampled bars as early as possible if no new ticks are coming
     in.
+  id: totrans-52
   prefs: []
   type: TYPE_NORMAL
+  zh: 数据将通过比较内部设备时钟和平台提供的`ticks`来内部计算`timeoffset`，以便在没有新的`ticks`到达时尽快提供*自动*重新采样的柱状图。
 - en: 'Instantiating the data:'
+  id: totrans-53
   prefs: []
   type: TYPE_NORMAL
+  zh: 实例化数据：
 - en: 'Pass the symbol seen on the top-left side of *VisualChart* without spaces.
     For example:'
+  id: totrans-54
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 将在 *VisualChart* 左上方看到的符号传递，不包括空格。 例如：
 - en: '*ES-Mini* is displayed as `001 ES`. Instantiate it as:'
+  id: totrans-55
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '*ES-Mini* 显示为 `001 ES`。 实例化它为：'
 - en: '[PRE2]'
+  id: totrans-56
   prefs:
   - PREF_IND
   type: TYPE_PRE
+  zh: '[PRE2]'
 - en: '*EuroStoxx 50* is displayed as `015 ES`. Instantiate it as:'
+  id: totrans-57
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '*EuroStoxx 50* 显示为 `015 ES`。 实例化它为：'
 - en: '[PRE3]'
+  id: totrans-58
   prefs:
   - PREF_IND
   type: TYPE_PRE
+  zh: '[PRE3]'
 - en: Note
+  id: totrans-59
   prefs: []
   type: TYPE_NORMAL
+  zh: 注意
 - en: '*backtrader* will make an effort and clear out a whitespace located at the
     fourth position if the name is directly pasted from *Visual Chart*'
+  id: totrans-60
   prefs: []
   type: TYPE_NORMAL
+  zh: '*backtrader* 将尽力清除位于名称直接从 *Visual Chart* 粘贴的第四个位置的空格。'
 - en: Time management
+  id: totrans-61
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 时间管理
 - en: The time management follow the general rules of *backtrader*
+  id: totrans-62
   prefs: []
   type: TYPE_NORMAL
+  zh: 时间管理遵循 *backtrader* 的一般规则
 - en: Give the time in *Market* time, to make sure the code is not dependent on DST
     transitions happening at different times and making local time not reliable for
     time comparisons.
+  id: totrans-63
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 给出*市场*时间，以确保代码不依赖于在不同时间发生DST转换，并使本地时间对时间比较不可靠。
 - en: 'This works for most markets in *Visual Chart* but some specific management
     is done for some markets:'
+  id: totrans-64
   prefs: []
   type: TYPE_NORMAL
+  zh: 这适用于 *Visual Chart* 中的大多数市场，但对于某些市场进行了特定的管理：
 - en: Datas in the exchange `096` which is named `International Indices`.
+  id: totrans-65
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 交换 `096` 中的数据被命名为 `International Indices`。
 - en: These are theoretically reported to be in the timezone `Europe/London` but tests
     have revealed this seems to be partially true and some internal management is
     in place to cover for it.
+  id: totrans-66
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 理论上这些被报告为位于`Europe/London`时区，但测试表明这似乎只是部分正确，某些内部管理措施已经覆盖了它。
 - en: The use of real *timezones* for time management can be enabled by passing the
     parameter `usetimezones=True`. This tries to use `pytz` if available. It is not
     needed, as for most markets the internal time offsets provided by *Visual Chart*
     allow for the seamless conversion to the market time.
+  id: totrans-67
   prefs: []
   type: TYPE_NORMAL
+  zh: 可以通过传递参数 `usetimezones=True` 来启用实际*时区*的时间管理。 如果可用，会尝试使用 `pytz`。 并不需要，因为对于大多数市场，*Visual
+    Chart* 提供的内部时间偏移量允许无缝转换到市场时间。
 - en: In any case it would seem to be pointless to report the `096.DJI` in `Europe/London`
     time when it is actually located in `US/Eastern`. As such `backtrader` will report
     it in the later. In that case the use of `pytz` is more than recommended.
+  id: totrans-68
   prefs: []
   type: TYPE_NORMAL
+  zh: 在任何情况下，报告`096.DJI`位于`Europe/London`时间似乎是毫无意义的，当实际上它位于`US/Eastern`时。 因此，`backtrader`
+    将在后者中报告它。 在这种情况下，强烈推荐使用 `pytz`。
 - en: Note
+  id: totrans-69
   prefs: []
   type: TYPE_NORMAL
+  zh: 注意
 - en: The *Dow Jones Industrials* index (not the global version) is located at `099I-DJI`
+  id: totrans-70
   prefs: []
   type: TYPE_NORMAL
+  zh: '*道琼斯工业指数*（不是全球版本）位于 `099I-DJI`'
 - en: Note
+  id: totrans-71
   prefs: []
   type: TYPE_NORMAL
+  zh: 注意
 - en: All this time management is pending a real test during a DST transition in which
     local and remote markets happend to be out of sync with regards to DST.
+  id: totrans-72
   prefs: []
   type: TYPE_NORMAL
+  zh: 所有这些时间管理都在DST转换期间进行真正的测试，期间本地和远程市场发生了与DST相关的不同步现象。
 - en: 'List of `International Indices` for which the output *timezone* is defined
     in `VCDATA`:'
+  id: totrans-73
   prefs: []
   type: TYPE_NORMAL
+  zh: '`VCDATA`中定义了输出*时区*的`International Indices`列表：'
 - en: '[PRE4]'
+  id: totrans-74
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE4]'
 - en: Small time problem
+  id: totrans-75
   prefs:
   - PREF_H4
   type: TYPE_NORMAL
+  zh: 小时间问题
 - en: Passing `fromdate` or `todate` with a given **time of day** rather than the
     default `00:00:00` seems to create a filter in the *COM* API and bars for any
     days will only be delivered after the given time.
+  id: totrans-76
   prefs: []
   type: TYPE_NORMAL
+  zh: 使用给定的**时间**而不是默认的 `00:00:00` 传递 `fromdate` 或 `todate` 似乎会在 *COM* API 中创建一个过滤器，并且任何日期的柱状图只会在给定时间之后交付。
 - en: 'As such:'
+  id: totrans-77
   prefs: []
   type: TYPE_NORMAL
+  zh: 因此：
 - en: 'Please pass only **full dates** to `VCData` as in:'
+  id: totrans-78
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 请仅向 `VCData` 传递**完整日期**，如下所示：
 - en: '[PRE5]'
+  id: totrans-79
   prefs:
   - PREF_IND
   type: TYPE_PRE
+  zh: '[PRE5]'
 - en: 'And not::'
+  id: totrans-80
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: '并非::'
 - en: '[PRE6]'
+  id: totrans-81
   prefs:
   - PREF_IND
   type: TYPE_PRE
+  zh: '[PRE6]'
 - en: Backfilling time lengths
+  id: totrans-82
   prefs:
   - PREF_H4
   type: TYPE_NORMAL
+  zh: 补偿时间长度
 - en: 'If no `fromdate` is specified by the end user, the platform will automatically
     try to backfill and the carry on with live data. The backfilling is timeframe
     dependent and is:'
+  id: totrans-83
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果最终用户未指定`fromdate`，平台将自动尝试回填，然后继续实时数据。回填是时间框架相关的，如下：
 - en: '`Ticks`, `MicroSeconds`, `Seconds`: **1 Day**'
+  id: totrans-84
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`Ticks`，`MicroSeconds`，`Seconds`：**1天**'
 - en: The same for the 3 timeframes given that *Seconds* and *MicroSeconds* are not
     directly supported by *Visual Chart* and are done through resampling of *Ticks*
+  id: totrans-85
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 对于给定的3个时间框架，*秒*和*微秒*不受*Visual Chart*直接支持，通过*Ticks*的重新采样完成
 - en: '`Minutes`: **2 Days**'
+  id: totrans-86
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`分钟`：**2天**'
 - en: '`Days`: **1 year**'
+  id: totrans-87
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`天数`：**1年**'
 - en: '`Weeks`: **2 years**'
+  id: totrans-88
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`周`：**2年**'
 - en: '`Months`: **5 years**'
+  id: totrans-89
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`月份`：**5年**'
 - en: '`Months`: **20 years**'
+  id: totrans-90
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`月份`：**20年**'
 - en: 'The defined backfilling periods are multiplied by the requested `compression`,
     that is: if the *timeframe* is `Minutes` and the *compression* is 5 the final
     *backfilling period* will be: `2 days * 5 -> 10 days`'
+  id: totrans-91
   prefs: []
   type: TYPE_NORMAL
+  zh: 定义的回填期将乘以请求的`压缩`，即：如果*时间框架*是`分钟`，*压缩*是5，则最终*回填期*将是：`2天 * 5 -> 10天`
 - en: Trading the data
+  id: totrans-92
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 交易数据
 - en: '*Visual Chart* offers **continuous futures**. No manual management is needed
     and the future of your choice can be tracked without interruption. This is an
     advantage and presents a small challenge:'
+  id: totrans-93
   prefs: []
   type: TYPE_NORMAL
+  zh: '*Visual Chart*提供**连续未来**。无需手动管理，您可以跟踪所选的未来而无需中断。这是一个优势，也提出了一个小挑战：'
 - en: '`ES-Mini` is `001ES`, but the actual trading asset (ex: Sep-2016) is `ESU16`.'
+  id: totrans-94
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`ES-Mini`是`001ES`，但实际交易资产（例如：Sep-2016）是`ESU16`。'
 - en: 'To overcome this and allow a strategy to track the *continuous future* and
     trade on the *real asset* the following can be specified during data instantiation:'
+  id: totrans-95
   prefs: []
   type: TYPE_NORMAL
+  zh: 为了克服这一点，并允许跟踪*连续未来*并交易*真实资产*的策略，在数据实例化期间可以指定以下内容：
 - en: '[PRE7]'
+  id: totrans-96
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE7]'
 - en: Trades will happen on `ESU16`, but the data feed will be frm `001ES` (the data
     is the same 3 months long)
+  id: totrans-97
   prefs: []
   type: TYPE_NORMAL
+  zh: 交易将在`ESU16`上进行，但数据源将来自`001ES`（数据相同，为期3个月）
 - en: Other parameters
+  id: totrans-98
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 其他参数
 - en: '`qcheck` (default: `0.5` seconds) controls the frequency to wake up to talk
     to the internal resampler/replayer to avoid late delivery of bars.'
+  id: totrans-99
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`qcheck`（默认：`0.5`秒）控制唤醒与内部重新采样器/重播器交流的频率，以避免延迟传递条形图。'
 - en: 'The following logic will be applied to used this parameter:'
+  id: totrans-100
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 将应用以下逻辑来使用此参数：
 - en: If internal *resampling/replaying* is detected, the value will be used as it
     is.
+  id: totrans-101
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 如果检测到内部*重新采样/重播*，则将使用该值。
 - en: If no internal *resampling/replaying* is detected, the data feed will not wake
     up, because there is nothing to report to.
+  id: totrans-102
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 如果未检测到内部*重新采样/重播*，数据源将不会唤醒，因为没有要报告的内容。
 - en: The data feed will still wake up to check the *Visual Chart* built-in resampler,
     but this is automatically controlled.
+  id: totrans-103
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 数据源仍将唤醒以检查*Visual Chart*内置的重新采样器，但这是自动控制的。
 - en: Data Notifications
+  id: totrans-104
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 数据通知
 - en: The data feed will report the current status via one or more of the following
     (check the *Cerebro* and *Strategy* reference)
+  id: totrans-105
   prefs: []
   type: TYPE_NORMAL
+  zh: 数据源将通过以下一种或多种方式报告当前状态（检查*Cerebro*和*Strategy*参考）
 - en: '`Cerebro.notify_data` (if overriden)n'
+  id: totrans-106
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`Cerebro.notify_data`（如果被覆盖）'
 - en: A callback addded with `Cerebro.adddatacb`
+  id: totrans-107
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 使用`Cerebro.adddatacb`添加的回调
 - en: '`Strategy.notify_data` (if overriden)'
+  id: totrans-108
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`Strategy.notify_data`（如果被覆盖）'
 - en: 'An example inside the *strategy*:'
+  id: totrans-109
   prefs: []
   type: TYPE_NORMAL
+  zh: '*策略*内的一个示例：'
 - en: '[PRE8]'
+  id: totrans-110
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE8]'
 - en: 'The following notifications will be sent following changes in the system:'
+  id: totrans-111
   prefs: []
   type: TYPE_NORMAL
+  zh: 系统发生变化后将发送以下通知：
 - en: '`CONNECTED`'
+  id: totrans-112
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`CONNECTED`'
 - en: Sent on successful initial connection
+  id: totrans-113
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 成功初始连接时发送
 - en: '`DISCONNECTED`'
+  id: totrans-114
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`DISCONNECTED`'
 - en: 'In this case retrieving the data is no longer possible and the data will indicate
     the system nothing can be done. Possible conditions:'
+  id: totrans-115
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 在这种情况下，不再可能检索数据，数据将指示系统无法执行任何操作。可能的情况：
 - en: Wrong contract specified
+  id: totrans-116
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 指定了错误的合同
 - en: Interruption during historical download
+  id: totrans-117
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 在历史下载期间中断
 - en: Number of reconnection attempts to TWS exceeded
+  id: totrans-118
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 尝试重新连接到TWS的次数超过了
 - en: '`CONNBROKEN`'
+  id: totrans-119
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`CONNBROKEN`'
 - en: Connectivity has been lost to either TWS or to the data farms. The data feed
     will try (via the store) to reconnect and backfill, when needed, and resume operations
+  id: totrans-120
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 连接已丢失，无论是到TWS还是到数据中心。数据源将尝试（通过存储）重新连接和回填，必要时，并恢复操作
 - en: '`NOTSUBSCRIBED`'
+  id: totrans-121
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`NOTSUBSCRIBED`'
 - en: Contract and connection are ok, but the data cannot be retrieved due to lack
     of permissions.
+  id: totrans-122
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 合同和连接正常，但由于权限不足，无法检索数据。
 - en: The data will indicate to the system that it cannot retrieve the data
+  id: totrans-123
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 数据将指示系统无法检索数据
 - en: '`DELAYED`'
+  id: totrans-124
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`DELAYED`'
 - en: Signaled to indicate that a *historical*/*backfilling* operation are in progress
     and the data being processed by the strategy is not real-time data
+  id: totrans-125
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 表示*历史*/*回填*操作正在进行中，并且策略处理的数据不是实时数据
 - en: '`LIVE`'
+  id: totrans-126
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`LIVE`'
 - en: Signaled to indicate that the data to be processed from this point onwards by
     the *strategy* is real-time data
+  id: totrans-127
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 表示从这一点开始要处理的数据是实时数据
 - en: Developers of *strategies* should consider which actions to undertake in cases
     like when a disconnection takes place or when receiving **delayed** data.
+  id: totrans-128
   prefs: []
   type: TYPE_NORMAL
+  zh: '*策略*的开发人员应考虑在发生断开连接或接收**延迟**数据时采取哪些行动。'
 - en: VCBroker - Trading Live
+  id: totrans-129
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: VCBroker - 实时交易
 - en: Using the broker
+  id: totrans-130
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 使用经纪人
 - en: To use the *VCBroker*, the standard broker simulation instance created by *cerebro*
     has to be replaced.
+  id: totrans-131
   prefs: []
   type: TYPE_NORMAL
+  zh: 要使用*VCBroker*，必须替换由*cerebro*创建的标准经纪人模拟实例。
 - en: 'Using the *Store* model (preferred):'
+  id: totrans-132
   prefs: []
   type: TYPE_NORMAL
+  zh: 使用*Store*模型（首选）：
 - en: '[PRE9]'
+  id: totrans-133
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE9]'
 - en: Broker Parameters
+  id: totrans-134
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 经纪人参数
 - en: Be it directly or over `getbroker` the `VCBroker` broker supports no parameters.
     This is because the broker is just a proxy to the a real *Broker*. And what the
     real broker gives, shall not be taken away.
+  id: totrans-135
   prefs: []
   type: TYPE_NORMAL
+  zh: 无论是直接还是通过`getbroker`，`VCBroker`经纪人都不支持参数。 这是因为经纪人只是对真实*经纪人*的代理。 真正的经纪人给出的，不应被拿走。
 - en: Restrictions
+  id: totrans-136
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 限制
 - en: Position
+  id: totrans-137
   prefs:
   - PREF_H4
   type: TYPE_NORMAL
+  zh: 仓位
 - en: '*Visual Chart* reports **open positions**. This could be used most of the time
     to control the actual position, but a final event indicating a *Position* has
     been closed is missing.'
+  id: totrans-138
   prefs: []
   type: TYPE_NORMAL
+  zh: '*Visual Chart*报告**持仓**。 这在大多数情况下可以用来控制实际仓位，但缺少指示*仓位*已关闭的最终事件。'
 - en: That makes it compulsory for *backtrader* to keep full accounting of the *Position*
     and separate from any previous existing position in your account
+  id: totrans-139
   prefs: []
   type: TYPE_NORMAL
+  zh: 这使得*backtrader*必须对*Position*进行完整的会计核算，并与您帐户中任何先前存在的仓位分开
 - en: Commission
+  id: totrans-140
   prefs:
   - PREF_H4
   type: TYPE_NORMAL
+  zh: 佣金
 - en: 'The *COM* trading interface doesn’t report commissions. There is no chance
     for *backtrader* to make and educated guess, unless:'
+  id: totrans-141
   prefs: []
   type: TYPE_NORMAL
+  zh: '*COM*交易界面不报告佣金。 *backtrader*没有机会做出合理猜测，除非：'
 - en: The *broker* is instantiated with a *Commission* instance indicating which commissions
     do actually take place.
+  id: totrans-142
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '*经纪人*与指示实际发生的佣金的*佣金*实例一起实例化。'
 - en: Trading with it
+  id: totrans-143
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 与其进行交易
 - en: Account
+  id: totrans-144
   prefs:
   - PREF_H4
   type: TYPE_NORMAL
+  zh: 账户
 - en: '*Visual Chart* supports several accounts at the same time in one broker. The
     chosen account can be controlled with the parameter:'
+  id: totrans-145
   prefs: []
   type: TYPE_NORMAL
+  zh: '*Visual Chart*在一个经纪人上同时支持多个帐户。 可以使用以下参数控制选择的帐户：'
 - en: '`account` (default: `None`)'
+  id: totrans-146
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`account`（默认值：`None`）'
 - en: VisualChart supports several accounts simultaneously on the broker. If the default
     `None` is in place the 1^(st) account in the ComTrader `Accounts` collection will
     be used.
+  id: totrans-147
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: VisualChart支持同时在经纪人上使用多个帐户。 如果使用默认值`None`，则将使用ComTrader `Accounts`集合中的第一个帐户。
 - en: If an account name is provided, the `Accounts` collection will be checked and
     used if present
+  id: totrans-148
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 如果提供了帐户名称，则将检查并使用`Accounts`集合（如果存在）
 - en: Opperations
+  id: totrans-149
   prefs:
   - PREF_H4
   type: TYPE_NORMAL
+  zh: 操作
 - en: There is no change with regards to the standar usage. Just use the methods available
     in the strategy (see the `Strategy` reference for a full explanation)
+  id: totrans-150
   prefs: []
   type: TYPE_NORMAL
+  zh: 关于标准用法没有变化。 只需使用策略中可用的方法（有关详细说明，请参阅`Strategy`参考）
 - en: '`buy`'
+  id: totrans-151
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`buy`'
 - en: '`sell`'
+  id: totrans-152
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`sell`'
 - en: '`close`'
+  id: totrans-153
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`close`'
 - en: '`cancel`'
+  id: totrans-154
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`cancel`'
 - en: Order objects returned
+  id: totrans-155
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 返回的订单对象
 - en: Standard *backtrader* `Order` objects
+  id: totrans-156
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 标准*backtrader* `Order`对象
 - en: Order Execution Types
+  id: totrans-157
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 订单执行类型
 - en: '*Visual Chart* supports the minimum order execution types needed by *backtrader*
     and as such, anyhing which is backtested can go live.'
+  id: totrans-158
   prefs: []
   type: TYPE_NORMAL
+  zh: '*Visual Chart*支持*backtrader*所需的最小订单执行类型，因此，任何经过回测的内容都可以实时执行。'
 - en: 'As such the order execution types are limited to the ones available in the
     *broker simulation*:'
+  id: totrans-159
   prefs: []
   type: TYPE_NORMAL
+  zh: 因此，订单执行类型仅限于*经纪人模拟*中可用的类型：
 - en: '`Order.Market`'
+  id: totrans-160
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`Order.Market`'
 - en: '`Order.Close`'
+  id: totrans-161
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`Order.Close`'
 - en: '`Order.Limit`'
+  id: totrans-162
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`Order.Limit`'
 - en: '`Order.Stop` (when the *Stop* is triggered a *Market* order follows)'
+  id: totrans-163
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`Order.Stop`（当*Stop*触发时，*Market*订单随后进行）'
 - en: '`Order.StopLimit` (when the *Stop* is triggered a *Limit* order follows)'
+  id: totrans-164
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`Order.StopLimit`（当*Stop*触发时，*Limit*订单随后进行）'
 - en: Order Validity
+  id: totrans-165
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 订单有效性
 - en: 'The same validity notion available during backtesting (with `valid` to `buy`
     and `sell`) is available and with the same meaning. As such, the `valid` parameter
     is translated as follows for *Visual Chart Orders* for the following values:'
+  id: totrans-166
   prefs: []
   type: TYPE_NORMAL
+  zh: 在回测期间可用的相同有效性概念（用于`valid`到`buy`和`sell`）可用，并具有相同含义。 因此，对于以下值，`valid`参数转换如下以用于*Visual
+    Chart Orders*：
 - en: '`None` translates to *Good Til Cancelled*'
+  id: totrans-167
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`None`翻译为*Good Til Cancelled*'
 - en: Because no validity has been specified it is understood that the order must
     be valid until cancelled
+  id: totrans-168
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 因为未指定有效期，因此理解订单必须有效直至取消
 - en: '`datetime/date` translates to *Good Til Date*'
+  id: totrans-169
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`datetime/date`翻译为*Good Til Date*'
 - en: Note
+  id: totrans-170
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 注意
 - en: 'Beware: *Visual Chart* does only support “full dates” and the *time* part is
     discarded.'
+  id: totrans-171
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 注意：*Visual Chart*仅支持“完整日期”，并且忽略了*时间*部分。
 - en: '`timedelta(x)` translates to *Good Til Date* (here `timedelta(x) != timedelta()`)'
+  id: totrans-172
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`timedelta(x)` 翻译为 *有效期至*（这里 `timedelta(x) != timedelta()`）'
 - en: Note
+  id: totrans-173
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 注释
 - en: 'Beware: *Visual Chart* does only support **full dates** and the *time* part
     is discarded.'
+  id: totrans-174
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 注意：*Visual Chart* 仅支持**完整日期**，并且会将*时间*部分丢弃。
 - en: This is interpreted as a signal to have an order be valid from `now` + `timedelta(x)`
+  id: totrans-175
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 这被解释为指示订单从 `now` + `timedelta(x)` 开始有效
 - en: '`timedelta() or 0` translates to *Session*'
+  id: totrans-176
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`timedelta() or 0` 翻译为 *会话*'
 - en: A value has been passed (instead of `None`) but is *Null* and is interpreted
     as an order valid for the current *day* (session)
+  id: totrans-177
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 已传递一个值（而不是 `None`），但是值为 *Null*，并被解释为仅在当前 *日期*（会话）有效的订单
 - en: Notifications
+  id: totrans-178
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 通知
 - en: The standard `Order` status will be notified to a *strategy* over the method
     `notify_order` (if overridden)
+  id: totrans-179
   prefs: []
   type: TYPE_NORMAL
+  zh: 标准 `Order` 状态将通过方法 `notify_order`（如果被覆盖）通知到一个 *策略* 上
 - en: '`Submitted` - the order has been sent to TWS'
+  id: totrans-180
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`已提交` - 订单已发送至 TWS'
 - en: '`Accepted` - the order has been placed'
+  id: totrans-181
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`已接受` - 订单已下达'
 - en: '`Rejected` - order placement failed or was cancelled by the system during its
     lifetime'
+  id: totrans-182
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`已拒绝` - 订单放置失败或在其生命周期内被系统取消'
 - en: '`Partial` - a partial execution has taken place'
+  id: totrans-183
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`部分完成` - 部分执行已经发生'
 - en: '`Completed` - the order has been fully executed'
+  id: totrans-184
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`已完成` - 订单已完全执行'
 - en: '`Canceled` (or `Cancelled`)'
+  id: totrans-185
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`已取消`（或 `取消`）'
 - en: '`Expired` - Not reported as of yet. An heuristic would be needed to distinguish
     this status from `Cancelled`'
+  id: totrans-186
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`已过期` - 目前尚未报告。需要一种启发式方法来区分此状态与 `取消` 的区别'
 - en: Reference
+  id: totrans-187
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 参考
 - en: VCStore
+  id: totrans-188
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: VCStore
 - en: class backtrader.stores.VCStore()
+  id: totrans-189
   prefs:
   - PREF_H4
   type: TYPE_NORMAL
+  zh: 类 backtrader.stores.VCStore()
 - en: Singleton class wrapping an ibpy ibConnection instance.
+  id: totrans-190
   prefs: []
   type: TYPE_NORMAL
+  zh: 包装 ibpy ibConnection 实例的单例类。
 - en: The parameters can also be specified in the classes which use this store, like
     `VCData` and `VCBroker`
+  id: totrans-191
   prefs: []
   type: TYPE_NORMAL
+  zh: 这些参数也可以在使用该存储的类中指定，例如 `VCData` 和 `VCBroker`
 - en: VCBroker
+  id: totrans-192
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: VCBroker
 - en: class backtrader.brokers.VCBroker(**kwargs)
+  id: totrans-193
   prefs:
   - PREF_H4
   type: TYPE_NORMAL
+  zh: 类 backtrader.brokers.VCBroker(**kwargs)
 - en: Broker implementation for VisualChart.
+  id: totrans-194
   prefs: []
   type: TYPE_NORMAL
+  zh: VisualChart 的经纪商实现。
 - en: This class maps the orders/positions from VisualChart to the internal API of
     `backtrader`.
+  id: totrans-195
   prefs: []
   type: TYPE_NORMAL
+  zh: 此类将 VisualChart 的订单/持仓映射到 `backtrader` 的内部 API。
 - en: 'Params:'
+  id: totrans-196
   prefs: []
   type: TYPE_NORMAL
+  zh: 参数：
 - en: '`account` (default: None)'
+  id: totrans-197
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`账户`（默认值：None）'
 - en: VisualChart supports several accounts simultaneously on the broker. If the default
     `None` is in place the 1^(st) account in the ComTrader `Accounts` collection will
     be used.
+  id: totrans-198
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: VisualChart 支持在经纪商上同时使用多个账户。如果默认值为 `None`，则将使用 ComTrader `Accounts` 集合中的第 1
+    个账户。
 - en: If an account name is provided, the `Accounts` collection will be checked and
     used if present
+  id: totrans-199
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 如果提供了账户名称，则将检查并使用 `Accounts` 集合（如果存在）
 - en: '`commission` (default: None)'
+  id: totrans-200
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`佣金`（默认值：None）'
 - en: An object will be autogenerated if no commission-scheme is passed as parameter
+  id: totrans-201
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 如果未传递佣金方案，则将自动生成对象
 - en: See the notes below for further explanations
+  id: totrans-202
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 有关更多解释，请参阅下面的注释
 - en: Notes
+  id: totrans-203
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 注释
 - en: Position
+  id: totrans-204
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 持仓
 - en: VisualChart reports “OpenPositions” updates through the ComTrader interface
     but only when the position has a “size”. An update to indicate a position has
     moved to ZERO is reported by the absence of such position. This forces to keep
     accounting of the positions by looking at the execution events, just like the
     simulation broker does
+  id: totrans-205
   prefs: []
   type: TYPE_NORMAL
+  zh: VisualChart 通过 ComTrader 接口报告“OpenPositions”更新，但仅当持仓具有“大小”时。指示持仓已移至零的更新通过不存在此类持仓来报告。这强制通过观察执行事件来保持持仓的会计，就像模拟经纪商一样。
 - en: Commission
+  id: totrans-206
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 佣金
 - en: The ComTrader interface of VisualChart does not report commissions and as such
     the auto-generated CommissionInfo object cannot use non-existent commissions to
     properly account for them. In order to support commissions a `commission` parameter
     has to be passed with the appropriate commission schemes.
+  id: totrans-207
   prefs: []
   type: TYPE_NORMAL
+  zh: VisualChart 的 ComTrader 接口不报告佣金，因此自动生成的 CommissionInfo 对象不能使用不存在的佣金来正确计算它们。为了支持佣金，必须传递带有适当佣金方案的
+    `commission` 参数。
 - en: The documentation on Commission Schemes details how to do this
+  id: totrans-208
   prefs: []
   type: TYPE_NORMAL
+  zh: 佣金方案的文档详细介绍了如何实现这一点
 - en: Expiration Timing
+  id: totrans-209
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 过期时间
 - en: The ComTrader interface (or is it the comtypes module?) discards `time` information
     from `datetime` objects and expiration dates are always full dates.
+  id: totrans-210
   prefs: []
   type: TYPE_NORMAL
+  zh: ComTrader 接口（或者是 comtypes 模块？）从 `datetime` 对象中丢弃了 `time` 信息，并且到期日期始终是完整日期。
 - en: Expiration Reporting
+  id: totrans-211
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 过期报告
 - en: At the moment no heuristic is in place to determine when a cancelled order has
     been cancelled due to expiration. And therefore expired orders are reported as
     cancelled.
+  id: totrans-212
   prefs: []
   type: TYPE_NORMAL
+  zh: 目前还没有启发式方法来确定取消的订单何时因过期而取消。因此，过期订单被报告为已取消。
 - en: VCData
+  id: totrans-213
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: VCData
 - en: class backtrader.feeds.VCData(**kwargs)
+  id: totrans-214
   prefs:
   - PREF_H4
   type: TYPE_NORMAL
+  zh: 类 backtrader.feeds.VCData(**kwargs)
 - en: VisualChart Data Feed.
+  id: totrans-215
   prefs: []
   type: TYPE_NORMAL
+  zh: VisualChart 数据源。
 - en: 'Params:'
+  id: totrans-216
   prefs: []
   type: TYPE_NORMAL
+  zh: 参数：
 - en: '`qcheck` (default: `0.5`) Default timeout for waking up to let a resampler/replayer
     that the current bar can be check for due delivery'
+  id: totrans-217
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`qcheck`（默认值：`0.5`）唤醒以便让重采样器/重播器检查当前柱是否可以进行交付的默认超时时间'
 - en: The value is only used if a resampling/replaying filter has been inserted in
     the data
+  id: totrans-218
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 该值仅在数据中插入了重采样/重播过滤器时才会使用
 - en: '`historical` (default: `False`) If no `todate` parameter is supplied (defined
     in the base class), this will force a historical only download if set to `True`'
+  id: totrans-219
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`historical`（默认值：`False`）如果没有提供`todate`参数（在基类中定义），则将强制仅进行历史下载（如果设置为`True`）'
 - en: If `todate` is supplied the same effect is achieved
+  id: totrans-220
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 如果提供了`todate`，则可以实现相同的效果
 - en: '`milliseconds` (default: `True`) The bars constructed by *Visual Chart* have
     this aspect: HH:MM:59.999000'
+  id: totrans-221
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`milliseconds`（默认值：`True`）由*Visual Chart*构建的柱状图具有如下外观：HH:MM:59.999000'
 - en: 'If this parameter is `True` a millisecond will be added to this time to make
     it look like: HH::MM + 1:00.000000'
+  id: totrans-222
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 如果该参数设置为`True`，将会在时间上增加一毫秒，使其看起来像是：HH::MM + 1:00.000000
 - en: '`tradename` (default: `None`) Continous futures cannot be traded but are ideal
     for data tracking. If this parameter is supplied it will be the name of the current
     future which will be the trading asset. Example:'
+  id: totrans-223
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`tradename`（默认值：`None`）连续期货无法交易，但非常适合数据跟踪。如果提供了该参数，它将是当前期货的名称，该名称将成为交易资产。示例：'
 - en: 001ES -> ES-Mini continuous supplied as `dataname`
+  id: totrans-224
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 001ES -> ES-Mini 连续提供作为`dataname`
 - en: ESU16 -> ES-Mini 2016-09\. If this is supplied in `tradename` it will be the
     trading asset.
+  id: totrans-225
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: ESU16 -> ES-Mini 2016-09\. 如果在`tradename`中提供了此信息，它将成为交易资产。
 - en: '`usetimezones` (default: `True`) For most markets the time offset information
     provided by *Visual Chart* allows for datetime to be converted to market time
     (*backtrader* choice for representation)'
+  id: totrans-226
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`usetimezones`（默认值：`True`）对于大多数市场，*Visual Chart*提供的时间偏移信息允许将日期时间转换为市场时间（*backtrader*选择的表示方式）'
 - en: Some markets are special (`096`) and need special internal coverage and timezone
     support to display in the user expected market time.
+  id: totrans-227
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 一些市场是特殊的（`096`），需要特殊的内部覆盖和时区支持以显示用户预期的市场时间。
 - en: If this parameter is set to `True` importing `pytz` will be attempted to use
     timezones (default)
+  id: totrans-228
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 如果该参数设置为`True`，将尝试导入`pytz`以使用时区（默认值）
 - en: Disabling it will remove timezone usage (may help if the load is excesive)
+  id: totrans-229
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 禁用它将取消时区使用（可能有助于减轻负载过重的情况）

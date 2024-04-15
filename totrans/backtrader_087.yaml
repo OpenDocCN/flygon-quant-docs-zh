@@ -1,1539 +1,2274 @@
 - en: Interactive Brokers
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 交互式经纪人
 - en: 原文：[https://www.backtrader.com/docu/live/ib/ib/](https://www.backtrader.com/docu/live/ib/ib/)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.backtrader.com/docu/live/ib/ib/](https://www.backtrader.com/docu/live/ib/ib/)
 - en: 'The integration with Interactive Brokers supports both:'
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: 与交互式经纪人的集成支持两种：
 - en: '*Live Data* feeding'
+  id: totrans-3
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '*实时数据*提供'
 - en: '*Live Trading*'
+  id: totrans-4
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '*实时交易*'
 - en: Note
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: 注意
 - en: In spite of all attempts to test the maximum number of error conditions and
     situations, the code could (like any other piece of software) contain bugs.
+  id: totrans-6
   prefs: []
   type: TYPE_NORMAL
+  zh: 尽管尝试测试尽可能多的错误条件和情况，但代码可能（像任何其他软件一样）包含错误。
 - en: Test any strategy thoroughly with a **Paper Trading** account or the TWS **Demo**
     before going in production.
+  id: totrans-7
   prefs: []
   type: TYPE_NORMAL
+  zh: 在进入生产之前，彻底测试任何策略都使用**模拟交易**帐户或TWS **演示**。
 - en: Note
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: 注意
 - en: 'Interaction with Interactive Brokers is done by using the `IbPy` module and
     this has to be installed prior to usage. There is no package in Pypi (at the time
     of writing) but it can be installed using `pip` with the following command:'
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: 使用`IbPy`模块进行与交互式经纪人的交互必须事先安装。在写作时，Pypi中没有包，但可以使用以下命令使用`pip`进行安装：
 - en: '[PRE0]'
+  id: totrans-10
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: 'If `git` is not available in your system (Windows installation?) the following
     should also work:'
+  id: totrans-11
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果您的系统中没有`git`可用（Windows安装？），则以下内容也应该有效：
 - en: '[PRE1]'
+  id: totrans-12
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE1]'
 - en: Sample Code
+  id: totrans-13
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 示例代码
 - en: 'The sources contain a full sample under:'
+  id: totrans-14
   prefs: []
   type: TYPE_NORMAL
+  zh: 源代码包含完整的示例：
 - en: samples/ibtest/ibtest.py
+  id: totrans-15
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: samples/ibtest/ibtest.py
 - en: The sample cannot cover every possible use case but it tries to provide broad
     insight and should highlight that there is no real difference when it comes to
     use the backtesting module or the live data module
+  id: totrans-16
   prefs: []
   type: TYPE_NORMAL
+  zh: 示例不能涵盖每种可能的用例，但它试图提供广泛的见解，并应该突出显示在使用回测模块或实时数据模块时没有真正的区别
 - en: 'One thing could be pin-pointed:'
+  id: totrans-17
   prefs: []
   type: TYPE_NORMAL
+  zh: 有一件事可以确定：
 - en: The sample waits for a `data.LIVE` data status notification before any trading
     activity takes place.
+  id: totrans-18
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 示例在进行任何交易活动之前等待`data.LIVE`数据状态通知。
 - en: This would probably is something to consider in any live strategy
+  id: totrans-19
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 这可能是在任何实时策略中考虑的事情
 - en: Store Model vs Direct Model
+  id: totrans-20
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 商店模型 vs 直接模型
 - en: 'Interaction with Interactive Brokers is supported through 2 models:'
+  id: totrans-21
   prefs: []
   type: TYPE_NORMAL
+  zh: 与交互式经纪人的交互支持通过2种模式：
 - en: Store Model (*Preferred*)
+  id: totrans-22
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 商店模型（*首选*）
 - en: Direct interaction with the data feed class and the broker class
+  id: totrans-23
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 与数据源类和经纪人类的直接交互
 - en: The store model provides a clear separation pattern when it comes down to creating
     *brokers* and *datas*. Two code snippets should serve better as an example.
+  id: totrans-24
   prefs: []
   type: TYPE_NORMAL
+  zh: 商店模型在创建*经纪人*和*数据源*时提供了清晰的分离模式。两个代码片段应该更好地作为示例。
 - en: 'First with the **Store** model:'
+  id: totrans-25
   prefs: []
   type: TYPE_NORMAL
+  zh: 首先是**Store**模型：
 - en: '[PRE2]'
+  id: totrans-26
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE2]'
 - en: 'Here the parameters:'
+  id: totrans-27
   prefs: []
   type: TYPE_NORMAL
+  zh: 这里是参数：
 - en: '`host`, `port` and `clientId` are passed to where they belong the `IBStore`
     which opens a connection using those parameters.'
+  id: totrans-28
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`host`、`port`和`clientId`被传递到它们所属的地方`IBStore`，该地方使用这些参数打开连接。'
 - en: And then a **data** feed is created with `getdata` and a parameter common to
     all data feeds in *backtrader*
+  id: totrans-29
   prefs: []
   type: TYPE_NORMAL
+  zh: 然后使用`getdata`创建一个与*backtrader*中所有数据源共用的**数据**源。
 - en: '`dataname` whic requests the *EUR*/*USD* Forex pair.'
+  id: totrans-30
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`dataname`请求*EUR*/*USD*外汇对。'
 - en: 'And now with direct usage:'
+  id: totrans-31
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在可以直接使用了：
 - en: '[PRE3]'
+  id: totrans-32
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE3]'
 - en: 'Here:'
+  id: totrans-33
   prefs: []
   type: TYPE_NORMAL
+  zh: 这里：
 - en: Parameters intended for the store are passed to the data.
+  id: totrans-34
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 用于商店的参数被传递给数据。
 - en: Those will be used to create a `IBStore` instance in the background
+  id: totrans-35
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 这些将用于在后台创建`IBStore`实例
 - en: 'The drawback:'
+  id: totrans-36
   prefs: []
   type: TYPE_NORMAL
+  zh: 缺点：
 - en: A lot less clarity, because it becomes unclear what belongs to the data and
     what belongs to the store.
+  id: totrans-37
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 清晰度大大降低，因为不清楚什么属于数据，什么属于商店。
 - en: IBStore - the store
+  id: totrans-38
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: IBStore - 商店
 - en: The store is the keystone of the live data feed/trade support, providing a layer
     of adaptation between the `IbPy` module and the needs of a data feed and a broker
     proxy.
+  id: totrans-39
   prefs: []
   type: TYPE_NORMAL
+  zh: 商店是实时数据源/交易支持的关键，提供了一个在`IbPy`模块和数据源和经纪人代理的需求之间的适应层。
 - en: 'A *Store* is a concept which covers the following functions:'
+  id: totrans-40
   prefs: []
   type: TYPE_NORMAL
+  zh: '*商店*是一个涵盖以下功能的概念：'
 - en: 'Being the central shop for an entity: in this case the entity is IB'
+  id: totrans-41
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 作为一个实体的中心商店：在这种情况下，实体是IB。
 - en: Which may or may not require parameters
+  id: totrans-42
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 这可能需要或不需要参数
 - en: 'Providing access to getting a *broker* instance with the method:'
+  id: totrans-43
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 提供通过该方法获取*经纪人*实例的访问权限：
 - en: '`IBStore.getbroker(*args, **kwargs)`'
+  id: totrans-44
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`IBStore.getbroker(*args, **kwargs)`'
 - en: Providing access to getter *data* feed instances
+  id: totrans-45
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 提供获取*数据*源实例的访问权限
 - en: '`IBStore.getdata(*args, **kwargs)`'
+  id: totrans-46
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`IBStore.getdata(*args, **kwargs)`'
 - en: In this case many of the `**kwargs` are common to data feeds like `dataname`,
     `fromdate`, `todate`, `sessionstart`, `sessionend`, `timeframe`, `compression`
+  id: totrans-47
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 在这种情况下，许多`**kwargs`与数据源相同，如`dataname`、`fromdate`、`todate`、`sessionstart`、`sessionend`、`timeframe`、`compression`
 - en: The data may provide other params. Check the reference below.
+  id: totrans-48
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 数据可能提供其他参数。请查看下面的参考资料。
 - en: 'The `IBStore` provides:'
+  id: totrans-49
   prefs: []
   type: TYPE_NORMAL
+  zh: '`IBStore` 提供：'
 - en: Connectivity target (`host` and `port` parameters)
+  id: totrans-50
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 连接目标（`host` 和 `port` 参数）
 - en: Identification (`clientId` parameter)
+  id: totrans-51
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 标识（`clientId` 参数）
 - en: Re-connectivity control (`reconnect` and `timeout` parameters)
+  id: totrans-52
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 重新连接控制（`reconnect` 和 `timeout` 参数）
 - en: Time offset check (`timeoffset` parameters, see below)
+  id: totrans-53
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 时间偏移检查（`timeoffset` 参数，请参见下文）
 - en: Notification and debugging
+  id: totrans-54
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 通知和调试
 - en: '`notifyall` (default: `False`): in this case any `error` message (many are
     simply informative) sent by IB will be relayed to *Cerebro*/*Strategy*'
+  id: totrans-55
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: '`notifyall`（默认：`False`）：在这种情况下，IB 发送的任何*错误*消息（许多只是信息性的）都将被转发给*Cerebro*/*Strategy*'
 - en: '`_debug` (default: `False`): in this case each and every message received from
     TWS will be print out to standard outpu'
+  id: totrans-56
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: '`_debug`（默认：`False`）：在这种情况下，从 TWS 收到的每条消息都将打印到标准输出'
 - en: IBData feeds
+  id: totrans-57
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: IBData 数据源
 - en: Data Options
+  id: totrans-58
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 数据选项
 - en: 'Be it directly or over `getdata` the `IBData` feed supports the following data
     options:'
+  id: totrans-59
   prefs: []
   type: TYPE_NORMAL
+  zh: 无论是直接还是通过 `getdata`，`IBData` 数据源支持以下数据选项：
 - en: Historical download requests
+  id: totrans-60
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 历史下载请求
 - en: These will be split over multiple requests if the duration exceeds the limits
     imposed by IB for a given *timeframe/compression* combination
+  id: totrans-61
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 如果持续时间超过 IB 对于给定*时间框架/压缩*组合施加的限制，这些将分成多个请求
 - en: RealTime Data in 3 flavors
+  id: totrans-62
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 3种实时数据
 - en: '`tickPrice` events (via IB `reqMktData`)'
+  id: totrans-63
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`tickPrice` 事件（通过 IB `reqMktData`）'
 - en: Used for *CASH* products (experimentation with at least TWS API 9.70 has shown
     no support for the other types)
+  id: totrans-64
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 用于*CASH*产品（至少 TWS API 9.70 的实验表明不支持其他类型）
 - en: Receives a *tick* price event by looking at the `BID` prices, which according
     to the non-official Internet literature seems to be the way to track the `CASH`
     market prices.
+  id: totrans-65
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 通过查看`BID`价格接收*tick*价格事件，根据非官方互联网文献，这似乎是跟踪`CASH`市场价格的方法。
 - en: Timestamps are generated locally in the system. An offset to the IB Server time
     can be used if wished by the end user (calculated from IB `reqCurrentTime`)
+  id: totrans-66
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 时间戳是在系统中本地生成的。如果用户希望，可以使用与 IB 服务器时间的偏移量（从 IB `reqCurrentTime` 计算）
 - en: '`tickString` events (aka `RTVolume` (via IB `reqMktData`)'
+  id: totrans-67
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`tickString` 事件（又名 `RTVolume`（通过 IB `reqMktData`））'
 - en: Receives a *OHLC/Volume* snapshot from IB approx. every 250ms (or greater if
     no trading has happened)
+  id: totrans-68
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 大约每250毫秒从 IB 接收一个*OHLC/Volume*快照（如果没有发生交易，则间隔可能更长）
 - en: '`RealTimeBars` events (via IB `reqRealTimeBars`)'
+  id: totrans-69
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`RealTimeBars` 事件（通过 IB `reqRealTimeBars`）'
 - en: Receives historical 5 seconds bars (duration fixed by IB) every 5 seconds
+  id: totrans-70
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 每5秒接收历史数据条（由 IB 固定持续时间）
 - en: If the chosen *timeframe/combination* is below the level *Seconds/5* this feature
     will be automatically disabled.
+  id: totrans-71
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 如果所选的*时间框架/组合*低于*秒/5*级别，此功能将自动禁用。
 - en: '!!! note'
+  id: totrans-72
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: '!!! 注意'
 - en: '[PRE4]'
+  id: totrans-73
   prefs:
   - PREF_IND
   type: TYPE_PRE
+  zh: '[PRE4]'
 - en: 'The default behavior is to use: `tickString` in most cases unless the user
     specifically wants to use `RealTimeBars`'
+  id: totrans-74
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 默认行为是在大多数情况下使用：`tickString`，除非用户明确希望使用`RealTimeBars`
 - en: '`Backfilling`'
+  id: totrans-75
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`Backfilling`'
 - en: 'Unless the user requests to just do a *historical* download, the data feed
     will automatically backfill:'
+  id: totrans-76
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 除非用户要求只进行*历史*下载，否则数据源将自动进行回填：
 - en: '**At the start**: with the maximum possible duration. Example: for a *Days/1*
     (*timeframe/compression*) combination the maximum default duration at IB is *1
     year* and this is the amount of time that will be backfilled'
+  id: totrans-77
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**在开始时**：使用最大可能的持续时间。例如：对于*天/1*（*时间框架/压缩*）组合，IB 的最大默认持续时间是*1年*，这是将进行回填的时间量'
 - en: '**After a data disconnection**: in this case the amount of data downloaded
     for the backfilling operation will be reduced to the minimum by looking at the
     latest data received before the disconnection.'
+  id: totrans-78
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**在数据断开连接后**：在这种情况下，用于回填操作的数据量将通过查看断开连接前接收的最新数据来减少。'
 - en: Note
+  id: totrans-79
   prefs: []
   type: TYPE_NORMAL
+  zh: 注意
 - en: 'Take into account that the final *timeframe/compression* combination taken
     into account may not be the one specified during *data feed creation* but during
     *insertion* in the system. See the following example:'
+  id: totrans-80
   prefs: []
   type: TYPE_NORMAL
+  zh: 请注意，最终考虑的*时间框架/压缩*组合可能不是在*数据源创建*期间指定的，而是在系统中*插入*期间指定的。请参见以下示例：
 - en: '[PRE5]'
+  id: totrans-81
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE5]'
 - en: As should now be clear, the final *timeframe/compression* combination taken
     into account is *Minutes/2*
+  id: totrans-82
   prefs: []
   type: TYPE_NORMAL
+  zh: 如现在应该清楚的是，最终考虑的*时间框架/压缩*组合是*分钟/2*
 - en: Data Contract Check
+  id: totrans-83
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 数据合同检查
 - en: During the start phase, the *data* feed will try to download the details of
     the specified contract (see the reference for how to specify it). If no such contract
     is found or multiple matches are found, the data will refuse to carry on and will
     notify it to the system. Some examples.
+  id: totrans-84
   prefs: []
   type: TYPE_NORMAL
+  zh: 在启动阶段，*数据*源将尝试下载指定合同的详细信息（查看如何指定的参考资料）。如果找不到这样的合同或找到多个匹配项，则数据将拒绝继续并将其通知系统。一些例子。
 - en: 'Simple but unambiguous contract specification:'
+  id: totrans-85
   prefs: []
   type: TYPE_NORMAL
+  zh: 简单但明确的合同规范：
 - en: '[PRE6]'
+  id: totrans-86
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE6]'
 - en: Only one instance will be found (2016-06) because for the default type, `STK`,
     exchange `SMART` and currency (the default is none) a single contract trading
     in `USD` will be found.
+  id: totrans-87
   prefs: []
   type: TYPE_NORMAL
+  zh: 只会找到一个实例（2016-06），因为对于默认类型`STK`、交易所`SMART`和货币（默认为空）的单一合同交易将被找到。
 - en: 'A similar approach will fail with `AAPL`:'
+  id: totrans-88
   prefs: []
   type: TYPE_NORMAL
+  zh: 使用`AAPL`的类似方法会失败：
 - en: '[PRE7]'
+  id: totrans-89
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE7]'
 - en: 'Because `SMART` finds contracts in several real exchanges and `AAPL` trades
     in different currencies in some of them. The following is ok:'
+  id: totrans-90
   prefs: []
   type: TYPE_NORMAL
+  zh: 因为`SMART`可以在几个真实交易所找到合同，并且`AAPL`在其中一些交易所以不同的货币交易。以下是可以的：
 - en: '[PRE8]'
+  id: totrans-91
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE8]'
 - en: Data Notifications
+  id: totrans-92
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 数据通知
 - en: The data feed will report the current status via one or more of the following
     (check the *Cerebro* and *Strategy* reference)
+  id: totrans-93
   prefs: []
   type: TYPE_NORMAL
+  zh: 数据源将通过以下一种或多种方式报告当前状态（查看*Cerebro*和*Strategy*参考资料）
 - en: '`Cerebro.notify_data` (if overriden)n'
+  id: totrans-94
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`Cerebro.notify_data`（如果重写）'
 - en: A callback addded with `Cerebro.adddatacb`
+  id: totrans-95
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 使用`Cerebro.adddatacb`添加回调
 - en: '`Strategy.notify_data` (if overriden)'
+  id: totrans-96
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`Strategy.notify_data`（如果重写）'
 - en: 'An example inside the *strategy*:'
+  id: totrans-97
   prefs: []
   type: TYPE_NORMAL
+  zh: 在*strategy*内部的一个例子：
 - en: '[PRE9]'
+  id: totrans-98
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE9]'
 - en: 'The following notifications will be sent following changes in the system:'
+  id: totrans-99
   prefs: []
   type: TYPE_NORMAL
+  zh: 系统发生更改后，将发送以下通知：
 - en: '`CONNECTED`'
+  id: totrans-100
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`CONNECTED`'
 - en: Sent on successful initial connection
+  id: totrans-101
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 成功初始连接时发送
 - en: '`DISCONNECTED`'
+  id: totrans-102
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`DISCONNECTED`'
 - en: 'In this case retrieving the data is no longer possible and the data will indicate
     the system nothing can be done. Possible conditions:'
+  id: totrans-103
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 在这种情况下，不再能够检索数据，并且数据将指示系统无法执行任何操作。可能的条件：
 - en: Wrong contract specified
+  id: totrans-104
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 指定的合同有误
 - en: Interruption during historical download
+  id: totrans-105
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 在历史下载期间中断
 - en: Number of reconnection attempts to TWS exceeded
+  id: totrans-106
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 尝试重新连接到TWS的次数已超过限制
 - en: '`CONNBROKEN`'
+  id: totrans-107
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`CONNBROKEN`'
 - en: Connectivity has been lost to either TWS or to the data farms. The data feed
     will try (via the store) to reconnect and backfill, when needed, and resume operations
+  id: totrans-108
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 与TWS或数据中心的连接已断开。数据源将尝试（通过存储）重新连接和回溯填充，必要时，并恢复操作
 - en: '`NOTSUBSCRIBED`'
+  id: totrans-109
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`NOTSUBSCRIBED`'
 - en: Contract and connection are ok, but the data cannot be retrieved due to lack
     of permissions.
+  id: totrans-110
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 合同和连接都正常，但由于权限不足，无法检索数据。
 - en: The data will indicate to the system that it cannot retrieve the data
+  id: totrans-111
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 数据将向系统指示无法检索数据
 - en: '`DELAYED`'
+  id: totrans-112
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`DELAYED`'
 - en: Signaled to indicate that a *historical*/*backfilling* operation are in progress
     and the data being processed by the strategy is not real-time data
+  id: totrans-113
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 表示正在进行*历史*/*回溯*操作，并且由策略处理的数据不是实时数据
 - en: '`LIVE`'
+  id: totrans-114
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`LIVE`'
 - en: Signaled to indicate that the data to be processed from this point onwards by
     the *strategy* is real-time data
+  id: totrans-115
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 表示从此处开始由*strategy*处理的数据是实时数据
 - en: Developers of *strategies* should consider which actions to undertake in cases
     like when a disconnection takes place or when receiving **delayed** data.
+  id: totrans-116
   prefs: []
   type: TYPE_NORMAL
+  zh: '*策略*的开发者应该考虑在发生断开连接或接收**延迟**数据等情况时要采取哪些行动。'
 - en: Data TimeFrames and Compressions
+  id: totrans-117
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 数据时间框架和压缩
 - en: Data feeds in the *backtrader* ecosystem, support the `timeframe` and `compression`
     parameters during creation. These parameters are also accessible as attributes
     with `data._timeframe` and `data._compression`
+  id: totrans-118
   prefs: []
   type: TYPE_NORMAL
+  zh: '*backtrader*生态系统中的数据源，在创建时支持`timeframe`和`compression`参数。这些参数也可以通过`data._timeframe`和`data._compression`属性访问'
 - en: The significance of *timeframe/compression* combinations has a specific purpose
     whenpassing the data to a `cerebro` instance via `resampledata` or `replaydata`,
     to let the internal resampler/replayer objects to understand what the intended
     target is. `._timeframe` and `._compression` will be overwritten in the data when
     resampled/replayed.
+  id: totrans-119
   prefs: []
   type: TYPE_NORMAL
+  zh: '*timeframe/compression*组合的重要性在将数据通过`resampledata`或`replaydata`传递给`cerebro`实例时具有特定目的，以便内部重新采样器/重播器对象了解预期目标是什么。当重新采样/重播时，`._timeframe`和`._compression`将在数据中被覆盖。'
 - en: 'But in live data feeds on the other hand this information can play an important
     role. See the following example:'
+  id: totrans-120
   prefs: []
   type: TYPE_NORMAL
+  zh: 但在另一方面，对于实时数据源，这些信息可能起重要作用。请参阅以下示例：
 - en: '[PRE10]'
+  id: totrans-121
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE10]'
 - en: 'The user is requesting **tick** data and this important because:'
+  id: totrans-122
   prefs: []
   type: TYPE_NORMAL
+  zh: 用户正在请求**tick**数据，这很重要，因为：
 - en: No backfilling will take place (the minimum unit supported by IB is *Seconds/1*)
+  id: totrans-123
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 不会进行回溯填充（IB支持的最小单位是*Seconds/1*）
 - en: Even if `RealTimeBars` are requested and supported by the `dataname`, they will
     not be used because the minimum resolution of a `RealTimeBar` is *Seconds/5*
+  id: totrans-124
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 即使请求和支持`dataname`的`RealTimeBars`，也不会使用，因为`RealTimeBar`的最小分辨率是*Seconds/5*
 - en: 'In any case and unless working with a resolution of *Ticks/1*, the data has
     to be *resampled/replayed*. The case above with realtimebars and working:'
+  id: totrans-125
   prefs: []
   type: TYPE_NORMAL
+  zh: 无论如何，除非使用*Ticks/1*的分辨率，否则数据必须进行*重新采样/重播*。上述情况下与实时条和工作：
 - en: '[PRE11]'
+  id: totrans-126
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE11]'
 - en: 'In this case and as explained above, the `._timeframe` and `._compression`
     attributes of the data will be overwritten during `resampledata`. This is what
     will happen:'
+  id: totrans-127
   prefs: []
   type: TYPE_NORMAL
+  zh: 在这种情况下，并且如上所述，在`resampledata`期间将覆盖数据的`._timeframe`和`._compression`属性。这是会发生的事情：
 - en: '*backfilling* will happen requesting a resolution of *Seconds/20*'
+  id: totrans-128
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 将会发生回溯填充，请求分辨率为*Seconds/20*
 - en: '`RealTimeBars` will be used for real-time data because the resolution is equal/greater
     than *Seconds/5* and the data supports is (is no *CASH* product)'
+  id: totrans-129
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`RealTimeBars`将用于实时数据，因为分辨率等于/大于*Seconds/5*且数据支持（不是*CASH*产品）'
 - en: Events to the system from TWS will happen at most every 5 seconds. This is possibly
     not important because the system will only send a bar to the strategy every 20
     seconds.
+  id: totrans-130
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: TWS发送给系统的事件最多每5秒发生一次。这可能不重要，因为系统每20秒只向策略发送一个条。
 - en: 'The same without `RealTimeBars`:'
+  id: totrans-131
   prefs: []
   type: TYPE_NORMAL
+  zh: 没有`RealTimeBars`的情况下相同：
 - en: '[PRE12]'
+  id: totrans-132
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE12]'
 - en: 'In this case:'
+  id: totrans-133
   prefs: []
   type: TYPE_NORMAL
+  zh: 在这种情况下：
 - en: '*backfilling* will happen requesting a resolution of *Seconds/20*'
+  id: totrans-134
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 将会发生回溯填充，请求分辨率为*Seconds/20*
 - en: '`tickString` will be used for real-time data because (is no *CASH* product)'
+  id: totrans-135
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`tickString`将用于实时数据，因为（不是*CASH*产品）'
 - en: Events to the system from TWS will happen every at most every 250ms. This is
     possibly not important because the system will only send a bar to the strategy
     every 20 seconds.
+  id: totrans-136
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: TWS发送给系统的事件最多每250毫秒发生一次。这可能不重要，因为系统每20秒只向策略发送一个条。
 - en: 'Finally with a *CASH* product and up to 20 seconds:'
+  id: totrans-137
   prefs: []
   type: TYPE_NORMAL
+  zh: 最后，对于*CASH*产品和最多20秒：
 - en: '[PRE13]'
+  id: totrans-138
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE13]'
 - en: 'In this case:'
+  id: totrans-139
   prefs: []
   type: TYPE_NORMAL
+  zh: 在这种情况下：
 - en: '*backfilling* will happen requesting a resolution of *Seconds/20*'
+  id: totrans-140
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 将会发生回溯填充，请求分辨率为*Seconds/20*
 - en: '`tickPrice` will be used for real-time data because this is a cash product'
+  id: totrans-141
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`tickPrice`将用于实时数据，因为这是现金产品'
 - en: Even if `rtbar=True` is added
+  id: totrans-142
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 即使添加了`rtbar=True`
 - en: Events to the system from TWS will happen at most every 250ms. This is possibly
     not important because the system will only send a bar to the strategy every 20
     seconds.
+  id: totrans-143
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: TWS发送给系统的事件最多每250毫秒发生一次。这可能不重要，因为系统每20秒只向策略发送一个条。
 - en: Time Management
+  id: totrans-144
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 时间管理
 - en: The data feed will automatically determine the timezone from the `ContractDetails`
     object reported by *TWS*.
+  id: totrans-145
   prefs: []
   type: TYPE_NORMAL
+  zh: 数据源将自动从*TWS*报告的`ContractDetails`对象中确定时区。
 - en: Note
+  id: totrans-146
   prefs: []
   type: TYPE_NORMAL
+  zh: 注意
 - en: This requires that `pytz` be installed. If not installed the user should supply
     with the `tz` parameter to the data source a `tzinfo` compatible instance for
     the desired output timezone
+  id: totrans-147
   prefs: []
   type: TYPE_NORMAL
+  zh: 这要求安装`pytz`。如果未安装，则用户应为数据源的`tz`参数提供与所需输出时区兼容的`tzinfo`实例
 - en: Note
+  id: totrans-148
   prefs: []
   type: TYPE_NORMAL
+  zh: 注意
 - en: If `pytz` is installed and the user feels the automatic timezone determination
     is not working, the `tz` parameter can contain a string with the name of the timezone.
     `backtrader` will try to instantiate a `pytz.timezone` with the given name
+  id: totrans-149
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果安装了`pytz`并且用户认为自动时区确定不起作用，则`tz`参数可以包含一个时区名称的字符串。`backtrader`将尝试使用给定名称实例化一个`pytz.timezone`
 - en: 'The reported `datetime` will be that of the timezone related to the product.
     Some examples:'
+  id: totrans-150
   prefs: []
   type: TYPE_NORMAL
+  zh: 报告的`datetime`将是与产品相关的时区的时间。一些示例：
 - en: '*Product*: EuroStoxxx 50 in the Eurex (ticker: *ESTX50-YYYYMM-DTB*)'
+  id: totrans-151
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '*产品*: 欧洲证券交易所的EuroStoxxx 50（股票代码：*ESTX50-YYYYMM-DTB*)'
 - en: The timezone will be `CET` (*Central European Time*) aka `Europe/Berlin`
+  id: totrans-152
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 时区将是`CET`（中欧时间），又名`Europe/Berlin`
 - en: '*Product*: ES-Mini (ticker: *ES-YYYYMM-GLOBEX*)'
+  id: totrans-153
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '*产品*: ES-Mini（股票代码：*ES-YYYYMM-GLOBEX*)'
 - en: The timezone will be `EST5EDT` aka `EST` aka `US/Eastern`
+  id: totrans-154
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 时区将是`EST5EDT`，又名`EST`，又名`US/Eastern`
 - en: '*Product*: EUR.JPY forex pair (ticker *EUR.JPY-CASH-IDEALPRO*)'
+  id: totrans-155
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '*产品*: EUR.JPY外汇对（股票代码*EUR.JPY-CASH-IDEALPRO*)'
 - en: The timezone will be `EST5EDT` aka `EST` aka `US/Eastern`
+  id: totrans-156
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 时区将是`EST5EDT`，又名`EST`，又名`US/Eastern`
 - en: Actually this is an Interactive Brokers setting, because Forex pairs trade almost
     24 hours without interruption and as such there wouldn’t be a real timezone for
     them.
+  id: totrans-157
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 实际上这是一个交互式经纪商的设置，因为外汇交易几乎连续24小时进行，因此对于它们不会有真正的时区。
 - en: This behavior makes sure that trading remains consistent regardless of the actual
     location of the trader, given that the computer will most likely have the actual
     location timezone and not the timezone of the trading venue.
+  id: totrans-158
   prefs: []
   type: TYPE_NORMAL
+  zh: 这种行为确保交易保持一致，无论交易者的实际位置如何，因为计算机很可能具有实际位置的时区，而不是交易场所的时区。
 - en: Please read the **Time Management** section of the manual.
+  id: totrans-159
   prefs: []
   type: TYPE_NORMAL
+  zh: 请阅读手册的**时间管理**部分。
 - en: Note
+  id: totrans-160
   prefs: []
   type: TYPE_NORMAL
+  zh: 注意
 - en: The TWS Demo is not accurate at reporting timezones for assets for which no
     data download permissions are available (The EuroStoxx 50 future is an example
     of those cases)
+  id: totrans-161
   prefs: []
   type: TYPE_NORMAL
+  zh: TWS Demo在没有数据下载权限的资产的时区报告方面并不准确（欧洲斯托克50期货就是这种情况的一个例子）
 - en: Live Feeds and Resampling/Replaying
+  id: totrans-162
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 实时数据源和重采样/重播
 - en: 'A design decision with regards to when to deliver bars for live feeds is:'
+  id: totrans-163
   prefs: []
   type: TYPE_NORMAL
+  zh: 关于何时为实时数据源交付条的设计决策是：
 - en: '*Deliver them as much in real-time as possible*'
+  id: totrans-164
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 尽可能实时地交付它们
 - en: 'This may seem obvious and it is the case for a timeframe of `Ticks`, but if
     *Resampling/Replaying* play a role, delays can take place. Use case:'
+  id: totrans-165
   prefs: []
   type: TYPE_NORMAL
+  zh: 这可能看起来很明显，对于`Ticks`的时间框架来说是这样，但如果*重采样/重播*起作用，延迟可能会发生。用例：
 - en: 'Resampling is configured to *Seconds/5* with:'
+  id: totrans-166
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 重采样配置为*Seconds/5*，具有：
 - en: '[PRE14]'
+  id: totrans-167
   prefs:
   - PREF_IND
   type: TYPE_PRE
+  zh: '[PRE14]'
 - en: A tick with time `23:05:27.325000` is delivered
+  id: totrans-168
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 一个时间为`23:05:27.325000`的tick被交付
 - en: Trading in the market is slow and the next tick is delivered at `23:05:59.025000`
+  id: totrans-169
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 在市场上交易速度很慢，下一个tick将在`23:05:59.025000`时到达
 - en: It may not seem obvious but *backtrader* doesn’t know that trading is very slow
     and the next tick will come in around `32` seconds later. With no provisions in
     place a resampled bar with time `23:05:30.000000` would be delivered around `29
     seconds` too late.
+  id: totrans-170
   prefs: []
   type: TYPE_NORMAL
+  zh: 也许并不明显，但*backtrader*并不知道交易速度非常慢，下一个tick大约会在`32`秒后到来。如果没有适当的措施，一个时间为`23:05:30.000000`的重采样条可能会被延迟约`29秒`。
 - en: 'That’s why the live feed wakes up every `x` seconds (*float* value) to go to
     the *Resampler/Replayer* and let it know that no new data has come in. This is
     controlled with the parameter `qcheck` (default value: `0.5` seconds) when creating
     a live data feed.'
+  id: totrans-171
   prefs: []
   type: TYPE_NORMAL
+  zh: 这就是为什么实时数据源每隔`x`秒（*float*值）唤醒一次*重采样器/重播器*并让它知道没有新数据输入。这是在创建实时数据源时通过参数`qcheck`（默认值：`0.5`秒）来控制的。
 - en: That means that the resampler has a chance every `qcheck` seconds to deliver
     a bar if the local clock says, the resampling period is over. With this in place,
     the resampled bar for the scenario above (`23:05:30.000000`) would be delivered
     at most `qcheck` seconds after the reported time.
+  id: totrans-172
   prefs: []
   type: TYPE_NORMAL
+  zh: 这意味着重采样器每隔`qcheck`秒就有机会交付一个条，如果本地时钟显示，重采样周期已经结束。这样一来，上述情景（`23:05:30.000000`）的重采样条最多会在报告时间后`qcheck`秒交付。
 - en: 'Because the default valus is `0.5` the latest time would be: `23:05:30.500000`.
     That is almost 29 seconds earlier as before.'
+  id: totrans-173
   prefs: []
   type: TYPE_NORMAL
+  zh: 因为默认值是`0.5`，所以最晚时间是：`23:05:30.500000`。几乎比以前早了29秒。
 - en: 'The drawback:'
+  id: totrans-174
   prefs: []
   type: TYPE_NORMAL
+  zh: 缺点：
 - en: '*Some ticks may come in too late for the already delivered resampled/replayed
     bar*'
+  id: totrans-175
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '*有些tick可能会对已经交付的重采样/重播的条造成延迟*'
 - en: If after delivering, TWS gets a late message from the server with a timestamp
     of `23:05:29.995\`000`, this is simply too late for the already reported time
     to the system of`23:05.30.000000`
+  id: totrans-176
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果在交付后，TWS从服务器收到一个时间戳为`23:05:29.995\`000`的延迟消息，这对于已经向系统报告的时间`23:05.30.000000`来说就太晚了
 - en: 'This happens mostly if:'
+  id: totrans-177
   prefs: []
   type: TYPE_NORMAL
+  zh: 这通常发生在以下情况下：
 - en: '`timeoffset` *is disabled (set to `False`) in `IBStore\` and the time difference
     between the *IB* reported time and the local clock is significant.'
+  id: totrans-178
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`timeoffset`在`IBStore\`中被禁用（设置为`False`），*IB*报告的时间与本地时钟的时间差很大。'
 - en: 'The best approach to avoid most of those late samples:'
+  id: totrans-179
   prefs: []
   type: TYPE_NORMAL
+  zh: 避免大部分延迟样本的最佳方法是：
 - en: 'Increase the `qcheck` value, to allow for late messages to be taken into account:'
+  id: totrans-180
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 增加`qcheck`值，以考虑延迟消息：
 - en: '[PRE15]'
+  id: totrans-181
   prefs:
   - PREF_IND
   type: TYPE_PRE
+  zh: '[PRE15]'
 - en: This should add extra room, even if it delays the delivery of the *resampled/replayed*
     bar
+  id: totrans-182
   prefs: []
   type: TYPE_NORMAL
+  zh: 这应该增加额外的空间，即使延迟了*重采样/重播*条的交付
 - en: Note
+  id: totrans-183
   prefs: []
   type: TYPE_NORMAL
+  zh: 注意
 - en: Of course a delay of 2.0 seconds has a different significance for a resampling
     of *Seconds/5* than for a resampling of *Minutes/10*
+  id: totrans-184
   prefs: []
   type: TYPE_NORMAL
+  zh: 当然，对于*Seconds/5*的重采样来说，2.0秒的延迟意义不同于*Minutes/10*的重采样
 - en: 'If for whatever reason the end-user wishes to disable `timeoffset` and not
     manage via `qcheck`, the late samples can still be taken:'
+  id: totrans-185
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果由于某种原因，最终用户希望禁用`timeoffset`并且不通过`qcheck`进行管理，则仍然可以接受延迟样本：
 - en: 'Use `_latethrough` set to `True` as a parameter to `getdata` / `IBData`:'
+  id: totrans-186
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 在`getdata` / `IBData`的参数中设置`_latethrough`为`True`：
 - en: '[PRE16]'
+  id: totrans-187
   prefs:
   - PREF_IND
   type: TYPE_PRE
+  zh: '[PRE16]'
 - en: 'Use `takelate` set to `True` when *resampling/replaying*:'
+  id: totrans-188
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 在*重采样/重播*时设置`takelate`为`True`：
 - en: '[PRE17]'
+  id: totrans-189
   prefs:
   - PREF_IND
   type: TYPE_PRE
+  zh: '[PRE17]'
 - en: IBBroker - Trading Live
+  id: totrans-190
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: IBBroker - 实时交易
 - en: Note
+  id: totrans-191
   prefs: []
   type: TYPE_NORMAL
+  zh: 注意
 - en: Following a request a `tradeid` functionality was implemented in the *broker
     simulation* available in *backtrader*. This allows to keep track of trades being
     executed in paralled on the same asset correctly allocating commissions to the
     appropriate `tradeid`
+  id: totrans-192
   prefs: []
   type: TYPE_NORMAL
+  zh: 在*backtrader*中的*经纪人模拟*中实现了`tradeid`功能。这允许正确地跟踪在同一资产上并行执行的交易，并将佣金正确地分配给适当的`tradeid`
 - en: Such notion is not supported in this live broker because commissions are reported
     by the broker at times at which it would be impossible to separate them for the
     different `tradeid` values.
+  id: totrans-193
   prefs: []
   type: TYPE_NORMAL
+  zh: 此概念在此实时经纪人中不受支持，因为佣金是由经纪人报告的，而在某些情况下，不可能将其分离为不同的`tradeid`值。
 - en: '`tradeid` can still be specified but it makes no longer sense.'
+  id: totrans-194
   prefs: []
   type: TYPE_NORMAL
+  zh: '`tradeid`仍然可以指定，但不再有意义。'
 - en: Using the broker
+  id: totrans-195
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 使用经纪人
 - en: To use the *IB Broker*, the standard broker simulation instance created by *cerebro*
     has to be replaced.
+  id: totrans-196
   prefs: []
   type: TYPE_NORMAL
+  zh: 要使用*IB Broker*，必须替换由*cerebro*创建的标准经纪人模拟实例。
 - en: 'Using the *Store* model (preferred):'
+  id: totrans-197
   prefs: []
   type: TYPE_NORMAL
+  zh: 使用*Store*模型（首选）：
 - en: '[PRE18]'
+  id: totrans-198
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE18]'
 - en: 'Using the direct approach:'
+  id: totrans-199
   prefs: []
   type: TYPE_NORMAL
+  zh: 使用直接方法：
 - en: '[PRE19]'
+  id: totrans-200
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE19]'
 - en: Broker Parameters
+  id: totrans-201
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 经纪人参数
 - en: Be it directly or over `getbroker` the `IBBroker` broker supports no parameters.
     This is because the broker is just a proxy to the a real *Broker*. And what the
     real broker gives, shall not be taken away.
+  id: totrans-202
   prefs: []
   type: TYPE_NORMAL
+  zh: 不管是直接还是通过`getbroker`，`IBBroker`经纪人都不支持任何参数。这是因为经纪人只是一个真实*经纪人*的代理。真实经纪人给予的，不应被剥夺。
 - en: Some restrictions
+  id: totrans-203
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 一些限制
 - en: Cash and Value reporting
+  id: totrans-204
   prefs:
   - PREF_H4
   type: TYPE_NORMAL
+  zh: 现金和价值报告
 - en: Where the internal *backtrader* broker simulation makes a calculation of `value`
     (net liquidation value) and `cash` before calling the strategy `next` method,
     the same cannot be guaranteed with a live broker.
+  id: totrans-205
   prefs: []
   type: TYPE_NORMAL
+  zh: 当内部的*backtrader*经纪人模拟在调用策略的`next`方法之前对`value`（净清算价值）和`cash`进行计算时，无法保证与实时经纪人相同。
 - en: If the values were requested, the execution of `next` could be delayed until
     the answers arrive
+  id: totrans-206
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 如果请求了值，则可能会延迟`next`的执行，直到回答到达
 - en: The broker may not yet have calculated the values
+  id: totrans-207
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 经纪人可能尚未计算出这些值
 - en: '*backtrader* tells TWS to provide the updated values as soon as they are changed
     (*backtrader* subscribes to `accounUpdate` messages), but it doesn’t know when
     the messages will arrive.'
+  id: totrans-208
   prefs: []
   type: TYPE_NORMAL
+  zh: '*backtrader*告诉TWS在它们更改时提供更新的值（*backtrader*订阅`accounUpdate`消息），但它不知道消息何时到达。'
 - en: The values reported by the `getcash` and `getvalue` methods of `IBBroker` are
     always the latest values received from IB.
+  id: totrans-209
   prefs: []
   type: TYPE_NORMAL
+  zh: '`IBBroker`的`getcash`和`getvalue`方法报告的值始终是从IB接收到的最新值。'
 - en: Note
+  id: totrans-210
   prefs: []
   type: TYPE_NORMAL
+  zh: 注意
 - en: A further restriction is that the values are reported in the base currency of
     the account, even if values for more currencies are available. This is a design
     choise.
+  id: totrans-211
   prefs: []
   type: TYPE_NORMAL
+  zh: 进一步的限制是，即使有更多货币的值可用，这些值也以帐户的基本货币报告。这是一个设计选择。
 - en: Position
+  id: totrans-212
   prefs:
   - PREF_H4
   type: TYPE_NORMAL
+  zh: 位置
 - en: '*backtrader* uses the `Position` (price and size) of an asset reported by TWS.
     Internal calculations could be used following *order execution* and *order status*
     messages, but if some of these messages were missed (sockets sometimes lose packets)
     the calculations would not follow.'
+  id: totrans-213
   prefs: []
   type: TYPE_NORMAL
+  zh: '*backtrader*使用TWS报告的资产的`Position`（价格和大小）。在*order execution*和*order status*消息后，内部计算可以被使用，但是如果其中一些消息被错过（套接字有时会丢失数据包），则计算将无法进行。'
 - en: Of course if upon connecting to TWS the asset on which trades will be executed
     already has an open position, the calculation of `Trades` made by the strategy
     will not work as usual because of the initial offset
+  id: totrans-214
   prefs: []
   type: TYPE_NORMAL
+  zh: 当然，如果连接到TWS时将执行交易的资产已经有一个开放的头寸，由于初始偏移，策略所做的`Trades`的计算将不会像通常一样工作
 - en: Trading with it
+  id: totrans-215
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 与其进行交易
 - en: There is no change with regards to the standard usage. Just use the methods
     available in the strategy (see the `Strategy` reference for a full explanation)
+  id: totrans-216
   prefs: []
   type: TYPE_NORMAL
+  zh: 就标准用法而言，没有变化。只需使用策略中可用的方法（有关完整说明，请参阅`Strategy`参考资料）
 - en: '`buy`'
+  id: totrans-217
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`buy`'
 - en: '`sell`'
+  id: totrans-218
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`sell`'
 - en: '`close`'
+  id: totrans-219
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`close`'
 - en: '`cancel`'
+  id: totrans-220
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`cancel`'
 - en: Order objects returned
+  id: totrans-221
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 返回的订单对象
 - en: Compatible with the backtrader `Order` objects (subclass in the same hierarchy)
+  id: totrans-222
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 与backtrader的`Order`对象兼容（在同一层次结构中的子类）
 - en: Order Execution Types
+  id: totrans-223
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 订单执行类型
 - en: 'IB supports a myriad of execution types, some of them simulated by IB and some
     of them supported by the exchange itself. The decision as to which order execution
     types to initially support has a motivation:'
+  id: totrans-224
   prefs: []
   type: TYPE_NORMAL
+  zh: IB支持各种执行类型，其中一些由IB模拟，一些由交易所本身支持。最初支持哪些订单执行类型的决定有一个动机：
 - en: Compatibility with the *broker simulation* available in *backtrader*
+  id: totrans-225
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 与*backtrader*中可用的*经纪人模拟*兼容性
 - en: The reasoning being that what has been back-tested is what will go in production.
+  id: totrans-226
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 这是因为经过回测的内容将会投入生产。
 - en: 'As such the order execution types are limited to the ones available in the
     *broker simulation*:'
+  id: totrans-227
   prefs: []
   type: TYPE_NORMAL
+  zh: 因此，订单执行类型仅限于*broker simulation*中可用的类型：
 - en: '`Order.Market`'
+  id: totrans-228
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`Order.Market`'
 - en: '`Order.Close`'
+  id: totrans-229
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`Order.Close`'
 - en: '`Order.Limit`'
+  id: totrans-230
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`Order.Limit`'
 - en: '`Order.Stop` (when the *Stop* is triggered a *Market* order follows)'
+  id: totrans-231
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`Order.Stop`（当*Stop*触发时，*Market*订单跟随）'
 - en: '`Order.StopLimit` (when the *Stop* is triggered a *Limit* order follows)'
+  id: totrans-232
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`Order.StopLimit`（当*Stop*触发时，*Limit*订单跟随）'
 - en: Note
+  id: totrans-233
   prefs: []
   type: TYPE_NORMAL
+  zh: 注意
 - en: 'Stop triggering is done following different strategies by IB. *backtrader*
     does not modify the default setting which is `0`:'
+  id: totrans-234
   prefs: []
   type: TYPE_NORMAL
+  zh: 停止触发是根据不同的策略由IB执行的。*backtrader*不修改默认设置，即为`0`：
 - en: '[PRE20]'
+  id: totrans-235
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE20]'
 - en: 'If the user wishes to modify this, extra `**kwargs` can be supplied to `buy`
     and `sell` following the IB documentation. For example inside the `next` method
     of a strategy:'
+  id: totrans-236
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果用户希望修改此项，可以根据IB文档提供的额外`**kwargs`向`buy`和`sell`提供。例如，在策略的`next`方法中：
 - en: '[PRE21]'
+  id: totrans-237
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE21]'
 - en: This has changed the policy to `2` (*“last” method, where stop orders are triggered
     based on the last price.*)
+  id: totrans-238
   prefs: []
   type: TYPE_NORMAL
+  zh: 这已更改策略为`2`（*“last”方法，其中停止订单基于最后价格触发*）
 - en: Please consult the IB API docs for any further clarification on stop triggering
+  id: totrans-239
   prefs: []
   type: TYPE_NORMAL
+  zh: 请参阅IB API文档以获取有关停止触发的进一步澄清
 - en: Order Validity
+  id: totrans-240
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 订单有效期
 - en: 'The same validity notion available during backtesting (with `valid` to `buy`
     and `sell`) is available and with the same meaning. As such, the `valid` parameter
     is translated as follows for *IB Orders* for the following values:'
+  id: totrans-241
   prefs: []
   type: TYPE_NORMAL
+  zh: 在回测期间可用的相同有效性概念（使用`valid`来`buy`和`sell`）也可用，并具有相同的含义。因此，对于以下*IB订单*的`valid`参数翻译如下：
 - en: '`None -> GTC` (Good Til Cancelled)'
+  id: totrans-242
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`None -> GTC`（Good Til Cancelled）'
 - en: Because no validity has been specified it is understood that the order must
     be valid until cancelled
+  id: totrans-243
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 因为没有指定有效期，所以理解为订单必须有效直到取消
 - en: '`datetime/date` translates to `GTD` (Good Til Date)'
+  id: totrans-244
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`datetime/date`翻译为`GTD`（Good Til Date）'
 - en: Passing a datetime.datetime/datetime.date instance indicates the order must
     be valid until a given point in time.
+  id: totrans-245
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 传递`datetime.datetime/datetime.date`实例表示订单必须有效直到给定时间点。
 - en: '`timedelta(x)` translates to `GTD` (here `timedelta(x) != timedelta()`)'
+  id: totrans-246
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`timedelta(x)`翻译为`GTD`（这里`timedelta(x) != timedelta()`）'
 - en: This is interpreted as a signal to have an order be valid from `now` + `timedelta(x)`
+  id: totrans-247
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 这被解释为指示订单从`now` + `timedelta(x)`开始有效
 - en: '`float` translates to `GTD`'
+  id: totrans-248
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`float`翻译为`GTD`'
 - en: If the value has been taken from the raw *float* datetime storage used by *backtrader*
     the order must valid until the datetime indicated by that *float*
+  id: totrans-249
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 如果该值来自*backtrader*使用的原始*float*日期时间存储，则订单必须有效直到由该*float*指示的日期时间
 - en: '`timedelta() or 0` translates to `DAY`'
+  id: totrans-250
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`timedelta() or 0`翻译为`DAY`'
 - en: A value has been (instead of `None`) but is *Null* and is interpreted as an
     order valid for the current *day* (session)
+  id: totrans-251
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 已有一个值（而不是`None`），但是为空，被解释为当前*day*（session）有效的订单
 - en: Notifications
+  id: totrans-252
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 通知
 - en: The standard `Order` status will be notified to a *strategy* over the method
     `notify_order` (if overridden)
+  id: totrans-253
   prefs: []
   type: TYPE_NORMAL
+  zh: 标准的`Order`状态将通过方法`notify_order`（如果已重写）通知给*strategy*
 - en: '`Submitted` - the order has been sent to TWS'
+  id: totrans-254
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`Submitted` - 订单已发送到TWS'
 - en: '`Accepted` - the order has been placed'
+  id: totrans-255
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`Accepted` - 订单已下达'
 - en: '`Rejected` - order placement failed or was cancelled by the system during its
     lifetime'
+  id: totrans-256
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`Rejected` - 订单放置失败或在其生命周期内被系统取消'
 - en: '`Partial` - a partial execution has taken place'
+  id: totrans-257
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`Partial` - 已经部分执行'
 - en: '`Completed` - the order has been fully executed'
+  id: totrans-258
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`Completed` - 订单已完全执行'
 - en: '`Canceled` (or `Cancelled`)'
+  id: totrans-259
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`Canceled`（或`Cancelled`）'
 - en: 'This has several meanings under IB:'
+  id: totrans-260
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 这在IB下有几个意思：
 - en: Manual User Cancellation
+  id: totrans-261
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 手动用户取消
 - en: The Server/Exchange cancelled the order
+  id: totrans-262
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 服务器/交易所取消了订单
 - en: Order Validity expired
+  id: totrans-263
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 订单有效期已过期
 - en: An heuristic will be applied and if an `openOrder` message has been received
     from TWS with an `orderState` indicating `PendingCancel` or `Canceled`, then the
     order will be marked as `Expired`
+  id: totrans-264
   prefs:
   - PREF_IND
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 将应用启发式方法，如果已从TWS接收到带有`orderState`指示为`PendingCancel`或`Canceled`的`openOrder`消息，则订单将被标记为`已过期`
 - en: '`Expired` - See above for the explanation'
+  id: totrans-265
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`已过期` - 请参阅上文的解释'
 - en: Reference
+  id: totrans-266
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 参考
 - en: IBStore
+  id: totrans-267
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: IBStore
 - en: class backtrader.stores.IBStore()
+  id: totrans-268
   prefs:
   - PREF_H4
   type: TYPE_NORMAL
+  zh: 类backtrader.stores.IBStore()
 - en: Singleton class wrapping an ibpy ibConnection instance.
+  id: totrans-269
   prefs: []
   type: TYPE_NORMAL
+  zh: 封装一个ibpy ibConnection实例的单例类。
 - en: The parameters can also be specified in the classes which use this store, like
     `IBData` and `IBBroker`
+  id: totrans-270
   prefs: []
   type: TYPE_NORMAL
+  zh: 参数也可以在使用此存储的类中指定，如`IBData`和`IBBroker`
 - en: 'Params:'
+  id: totrans-271
   prefs: []
   type: TYPE_NORMAL
+  zh: 参数：
 - en: '`host` (default:`127.0.0.1`): where IB TWS or IB Gateway are actually running.
     And although this will usually be the localhost, it must not be'
+  id: totrans-272
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`host`（默认：`127.0.0.1`）：IB TWS或IB Gateway实际运行的位置。尽管这通常是本地主机，但不应该是'
 - en: '`port` (default: `7496`): port to connect to. The demo system uses `7497`'
+  id: totrans-273
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`port`（默认值：`7496`）：连接的端口。演示系统使用`7497`'
 - en: '`clientId` (default: `None`): which clientId to use to connect to TWS.'
+  id: totrans-274
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`clientId`（默认值：`None`）：要用于连接到TWS的客户端ID。'
 - en: '`None`: generates a random id between 1 and 65535 An `integer`: will be passed
     as the value to use.'
+  id: totrans-275
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: '`None`：生成1到65535之间的随机ID。一个`整数`：将作为要使用的值传递。'
 - en: '`notifyall` (default: `False`)'
+  id: totrans-276
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`notifyall`（默认值：`False`）'
 - en: If `False` only `error` messages will be sent to the `notify_store` methods
     of `Cerebro` and `Strategy`.
+  id: totrans-277
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 如果为`False`，则只会将`error`消息发送到`Cerebro`和`Strategy`的`notify_store`方法。
 - en: If `True`, each and every message received from TWS will be notified
+  id: totrans-278
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 如果为`True`，则会通知从TWS接收到的每条消息
 - en: '`_debug` (default: `False`)'
+  id: totrans-279
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`_debug`（默认值：`False`）'
 - en: Print all messages received from TWS to standard output
+  id: totrans-280
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 打印从TWS接收到的所有消息到标准输出
 - en: '`reconnect` (default: `3`)'
+  id: totrans-281
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`reconnect`（默认值：`3`）'
 - en: Number of attempts to try to reconnect after the 1^(st) connection attempt fails
+  id: totrans-282
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 在第1次连接尝试失败后，尝试重新连接的次数。
 - en: Set it to a `-1` value to keep on reconnecting forever
+  id: totrans-283
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 将其设置为`-1`值以永远保持重新连接
 - en: '`timeout` (default: `3.0`)'
+  id: totrans-284
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`timeout`（默认值：`3.0`）'
 - en: Time in seconds between reconnection attemps
+  id: totrans-285
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 重新连接尝试之间的秒数
 - en: '`timeoffset` (default: `True`)'
+  id: totrans-286
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`timeoffset`（默认值：`True`）'
 - en: If True, the time obtained from `reqCurrentTime` (IB Server time) will be used
     to calculate the offset to localtime and this offset will be used for the price
     notifications (tickPrice events, for example for CASH markets) to modify the locally
     calculated timestamp.
+  id: totrans-287
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 如果为True，则将从`reqCurrentTime`（IB服务器时间）获得的时间用于计算到本地时间的偏移量，并且此偏移量将用于价格通知（例如用于CASH市场的tickPrice事件）以修改本地计算的时间戳。
 - en: The time offset will propagate to other parts of the `backtrader` ecosystem
     like the **resampling** to align resampling timestamps using the calculated offset.
+  id: totrans-288
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 时间偏移将传播到`backtrader`生态系统的其他部分，例如**重新采样**，以使用计算出的偏移量对齐重新采样时间戳。
 - en: '`timerefresh` (default: `60.0`)'
+  id: totrans-289
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`timerefresh`（默认值：`60.0`）'
 - en: 'Time in seconds: how often the time offset has to be refreshed'
+  id: totrans-290
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 秒数：时间偏移量必须刷新的频率
 - en: '`indcash` (default: `True`)'
+  id: totrans-291
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`indcash`（默认值：`True`）'
 - en: Manage IND codes as if they were cash for price retrieval
+  id: totrans-292
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 将IND代码视为现金进行价格检索
 - en: IBBroker
+  id: totrans-293
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: IBBroker
 - en: class backtrader.brokers.IBBroker(**kwargs)
+  id: totrans-294
   prefs:
   - PREF_H4
   type: TYPE_NORMAL
+  zh: 类`backtrader.brokers.IBBroker(**kwargs)`
 - en: Broker implementation for Interactive Brokers.
+  id: totrans-295
   prefs: []
   type: TYPE_NORMAL
+  zh: 用于Interactive Brokers的经纪实现。
 - en: This class maps the orders/positions from Interactive Brokers to the internal
     API of `backtrader`.
+  id: totrans-296
   prefs: []
   type: TYPE_NORMAL
+  zh: 此类将Interactive Brokers的订单/持仓映射到`backtrader`的内部API。
 - en: Notes
+  id: totrans-297
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 注意
 - en: '`tradeid` is not really supported, because the profit and loss are taken directly
     from IB. Because (as expected) calculates it in FIFO manner, the pnl is not accurate
     for the tradeid.'
+  id: totrans-298
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 实际上不支持`tradeid`，因为利润和损失直接来自IB。因为（如预期的那样）以FIFO方式计算，所以对于`tradeid`，利润和损失并不准确。
 - en: Position
+  id: totrans-299
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 仓位
 - en: If there is an open position for an asset at the beginning of operaitons or
     orders given by other means change a position, the trades calculated in the `Strategy`
     in cerebro will not reflect the reality.
+  id: totrans-300
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果在操作开始时有资产的持仓或通过其他方式给出的订单改变了持仓，那么在`cerebro`中计算的交易将不反映现实。
 - en: To avoid this, this broker would have to do its own position management which
     would also allow tradeid with multiple ids (profit and loss would also be calculated
     locally), but could be considered to be defeating the purpose of working with
     a live broker
+  id: totrans-301
   prefs: []
   type: TYPE_NORMAL
+  zh: 为了避免这种情况，该经纪商将不得不进行自己的持仓管理，这也将允许使用多个ID进行交易（利润和损失也将在本地计算），但可能被认为是与实时经纪商合作的目的相悖。
 - en: IBData
+  id: totrans-302
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: IBData
 - en: class backtrader.feeds.IBData(**kwargs)
+  id: totrans-303
   prefs:
   - PREF_H4
   type: TYPE_NORMAL
+  zh: 类`backtrader.feeds.IBData(**kwargs)`
 - en: Interactive Brokers Data Feed.
+  id: totrans-304
   prefs: []
   type: TYPE_NORMAL
+  zh: Interactive Brokers数据源。
 - en: 'Supports the following contract specifications in parameter `dataname`:'
+  id: totrans-305
   prefs: []
   type: TYPE_NORMAL
+  zh: 支持参数`dataname`中的以下合同规格：
 - en: 'TICKER # Stock type and SMART exchange'
+  id: totrans-306
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 'TICKER # 股票类型和SMART交易所'
 - en: 'TICKER-STK # Stock and SMART exchange'
+  id: totrans-307
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 'TICKER-STK # 股票和SMART交易所'
 - en: 'TICKER-STK-EXCHANGE # Stock'
+  id: totrans-308
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 'TICKER-STK-EXCHANGE # 股票'
 - en: 'TICKER-STK-EXCHANGE-CURRENCY # Stock'
+  id: totrans-309
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 'TICKER-STK-EXCHANGE-CURRENCY # 股票'
 - en: 'TICKER-CFD # CFD and SMART exchange'
+  id: totrans-310
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 'TICKER-CFD # 差价合约和SMART交易所'
 - en: 'TICKER-CFD-EXCHANGE # CFD'
+  id: totrans-311
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 'TICKER-CFD-EXCHANGE # 差价合约'
 - en: 'TICKER-CDF-EXCHANGE-CURRENCY # Stock'
+  id: totrans-312
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 'TICKER-CDF-EXCHANGE-CURRENCY # 股票'
 - en: 'TICKER-IND-EXCHANGE # Index'
+  id: totrans-313
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 'TICKER-IND-EXCHANGE # 指数'
 - en: 'TICKER-IND-EXCHANGE-CURRENCY # Index'
+  id: totrans-314
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 'TICKER-IND-EXCHANGE-CURRENCY # 指数'
 - en: 'TICKER-YYYYMM-EXCHANGE # Future'
+  id: totrans-315
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 'TICKER-YYYYMM-EXCHANGE # 期货'
 - en: 'TICKER-YYYYMM-EXCHANGE-CURRENCY # Future'
+  id: totrans-316
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 'TICKER-YYYYMM-EXCHANGE-CURRENCY # 期货'
 - en: 'TICKER-YYYYMM-EXCHANGE-CURRENCY-MULT # Future'
+  id: totrans-317
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 'TICKER-YYYYMM-EXCHANGE-CURRENCY-MULT # 期货'
 - en: 'TICKER-FUT-EXCHANGE-CURRENCY-YYYYMM-MULT # Future'
+  id: totrans-318
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 'TICKER-FUT-EXCHANGE-CURRENCY-YYYYMM-MULT # 期货'
 - en: 'TICKER-YYYYMM-EXCHANGE-CURRENCY-STRIKE-RIGHT # FOP'
+  id: totrans-319
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 'TICKER-YYYYMM-EXCHANGE-CURRENCY-STRIKE-RIGHT # 期权'
 - en: 'TICKER-YYYYMM-EXCHANGE-CURRENCY-STRIKE-RIGHT-MULT # FOP'
+  id: totrans-320
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 'TICKER-YYYYMM-EXCHANGE-CURRENCY-STRIKE-RIGHT-MULT # 期权'
 - en: 'TICKER-FOP-EXCHANGE-CURRENCY-YYYYMM-STRIKE-RIGHT # FOP'
+  id: totrans-321
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 'TICKER-FOP-EXCHANGE-CURRENCY-YYYYMM-STRIKE-RIGHT # 期权组合'
 - en: 'TICKER-FOP-EXCHANGE-CURRENCY-YYYYMM-STRIKE-RIGHT-MULT # FOP'
+  id: totrans-322
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 'TICKER-FOP-EXCHANGE-CURRENCY-YYYYMM-STRIKE-RIGHT-MULT # 期权组合'
 - en: 'CUR1.CUR2-CASH-IDEALPRO # Forex'
+  id: totrans-323
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 'CUR1.CUR2-CASH-IDEALPRO # 外汇'
 - en: 'TICKER-YYYYMMDD-EXCHANGE-CURRENCY-STRIKE-RIGHT # OPT'
+  id: totrans-324
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 'TICKER-YYYYMMDD-EXCHANGE-CURRENCY-STRIKE-RIGHT # 期权'
 - en: 'TICKER-YYYYMMDD-EXCHANGE-CURRENCY-STRIKE-RIGHT-MULT # OPT'
+  id: totrans-325
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 'TICKER-YYYYMMDD-EXCHANGE-CURRENCY-STRIKE-RIGHT-MULT # 期权'
 - en: 'TICKER-OPT-EXCHANGE-CURRENCY-YYYYMMDD-STRIKE-RIGHT # OPT'
+  id: totrans-326
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 'TICKER-OPT-EXCHANGE-CURRENCY-YYYYMMDD-STRIKE-RIGHT # 期权'
 - en: 'TICKER-OPT-EXCHANGE-CURRENCY-YYYYMMDD-STRIKE-RIGHT-MULT # OPT'
+  id: totrans-327
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 'TICKER-OPT-EXCHANGE-CURRENCY-YYYYMMDD-STRIKE-RIGHT-MULT # 期权'
 - en: 'Params:'
+  id: totrans-328
   prefs: []
   type: TYPE_NORMAL
+  zh: Params：
 - en: '`sectype` (default: `STK`)'
+  id: totrans-329
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`sectype`（默认：`STK`）'
 - en: Default value to apply as *security type* if not provided in the `dataname`
     specification
+  id: totrans-330
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 如果在`dataname`规范中未提供*证券类型*，则应用的默认值
 - en: '`exchange` (default: `SMART`)'
+  id: totrans-331
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`exchange`（默认：`SMART`）'
 - en: Default value to apply as *exchange* if not provided in the `dataname` specification
+  id: totrans-332
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 如果在`dataname`规范中未提供*交易所*，则应用的默认值
 - en: '`currency` (default: `''''`)'
+  id: totrans-333
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`currency`（默认：`''''`）'
 - en: Default value to apply as *currency* if not provided in the `dataname` specification
+  id: totrans-334
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 如果在`dataname`规范中未提供*货币*，则应用的默认值
 - en: '`historical` (default: `False`)'
+  id: totrans-335
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`historical`（默认：`False`）'
 - en: If set to `True` the data feed will stop after doing the first download of data.
+  id: totrans-336
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 如果设置为`True`，数据源将在第一次下载数据后停止。
 - en: The standard data feed parameters `fromdate` and `todate` will be used as reference.
+  id: totrans-337
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 将使用标准数据源参数`fromdate`和`todate`作为参考。
 - en: The data feed will make multiple requests if the requested duration is larger
     than the one allowed by IB given the timeframe/compression chosen for the data.
+  id: totrans-338
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 如果请求的持续时间大于由IB给定的允许的数据时间段/压缩，则数据源将发出多个请求。
 - en: '`what` (default: `None`)'
+  id: totrans-339
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`what`（默认：`None`）'
 - en: 'If `None` the default for different assets types will be used for historical
     data requests:'
+  id: totrans-340
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 如果为`None`，则历史数据请求将使用不同资产类型的默认值：
 - en: ‘BID’ for CASH assets
+  id: totrans-341
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 对于CASH资产，为‘BID’
 - en: ‘TRADES’ for any other
+  id: totrans-342
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 对于任何其他交易
 - en: Check the IB API docs if another value is wished
+  id: totrans-343
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 如果希望使用另一个值，请查看IB API文档
 - en: '`rtbar` (default: `False`)'
+  id: totrans-344
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`rtbar`（默认：`False`）'
 - en: If `True` the `5 Seconds Realtime bars` provided by Interactive Brokers will
     be used as the smalles tick. According to the documentation they correspond to
     real-time values (once collated and curated by IB)
+  id: totrans-345
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 如果为`True`，则将使用由Interactive Brokers提供的`5秒实时数据条`作为最小刻度。根据文档，它们对应于实时值（一旦被IB整理和筛选）
 - en: If `False` then the `RTVolume` prices will be used, which are based on receiving
     ticks. In the case of `CASH` assets (like for example EUR.JPY) `RTVolume` will
     always be used and from it the `bid` price (industry de-facto standard with IB
     according to the literature scattered over the Internet)
+  id: totrans-346
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 如果为`False`，则将使用基于接收到的刻度的`RTVolume`价格。对于`CASH`资产（例如EUR.JPY），将始终使用`RTVolume`，并从中获取`bid`价格（根据互联网上零散的文献，这是IB的行业事实标准）
 - en: Even if set to `True`, if the data is resampled/kept to a timeframe/compression
     below Seconds/5, no real time bars will be used, because IB doesn’t serve them
     below that level
+  id: totrans-347
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 即使设置为`True`，如果数据被重新采样/保留到低于秒/5的时间段/压缩，也不会使用实时数据，因为IB不会在该级别以下提供它们
 - en: '`qcheck` (default: `0.5`)'
+  id: totrans-348
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`qcheck`（默认：`0.5`）'
 - en: Time in seconds to wake up if no data is received to give a chance to resample/replay
     packets properly and pass notifications up the chain
+  id: totrans-349
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 如果未收到数据，等待的时间（秒）以便适当地对数据包进行重新采样/重播并将通知传递给链上
 - en: '`backfill_start` (default: `True`)'
+  id: totrans-350
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`backfill_start`（默认：`True`）'
 - en: Perform backfilling at the start. The maximum possible historical data will
     be fetched in a single request.
+  id: totrans-351
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 在开始时执行回填。将在单个请求中获取尽可能多的历史数据。
 - en: '`backfill` (default: `True`)'
+  id: totrans-352
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`backfill`（默认：`True`）'
 - en: Perform backfilling after a disconnection/reconnection cycle. The gap duration
     will be used to download the smallest possible amount of data
+  id: totrans-353
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 在断开连接/重新连接周期后执行回填。间隙持续时间将用于下载尽可能少的数据
 - en: '`backfill_from` (default: `None`)'
+  id: totrans-354
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`backfill_from`（默认：`None`）'
 - en: An additional data source can be passed to do an initial layer of backfilling.
     Once the data source is depleted and if requested, backfilling from IB will take
     place. This is ideally meant to backfill from already stored sources like a file
     on disk, but not limited to.
+  id: totrans-355
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 可以传递附加数据源来进行初始回填。一旦数据源用尽，并且如果需要，将从IB进行回填。理想情况下，这意味着从已存储的源（如磁盘上的文件）进行回填，但不限于此。
 - en: '`latethrough` (default: `False`)'
+  id: totrans-356
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`latethrough`（默认：`False`）'
 - en: If the data source is resampled/replayed, some ticks may come in too late for
     the already delivered resampled/replayed bar. If this is `True` those ticks will
     bet let through in any case.
+  id: totrans-357
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 如果数据源被重采样/重播，一些 ticks 可能来得太晚，已经交付的重采样/重播 bar 了。如果设置为 `True`，那些 ticks 将无论如何通过。
 - en: Check the Resampler documentation to see who to take those ticks into account.
+  id: totrans-358
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 检查重采样文档以了解如何考虑这些 ticks。
 - en: This can happen especially if `timeoffset` is set to `False` in the `IBStore`
     instance and the TWS server time is not in sync with that of the local computer
+  id: totrans-359
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 这种情况可能特别发生在 `IBStore` 实例中 `timeoffset` 设置为 `False`，且 TWS 服务器时间与本地计算机时间不同步时
 - en: '`tradename` (default: `None`) Useful for some specific cases like `CFD` in
     which prices are offered by one asset and trading happens in a different onel'
+  id: totrans-360
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`tradename`（默认：`None`）对于某些特定情况很有用，比如 `CFD`，其中价格由一种资产提供，交易发生在另一种资产上。'
 - en: SPY-STK-SMART-USD -> SP500 ETF (will be specified as `dataname`)
+  id: totrans-361
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: SPY-STK-SMART-USD -> 标普500 ETF（将被指定为 `dataname`）
 - en: SPY-CFD-SMART-USD -> which is the corresponding CFD which offers not price tracking
     but in this case will be the trading asset (specified as `tradename`)
+  id: totrans-362
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: SPY-CFD-SMART-USD -> 对应的 CFD 提供的不是价格跟踪，而是交易资产（指定为 `tradename`）
 - en: The default values in the params are the to allow things like `\`TICKER`, to
     which the parameter`sectype`(default:`STK`) and`exchange`(default:`SMART`) are
     applied.
+  id: totrans-363
   prefs: []
   type: TYPE_NORMAL
+  zh: 参数中的默认值是允许类似 `\`TICKER` 这样的东西，其中参数 `sectype`（默认：`STK`）和 `exchange`（默认：`SMART`）被应用。
 - en: 'Some assets like `AAPL` need full specification including `currency` (default:
     ‘’) whereas others like `TWTR` can be simply passed as it is.'
+  id: totrans-364
   prefs: []
   type: TYPE_NORMAL
+  zh: 一些资产如 `AAPL` 需要完整的规范，包括 `currency`（默认：‘’），而其他资产如 `TWTR` 可以直接传递。
 - en: '`AAPL-STK-SMART-USD` would be the full specification for dataname'
+  id: totrans-365
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`AAPL-STK-SMART-USD` 将是 dataname 的完整规范'
 - en: 'Or else: `IBData` as `IBData(dataname=''AAPL'', currency=''USD'')` which uses
     the default values (`STK` and `SMART`) and overrides the currency to be `USD`'
+  id: totrans-366
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 或者：`IBData` 作为 `IBData(dataname='AAPL', currency='USD')`，它使用默认值（`STK` 和 `SMART`），并覆盖货币为
+    `USD`

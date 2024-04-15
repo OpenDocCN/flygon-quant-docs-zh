@@ -1,183 +1,273 @@
 - en: MFI Generic
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: MFI 通用
 - en: 原文：[https://www.backtrader.com/blog/2019-07-17-mfi-generic/mfi-generic/](https://www.backtrader.com/blog/2019-07-17-mfi-generic/mfi-generic/)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.backtrader.com/blog/2019-07-17-mfi-generic/mfi-generic/](https://www.backtrader.com/blog/2019-07-17-mfi-generic/mfi-generic/)
 - en: In the recent [Canonical vs Non-Canonical](../../2019-07-08-canonical-or-not/canonical-or-not/)
     post, the `MFI` (aka `MoneyFlowIndicator`) was developed.
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: 在最近的[规范与非规范](../../2019-07-08-canonical-or-not/canonical-or-not/)文章中，开发了`MFI`（也称为`MoneyFlowIndicator`）。
 - en: Although it is developed in the *canonical* way, it does still offer some room
     for improvement and becoming generic.
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: 尽管它是以*规范*方式开发的，但仍然存在一些改进和通用化的空间。
 - en: Let's focus of the 1^(st) lines of the implementation, the ones which create
     the typical price
+  id: totrans-4
   prefs: []
   type: TYPE_NORMAL
+  zh: 让我们关注实现的第1行，创建典型价格的行
 - en: '[PRE0]'
+  id: totrans-5
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: A typical instantiation would look like this
+  id: totrans-6
   prefs: []
   type: TYPE_NORMAL
+  zh: 典型的实例化可能如下所示
 - en: '[PRE1]'
+  id: totrans-7
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE1]'
 - en: 'The problem here should be obvious: *"One needs an input for the indicator
     which features `close`, `low`, `high` and `volume` components (aka *lines* in
     the *backtrader* ecosystem)"*'
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: 这里的问题应该是显而易见的：“需要为具有`close`、`low`、`high`和`volume`组件（也称为*backtrader*生态系统中的*lines*）的指标提供输入”
 - en: It may, of course, be the case that one wishes to create a `MoneyFlowIndicator`
     using components from different data sources (lines from data feeds or lines from
     other indicators) As simple as wanting to give the `close` a lot more weight,
     without having to develop a specific indicator. Considering the industry-standard
     `OHLCV` field ordering, a multiple inputs, extra weight for `close`, instantiation
     could look like this
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: 当然，可能会有这样一种情况，即希望使用来自不同数据源（数据源的线或其他指标的线）的组件创建`MoneyFlowIndicator`，就像想要给`close`赋予更大的权重一样，而无需开发特定的指标。考虑到行业标准的`OHLCV`字段排序，一个多输入、额外加权`close`的实例化可能如下所示
 - en: '[PRE2]'
+  id: totrans-10
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE2]'
 - en: Or because the user previously worked with `ta-lib` and fancies the multiple
     inputs style.
+  id: totrans-11
   prefs: []
   type: TYPE_NORMAL
+  zh: 或者因为用户之前使用过`ta-lib`，喜欢多输入样式。
 - en: Supporting multiple inputs
+  id: totrans-12
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 支持多个输入
 - en: '*backtrader* tries to be as *pythonic* as possible and the `self.datas` array
     containing the list of data feeds in the system (and which is auto-magically provided
     to your strategy) can be queried for its length. Let''s use this to discriminate
     what the caller wants and properly calculate `tprice` and `mfraw`'
+  id: totrans-13
   prefs: []
   type: TYPE_NORMAL
+  zh: '*backtrader* 尽可能地遵循*pythonic*的原则，`self.datas`数组包含系统中数据源的列表（并且自动提供给您的策略），可以查询其长度。让我们使用这个来区分调用者想要的内容，并正确计算`tprice`和`mfraw`'
 - en: '[PRE3]'
+  id: totrans-14
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE3]'
 - en: '`def __init__(self):'
+  id: totrans-15
   prefs: []
   type: TYPE_NORMAL
+  zh: '`def __init__(self):'
 - en: 'if len(self.datas) == 1:'
+  id: totrans-16
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 'if len(self.datas) == 1:'
 - en: 1 data feed passed, must have components
+  id: totrans-17
   prefs:
   - PREF_IND
   - PREF_IND
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 传递了1个数据源，必须有分量
 - en: tprice = (self.data.close + self.data.low + self.data.high) / 3.0
+  id: totrans-18
   prefs:
   - PREF_IND
   - PREF_IND
   type: TYPE_NORMAL
+  zh: tprice = (self.data.close + self.data.low + self.data.high) / 3.0
 - en: mfraw = tprice * self.data.volume
+  id: totrans-19
   prefs:
   - PREF_IND
   - PREF_IND
   type: TYPE_NORMAL
+  zh: mfraw = tprice * self.data.volume
 - en: 'else:'
+  id: totrans-20
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 否则：
 - en: if more than 1 data feed, individual components in OHLCV order
+  id: totrans-21
   prefs:
   - PREF_IND
   - PREF_IND
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 如果有多个数据源，则按照OHLCV的顺序提取各个分量
 - en: tprice = (self.data0 + self.data1 + self.data2) / 3.0
+  id: totrans-22
   prefs:
   - PREF_IND
   - PREF_IND
   type: TYPE_NORMAL
+  zh: tprice = (self.data0 + self.data1 + self.data2) / 3.0
 - en: mfraw = tprice * self.data3
+  id: totrans-23
   prefs:
   - PREF_IND
   - PREF_IND
   type: TYPE_NORMAL
+  zh: mfraw = tprice * self.data3
 - en: No changes with regards to previous implementation
+  id: totrans-24
   prefs:
   - PREF_IND
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 与之前的实现相比没有变化
 - en: flowpos = bt.ind.SumN(mfraw * (tprice > tprice(-1)), period=self.p.period)
+  id: totrans-25
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: flowpos = bt.ind.SumN(mfraw * (tprice > tprice(-1)), period=self.p.period)
 - en: flowneg = bt.ind.SumN(mfraw * (tprice < tprice(-1)), period=self.p.period)
+  id: totrans-26
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: flowneg = bt.ind.SumN(mfraw * (tprice < tprice(-1)), period=self.p.period)
 - en: mfiratio = bt.ind.DivByZero(flowpos, flowneg, zero=100.0)
+  id: totrans-27
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: mfiratio = bt.ind.DivByZero(flowpos, flowneg, zero=100.0)
 - en: self.l.mfi = 100.0 - 100.0 / (1.0 + mfiratio)`
+  id: totrans-28
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: self.l.mfi = 100.0 - 100.0 / (1.0 + mfiratio)`
 - en: '[PRE4]'
+  id: totrans-29
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE4]'
 - en: '* * *'
+  id: totrans-30
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: '**NOTE**'
+  id: totrans-31
   prefs: []
   type: TYPE_NORMAL
+  zh: '**注意**'
 - en: Notice how the individual components are referenced as `self.dataX` (such as
     `self.data0`, `self.data1`)
+  id: totrans-32
   prefs: []
   type: TYPE_NORMAL
+  zh: 请注意，如何引用各个分量，例如`self.dataX`（例如`self.data0`、`self.data1`）
 - en: This is the same as using `self.datas[x]`, as in `self.datas[0]` ...
+  id: totrans-33
   prefs: []
   type: TYPE_NORMAL
+  zh: 这与使用`self.datas[x]`相同，如`self.datas[0]`...
 - en: '* * *'
+  id: totrans-34
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Let's see graphically that this indicator produces the same results as the *canonical*
     one, and the same results when the multiple inputs correspond to the original
     components of the data feed. To do so, it will be run in a strategy as this
+  id: totrans-35
   prefs: []
   type: TYPE_NORMAL
+  zh: 让我们从图形上看到，这个指标产生了与*规范*相同的结果，当多个输入对应于数据源的原始组件时也是如此。为此，它将在策略中运行，如下所示
 - en: '[PRE5]'
+  id: totrans-36
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE5]'
 - en: '![MFI Results Check](../Images/732d038551706e59f094b96adfcf5bf3.png)'
+  id: totrans-37
   prefs: []
   type: TYPE_IMG
+  zh: '![MFI 结果检查](../Images/732d038551706e59f094b96adfcf5bf3.png)'
 - en: Without having to resort to check each value, it should be obvious from the
     picture that the results are the same for the three.
+  id: totrans-38
   prefs: []
   type: TYPE_NORMAL
+  zh: 无需每个值都进行检查，从图片上显然可以看出这三个结果是相同的。
 - en: Let's finally see what happens if put a lot more weight on to the `close`. Let's
     run like this.
+  id: totrans-39
   prefs: []
   type: TYPE_NORMAL
+  zh: 最后让我们看看如果给`close`加上更多的权重会发生什么。让我们这样运行。
 - en: '[PRE6]'
+  id: totrans-40
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE6]'
 - en: '![MFI Close * 5.0](../Images/c266b4a4b9e54f726e00c6370528d1cf.png)'
+  id: totrans-41
   prefs: []
   type: TYPE_IMG
+  zh: '![MFI Close * 5.0](../Images/c266b4a4b9e54f726e00c6370528d1cf.png)'
 - en: Whether this makes sense or not is left to the reader, but one can clearly see
     that adding weight to the `close` has altered the pattern.
+  id: totrans-42
   prefs: []
   type: TYPE_NORMAL
+  zh: 这是否有意义留给读者决定，但可以清楚地看到给`close`添加权重已经改变了模式。
 - en: Conclusion
+  id: totrans-43
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 结论
 - en: By simple using the pythonic `len`, one can transform an indicator which uses
     a data feed with multiple components (and fixed names) into an indicator which
     accepts multiple generic inputs.
+  id: totrans-44
   prefs: []
   type: TYPE_NORMAL
+  zh: 通过简单使用Pythonic的`len`，一个人可以将一个使用多个组件（和固定名称）的数据源的指标转换为接受多个通用输入的指标。
