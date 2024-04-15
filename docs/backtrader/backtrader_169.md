@@ -31,13 +31,13 @@
 运行一个自定义脚本，查看`backtrader`如何同步数据：
 
 ```py
-`$ ./weekdaysaligner.py --online --data1 '^GSPC' --data0 '^GDAXI'` 
+$ ./weekdaysaligner.py --online --data1 '^GSPC' --data0 '^GDAXI'
 ```
 
 输出如下：
 
 ```py
-`0001,  True, data0, 2012-01-03T23:59:59, 2012-01-03T23:59:59, data1
+0001,  True, data0, 2012-01-03T23:59:59, 2012-01-03T23:59:59, data1
 0002,  True, data0, 2012-01-04T23:59:59, 2012-01-04T23:59:59, data1
 0003,  True, data0, 2012-01-05T23:59:59, 2012-01-05T23:59:59, data1
 0004,  True, data0, 2012-01-06T23:59:59, 2012-01-06T23:59:59, data1
@@ -48,7 +48,7 @@
 0009,  True, data0, 2012-01-13T23:59:59, 2012-01-13T23:59:59, data1
 0010, False, data0, 2012-01-17T23:59:59, 2012-01-16T23:59:59, data1
 0011, False, data0, 2012-01-18T23:59:59, 2012-01-17T23:59:59, data1
-...` 
+...
 ```
 
 一旦到达 `2012-01-16`，交易日历就开始分歧。`data0` 是 `datamaster`（`^GSPC`），即使 `data1`（`^GDAXI`）在 `2012-01-16` 有一根柱子要交付，**这对于*S&P 500* 来说并不是一个交易日**。
@@ -58,9 +58,9 @@
 随着每一天的分歧，同步问题逐渐累积。在 `2012` 年末，情况如下：
 
 ```py
-`...
+...
 0249, False, data0, 2012-12-28T23:59:59, 2012-12-19T23:59:59, data1
-0250, False, data0, 2012-12-31T23:59:59, 2012-12-20T23:59:59, data1` 
+0250, False, data0, 2012-12-31T23:59:59, 2012-12-20T23:59:59, data1
 ```
 
 原因应该是显而易见的：*欧洲人交易的日子比美国人多*。
@@ -68,9 +68,9 @@
 在 Ticket #76 [`github.com/mementum/backtrader/issues/76`](https://github.com/mementum/backtrader/issues/76) 中，作者展示了 `zipline` 的操作。让我们来看看 `2012-01-13` - `2012-01-17` 的难题：
 
 ```py
-`0009 : True : 2012-01-13 : close 1289.09 - 2012-01-13 :  close 6143.08
+0009 : True : 2012-01-13 : close 1289.09 - 2012-01-13 :  close 6143.08
 0010 : False : 2012-01-13 : close 1289.09 - 2012-01-16 :  close 6220.01
-0011 : True : 2012-01-17 : close 1293.67 - 2012-01-17 :  close 6332.93` 
+0011 : True : 2012-01-17 : close 1293.67 - 2012-01-17 :  close 6332.93
 ```
 
 需要注意！`2012-01-13` 的数据已经被简单地**复制**，似乎没有征求用户的许可。在我看来，这不应该发生，因为平台的最终用户无法撤销这种自发添加。
@@ -82,17 +82,17 @@
 一旦我们已经看到*其他内容*，让我们再次尝试使用累积的智慧，使用`backtrader`：*欧洲人比美国人交易频繁*。让我们颠倒`^GSPC`和`^GDAXI`的角色，看看结果：
 
 ```py
-`$ ./weekdaysaligner.py --online --data1 '^GSPC' --data0 '^GDAXI'` 
+$ ./weekdaysaligner.py --online --data1 '^GSPC' --data0 '^GDAXI'
 ```
 
 输出（直接跳转到`2012-01-13`）：
 
 ```py
-`...
+...
 0009,  True, data0, 2012-01-13T23:59:59, 2012-01-13T23:59:59, data1
 0010, False, data0, 2012-01-16T23:59:59, 2012-01-13T23:59:59, data1
 0011,  True, data0, 2012-01-17T23:59:59, 2012-01-17T23:59:59, data1
-...` 
+...
 ```
 
 该死的！`backtrader`也*复制了*`2012-01-13`值作为`data0`（现在为`^GDAXI`）的交付，以匹配`data1`（在此情况下为`^GSPC`）的交付，这是`2012-01-16`。
@@ -104,31 +104,31 @@
 不久之后再次看到相同的重新同步：
 
 ```py
-`...
+...
 0034,  True, data0, 2012-02-17T23:59:59, 2012-02-17T23:59:59, data1
 0035, False, data0, 2012-02-20T23:59:59, 2012-02-17T23:59:59, data1
 0036,  True, data0, 2012-02-21T23:59:59, 2012-02-21T23:59:59, data1
-...` 
+...
 ```
 
 紧接着是不那么容易的重新同步：
 
 ```py
-`...
+...
 0068,  True, data0, 2012-04-05T23:59:59, 2012-04-05T23:59:59, data1
 0069, False, data0, 2012-04-10T23:59:59, 2012-04-09T23:59:59, data1
 ...
 0129, False, data0, 2012-07-04T23:59:59, 2012-07-03T23:59:59, data1
 0130,  True, data0, 2012-07-05T23:59:59, 2012-07-05T23:59:59, data1
-...` 
+...
 ```
 
 这种情节会一直重复，直到最后一个`^GDAXI`柱形图被提供：
 
 ```py
-`...
+...
 0256,  True, data0, 2012-12-31T23:59:59, 2012-12-31T23:59:59, data1
-...` 
+...
 ```
 
 这种*同步*问题的原因是`backtrader`不会复制数据。
@@ -150,7 +150,7 @@
 实际代码如下
 
 ```py
-`from __future__ import (absolute_import, division, print_function,
+from __future__ import (absolute_import, division, print_function,
                         unicode_literals)
 
 import datetime
@@ -192,35 +192,35 @@ class WeekDaysFiller(object):
 
         self.lastclose = data.close[0]
         data._save2stack(erase=True)  # dt bar to the stack and out of stream
-        return True  # bars are on the stack (new and original)` 
+        return True  # bars are on the stack (new and original)
 ```
 
 测试脚本已经具备使用它的能力：
 
 ```py
-`$ ./weekdaysaligner.py --online --data0 '^GSPC' --data1 '^GDAXI' --filler` 
+$ ./weekdaysaligner.py --online --data0 '^GSPC' --data1 '^GDAXI' --filler
 ```
 
 使用`--filler`，`WeekDaysFiller`被添加到`data0`和`data1`。并且输出：
 
 ```py
-`0001,  True, data0, 2012-01-03T23:59:59, 2012-01-03T23:59:59, data1
+0001,  True, data0, 2012-01-03T23:59:59, 2012-01-03T23:59:59, data1
 ...
 0009,  True, data0, 2012-01-13T23:59:59, 2012-01-13T23:59:59, data1
 0010,  True, data0, 2012-01-16T23:59:59, 2012-01-16T23:59:59, data1
 0011,  True, data0, 2012-01-17T23:59:59, 2012-01-17T23:59:59, data1
-...` 
+...
 ```
 
 在`2012-01-13`至`2012-01-17`期间的第 1 个*难题*已经解决。并且整个集合已经*同步*：
 
 ```py
-`...
+...
 0256,  True, data0, 2012-12-25T23:59:59, 2012-12-25T23:59:59, data1
 0257,  True, data0, 2012-12-26T23:59:59, 2012-12-26T23:59:59, data1
 0258,  True, data0, 2012-12-27T23:59:59, 2012-12-27T23:59:59, data1
 0259,  True, data0, 2012-12-28T23:59:59, 2012-12-28T23:59:59, data1
-0260,  True, data0, 2012-12-31T23:59:59, 2012-12-31T23:59:59, data1` 
+0260,  True, data0, 2012-12-31T23:59:59, 2012-12-31T23:59:59, data1
 ```
 
 值得注意的是：
@@ -236,7 +236,7 @@ class WeekDaysFiller(object):
 *过滤器*正在用`NaN`值进行*填充*，用于给定数据中没有交易发生的日子。让我们来绘制它：
 
 ```py
-`$ ./weekdaysaligner.py --online --data0 '^GSPC' --data1 '^GDAXI' --filler --plot` 
+$ ./weekdaysaligner.py --online --data0 '^GSPC' --data1 '^GDAXI' --filler --plot
 ```
 
 ![image](img/52cbd847e4685be8fedc6dbfb9938df4.png)
@@ -250,7 +250,7 @@ class WeekDaysFiller(object):
 第 2 个绘图将尝试回答顶部的问题：*指标会发生什么情况？*请记住，新的柱形图已经被赋予了`NaN`的值（这就是它们没有显示的原因）：
 
 ```py
-`$ ./weekdaysaligner.py --online --data0 '^GSPC' --data1 '^GDAXI' --filler --plot --sma 10` 
+$ ./weekdaysaligner.py --online --data0 '^GSPC' --data1 '^GDAXI' --filler --plot --sma 10
 ```
 
 ![image](img/83d5c0836f090ea5ab87d3f558256ae6.png)
@@ -260,7 +260,7 @@ class WeekDaysFiller(object):
 如果使用的不是 `NaN` 而是上次观察到的收盘价：
 
 ```py
-`$ ./weekdaysaligner.py --online --data0 '^GSPC' --data1 '^GDAXI' --filler --plot --sma 10 --fillclose` 
+$ ./weekdaysaligner.py --online --data0 '^GSPC' --data1 '^GDAXI' --filler --plot --sma 10 --fillclose
 ```
 
 整个 260 天使用正常 *SMA* 绘制的图表看起来更加漂亮。
@@ -278,7 +278,7 @@ class WeekDaysFiller(object):
 在 `backtrader` 源码中可用作示例：
 
 ```py
-`$ ./weekdaysaligner.py --help
+$ ./weekdaysaligner.py --help
 usage: weekdaysaligner.py [-h] [--online] --data0 DATA0 [--data1 DATA1]
                           [--sma SMA] [--fillclose] [--filler] [--filler0]
                           [--filler1] [--fromdate FROMDATE] [--todate TODATE]
@@ -301,13 +301,13 @@ optional arguments:
                         2012-01-01)
   --todate TODATE, -t TODATE
                         Ending date in YYYY-MM-DD format (default: 2012-12-31)
-  --plot                Do plot (default: False)` 
+  --plot                Do plot (default: False)
 ```
 
 代码：
 
 ```py
-`from __future__ import (absolute_import, division, print_function,
+from __future__ import (absolute_import, division, print_function,
                         unicode_literals)
 
 import argparse
@@ -411,5 +411,5 @@ def parse_args():
     return parser.parse_args()
 
 if __name__ == '__main__':
-    runstrat()` 
+    runstrat()
 ```

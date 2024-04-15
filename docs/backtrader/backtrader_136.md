@@ -17,7 +17,7 @@
 幸运的是，之前的样本足够灵活，可以进行实验。 为了得到一些视觉反馈和验证，以下代码将添加到策略中
 
 ```py
-`def start(self):
+def start(self):
     print(','.join(['TRADE', 'STATUS', 'Value', 'PNL', 'COMMISSION']))
 
 def notify_order(self, order):
@@ -42,7 +42,7 @@ def notify_trade(self, trade):
             trade.pnl,
             trade.commission,
         ]
-        )))` 
+        )))
 ```
 
 关键在于以下内容：
@@ -60,13 +60,13 @@ def notify_trade(self, trade):
 首先快速测试以查看某些订单是否被接受。
 
 ```py
-`$ ./btfd.py --comminfo commission=0.001,leverage=2.0 --strat target=1.0
+$ ./btfd.py --comminfo commission=0.001,leverage=2.0 --strat target=1.0
 
 TRADE,STATUS,Value,PNL,COMMISSION
 ORDER FAILED with status: Margin
 ORDER FAILED with status: Margin
 TRADE,OPEN,1990-01-08,199345.2,0.0,199.3452
-TRADE,CLOSE,1990-01-10,0.0,-1460.28,397.23012` 
+TRADE,CLOSE,1990-01-10,0.0,-1460.28,397.23012
 ```
 
 注意：
@@ -92,7 +92,7 @@ TRADE,CLOSE,1990-01-10,0.0,-1460.28,397.23012`
 ### 目标 99.8% - 佣金 0.1%
 
 ```py
-`./btfd.py --comminfo commission=0.001,leverage=2.0 --strat target=0.998 --plot` 
+./btfd.py --comminfo commission=0.001,leverage=2.0 --strat target=0.998 --plot
 ```
 
 ![image](img/c1469fcb970e66b1e6308b288bad3330.png)
@@ -110,7 +110,7 @@ TRADE,CLOSE,1990-01-10,0.0,-1460.28,397.23012`
 很可能是佣金过于激进。 让我们去一半
 
 ```py
-`./btfd.py --comminfo commission=0.0005,leverage=2.0 --strat target=0.999 --plot` 
+./btfd.py --comminfo commission=0.0005,leverage=2.0 --strat target=0.999 --plot
 ```
 
 ![image](img/53135e6fc1bb42bf8182488fc8fedefc.png)
@@ -122,7 +122,7 @@ TRADE,CLOSE,1990-01-10,0.0,-1460.28,397.23012`
 佣金再次被除以二
 
 ```py
-`./btfd.py --comminfo commission=0.00025,leverage=2.0 --strat target=0.9995 --plot` 
+./btfd.py --comminfo commission=0.00025,leverage=2.0 --strat target=0.9995 --plot
 ```
 
 ![image](img/9f8d0eb059dc30ae2845e066e3953597.png)
@@ -146,7 +146,7 @@ TRADE,CLOSE,1990-01-10,0.0,-1460.28,397.23012`
 没有应用*利率*。使用佣金已足以看出`16x`距离任何潜在利润有多远。无论如何，以`2%`的利率运行将执行如下
 
 ```py
-`./btfd.py --comminfo commission=0.00025,leverage=2.0,interest=0.02,interest_long=True --strat target=0.9995 --plot` 
+./btfd.py --comminfo commission=0.00025,leverage=2.0,interest=0.02,interest_long=True --strat target=0.9995 --plot
 ```
 
 `interest_long=True` 是必须的，因为默认情况下收取利息的行为只针对*多头*仓位进行。
@@ -154,7 +154,7 @@ TRADE,CLOSE,1990-01-10,0.0,-1460.28,397.23012`
 ## 示例用法
 
 ```py
-`$ ./btfd.py --help
+$ ./btfd.py --help
 usage: btfd.py [-h] [--offline] [--data TICKER]
                [--fromdate YYYY-MM-DD[THH:MM:SS]]
                [--todate YYYY-MM-DD[THH:MM:SS]] [--cerebro kwargs]
@@ -180,13 +180,13 @@ optional arguments:
   --strat kwargs        kwargs in key=value format (default:
                         approach="highlow")
   --comminfo kwargs     kwargs in key=value format (default: leverage=2.0)
-  --plot [kwargs]       kwargs in key=value format (default: )` 
+  --plot [kwargs]       kwargs in key=value format (default: )
 ```
 
 ## 示例代码
 
 ```py
-`from __future__ import (absolute_import, division, print_function,
+from __future__ import (absolute_import, division, print_function,
                         unicode_literals)
 
 # References:
@@ -357,5 +357,5 @@ def parse_args(pargs=None):
     return parser.parse_args(pargs)
 
 if __name__ == '__main__':
-    runstrat()` 
+    runstrat()
 ```

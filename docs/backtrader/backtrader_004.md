@@ -7,7 +7,7 @@
 ![image](img/80e7046cb8ec40277514e948183e2afa.png)
 
 ```py
-`from datetime import datetime
+from datetime import datetime
 import backtrader as bt
 
 # Create a subclass of Strategy to define the indicators and logic
@@ -43,11 +43,11 @@ cerebro.adddata(data)  # Add the data feed
 
 cerebro.addstrategy(SmaCross)  # Add the trading strategy
 cerebro.run()  # run it all
-cerebro.plot()  # and plot it with a single command` 
+cerebro.plot()  # and plot it with a single command
 ```
 
 ```py
-`from datetime import datetime
+from datetime import datetime
 import backtrader as bt
 
 # Create a subclass of Strategy to define the indicators and logic
@@ -83,11 +83,11 @@ cerebro.adddata(data)  # Add the data feed
 
 cerebro.addstrategy(SmaCross)  # Add the trading strategy
 cerebro.run()  # run it all
-cerebro.plot()  # and plot it with a single command` 
+cerebro.plot()  # and plot it with a single command
 ```
 
 ```py
-`from datetime import datetime
+from datetime import datetime
 import backtrader as bt
 
 # Create a subclass of SignaStrategy to define the indicators and signals
@@ -116,5 +116,5 @@ cerebro.adddata(data)  # Add the data feed
 
 cerebro.addstrategy(SmaCross)  # Add the trading strategy
 cerebro.run()  # run it all
-cerebro.plot()  # and plot it with a single command` 
+cerebro.plot()  # and plot it with a single command
 ```

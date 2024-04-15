@@ -17,20 +17,20 @@
 上述的直接输入输出日期时间方法将奏效，例如柏林的交易员可以始终这样做：
 
 ```py
-`class Strategy(bt.Strategy):
+class Strategy(bt.Strategy):
 
     def next(self):
 
         # The DAX future opens at 08:00 CET
         if self.data.datetime.time() < datetime.time(8, 30):
             # don't operate until the market has been running 30 minutes
-            return  #` 
+            return  #
 ```
 
 直接方法的问题在于当同一位柏林的交易员决定交易`ES-Mini`时会出现。因为夏令时的变化在一年中的不同时间发生，这导致一年中有几周的时间差异不同步。以下情况不会总是奏效：
 
 ```py
-`class Strategy(bt.Strategy):
+class Strategy(bt.Strategy):
 
     def next(self):
 
@@ -43,7 +43,7 @@
 
         if self.data.datetime.time() < datetime.time(16, 0):
             # don't operate until the market has been running 30 minutes
-            return  #` 
+            return  #
 ```
 
 ## 时区操作
@@ -87,7 +87,7 @@
 考虑到这一切，让我们回想一下在`US/Eastern`时区进行交易的柏林交易员：
 
 ```py
-`import pytz
+import pytz
 
 import bt
 
@@ -105,13 +105,13 @@ class Strategy(bt.Strategy):
 
         if self.data.datetime.time() < datetime.time(10, 0):
             # don't operate until the market has been running 30 minutes
-            return  #` 
+            return  #
 ```
 
 对于*数据源*可以自动确定输出时区的情况：
 
 ```py
-`import bt
+import bt
 
 data = bt.feeds.MyFeedAutoTZ('ES-Mini')
 
@@ -127,7 +127,7 @@ class Strategy(bt.Strategy):
 
         if self.data.datetime.time() < datetime.time(10, 0):
             # don't operate until the market has been running 30 minutes
-            return  #` 
+            return  #
 ```
 
 比以上工作还要少。

@@ -9,7 +9,7 @@
 如果希望保留先前的行为并且图形必须独立绘制，请简单执行：
 
 ```py
-`import backtrader as bt
+import backtrader as bt
 
 ...
 
@@ -17,7 +17,7 @@ cerebro.run()
 
 ...
 
-cerebro.plot(iplot=False)` 
+cerebro.plot(iplot=False)
 ```
 
 当然，如果从脚本或交互式运行，`matplotlib`的默认绘图后端将像以前一样使用，这将在单独的窗口中绘制图表。

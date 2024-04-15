@@ -9,10 +9,10 @@
 [文档](http://backtrader.readthedocs.org/en/latest/)已更新，只引用了现代化的`resampling`和`replaying`方式。操作如下：
 
 ```py
-`...
+...
 data = backtrader.feeds.BacktraderCSVData(dataname='mydata.csv')  # daily bars
 cerebro.resampledata(data, timeframe=backtrader.TimeFrame.Weeks) # to weeks
-...` 
+...
 ```
 
 对于*replaying*只需将`resampledata`更改为`replaydata`。还有其他方法可以做到，但这是最直接的接口，可能是唯一会被任何人使用的接口。
@@ -24,7 +24,7 @@ cerebro.resampledata(data, timeframe=backtrader.TimeFrame.Weeks) # to weeks
 已经添加了一个名为*data-bid-ask*的示例到数据源中。从这个示例中：
 
 ```py
-`class BidAskCSV(btfeeds.GenericCSVData):
+class BidAskCSV(btfeeds.GenericCSVData):
     linesoverride = True  # discard usual OHLC structure
     # datetime must be present and last
     lines = ('bid', 'ask', 'datetime')
@@ -35,7 +35,7 @@ cerebro.resampledata(data, timeframe=backtrader.TimeFrame.Weeks) # to weeks
         ('datetime', 0),  # field pos 0
         ('bid', 1),  # default field pos 1
         ('ask', 2),  # defult field pos 2
-    )` 
+    )
 ```
 
 通过指定`linesoverride`，常规的*lines*继承机制被绕过，对象中定义的行将取代任何先前的行。
@@ -43,11 +43,11 @@ cerebro.resampledata(data, timeframe=backtrader.TimeFrame.Weeks) # to weeks
 此版本可从*pypi*获取，并可通过常规方式安装：
 
 ```py
-`pip install backtrader` 
+pip install backtrader
 ```
 
 或者如果更新：
 
 ```py
-`pip install backtrader --upgrade` 
+pip install backtrader --upgrade
 ```

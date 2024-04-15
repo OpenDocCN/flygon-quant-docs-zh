@@ -69,7 +69,7 @@
 作为参考，当 CPU 数量限制为 `1` 且未使用 `multiprocessing` 模块时发生了什么：
 
 ```py
-`$ ./optimization.py --maxcpus 1
+$ ./optimization.py --maxcpus 1
 ==================================================
 **************************************************
 --------------------------------------------------
@@ -81,7 +81,7 @@ OrderedDict([(u'smaperiod', 10), (u'macdperiod1', 13), (u'macdperiod2', 26), (u'
 ...
 OrderedDict([(u'smaperiod', 29), (u'macdperiod1', 19), (u'macdperiod2', 29), (u'macdperiod3', 14)])
 ==================================================
-Time used: 184.922727833` 
+Time used: 184.922727833
 ```
 
 ### 多核运行
@@ -93,12 +93,12 @@ Time used: 184.922727833`
 默认行为：
 
 ```py
-`$ ./optimization.py
+$ ./optimization.py
 ...
 ...
 ...
 ==================================================
-Time used: 56.5889185394` 
+Time used: 56.5889185394
 ```
 
 多核和*数据提供*以及*结果*改进带来的总改进意味着从`184.92`秒降至`56.58`秒。
@@ -112,12 +112,12 @@ Time used: 56.5889185394`
 让我们将完整的*策略*对象传递给调用者：
 
 ```py
-`$ ./optimization.py --no-optreturn
+$ ./optimization.py --no-optreturn
 ...
 ...
 ...
 ==================================================
-Time used: 67.056914007` 
+Time used: 67.056914007
 ```
 
 执行时间增加了`18.50%`（或加速比为`15.62%`）。
@@ -127,12 +127,12 @@ Time used: 67.056914007`
 每个子进程被强制加载其自己的*数据提供*值集：
 
 ```py
-`$ ./optimization.py --no-optdatas
+$ ./optimization.py --no-optdatas
 ...
 ...
 ...
 ==================================================
-Time used: 72.7238112637` 
+Time used: 72.7238112637
 ```
 
 执行时间增加了`28.52%`（或加速比为`22.19%`）。
@@ -142,12 +142,12 @@ Time used: 72.7238112637`
 仍然使用多核但保持旧的非改进行为：
 
 ```py
-`$ ./optimization.py --no-optdatas --no-optreturn
+$ ./optimization.py --no-optdatas --no-optreturn
 ...
 ...
 ...
 ==================================================
-Time used: 83.6246643786` 
+Time used: 83.6246643786
 ```
 
 执行时间增加了`47.79%`（或加速比为`32.34%`）。
@@ -167,7 +167,7 @@ Time used: 83.6246643786`
 ## 示例用法
 
 ```py
-`$ ./optimization.py --help
+$ ./optimization.py --help
 usage: optimization.py [-h] [--data DATA] [--fromdate FROMDATE]
                        [--todate TODATE] [--maxcpus MAXCPUS] [--no-runonce]
                        [--exactbars EXACTBARS] [--no-optdatas]
@@ -204,5 +204,5 @@ optional arguments:
   --m2_low M2_LOW       MACD Slow MA range low to optimize
   --m2_high M2_HIGH     MACD Slow MA range high to optimize
   --m3_low M3_LOW       MACD Signal range low to optimize
-  --m3_high M3_HIGH     MACD Signal range high to optimize` 
+  --m3_high M3_HIGH     MACD Signal range high to optimize
 ```

@@ -49,7 +49,7 @@
 代码
 
 ```py
-`class MFI(bt.Indicator):
+class MFI(bt.Indicator):
     lines = ('mfi', 'money_flow_raw', 'typical', 'money_flow_pos', 'money_flow_neg')
 
     plotlines = dict(
@@ -80,7 +80,7 @@
             self.lines.mfi[0] = 100
             return
 
-        self.lines.mfi[0] =  100 - 100 / (1 +  pos_period / neg_period)` 
+        self.lines.mfi[0] =  100 - 100 / (1 +  pos_period / neg_period)
 ```
 
 注意
@@ -96,7 +96,7 @@
 有了这个，一个快速的**规范**实现`MFI`指标
 
 ```py
-`class MFI_Canonical(bt.Indicator):
+class MFI_Canonical(bt.Indicator):
     lines = ('mfi',)
     params = dict(period=14)
 
@@ -108,7 +108,7 @@
         flowneg = bt.ind.SumN(mfraw * (tprice < tprice(-1)), period=self.p.period)
 
         mfiratio = bt.ind.DivByZero(flowpos, flowneg, zero=100.0)
-        self.l.mfi = 100.0 - 100.0 / (1.0 + mfiratio)` 
+        self.l.mfi = 100.0 - 100.0 / (1.0 + mfiratio)
 ```
 
 人们应该立即注意到
@@ -154,14 +154,14 @@
             self.lines.mfi[0] = 100
             return
 
-        self.lines.mfi[0] =  100 - 100 / (1 +  pos_period / neg_period)` 
+        self.lines.mfi[0] =  100 - 100 / (1 +  pos_period / neg_period)
 ```
 
 这是另一种方法
 
 ```py
  `mfiratio = bt.ind.DivByZero(flowpos, flowneg, zero=100.0)
-        self.l.mfi = 100.0 - 100.0 / (1.0 + mfiratio)` 
+        self.l.mfi = 100.0 - 100.0 / (1.0 + mfiratio)
 ```
 
 不是有很多行，一个`return`语句和对输出*行*的不同赋值，而是对`mfiratio`计算的单个声明和对输出行`mfi`的单个赋值（按照*StockCharts*公式）

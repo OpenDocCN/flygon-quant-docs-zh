@@ -29,7 +29,7 @@
 通常启动的一个指标是`Highest`（别名为`MaxN`），以获得给定周期内的*最高*某物。如
 
 ```py
-`import backtrader as bt
+import backtrader as bt
 
 class MyStrategy(bt.Strategy)
     def __init__(self):
@@ -37,7 +37,7 @@ class MyStrategy(bt.Strategy)
 
     def next(self):
         if self.the_highest_high_15 > X:
-            print('ABOUT TO DO SOMETHING')` 
+            print('ABOUT TO DO SOMETHING')
 ```
 
 在此代码片段中，我们实例化`Highest`以跟踪最近 15 个周期内的最高高点。如果最高高点大于`X`，将执行某些操作。
@@ -57,7 +57,7 @@ class MyStrategy(bt.Strategy)
 我们首先将使用我们将在指标生命周期中更改的参数，通过它实现动态性。
 
 ```py
-`import backtrader as bt
+import backtrader as bt
 
 class DynamicHighest(bt.Indicator):
     lines = ('dyn_highest',)
@@ -76,7 +76,7 @@ class MyStrategy(bt.Strategy)
 
     def next(self):
         if self.dyn_highest > X:
-            print('ABOUT TO DO SOMETHING')` 
+            print('ABOUT TO DO SOMETHING')
 ```
 
 让我们来吧！我们拥有它，到目前为止我们还没有违反为我们的指标制定的规则。让我们看看指标
@@ -110,7 +110,7 @@ class MyStrategy(bt.Strategy)
 好的，让我们使用一个方法。
 
 ```py
-`import backtrader as bt
+import backtrader as bt
 
 class DynamicHighest(bt.Indicator):
     lines = ('dyn_highest',)
@@ -134,7 +134,7 @@ class MyStrategy(bt.Strategy)
 
     def next(self):
         if self.dyn_highest > X:
-            print('ABOUT TO DO SOMETHING')` 
+            print('ABOUT TO DO SOMETHING')
 ```
 
 并没有太大的区别，但现在指标有了一些额外的样板代码，包括 `__init__` 和方法 `tradeopen(self, yesno)`。但是我们的 `DynamicHighest` 的动态性是相同的。
@@ -144,7 +144,7 @@ class MyStrategy(bt.Strategy)
 让我们恢复 `params` 并使指标成为可以应用不同函数而不仅仅是 `max` 的指标
 
 ```py
-`import backtrader as bt
+import backtrader as bt
 
 class DynamicFn(bt.Indicator):
     lines = ('dyn_highest',)
@@ -171,7 +171,7 @@ class MyStrategy(bt.Strategy)
 
     def next(self):
         if self.dyn_highest > X:
-            print('ABOUT TO DO SOMETHING')` 
+            print('ABOUT TO DO SOMETHING')
 ```
 
 说了做到！我们已经添加了：

@@ -63,13 +63,13 @@
 当用户希望优化 `strategy` 时，`Strategy` 子类将被添加到 `Cerebro` 实例中，如下所示：
 
 ```py
-`cerebro.optstrategy(StrategyClass, *args, **kwargs)` 
+cerebro.optstrategy(StrategyClass, *args, **kwargs)
 ```
 
 与向 `Cerebro` 传递策略的常规方式相反：
 
 ```py
-`cerebro.addstrategy(StrategyClass, *args, **kwargs)` 
+cerebro.addstrategy(StrategyClass, *args, **kwargs)
 ```
 
 这一直都是这样，没有改变。背景是：
@@ -109,7 +109,7 @@ cerebro = bt.Cerebro() # runonce 为 True，preload 为 True，且 “new” max
 代码如下。只需将`maxcpus`参数的`1`更改为限制测试为 1 个核心。
 
 ```py
-`from __future__ import (absolute_import, division, print_function,
+from __future__ import (absolute_import, division, print_function,
                         unicode_literals)
 
 import time
@@ -173,5 +173,5 @@ if __name__ == '__main__':
     print('==================================================')
 
     # print out the result
-    print('Time used:', str(tend - tstart))` 
+    print('Time used:', str(tend - tstart))
 ```

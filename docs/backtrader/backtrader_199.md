@@ -29,7 +29,7 @@ Stockcharts 在这里有关于 Trix 的很好的讨论：[ChartSchool - Trix](ht
 让我们尝试如何做到，用尽可能少的行：
 
 ```py
-`from __future__ import (absolute_import, division, print_function,
+from __future__ import (absolute_import, division, print_function,
                         unicode_literals)
 
 import backtrader as bt
@@ -45,7 +45,7 @@ class MyTrix(bt.Indicator):
         ema2 = btind.EMA(ema1, period=self.p.period)
         ema3 = btind.EMA(ema2, period=self.p.period)
 
-        self.lines.trix = 100.0 * (ema3 - ema3(-1)) / ema3(-1)` 
+        self.lines.trix = 100.0 * (ema3 - ema3(-1)) / ema3(-1)
 ```
 
 Trix 指标已经投入使用。看着这一切，作为该平台的作者，我真的相信我的目标是能够快速地轻松尝试新的想法……已经实现了。
@@ -111,7 +111,7 @@ Trix 指标已经投入使用。看着这一切，作为该平台的作者，我
 假设我们已经将`MyTrix`指标放在了一个 mytrix.py 文件中。
 
 ```py
-`from __future__ import (absolute_import, division, print_function,
+from __future__ import (absolute_import, division, print_function,
                         unicode_literals)
 
 import backtrader as bt
@@ -143,7 +143,7 @@ if __name__ == '__main__':
     cerebro.run()
 
     # Plot the result
-    cerebro.plot()` 
+    cerebro.plot()
 ```
 
 并且视觉输出如下（在新窗口/标签中打开图表以获取全尺寸图像），希望显示出指标可以多快地创建和通过`backtrader`进行视觉评估的简单性。

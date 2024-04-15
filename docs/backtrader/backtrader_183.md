@@ -47,7 +47,7 @@
 最后，执行和结果为从 1998 年至今的 Eurostoxx 50 期货：
 
 ```py
-`bt-run.py \
+bt-run.py \
     --csvformat vchartcsv \
     --data ../datas/sample/1998-2015-estx50-vchart.txt \
     --analyzer legdownup \
@@ -86,7 +86,7 @@ Date,LegDown,LegUp_5,LegUp_10,LegUp_15,LegUp_20
 2000-02-09,-400.0,-22.0,-46.0,96.0,270.0
 1999-01-05,-438.0,3.0,5.0,-107.0,5.0
 1999-01-07,-446.0,-196.0,-6.0,-82.0,-50.0
-1999-01-06,-536.0,-231.0,-42.0,-174.0,-129.0` 
+1999-01-06,-536.0,-231.0,-42.0,-174.0,-129.0
 ```
 
 2015 年 8 月的下跌在第 13 个位置显示出来。显然是一个不常见的事件，尽管有更大的事件发生过。
@@ -120,7 +120,7 @@ Date,LegDown,LegUp_5,LegUp_10,LegUp_15,LegUp_20
 最后是由 `bt-run` 加载的 `legupdown` 模块。
 
 ```py
-`from __future__ import (absolute_import, division, print_function,
+from __future__ import (absolute_import, division, print_function,
                         unicode_literals)
 
 import itertools
@@ -248,5 +248,5 @@ class LegDownUpAnalyzer(bt.Analyzer):
         for key, vals in six.iteritems(self.ret):
             keytxt = key.strftime('%Y-%m-%d')
             txt = ','.join(itertools.chain([keytxt], map(str, vals)))
-            print(txt)` 
+            print(txt)
 ```

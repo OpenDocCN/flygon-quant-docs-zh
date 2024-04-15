@@ -197,7 +197,7 @@
 参数：
 
 ```py
-`These are passed transparently to the children
+These are passed transparently to the children
 
 * timeframe (default: `bt.TimeFrame.Days`)
 
@@ -207,7 +207,7 @@
 * compression (default: 1\`)
 
   If `None` then the compression of the 1st data of the system will be
-  used` 
+  used
 ```
 
 `timeframe` 和 `compression` 都遵循 `pyfolio` 的默认行为，即使用 *daily* 数据并将其上采样以获得年度收益等值。
@@ -221,9 +221,9 @@
 返回一个包含收益为值和每个收益为键的字典
 
 ```py
-``pyfolio`
+pyfolio`
 
-returns, positions, transactions, gross_leverage` 
+returns, positions, transactions, gross_leverage
 ```
 
 因为对象旨在直接输入到 `pyfolio`，此方法通过本地导入 `pandas` 将内部 *backtrader* 结果转换为 *pandas DataFrames*，这是例如 `pyfolio.create_full_tear_sheet` 期望的输入

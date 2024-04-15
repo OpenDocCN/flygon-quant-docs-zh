@@ -17,8 +17,8 @@
 计算示例，在该示例中，`data0` 的时间框架为天，而 `data1` 的时间框架为`月`：
 
 ```py
-`pivotpoint = btind.PivotPoint(self.data1)
-sellsignal = self.data0.close < pivotpoint.s1` 
+pivotpoint = btind.PivotPoint(self.data1)
+sellsignal = self.data0.close < pivotpoint.s1
 ```
 
 在这里寻找*卖出信号*当收盘价低于`s1`线时（*1^(st) support*）
@@ -30,8 +30,8 @@ sellsignal = self.data0.close < pivotpoint.s1`
 这将导致以下错误：
 
 ```py
-`return self.array[self.idx + ago]
-IndexError: array index out of range` 
+return self.array[self.idx + ago]
+IndexError: array index out of range
 ```
 
 出于一个很好的原因：`self.data.close` 提供了来自第一个瞬间的值，但是`PivotPoint`（因此`s1`线）只会在一个**完整的月份**过去后才会提供值，大致相当于`self.data0.close`的 22 个值。在这 22 个 *收盘价* 中还没有`s1`的值，并且尝试从底层数组中获取它失败。
@@ -39,14 +39,14 @@ IndexError: array index out of range`
 *Lines* 对象支持 `(ago)` 操作符（*Python* 中的 `__call__` 特殊方法）以提供其自身的延迟版本：
 
 ```py
-`close1 = self.data.close(-1)` 
+close1 = self.data.close(-1)
 ```
 
 在此示例中，对象 `close1`（通过`[0]`访问）始终包含由`close`交付的前一个值（`-1`）。语法已经被重用以适应不同的时间框架。让我们重写上面的`pivotpoint`片段：
 
 ```py
-`pivotpoint = btind.PivotPoint(self.data1)
-sellsignal = self.data0.close < pivotpoint.s1()` 
+pivotpoint = btind.PivotPoint(self.data1)
+sellsignal = self.data0.close < pivotpoint.s1()
 ```
 
 注意看`()` 是如何执行的，不带参数（在后台提供一个`None`）。以下是正在发生的：
@@ -56,13 +56,13 @@ sellsignal = self.data0.close < pivotpoint.s1()`
 但是要使魔术生效，需要一些额外的东西。 `Cerebro` 必须以以下方式创建：
 
 ```py
-`cerebro = bt.Cerebro(runonce=False)` 
+cerebro = bt.Cerebro(runonce=False)
 ```
 
 或者执行：
 
 ```py
-`cerebro.run(runonce=False)` 
+cerebro.run(runonce=False)
 ```
 
 在这种模式下，指标和晚评估的自动 *lines* 对象是逐步执行而不是在紧密循环中执行。这使整个操作变慢，但这使其**可能**
@@ -70,18 +70,18 @@ sellsignal = self.data0.close < pivotpoint.s1()`
 上面断开的底部的示例脚本，现在可以运行：
 
 ```py
-`$ ./mixing-timeframes.py` 
+$ ./mixing-timeframes.py
 ```
 
 有输出：
 
 ```py
-`0021,0021,0001,2005-01-31,2984.75,2935.96,0.00
+0021,0021,0001,2005-01-31,2984.75,2935.96,0.00
 0022,0022,0001,2005-02-01,3008.85,2935.96,0.00
 ...
 0073,0073,0003,2005-04-15,3013.89,3010.76,0.00
 0074,0074,0003,2005-04-18,2947.79,3010.76,1.00
-...` 
+...
 ```
 
 在第 74 行，发生了`close < s1`的第 1 个实例。
@@ -89,37 +89,37 @@ sellsignal = self.data0.close < pivotpoint.s1()`
 脚本还提供了对其他可能性的见解：*耦合指标的所有线*。之前我们有：
 
 ```py
-`self.sellsignal = self.data0.close < pp.s1()` 
+self.sellsignal = self.data0.close < pp.s1()
 ```
 
 作为替代：
 
 ```py
-`pp1 = pp()
-self.sellsignal = self.data0.close < pp1.s1` 
+pp1 = pp()
+self.sellsignal = self.data0.close < pp1.s1
 ```
 
 现在整个`PivotPoint`指标已经耦合，可以访问其任何线（即 `p`, `r1`, `r2`, `s1`, `s2`）。脚本只对`s1`感兴趣，并且访问是直接的。:
 
 ```py
-`$ ./mixing-timeframes.py --multi` 
+$ ./mixing-timeframes.py --multi
 ```
 
 输出：
 
 ```py
-`0021,0021,0001,2005-01-31,2984.75,2935.96,0.00
+0021,0021,0001,2005-01-31,2984.75,2935.96,0.00
 0022,0022,0001,2005-02-01,3008.85,2935.96,0.00
 ...
 0073,0073,0003,2005-04-15,3013.89,3010.76,0.00
 0074,0074,0003,2005-04-18,2947.79,3010.76,1.00
-...` 
+...
 ```
 
 这里没有什么意外。与以前相同。甚至可以绘制“耦合”对象：
 
 ```py
-`$ ./mixing-timeframes.py --multi --plot` 
+$ ./mixing-timeframes.py --multi --plot
 ```
 
 ![image](img/89385648179dd20fa0a0e1e79014526a.png)
@@ -166,7 +166,7 @@ self.sellsignal = self.data0.close < pp1.s1`
 在`backtrader`源代码中作为示例提供。用法：
 
 ```py
-`$ ./mixing-timeframes.py --help
+$ ./mixing-timeframes.py --help
 usage: mixing-timeframes.py [-h] [--data DATA] [--multi] [--plot]
 
 Sample for pivot point and cross plotting
@@ -175,13 +175,13 @@ optional arguments:
   -h, --help   show this help message and exit
   --data DATA  Data to be read in (default: ../../datas/2005-2006-day-001.txt)
   --multi      Couple all lines of the indicator (default: False)
-  --plot       Plot the result (default: False)` 
+  --plot       Plot the result (default: False)
 ```
 
 代码：
 
 ```py
-`from __future__ import (absolute_import, division, print_function,
+from __future__ import (absolute_import, division, print_function,
                         unicode_literals)
 
 import argparse
@@ -248,5 +248,5 @@ def parse_args():
     return parser.parse_args()
 
 if __name__ == '__main__':
-    runstrat()` 
+    runstrat()
 ```

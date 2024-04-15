@@ -35,7 +35,7 @@
 *backtrader*生态系统中的*filler*可以是符合以下签名的任何*callable*：
 
 ```py
-`callable(order, price, ago)` 
+callable(order, price, ago)
 ```
 
 其中：
@@ -59,9 +59,9 @@
 可调用对象可以是一个函数，或者例如支持`__call__`方法的类的实例，如：
 
 ```py
-`class MyFiller(object):
+class MyFiller(object):
     def __call__(self, order, price, ago):
-        pass` 
+        pass
 ```
 
 ## 向经纪人添加填充器
@@ -69,21 +69,21 @@
 最直接的方法是使用`set_filler`：
 
 ```py
-`import backtrader as bt
+import backtrader as bt
 
 cerebro = Cerebro()
-cerebro.broker.set_filler(bt.broker.filler.FixedSize())` 
+cerebro.broker.set_filler(bt.broker.filler.FixedSize())
 ```
 
 第二选择是完全替换`broker`，尽管这可能只适用于已经重写部分功能的`BrokerBack`的子类：
 
 ```py
-`import backtrader as bt
+import backtrader as bt
 
 cerebro = Cerebro()
 filler = bt.broker.filler.FixedSize()
 newbroker = bt.broker.BrokerBack(filler=filler)
-cerebro.broker = newbroker` 
+cerebro.broker = newbroker
 ```
 
 ## 该样本
@@ -95,13 +95,13 @@ cerebro.broker = newbroker`
 例如，不使用填充器运行：
 
 ```py
-`$ ./volumefilling.py --stakeperc 20.0` 
+$ ./volumefilling.py --stakeperc 20.0
 ```
 
 输出：
 
 ```py
-`Len,Datetime,Open,High,Low,Close,Volume,OpenInterest
+Len,Datetime,Open,High,Low,Close,Volume,OpenInterest
 0001,2006-01-02,3602.00,3624.00,3596.00,3617.00,164794.00,1511674.00
 ++ STAKE VOLUME: 32958.0
 -- NOTIFY ORDER BEGIN
@@ -112,7 +112,7 @@ Alive: False
 -- ORDER REMSIZE: 0.0
 ++ ORDER COMPLETED at data.len: 2
 0002,2006-01-03,3623.00,3665.00,3614.00,3665.00,554426.00,1501792.00
-...` 
+...
 ```
 
 因为输入相当冗长，所以大部分内容都被跳过了，但总结是：
@@ -128,13 +128,13 @@ Alive: False
 另一个运行使用`FixedSize`成交量填充器和每个条的最大`1000`单位：
 
 ```py
-`$ ./volumefilling.py --stakeperc 20.0 --filler FixedSize --filler-args size=1000` 
+$ ./volumefilling.py --stakeperc 20.0 --filler FixedSize --filler-args size=1000
 ```
 
 输出：
 
 ```py
-`Len,Datetime,Open,High,Low,Close,Volume,OpenInterest
+Len,Datetime,Open,High,Low,Close,Volume,OpenInterest
 0001,2006-01-02,3602.00,3624.00,3596.00,3617.00,164794.00,1511674.00
 ++ STAKE VOLUME: 32958.0
 -- NOTIFY ORDER BEGIN
@@ -143,7 +143,7 @@ Alive: False
 -- ORDER REMSIZE: 0.0
 ++ ORDER COMPLETED at data.len: 34
 0034,2006-02-16,3755.00,3774.00,3738.00,3773.00,502043.00,1662302.00
-...` 
+...
 ```
 
 现在：
@@ -155,18 +155,18 @@ Alive: False
 这并不是一个伟大的成就，所以让我们来看看`FixedBarPerc`：
 
 ```py
-`$ ./volumefilling.py --stakeperc 20.0 --filler FixedBarPerc --filler-args perc=0.75` 
+$ ./volumefilling.py --stakeperc 20.0 --filler FixedBarPerc --filler-args perc=0.75
 ```
 
 输出：
 
 ```py
-`...
+...
 -- NOTIFY ORDER END
 -- ORDER REMSIZE: 0.0
 ++ ORDER COMPLETED at data.len: 11
 0011,2006-01-16,3635.00,3664.00,3632.00,3660.00,273296.00,1592611.00
-...` 
+...
 ```
 
 这次：
@@ -180,18 +180,18 @@ Alive: False
 这更有趣，但让我们看看现在使用`BarPointPerc`更动态的成交量分配会发生什么：
 
 ```py
-`$ ./volumefilling.py --stakeperc 20.0 --filler BarPointPerc --filler-args minmov=1.0,perc=10.0` 
+$ ./volumefilling.py --stakeperc 20.0 --filler BarPointPerc --filler-args minmov=1.0,perc=10.0
 ```
 
 输出：
 
 ```py
-`...
+...
 -- NOTIFY ORDER END
 -- ORDER REMSIZE: 0.0
 ++ ORDER COMPLETED at data.len: 22
 0022,2006-01-31,3697.00,3718.00,3681.00,3704.00,749740.00,1642003.00
-...` 
+...
 ```
 
 发生的事情是：
@@ -213,7 +213,7 @@ Alive: False
 现金增加到一个更多的数量，以避免保证金调用并启用绘图：
 
 ```py
-`$ ./volumefilling.py --filler FixedSize --filler-args size=10000 --stakeperc 10.0 --plot --cash 500e9` 
+$ ./volumefilling.py --filler FixedSize --filler-args size=10000 --stakeperc 10.0 --plot --cash 500e9
 ```
 
 而不是查看输出，因为输出非常冗长，让我们看看图表，它已经讲述了整个故事。
@@ -223,7 +223,7 @@ Alive: False
 使用示例：
 
 ```py
-`usage: volumefilling.py [-h] [--data DATA] [--cash CASH]
+usage: volumefilling.py [-h] [--data DATA] [--cash CASH]
                         [--filler {FixedSize,FixedBarPerc,BarPointPerc}]
                         [--filler-args FILLER_ARGS] [--stakeperc STAKEPERC]
                         [--opbreak OPBREAK] [--fromdate FROMDATE]
@@ -250,13 +250,13 @@ optional arguments:
                         Starting date in YYYY-MM-DD format (default: None)
   --todate TODATE, -t TODATE
                         Ending date in YYYY-MM-DD format (default: None)
-  --plot                Plot the result (default: False)` 
+  --plot                Plot the result (default: False)
 ```
 
 ### 代码
 
 ```py
-`from __future__ import (absolute_import, division, print_function,
+from __future__ import (absolute_import, division, print_function,
                         unicode_literals)
 
 import argparse
@@ -407,5 +407,5 @@ def parse_args():
     return parser.parse_args()
 
 if __name__ == '__main__':
-    runstrat()` 
+    runstrat()
 ```

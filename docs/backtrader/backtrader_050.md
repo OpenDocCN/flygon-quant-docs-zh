@@ -7,7 +7,7 @@
 别名：
 
 ```py
-`* AccDeOsc` 
+* AccDeOsc
 ```
 
 加速/减速技术指标（AC）测量当前驱动力的加速度和减速度。该指标将在任何驱动力变化之前改变方向，而驱动力又会在价格之前改变方向。
@@ -15,35 +15,35 @@
 公式：
 
 ```py
-`* AcdDecOsc = AwesomeOscillator - SMA(AwesomeOscillator, period)` 
+* AcdDecOsc = AwesomeOscillator - SMA(AwesomeOscillator, period)
 ```
 
 见：
 
 ```py
-`* [`www.metatrader5.com/en/terminal/help/indicators/bw_indicators/ao`](https://www.metatrader5.com/en/terminal/help/indicators/bw_indicators/ao)
+* [`www.metatrader5.com/en/terminal/help/indicators/bw_indicators/ao`](https://www.metatrader5.com/en/terminal/help/indicators/bw_indicators/ao)
 
-* [`www.ifcmarkets.com/en/ntx-indicators/ntx-indicators-accelerator-decelerator-oscillator`](https://www.ifcmarkets.com/en/ntx-indicators/ntx-indicators-accelerator-decelerator-oscillator)` 
+* [`www.ifcmarkets.com/en/ntx-indicators/ntx-indicators-accelerator-decelerator-oscillator`](https://www.ifcmarkets.com/en/ntx-indicators/ntx-indicators-accelerator-decelerator-oscillator)
 ```
 
 线条：
 
 ```py
-`* accde` 
+* accde
 ```
 
 参数：
 
 ```py
-`* period (5)
+* period (5)
 
-* movav (SMA)` 
+* movav (SMA)
 ```
 
 绘制信息：
 
 ```py
-`* plot (True)
+* plot (True)
 
 * plotmaster (None)
 
@@ -61,7 +61,7 @@
 
 * plotlinevalues (True)
 
-* plotvaluetags (True)` 
+* plotvaluetags (True)
 ```
 
 +   绘制垂直边距（0.0）
@@ -543,13 +543,13 @@ Formula:
 Note:
 
 ```py
-`The lines oscillate between 0 and 100\. That means that the “distance” to
+The lines oscillate between 0 and 100\. That means that the “distance” to
 the last highest or lowest must go from 0 to period so that the formula
 can yield 0 and 100.
 
 Hence the lookback period is period + 1, because the current bar is also
 taken into account. And therefore this indicator needs an effective
-lookback period of period + 1.` 
+lookback period of period + 1.
 ```
 
 参见：
@@ -679,13 +679,13 @@ lookback period of period + 1.`
 注意：
 
 ```py
-`The lines oscillate between 0 and 100\. That means that the “distance” to
+The lines oscillate between 0 and 100\. That means that the “distance” to
 the last highest or lowest must go from 0 to period so that the formula
 can yield 0 and 100.
 
 Hence the lookback period is period + 1, because the current bar is also
 taken into account. And therefore this indicator needs an effective
-lookback period of period + 1.` 
+lookback period of period + 1.
 ```
 
 查看：
@@ -759,13 +759,13 @@ lookback period of period + 1.`
 注意：
 
 ```py
-`The lines oscillate between 0 and 100\. That means that the “distance” to
+The lines oscillate between 0 and 100\. That means that the “distance” to
 the last highest or lowest must go from 0 to period so that the formula
 can yield 0 and 100.
 
 Hence the lookback period is period + 1, because the current bar is also
 taken into account. And therefore this indicator needs an effective
-lookback period of period + 1.` 
+lookback period of period + 1.
 ```
 
 查看：
@@ -835,7 +835,7 @@ lookback period of period + 1.`
 公式：
 
 ```py
-`(None, uses the aforementioned indicators)` 
+(None, uses the aforementioned indicators)
 ```
 
 另请参阅：
@@ -2593,7 +2593,7 @@ DEMA 首次于 1994 年在“股票与商品技术分析”杂志中 Patrick G. 
 参见：
 
 ```py
-`(None)` 
+(None)
 ```
 
 线条：
@@ -3487,8 +3487,8 @@ PlotLines:
 注意：
 
 ```py
-`Returned indexes look backwards. 0 is the current index and 1 is
-the previous bar.` 
+Returned indexes look backwards. 0 is the current index and 1 is
+the previous bar.
 ```
 
 公式：
@@ -3548,8 +3548,8 @@ the previous bar.`
 注意：
 
 ```py
-`Returned indexes look backwards. 0 is the current index and 1 is
-the previous bar.` 
+Returned indexes look backwards. 0 is the current index and 1 is
+the previous bar.
 ```
 
 公式：
@@ -3609,8 +3609,8 @@ the previous bar.`
 注意：
 
 ```py
-`Returned indexes look backwards. 0 is the current index and 1 is
-the previous bar.` 
+Returned indexes look backwards. 0 is the current index and 1 is
+the previous bar.
 ```
 
 公式：
@@ -3670,8 +3670,8 @@ the previous bar.`
 注意：
 
 ```py
-`Returned indexes look backwards. 0 is the current index and 1 is
-the previous bar.` 
+Returned indexes look backwards. 0 is the current index and 1 is
+the previous bar.
 ```
 
 公式：
@@ -3731,8 +3731,8 @@ the previous bar.`
 注意：
 
 ```py
-`Returned indexes look backwards. 0 is the current index and 1 is
-the previous bar.` 
+Returned indexes look backwards. 0 is the current index and 1 is
+the previous bar.
 ```
 
 公式：
@@ -3792,8 +3792,8 @@ the previous bar.`
 注意：
 
 ```py
-`Returned indexes look backwards. 0 is the current index and 1 is
-the previous bar.` 
+Returned indexes look backwards. 0 is the current index and 1 is
+the previous bar.
 ```
 
 公式：
@@ -3851,7 +3851,7 @@ PlotLines：
 参考资料：
 
 ```py
-`[Ref 1] [`www.investopedia.com/articles/trading/06/fractals.asp`](http://www.investopedia.com/articles/trading/06/fractals.asp)` 
+[Ref 1] [`www.investopedia.com/articles/trading/06/fractals.asp`](http://www.investopedia.com/articles/trading/06/fractals.asp)
 ```
 
 线条：
@@ -3933,17 +3933,17 @@ Heikin Ashi 蜡烛线的形式
 公式：
 
 ```py
-`ha_open = (ha_open(-1) + ha_close(-1)) / 2
+ha_open = (ha_open(-1) + ha_close(-1)) / 2
 ha_high = max(hi, ha_open, ha_close)
 ha_low = min(lo, ha_open, ha_close)
-ha_close = (open + high + low + close) / 4` 
+ha_close = (open + high + low + close) / 4
 ```
 
 另请参阅：
 
 ```py
-`[`en.wikipedia.org/wiki/Candlestick_chart#Heikin_Ashi_candlesticks`](https://en.wikipedia.org/wiki/Candlestick_chart#Heikin_Ashi_candlesticks)
-[`stockcharts.com/school/doku.php?id=chart_school:chart_analysis:heikin_ashi`](http://stockcharts.com/school/doku.php?id=chart_school:chart_analysis:heikin_ashi)` 
+[`en.wikipedia.org/wiki/Candlestick_chart#Heikin_Ashi_candlesticks`](https://en.wikipedia.org/wiki/Candlestick_chart#Heikin_Ashi_candlesticks)
+[`stockcharts.com/school/doku.php?id=chart_school:chart_analysis:heikin_ashi`](http://stockcharts.com/school/doku.php?id=chart_school:chart_analysis:heikin_ashi)
 ```
 
 线条：
@@ -4269,23 +4269,23 @@ PlotLines:
 别名：
 
 ```py
-`- Hurst
+- Hurst
 
 References:
 
 - [`www.quantopian.com/posts/hurst-exponent`](https://www.quantopian.com/posts/hurst-exponent)
 
-- [`www.quantopian.com/posts/some-code-from-ernie-chans-new-book-implemented-in-python`](https://www.quantopian.com/posts/some-code-from-ernie-chans-new-book-implemented-in-python)` 
+- [`www.quantopian.com/posts/some-code-from-ernie-chans-new-book-implemented-in-python`](https://www.quantopian.com/posts/some-code-from-ernie-chans-new-book-implemented-in-python)
 ```
 
 结果的解释
 
 ```py
-`1\. Geometric random walk (H=0.5)
+1\. Geometric random walk (H=0.5)
 
 1\. Mean-reverting series (H<0.5)
 
-1\. Trending Series (H>0.5)` 
+1\. Trending Series (H>0.5)
 ```
 
 重要说明：
@@ -5657,7 +5657,7 @@ PlotLines:
 注意：
 
 ```py
-`Base classes must provide a “func” attribute which is a callable` 
+Base classes must provide a “func” attribute which is a callable
 ```
 
 Formula:
@@ -5707,7 +5707,7 @@ PlotInfo:
 Datas:
 
 ```py
-`This indicator can accept 1 or 2 datas for the calculation.` 
+This indicator can accept 1 or 2 datas for the calculation.
 ```
 
 +   如果提供了 1 组数据，必须是一个复杂的“Lines”对象（指标），该对象还具有“datas”。示例：移动平均线
@@ -7769,7 +7769,7 @@ TEMA 首次于 1994 年在“股票与商品技术分析”杂志上的文章“
 参见：
 
 ```py
-`(None)` 
+(None)
 ```
 
 线条：
@@ -8363,7 +8363,7 @@ See:
 公式：
 
 ```py
-`# Buying Pressure = Close - TrueLow
+# Buying Pressure = Close - TrueLow
 BP = Close - Minimum(Low or Prior Close)
 
 # TrueRange = TrueHigh - TrueLow
@@ -8373,7 +8373,7 @@ Average7 = (7-period BP Sum) / (7-period TR Sum)
 Average14 = (14-period BP Sum) / (14-period TR Sum)
 Average28 = (28-period BP Sum) / (28-period TR Sum)
 
-UO = 100 x [(4 x Average7)+(2 x Average14)+Average28]/(4+2+1)` 
+UO = 100 x [(4 x Average7)+(2 x Average14)+Average28]/(4+2+1)
 ```
 
 参见：

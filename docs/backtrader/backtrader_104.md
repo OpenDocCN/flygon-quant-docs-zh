@@ -129,7 +129,7 @@
 **固定大小投注和绘图的单次运行**
 
 ```py
-`./vanktharp-coinflip.py --years 1985-1990 --fixedsize --sizer stake=1 --iterations 1 --plot
+./vanktharp-coinflip.py --years 1985-1990 --fixedsize --sizer stake=1 --iterations 1 --plot
 
 **** Iteration:    1
 -- PNL: 10482.00
@@ -141,7 +141,7 @@
 **** Summary of Trades
 -- Total       :       49
 -- Total Won   :       22
--- % Total Won : 0.45` 
+-- % Total Won : 0.45
 ```
 
 **使用 1%风险模型、10 次迭代和散点图的 100 次运行**
@@ -149,7 +149,7 @@
 （为了实际目的，输出已缩短）
 
 ```py
-`$ ./vanktharp-coinflip.py --years 1985-1990 --percrisk --sizer percrisk=0.01 --iterations 100 --scatter
+$ ./vanktharp-coinflip.py --years 1985-1990 --percrisk --sizer percrisk=0.01 --iterations 100 --scatter
 **** Iteration:    1
 -- PNL: -18218.00
 --   Trades 60 - Won 24 - %_Won: 0.40
@@ -166,7 +166,7 @@
 **** Summary of Trades
 -- Total       :     5504
 -- Total Won   :     2284
--- % Total Won : 0.41` 
+-- % Total Won : 0.41
 ```
 
 ## 测试运行混合
@@ -218,7 +218,7 @@
 +   [`gist.github.com/mementum/364173371634b226120dc39708cd9610`](https://gist.github.com/mementum/364173371634b226120dc39708cd9610)
 
 ```py
-`#!/usr/bin/env python
+#!/usr/bin/env python
 # -*- coding: utf-8; py-indent-offset:4 -*-
 ###############################################################################
 # Copyright (C) 2019 Daniel Rodriguez - MIT License
@@ -562,5 +562,5 @@ def parse_args(pargs=None):
     return parser.parse_args(pargs)
 
 if __name__ == '__main__':
-    run()` 
+    run()
 ```

@@ -19,7 +19,7 @@
 源数据（10 行 bid-ask 数据）：
 
 ```py
-`Date,Time,Symbol,Status,Bid,Ask,Bid Vol,Ask Vol
+Date,Time,Symbol,Status,Bid,Ask,Bid Vol,Ask Vol
 01/03/16,23:43:11,EUR/JPY,D,,130.520,,1000000
 01/03/16,23:43:27,EUR/JPY,D,,130.520,,2000000
 01/03/16,23:49:19,EUR/JPY,D,,130.510,,500000
@@ -29,7 +29,7 @@
 01/03/16,23:51:25,EUR/JPY,D,,130.500,,1200000
 01/03/16,23:52:27,EUR/JPY,D,,130.495,,1100000
 01/03/16,23:53:25,EUR/JPY,D,,130.480,,600000
-01/03/16,23:54:27,EUR/JPY,D,,130.470,,900000` 
+01/03/16,23:54:27,EUR/JPY,D,,130.470,,900000
 ```
 
 之后：
@@ -57,7 +57,7 @@
         close=5,
         volume=7,
         openinterest=-1,  # -1 for not present
-        timeframe=bt.TimeFrame.Ticks)` 
+        timeframe=bt.TimeFrame.Ticks)
 ```
 
 一些参数甚至不需要更改，即：
@@ -81,7 +81,7 @@
 ```py
  `cerebro.resampledata(data,
                          timeframe=bt.TimeFrame.Ticks,
-                         compression=args.compression)` 
+                         compression=args.compression)
 ```
 
 我们提供相同的`timeframe`，数据携带的是`TimeFrame.Ticks`，以确保数据不被*上采样*。而`compression`是从命令行中传递的参数，因此：`compression=args.compression`
@@ -89,12 +89,12 @@
 一个示例执行：
 
 ```py
-`$ ./bidask-to-ohlc.py --compression 2
+$ ./bidask-to-ohlc.py --compression 2
 2016-03-01 23:43:27,130.52,130.52,130.52,130.52,3000000.0
 2016-03-01 23:49:22,130.51,130.53,130.53,130.53,2000000.0
 2016-03-01 23:49:27,130.54,130.55,130.55,130.55,1650000.0
 2016-03-01 23:52:27,130.5,130.5,130.5,130.495,2300000.0
-2016-03-01 23:54:27,130.48,130.48,130.48,130.47,1500000.0` 
+2016-03-01 23:54:27,130.48,130.48,130.48,130.47,1500000.0
 ```
 
 不出所料，我们已经从*Bid/Ask*格式转换为*OHLC*格式，并且由于分配给压缩的`2`，数据已经从`10`行减少到`5`行。
@@ -102,11 +102,11 @@
 也不应该让人惊讶，`backtrader`不能创造奇迹，如果*compression*因子不是原始行数的除数，它将传递`rows / compression + 1`行新行：
 
 ```py
-`$ ./bidask-to-ohlc.py --compression 3
+$ ./bidask-to-ohlc.py --compression 3
 2016-03-01 23:49:19,130.52,130.52,130.52,130.51,3500000.0
 2016-03-01 23:49:27,130.53,130.55,130.55,130.55,3150000.0
 2016-03-01 23:53:25,130.5,130.5,130.5,130.48,2900000.0
-2016-03-01 23:54:27,130.47,130.47,130.47,130.47,900000.0` 
+2016-03-01 23:54:27,130.47,130.47,130.47,130.47,900000.0
 ```
 
 在这种情况下，`10 / 3 = 3.33333`，这就是为什么会传递`4`行的原因。
@@ -118,7 +118,7 @@
 样例代码（包含在 `backtrader` 的源代码中）
 
 ```py
-`from __future__ import (absolute_import, division, print_function,)
+from __future__ import (absolute_import, division, print_function,)
 #                        unicode_literals)
 
 import argparse
@@ -182,5 +182,5 @@ def parse_args():
     return parser.parse_args()
 
 if __name__ == '__main__':
-    runstrat()` 
+    runstrat()
 ```

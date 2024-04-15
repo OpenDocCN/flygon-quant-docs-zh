@@ -11,31 +11,31 @@
 数据源被添加到 `cerebro` 实例中，如下所示：
 
 ```py
-`from datetime import datetime
+from datetime import datetime
 import backtrader as bt
 
 cerebro = bt.Cerebro()
 data = bt.YahooFinanceData(dataname=my_ticker, fromdate=datetime(2016, 1, 1))
 cerebro.adddata(data)
 
-...` 
+...
 ```
 
 我们的示例中的获胜策略将在 `close` 超过 *Simple Moving Average* 时进行多头操作。我们将使用 *Signals* 来缩短示例：
 
 ```py
-`class MyStrategy(bt.SignalStrategy):
+class MyStrategy(bt.SignalStrategy):
     params = (('period', 30),)
 
     def __init__(self):
         mysig = self.data.close > bt.indicators.SMA(period=self.p.period)
-        self.signal_add(bt.signal.SIGNAL_LONG, mysig)` 
+        self.signal_add(bt.signal.SIGNAL_LONG, mysig)
 ```
 
 这些被添加到混合中：
 
 ```py
-`cerebro.addstrategy(MyStrategy)` 
+cerebro.addstrategy(MyStrategy)
 ```
 
 任何读者都会注意到：
@@ -85,18 +85,18 @@ cerebro.adddata(data)
 让我们定义一个获胜的指标，并将其添加到一个获胜的策略中。我们将重新包装 *close over SMA* 的概念：
 
 ```py
-`class MyIndicator(bt.Indicator):
+class MyIndicator(bt.Indicator):
     params = (('period', 30),)
     lines = ('signal',)
 
     def __init__(self):
-        self.lines.signal = self.data - bt.indicators.SMA` 
+        self.lines.signal = self.data - bt.indicators.SMA
 ```
 
 现在将其添加到常规策略中：
 
 ```py
-`class MyStrategy(bt.Strategy):
+class MyStrategy(bt.Strategy):
     params = (('period', 30),)
 
     def __init__(self):
@@ -104,13 +104,13 @@ cerebro.adddata(data)
 
     def next(self):
         if self.mysig:
-            pass  # do something like buy ...` 
+            pass  # do something like buy ...
 ```
 
 从上面的代码中显然在 `MyIndicator` 中进行了计算：
 
 ```py
-`self.lines.signal = self.data - bt.indicators.SMA` 
+self.lines.signal = self.data - bt.indicators.SMA
 ```
 
 但似乎没有地方执行这个操作。正如本系列中的第 1 篇文章所示，该操作生成一个*对象*，分配给`self.lines.signal`，然后发生以下情况：

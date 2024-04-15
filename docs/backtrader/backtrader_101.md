@@ -25,7 +25,7 @@
 脚本
 
 ```py
-`import numpy as np
+import numpy as np
 import pandas as pd
 
 COLUMNS = ['open', 'high', 'low', 'close', 'volume', 'openinterest']
@@ -39,7 +39,7 @@ for i in range(STOCKS):
     data = np.random.randint(10, 20, size=(CANDLES, len(COLUMNS)))
     df = pd.DataFrame(data * 1.01, dateindex, columns=COLUMNS)
     df = df.rename_axis('datetime')
-    df.to_csv('candles{:02d}.csv'.format(i))` 
+    df.to_csv('candles{:02d}.csv'.format(i))
 ```
 
 这将生成 100 个文件，从`candles00.csv`开始一直到`candles99.csv`。实际值并不重要。重要的是具有标准的`datetime`、`OHLCV`组件（和`OpenInterest`）。
@@ -69,7 +69,7 @@ for i in range(STOCKS):
 我们的测试脚本（请查看底部获取完整源代码）将打开这 100 个文件，并使用默认的*backtrader*配置处理它们。
 
 ```py
-`$ ./two-million-candles.py
+$ ./two-million-candles.py
 Cerebro Start Time:          2019-10-26 08:33:15.563088
 Strat Init Time:             2019-10-26 08:34:31.845349
 Time Loading Data Feeds:     76.28
@@ -84,7 +84,7 @@ End Time:                    2019-10-26 08:35:31.493349
 Time in Strategy Next Logic: 58.82
 Total Time in Strategy:      58.82
 Total Time:                  135.93
-Length of data feeds:        20000` 
+Length of data feeds:        20000
 ```
 
 **内存使用**：观察到峰值为 348 M 字节
@@ -102,7 +102,7 @@ Length of data feeds:        20000`
 既然该帖子声称使用`pypy`没有帮助，那么我们来看看使用它会发生什么。
 
 ```py
-`$ ./two-million-candles.py
+$ ./two-million-candles.py
 Cerebro Start Time:          2019-10-26 08:39:42.958689
 Strat Init Time:             2019-10-26 08:40:31.260691
 Time Loading Data Feeds:     48.30
@@ -117,7 +117,7 @@ End Time:                    2019-10-26 08:40:40.150689
 Time in Strategy Next Logic: 8.54
 Total Time in Strategy:      8.54
 Total Time:                  57.19
-Length of data feeds:        20000` 
+Length of data feeds:        20000
 ```
 
 天啊！总时间从`135.93`秒降至`57.19`秒。性能**翻了一番**。
@@ -144,13 +144,13 @@ Length of data feeds:        20000`
 
   * This setting will deactivate `preload` and `runonce`
 
-  * Using this setting also deactivates **plotting**` 
+  * Using this setting also deactivates **plotting**
 ```
 
 为了最大限度地优化，并且因为绘图将被禁用，以下内容也将被使用：`stdstats=False`，它禁用了用于现金、价值和交易的标准*观察者*（对绘图有用，但不再在范围内）
 
 ```py
-`$ ./two-million-candles.py --cerebro exactbars=False,stdstats=False
+$ ./two-million-candles.py --cerebro exactbars=False,stdstats=False
 Cerebro Start Time:          2019-10-26 08:37:08.014348
 Strat Init Time:             2019-10-26 08:38:21.850392
 Time Loading Data Feeds:     73.84
@@ -165,7 +165,7 @@ End Time:                    2019-10-26 08:39:02.334936
 Time in Strategy Next Logic: 40.48
 Total Time in Strategy:      40.48
 Total Time:                  114.32
-Length of data feeds:        20000` 
+Length of data feeds:        20000
 ```
 
 性能：每秒`17,494`根蜡烛
@@ -189,7 +189,7 @@ Length of data feeds:        20000`
 现在我们知道如何优化，让我们按照`pypy`的方式来做。
 
 ```py
-`$ ./two-million-candles.py --cerebro exactbars=True,stdstats=False
+$ ./two-million-candles.py --cerebro exactbars=True,stdstats=False
 Cerebro Start Time:          2019-10-26 08:44:32.309689
 Strat Init Time:             2019-10-26 08:44:32.406689
 Time Loading Data Feeds:     0.10
@@ -204,7 +204,7 @@ End Time:                    2019-10-26 08:45:38.918693
 Time in Strategy Next Logic: 66.47
 Total Time in Strategy:      66.47
 Total Time:                  66.61
-Length of data feeds:        20000` 
+Length of data feeds:        20000
 ```
 
 性能：每秒`30,025`根蜡烛
@@ -228,7 +228,7 @@ Length of data feeds:        20000`
 该脚本可以创建指标（移动平均线）并在 100 个数据源上执行*多空*策略，使用移动平均线的交叉。让我们用`pypy`来做，并且知道它与批处理模式更好，就这么办。
 
 ```py
-`$ ./two-million-candles.py --strat indicators=True,trade=True
+$ ./two-million-candles.py --strat indicators=True,trade=True
 Cerebro Start Time:          2019-10-26 08:57:36.114415
 Strat Init Time:             2019-10-26 08:58:25.569448
 Time Loading Data Feeds:     49.46
@@ -247,7 +247,7 @@ End Time:                    2019-10-26 09:00:13.057955
 Time in Strategy Next Logic: 92.05
 Total Time in Strategy:      92.21
 Total Time:                  156.94
-Length of data feeds:        20000` 
+Length of data feeds:        20000
 ```
 
 性能：每秒`12,743`根蜡烛
@@ -259,7 +259,7 @@ Length of data feeds:        20000`
 在得出任何结论之前，让我们运行它创建指标，但不进行交易
 
 ```py
-`$ ./two-million-candles.py --strat indicators=True
+$ ./two-million-candles.py --strat indicators=True
 Cerebro Start Time:          2019-10-26 09:05:55.967969
 Strat Init Time:             2019-10-26 09:06:44.072969
 Time Loading Data Feeds:     48.10
@@ -278,7 +278,7 @@ End Time:                    2019-10-26 09:07:09.151838
 Time in Strategy Next Logic: 9.79
 Total Time in Strategy:      9.94
 Total Time:                  73.18
-Length of data feeds:        20000` 
+Length of data feeds:        20000
 ```
 
 性能：`27,329`根蜡烛/秒
@@ -350,7 +350,7 @@ Length of data feeds:        20000`
 这里是源代码
 
 ```py
-`#!/usr/bin/env python
+#!/usr/bin/env python
 # -*- coding: utf-8; py-indent-offset:4 -*-
 ###############################################################################
 import argparse
@@ -471,5 +471,5 @@ def parse_args(pargs=None):
     return parser.parse_args(pargs)
 
 if __name__ == '__main__':
-    run()` 
+    run()
 ```

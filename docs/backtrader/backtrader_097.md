@@ -15,7 +15,7 @@
 有一个基类`TradingCalendarBase`，用作任何交易日历的基础。它定义了必须被覆盖的两个（2）方法：
 
 ```py
-`class TradingCalendarBase(with_metaclass(MetaParams, object)):
+class TradingCalendarBase(with_metaclass(MetaParams, object)):
     def _nextday(self, day):
   '''
  Returns the next trading day (datetime/date instance) after ``day``
@@ -31,7 +31,7 @@
  Returns a tuple with the opening and closing times (``datetime.time``)
  for the given ``date`` (``datetime/date`` instance)
  '''
-        raise NotImplementedError` 
+        raise NotImplementedError
 ```
 
 ## 实施
@@ -41,13 +41,13 @@
 此实现基于一个很好的包，该包是 Quantopian 初始功能的分支。该软件包位于：[pandas_market_calendars](https://github.com/rsheftel/pandas_market_calendars) 并且可以轻松安装：
 
 ```py
-`pip install pandas_market_calendars` 
+pip install pandas_market_calendars
 ```
 
 该实现具有以下接口：
 
 ```py
-`class PandasMarketCalendar(TradingCalendarBase):
+class PandasMarketCalendar(TradingCalendarBase):
   '''
  Wrapper of ``pandas_market_calendars`` for a trading calendar. The package
  ``pandas_market_calendar`` must be installed
@@ -77,7 +77,7 @@
     params = (
         ('calendar', None),  # A pandas_market_calendars instance or exch name
         ('cachesize', 365),  # Number of days to cache in advance
-    )` 
+    )
 ```
 
 ### 交易日历
@@ -85,7 +85,7 @@
 此实现允许通过指定节假日、提前天、非交易工作日和开放和关闭会话时间来构建日历：
 
 ```py
-`class TradingCalendar(TradingCalendarBase):
+class TradingCalendar(TradingCalendarBase):
   '''
  Wrapper of ``pandas_market_calendars`` for a trading calendar. The package
  ``pandas_market_calendar`` must be installed
@@ -123,7 +123,7 @@
         ('holidays', []),  # list of non trading days (date)
         ('earlydays', []),  # list of tuples (date, opentime, closetime)
         ('offdays', ISOWEEKEND),  # list of non trading (isoweekdays)
-    )` 
+    )
 ```
 
 ## 使用模式
@@ -133,7 +133,7 @@
 通过`Cerebro`可以添加一个全局日历，该日历是所有数据源的默认日历，除非为数据源指定了一个：
 
 ```py
-`def addcalendar(self, cal):
+def addcalendar(self, cal):
   '''Adds a global trading calendar to the system. Individual data feeds
  may have separate calendars which override the global one
 
@@ -144,7 +144,7 @@
 
  If a subclass of `TradingCalendarBase` is passed (not an instance) it
  will be instantiated
- '''` 
+ '''
 ```
 
 ### 每个数据源
@@ -154,10 +154,10 @@
 例如：
 
 ```py
-`...
+...
 data = bt.feeds.YahooFinanceData(dataname='YHOO', calendar='NYSE', ...)
 cerebro.adddata(data)
-...` 
+...
 ```
 
 ## 示例
@@ -169,13 +169,13 @@ cerebro.adddata(data)
 在这种情况下，从每日重采样到每周（使用`YHOO`和 2016 年的每日数据）：
 
 ```py
-`$ ./tcal.py
+$ ./tcal.py
 
 ...
 Strategy len 56 datetime 2016-03-23 Data0 len 56 datetime 2016-03-23 Data1 len 11 datetime 2016-03-18
 Strategy len 57 datetime 2016-03-24 Data0 len 57 datetime 2016-03-24 Data1 len 11 datetime 2016-03-18
 Strategy len 58 datetime 2016-03-28 Data0 len 58 datetime 2016-03-28 Data1 len 12 datetime 2016-03-24
-...` 
+...
 ```
 
 在这个输出中，第 1 个日期是策略的结算日期。第 2 个日期是每日的日期
@@ -185,13 +185,13 @@ Strategy len 58 datetime 2016-03-28 Data0 len 58 datetime 2016-03-28 Data1 len 1
 同样的但是使用`NYSE`的`PandasMarketCalendar`运行（并添加绘图）
 
 ```py
-`$ ./tcal.py --plot --pandascal NYSE
+$ ./tcal.py --plot --pandascal NYSE
 
 ...
 Strategy len 56 datetime 2016-03-23 Data0 len 56 datetime 2016-03-23 Data1 len 11 datetime 2016-03-18
 Strategy len 57 datetime 2016-03-24 Data0 len 57 datetime 2016-03-24 Data1 len 12 datetime 2016-03-24
 Strategy len 58 datetime 2016-03-28 Data0 len 58 datetime 2016-03-28 Data1 len 12 datetime 2016-03-24
-...` 
+...
 ```
 
 有一个变化！由于日历，重采样器知道周在 2016-03-24 结束，并于同一天交付了相应的每周重采样柱 2016-03-24。
@@ -203,7 +203,7 @@ Strategy len 58 datetime 2016-03-28 Data0 len 58 datetime 2016-03-28 Data1 len 1
 由于并非每个市场都可能提供相同的信息，因此人们也可以自己制定日历。对于`NYSE`和`2016`年，情况如下：
 
 ```py
-`class NYSE_2016(bt.TradingCalendar):
+class NYSE_2016(bt.TradingCalendar):
     params = dict(
         holidays=[
             datetime.date(2016, 1, 1),
@@ -216,19 +216,19 @@ Strategy len 58 datetime 2016-03-28 Data0 len 58 datetime 2016-03-28 Data1 len 1
             datetime.date(2016, 11, 24),
             datetime.date(2016, 12, 26),
         ]
-    )` 
+    )
 ```
 
 复活节星期五（2016-03-25）被列为假日之一。现在运行示例：
 
 ```py
-`$ ./tcal.py --plot --owncal
+$ ./tcal.py --plot --owncal
 
 ...
 Strategy len 56 datetime 2016-03-23 Data0 len 56 datetime 2016-03-23 Data1 len 11 datetime 2016-03-18
 Strategy len 57 datetime 2016-03-24 Data0 len 57 datetime 2016-03-24 Data1 len 12 datetime 2016-03-24
 Strategy len 58 datetime 2016-03-28 Data0 len 58 datetime 2016-03-28 Data1 len 12 datetime 2016-03-24
-...` 
+...
 ```
 
 并且使用精心制作的日历定义得到了相同的结果。
@@ -244,14 +244,14 @@ Strategy len 58 datetime 2016-03-28 Data0 len 58 datetime 2016-03-28 Data1 len 1
 首先没有交易日历
 
 ```py
-`$ ./tcal-intra.py
+$ ./tcal-intra.py
 
 ...
 Strategy len 6838 datetime 2016-11-25 18:00:00 Data0 len 6838 datetime 2016-11-25 13:00:00 Data1 len 21 datetime 2016-11-23 16:00:00
 Strategy len 6839 datetime 2016-11-25 18:01:00 Data0 len 6839 datetime 2016-11-25 13:01:00 Data1 len 21 datetime 20 16-11-23 16:00:00
 Strategy len 6840 datetime 2016-11-28 14:31:00 Data0 len 6840 datetime 2016-11-28 09:31:00 Data1 len 22 datetime 2016-11-25 16:00:00
 Strategy len 6841 datetime 2016-11-28 14:32:00 Data0 len 6841 datetime 2016-11-28 09:32:00 Data1 len 22 datetime 2016-11-25 16:00:00
-...` 
+...
 ```
 
 如预期的那样，交易日在`13:00`提前关闭，但重新采样器不知道这一点（官方交易结束时间为`16:00`），并继续提供上一交易日（2016-11-23）的重新采样日线柱形图，新的重新采样日线柱形图首次在下一个交易日（2016-11-28）中交付，日期为 2016-11-25。
@@ -267,14 +267,14 @@ Strategy len 6841 datetime 2016-11-28 14:32:00 Data0 len 6841 datetime 2016-11-2
 使用`PandasMarketCalendar`实例进行相同运行：
 
 ```py
-`$ ./tcal-intra.py --pandascal NYSE
+$ ./tcal-intra.py --pandascal NYSE
 
 ...
 Strategy len 6838 datetime 2016-11-25 18:00:00 Data0 len 6838 datetime 2016-11-25 13:00:00 Data1 len 15 datetime 2016-11-25 13:00:00
 Strategy len 6839 datetime 2016-11-25 18:01:00 Data0 len 6839 datetime 2016-11-25 13:01:00 Data1 len 15 datetime 2016-11-25 13:00:00
 Strategy len 6840 datetime 2016-11-28 14:31:00 Data0 len 6840 datetime 2016-11-28 09:31:00 Data1 len 15 datetime 2016-11-25 13:00:00
 Strategy len 6841 datetime 2016-11-28 14:32:00 Data0 len 6841 datetime 2016-11-28 09:32:00 Data1 len 15 datetime 2016-11-25 13:00:00
-...` 
+...
 ```
 
 现在，当每日 1 分钟的数据源命中 2016-11-25 的 13:00 时（我们忽略 13:01 柱形图），2016-11-25 的每日柱形图就被交付了，因为交易日历告诉重新采样代码该天已结束。
@@ -282,7 +282,7 @@ Strategy len 6841 datetime 2016-11-28 14:32:00 Data0 len 6841 datetime 2016-11-2
 让我们添加一个精心制作的定义。与之前相同，但扩展了一些`earlydays`
 
 ```py
-`class NYSE_2016(bt.TradingCalendar):
+class NYSE_2016(bt.TradingCalendar):
     params = dict(
         holidays=[
             datetime.date(2016, 1, 1),
@@ -301,20 +301,20 @@ Strategy len 6841 datetime 2016-11-28 14:32:00 Data0 len 6841 datetime 2016-11-2
         ],
         open=datetime.time(9, 30),
         close=datetime.time(16, 0),
-    )` 
+    )
 ```
 
 运行：
 
 ```py
-`$ ./tcal-intra.py --owncal
+$ ./tcal-intra.py --owncal
 
 ...
 Strategy len 6838 datetime 2016-11-25 18:00:00 Data0 len 6838 datetime 2016-11-25 13:00:00 Data1 len 15 datetime 2016-11-23 16:00:00
 Strategy len 6839 datetime 2016-11-25 18:01:00 Data0 len 6839 datetime 2016-11-25 13:01:00 Data1 len 16 datetime 2016-11-25 13:01:00
 Strategy len 6840 datetime 2016-11-28 14:31:00 Data0 len 6840 datetime 2016-11-28 09:31:00 Data1 len 16 datetime 2016-11-25 13:01:00
 Strategy len 6841 datetime 2016-11-28 14:32:00 Data0 len 6841 datetime 2016-11-28 09:32:00 Data1 len 16 datetime 2016-11-25 13:01:00
-...` 
+...
 ```
 
 热心的读者会注意到，精心制作的定义包含将`13:01`（使用`datetime.time(13, 1)`）定义为我们 2016-11-25 的短日的会话结束。这只是为了展示精心制作的`TradingCalendar`如何帮助调整事物。
@@ -326,7 +326,7 @@ Strategy len 6841 datetime 2016-11-28 14:32:00 Data0 len 6841 datetime 2016-11-2
 第一个`datetime`，属于策略的时间，总是在一个不同的时区，实际上是`UTC`。同样在这个版本`1.9.42.116`中可以同步。以下参数已添加到`Cerebro`（在实例化期间或使用`cerebro.run`期间使用）
 
 ```py
-`- ``tz`` (default: ``None``)
+- ``tz`` (default: ``None``)
 
   Adds a global timezone for strategies. The argument ``tz`` can be
 
@@ -340,13 +340,13 @@ Strategy len 6841 datetime 2016-11-28 14:32:00 Data0 len 6841 datetime 2016-11-2
 
     - ``integer``. Use, for the strategy, the same timezone as the
       corresponding ``data`` in the ``self.datas`` iterable (``0`` would
-      use the timezone from ``data0``)` 
+      use the timezone from ``data0``)
 ```
 
 还支持`cerebro.addtz`方法：
 
 ```py
-`def addtz(self, tz):
+def addtz(self, tz):
   '''
  This can also be done with the parameter ``tz``
 
@@ -364,20 +364,20 @@ Strategy len 6841 datetime 2016-11-28 14:32:00 Data0 len 6841 datetime 2016-11-2
  corresponding ``data`` in the ``self.datas`` iterable (``0`` would
  use the timezone from ``data0``)
 
- '''` 
+ '''
 ```
 
 重复上次日内示例的运行，并在`tz`中使用`0`（与`data0`的时区同步），以下是关注相同日期和时间的输出：
 
 ```py
-`$ ./tcal-intra.py --owncal --cerebro tz=0
+$ ./tcal-intra.py --owncal --cerebro tz=0
 
 ...
 Strategy len 6838 datetime 2016-11-25 13:00:00 Data0 len 6838 datetime 2016-11-25 13:00:00 Data1 len 15 datetime 2016-11-23 16:00:00
 Strategy len 6839 datetime 2016-11-25 13:01:00 Data0 len 6839 datetime 2016-11-25 13:01:00 Data1 len 16 datetime 2016-11-25 13:01:00
 Strategy len 6840 datetime 2016-11-28 09:31:00 Data0 len 6840 datetime 2016-11-28 09:31:00 Data1 len 16 datetime 2016-11-25 13:01:00
 Strategy len 6841 datetime 2016-11-28 09:32:00 Data0 len 6841 datetime 2016-11-28 09:32:00 Data1 len 16 datetime 2016-11-25 13:01:00
-...` 
+...
 ```
 
 时间戳现在是时区对齐的。
@@ -385,7 +385,7 @@ Strategy len 6841 datetime 2016-11-28 09:32:00 Data0 len 6841 datetime 2016-11-2
 ## 示例用法（tcal.py）
 
 ```py
-`$ ./tcal.py --help
+$ ./tcal.py --help
 usage: tcal.py [-h] [--data0 DATA0] [--offline] [--fromdate FROMDATE]
                [--todate TODATE] [--cerebro kwargs] [--broker kwargs]
                [--sizer kwargs] [--strat kwargs] [--plot [kwargs]]
@@ -412,13 +412,13 @@ optional arguments:
                         Name of trading calendar to use (default: )
   --owncal              Apply custom NYSE 2016 calendar (default: False)
   --timeframe {Weeks,Months,Years}
-                        Timeframe to resample to (default: Weeks)` 
+                        Timeframe to resample to (default: Weeks)
 ```
 
 ## 示例用法（tcal-intra.py）
 
 ```py
-`$ ./tcal-intra.py --help
+$ ./tcal-intra.py --help
 usage: tcal-intra.py [-h] [--data0 DATA0] [--fromdate FROMDATE]
                      [--todate TODATE] [--cerebro kwargs] [--broker kwargs]
                      [--sizer kwargs] [--strat kwargs] [--plot [kwargs]]
@@ -441,13 +441,13 @@ optional arguments:
   --pandascal PANDASCAL
                         Name of trading calendar to use (default: )
   --owncal              Apply custom NYSE 2016 calendar (default: False)
-  --timeframe {Days}    Timeframe to resample to (default: Days)` 
+  --timeframe {Days}    Timeframe to resample to (default: Days)
 ```
 
 ## 示例代码（tcal.py）
 
 ```py
-`from __future__ import (absolute_import, division, print_function,
+from __future__ import (absolute_import, division, print_function,
                         unicode_literals)
 
 import argparse
@@ -599,13 +599,13 @@ def parse_args(pargs=None):
     return parser.parse_args(pargs)
 
 if __name__ == '__main__':
-    runstrat()` 
+    runstrat()
 ```
 
 ## 示例代码（tcal-intra.py）
 
 ```py
-`from __future__ import (absolute_import, division, print_function,
+from __future__ import (absolute_import, division, print_function,
                         unicode_literals)
 
 import argparse
@@ -755,5 +755,5 @@ def parse_args(pargs=None):
     return parser.parse_args(pargs)
 
 if __name__ == '__main__':
-    runstrat()` 
+    runstrat()
 ```

@@ -57,7 +57,7 @@
 通过一条语句完整发行 3 个订单集。例如：
 
 ```py
-`brackets = self.buy_bracket(limitprice=14.00, price=13.50, stopprice=13.00)` 
+brackets = self.buy_bracket(limitprice=14.00, price=13.50, stopprice=13.00)
 ```
 
 注意 `stopprice` 和 `limitprice` 如何包裹主 `price`
@@ -89,11 +89,11 @@
 一个实际示例，执行上述单个命令所做的事情：
 
 ```py
-`mainside = self.buy(price=13.50, exectype=bt.Order.Limit, transmit=False)
+mainside = self.buy(price=13.50, exectype=bt.Order.Limit, transmit=False)
 lowside  = self.sell(price=13.00, size=mainsize.size, exectype=bt.Order.Stop,
                      transmit=False, parent=mainside)
 highside = self.sell(price=14.00, size=mainsize.size, exectype=bt.Order.Limit,
-                     transmit=True, parent=mainside)` 
+                     transmit=True, parent=mainside)
 ```
 
 还有很多事情要做：
@@ -113,7 +113,7 @@ highside = self.sell(price=14.00, size=mainsize.size, exectype=bt.Order.Limit,
 运行下面的示例会产生以下输出（为简洁起见）
 
 ```py
-`$ ./bracket.py --plot
+$ ./bracket.py --plot
 
 2005-01-28: Oref 1 / Buy at 2941.11055
 2005-01-28: Oref 2 / Sell Stop at 2881.99275
@@ -153,7 +153,7 @@ highside = self.sell(price=14.00, size=mainsize.size, exectype=bt.Order.Limit,
 2005-09-27: Order ref: 22 / Type Buy / Status Completed
 2005-10-04: Order ref: 24 / Type Sell / Status Completed
 2005-10-04: Order ref: 23 / Type Sell / Status Canceled
-...` 
+...
 ```
 
 显示了 3 种不同的结果：
@@ -175,7 +175,7 @@ highside = self.sell(price=14.00, size=mainsize.size, exectype=bt.Order.Limit,
 运行示例手动发出 3 个订单，但可以告诉它使用`buy_bracket`。让我们看看输出：
 
 ```py
-`$ ./bracket.py --strat usebracket=True` 
+$ ./bracket.py --strat usebracket=True
 ```
 
 产生相同的结果
@@ -187,7 +187,7 @@ highside = self.sell(price=14.00, size=mainsize.size, exectype=bt.Order.Limit,
 查看新的`buy_bracket`和`sell_bracket`方法
 
 ```py
-`def buy_bracket(self, data=None, size=None, price=None, plimit=None,
+def buy_bracket(self, data=None, size=None, price=None, plimit=None,
                 exectype=bt.Order.Limit, valid=None, tradeid=0,
                 trailamount=None, trailpercent=None, oargs={},
                 stopprice=None, stopexec=bt.Order.Stop, stopargs={},
@@ -339,13 +339,13 @@ def sell_bracket(self, data=None,
 
       - A list containing the 3 orders [order, stop side, limit side]
 
-    '''` 
+    '''
 ```
 
 ## 示例用法
 
 ```py
-`$ ./bracket.py --help
+$ ./bracket.py --help
 usage: bracket.py [-h] [--data0 DATA0] [--fromdate FROMDATE] [--todate TODATE]
                   [--cerebro kwargs] [--broker kwargs] [--sizer kwargs]
                   [--strat kwargs] [--plot [kwargs]]
@@ -362,13 +362,13 @@ optional arguments:
   --broker kwargs      kwargs in key=value format (default: )
   --sizer kwargs       kwargs in key=value format (default: )
   --strat kwargs       kwargs in key=value format (default: )
-  --plot [kwargs]      kwargs in key=value format (default: )` 
+  --plot [kwargs]      kwargs in key=value format (default: )
 ```
 
 ## 示例代码
 
 ```py
-`from __future__ import (absolute_import, division, print_function,
+from __future__ import (absolute_import, division, print_function,
                         unicode_literals)
 
 import argparse
@@ -541,5 +541,5 @@ def parse_args(pargs=None):
     return parser.parse_args(pargs)
 
 if __name__ == '__main__':
-    runstrat()` 
+    runstrat()
 ```

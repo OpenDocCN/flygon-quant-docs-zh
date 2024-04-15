@@ -19,13 +19,13 @@
 使用`IbPy`模块进行与交互式经纪人的交互必须事先安装。在写作时，Pypi 中没有包，但可以使用以下命令使用`pip`进行安装：
 
 ```py
-`pip install git+https://github.com/blampe/IbPy.git` 
+pip install git+https://github.com/blampe/IbPy.git
 ```
 
 如果您的系统中没有`git`可用（Windows 安装？），则以下内容也应该有效：
 
 ```py
-`pip install https://github.com/blampe/IbPy/archive/master.zip` 
+pip install https://github.com/blampe/IbPy/archive/master.zip
 ```
 
 ## 示例代码
@@ -55,10 +55,10 @@
 首先是**Store**模型：
 
 ```py
-`import backtrader as bt
+import backtrader as bt
 
 ibstore = bt.stores.IBStore(host='127.0.0.1', port=7496, clientId=35)
-data = ibstore.getdata(dataname='EUR.USD-CASH-IDEALPRO')` 
+data = ibstore.getdata(dataname='EUR.USD-CASH-IDEALPRO')
 ```
 
 这里是参数：
@@ -72,10 +72,10 @@ data = ibstore.getdata(dataname='EUR.USD-CASH-IDEALPRO')`
 现在可以直接使用了：
 
 ```py
-`import backtrader as bt
+import backtrader as bt
 
 data = bt.feeds.IBData(dataname='EUR.USD-CASH-IDEALPRO',
-                       host='127.0.0.1', port=7496, clientId=35)` 
+                       host='127.0.0.1', port=7496, clientId=35)
 ```
 
 这里：
@@ -177,10 +177,10 @@ data = bt.feeds.IBData(dataname='EUR.USD-CASH-IDEALPRO',
 请注意，最终考虑的*时间框架/压缩*组合可能不是在*数据源创建*期间指定的，而是在系统中*插入*期间指定的。请参见以下示例：
 
 ```py
-`data = ibstore.getdata(dataname='EUR.USD-CASH-IDEALPRO',
+data = ibstore.getdata(dataname='EUR.USD-CASH-IDEALPRO',
                        timeframe=bt.TimeFrame.Seconds, compression=5)
 
-cerebro.resampledata(data, timeframe=bt.TimeFrame.Minutes, compression=2)` 
+cerebro.resampledata(data, timeframe=bt.TimeFrame.Minutes, compression=2)
 ```
 
 如现在应该清楚的是，最终考虑的*时间框架/压缩*组合是*分钟/2*
@@ -192,7 +192,7 @@ cerebro.resampledata(data, timeframe=bt.TimeFrame.Minutes, compression=2)`
 简单但明确的合同规范：
 
 ```py
-`data = ibstore.getdata(dataname='TWTR')  # Twitter` 
+data = ibstore.getdata(dataname='TWTR')  # Twitter
 ```
 
 只会找到一个实例（2016-06），因为对于默认类型`STK`、交易所`SMART`和货币（默认为空）的单一合同交易将被找到。
@@ -200,13 +200,13 @@ cerebro.resampledata(data, timeframe=bt.TimeFrame.Minutes, compression=2)`
 使用`AAPL`的类似方法会失败：
 
 ```py
-`data = ibstore.getdata(dataname='AAPL')  # Error -> multiple contracts` 
+data = ibstore.getdata(dataname='AAPL')  # Error -> multiple contracts
 ```
 
 因为`SMART`可以在几个真实交易所找到合同，并且`AAPL`在其中一些交易所以不同的货币交易。以下是可以的：
 
 ```py
-`data = ibstore.getdata(dataname='AAPL-STK-SMART-USD')  # 1 contract found` 
+data = ibstore.getdata(dataname='AAPL-STK-SMART-USD')  # 1 contract found
 ```
 
 ### 数据通知
@@ -222,13 +222,13 @@ cerebro.resampledata(data, timeframe=bt.TimeFrame.Minutes, compression=2)`
 在*strategy*内部的一个例子：
 
 ```py
-`class IBStrategy(bt.Strategy):
+class IBStrategy(bt.Strategy):
 
     def notify_data(self, data, status, *args, **kwargs):
 
         if status == data.LIVE:  # the data has switched to live data
            # do something
-           pass` 
+           pass
 ```
 
 系统发生更改后，将发送以下通知：
@@ -276,12 +276,12 @@ cerebro.resampledata(data, timeframe=bt.TimeFrame.Minutes, compression=2)`
 但在另一方面，对于实时数据源，这些信息可能起重要作用。请参阅以下示例：
 
 ```py
-`data = ibstore.getdata(dataname='EUR.USD-CASH-IDEALPRO',
+data = ibstore.getdata(dataname='EUR.USD-CASH-IDEALPRO',
                        timeframe=bt.TimeFrame.Ticks,
                        compression=1,  # 1 is the default
                        rtbar=True,  # use RealTimeBars
                       )
-cerebro.adddata(data)` 
+cerebro.adddata(data)
 ```
 
 用户正在请求**tick**数据，这很重要，因为：
@@ -293,8 +293,8 @@ cerebro.adddata(data)`
 无论如何，除非使用*Ticks/1*的分辨率，否则数据必须进行*重新采样/重播*。上述情况下与实时条和工作：
 
 ```py
-`data = ibstore.getdata(dataname='TWTR-STK-SMART', rtbar=True)
-cerebro.resampledata(data, timeframe=bt.TimeFrame.Seconds, compression=20)` 
+data = ibstore.getdata(dataname='TWTR-STK-SMART', rtbar=True)
+cerebro.resampledata(data, timeframe=bt.TimeFrame.Seconds, compression=20)
 ```
 
 在这种情况下，并且如上所述，在`resampledata`期间将覆盖数据的`._timeframe`和`._compression`属性。这是会发生的事情：
@@ -308,8 +308,8 @@ cerebro.resampledata(data, timeframe=bt.TimeFrame.Seconds, compression=20)`
 没有`RealTimeBars`的情况下相同：
 
 ```py
-`data = ibstore.getdata(dataname='TWTR-STK-SMART')
-cerebro.resampledata(data, timeframe=bt.TimeFrame.Seconds, compression=20)` 
+data = ibstore.getdata(dataname='TWTR-STK-SMART')
+cerebro.resampledata(data, timeframe=bt.TimeFrame.Seconds, compression=20)
 ```
 
 在这种情况下：
@@ -323,8 +323,8 @@ cerebro.resampledata(data, timeframe=bt.TimeFrame.Seconds, compression=20)`
 最后，对于*CASH*产品和最多 20 秒：
 
 ```py
-`data = ibstore.getdata(dataname='EUR.USD-CASH-IDEALPRO')
-cerebro.resampledata(data, timeframe=bt.TimeFrame.Seconds, compression=20)` 
+data = ibstore.getdata(dataname='EUR.USD-CASH-IDEALPRO')
+cerebro.resampledata(data, timeframe=bt.TimeFrame.Seconds, compression=20)
 ```
 
 在这种情况下：
@@ -454,20 +454,20 @@ TWS Demo 在没有数据下载权限的资产的时区报告方面并不准确�
 使用*Store*模型（首选）：
 
 ```py
-`import backtrader as bt
+import backtrader as bt
 
 cerebro = bt.Cerebro()
 ibstore = bt.stores.IBStore(host='127.0.0.1', port=7496, clientId=35)
-cerebro.broker = ibstore.getbroker()  # or cerebro.setbroker(...)` 
+cerebro.broker = ibstore.getbroker()  # or cerebro.setbroker(...)
 ```
 
 使用直接方法：
 
 ```py
-`import backtrader as bt
+import backtrader as bt
 
 cerebro = bt.Cerebro()
-cerebro.broker = bt.brokers.IBBroker(host='127.0.0.1', port=7496, clientId=35)` 
+cerebro.broker = bt.brokers.IBBroker(host='127.0.0.1', port=7496, clientId=35)
 ```
 
 ### 经纪人参数
@@ -539,17 +539,17 @@ IB 支持各种执行类型，其中一些由 IB 模拟，一些由交易所本�
 停止触发是根据不同的策略由 IB 执行的。*backtrader*不修改默认设置，即为`0`：
 
 ```py
-`0 - the default value. The "double bid/ask" method will be used for
+0 - the default value. The "double bid/ask" method will be used for
 orders for OTC stocks and US options. All other orders will use the
-"last" method.` 
+"last" method.
 ```
 
 如果用户希望修改此项，可以根据 IB 文档提供的额外`**kwargs`向`buy`和`sell`提供。例如，在策略的`next`方法中：
 
 ```py
-`def next(self):
+def next(self):
     # some logic before
-    self.buy(data, m_triggerMethod=2)` 
+    self.buy(data, m_triggerMethod=2)
 ```
 
 这已更改策略为`2`（*“last”方法，其中停止订单基于最后价格触发*）

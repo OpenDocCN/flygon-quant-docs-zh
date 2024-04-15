@@ -72,17 +72,17 @@
 说起来容易做起来难：
 
 ```py
-`...
+...
 
 comminfo = CommInfo_Stocks_PercAbs(commission=0.005)  # 0.5%
-cerebro.broker.addcommissioninfo(comminfo)` 
+cerebro.broker.addcommissioninfo(comminfo)
 ```
 
 `addcommissioninfo` 方法定义如下：
 
 ```py
-`def addcommissioninfo(self, comminfo, name=None):
-    self.comminfo[name] = comminfo` 
+def addcommissioninfo(self, comminfo, name=None):
+    self.comminfo[name] = comminfo
 ```
 
 设置 `name` 意味着 `comminfo` 对象仅适用于具有该名称的资产。默认值 `None` 意味着它适用于系统中的所有资产。
@@ -94,7 +94,7 @@ cerebro.broker.addcommissioninfo(comminfo)`
 这应该很容易：
 
 ```py
-`import backtrader as bt
+import backtrader as bt
 
 class CommInfo_Fut_Perc_Mult(bt.CommInfoBase):
     params = (
@@ -104,25 +104,25 @@ class CommInfo_Fut_Perc_Mult(bt.CommInfoBase):
     )
 
     def _getcommission(self, size, price, pseudoexec):
-        return size * price * self.p.commission * self.p.mult` 
+        return size * price * self.p.commission * self.p.mult
 ```
 
 将其加入系统：
 
 ```py
-`comminfo = CommInfo_Fut_Perc_Mult(
+comminfo = CommInfo_Fut_Perc_Mult(
     commission=0.1,  # 0.1%
     mult=10,
     margin=2000  # Margin is needed for futures-like instruments
 )
 
-cerebro.addcommissioninfo(comminfo)` 
+cerebro.addcommissioninfo(comminfo)
 ```
 
 如果格式 **0.xx** 被偏好为默认值，只需将参数 `percabs` 设置为 `True`：
 
 ```py
-`class CommInfo_Fut_Perc_Mult(bt.CommInfoBase):
+class CommInfo_Fut_Perc_Mult(bt.CommInfoBase):
     params = (
       ('stocklike', False),  # Futures
       ('commtype', bt.CommInfoBase.COMM_PERC),  # Apply % Commission
@@ -135,7 +135,7 @@ comminfo = CommInfo_Fut_Perc_Mult(
     margin=2000  # Margin is needed for futures-like instruments
 )
 
-cerebro.addcommissioninfo(comminfo)` 
+cerebro.addcommissioninfo(comminfo)
 ```
 
 这一切都应该行得通。
@@ -145,11 +145,11 @@ cerebro.addcommissioninfo(comminfo)`
 让我们回顾一下 `_getcommission` 的定义：
 
 ```py
-`def _getcommission(self, size, price, pseudoexec):
+def _getcommission(self, size, price, pseudoexec):
   '''Calculates the commission of an operation at a given price
 
  pseudoexec: if True the operation has not yet been executed
- '''` 
+ '''
 ```
 
 `pseudoexec` 参数的目的可能看起来很模糊，但它确实有其作用。
@@ -167,7 +167,7 @@ cerebro.addcommissioninfo(comminfo)`
 将情景付诸实践：
 
 ```py
-`import backtrader as bt
+import backtrader as bt
 
 class CommInfo_Fut_Discount(bt.CommInfoBase):
     params = (
@@ -194,7 +194,7 @@ class CommInfo_Fut_Discount(bt.CommInfoBase):
            # keep track of actual real executed size for future discounts
            self.negotiated_volume += size
 
-        return commvalue` 
+        return commvalue
 ```
 
 现在，`pseudoexec`的目的和存在应该清楚了。

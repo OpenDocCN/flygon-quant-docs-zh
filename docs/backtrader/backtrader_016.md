@@ -33,7 +33,7 @@
 例如使用 pip：
 
 ```py
-`pip install backtrader` 
+pip install backtrader
 ```
 
 使用相同语法也可以应用 *easy_install*
@@ -43,7 +43,7 @@
 若需要绘图功能，请使用此选项：
 
 ```py
-`pip install backtrader[plotting]` 
+pip install backtrader[plotting]
 ```
 
 这会引入 matplotlib，它将进一步引入其他依赖项。
@@ -59,7 +59,7 @@
 解压后运行以下命令：
 
 ```py
-`python setup.py install` 
+python setup.py install
 ```
 
 ## 从源码在你的项目中运行
@@ -71,9 +71,9 @@
 然后将 *backtrader* 包目录复制到你自己的项目中。例如，在类 Unix 操作系统下：
 
 ```py
-`tar xzf backtrader.tgz
+tar xzf backtrader.tgz
 cd backtrader
-cp -r backtrader project_directory` 
+cp -r backtrader project_directory
 ```
 
 请记住，你随后需要手动安装 `matplotlib` 以进行绘图。

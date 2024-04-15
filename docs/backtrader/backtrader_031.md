@@ -11,12 +11,12 @@
 CSV 数据源开发展示了如何添加新的基于 CSV 的数据源。现有的基类 CSVDataBase 提供了框架，大多数情况下子类可以简单地执行以下操作：
 
 ```py
-`def _loadline(self, linetokens):
+def _loadline(self, linetokens):
 
   # parse the linetokens here and put them in self.lines.close,
   # self.lines.high, etc
 
-  return True # if data was parsed, else ... return False` 
+  return True # if data was parsed, else ... return False
 ```
 
 基类负责参数、初始化、文件打开、读取行、拆分行为标记和其他额外的事情，比如跳过不符合用户可能已定义的日期范围（`fromdate`、`todate`）的行。
@@ -38,7 +38,7 @@ CSV 数据源开发展示了如何添加新的基于 CSV 的数据源。现有�
 让我们使用`backtrader.feed.DataBase`已提供的参数：
 
 ```py
-`from backtrader.utils.py3 import with_metaclass
+from backtrader.utils.py3 import with_metaclass
 
 ...
 ...
@@ -51,7 +51,7 @@ class DataBase(with_metaclass(MetaDataBase, dataseries.OHLCDateTime)):
         ('name', ''),
         ('compression', 1),
         ('timeframe', TimeFrame.Days),
-        ('sessionend', None))` 
+        ('sessionend', None))
 ```
 
 具有以下含义：
@@ -99,7 +99,7 @@ class DataBase(with_metaclass(MetaDataBase, dataseries.OHLCDateTime)):
         else:
             self.dtsize = 2
             self.barsize = 32
-            self.barfmt = 'IIffffII'` 
+            self.barfmt = 'IIffffII'
 ```
 
 ### 开始
@@ -117,7 +117,7 @@ class DataBase(with_metaclass(MetaDataBase, dataseries.OHLCDateTime)):
             self.f = self.p.dataname
         else:
             # Let an exception propagate
-            self.f = open(self.p.dataname, 'rb')` 
+            self.f = open(self.p.dataname, 'rb')
 ```
 
 ### 停止
@@ -131,7 +131,7 @@ class DataBase(with_metaclass(MetaDataBase, dataseries.OHLCDateTime)):
         # Close the file if any
         if self.f is not None:
             self.f.close()
-            self.f = None` 
+            self.f = None
 ```
 
 ### 实际加载
@@ -189,7 +189,7 @@ class DataBase(with_metaclass(MetaDataBase, dataseries.OHLCDateTime)):
         self.lines.openinterest[0] = oi
 
         # Say success
-        return True` 
+        return True
 ```
 
 ## 其他二进制格式
@@ -221,7 +221,7 @@ class DataBase(with_metaclass(MetaDataBase, dataseries.OHLCDateTime)):
 这只涉及加载数据，因此甚至不需要`Strategy`的子类。
 
 ```py
-`from __future__ import (absolute_import, division, print_function,
+from __future__ import (absolute_import, division, print_function,
                         unicode_literals)
 
 import datetime
@@ -259,7 +259,7 @@ if __name__ == '__main__':
     cerebro.run()
 
     # Plot the result
-    cerebro.plot(style='bar')` 
+    cerebro.plot(style='bar')
 ```
 
 ![image](img/529e2848164db330489108c0f003179e.png)
@@ -267,7 +267,7 @@ if __name__ == '__main__':
 ## VChartData 完整代码
 
 ```py
-`from __future__ import (absolute_import, division, print_function,
+from __future__ import (absolute_import, division, print_function,
                         unicode_literals)
 
 import datetime
@@ -348,5 +348,5 @@ class VChartData(DataBase):
         self.lines.openinterest[0] = oi
 
         # Say success
-        return True` 
+        return True
 ```

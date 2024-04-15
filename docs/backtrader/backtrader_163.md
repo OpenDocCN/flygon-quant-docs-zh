@@ -96,13 +96,13 @@
 首先：`015ES`（*EuroStoxx50* 连续）重新采样为 1 分钟，并具有断开连接和重新连接：
 
 ```py
-`$ ./vctest.py --data0 015ES --timeframe Minutes --compression 1 --fromdate 2016-07-12` 
+$ ./vctest.py --data0 015ES --timeframe Minutes --compression 1 --fromdate 2016-07-12
 ```
 
 输出：
 
 ```py
-`--------------------------------------------------
+--------------------------------------------------
 Strategy Created
 --------------------------------------------------
 Datetime, Open, High, Low, Close, Volume, OpenInterest, SMA
@@ -131,7 +131,7 @@ Datetime, Open, High, Low, Close, Volume, OpenInterest, SMA
 0659, 2016-07-12T18:59:00.000000, 2929.0, 2930.0, 2929.0, 2930.0, 353.0, 0.0, 2930.0
 ***** DATA NOTIF: LIVE
 0660, 2016-07-12T19:00:00.000000, 2930.0, 2930.0, 2930.0, 2930.0, 376.0, 0.0, 2930.0
-0661, 2016-07-12T19:01:00.000000, 2929.0, 2930.0, 2929.0, 2930.0, 35.0, 0.0, 2929.8` 
+0661, 2016-07-12T19:01:00.000000, 2929.0, 2930.0, 2929.0, 2930.0, 35.0, 0.0, 2929.8
 ```
 
 注意
@@ -147,13 +147,13 @@ Datetime, Open, High, Low, Close, Volume, OpenInterest, SMA
 执行：
 
 ```py
-`$ ./vctest.py --data0 015ES --timeframe Minutes --compression 1 --fromdate 2016-07-12 2>&1 --broker --account accname --trade --stake 2` 
+$ ./vctest.py --data0 015ES --timeframe Minutes --compression 1 --fromdate 2016-07-12 2>&1 --broker --account accname --trade --stake 2
 ```
 
 输出相当冗长，显示了订单执行的所有部分。 简要总结一下：
 
 ```py
-`--------------------------------------------------
+--------------------------------------------------
 Strategy Created
 --------------------------------------------------
 Datetime, Open, High, Low, Close, Volume, OpenInterest, SMA
@@ -237,7 +237,7 @@ historyon:False
 history:[]
 status:1
 -------------------------------------------------- TRADE END
-...` 
+...
 ```
 
 以下发生了：
@@ -263,7 +263,7 @@ status:1
 使用方式：
 
 ```py
-`$ ./vctest.py --help
+$ ./vctest.py --help
 usage: vctest.py [-h] [--exactbars EXACTBARS] [--plot] [--stopafter STOPAFTER]
                  [--nostore] [--qcheck QCHECK] [--no-timeoffset] --data0 DATA0
                  [--tradename TRADENAME] [--data1 DATA1] [--timezone TIMEZONE]
@@ -330,13 +330,13 @@ optional arguments:
   --stake STAKE         Stake to use in buy operations (default: 10)
   --valid VALID         Seconds or YYYY-MM-DD (default: None)
   --cancel CANCEL       Cancel a buy order after n bars in operation, to be
-                        combined with orders like Limit (default: 0)` 
+                        combined with orders like Limit (default: 0)
 ```
 
 代码：
 
 ```py
-`from __future__ import (absolute_import, division, print_function,
+from __future__ import (absolute_import, division, print_function,
                         unicode_literals)
 
 import argparse
@@ -721,5 +721,5 @@ def parse_args():
     return parser.parse_args()
 
 if __name__ == '__main__':
-    runstrategy()` 
+    runstrategy()
 ```

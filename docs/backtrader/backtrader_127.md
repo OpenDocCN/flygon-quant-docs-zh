@@ -49,7 +49,7 @@
 一些使用模式
 
 ```py
-`# For a StopTrail going downwards
+# For a StopTrail going downwards
 # last price will be used as reference
 self.buy(size=1, exectype=bt.Order.StopTrail, trailamount=0.25)
 # or
@@ -59,13 +59,13 @@ self.buy(size=1, exectype=bt.Order.StopTrail, price=10.50, trailamount=0.25)
 # last price will be used as reference
 self.sell(size=1, exectype=bt.Order.StopTrail, trailamount=0.25)
 # or
-self.sell(size=1, exectype=bt.Order.StopTrail, price=10.50, trailamount=0.25)` 
+self.sell(size=1, exectype=bt.Order.StopTrail, price=10.50, trailamount=0.25)
 ```
 
 也可以指定`trailpercent`而不是`trailamount`，并且距离将以价格的百分比计算
 
 ```py
-`# For a StopTrail going downwards with 2% distance
+# For a StopTrail going downwards with 2% distance
 # last price will be used as reference
 self.buy(size=1, exectype=bt.Order.StopTrail, trailpercent=0.02)
 # or
@@ -75,7 +75,7 @@ self.buy(size=1, exectype=bt.Order.StopTrail, price=10.50, trailpercent=0.0.02)
 # last price will be used as reference
 self.sell(size=1, exectype=bt.Order.StopTrail, trailpercent=0.02)
 # or
-self.sell(size=1, exectype=bt.Order.StopTrail, price=10.50, trailpercent=0.02)` 
+self.sell(size=1, exectype=bt.Order.StopTrail, price=10.50, trailpercent=0.02)
 ```
 
 对于`StopTrailLimit`
@@ -101,7 +101,7 @@ self.sell(size=1, exectype=bt.Order.StopTrail, price=10.50, trailpercent=0.02)`
 执行与固定价格距离为`50`点
 
 ```py
-`$ ./trail.py --plot --strat trailamount=50.0` 
+$ ./trail.py --plot --strat trailamount=50.0
 ```
 
 产生以下图表
@@ -111,7 +111,7 @@ self.sell(size=1, exectype=bt.Order.StopTrail, price=10.50, trailpercent=0.02)`
 以及以下输出：
 
 ```py
-`**************************************************
+**************************************************
 2005-02-14,3075.76,3025.76,3025.76
 ----------
 2005-02-15,3086.95,3036.95,3036.95
@@ -161,7 +161,7 @@ self.sell(size=1, exectype=bt.Order.StopTrail, price=10.50, trailpercent=0.02)`
 2006-12-22,4073.5,4068.54,4023.5
 2006-12-27,4134.86,4084.86,4084.86
 2006-12-28,4130.66,4084.86,4080.66
-2006-12-29,4119.94,4084.86,4069.94` 
+2006-12-29,4119.94,4084.86,4069.94
 ```
 
 而不是等待通常的交叉下行模式，系统使用跟踪止损退出市场。让我们以第 1 次操作为例
@@ -183,7 +183,7 @@ self.sell(size=1, exectype=bt.Order.StopTrail, price=10.50, trailpercent=0.02)`
 为了比较，使用固定距离为`30`点的执行（只有图表）
 
 ```py
-`$ ./trail.py --plot --strat trailamount=30.0` 
+$ ./trail.py --plot --strat trailamount=30.0
 ```
 
 以及图表
@@ -193,7 +193,7 @@ self.sell(size=1, exectype=bt.Order.StopTrail, price=10.50, trailpercent=0.02)`
 接着最后一个执行，使用`trailpercent=0.02`
 
 ```py
-`$ ./trail.py --plot --strat trailpercent=0.02` 
+$ ./trail.py --plot --strat trailpercent=0.02
 ```
 
 相应的图表。
@@ -203,7 +203,7 @@ self.sell(size=1, exectype=bt.Order.StopTrail, price=10.50, trailpercent=0.02)`
 示例用法
 
 ```py
-`$ ./trail.py --help
+$ ./trail.py --help
 usage: trail.py [-h] [--data0 DATA0] [--fromdate FROMDATE] [--todate TODATE]
                 [--cerebro kwargs] [--broker kwargs] [--sizer kwargs]
                 [--strat kwargs] [--plot [kwargs]]
@@ -220,13 +220,13 @@ optional arguments:
   --broker kwargs      kwargs in key=value format (default: )
   --sizer kwargs       kwargs in key=value format (default: )
   --strat kwargs       kwargs in key=value format (default: )
-  --plot [kwargs]      kwargs in key=value format (default: )` 
+  --plot [kwargs]      kwargs in key=value format (default: )
 ```
 
 示例代码
 
 ```py
-`from __future__ import (absolute_import, division, print_function,
+from __future__ import (absolute_import, division, print_function,
                         unicode_literals)
 
 import argparse
@@ -353,5 +353,5 @@ def parse_args(pargs=None):
     return parser.parse_args(pargs)
 
 if __name__ == '__main__':
-    runstrat()` 
+    runstrat()
 ```

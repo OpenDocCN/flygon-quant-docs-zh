@@ -13,7 +13,7 @@
 这个问题似乎适合一个简单的分析器。虽然问题只想要那些高于移动平均线的股票，但我们会保留额外的信息，比如那些不符合条件的股票，以确保谷物确实被分离出来。
 
 ```py
-`class Screener_SMA(bt.Analyzer):
+class Screener_SMA(bt.Analyzer):
     params = dict(period=10)
 
     def start(self):
@@ -29,7 +29,7 @@
             if data > sma:  # if data.close[0] > sma[0]
                 self.rets['over'].append(node)
             else:
-                self.rets['under'].append(node)` 
+                self.rets['under'].append(node)
 ```
 
 注意
@@ -65,7 +65,7 @@
 让我们来运行一下：
 
 ```py
-`$ btrun --format yahoo --data YHOO --data IBM --data NVDA --data TSLA --data ORCL --data AAPL --fromdate 2016-07-15 --todate 2016-08-13 --analyzer st-screener:Screener_SMA --cerebro runonce=0 --writer --nostdstats
+$ btrun --format yahoo --data YHOO --data IBM --data NVDA --data TSLA --data ORCL --data AAPL --fromdate 2016-07-15 --todate 2016-08-13 --analyzer st-screener:Screener_SMA --cerebro runonce=0 --writer --nostdstats
 ===============================================================================
 Cerebro:
   -----------------------------------------------------------------------------
@@ -130,7 +130,7 @@ Cerebro:
           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
           - Analysis:
             - over: ('ORCL', 41.09, 41.032), ('IBM', 161.95, 161.221), ('YHOO', 42.94, 39.629000000000005), ('AAPL', 108.18, 106.926), ('NVDA', 63.04, 58.327)
-            - under: ('TSLA', 224.91, 228.423)` 
+            - under: ('TSLA', 224.91, 228.423)
 ```
 
 我们使用了一组众所周知的股票代码：
@@ -142,7 +142,7 @@ Cerebro:
 让我们尝试一个 `50` 天的周期。是的，这也可以通过 `btrun` 控制。运行（输出缩短）：
 
 ```py
-`$ btrun --format yahoo --data YHOO --data IBM --data NVDA --data TSLA --data ORCL --data AAPL --fromdate 2016-05-15 --todate 2016-08-13 --analyzer st-screener:Screener_SMA:period=50 --cerebro runonce=0 --writer --nostdstats
+$ btrun --format yahoo --data YHOO --data IBM --data NVDA --data TSLA --data ORCL --data AAPL --fromdate 2016-05-15 --todate 2016-08-13 --analyzer st-screener:Screener_SMA:period=50 --cerebro runonce=0 --writer --nostdstats
 ===============================================================================
 Cerebro:
   -----------------------------------------------------------------------------
@@ -159,7 +159,7 @@ Cerebro:
           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
           - Analysis:
             - over: ('ORCL', 41.09, 40.339), ('IBM', 161.95, 155.0356), ('YHOO', 42.94, 37.9648), ('TSLA', 224.91, 220.4784), ('AAPL', 108.18, 98.9782), ('NVDA', 63.04, 51.4746)
-            - under:` 
+            - under:
 ```
 
 注意如何在命令行中指定了 `50` 天的周期：
@@ -186,7 +186,7 @@ Cerebro:
         cerebro.adddata(data)
 
     cerebro.addanalyzer(Screener_SMA, period=args.period)
-    cerebro.run(runonce=False, stdstats=False, writer=True)` 
+    cerebro.run(runonce=False, stdstats=False, writer=True)
 ```
 
 其余大部分是关于参数解析的。
@@ -194,7 +194,7 @@ Cerebro:
 对于 `10` 天（再次缩短输出）：
 
 ```py
-`$ ./st-screener.py
+$ ./st-screener.py
 ===============================================================================
 Cerebro:
 ...
@@ -207,7 +207,7 @@ Cerebro:
           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
           - Analysis:
             - over: (u'NVDA', 63.04, 58.327), (u'AAPL', 108.18, 106.926), (u'YHOO', 42.94, 39.629000000000005), (u'IBM', 161.95, 161.221), (u'ORCL', 41.09, 41.032)
-            - under: (u'TSLA', 224.91, 228.423)` 
+            - under: (u'TSLA', 224.91, 228.423)
 ```
 
 结果相同。所以让我们避免重复为 `50` 天做这个。
@@ -231,7 +231,7 @@ Cerebro:
 ## 脚本用法
 
 ```py
-`$ ./st-screener.py --help
+$ ./st-screener.py --help
 usage: st-screener.py [-h] [--tickers TICKERS] [--period PERIOD]
 
 SMA Stock Screener
@@ -240,13 +240,13 @@ optional arguments:
   -h, --help         show this help message and exit
   --tickers TICKERS  Yahoo Tickers to consider, COMMA separated (default:
                      YHOO,IBM,AAPL,TSLA,ORCL,NVDA)
-  --period PERIOD    SMA period (default: 10)` 
+  --period PERIOD    SMA period (default: 10)
 ```
 
 ## 完整的脚本
 
 ```py
-`#!/usr/bin/env python
+#!/usr/bin/env python
 # -*- coding: utf-8; py-indent-offset:4 -*-
 ###############################################################################
 #
@@ -329,5 +329,5 @@ def parse_args(pargs=None):
     return parser.parse_args()
 
 if __name__ == '__main__':
-    run()` 
+    run()
 ```

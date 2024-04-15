@@ -11,7 +11,7 @@
 可通过运行示例查看当前行为：
 
 ```py
-`./buysellarrows.py --plot style="'ohlc'"` 
+./buysellarrows.py --plot style="'ohlc'"
 ```
 
 具有以下输出
@@ -29,11 +29,11 @@
 以代码术语表示。
 
 ```py
-`class MyBuySell(bt.observers.BuySell):
+class MyBuySell(bt.observers.BuySell):
     plotlines = dict(
         buy=dict(marker='$\u21E7$', markersize=12.0),
         sell=dict(marker='$\u21E9$', markersize=12.0)
-    )` 
+    )
 ```
 
 和：
@@ -41,7 +41,7 @@
 ```py
  `# Patch observer if needed
     if args.myobserver:
-        bt.observers.BuySell = MyBuySell` 
+        bt.observers.BuySell = MyBuySell
 ```
 
 注意
@@ -49,12 +49,12 @@
 猴子补丁并不是绝对必要的。也可以按照标准方式进行：
 
 ```py
-`cerebro = bt.Cerebro(stdstats=False)  # remove the standard observers
+cerebro = bt.Cerebro(stdstats=False)  # remove the standard observers
 
 ...
 cerebro.addobserver(MyObserver, barplot=True)
 
-...` 
+...
 ```
 
 并且将使用自定义观察者，但其他常规实例化的观察者将缺失。因此，在示例中进行猴子补丁，简单地修改观察者并保持外观。
@@ -62,7 +62,7 @@ cerebro.addobserver(MyObserver, barplot=True)
 再次运行时使用正确参数：
 
 ```py
-`$ ./buysellarrows.py --plot style="'ohlc'" --myobserver` 
+$ ./buysellarrows.py --plot style="'ohlc'" --myobserver
 ```
 
 然后输出。
@@ -76,7 +76,7 @@ cerebro.addobserver(MyObserver, barplot=True)
 ## 示例用法
 
 ```py
-`$ ./buysellarrows.py --help
+$ ./buysellarrows.py --help
 usage: buysellarrows.py [-h] [--data DATA | --yahoo TICKER]
                         [--fromdate FROMDATE] [--todate TODATE]
                         [--cerebro kwargs] [--broker kwargs] [--sizer kwargs]
@@ -96,13 +96,13 @@ optional arguments:
   --sizer kwargs       kwargs in key=value format (default: )
   --strat kwargs       kwargs in key=value format (default: )
   --plot [kwargs]      kwargs in key=value format (default: )
-  --myobserver         Patch in Custom BuySell observer (default: False)` 
+  --myobserver         Patch in Custom BuySell observer (default: False)
 ```
 
 ## 示例代码
 
 ```py
-`from __future__ import (absolute_import, division, print_function,
+from __future__ import (absolute_import, division, print_function,
                         unicode_literals)
 
 import argparse
@@ -212,5 +212,5 @@ def parse_args(pargs=None):
     return parser.parse_args(pargs)
 
 if __name__ == '__main__':
-    runstrat()` 
+    runstrat()
 ```

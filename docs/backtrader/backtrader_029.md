@@ -37,7 +37,7 @@ GitHub 上的问题实际上推动了完成文档部分或帮助我理解 `backt
 结果：
 
 ```py
-`from backtrader.feeds import GenericCSVData
+from backtrader.feeds import GenericCSVData
 
 class GenericCSV_PE(GenericCSVData):
 
@@ -46,7 +46,7 @@ class GenericCSV_PE(GenericCSVData):
 
     # openinterest in GenericCSVData has index 7 ... add 1
     # add the parameter to the parameters inherited from the base class
-    params = (('pe', 8),)` 
+    params = (('pe', 8),)
 ```
 
 工作完成了…
@@ -54,7 +54,7 @@ class GenericCSV_PE(GenericCSVData):
 稍后，在策略中使用这个数据源时：
 
 ```py
-`import backtrader as bt
+import backtrader as bt
 
 ....
 
@@ -67,7 +67,7 @@ class MyStrategy(bt.Strategy):
         if self.data.close > 2000 and self.data.pe < 12:
             # TORA TORA TORA --- Get off this market
             self.sell(stake=1000000, price=0.01, exectype=Order.Limit)
-    ...` 
+    ...
 ```
 
 ## 绘制那条额外的 P/E 线
@@ -77,7 +77,7 @@ class MyStrategy(bt.Strategy):
 最好的替代方法是对该行进行简单移动平均，并在单独的轴上绘制它：
 
 ```py
-`import backtrader as bt
+import backtrader as bt
 import backtrader.indicators as btind
 
 ....
@@ -97,5 +97,5 @@ class MyStrategy(bt.Strategy):
         if self.data.close > 2000 and self.data.pe < 12:
             # TORA TORA TORA --- Get off this market
             self.sell(stake=1000000, price=0.01, exectype=Order.Limit)
-    ...` 
+    ...
 ```

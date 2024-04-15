@@ -53,7 +53,7 @@
                              compression=args.compression)
 
     # Run over everything
-    cerebro.run()` 
+    cerebro.run()
 ```
 
 步骤：
@@ -75,7 +75,7 @@
 脚本的调用：
 
 ```py
-`$ ./multitimeframe-example.py --timeframe weekly --compression 1` 
+$ ./multitimeframe-example.py --timeframe weekly --compression 1
 ```
 
 输出图表：
@@ -87,7 +87,7 @@
 脚本的调用：
 
 ```py
-`$ ./multitimeframe-example.py --timeframe daily --compression 2` 
+$ ./multitimeframe-example.py --timeframe daily --compression 2
 ```
 
 输出图表：
@@ -117,10 +117,10 @@
 命令行和输出
 
 ```py
-`$ ./multitimeframe-example.py --timeframe weekly --compression 1 --indicators --onlydaily
+$ ./multitimeframe-example.py --timeframe weekly --compression 1 --indicators --onlydaily
 --------------------------------------------------
 nextstart called with len 10
---------------------------------------------------` 
+--------------------------------------------------
 ```
 
 以及图表。
@@ -134,7 +134,7 @@ nextstart called with len 10
 命令行：
 
 ```py
-`$ ./multitimeframe-example.py --timeframe weekly --compression 1 --indicators
+$ ./multitimeframe-example.py --timeframe weekly --compression 1 --indicators
 --------------------------------------------------
 nextstart called with len 50
 --------------------------------------------------
@@ -149,7 +149,7 @@ nextstart called with len 53
 --------------------------------------------------
 --------------------------------------------------
 nextstart called with len 54
---------------------------------------------------` 
+--------------------------------------------------
 ```
 
 这里有两件事需要注意：
@@ -177,7 +177,7 @@ nextstart called with len 54
 测试脚本。
 
 ```py
-`from __future__ import (absolute_import, division, print_function,
+from __future__ import (absolute_import, division, print_function,
                         unicode_literals)
 
 import argparse
@@ -279,5 +279,5 @@ def parse_args():
     return parser.parse_args()
 
 if __name__ == '__main__':
-    runstrat()` 
+    runstrat()
 ```

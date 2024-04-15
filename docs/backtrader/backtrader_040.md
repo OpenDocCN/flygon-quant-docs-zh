@@ -15,7 +15,7 @@
 这些只是声明。不要盲目复制此代码。请参见下面示例中的实际用法
 
 ```py
-`class PandasData(feed.DataBase):
+class PandasData(feed.DataBase):
   '''
  The ``dataname`` parameter inherited from ``feed.DataBase`` is the pandas
  DataFrame
@@ -40,7 +40,7 @@
         ('close', -1),
         ('volume', -1),
         ('openinterest', -1),
-    )` 
+    )
 ```
 
 上述从 `PandasData` 类中摘录的片段显示了键：
@@ -76,25 +76,25 @@
 运行示例以使用 CSV 数据中的现有“标题”：
 
 ```py
-`$ ./panda-test.py
+$ ./panda-test.py
 --------------------------------------------------
                Open     High      Low    Close  Volume  OpenInterest
 Date
 2006-01-02  3578.73  3605.95  3578.73  3604.33       0             0
 2006-01-03  3604.08  3638.42  3601.84  3614.34       0             0
-2006-01-04  3615.23  3652.46  3615.23  3652.46       0             0` 
+2006-01-04  3615.23  3652.46  3615.23  3652.46       0             0
 ```
 
 相同但告诉脚本跳过标题：
 
 ```py
-`$ ./panda-test.py --noheaders
+$ ./panda-test.py --noheaders
 --------------------------------------------------
                   1        2        3        4  5  6
 0
 2006-01-02  3578.73  3605.95  3578.73  3604.33  0  0
 2006-01-03  3604.08  3638.42  3601.84  3614.34  0  0
-2006-01-04  3615.23  3652.46  3615.23  3652.46  0  0` 
+2006-01-04  3615.23  3652.46  3615.23  3652.46  0  0
 ```
 
 第 2 次运行使用的是 tells `pandas.read_csv`：
@@ -112,7 +112,7 @@ Date
 测试的示例代码。
 
 ```py
-`from __future__ import (absolute_import, division, print_function,
+from __future__ import (absolute_import, division, print_function,
                         unicode_literals)
 
 import argparse
@@ -174,5 +174,5 @@ def parse_args():
     return parser.parse_args()
 
 if __name__ == '__main__':
-    runstrat()` 
+    runstrat()
 ```

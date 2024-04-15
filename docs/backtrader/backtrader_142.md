@@ -9,14 +9,14 @@
 例如一个指标：
 
 ```py
-`import backtrader as bt
+import backtrader as bt
 
 class MyIndicator(bt.Indicator):
 
     lines = ('myline',)
     params = (('period', 20),)
 
-    ...` 
+    ...
 ```
 
 任何能够阅读 Python 的人都会说：
@@ -30,7 +30,7 @@ class MyIndicator(bt.Indicator):
 扩展示例：
 
 ```py
-`import backtrader as bt
+import backtrader as bt
 
 class MyIndicator(bt.Indicator):
 
@@ -39,7 +39,7 @@ class MyIndicator(bt.Indicator):
 
     def __init__(self):
 
-        self.lines.myline = (self.data.high - self.data.low) / self.p.period` 
+        self.lines.myline = (self.data.high - self.data.low) / self.p.period
 ```
 
 对于任何人来说，这里应该很明显：
@@ -69,7 +69,7 @@ class MyIndicator(bt.Indicator):
 对于那些不熟悉*元类*的人，它或多或少是这样实现的：
 
 ```py
-`class MyMetaClass(type):
+class MyMetaClass(type):
 
     def __new__(meta, name, bases, dct):
         ...
@@ -84,7 +84,7 @@ class MyIndicator(bt.Indicator):
         dct['lines'] = MyLinesClass(info_from_lines)
         dct['params'] = MyParamsClass(info_from_params)
 
-        ...` 
+        ...
 ```
 
 这里拦截了*类*的创建，并用从定义中提取的信息替换了 `lines` 和 `params` 的定义。
@@ -92,7 +92,7 @@ class MyIndicator(bt.Indicator):
 这单独是不够的，所以还拦截了实例的创建。 使用 Pyton 3.x 语法：
 
 ```py
-`class MyClass(Parent, metaclass=MyMetaClass):
+class MyClass(Parent, metaclass=MyMetaClass):
 
     def __new__(cls, *args, **kwargs):
 
@@ -100,7 +100,7 @@ class MyIndicator(bt.Indicator):
         obj.lines = cls.lines()
         obj.params = cls.params()
 
-        return obj` 
+        return obj
 ```
 
 在这里，*上面定义的* `MyLinesClass` 和 `MyParamsClass` 的实例已经被放置到 `MyClass` 的实例中。

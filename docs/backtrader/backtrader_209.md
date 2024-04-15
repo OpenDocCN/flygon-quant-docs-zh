@@ -31,7 +31,7 @@
 根据上述公式开发`StochRSI`是直接的。
 
 ```py
-`class StochRSI(bt.Indicator):
+class StochRSI(bt.Indicator):
     lines = ('stochrsi',)
     params = dict(
         period=14,  # to apply to RSI
@@ -45,7 +45,7 @@
         maxrsi = bt.ind.Highest(rsi, period=pperiod)
         minrsi = bt.ind.Lowest(rsi, period=pperiod)
 
-        self.l.stochrsi = (rsi - minrsi) / (maxrsi - minrsi)` 
+        self.l.stochrsi = (rsi - minrsi) / (maxrsi - minrsi)
 ```
 
 这里是指标工作原理的一瞥

@@ -23,7 +23,7 @@ backtrader 已经能够从分钟数据进行重新取样。接受 tick 数据并
 默认执行不会触及数据：
 
 ```py
-`$ ./resample-tickdata.py` 
+$ ./resample-tickdata.py
 ```
 
 生成这个图表：
@@ -33,7 +33,7 @@ backtrader 已经能够从分钟数据进行重新取样。接受 tick 数据并
 将 3 个 tick 压缩为 1 个：
 
 ```py
-`$ ./resample-tickdata.py --timeframe ticks --compression 3` 
+$ ./resample-tickdata.py --timeframe ticks --compression 3
 ```
 
 生成这个图表：
@@ -45,7 +45,7 @@ backtrader 已经能够从分钟数据进行重新取样。接受 tick 数据并
 现在压缩到秒和 5 个 bar 的压缩：
 
 ```py
-`$ ./resample-tickdata.py --timeframe seconds --compression 5` 
+$ ./resample-tickdata.py --timeframe seconds --compression 5
 ```
 
 通过一个新的图表：
@@ -55,7 +55,7 @@ backtrader 已经能够从分钟数据进行重新取样。接受 tick 数据并
 最后转换为分钟。样本数据包含来自 4 个不同分钟的 tick 数据（文件中的最后一个 tick 是第 4 分钟的唯一一个 tick）：
 
 ```py
-`$ ./resample-tickdata.py --timeframe minutes` 
+$ ./resample-tickdata.py --timeframe minutes
 ```
 
 使用 4 个 bar（顶部可以看到最终价格为 3069）。第 4 个 bar 是一个单点，因为这一分钟文件中只有一个 tick。
@@ -65,7 +65,7 @@ backtrader 已经能够从分钟数据进行重新取样。接受 tick 数据并
 脚本用法：
 
 ```py
-`$ ./resample-tickdata.py --help
+$ ./resample-tickdata.py --help
 usage: resample-tickdata.py [-h] [--dataname DATANAME]
                             [--timeframe {ticks,microseconds,seconds,minutes,daily,weekly,monthly}]
                             [--compression COMPRESSION]
@@ -78,13 +78,13 @@ optional arguments:
   --timeframe {ticks,microseconds,seconds,minutes,daily,weekly,monthly}
                         Timeframe to resample to
   --compression COMPRESSION
-                        Compress n bars into 1` 
+                        Compress n bars into 1
 ```
 
 以及代码。
 
 ```py
-`from __future__ import (absolute_import, division, print_function,
+from __future__ import (absolute_import, division, print_function,
                         unicode_literals)
 
 import argparse
@@ -152,5 +152,5 @@ def parse_args():
     return parser.parse_args()
 
 if __name__ == '__main__':
-    runstrat()` 
+    runstrat()
 ```

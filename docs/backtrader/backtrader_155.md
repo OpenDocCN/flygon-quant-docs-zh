@@ -35,7 +35,7 @@
 为策略手动选择的参数：
 
 ```py
-`params = (
+params = (
     # Standard MACD Parameters
     ('macd1', 12),
     ('macd2', 26),
@@ -44,13 +44,13 @@
     ('atrdist', 3.0),   # ATR distance for stop price
     ('smaperiod', 30),  # SMA Period (pretty standard)
     ('dirperiod', 10),  # Lookback period to consider SMA trend direction
-)` 
+)
 ```
 
 并且系统范围内：
 
 ```py
-`parser.add_argument('--cash', required=False, action='store',
+parser.add_argument('--cash', required=False, action='store',
                     type=float, default=50000,
                     help=('Cash to start with'))
 
@@ -61,7 +61,7 @@ parser.add_argument('--cashalloc', required=False, action='store',
 parser.add_argument('--commperc', required=False, action='store',
                     type=float, default=0.0033,
                     help=('Perc (abs) commision in each operation. '
-                          '0.001 -> 0.1%%, 0.01 -> 1%%'))` 
+                          '0.001 -> 0.1%%, 0.01 -> 1%%'))
 ```
 
 日期范围将从`2005-01-01`到`2014-12-31`，共 10 年。
@@ -93,7 +93,7 @@ parser.add_argument('--commperc', required=False, action='store',
 ### YHOO
 
 ```py
-`$ ./macdsystem.py --plot --dataset yhoo
+$ ./macdsystem.py --plot --dataset yhoo
 ===============================================================================
 TimeReturn:
   - 9999-12-31 23:59:59.999999: -0.07118518868
@@ -118,7 +118,7 @@ SharpeRatio:
 ===============================================================================
 SQN:
   - sqn: -0.784558216044
-  - trades: 45` 
+  - trades: 45
 ```
 
 ![图片](img/47b5367760ce780e98f9c40d98b79493.png)
@@ -126,7 +126,7 @@ SQN:
 ### ORCL
 
 ```py
-`$ ./macdsystem.py --plot --dataset orcl
+$ ./macdsystem.py --plot --dataset orcl
 ===============================================================================
 TimeReturn:
   - 9999-12-31 23:59:59.999999: 0.24890384718
@@ -151,7 +151,7 @@ SharpeRatio:
 ===============================================================================
 SQN:
   - sqn: 1.76240859868
-  - trades: 37` 
+  - trades: 37
 ```
 
 ![图片](img/278bb8cecab092fb70f817d5be7fde98.png)
@@ -159,7 +159,7 @@ SQN:
 ### NVDA
 
 ```py
-`$ ./macdsystem.py --plot --dataset nvda
+$ ./macdsystem.py --plot --dataset nvda
 ===============================================================================
 TimeReturn:
   - 9999-12-31 23:59:59.999999: -0.0178507058999
@@ -184,7 +184,7 @@ SharpeRatio:
 ===============================================================================
 SQN:
   - sqn: -0.0700412395071
-  - trades: 38` 
+  - trades: 38
 ```
 
 ![图片](img/3d510dca85f3683a0edf93748a6cfcf6.png)
@@ -220,7 +220,7 @@ SQN:
 ### YHOO
 
 ```py
-`$ ./macdsystem.py --plot --dataset yhoo --cashalloc 0.50
+$ ./macdsystem.py --plot --dataset yhoo --cashalloc 0.50
 ===============================================================================
 TimeReturn:
   - 9999-12-31 23:59:59.999999: -0.20560369198
@@ -245,7 +245,7 @@ SharpeRatio:
 ===============================================================================
 SQN:
   - sqn: -0.97846453428
-  - trades: 45` 
+  - trades: 45
 ```
 
 ![图像](img/186afda5652f4ebe4ccfe66ddcd8e428.png)
@@ -253,7 +253,7 @@ SQN:
 ### ORCL
 
 ```py
-`$ ./macdsystem.py --plot --dataset orcl --cashalloc 0.50
+$ ./macdsystem.py --plot --dataset orcl --cashalloc 0.50
 ===============================================================================
 TimeReturn:
   - 9999-12-31 23:59:59.999999: 0.69016747856
@@ -278,7 +278,7 @@ SharpeRatio:
 ===============================================================================
 SQN:
   - sqn: 1.68844251174
-  - trades: 37` 
+  - trades: 37
 ```
 
 ![图像](img/85e8d1e6047a6086a5144570886714f3.png)
@@ -286,7 +286,7 @@ SQN:
 ### NVDA
 
 ```py
-`$ ./macdsystem.py --plot --dataset nvda --cashalloc 0.50
+$ ./macdsystem.py --plot --dataset nvda --cashalloc 0.50
 ===============================================================================
 TimeReturn:
   - 9999-12-31 23:59:59.999999: -0.128845648113
@@ -311,7 +311,7 @@ SharpeRatio:
 ===============================================================================
 SQN:
   - sqn: -0.190661428812
-  - trades: 38` 
+  - trades: 38
 ```
 
 ![图像](img/4087e3427d905414be4d49d540029d5b.png)
@@ -331,7 +331,7 @@ SQN:
 ### YHOO
 
 ```py
-`$ ./macdsystem.py --plot --dataset yhoo --cashalloc 0.50 --atrdist 4.0
+$ ./macdsystem.py --plot --dataset yhoo --cashalloc 0.50 --atrdist 4.0
 ===============================================================================
 TimeReturn:
   - 9999-12-31 23:59:59.999999: 0.01196310622
@@ -356,7 +356,7 @@ SharpeRatio:
 ===============================================================================
 SQN:
   - sqn: -0.211652416441
-  - trades: 33` 
+  - trades: 33
 ```
 
 ![图像](img/91ae6a1c373ec19df0d8f696d8c8bfb6.png)
@@ -364,7 +364,7 @@ SQN:
 ### ORCL
 
 ```py
-`$ ./macdsystem.py --plot --dataset orcl --cashalloc 0.50 --atrdist 4.0
+$ ./macdsystem.py --plot --dataset orcl --cashalloc 0.50 --atrdist 4.0
 ===============================================================================
 TimeReturn:
   - 9999-12-31 23:59:59.999999: 0.21907748452
@@ -389,7 +389,7 @@ SharpeRatio:
 ===============================================================================
 SQN:
   - sqn: 0.646519270815
-  - trades: 30` 
+  - trades: 30
 ```
 
 ![图像](img/e2204da21578c987dc1b943e52531fdc.png)
@@ -397,7 +397,7 @@ SQN:
 ### NVDA
 
 ```py
-`$ ./macdsystem.py --plot --dataset nvda --cashalloc 0.50 --atrdist 4.0
+$ ./macdsystem.py --plot --dataset nvda --cashalloc 0.50 --atrdist 4.0
 ===============================================================================
 TimeReturn:
   - 9999-12-31 23:59:59.999999: 0.48840287049
@@ -422,7 +422,7 @@ SharpeRatio:
 ===============================================================================
 SQN:
   - sqn: 0.564151633588
-  - trades: 29` 
+  - trades: 29
 ```
 
 ![图像](img/1191866a3afdee367833d3665bfcb9dd.png)
@@ -446,7 +446,7 @@ SQN:
 ## 样本的使用
 
 ```py
-`$ ./macdsystem.py --help
+$ ./macdsystem.py --help
 usage: macdsystem.py [-h] (--data DATA | --dataset {yhoo,orcl,nvda})
                      [--fromdate FROMDATE] [--todate TODATE] [--cash CASH]
                      [--cashalloc CASHALLOC] [--commperc COMMPERC]
@@ -486,13 +486,13 @@ optional arguments:
   --plot [kwargs], -p [kwargs]
                         Plot the read data applying any kwargs passed For
                         example: --plot style="candle" (to plot candles)
-                        (default: None)` 
+                        (default: None)
 ```
 
 ## 还有代码本身
 
 ```py
-`from __future__ import (absolute_import, division, print_function,
+from __future__ import (absolute_import, division, print_function,
                         unicode_literals)
 
 import argparse
@@ -753,5 +753,5 @@ def parse_args(pargs=None):
     return parser.parse_args()
 
 if __name__ == '__main__':
-    runstrat()` 
+    runstrat()
 ```

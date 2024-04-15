@@ -7,9 +7,9 @@
 *Strategy*提供了交易方法，即：`buy`，`sell`和`close`。让我们看看`buy`的签名：
 
 ```py
-`def buy(self, data=None,
+def buy(self, data=None,
         size=None, price=None, plimit=None,
-        exectype=None, valid=None, tradeid=0, **kwargs):` 
+        exectype=None, valid=None, tradeid=0, **kwargs):
 ```
 
 注意，如果调用者没有指定，`size`的默认值为`None`。这就是*Sizers*发挥重要作用的地方：
@@ -19,8 +19,8 @@
 这显然意味着*Strategies*有一个*Sizer*：是的，确实！背景机制会为*Strategy*添加一个默认的*sizer*，如果用户没有添加一个。添加到*strategy*的默认*Sizer*是`SizerFix`。定义的初始行：
 
 ```py
-`class SizerFix(SizerBase):
-    params = (('stake', 1),)` 
+class SizerFix(SizerBase):
+    params = (('stake', 1),)
 ```
 
 很容易猜到这个*Sizer*只是使用`1`单位的`stake`*买入/卖出*（无论是股票、合约等）
@@ -138,13 +138,13 @@
 让我们来看一下 `FixedSize` 尺寸器的定义：
 
 ```py
-`import backtrader as bt
+import backtrader as bt
 
 class FixedSize(bt.Sizer):
     params = (('stake', 1),)
 
     def _getsizing(self, comminfo, cash, data, isbuy):
-        return self.params.stake` 
+        return self.params.stake
 ```
 
 这很简单，因为 *Sizer* 不做任何计算，参数就在那里。
@@ -154,12 +154,12 @@ class FixedSize(bt.Sizer):
 另一个例子：**头寸翻转者**：
 
 ```py
-`class FixedRerverser(bt.FixedSize):
+class FixedRerverser(bt.FixedSize):
 
     def _getsizing(self, comminfo, cash, data, isbuy):
         position = self.broker.getposition(data)
         size = self.p.stake * (1 + (position.size != 0))
-        return size` 
+        return size
 ```
 
 这个构建在现有的 `FixedSize` 基础上，继承了 `params` 并覆盖了 `_getsizing` 以实现：
@@ -177,7 +177,7 @@ class FixedSize(bt.Sizer):
 在不考虑复杂的大小算法的情况下，可以使用两个不同的 *Sizer* 将策略从单向变为双向。只需在 *cerebro* 执行中更改 *Sizer*，策略就会改变行为。一个非常简单的 `close` 穿越 `SMA` 算法：
 
 ```py
-`class CloseSMA(bt.Strategy):
+class CloseSMA(bt.Strategy):
     params = (('period', 15),)
 
     def __init__(self):
@@ -189,7 +189,7 @@ class FixedSize(bt.Sizer):
             self.buy()
 
         elif self.crossover < 0:
-            self.sell()` 
+            self.sell()
 ```
 
 注意策略不考虑当前的 *持仓*（通过查看 `self.position`）来决定是否实际执行 *买入* 或 *卖出*。只考虑 `CrossOver` 的 *信号*。 *Sizers* 将负责一切。
@@ -197,7 +197,7 @@ class FixedSize(bt.Sizer):
 这个尺寸器将在已经开仓的情况下仅在卖出时返回 *非零* 大小：
 
 ```py
-`class LongOnly(bt.Sizer):
+class LongOnly(bt.Sizer):
     params = (('stake', 1),)
 
     def _getsizing(self, comminfo, cash, data, isbuy):
@@ -209,18 +209,18 @@ class FixedSize(bt.Sizer):
       if not position.size:
           return 0  # do not sell if nothing is open
 
-      return self.p.stake` 
+      return self.p.stake
 ```
 
 将所有内容放在一起（并假设 *backtrader* 已经被导入并且一个 *data* 已经被添加到系统中）:
 
 ```py
-`...
+...
 cerebro.addstrategy(CloseSMA)
 cerebro.addsizer(LongOnly)
 ...
 cerebro.run()
-...` 
+...
 ```
 
 图表（从源代码中包含的示例中获取）。
@@ -230,12 +230,12 @@ cerebro.run()
 简单地将 *Sizer* 更改为上面显示的 `FixedReverser` 即可获得 *长-短* 版本：
 
 ```py
-`...
+...
 cerebro.addstrategy(CloseSMA)
 cerebro.addsizer(FixedReverser)
 ...
 cerebro.run()
-...` 
+...
 ```
 
 输出图表。
@@ -277,7 +277,7 @@ cerebro.run()
 参数：
 
 ```py
-`* `comminfo`: The CommissionInfo instance that contains
+* `comminfo`: The CommissionInfo instance that contains
   information about the commission for the data and allows
   calculation of position value, operation cost, commision for the
   operation
@@ -287,7 +287,7 @@ cerebro.run()
 * `data`: target of the operation
 
 * `isbuy`: will be `True` for *buy* operations and `False`
-  for *sell* operations` 
+  for *sell* operations
 ```
 
 该方法必须返回要执行的实际大小（一个整数）。如果返回`0`，则不会执行任何操作。

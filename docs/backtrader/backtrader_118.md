@@ -15,7 +15,7 @@
 首先，让我们将*砖形图*单独放在一个图表上：
 
 ```py
-`$ ./renko.py --renko size=35,align=10.0 --plot` 
+$ ./renko.py --renko size=35,align=10.0 --plot
 ```
 
 输出
@@ -27,7 +27,7 @@
 为了更好地看到和欣赏效果，让我们将普通的价格条和*砖形图*放在一起在一个图表上：
 
 ```py
-`$ ./renko.py --renko size=35,align=10.0 --plot --dual` 
+$ ./renko.py --renko size=35,align=10.0 --plot --dual
 ```
 
 输出
@@ -39,7 +39,7 @@
 ## 示例用法
 
 ```py
-`$ ./renko.py --help
+$ ./renko.py --help
 usage: renko.py [-h] [--data0 DATA0] [--fromdate FROMDATE] [--todate TODATE]
                 [--cerebro kwargs] [--broker kwargs] [--sizer kwargs]
                 [--strat kwargs] [--plot [kwargs]] [--renko kwargs] [--dual]
@@ -59,13 +59,13 @@ optional arguments:
   --plot [kwargs]      kwargs in key=value format (default: )
   --renko kwargs       kwargs in key=value format (default: )
   --dual               put the filter on a second version of the data
-                       (default: False)` 
+                       (default: False)
 ```
 
 ## 示例代码
 
 ```py
-`from __future__ import (absolute_import, division, print_function,
+from __future__ import (absolute_import, division, print_function,
                         unicode_literals)
 
 import argparse
@@ -175,5 +175,5 @@ def parse_args(pargs=None):
     return parser.parse_args(pargs)
 
 if __name__ == '__main__':
-    runstrat()` 
+    runstrat()
 ```

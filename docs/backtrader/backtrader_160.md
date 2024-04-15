@@ -45,13 +45,13 @@
 该示例使用`random.randint`来决定何时*买入*/*卖出*，因此这只是一个检查事情是否正常运行的方法：
 
 ```py
-`$ ./pyfoliotest.py --printout --no-pyfolio --plot` 
+$ ./pyfoliotest.py --printout --no-pyfolio --plot
 ```
 
 输出：
 
 ```py
-`Len,Datetime,Open,High,Low,Close,Volume,OpenInterest
+Len,Datetime,Open,High,Low,Close,Volume,OpenInterest
 0001,2005-01-03T23:59:59,38.36,38.90,37.65,38.18,25482800.00,0.00
 BUY  1000 @%23.58
 0002,2005-01-04T23:59:59,38.45,38.54,36.46,36.58,26625300.00,0.00
@@ -63,7 +63,7 @@ SELL 500 @%37.51
 0502,2006-12-28T23:59:59,25.62,25.72,25.30,25.36,11908400.00,0.00
 0503,2006-12-29T23:59:59,25.42,25.82,25.33,25.54,16297800.00,0.00
 SELL 250 @%17.14
-SELL 250 @%37.01` 
+SELL 250 @%37.01
 ```
 
 ![image](img/2065abb1e634b5adc14e6c863f425683.png)
@@ -79,11 +79,11 @@ SELL 250 @%37.01`
 `runstrat`在此处获取[]作为参数以使用默认参数运行，并跳过由*笔记本*本身传递的参数
 
 ```py
-`%matplotlib inline` 
+%matplotlib inline
 ```
 
 ```py
-`from __future__ import (absolute_import, division, print_function,
+from __future__ import (absolute_import, division, print_function,
                         unicode_literals)
 
 import argparse
@@ -245,23 +245,23 @@ def parse_args(args=None):
 
     import sys
     aargs = args if args is not None else sys.argv[1:]
-    return parser.parse_args(aargs)` 
+    return parser.parse_args(aargs)
 ```
 
 ```py
-`runstrat([])` 
+runstrat([])
 ```
 
 ```py
-`Entire data start date: 2005-01-03
+Entire data start date: 2005-01-03
 Entire data end date: 2006-12-29
 
 Out-of-Sample Months: 20
-Backtest Months: 3` 
+Backtest Months: 3
 ```
 
 ```py
-`[-0.012 -0.025]` 
+[-0.012 -0.025]
 ```
 
 ![image](img/9e907c78e596f4812d1a645f7945f889.png)
@@ -271,15 +271,15 @@ Backtest Months: 3`
 ![image](img/8452c2408ba1795af50c3642991c3838.png)
 
 ```py
-`D:drobinWinPython-64bit-2.7.10.3python-2.7.10.amd64libsite-packagespyfolioplotting.py:1210: FutureWarning: .resample() is now a deferred operation
+D:drobinWinPython-64bit-2.7.10.3python-2.7.10.amd64libsite-packagespyfolioplotting.py:1210: FutureWarning: .resample() is now a deferred operation
 use .resample(...).mean() instead of .resample(...)
-  **kwargs)` 
+  **kwargs)
 ```
 
 ![image](img/f2cc25932652c1c71d99dd12b9020b3c.png)
 
 ```py
-`<matplotlib.figure.Figure at 0x23982b70>` 
+<matplotlib.figure.Figure at 0x23982b70>
 ```
 
 ![image](img/306275e8d7f851520c93bc570295e1d5.png)
@@ -287,7 +287,7 @@ use .resample(...).mean() instead of .resample(...)
 使用示例：
 
 ```py
-`$ ./pyfoliotest.py --help
+$ ./pyfoliotest.py --help
 usage: pyfoliotest.py [-h] [--data0 DATA0] [--data1 DATA1] [--data2 DATA2]
                       [--fromdate FROMDATE] [--todate TODATE] [--printout]
                       [--cash CASH] [--plot] [--plot-style {bar,candle,line}]
@@ -311,5 +311,5 @@ optional arguments:
   --plot                Plot the result (default: False)
   --plot-style {bar,candle,line}
                         Plot style (default: bar)
-  --no-pyfolio          Do not do pyfolio things (default: False)` 
+  --no-pyfolio          Do not do pyfolio things (default: False)
 ```

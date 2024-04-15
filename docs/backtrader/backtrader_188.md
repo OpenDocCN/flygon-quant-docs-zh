@@ -49,7 +49,7 @@
 +   文件名为 mymod.py。
 
 ```py
-`from __future__ import (absolute_import, division, print_function,
+from __future__ import (absolute_import, division, print_function,
                         unicode_literals)
 
 import backtrader as bt
@@ -75,15 +75,15 @@ class MyTest(bt.Strategy):
                  (len(self),
                   self.data.open[0], self.data.high[0],
                   self.data.low[0], self.data.close[0],
-                  self.data.volume[0], self.data.openinterest[0]))` 
+                  self.data.volume[0], self.data.openinterest[0]))
 ```
 
 用通常的测试样本执行策略很容易：简单：
 
 ```py
-`./bt-run.py --csvformat btcsv \
+./bt-run.py --csvformat btcsv \
             --data ../samples/data/sample/2006-day-001.txt \
-            --strategy ./mymod.py` 
+            --strategy ./mymod.py
 ```
 
 图表输出。
@@ -93,7 +93,7 @@ class MyTest(bt.Strategy):
 控制台输出：
 
 ```py
-`2006-01-20T23:59:59+00:00, 15, 3593.16, 3612.37, 3550.80, 3550.80, 0.00, 0.00
+2006-01-20T23:59:59+00:00, 15, 3593.16, 3612.37, 3550.80, 3550.80, 0.00, 0.00
 2006-01-23T23:59:59+00:00, 16, 3550.24, 3550.24, 3515.07, 3544.31, 0.00, 0.00
 2006-01-24T23:59:59+00:00, 17, 3544.78, 3553.16, 3526.37, 3532.68, 0.00, 0.00
 2006-01-25T23:59:59+00:00, 18, 3532.72, 3578.00, 3532.72, 3578.00, 0.00, 0.00
@@ -102,7 +102,7 @@ class MyTest(bt.Strategy):
 2006-12-22T23:59:59+00:00, 252, 4109.86, 4109.86, 4072.62, 4073.50, 0.00, 0.00
 2006-12-27T23:59:59+00:00, 253, 4079.70, 4134.86, 4079.70, 4134.86, 0.00, 0.00
 2006-12-28T23:59:59+00:00, 254, 4137.44, 4142.06, 4125.14, 4130.66, 0.00, 0.00
-2006-12-29T23:59:59+00:00, 255, 4130.12, 4142.01, 4119.94, 4119.94, 0.00, 0.00` 
+2006-12-29T23:59:59+00:00, 255, 4130.12, 4142.01, 4119.94, 4119.94, 0.00, 0.00
 ```
 
 同样的策略但是：
@@ -112,10 +112,10 @@ class MyTest(bt.Strategy):
 命令行：
 
 ```py
-`./bt-run.py --csvformat btcsv \
+./bt-run.py --csvformat btcsv \
             --data ../samples/data/sample/2006-day-001.txt \
             --strategy ./mymod.py \
-            period 50` 
+            period 50
 ```
 
 图表输出。
@@ -139,7 +139,7 @@ class MyTest(bt.Strategy):
 代码。
 
 ```py
-`from __future__ import (absolute_import, division, print_function,
+from __future__ import (absolute_import, division, print_function,
                         unicode_literals)
 
 import backtrader as bt
@@ -162,15 +162,15 @@ class SMA_CrossOver(bt.Strategy):
                 self.sell()
 
         elif self.buysig > 0:
-            self.buy()` 
+            self.buy()
 ```
 
 标准执行：
 
 ```py
-`./bt-run.py --csvformat btcsv \
+./bt-run.py --csvformat btcsv \
             --data ../samples/data/sample/2006-day-001.txt \
-            --strategy :SMA_CrossOver` 
+            --strategy :SMA_CrossOver
 ```
 
 注意‘:’。加载策略的标准表示法（见下文）是：
@@ -194,14 +194,14 @@ class SMA_CrossOver(bt.Strategy):
 最后一个示例添加佣金方案、现金并更改参数：
 
 ```py
-`./bt-run.py --csvformat btcsv \
+./bt-run.py --csvformat btcsv \
             --data ../samples/data/sample/2006-day-001.txt \
             --cash 20000 \
             --commission 2.0 \
             --mult 10 \
             --margin 2000 \
             --strategy :SMA_CrossOver \
-            fast 5 slow 20` 
+            fast 5 slow 20
 ```
 
 输出。
@@ -229,20 +229,20 @@ class SMA_CrossOver(bt.Strategy):
 以`SharpeRatio`分析 2005-2006 年为例：
 
 ```py
-`./bt-run.py --csvformat btcsv \
+./bt-run.py --csvformat btcsv \
             --data ../samples/data/sample/2005-2006-day-001.txt \
             --strategy :SMA_CrossOver \
-            --analyzer :SharpeRatio` 
+            --analyzer :SharpeRatio
 ```
 
 输出：
 
 ```py
-`====================
+====================
 == Analyzers
 ====================
 ##  sharperatio
---  sharperatio : 11.6473326097` 
+--  sharperatio : 11.6473326097
 ```
 
 良好的策略！！！（实际示例中纯粹是运气，而且也没有佣金）
@@ -256,7 +256,7 @@ class SMA_CrossOver(bt.Strategy):
 直接从脚本中：
 
 ```py
-`$ ./bt-run.py --help
+$ ./bt-run.py --help
 usage: bt-run.py [-h] --data DATA
                  [--csvformat {yahoocsv_unreversed,vchart,sierracsv,yahoocsv,vchartcsv,btcsv}]
                  [--fromdate FROMDATE] [--todate TODATE] --strategy STRATEGY
@@ -331,13 +331,13 @@ Plotting options:
   --plotstyle {bar,line,candle}, -ps {bar,line,candle}
                         Plot style for the input data
   --plotfigs PLOTFIGS, -pn PLOTFIGS
-                        Plot using n figures` 
+                        Plot using n figures
 ```
 
 以及代码：
 
 ```py
-`from __future__ import (absolute_import, division, print_function,
+from __future__ import (absolute_import, division, print_function,
                         unicode_literals)
 
 import argparse
@@ -716,5 +716,5 @@ def parse_args():
     return parser.parse_args()
 
 if __name__ == '__main__':
-    runstrat()` 
+    runstrat()
 ```

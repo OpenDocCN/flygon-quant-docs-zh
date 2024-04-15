@@ -53,7 +53,7 @@
         data2 = bt.DataResampler(
             dataname=data,
             timeframe=tframes[args.timeframe],
-            compression=args.compression)` 
+            compression=args.compression)
 ```
 
 步骤：
@@ -75,7 +75,7 @@
 脚本的调用：
 
 ```py
-`$ ./data-multitimeframe.py --timeframe weekly --compression 1` 
+$ ./data-multitimeframe.py --timeframe weekly --compression 1
 ```
 
 和输出图表：
@@ -87,7 +87,7 @@
 脚本的调用：
 
 ```py
-`$ ./data-multitimeframe.py --timeframe daily --compression 2` 
+$ ./data-multitimeframe.py --timeframe daily --compression 2
 ```
 
 和输出图表：
@@ -119,10 +119,10 @@
 命令行和输出
 
 ```py
-`$ ./data-multitimeframe.py --timeframe weekly --compression 1 --indicators --onlydaily
+$ ./data-multitimeframe.py --timeframe weekly --compression 1 --indicators --onlydaily
 --------------------------------------------------
 nextstart called with len 10
---------------------------------------------------` 
+--------------------------------------------------
 ```
 
 以及图表。
@@ -136,7 +136,7 @@ nextstart called with len 10
 命令行：
 
 ```py
-`$ ./data-multitimeframe.py --timeframe weekly --compression 1 --indicators
+$ ./data-multitimeframe.py --timeframe weekly --compression 1 --indicators
 --------------------------------------------------
 nextstart called with len 50
 --------------------------------------------------
@@ -151,7 +151,7 @@ nextstart called with len 53
 --------------------------------------------------
 --------------------------------------------------
 nextstart called with len 54
---------------------------------------------------` 
+--------------------------------------------------
 ```
 
 注意这里的两件事：
@@ -179,7 +179,7 @@ nextstart called with len 54
 测试脚本。
 
 ```py
-`from __future__ import (absolute_import, division, print_function,
+from __future__ import (absolute_import, division, print_function,
                         unicode_literals)
 
 import argparse
@@ -290,5 +290,5 @@ def parse_args():
     return parser.parse_args()
 
 if __name__ == '__main__':
-    runstrat()` 
+    runstrat()
 ```

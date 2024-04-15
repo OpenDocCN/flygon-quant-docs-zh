@@ -23,7 +23,7 @@
 引用自参考资料：
 
 ```py
-`BP = Close - Minimum(Low or Prior Close)
+BP = Close - Minimum(Low or Prior Close)
 
 TR = Maximum(High or Prior Close)  -  Minimum(Low or Prior Close)
 
@@ -31,7 +31,7 @@ Average7 = (7-period BP Sum) / (7-period TR Sum)
 Average14 = (14-period BP Sum) / (14-period TR Sum)
 Average28 = (28-period BP Sum) / (28-period TR Sum)
 
-UO = 100 x [(4 x Average7)+(2 x Average14)+Average28]/(4+2+1)` 
+UO = 100 x [(4 x Average7)+(2 x Average14)+Average28]/(4+2+1)
 ```
 
 摘要：
@@ -120,12 +120,12 @@ UO = 100 x [(4 x Average7)+(2 x Average14)+Average28]/(4+2+1)`
 执行：
 
 ```py
-`btrun \
+btrun \
   --nostdstats \
   --data 2005-2006-day-001.txt \
   --indicator ultimateoscillator:UltimateOscillator \
   --indicator ultimateoscillator:UltimateOscillator:p1=4,p2=8,p3=16 \
-  --plot` 
+  --plot
 ```
 
 注意
@@ -139,7 +139,7 @@ UO = 100 x [(4 x Average7)+(2 x Average14)+Average28]/(4+2+1)`
 `UltimateOscillator` 代码：
 
 ```py
-`from __future__ import (absolute_import, division, print_function,
+from __future__ import (absolute_import, division, print_function,
                         unicode_literals)
 
 import backtrader as bt
@@ -190,5 +190,5 @@ class UltimateOscillator(bt.Indicator):
         av28 = SumN(bp, period=self.p.p3) / SumN(tr, period=self.p.p3)
 
         uo = 100.0 * (4.0 * av7 + 2.0 * av14 + av28) / (4.0 + 2.0 + 1.0)
-        self.lines.uo = uo` 
+        self.lines.uo = uo
 ```

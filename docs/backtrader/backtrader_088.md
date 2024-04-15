@@ -87,11 +87,11 @@
 使用*Store*模型（首选）：
 
 ```py
-`import backtrader as bt
+import backtrader as bt
 
 cerebro = bt.Cerebro()
 oandastore = bt.stores.OandaStore()
-cerebro.broker = oandastore.getbroker()  # or cerebro.setbroker(...)` 
+cerebro.broker = oandastore.getbroker()  # or cerebro.setbroker(...)
 ```
 
 ### 经纪人 - 初始持仓
@@ -261,7 +261,7 @@ Oanda 数据源。
 此数据源仅支持`timeframe`和`compression`的以下映射，这些映射符合 OANDA API 开发人员指南中的定义：
 
 ```py
-`(TimeFrame.Seconds, 5): 'S5',
+(TimeFrame.Seconds, 5): 'S5',
 (TimeFrame.Seconds, 10): 'S10',
 (TimeFrame.Seconds, 15): 'S15',
 (TimeFrame.Seconds, 30): 'S30',
@@ -281,7 +281,7 @@ Oanda 数据源。
 (TimeFrame.Minutes, 480): 'H8',
 (TimeFrame.Days, 1): 'D',
 (TimeFrame.Weeks, 1): 'W',
-(TimeFrame.Months, 1): 'M',` 
+(TimeFrame.Months, 1): 'M',
 ```
 
 任何其他组合都将被拒绝

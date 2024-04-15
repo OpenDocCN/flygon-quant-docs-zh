@@ -33,7 +33,7 @@
 在`__init__`期间操作的示例：
 
 ```py
-`hilo_diff = self.data.high - self.data.low` 
+hilo_diff = self.data.high - self.data.low
 ```
 
 变量`hilo_diff`保存对在调用`next`之前预先计算的**lines**对象的引用，并且可以使用标准数组表示法`[]`访问
@@ -43,8 +43,8 @@
 这也适用于将简单的**lines**（如 self.data 数据源中的 lines）与复杂的指标混合使用时：
 
 ```py
-`sma = bt.SimpleMovingAverage(self.data.close)
-close_sma_diff = self.data.close - sma` 
+sma = bt.SimpleMovingAverage(self.data.close)
+close_sma_diff = self.data.close - sma
 ```
 
 现在`close_sma_diff`再次包含一个**line**对象。
@@ -52,7 +52,7 @@ close_sma_diff = self.data.close - sma`
 使用逻辑运算符：
 
 ```py
-`close_over_sma = self.data.close > sma` 
+close_over_sma = self.data.close > sma
 ```
 
 现在生成的**lines**对象将包含一个布尔数组。
@@ -62,13 +62,13 @@ close_sma_diff = self.data.close - sma`
 操作示例（逻辑运算符）：
 
 ```py
-`close_over_sma = self.data.close > self.sma` 
+close_over_sma = self.data.close > self.sma
 ```
 
 使用等效数组（索引从 0 开始的表示法）：
 
 ```py
-`close_over_sma = self.data.close[0] > self.sma[0]` 
+close_over_sma = self.data.close[0] > self.sma[0]
 ```
 
 在这种情况下，`close_over_sma`产生一个布尔值，该值是通过将`self.data.close`和`self.sma`应用到`[0]`运算符返回的两个浮点值进行比较的结果
@@ -82,7 +82,7 @@ close_sma_diff = self.data.close - sma`
 一个完整的示例，在`__init__`期间生成一个**buy**信号：
 
 ```py
-`class MyStrategy(bt.Strategy):
+class MyStrategy(bt.Strategy):
 
     def __init__(self):
 
@@ -98,7 +98,7 @@ close_sma_diff = self.data.close - sma`
     def next(self):
 
         if buy_sig:
-            self.buy()` 
+            self.buy()
 ```
 
 注意
@@ -147,24 +147,24 @@ Python 的`and`运算符不能被重载，迫使平台定义自己的`And`。其
 在开发 `Indicator` 时，可以添加一个 `plotinfo` 声明。它可以是元组的元组（2 个元素）、一个 `dict` 或一个 `OrderedDict`。它看起来像：
 
 ```py
-`class MyIndicator(bt.Indicator):
+class MyIndicator(bt.Indicator):
 
     ....
     plotinfo = dict(subplot=False)
-    ....` 
+    ....
 ```
 
 该值稍后可以按如下方式访问（和设置）（如果需要的话）：
 
 ```py
-`myind = MyIndicator(self.data, someparam=value)
-myind.plotinfo.subplot = True` 
+myind = MyIndicator(self.data, someparam=value)
+myind.plotinfo.subplot = True
 ```
 
 该值甚至可以在实例化期间设置：
 
 ```py
-`myind = MyIndicator(self.data, someparams=value, subplot=True)` 
+myind = MyIndicator(self.data, someparams=value, subplot=True)
 ```
 
 `subplot=True` 将传递给（幕后）实例化的成员变量 `plotinfo`，用于指标。

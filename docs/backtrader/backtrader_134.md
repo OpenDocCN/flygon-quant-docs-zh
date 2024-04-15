@@ -15,13 +15,13 @@
 让我们考虑穿越一个普通的数字参数的用例。类似这样
 
 ```py
-`mycrossover = bt.ind.CrossOver(bt.ind.RSI(), 50.0)` 
+mycrossover = bt.ind.CrossOver(bt.ind.RSI(), 50.0)
 ```
 
 这将会像这样断开
 
 ```py
-`Traceback (most recent call last):
+Traceback (most recent call last):
   File "./cross-over-num.py", line 114, in <module>
     runstrat()
   File "./cross-over-num.py", line 70, in runstrat
@@ -42,7 +42,7 @@
     _obj, args, kwargs = cls.doinit(_obj, *args, **kwargs)
   File "d:\dro\01-docs\01-home\src\backtrader\backtrader\metabase.py", line 77, in doinit
     _obj.__init__(*args, **kwargs)
- Typeerror: __init__() takes exactly 1 argument (2 given)` 
+ Typeerror: __init__() takes exactly 1 argument (2 given)
 ```
 
 最后一行最具信息性，因为它告诉我们有太多的参数。这意味着`50.0`正在伤害我们。
@@ -50,7 +50,7 @@
 为了解决手头的问题，给出了一个数字包装器作为答案。
 
 ```py
-`class ConstantValue(bt.Indicator):
+class ConstantValue(bt.Indicator):
     lines = ('constant',)
     params = (('constant', float('NaN')),)
 
@@ -59,13 +59,13 @@
 
 ...
 
-mycrossover = bt.ind.CrossOver(bt.ind.RSI(), ConstantValue(50.0))` 
+mycrossover = bt.ind.CrossOver(bt.ind.RSI(), ConstantValue(50.0))
 ```
 
 问题解决了。但等等，解决方案已经在手边。有一个内部助手，用于解决问题，但被完全遗忘了：`LineNum`。它做的就是名字所暗示的：*获取一个数字并将其变成一行*。问题的解决方案就在那里，解决方案可能看起来像这样：
 
 ```py
-`mycrossover = bt.ind.CrossOver(bt.ind.RSI(), bt.LineNum(50.0))` 
+mycrossover = bt.ind.CrossOver(bt.ind.RSI(), bt.LineNum(50.0))
 ```
 
 通常的后台线程仍在不断地运行，告诉我们仍然有一些地方不是 100%清晰，解决方案应该是显而易见的，而不需要用户指定*包装器*。
@@ -73,16 +73,16 @@ mycrossover = bt.ind.CrossOver(bt.ind.RSI(), ConstantValue(50.0))`
 然后出现了疏忽。即使`mindatas`机制存在并应用于系统的某些部分，但并没有应用于`CrossOver`。尝试过，但有时人类会失败，他们相信自己已经做了某事，结果发现他们没有往下滚动。这就是情况。像这样添加一行代码：
 
 ```py
-`class CrossOver(Indicator):
+class CrossOver(Indicator):
     ...
     _mindatas = 2
-    ...` 
+    ...
 ```
 
 现在问题的解决方案很明显：
 
 ```py
-`mycrossover = bt.ind.CrossOver(bt.ind.RSI(), 50.0)` 
+mycrossover = bt.ind.CrossOver(bt.ind.RSI(), 50.0)
 ```
 
 应该一直是这样的方式（参见下面的示例和图表）
@@ -132,7 +132,7 @@ mycrossover = bt.ind.CrossOver(bt.ind.RSI(), ConstantValue(50.0))`
 一个小示例（尽管有一个完整的框架）来测试完整的解决方案：
 
 ```py
-`$ ./cross-over-num.py --plot` 
+$ ./cross-over-num.py --plot
 ```
 
 这将产生这样的输出。
@@ -142,7 +142,7 @@ mycrossover = bt.ind.CrossOver(bt.ind.RSI(), ConstantValue(50.0))`
 ## 示例用法
 
 ```py
-`$ ./cross-over-num.py --help
+$ ./cross-over-num.py --help
 usage: cross-over-num.py [-h] [--data0 DATA0] [--fromdate FROMDATE]
                          [--todate TODATE] [--cerebro kwargs]
                          [--broker kwargs] [--sizer kwargs] [--strat kwargs]
@@ -160,13 +160,13 @@ optional arguments:
   --broker kwargs      kwargs in key=value format (default: )
   --sizer kwargs       kwargs in key=value format (default: )
   --strat kwargs       kwargs in key=value format (default: )
-  --plot [kwargs]      kwargs in key=value format (default: )` 
+  --plot [kwargs]      kwargs in key=value format (default: )
 ```
 
 ## 示例代码
 
 ```py
-`from __future__ import (absolute_import, division, print_function,
+from __future__ import (absolute_import, division, print_function,
                         unicode_literals)
 
 import argparse
@@ -254,5 +254,5 @@ def parse_args(pargs=None):
     return parser.parse_args(pargs)
 
 if __name__ == '__main__':
-    runstrat()` 
+    runstrat()
 ```

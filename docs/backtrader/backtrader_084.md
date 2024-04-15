@@ -11,9 +11,9 @@
 参数：
 
 ```py
-`* `stake` (default: `1`)
+* `stake` (default: `1`)
 
-* `tranches` (default: `1`)` 
+* `tranches` (default: `1`)
 ```
 
 ## FixedReverser
@@ -29,7 +29,7 @@
 参数：
 
 ```py
-`* `stake` (default: `1`)` 
+* `stake` (default: `1`)
 ```
 
 ## PercentSizer
@@ -41,7 +41,7 @@
 参数：
 
 ```py
-`* `percents` (default: `20`)` 
+* `percents` (default: `20`)
 ```
 
 ## AllInSizer
@@ -53,7 +53,7 @@
 参数：
 
 ```py
-`* `percents` (default: `100`)` 
+* `percents` (default: `100`)
 ```
 
 ## PercentSizerInt
@@ -65,7 +65,7 @@
 参数：
 
 ```py
-`* `percents` (default: `20`)` 
+* `percents` (default: `20`)
 ```
 
 ## AllInSizerInt
@@ -77,5 +77,5 @@
 参数：
 
 ```py
- `* `percents` (default: `100`)` 
+ `* `percents` (default: `100`)
 ```

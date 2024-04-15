@@ -37,25 +37,25 @@
 让我们回顾一下如何定义接受 *params* 并定义 *lines* 的 `Indicator`：
 
 ```py
-`class MyIndicator(bt.Indicator):
+class MyIndicator(bt.Indicator):
     lines = ('myline',)
     params = (
         ('period', 50),
-    )` 
+    )
 ```
 
 以及后续可以作为 `self.params.period` 或 `self.p.period` 的参数：
 
 ```py
-`def __init__(self):
-    print('my period is:', self.p.period)` 
+def __init__(self):
+    print('my period is:', self.p.period)
 ```
 
 以及作为 `self.lines.myline` 或 `self.l.myline` 的当前值：
 
 ```py
-`def next(self):
-    print('mylines[0]:', self.lines.myline[0])` 
+def next(self):
+    print('mylines[0]:', self.lines.myline[0])
 ```
 
 这并不特别有用，只是展示了 **声明式** 方法的 **params** 背景机制，该机制还具有适当的继承支持（包括 *多继承*）
@@ -65,12 +65,12 @@
 使用相同的声明技术（有些人称之为 *元编程*），支持外部 *包* 可以这样实现：
 
 ```py
-`class MyIndicator(bt.Indicator):
+class MyIndicator(bt.Indicator):
     packages = ('pandas',)
     lines = ('myline',)
     params = (
         ('period', 50),
-    )` 
+    )
 ```
 
 天啊！这似乎只是另一个声明。指标的实施者的第一个问题将是：
@@ -80,8 +80,8 @@
 答案很明显：**不**。后台机制将导入 `pandas` 并使其在定义 `MyIndicator` 的模块中可用。现在可以在 `next` 中执行以下操作：
 
 ```py
-`def next(self):
-    print('mylines[0]:', pandas.SomeFunction(self.lines.myline[0]))` 
+def next(self):
+    print('mylines[0]:', pandas.SomeFunction(self.lines.myline[0]))
 ```
 
 `packages` 指令也可以用于：
@@ -93,7 +93,7 @@
 假设还希望将 statsmodel 命名为 `sm` 以完成 `pandas.SomeFunction`：
 
 ```py
-`class MyIndicator(bt.Indicator):
+class MyIndicator(bt.Indicator):
     packages = ('pandas', ('statsmodel', 'sm'),)
     lines = ('myline',)
     params = (
@@ -101,7 +101,7 @@
     )
 
     def next(self):
-        print('mylines[0]:', sm.XX(pandas.SomeFunction(self.lines.myline[0])))` 
+        print('mylines[0]:', sm.XX(pandas.SomeFunction(self.lines.myline[0])))
 ```
 
 `statsmodel` 已被导入为 `sm` 并可用。只需传递一个可迭代对象（`tuple` 是 *backtrader* 的约定）包含包的名称和所需的别名。
@@ -113,19 +113,19 @@ Python 以不断查找事物而闻名，这也是该语言在动态性、内省�
 常见的加速之一是通过直接从模块中导入符号而不是查找模块来实现本地查找。使用我们从 `pandas` 中的 `SomeFunction`，会是这样的：
 
 ```py
-`from pandas import SomeFunction` 
+from pandas import SomeFunction
 ```
 
 或者使用别名：
 
 ```py
-`from pandas import SomeFunction as SomeFunc` 
+from pandas import SomeFunction as SomeFunc
 ```
 
 *backtrader* 提供了对 `frompackages` 指令的支持。让我们重新设计 `MyIndicator`：
 
 ```py
-`class MyIndicator(bt.Indicator):
+class MyIndicator(bt.Indicator):
     frompackages = (('pandas', 'SomeFunction'),)
     lines = ('myline',)
     params = (
@@ -133,13 +133,13 @@ Python 以不断查找事物而闻名，这也是该语言在动态性、内省�
     )
 
     def next(self):
-        print('mylines[0]:', SomeFunction(self.lines.myline[0]))` 
+        print('mylines[0]:', SomeFunction(self.lines.myline[0]))
 ```
 
 当然，这开始增加更多的括号。例如，如果要从 `pandas` 中导入两个（2）个东西，看起来会像这样：
 
 ```py
-`class MyIndicator(bt.Indicator):
+class MyIndicator(bt.Indicator):
     frompackages = (('pandas', ['SomeFunction', 'SomeFunction2']),)
     lines = ('myline',)
     params = (
@@ -147,7 +147,7 @@ Python 以不断查找事物而闻名，这也是该语言在动态性、内省�
     )
 
     def next(self):
-        print('mylines[0]:', SomeFunction2(SomeFunction(self.lines.myline[0])))` 
+        print('mylines[0]:', SomeFunction2(SomeFunction(self.lines.myline[0])))
 ```
 
 为了清晰起见，`SomeFunction` 和 `SomeFunction2` 已放在一个 `list` 而不是一个 `tuple` 中，以便使用方括号 `[]` 并更好地阅读它。
@@ -155,7 +155,7 @@ Python 以不断查找事物而闻名，这也是该语言在动态性、内省�
 也可以将 `SomeFunction` 别名为例如 `SFunc`。完整示例：
 
 ```py
-`class MyIndicator(bt.Indicator):
+class MyIndicator(bt.Indicator):
     frompackages = (('pandas', [('SomeFunction', 'SFunc'), 'SomeFunction2']),)
     lines = ('myline',)
     params = (
@@ -163,13 +163,13 @@ Python 以不断查找事物而闻名，这也是该语言在动态性、内省�
     )
 
     def next(self):
-        print('mylines[0]:', SomeFunction2(SFunc(self.lines.myline[0])))` 
+        print('mylines[0]:', SomeFunction2(SFunc(self.lines.myline[0])))
 ```
 
 从不同的包中导入也是可能的，但会增加更多的括号。当然，换行和缩进会有所帮助：
 
 ```py
-`class MyIndicator(bt.Indicator):
+class MyIndicator(bt.Indicator):
     frompackages = (
         ('pandas', [('SomeFunction', 'SFunc'), 'SomeFunction2']),
         ('statsmodel', 'XX'),
@@ -180,7 +180,7 @@ Python 以不断查找事物而闻名，这也是该语言在动态性、内省�
     )
 
     def next(self):
-        print('mylines[0]:', XX(SomeFunction2(SFunc(self.lines.myline[0]))))` 
+        print('mylines[0]:', XX(SomeFunction2(SFunc(self.lines.myline[0]))))
 ```
 
 ## 使用继承
@@ -188,11 +188,11 @@ Python 以不断查找事物而闻名，这也是该语言在动态性、内省�
 `packages` 和 `frompackages` 都支持（多重）继承。例如，可以有一个基类，为所有子类添加 `numpy` 支持：
 
 ```py
-`class NumPySupport(object):
+class NumPySupport(object):
     packages = ('numpy',)
 
 class MyIndicator(bt.Indicator, NumPySupport):
-    packages = ('pandas',)` 
+    packages = ('pandas',)
 ```
 
 `MyIndicator` 将需要从后台机制中导入 `numpy` 和 `pandas` 并将能够使用它们。
@@ -208,7 +208,7 @@ class MyIndicator(bt.Indicator, NumPySupport):
 实现：
 
 ```py
-`class KalmanMovingAverage(bt.indicators.MovingAverageBase):
+class KalmanMovingAverage(bt.indicators.MovingAverageBase):
     packages = ('pykalman',)
     frompackages = (('pykalman', [('KalmanFilter', 'KF')]),)
     lines = ('kma',)
@@ -242,13 +242,13 @@ class MyIndicator(bt.Indicator, NumPySupport):
 
     def next(self):
         k1, self._c1 = self._kf.filter_update(self._k1, self._c1, self.data[0])
-        self.lines.kma[0] = self._k1 = k1` 
+        self.lines.kma[0] = self._k1 = k1
 ```
 
 还有一个基于这里的一篇文章的 `KalmanFilter`：[Kalman Filter-Based Pairs Trading Strategy In QSTrader](https://www.quantstart.com/articles/kalman-filter-based-pairs-trading-strategy-in-qstrader)
 
 ```py
-`class NumPy(object):
+class NumPy(object):
     packages = (('numpy', 'np'),)
 
 class KalmanFilterInd(bt.Indicator, NumPy):
@@ -295,7 +295,7 @@ class KalmanFilterInd(bt.Indicator, NumPy):
 
         # Fill the lines
         self.lines.et[0] = et
-        self.lines.sqrt_qt[0] = sqrt_Qt` 
+        self.lines.sqrt_qt[0] = sqrt_Qt
 ```
 
 为了说明这一点，展示了 `packages` 如何与继承一起工作（`pandas` 实际上并不是必需的）
@@ -303,7 +303,7 @@ class KalmanFilterInd(bt.Indicator, NumPy):
 一个样例的执行：
 
 ```py
-`$ ./kalman-things.py --plot` 
+$ ./kalman-things.py --plot
 ```
 
 生成了这张图表
@@ -313,7 +313,7 @@ class KalmanFilterInd(bt.Indicator, NumPy):
 ## 样例用法
 
 ```py
-`$ ./kalman-things.py --help
+$ ./kalman-things.py --help
 usage: kalman-things.py [-h] [--data0 DATA0] [--data1 DATA1]
                         [--fromdate FROMDATE] [--todate TODATE]
                         [--cerebro kwargs] [--broker kwargs] [--sizer kwargs]
@@ -335,13 +335,13 @@ optional arguments:
   --broker kwargs      kwargs in key=value format (default: )
   --sizer kwargs       kwargs in key=value format (default: )
   --strat kwargs       kwargs in key=value format (default: )
-  --plot [kwargs]      kwargs in key=value format (default: )` 
+  --plot [kwargs]      kwargs in key=value format (default: )
 ```
 
 ## 样例代码
 
 ```py
-`from __future__ import (absolute_import, division, print_function,
+from __future__ import (absolute_import, division, print_function,
                         unicode_literals)
 
 import argparse
@@ -557,5 +557,5 @@ def parse_args(pargs=None):
     return parser.parse_args(pargs)
 
 if __name__ == '__main__':
-    runstrat()` 
+    runstrat()
 ```

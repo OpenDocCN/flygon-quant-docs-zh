@@ -90,7 +90,7 @@
     # First add the original data - smaller timeframe
     cerebro.replaydata(data,
                        timeframe=tframes[args.timeframe],
-                       compression=args.compression)` 
+                       compression=args.compression)
 ```
 
 ## 示例 - 每日重放到周线
@@ -98,13 +98,13 @@
 脚本的调用：
 
 ```py
-`$ ./replay-example.py --timeframe weekly --compression 1` 
+$ ./replay-example.py --timeframe weekly --compression 1
 ```
 
 不幸的是，图表无法向我们展示背景中真实发生的事情，所以让我们看看控制台输出：
 
 ```py
-`prenext len 1 - counter 1
+prenext len 1 - counter 1
 prenext len 1 - counter 2
 prenext len 1 - counter 3
 prenext len 1 - counter 4
@@ -131,7 +131,7 @@ prenext len 9 - counter 45
 ---next len 51 - counter 252
 ---next len 52 - counter 253
 ---next len 52 - counter 254
----next len 52 - counter 255` 
+---next len 52 - counter 255
 ```
 
 正如我们所看到的，内部的`self.counter`变量正在跟踪每次调用`prenext`或`next`。前者在应用简单移动平均产生值之前调用。后者在简单移动平均产生值时调用。
@@ -157,7 +157,7 @@ prenext len 9 - counter 45
 控制台：
 
 ```py
-`$ ./replay-example.py --timeframe daily --compression 2
+$ ./replay-example.py --timeframe daily --compression 2
 prenext len 1 - counter 1
 prenext len 1 - counter 2
 prenext len 2 - counter 3
@@ -172,7 +172,7 @@ prenext len 4 - counter 7
 ---next len 126 - counter 252
 ---next len 127 - counter 253
 ---next len 127 - counter 254
----next len 128 - counter 255` 
+---next len 128 - counter 255
 ```
 
 这次我们得到了预期的一半 K 线，因为请求的压缩因子是 2。
@@ -188,7 +188,7 @@ prenext len 4 - counter 7
 测试脚本。
 
 ```py
-`from __future__ import (absolute_import, division, print_function,
+from __future__ import (absolute_import, division, print_function,
                         unicode_literals)
 
 import argparse
@@ -270,5 +270,5 @@ def parse_args():
     return parser.parse_args()
 
 if __name__ == '__main__':
-    runstrat()` 
+    runstrat()
 ```

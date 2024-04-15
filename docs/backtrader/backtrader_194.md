@@ -9,7 +9,7 @@ GitHub 上的问题，[Issue #6](https://github.com/mementum/backtrader/issues/6
 参数声明中包含关键信息：
 
 ```py
-`class GenericCSVData(feed.CSVDataBase):
+class GenericCSVData(feed.CSVDataBase):
     params = (
         ('nullvalue', float('NaN')),
         ('dtformat', '%Y-%m-%d %H:%M:%S'),
@@ -23,7 +23,7 @@ GitHub 上的问题，[Issue #6](https://github.com/mementum/backtrader/issues/6
         ('close', 4),
         ('volume', 5),
         ('openinterest', 6),
-    )` 
+    )
 ```
 
 因为该类继承自 CSVDataBase，一些标准参数可用：
@@ -81,7 +81,7 @@ GitHub 上的问题，[Issue #6](https://github.com/mementum/backtrader/issues/6
 代码：
 
 ```py
-`import datetime
+import datetime
 import backtrader as bt
 import backtrader.feeds as btfeed
 
@@ -105,7 +105,7 @@ data = btfeed.GenericCSVData(
     close=4,
     volume=5,
     openinterest=-1
-)` 
+)
 ```
 
 稍微修改的要求：
@@ -127,7 +127,7 @@ data = btfeed.GenericCSVData(
 代码：
 
 ```py
-`import datetime
+import datetime
 import backtrader as bt
 import backtrader.feeds as btfeed
 
@@ -153,5 +153,5 @@ data = btfeed.GenericCSVData(
     close=5,
     volume=6,
     openinterest=-1
-)` 
+)
 ```

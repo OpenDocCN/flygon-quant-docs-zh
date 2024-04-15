@@ -5,12 +5,12 @@
 添加一个基于 CSV 的新数据源很容易。现有的基类 CSVDataBase 提供了框架，大部分工作都由子类完成，这在大多数情况下可以简单地完成：
 
 ```py
-`def _loadline(self, linetokens):
+def _loadline(self, linetokens):
 
   # parse the linetokens here and put them in self.lines.close,
   # self.lines.high, etc
 
-  return True # if data was parsed, else ... return False` 
+  return True # if data was parsed, else ... return False
 ```
 
 这在 CSV 数据源开发中已经展示过了。
@@ -34,7 +34,7 @@
 让我们使用`backtrader.feed.DataBase`已经提供的参数：
 
 ```py
-`class DataBase(six.with_metaclass(MetaDataBase, dataseries.OHLCDateTime)):
+class DataBase(six.with_metaclass(MetaDataBase, dataseries.OHLCDateTime)):
 
     params = (('dataname', None),
         ('fromdate', datetime.datetime.min),
@@ -42,7 +42,7 @@
         ('name', ''),
         ('compression', 1),
         ('timeframe', TimeFrame.Days),
-        ('sessionend', None))` 
+        ('sessionend', None))
 ```
 
 具有���下含义：
@@ -82,7 +82,7 @@
         else:
             self.dtsize = 2
             self.barsize = 32
-            self.barfmt = 'IIffffII'` 
+            self.barfmt = 'IIffffII'
 ```
 
 ### 开始
@@ -100,7 +100,7 @@
             self.f = self.p.dataname
         else:
             # Let an exception propagate
-            self.f = open(self.p.dataname, 'rb')` 
+            self.f = open(self.p.dataname, 'rb')
 ```
 
 ### 停止
@@ -114,7 +114,7 @@
         # Close the file if any
         if self.f is not None:
             self.f.close()
-            self.f = None` 
+            self.f = None
 ```
 
 ### 实际加载
@@ -172,7 +172,7 @@
         self.lines.openinterest[0] = oi
 
         # Say success
-        return True` 
+        return True
 ```
 
 ## 其他二进制格式
@@ -204,7 +204,7 @@
 这只涉及加载数据，因此甚至不需要`Strategy`的子类。
 
 ```py
-`from __future__ import (absolute_import, division, print_function,
+from __future__ import (absolute_import, division, print_function,
                         unicode_literals)
 
 import datetime
@@ -235,7 +235,7 @@ if __name__ == '__main__':
     cerebro.run()
 
     # Plot the result
-    cerebro.plot(style='bar')` 
+    cerebro.plot(style='bar')
 ```
 
 ![image](img/b05b400a8f4c0282916d6f8d86a551e0.png)
@@ -243,7 +243,7 @@ if __name__ == '__main__':
 ## VChartData 完整代码
 
 ```py
-`from __future__ import (absolute_import, division, print_function,
+from __future__ import (absolute_import, division, print_function,
                         unicode_literals)
 
 import datetime
@@ -324,5 +324,5 @@ class VChartData(DataBase):
         self.lines.openinterest[0] = oi
 
         # Say success
-        return True` 
+        return True
 ```

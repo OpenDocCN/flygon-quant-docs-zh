@@ -29,7 +29,7 @@
 在`Cerebro`和`Strategy`子类中，计时器回调将在以下方法中收到。
 
 ```py
-`def notify_timer(self, timer, when, *args, **kwargs):
+def notify_timer(self, timer, when, *args, **kwargs):
   '''Receives a timer notification where ``timer`` is the timer which was
  returned by ``add_timer``, and ``when`` is the calling time. ``args``
  and ``kwargs`` are any additional arguments passed to ``add_timer``
@@ -37,7 +37,7 @@
  The actual ``when`` time can be later, but the system may have not be
  able to call the timer before. This value is the timer value and not the
  system time.
- '''` 
+ '''
 ```
 
 ### 添加计时器 - 通过策略
@@ -45,14 +45,14 @@
 用这种方法完成
 
 ```py
-`def add_timer(self, when,
+def add_timer(self, when,
               offset=datetime.timedelta(), repeat=datetime.timedelta(),
               weekdays=[], weekcarry=False,
               monthdays=[], monthcarry=True,
               allow=None,
               tzdata=None, cheat=False,
               *args, **kwargs):
-    '''` 
+    '''
 ```
 
 它返回创建的`Timer`实例。
@@ -64,14 +64,14 @@
 与相同的方法完成，并只添加参数`strats`。如果设置为`True`，则不仅将通知计时器给*cerebro*，还将通知给系统中运行的所有策略。
 
 ```py
-`def add_timer(self, when,
+def add_timer(self, when,
               offset=datetime.timedelta(), repeat=datetime.timedelta(),
               weekdays=[], weekcarry=False,
               monthdays=[], monthcarry=True,
               allow=None,
               tzdata=None, cheat=False, strats=False,
               *args, **kwargs):
-    '''` 
+    '''
 ```
 
 它返回创建的`Timer`实例。
@@ -113,7 +113,7 @@
 示例`scheduled.py`默认使用*backtrader*发行版中提供的标准每日条运行。策略的参数
 
 ```py
-`class St(bt.Strategy):
+class St(bt.Strategy):
     params = dict(
         when=bt.timer.SESSION_START,
         timer=True,
@@ -121,7 +121,7 @@
         offset=datetime.timedelta(),
         repeat=datetime.timedelta(),
         weekdays=[],
-    )` 
+    )
 ```
 
 数据的会话时间如下：
@@ -133,7 +133,7 @@
 仅使用时间运行
 
 ```py
-`$ ./scheduled.py --strat when='datetime.time(15,30)'
+$ ./scheduled.py --strat when='datetime.time(15,30)'
 
 strategy notify_timer with tid 0, when 2005-01-03 15:30:00 cheat False
 1, 2005-01-03 17:30:00, Week 1, Day 1, O 2952.29, H 2989.61, L 2946.8, C 2970.02
@@ -142,32 +142,32 @@ strategy notify_timer with tid 0, when 2005-01-04 15:30:00 cheat False
 strategy notify_timer with tid 0, when 2005-01-05 15:30:00 cheat False
 3, 2005-01-05 17:30:00, Week 1, Day 3, O 2969.0, H 2969.0, L 2942.69, C 2947.19
 strategy notify_timer with tid 0, when 2005-01-06 15:30:00 cheat False
-...` 
+...
 ```
 
 如指定的，计时器在`15:30`时在跳动。没有什么意外。让我们添加一个偏移量为 30 分钟。
 
 ```py
-`$ ./scheduled.py --strat when='datetime.time(15,30)',offset='datetime.timedelta(minutes=30)'
+$ ./scheduled.py --strat when='datetime.time(15,30)',offset='datetime.timedelta(minutes=30)'
 
 strategy notify_timer with tid 0, when 2005-01-03 16:00:00 cheat False
 1, 2005-01-03 17:30:00, Week 1, Day 1, O 2952.29, H 2989.61, L 2946.8, C 2970.02
 strategy notify_timer with tid 0, when 2005-01-04 16:00:00 cheat False
 2, 2005-01-04 17:30:00, Week 1, Day 2, O 2969.78, H 2979.88, L 2961.14, C 2971.12
 strategy notify_timer with tid 0, when 2005-01-05 16:00:00 cheat False
-...` 
+...
 ```
 
 时间已从`15:30`更改为`16:00`以进行计时。没有什么意外。让我们做同样的事情，但参考会话开始。
 
 ```py
-`$ ./scheduled.py --strat when='bt.timer.SESSION_START',offset='datetime.timedelta(minutes=30)'
+$ ./scheduled.py --strat when='bt.timer.SESSION_START',offset='datetime.timedelta(minutes=30)'
 
 strategy notify_timer with tid 0, when 2005-01-03 09:30:00 cheat False
 1, 2005-01-03 17:30:00, Week 1, Day 1, O 2952.29, H 2989.61, L 2946.8, C 2970.02
 strategy notify_timer with tid 0, when 2005-01-04 09:30:00 cheat False
 2, 2005-01-04 17:30:00, Week 1, Day 2, O 2969.78, H 2979.88, L 2961.14, C 2971.12
-...` 
+...
 ```
 
 Et voilá！回调被调用的时间是`09:30`。而会话开始，见上文，是`09:00`。这使得我们能够简单地说，在会话开始后*30 分钟*执行某个动作。
@@ -175,14 +175,14 @@ Et voilá！回调被调用的时间是`09:30`。而会话开始，见上文，�
 让我们添加一个重复：
 
 ```py
-`$ ./scheduled.py --strat when='bt.timer.SESSION_START',offset='datetime.timedelta(minutes=30)',repeat='datetime.timedelta(minutes=30)'
+$ ./scheduled.py --strat when='bt.timer.SESSION_START',offset='datetime.timedelta(minutes=30)',repeat='datetime.timedelta(minutes=30)'
 
 strategy notify_timer with tid 0, when 2005-01-03 09:30:00 cheat False
 1, 2005-01-03 17:30:00, Week 1, Day 1, O 2952.29, H 2989.61, L 2946.8, C 2970.02
 strategy notify_timer with tid 0, when 2005-01-04 09:30:00 cheat False
 2, 2005-01-04 17:30:00, Week 1, Day 2, O 2969.78, H 2979.88, L 2961.14, C 2971.12
 strategy notify_timer with tid 0, when 2005-01-05 09:30:00 cheat False
-...` 
+...
 ```
 
 **没有重复**。原因是价格的分辨率是每日的。计时器像在先前的例子中那样在`09:30`第 1 次被调用。但当系统获取下一批价格时，它们发生在下一天。显然，计时器只能被调用一次。需要更低的分辨率。
@@ -190,7 +190,7 @@ strategy notify_timer with tid 0, when 2005-01-05 09:30:00 cheat False
 但在转到较低分辨率之前，让我们通过在会话结束前调用计时器来欺骗一下。
 
 ```py
-`$ ./scheduled.py --strat when='bt.timer.SESSION_START',cheat=True
+$ ./scheduled.py --strat when='bt.timer.SESSION_START',cheat=True
 
 strategy notify_timer with tid 1, when 2005-01-03 09:00:00 cheat True
 -- 2005-01-03 Create buy order
@@ -202,7 +202,7 @@ strategy notify_timer with tid 0, when 2005-01-04 09:00:00 cheat False
 2, 2005-01-04 17:30:00, Week 1, Day 2, O 2969.78, H 2979.88, L 2961.14, C 2971.12
 strategy notify_timer with tid 1, when 2005-01-05 09:00:00 cheat True
 strategy notify_timer with tid 0, when 2005-01-05 09:00:00 cheat False
-...` 
+...
 ```
 
 策略添加了一个带有`cheat=True`的第 2 个计时器。这是第二个添加的，因此将收到第二个*tid*（计时器 id），即`1`（请在上面的示例中查看分配的*tid*为`0`）
@@ -218,7 +218,7 @@ strategy notify_timer with tid 0, when 2005-01-05 09:00:00 cheat False
 相同，但经纪人处于`coo=True`模式
 
 ```py
-`$ ./scheduled.py --strat when='bt.timer.SESSION_START',cheat=True --broker coo=True
+$ ./scheduled.py --strat when='bt.timer.SESSION_START',cheat=True --broker coo=True
 
 strategy notify_timer with tid 1, when 2005-01-03 09:00:00 cheat True
 -- 2005-01-03 Create buy order
@@ -230,7 +230,7 @@ strategy notify_timer with tid 0, when 2005-01-04 09:00:00 cheat False
 2, 2005-01-04 17:30:00, Week 1, Day 2, O 2969.78, H 2979.88, L 2961.14, C 2971.12
 strategy notify_timer with tid 1, when 2005-01-05 09:00:00 cheat True
 strategy notify_timer with tid 0, when 2005-01-05 09:00:00 cheat False
-...` 
+...
 ```
 
 有些事情已经改变了。
@@ -246,7 +246,7 @@ strategy notify_timer with tid 0, when 2005-01-05 09:00:00 cheat False
 示例`scheduled-min.py`默认以*backtrader*分发的标准 5 分钟柱形图运行。策略的参数被扩展以包括`monthdays`和*carry*选项
 
 ```py
-`class St(bt.Strategy):
+class St(bt.Strategy):
     params = dict(
         when=bt.timer.SESSION_START,
         timer=True,
@@ -257,7 +257,7 @@ strategy notify_timer with tid 0, when 2005-01-05 09:00:00 cheat False
         weekcarry=False,
         monthdays=[],
         monthcarry=True,
-    )` 
+    )
 ```
 
 数据具有相同的会话时间：
@@ -269,7 +269,7 @@ strategy notify_timer with tid 0, when 2005-01-05 09:00:00 cheat False
 让我们做一些实验。首先是单个计时器。
 
 ```py
-`$ ./scheduled-min.py --strat when='datetime.time(15, 30)'
+$ ./scheduled-min.py --strat when='datetime.time(15, 30)'
 
 1, 2006-01-02 09:05:00, Week 1, Day 1, O 3578.73, H 3587.88, L 3578.73, C 3582.99
 2, 2006-01-02 09:10:00, Week 1, Day 1, O 3583.01, H 3588.4, L 3583.01, C 3588.03
@@ -281,7 +281,7 @@ strategy notify_timer with tid 0, when 2006-01-02 15:30:00 cheat False
 179, 2006-01-03 15:25:00, Week 1, Day 2, O 3634.72, H 3635.0, L 3634.06, C 3634.87
 strategy notify_timer with tid 0, when 2006-01-03 15:30:00 cheat False
 180, 2006-01-03 15:30:00, Week 1, Day 2, O 3634.81, H 3634.89, L 3634.04, C 3634.23
-...` 
+...
 ```
 
 计时器按要求在`15:30`启动。日志显示它在前两天的第 1 次中如何做到这一点。
@@ -289,7 +289,7 @@ strategy notify_timer with tid 0, when 2006-01-03 15:30:00 cheat False
 将`15 分钟`的*重复*加入混合中
 
 ```py
-`$ ./scheduled-min.py --strat when='datetime.time(15, 30)',repeat='datetime.timedelta(minutes=15)'
+$ ./scheduled-min.py --strat when='datetime.time(15, 30)',repeat='datetime.timedelta(minutes=15)'
 
 ...
 74, 2006-01-02 15:10:00, Week 1, Day 1, O 3596.12, H 3596.63, L 3595.92, C 3596.63
@@ -323,7 +323,7 @@ strategy notify_timer with tid 0, when 2006-01-02 17:30:00 cheat False
 179, 2006-01-03 15:25:00, Week 1, Day 2, O 3634.72, H 3635.0, L 3634.06, C 3634.87
 strategy notify_timer with tid 0, when 2006-01-03 15:30:00 cheat False
 180, 2006-01-03 15:30:00, Week 1, Day 2, O 3634.81, H 3634.89, L 3634.04, C 3634.23
-...` 
+...
 ```
 
 如预期的那样，第 1 次调用在`15:30`触发，然后每 15 分钟重复一次，直到会话结束于`17:30`。当新会话开始时，计时器再次被重置为`15:30`。
@@ -331,7 +331,7 @@ strategy notify_timer with tid 0, when 2006-01-03 15:30:00 cheat False
 现在在会话开始前作弊
 
 ```py
-`$ ./scheduled-min.py --strat when='bt.timer.SESSION_START',cheat=True
+$ ./scheduled-min.py --strat when='bt.timer.SESSION_START',cheat=True
 
 strategy notify_timer with tid 1, when 2006-01-02 09:00:00 cheat True
 -- 2006-01-02 09:05:00 Create buy order
@@ -339,13 +339,13 @@ strategy notify_timer with tid 0, when 2006-01-02 09:00:00 cheat False
 1, 2006-01-02 09:05:00, Week 1, Day 1, O 3578.73, H 3587.88, L 3578.73, C 3582.99
 -- 2006-01-02 09:10:00 Buy Exec @ 3583.01
 2, 2006-01-02 09:10:00, Week 1, Day 1, O 3583.01, H 3588.4, L 3583.01, C 3588.03
-...` 
+...
 ```
 
 订单创建于`09:05:00`，执行于`09:10:00`，因为经纪人不处于*开盘欺骗*模式。让我们设置它...
 
 ```py
-`$ ./scheduled-min.py --strat when='bt.timer.SESSION_START',cheat=True --broker coo=True
+$ ./scheduled-min.py --strat when='bt.timer.SESSION_START',cheat=True --broker coo=True
 
 strategy notify_timer with tid 1, when 2006-01-02 09:00:00 cheat True
 -- 2006-01-02 09:05:00 Create buy order
@@ -353,7 +353,7 @@ strategy notify_timer with tid 0, when 2006-01-02 09:00:00 cheat False
 -- 2006-01-02 09:05:00 Buy Exec @ 3578.73
 1, 2006-01-02 09:05:00, Week 1, Day 1, O 3578.73, H 3587.88, L 3578.73, C 3582.99
 2, 2006-01-02 09:10:00, Week 1, Day 1, O 3583.01, H 3588.4, L 3583.01, C 3588.03
-...` 
+...
 ```
 
 下达时间和执行时间为`09:05:00`，执行价格为`09:05:00`的开盘价。
@@ -408,13 +408,13 @@ strategy notify_timer with tid 0, when 2006-01-02 09:00:00 cheat False
 ## `add_timer` 的参数
 
 ```py
-`* `when`: can be
+* `when`: can be
 
   * `datetime.time` instance (see below `tzdata`)
 
   * `bt.timer.SESSION_START` to reference a session start
 
-  * `bt.timer.SESSION_END` to reference a session end` 
+  * `bt.timer.SESSION_END` to reference a session end
 ```
 
 +   `offset` 必须是 `datetime.timedelta` 实例
@@ -468,7 +468,7 @@ strategy notify_timer with tid 0, when 2006-01-02 09:00:00 cheat False
 ## 示例用法 `scheduled.py`
 
 ```py
-`$ ./scheduled.py --help
+$ ./scheduled.py --help
 usage: scheduled.py [-h] [--data0 DATA0] [--fromdate FROMDATE]
                     [--todate TODATE] [--cerebro kwargs] [--broker kwargs]
                     [--sizer kwargs] [--strat kwargs] [--plot [kwargs]]
@@ -485,13 +485,13 @@ optional arguments:
   --broker kwargs      kwargs in key=value format (default: )
   --sizer kwargs       kwargs in key=value format (default: )
   --strat kwargs       kwargs in key=value format (default: )
-  --plot [kwargs]      kwargs in key=value format (default: )` 
+  --plot [kwargs]      kwargs in key=value format (default: )
 ```
 
 ## 示例用法 `scheduled-min.py`
 
 ```py
-`$ ./scheduled-min.py --help
+$ ./scheduled-min.py --help
 usage: scheduled-min.py [-h] [--data0 DATA0] [--fromdate FROMDATE]
                         [--todate TODATE] [--cerebro kwargs] [--broker kwargs]
                         [--sizer kwargs] [--strat kwargs] [--plot [kwargs]]
@@ -507,13 +507,13 @@ optional arguments:
   --broker kwargs      kwargs in key=value format (default: )
   --sizer kwargs       kwargs in key=value format (default: )
   --strat kwargs       kwargs in key=value format (default: )
-  --plot [kwargs]      kwargs in key=value format (default: )` 
+  --plot [kwargs]      kwargs in key=value format (default: )
 ```
 
 ## 示例源 `scheduled.py`
 
 ```py
-`from __future__ import (absolute_import, division, print_function,
+from __future__ import (absolute_import, division, print_function,
                         unicode_literals)
 
 import argparse
@@ -652,13 +652,13 @@ def parse_args(pargs=None):
     return parser.parse_args(pargs)
 
 if __name__ == '__main__':
-    runstrat()` 
+    runstrat()
 ```
 
 ## 示例源 `scheduled-min.py`
 
 ```py
-`from __future__ import (absolute_import, division, print_function,
+from __future__ import (absolute_import, division, print_function,
                         unicode_literals)
 
 import argparse
@@ -809,5 +809,5 @@ def parse_args(pargs=None):
     return parser.parse_args(pargs)
 
 if __name__ == '__main__':
-    runstrat()` 
+    runstrat()
 ```

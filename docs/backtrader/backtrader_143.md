@@ -13,7 +13,7 @@
 一个非常快速的例子：
 
 ```py
-`import backtrader as bt
+import backtrader as bt
 
 class MyStrategy(bt.Strategy):
 
@@ -28,7 +28,7 @@ class MyStrategy(bt.Strategy):
 ...
 ...
 cerebro.addstrategy(MyStrategy)
-cerebro.run()` 
+cerebro.run()
 ```
 
 很快就会出现的一个问题是：
@@ -56,7 +56,7 @@ cerebro.run()`
 *运算符重载*才是真正的方法。让我们分解*高低平均值*的计算：
 
 ```py
-`self.hi_lo_avg = (self.data.high + self.data.low) / 2.0` 
+self.hi_lo_avg = (self.data.high + self.data.low) / 2.0
 ```
 
 组件：
@@ -76,13 +76,13 @@ cerebro.run()`
 为什么下面的操作返回一个*lines*对象。让我们开始：
 
 ```py
-`temp = self.data.high - self.data.low` 
+temp = self.data.high - self.data.low
 ```
 
 然后将临时对象除以`2.0`并赋值给成员变量：
 
 ```py
-`self.hi_lo_avg = temp / 2.0` 
+self.hi_lo_avg = temp / 2.0
 ```
 
 这再次返回另一个*lines*对象。因为运算符重载不仅适用于直接在*lines*对象之间执行的操作，还适用于例如这种除法的算术运算。
@@ -96,7 +96,7 @@ cerebro.run()`
 因为运算符重载不仅限于*算术*，让我们举个例子，将一个指标添加进来。第一次尝试可能是：
 
 ```py
-`import backtrader as bt
+import backtrader as bt
 
 class MyStrategy(bt.Strategy):
 
@@ -111,13 +111,13 @@ class MyStrategy(bt.Strategy):
 ...
 ...
 cerebro.addstrategy(MyStrategy)
-cerebro.run()` 
+cerebro.run()
 ```
 
 但在这种情况下，只是从`another_value`改为了`self.sma[0]`。让我们改进一下：
 
 ```py
-`import backtrader as bt
+import backtrader as bt
 
 class MyStrategy(bt.Strategy):
 
@@ -132,7 +132,7 @@ class MyStrategy(bt.Strategy):
 ...
 ...
 cerebro.addstrategy(MyStrategy)
-cerebro.run()` 
+cerebro.run()
 ```
 
 为了好处。运算符重载在`next`中也是有效的，用户可以直接删除`[0]`并直接比较对象。
@@ -140,7 +140,7 @@ cerebro.run()`
 如果所有这些都是实际可能的，那实际上似乎有点过度。但好消息是还有更多。看看这个例子：
 
 ```py
-`import backtrader as bt
+import backtrader as bt
 
 class MyStrategy(bt.Strategy):
 
@@ -156,7 +156,7 @@ class MyStrategy(bt.Strategy):
 ...
 ...
 cerebro.addstrategy(MyStrategy)
-cerebro.run()` 
+cerebro.run()
 ```
 
 我们已经做了两件事：

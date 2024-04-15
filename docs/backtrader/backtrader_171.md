@@ -11,10 +11,10 @@
 基础知识：
 
 ```py
-`from backtrader.feeds import GenericCSVData
+from backtrader.feeds import GenericCSVData
 
 class GenericCSV_PE(GenericCSVData):
-    lines = ('pe',)  # Add 'pe' to already defined lines` 
+    lines = ('pe',)  # Add 'pe' to already defined lines
 ```
 
 完成。`backtrader`在后台定义了最常见的线：OHLC。
@@ -22,7 +22,7 @@ class GenericCSV_PE(GenericCSVData):
 如果我们深入研究`GenericCSV_PE`的最终方面，继承加上新定义的线的总和将产生以下线：
 
 ```py
-`('close', 'open', 'high', 'low', 'volume', 'openinterest', 'datetime', 'pe',)` 
+('close', 'open', 'high', 'low', 'volume', 'openinterest', 'datetime', 'pe',)
 ```
 
 这可以随时通过`getlinealiases`方法检查（适用于*DataFeeds*、*Indicators*、*Strategies*和*Observers*）
@@ -44,11 +44,11 @@ class GenericCSV_PE(GenericCSVData):
 这是它的工作原理：
 
 ```py
-`from backtrader.feeds import GenericCSVData
+from backtrader.feeds import GenericCSVData
 
 class GenericCSV_BidAsk(GenericCSVData):
     linesoverride = True
-    lines = ('bid', 'ask', 'datetime')  # Replace hierarchy with this one` 
+    lines = ('bid', 'ask', 'datetime')  # Replace hierarchy with this one
 ```
 
 完成。
@@ -58,7 +58,7 @@ class GenericCSV_BidAsk(GenericCSVData):
 原始的`GenericCSVData`类解析一个*csv*文件，并需要提示哪里是对应于*lines*的*fields*。原始定义如下：
 
 ```py
-`class GenericCSVData(feed.CSVDataBase):
+class GenericCSVData(feed.CSVDataBase):
     params = (
         ('nullvalue', float('NaN')),
         ('dtformat', '%Y-%m-%d %H:%M:%S'),
@@ -72,19 +72,19 @@ class GenericCSV_BidAsk(GenericCSVData):
         ('close', 4),
         ('volume', 5),
         ('openinterest', 6),
-    )` 
+    )
 ```
 
 新的*重新定义层次结构类*可以轻松完成：
 
 ```py
-`from backtrader.feeds import GenericCSVData
+from backtrader.feeds import GenericCSVData
 
 class GenericCSV_BidAsk(GenericCSVData):
     linesoverride = True
     lines = ('bid', 'ask', 'datetime')  # Replace hierarchy with this one
 
-    params = (('bid', 1), ('ask', 2))` 
+    params = (('bid', 1), ('ask', 2))
 ```
 
 表明*Bid*价格是 csv 流中的字段#1，*Ask*价格是字段#2。我们保留了基类中的*datetime* #0 定义不变。
@@ -92,7 +92,7 @@ class GenericCSV_BidAsk(GenericCSVData):
 为此制作一个小数据文件有所帮助：
 
 ```py
-`TIMESTAMP,BID,ASK
+TIMESTAMP,BID,ASK
 02/03/2010 16:53:50,0.5346,0.5347
 02/03/2010 16:53:51,0.5343,0.5347
 02/03/2010 16:53:52,0.5543,0.5545
@@ -102,13 +102,13 @@ class GenericCSV_BidAsk(GenericCSVData):
 02/03/2010 16:53:56,0.5824,0.5826
 02/03/2010 16:53:57,0.5371,0.5374
 02/03/2010 16:53:58,0.5793,0.5794
-02/03/2010 16:53:59,0.5684,0.5688` 
+02/03/2010 16:53:59,0.5684,0.5688
 ```
 
 将一个小测试脚本添加到等式中（对于那些直接转到源代码中的示例的人来说，增加一些内容）（见最后的完整代码）：
 
 ```py
-`$ ./bidask.py` 
+$ ./bidask.py
 ```
 
 输出说明一切：
@@ -123,7 +123,7 @@ class GenericCSV_BidAsk(GenericCSVData):
  7: 2010-02-03T16:53:56 - Bid 0.5824 - 0.5826 Ask
  8: 2010-02-03T16:53:57 - Bid 0.5371 - 0.5374 Ask
  9: 2010-02-03T16:53:58 - Bid 0.5793 - 0.5794 Ask
-10: 2010-02-03T16:53:59 - Bid 0.5684 - 0.5688 Ask` 
+10: 2010-02-03T16:53:59 - Bid 0.5684 - 0.5688 Ask
 ```
 
 瞧！*Bid*/*Ask*价格已经被正确读取、解析和解释，并且策略已能通过*self.data*访问数据源中的*.bid*和*.ask*行。
@@ -147,7 +147,7 @@ class GenericCSV_BidAsk(GenericCSVData):
 测试脚本已经支持添加*SMA*。让我们执行：
 
 ```py
-`$ ./bidask.py --sma --period=3` 
+$ ./bidask.py --sma --period=3
 ```
 
 输出：
@@ -160,7 +160,7 @@ class GenericCSV_BidAsk(GenericCSVData):
  7: 2010-02-03T16:53:56 - Bid 0.5824 - 0.5826 Ask - SMA: 0.5510
  8: 2010-02-03T16:53:57 - Bid 0.5371 - 0.5374 Ask - SMA: 0.5552
  9: 2010-02-03T16:53:58 - Bid 0.5793 - 0.5794 Ask - SMA: 0.5663
-10: 2010-02-03T16:53:59 - Bid 0.5684 - 0.5688 Ask - SMA: 0.5616` 
+10: 2010-02-03T16:53:59 - Bid 0.5684 - 0.5688 Ask - SMA: 0.5616
 ```
 
 注意
@@ -172,7 +172,7 @@ class GenericCSV_BidAsk(GenericCSVData):
 测试脚本用法：
 
 ```py
-`$ ./bidask.py --help
+$ ./bidask.py --help
 usage: bidask.py [-h] [--data DATA] [--dtformat DTFORMAT] [--sma]
                  [--period PERIOD]
 
@@ -187,13 +187,13 @@ optional arguments:
                         %H:%M:%S)
   --sma, -s             Add an SMA to the mix (default: False)
   --period PERIOD, -p PERIOD
-                        Period for the sma (default: 5)` 
+                        Period for the sma (default: 5)
 ```
 
 而测试脚本本身（包含在`backtrader`源代码中）
 
 ```py
-`from __future__ import (absolute_import, division, print_function,
+from __future__ import (absolute_import, division, print_function,
                         unicode_literals)
 
 import argparse
@@ -265,5 +265,5 @@ def runstrategy():
     cerebro.run()
 
 if __name__ == '__main__':
-    runstrategy()` 
+    runstrategy()
 ```

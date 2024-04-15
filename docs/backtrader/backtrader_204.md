@@ -37,7 +37,7 @@
   smoothedbulls = moving_average(bulls, smoothing_period) / pointsize
   smoothedbears = moving_average(bears, smoothing_period) / pointsize
 
-  ash = smoothedbulls - smoothedbears` 
+  ash = smoothedbulls - smoothedbears
 ```
 
 `RSI` / `STOCH` 命名是原始实现者选择的，`pointsize` 也被称为 `pipsize`，反映了其 *外汇* 起源。目前尚不清楚 *平滑平均值* 是否必须与以前的移动平均值相同，一些版本似乎使用已经平均化的价格而不是标准价格。移动平均线是使用 *整数* 选择的。
@@ -57,7 +57,7 @@
 这里是实现
 
 ```py
-`class ASH(bt.Indicator):
+class ASH(bt.Indicator):
     alias = ('AbsoluteStrengthOscilator',)
 
     lines = ('ash', 'bulls', 'bears',)  # output lines
@@ -104,7 +104,7 @@
         # Assign the final values to the output lines
         self.l.bulls = smoothbulls
         self.l.bears = smoothbears
-        self.l.ash = smoothbulls - smoothbears` 
+        self.l.ash = smoothbulls - smoothbears
 ```
 
 这里展示了指标的工作方式

@@ -19,7 +19,7 @@
 *backtrader*在 1.8.10.99 版本中添加了一个功能，可以将不同到期日期的期货数据合并成一个连续的期货：
 
 ```py
-`import backtrader as bt
+import backtrader as bt
 
 cerebro = bt.Cerebro()
 data0 = bt.feeds.MyFeed(dataname='Expiry0')
@@ -29,7 +29,7 @@ dataN = bt.feeds.MyFeed(dataname='ExpiryN')
 
 drollover = cerebro.rolloverdata(data0, data1, ..., dataN, name='MyRoll', **kwargs)
 
-cerebro.run()` 
+cerebro.run()
 ```
 
 注
@@ -39,7 +39,7 @@ cerebro.run()`
 也可以通过直接访问`RollOver`数据源来完成（如果进行了子类化，则会有所帮助）：
 
 ```py
-`import backtrader as bt
+import backtrader as bt
 
 cerebro = bt.Cerebro()
 data0 = bt.feeds.MyFeed(dataname='Expiry0')
@@ -50,7 +50,7 @@ dataN = bt.feeds.MyFeed(dataname='ExpiryN')
 drollover = bt.feeds.RollOver(data0, data1, ..., dataN, dataname='MyRoll', **kwargs)
 cerebro.adddata(drollover)
 
-cerebro.run()` 
+cerebro.run()
 ```
 
 注
@@ -150,7 +150,7 @@ cerebro.run()`
 让我们从纯连接开始，运行示例而不带任何参数。
 
 ```py
-`$ ./rollover.py
+$ ./rollover.py
 
 Len, Name, RollName, Datetime, WeekDay, Open, High, Low, Close, Volume, OpenInterest
 0001, FESX, 199FESXM4, 2013-09-26, Thu, 2829.0, 2843.0, 2829.0, 2843.0, 3.0, 1000.0
@@ -169,7 +169,7 @@ Len, Name, RollName, Datetime, WeekDay, Open, High, Low, Close, Volume, OpenInte
 0367, FESX, 199FESXM5, 2015-03-23, Mon, 3654.0, 3655.0, 3608.0, 3618.0, 802344.0, 3521988.0
 ...
 0426, FESX, 199FESXM5, 2015-06-18, Thu, 3398.0, 3540.0, 3373.0, 3465.0, 1173246.0, 811805.0
-0427, FESX, 199FESXM5, 2015-06-19, Fri, 3443.0, 3499.0, 3440.0, 3488.0, 104096.0, 516792.0` 
+0427, FESX, 199FESXM5, 2015-06-19, Fri, 3443.0, 3499.0, 3440.0, 3488.0, 104096.0, 516792.0
 ```
 
 这使用`cerebro.chaindata`，结果应该很清楚：
@@ -183,7 +183,7 @@ Len, Name, RollName, Datetime, WeekDay, Open, High, Low, Close, Volume, OpenInte
 让我们执行`--rollover`
 
 ```py
-`$ ./rollover.py --rollover --plot
+$ ./rollover.py --rollover --plot
 
 Len, Name, RollName, Datetime, WeekDay, Open, High, Low, Close, Volume, OpenInterest
 0001, FESX, 199FESXM4, 2013-09-26, Thu, 2829.0, 2843.0, 2829.0, 2843.0, 3.0, 1000.0
@@ -202,7 +202,7 @@ Len, Name, RollName, Datetime, WeekDay, Open, High, Low, Close, Volume, OpenInte
 0367, FESX, 199FESXM5, 2015-03-23, Mon, 3654.0, 3655.0, 3608.0, 3618.0, 802344.0, 3521988.0
 ...
 0426, FESX, 199FESXM5, 2015-06-18, Thu, 3398.0, 3540.0, 3373.0, 3465.0, 1173246.0, 811805.0
-0427, FESX, 199FESXM5, 2015-06-19, Fri, 3443.0, 3499.0, 3440.0, 3488.0, 104096.0, 516792.0` 
+0427, FESX, 199FESXM5, 2015-06-19, Fri, 3443.0, 3499.0, 3440.0, 3488.0, 104096.0, 516792.0
 ```
 
 相同的行为。可以清楚地看到合同更改是在 3 月、6 月、9 月、12 月的第 3 个星期五进行的。
@@ -218,7 +218,7 @@ Len, Name, RollName, Datetime, WeekDay, Open, High, Low, Close, Volume, OpenInte
 `checkdate`将在月份的第 3 个星期五到来时（例如，如果*星期一*是银行假日，则可能是*星期二*）进行滚动。
 
 ```py
-`$ ./rollover.py --rollover --checkdate --plot
+$ ./rollover.py --rollover --checkdate --plot
 
 Len, Name, RollName, Datetime, WeekDay, Open, High, Low, Close, Volume, OpenInterest
 0001, FESX, 199FESXM4, 2013-09-26, Thu, 2829.0, 2843.0, 2829.0, 2843.0, 3.0, 1000.0
@@ -237,7 +237,7 @@ Len, Name, RollName, Datetime, WeekDay, Open, High, Low, Close, Volume, OpenInte
 0362, FESX, 199FESXM5, 2015-03-16, Mon, 3594.0, 3641.0, 3588.0, 3629.0, 250445.0, 1056099.0
 ...
 0426, FESX, 199FESXM5, 2015-06-18, Thu, 3398.0, 3540.0, 3373.0, 3465.0, 1173246.0, 811805.0
-0427, FESX, 199FESXM5, 2015-06-19, Fri, 3443.0, 3499.0, 3440.0, 3488.0, 104096.0, 516792.0` 
+0427, FESX, 199FESXM5, 2015-06-19, Fri, 3443.0, 3499.0, 3440.0, 3488.0, 104096.0, 516792.0
 ```
 
 **好多了**。现在滚动发生在*5 天前*。快速查看*Len*指数就可以看到。例如：
@@ -255,7 +255,7 @@ Len, Name, RollName, Datetime, WeekDay, Open, High, Low, Close, Volume, OpenInte
 让我们添加一个`checkcondition`并运行。
 
 ```py
-`$ ./rollover.py --rollover --checkdate --checkcondition --plot
+$ ./rollover.py --rollover --checkdate --checkcondition --plot
 
 Len, Name, RollName, Datetime, WeekDay, Open, High, Low, Close, Volume, OpenInterest
 0001, FESX, 199FESXM4, 2013-09-26, Thu, 2829.0, 2843.0, 2829.0, 2843.0, 3.0, 1000.0
@@ -274,7 +274,7 @@ Len, Name, RollName, Datetime, WeekDay, Open, High, Low, Close, Volume, OpenInte
 0366, FESX, 199FESXM5, 2015-03-20, Fri, 3607.0, 3664.0, 3595.0, 3646.0, 1182235.0, 3407004.0
 ...
 0426, FESX, 199FESXM5, 2015-06-18, Thu, 3398.0, 3540.0, 3373.0, 3465.0, 1173246.0, 811805.0
-0427, FESX, 199FESXM5, 2015-06-19, Fri, 3443.0, 3499.0, 3440.0, 3488.0, 104096.0, 516792.0` 
+0427, FESX, 199FESXM5, 2015-06-19, Fri, 3443.0, 3499.0, 3440.0, 3488.0, 104096.0, 516792.0
 ```
 
 *更好了**。我们已将切换日期移至众所周知的到期月份第 3 个星期五之前的*星期四*
@@ -294,7 +294,7 @@ Len, Name, RollName, Datetime, WeekDay, Open, High, Low, Close, Volume, OpenInte
 ## 使用示例
 
 ```py
-`$ ./rollover.py --help
+$ ./rollover.py --help
 usage: rollover.py [-h] [--no-cerebro] [--rollover] [--checkdate]
                    [--checkcondition] [--plot [kwargs]]
 
@@ -309,13 +309,13 @@ optional arguments:
   --plot [kwargs], -p [kwargs]
                         Plot the read data applying any kwargs passed For
                         example: --plot style="candle" (to plot candles)
-                        (default: None)` 
+                        (default: None)
 ```
 
 ## 示例代码
 
 ```py
-`from __future__ import (absolute_import, division, print_function,
+from __future__ import (absolute_import, division, print_function,
                         unicode_literals)
 
 import argparse
@@ -450,5 +450,5 @@ def parse_args(pargs=None):
     return parser.parse_args()
 
 if __name__ == '__main__':
-    runstrat()` 
+    runstrat()
 ```

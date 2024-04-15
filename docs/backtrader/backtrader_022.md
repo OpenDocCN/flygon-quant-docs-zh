@@ -109,7 +109,7 @@
 有一个单一的方法可以做到这一点，但它支持几个选项（也可以在实例化时指定），以决定如何运行：
 
 ```py
-`result = cerebro.run(**kwargs)` 
+result = cerebro.run(**kwargs)
 ```
 
 请参阅下面的参考文献，了解可用的参数。
@@ -131,7 +131,7 @@
 `cerebro`在回测期间返回所创建的策略实例。这允许分析它们的操作，因为可以访问策略中的所有元素：
 
 ```py
-`result = cerebro.run(**kwargs)` 
+result = cerebro.run(**kwargs)
 ```
 
 由`run`返回的`result`的格式取决于是否使用了*优化*（使用`optstrategy`添加了一个*策略*）：
@@ -155,7 +155,7 @@
 如果安装了`matplotlib`，则可以绘制策略图。通常的模式是：
 
 ```py
-`cerebro.plot()` 
+cerebro.plot()
 ```
 
 请参阅下文的参考文献和绘图部分
@@ -262,7 +262,7 @@
 可能的值：
 
 ```py
-`* `True` or `1`: all “lines” objects reduce memory usage to the
+* `True` or `1`: all “lines” objects reduce memory usage to the
   automatically calculated minimum period.
 
   If a Simple Moving Average has a period of 30, the underlying data
@@ -297,7 +297,7 @@
 
   * This allows to keep `plotting` and `preloading` active.
 
-  * `runonce` will be deactivated` 
+  * `runonce` will be deactivated
 ```
 
 +   `objcache`（默认：`False`）
@@ -305,8 +305,8 @@
 实验选项，用于实现线条对象的缓存并减少它们的数量。从 UltimateOscillator 示例：
 
 ```py
-`bp = self.data.close - TrueLow(self.data)
-tr = TrueRange(self.data)  # -> creates another TrueLow(self.data)` 
+bp = self.data.close - TrueLow(self.data)
+tr = TrueRange(self.data)  # -> creates another TrueLow(self.data)
 ```
 
 如果这是`True`，则`TrueRange`内的第 2 个`TrueLow(self.data)`将与`bp`计算中的签名匹配。它将被重用。
@@ -332,9 +332,9 @@ tr = TrueRange(self.data)  # -> creates another TrueLow(self.data)`
 如果为`True`，则优化结果将不是完整的`Strategy`对象（以及所有*datas*、*indicators*、*observers*...），而是具有以下属性的对象（与`Strategy`中相同）：
 
 ```py
-`* `params` (or `p`) the strategy had for the execution
+* `params` (or `p`) the strategy had for the execution
 
-* `analyzers` the strategy has executed` 
+* `analyzers` the strategy has executed
 ```
 
 在大多数情况下，只有*分析器*和与之相关的*参数*是评估策略性能所需的内容。如果需要对生成的值（例如*指标*）进行详细分析，则关闭此选项。
@@ -352,7 +352,7 @@ tr = TrueRange(self.data)  # -> creates another TrueLow(self.data)`
 为策略添加全局时区。参数`tz`可以是
 
 ```py
-`* `None`: in this case the datetime displayed by strategies will be
+* `None`: in this case the datetime displayed by strategies will be
   in UTC, which has been always the standard behavior
 
 * `pytz` instance. It will be used as such to convert UTC times to
@@ -362,7 +362,7 @@ tr = TrueRange(self.data)  # -> creates another TrueLow(self.data)`
 
 * `integer`. Use, for the strategy, the same timezone as the
   corresponding `data` in the `self.datas` iterable (`0` would
-  use the timezone from `data0`)` 
+  use the timezone from `data0`)
 ```
 
 +   `cheat_on_open`（默认：`False`）

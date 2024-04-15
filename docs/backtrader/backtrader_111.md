@@ -11,14 +11,14 @@
 在学习笔记中策略的`__init__`方法中，我们发现以下内容
 
 ```py
-`def __init__(self):
+def __init__(self):
     ...
     self.ma1 = bt.indicators.SMA(self.datas[0],
                                    period=self.p.period
                                   )
     self.ma2 = bt.indicators.SMA(self.datas[1],
                                    period=self.p.period
-                                  )` 
+                                  )
 ```
 
 这里没有什么好争论的（风格是非常个人的事情，我不会触及那方面）
@@ -26,19 +26,19 @@
 在策略的`next`方法中，以下是买入和卖出的逻辑决策。
 
 ```py
-`...
+...
 # Not yet ... we MIGHT BUY if ...
 if (self.ma1[0]-self.ma1[-1])/self.ma1[-1]>(self.ma2[0]-self.ma2[-1])/self.ma2[-1]:
-...` 
+...
 ```
 
 和
 
 ```py
-`...
+...
 # Already in the market ... we might sell
 if (self.ma1[0]-self.ma1[-1])/self.ma1[-1]<=(self.ma2[0]-self.ma2[-1])/self.ma2[-1]:
-...` 
+...
 ```
 
 这两个逻辑块是可以做得更好的，这样也会增加可读性、可维护性和调整性（如果需要的话）
@@ -48,7 +48,7 @@ if (self.ma1[0]-self.ma1[-1])/self.ma1[-1]<=(self.ma2[0]-self.ma2[-1])/self.ma2[
 让我们调整`__init__`
 
 ```py
-`def __init__(self):
+def __init__(self):
     ...
 
     # Let's create the moving averages as before
@@ -60,13 +60,13 @@ if (self.ma1[0]-self.ma1[-1])/self.ma1[-1]<=(self.ma2[0]-self.ma2[-1])/self.ma2[
     ma2_pct = ma2 / ma2(-1) - 1.0  # The ma2 percentage part
 
     self.buy_sig = ma1_pct > ma2_pct  # buy signal
-    self.sell_sig = ma1_pct <= ma2_pct  # sell signal` 
+    self.sell_sig = ma1_pct <= ma2_pct  # sell signal
 ```
 
 现在我们可以将其带到`next`方法并执行以下操作：
 
 ```py
-`def next(self):
+def next(self):
     ...
     # Not yet ... we MIGHT BUY if ...
     if self.buy_sig:
@@ -75,7 +75,7 @@ if (self.ma1[0]-self.ma1[-1])/self.ma1[-1]<=(self.ma2[0]-self.ma2[-1])/self.ma2[
     ...
     # Already in the market ... we might sell
     if self.sell_sig:
-    ...` 
+    ...
 ```
 
 注意，我们甚至不必使用`self.buy_sig[0]`，因为通过`if self.buy_sig`进行的布尔测试已经被*backtrader*机制翻译成了对`[0]`的检查
@@ -89,7 +89,7 @@ if (self.ma1[0]-self.ma1[-1])/self.ma1[-1]<=(self.ma2[0]-self.ma2[-1])/self.ma2[
 正如名称所示，它已经计算了一定周期内的百分比变化。现在`__init__`中的代码看起来是这样的
 
 ```py
-`def __init__(self):
+def __init__(self):
     ...
 
     # Let's create the moving averages as before
@@ -100,7 +100,7 @@ if (self.ma1[0]-self.ma1[-1])/self.ma1[-1]<=(self.ma2[0]-self.ma2[-1])/self.ma2[
     ma2_pct = bt.ind.PctChange(ma2, period=1)  # The ma2 percentage part
 
     self.buy_sig = ma1_pct > ma2_pct  # buy signal
-    self.sell_sig = ma1_pct <= ma2_pct  # sell signal` 
+    self.sell_sig = ma1_pct <= ma2_pct  # sell signal
 ```
 
 在这种情况下，并没有太大的区别，但如果计算更大更复杂的话，这绝对可以为你省下很多麻烦。

@@ -15,15 +15,15 @@
 数据重放正如其名称所示：
 
 ```py
-`Replay a daily bar using the 1 minute data` 
+Replay a daily bar using the 1 minute data
 ```
 
 当然，这并不是市场实际发展的方式，但比孤立地查看每日完整和关闭的柱状图要好得多：
 
 ```py
-`If the strategy operates in realtime during the formation of the daily bar,
+If the strategy operates in realtime during the formation of the daily bar,
 the approximation of the formation of the bar gives a chance to replicate the
-actual behavior of the strategy under real conditions` 
+actual behavior of the strategy under real conditions
 ```
 
 将*数据重放*付诸实践遵循`backtrader`的常规使用模式
@@ -75,7 +75,7 @@ actual behavior of the strategy under real conditions`
     cerebro.adddata(data_replayed)
 
     # Run over everything
-    cerebro.run(preload=False)` 
+    cerebro.run(preload=False)
 ```
 
 ## 示例 - 将每日重放为每周
@@ -83,13 +83,13 @@ actual behavior of the strategy under real conditions`
 脚本的调用：
 
 ```py
-`$ ./data-replay.py --timeframe weekly --compression 1` 
+$ ./data-replay.py --timeframe weekly --compression 1
 ```
 
 不幸的是，图表无法向我们展示背景中发生的真实情况，因此让我们看看控制台输出：
 
 ```py
-`prenext len 1 - counter 1
+prenext len 1 - counter 1
 prenext len 1 - counter 2
 prenext len 1 - counter 3
 prenext len 1 - counter 4
@@ -116,7 +116,7 @@ prenext len 9 - counter 45
 ---next len 51 - counter 252
 ---next len 52 - counter 253
 ---next len 52 - counter 254
----next len 52 - counter 255` 
+---next len 52 - counter 255
 ```
 
 正如我们所看到的，内部的`self.counter`变量正在跟踪每次调用`prenext`或`next`。前者在应用简单移动平均产生值之前调用。后者在简单移动平均产生值时调用。
@@ -142,7 +142,7 @@ prenext len 9 - counter 45
 控制台：
 
 ```py
-`$ ./data-replay.py --timeframe daily --compression 2
+$ ./data-replay.py --timeframe daily --compression 2
 prenext len 1 - counter 1
 prenext len 1 - counter 2
 prenext len 2 - counter 3
@@ -157,7 +157,7 @@ prenext len 4 - counter 7
 ---next len 126 - counter 252
 ---next len 127 - counter 253
 ---next len 127 - counter 254
----next len 128 - counter 255` 
+---next len 128 - counter 255
 ```
 
 这次我们得到了预期的一半柱状图，因为请求的压缩因子为 2。
@@ -173,7 +173,7 @@ prenext len 4 - counter 7
 测试脚本。
 
 ```py
-`from __future__ import (absolute_import, division, print_function,
+from __future__ import (absolute_import, division, print_function,
                         unicode_literals)
 
 import argparse
@@ -260,5 +260,5 @@ def parse_args():
     return parser.parse_args()
 
 if __name__ == '__main__':
-    runstrat()` 
+    runstrat()
 ```

@@ -19,11 +19,11 @@
 这可能看起来很麻烦，因为对于每个时间框架，都需要定义必须使用的其他时间框架。 查看公式会引起另一个问题：
 
 ```py
-`Pivot Point (P) = (High + Low + Close)/3
+Pivot Point (P) = (High + Low + Close)/3
 Support 1 (S1) = (P x 2) - High
 Support 2 (S2) = P  -  (High  -  Low)
 Resistance 1 (R1) = (P x 2) - Low
-Resistance 2 (R2) = P + (High  -  Low)` 
+Resistance 2 (R2) = P + (High  -  Low)
 ```
 
 即使文本充满了对 *先前期间* 和 *过去 …* 的引用，但公式似乎是参考当前时刻。 让我们遵循 *文本* 的建议，在我们首次尝试 PivotPoint 时使用 *previous*。 但首先，让我们通过这样做来解决不同时间框架的问题：
@@ -33,17 +33,17 @@ Resistance 2 (R2) = P + (High  -  Low)`
 尽管这可能看起来令人困惑，但必须考虑到 *指标* 必须尽可能愚蠢，并由实际公式组成。 问题将按以下方式解决：
 
 ```py
-`data = btfeeds.ADataFeed(..., timeframe=bt.TimeFrame.Days)
+data = btfeeds.ADataFeed(..., timeframe=bt.TimeFrame.Days)
 cerebro.adddata(data)
-cerebro.resampledata(data, timeframe=bt.TimeFrame.Months)` 
+cerebro.resampledata(data, timeframe=bt.TimeFrame.Months)
 ```
 
 而后在 *策略* 中：
 
 ```py
-`class MyStrategy(bt.Strategy):
+class MyStrategy(bt.Strategy):
     def __init__(self):
-        self.pp = PivotPoint(self.data1)  # the resampled data` 
+        self.pp = PivotPoint(self.data1)  # the resampled data
 ```
 
 现在清楚了。 该系统将具有数据，再加上额外的输入重采样为所需的时间框架。 `PivotPoint` 指标将使用已重采样的数据工作，这些数据已处于所需的 *每月* 时间框架中，以供原始数据时间框架使用，即 *每日*。
@@ -51,7 +51,7 @@ cerebro.resampledata(data, timeframe=bt.TimeFrame.Months)`
 指标可以被开发出来。 让我们从跟随文本指示开始，而不是公式，回望 1 期。
 
 ```py
-`class PivotPoint1(bt.Indicator):
+class PivotPoint1(bt.Indicator):
     lines = ('p', 's1', 's2', 'r1', 'r2',)
 
     def __init__(self):
@@ -67,7 +67,7 @@ cerebro.resampledata(data, timeframe=bt.TimeFrame.Months)`
 
         hilo = h - l
         self.lines.s2 = p - hilo  # p - (high - low)
-        self.lines.r2 = p + hilo  # p + (high - low)` 
+        self.lines.r2 = p + hilo  # p + (high - low)
 ```
 
 该策略将查看参数 `usepp1` 来使用此 `PivotPoint1`
@@ -77,7 +77,7 @@ cerebro.resampledata(data, timeframe=bt.TimeFrame.Months)`
         if self.p.usepp1:
             self.pp = PivotPoint1(self.data1)
         else:
-            self.pp = PivotPoint(self.data1)` 
+            self.pp = PivotPoint(self.data1)
 ```
 
 输出由一个简单的 `next` 方法控制
@@ -91,21 +91,21 @@ cerebro.resampledata(data, timeframe=bt.TimeFrame.Months)`
              self.data.datetime.date(0).isoformat(),
              '%.2f' % self.pp[0]])
 
-        print(txt)` 
+        print(txt)
 ```
 
 让我们执行：
 
 ```py
-`./ppsample --usepp1` 
+./ppsample --usepp1
 ```
 
 输出如下：
 
 ```py
-`0041,0041,0002,2005-02-28,2962.79
+0041,0041,0002,2005-02-28,2962.79
 0042,0042,0002,2005-03-01,2962.79
-...` 
+...
 ```
 
 立即清楚的是：*索引 41 已经属于第 2 个月*。 这意味着我们已经跳过了 1 个月的指标计算。 现在清楚了为什么 *StockCharts* 中的文本总是提到计算是在前一个 *月* 进行的，但公式似乎是参考当前时刻。
@@ -117,7 +117,7 @@ cerebro.resampledata(data, timeframe=bt.TimeFrame.Months)`
 这就是为什么 `next` 方法看的是索引 `[0]`。 所有这些都有一个非常简单的解决方法，那就是按照 *StockCharts* 记录的方式编写公式。
 
 ```py
-`class PivotPoint(bt.Indicator):
+class PivotPoint(bt.Indicator):
     lines = ('p', 's1', 's2', 'r1', 'r2',)
     plotinfo = dict(subplot=False)
 
@@ -134,33 +134,33 @@ cerebro.resampledata(data, timeframe=bt.TimeFrame.Months)`
 
         hilo = h - l
         self.lines.s2 = p - hilo  # p - (high - low)
-        self.lines.r2 = p + hilo  # p + (high - low)` 
+        self.lines.r2 = p + hilo  # p + (high - low)
 ```
 
 没有 `usepp1` 的执行：
 
 ```py
-`./ppsample` 
+./ppsample
 ```
 
 新输出如下：
 
 ```py
-`0021,0021,0001,2005-01-31,2962.79
+0021,0021,0001,2005-01-31,2962.79
 0022,0022,0001,2005-02-01,2962.79
-...` 
+...
 ```
 
 啊哈！第 1 个月有`20`个交易日，一旦完成，指标就计算出值并可以传送。唯一打印的行是`p`，如果两行中的值相同，则是因为该值在整个下一个月内保持不变。引用*StockCharts*：
 
 ```py
-`Once Pivot Points are set, they do not change and remain in play throughout ...` 
+Once Pivot Points are set, they do not change and remain in play throughout ...
 ```
 
 指标已经可以使用。让我们开始绘图吧。绘图参数已经设置好。
 
 ```py
- `plotinfo = dict(subplot=False)` 
+ `plotinfo = dict(subplot=False)
 ```
 
 计算出的值与数据比例一致，并且就像*移动平均线*一样，可以沿着数据绘制（因此`subplot=False`）
@@ -168,7 +168,7 @@ cerebro.resampledata(data, timeframe=bt.TimeFrame.Months)`
 使用`--plot`进行执行：
 
 ```py
-`./ppsample --plot` 
+./ppsample --plot
 ```
 
 ![image](img/eb298ddb86ba808030c2e73fc49f9912.png)
@@ -180,7 +180,7 @@ cerebro.resampledata(data, timeframe=bt.TimeFrame.Months)`
 这是通过让`plotmaster`指定绘图目标来实现的，将其添加到指标的`plotinfo`属性中：
 
 ```py
-`./ppsample --plot --plot-on-daily` 
+./ppsample --plot --plot-on-daily
 ```
 
 ![image](img/f93a7e4338901f87003ba1bc56975262.png)
@@ -192,7 +192,7 @@ cerebro.resampledata(data, timeframe=bt.TimeFrame.Months)`
 在`backtrader`源码中提供为样例：
 
 ```py
-`$ ./ppsample.py --help
+$ ./ppsample.py --help
 usage: ppsample.py [-h] [--data DATA] [--usepp1] [--plot] [--plot-on-daily]
 
 Sample for pivot point and cross plotting
@@ -203,13 +203,13 @@ optional arguments:
                    ../../datas/2005-2006-day-001.txt)
   --usepp1         Have PivotPoint look 1 period backwards (default: False)
   --plot           Plot the result (default: False)
-  --plot-on-daily  Plot the indicator on the daily data (default: False)` 
+  --plot-on-daily  Plot the indicator on the daily data (default: False)
 ```
 
 `PivotPoint`的代码
 
 ```py
-`from __future__ import (absolute_import, division, print_function,)
+from __future__ import (absolute_import, division, print_function,)
 #                        unicode_literals)
 
 import backtrader as bt
@@ -249,13 +249,13 @@ class PivotPoint(bt.Indicator):
 
         hilo = h - l
         self.lines.s2 = p - hilo  # p - (high - low)
-        self.lines.r2 = p + hilo  # p + (high - low)` 
+        self.lines.r2 = p + hilo  # p + (high - low)
 ```
 
 脚本的代码。
 
 ```py
-`from __future__ import (absolute_import, division, print_function,
+from __future__ import (absolute_import, division, print_function,
                         unicode_literals)
 
 import argparse
@@ -325,5 +325,5 @@ def parse_args():
     return parser.parse_args()
 
 if __name__ == '__main__':
-    runstrat()` 
+    runstrat()
 ```

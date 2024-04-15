@@ -13,13 +13,13 @@
 任何回测运行都可以通过调用单个方法绘制：
 
 ```py
-`cerebro.plot()` 
+cerebro.plot()
 ```
 
 当然，这通常是像这样的最后一个命令，这个简单的代码使用了*backtrader*源之一的样本数据。
 
 ```py
-`from __future__ import (absolute_import, division, print_function,
+from __future__ import (absolute_import, division, print_function,
                         unicode_literals)
 
 import backtrader as bt
@@ -34,7 +34,7 @@ cerebro = bt.Cerebro()
 cerebro.adddata(data)
 cerebro.addstrategy(St)
 cerebro.run()
-cerebro.plot()` 
+cerebro.plot()
 ```
 
 这产生了以下图表。
@@ -54,15 +54,15 @@ cerebro.plot()`
 这*3 个观察器*是由`cerebro`自动添加的，并且通过`stdstats`参数（默认为`True`）进行控制。 如果希望禁用它们，请执行以下操作：
 
 ```py
-`cerebro = bt.Cerebro(stdstats=False)` 
+cerebro = bt.Cerebro(stdstats=False)
 ```
 
 或者稍后*运行*时，例如：
 
 ```py
-`cerebro = bt.Cerebro()
+cerebro = bt.Cerebro()
 ...
-cerebro.run(stdstats=False)` 
+cerebro.run(stdstats=False)
 ```
 
 ## 绘制的元素
@@ -92,7 +92,7 @@ cerebro.run(stdstats=False)`
 这些由 *Indicators* 和 *Observers* 中的数据集控制：
 
 ```py
-`plotinfo = dict(plot=True,
+plotinfo = dict(plot=True,
                 subplot=True,
                 plotname='',
                 plotskip=False,
@@ -107,7 +107,7 @@ cerebro.run(stdstats=False)`
                 plotforce=False,
                 plotmaster=None,
                 plotylimited=True,
-           )` 
+           )
 ```
 
 尽管在类定义期间 `plotinfo` 显示为 `dict`，但 *backtrader* 的元类机制将其转换为一个对象，该对象被继承并且可以进行多重继承。这意味着：
@@ -117,7 +117,7 @@ cerebro.run(stdstats=False)`
 给这些参数赋值有两种方法。让我们看一下第 1 种方法的 `SimpleMovingAverage` 实例化：
 
 ```py
-`sma = bt.indicators.SimpleMovingAverage(self.data, period=15, plotname='mysma')` 
+sma = bt.indicators.SimpleMovingAverage(self.data, period=15, plotname='mysma')
 ```
 
 如示例所示，`SimpleMovingAverage` 构造函数未使用的任何 `**kwargs` 将被解析（如果可能）为 `plotinfo` 的值。`SimpleMovingAverage` 仅定义了一个名为 `period` 的参数。这意味着 `plotname` 将与 `plotinfo` 中同名的参数相匹配。
@@ -125,8 +125,8 @@ cerebro.run(stdstats=False)`
 第 2 种方法：
 
 ```py
-`sma = bt.indicators.SimpleMovingAverage(self.data, period=15)
-sma.plotinfo.plotname = 'mysma'` 
+sma = bt.indicators.SimpleMovingAverage(self.data, period=15)
+sma.plotinfo.plotname = 'mysma'
 ```
 
 可以访问沿着 *SimpleMovingAverage* 实例化的 `plotinfo` 对象，也可以使用标准的 *Python* 点符号访问其中的参数。简单且可能比上述语法更清晰。
@@ -266,7 +266,7 @@ sma.plotinfo.plotname = 'mysma'`
 `OscillatorMixIn`的一个用例：
 
 ```py
-`plotlines = dict(_0=dict(_name='osc'))` 
+plotlines = dict(_0=dict(_name='osc'))
 ```
 
 如名称所示，这是一个*混合*类，旨在在多重继承方案（特别是在右侧）中使用。 *mixin*对来自将成为多重继承混合的其他指标的第一个线路的实际名称（索引从零开始）没有任何了解。
@@ -278,10 +278,10 @@ sma.plotinfo.plotname = 'mysma'`
 `BuySell`观察器包括以下内容：
 
 ```py
-`plotlines = dict(
+plotlines = dict(
     buy=dict(marker='^', markersize=8.0, color='lime', fillstyle='full'),
     sell=dict(marker='v', markersize=8.0, color='red', fillstyle='full')
-)` 
+)
 ```
 
 `buy`和`sell`线路有一些选项，直接传递给`matplotlib`以定义*marker*、*markersize*、*color*和*fillstyle*。所有这些选项都在*matplotlib*中定义。
@@ -289,7 +289,7 @@ sma.plotinfo.plotname = 'mysma'`
 `Trades`观察器包括以下内容：
 
 ```py
-`...
+...
 lines = ('pnlplus', 'pnlminus')
 ...
 
@@ -300,7 +300,7 @@ plotlines = dict(
     pnlminus=dict(_name='Negative',
                   marker='o', color='red',
                   markersize=8.0, fillstyle='full')
-)` 
+)
 ```
 
 这里使用`_name`将线路名称重新定义为例如`pnlplus`变为`Positive`。其余选项用于*matplotlib*
@@ -308,11 +308,11 @@ plotlines = dict(
 `DrawDown`观察器：
 
 ```py
-`lines = ('drawdown', 'maxdrawdown',)
+lines = ('drawdown', 'maxdrawdown',)
 
 ...
 
-plotlines = dict(maxdrawdown=dict(_plotskip='True',))` 
+plotlines = dict(maxdrawdown=dict(_plotskip='True',))
 ```
 
 这个定义了两条线，让最终用户不仅可以访问当前 `drawdown` 的值，还可以访问其最大值 (`maxdrawdown`)。但由于 `_plotskip=True`，后者不会绘制出来
@@ -320,11 +320,11 @@ plotlines = dict(maxdrawdown=dict(_plotskip='True',))`
 `BollingerBands` 指标：
 
 ```py
-`plotlines = dict(
+plotlines = dict(
     mid=dict(ls='--'),
     top=dict(_samecolor=True),
     bot=dict(_samecolor=True),
-)` 
+)
 ```
 
 这里 `mid` 线将以 *虚线* 样式绘制，而 `top` 和 `bot` 线将与 `mid` 线具有相同的颜色。
@@ -332,10 +332,10 @@ plotlines = dict(maxdrawdown=dict(_plotskip='True',))`
 `Stochastic`（在 `_StochasticBase` 中定义并继承）：
 
 ```py
-`lines = ('percK', 'percD',)
+lines = ('percK', 'percD',)
 ...
 plotlines = dict(percD=dict(_name='%D', ls='--'),
-                 percK=dict(_name='%K'))` 
+                 percK=dict(_name='%K'))
 ```
 
 较慢的线 `percD` 以 *虚线* 样式绘制。并且线的名称更改为包含花哨的 `%` 符号（`%K` 和 `%D`），在 *Python* 中无法在名称定义中使用
@@ -381,7 +381,7 @@ plotlines = dict(percD=dict(_name='%D', ls='--'),
 首先是在 cerebro 中的 `plot` 的*签名*：
 
 ```py
-`def plot(self, plotter=None, numfigs=1, iplot=True, **kwargs):` 
+def plot(self, plotter=None, numfigs=1, iplot=True, **kwargs):
 ```
 
 这意味着：
@@ -403,7 +403,7 @@ plotlines = dict(percD=dict(_name='%D', ls='--'),
 此对象包含控制系统范围内绘图的所有选项。选项在代码中有文档：
 
 ```py
-`class PlotScheme(object):
+class PlotScheme(object):
     def __init__(self):
         # to have a tight packing on the chart wether only the x axis or also
         # the y axis have (see matplotlib)
@@ -505,7 +505,7 @@ plotlines = dict(percD=dict(_name='%D', ls='--'),
         self.fmt_x_ticks = None
 
         # strftime Format string for the display of data points values
-        self.fmt_x_data = None` 
+        self.fmt_x_data = None
 ```
 
 #### PlotScheme 中的颜色
@@ -513,7 +513,7 @@ plotlines = dict(percD=dict(_name='%D', ls='--'),
 `PlotScheme` 类定义了一个方法，可以在子类中重写，该方法返回下一个要使用的颜色：
 
 ```py
-`def color(self, idx)` 
+def color(self, idx)
 ```
 
 其中`idx`是当前正在绘制的单个子图上的行的索引。例如，`MACD`绘制了 3 条线，因此`idx`变量只会有以下值：`0`、`1`和`2`。下一个图表（可能是另一个指标）将从`0`开始重新计数。
@@ -521,7 +521,7 @@ plotlines = dict(percD=dict(_name='%D', ls='--'),
 默认颜色方案使用的是*backtrader*中的（如上所示）`Tableau 10 Color Palette`，其索引修改为：
 
 ```py
-`tab10_index = [3, 0, 2, 1, 2, 4, 5, 6, 7, 8, 9]` 
+tab10_index = [3, 0, 2, 1, 2, 4, 5, 6, 7, 8, 9]
 ```
 
 通过覆盖`color`方法或将`lcolors`变量传递给`plot`（或在`PlotScheme`的子类中），可以完全改变着色方式。

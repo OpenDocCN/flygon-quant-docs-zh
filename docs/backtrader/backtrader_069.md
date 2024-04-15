@@ -13,13 +13,13 @@
 这使得最终用户远离了`CommissionInfo`对象，因为可以通过单个函数调用来创建/设置佣金方案。 在常规的`cerebro`创建/设置过程中，只需在`broker`成员属性上添加一个对`setcommission`的调用。 以下调用为使用*Interactive Brokers*时的**Eurostoxx50**期货设置了一个常规佣金方案：
 
 ```py
-`cerebro.broker.setcommission(commission=2.0, margin=2000.0, mult=10.0)` 
+cerebro.broker.setcommission(commission=2.0, margin=2000.0, mult=10.0)
 ```
 
 由于大多数用户通常只会测试单个工具，因此这就是所有的内容。 如果您已为数据源（`data feed`）指定了`name`，因为在图表上同时考虑了多个工具，因此可以稍微扩展此调用，如下所示：
 
 ```py
-`cerebro.broker.setcommission(commission=2.0, margin=2000.0, mult=10.0, name='Eurostoxxx50')` 
+cerebro.broker.setcommission(commission=2.0, margin=2000.0, mult=10.0, name='Eurostoxxx50')
 ```
 
 在这种情况下，此即时佣金方案仅适用于名称匹配为`Eurostoxx50`的工具。
@@ -65,13 +65,13 @@
 上述期货示例：
 
 ```py
-`cerebro.broker.setcommission(commission=2.0, margin=2000.0, mult=10.0)` 
+cerebro.broker.setcommission(commission=2.0, margin=2000.0, mult=10.0)
 ```
 
 以股票为例：
 
 ```py
-`cerebro.broker.setcommission(commission=0.005)  # 0.5% of the operation value` 
+cerebro.broker.setcommission(commission=0.005)  # 0.5% of the operation value
 ```
 
 注意
@@ -85,38 +85,38 @@
 可以通过直接使用`CommissionInfo`类来创建更永久的佣金方案。用户可以选择在某处定义此定义：
 
 ```py
-`import backtrader as bt
+import backtrader as bt
 
-commEurostoxx50 = bt.CommissionInfo(commission=2.0, margin=2000.0, mult=10.0)` 
+commEurostoxx50 = bt.CommissionInfo(commission=2.0, margin=2000.0, mult=10.0)
 ```
 
 稍后在另一个 Python 模块中应用它与 `addcommissioninfo`：
 
 ```py
-`from mycomm import commEurostoxx50
+from mycomm import commEurostoxx50
 
 ...
 
-cerebro.broker.addcommissioninfo(commEuroStoxx50, name='Eurostoxxx50')` 
+cerebro.broker.addcommissioninfo(commEuroStoxx50, name='Eurostoxxx50')
 ```
 
 `CommissionInfo`是一个对象，它使用与`backtrader`环境中的其他对象相同的`params`声明。因此，以上内容也可以表示为：
 
 ```py
-`import backtrader as bt
+import backtrader as bt
 
 class CommEurostoxx50(bt.CommissionInfo):
-    params = dict(commission=2.0, margin=2000.0, mult=10.0)` 
+    params = dict(commission=2.0, margin=2000.0, mult=10.0)
 ```
 
 以后：
 
 ```py
-`from mycomm import CommEurostoxx50
+from mycomm import CommEurostoxx50
 
 ...
 
-cerebro.broker.addcommissioninfoCommEuroStoxx50(), name='Eurostoxxx50')` 
+cerebro.broker.addcommissioninfoCommEuroStoxx50(), name='Eurostoxxx50')
 ```
 
 ## 现在进行与 SMA 交叉的“真实”比较
@@ -130,12 +130,12 @@ cerebro.broker.addcommissioninfoCommEuroStoxx50(), name='Eurostoxxx50')`
 代码（请参阅底部的完整策略）是相同的，可以在定义策略之前选择方案。
 
 ```py
-`futures_like = True
+futures_like = True
 
 if futures_like:
     commission, margin, mult = 2.0, 2000.0, 10.0
 else:
-    commission, margin, mult = 0.005, None, 1` 
+    commission, margin, mult = 0.005, None, 1
 ```
 
 只需将`futures_like`设置为 false 即可运行类似于`股票`的方案。
@@ -145,7 +145,7 @@ else:
 对于期货：
 
 ```py
-`2006-03-09, BUY CREATE, 3757.59
+2006-03-09, BUY CREATE, 3757.59
 2006-03-10, BUY EXECUTED, Price: 3754.13, Cost: 2000.00, Comm 2.00
 2006-04-11, SELL CREATE, 3788.81
 2006-04-12, SELL EXECUTED, Price: 3786.93, Cost: 2000.00, Comm 2.00
@@ -154,13 +154,13 @@ else:
 2006-04-21, BUY EXECUTED, Price: 3863.57, Cost: 2000.00, Comm 2.00
 2006-04-28, SELL CREATE, 3839.90
 2006-05-02, SELL EXECUTED, Price: 3839.24, Cost: 2000.00, Comm 2.00
-2006-05-02, OPERATION PROFIT, GROSS -243.30, NET -247.30` 
+2006-05-02, OPERATION PROFIT, GROSS -243.30, NET -247.30
 ```
 
 对于股票：
 
 ```py
-`2006-03-09, BUY CREATE, 3757.59
+2006-03-09, BUY CREATE, 3757.59
 2006-03-10, BUY EXECUTED, Price: 3754.13, Cost: 3754.13, Comm 18.77
 2006-04-11, SELL CREATE, 3788.81
 2006-04-12, SELL EXECUTED, Price: 3786.93, Cost: 3786.93, Comm 18.93
@@ -169,7 +169,7 @@ else:
 2006-04-21, BUY EXECUTED, Price: 3863.57, Cost: 3863.57, Comm 19.32
 2006-04-28, SELL CREATE, 3839.90
 2006-05-02, SELL EXECUTED, Price: 3839.24, Cost: 3839.24, Comm 19.20
-2006-05-02, OPERATION PROFIT, GROSS -24.33, NET -62.84` 
+2006-05-02, OPERATION PROFIT, GROSS -24.33, NET -62.84
 ```
 
 第一次操作的价格如下：
@@ -213,7 +213,7 @@ else:
 ## 代码
 
 ```py
-`from __future__ import (absolute_import, division, print_function,
+from __future__ import (absolute_import, division, print_function,
                         unicode_literals)
 
 import backtrader as bt
@@ -303,7 +303,7 @@ if __name__ == '__main__':
     cerebro.run()
 
     # Plot the result
-    cerebro.plot()` 
+    cerebro.plot()
 ```
 
 ## 参考
@@ -457,7 +457,7 @@ pseudoexec：如果为 True，则操作尚未执行
 参数：
 
 ```py
-`* `data`: data feed for which interest is charged
+* `data`: data feed for which interest is charged
 
 * `size`: current position size. > 0 for long positions and < 0 for
   short positions (this parameter will not be `0`)
@@ -469,7 +469,7 @@ pseudoexec：如果为 True，则操作尚未执行
 
 * `dt0`: (datetime.datetime) current datetime
 
-* `dt1`: (datetime.datetime) datetime of previous calculation` 
+* `dt1`: (datetime.datetime) datetime of previous calculation
 ```
 
 `dt0`和`dt1`在默认实现中未被使用，并作为覆盖方法的额外输入提供

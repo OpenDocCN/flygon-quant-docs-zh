@@ -53,7 +53,7 @@
 让我们看一个带有`usebracket=True`和`rawbracket=True`默认值的示例执行（为了简化图表，将删除音量）：
 
 ```py
-`$ ./mult-values.py --plot volume=False
+$ ./mult-values.py --plot volume=False
 
 2001-01-02 d0 Position 0
 2001-01-02 Data d0 OType buy Sizing to 1
@@ -86,7 +86,7 @@
 2006-12-28 d2 Position 0
 2006-12-29 d0 Position 0
 2006-12-29 d1 Position 0
-2006-12-29 d2 Position 0` 
+2006-12-29 d2 Position 0
 ```
 
 ![image](img/c33c44402b58012a4e07f3e0a1929f5b.png)
@@ -94,7 +94,7 @@
 第二个执行设置`rawbracket=False`
 
 ```py
-`$ ./mult-values.py --plot volume=False --strat rawbracket=False` 
+$ ./mult-values.py --plot volume=False --strat rawbracket=False
 ```
 
 这将输出完全相同的结果，这次使用了`buy_bracket`。
@@ -104,7 +104,7 @@
 最后禁用括号使用：
 
 ```py
-`./mult-values.py --strat usebracket=False --plot volume=False` 
+./mult-values.py --strat usebracket=False --plot volume=False
 ```
 
 ![image](img/88007dbea907e091bf7507b28a5964f9.png)
@@ -116,7 +116,7 @@
 ## 示例用法
 
 ```py
-`$ ./mult-values.py --help
+$ ./mult-values.py --help
 usage: mult-values.py [-h] [--data0 DATA0] [--data1 DATA1] [--data2 DATA2]
                       [--fromdate FROMDATE] [--todate TODATE]
                       [--cerebro kwargs] [--broker kwargs] [--sizer kwargs]
@@ -140,13 +140,13 @@ optional arguments:
   --broker kwargs      kwargs in key=value format (default: )
   --sizer kwargs       kwargs in key=value format (default: )
   --strat kwargs       kwargs in key=value format (default: )
-  --plot [kwargs]      kwargs in key=value format (default: )` 
+  --plot [kwargs]      kwargs in key=value format (default: )
 ```
 
 ## 示例代码
 
 ```py
-`from __future__ import (absolute_import, division, print_function,
+from __future__ import (absolute_import, division, print_function,
                         unicode_literals)
 
 import argparse
@@ -338,5 +338,5 @@ def parse_args(pargs=None):
     return parser.parse_args(pargs)
 
 if __name__ == '__main__':
-    runstrat()` 
+    runstrat()
 ```

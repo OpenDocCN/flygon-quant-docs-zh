@@ -13,8 +13,8 @@
 *cash*根据仪器进行每次迭代调整，如`期货`
 
 ```py
-`which a price change implies in real brokers the addition/substracion of
-cash.` 
+which a price change implies in real brokers the addition/substracion of
+cash.
 ```
 
 支持的订单类型：

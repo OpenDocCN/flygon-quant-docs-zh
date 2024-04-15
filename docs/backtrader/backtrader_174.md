@@ -15,9 +15,9 @@
 鉴于现有的数据源，您可以使用数据源的`addfilter`方法：
 
 ```py
-`data = MyDataFeed(name=myname)
+data = MyDataFeed(name=myname)
 
-data.addfilter(filter, *args, **kwargs)` 
+data.addfilter(filter, *args, **kwargs)
 ```
 
 显然，`filter`必须符合给定的接口，即：
@@ -65,7 +65,7 @@ data.addfilter(filter, *args, **kwargs)`
 以下过滤器（已经在`backtrader`中可用）挺身而出：
 
 ```py
-`class SessionFilter(with_metaclass(metabase.MetaParams, object)):
+class SessionFilter(with_metaclass(metabase.MetaParams, object)):
     '''
     This class can be applied to a data source as a filter and will filter out
     intraday bars which fall outside of the regular session times (ie: pre/post
@@ -93,7 +93,7 @@ data.addfilter(filter, *args, **kwargs)`
 
         # bar outside of the regular session times
         data.backwards()  # remove bar from data stack
-        return True  # signal the data was manipulated` 
+        return True  # signal the data was manipulated
 ```
 
 该过滤器使用数据中嵌入的会话开始/结束时间来过滤条形图
@@ -109,13 +109,13 @@ data.addfilter(filter, *args, **kwargs)`
 脚本末尾的示例代码可以在有或无过滤的情况下运行。第一次运行是 100%未经过滤且未指定会话时间：
 
 ```py
-`$ ./data-filler.py --writer --wrcsv` 
+$ ./data-filler.py --writer --wrcsv
 ```
 
 查看第 1 天的开始和结束：
 
 ```py
-`===============================================================================
+===============================================================================
 Id,2006-01-02-volume-min-001,len,datetime,open,high,low,close,volume,openinterest,Strategy,len
 1,2006-01-02-volume-min-001,1,2006-01-02 09:01:00,3602.0,3603.0,3597.0,3599.0,5699.0,0.0,Strategy,1
 2,2006-01-02-volume-min-001,2,2006-01-02 09:02:00,3600.0,3601.0,3598.0,3599.0,894.0,0.0,Strategy,2
@@ -126,7 +126,7 @@ Id,2006-01-02-volume-min-001,len,datetime,open,high,low,close,volume,openinteres
 583,2006-01-02-volume-min-001,583,2006-01-02 20:01:00,3618.0,3618.0,3617.0,3617.0,15.0,0.0,Strategy,583
 584,2006-01-02-volume-min-001,584,2006-01-02 20:04:00,3617.0,3617.0,3617.0,3617.0,107.0,0.0,Strategy,584
 585,2006-01-02-volume-min-001,585,2006-01-03 09:01:00,3623.0,3625.0,3622.0,3624.0,4026.0,0.0,Strategy,585
-...` 
+...
 ```
 
 2006 年 1 月 2 日从 09:01:00 到 20:04:00 进行会话运行。
@@ -134,7 +134,7 @@ Id,2006-01-02-volume-min-001,len,datetime,open,high,low,close,volume,openinteres
 现在使用`SessionFilter`运行，并告诉脚本使用 09:30 和 17:30 作为会话的开始/结束时间：
 
 ```py
-`$ ./data-filler.py --writer --wrcsv --tstart 09:30 --tend 17:30 --filter
+$ ./data-filler.py --writer --wrcsv --tstart 09:30 --tend 17:30 --filter
 
 ===============================================================================
 Id,2006-01-02-volume-min-001,len,datetime,open,high,low,close,volume,openinterest,Strategy,len
@@ -145,7 +145,7 @@ Id,2006-01-02-volume-min-001,len,datetime,open,high,low,close,volume,openinteres
 445,2006-01-02-volume-min-001,445,2006-01-02 17:29:00,3621.0,3621.0,3620.0,3620.0,866.0,0.0,Strategy,445
 446,2006-01-02-volume-min-001,446,2006-01-02 17:30:00,3620.0,3621.0,3619.0,3621.0,1670.0,0.0,Strategy,446
 447,2006-01-02-volume-min-001,447,2006-01-03 09:30:00,3637.0,3638.0,3635.0,3636.0,1458.0,0.0,Strategy,447
-...` 
+...
 ```
 
 数据输出现在从 09:30 开始，到 17:30 结束。已经过滤掉预/后市场数据。
@@ -155,12 +155,12 @@ Id,2006-01-02-volume-min-001,len,datetime,open,high,low,close,volume,openinteres
 对输出的深入检查显示如下：
 
 ```py
-`...
+...
 61,2006-01-02-volume-min-001,61,2006-01-02 10:30:00,3613.0,3614.0,3613.0,3614.0,112.0,0.0,Strategy,61
 62,2006-01-02-volume-min-001,62,2006-01-02 10:31:00,3614.0,3614.0,3614.0,3614.0,183.0,0.0,Strategy,62
 63,2006-01-02-volume-min-001,63,2006-01-02 10:34:00,3614.0,3614.0,3614.0,3614.0,841.0,0.0,Strategy,63
 64,2006-01-02-volume-min-001,64,2006-01-02 10:35:00,3614.0,3614.0,3614.0,3614.0,17.0,0.0,Strategy,64
-...` 
+...
 ```
 
 缺少分钟 10:32 和 10:33 的数据。作为一年中的第 1 个交易日，可能根本没有进行交易。或者数据源可能未能捕获到这些数据。
@@ -170,7 +170,7 @@ Id,2006-01-02-volume-min-001,len,datetime,open,high,low,close,volume,openinteres
 `backtrader`中已经存在一个`SessionFiller`，按预期填补了缺失的数据。代码很长，比过滤器的复杂性更多（请参阅末尾的完整实现），但让我们看看类/参数定义：
 
 ```py
-`class SessionFiller(with_metaclass(metabase.MetaParams, object)):
+class SessionFiller(with_metaclass(metabase.MetaParams, object)):
     '''
     Bar Filler for a Data Source inside the declared session start/end times.
 
@@ -201,20 +201,20 @@ Id,2006-01-02-volume-min-001,len,datetime,open,high,low,close,volume,openinteres
     params = (('fill_price', None),
               ('fill_vol', float('NaN')),
               ('fill_oi', float('NaN')),
-              ('skip_first_fill', True))` 
+              ('skip_first_fill', True))
 ```
 
 示例脚本现在可以过滤和填充数据了：
 
 ```py
-`./data-filler.py --writer --wrcsv --tstart 09:30 --tend 17:30 --filter --filler
+./data-filler.py --writer --wrcsv --tstart 09:30 --tend 17:30 --filter --filler
 
 ...
 62,2006-01-02-volume-min-001,62,2006-01-02 10:31:00,3614.0,3614.0,3614.0,3614.0,183.0,0.0,Strategy,62
 63,2006-01-02-volume-min-001,63,2006-01-02 10:32:00,3614.0,3614.0,3614.0,3614.0,0.0,,Strategy,63
 64,2006-01-02-volume-min-001,64,2006-01-02 10:33:00,3614.0,3614.0,3614.0,3614.0,0.0,,Strategy,64
 65,2006-01-02-volume-min-001,65,2006-01-02 10:34:00,3614.0,3614.0,3614.0,3614.0,841.0,0.0,Strategy,65
-...` 
+...
 ```
 
 分钟 10:32 和 10:33 已存在。脚本使用最后已知的“收盘”价格填充价格值，并将成交量和持仓量字段设置为 0。脚本接受一个`--fvol`参数，将成交量设置为任何值（包括'NaN'）
@@ -232,7 +232,7 @@ Id,2006-01-02-volume-min-001,len,datetime,open,high,low,close,volume,openinteres
 请记住，默认情况下将缺失的成交量设置为`0`，可以开发一个简单的`RelativeVolume`指标：
 
 ```py
-`class RelativeVolume(bt.Indicator):
+class RelativeVolume(bt.Indicator):
     csv = True  # show up in csv output (default for indicators is False)
 
     lines = ('relvol',)
@@ -253,7 +253,7 @@ Id,2006-01-02-volume-min-001,len,datetime,open,high,low,close,volume,openinteres
                 self.data.volume,
                 zero=0.0)
 
-        self.lines.relvol = relvol` 
+        self.lines.relvol = relvol
 ```
 
 使用`backtrader`中的内置辅助功能，足够聪明，可以避免除零错误。
@@ -261,24 +261,24 @@ Id,2006-01-02-volume-min-001,len,datetime,open,high,low,close,volume,openinteres
 在下次脚本调用中将所有部分组合起来：
 
 ```py
-`./data-filler.py --writer --wrcsv --tstart 09:30 --tend 17:30 --filter --filler --relvol
+./data-filler.py --writer --wrcsv --tstart 09:30 --tend 17:30 --filter --filler --relvol
 
 ===============================================================================
 Id,2006-01-02-volume-min-001,len,datetime,open,high,low,close,volume,openinterest,Strategy,len,RelativeVolume,len,relvol
 1,2006-01-02-volume-min-001,1,2006-01-02 09:30:00,3604.0,3605.0,3603.0,3604.0,546.0,0.0,Strategy,1,RelativeVolume,1,
 2,2006-01-02-volume-min-001,2,2006-01-02 09:31:00,3604.0,3606.0,3604.0,3606.0,438.0,0.0,Strategy,2,RelativeVolume,2,
-...` 
+...
 ```
 
 `RelativeVolume`指标在第 1 个条形图期间产生了预期外的输出。周期在脚本中计算为：(17:30 - 09:30 * 60) + 1。让我们直接看看相对成交量在第二天的 10:32 和 10:33 是如何看待的，考虑到第 1 天，成交量值被填充为`0`：
 
 ```py
-`...
+...
 543,2006-01-02-volume-min-001,543,2006-01-03 10:31:00,3648.0,3648.0,3647.0,3648.0,56.0,0.0,Strategy,543,RelativeVolume,543,3.26785714286
 544,2006-01-02-volume-min-001,544,2006-01-03 10:32:00,3647.0,3648.0,3647.0,3647.0,313.0,0.0,Strategy,544,RelativeVolume,544,0.0
 545,2006-01-02-volume-min-001,545,2006-01-03 10:33:00,3647.0,3647.0,3647.0,3647.0,135.0,0.0,Strategy,545,RelativeVolume,545,0.0
 546,2006-01-02-volume-min-001,546,2006-01-03 10:34:00,3648.0,3648.0,3647.0,3648.0,171.0,0.0,Strategy,546,RelativeVolume,546,4.91812865497
-...` 
+...
 ```
 
 如预期那样，它被设置为`0`。
@@ -292,7 +292,7 @@ Id,2006-01-02-volume-min-001,len,datetime,open,high,low,close,volume,openinteres
 在`backtrader`的源码中提供了示例：
 
 ```py
-`usage: data-filler.py [-h] [--data DATA] [--filter] [--filler] [--fvol FVOL]
+usage: data-filler.py [-h] [--data DATA] [--filter] [--filler] [--fvol FVOL]
                       [--tstart TSTART] [--tend TEND] [--relvol]
                       [--fromdate FROMDATE] [--todate TODATE] [--writer]
                       [--wrcsv] [--plot] [--numfigs NUMFIGS]
@@ -318,13 +318,13 @@ optional arguments:
   --wrcsv, -wc          Enable CSV Output in the writer
   --plot, -p            Plot the read data
   --numfigs NUMFIGS, -n NUMFIGS
-                        Plot using numfigs figures` 
+                        Plot using numfigs figures
 ```
 
 代码：
 
 ```py
-`from __future__ import (absolute_import, division, print_function,
+from __future__ import (absolute_import, division, print_function,
                         unicode_literals)
 
 import argparse
@@ -452,7 +452,7 @@ def parse_args():
     return parser.parse_args()
 
 if __name__ == '__main__':
-    runstrategy()` 
+    runstrategy()
 ```
 
 ### SessionFiller
@@ -460,7 +460,7 @@ if __name__ == '__main__':
 来自`backtrader`源码：
 
 ```py
-`class SessionFiller(with_metaclass(metabase.MetaParams, object)):
+class SessionFiller(with_metaclass(metabase.MetaParams, object)):
     '''
     Bar Filler for a Data Source inside the declared session start/end times.
 
@@ -600,5 +600,5 @@ if __name__ == '__main__':
         # Add tot he stack of bars to save
         data._add2stack(bar)
 
-        return True` 
+        return True
 ```

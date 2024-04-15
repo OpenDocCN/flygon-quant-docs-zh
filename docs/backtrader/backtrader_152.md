@@ -27,7 +27,7 @@
 结果可以通过使用样本数据和`btrun`绘制图表来观察：
 
 ```py
-`$ btrun --nostdstats \
+$ btrun --nostdstats \
     --format btcsv \
     --data ../../../backtrader/datas/2006-day-001.txt \
     --indicator :SMA \
@@ -35,7 +35,7 @@
     --indicator :HMA \
     --indicator :ZeroLagIndicator \
     --indicator :DMA \
-    --plot style=\'line\'` 
+    --plot style=\'line\'
 ```
 
 ![image](img/6e038c70644378e5a556d5c06b6d6192.png)
@@ -49,13 +49,13 @@
 通过比较显示*DMA*如何处于*ZeroLagIndicator*和*HullMovingAverage*之间的中间位置。后者的`period=7`与*迪克森移动平均线*内部的默认值匹配：
 
 ```py
-`$ btrun --nostdstats \
+$ btrun --nostdstats \
     --format btcsv \
     --data ../../../backtrader/datas/2006-day-001.txt \
     --indicator :HMA:period=7 \
     --indicator :ZeroLagIndicator \
     --indicator :DMA \
-    --plot style=\'line\'` 
+    --plot style=\'line\'
 ```
 
 ![image](img/d67d125f4397f67fac3ef1b29301f55a.png)

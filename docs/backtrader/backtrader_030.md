@@ -77,7 +77,7 @@
 在此示例中，仅支持每日格式：
 
 ```py
-`import itertools
+import itertools
 ...
 import backtrader as bt
 
@@ -111,7 +111,7 @@ class MyCSVData(bt.CSVDataBase):
         self.lines.volume[0] = float(linetokens[next(i)])
         self.lines.openinterest[0] = float(linetokens[next(i)])
 
-        return True` 
+        return True
 ```
 
 代码期望所有字段已就位并可转换为浮点数，除日期时间外，日期时间具有固定的 YYYY-MM-DD 格式，并且可在不使用`datetime.datetime.strptime`的情况下解析。
@@ -137,9 +137,9 @@ class MyCSVData(bt.CSVDataBase):
 针对这些文件的解析器：
 
 ```py
-`class SierraChartCSVData(backtrader.feeds.GenericCSVData):
+class SierraChartCSVData(backtrader.feeds.GenericCSVData):
 
-    params = (('dtformat', '%Y/%m/%d'),)` 
+    params = (('dtformat', '%Y/%m/%d'),)
 ```
 
 `params`的定义只是重新定义基类中的一个现有参数。在这种情况下，只需更改日期的格式化字符串。
@@ -149,7 +149,7 @@ Et voilá … **Sierra Chart** 的解析器完成了。
 下面是`GenericCSVData`的参数定义，以便提醒：
 
 ```py
-`class GenericCSVData(feed.CSVDataBase):
+class GenericCSVData(feed.CSVDataBase):
     params = (
         ('nullvalue', float('NaN')),
         ('dtformat', '%Y-%m-%d %H:%M:%S'),
@@ -163,5 +163,5 @@ Et voilá … **Sierra Chart** 的解析器完成了。
         ('close', 4),
         ('volume', 5),
         ('openinterest', 6),
-    )` 
+    )
 ```

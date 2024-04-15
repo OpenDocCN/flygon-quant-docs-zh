@@ -35,7 +35,7 @@
 执行：
 
 ```py
-`$ ./plot-same-axis.py` 
+$ ./plot-same-axis.py
 ```
 
 和图表。
@@ -61,7 +61,7 @@
 执行：
 
 ```py
-`$ ./plot-same-axis.py --smasubplot --nomacdplot --rsioverstoc` 
+$ ./plot-same-axis.py --smasubplot --nomacdplot --rsioverstoc
 ```
 
 图表。
@@ -71,7 +71,7 @@
 为了检查尺度的不兼容性，让我们尝试在 SMA 上绘制 RSI：
 
 ```py
-`$ ./plot-same-axis.py --rsiovermacd` 
+$ ./plot-same-axis.py --rsiovermacd
 ```
 
 图表。
@@ -97,7 +97,7 @@ $ ./plot-same-axis.py –rsiovermacd –smasubplot
 沿着另一个方向，让我们在另一个指标上绘制多行指标。让我们将 Stochastic 绘制在 RSI 上：
 
 ```py
-`$ ./plot-same-axis.py --stocrsi` 
+$ ./plot-same-axis.py --stocrsi
 ```
 
 ![image](img/6d724766dd27849b572ad23391dc3bc4.png)
@@ -107,19 +107,19 @@ $ ./plot-same-axis.py –rsiovermacd –smasubplot
 在代码中，当前的设置将是：
 
 ```py
-`stoc.plotinfo.plotmaster = rsi` 
+stoc.plotinfo.plotmaster = rsi
 ```
 
 要显示随机线的名称而不是名称，我们还需要：
 
 ```py
-`stoc.plotinfo.plotlinelabels = True` 
+stoc.plotinfo.plotlinelabels = True
 ```
 
 这已经被参数化，新的执行结果显示如下：
 
 ```py
-`$ ./plot-same-axis.py --stocrsi --stocrsilabels` 
+$ ./plot-same-axis.py --stocrsi --stocrsilabels
 ```
 
 现在图表显示了随机线的名称在 RSI 线的名称下方。
@@ -129,7 +129,7 @@ $ ./plot-same-axis.py –rsiovermacd –smasubplot
 脚本用法：
 
 ```py
-`$ ./plot-same-axis.py --help
+$ ./plot-same-axis.py --help
 usage: plot-same-axis.py [-h] [--data DATA] [--fromdate FROMDATE]
                          [--todate TODATE] [--stdstats] [--smasubplot]
                          [--nomacdplot]
@@ -153,13 +153,13 @@ optional arguments:
   --stocrsi, -strsi     Plot the Stochastic indicator on the RSI axis
   --stocrsilabels       Plot line names instead of indicator name
   --numfigs NUMFIGS, -n NUMFIGS
-                        Plot using numfigs figures` 
+                        Plot using numfigs figures
 ```
 
 以及代码。
 
 ```py
-`from __future__ import (absolute_import, division, print_function,
+from __future__ import (absolute_import, division, print_function,
                         unicode_literals)
 
 import argparse
@@ -280,5 +280,5 @@ def parse_args():
     return parser.parse_args()
 
 if __name__ == '__main__':
-    runstrategy()` 
+    runstrategy()
 ```

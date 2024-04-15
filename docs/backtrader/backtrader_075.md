@@ -11,9 +11,9 @@
 引用主要`pyfolio`页面上的内容[`quantopian.github.io/pyfolio/`](http://quantopian.github.io/pyfolio/)：
 
 ```py
-`pyfolio is a Python library for performance and risk analysis of financial
+pyfolio is a Python library for performance and risk analysis of financial
 portfolios developed by Quantopian Inc. It works well with the Zipline open
-source backtesting library` 
+source backtesting library
 ```
 
 现在它也与*backtrader*很好地配合。需要什么：
@@ -75,7 +75,7 @@ source backtesting library`
 代码如下所示：
 
 ```py
-`...
+...
 cerebro.addanalyzer(bt.analyzers.PyFolio, _name='pyfolio')
 ...
 results = cerebro.run()
@@ -94,7 +94,7 @@ pf.create_full_tear_sheet(
     live_start_date='2005-05-01',  # This date is sample specific
     round_trips=True)
 
-# At this point tables and chart will show up` 
+# At this point tables and chart will show up
 ```
 
 ### 参考

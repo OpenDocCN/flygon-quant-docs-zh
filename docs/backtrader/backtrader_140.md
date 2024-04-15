@@ -11,13 +11,13 @@
 在发布`1.9.7.105`时，经纪人已更改了默认行为以增加现金并减少价值。这可以通过参数`shortcash`来控制，默认为`True`。更改方式如下：
 
 ```py
-`cerebro.broker.set_shortcash(False)` 
+cerebro.broker.set_shortcash(False)
 ```
 
 或者：
 
 ```py
-`cerebro.broker = bt.brokers.BackBroker(shortcash=False, **other_kwargs)` 
+cerebro.broker = bt.brokers.BackBroker(shortcash=False, **other_kwargs)
 ```
 
 ## 行动中
@@ -25,7 +25,7 @@
 下面的示例使用标准的移动平均线交叉，并可用于查看差异。不带参数运行它并且新行为：
 
 ```py
-`$ ./shortcash.py --plot` 
+$ ./shortcash.py --plot
 ```
 
 ![图片](img/e28f919fa437e7e8e35ae2f211294acf.png)
@@ -33,7 +33,7 @@
 可以与以下行为进行比较：
 
 ```py
-`$ ./shortcash.py --plot --broker shortcash=False` 
+$ ./shortcash.py --plot --broker shortcash=False
 ```
 
 ![图片](img/5bf61e8da86b48bf663059fb9f359918.png)
@@ -57,7 +57,7 @@
 ## 使用示例
 
 ```py
-`$ ./shortcash.py --help
+$ ./shortcash.py --help
 usage: shortcash.py [-h] [--data DATA] [--cerebro CEREBRO] [--broker BROKER]
                     [--sizer SIZER] [--strat STRAT] [--plot [kwargs]]
 
@@ -74,13 +74,13 @@ optional arguments:
   --plot [kwargs], -p [kwargs]
                         Plot the read data applying any kwargs passed For
                         example: --plot style="candle" (to plot candles)
-                        (default: None)` 
+                        (default: None)
 ```
 
 ## 示例代码
 
 ```py
-`from __future__ import (absolute_import, division, print_function,
+from __future__ import (absolute_import, division, print_function,
                         unicode_literals)
 
 import argparse
@@ -156,5 +156,5 @@ def parse_args(pargs=None):
     return parser.parse_args(pargs)
 
 if __name__ == '__main__':
-    runstrat()` 
+    runstrat()
 ```

@@ -79,7 +79,7 @@
 让我们看看*一月*和*二月*发生了什么。
 
 ```py
-`$ ./order_target.py --target-size -- plot
+$ ./order_target.py --target-size -- plot
 0001 - 2005-01-03 - Position Size:     00 - Value 1000000.00
 0001 - 2005-01-03 - Order Target Size: 03
 0002 - 2005-01-04 - Position Size:     03 - Value 999994.39
@@ -96,7 +96,7 @@
 0022 - 2005-02-02 - Order Target Size: 29
 0023 - 2005-02-03 - Position Size:     29 - Value 999966.33
 0023 - 2005-02-03 - Order Target Size: 28
-...` 
+...
 ```
 
 在*一月*，*目标*从年初的第 1 个交易日开始为`3`，并逐渐增加。*持仓*大小最初从`0`增加到`3`，然后以`1`的增量移动。
@@ -110,7 +110,7 @@
 预计*目标值*会有类似的行为。
 
 ```py
-`$ ./order_target.py --target-value --plot
+$ ./order_target.py --target-value --plot
 0001 - 2005-01-03 - Position Size:     00 - Value 1000000.00
 0001 - 2005-01-03 - data value 0.00
 0001 - 2005-01-03 - Order Target Value: 3000.00
@@ -134,7 +134,7 @@
 0023 - 2005-02-03 - Position Size:     816 - Value 999130.05
 0023 - 2005-02-03 - data value 28633.44
 0023 - 2005-02-03 - Order Target Value: 28000.00
-...` 
+...
 ```
 
 还有一行额外的信息，告诉实际的*数据值*（在投资组合中）是多少。这有助于确定是否已达到*目标值*。
@@ -170,7 +170,7 @@
 在这种情况下，它只是当前投资组合价值的一个百分比。
 
 ```py
-`$ ./order_target.py --target-percent --plot
+$ ./order_target.py --target-percent --plot
 0001 - 2005-01-03 - Position Size:     00 - Value 1000000.00
 0001 - 2005-01-03 - data percent 0.00
 0001 - 2005-01-03 - Order Target Percent: 0.03
@@ -194,7 +194,7 @@
 0023 - 2005-02-03 - Position Size:     8120 - Value 991240.75
 0023 - 2005-02-03 - data percent 0.29
 0023 - 2005-02-03 - Order Target Percent: 0.28
-...` 
+...
 ```
 
 信息已更改，以查看投资组合中数据代表的`%`。
@@ -204,7 +204,7 @@
 ## 示例用法
 
 ```py
-`$ ./order_target.py --help
+$ ./order_target.py --help
 usage: order_target.py [-h] [--data DATA] [--fromdate FROMDATE]
                        [--todate TODATE] [--cash CASH]
                        (--target-size | --target-value | --target-percent)
@@ -226,13 +226,13 @@ optional arguments:
   --plot [kwargs], -p [kwargs]
                         Plot the read data applying any kwargs passed For
                         example: --plot style="candle" (to plot candles)
-                        (default: None)` 
+                        (default: None)
 ```
 
 ## 示例代码
 
 ```py
-`from __future__ import (absolute_import, division, print_function,
+from __future__ import (absolute_import, division, print_function,
                         unicode_literals)
 
 import argparse
@@ -405,5 +405,5 @@ def parse_args(pargs=None):
     return parser.parse_args()
 
 if __name__ == '__main__':
-    runstrat()` 
+    runstrat()
 ```

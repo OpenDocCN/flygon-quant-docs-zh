@@ -78,15 +78,15 @@
 执行第一个脚本以查看在不请求内存节省时使用了多少内存位置：
 
 ```py
-`$ ./memory-savings.py --save 0
-Total memory cells used: 506430` 
+$ ./memory-savings.py --save 0
+Total memory cells used: 506430
 ```
 
 对于级别 1（总节省）：
 
 ```py
-`$ ./memory-savings.py --save 1
-Total memory cells used: 2041` 
+$ ./memory-savings.py --save 1
+Total memory cells used: 2041
 ```
 
 天啊！！！从*一百万*降至`2041`。确实。系统中的每个*lines*对象都使用`collections.deque`作为缓冲区（而不是`array.array`）并且被长度边界到请求操作的绝对最小值。例如：
@@ -120,8 +120,8 @@ Total memory cells used: 2041`
 现在是负级别。这些级别旨在在保存足够的内存的同时保持*绘图*可用。第一级别为`-1`：
 
 ```py
-`$ ./memory-savings.py --save -1
-Total memory cells used: 184623` 
+$ ./memory-savings.py --save -1
+Total memory cells used: 184623
 ```
 
 在这种情况下，*指标*的第一级（在策略中声明的那些）保持其完整长度的缓冲区。但如果这些指标依赖于其他指标（这是情况），以执行其工作，那么子对象将被限制长度。在这种情况下，我们从：
@@ -137,8 +137,8 @@ Total memory cells used: 184623`
 现在是第二级，也旨在节省在策略级别声明为不绘制的指标上的内存：
 
 ```py
-`$ ./memory-savings.py --save -2
-Total memory cells used: 174695` 
+$ ./memory-savings.py --save -2
+Total memory cells used: 174695
 ```
 
 现在并没有节省太多。这是因为一个单独的指标被标记为不绘制：`TestInd().plotinfo.plot = False`
@@ -146,8 +146,8 @@ Total memory cells used: 174695`
 让我们看看最后一个示例的绘图：
 
 ```py
-`$ ./memory-savings.py --save -2 --plot
-Total memory cells used: 174695` 
+$ ./memory-savings.py --save -2 --plot
+Total memory cells used: 174695
 ```
 
 ![图片](img/a2c44bb68588f90d96adbaf3568ba558.png)
@@ -155,7 +155,7 @@ Total memory cells used: 174695`
 对于感兴趣的读者，示例脚本可以生成对*指标*层次结构中遍历的每个*lines*对象的详细分析。运行时启用*绘图*（保存在`-1`处）：
 
 ```py
-`$ ./memory-savings.py --save -1 --lendetails
+$ ./memory-savings.py --save -1 --lendetails
 -- Evaluating Datas
 ---- Data 0 Total Cells 34755 - Cells per Line 4965
 -- Evaluating Indicators
@@ -170,13 +170,13 @@ Total memory cells used: 174695`
 ---- Observer 0 Total Cells 9930 - Cells per Line 4965
 ---- Observer 1 Total Cells 9930 - Cells per Line 4965
 ---- Observer 2 Total Cells 9930 - Cells per Line 4965
-Total memory cells used: 184623` 
+Total memory cells used: 184623
 ```
 
 启用最大节省（`1`）的相同代码：
 
 ```py
-`$ ./memory-savings.py --save 1 --lendetails
+$ ./memory-savings.py --save 1 --lendetails
 -- Evaluating Datas
 ---- Data 0 Total Cells 266 - Cells per Line 38
 -- Evaluating Indicators
@@ -188,7 +188,7 @@ Total memory cells used: 184623`
 -- Evaluating Observers
 ---- Observer 0 Total Cells 2 - Cells per Line 1
 ---- Observer 1 Total Cells 2 - Cells per Line 1
----- Observer 2 Total Cells 2 - Cells per Line 1` 
+---- Observer 2 Total Cells 2 - Cells per Line 1
 ```
 
 第二个输出立即显示了*数据源*中的行数被限制为`38`个内存位置，而不是完整数据源长度的`4965`个。
@@ -200,7 +200,7 @@ Total memory cells used: 184623`
 在`backtrader`源代码中作为示例提供。用法：
 
 ```py
-`$ ./memory-savings.py --help
+$ ./memory-savings.py --help
 usage: memory-savings.py [-h] [--data DATA] [--save SAVE] [--datalines]
                          [--lendetails] [--plot]
 
@@ -212,13 +212,13 @@ optional arguments:
   --save SAVE   Memory saving level [1, 0, -1, -2] (default: 0)
   --datalines   Print data lines (default: False)
   --lendetails  Print individual items memory usage (default: False)
-  --plot        Plot the result (default: False)` 
+  --plot        Plot the result (default: False)
 ```
 
 代码：
 
 ```py
-`from __future__ import (absolute_import, division, print_function,
+from __future__ import (absolute_import, division, print_function,
                         unicode_literals)
 
 import argparse
@@ -354,5 +354,5 @@ def parse_args():
     return parser.parse_args()
 
 if __name__ == '__main__':
-    runstrat()` 
+    runstrat()
 ```

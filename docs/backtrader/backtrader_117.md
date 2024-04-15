@@ -13,12 +13,12 @@
 ## 使用模式
 
 ```py
-`...
+...
 cerebro.adddata(mydata)
 ...
 cerebro.add_order_history(orders, notify=True or False)
 ...
-cerebro.run()` 
+cerebro.run()
 ```
 
 显而易见的问题在于`orders`应该是什么样子。让我们引用文档：
@@ -62,12 +62,12 @@ cerebro.run()`
 orders 可能的样子的一个实际例子
 
 ```py
-`ORDER_HISTORY = (
+ORDER_HISTORY = (
     ('2005-02-01', 1, 2984.63),
     ('2005-03-04', -1, 3079.93),
     ...
     ('2006-12-18', 1, 4140.99),
-)` 
+)
 ```
 
 一个有 3 个元素的可迭代对象，可以完全从*CSV*文件中加载。
@@ -87,7 +87,7 @@ orders 可能的样子的一个实际例子
 ## 运行 1：SMA 交叉
 
 ```py
-`$ ./order-history.py --plot --cerebro writer=True` 
+$ ./order-history.py --plot --cerebro writer=True
 ```
 
 这产生了一个图表
@@ -97,7 +97,7 @@ orders 可能的样子的一个实际例子
 和一些文本输出（为简洁起见截断）：
 
 ```py
-`Creating Signal Strategy
+Creating Signal Strategy
 2005-02-01,1,2984.63
 2005-03-04,-1,3079.93
 ...
@@ -136,13 +136,13 @@ Cerebro:
               - won:
                 - current: 2
                 - longest: 2
-...` 
+...
 ```
 
 ## 运行 2：订单历史
 
 ```py
-`$ ./order-history.py --plot --cerebro writer=True --order-history` 
+$ ./order-history.py --plot --cerebro writer=True --order-history
 ```
 
 这产生了一个看起来没有差异的图表
@@ -152,7 +152,7 @@ Cerebro:
 和一些文本输出（为了简洁起见再次截断）：
 
 ```py
-`Creating Empty Strategy
+Creating Empty Strategy
 2005-02-01,1,2984.63
 2005-03-04,-1,3079.93
 ...
@@ -186,7 +186,7 @@ Cerebro:
               - won:
                 - current: 2
                 - longest: 2
-...` 
+...
 ```
 
 并且所期望的值与参考值相匹配。
@@ -198,7 +198,7 @@ Cerebro:
 ## 示例用法
 
 ```py
-`$ ./order-history.py --help
+$ ./order-history.py --help
 usage: order-history.py [-h] [--data0 DATA0] [--fromdate FROMDATE]
                         [--todate TODATE] [--order-history] [--cerebro kwargs]
                         [--broker kwargs] [--sizer kwargs] [--strat kwargs]
@@ -217,13 +217,13 @@ optional arguments:
   --broker kwargs      kwargs in key=value format (default: )
   --sizer kwargs       kwargs in key=value format (default: )
   --strat kwargs       kwargs in key=value format (default: )
-  --plot [kwargs]      kwargs in key=value format (default: )` 
+  --plot [kwargs]      kwargs in key=value format (default: )
 ```
 
 ## 示例代码
 
 ```py
-`from __future__ import (absolute_import, division, print_function,
+from __future__ import (absolute_import, division, print_function,
                         unicode_literals)
 
 import argparse
@@ -385,5 +385,5 @@ def parse_args(pargs=None):
     return parser.parse_args(pargs)
 
 if __name__ == '__main__':
-    runstrat()` 
+    runstrat()
 ```

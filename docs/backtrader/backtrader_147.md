@@ -31,7 +31,7 @@
 为了保持一致性，比率是年化的。`sharpe-timereturn`样本并使用以下方式执行：
 
 ```py
-`--annualize --timeframe xxx` 
+--annualize --timeframe xxx
 ```
 
 `xxx`代表`天`、`周`、`月`或`年`（默认）
@@ -59,7 +59,7 @@
 `VWR`（遵循文献）始终以年化形式返回。样本使用以下方式执行：
 
 ```py
-`--timeframe xxx` 
+--timeframe xxx
 ```
 
 `xxx`代表`天`、`周`、`月`或`年`
@@ -79,7 +79,7 @@
 ## 样本用法
 
 ```py
-`$ ./vwr.py --help
+$ ./vwr.py --help
 usage: vwr.py [-h] [--data DATA] [--cash CASH] [--fromdate FROMDATE]
               [--todate TODATE] [--writercsv]
               [--tframe {weeks,months,days,years}] [--sigma-max SIGMA_MAX]
@@ -110,13 +110,13 @@ optional arguments:
   --plot [kwargs], -p [kwargs]
                         Plot the read data applying any kwargs passed For
                         example: --plot style="candle" (to plot candles)
-                        (default: None)` 
+                        (default: None)
 ```
 
 ## 样本代码
 
 ```py
-`from __future__ import (absolute_import, division, print_function,
+from __future__ import (absolute_import, division, print_function,
                         unicode_literals)
 
 import argparse
@@ -249,5 +249,5 @@ def parse_args(pargs=None):
     return parser.parse_args()
 
 if __name__ == '__main__':
-    runstrat()` 
+    runstrat()
 ```

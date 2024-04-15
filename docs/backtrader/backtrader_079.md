@@ -21,7 +21,7 @@
 如果默认值被遵守，**Cerebro**将执行以下等效的用户代码：
 
 ```py
-`import backtrader as bt
+import backtrader as bt
 
 ...
 
@@ -29,13 +29,13 @@ cerebro = bt.Cerebro()  # default kwarg: stdstats=True
 
 cerebro.addobserver(bt.observers.Broker)
 cerebro.addobserver(bt.observers.Trades)
-cerebro.addobserver(bt.observers.BuySell)` 
+cerebro.addobserver(bt.observers.BuySell)
 ```
 
 让我们看看具有这 3 个默认观察者的常规图表（即使没有发出订单，因此没有交易发生，也没有现金和投资组合价值的变化）
 
 ```py
-`from __future__ import (absolute_import, division, print_function,
+from __future__ import (absolute_import, division, print_function,
                         unicode_literals)
 
 import backtrader as bt
@@ -49,7 +49,7 @@ if __name__ == '__main__':
     cerebro.adddata(data)
 
     cerebro.run()
-    cerebro.plot()` 
+    cerebro.plot()
 ```
 
 ![image](img/84e7246cac1bca7906d4e502642c1aa3.png)
@@ -57,7 +57,7 @@ if __name__ == '__main__':
 现在让我们在创建**Cerebro**实例时将`stdstats`的值更改为`False`（也可以在调用`run`时执行）：
 
 ```py
-`cerebro = bt.Cerebro(stdstats=False)` 
+cerebro = bt.Cerebro(stdstats=False)
 ```
 
 现在图表不同了。
@@ -73,22 +73,22 @@ if __name__ == '__main__':
 它只是一个占位符。如果我们回忆一下如何添加默认**观察者**的过程：
 
 ```py
-`...
+...
 cerebro.addobserver(backtrader.observers.Broker)
-...` 
+...
 ```
 
 显而易见的问题是如何访问`Broker`观察者。以下是一个示例，展示了如何从策略的`next`方法中执行：
 
 ```py
-`class MyStrategy(bt.Strategy):
+class MyStrategy(bt.Strategy):
 
     def next(self):
 
         if self.stats.broker.value[0] < 1000.0:
            print('WHITE FLAG ... I LOST TOO MUCH')
         elif self.stats.broker.value[0] > 10000000.0:
-           print('TIME FOR THE VIRGIN ISLANDS ....!!!')` 
+           print('TIME FOR THE VIRGIN ISLANDS ....!!!')
 ```
 
 `Broker`观察者就像数据、指标和策略本身一样也是`Lines`对象。在这种情况下，`Broker`有 2 行：
@@ -102,7 +102,7 @@ cerebro.addobserver(backtrader.observers.Broker)
 实现与指标的非常相似：
 
 ```py
-`class Broker(Observer):
+class Broker(Observer):
     alias = ('CashValue',)
     lines = ('cash', 'value')
 
@@ -110,7 +110,7 @@ cerebro.addobserver(backtrader.observers.Broker)
 
     def next(self):
         self.lines.cash[0] = self._owner.broker.getcash()
-        self.lines.value[0] = value = self._owner.broker.getvalue()` 
+        self.lines.value[0] = value = self._owner.broker.getvalue()
 ```
 
 步骤：
@@ -144,7 +144,7 @@ cerebro.addobserver(backtrader.observers.Broker)
 +   **DrawDown**是`backtrader`生态系统中已经存在的观察者
 
 ```py
-`from __future__ import (absolute_import, division, print_function,
+from __future__ import (absolute_import, division, print_function,
                         unicode_literals)
 
 import argparse
@@ -207,7 +207,7 @@ def runstrat():
     cerebro.plot()
 
 if __name__ == '__main__':
-    runstrat()` 
+    runstrat()
 ```
 
 视觉输出显示了回撤的演变
@@ -217,7 +217,7 @@ if __name__ == '__main__':
 文本输出的一部分：
 
 ```py
-`...
+...
 2006-12-14T23:59:59+00:00, MaxDrawDown: 2.62
 2006-12-15T23:59:59+00:00, DrawDown: 0.22
 2006-12-15T23:59:59+00:00, MaxDrawDown: 2.62
@@ -236,7 +236,7 @@ if __name__ == '__main__':
 2006-12-28T23:59:59+00:00, DrawDown: 0.65
 2006-12-28T23:59:59+00:00, MaxDrawDown: 2.62
 2006-12-29T23:59:59+00:00, DrawDown: 0.06
-2006-12-29T23:59:59+00:00, MaxDrawDown: 2.62` 
+2006-12-29T23:59:59+00:00, MaxDrawDown: 2.62
 ```
 
 注意
@@ -280,7 +280,7 @@ if __name__ == '__main__':
 为了*可见性*，显示将不会沿着价格绘制，而是在单独的轴上。
 
 ```py
-`from __future__ import (absolute_import, division, print_function,
+from __future__ import (absolute_import, division, print_function,
                         unicode_literals)
 
 import math
@@ -313,7 +313,7 @@ class OrderObserver(bt.observer.Observer):
                 self.lines.created[0] = order.created.price
 
             elif order.status in [bt.Order.Expired]:
-                self.lines.expired[0] = order.created.price` 
+                self.lines.expired[0] = order.created.price
 ```
 
 自定义观察者只关心**买入**订单，因为这是一个只买入以试图获利的策略。卖出订单是市价订单，将立即执行。
@@ -333,7 +333,7 @@ Close-SMA CrossOver 策略已更改为：
 最终应用新的**观察者**的策略代码
 
 ```py
-`from __future__ import (absolute_import, division, print_function,
+from __future__ import (absolute_import, division, print_function,
                         unicode_literals)
 
 import datetime
@@ -428,7 +428,7 @@ def runstrat():
     cerebro.plot()
 
 if __name__ == '__main__':
-    runstrat()` 
+    runstrat()
 ```
 
 ## 保存/保留统计信息
@@ -442,7 +442,7 @@ if __name__ == '__main__':
 考虑到`DrawDown`观察者，可以这样做
 
 ```py
-`class MyStrategy(bt.Strategy):
+class MyStrategy(bt.Strategy):
 
     def start(self):
 
@@ -453,7 +453,7 @@ if __name__ == '__main__':
         self.mystats.write(self.data.datetime.date(0).strftime('%Y-%m-%d'))
         self.mystats.write(',%.2f' % self.stats.drawdown.drawdown[-1])
         self.mystats.write(',%.2f' % self.stats.drawdown.maxdrawdown-1])
-        self.mystats.write('\n')` 
+        self.mystats.write('\n')
 ```
 
 要保存索引 0 的值，一旦所有观察者都被处理，可以添加一个自定义观察者作为系统的最后一个观察者，将值保存到 csv 文件中。

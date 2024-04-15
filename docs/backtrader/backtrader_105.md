@@ -33,23 +33,23 @@
 因此，*CSV*数据的格式如下
 
 ```py
-`date, open, high, low, close, volume, npy
+date, open, high, low, close, volume, npy
 2001-12-31, 1.0, 1.0, 1.0, 1.0, 0.5, 3.0
 2002-01-31, 2.0, 2.5, 1.1, 1.2, 3.0, 5.0
-...` 
+...
 ```
 
 即：每月一行。现在数据加载器引擎可以准备好创建一个简单的扩展，与*backtrader*一起提供的通用内置 CSV 加载器。
 
 ```py
-`class NetPayOutData(bt.feeds.GenericCSVData):
+class NetPayOutData(bt.feeds.GenericCSVData):
     lines = ('npy',)  # add a line containing the net payout yield
     params = dict(
         npy=6,  # npy field is in the 6th column (0 based index)
         dtformat='%Y-%m-%d',  # fix date format a yyyy-mm-dd
         timeframe=bt.TimeFrame.Months,  # fixed the timeframe
         openinterest=-1,  # -1 indicates there is no openinterest field
-    )` 
+    )
 ```
 
 那就是。注意添加基本数据到`ohlcv`数据流是多么容易。
@@ -101,14 +101,14 @@
 首先是声明和参数。
 
 ```py
-`class St(bt.Strategy):
+class St(bt.Strategy):
     params = dict(
         selcperc=0.10,  # percentage of stocks to select from the universe
         rperiod=1,  # period for the returns calculation, default 1 period
         vperiod=36,  # lookback period for volatility - default 36 periods
         mperiod=12,  # lookback period for momentum - default 12 periods
         reserve=0.05  # 5% reserve capital
-    )` 
+    )
 ```
 
 注意，上面未提及的内容已添加，即参数`reserve=0.05`（即*5%*），用于计算每只股票的百分比分配，保留一定资金在银行中。虽然对于模拟，人们可能想要使用 100%的资本，但这样做可能会遇到一些问题，如价格差距、浮点精度等，最终可能会错过一些市场入场机会。
@@ -117,7 +117,7 @@
 
 ```py
  `def log(self, arg):
-        print('{}  {}'.format(self.datetime.date(), arg))` 
+        print('{}  {}'.format(self.datetime.date(), arg))
 ```
 
 在`__init__`方法的开头，计算要排名的股票数量，并应用保留资本参数以确定银行的每只股票百分比。
@@ -131,7 +131,7 @@
         # reserve kept to make sure orders are not rejected due to
         # margin. Prices are calculated when known (close), but orders can only
         # be executed next day (opening price). Price can gap upwards
-        self.perctarget = (1.0 - self.p.reserve) % self.selnum` 
+        self.perctarget = (1.0 - self.p.reserve) % self.selnum
 ```
 
 最后，初始化完成，计算每只股票的波动率和动量指标，然后将其应用于每只股票的排名公式计算中。
@@ -144,7 +144,7 @@
 
         # simple rank formula: (momentum * net payout) / volatility
         # the highest ranked: low vol, large momentum, large payout
-        self.ranks = {d: d.npy * m / v for d, v, m in zip(self.datas, vs, ms)}` 
+        self.ranks = {d: d.npy * m / v for d, v, m in zip(self.datas, vs, ms)}
 ```
 
 现在是每个月迭代的时候了。排名在`self.ranks`字典中可用。每次迭代都必须对键/值对进行排序，以确定哪些项必须离开，哪些项必须成为组合的一部分（保留或添加）。
@@ -156,7 +156,7 @@
             self.ranks.items(),  # get the (d, rank), pair
             key=lambda x: x[1][0],  # use rank (elem 1) and current time "0"
             reverse=True,  # highest ranked 1st ... please
-        )` 
+        )
 ```
 
 可迭代物按照相反顺序排序，因为排名公式为排名靠前的股票提供更高的分数。
@@ -170,7 +170,7 @@
         rtop = dict(ranks[:self.selnum])
 
         # For logging purposes of stocks leaving the portfolio
-        rbot = dict(ranks[self.selnum:])` 
+        rbot = dict(ranks[self.selnum:])
 ```
 
 这里发生了一些 Python 的诡计，因为使用了一个`dict`。原因是，如果将排名靠前的股票放入一个`list`中，*Python*会在内部使用运算符`==`来检查运算符`in`的存在。尽管不太可能，但两只股票可能在同一天具有相同的值。使用`dict`时，检查项存在性时会使用哈希值作为键的一部分。
@@ -181,7 +181,7 @@
 
 ```py
  `# prepare quick lookup list of stocks currently holding a position
-        posdata = [d for d, pos in self.getpositions().items() if pos]` 
+        posdata = [d for d, pos in self.getpositions().items() if pos]
 ```
 
 ### 重新平衡 2：卖出不再排名靠前的股票
@@ -193,7 +193,7 @@
         # do this first to issue sell orders and free cash
         for d in (d for d in posdata if d not in rtop):
             self.log('Exit {} - Rank {:.2f}'.format(d._name, rbot[d][0]))
-            self.order_target_percent(d, target=0.0)` 
+            self.order_target_percent(d, target=0.0)
 ```
 
 当前拥有仓位但不再排名靠前的股票被出售（即`target=0.0`）。
@@ -211,7 +211,7 @@
         for d in (d for d in posdata if d in rtop):
             self.log('Rebal {} - Rank {:.2f}'.format(d._name, rtop[d][0]))
             self.order_target_percent(d, target=self.perctarget)
-            del rtop[d]  # remove it, to simplify next iteration` 
+            del rtop[d]  # remove it, to simplify next iteration
 ```
 
 在将新股票添加到投资组合之前，重新平衡已有仓位的股票，因为新股票只会发布`buy`订单并消耗现金。在重新平衡后从`rtop[data].pop()`中移除现有股票后，`rtop`中剩余的股票是将新添加到投资组合中的股票。
@@ -221,7 +221,7 @@
         # do this last, as this will generate buy orders consuming cash
         for d in rtop:
             self.log('Enter {} - Rank {:.2f}'.format(d._name, rtop[d][0]))
-            self.order_target_percent(d, target=self.perctarget)` 
+            self.order_target_percent(d, target=self.perctarget)
 ```
 
 ## 运行所有并评估它！
@@ -229,7 +229,7 @@
 拥有数据加载器类和策略是不够的。就像任何其他框架一样，需要一些样板。以下代码使其成为可能。
 
 ```py
-`def run(args=None):
+def run(args=None):
     args = parse_args(args)
 
     cerebro = bt.Cerebro()
@@ -262,7 +262,7 @@
 
     # Basic performance evaluation ... final value ... minus starting cash
     pnl = cerebro.broker.get_value() - args.cash
-    print('Profit ... or Loss: {:.2f}'.format(pnl))` 
+    print('Profit ... or Loss: {:.2f}'.format(pnl))
 ```
 
 在以下情况下完成：
@@ -294,7 +294,7 @@
 最后，作品的大部分呈现为整体。享受吧！
 
 ```py
-`import argparse
+import argparse
 import datetime
 import glob
 import os.path
@@ -442,5 +442,5 @@ def parse_args(pargs=None):
     return parser.parse_args(pargs)
 
 if __name__ == '__main__':
-    run()` 
+    run()
 ```

@@ -21,7 +21,7 @@
 *backtrader* 生态系统中的一个 *filler* 可以是符合以下签名的任何 *callable*：
 
 ```py
-`callable(order, price, ago)` 
+callable(order, price, ago)
 ```
 
 其中：
@@ -45,9 +45,9 @@
 可调用对象可以是函数，也可以是例如支持 `__call__` 方法的类的实例，如：
 
 ```py
-`class MyFiller(object):
+class MyFiller(object):
     def __call__(self, order, price, ago):
-        pass` 
+        pass
 ```
 
 ## 向经纪人添加一个 Filler
@@ -55,21 +55,21 @@
 最直接的方法是使用 `set_filler`：
 
 ```py
-`import backtrader as bt
+import backtrader as bt
 
 cerebro = Cerebro()
-cerebro.broker.set_filler(bt.broker.fillers.FixedSize())` 
+cerebro.broker.set_filler(bt.broker.fillers.FixedSize())
 ```
 
 第二种选择是完全替换 `broker`，虽然这可能只适用于已重写部分功能的 `BrokerBack` 的子类：
 
 ```py
-`import backtrader as bt
+import backtrader as bt
 
 cerebro = Cerebro()
 filler = bt.broker.fillers.FixedSize()
 newbroker = bt.broker.BrokerBack(filler=filler)
-cerebro.broker = newbroker` 
+cerebro.broker = newbroker
 ```
 
 ## 示例

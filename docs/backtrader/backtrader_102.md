@@ -49,7 +49,7 @@
 标准*backtrader*发行版中没有`DonchianChannels`的实现，但可以很快制作。一个参数将决定当前栏是否用于通道计算。
 
 ```py
-`class DonchianChannels(bt.Indicator):
+class DonchianChannels(bt.Indicator):
   '''
  Params Note:
  - ``lookback`` (default: -1)
@@ -84,7 +84,7 @@
 
         self.l.dch = bt.ind.Highest(hi, period=self.p.period)
         self.l.dcl = bt.ind.Lowest(lo, period=self.p.period)
-        self.l.dcm = (self.l.dch + self.l.dcl) / 2.0  # avg of the above` 
+        self.l.dcm = (self.l.dch + self.l.dcl) / 2.0  # avg of the above
 ```
 
 使用`lookback=-1`参数，一个示例图表看起来像这样（放大后）
@@ -100,10 +100,10 @@
 程序员首先去商业平台，并使用*唐奇安通道*实现一个策略。因为图表上没有显示突破，所以必须将当前价格值与前一个通道值进行比较。如下所示
 
 ```py
-`if price0 > channel_high_1:
+if price0 > channel_high_1:
     sell()
 elif price0 < channel_low_1:
-    buy()` 
+    buy()
 ```
 
 当前价格，即：`price0`与`1`周期前的高/低通道值进行比较（因此有`_1`后缀）
@@ -118,7 +118,7 @@ elif price0 < channel_low_1:
         if self.data[0] > self.donchian.dch[-1]:
             self.sell()
         elif self.data[0] < self.donchian.dcl[-1]:
-            self.buy()` 
+            self.buy()
 ```
 
 这是错误的！！！因为突破发生在比较的同时。正确的代码：
@@ -131,7 +131,7 @@ elif price0 < channel_low_1:
         if self.data[0] > self.donchian.dch[0]:
             self.sell()
         elif self.data[0] < self.donchian.dcl[0]:
-            self.buy()` 
+            self.buy()
 ```
 
 虽然这只是一个小例子，但它展示了由于指标被编码为`1`栏差异而导致的回测结果可能会有所不同。这看起来可能并不多，但当错误的交易开始时，它肯定会产生影响。

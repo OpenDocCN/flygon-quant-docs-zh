@@ -21,7 +21,7 @@
 +   对实际工厂方法没有任何更改：`__new__`，它仍然使用 `idx` 参数来返回 `_STRATS` 类属性中给定索引处的任何内容
 
 ```py
-`class StFetcher(object):
+class StFetcher(object):
     _STRATS = []
 
     @classmethod
@@ -36,7 +36,7 @@
         idx = kwargs.pop('idx')
 
         obj = cls._STRATSidx
-        return obj` 
+        return obj
 ```
 
 如下：
@@ -48,15 +48,15 @@
 示例中的策略不需要重新设计。使用 `StFetcher` 的 `register` 方法进行装饰就足以将它们添加到选择池中。
 
 ```py
-`@StFetcher.register
-class St0(bt.SignalStrategy):` 
+@StFetcher.register
+class St0(bt.SignalStrategy):
 ```
 
 和
 
 ```py
-`@StFetcher.register
-class St1(bt.SignalStrategy):` 
+@StFetcher.register
+class St1(bt.SignalStrategy):
 ```
 
 # 利用 `COUNT`
@@ -64,18 +64,18 @@ class St1(bt.SignalStrategy):`
 在将策略工厂添加到系统中并使用 `optstrategy` 时，过去的手动 `[0, 1]` 列表可以完全替换为对 `StFetcher.COUNT()` 的透明调用。硬编码已经结束。
 
 ```py
- `cerebro.optstrategy(StFetcher, idx=StFetcher.COUNT())` 
+ `cerebro.optstrategy(StFetcher, idx=StFetcher.COUNT())
 ```
 
 ## 一个样本运行
 
 ```py
-`$ ./stselection-revisited.py --optreturn
+$ ./stselection-revisited.py --optreturn
 Strat 0 Name OptReturn:
   - analyzer: OrderedDict([(u'rtot', 0.04847392369449283), (u'ravg', 9.467563221580632e-05), (u'rnorm', 0.02414514457151587), (u'rnorm100', 2.414514457151587)])
 
 Strat 1 Name OptReturn:
-  - analyzer: OrderedDict([(u'rtot', 0.05124714332260593), (u'ravg', 0.00010009207680196471), (u'rnorm', 0.025543999840699633), (u'rnorm100', 2.5543999840699634)])` 
+  - analyzer: OrderedDict([(u'rtot', 0.05124714332260593), (u'ravg', 0.00010009207680196471), (u'rnorm', 0.025543999840699633), (u'rnorm100', 2.5543999840699634)])
 ```
 
 我们的两种策略已经运行并且（如预期）产生了不同的结果。
@@ -91,7 +91,7 @@ Strat 1 Name OptReturn:
 ### 样本用法
 
 ```py
-`$ ./stselection-revisited.py --help
+$ ./stselection-revisited.py --help
 usage: strategy-selection.py [-h] [--data DATA] [--maxcpus MAXCPUS]
                              [--optreturn]
 
@@ -102,7 +102,7 @@ optional arguments:
   --data DATA        Data to be read in (default:
                      ../../datas/2005-2006-day-001.txt)
   --maxcpus MAXCPUS  Limit the numer of CPUs to use (default: None)
-  --optreturn        Return reduced/mocked strategy object (default: False)` 
+  --optreturn        Return reduced/mocked strategy object (default: False)
 ```
 
 ### 代码
@@ -110,7 +110,7 @@ optional arguments:
 已经包含在 backtrader 的源代码中
 
 ```py
-`from __future__ import (absolute_import, division, print_function,
+from __future__ import (absolute_import, division, print_function,
                         unicode_literals)
 
 import argparse
@@ -186,5 +186,5 @@ def parse_args(pargs=None):
     return parser.parse_args(pargs)
 
 if __name__ == '__main__':
-    runstrat()` 
+    runstrat()
 ```

@@ -25,7 +25,7 @@
 未启用多个 id 的执行：
 
 ```py
-`$ ./multitrades.py --plot` 
+$ ./multitrades.py --plot
 ```
 
 结果图表显示所有交易都携带 id `0`，因此无法区分。
@@ -35,7 +35,7 @@
 第二次执行通过在 0、1 和 2 之间循环实现多交易：
 
 ```py
-`$ ./multitrades.py --plot --mtrade` 
+$ ./multitrades.py --plot --mtrade
 ```
 
 现在 3 个不同的标记交替显示，每个交易都可以使用`tradeid`成员进行区分。
@@ -53,7 +53,7 @@
 现在，自定义观察者的代码
 
 ```py
-`from __future__ import (absolute_import, division, print_function,
+from __future__ import (absolute_import, division, print_function,
                         unicode_literals)
 
 import math
@@ -80,13 +80,13 @@ class MTradeObserver(bt.observer.Observer):
             if not trade.isclosed:
                 continue
 
-            self.lines[trade.tradeid][0] = trade.pnlcomm` 
+            self.lines[trade.tradeid][0] = trade.pnlcomm
 ```
 
 主要脚本用法：
 
 ```py
-`$ ./multitrades.py --help
+$ ./multitrades.py --help
 usage: multitrades.py [-h] [--data DATA] [--fromdate FROMDATE]
                       [--todate TODATE] [--mtrade] [--period PERIOD]
                       [--onlylong] [--cash CASH] [--comm COMM] [--mult MULT]
@@ -112,13 +112,13 @@ optional arguments:
   --stake STAKE         Stake to apply in each operation
   --plot, -p            Plot the read data
   --numfigs NUMFIGS, -n NUMFIGS
-                        Plot using numfigs figures` 
+                        Plot using numfigs figures
 ```
 
 脚本的代码。
 
 ```py
-`from __future__ import (absolute_import, division, print_function,
+from __future__ import (absolute_import, division, print_function,
                         unicode_literals)
 
 import argparse
@@ -309,5 +309,5 @@ def parse_args():
     return parser.parse_args()
 
 if __name__ == '__main__':
-    runstrategy()` 
+    runstrategy()
 ```

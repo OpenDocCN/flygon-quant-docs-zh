@@ -25,9 +25,9 @@
 成员属性：
 
 ```py
-`* size (int): current size of the position
+* size (int): current size of the position
 
-* price (float): current price of the position` 
+* price (float): current price of the position
 ```
 
 Position 实例可以使用 len(position) 进行测试，以查看大小是否为空

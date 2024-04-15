@@ -23,7 +23,7 @@
 使用*补偿*概念，`backtrader`添加了一种让用户与平台通信的方式，即一个数据源上的事物会对另一个数据源产生补偿效果。 使用模式
 
 ```py
-`import backtrader as bt
+import backtrader as bt
 
 cerebro = bt.Cerebro()
 
@@ -36,7 +36,7 @@ cerebro.adddata(data1)
 
 ...
 
-cerebro.run()` 
+cerebro.run()
 ```
 
 ## 将所有内容放在一起
@@ -67,7 +67,7 @@ cerebro.run()`
   future expiration would require activating `cheat-on-close` to
   make sure the orders are executed when the future expires. This is
   not needed in this sample, because the expiration is being chosen
-  at random.` 
+  at random.
 ```
 
 +   注意策略
@@ -96,7 +96,7 @@ cerebro.run()`
 执行：
 
 ```py
-`$ ./future-spot.py --no-comp` 
+$ ./future-spot.py --no-comp
 ```
 
 使用这个图形输出。
@@ -114,7 +114,7 @@ cerebro.run()`
 只能想象如果应用相同的逻辑而不进行*补偿*会发生什么。 让我们试试：
 
 ```py
-`$ ./future-spot.py --no-comp` 
+$ ./future-spot.py --no-comp
 ```
 
 和输出
@@ -130,20 +130,20 @@ cerebro.run()`
 ## 示例用法
 
 ```py
-`$ ./future-spot.py --help
+$ ./future-spot.py --help
 usage: future-spot.py [-h] [--no-comp]
 
 Compensation example
 
 optional arguments:
   -h, --help  show this help message and exit
-  --no-comp` 
+  --no-comp
 ```
 
 ## 示例代码
 
 ```py
-`from __future__ import (absolute_import, division, print_function,
+from __future__ import (absolute_import, division, print_function,
                         unicode_literals)
 
 import argparse
@@ -209,5 +209,5 @@ def parse_args(pargs=None):
     return parser.parse_args(pargs)
 
 if __name__ == '__main__':
-    runstrat()` 
+    runstrat()
 ```

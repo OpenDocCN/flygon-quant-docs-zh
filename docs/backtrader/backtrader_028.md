@@ -25,14 +25,14 @@
 有关插入方式的快速提醒：
 
 ```py
-`import backtrader as bt
+import backtrader as bt
 import backtrader.feeds as btfeeds
 
 data = btfeeds.YahooFinanceCSVData(dataname='wheremydatacsvis.csv')
 
 cerebro = bt.Cerebro()
 
-cerebro.adddata(data)  # a 'name' parameter can be passed for plotting purposes` 
+cerebro.adddata(data)  # a 'name' parameter can be passed for plotting purposes
 ```
 
 ## 数据源常见参数
@@ -134,7 +134,7 @@ cerebro.adddata(data)  # a 'name' parameter can be passed for plotting purposes`
 代码：
 
 ```py
-`import datetime
+import datetime
 import backtrader as bt
 import backtrader.feeds as btfeeds
 
@@ -160,7 +160,7 @@ data = btfeeds.GenericCSVData(
     openinterest=-1
 )
 
-...` 
+...
 ```
 
 稍作修改的要求：
@@ -182,7 +182,7 @@ data = btfeeds.GenericCSVData(
 代码：
 
 ```py
-`import datetime
+import datetime
 import backtrader as bt
 import backtrader.feeds as btfeed
 
@@ -208,13 +208,13 @@ data = btfeeds.GenericCSVData(
     close=5,
     volume=6,
     openinterest=-1
-)` 
+)
 ```
 
 这也可以通过子类化来*永久*实现：
 
 ```py
-`import datetime
+import datetime
 import backtrader.feeds as btfeed
 
 class MyHLOC(btfreeds.GenericCSVData):
@@ -234,11 +234,11 @@ class MyHLOC(btfreeds.GenericCSVData):
     ('close', 5),
     ('volume', 6),
     ('openinterest', -1)
-)` 
+)
 ```
 
 现在只需提供 `dataname`，就可以重用这个新类：
 
 ```py
-`data = btfeeds.MyHLOC(dataname='mydata.csv')` 
+data = btfeeds.MyHLOC(dataname='mydata.csv')
 ```

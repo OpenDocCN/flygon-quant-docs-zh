@@ -37,7 +37,7 @@
 默认实现将使用以下公式：
 
 ```py
-`days * abs(size) * price * (interest / 365)` 
+days * abs(size) * price * (interest / 365)
 ```
 
 其中：
@@ -49,7 +49,7 @@
 为了改变`CommissionInfo`的公式子类化是必需的。需要被重写的方法是：
 
 ```py
-`def _get_credit_interest(self, size, price, days, dt0, dt1):
+def _get_credit_interest(self, size, price, days, dt0, dt1):
   '''
  This method returns  the cost in terms of credit interest charged by
  the broker.
@@ -78,18 +78,18 @@
 
  ``dt0`` and ``dt1`` are not used in the default implementation and are
  provided as extra input for overridden methods
- '''` 
+ '''
 ```
 
 可能是*经纪人*在计算利率时不考虑周末或银行假日。在这种情况下，这个子类会奏效
 
 ```py
-`import backtrader as bt
+import backtrader as bt
 
 class MyCommissionInfo(bt.CommInfo):
 
    def _get_credit_interest(self, size, price, days, dt0, dt1):
-       return 1.0 * abs(size) * price * (self.p.interest / 365.0)` 
+       return 1.0 * abs(size) * price * (self.p.interest / 365.0)
 ```
 
 在这种情况下，在公式中：

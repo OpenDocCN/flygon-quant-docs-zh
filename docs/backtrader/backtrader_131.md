@@ -11,13 +11,13 @@
 一切仍然在标准的 `cerebro.plot` 之上。例如：
 
 ```py
-`cerebro.plot(start=datetime.date(2005, 7, 1), end=datetime.date(2006, 1, 31))` 
+cerebro.plot(start=datetime.date(2005, 7, 1), end=datetime.date(2006, 1, 31))
 ```
 
 对于人类而言，这是一种直接的方法。具有扩展功能的人类实际上可以尝试将索引映射到 `datetime` 时间戳，如下所示：
 
 ```py
-`cerebro.plot(start=75, end=185)` 
+cerebro.plot(start=75, end=185)
 ```
 
 一个非常标准的示例包含了 *简单移动平均*（在数据绘图中）、*随机指标*（独立绘图）和 *随机指标* 线的 *交叉*，如下所示。`cerebro.plot` 的参数作为命令行参数传递。
@@ -25,7 +25,7 @@
 使用 `date` 方法进行执行：
 
 ```py
-`./partial-plot.py --plot 'start=datetime.date(2005, 7, 1),end=datetime.date(2006, 1, 31)'` 
+./partial-plot.py --plot 'start=datetime.date(2005, 7, 1),end=datetime.date(2006, 1, 31)'
 ```
 
 Python 中的 `eval` 魔法允许在命令行中直接编写 `datetime.date` 并将其实际映射到合理的内容。输出图表
@@ -35,7 +35,7 @@ Python 中的 `eval` 魔法允许在命令行中直接编写 `datetime.date` 并
 让我们与完整的图形进行比较，看看数据实际上是从两端跳过的：
 
 ```py
-`./partial-plot.py --plot` 
+./partial-plot.py --plot
 ```
 
 Python 中的 `eval` 魔法允许在命令行中直接编写 `datetime.date` 并将其实际映射到合理的内容。输出图表
@@ -45,7 +45,7 @@ Python 中的 `eval` 魔法允许在命令行中直接编写 `datetime.date` 并
 ## 示例用法
 
 ```py
-`$ ./partial-plot.py --help
+$ ./partial-plot.py --help
 usage: partial-plot.py [-h] [--data0 DATA0] [--fromdate FROMDATE]
                        [--todate TODATE] [--cerebro kwargs] [--broker kwargs]
                        [--sizer kwargs] [--strat kwargs] [--plot [kwargs]]
@@ -62,13 +62,13 @@ optional arguments:
   --broker kwargs      kwargs in key=value format (default: )
   --sizer kwargs       kwargs in key=value format (default: )
   --strat kwargs       kwargs in key=value format (default: )
-  --plot [kwargs]      kwargs in key=value format (default: )` 
+  --plot [kwargs]      kwargs in key=value format (default: )
 ```
 
 ## 代码示例
 
 ```py
-`from __future__ import (absolute_import, division, print_function,
+from __future__ import (absolute_import, division, print_function,
                         unicode_literals)
 
 import argparse
@@ -159,5 +159,5 @@ def parse_args(pargs=None):
     return parser.parse_args(pargs)
 
 if __name__ == '__main__':
-    runstrat()` 
+    runstrat()
 ```

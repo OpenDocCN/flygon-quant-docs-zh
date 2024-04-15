@@ -33,7 +33,7 @@
 ```py
  `def next(self):
         # Apply 50% of the portfolio to buy the main asset
-        self.order_target_percent(target=0.5)` 
+        self.order_target_percent(target=0.5)
 ```
 
 以下发生了：
@@ -61,7 +61,7 @@
 在分数场景中，该方案的方法是：`getsize(price, cash)`，其具有以下文档字符串
 
 ```py
-`Returns the needed size to meet a cash operation at a given price` 
+Returns the needed size to meet a cash operation at a given price
 ```
 
 方案与经纪人密切相关，通过经纪人 API，可以在系统中添加方案。
@@ -75,10 +75,10 @@
 这可以通过扩展现有的基础方案`CommissionInfo`来轻松实现。
 
 ```py
-`class CommInfoFractional(bt.CommissionInfo):
+class CommInfoFractional(bt.CommissionInfo):
     def getsize(self, price, cash):
   '''Returns fractional size for cash operation @price'''
-        return self.p.leverage * (cash / price)` 
+        return self.p.leverage * (cash / price)
 ```
 
 同上并完成。通过子类化`CommissionInfo`并编写一行方法，实现了目标。因为原始方案定义支持`leverage`，这一点已经考虑在内，以防加密货币可以使用杠杆购买（其中默认值为`1.0`，即：无杠杆）
@@ -87,7 +87,7 @@
 
 ```py
  `if args.fractional:  # use the fractional scheme if requested
-        cerebro.broker.addcommissioninfo(CommInfoFractional())` 
+        cerebro.broker.addcommissioninfo(CommInfoFractional())
 ```
 
 也就是说：子类方案的一个实例（注意用`()`进行实例化）被添加了。如上所述，未设置`name`参数，这意味着它将应用于系统中的所有资产。
@@ -99,7 +99,7 @@
 **整数运行：无分数 - 无趣**
 
 ```py
-`$ ./fractional-sizes.py --plot
+$ ./fractional-sizes.py --plot
 2005-02-14,3079.93,3083.38,3065.27,3075.76,0.00
 2005-02-15,3075.20,3091.64,3071.08,3086.95,0.00
 ...
@@ -108,7 +108,7 @@
 2005-03-22,Sell Order Completed - Size: -16 @Price: 3040.55 Value: -48648.80 Comm: 0.00
 2005-03-22,Trade Opened  - Size -16 @Price 3040.55
 2005-03-22,3040.55,3053.18,3021.66,3050.44,0.00
-...` 
+...
 ```
 
 一个大小为`16`单位的短期交易已经开启。由于显而易见的原因，整个日志未显示，其中包含许多其他操作，都是以整数大小进行交易。
@@ -120,7 +120,7 @@
 经过分数的艰苦子类化和一行代码的工作后...
 
 ```py
-`$ ./fractional-sizes.py --fractional --plot
+$ ./fractional-sizes.py --fractional --plot
 2005-02-14,3079.93,3083.38,3065.27,3075.76,0.00
 2005-02-15,3075.20,3091.64,3071.08,3086.95,0.00
 ...
@@ -129,7 +129,7 @@
 2005-03-22,Sell Order Completed - Size: -16.457437774427774 @Price: 3040.55 Value: -50039.66 Comm: 0.00
 2005-03-22,Trade Opened  - Size -16.457437774427774 @Price 3040.55
 2005-03-22,3040.55,3053.18,3021.66,3050.44,0.00
-...` 
+...
 ```
 
 `V` 为胜利。短期交易已经通过相同的交叉方式开启，但这次是以`-16.457437774427774`的分数大小。
@@ -145,7 +145,7 @@
 # 该脚本
 
 ```py
-`#!/usr/bin/env python
+#!/usr/bin/env python
 # -*- coding: utf-8; py-indent-offset:4 -*-
 ###############################################################################
 # Copyright (C) 2019 Daniel Rodriguez - MIT License
@@ -309,5 +309,5 @@ def parse_args(pargs=None):
     return pargs
 
 if __name__ == '__main__':
-    run()` 
+    run()
 ```

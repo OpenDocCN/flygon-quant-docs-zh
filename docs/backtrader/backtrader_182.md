@@ -67,7 +67,7 @@ backtrader 支持同时使用不同数据源，因此在大多数情况下可能
 该脚本可以接受参数以修改上述设置，如帮助文本中所示：
 
 ```py
-`$ ./multidata-strategy.py --help
+$ ./multidata-strategy.py --help
 usage: multidata-strategy.py [-h] [--data0 DATA0] [--data1 DATA1]
                              [--fromdate FROMDATE] [--todate TODATE]
                              [--period PERIOD] [--cash CASH]
@@ -92,13 +92,13 @@ optional arguments:
   --stake STAKE         Stake to apply in each operation
   --plot, -p            Plot the read data
   --numfigs NUMFIGS, -n NUMFIGS
-                        Plot using numfigs figures` 
+                        Plot using numfigs figures
 ```
 
 标准执行结果：
 
 ```py
-`$ ./multidata-strategy.py
+$ ./multidata-strategy.py
 2003-02-11T23:59:59+00:00, BUY CREATE , 9.14
 2003-02-12T23:59:59+00:00, BUY COMPLETE, 11.14
 2003-02-12T23:59:59+00:00, SELL CREATE , 9.09
@@ -116,7 +116,7 @@ optional arguments:
 ==================================================
 Starting Value - 100000.00
 Ending   Value - 99959.26
-==================================================` 
+==================================================
 ```
 
 经过两年的执行后，该策略：
@@ -132,7 +132,7 @@ Ending   Value - 99959.26
 以及脚本（已添加到`backtrader`源分发的`samples/multidata-strategy`目录下。
 
 ```py
-`from __future__ import (absolute_import, division, print_function,
+from __future__ import (absolute_import, division, print_function,
                         unicode_literals)
 
 import argparse
@@ -300,5 +300,5 @@ def parse_args():
     return parser.parse_args()
 
 if __name__ == '__main__':
-    runstrategy()` 
+    runstrategy()
 ```

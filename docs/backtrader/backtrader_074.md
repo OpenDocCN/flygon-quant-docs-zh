@@ -53,27 +53,27 @@
 还提供了一些其他别名，尽管它们可能是多余的：
 
 ```py
-`* `self.dataX_Y` where X is a reference to `self.datas[X]` and `Y`
-  refers to the line, finally pointing to: `self.datas[X].lines[Y]`` 
+* `self.dataX_Y` where X is a reference to `self.datas[X]` and `Y`
+  refers to the line, finally pointing to: `self.datas[X].lines[Y]`
 ```
 
 如果线条有名称，还可以获得以下内容：
 
 ```py
-`* `self.dataX_Name` which resolves to `self.datas[X].Name` returning
-  the line by name rather than by index` 
+* `self.dataX_Name` which resolves to `self.datas[X].Name` returning
+  the line by name rather than by index
 ```
 
 对于第一个数据，最后两个快捷方式也可用，无需初始的 `X` 数字引用。例如：
 
 ```py
-`* `self.data_2` refers to `self.datas[0].lines[2]`` 
+* `self.data_2` refers to `self.datas[0].lines[2]`
 ```
 
 和
 
 ```py
-`* `self.data_close` refers to `self.datas[0].close`` 
+* `self.data_close` refers to `self.datas[0].close`
 ```
 
 ### 返回分析结果
@@ -133,7 +133,7 @@
 尽可能简单：
 
 ```py
-`from __future__ import (absolute_import, division, print_function,
+from __future__ import (absolute_import, division, print_function,
                         unicode_literals)
 
 import datetime
@@ -160,14 +160,14 @@ cerebro.addanalyzer(btanalyzers.SharpeRatio, _name='mysharpe')
 thestrats = cerebro.run()
 thestrat = thestrats[0]
 
-print('Sharpe Ratio:', thestrat.analyzers.mysharpe.get_analysis())` 
+print('Sharpe Ratio:', thestrat.analyzers.mysharpe.get_analysis())
 ```
 
 执行它（已将其存储在 `analyzer-test.py` 中：
 
 ```py
-`$ ./analyzer-test.py
-Sharpe Ratio: {'sharperatio': 11.647332609673256}` 
+$ ./analyzer-test.py
+Sharpe Ratio: {'sharperatio': 11.647332609673256}
 ```
 
 没有绘图，因为 `SharpeRatio` 是在计算结束时的单个值。
@@ -187,7 +187,7 @@ Sharpe Ratio: {'sharperatio': 11.647332609673256}`
 `SharpeRatio`的代码作为基础（简化版）
 
 ```py
-`from __future__ import (absolute_import, division, print_function,
+from __future__ import (absolute_import, division, print_function,
                         unicode_literals)
 
 import operator
@@ -220,7 +220,7 @@ class SharpeRatio(Analyzer):
         self.ratio = retavg / retdev
 
     def get_analysis(self):
-        return dict(sharperatio=self.ratio)` 
+        return dict(sharperatio=self.ratio)
 ```
 
 代码可以分解为：

@@ -35,13 +35,13 @@
 考虑到这一点，如果我们想象一个在初始化过程中创建的简单移动平均策略：
 
 ```py
-`self.sma = SimpleMovingAverage(.....)` 
+self.sma = SimpleMovingAverage(.....)
 ```
 
 访问当前移动平均线的最简单和最简单的方法：
 
 ```py
-`av = self.sma[0]` 
+av = self.sma[0]
 ```
 
 无需知道已处理了多少个条/分钟/天/月，因为“0”唯一标识当前时刻。
@@ -49,7 +49,7 @@
 按照 Python 的传统，通过*-1*来访问“最后”输出值：
 
 ```py
-`previous_value = self.sma[-1]` 
+previous_value = self.sma[-1]
 ```
 
 当然，早期的输出值可以用-2、-3 等来访问
@@ -61,7 +61,7 @@
 让我们开始吧。
 
 ```py
-`from __future__ import (absolute_import, division, print_function,
+from __future__ import (absolute_import, division, print_function,
                         unicode_literals)
 
 import backtrader as bt
@@ -73,14 +73,14 @@ if __name__ == '__main__':
 
     cerebro.run()
 
-    print('Final Portfolio Value: %.2f' % cerebro.broker.getvalue())` 
+    print('Final Portfolio Value: %.2f' % cerebro.broker.getvalue())
 ```
 
 执行后输出为：
 
 ```py
-`Starting Portfolio Value: 10000.00
-Final Portfolio Value: 10000.00` 
+Starting Portfolio Value: 10000.00
+Final Portfolio Value: 10000.00
 ```
 
 在这个例子中：
@@ -108,7 +108,7 @@ Final Portfolio Value: 10000.00`
 在金融世界中，确实只有“失败者”才从 10k 开始。让我们改变现金并再次运行示例。
 
 ```py
-`from __future__ import (absolute_import, division, print_function,
+from __future__ import (absolute_import, division, print_function,
                         unicode_literals)
 
 import backtrader as bt
@@ -121,14 +121,14 @@ if __name__ == '__main__':
 
     cerebro.run()
 
-    print('Final Portfolio Value: %.2f' % cerebro.broker.getvalue())` 
+    print('Final Portfolio Value: %.2f' % cerebro.broker.getvalue())
 ```
 
 执行后输出为：
 
 ```py
-`Starting Portfolio Value: 1000000.00
-Final Portfolio Value: 1000000.00` 
+Starting Portfolio Value: 1000000.00
+Final Portfolio Value: 1000000.00
 ```
 
 任务完成。让我们转向风云变幻的水域。
@@ -140,7 +140,7 @@ Final Portfolio Value: 1000000.00`
 因此... 没有 *Data Feed* -> **没趣**。让我们给这个不断增长的示例添加一个。
 
 ```py
-`from __future__ import (absolute_import, division, print_function,
+from __future__ import (absolute_import, division, print_function,
                         unicode_literals)
 
 import datetime  # For datetime objects
@@ -181,14 +181,14 @@ if __name__ == '__main__':
     cerebro.run()
 
     # Print out the final result
-    print('Final Portfolio Value: %.2f' % cerebro.broker.getvalue())` 
+    print('Final Portfolio Value: %.2f' % cerebro.broker.getvalue())
 ```
 
 执行后的输出为：
 
 ```py
-`Starting Portfolio Value: 1000000.00
-Final Portfolio Value: 1000000.00` 
+Starting Portfolio Value: 1000000.00
+Final Portfolio Value: 1000000.00
 ```
 
 模板代码的数量略有增加，因为我们添加了：
@@ -214,7 +214,7 @@ Yahoo Online 以日期降序发送 CSV 数据，这不是标准约定。*reverse
 **DataSeries**（*Data Feeds* 中的基础类）对象具有访问已知 OHLC（开盘价 最高价 最低价 收盘价）日常值的别名。这应该能够简化我们的打印逻辑的创建。
 
 ```py
-`from __future__ import (absolute_import, division, print_function,
+from __future__ import (absolute_import, division, print_function,
                         unicode_literals)
 
 import datetime  # For datetime objects
@@ -275,13 +275,13 @@ if __name__ == '__main__':
     cerebro.run()
 
     # Print out the final result
-    print('Final Portfolio Value: %.2f' % cerebro.broker.getvalue())` 
+    print('Final Portfolio Value: %.2f' % cerebro.broker.getvalue())
 ```
 
 执行后的输出为：
 
 ```py
-`Starting Portfolio Value: 100000.00
+Starting Portfolio Value: 100000.00
 2000-01-03T00:00:00, Close, 27.85
 2000-01-04T00:00:00, Close, 25.39
 2000-01-05T00:00:00, Close, 24.05
@@ -292,7 +292,7 @@ if __name__ == '__main__':
 2000-12-27T00:00:00, Close, 28.94
 2000-12-28T00:00:00, Close, 29.29
 2000-12-29T00:00:00, Close, 27.41
-Final Portfolio Value: 100000.00` 
+Final Portfolio Value: 100000.00
 ```
 
 有人说股票市场是危险的生意，但似乎并不是这样。
@@ -316,7 +316,7 @@ Final Portfolio Value: 100000.00`
 +   如果价格连续下跌 3 个交易会话... 买买买！！！
 
 ```py
-`from __future__ import (absolute_import, division, print_function,
+from __future__ import (absolute_import, division, print_function,
                         unicode_literals)
 
 import datetime  # For datetime objects
@@ -387,13 +387,13 @@ if __name__ == '__main__':
     cerebro.run()
 
     # Print out the final result
-    print('Final Portfolio Value: %.2f' % cerebro.broker.getvalue())` 
+    print('Final Portfolio Value: %.2f' % cerebro.broker.getvalue())
 ```
 
 执行后的输出为：
 
 ```py
-`Starting Portfolio Value: 100000.00
+Starting Portfolio Value: 100000.00
 2000-01-03, Close, 27.85
 2000-01-04, Close, 25.39
 2000-01-05, Close, 24.05
@@ -412,7 +412,7 @@ if __name__ == '__main__':
 2000-12-27, BUY CREATE, 28.94
 2000-12-28, Close, 29.29
 2000-12-29, Close, 27.41
-Final Portfolio Value: 99725.08` 
+Final Portfolio Value: 99725.08
 ```
 
 发出了多个“BUY”创建订单，我们的投资组合价值减少了。显然有几个重要的事情缺失了。
@@ -458,7 +458,7 @@ Final Portfolio Value: 99725.08`
 *next*方法没有传递“bar index”，因此似乎不清楚如何理解 5 个 bar 是否已经过去，但这已经以 Pythonic 的方式进行了建模：在对象上调用*len*，它将告诉您它的*lines*长度。只需记录（保存在变量中）操作发生的长度，然后查看当前长度是否相差 5 个 bar。
 
 ```py
-`from __future__ import (absolute_import, division, print_function,
+from __future__ import (absolute_import, division, print_function,
                         unicode_literals)
 
 import datetime  # For datetime objects
@@ -573,13 +573,13 @@ if __name__ == '__main__':
     cerebro.run()
 
     # Print out the final result
-    print('Final Portfolio Value: %.2f' % cerebro.broker.getvalue())` 
+    print('Final Portfolio Value: %.2f' % cerebro.broker.getvalue())
 ```
 
 执行后的输出如下：
 
 ```py
-`Starting Portfolio Value: 100000.00
+Starting Portfolio Value: 100000.00
 2000-01-03T00:00:00, Close, 27.85
 2000-01-04T00:00:00, Close, 25.39
 2000-01-05T00:00:00, Close, 24.05
@@ -611,7 +611,7 @@ if __name__ == '__main__':
 2000-12-28T00:00:00, Close, 29.29
 2000-12-29T00:00:00, Close, 27.41
 2000-12-29T00:00:00, SELL CREATE, 27.41
-Final Portfolio Value: 100018.53` 
+Final Portfolio Value: 100018.53
 ```
 
 烈焰般的船舱!!! 系统赚了钱……一定有问题。
@@ -625,14 +625,14 @@ Final Portfolio Value: 100018.53`
 一条线足矣：
 
 ```py
-`# 0.1% ... divide by 100 to remove the %
-cerebro.broker.setcommission(commission=0.001)` 
+# 0.1% ... divide by 100 to remove the %
+cerebro.broker.setcommission(commission=0.001)
 ```
 
 由于对该平台有经验，我们想要在买入/卖出周期之后看到利润或损失，有无佣金都行。
 
 ```py
-`from __future__ import (absolute_import, division, print_function,
+from __future__ import (absolute_import, division, print_function,
                         unicode_literals)
 
 import datetime  # For datetime objects
@@ -768,13 +768,13 @@ if __name__ == '__main__':
     cerebro.run()
 
     # Print out the final result
-    print('Final Portfolio Value: %.2f' % cerebro.broker.getvalue())` 
+    print('Final Portfolio Value: %.2f' % cerebro.broker.getvalue())
 ```
 
 执行后的输出如下：
 
 ```py
-`Starting Portfolio Value: 100000.00
+Starting Portfolio Value: 100000.00
 2000-01-03T00:00:00, Close, 27.85
 2000-01-04T00:00:00, Close, 25.39
 2000-01-05T00:00:00, Close, 24.05
@@ -808,7 +808,7 @@ if __name__ == '__main__':
 2000-12-28T00:00:00, Close, 29.29
 2000-12-29T00:00:00, Close, 27.41
 2000-12-29T00:00:00, SELL CREATE, 27.41
-Final Portfolio Value: 100016.98` 
+Final Portfolio Value: 100016.98
 ```
 
 上帝保佑女王!!! 系统仍然赚了钱。
@@ -816,7 +816,7 @@ Final Portfolio Value: 100016.98`
 在继续之前，让我们通过过滤“OPERATION PROFIT”行来注意一些事情：
 
 ```py
-`2000-01-14T00:00:00, OPERATION PROFIT, GROSS 2.09, NET 2.04
+2000-01-14T00:00:00, OPERATION PROFIT, GROSS 2.09, NET 2.04
 2000-02-07T00:00:00, OPERATION PROFIT, GROSS 3.68, NET 3.63
 2000-02-28T00:00:00, OPERATION PROFIT, GROSS 4.48, NET 4.42
 2000-03-13T00:00:00, OPERATION PROFIT, GROSS 3.48, NET 3.41
@@ -838,20 +838,20 @@ Final Portfolio Value: 100016.98`
 2000-11-06T00:00:00, OPERATION PROFIT, GROSS -3.59, NET -3.65
 2000-11-16T00:00:00, OPERATION PROFIT, GROSS 1.28, NET 1.23
 2000-12-01T00:00:00, OPERATION PROFIT, GROSS 2.59, NET 2.54
-2000-12-18T00:00:00, OPERATION PROFIT, GROSS -0.06, NET -0.12` 
+2000-12-18T00:00:00, OPERATION PROFIT, GROSS -0.06, NET -0.12
 ```
 
 加总“净”利润，最终数字是：
 
 ```py
-`15.83` 
+15.83
 ```
 
 但系统在最后说了以下内容：
 
 ```py
-`2000-12-29T00:00:00, SELL CREATE, 27.41
-Final Portfolio Value: 100016.98` 
+2000-12-29T00:00:00, SELL CREATE, 27.41
+Final Portfolio Value: 100016.98
 ```
 
 显然*15.83*不等于*16.98*。没有任何错误。*15.83*的“净”利润已经到手了。
@@ -861,17 +861,17 @@ Final Portfolio Value: 100016.98`
 经纪人计算的“最终投资组合价值”考虑了 2000-12-29 的“收盘”价格。实际执行价格将在下一个交易日设定，恰好是 2001-01-02。扩展 *数据源*”以考虑这一天的输出为：
 
 ```py
-`2001-01-02T00:00:00, SELL EXECUTED, Price: 27.87, Cost: 27.87, Commission 0.03
+2001-01-02T00:00:00, SELL EXECUTED, Price: 27.87, Cost: 27.87, Commission 0.03
 2001-01-02T00:00:00, OPERATION PROFIT, GROSS 1.64, NET 1.59
 2001-01-02T00:00:00, Close, 24.87
 2001-01-02T00:00:00, BUY CREATE, 24.87
-Final Portfolio Value: 100017.41` 
+Final Portfolio Value: 100017.41
 ```
 
 现在将之前的净利润添加到已完成操作的净利润中：
 
 ```py
-`15.83 + 1.59 = 17.42` 
+15.83 + 1.59 = 17.42
 ```
 
 这样（忽略“print”语句中的四舍五入误差），策略开始时额外的投资组合超过了初始的 100000 货币单位。
@@ -883,23 +883,23 @@ Final Portfolio Value: 100017.41`
 参数的定义很容易，如下所示：
 
 ```py
-`params = (('myparam', 27), ('exitbars', 5),)` 
+params = (('myparam', 27), ('exitbars', 5),)
 ```
 
 由于这是一个标准的 Python 元组，其中包含一些元组，下面的代码可能更吸引人：
 
 ```py
-`params = (
+params = (
     ('myparam', 27),
     ('exitbars', 5),
-)` 
+)
 ```
 
 在向 Cerebro 引擎添加策略时，允许使用任一格式化参数设置策略：
 
 ```py
-`# Add a strategy
-cerebro.addstrategy(TestStrategy, myparam=20, exitbars=7)` 
+# Add a strategy
+cerebro.addstrategy(TestStrategy, myparam=20, exitbars=7)
 ```
 
 注
@@ -907,7 +907,7 @@ cerebro.addstrategy(TestStrategy, myparam=20, exitbars=7)`
 下面的 `setsizing` 方法已被弃用。此内容保留在此处供查看旧源代码的人使用。源代码已更新为使用：
 
 ```py
-`cerebro.addsizer(bt.sizers.FixedSize, stake=10)```
+cerebro.addsizer(bt.sizers.FixedSize, stake=10)```
 
 ```py
 

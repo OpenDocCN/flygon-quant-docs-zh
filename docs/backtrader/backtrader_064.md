@@ -11,7 +11,7 @@
 模式：
 
 ```py
-`cerebro = bt.Cerebro(cheat_on_open=True)` 
+cerebro = bt.Cerebro(cheat_on_open=True)
 ```
 
 这个：
@@ -57,7 +57,7 @@
 常规执行：
 
 ```py
-`$ ./cheat-on-open.py --cerebro cheat_on_open=False
+$ ./cheat-on-open.py --cerebro cheat_on_open=False
 
 ...
 2005-04-07 next, open 3073.4 close 3090.72
@@ -66,7 +66,7 @@ Strat Len 68 2005-04-08 Send Buy, fromopen False, close 3088.92
 2005-04-11 Buy Executed at price 3088.47
 2005-04-11 next, open 3088.47 close 3080.6
 2005-04-12 next, open 3080.42 close 3065.18
-...` 
+...
 ```
 
 ![图片](img/0fdbcee754e7caf6d5abcfa1d35f4dbc.png)
@@ -80,7 +80,7 @@ Strat Len 68 2005-04-08 Send Buy, fromopen False, close 3088.92
 作弊执行：
 
 ```py
-`$ ./cheat-on-open.py --cerebro cheat_on_open=True
+$ ./cheat-on-open.py --cerebro cheat_on_open=True
 
 ...
 2005-04-07 next, open 3073.4 close 3090.72
@@ -89,7 +89,7 @@ Strat Len 68 2005-04-08 Send Buy, fromopen False, close 3088.92
 2005-04-11 Buy Executed at price 3088.47
 2005-04-11 next, open 3088.47 close 3080.6
 2005-04-12 next, open 3080.42 close 3065.18
-...` 
+...
 ```
 
 ![图片](img/563421cf98c94af36cb0ecaff39f95ad.png)
@@ -109,7 +109,7 @@ Strat Len 68 2005-04-08 Send Buy, fromopen False, close 3088.92
 ## 样本用法
 
 ```py
-`$ ./cheat-on-open.py --help
+$ ./cheat-on-open.py --help
 usage: cheat-on-open.py [-h] [--data0 DATA0] [--fromdate FROMDATE]
                         [--todate TODATE] [--cerebro kwargs] [--broker kwargs]
                         [--sizer kwargs] [--strat kwargs] [--plot [kwargs]]
@@ -126,13 +126,13 @@ optional arguments:
   --broker kwargs      kwargs in key=value format (default: )
   --sizer kwargs       kwargs in key=value format (default: )
   --strat kwargs       kwargs in key=value format (default: )
-  --plot [kwargs]      kwargs in key=value format (default: )` 
+  --plot [kwargs]      kwargs in key=value format (default: )
 ```
 
 ## 样本来源
 
 ```py
-`from __future__ import (absolute_import, division, print_function,
+from __future__ import (absolute_import, division, print_function,
                         unicode_literals)
 
 import argparse
@@ -261,5 +261,5 @@ def parse_args(pargs=None):
     return parser.parse_args(pargs)
 
 if __name__ == '__main__':
-    runstrat()` 
+    runstrat()
 ```

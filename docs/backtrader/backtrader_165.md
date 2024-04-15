@@ -55,7 +55,7 @@
 ```py
  `If no `pytz` is detected and no `tzinfo` compatible instance is
   supplied to the *data feed*, the time delivered by the platform will be
-  `UTC`` 
+  `UTC`
 ```
 
 尽可能多地进行了文档记录，并且可以在通常的文档链接中找到：
@@ -67,13 +67,13 @@
 首先：对`TWTR`进行重新采样为 5 秒：
 
 ```py
-`$ ./ibtest.py --port 7497 --data0 TWTR --resample --timeframe Seconds --compression 5` 
+$ ./ibtest.py --port 7497 --data0 TWTR --resample --timeframe Seconds --compression 5
 ```
 
 输出：
 
 ```py
-`Server Version: 76
+Server Version: 76
 TWS Time at connection:20160620 22:37:37 CET
 --------------------------------------------------
 Strategy Created
@@ -95,7 +95,7 @@ Datetime, Open, High, Low, Close, Volume, OpenInterest, SMA
 ***** DATA NOTIF: LIVE
 1443, 2016-06-20T16:37:45.000000, 16.1, 16.11, 16.1, 16.11, 5.0, 0, 16.06
 1444, 2016-06-20T16:37:50.000000, 16.11, 16.11, 16.1, 16.1, 14.0, 0, 16.076
-...` 
+...
 ```
 
 注意
@@ -131,13 +131,13 @@ Datetime, Open, High, Low, Close, Volume, OpenInterest, SMA
 让我们做同样的事情，但强制断开连接（网络接口被禁用了 20 秒）：
 
 ```py
-`$ ./ibtest.py --port 7497 --data0 TWTR --resample --timeframe Seconds --compression 5` 
+$ ./ibtest.py --port 7497 --data0 TWTR --resample --timeframe Seconds --compression 5
 ```
 
 输出（跳过初始已知部分）：
 
 ```py
-`...
+...
 1440, 2016-06-20T18:16:20.000000, 16.05, 16.05, 16.04, 16.04, 0.0, 0, 16.048
 1441, 2016-06-20T18:16:25.000000, 16.05, 16.05, 16.05, 16.05, 0.0, 0, 16.05
 ***** DATA NOTIF: LIVE
@@ -161,7 +161,7 @@ Datetime, Open, High, Low, Close, Volume, OpenInterest, SMA
 1451, 2016-06-20T18:17:15.000000, 15.92, 15.92, 15.9, 15.92, 9.0, 0, 15.988
 1452, 2016-06-20T18:17:20.000000, 15.91, 15.91, 15.89, 15.89, 18.0, 0, 15.958
 1453, 2016-06-20T18:17:25.000000, 15.89, 15.92, 15.89, 15.89, 24.0, 0, 15.928
-...` 
+...
 ```
 
 叙述：
@@ -193,13 +193,13 @@ Datetime, Open, High, Low, Close, Volume, OpenInterest, SMA
 执行：
 
 ```py
-`./ibtest.py --port 7497 --data0 TWTR --resample --timeframe Seconds --compression 5 --broker --trade --stake 20000` 
+./ibtest.py --port 7497 --data0 TWTR --resample --timeframe Seconds --compression 5 --broker --trade --stake 20000
 ```
 
 输出相当冗长，显示了订单执行的所有部分。总结一下：
 
 ```py
-`...
+...
 ***** DATA NOTIF: LIVE
 1442, 2016-06-20T18:28:05.000000, 15.92, 15.93, 15.92, 15.93, 1748.0, 0, 16.03
 -------------------------------------------------- ORDER BEGIN 2016-06-20 23:28:11.343000
@@ -284,7 +284,7 @@ Tif (Time in Force): GTC
 GoodTillDate:
 -------------------------------------------------- ORDER END
 1445, 2016-06-20T18:28:20.000000, 15.92, 15.93, 15.92, 15.93, 21.0, 0, 15.954
-...` 
+...
 ```
 
 发生了以下情况：
@@ -310,7 +310,7 @@ GoodTillDate:
 用法：
 
 ```py
-`$ ./ibtest.py --help
+$ ./ibtest.py --help
 usage: ibtest.py [-h] [--exactbars EXACTBARS] [--plot] [--stopafter STOPAFTER]
                  [--usestore] [--notifyall] [--debug] [--host HOST]
                  [--qcheck QCHECK] [--port PORT] [--clientId CLIENTID]
@@ -396,13 +396,13 @@ optional arguments:
   --valid VALID         Seconds to keep the order alive (0 means DAY)
                         (default: None)
   --cancel CANCEL       Cancel a buy order after n bars in operation, to be
-                        combined with orders like Limit (default: 0)` 
+                        combined with orders like Limit (default: 0)
 ```
 
 代码：
 
 ```py
-`from __future__ import (absolute_import, division, print_function,
+from __future__ import (absolute_import, division, print_function,
                         unicode_literals)
 
 import argparse
@@ -814,5 +814,5 @@ def parse_args():
     return parser.parse_args()
 
 if __name__ == '__main__':
-    runstrategy()` 
+    runstrategy()
 ```

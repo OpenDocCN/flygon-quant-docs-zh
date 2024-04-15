@@ -59,7 +59,7 @@
 +   存储在一个名为`mymod.py`的文件中
 
 ```py
-`from __future__ import (absolute_import, division, print_function,
+from __future__ import (absolute_import, division, print_function,
                         unicode_literals)
 
 import backtrader as bt
@@ -85,15 +85,15 @@ class MyTest(bt.Strategy):
                  (len(self),
                   self.data.open[0], self.data.high[0],
                   self.data.low[0], self.data.close[0],
-                  self.data.volume[0], self.data.openinterest[0]))` 
+                  self.data.volume[0], self.data.openinterest[0]))
 ```
 
 使用通常的测试样本执行策略很容易：
 
 ```py
-`btrun --csvformat btcsv \
+btrun --csvformat btcsv \
       --data ../../datas/2006-day-001.txt \
-      --strategy mymod.py` 
+      --strategy mymod.py
 ```
 
 图表输出
@@ -103,7 +103,7 @@ class MyTest(bt.Strategy):
 控制台输出：
 
 ```py
-`2006-01-20T23:59:59+00:00, 15, 3593.16, 3612.37, 3550.80, 3550.80, 0.00, 0.00
+2006-01-20T23:59:59+00:00, 15, 3593.16, 3612.37, 3550.80, 3550.80, 0.00, 0.00
 2006-01-23T23:59:59+00:00, 16, 3550.24, 3550.24, 3515.07, 3544.31, 0.00, 0.00
 2006-01-24T23:59:59+00:00, 17, 3544.78, 3553.16, 3526.37, 3532.68, 0.00, 0.00
 2006-01-25T23:59:59+00:00, 18, 3532.72, 3578.00, 3532.72, 3578.00, 0.00, 0.00
@@ -112,7 +112,7 @@ class MyTest(bt.Strategy):
 2006-12-22T23:59:59+00:00, 252, 4109.86, 4109.86, 4072.62, 4073.50, 0.00, 0.00
 2006-12-27T23:59:59+00:00, 253, 4079.70, 4134.86, 4079.70, 4134.86, 0.00, 0.00
 2006-12-28T23:59:59+00:00, 254, 4137.44, 4142.06, 4125.14, 4130.66, 0.00, 0.00
-2006-12-29T23:59:59+00:00, 255, 4130.12, 4142.01, 4119.94, 4119.94, 0.00, 0.00` 
+2006-12-29T23:59:59+00:00, 255, 4130.12, 4142.01, 4119.94, 4119.94, 0.00, 0.00
 ```
 
 相同的策略，但：
@@ -122,10 +122,10 @@ class MyTest(bt.Strategy):
 命令行：
 
 ```py
-`btrun --csvformat btcsv \
+btrun --csvformat btcsv \
       --data ../../datas/2006-day-001.txt \
       --plot \
-      --strategy mymod.py:period=50` 
+      --strategy mymod.py:period=50
 ```
 
 图表输出。
@@ -153,7 +153,7 @@ class MyTest(bt.Strategy):
 代码
 
 ```py
-`from __future__ import (absolute_import, division, print_function,
+from __future__ import (absolute_import, division, print_function,
                         unicode_literals)
 
 import backtrader as bt
@@ -176,16 +176,16 @@ class SMA_CrossOver(bt.Strategy):
                 self.sell()
 
         elif self.buysig > 0:
-            self.buy()` 
+            self.buy()
 ```
 
 标准执行：
 
 ```py
-`btrun --csvformat btcsv \
+btrun --csvformat btcsv \
       --data ../../datas/2006-day-001.txt \
       --plot \
-      --strategy :SMA_CrossOver` 
+      --strategy :SMA_CrossOver
 ```
 
 请注意 `:`。加载策略的标准表示法（见下文）是：
@@ -215,14 +215,14 @@ class SMA_CrossOver(bt.Strategy):
 最后一个例子，添加佣金方案，现金和更改参数：
 
 ```py
-`btrun --csvformat btcsv \
+btrun --csvformat btcsv \
       --data ../../datas/2006-day-001.txt \
       --plot \
       --cash 20000 \
       --commission 2.0 \
       --mult 10 \
       --margin 2000 \
-      --strategy :SMA_CrossOver:fast=5,slow=20` 
+      --strategy :SMA_CrossOver:fast=5,slow=20
 ```
 
 输出
@@ -248,14 +248,14 @@ class SMA_CrossOver(bt.Strategy):
 一个例子：
 
 ```py
-`btrun --csvformat btcsv \
+btrun --csvformat btcsv \
       --data ../../datas/2006-day-001.txt \
       --cash 20000 \
       --commission 2.0 \
       --mult 10 \
       --margin 2000 \
       --nostdstats \
-      --observer :Broker` 
+      --observer :Broker
 ```
 
 这将没有太大作用，但达到了预期目的：
@@ -269,14 +269,14 @@ class SMA_CrossOver(bt.Strategy):
 如上所述，`nostdstats` 是一个遗留参数。较新版本的 `btrun` 可以直接将参数传递给 `Cerebro`。等效的调用将是：
 
 ```py
-`btrun --csvformat btcsv \
+btrun --csvformat btcsv \
       --data ../../datas/2006-day-001.txt \
       --cash 20000 \
       --commission 2.0 \
       --mult 10 \
       --margin 2000 \
       --cerebro stdstats=False \
-      --observer :Broker` 
+      --observer :Broker
 ```
 
 ## 添加分析器
@@ -286,10 +286,10 @@ class SMA_CrossOver(bt.Strategy):
 对于 2005-2006 年的 `SharpeRatio` 分析的示例：
 
 ```py
-`btrun --csvformat btcsv \
+btrun --csvformat btcsv \
       --data ../../datas/2005-2006-day-001.txt \
       --strategy :SMA_CrossOver \
-      --analyzer :SharpeRatio` 
+      --analyzer :SharpeRatio
 ```
 
 控制台输出为 **nothing**。
@@ -307,7 +307,7 @@ class SMA_CrossOver(bt.Strategy):
 扩展上面的示例：
 
 ```py
-`btrun --csvformat btcsv \
+btrun --csvformat btcsv \
       --data ../../datas/2005-2006-day-001.txt \
       --strategy :SMA_CrossOver \
       --analyzer :SharpeRatio \
@@ -320,7 +320,7 @@ class SMA_CrossOver(bt.Strategy):
 ##########
 sharperatio
 ##########
-{'sharperatio': 11.647332609673256}` 
+{'sharperatio': 11.647332609673256}
 ```
 
 好战略！！！（事实上，这只是一个例子，也没有佣金）
@@ -332,7 +332,7 @@ sharperatio
 相同的例子，但使用了 `writer` 参数：
 
 ```py
-`btrun --csvformat btcsv \
+btrun --csvformat btcsv \
       --data ../../datas/2005-2006-day-001.txt \
       --strategy :SMA_CrossOver \
       --analyzer :SharpeRatio \
@@ -394,7 +394,7 @@ Cerebro:
           - Params: None
           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
           - Analysis:
-            - sharperatio: 11.6473326097` 
+            - sharperatio: 11.6473326097
 ```
 
 ## 添加指标和观察者
@@ -412,12 +412,12 @@ Cerebro:
 让我们重复一下例子，但添加一个 `Stochastic`，`Broker` 并查看图表（我们将更改一些参数）：
 
 ```py
-`btrun --csvformat btcsv \
+btrun --csvformat btcsv \
       --data ../../datas/2006-day-001.txt \
       --nostdstats \
       --observer :Broker \
       --indicator :Stochastic:period_dslow=5 \
-      --plot` 
+      --plot
 ```
 
 图表
@@ -437,12 +437,12 @@ Cerebro:
 调用：
 
 ```py
-`btrun --csvformat btcsv \
+btrun --csvformat btcsv \
       --data ../../datas/2006-day-001.txt \
       --nostdstats \
       --observer :Broker \
       --indicator :Stochastic:period_dslow=5 \
-      --plot style=\"candle\"` 
+      --plot style=\"candle\"
 ```
 
 注意
@@ -460,7 +460,7 @@ Cerebro:
 直接从脚本中：
 
 ```py
-`$ btrun --help
+$ btrun --help
 usage: btrun-script.py [-h] --data DATA [--cerebro [kwargs]] [--nostdstats]
                        [--format {yahoocsv_unreversed,vchart,vchartcsv,yahoo,mt4csv,ibdata,sierracsv,yahoocsv,btcsv,vcdata}]
                        [--fromdate FROMDATE] [--todate TODATE]
@@ -688,5 +688,5 @@ Cash and Commission Scheme Args:
   --no-slip_match       Disable slip_match, ie: matching capped at
                         high-low if slippage goes over those limits
   --slip_out            with slip_match enabled, match outside high-low
-  --flush               flush the output - useful under win32 systems` 
+  --flush               flush the output - useful under win32 systems
 ```

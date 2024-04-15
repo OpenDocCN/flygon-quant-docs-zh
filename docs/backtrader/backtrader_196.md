@@ -18,23 +18,23 @@ backtrader 的诞生是出于必要性。我自己...希望有一种感觉，我
 
 ## 不可知论
 
-在继续之前，让我们记住`backtrader`试图保持对数据表示的不可知。可以将不同的佣金方案应用于相同的数据集。
+    在继续之前，让我们记住`backtrader`试图保持对数据表示的不可知。可以将不同的佣金方案应用于相同的数据集。
 
-让我们看看如何做到这一点。
+    让我们看看如何做到这一点。
 
-## 使用经纪人快捷方式
+    ## 使用经纪人快捷方式
 
-这样可以使最终用户远离`CommissionInfo`对象，因为可以通过单个函数调用创建/设置佣金方案。在常规的`cerebro`创建/设置过程中，只需将调用添加到`broker`成员变量上即可。以下调用在使用*InteractiveBrokers*时为**Eurostoxx50**期货设置了一种常规佣金方案：
+    这样可以使最终用户远离`CommissionInfo`对象，因为可以通过单个函数调用创建/设置佣金方案。在常规的`cerebro`创建/设置过程中，只需将调用添加到`broker`成员变量上即可。以下调用在使用*InteractiveBrokers*时为**Eurostoxx50**期货设置了一种常规佣金方案：
 
 ```py
-`cerebro.broker.setcommission(commission=2.0, margin=2000.0, mult=10.0)` 
+cerebro.broker.setcommission(commission=2.0, margin=2000.0, mult=10.0)
 ```
 
 由于大多数用户通常只测试单个工具，因此这就是问题的全部。如果您已经为数据源指定了`name`，因为图表上同时考虑了多个工具，因此此调用可以略微扩展为如下所示：
 
 ```py
-`cerebro.broker.setcommission(commission=2.0, margin=2000.0, mult=10.0,
-name='Eurostoxxx50')` 
+cerebro.broker.setcommission(commission=2.0, margin=2000.0, mult=10.0,
+name='Eurostoxxx50')
 ```
 
 在这种情况下，这种即时佣金方案将仅应用于名称与`Eurostoxx50`匹配的工具。
@@ -80,13 +80,13 @@ name='Eurostoxxx50')`
 来自上述的期货示例：
 
 ```py
-`cerebro.broker.setcommission(commission=2.0, margin=2000.0, mult=10.0)` 
+cerebro.broker.setcommission(commission=2.0, margin=2000.0, mult=10.0)
 ```
 
 股票的一个例子：
 
 ```py
-`cerebro.broker.setcommission(commission=0.005)  # 0.5% of the operation value` 
+cerebro.broker.setcommission(commission=0.005)  # 0.5% of the operation value
 ```
 
 ## 创建永久佣金方案
@@ -94,38 +94,38 @@ name='Eurostoxxx50')`
 更持久的佣金方案可以通过直接使用`CommissionInfo`类来创建。用户可以选择将此定义放在某处：
 
 ```py
-`from bt import CommissionInfo
+from bt import CommissionInfo
 
-commEurostoxx50 = CommissionInfo(commission=2.0, margin=2000.0, mult=10.0)` 
+commEurostoxx50 = CommissionInfo(commission=2.0, margin=2000.0, mult=10.0)
 ```
 
 然后在另一个 Python 模块中应用它与`addcommissioninfo`：
 
 ```py
-`from mycomm import commEurostoxx50
+from mycomm import commEurostoxx50
 
 ...
 
-cerebro.broker.addcomissioninfo(commEuroStoxx50, name='Eurostoxxx50')` 
+cerebro.broker.addcomissioninfo(commEuroStoxx50, name='Eurostoxxx50')
 ```
 
 `CommissionInfo`是一个对象，它使用与`backtrader`环境中的其他对象一样的`params`声明。因此，上述内容也可以表示为：
 
 ```py
-`from bt import CommissionInfo
+from bt import CommissionInfo
 
 class CommEurostoxx50(CommissionInfo):
-    params = dict(commission=2.0, margin=2000.0, mult=10.0)` 
+    params = dict(commission=2.0, margin=2000.0, mult=10.0)
 ```
 
 后来：
 
 ```py
-`from mycomm import CommEurostoxx50
+from mycomm import CommEurostoxx50
 
 ...
 
-cerebro.broker.addcomissioninfoCommEuroStoxx50(), name='Eurostoxxx50')` 
+cerebro.broker.addcomissioninfoCommEuroStoxx50(), name='Eurostoxxx50')
 ```
 
 ## 现在是与 SMA 交叉的“真实”比较
@@ -139,12 +139,12 @@ cerebro.broker.addcomissioninfoCommEuroStoxx50(), name='Eurostoxxx50')`
 代码（请参阅底部获取完整策略）是相同的，可以在定义策略之前选择方案。
 
 ```py
-`futures_like = True
+futures_like = True
 
 if futures_like:
     commission, margin, mult = 2.0, 2000.0, 10.0
 else:
-    commission, margin, mult = 0.005, None, 1` 
+    commission, margin, mult = 0.005, None, 1
 ```
 
 只需将`futures_like`设置为 false 即可使用类似`股票`的方案运行。
@@ -154,7 +154,7 @@ else:
 对于期货：
 
 ```py
-`2006-03-09, BUY CREATE, 3757.59
+2006-03-09, BUY CREATE, 3757.59
 2006-03-10, BUY EXECUTED, Price: 3754.13, Cost: 2000.00, Comm 2.00
 2006-04-11, SELL CREATE, 3788.81
 2006-04-12, SELL EXECUTED, Price: 3786.93, Cost: 2000.00, Comm 2.00
@@ -163,13 +163,13 @@ else:
 2006-04-21, BUY EXECUTED, Price: 3863.57, Cost: 2000.00, Comm 2.00
 2006-04-28, SELL CREATE, 3839.90
 2006-05-02, SELL EXECUTED, Price: 3839.24, Cost: 2000.00, Comm 2.00
-2006-05-02, OPERATION PROFIT, GROSS -243.30, NET -247.30` 
+2006-05-02, OPERATION PROFIT, GROSS -243.30, NET -247.30
 ```
 
 对于股票：
 
 ```py
-`2006-03-09, BUY CREATE, 3757.59
+2006-03-09, BUY CREATE, 3757.59
 2006-03-10, BUY EXECUTED, Price: 3754.13, Cost: 3754.13, Comm 18.77
 2006-04-11, SELL CREATE, 3788.81
 2006-04-12, SELL EXECUTED, Price: 3786.93, Cost: 3786.93, Comm 18.93
@@ -178,7 +178,7 @@ else:
 2006-04-21, BUY EXECUTED, Price: 3863.57, Cost: 3863.57, Comm 19.32
 2006-04-28, SELL CREATE, 3839.90
 2006-05-02, SELL EXECUTED, Price: 3839.24, Cost: 3839.24, Comm 19.20
-2006-05-02, OPERATION PROFIT, GROSS -24.33, NET -62.84` 
+2006-05-02, OPERATION PROFIT, GROSS -24.33, NET -62.84
 ```
 
 第一次操作具有以下价格：
@@ -222,7 +222,7 @@ else:
 ## 代码
 
 ```py
-`from __future__ import (absolute_import, division, print_function,
+from __future__ import (absolute_import, division, print_function,
                         unicode_literals)
 
 import backtrader as bt
@@ -312,5 +312,5 @@ if __name__ == '__main__':
     cerebro.run()
 
     # Plot the result
-    cerebro.plot()` 
+    cerebro.plot()
 ```

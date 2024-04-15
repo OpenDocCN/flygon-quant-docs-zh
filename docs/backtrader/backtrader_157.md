@@ -23,7 +23,7 @@
 就像使用*backtrader*中已经内置的任何指标一样容易。简单移动平均的示例。首先是*backtrader*的：
 
 ```py
-`import backtrader as bt
+import backtrader as bt
 
 class MyStrategy(bt.Strategy):
     params = (('period', 20),)
@@ -32,13 +32,13 @@ class MyStrategy(bt.Strategy):
         self.sma = bt.indicators.SMA(self.data, period=self.p.period)
         ...
 
-...` 
+...
 ```
 
 现在是*ta-lib*的示例：
 
 ```py
-`import backtrader as bt
+import backtrader as bt
 
 class MyStrategy(bt.Strategy):
     params = (('period', 20),)
@@ -47,7 +47,7 @@ class MyStrategy(bt.Strategy):
         self.sma = bt.talib.SMA(self.data, timeperiod=self.p.period)
         ...
 
-...` 
+...
 ```
 
 哦，就这样！当然，*ta-lib*指标的*params*由库本身定义，而不是由*backtrader*定义。在这种情况下，*ta-lib*中的*SMA*需要一个名为`timeperiod`的参数来定义操作窗口的大小。
@@ -55,7 +55,7 @@ class MyStrategy(bt.Strategy):
 对于需要多个输入的指标，例如*随机指标*：
 
 ```py
-`import backtrader as bt
+import backtrader as bt
 
 class MyStrategy(bt.Strategy):
     params = (('period', 20),)
@@ -66,7 +66,7 @@ class MyStrategy(bt.Strategy):
 
         ...
 
-...` 
+...
 ```
 
 注意`high`、`low`和`close`已经被单独传递。人们总是可以传递`open`而不是`low`（或任何其他数据系列）进行实验。
@@ -74,13 +74,13 @@ class MyStrategy(bt.Strategy):
 *ta-lib*指标文档会自动解析并添加到*backtrader*文档中。您还可以查看*ta-lib*源代码/文档。或者额外执行：
 
 ```py
-`print(bt.talib.SMA.__doc__)` 
+print(bt.talib.SMA.__doc__)
 ```
 
 在这种情况下输出：
 
 ```py
-`SMA([input_arrays], [timeperiod=30])
+SMA([input_arrays], [timeperiod=30])
 
 Simple Moving Average (Overlap Studies)
 
@@ -89,7 +89,7 @@ Inputs:
 Parameters:
     timeperiod: 30
 Outputs:
-    real` 
+    real
 ```
 
 提供一些信息：
@@ -105,9 +105,9 @@ Outputs:
 对于像`bt.talib.STOCH`这样的指标选择特定的*移动平均线*，标准*ta-lib* `MA_Type` 可以通过`bactrader.talib.MA_Type`来访问。例如：
 
 ```py
-`import backtrader as bt
+import backtrader as bt
 print('SMA:', bt.talib.MA_Type.SMA)
-print('T3:', bt.talib.MA_Type.T3)` 
+print('T3:', bt.talib.MA_Type.T3)
 ```
 
 ## 绘制 ta-lib 指标
@@ -155,7 +155,7 @@ print('T3:', bt.talib.MA_Type.T3)`
 示例执行：
 
 ```py
-`$ ./talibtest.py --plot --ind kama` 
+$ ./talibtest.py --plot --ind kama
 ```
 
 输出
@@ -165,7 +165,7 @@ print('T3:', bt.talib.MA_Type.T3)`
 ### SMA
 
 ```py
-`$ ./talibtest.py --plot --ind sma` 
+$ ./talibtest.py --plot --ind sma
 ```
 
 输出
@@ -175,7 +175,7 @@ print('T3:', bt.talib.MA_Type.T3)`
 ### EMA
 
 ```py
-`$ ./talibtest.py --plot --ind ema` 
+$ ./talibtest.py --plot --ind ema
 ```
 
 输出
@@ -185,7 +185,7 @@ print('T3:', bt.talib.MA_Type.T3)`
 ### 随机指标
 
 ```py
-`$ ./talibtest.py --plot --ind stoc` 
+$ ./talibtest.py --plot --ind stoc
 ```
 
 输出
@@ -195,7 +195,7 @@ print('T3:', bt.talib.MA_Type.T3)`
 ### RSI
 
 ```py
-`$ ./talibtest.py --plot --ind rsi` 
+$ ./talibtest.py --plot --ind rsi
 ```
 
 输出
@@ -205,7 +205,7 @@ print('T3:', bt.talib.MA_Type.T3)`
 ### MACD
 
 ```py
-`$ ./talibtest.py --plot --ind macd` 
+$ ./talibtest.py --plot --ind macd
 ```
 
 输出
@@ -215,7 +215,7 @@ print('T3:', bt.talib.MA_Type.T3)`
 ### 布林带
 
 ```py
-`$ ./talibtest.py --plot --ind bollinger` 
+$ ./talibtest.py --plot --ind bollinger
 ```
 
 输出
@@ -227,7 +227,7 @@ print('T3:', bt.talib.MA_Type.T3)`
 请注意，*ta-lib*选择将*下行*线放在前面，当与*backtrader*内置指标进行比较时，颜色会反转。
 
 ```py
-`$ ./talibtest.py --plot --ind aroon` 
+$ ./talibtest.py --plot --ind aroon
 ```
 
 输出
@@ -237,7 +237,7 @@ print('T3:', bt.talib.MA_Type.T3)`
 ### 终极波动率
 
 ```py
-`$ ./talibtest.py --plot --ind ultimate` 
+$ ./talibtest.py --plot --ind ultimate
 ```
 
 输出
@@ -247,7 +247,7 @@ print('T3:', bt.talib.MA_Type.T3)`
 ### Trix
 
 ```py
-`$ ./talibtest.py --plot --ind trix` 
+$ ./talibtest.py --plot --ind trix
 ```
 
 输出
@@ -259,7 +259,7 @@ print('T3:', bt.talib.MA_Type.T3)`
 在这里，*backtrader* 提供了`ADX`和`ADXR`线。
 
 ```py
-`$ ./talibtest.py --plot --ind adxr` 
+$ ./talibtest.py --plot --ind adxr
 ```
 
 输出
@@ -269,7 +269,7 @@ print('T3:', bt.talib.MA_Type.T3)`
 ### DEMA
 
 ```py
-`$ ./talibtest.py --plot --ind dema` 
+$ ./talibtest.py --plot --ind dema
 ```
 
 输出
@@ -279,7 +279,7 @@ print('T3:', bt.talib.MA_Type.T3)`
 ### TEMA
 
 ```py
-`$ ./talibtest.py --plot --ind tema` 
+$ ./talibtest.py --plot --ind tema
 ```
 
 输出
@@ -291,7 +291,7 @@ print('T3:', bt.talib.MA_Type.T3)`
 在这里，*backtrader*不仅提供了`ppo`线，还提供了更传统的`macd`方法。
 
 ```py
-`$ ./talibtest.py --plot --ind ppo` 
+$ ./talibtest.py --plot --ind ppo
 ```
 
 输出
@@ -301,7 +301,7 @@ print('T3:', bt.talib.MA_Type.T3)`
 ### WilliamsR
 
 ```py
-`$ ./talibtest.py --plot --ind williamsr` 
+$ ./talibtest.py --plot --ind williamsr
 ```
 
 输出
@@ -313,7 +313,7 @@ print('T3:', bt.talib.MA_Type.T3)`
 所有指标都具有完全相同的形状，但如何跟踪*动量*或*变化率*有几种定义。
 
 ```py
-`$ ./talibtest.py --plot --ind roc` 
+$ ./talibtest.py --plot --ind roc
 ```
 
 输出
@@ -323,7 +323,7 @@ print('T3:', bt.talib.MA_Type.T3)`
 ## 示例用法
 
 ```py
-`$ ./talibtest.py --help
+$ ./talibtest.py --help
 usage: talibtest.py [-h] [--data0 DATA0] [--fromdate FROMDATE]
                     [--todate TODATE]
                     [--ind {sma,ema,stoc,rsi,macd,bollinger,aroon,ultimate,trix,kama,adxr,dema,tema,ppo,williamsr,roc}]
@@ -347,13 +347,13 @@ optional arguments:
   --plot [kwargs], -p [kwargs]
                         Plot the read data applying any kwargs passed For
                         example (escape the quotes if needed): --plot
-                        style="candle" (to plot candles) (default: None)` 
+                        style="candle" (to plot candles) (default: None)
 ```
 
 ## 示例代码
 
 ```py
-`from __future__ import (absolute_import, division, print_function,
+from __future__ import (absolute_import, division, print_function,
                         unicode_literals)
 
 import argparse
@@ -520,5 +520,5 @@ def parse_args(pargs=None):
     return parser.parse_args()
 
 if __name__ == '__main__':
-    runstrat()` 
+    runstrat()
 ```

@@ -17,7 +17,7 @@ GitHub 上的增强请求[#29](https://github.com/mementum/backtrader/issues/29)
 在进入示例之前的实际工作
 
 ```py
-`class CommInfoBase(with_metaclass(MetaParams)):
+class CommInfoBase(with_metaclass(MetaParams)):
     COMM_PERC, COMM_FIXED = range(2)
 
     params = (
@@ -25,7 +25,7 @@ GitHub 上的增强请求[#29](https://github.com/mementum/backtrader/issues/29)
         ('commtype', None),
         ('stocklike', False),
         ('percabs', False),
-    )` 
+    )
 ```
 
 引入了`CommissionInfo`的基类，它将新参数添加到混合中：
@@ -57,10 +57,10 @@ GitHub 上的增强请求[#29](https://github.com/mementum/backtrader/issues/29)
 所有这些参数也可以在`broker.setcommission`中使用，现在看起来像这样：
 
 ```py
-`def setcommission(self,
+def setcommission(self,
                   commission=0.0, margin=None, mult=1.0,
                   commtype=None, percabs=True, stocklike=False,
-                  name=None):` 
+                  name=None):
 ```
 
 请注意以下内容：
@@ -70,7 +70,7 @@ GitHub 上的增强请求[#29](https://github.com/mementum/backtrader/issues/29)
 用于测试`commissions-schemes`的旧示例已重写以支持命令行参数和新行为。用法帮助：
 
 ```py
-`$ ./commission-schemes.py --help
+$ ./commission-schemes.py --help
 usage: commission-schemes.py [-h] [--data DATA] [--fromdate FROMDATE]
                              [--todate TODATE] [--stake STAKE]
                              [--period PERIOD] [--cash CASH] [--comm COMM]
@@ -114,7 +114,7 @@ optional arguments:
                         None}atherthan absolute value 0.xx (default: False)
   --plot, -p            Plot the read data (default: False)
   --numfigs NUMFIGS, -n NUMFIGS
-                        Plot using numfigs figures (default: 1)` 
+                        Plot using numfigs figures (default: 1)
 ```
 
 让我们进行一些运行以重现原始佣金方案贴文的原始行为。
@@ -124,7 +124,7 @@ optional arguments:
 执行和图表：
 
 ```py
-`$ ./commission-schemes.py --comm 2.0 --margin 2000.0 --mult 10 --plot` 
+$ ./commission-schemes.py --comm 2.0 --margin 2000.0 --mult 10 --plot
 ```
 
 ![image](img/3b34821f141f4b6846b890b1429d0309.png)
@@ -132,12 +132,12 @@ optional arguments:
 并且输出显示固定佣金为 2.0 货币单位（默认的投注是 1）：
 
 ```py
-`2006-03-09, BUY CREATE, 3757.59
+2006-03-09, BUY CREATE, 3757.59
 2006-03-10, BUY EXECUTED, Price: 3754.13, Cost: 2000.00, Comm 2.00
 2006-04-11, SELL CREATE, 3788.81
 2006-04-12, SELL EXECUTED, Price: 3786.93, Cost: 2000.00, Comm 2.00
 2006-04-12, TRADE PROFIT, GROSS 328.00, NET 324.00
-...` 
+...
 ```
 
 ## 股票佣金（带和不带保证金的百分比）
@@ -145,7 +145,7 @@ optional arguments:
 执行和图表：
 
 ```py
-`$ ./commission-schemes.py --comm 0.005 --margin 0 --mult 1 --plot` 
+$ ./commission-schemes.py --comm 0.005 --margin 0 --mult 1 --plot
 ```
 
 ![图片](img/f71981f061c32c988b10695da5e75c81.png)
@@ -153,7 +153,7 @@ optional arguments:
 为了提高可读性，可以使用相对百分比值：
 
 ```py
-`$ ./commission-schemes.py --percrel --comm 0.5 --margin 0 --mult 1 --plot` 
+$ ./commission-schemes.py --percrel --comm 0.5 --margin 0 --mult 1 --plot
 ```
 
 现在`0.5`直接意味着`0.5％`
@@ -161,12 +161,12 @@ optional arguments:
 在两种情况下输出为：
 
 ```py
-`2006-03-09, BUY CREATE, 3757.59
+2006-03-09, BUY CREATE, 3757.59
 2006-03-10, BUY EXECUTED, Price: 3754.13, Cost: 3754.13, Comm 18.77
 2006-04-11, SELL CREATE, 3788.81
 2006-04-12, SELL EXECUTED, Price: 3786.93, Cost: 3754.13, Comm 18.93
 2006-04-12, TRADE PROFIT, GROSS 32.80, NET -4.91
-...` 
+...
 ```
 
 ## 期货的佣金（百分比和有保证金）
@@ -174,7 +174,7 @@ optional arguments:
 使用新参数，期货的基于百分比的方案：
 
 ```py
-`$ ./commission-schemes.py --commtype perc --percrel --comm 0.5 --margin 2000 --mult 10 --plot` 
+$ ./commission-schemes.py --commtype perc --percrel --comm 0.5 --margin 2000 --mult 10 --plot
 ```
 
 ![图片](img/f71981f061c32c988b10695da5e75c81.png)
@@ -184,12 +184,12 @@ optional arguments:
 输出显示佣金现在是可变的：
 
 ```py
-`2006-03-09, BUY CREATE, 3757.59
+2006-03-09, BUY CREATE, 3757.59
 2006-03-10, BUY EXECUTED, Price: 3754.13, Cost: 2000.00, Comm 18.77
 2006-04-11, SELL CREATE, 3788.81
 2006-04-12, SELL EXECUTED, Price: 3786.93, Cost: 2000.00, Comm 18.93
 2006-04-12, TRADE PROFIT, GROSS 328.00, NET 290.29
-...` 
+...
 ```
 
 在先前的运行中设置了 2.0 货币单位（默认投注为 1）
@@ -199,7 +199,7 @@ optional arguments:
 ## 示例的代码
 
 ```py
-`from __future__ import (absolute_import, division, print_function,
+from __future__ import (absolute_import, division, print_function,
                         unicode_literals)
 
 import argparse
@@ -362,5 +362,5 @@ def parse_args():
     return parser.parse_args()
 
 if __name__ == '__main__':
-    runstrategy()` 
+    runstrategy()
 ```

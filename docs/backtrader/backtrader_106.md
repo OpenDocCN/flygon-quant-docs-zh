@@ -9,23 +9,23 @@
 让我们关注实现的第 1 行，创建典型价格的行
 
 ```py
-`class MFI_Canonical(bt.Indicator):
+class MFI_Canonical(bt.Indicator):
     lines = ('mfi',)
     params = dict(period=14)
 
     def __init__(self):
         tprice = (self.data.close + self.data.low + self.data.high) / 3.0
         mfraw = tprice * self.data.volume
-        ...` 
+        ...
 ```
 
 典型的实例化可能如下所示
 
 ```py
-`class MyMFIStrategy(bt.Strategy):
+class MyMFIStrategy(bt.Strategy):
 
     def __init__(self):
-        mfi = bt.MFI_Canonical(self.data)` 
+        mfi = bt.MFI_Canonical(self.data)
 ```
 
 这里的问题应该是显而易见的：“需要为具有`close`、`low`、`high`和`volume`组件（也称为*backtrader*生态系统中的*lines*）的指标提供输入”
@@ -33,12 +33,12 @@
 当然，可能会有这样一种情况，即希望使用来自不同数据源（数据源的线或其他指标的线）的组件创建`MoneyFlowIndicator`，就像想要给`close`赋予更大的权重一样，而无需开发特定的指标。考虑到行业标准的`OHLCV`字段排序，一个多输入、额外加权`close`的实例化可能如下所示
 
 ```py
-`class MyMFIStrategy2(bt.Strategy):
+class MyMFIStrategy2(bt.Strategy):
 
     def __init__(self):
         wclose = self.data.close * 5.0
         mfi = bt.MFI_Canonical(self.data.high, self.data.low,
-                               wclose, self.data.volume)` 
+                               wclose, self.data.volume)
 ```
 
 或者因为用户之前使用过`ta-lib`，喜欢多输入样式。
@@ -96,7 +96,7 @@
 让我们从图形上看到，这个指标产生了与*规范*相同的结果，当多个输入对应于数据源的原始组件时也是如此。为此，它将在策略中运行，如下所示
 
 ```py
-`class MyMFIStrategy2(bt.Strategy):
+class MyMFIStrategy2(bt.Strategy):
 
     def __init__(self):
         MFI_Canonical(self.data)
@@ -105,7 +105,7 @@
                            self.data.low,
                            self.data.close,
                            self.data.volume,
-                           plotname='MFI Multiple Inputs')` 
+                           plotname='MFI Multiple Inputs')
 ```
 
 ![MFI 结果检查](img/732d038551706e59f094b96adfcf5bf3.png)
@@ -115,7 +115,7 @@
 最后让我们看看如果给`close`加上更多的权重会发生什么。让我们这样运行。
 
 ```py
-`class MyMFIStrategy2(bt.Strategy):
+class MyMFIStrategy2(bt.Strategy):
     def __init__(self):
 
         MFI_MultipleInputs(self.data)
@@ -123,7 +123,7 @@
                            self.data.low,
                            self.data.close * 5.0,
                            self.data.volume,
-                           plotname='MFI Close * 5.0')` 
+                           plotname='MFI Close * 5.0')
 ```
 
 ![MFI Close * 5.0](img/c266b4a4b9e54f726e00c6370528d1cf.png)

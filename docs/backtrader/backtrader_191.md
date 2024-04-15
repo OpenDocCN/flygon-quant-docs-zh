@@ -69,7 +69,7 @@
 一些例子：
 
 ```py
-`# buy the main date, with sizer default stake, Market order
+# buy the main date, with sizer default stake, Market order
 order = self.buy()
 
 # Market order - valid will be "IGNORED"
@@ -92,7 +92,7 @@ order = self.buy(exectype=Order.StopLimit,
                  plimit=self.data.close[0] * 1.07)
 
 # Canceling an existing order
-self.broker.cancel(order)` 
+self.broker.cancel(order)
 ```
 
 注意
@@ -100,7 +100,7 @@ self.broker.cancel(order)`
 所有订单类型都可以通过创建`Order`实例（或其子类之一），然后通过以下方式传递给经纪人：
 
 ```py
-`order = self.broker.submit(order)` 
+order = self.broker.submit(order)
 ```
 
 注意
@@ -179,7 +179,7 @@ self.broker.cancel(order)`
 对于`Buy`订单
 
 ```py
-`- Case 1:
+- Case 1:
 
   If the `open` price of the bar is below the limit price the order
   executes immediately with the `open` price. The order has been swept
@@ -189,7 +189,7 @@ self.broker.cancel(order)`
 
   If the `open` price has not penetrated below the limit price but the
   `low` price is below the limit price, then the limit price has been
-  seen during the session and the order can be executed` 
+  seen during the session and the order can be executed
 ```
 
 对于`Sell`订单，逻辑显然是相反的。
@@ -211,7 +211,7 @@ self.broker.cancel(order)`
 对于`\`Stop`orders which`Buy`
 
 ```py
-`- Case 1:
+- Case 1:
 
   If the `open` price of the bar is above the stop price the order is
   executed immediately with the `open` price.
@@ -223,7 +223,7 @@ self.broker.cancel(order)`
 
   If the `open` price has not penetrated above the stop price but the
   `high` price is above the stop price, then the stop price has been
-  seen during the session and the order can be executed` 
+  seen during the session and the order can be executed
 ```
 
 对于`Sell`订单，逻辑显然是相反的。
@@ -259,7 +259,7 @@ self.broker.cancel(order)`
                 self.buy(exectype=bt.Order.Market)  # default if not given
 
                 self.log('BUY CREATE, exectype Market, price %.2f' %
-                         self.data.close[0])` 
+                         self.data.close[0])
 ```
 
 输出图表。
@@ -269,7 +269,7 @@ self.broker.cancel(order)`
 命令行和输出：
 
 ```py
-`$ ./order-execution-samples.py --exectype Market
+$ ./order-execution-samples.py --exectype Market
 2006-01-26T23:59:59+00:00, BUY CREATE, exectype Market, price 3641.42
 2006-01-26T23:59:59+00:00, ORDER ACCEPTED/SUBMITTED
 2006-01-27T23:59:59+00:00, BUY EXECUTED, Price: 3643.35, Cost: 3643.35, Comm 0.00
@@ -280,7 +280,7 @@ self.broker.cancel(order)`
 ...
 2006-12-11T23:59:59+00:00, BUY CREATE, exectype Market, price 4052.89
 2006-12-11T23:59:59+00:00, ORDER ACCEPTED/SUBMITTED
-2006-12-12T23:59:59+00:00, BUY EXECUTED, Price: 4052.55, Cost: 4052.55, Comm 0.00` 
+2006-12-12T23:59:59+00:00, BUY EXECUTED, Price: 4052.55, Cost: 4052.55, Comm 0.00
 ```
 
 ### 执行类型：收盘
@@ -296,7 +296,7 @@ self.broker.cancel(order)`
                 self.buy(exectype=bt.Order.Close)
 
                 self.log('BUY CREATE, exectype Close, price %.2f' %
-                         self.data.close[0])` 
+                         self.data.close[0])
 ```
 
 输出图表。
@@ -306,7 +306,7 @@ self.broker.cancel(order)`
 命令行和输出：
 
 ```py
-`$ ./order-execution-samples.py --exectype Close
+$ ./order-execution-samples.py --exectype Close
 2006-01-26T23:59:59+00:00, BUY CREATE, exectype Close, price 3641.42
 2006-01-26T23:59:59+00:00, ORDER ACCEPTED/SUBMITTED
 2006-01-27T23:59:59+00:00, BUY EXECUTED, Price: 3685.48, Cost: 3685.48, Comm 0.00
@@ -323,7 +323,7 @@ self.broker.cancel(order)`
 2006-11-27T23:59:59+00:00, SELL EXECUTED, Price: 4045.05, Cost: 4045.05, Comm 0.00
 2006-12-11T23:59:59+00:00, BUY CREATE, exectype Close, price 4052.89
 2006-12-11T23:59:59+00:00, ORDER ACCEPTED/SUBMITTED
-2006-12-12T23:59:59+00:00, BUY EXECUTED, Price: 4059.74, Cost: 4059.74, Comm 0.00` 
+2006-12-12T23:59:59+00:00, BUY EXECUTED, Price: 4059.74, Cost: 4059.74, Comm 0.00
 ```
 
 ### 执行类型：限价
@@ -335,7 +335,7 @@ self.broker.cancel(order)`
                 valid = self.data.datetime.date(0) + \
                         datetime.timedelta(days=self.p.valid)
             else:
-                valid = None` 
+                valid = None
 ```
 
 设置了信号生成价格（信号条的收盘价）下跌 1％的限价。请注意，这阻止了上面许多订单的执行。
@@ -351,7 +351,7 @@ self.broker.cancel(order)`
                     self.log(txt % (price, valid.strftime('%Y-%m-%d')))
                 else:
                     txt = 'BUY CREATE, exectype Limit, price %.2f'
-                    self.log(txt % price)` 
+                    self.log(txt % price)
 ```
 
 输出图表。
@@ -363,7 +363,7 @@ self.broker.cancel(order)`
 命令行和输出：
 
 ```py
-`$ ./order-execution-samples.py --exectype Limit --perc1 1
+$ ./order-execution-samples.py --exectype Limit --perc1 1
 2006-01-26T23:59:59+00:00, BUY CREATE, exectype Limit, price 3605.01
 2006-01-26T23:59:59+00:00, ORDER ACCEPTED/SUBMITTED
 2006-05-18T23:59:59+00:00, BUY EXECUTED, Price: 3605.01, Cost: 3605.01, Comm 0.00
@@ -377,7 +377,7 @@ self.broker.cancel(order)`
 2006-07-13T23:59:59+00:00, ORDER ACCEPTED/SUBMITTED
 2006-07-14T23:59:59+00:00, SELL EXECUTED, Price: 3545.92, Cost: 3545.92, Comm 0.00
 2006-07-24T23:59:59+00:00, BUY CREATE, exectype Limit, price 3596.60
-2006-07-24T23:59:59+00:00, ORDER ACCEPTED/SUBMITTED` 
+2006-07-24T23:59:59+00:00, ORDER ACCEPTED/SUBMITTED
 ```
 
 ### 执行类型：限价与有效期
@@ -393,7 +393,7 @@ self.broker.cancel(order)`
 命令行和输出：
 
 ```py
-`$ ./order-execution-samples.py --exectype Limit --perc1 1 --valid 4
+$ ./order-execution-samples.py --exectype Limit --perc1 1 --valid 4
 2006-01-26T23:59:59+00:00, BUY CREATE, exectype Limit, price 3605.01, valid: 2006-01-30
 2006-01-26T23:59:59+00:00, ORDER ACCEPTED/SUBMITTED
 2006-01-30T23:59:59+00:00, BUY EXPIRED
@@ -432,7 +432,7 @@ self.broker.cancel(order)`
 2006-11-10T23:59:59+00:00, BUY EXPIRED
 2006-12-11T23:59:59+00:00, BUY CREATE, exectype Limit, price 4012.36, valid: 2006-12-15
 2006-12-11T23:59:59+00:00, ORDER ACCEPTED/SUBMITTED
-2006-12-15T23:59:59+00:00, BUY EXPIRED` 
+2006-12-15T23:59:59+00:00, BUY EXPIRED
 ```
 
 ### 执行类型：止损
@@ -452,7 +452,7 @@ self.broker.cancel(order)`
                     self.log(txt % (price, valid.strftime('%Y-%m-%d')))
                 else:
                     txt = 'BUY CREATE, exectype Stop, price %.2f'
-                    self.log(txt % price)` 
+                    self.log(txt % price)
 ```
 
 输出图表。
@@ -462,7 +462,7 @@ self.broker.cancel(order)`
 命令行和输出：
 
 ```py
-`$ ./order-execution-samples.py --exectype Stop --perc1 1
+$ ./order-execution-samples.py --exectype Stop --perc1 1
 2006-01-26T23:59:59+00:00, BUY CREATE, exectype Stop, price 3677.83
 2006-01-26T23:59:59+00:00, ORDER ACCEPTED/SUBMITTED
 2006-01-27T23:59:59+00:00, BUY EXECUTED, Price: 3677.83, Cost: 3677.83, Comm 0.00
@@ -489,7 +489,7 @@ self.broker.cancel(order)`
 2006-11-27T23:59:59+00:00, SELL EXECUTED, Price: 4045.05, Cost: 4045.05, Comm 0.00
 2006-12-11T23:59:59+00:00, BUY CREATE, exectype Stop, price 4093.42
 2006-12-11T23:59:59+00:00, ORDER ACCEPTED/SUBMITTED
-2006-12-13T23:59:59+00:00, BUY EXECUTED, Price: 4093.42, Cost: 4093.42, Comm 0.00` 
+2006-12-13T23:59:59+00:00, BUY EXECUTED, Price: 4093.42, Cost: 4093.42, Comm 0.00
 ```
 
 ### 执行类型：止损限价
@@ -514,7 +514,7 @@ self.broker.cancel(order)`
                 else:
                     txt = ('BUY CREATE, exectype StopLimit, price %.2f,'
                            ' pricelimit: %.2f')
-                    self.log(txt % (price, plimit))` 
+                    self.log(txt % (price, plimit))
 ```
 
 输出图表。
@@ -524,7 +524,7 @@ self.broker.cancel(order)`
 命令行和输出：
 
 ```py
-`$ ./order-execution-samples.py --exectype StopLimit --perc1 1 --perc2 0.5 --valid 20
+$ ./order-execution-samples.py --exectype StopLimit --perc1 1 --perc2 0.5 --valid 20
 2006-01-26T23:59:59+00:00, BUY CREATE, exectype StopLimit, price 3677.83, valid: 2006-02-15, pricelimit: 3659.63
 2006-01-26T23:59:59+00:00, ORDER ACCEPTED/SUBMITTED
 2006-02-03T23:59:59+00:00, BUY EXECUTED, Price: 3659.63, Cost: 3659.63, Comm 0.00
@@ -544,7 +544,7 @@ self.broker.cancel(order)`
 ...
 2006-12-11T23:59:59+00:00, BUY CREATE, exectype StopLimit, price 4093.42, valid: 2006-12-31, pricelimit: 4073.15
 2006-12-11T23:59:59+00:00, ORDER ACCEPTED/SUBMITTED
-2006-12-22T23:59:59+00:00, BUY EXECUTED, Price: 4073.15, Cost: 4073.15, Comm 0.00` 
+2006-12-22T23:59:59+00:00, BUY EXECUTED, Price: 4073.15, Cost: 4073.15, Comm 0.00
 ```
 
 ### 测试脚本执行
@@ -552,7 +552,7 @@ self.broker.cancel(order)`
 在命令行的`help`中详细说明：
 
 ```py
-`$ ./order-execution-samples.py --help
+$ ./order-execution-samples.py --help
 usage: order-execution-samples.py [-h] [--infile INFILE]
                                   [--csvformat {bt,visualchart,sierrachart,yahoo,yahoo_unreversed}]
                                   [--fromdate FROMDATE] [--todate TODATE]
@@ -591,13 +591,13 @@ optional arguments:
                         the limit/trigger price in Limit/Stop orders
   --perc2 PERC2, -p2 PERC2
                         % distance from close price at order creation time for
-                        the limit price in StopLimit orders` 
+                        the limit price in StopLimit orders
 ```
 
 ### 完整代码
 
 ```py
-`from __future__ import (absolute_import, division, print_function,
+from __future__ import (absolute_import, division, print_function,
                         unicode_literals)
 
 import argparse
@@ -839,5 +839,5 @@ def parse_args():
     return parser.parse_args()
 
 if __name__ == '__main__':
-    runstrat()` 
+    runstrat()
 ```

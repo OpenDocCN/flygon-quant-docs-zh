@@ -13,25 +13,25 @@ ACOS([input_arrays])
 输入：
 
 ```py
-`price: (any ndarray)` 
+price: (any ndarray)
 ```
 
 输出：
 
 ```py
-`real` 
+real
 ```
 
 线条：
 
 ```py
-`* real` 
+* real
 ```
 
 绘图信息：
 
 ```py
-`* subplot (True)
+* subplot (True)
 
 * plot (True)
 
@@ -53,13 +53,13 @@ ACOS([input_arrays])
 
 * plotmaster (None)
 
-* plotyticks ([])` 
+* plotyticks ([])
 ```
 
 绘图线：
 
 ```py
-`* real: - ls (-)` 
+* real: - ls (-)
 ```
 
 ### AD
@@ -71,25 +71,25 @@ AD([input_arrays])
 输入：
 
 ```py
-`prices: [‘high’, ‘low’, ‘close’, ‘volume’]` 
+prices: [‘high’, ‘low’, ‘close’, ‘volume’]
 ```
 
 输出：
 
 ```py
-`real` 
+real
 ```
 
 线条：
 
 ```py
-`* real` 
+* real
 ```
 
 绘图信息：
 
 ```py
-`* subplot (True)
+* subplot (True)
 
 * plot (True)
 
@@ -111,13 +111,13 @@ AD([input_arrays])
 
 * plotmaster (None)
 
-* plotyticks ([])` 
+* plotyticks ([])
 ```
 
 绘图线：
 
 ```py
-`* real: - ls (-)` 
+* real: - ls (-)
 ```
 
 ### ADD
@@ -129,25 +129,25 @@ ADD([input_arrays])
 输入：
 
 ```py
-`price0: (any ndarray) price1: (any ndarray)` 
+price0: (any ndarray) price1: (any ndarray)
 ```
 
 输出：
 
 ```py
-`real` 
+real
 ```
 
 线条：
 
 ```py
-`* real` 
+* real
 ```
 
 绘图信息：
 
 ```py
-`* subplot (True)
+* subplot (True)
 
 * plot (True)
 
@@ -169,13 +169,13 @@ ADD([input_arrays])
 
 * plotmaster (None)
 
-* plotyticks ([])` 
+* plotyticks ([])
 ```
 
 绘图线：
 
 ```py
-`* real: - ls (-)` 
+* real: - ls (-)
 ```
 
 ### ADOSC
@@ -187,39 +187,39 @@ ADOSC([input_arrays], [fastperiod=3], [slowperiod=10])
 输入：
 
 ```py
-`prices: [‘high’, ‘low’, ‘close’, ‘volume’]` 
+prices: [‘high’, ‘low’, ‘close’, ‘volume’]
 ```
 
 参数：
 
 ```py
-`fastperiod: 3 slowperiod: 10` 
+fastperiod: 3 slowperiod: 10
 ```
 
 输出：
 
 ```py
-`real` 
+real
 ```
 
 线条：
 
 ```py
-`* real` 
+* real
 ```
 
 参数：
 
 ```py
-`* fastperiod (3)
+* fastperiod (3)
 
-* slowperiod (10)` 
+* slowperiod (10)
 ```
 
 绘图信息：
 
 ```py
-`* subplot (True)
+* subplot (True)
 
 * plot (True)
 
@@ -241,13 +241,13 @@ ADOSC([input_arrays], [fastperiod=3], [slowperiod=10])
 
 * plotmaster (None)
 
-* plotyticks ([])` 
+* plotyticks ([])
 ```
 
 绘图线：
 
 ```py
-`* real: - ls (-)` 
+* real: - ls (-)
 ```
 
 ### ADX
@@ -259,37 +259,37 @@ ADX([input_arrays], [timeperiod=14])
 输入：
 
 ```py
-`prices: [‘high’, ‘low’, ‘close’]` 
+prices: [‘high’, ‘low’, ‘close’]
 ```
 
 参数：
 
 ```py
-`timeperiod: 14` 
+timeperiod: 14
 ```
 
 输出：
 
 ```py
-`real` 
+real
 ```
 
 线条：
 
 ```py
-`* real` 
+* real
 ```
 
 参数：
 
 ```py
-`* timeperiod (14)` 
+* timeperiod (14)
 ```
 
 绘图信息：
 
 ```py
-`* subplot (True)
+* subplot (True)
 
 * plot (True)
 
@@ -311,13 +311,13 @@ ADX([input_arrays], [timeperiod=14])
 
 * plotmaster (None)
 
-* plotyticks ([])` 
+* plotyticks ([])
 ```
 
 绘图线：
 
 ```py
-`* real: - ls (-)` 
+* real: - ls (-)
 ```
 
 ### ADXR
@@ -329,37 +329,37 @@ ADXR([input_arrays], [timeperiod=14])
 输入：
 
 ```py
-`prices: [‘high’, ‘low’, ‘close’]` 
+prices: [‘high’, ‘low’, ‘close’]
 ```
 
 参数：
 
 ```py
-`timeperiod: 14` 
+timeperiod: 14
 ```
 
 输出：
 
 ```py
-`real` 
+real
 ```
 
 线条：
 
 ```py
-`* real` 
+* real
 ```
 
 参数：
 
 ```py
-`* timeperiod (14)` 
+* timeperiod (14)
 ```
 
 绘图信息：
 
 ```py
-`* subplot (True)
+* subplot (True)
 
 * plot (True)
 
@@ -381,13 +381,13 @@ ADXR([input_arrays], [timeperiod=14])
 
 * plotmaster (None)
 
-* plotyticks ([])` 
+* plotyticks ([])
 ```
 
 绘图线：
 
 ```py
-`* real: - ls (-)` 
+* real: - ls (-)
 ```
 
 ### APO
@@ -399,41 +399,41 @@ APO([input_arrays], [fastperiod=12], [slowperiod=26], [matype=0])
 输入：
 
 ```py
-`price: (any ndarray)` 
+price: (any ndarray)
 ```
 
 参数：
 
 ```py
-`fastperiod: 12 slowperiod: 26 matype: 0 (Simple Moving Average)` 
+fastperiod: 12 slowperiod: 26 matype: 0 (Simple Moving Average)
 ```
 
 输出：
 
 ```py
-`real` 
+real
 ```
 
 线条：
 
 ```py
-`* real` 
+* real
 ```
 
 参数：
 
 ```py
-`* fastperiod (12)
+* fastperiod (12)
 
 * slowperiod (26)
 
-* matype (0)` 
+* matype (0)
 ```
 
 绘图信息：
 
 ```py
-`* subplot (True)
+* subplot (True)
 
 * plot (True)
 
@@ -455,13 +455,13 @@ APO([input_arrays], [fastperiod=12], [slowperiod=26], [matype=0])
 
 * plotmaster (None)
 
-* plotyticks ([])` 
+* plotyticks ([])
 ```
 
 绘图线：
 
 ```py
-`* real: - ls (-)` 
+* real: - ls (-)
 ```
 
 ### AROON
@@ -473,39 +473,39 @@ Aroon（Momentum Indicators）
 输入：
 
 ```py
-`prices: [‘high’, ‘low’]` 
+prices: [‘high’, ‘low’]
 ```
 
 参数：
 
 ```py
-`timeperiod: 14` 
+timeperiod: 14
 ```
 
 输出：
 
 ```py
-`aroondown aroonup` 
+aroondown aroonup
 ```
 
 线条：
 
 ```py
-`* aroondown
+* aroondown
 
-* aroonup` 
+* aroonup
 ```
 
 参数：
 
 ```py
-`* timeperiod (14)` 
+* timeperiod (14)
 ```
 
 绘图信息：
 
 ```py
-`* subplot (True)
+* subplot (True)
 
 * plot (True)
 
@@ -527,15 +527,15 @@ Aroon（Momentum Indicators）
 
 * plotmaster (None)
 
-* plotyticks ([])` 
+* plotyticks ([])
 ```
 
 绘图线：
 
 ```py
-`* aroondown: - ls (–)
+* aroondown: - ls (–)
 
-* aroonup: - ls (-)` 
+* aroonup: - ls (-)
 ```
 
 ### AROONOSC
@@ -547,37 +547,37 @@ Aroon Oscillator（Momentum Indicators）
 输入：
 
 ```py
-`prices: [‘high’, ‘low’]` 
+prices: [‘high’, ‘low’]
 ```
 
 参数：
 
 ```py
-`timeperiod: 14` 
+timeperiod: 14
 ```
 
 输出：
 
 ```py
-`real` 
+real
 ```
 
 线条：
 
 ```py
-`* real` 
+* real
 ```
 
 参数：
 
 ```py
-`* timeperiod (14)` 
+* timeperiod (14)
 ```
 
 绘图信息：
 
 ```py
-`* subplot (True)
+* subplot (True)
 
 * plot (True)
 
@@ -599,13 +599,13 @@ Aroon Oscillator（Momentum Indicators）
 
 * plotmaster (None)
 
-* plotyticks ([])` 
+* plotyticks ([])
 ```
 
 绘图线：
 
 ```py
-`* real: - ls (-)` 
+* real: - ls (-)
 ```
 
 ### ASIN
@@ -617,25 +617,25 @@ ASIN([input_arrays])
 输入：
 
 ```py
-`price: (any ndarray)` 
+price: (any ndarray)
 ```
 
 输出：
 
 ```py
-`real` 
+real
 ```
 
 线条：
 
 ```py
-`* real` 
+* real
 ```
 
 绘图信息：
 
 ```py
-`* subplot (True)
+* subplot (True)
 
 * plot (True)
 
@@ -657,13 +657,13 @@ ASIN([input_arrays])
 
 * plotmaster (None)
 
-* plotyticks ([])` 
+* plotyticks ([])
 ```
 
 绘图线：
 
 ```py
-`* real: - ls (-)` 
+* real: - ls (-)
 ```
 
 ### ATAN
@@ -675,25 +675,25 @@ ATAN([input_arrays])
 输入：
 
 ```py
-`price: (any ndarray)` 
+price: (any ndarray)
 ```
 
 输出：
 
 ```py
-`real` 
+real
 ```
 
 线条：
 
 ```py
-`* real` 
+* real
 ```
 
 绘图信息：
 
 ```py
-`* subplot (True)
+* subplot (True)
 
 * plot (True)
 
@@ -715,13 +715,13 @@ ATAN([input_arrays])
 
 * plotmaster (None)
 
-* plotyticks ([])` 
+* plotyticks ([])
 ```
 
 绘图线：
 
 ```py
-`* real: - ls (-)` 
+* real: - ls (-)
 ```
 
 ### ATR
@@ -733,37 +733,37 @@ ATR([input_arrays], [timeperiod=14])
 输入：
 
 ```py
-`prices: [‘high’, ‘low’, ‘close’]` 
+prices: [‘high’, ‘low’, ‘close’]
 ```
 
 参数：
 
 ```py
-`timeperiod: 14` 
+timeperiod: 14
 ```
 
 输出：
 
 ```py
-`real` 
+real
 ```
 
 线条：
 
 ```py
-`* real` 
+* real
 ```
 
 参数：
 
 ```py
-`* timeperiod (14)` 
+* timeperiod (14)
 ```
 
 绘图信息：
 
 ```py
-`* subplot (True)
+* subplot (True)
 
 * plot (True)
 
@@ -785,13 +785,13 @@ ATR([input_arrays], [timeperiod=14])
 
 * plotmaster (None)
 
-* plotyticks ([])` 
+* plotyticks ([])
 ```
 
 绘图线：
 
 ```py
-`* real: - ls (-)` 
+* real: - ls (-)
 ```
 
 ### AVGPRICE
@@ -803,25 +803,25 @@ AVGPRICE([input_arrays])
 输入：
 
 ```py
-`prices: [‘open’, ‘high’, ‘low’, ‘close’]` 
+prices: [‘open’, ‘high’, ‘low’, ‘close’]
 ```
 
 输出：
 
 ```py
-`real` 
+real
 ```
 
 线条：
 
 ```py
-`* real` 
+* real
 ```
 
 绘图信息：
 
 ```py
-`* subplot (False)
+* subplot (False)
 
 * plot (True)
 
@@ -843,13 +843,13 @@ AVGPRICE([input_arrays])
 
 * plotmaster (None)
 
-* plotyticks ([])` 
+* plotyticks ([])
 ```
 
 绘图线：
 
 ```py
-`* real: - ls (-)` 
+* real: - ls (-)
 ```
 
 ### BBANDS
@@ -861,48 +861,48 @@ BBANDS([input_arrays], [timeperiod=5], [nbdevup=2], [nbdevdn=2], [matype=0])
 输入：
 
 ```py
-`price: (any ndarray)` 
+price: (any ndarray)
 ```
 
 参数：
 
 ```py
-`timeperiod: 5 nbdevup: 2 nbdevdn: 2 matype: 0 (Simple Moving
-Average)` 
+timeperiod: 5 nbdevup: 2 nbdevdn: 2 matype: 0 (Simple Moving
+Average)
 ```
 
 输出：
 
 ```py
-`upperband middleband lowerband` 
+upperband middleband lowerband
 ```
 
 线条：
 
 ```py
-`* upperband
+* upperband
 
 * middleband
 
-* lowerband` 
+* lowerband
 ```
 
 参数：
 
 ```py
-`* timeperiod (5)
+* timeperiod (5)
 
 * nbdevup (2)
 
 * nbdevdn (2)
 
-* matype (0)` 
+* matype (0)
 ```
 
 绘图信息：
 
 ```py
-`* subplot (False)
+* subplot (False)
 
 * plot (True)
 
@@ -924,17 +924,17 @@ Average)`
 
 * plotmaster (None)
 
-* plotyticks ([])` 
+* plotyticks ([])
 ```
 
 绘图线：
 
 ```py
-`* middleband: - _samecolor (True) - ls (-)
+* middleband: - _samecolor (True) - ls (-)
 
 * upperband:
 
-* lowerband: - _samecolor (True)` 
+* lowerband: - _samecolor (True)
 ```
 
 ### BETA
@@ -946,37 +946,37 @@ BETA([input_arrays], [timeperiod=5])
 输入：
 
 ```py
-`price0: (any ndarray) price1: (any ndarray)` 
+price0: (any ndarray) price1: (any ndarray)
 ```
 
 参数：
 
 ```py
-`timeperiod: 5` 
+timeperiod: 5
 ```
 
 输出：
 
 ```py
-`real` 
+real
 ```
 
 线条：
 
 ```py
-`* real` 
+* real
 ```
 
 参数：
 
 ```py
-`* timeperiod (5)` 
+* timeperiod (5)
 ```
 
 绘图信息：
 
 ```py
-`* subplot (True)
+* subplot (True)
 
 * plot (True)
 
@@ -998,13 +998,13 @@ BETA([input_arrays], [timeperiod=5])
 
 * plotmaster (None)
 
-* plotyticks ([])` 
+* plotyticks ([])
 ```
 
 绘图线：
 
 ```py
-`* real: - ls (-)` 
+* real: - ls (-)
 ```
 
 ### BOP
@@ -1016,25 +1016,25 @@ BOP([input_arrays])
 输入：
 
 ```py
-`prices: [‘open’, ‘high’, ‘low’, ‘close’]` 
+prices: [‘open’, ‘high’, ‘low’, ‘close’]
 ```
 
 输出：
 
 ```py
-`real` 
+real
 ```
 
 线条：
 
 ```py
-`* real` 
+* real
 ```
 
 绘图信息：
 
 ```py
-`* subplot (True)
+* subplot (True)
 
 * plot (True)
 
@@ -1056,13 +1056,13 @@ BOP([input_arrays])
 
 * plotmaster (None)
 
-* plotyticks ([])` 
+* plotyticks ([])
 ```
 
 绘图线：
 
 ```py
-`* real: - ls (-)` 
+* real: - ls (-)
 ```
 
 ### CCI
@@ -1074,37 +1074,37 @@ CCI([input_arrays], [timeperiod=14])
 输入：
 
 ```py
-`prices: [‘high’, ‘low’, ‘close’]` 
+prices: [‘high’, ‘low’, ‘close’]
 ```
 
 参数：
 
 ```py
-`timeperiod: 14` 
+timeperiod: 14
 ```
 
 输出：
 
 ```py
-`real` 
+real
 ```
 
 线条：
 
 ```py
-`* real` 
+* real
 ```
 
 参数：
 
 ```py
-`* timeperiod (14)` 
+* timeperiod (14)
 ```
 
 绘图信息：
 
 ```py
-`* subplot (True)
+* subplot (True)
 
 * plot (True)
 
@@ -1126,13 +1126,13 @@ CCI([input_arrays], [timeperiod=14])
 
 * plotmaster (None)
 
-* plotyticks ([])` 
+* plotyticks ([])
 ```
 
 绘图线：
 
 ```py
-`* real: - ls (-)` 
+* real: - ls (-)
 ```
 
 CDL2###CROWS
@@ -1144,27 +1144,27 @@ CDL2CROWS([input_arrays])
 输入：
 
 ```py
-`prices: [‘open’, ‘high’, ‘low’, ‘close’]` 
+prices: [‘open’, ‘high’, ‘low’, ‘close’]
 ```
 
 输出：
 
 ```py
-`integer (values are -100, 0 or 100)` 
+integer (values are -100, 0 or 100)
 ```
 
 线条：
 
 ```py
-`* integer
+* integer
 
-* _candleplot` 
+* _candleplot
 ```
 
 绘图信息：
 
 ```py
-`* subplot (False)
+* subplot (False)
 
 * plot (True)
 
@@ -1186,16 +1186,16 @@ CDL2CROWS([input_arrays])
 
 * plotmaster (None)
 
-* plotyticks ([])` 
+* plotyticks ([])
 ```
 
 绘图线：
 
 ```py
-`* integer: - _plotskip (True)
+* integer: - _plotskip (True)
 
 * _candleplot: - marker (d) - fillstyle (full) - markersize (7.0) -
-  ls () - _name (CDL2CROWS)` 
+  ls () - _name (CDL2CROWS)
 ```
 
 CDL3###BLACKCROWS
@@ -1207,27 +1207,27 @@ CDL3BLACKCROWS([input_arrays])
 输入：
 
 ```py
-`prices: [‘open’, ‘high’, ‘low’, ‘close’]` 
+prices: [‘open’, ‘high’, ‘low’, ‘close’]
 ```
 
 输出：
 
 ```py
-`integer (values are -100, 0 or 100)` 
+integer (values are -100, 0 or 100)
 ```
 
 线条：
 
 ```py
-`* integer
+* integer
 
-* _candleplot` 
+* _candleplot
 ```
 
 绘图信息：
 
 ```py
-`* subplot (False)
+* subplot (False)
 
 * plot (True)
 
@@ -1249,16 +1249,16 @@ CDL3BLACKCROWS([input_arrays])
 
 * plotmaster (None)
 
-* plotyticks ([])` 
+* plotyticks ([])
 ```
 
 绘图线：
 
 ```py
-`* integer: - _plotskip (True)
+* integer: - _plotskip (True)
 
 * _candleplot: - marker (d) - fillstyle (full) - markersize (7.0) -
-  ls () - _name (CDL3BLACKCROWS)` 
+  ls () - _name (CDL3BLACKCROWS)
 ```
 
 CDL3###INSIDE
@@ -1270,27 +1270,27 @@ CDL3INSIDE([input_arrays])
 输入：
 
 ```py
-`prices: [‘open’, ‘high’, ‘low’, ‘close’]` 
+prices: [‘open’, ‘high’, ‘low’, ‘close’]
 ```
 
 输出：
 
 ```py
-`integer (values are -100, 0 or 100)` 
+integer (values are -100, 0 or 100)
 ```
 
 线条：
 
 ```py
-`* integer
+* integer
 
-* _candleplot` 
+* _candleplot
 ```
 
 绘图信息：
 
 ```py
-`* subplot (False)
+* subplot (False)
 
 * plot (True)
 
@@ -1312,16 +1312,16 @@ CDL3INSIDE([input_arrays])
 
 * plotmaster (None)
 
-* plotyticks ([])` 
+* plotyticks ([])
 ```
 
 绘图线：
 
 ```py
-`* integer: - _plotskip (True)
+* integer: - _plotskip (True)
 
 * _candleplot: - marker (d) - fillstyle (full) - markersize (7.0) -
-  ls () - _name (CDL3INSIDE)` 
+  ls () - _name (CDL3INSIDE)
 ```
 
 CDL3###LINESTRIKE
@@ -1333,27 +1333,27 @@ CDL3LINESTRIKE([input_arrays])
 输入：
 
 ```py
-`prices: [‘open’, ‘high’, ‘low’, ‘close’]` 
+prices: [‘open’, ‘high’, ‘low’, ‘close’]
 ```
 
 输出：
 
 ```py
-`integer (values are -100, 0 or 100)` 
+integer (values are -100, 0 or 100)
 ```
 
 线条：
 
 ```py
-`* integer
+* integer
 
-* _candleplot` 
+* _candleplot
 ```
 
 绘图信息：
 
 ```py
-`* subplot (False)
+* subplot (False)
 
 * plot (True)
 
@@ -1375,16 +1375,16 @@ CDL3LINESTRIKE([input_arrays])
 
 * plotmaster (None)
 
-* plotyticks ([])` 
+* plotyticks ([])
 ```
 
 绘图线条：
 
 ```py
-`* integer: - _plotskip (True)
+* integer: - _plotskip (True)
 
 * _candleplot: - marker (d) - fillstyle (full) - markersize (7.0) -
-  ls () - _name (CDL3LINESTRIKE)` 
+  ls () - _name (CDL3LINESTRIKE)
 ```
 
 CDL3###OUTSIDE
@@ -1396,27 +1396,27 @@ CDL3OUTSIDE（[输入数组]）
 输入：
 
 ```py
-`prices: [‘open’, ‘high’, ‘low’, ‘close’]` 
+prices: [‘open’, ‘high’, ‘low’, ‘close’]
 ```
 
 输出：
 
 ```py
-`integer (values are -100, 0 or 100)` 
+integer (values are -100, 0 or 100)
 ```
 
 线条：
 
 ```py
-`* integer
+* integer
 
-* _candleplot` 
+* _candleplot
 ```
 
 绘图信息：
 
 ```py
-`* subplot (False)
+* subplot (False)
 
 * plot (True)
 
@@ -1438,16 +1438,16 @@ CDL3OUTSIDE（[输入数组]）
 
 * plotmaster (None)
 
-* plotyticks ([])` 
+* plotyticks ([])
 ```
 
 绘图线条：
 
 ```py
-`* integer: - _plotskip (True)
+* integer: - _plotskip (True)
 
 * _candleplot: - marker (d) - fillstyle (full) - markersize (7.0) -
-  ls () - _name (CDL3OUTSIDE)` 
+  ls () - _name (CDL3OUTSIDE)
 ```
 
 CDL3###STARSINSOUTH
@@ -1459,27 +1459,27 @@ CDL3STARSINSOUTH（[输入数组]）
 输入：
 
 ```py
-`prices: [‘open’, ‘high’, ‘low’, ‘close’]` 
+prices: [‘open’, ‘high’, ‘low’, ‘close’]
 ```
 
 输出：
 
 ```py
-`integer (values are -100, 0 or 100)` 
+integer (values are -100, 0 or 100)
 ```
 
 线条：
 
 ```py
-`* integer
+* integer
 
-* _candleplot` 
+* _candleplot
 ```
 
 绘图信息：
 
 ```py
-`* subplot (False)
+* subplot (False)
 
 * plot (True)
 
@@ -1501,16 +1501,16 @@ CDL3STARSINSOUTH（[输入数组]）
 
 * plotmaster (None)
 
-* plotyticks ([])` 
+* plotyticks ([])
 ```
 
 绘图线条：
 
 ```py
-`* integer: - _plotskip (True)
+* integer: - _plotskip (True)
 
 * _candleplot: - marker (d) - fillstyle (full) - markersize (7.0) -
-  ls () - _name (CDL3STARSINSOUTH)` 
+  ls () - _name (CDL3STARSINSOUTH)
 ```
 
 CDL3###WHITESOLDIERS
@@ -1522,27 +1522,27 @@ CDL3WHITESOLDIERS（[输入数组]）
 输入：
 
 ```py
-`prices: [‘open’, ‘high’, ‘low’, ‘close’]` 
+prices: [‘open’, ‘high’, ‘low’, ‘close’]
 ```
 
 输出：
 
 ```py
-`integer (values are -100, 0 or 100)` 
+integer (values are -100, 0 or 100)
 ```
 
 线条：
 
 ```py
-`* integer
+* integer
 
-* _candleplot` 
+* _candleplot
 ```
 
 绘图信息：
 
 ```py
-`* subplot (False)
+* subplot (False)
 
 * plot (True)
 
@@ -1564,16 +1564,16 @@ CDL3WHITESOLDIERS（[输入数组]）
 
 * plotmaster (None)
 
-* plotyticks ([])` 
+* plotyticks ([])
 ```
 
 绘图线条：
 
 ```py
-`* integer: - _plotskip (True)
+* integer: - _plotskip (True)
 
 * _candleplot: - marker (d) - fillstyle (full) - markersize (7.0) -
-  ls () - _name (CDL3WHITESOLDIERS)` 
+  ls () - _name (CDL3WHITESOLDIERS)
 ```
 
 ### CDLABANDONEDBABY
@@ -1585,39 +1585,39 @@ CDLABANDONEDBABY（[输入数组]，[穿透=0.3]）
 输入：
 
 ```py
-`prices: [‘open’, ‘high’, ‘low’, ‘close’]` 
+prices: [‘open’, ‘high’, ‘low’, ‘close’]
 ```
 
 参数：
 
 ```py
-`penetration: 0.3` 
+penetration: 0.3
 ```
 
 输出：
 
 ```py
-`integer (values are -100, 0 or 100)` 
+integer (values are -100, 0 or 100)
 ```
 
 线条：
 
 ```py
-`* integer
+* integer
 
-* _candleplot` 
+* _candleplot
 ```
 
 参数：
 
 ```py
-`* penetration (0.3)` 
+* penetration (0.3)
 ```
 
 绘图信息：
 
 ```py
-`* subplot (False)
+* subplot (False)
 
 * plot (True)
 
@@ -1639,16 +1639,16 @@ CDLABANDONEDBABY（[输入数组]，[穿透=0.3]）
 
 * plotmaster (None)
 
-* plotyticks ([])` 
+* plotyticks ([])
 ```
 
 绘图线条：
 
 ```py
-`* integer: - _plotskip (True)
+* integer: - _plotskip (True)
 
 * _candleplot: - marker (d) - fillstyle (full) - markersize (7.0) -
-  ls () - _name (CDLABANDONEDBABY)` 
+  ls () - _name (CDLABANDONEDBABY)
 ```
 
 ### CDLADVANCEBLOCK
@@ -1660,27 +1660,27 @@ CDLADVANCEBLOCK（[输入数组]）
 输入：
 
 ```py
-`prices: [‘open’, ‘high’, ‘low’, ‘close’]` 
+prices: [‘open’, ‘high’, ‘low’, ‘close’]
 ```
 
 输出：
 
 ```py
-`integer (values are -100, 0 or 100)` 
+integer (values are -100, 0 or 100)
 ```
 
 线条：
 
 ```py
-`* integer
+* integer
 
-* _candleplot` 
+* _candleplot
 ```
 
 绘图信息：
 
 ```py
-`* subplot (False)
+* subplot (False)
 
 * plot (True)
 
@@ -1702,16 +1702,16 @@ CDLADVANCEBLOCK（[输入数组]）
 
 * plotmaster (None)
 
-* plotyticks ([])` 
+* plotyticks ([])
 ```
 
 绘图线条：
 
 ```py
-`* integer: - _plotskip (True)
+* integer: - _plotskip (True)
 
 * _candleplot: - marker (d) - fillstyle (full) - markersize (7.0) -
-  ls () - _name (CDLADVANCEBLOCK)` 
+  ls () - _name (CDLADVANCEBLOCK)
 ```
 
 ### CDLBELTHOLD
@@ -1723,27 +1723,27 @@ CDLBELTHOLD（[输入数组]）
 输入：
 
 ```py
-`prices: [‘open’, ‘high’, ‘low’, ‘close’]` 
+prices: [‘open’, ‘high’, ‘low’, ‘close’]
 ```
 
 输出：
 
 ```py
-`integer (values are -100, 0 or 100)` 
+integer (values are -100, 0 or 100)
 ```
 
 线条：
 
 ```py
-`* integer
+* integer
 
-* _candleplot` 
+* _candleplot
 ```
 
 绘图信息：
 
 ```py
-`* subplot (False)
+* subplot (False)
 
 * plot (True)
 
@@ -1765,16 +1765,16 @@ CDLBELTHOLD（[输入数组]）
 
 * plotmaster (None)
 
-* plotyticks ([])` 
+* plotyticks ([])
 ```
 
 绘图线条：
 
 ```py
-`* integer: - _plotskip (True)
+* integer: - _plotskip (True)
 
 * _candleplot: - marker (d) - fillstyle (full) - markersize (7.0) -
-  ls () - _name (CDLBELTHOLD)` 
+  ls () - _name (CDLBELTHOLD)
 ```
 
 ### CDLBREAKAWAY
@@ -1786,27 +1786,27 @@ CDLBREAKAWAY（[输入数组]）
 输入：
 
 ```py
-`prices: [‘open’, ‘high’, ‘low’, ‘close’]` 
+prices: [‘open’, ‘high’, ‘low’, ‘close’]
 ```
 
 输出：
 
 ```py
-`integer (values are -100, 0 or 100)` 
+integer (values are -100, 0 or 100)
 ```
 
 线条：
 
 ```py
-`* integer
+* integer
 
-* _candleplot` 
+* _candleplot
 ```
 
 绘图信息：
 
 ```py
-`* subplot (False)
+* subplot (False)
 
 * plot (True)
 
@@ -1828,16 +1828,16 @@ CDLBREAKAWAY（[输入数组]）
 
 * plotmaster (None)
 
-* plotyticks ([])` 
+* plotyticks ([])
 ```
 
 绘图线条：
 
 ```py
-`* integer: - _plotskip (True)
+* integer: - _plotskip (True)
 
 * _candleplot: - marker (d) - fillstyle (full) - markersize (7.0) -
-  ls () - _name (CDLBREAKAWAY)` 
+  ls () - _name (CDLBREAKAWAY)
 ```
 
 ### CDLCLOSINGMARUBOZU
@@ -1849,27 +1849,27 @@ CDLCLOSINGMARUBOZU（[输入数组]）
 输入：
 
 ```py
-`prices: [‘open’, ‘high’, ‘low’, ‘close’]` 
+prices: [‘open’, ‘high’, ‘low’, ‘close’]
 ```
 
 输出：
 
 ```py
-`integer (values are -100, 0 or 100)` 
+integer (values are -100, 0 or 100)
 ```
 
 线条：
 
 ```py
-`* integer
+* integer
 
-* _candleplot` 
+* _candleplot
 ```
 
 绘图信息：
 
 ```py
-`* subplot (False)
+* subplot (False)
 
 * plot (True)
 
@@ -1891,16 +1891,16 @@ CDLCLOSINGMARUBOZU（[输入数组]）
 
 * plotmaster (None)
 
-* plotyticks ([])` 
+* plotyticks ([])
 ```
 
 绘图线条：
 
 ```py
-`* integer: - _plotskip (True)
+* integer: - _plotskip (True)
 
 * _candleplot: - marker (d) - fillstyle (full) - markersize (7.0) -
-  ls () - _name (CDLCLOSINGMARUBOZU)` 
+  ls () - _name (CDLCLOSINGMARUBOZU)
 ```
 
 ### CDLCONCEALBABYSWALL
@@ -1912,27 +1912,27 @@ CDLCONCEALBABYSWALL（[输入数组]）
 输入：
 
 ```py
-`prices: [‘open’, ‘high’, ‘low’, ‘close’]` 
+prices: [‘open’, ‘high’, ‘low’, ‘close’]
 ```
 
 输出：
 
 ```py
-`integer (values are -100, 0 or 100)` 
+integer (values are -100, 0 or 100)
 ```
 
 线条：
 
 ```py
-`* integer
+* integer
 
-* _candleplot` 
+* _candleplot
 ```
 
 绘图信息：
 
 ```py
-`* subplot (False)
+* subplot (False)
 
 * plot (True)
 
@@ -1954,16 +1954,16 @@ CDLCONCEALBABYSWALL（[输入数组]）
 
 * plotmaster (None)
 
-* plotyticks ([])` 
+* plotyticks ([])
 ```
 
 绘图线条：
 
 ```py
-`* integer: - _plotskip (True)
+* integer: - _plotskip (True)
 
 * _candleplot: - marker (d) - fillstyle (full) - markersize (7.0) -
-  ls () - _name (CDLCONCEALBABYSWALL)` 
+  ls () - _name (CDLCONCEALBABYSWALL)
 ```
 
 ### CDLCOUNTERATTACK
@@ -1975,27 +1975,27 @@ CDLCOUNTERATTACK（[输入数组]）
 输入：
 
 ```py
-`prices: [‘open’, ‘high’, ‘low’, ‘close’]` 
+prices: [‘open’, ‘high’, ‘low’, ‘close’]
 ```
 
 输出：
 
 ```py
-`integer (values are -100, 0 or 100)` 
+integer (values are -100, 0 or 100)
 ```
 
 线条：
 
 ```py
-`* integer
+* integer
 
-* _candleplot` 
+* _candleplot
 ```
 
 绘图信息：
 
 ```py
-`* subplot (False)
+* subplot (False)
 
 * plot (True)
 
@@ -2017,16 +2017,16 @@ CDLCOUNTERATTACK（[输入数组]）
 
 * plotmaster (None)
 
-* plotyticks ([])` 
+* plotyticks ([])
 ```
 
 绘图线条：
 
 ```py
-`* integer: - _plotskip (True)
+* integer: - _plotskip (True)
 
 * _candleplot: - marker (d) - fillstyle (full) - markersize (7.0) -
-  ls () - _name (CDLCOUNTERATTACK)` 
+  ls () - _name (CDLCOUNTERATTACK)
 ```
 
 ### CDLDARKCLOUDCOVER
@@ -2038,39 +2038,39 @@ CDLDARKCLOUDCOVER（[输入数组]，[穿透=0.5]）
 输入：
 
 ```py
-`prices: [‘open’, ‘high’, ‘low’, ‘close’]` 
+prices: [‘open’, ‘high’, ‘low’, ‘close’]
 ```
 
 参数：
 
 ```py
-`penetration: 0.5` 
+penetration: 0.5
 ```
 
 输出：
 
 ```py
-`integer (values are -100, 0 or 100)` 
+integer (values are -100, 0 or 100)
 ```
 
 线条：
 
 ```py
-`* integer
+* integer
 
-* _candleplot` 
+* _candleplot
 ```
 
 参数：
 
 ```py
-`* penetration (0.5)` 
+* penetration (0.5)
 ```
 
 绘图信息：
 
 ```py
-`* subplot (False)
+* subplot (False)
 
 * plot (True)
 
@@ -2092,16 +2092,16 @@ CDLDARKCLOUDCOVER（[输入数组]，[穿透=0.5]）
 
 * plotmaster (None)
 
-* plotyticks ([])` 
+* plotyticks ([])
 ```
 
 绘图线条：
 
 ```py
-`* integer: - _plotskip (True)
+* integer: - _plotskip (True)
 
 * _candleplot: - marker (d) - fillstyle (full) - markersize (7.0) -
-  ls () - _name (CDLDARKCLOUDCOVER)` 
+  ls () - _name (CDLDARKCLOUDCOVER)
 ```
 
 ### CDLDOJI
@@ -2113,27 +2113,27 @@ CDLDOJI（[输入数组]）
 输入：
 
 ```py
-`prices: [‘open’, ‘high’, ‘low’, ‘close’]` 
+prices: [‘open’, ‘high’, ‘low’, ‘close’]
 ```
 
 输出：
 
 ```py
-`integer (values are -100, 0 or 100)` 
+integer (values are -100, 0 or 100)
 ```
 
 线条：
 
 ```py
-`* integer
+* integer
 
-* _candleplot` 
+* _candleplot
 ```
 
 绘图信息：
 
 ```py
-`* subplot (False)
+* subplot (False)
 
 * plot (True)
 
@@ -2155,16 +2155,16 @@ CDLDOJI（[输入数组]）
 
 * plotmaster (None)
 
-* plotyticks ([])` 
+* plotyticks ([])
 ```
 
 绘图线条：
 
 ```py
-`* integer: - _plotskip (True)
+* integer: - _plotskip (True)
 
 * _candleplot: - marker (d) - fillstyle (full) - markersize (7.0) -
-  ls () - _name (CDLDOJI)` 
+  ls () - _name (CDLDOJI)
 ```
 
 ### CDLDOJISTAR
@@ -2176,27 +2176,27 @@ CDLDOJISTAR（[输入数组]）
 输入：
 
 ```py
-`prices: [‘open’, ‘high’, ‘low’, ‘close’]` 
+prices: [‘open’, ‘high’, ‘low’, ‘close’]
 ```
 
 输出：
 
 ```py
-`integer (values are -100, 0 or 100)` 
+integer (values are -100, 0 or 100)
 ```
 
 线条：
 
 ```py
-`* integer
+* integer
 
-* _candleplot` 
+* _candleplot
 ```
 
 绘图信息：
 
 ```py
-`* subplot (False)
+* subplot (False)
 
 * plot (True)
 
@@ -2218,16 +2218,16 @@ CDLDOJISTAR（[输入数组]）
 
 * plotmaster (None)
 
-* plotyticks ([])` 
+* plotyticks ([])
 ```
 
 绘图线条：
 
 ```py
-`* integer: - _plotskip (True)
+* integer: - _plotskip (True)
 
 * _candleplot: - marker (d) - fillstyle (full) - markersize (7.0) -
-  ls () - _name (CDLDOJISTAR)` 
+  ls () - _name (CDLDOJISTAR)
 ```
 
 ### CDLDRAGONFLYDOJI
@@ -2239,27 +2239,27 @@ CDLDRAGONFLYDOJI（[输入数组]）
 输入：
 
 ```py
-`prices: [‘open’, ‘high’, ‘low’, ‘close’]` 
+prices: [‘open’, ‘high’, ‘low’, ‘close’]
 ```
 
 输出：
 
 ```py
-`integer (values are -100, 0 or 100)` 
+integer (values are -100, 0 or 100)
 ```
 
 线条：
 
 ```py
-`* integer
+* integer
 
-* _candleplot` 
+* _candleplot
 ```
 
 绘图信息：
 
 ```py
-`* subplot (False)
+* subplot (False)
 
 * plot (True)
 
@@ -2281,16 +2281,16 @@ CDLDRAGONFLYDOJI（[输入数组]）
 
 * plotmaster (None)
 
-* plotyticks ([])` 
+* plotyticks ([])
 ```
 
 绘图线条：
 
 ```py
-`* integer: - _plotskip (True)
+* integer: - _plotskip (True)
 
 * _candleplot: - marker (d) - fillstyle (full) - markersize (7.0) -
-  ls () - _name (CDLDRAGONFLYDOJI)` 
+  ls () - _name (CDLDRAGONFLYDOJI)
 ```
 
 ### CDLENGULFING
@@ -2302,27 +2302,27 @@ CDLENGULFING（[输入数组]）
 输入：
 
 ```py
-`prices: [‘open’, ‘high’, ‘low’, ‘close’]` 
+prices: [‘open’, ‘high’, ‘low’, ‘close’]
 ```
 
 输出：
 
 ```py
-`integer (values are -100, 0 or 100)` 
+integer (values are -100, 0 or 100)
 ```
 
 线条：
 
 ```py
-`* integer
+* integer
 
-* _candleplot` 
+* _candleplot
 ```
 
 绘图信息：
 
 ```py
-`* subplot (False)
+* subplot (False)
 
 * plot (True)
 
@@ -2344,16 +2344,16 @@ CDLENGULFING（[输入数组]）
 
 * plotmaster (None)
 
-* plotyticks ([])` 
+* plotyticks ([])
 ```
 
 绘图线条：
 
 ```py
-`* integer: - _plotskip (True)
+* integer: - _plotskip (True)
 
 * _candleplot: - marker (d) - fillstyle (full) - markersize (7.0) -
-  ls () - _name (CDLENGULFING)` 
+  ls () - _name (CDLENGULFING)
 ```
 
 ### CDLEVENINGDOJISTAR
@@ -2365,39 +2365,39 @@ CDLEVENINGDOJISTAR（[输入数组]，[穿透=0.3]）
 输入：
 
 ```py
-`prices: [‘open’, ‘high’, ‘low’, ‘close’]` 
+prices: [‘open’, ‘high’, ‘low’, ‘close’]
 ```
 
 参数：
 
 ```py
-`penetration: 0.3` 
+penetration: 0.3
 ```
 
 输出：
 
 ```py
-`integer (values are -100, 0 or 100)` 
+integer (values are -100, 0 or 100)
 ```
 
 线条：
 
 ```py
-`* integer
+* integer
 
-* _candleplot` 
+* _candleplot
 ```
 
 参数：
 
 ```py
-`* penetration (0.3)` 
+* penetration (0.3)
 ```
 
 绘图信息：
 
 ```py
-`* subplot (False)
+* subplot (False)
 
 * plot (True)
 
@@ -2419,16 +2419,16 @@ CDLEVENINGDOJISTAR（[输入数组]，[穿透=0.3]）
 
 * plotmaster (None)
 
-* plotyticks ([])` 
+* plotyticks ([])
 ```
 
 绘图线条：
 
 ```py
-`* integer: - _plotskip (True)
+* integer: - _plotskip (True)
 
 * _candleplot: - marker (d) - fillstyle (full) - markersize (7.0) -
-  ls () - _name (CDLEVENINGDOJISTAR)` 
+  ls () - _name (CDLEVENINGDOJISTAR)
 ```
 
 ### CDLEVENINGSTAR
@@ -2440,39 +2440,39 @@ CDLEVENINGSTAR（[输入数组]，[穿透=0.3]）
 输入：
 
 ```py
-`prices: [‘open’, ‘high’, ‘low’, ‘close’]` 
+prices: [‘open’, ‘high’, ‘low’, ‘close’]
 ```
 
 参数：
 
 ```py
-`penetration: 0.3` 
+penetration: 0.3
 ```
 
 输出：
 
 ```py
-`integer (values are -100, 0 or 100)` 
+integer (values are -100, 0 or 100)
 ```
 
 线条：
 
 ```py
-`* integer
+* integer
 
-* _candleplot` 
+* _candleplot
 ```
 
 参数：
 
 ```py
-`* penetration (0.3)` 
+* penetration (0.3)
 ```
 
 绘图信息：
 
 ```py
-`* subplot (False)
+* subplot (False)
 
 * plot (True)
 
@@ -2494,16 +2494,16 @@ CDLEVENINGSTAR（[输入数组]，[穿透=0.3]）
 
 * plotmaster (None)
 
-* plotyticks ([])` 
+* plotyticks ([])
 ```
 
 绘图线条：
 
 ```py
-`* integer: - _plotskip (True)
+* integer: - _plotskip (True)
 
 * _candleplot: - marker (d) - fillstyle (full) - markersize (7.0) -
-  ls () - _name (CDLEVENINGSTAR)` 
+  ls () - _name (CDLEVENINGSTAR)
 ```
 
 ### CDLGAPSIDESIDEWHITE
@@ -2515,27 +2515,27 @@ CDLGAPSIDESIDEWHITE（[输入数组]）
 输入：
 
 ```py
-`prices: [‘open’, ‘high’, ‘low’, ‘close’]` 
+prices: [‘open’, ‘high’, ‘low’, ‘close’]
 ```
 
 输出：
 
 ```py
-`integer (values are -100, 0 or 100)` 
+integer (values are -100, 0 or 100)
 ```
 
 线条：
 
 ```py
-`* integer
+* integer
 
-* _candleplot` 
+* _candleplot
 ```
 
 绘图信息：
 
 ```py
-`* subplot (False)
+* subplot (False)
 
 * plot (True)
 
@@ -2557,16 +2557,16 @@ CDLGAPSIDESIDEWHITE（[输入数组]）
 
 * plotmaster (None)
 
-* plotyticks ([])` 
+* plotyticks ([])
 ```
 
 绘图线条：
 
 ```py
-`* integer: - _plotskip (True)
+* integer: - _plotskip (True)
 
 * _candleplot: - marker (d) - fillstyle (full) - markersize (7.0) -
-  ls () - _name (CDLGAPSIDESIDEWHITE)` 
+  ls () - _name (CDLGAPSIDESIDEWHITE)
 ```
 
 ### CDLGRAVESTONEDOJI
@@ -2578,27 +2578,27 @@ CDLGRAVESTONEDOJI（[输入数组]）
 输入：
 
 ```py
-`prices: [‘open’, ‘high’, ‘low’, ‘close’]` 
+prices: [‘open’, ‘high’, ‘low’, ‘close’]
 ```
 
 输出：
 
 ```py
-`integer (values are -100, 0 or 100)` 
+integer (values are -100, 0 or 100)
 ```
 
 线条：
 
 ```py
-`* integer
+* integer
 
-* _candleplot` 
+* _candleplot
 ```
 
 绘图信息：
 
 ```py
-`* subplot (False)
+* subplot (False)
 
 * plot (True)
 
@@ -2620,16 +2620,16 @@ CDLGRAVESTONEDOJI（[输入数组]）
 
 * plotmaster (None)
 
-* plotyticks ([])` 
+* plotyticks ([])
 ```
 
 绘图线条：
 
 ```py
-`* integer: - _plotskip (True)
+* integer: - _plotskip (True)
 
 * _candleplot: - marker (d) - fillstyle (full) - markersize (7.0) -
-  ls () - _name (CDLGRAVESTONEDOJI)` 
+  ls () - _name (CDLGRAVESTONEDOJI)
 ```
 
 ### CDLHAMMER
@@ -2641,27 +2641,27 @@ CDLHAMMER（[输入数组]）
 输入：
 
 ```py
-`prices: [‘open’, ‘high’, ‘low’, ‘close’]` 
+prices: [‘open’, ‘high’, ‘low’, ‘close’]
 ```
 
 输出：
 
 ```py
-`integer (values are -100, 0 or 100)` 
+integer (values are -100, 0 or 100)
 ```
 
 线条：
 
 ```py
-`* integer
+* integer
 
-* _candleplot` 
+* _candleplot
 ```
 
 绘图信息：
 
 ```py
-`* subplot (False)
+* subplot (False)
 
 * plot (True)
 
@@ -2683,16 +2683,16 @@ CDLHAMMER（[输入数组]）
 
 * plotmaster (None)
 
-* plotyticks ([])` 
+* plotyticks ([])
 ```
 
 绘图线条：
 
 ```py
-`* integer: - _plotskip (True)
+* integer: - _plotskip (True)
 
 * _candleplot: - marker (d) - fillstyle (full) - markersize (7.0) -
-  ls () - _name (CDLHAMMER)` 
+  ls () - _name (CDLHAMMER)
 ```
 
 ### CDLHANGINGMAN
@@ -2704,27 +2704,27 @@ CDLHANGINGMAN（[输入数组]）
 输入：
 
 ```py
-`prices: [‘open’, ‘high’, ‘low’, ‘close’]` 
+prices: [‘open’, ‘high’, ‘low’, ‘close’]
 ```
 
 输出：
 
 ```py
-`integer (values are -100, 0 or 100)` 
+integer (values are -100, 0 or 100)
 ```
 
 线条：
 
 ```py
-`* integer
+* integer
 
-* _candleplot` 
+* _candleplot
 ```
 
 绘图信息：
 
 ```py
-`* subplot (False)
+* subplot (False)
 
 * plot (True)
 
@@ -2746,16 +2746,16 @@ CDLHANGINGMAN（[输入数组]）
 
 * plotmaster (None)
 
-* plotyticks ([])` 
+* plotyticks ([])
 ```
 
 绘图线条：
 
 ```py
-`* integer: - _plotskip (True)
+* integer: - _plotskip (True)
 
 * _candleplot: - marker (d) - fillstyle (full) - markersize (7.0) -
-  ls () - _name (CDLHANGINGMAN)` 
+  ls () - _name (CDLHANGINGMAN)
 ```
 
 ### CDLHARAMI
@@ -2767,27 +2767,27 @@ CDLHARAMI（[输入数组]）
 输入：
 
 ```py
-`prices: [‘open’, ‘high’, ‘low’, ‘close’]` 
+prices: [‘open’, ‘high’, ‘low’, ‘close’]
 ```
 
 输出：
 
 ```py
-`integer (values are -100, 0 or 100)` 
+integer (values are -100, 0 or 100)
 ```
 
 线：
 
 ```py
-`* integer
+* integer
 
-* _candleplot` 
+* _candleplot
 ```
 
 绘图信息：
 
 ```py
-`* subplot (False)
+* subplot (False)
 
 * plot (True)
 
@@ -2809,16 +2809,16 @@ CDLHARAMI（[输入数组]）
 
 * plotmaster (None)
 
-* plotyticks ([])` 
+* plotyticks ([])
 ```
 
 绘图线：
 
 ```py
-`* integer: - _plotskip (True)
+* integer: - _plotskip (True)
 
 * _candleplot: - marker (d) - fillstyle (full) - markersize (7.0) -
-  ls () - _name (CDLHARAMI)` 
+  ls () - _name (CDLHARAMI)
 ```
 
 ### CDLHARAMICROSS
@@ -2830,27 +2830,27 @@ CDLHARAMICROSS（[输入数组]）
 输入：
 
 ```py
-`prices: [‘open’, ‘high’, ‘low’, ‘close’]` 
+prices: [‘open’, ‘high’, ‘low’, ‘close’]
 ```
 
 输出：
 
 ```py
-`integer (values are -100, 0 or 100)` 
+integer (values are -100, 0 or 100)
 ```
 
 线：
 
 ```py
-`* integer
+* integer
 
-* _candleplot` 
+* _candleplot
 ```
 
 绘图信息：
 
 ```py
-`* subplot (False)
+* subplot (False)
 
 * plot (True)
 
@@ -2872,16 +2872,16 @@ CDLHARAMICROSS（[输入数组]）
 
 * plotmaster (None)
 
-* plotyticks ([])` 
+* plotyticks ([])
 ```
 
 绘图线：
 
 ```py
-`* integer: - _plotskip (True)
+* integer: - _plotskip (True)
 
 * _candleplot: - marker (d) - fillstyle (full) - markersize (7.0) -
-  ls () - _name (CDLHARAMICROSS)` 
+  ls () - _name (CDLHARAMICROSS)
 ```
 
 ### CDLHIGHWAVE
@@ -2893,27 +2893,27 @@ CDLHIGHWAVE（[输入数组]）
 输入：
 
 ```py
-`prices: [‘open’, ‘high’, ‘low’, ‘close’]` 
+prices: [‘open’, ‘high’, ‘low’, ‘close’]
 ```
 
 输出：
 
 ```py
-`integer (values are -100, 0 or 100)` 
+integer (values are -100, 0 or 100)
 ```
 
 线：
 
 ```py
-`* integer
+* integer
 
-* _candleplot` 
+* _candleplot
 ```
 
 绘图信息：
 
 ```py
-`* subplot (False)
+* subplot (False)
 
 * plot (True)
 
@@ -2935,16 +2935,16 @@ CDLHIGHWAVE（[输入数组]）
 
 * plotmaster (None)
 
-* plotyticks ([])` 
+* plotyticks ([])
 ```
 
 绘图线：
 
 ```py
-`* integer: - _plotskip (True)
+* integer: - _plotskip (True)
 
 * _candleplot: - marker (d) - fillstyle (full) - markersize (7.0) -
-  ls () - _name (CDLHIGHWAVE)` 
+  ls () - _name (CDLHIGHWAVE)
 ```
 
 ### CDLHIKKAKE
@@ -2956,27 +2956,27 @@ Hikkake 模式（模式识别）
 输入：
 
 ```py
-`prices: [‘open’, ‘high’, ‘low’, ‘close’]` 
+prices: [‘open’, ‘high’, ‘low’, ‘close’]
 ```
 
 输出：
 
 ```py
-`integer (values are -100, 0 or 100)` 
+integer (values are -100, 0 or 100)
 ```
 
 线：
 
 ```py
-`* integer
+* integer
 
-* _candleplot` 
+* _candleplot
 ```
 
 绘图信息：
 
 ```py
-`* subplot (False)
+* subplot (False)
 
 * plot (True)
 
@@ -2998,16 +2998,16 @@ Hikkake 模式（模式识别）
 
 * plotmaster (None)
 
-* plotyticks ([])` 
+* plotyticks ([])
 ```
 
 绘图线：
 
 ```py
-`* integer: - _plotskip (True)
+* integer: - _plotskip (True)
 
 * _candleplot: - marker (d) - fillstyle (full) - markersize (7.0) -
-  ls () - _name (CDLHIKKAKE)` 
+  ls () - _name (CDLHIKKAKE)
 ```
 
 ### CDLHIKKAKEMOD
@@ -3019,27 +3019,27 @@ CDLHIKKAKEMOD（[输入数组]）
 输入：
 
 ```py
-`prices: [‘open’, ‘high’, ‘low’, ‘close’]` 
+prices: [‘open’, ‘high’, ‘low’, ‘close’]
 ```
 
 输出：
 
 ```py
-`integer (values are -100, 0 or 100)` 
+integer (values are -100, 0 or 100)
 ```
 
 线：
 
 ```py
-`* integer
+* integer
 
-* _candleplot` 
+* _candleplot
 ```
 
 绘图信息：
 
 ```py
-`* subplot (False)
+* subplot (False)
 
 * plot (True)
 
@@ -3061,16 +3061,16 @@ CDLHIKKAKEMOD（[输入数组]）
 
 * plotmaster (None)
 
-* plotyticks ([])` 
+* plotyticks ([])
 ```
 
 绘图线：
 
 ```py
-`* integer: - _plotskip (True)
+* integer: - _plotskip (True)
 
 * _candleplot: - marker (d) - fillstyle (full) - markersize (7.0) -
-  ls () - _name (CDLHIKKAKEMOD)` 
+  ls () - _name (CDLHIKKAKEMOD)
 ```
 
 ### CDLHOMINGPIGEON
@@ -3082,27 +3082,27 @@ CDLHOMINGPIGEON（[输入数组]）
 输入：
 
 ```py
-`prices: [‘open’, ‘high’, ‘low’, ‘close’]` 
+prices: [‘open’, ‘high’, ‘low’, ‘close’]
 ```
 
 输出：
 
 ```py
-`integer (values are -100, 0 or 100)` 
+integer (values are -100, 0 or 100)
 ```
 
 线：
 
 ```py
-`* integer
+* integer
 
-* _candleplot` 
+* _candleplot
 ```
 
 绘图信息：
 
 ```py
-`* subplot (False)
+* subplot (False)
 
 * plot (True)
 
@@ -3124,16 +3124,16 @@ CDLHOMINGPIGEON（[输入数组]）
 
 * plotmaster (None)
 
-* plotyticks ([])` 
+* plotyticks ([])
 ```
 
 绘图线：
 
 ```py
-`* integer: - _plotskip (True)
+* integer: - _plotskip (True)
 
 * _candleplot: - marker (d) - fillstyle (full) - markersize (7.0) -
-  ls () - _name (CDLHOMINGPIGEON)` 
+  ls () - _name (CDLHOMINGPIGEON)
 ```
 
 CDLIDENTICAL3###CROWS
@@ -3145,27 +3145,27 @@ CDLIDENTICAL3CROWS（[输入数组]）
 输入：
 
 ```py
-`prices: [‘open’, ‘high’, ‘low’, ‘close’]` 
+prices: [‘open’, ‘high’, ‘low’, ‘close’]
 ```
 
 输出：
 
 ```py
-`integer (values are -100, 0 or 100)` 
+integer (values are -100, 0 or 100)
 ```
 
 线：
 
 ```py
-`* integer
+* integer
 
-* _candleplot` 
+* _candleplot
 ```
 
 绘图信息：
 
 ```py
-`* subplot (False)
+* subplot (False)
 
 * plot (True)
 
@@ -3187,16 +3187,16 @@ CDLIDENTICAL3CROWS（[输入数组]）
 
 * plotmaster (None)
 
-* plotyticks ([])` 
+* plotyticks ([])
 ```
 
 绘图线：
 
 ```py
-`* integer: - _plotskip (True)
+* integer: - _plotskip (True)
 
 * _candleplot: - marker (d) - fillstyle (full) - markersize (7.0) -
-  ls () - _name (CDLIDENTICAL3CROWS)` 
+  ls () - _name (CDLIDENTICAL3CROWS)
 ```
 
 ### CDLINNECK
@@ -3208,27 +3208,27 @@ CDLINNECK（[输入数组]）
 输入：
 
 ```py
-`prices: [‘open’, ‘high’, ‘low’, ‘close’]` 
+prices: [‘open’, ‘high’, ‘low’, ‘close’]
 ```
 
 输出：
 
 ```py
-`integer (values are -100, 0 or 100)` 
+integer (values are -100, 0 or 100)
 ```
 
 线：
 
 ```py
-`* integer
+* integer
 
-* _candleplot` 
+* _candleplot
 ```
 
 绘图信息：
 
 ```py
-`* subplot (False)
+* subplot (False)
 
 * plot (True)
 
@@ -3250,16 +3250,16 @@ CDLINNECK（[输入数组]）
 
 * plotmaster (None)
 
-* plotyticks ([])` 
+* plotyticks ([])
 ```
 
 绘图线：
 
 ```py
-`* integer: - _plotskip (True)
+* integer: - _plotskip (True)
 
 * _candleplot: - marker (d) - fillstyle (full) - markersize (7.0) -
-  ls () - _name (CDLINNECK)` 
+  ls () - _name (CDLINNECK)
 ```
 
 ### CDLINVERTEDHAMMER
@@ -3271,27 +3271,27 @@ CDLINVERTEDHAMMER（[输入数组]）
 输入：
 
 ```py
-`prices: [‘open’, ‘high’, ‘low’, ‘close’]` 
+prices: [‘open’, ‘high’, ‘low’, ‘close’]
 ```
 
 输出：
 
 ```py
-`integer (values are -100, 0 or 100)` 
+integer (values are -100, 0 or 100)
 ```
 
 线：
 
 ```py
-`* integer
+* integer
 
-* _candleplot` 
+* _candleplot
 ```
 
 绘图信息：
 
 ```py
-`* subplot (False)
+* subplot (False)
 
 * plot (True)
 
@@ -3313,16 +3313,16 @@ CDLINVERTEDHAMMER（[输入数组]）
 
 * plotmaster (None)
 
-* plotyticks ([])` 
+* plotyticks ([])
 ```
 
 绘图线：
 
 ```py
-`* integer: - _plotskip (True)
+* integer: - _plotskip (True)
 
 * _candleplot: - marker (d) - fillstyle (full) - markersize (7.0) -
-  ls () - _name (CDLINVERTEDHAMMER)` 
+  ls () - _name (CDLINVERTEDHAMMER)
 ```
 
 ### CDLKICKING
@@ -3334,27 +3334,27 @@ CDLKICKING（[输入数组]）
 输入：
 
 ```py
-`prices: [‘open’, ‘high’, ‘low’, ‘close’]` 
+prices: [‘open’, ‘high’, ‘low’, ‘close’]
 ```
 
 输出：
 
 ```py
-`integer (values are -100, 0 or 100)` 
+integer (values are -100, 0 or 100)
 ```
 
 ��：
 
 ```py
-`* integer
+* integer
 
-* _candleplot` 
+* _candleplot
 ```
 
 绘图信息：
 
 ```py
-`* subplot (False)
+* subplot (False)
 
 * plot (True)
 
@@ -3376,16 +3376,16 @@ CDLKICKING（[输入数组]）
 
 * plotmaster (None)
 
-* plotyticks ([])` 
+* plotyticks ([])
 ```
 
 绘图线：
 
 ```py
-`* integer: - _plotskip (True)
+* integer: - _plotskip (True)
 
 * _candleplot: - marker (d) - fillstyle (full) - markersize (7.0) -
-  ls () - _name (CDLKICKING)` 
+  ls () - _name (CDLKICKING)
 ```
 
 ### CDLKICKINGBYLENGTH
@@ -3397,27 +3397,27 @@ CDLKICKINGBYLENGTH（[输入数组]）
 输入：
 
 ```py
-`prices: [‘open’, ‘high’, ‘low’, ‘close’]` 
+prices: [‘open’, ‘high’, ‘low’, ‘close’]
 ```
 
 输出：
 
 ```py
-`integer (values are -100, 0 or 100)` 
+integer (values are -100, 0 or 100)
 ```
 
 线：
 
 ```py
-`* integer
+* integer
 
-* _candleplot` 
+* _candleplot
 ```
 
 绘图信息：
 
 ```py
-`* subplot (False)
+* subplot (False)
 
 * plot (True)
 
@@ -3439,16 +3439,16 @@ CDLKICKINGBYLENGTH（[输入数组]）
 
 * plotmaster (None)
 
-* plotyticks ([])` 
+* plotyticks ([])
 ```
 
 绘图线：
 
 ```py
-`* integer: - _plotskip (True)
+* integer: - _plotskip (True)
 
 * _candleplot: - marker (d) - fillstyle (full) - markersize (7.0) -
-  ls () - _name (CDLKICKINGBYLENGTH)` 
+  ls () - _name (CDLKICKINGBYLENGTH)
 ```
 
 ### CDLLADDERBOTTOM
@@ -3460,27 +3460,27 @@ CDLLADDERBOTTOM（[输入数组]）
 输入：
 
 ```py
-`prices: [‘open’, ‘high’, ‘low’, ‘close’]` 
+prices: [‘open’, ‘high’, ‘low’, ‘close’]
 ```
 
 输出：
 
 ```py
-`integer (values are -100, 0 or 100)` 
+integer (values are -100, 0 or 100)
 ```
 
 线：
 
 ```py
-`* integer
+* integer
 
-* _candleplot` 
+* _candleplot
 ```
 
 绘图信息：
 
 ```py
-`* subplot (False)
+* subplot (False)
 
 * plot (True)
 
@@ -3502,16 +3502,16 @@ CDLLADDERBOTTOM（[输入数组]）
 
 * plotmaster (None)
 
-* plotyticks ([])` 
+* plotyticks ([])
 ```
 
 绘图线：
 
 ```py
-`* integer: - _plotskip (True)
+* integer: - _plotskip (True)
 
 * _candleplot: - marker (d) - fillstyle (full) - markersize (7.0) -
-  ls () - _name (CDLLADDERBOTTOM)` 
+  ls () - _name (CDLLADDERBOTTOM)
 ```
 
 ### CDLLONGLEGGEDDOJI
@@ -3523,27 +3523,27 @@ CDLLONGLEGGEDDOJI（[输入数组]）
 输入：
 
 ```py
-`prices: [‘open’, ‘high’, ‘low’, ‘close’]` 
+prices: [‘open’, ‘high’, ‘low’, ‘close’]
 ```
 
 输出：
 
 ```py
-`integer (values are -100, 0 or 100)` 
+integer (values are -100, 0 or 100)
 ```
 
 线：
 
 ```py
-`* integer
+* integer
 
-* _candleplot` 
+* _candleplot
 ```
 
 绘图信息：
 
 ```py
-`* subplot (False)
+* subplot (False)
 
 * plot (True)
 
@@ -3565,16 +3565,16 @@ CDLLONGLEGGEDDOJI（[输入数组]）
 
 * plotmaster (None)
 
-* plotyticks ([])` 
+* plotyticks ([])
 ```
 
 绘图线：
 
 ```py
-`* integer: - _plotskip (True)
+* integer: - _plotskip (True)
 
 * _candleplot: - marker (d) - fillstyle (full) - markersize (7.0) -
-  ls () - _name (CDLLONGLEGGEDDOJI)` 
+  ls () - _name (CDLLONGLEGGEDDOJI)
 ```
 
 ### CDLLONGLINE
@@ -3586,27 +3586,27 @@ CDLLONGLINE（[输入数组]）
 输入：
 
 ```py
-`prices: [‘open’, ‘high’, ‘low’, ‘close’]` 
+prices: [‘open’, ‘high’, ‘low’, ‘close’]
 ```
 
 输出：
 
 ```py
-`integer (values are -100, 0 or 100)` 
+integer (values are -100, 0 or 100)
 ```
 
 线：
 
 ```py
-`* integer
+* integer
 
-* _candleplot` 
+* _candleplot
 ```
 
 绘图信息：
 
 ```py
-`* subplot (False)
+* subplot (False)
 
 * plot (True)
 
@@ -3628,16 +3628,16 @@ CDLLONGLINE（[输入数组]）
 
 * plotmaster (None)
 
-* plotyticks ([])` 
+* plotyticks ([])
 ```
 
 绘图线：
 
 ```py
-`* integer: - _plotskip (True)
+* integer: - _plotskip (True)
 
 * _candleplot: - marker (d) - fillstyle (full) - markersize (7.0) -
-  ls () - _name (CDLLONGLINE)` 
+  ls () - _name (CDLLONGLINE)
 ```
 
 ### CDLMARUBOZU
@@ -3649,27 +3649,27 @@ CDLMARUBOZU（[输入数组]）
 输入：
 
 ```py
-`prices: [‘open’, ‘high’, ‘low’, ‘close’]` 
+prices: [‘open’, ‘high’, ‘low’, ‘close’]
 ```
 
 输出：
 
 ```py
-`integer (values are -100, 0 or 100)` 
+integer (values are -100, 0 or 100)
 ```
 
 线：
 
 ```py
-`* integer
+* integer
 
-* _candleplot` 
+* _candleplot
 ```
 
 绘图信息：
 
 ```py
-`* subplot (False)
+* subplot (False)
 
 * plot (True)
 
@@ -3691,16 +3691,16 @@ CDLMARUBOZU（[输入数组]）
 
 * plotmaster (None)
 
-* plotyticks ([])` 
+* plotyticks ([])
 ```
 
 绘图线：
 
 ```py
-`* integer: - _plotskip (True)
+* integer: - _plotskip (True)
 
 * _candleplot: - marker (d) - fillstyle (full) - markersize (7.0) -
-  ls () - _name (CDLMARUBOZU)` 
+  ls () - _name (CDLMARUBOZU)
 ```
 
 ### CDLMATCHINGLOW
@@ -3712,27 +3712,27 @@ CDLMATCHINGLOW（[输入数组]）
 输入：
 
 ```py
-`prices: [‘open’, ‘high’, ‘low’, ‘close’]` 
+prices: [‘open’, ‘high’, ‘low’, ‘close’]
 ```
 
 输出：
 
 ```py
-`integer (values are -100, 0 or 100)` 
+integer (values are -100, 0 or 100)
 ```
 
 线：
 
 ```py
-`* integer
+* integer
 
-* _candleplot` 
+* _candleplot
 ```
 
 绘图信息：
 
 ```py
-`* subplot (False)
+* subplot (False)
 
 * plot (True)
 
@@ -3754,16 +3754,16 @@ CDLMATCHINGLOW（[输入数组]）
 
 * plotmaster (None)
 
-* plotyticks ([])` 
+* plotyticks ([])
 ```
 
 绘图线：
 
 ```py
-`* integer: - _plotskip (True)
+* integer: - _plotskip (True)
 
 * _candleplot: - marker (d) - fillstyle (full) - markersize (7.0) -
-  ls () - _name (CDLMATCHINGLOW)` 
+  ls () - _name (CDLMATCHINGLOW)
 ```
 
 ### CDLMATHOLD
@@ -3775,39 +3775,39 @@ CDLMATHOLD（[输入数组]，[穿透=0.5]）
 输入：
 
 ```py
-`prices: [‘open’, ‘high’, ‘low’, ‘close’]` 
+prices: [‘open’, ‘high’, ‘low’, ‘close’]
 ```
 
 参数：
 
 ```py
-`penetration: 0.5` 
+penetration: 0.5
 ```
 
 输出：
 
 ```py
-`integer (values are -100, 0 or 100)` 
+integer (values are -100, 0 or 100)
 ```
 
 线：
 
 ```py
-`* integer
+* integer
 
-* _candleplot` 
+* _candleplot
 ```
 
 参数：
 
 ```py
-`* penetration (0.5)` 
+* penetration (0.5)
 ```
 
 绘图信息：
 
 ```py
-`* subplot (False)
+* subplot (False)
 
 * plot (True)
 
@@ -3829,16 +3829,16 @@ CDLMATHOLD（[输入数组]，[穿透=0.5]）
 
 * plotmaster (None)
 
-* plotyticks ([])` 
+* plotyticks ([])
 ```
 
 绘图线：
 
 ```py
-`* integer: - _plotskip (True)
+* integer: - _plotskip (True)
 
 * _candleplot: - marker (d) - fillstyle (full) - markersize (7.0) -
-  ls () - _name (CDLMATHOLD)` 
+  ls () - _name (CDLMATHOLD)
 ```
 
 ### CDLMORNINGDOJISTAR
@@ -3850,39 +3850,39 @@ CDLMORNINGDOJISTAR（[输入数组]，[穿透=0.3]）
 输入：
 
 ```py
-`prices: [‘open’, ‘high’, ‘low’, ‘close’]` 
+prices: [‘open’, ‘high’, ‘low’, ‘close’]
 ```
 
 参数：
 
 ```py
-`penetration: 0.3` 
+penetration: 0.3
 ```
 
 输出：
 
 ```py
-`integer (values are -100, 0 or 100)` 
+integer (values are -100, 0 or 100)
 ```
 
 线：
 
 ```py
-`* integer
+* integer
 
-* _candleplot` 
+* _candleplot
 ```
 
 参数：
 
 ```py
-`* penetration (0.3)` 
+* penetration (0.3)
 ```
 
 绘图信息：
 
 ```py
-`* subplot (False)
+* subplot (False)
 
 * plot (True)
 
@@ -3904,16 +3904,16 @@ CDLMORNINGDOJISTAR（[输入数组]，[穿透=0.3]）
 
 * plotmaster (None)
 
-* plotyticks ([])` 
+* plotyticks ([])
 ```
 
 绘图线：
 
 ```py
-`* integer: - _plotskip (True)
+* integer: - _plotskip (True)
 
 * _candleplot: - marker (d) - fillstyle (full) - markersize (7.0) -
-  ls () - _name (CDLMORNINGDOJISTAR)` 
+  ls () - _name (CDLMORNINGDOJISTAR)
 ```
 
 ### CDLMORNINGSTAR
@@ -3925,39 +3925,39 @@ CDLMORNINGSTAR（[输入数组]，[穿透=0.3]）
 输入：
 
 ```py
-`prices: [‘open’, ‘high’, ‘low’, ‘close’]` 
+prices: [‘open’, ‘high’, ‘low’, ‘close’]
 ```
 
 参数：
 
 ```py
-`penetration: 0.3` 
+penetration: 0.3
 ```
 
 输出：
 
 ```py
-`integer (values are -100, 0 or 100)` 
+integer (values are -100, 0 or 100)
 ```
 
 线：
 
 ```py
-`* integer
+* integer
 
-* _candleplot` 
+* _candleplot
 ```
 
 参数：
 
 ```py
-`* penetration (0.3)` 
+* penetration (0.3)
 ```
 
 绘图信息：
 
 ```py
-`* subplot (False)
+* subplot (False)
 
 * plot (True)
 
@@ -3979,16 +3979,16 @@ CDLMORNINGSTAR（[输入数组]，[穿透=0.3]）
 
 * plotmaster (None)
 
-* plotyticks ([])` 
+* plotyticks ([])
 ```
 
 绘图线：
 
 ```py
-`* integer: - _plotskip (True)
+* integer: - _plotskip (True)
 
 * _candleplot: - marker (d) - fillstyle (full) - markersize (7.0) -
-  ls () - _name (CDLMORNINGSTAR)` 
+  ls () - _name (CDLMORNINGSTAR)
 ```
 
 ### CDLONNECK
@@ -4000,27 +4000,27 @@ CDLONNECK（[输入数组]）
 输入：
 
 ```py
-`prices: [‘open’, ‘high’, ‘low’, ‘close’]` 
+prices: [‘open’, ‘high’, ‘low’, ‘close’]
 ```
 
 输出：
 
 ```py
-`integer (values are -100, 0 or 100)` 
+integer (values are -100, 0 or 100)
 ```
 
 线：
 
 ```py
-`* integer
+* integer
 
-* _candleplot` 
+* _candleplot
 ```
 
 绘图信息：
 
 ```py
-`* subplot (False)
+* subplot (False)
 
 * plot (True)
 
@@ -4042,16 +4042,16 @@ CDLONNECK（[输入数组]）
 
 * plotmaster (None)
 
-* plotyticks ([])` 
+* plotyticks ([])
 ```
 
 绘图线：
 
 ```py
-`* integer: - _plotskip (True)
+* integer: - _plotskip (True)
 
 * _candleplot: - marker (d) - fillstyle (full) - markersize (7.0) -
-  ls () - _name (CDLONNECK)` 
+  ls () - _name (CDLONNECK)
 ```
 
 ### CDLPIERCING
@@ -4063,27 +4063,27 @@ CDLPIERCING（[输入数组]）
 输入：
 
 ```py
-`prices: [‘open’, ‘high’, ‘low’, ‘close’]` 
+prices: [‘open’, ‘high’, ‘low’, ‘close’]
 ```
 
 输出：
 
 ```py
-`integer (values are -100, 0 or 100)` 
+integer (values are -100, 0 or 100)
 ```
 
 线：
 
 ```py
-`* integer
+* integer
 
-* _candleplot` 
+* _candleplot
 ```
 
 绘图信息：
 
 ```py
-`* subplot (False)
+* subplot (False)
 
 * plot (True)
 
@@ -4105,16 +4105,16 @@ CDLPIERCING（[输入数组]）
 
 * plotmaster (None)
 
-* plotyticks ([])` 
+* plotyticks ([])
 ```
 
 绘图线：
 
 ```py
-`* integer: - _plotskip (True)
+* integer: - _plotskip (True)
 
 * _candleplot: - marker (d) - fillstyle (full) - markersize (7.0) -
-  ls () - _name (CDLPIERCING)` 
+  ls () - _name (CDLPIERCING)
 ```
 
 ### CDLRICKSHAWMAN
@@ -4126,27 +4126,27 @@ CDLRICKSHAWMAN（[输入数组]）
 输入：
 
 ```py
-`prices: [‘open’, ‘high’, ‘low’, ‘close’]` 
+prices: [‘open’, ‘high’, ‘low’, ‘close’]
 ```
 
 输出：
 
 ```py
-`integer (values are -100, 0 or 100)` 
+integer (values are -100, 0 or 100)
 ```
 
 线：
 
 ```py
-`* integer
+* integer
 
-* _candleplot` 
+* _candleplot
 ```
 
 绘图信息：
 
 ```py
-`* subplot (False)
+* subplot (False)
 
 * plot (True)
 
@@ -4168,16 +4168,16 @@ CDLRICKSHAWMAN（[输入数组]）
 
 * plotmaster (None)
 
-* plotyticks ([])` 
+* plotyticks ([])
 ```
 
 绘图线：
 
 ```py
-`* integer: - _plotskip (True)
+* integer: - _plotskip (True)
 
 * _candleplot: - marker (d) - fillstyle (full) - markersize (7.0) -
-  ls () - _name (CDLRICKSHAWMAN)` 
+  ls () - _name (CDLRICKSHAWMAN)
 ```
 
 CDLRISEFALL3###METHODS
@@ -4189,27 +4189,27 @@ CDLRISEFALL3METHODS（[输入数组]）
 输入：
 
 ```py
-`prices: [‘open’, ‘high’, ‘low’, ‘close’]` 
+prices: [‘open’, ‘high’, ‘low’, ‘close’]
 ```
 
 输出：
 
 ```py
-`integer (values are -100, 0 or 100)` 
+integer (values are -100, 0 or 100)
 ```
 
 线：
 
 ```py
-`* integer
+* integer
 
-* _candleplot` 
+* _candleplot
 ```
 
 绘制信息：
 
 ```py
-`* subplot (False)
+* subplot (False)
 
 * plot (True)
 
@@ -4231,16 +4231,16 @@ CDLRISEFALL3METHODS（[输入数组]）
 
 * plotmaster (None)
 
-* plotyticks ([])` 
+* plotyticks ([])
 ```
 
 绘制线：
 
 ```py
-`* integer: - _plotskip (True)
+* integer: - _plotskip (True)
 
 * _candleplot: - marker (d) - fillstyle (full) - markersize (7.0) -
-  ls () - _name (CDLRISEFALL3METHODS)` 
+  ls () - _name (CDLRISEFALL3METHODS)
 ```
 
 ### CDLSEPARATINGLINES
@@ -4252,27 +4252,27 @@ CDLSEPARATINGLINES（[input_arrays]）
 输入：
 
 ```py
-`prices: [‘open’, ‘high’, ‘low’, ‘close’]` 
+prices: [‘open’, ‘high’, ‘low’, ‘close’]
 ```
 
 输出：
 
 ```py
-`integer (values are -100, 0 or 100)` 
+integer (values are -100, 0 or 100)
 ```
 
 线：
 
 ```py
-`* integer
+* integer
 
-* _candleplot` 
+* _candleplot
 ```
 
 绘制信息：
 
 ```py
-`* subplot (False)
+* subplot (False)
 
 * plot (True)
 
@@ -4294,16 +4294,16 @@ CDLSEPARATINGLINES（[input_arrays]）
 
 * plotmaster (None)
 
-* plotyticks ([])` 
+* plotyticks ([])
 ```
 
 绘制线：
 
 ```py
-`* integer: - _plotskip (True)
+* integer: - _plotskip (True)
 
 * _candleplot: - marker (d) - fillstyle (full) - markersize (7.0) -
-  ls () - _name (CDLSEPARATINGLINES)` 
+  ls () - _name (CDLSEPARATINGLINES)
 ```
 
 ### CDLSHOOTINGSTAR
@@ -4315,27 +4315,27 @@ CDLSHOOTINGSTAR（[input_arrays]）
 输入：
 
 ```py
-`prices: [‘open’, ‘high’, ‘low’, ‘close’]` 
+prices: [‘open’, ‘high’, ‘low’, ‘close’]
 ```
 
 输出：
 
 ```py
-`integer (values are -100, 0 or 100)` 
+integer (values are -100, 0 or 100)
 ```
 
 线：
 
 ```py
-`* integer
+* integer
 
-* _candleplot` 
+* _candleplot
 ```
 
 绘制信息：
 
 ```py
-`* subplot (False)
+* subplot (False)
 
 * plot (True)
 
@@ -4357,16 +4357,16 @@ CDLSHOOTINGSTAR（[input_arrays]）
 
 * plotmaster (None)
 
-* plotyticks ([])` 
+* plotyticks ([])
 ```
 
 绘制线：
 
 ```py
-`* integer: - _plotskip (True)
+* integer: - _plotskip (True)
 
 * _candleplot: - marker (d) - fillstyle (full) - markersize (7.0) -
-  ls () - _name (CDLSHOOTINGSTAR)` 
+  ls () - _name (CDLSHOOTINGSTAR)
 ```
 
 ### CDLSHORTLINE
@@ -4378,27 +4378,27 @@ CDLSHORTLINE（[input_arrays]）
 输入：
 
 ```py
-`prices: [‘open’, ‘high’, ‘low’, ‘close’]` 
+prices: [‘open’, ‘high’, ‘low’, ‘close’]
 ```
 
 输出：
 
 ```py
-`integer (values are -100, 0 or 100)` 
+integer (values are -100, 0 or 100)
 ```
 
 线：
 
 ```py
-`* integer
+* integer
 
-* _candleplot` 
+* _candleplot
 ```
 
 绘制信息：
 
 ```py
-`* subplot (False)
+* subplot (False)
 
 * plot (True)
 
@@ -4420,16 +4420,16 @@ CDLSHORTLINE（[input_arrays]）
 
 * plotmaster (None)
 
-* plotyticks ([])` 
+* plotyticks ([])
 ```
 
 绘制线：
 
 ```py
-`* integer: - _plotskip (True)
+* integer: - _plotskip (True)
 
 * _candleplot: - marker (d) - fillstyle (full) - markersize (7.0) -
-  ls () - _name (CDLSHORTLINE)` 
+  ls () - _name (CDLSHORTLINE)
 ```
 
 ### CDLSPINNINGTOP
@@ -4441,27 +4441,27 @@ CDLSPINNINGTOP（[input_arrays]）
 输入：
 
 ```py
-`prices: [‘open’, ‘high’, ‘low’, ‘close’]` 
+prices: [‘open’, ‘high’, ‘low’, ‘close’]
 ```
 
 输出：
 
 ```py
-`integer (values are -100, 0 or 100)` 
+integer (values are -100, 0 or 100)
 ```
 
 线：
 
 ```py
-`* integer
+* integer
 
-* _candleplot` 
+* _candleplot
 ```
 
 绘制信息：
 
 ```py
-`* subplot (False)
+* subplot (False)
 
 * plot (True)
 
@@ -4483,16 +4483,16 @@ CDLSPINNINGTOP（[input_arrays]）
 
 * plotmaster (None)
 
-* plotyticks ([])` 
+* plotyticks ([])
 ```
 
 绘制线：
 
 ```py
-`* integer: - _plotskip (True)
+* integer: - _plotskip (True)
 
 * _candleplot: - marker (d) - fillstyle (full) - markersize (7.0) -
-  ls () - _name (CDLSPINNINGTOP)` 
+  ls () - _name (CDLSPINNINGTOP)
 ```
 
 ### CDLSTALLEDPATTERN
@@ -4504,27 +4504,27 @@ CDLSTALLEDPATTERN（[input_arrays]）
 输入：
 
 ```py
-`prices: [‘open’, ‘high’, ‘low’, ‘close’]` 
+prices: [‘open’, ‘high’, ‘low’, ‘close’]
 ```
 
 输出：
 
 ```py
-`integer (values are -100, 0 or 100)` 
+integer (values are -100, 0 or 100)
 ```
 
 线：
 
 ```py
-`* integer
+* integer
 
-* _candleplot` 
+* _candleplot
 ```
 
 绘制信息：
 
 ```py
-`* subplot (False)
+* subplot (False)
 
 * plot (True)
 
@@ -4546,16 +4546,16 @@ CDLSTALLEDPATTERN（[input_arrays]）
 
 * plotmaster (None)
 
-* plotyticks ([])` 
+* plotyticks ([])
 ```
 
 绘制线：
 
 ```py
-`* integer: - _plotskip (True)
+* integer: - _plotskip (True)
 
 * _candleplot: - marker (d) - fillstyle (full) - markersize (7.0) -
-  ls () - _name (CDLSTALLEDPATTERN)` 
+  ls () - _name (CDLSTALLEDPATTERN)
 ```
 
 ### CDLSTICKSANDWICH
@@ -4567,27 +4567,27 @@ CDLSTICKSANDWICH（[input_arrays]）
 输入：
 
 ```py
-`prices: [‘open’, ‘high’, ‘low’, ‘close’]` 
+prices: [‘open’, ‘high’, ‘low’, ‘close’]
 ```
 
 输出：
 
 ```py
-`integer (values are -100, 0 or 100)` 
+integer (values are -100, 0 or 100)
 ```
 
 线：
 
 ```py
-`* integer
+* integer
 
-* _candleplot` 
+* _candleplot
 ```
 
 绘制信息：
 
 ```py
-`* subplot (False)
+* subplot (False)
 
 * plot (True)
 
@@ -4609,16 +4609,16 @@ CDLSTICKSANDWICH（[input_arrays]）
 
 * plotmaster (None)
 
-* plotyticks ([])` 
+* plotyticks ([])
 ```
 
 绘制线：
 
 ```py
-`* integer: - _plotskip (True)
+* integer: - _plotskip (True)
 
 * _candleplot: - marker (d) - fillstyle (full) - markersize (7.0) -
-  ls () - _name (CDLSTICKSANDWICH)` 
+  ls () - _name (CDLSTICKSANDWICH)
 ```
 
 ### CDLTAKURI
@@ -4630,27 +4630,27 @@ CDLTAKURI（[input_arrays]）
 输入：
 
 ```py
-`prices: [‘open’, ‘high’, ‘low’, ‘close’]` 
+prices: [‘open’, ‘high’, ‘low’, ‘close’]
 ```
 
 输出：
 
 ```py
-`integer (values are -100, 0 or 100)` 
+integer (values are -100, 0 or 100)
 ```
 
 线：
 
 ```py
-`* integer
+* integer
 
-* _candleplot` 
+* _candleplot
 ```
 
 绘制信息：
 
 ```py
-`* subplot (False)
+* subplot (False)
 
 * plot (True)
 
@@ -4672,16 +4672,16 @@ CDLTAKURI（[input_arrays]）
 
 * plotmaster (None)
 
-* plotyticks ([])` 
+* plotyticks ([])
 ```
 
 绘制线：
 
 ```py
-`* integer: - _plotskip (True)
+* integer: - _plotskip (True)
 
 * _candleplot: - marker (d) - fillstyle (full) - markersize (7.0) -
-  ls () - _name (CDLTAKURI)` 
+  ls () - _name (CDLTAKURI)
 ```
 
 ### CDLTASUKIGAP
@@ -4693,27 +4693,27 @@ CDLTASUKIGAP（[input_arrays]）
 输入：
 
 ```py
-`prices: [‘open’, ‘high’, ‘low’, ‘close’]` 
+prices: [‘open’, ‘high’, ‘low’, ‘close’]
 ```
 
 输出：
 
 ```py
-`integer (values are -100, 0 or 100)` 
+integer (values are -100, 0 or 100)
 ```
 
 线：
 
 ```py
-`* integer
+* integer
 
-* _candleplot` 
+* _candleplot
 ```
 
 绘制信息：
 
 ```py
-`* subplot (False)
+* subplot (False)
 
 * plot (True)
 
@@ -4735,16 +4735,16 @@ CDLTASUKIGAP（[input_arrays]）
 
 * plotmaster (None)
 
-* plotyticks ([])` 
+* plotyticks ([])
 ```
 
 绘制线：
 
 ```py
-`* integer: - _plotskip (True)
+* integer: - _plotskip (True)
 
 * _candleplot: - marker (d) - fillstyle (full) - markersize (7.0) -
-  ls () - _name (CDLTASUKIGAP)` 
+  ls () - _name (CDLTASUKIGAP)
 ```
 
 ### CDLTHRUSTING
@@ -4756,27 +4756,27 @@ CDLTHRUSTING（[input_arrays]）
 输入：
 
 ```py
-`prices: [‘open’, ‘high’, ‘low’, ‘close’]` 
+prices: [‘open’, ‘high’, ‘low’, ‘close’]
 ```
 
 输出：
 
 ```py
-`integer (values are -100, 0 or 100)` 
+integer (values are -100, 0 or 100)
 ```
 
 线：
 
 ```py
-`* integer
+* integer
 
-* _candleplot` 
+* _candleplot
 ```
 
 绘制信息：
 
 ```py
-`* subplot (False)
+* subplot (False)
 
 * plot (True)
 
@@ -4798,16 +4798,16 @@ CDLTHRUSTING（[input_arrays]）
 
 * plotmaster (None)
 
-* plotyticks ([])` 
+* plotyticks ([])
 ```
 
 绘制线：
 
 ```py
-`* integer: - _plotskip (True)
+* integer: - _plotskip (True)
 
 * _candleplot: - marker (d) - fillstyle (full) - markersize (7.0) -
-  ls () - _name (CDLTHRUSTING)` 
+  ls () - _name (CDLTHRUSTING)
 ```
 
 ### CDLTRISTAR
@@ -4819,27 +4819,27 @@ CDLTRISTAR（[input_arrays]）
 输入：
 
 ```py
-`prices: [‘open’, ‘high’, ‘low’, ‘close’]` 
+prices: [‘open’, ‘high’, ‘low’, ‘close’]
 ```
 
 输出：
 
 ```py
-`integer (values are -100, 0 or 100)` 
+integer (values are -100, 0 or 100)
 ```
 
 线：
 
 ```py
-`* integer
+* integer
 
-* _candleplot` 
+* _candleplot
 ```
 
 绘制信息：
 
 ```py
-`* subplot (False)
+* subplot (False)
 
 * plot (True)
 
@@ -4861,16 +4861,16 @@ CDLTRISTAR（[input_arrays]）
 
 * plotmaster (None)
 
-* plotyticks ([])` 
+* plotyticks ([])
 ```
 
 绘制线：
 
 ```py
-`* integer: - _plotskip (True)
+* integer: - _plotskip (True)
 
 * _candleplot: - marker (d) - fillstyle (full) - markersize (7.0) -
-  ls () - _name (CDLTRISTAR)` 
+  ls () - _name (CDLTRISTAR)
 ```
 
 CDLUNIQUE3###RIVER
@@ -4882,27 +4882,27 @@ CDLUNIQUE3RIVER（[input_arrays]）
 输入：
 
 ```py
-`prices: [‘open’, ‘high’, ‘low’, ‘close’]` 
+prices: [‘open’, ‘high’, ‘low’, ‘close’]
 ```
 
 输出：
 
 ```py
-`integer (values are -100, 0 or 100)` 
+integer (values are -100, 0 or 100)
 ```
 
 线：
 
 ```py
-`* integer
+* integer
 
-* _candleplot` 
+* _candleplot
 ```
 
 绘制信息：
 
 ```py
-`* subplot (False)
+* subplot (False)
 
 * plot (True)
 
@@ -4924,16 +4924,16 @@ CDLUNIQUE3RIVER（[input_arrays]）
 
 * plotmaster (None)
 
-* plotyticks ([])` 
+* plotyticks ([])
 ```
 
 绘制线：
 
 ```py
-`* integer: - _plotskip (True)
+* integer: - _plotskip (True)
 
 * _candleplot: - marker (d) - fillstyle (full) - markersize (7.0) -
-  ls () - _name (CDLUNIQUE3RIVER)` 
+  ls () - _name (CDLUNIQUE3RIVER)
 ```
 
 CDLUPSIDEGAP2###CROWS
@@ -4945,27 +4945,27 @@ CDLUPSIDEGAP2CROWS（[input_arrays]）
 输入：
 
 ```py
-`prices: [‘open’, ‘high’, ‘low’, ‘close’]` 
+prices: [‘open’, ‘high’, ‘low’, ‘close’]
 ```
 
 输出：
 
 ```py
-`integer (values are -100, 0 or 100)` 
+integer (values are -100, 0 or 100)
 ```
 
 线：
 
 ```py
-`* integer
+* integer
 
-* _candleplot` 
+* _candleplot
 ```
 
 绘制信息：
 
 ```py
-`* subplot (False)
+* subplot (False)
 
 * plot (True)
 
@@ -4987,16 +4987,16 @@ CDLUPSIDEGAP2CROWS（[input_arrays]）
 
 * plotmaster (None)
 
-* plotyticks ([])` 
+* plotyticks ([])
 ```
 
 绘制线：
 
 ```py
-`* integer: - _plotskip (True)
+* integer: - _plotskip (True)
 
 * _candleplot: - marker (d) - fillstyle (full) - markersize (7.0) -
-  ls () - _name (CDLUPSIDEGAP2CROWS)` 
+  ls () - _name (CDLUPSIDEGAP2CROWS)
 ```
 
 CDLXSIDEGAP3###METHODS
@@ -5008,27 +5008,27 @@ CDLXSIDEGAP3METHODS（[input_arrays]）
 输入：
 
 ```py
-`prices: [‘open’, ‘high’, ‘low’, ‘close’]` 
+prices: [‘open’, ‘high’, ‘low’, ‘close’]
 ```
 
 输出：
 
 ```py
-`integer (values are -100, 0 or 100)` 
+integer (values are -100, 0 or 100)
 ```
 
 线：
 
 ```py
-`* integer
+* integer
 
-* _candleplot` 
+* _candleplot
 ```
 
 绘制信息：
 
 ```py
-`* subplot (False)
+* subplot (False)
 
 * plot (True)
 
@@ -5050,16 +5050,16 @@ CDLXSIDEGAP3METHODS（[input_arrays]）
 
 * plotmaster (None)
 
-* plotyticks ([])` 
+* plotyticks ([])
 ```
 
 绘制线：
 
 ```py
-`* integer: - _plotskip (True)
+* integer: - _plotskip (True)
 
 * _candleplot: - marker (d) - fillstyle (full) - markersize (7.0) -
-  ls () - _name (CDLXSIDEGAP3METHODS)` 
+  ls () - _name (CDLXSIDEGAP3METHODS)
 ```
 
 ### CEIL
@@ -5071,25 +5071,25 @@ CEIL（[input_arrays]）
 输入：
 
 ```py
-`price: (any ndarray)` 
+price: (any ndarray)
 ```
 
 输出：
 
 ```py
-`real` 
+real
 ```
 
 线：
 
 ```py
-`* real` 
+* real
 ```
 
 绘制信息：
 
 ```py
-`* subplot (True)
+* subplot (True)
 
 * plot (True)
 
@@ -5111,13 +5111,13 @@ CEIL（[input_arrays]）
 
 * plotmaster (None)
 
-* plotyticks ([])` 
+* plotyticks ([])
 ```
 
 绘制线：
 
 ```py
-`* real: - ls (-)` 
+* real: - ls (-)
 ```
 
 ### CMO
@@ -5129,37 +5129,37 @@ CMO（[input_arrays]，[timeperiod=14]）
 输入：
 
 ```py
-`price: (any ndarray)` 
+price: (any ndarray)
 ```
 
 参数：
 
 ```py
-`timeperiod: 14` 
+timeperiod: 14
 ```
 
 输出：
 
 ```py
-`real` 
+real
 ```
 
 线：
 
 ```py
-`* real` 
+* real
 ```
 
 参数：
 
 ```py
-`* timeperiod (14)` 
+* timeperiod (14)
 ```
 
 绘制信息：
 
 ```py
-`* subplot (True)
+* subplot (True)
 
 * plot (True)
 
@@ -5181,13 +5181,13 @@ CMO（[input_arrays]，[timeperiod=14]）
 
 * plotmaster (None)
 
-* plotyticks ([])` 
+* plotyticks ([])
 ```
 
 绘制线：
 
 ```py
-`* real: - ls (-)` 
+* real: - ls (-)
 ```
 
 ### CORREL
@@ -5199,37 +5199,37 @@ CORREL（[input_arrays]，[timeperiod=30]）
 输入：
 
 ```py
-`price0: (any ndarray) price1: (any ndarray)` 
+price0: (any ndarray) price1: (any ndarray)
 ```
 
 参数：
 
 ```py
-`timeperiod: 30` 
+timeperiod: 30
 ```
 
 输出：
 
 ```py
-`real` 
+real
 ```
 
 线：
 
 ```py
-`* real` 
+* real
 ```
 
 参数：
 
 ```py
-`* timeperiod (30)` 
+* timeperiod (30)
 ```
 
 绘制信息：
 
 ```py
-`* subplot (True)
+* subplot (True)
 
 * plot (True)
 
@@ -5251,13 +5251,13 @@ CORREL（[input_arrays]，[timeperiod=30]）
 
 * plotmaster (None)
 
-* plotyticks ([])` 
+* plotyticks ([])
 ```
 
 绘制线：
 
 ```py
-`* real: - ls (-)` 
+* real: - ls (-)
 ```
 
 ### COS
@@ -5269,25 +5269,25 @@ COS（[input_arrays]）
 输入：
 
 ```py
-`price: (any ndarray)` 
+price: (any ndarray)
 ```
 
 输出：
 
 ```py
-`real` 
+real
 ```
 
 线：
 
 ```py
-`* real` 
+* real
 ```
 
 绘制信息：
 
 ```py
-`* subplot (True)
+* subplot (True)
 
 * plot (True)
 
@@ -5309,13 +5309,13 @@ COS（[input_arrays]）
 
 * plotmaster (None)
 
-* plotyticks ([])` 
+* plotyticks ([])
 ```
 
 绘制线：
 
 ```py
-`* real: - ls (-)` 
+* real: - ls (-)
 ```
 
 ### COSH
@@ -5327,25 +5327,25 @@ COSH（[input_arrays]）
 输入：
 
 ```py
-`price: (any ndarray)` 
+price: (any ndarray)
 ```
 
 输出：
 
 ```py
-`real` 
+real
 ```
 
 线：
 
 ```py
-`* real` 
+* real
 ```
 
 绘制信息：
 
 ```py
-`* subplot (True)
+* subplot (True)
 
 * plot (True)
 
@@ -5367,13 +5367,13 @@ COSH（[input_arrays]）
 
 * plotmaster (None)
 
-* plotyticks ([])` 
+* plotyticks ([])
 ```
 
 绘制线：
 
 ```py
-`* real: - ls (-)` 
+* real: - ls (-)
 ```
 
 ### DEMA
@@ -5385,37 +5385,37 @@ DEMA（[input_arrays]，[timeperiod=30]）
 输入：
 
 ```py
-`price: (any ndarray)` 
+price: (any ndarray)
 ```
 
 参数：
 
 ```py
-`timeperiod: 30` 
+timeperiod: 30
 ```
 
 输出：
 
 ```py
-`real` 
+real
 ```
 
 线：
 
 ```py
-`* real` 
+* real
 ```
 
 参数：
 
 ```py
-`* timeperiod (30)` 
+* timeperiod (30)
 ```
 
 绘制信息：
 
 ```py
-`* subplot (False)
+* subplot (False)
 
 * plot (True)
 
@@ -5437,13 +5437,13 @@ DEMA（[input_arrays]，[timeperiod=30]）
 
 * plotmaster (None)
 
-* plotyticks ([])` 
+* plotyticks ([])
 ```
 
 绘制线：
 
 ```py
-`* real: - ls (-)` 
+* real: - ls (-)
 ```
 
 ### DIV
@@ -5455,25 +5455,25 @@ DIV（[input_arrays]）
 输入：
 
 ```py
-`price0: (any ndarray) price1: (any ndarray)` 
+price0: (any ndarray) price1: (any ndarray)
 ```
 
 输出：
 
 ```py
-`real` 
+real
 ```
 
 线：
 
 ```py
-`* real` 
+* real
 ```
 
 绘制信息：
 
 ```py
-`* subplot (True)
+* subplot (True)
 
 * plot (True)
 
@@ -5495,13 +5495,13 @@ DIV（[input_arrays]）
 
 * plotmaster (None)
 
-* plotyticks ([])` 
+* plotyticks ([])
 ```
 
 绘制线：
 
 ```py
-`* real: - ls (-)` 
+* real: - ls (-)
 ```
 
 ### DX
@@ -5513,37 +5513,37 @@ DX（[input_arrays]，[timeperiod=14]）
 输入：
 
 ```py
-`prices: [‘high’, ‘low’, ‘close’]` 
+prices: [‘high’, ‘low’, ‘close’]
 ```
 
 参数：
 
 ```py
-`timeperiod: 14` 
+timeperiod: 14
 ```
 
 输出：
 
 ```py
-`real` 
+real
 ```
 
 线：
 
 ```py
-`* real` 
+* real
 ```
 
 参数：
 
 ```py
-`* timeperiod (14)` 
+* timeperiod (14)
 ```
 
 绘制信息：
 
 ```py
-`* subplot (True)
+* subplot (True)
 
 * plot (True)
 
@@ -5565,13 +5565,13 @@ DX（[input_arrays]，[timeperiod=14]）
 
 * plotmaster (None)
 
-* plotyticks ([])` 
+* plotyticks ([])
 ```
 
 绘制线：
 
 ```py
-`* real: - ls (-)` 
+* real: - ls (-)
 ```
 
 ### EMA
@@ -5583,37 +5583,37 @@ EMA（[input_arrays]，[timeperiod=30]）
 输入：
 
 ```py
-`price: (any ndarray)` 
+price: (any ndarray)
 ```
 
 参数：
 
 ```py
-`timeperiod: 30` 
+timeperiod: 30
 ```
 
 输出：
 
 ```py
-`real` 
+real
 ```
 
 线：
 
 ```py
-`* real` 
+* real
 ```
 
 参数：
 
 ```py
-`* timeperiod (30)` 
+* timeperiod (30)
 ```
 
 绘图信息：
 
 ```py
-`* subplot (False)
+* subplot (False)
 
 * plot (True)
 
@@ -5635,13 +5635,13 @@ EMA（[input_arrays]，[timeperiod=30]）
 
 * plotmaster (None)
 
-* plotyticks ([])` 
+* plotyticks ([])
 ```
 
 绘图线：
 
 ```py
-`* real: - ls (-)` 
+* real: - ls (-)
 ```
 
 ### EXP
@@ -5653,25 +5653,25 @@ EXP([input_arrays])
 输入：
 
 ```py
-`price: (any ndarray)` 
+price: (any ndarray)
 ```
 
 输出：
 
 ```py
-`real` 
+real
 ```
 
 线：
 
 ```py
-`* real` 
+* real
 ```
 
 绘图信息：
 
 ```py
-`* subplot (True)
+* subplot (True)
 
 * plot (True)
 
@@ -5693,13 +5693,13 @@ EXP([input_arrays])
 
 * plotmaster (None)
 
-* plotyticks ([])` 
+* plotyticks ([])
 ```
 
 绘图线：
 
 ```py
-`* real: - ls (-)` 
+* real: - ls (-)
 ```
 
 ### FLOOR
@@ -5711,25 +5711,25 @@ FLOOR([input_arrays])
 输入：
 
 ```py
-`price: (any ndarray)` 
+price: (any ndarray)
 ```
 
 输出：
 
 ```py
-`real` 
+real
 ```
 
 线：
 
 ```py
-`* real` 
+* real
 ```
 
 绘图信息：
 
 ```py
-`* subplot (True)
+* subplot (True)
 
 * plot (True)
 
@@ -5751,13 +5751,13 @@ FLOOR([input_arrays])
 
 * plotmaster (None)
 
-* plotyticks ([])` 
+* plotyticks ([])
 ```
 
 绘图线：
 
 ```py
-`* real: - ls (-)` 
+* real: - ls (-)
 ```
 
 HT_###周期
@@ -5769,25 +5769,25 @@ HT_DCPERIOD([input_arrays])
 输入：
 
 ```py
-`price: (any ndarray)` 
+price: (any ndarray)
 ```
 
 输出：
 
 ```py
-`real` 
+real
 ```
 
 线：
 
 ```py
-`* real` 
+* real
 ```
 
 绘图信息：
 
 ```py
-`* subplot (True)
+* subplot (True)
 
 * plot (True)
 
@@ -5809,13 +5809,13 @@ HT_DCPERIOD([input_arrays])
 
 * plotmaster (None)
 
-* plotyticks ([])` 
+* plotyticks ([])
 ```
 
 绘图线：
 
 ```py
-`* real: - ls (-)` 
+* real: - ls (-)
 ```
 
 HT_###周期相位
@@ -5827,25 +5827,25 @@ HT_DCPHASE([input_arrays])
 输入：
 
 ```py
-`price: (any ndarray)` 
+price: (any ndarray)
 ```
 
 输出：
 
 ```py
-`real` 
+real
 ```
 
 线：
 
 ```py
-`* real` 
+* real
 ```
 
 绘图信息：
 
 ```py
-`* subplot (True)
+* subplot (True)
 
 * plot (True)
 
@@ -5867,13 +5867,13 @@ HT_DCPHASE([input_arrays])
 
 * plotmaster (None)
 
-* plotyticks ([])` 
+* plotyticks ([])
 ```
 
 绘图线：
 
 ```py
-`* real: - ls (-)` 
+* real: - ls (-)
 ```
 
 HT_###相位计量器
@@ -5885,27 +5885,27 @@ HT_PHASOR([input_arrays])
 输入：
 
 ```py
-`price: (any ndarray)` 
+price: (any ndarray)
 ```
 
 输出：
 
 ```py
-`inphase quadrature` 
+inphase quadrature
 ```
 
 线：
 
 ```py
-`* inphase
+* inphase
 
-* quadrature` 
+* quadrature
 ```
 
 绘图信息：
 
 ```py
-`* subplot (True)
+* subplot (True)
 
 * plot (True)
 
@@ -5927,15 +5927,15 @@ HT_PHASOR([input_arrays])
 
 * plotmaster (None)
 
-* plotyticks ([])` 
+* plotyticks ([])
 ```
 
 绘图线：
 
 ```py
-`* inphase: - ls (-)
+* inphase: - ls (-)
 
-* quadrature: - ls (–)` 
+* quadrature: - ls (–)
 ```
 
 HT_###正弦
@@ -5947,27 +5947,27 @@ HT_SINE([input_arrays])
 输入：
 
 ```py
-`price: (any ndarray)` 
+price: (any ndarray)
 ```
 
 输出：
 
 ```py
-`sine leadsine` 
+sine leadsine
 ```
 
 线：
 
 ```py
-`* sine
+* sine
 
-* leadsine` 
+* leadsine
 ```
 
 绘图信息：
 
 ```py
-`* subplot (True)
+* subplot (True)
 
 * plot (True)
 
@@ -5989,15 +5989,15 @@ HT_SINE([input_arrays])
 
 * plotmaster (None)
 
-* plotyticks ([])` 
+* plotyticks ([])
 ```
 
 绘图线：
 
 ```py
-`* leadsine: - ls (–)
+* leadsine: - ls (–)
 
-* sine: - ls (-)` 
+* sine: - ls (-)
 ```
 
 HT_###趋势线
@@ -6009,25 +6009,25 @@ HT 趋势线([input_arrays])
 输入：
 
 ```py
-`price: (any ndarray)` 
+price: (any ndarray)
 ```
 
 输出：
 
 ```py
-`real` 
+real
 ```
 
 线：
 
 ```py
-`* real` 
+* real
 ```
 
 绘图信息：
 
 ```py
-`* subplot (False)
+* subplot (False)
 
 * plot (True)
 
@@ -6049,13 +6049,13 @@ HT 趋势线([input_arrays])
 
 * plotmaster (None)
 
-* plotyticks ([])` 
+* plotyticks ([])
 ```
 
 绘图线：
 
 ```py
-`* real: - ls (-)` 
+* real: - ls (-)
 ```
 
 HT_###趋势模式
@@ -6067,25 +6067,25 @@ HT 趋势模式([input_arrays])
 输入：
 
 ```py
-`price: (any ndarray)` 
+price: (any ndarray)
 ```
 
 输出：
 
 ```py
-`integer (values are -100, 0 or 100)` 
+integer (values are -100, 0 or 100)
 ```
 
 线：
 
 ```py
-`* integer` 
+* integer
 ```
 
 绘图信息：
 
 ```py
-`* subplot (True)
+* subplot (True)
 
 * plot (True)
 
@@ -6107,13 +6107,13 @@ HT 趋势模式([input_arrays])
 
 * plotmaster (None)
 
-* plotyticks ([])` 
+* plotyticks ([])
 ```
 
 绘图线：
 
 ```py
-`* integer: - ls (-)` 
+* integer: - ls (-)
 ```
 
 ### KAMA
@@ -6125,37 +6125,37 @@ KAMA([input_arrays], [timeperiod=30])
 输入：
 
 ```py
-`price: (any ndarray)` 
+price: (any ndarray)
 ```
 
 参数：
 
 ```py
-`timeperiod: 30` 
+timeperiod: 30
 ```
 
 输出：
 
 ```py
-`real` 
+real
 ```
 
 线：
 
 ```py
-`* real` 
+* real
 ```
 
 参数：
 
 ```py
-`* timeperiod (30)` 
+* timeperiod (30)
 ```
 
 绘图信息：
 
 ```py
-`* subplot (False)
+* subplot (False)
 
 * plot (True)
 
@@ -6177,13 +6177,13 @@ KAMA([input_arrays], [timeperiod=30])
 
 * plotmaster (None)
 
-* plotyticks ([])` 
+* plotyticks ([])
 ```
 
 绘图线：
 
 ```py
-`* real: - ls (-)` 
+* real: - ls (-)
 ```
 
 ### 线性回归
@@ -6195,37 +6195,37 @@ KAMA([input_arrays], [timeperiod=30])
 输入：
 
 ```py
-`price: (any ndarray)` 
+price: (any ndarray)
 ```
 
 参数：
 
 ```py
-`timeperiod: 14` 
+timeperiod: 14
 ```
 
 输出：
 
 ```py
-`real` 
+real
 ```
 
 线：
 
 ```py
-`* real` 
+* real
 ```
 
 参数：
 
 ```py
-`* timeperiod (14)` 
+* timeperiod (14)
 ```
 
 绘图信息：
 
 ```py
-`* subplot (False)
+* subplot (False)
 
 * plot (True)
 
@@ -6247,13 +6247,13 @@ KAMA([input_arrays], [timeperiod=30])
 
 * plotmaster (None)
 
-* plotyticks ([])` 
+* plotyticks ([])
 ```
 
 绘图线：
 
 ```py
-`* real: - ls (-)` 
+* real: - ls (-)
 ```
 
 线性回归角度
@@ -6265,37 +6265,37 @@ KAMA([input_arrays], [timeperiod=30])
 输入：
 
 ```py
-`price: (any ndarray)` 
+price: (any ndarray)
 ```
 
 参数：
 
 ```py
-`timeperiod: 14` 
+timeperiod: 14
 ```
 
 输出：
 
 ```py
-`real` 
+real
 ```
 
 线：
 
 ```py
-`* real` 
+* real
 ```
 
 参数：
 
 ```py
-`* timeperiod (14)` 
+* timeperiod (14)
 ```
 
 绘图信息：
 
 ```py
-`* subplot (True)
+* subplot (True)
 
 * plot (True)
 
@@ -6317,13 +6317,13 @@ KAMA([input_arrays], [timeperiod=30])
 
 * plotmaster (None)
 
-* plotyticks ([])` 
+* plotyticks ([])
 ```
 
 绘图线：
 
 ```py
-`* real: - ls (-)` 
+* real: - ls (-)
 ```
 
 线性回归截距
@@ -6335,37 +6335,37 @@ KAMA([input_arrays], [timeperiod=30])
 输入：
 
 ```py
-`price: (any ndarray)` 
+price: (any ndarray)
 ```
 
 参数：
 
 ```py
-`timeperiod: 14` 
+timeperiod: 14
 ```
 
 输出：
 
 ```py
-`real` 
+real
 ```
 
 线：
 
 ```py
-`* real` 
+* real
 ```
 
 参数：
 
 ```py
-`* timeperiod (14)` 
+* timeperiod (14)
 ```
 
 绘图信息：
 
 ```py
-`* subplot (False)
+* subplot (False)
 
 * plot (True)
 
@@ -6387,13 +6387,13 @@ KAMA([input_arrays], [timeperiod=30])
 
 * plotmaster (None)
 
-* plotyticks ([])` 
+* plotyticks ([])
 ```
 
 绘图线：
 
 ```py
-`* real: - ls (-)` 
+* real: - ls (-)
 ```
 
 线性回归斜率
@@ -6405,37 +6405,37 @@ KAMA([input_arrays], [timeperiod=30])
 输入：
 
 ```py
-`price: (any ndarray)` 
+price: (any ndarray)
 ```
 
 参数：
 
 ```py
-`timeperiod: 14` 
+timeperiod: 14
 ```
 
 输出：
 
 ```py
-`real` 
+real
 ```
 
 线：
 
 ```py
-`* real` 
+* real
 ```
 
 参数：
 
 ```py
-`* timeperiod (14)` 
+* timeperiod (14)
 ```
 
 绘图信息：
 
 ```py
-`* subplot (True)
+* subplot (True)
 
 * plot (True)
 
@@ -6457,13 +6457,13 @@ KAMA([input_arrays], [timeperiod=30])
 
 * plotmaster (None)
 
-* plotyticks ([])` 
+* plotyticks ([])
 ```
 
 绘图线：
 
 ```py
-`* real: - ls (-)` 
+* real: - ls (-)
 ```
 
 ### LN
@@ -6475,25 +6475,25 @@ LN([input_arrays])
 输入：
 
 ```py
-`price: (any ndarray)` 
+price: (any ndarray)
 ```
 
 输出：
 
 ```py
-`real` 
+real
 ```
 
 线：
 
 ```py
-`* real` 
+* real
 ```
 
 绘图信息：
 
 ```py
-`* subplot (True)
+* subplot (True)
 
 * plot (True)
 
@@ -6515,13 +6515,13 @@ LN([input_arrays])
 
 * plotmaster (None)
 
-* plotyticks ([])` 
+* plotyticks ([])
 ```
 
 绘图线：
 
 ```py
-`* real: - ls (-)` 
+* real: - ls (-)
 ```
 
 LOG10
@@ -6533,25 +6533,25 @@ LOG10([input_arrays])
 输入：
 
 ```py
-`price: (any ndarray)` 
+price: (any ndarray)
 ```
 
 输出：
 
 ```py
-`real` 
+real
 ```
 
 线：
 
 ```py
-`* real` 
+* real
 ```
 
 绘图信息：
 
 ```py
-`* subplot (True)
+* subplot (True)
 
 * plot (True)
 
@@ -6573,13 +6573,13 @@ LOG10([input_arrays])
 
 * plotmaster (None)
 
-* plotyticks ([])` 
+* plotyticks ([])
 ```
 
 绘图线：
 
 ```py
-`* real: - ls (-)` 
+* real: - ls (-)
 ```
 
 ### MA
@@ -6591,39 +6591,39 @@ MA([input_arrays], [timeperiod=30], [matype=0])
 输入：
 
 ```py
-`price: (any ndarray)` 
+price: (any ndarray)
 ```
 
 参数：
 
 ```py
-`timeperiod: 30 matype: 0 (Simple Moving Average)` 
+timeperiod: 30 matype: 0 (Simple Moving Average)
 ```
 
 输出：
 
 ```py
-`real` 
+real
 ```
 
 线：
 
 ```py
-`* real` 
+* real
 ```
 
 参数：
 
 ```py
-`* timeperiod (30)
+* timeperiod (30)
 
-* matype (0)` 
+* matype (0)
 ```
 
 绘图信息：
 
 ```py
-`* subplot (False)
+* subplot (False)
 
 * plot (True)
 
@@ -6645,13 +6645,13 @@ MA([input_arrays], [timeperiod=30], [matype=0])
 
 * plotmaster (None)
 
-* plotyticks ([])` 
+* plotyticks ([])
 ```
 
 绘图线：
 
 ```py
-`* real: - ls (-)` 
+* real: - ls (-)
 ```
 
 ### MACD
@@ -6663,45 +6663,45 @@ MACD([input_arrays], [fastperiod=12], [slowperiod=26], [signalperiod=9])
 输入：
 
 ```py
-`price: (any ndarray)` 
+price: (any ndarray)
 ```
 
 参数：
 
 ```py
-`fastperiod: 12 slowperiod: 26 signalperiod: 9` 
+fastperiod: 12 slowperiod: 26 signalperiod: 9
 ```
 
 输出：
 
 ```py
-`macd macdsignal macdhist` 
+macd macdsignal macdhist
 ```
 
 线：
 
 ```py
-`* macd
+* macd
 
 * macdsignal
 
-* macdhist` 
+* macdhist
 ```
 
 参数：
 
 ```py
-`* fastperiod (12)
+* fastperiod (12)
 
 * slowperiod (26)
 
-* signalperiod (9)` 
+* signalperiod (9)
 ```
 
 绘图信息：
 
 ```py
-`* subplot (True)
+* subplot (True)
 
 * plot (True)
 
@@ -6723,17 +6723,17 @@ MACD([input_arrays], [fastperiod=12], [slowperiod=26], [signalperiod=9])
 
 * plotmaster (None)
 
-* plotyticks ([])` 
+* plotyticks ([])
 ```
 
 绘图线：
 
 ```py
-`* macdsignal: - ls (–)
+* macdsignal: - ls (–)
 
 * macd: - ls (-)
 
-* macdhist: - _method (bar)` 
+* macdhist: - _method (bar)
 ```
 
 ### MACDEXT
@@ -6745,36 +6745,36 @@ MACDEXT([input_arrays], [fastperiod=12], [fastmatype=0], [slowperiod=26], [slowm
 输入：
 
 ```py
-`price: (any ndarray)` 
+price: (any ndarray)
 ```
 
 参数：
 
 ```py
-`fastperiod: 12 fastmatype: 0 slowperiod: 26 slowmatype: 0
-signalperiod: 9 signalmatype: 0` 
+fastperiod: 12 fastmatype: 0 slowperiod: 26 slowmatype: 0
+signalperiod: 9 signalmatype: 0
 ```
 
 输出：
 
 ```py
-`macd macdsignal macdhist` 
+macd macdsignal macdhist
 ```
 
 线：
 
 ```py
-`* macd
+* macd
 
 * macdsignal
 
-* macdhist` 
+* macdhist
 ```
 
 参数：
 
 ```py
-`* fastperiod (12)
+* fastperiod (12)
 
 * fastmatype (0)
 
@@ -6784,13 +6784,13 @@ signalperiod: 9 signalmatype: 0`
 
 * signalperiod (9)
 
-* signalmatype (0)` 
+* signalmatype (0)
 ```
 
 绘图信息：
 
 ```py
-`* subplot (True)
+* subplot (True)
 
 * plot (True)
 
@@ -6812,17 +6812,17 @@ signalperiod: 9 signalmatype: 0`
 
 * plotmaster (None)
 
-* plotyticks ([])` 
+* plotyticks ([])
 ```
 
 绘图线：
 
 ```py
-`* macdsignal: - ls (–)
+* macdsignal: - ls (–)
 
 * macd: - ls (-)
 
-* macdhist: - _method (bar)` 
+* macdhist: - _method (bar)
 ```
 
 ### MACDFIX
@@ -6834,41 +6834,41 @@ MACDFIX([input_arrays], [signalperiod=9])
 输入：
 
 ```py
-`price: (any ndarray)` 
+price: (any ndarray)
 ```
 
 参数：
 
 ```py
-`signalperiod: 9` 
+signalperiod: 9
 ```
 
 输出：
 
 ```py
-`macd macdsignal macdhist` 
+macd macdsignal macdhist
 ```
 
 线：
 
 ```py
-`* macd
+* macd
 
 * macdsignal
 
-* macdhist` 
+* macdhist
 ```
 
 参数：
 
 ```py
-`* signalperiod (9)` 
+* signalperiod (9)
 ```
 
 绘图信息：
 
 ```py
-`* subplot (True)
+* subplot (True)
 
 * plot (True)
 
@@ -6890,17 +6890,17 @@ MACDFIX([input_arrays], [signalperiod=9])
 
 * plotmaster (None)
 
-* plotyticks ([])` 
+* plotyticks ([])
 ```
 
 绘图线：
 
 ```py
-`* macdsignal: - ls (–)
+* macdsignal: - ls (–)
 
 * macd: - ls (-)
 
-* macdhist: - _method (bar)` 
+* macdhist: - _method (bar)
 ```
 
 ### MAMA
@@ -6912,41 +6912,41 @@ MESA 自适应移动平均线（重叠研究）
 输入：
 
 ```py
-`price: (any ndarray)` 
+price: (any ndarray)
 ```
 
 参数：
 
 ```py
-`fastlimit: 0.5 slowlimit: 0.05` 
+fastlimit: 0.5 slowlimit: 0.05
 ```
 
 输出：
 
 ```py
-`mama fama` 
+mama fama
 ```
 
 线条：
 
 ```py
-`* mama
+* mama
 
-* fama` 
+* fama
 ```
 
 参数：
 
 ```py
-`* fastlimit (0.5)
+* fastlimit (0.5)
 
-* slowlimit (0.05)` 
+* slowlimit (0.05)
 ```
 
 绘图信息：
 
 ```py
-`* subplot (False)
+* subplot (False)
 
 * plot (True)
 
@@ -6968,15 +6968,15 @@ MESA 自适应移动平均线（重叠研究）
 
 * plotmaster (None)
 
-* plotyticks ([])` 
+* plotyticks ([])
 ```
 
 折线：
 
 ```py
-`* mama: - ls (-)
+* mama: - ls (-)
 
-* fama: - ls (–)` 
+* fama: - ls (–)
 ```
 
 ### MAVP
@@ -6988,41 +6988,41 @@ MAVP（[input_arrays]，[minperiod=2]，[maxperiod=30]，[matype=0]）
 输入：
 
 ```py
-`price: (any ndarray) periods: (any ndarray)` 
+price: (any ndarray) periods: (any ndarray)
 ```
 
 参数：
 
 ```py
-`minperiod: 2 maxperiod: 30 matype: 0 (Simple Moving Average)` 
+minperiod: 2 maxperiod: 30 matype: 0 (Simple Moving Average)
 ```
 
 输出：
 
 ```py
-`real` 
+real
 ```
 
 线条：
 
 ```py
-`* real` 
+* real
 ```
 
 参数：
 
 ```py
-`* minperiod (2)
+* minperiod (2)
 
 * maxperiod (30)
 
-* matype (0)` 
+* matype (0)
 ```
 
 绘图信息：
 
 ```py
-`* subplot (False)
+* subplot (False)
 
 * plot (True)
 
@@ -7044,13 +7044,13 @@ MAVP（[input_arrays]，[minperiod=2]，[maxperiod=30]，[matype=0]）
 
 * plotmaster (None)
 
-* plotyticks ([])` 
+* plotyticks ([])
 ```
 
 折线：
 
 ```py
-`* real: - ls (-)` 
+* real: - ls (-)
 ```
 
 ### 最大
@@ -7062,37 +7062,37 @@ MAX（[input_arrays]，[timeperiod=30]）
 输入：
 
 ```py
-`price: (any ndarray)` 
+price: (any ndarray)
 ```
 
 参数：
 
 ```py
-`timeperiod: 30` 
+timeperiod: 30
 ```
 
 输出：
 
 ```py
-`real` 
+real
 ```
 
 线条：
 
 ```py
-`* real` 
+* real
 ```
 
 参数：
 
 ```py
-`* timeperiod (30)` 
+* timeperiod (30)
 ```
 
 绘图信息：
 
 ```py
-`* subplot (False)
+* subplot (False)
 
 * plot (True)
 
@@ -7114,13 +7114,13 @@ MAX（[input_arrays]，[timeperiod=30]）
 
 * plotmaster (None)
 
-* plotyticks ([])` 
+* plotyticks ([])
 ```
 
 折线：
 
 ```py
-`* real: - ls (-)` 
+* real: - ls (-)
 ```
 
 ### MAXINDEX
@@ -7132,37 +7132,37 @@ MAXINDEX（[input_arrays]，[timeperiod=30]）
 输入：
 
 ```py
-`price: (any ndarray)` 
+price: (any ndarray)
 ```
 
 参数：
 
 ```py
-`timeperiod: 30` 
+timeperiod: 30
 ```
 
 输出：
 
 ```py
-`integer (values are -100, 0 or 100)` 
+integer (values are -100, 0 or 100)
 ```
 
 线条：
 
 ```py
-`* integer` 
+* integer
 ```
 
 参数：
 
 ```py
-`* timeperiod (30)` 
+* timeperiod (30)
 ```
 
 绘图信息：
 
 ```py
-`* subplot (True)
+* subplot (True)
 
 * plot (True)
 
@@ -7184,13 +7184,13 @@ MAXINDEX（[input_arrays]，[timeperiod=30]）
 
 * plotmaster (None)
 
-* plotyticks ([])` 
+* plotyticks ([])
 ```
 
 折线：
 
 ```py
-`* integer: - ls (-)` 
+* integer: - ls (-)
 ```
 
 ### MEDPRICE
@@ -7202,25 +7202,25 @@ MEDPRICE（[input_arrays]）
 输入：
 
 ```py
-`prices: [‘high’, ‘low’]` 
+prices: [‘high’, ‘low’]
 ```
 
 输出：
 
 ```py
-`real` 
+real
 ```
 
 线条：
 
 ```py
-`* real` 
+* real
 ```
 
 绘图信息：
 
 ```py
-`* subplot (False)
+* subplot (False)
 
 * plot (True)
 
@@ -7242,13 +7242,13 @@ MEDPRICE（[input_arrays]）
 
 * plotmaster (None)
 
-* plotyticks ([])` 
+* plotyticks ([])
 ```
 
 折线：
 
 ```py
-`* real: - ls (-)` 
+* real: - ls (-)
 ```
 
 ### MFI
@@ -7260,37 +7260,37 @@ MFI（[input_arrays]，[timeperiod=14]）
 输入：
 
 ```py
-`prices: [‘high’, ‘low’, ‘close’, ‘volume’]` 
+prices: [‘high’, ‘low’, ‘close’, ‘volume’]
 ```
 
 参数：
 
 ```py
-`timeperiod: 14` 
+timeperiod: 14
 ```
 
 输出：
 
 ```py
-`real` 
+real
 ```
 
 线条：
 
 ```py
-`* real` 
+* real
 ```
 
 参数：
 
 ```py
-`* timeperiod (14)` 
+* timeperiod (14)
 ```
 
 绘图信息：
 
 ```py
-`* subplot (True)
+* subplot (True)
 
 * plot (True)
 
@@ -7312,13 +7312,13 @@ MFI（[input_arrays]，[timeperiod=14]）
 
 * plotmaster (None)
 
-* plotyticks ([])` 
+* plotyticks ([])
 ```
 
 折线：
 
 ```py
-`* real: - ls (-)` 
+* real: - ls (-)
 ```
 
 ### MIDPOINT
@@ -7330,37 +7330,37 @@ MIDPOINT（[input_arrays]，[timeperiod=14]）
 输入：
 
 ```py
-`price: (any ndarray)` 
+price: (any ndarray)
 ```
 
 参数：
 
 ```py
-`timeperiod: 14` 
+timeperiod: 14
 ```
 
 输出：
 
 ```py
-`real` 
+real
 ```
 
 线条：
 
 ```py
-`* real` 
+* real
 ```
 
 参数：
 
 ```py
-`* timeperiod (14)` 
+* timeperiod (14)
 ```
 
 绘图信息：
 
 ```py
-`* subplot (False)
+* subplot (False)
 
 * plot (True)
 
@@ -7382,13 +7382,13 @@ MIDPOINT（[input_arrays]，[timeperiod=14]）
 
 * plotmaster (None)
 
-* plotyticks ([])` 
+* plotyticks ([])
 ```
 
 折线：
 
 ```py
-`* real: - ls (-)` 
+* real: - ls (-)
 ```
 
 ### MIDPRICE
@@ -7400,37 +7400,37 @@ MIDPRICE（[input_arrays]，[timeperiod=14]）
 输入：
 
 ```py
-`prices: [‘high’, ‘low’]` 
+prices: [‘high’, ‘low’]
 ```
 
 参数：
 
 ```py
-`timeperiod: 14` 
+timeperiod: 14
 ```
 
 输出：
 
 ```py
-`real` 
+real
 ```
 
 线条：
 
 ```py
-`* real` 
+* real
 ```
 
 参数：
 
 ```py
-`* timeperiod (14)` 
+* timeperiod (14)
 ```
 
 绘图信息：
 
 ```py
-`* subplot (False)
+* subplot (False)
 
 * plot (True)
 
@@ -7452,13 +7452,13 @@ MIDPRICE（[input_arrays]，[timeperiod=14]）
 
 * plotmaster (None)
 
-* plotyticks ([])` 
+* plotyticks ([])
 ```
 
 折线：
 
 ```py
-`* real: - ls (-)` 
+* real: - ls (-)
 ```
 
 ### 最小
@@ -7470,37 +7470,37 @@ MIN（[input_arrays]，[timeperiod=30]）
 输入：
 
 ```py
-`price: (any ndarray)` 
+price: (any ndarray)
 ```
 
 参数：
 
 ```py
-`timeperiod: 30` 
+timeperiod: 30
 ```
 
 输出：
 
 ```py
-`real` 
+real
 ```
 
 线条：
 
 ```py
-`* real` 
+* real
 ```
 
 参数：
 
 ```py
-`* timeperiod (30)` 
+* timeperiod (30)
 ```
 
 绘图信息：
 
 ```py
-`* subplot (False)
+* subplot (False)
 
 * plot (True)
 
@@ -7522,13 +7522,13 @@ MIN（[input_arrays]，[timeperiod=30]）
 
 * plotmaster (None)
 
-* plotyticks ([])` 
+* plotyticks ([])
 ```
 
 折线：
 
 ```py
-`* real: - ls (-)` 
+* real: - ls (-)
 ```
 
 ### MININDEX
@@ -7540,37 +7540,37 @@ MININDEX（[input_arrays]，[timeperiod=30]）
 输入：
 
 ```py
-`price: (any ndarray)` 
+price: (any ndarray)
 ```
 
 参数：
 
 ```py
-`timeperiod: 30` 
+timeperiod: 30
 ```
 
 输出：
 
 ```py
-`integer (values are -100, 0 or 100)` 
+integer (values are -100, 0 or 100)
 ```
 
 线条：
 
 ```py
-`* integer` 
+* integer
 ```
 
 参数：
 
 ```py
-`* timeperiod (30)` 
+* timeperiod (30)
 ```
 
 绘图信息：
 
 ```py
-`* subplot (True)
+* subplot (True)
 
 * plot (True)
 
@@ -7592,13 +7592,13 @@ MININDEX（[input_arrays]，[timeperiod=30]）
 
 * plotmaster (None)
 
-* plotyticks ([])` 
+* plotyticks ([])
 ```
 
 折线：
 
 ```py
-`* integer: - ls (-)` 
+* integer: - ls (-)
 ```
 
 ### MINMAX
@@ -7610,39 +7610,39 @@ MINMAX（[input_arrays]，[timeperiod=30]）
 输入：
 
 ```py
-`price: (any ndarray)` 
+price: (any ndarray)
 ```
 
 参数：
 
 ```py
-`timeperiod: 30` 
+timeperiod: 30
 ```
 
 输出：
 
 ```py
-`min max` 
+min max
 ```
 
 线条：
 
 ```py
-`* min
+* min
 
-* max` 
+* max
 ```
 
 参数：
 
 ```py
-`* timeperiod (30)` 
+* timeperiod (30)
 ```
 
 绘图信息：
 
 ```py
-`* subplot (False)
+* subplot (False)
 
 * plot (True)
 
@@ -7664,15 +7664,15 @@ MINMAX（[input_arrays]，[timeperiod=30]）
 
 * plotmaster (None)
 
-* plotyticks ([])` 
+* plotyticks ([])
 ```
 
 折线：
 
 ```py
-`* max: - ls (-)
+* max: - ls (-)
 
-* min: - ls (-)` 
+* min: - ls (-)
 ```
 
 ### MINMAXINDEX
@@ -7684,39 +7684,39 @@ MINMAXINDEX（[input_arrays]，[timeperiod=30]）
 输入：
 
 ```py
-`price: (any ndarray)` 
+price: (any ndarray)
 ```
 
 参数：
 
 ```py
-`timeperiod: 30` 
+timeperiod: 30
 ```
 
 输出：
 
 ```py
-`minidx maxidx` 
+minidx maxidx
 ```
 
 线条：
 
 ```py
-`* minidx
+* minidx
 
-* maxidx` 
+* maxidx
 ```
 
 参数：
 
 ```py
-`* timeperiod (30)` 
+* timeperiod (30)
 ```
 
 绘图信息：
 
 ```py
-`* subplot (True)
+* subplot (True)
 
 * plot (True)
 
@@ -7738,15 +7738,15 @@ MINMAXINDEX（[input_arrays]，[timeperiod=30]）
 
 * plotmaster (None)
 
-* plotyticks ([])` 
+* plotyticks ([])
 ```
 
 折线：
 
 ```py
-`* maxidx: - ls (-)
+* maxidx: - ls (-)
 
-* minidx: - ls (-)` 
+* minidx: - ls (-)
 ```
 
 MINUS_###DI
@@ -7758,37 +7758,37 @@ MINUS_DI（[input_arrays]，[timeperiod=14]）
 输入：
 
 ```py
-`prices: [‘high’, ‘low’, ‘close’]` 
+prices: [‘high’, ‘low’, ‘close’]
 ```
 
 参数：
 
 ```py
-`timeperiod: 14` 
+timeperiod: 14
 ```
 
 输出：
 
 ```py
-`real` 
+real
 ```
 
 线条：
 
 ```py
-`* real` 
+* real
 ```
 
 参数：
 
 ```py
-`* timeperiod (14)` 
+* timeperiod (14)
 ```
 
 绘图信息：
 
 ```py
-`* subplot (True)
+* subplot (True)
 
 * plot (True)
 
@@ -7810,13 +7810,13 @@ MINUS_DI（[input_arrays]，[timeperiod=14]）
 
 * plotmaster (None)
 
-* plotyticks ([])` 
+* plotyticks ([])
 ```
 
 折线：
 
 ```py
-`* real: - ls (-)` 
+* real: - ls (-)
 ```
 
 MINUS_###DM
@@ -7828,37 +7828,37 @@ MINUS_DM（[input_arrays]，[timeperiod=14]）
 输入：
 
 ```py
-`prices: [‘high’, ‘low’]` 
+prices: [‘high’, ‘low’]
 ```
 
 参数：
 
 ```py
-`timeperiod: 14` 
+timeperiod: 14
 ```
 
 输出：
 
 ```py
-`real` 
+real
 ```
 
 线条：
 
 ```py
-`* real` 
+* real
 ```
 
 参数：
 
 ```py
-`* timeperiod (14)` 
+* timeperiod (14)
 ```
 
 绘图信息：
 
 ```py
-`* subplot (True)
+* subplot (True)
 
 * plot (True)
 
@@ -7880,13 +7880,13 @@ MINUS_DM（[input_arrays]，[timeperiod=14]）
 
 * plotmaster (None)
 
-* plotyticks ([])` 
+* plotyticks ([])
 ```
 
 折线：
 
 ```py
-`* real: - ls (-)` 
+* real: - ls (-)
 ```
 
 ### MOM
@@ -7898,37 +7898,37 @@ MOM（[input_arrays]，[timeperiod=10]）
 输入：
 
 ```py
-`price: (any ndarray)` 
+price: (any ndarray)
 ```
 
 参数：
 
 ```py
-`timeperiod: 10` 
+timeperiod: 10
 ```
 
 输出：
 
 ```py
-`real` 
+real
 ```
 
 线条：
 
 ```py
-`* real` 
+* real
 ```
 
 参数：
 
 ```py
-`* timeperiod (10)` 
+* timeperiod (10)
 ```
 
 绘图信息：
 
 ```py
-`* subplot (True)
+* subplot (True)
 
 * plot (True)
 
@@ -7950,13 +7950,13 @@ MOM（[input_arrays]，[timeperiod=10]）
 
 * plotmaster (None)
 
-* plotyticks ([])` 
+* plotyticks ([])
 ```
 
 折线：
 
 ```py
-`* real: - ls (-)` 
+* real: - ls (-)
 ```
 
 ### MULT
@@ -7968,25 +7968,25 @@ MULT（[input_arrays]）
 输入：
 
 ```py
-`price0: (any ndarray) price1: (any ndarray)` 
+price0: (any ndarray) price1: (any ndarray)
 ```
 
 输出：
 
 ```py
-`real` 
+real
 ```
 
 线条：
 
 ```py
-`* real` 
+* real
 ```
 
 绘图信息：
 
 ```py
-`* subplot (True)
+* subplot (True)
 
 * plot (True)
 
@@ -8008,13 +8008,13 @@ MULT（[input_arrays]）
 
 * plotmaster (None)
 
-* plotyticks ([])` 
+* plotyticks ([])
 ```
 
 折线：
 
 ```py
-`* real: - ls (-)` 
+* real: - ls (-)
 ```
 
 ### NATR
@@ -8026,37 +8026,37 @@ NATR（[input_arrays]，[timeperiod=14]）
 输入：
 
 ```py
-`prices: [‘high’, ‘low’, ‘close’]` 
+prices: [‘high’, ‘low’, ‘close’]
 ```
 
 参数：
 
 ```py
-`timeperiod: 14` 
+timeperiod: 14
 ```
 
 输出：
 
 ```py
-`real` 
+real
 ```
 
 线条：
 
 ```py
-`* real` 
+* real
 ```
 
 参数：
 
 ```py
-`* timeperiod (14)` 
+* timeperiod (14)
 ```
 
 绘图信息：
 
 ```py
-`* subplot (True)
+* subplot (True)
 
 * plot (True)
 
@@ -8078,13 +8078,13 @@ NATR（[input_arrays]，[timeperiod=14]）
 
 * plotmaster (None)
 
-* plotyticks ([])` 
+* plotyticks ([])
 ```
 
 折线：
 
 ```py
-`* real: - ls (-)` 
+* real: - ls (-)
 ```
 
 ### OBV
@@ -8096,25 +8096,25 @@ OBV（[input_arrays]）
 输入：
 
 ```py
-`price: (any ndarray) prices: [‘volume’]` 
+price: (any ndarray) prices: [‘volume’]
 ```
 
 输出：
 
 ```py
-`real` 
+real
 ```
 
 线条：
 
 ```py
-`* real` 
+* real
 ```
 
 绘图信息：
 
 ```py
-`* subplot (True)
+* subplot (True)
 
 * plot (True)
 
@@ -8136,13 +8136,13 @@ OBV（[input_arrays]）
 
 * plotmaster (None)
 
-* plotyticks ([])` 
+* plotyticks ([])
 ```
 
 折线：
 
 ```py
-`* real: - ls (-)` 
+* real: - ls (-)
 ```
 
 PLUS_###DI
@@ -8154,37 +8154,37 @@ PLUS_DI（[input_arrays]，[timeperiod=14]）
 输入：
 
 ```py
-`prices: [‘high’, ‘low’, ‘close’]` 
+prices: [‘high’, ‘low’, ‘close’]
 ```
 
 参数：
 
 ```py
-`timeperiod: 14` 
+timeperiod: 14
 ```
 
 输出：
 
 ```py
-`real` 
+real
 ```
 
 线条：
 
 ```py
-`* real` 
+* real
 ```
 
 参数：
 
 ```py
-`* timeperiod (14)` 
+* timeperiod (14)
 ```
 
 绘图信息：
 
 ```py
-`* subplot (True)
+* subplot (True)
 
 * plot (True)
 
@@ -8206,13 +8206,13 @@ PLUS_DI（[input_arrays]，[timeperiod=14]）
 
 * plotmaster (None)
 
-* plotyticks ([])` 
+* plotyticks ([])
 ```
 
 绘图线：
 
 ```py
-`* real: - ls (-)` 
+* real: - ls (-)
 ```
 
 PLUS_###DM
@@ -8224,37 +8224,37 @@ PLUS_DM（[输入数组]，[时间周期=14]）
 输入：
 
 ```py
-`prices: [‘high’, ‘low’]` 
+prices: [‘high’, ‘low’]
 ```
 
 参数：
 
 ```py
-`timeperiod: 14` 
+timeperiod: 14
 ```
 
 输出：
 
 ```py
-`real` 
+real
 ```
 
 线条：
 
 ```py
-`* real` 
+* real
 ```
 
 参数：
 
 ```py
-`* timeperiod (14)` 
+* timeperiod (14)
 ```
 
 绘图信息：
 
 ```py
-`* subplot (True)
+* subplot (True)
 
 * plot (True)
 
@@ -8276,13 +8276,13 @@ PLUS_DM（[输入数组]，[时间周期=14]）
 
 * plotmaster (None)
 
-* plotyticks ([])` 
+* plotyticks ([])
 ```
 
 绘图线：
 
 ```py
-`* real: - ls (-)` 
+* real: - ls (-)
 ```
 
 ### PPO
@@ -8294,41 +8294,41 @@ PPO（[输入数组]，[fastperiod=12]，[slowperiod=26]，[matype=0]）
 输入：
 
 ```py
-`price: (any ndarray)` 
+price: (any ndarray)
 ```
 
 参数：
 
 ```py
-`fastperiod: 12 slowperiod: 26 matype: 0 (Simple Moving Average)` 
+fastperiod: 12 slowperiod: 26 matype: 0 (Simple Moving Average)
 ```
 
 输出：
 
 ```py
-`real` 
+real
 ```
 
 线条：
 
 ```py
-`* real` 
+* real
 ```
 
 参数：
 
 ```py
-`* fastperiod (12)
+* fastperiod (12)
 
 * slowperiod (26)
 
-* matype (0)` 
+* matype (0)
 ```
 
 绘图信息：
 
 ```py
-`* subplot (True)
+* subplot (True)
 
 * plot (True)
 
@@ -8350,13 +8350,13 @@ PPO（[输入数组]，[fastperiod=12]，[slowperiod=26]，[matype=0]）
 
 * plotmaster (None)
 
-* plotyticks ([])` 
+* plotyticks ([])
 ```
 
 绘图线：
 
 ```py
-`* real: - ls (-)` 
+* real: - ls (-)
 ```
 
 ### ROC
@@ -8368,37 +8368,37 @@ ROC（[输入数组]，[时间周期=10]）
 输入：
 
 ```py
-`price: (any ndarray)` 
+price: (any ndarray)
 ```
 
 参数：
 
 ```py
-`timeperiod: 10` 
+timeperiod: 10
 ```
 
 输出：
 
 ```py
-`real` 
+real
 ```
 
 线条：
 
 ```py
-`* real` 
+* real
 ```
 
 参数：
 
 ```py
-`* timeperiod (10)` 
+* timeperiod (10)
 ```
 
 绘图信息：
 
 ```py
-`* subplot (True)
+* subplot (True)
 
 * plot (True)
 
@@ -8420,13 +8420,13 @@ ROC（[输入数组]，[时间周期=10]）
 
 * plotmaster (None)
 
-* plotyticks ([])` 
+* plotyticks ([])
 ```
 
 绘图线：
 
 ```py
-`* real: - ls (-)` 
+* real: - ls (-)
 ```
 
 ### ROCP
@@ -8438,37 +8438,37 @@ ROCP（[输入数组]，[时间周期=10]）
 输入：
 
 ```py
-`price: (any ndarray)` 
+price: (any ndarray)
 ```
 
 参数：
 
 ```py
-`timeperiod: 10` 
+timeperiod: 10
 ```
 
 输出：
 
 ```py
-`real` 
+real
 ```
 
 线条：
 
 ```py
-`* real` 
+* real
 ```
 
 参数：
 
 ```py
-`* timeperiod (10)` 
+* timeperiod (10)
 ```
 
 绘图信息：
 
 ```py
-`* subplot (True)
+* subplot (True)
 
 * plot (True)
 
@@ -8490,13 +8490,13 @@ ROCP（[输入数组]，[时间周期=10]）
 
 * plotmaster (None)
 
-* plotyticks ([])` 
+* plotyticks ([])
 ```
 
 绘图线：
 
 ```py
-`* real: - ls (-)` 
+* real: - ls (-)
 ```
 
 ### ROCR
@@ -8508,37 +8508,37 @@ ROCR（[输入数组]，[时间周期=10]）
 输入：
 
 ```py
-`price: (any ndarray)` 
+price: (any ndarray)
 ```
 
 参数：
 
 ```py
-`timeperiod: 10` 
+timeperiod: 10
 ```
 
 输出：
 
 ```py
-`real` 
+real
 ```
 
 线条：
 
 ```py
-`* real` 
+* real
 ```
 
 参数：
 
 ```py
-`* timeperiod (10)` 
+* timeperiod (10)
 ```
 
 绘图信息：
 
 ```py
-`* subplot (True)
+* subplot (True)
 
 * plot (True)
 
@@ -8560,13 +8560,13 @@ ROCR（[输入数组]，[时间周期=10]）
 
 * plotmaster (None)
 
-* plotyticks ([])` 
+* plotyticks ([])
 ```
 
 绘图线：
 
 ```py
-`* real: - ls (-)` 
+* real: - ls (-)
 ```
 
 ROCR100
@@ -8578,37 +8578,37 @@ ROCR100（[输入数组]，[时间周期=10]）
 输入：
 
 ```py
-`price: (any ndarray)` 
+price: (any ndarray)
 ```
 
 参数：
 
 ```py
-`timeperiod: 10` 
+timeperiod: 10
 ```
 
 输出：
 
 ```py
-`real` 
+real
 ```
 
 线条：
 
 ```py
-`* real` 
+* real
 ```
 
 参数：
 
 ```py
-`* timeperiod (10)` 
+* timeperiod (10)
 ```
 
 绘图信息：
 
 ```py
-`* subplot (True)
+* subplot (True)
 
 * plot (True)
 
@@ -8630,13 +8630,13 @@ ROCR100（[输入数组]，[时间周期=10]）
 
 * plotmaster (None)
 
-* plotyticks ([])` 
+* plotyticks ([])
 ```
 
 绘图线：
 
 ```py
-`* real: - ls (-)` 
+* real: - ls (-)
 ```
 
 ### RSI
@@ -8648,37 +8648,37 @@ RSI（[输入数组]，[时间周期=14]）
 输入：
 
 ```py
-`price: (any ndarray)` 
+price: (any ndarray)
 ```
 
 参数：
 
 ```py
-`timeperiod: 14` 
+timeperiod: 14
 ```
 
 输出：
 
 ```py
-`real` 
+real
 ```
 
 线条：
 
 ```py
-`* real` 
+* real
 ```
 
 参数：
 
 ```py
-`* timeperiod (14)` 
+* timeperiod (14)
 ```
 
 绘图信息：
 
 ```py
-`* subplot (True)
+* subplot (True)
 
 * plot (True)
 
@@ -8700,13 +8700,13 @@ RSI（[输入数组]，[时间周期=14]）
 
 * plotmaster (None)
 
-* plotyticks ([])` 
+* plotyticks ([])
 ```
 
 绘图线：
 
 ```py
-`* real: - ls (-)` 
+* real: - ls (-)
 ```
 
 ### SAR
@@ -8718,39 +8718,39 @@ SAR（[输入数组]，[acceleration=0.02]，[maximum=0.2]）
 输入：
 
 ```py
-`prices: [‘high’, ‘low’]` 
+prices: [‘high’, ‘low’]
 ```
 
 参数：
 
 ```py
-`acceleration: 0.02 maximum: 0.2` 
+acceleration: 0.02 maximum: 0.2
 ```
 
 输出：
 
 ```py
-`real` 
+real
 ```
 
 线条：
 
 ```py
-`* real` 
+* real
 ```
 
 参数：
 
 ```py
-`* acceleration (0.02)
+* acceleration (0.02)
 
-* maximum (0.2)` 
+* maximum (0.2)
 ```
 
 绘图信息：
 
 ```py
-`* subplot (False)
+* subplot (False)
 
 * plot (True)
 
@@ -8772,13 +8772,13 @@ SAR（[输入数组]，[acceleration=0.02]，[maximum=0.2]）
 
 * plotmaster (None)
 
-* plotyticks ([])` 
+* plotyticks ([])
 ```
 
 绘图线：
 
 ```py
-`* real: - ls (-)` 
+* real: - ls (-)
 ```
 
 ### SAREXT
@@ -8790,34 +8790,34 @@ SAREXT（[输入数组]，[startvalue=0]，[offsetonreverse=0]，[accelerationin
 输入：
 
 ```py
-`prices: [‘high’, ‘low’]` 
+prices: [‘high’, ‘low’]
 ```
 
 参数：
 
 ```py
-`startvalue: 0 offsetonreverse: 0 accelerationinitlong: 0.02
+startvalue: 0 offsetonreverse: 0 accelerationinitlong: 0.02
 accelerationlong: 0.02 accelerationmaxlong: 0.2
 accelerationinitshort: 0.02 accelerationshort: 0.02
-accelerationmaxshort: 0.2` 
+accelerationmaxshort: 0.2
 ```
 
 输出：
 
 ```py
-`real` 
+real
 ```
 
 线条：
 
 ```py
-`* real` 
+* real
 ```
 
 参数：
 
 ```py
-`* startvalue (0)
+* startvalue (0)
 
 * offsetonreverse (0)
 
@@ -8831,13 +8831,13 @@ accelerationmaxshort: 0.2`
 
 * accelerationshort (0.02)
 
-* accelerationmaxshort (0.2)` 
+* accelerationmaxshort (0.2)
 ```
 
 绘图信息：
 
 ```py
-`* subplot (False)
+* subplot (False)
 
 * plot (True)
 
@@ -8859,13 +8859,13 @@ accelerationmaxshort: 0.2`
 
 * plotmaster (None)
 
-* plotyticks ([])` 
+* plotyticks ([])
 ```
 
 绘图线：
 
 ```py
-`* real: - ls (-)` 
+* real: - ls (-)
 ```
 
 ### SIN
@@ -8877,25 +8877,25 @@ SIN（[输入数组]）
 输入：
 
 ```py
-`price: (any ndarray)` 
+price: (any ndarray)
 ```
 
 输出：
 
 ```py
-`real` 
+real
 ```
 
 线条：
 
 ```py
-`* real` 
+* real
 ```
 
 绘图信息：
 
 ```py
-`* subplot (True)
+* subplot (True)
 
 * plot (True)
 
@@ -8917,13 +8917,13 @@ SIN（[输入数组]）
 
 * plotmaster (None)
 
-* plotyticks ([])` 
+* plotyticks ([])
 ```
 
 绘图线：
 
 ```py
-`* real: - ls (-)` 
+* real: - ls (-)
 ```
 
 ### SINH
@@ -8935,25 +8935,25 @@ SINH（[输入数组]）
 输入：
 
 ```py
-`price: (any ndarray)` 
+price: (any ndarray)
 ```
 
 输出：
 
 ```py
-`real` 
+real
 ```
 
 线条：
 
 ```py
-`* real` 
+* real
 ```
 
 绘图信息：
 
 ```py
-`* subplot (True)
+* subplot (True)
 
 * plot (True)
 
@@ -8975,13 +8975,13 @@ SINH（[输入数组]）
 
 * plotmaster (None)
 
-* plotyticks ([])` 
+* plotyticks ([])
 ```
 
 绘图线：
 
 ```py
-`* real: - ls (-)` 
+* real: - ls (-)
 ```
 
 ### SMA
@@ -8993,37 +8993,37 @@ SMA（[输入数组]，[时间周期=30]）
 输入：
 
 ```py
-`price: (any ndarray)` 
+price: (any ndarray)
 ```
 
 参数：
 
 ```py
-`timeperiod: 30` 
+timeperiod: 30
 ```
 
 输出：
 
 ```py
-`real` 
+real
 ```
 
 线条：
 
 ```py
-`* real` 
+* real
 ```
 
 参数：
 
 ```py
-`* timeperiod (30)` 
+* timeperiod (30)
 ```
 
 绘图信息：
 
 ```py
-`* subplot (False)
+* subplot (False)
 
 * plot (True)
 
@@ -9045,13 +9045,13 @@ SMA（[输入数组]，[时间周期=30]）
 
 * plotmaster (None)
 
-* plotyticks ([])` 
+* plotyticks ([])
 ```
 
 绘图线：
 
 ```py
-`* real: - ls (-)` 
+* real: - ls (-)
 ```
 
 ### SQRT
@@ -9063,25 +9063,25 @@ SQRT（[输入数组]）
 输入：
 
 ```py
-`price: (any ndarray)` 
+price: (any ndarray)
 ```
 
 输出：
 
 ```py
-`real` 
+real
 ```
 
 线条：
 
 ```py
-`* real` 
+* real
 ```
 
 绘图信息：
 
 ```py
-`* subplot (True)
+* subplot (True)
 
 * plot (True)
 
@@ -9103,13 +9103,13 @@ SQRT（[输入数组]）
 
 * plotmaster (None)
 
-* plotyticks ([])` 
+* plotyticks ([])
 ```
 
 绘图线：
 
 ```py
-`* real: - ls (-)` 
+* real: - ls (-)
 ```
 
 ### STDDEV
@@ -9121,39 +9121,39 @@ STDDEV（[输入数组]，[时间周期=5]，[nbdev=1]）
 输入：
 
 ```py
-`price: (any ndarray)` 
+price: (any ndarray)
 ```
 
 参数：
 
 ```py
-`timeperiod: 5 nbdev: 1` 
+timeperiod: 5 nbdev: 1
 ```
 
 输出：
 
 ```py
-`real` 
+real
 ```
 
 线条：
 
 ```py
-`* real` 
+* real
 ```
 
 参数：
 
 ```py
-`* timeperiod (5)
+* timeperiod (5)
 
-* nbdev (1)` 
+* nbdev (1)
 ```
 
 绘图信息：
 
 ```py
-`* subplot (True)
+* subplot (True)
 
 * plot (True)
 
@@ -9175,13 +9175,13 @@ STDDEV（[输入数组]，[时间周期=5]，[nbdev=1]）
 
 * plotmaster (None)
 
-* plotyticks ([])` 
+* plotyticks ([])
 ```
 
 绘图线：
 
 ```py
-`* real: - ls (-)` 
+* real: - ls (-)
 ```
 
 ### STOCH
@@ -9193,34 +9193,34 @@ STOCH（[输入数组]，[fastk_period=5]，[slowk_period=3]，[slowk_matype=0]�
 输入：
 
 ```py
-`prices: [‘high’, ‘low’, ‘close’]` 
+prices: [‘high’, ‘low’, ‘close’]
 ```
 
 参数：
 
 ```py
-`fastk_period: 5 slowk_period: 3 slowk_matype: 0 slowd_period: 3
-slowd_matype: 0` 
+fastk_period: 5 slowk_period: 3 slowk_matype: 0 slowd_period: 3
+slowd_matype: 0
 ```
 
 输出：
 
 ```py
-`slowk slowd` 
+slowk slowd
 ```
 
 线条：
 
 ```py
-`* slowk
+* slowk
 
-* slowd` 
+* slowd
 ```
 
 参数：
 
 ```py
-`* fastk_period (5)
+* fastk_period (5)
 
 * slowk_period (3)
 
@@ -9228,13 +9228,13 @@ slowd_matype: 0`
 
 * slowd_period (3)
 
-* slowd_matype (0)` 
+* slowd_matype (0)
 ```
 
 绘图信息：
 
 ```py
-`* subplot (True)
+* subplot (True)
 
 * plot (True)
 
@@ -9256,15 +9256,15 @@ slowd_matype: 0`
 
 * plotmaster (None)
 
-* plotyticks ([])` 
+* plotyticks ([])
 ```
 
 绘图线：
 
 ```py
-`* slowk: - ls (–)
+* slowk: - ls (–)
 
-* slowd: - ls (–)` 
+* slowd: - ls (–)
 ```
 
 ### STOCHF
@@ -9276,43 +9276,43 @@ STOCHF（[输入数组]，[fastk_period=5]，[fastd_period=3]，[fastd_matype=0]
 输入：
 
 ```py
-`prices: [‘high’, ‘low’, ‘close’]` 
+prices: [‘high’, ‘low’, ‘close’]
 ```
 
 参数：
 
 ```py
-`fastk_period: 5 fastd_period: 3 fastd_matype: 0` 
+fastk_period: 5 fastd_period: 3 fastd_matype: 0
 ```
 
 输出：
 
 ```py
-`fastk fastd` 
+fastk fastd
 ```
 
 线条：
 
 ```py
-`* fastk
+* fastk
 
-* fastd` 
+* fastd
 ```
 
 参数：
 
 ```py
-`* fastk_period (5)
+* fastk_period (5)
 
 * fastd_period (3)
 
-* fastd_matype (0)` 
+* fastd_matype (0)
 ```
 
 绘图信息：
 
 ```py
-`* subplot (True)
+* subplot (True)
 
 * plot (True)
 
@@ -9334,15 +9334,15 @@ STOCHF（[输入数组]，[fastk_period=5]，[fastd_period=3]，[fastd_matype=0]
 
 * plotmaster (None)
 
-* plotyticks ([])` 
+* plotyticks ([])
 ```
 
 绘图线：
 
 ```py
-`* fastk: - ls (-)
+* fastk: - ls (-)
 
-* fastd: - ls (-)` 
+* fastd: - ls (-)
 ```
 
 ### STOCHRSI
@@ -9354,45 +9354,45 @@ STOCHRSI（[输入数组]，[时间周期=14]，[fastk_period=5]，[fastd_period
 输入：
 
 ```py
-`price: (any ndarray)` 
+price: (any ndarray)
 ```
 
 参数：
 
 ```py
-`timeperiod: 14 fastk_period: 5 fastd_period: 3 fastd_matype: 0` 
+timeperiod: 14 fastk_period: 5 fastd_period: 3 fastd_matype: 0
 ```
 
 输出：
 
 ```py
-`fastk fastd` 
+fastk fastd
 ```
 
 线条：
 
 ```py
-`* fastk
+* fastk
 
-* fastd` 
+* fastd
 ```
 
 参数：
 
 ```py
-`* timeperiod (14)
+* timeperiod (14)
 
 * fastk_period (5)
 
 * fastd_period (3)
 
-* fastd_matype (0)` 
+* fastd_matype (0)
 ```
 
 绘图信息：
 
 ```py
-`* subplot (True)
+* subplot (True)
 
 * plot (True)
 
@@ -9414,15 +9414,15 @@ STOCHRSI（[输入数组]，[时间周期=14]，[fastk_period=5]，[fastd_period
 
 * plotmaster (None)
 
-* plotyticks ([])` 
+* plotyticks ([])
 ```
 
 绘图线：
 
 ```py
-`* fastk: - ls (-)
+* fastk: - ls (-)
 
-* fastd: - ls (-)` 
+* fastd: - ls (-)
 ```
 
 ### SUB
@@ -9434,25 +9434,25 @@ SUB([input_arrays])
 输入：
 
 ```py
-`price0: (any ndarray) price1: (any ndarray)` 
+price0: (any ndarray) price1: (any ndarray)
 ```
 
 输出：
 
 ```py
-`real` 
+real
 ```
 
 线：
 
 ```py
-`* real` 
+* real
 ```
 
 绘图信息：
 
 ```py
-`* subplot (True)
+* subplot (True)
 
 * plot (True)
 
@@ -9474,13 +9474,13 @@ SUB([input_arrays])
 
 * plotmaster (None)
 
-* plotyticks ([])` 
+* plotyticks ([])
 ```
 
 绘图线：
 
 ```py
-`* real: - ls (-)` 
+* real: - ls (-)
 ```
 
 ### SUM
@@ -9492,37 +9492,37 @@ SUM([input_arrays], [timeperiod=30])
 输入：
 
 ```py
-`price: (any ndarray)` 
+price: (any ndarray)
 ```
 
 参数：
 
 ```py
-`timeperiod: 30` 
+timeperiod: 30
 ```
 
 输出：
 
 ```py
-`real` 
+real
 ```
 
 线：
 
 ```py
-`* real` 
+* real
 ```
 
 参数：
 
 ```py
-`* timeperiod (30)` 
+* timeperiod (30)
 ```
 
 绘图信息：
 
 ```py
-`* subplot (True)
+* subplot (True)
 
 * plot (True)
 
@@ -9544,13 +9544,13 @@ SUM([input_arrays], [timeperiod=30])
 
 * plotmaster (None)
 
-* plotyticks ([])` 
+* plotyticks ([])
 ```
 
 绘图线：
 
 ```py
-`* real: - ls (-)` 
+* real: - ls (-)
 ```
 
 T3
@@ -9562,39 +9562,39 @@ T3([input_arrays], [timeperiod=5], [vfactor=0.7])
 输入：
 
 ```py
-`price: (any ndarray)` 
+price: (any ndarray)
 ```
 
 参数：
 
 ```py
-`timeperiod: 5 vfactor: 0.7` 
+timeperiod: 5 vfactor: 0.7
 ```
 
 输出：
 
 ```py
-`real` 
+real
 ```
 
 线：
 
 ```py
-`* real` 
+* real
 ```
 
 参数：
 
 ```py
-`* timeperiod (5)
+* timeperiod (5)
 
-* vfactor (0.7)` 
+* vfactor (0.7)
 ```
 
 绘图信息：
 
 ```py
-`* subplot (False)
+* subplot (False)
 
 * plot (True)
 
@@ -9616,13 +9616,13 @@ T3([input_arrays], [timeperiod=5], [vfactor=0.7])
 
 * plotmaster (None)
 
-* plotyticks ([])` 
+* plotyticks ([])
 ```
 
 绘图线：
 
 ```py
-`* real: - ls (-)` 
+* real: - ls (-)
 ```
 
 ### TAN
@@ -9634,25 +9634,25 @@ TAN([input_arrays])
 输入：
 
 ```py
-`price: (any ndarray)` 
+price: (any ndarray)
 ```
 
 输出：
 
 ```py
-`real` 
+real
 ```
 
 线：
 
 ```py
-`* real` 
+* real
 ```
 
 绘图信息：
 
 ```py
-`* subplot (True)
+* subplot (True)
 
 * plot (True)
 
@@ -9674,13 +9674,13 @@ TAN([input_arrays])
 
 * plotmaster (None)
 
-* plotyticks ([])` 
+* plotyticks ([])
 ```
 
 绘图线：
 
 ```py
-`* real: - ls (-)` 
+* real: - ls (-)
 ```
 
 ### TANH
@@ -9692,25 +9692,25 @@ TANH([input_arrays])
 输入：
 
 ```py
-`price: (any ndarray)` 
+price: (any ndarray)
 ```
 
 输出：
 
 ```py
-`real` 
+real
 ```
 
 线：
 
 ```py
-`* real` 
+* real
 ```
 
 绘图信息：
 
 ```py
-`* subplot (True)
+* subplot (True)
 
 * plot (True)
 
@@ -9732,13 +9732,13 @@ TANH([input_arrays])
 
 * plotmaster (None)
 
-* plotyticks ([])` 
+* plotyticks ([])
 ```
 
 绘图线：
 
 ```py
-`* real: - ls (-)` 
+* real: - ls (-)
 ```
 
 ### TEMA
@@ -9750,37 +9750,37 @@ TEMA([input_arrays], [timeperiod=30])
 输入：
 
 ```py
-`price: (any ndarray)` 
+price: (any ndarray)
 ```
 
 参数：
 
 ```py
-`timeperiod: 30` 
+timeperiod: 30
 ```
 
 输出：
 
 ```py
-`real` 
+real
 ```
 
 线：
 
 ```py
-`* real` 
+* real
 ```
 
 参数：
 
 ```py
-`* timeperiod (30)` 
+* timeperiod (30)
 ```
 
 绘图信息：
 
 ```py
-`* subplot (False)
+* subplot (False)
 
 * plot (True)
 
@@ -9802,13 +9802,13 @@ TEMA([input_arrays], [timeperiod=30])
 
 * plotmaster (None)
 
-* plotyticks ([])` 
+* plotyticks ([])
 ```
 
 绘图线：
 
 ```py
-`* real: - ls (-)` 
+* real: - ls (-)
 ```
 
 ### TRANGE
@@ -9820,25 +9820,25 @@ TRANGE([input_arrays])
 输入：
 
 ```py
-`prices: [‘high’, ‘low’, ‘close’]` 
+prices: [‘high’, ‘low’, ‘close’]
 ```
 
 输出：
 
 ```py
-`real` 
+real
 ```
 
 线：
 
 ```py
-`* real` 
+* real
 ```
 
 绘图信息：
 
 ```py
-`* subplot (True)
+* subplot (True)
 
 * plot (True)
 
@@ -9860,13 +9860,13 @@ TRANGE([input_arrays])
 
 * plotmaster (None)
 
-* plotyticks ([])` 
+* plotyticks ([])
 ```
 
 绘图线：
 
 ```py
-`* real: - ls (-)` 
+* real: - ls (-)
 ```
 
 ### TRIMA
@@ -9878,37 +9878,37 @@ TRIMA([input_arrays], [timeperiod=30])
 输入：
 
 ```py
-`price: (any ndarray)` 
+price: (any ndarray)
 ```
 
 参数：
 
 ```py
-`timeperiod: 30` 
+timeperiod: 30
 ```
 
 输出：
 
 ```py
-`real` 
+real
 ```
 
 线：
 
 ```py
-`* real` 
+* real
 ```
 
 参数：
 
 ```py
-`* timeperiod (30)` 
+* timeperiod (30)
 ```
 
 绘图信息：
 
 ```py
-`* subplot (False)
+* subplot (False)
 
 * plot (True)
 
@@ -9930,13 +9930,13 @@ TRIMA([input_arrays], [timeperiod=30])
 
 * plotmaster (None)
 
-* plotyticks ([])` 
+* plotyticks ([])
 ```
 
 绘图线：
 
 ```py
-`* real: - ls (-)` 
+* real: - ls (-)
 ```
 
 ### TRIX
@@ -9948,37 +9948,37 @@ TRIX([input_arrays], [timeperiod=30])
 输入：
 
 ```py
-`price: (any ndarray)` 
+price: (any ndarray)
 ```
 
 参数：
 
 ```py
-`timeperiod: 30` 
+timeperiod: 30
 ```
 
 输出：
 
 ```py
-`real` 
+real
 ```
 
 线：
 
 ```py
-`* real` 
+* real
 ```
 
 参数：
 
 ```py
-`* timeperiod (30)` 
+* timeperiod (30)
 ```
 
 绘图信息：
 
 ```py
-`* subplot (True)
+* subplot (True)
 
 * plot (True)
 
@@ -10000,13 +10000,13 @@ TRIX([input_arrays], [timeperiod=30])
 
 * plotmaster (None)
 
-* plotyticks ([])` 
+* plotyticks ([])
 ```
 
 绘图线：
 
 ```py
-`* real: - ls (-)` 
+* real: - ls (-)
 ```
 
 ### TSF
@@ -10018,37 +10018,37 @@ TSF([input_arrays], [timeperiod=14])
 输入：
 
 ```py
-`price: (any ndarray)` 
+price: (any ndarray)
 ```
 
 参数：
 
 ```py
-`timeperiod: 14` 
+timeperiod: 14
 ```
 
 输出：
 
 ```py
-`real` 
+real
 ```
 
 线：
 
 ```py
-`* real` 
+* real
 ```
 
 参数：
 
 ```py
-`* timeperiod (14)` 
+* timeperiod (14)
 ```
 
 绘图信息：
 
 ```py
-`* subplot (False)
+* subplot (False)
 
 * plot (True)
 
@@ -10070,13 +10070,13 @@ TSF([input_arrays], [timeperiod=14])
 
 * plotmaster (None)
 
-* plotyticks ([])` 
+* plotyticks ([])
 ```
 
 绘图线：
 
 ```py
-`* real: - ls (-)` 
+* real: - ls (-)
 ```
 
 ### TYPPRICE
@@ -10088,25 +10088,25 @@ TYPPRICE([input_arrays])
 输入：
 
 ```py
-`prices: [‘high’, ‘low’, ‘close’]` 
+prices: [‘high’, ‘low’, ‘close’]
 ```
 
 输出：
 
 ```py
-`real` 
+real
 ```
 
 线：
 
 ```py
-`* real` 
+* real
 ```
 
 绘图信息：
 
 ```py
-`* subplot (False)
+* subplot (False)
 
 * plot (True)
 
@@ -10128,13 +10128,13 @@ TYPPRICE([input_arrays])
 
 * plotmaster (None)
 
-* plotyticks ([])` 
+* plotyticks ([])
 ```
 
 绘图线：
 
 ```py
-`* real: - ls (-)` 
+* real: - ls (-)
 ```
 
 ### ULTOSC
@@ -10146,41 +10146,41 @@ ULTOSC([input_arrays], [timeperiod1=7], [timeperiod2=14], [timeperiod3=28])
 输入：
 
 ```py
-`prices: [‘high’, ‘low’, ‘close’]` 
+prices: [‘high’, ‘low’, ‘close’]
 ```
 
 参数：
 
 ```py
-`timeperiod1: 7 timeperiod2: 14 timeperiod3: 28` 
+timeperiod1: 7 timeperiod2: 14 timeperiod3: 28
 ```
 
 输出：
 
 ```py
-`real` 
+real
 ```
 
 线：
 
 ```py
-`* real` 
+* real
 ```
 
 参数：
 
 ```py
-`* timeperiod1 (7)
+* timeperiod1 (7)
 
 * timeperiod2 (14)
 
-* timeperiod3 (28)` 
+* timeperiod3 (28)
 ```
 
 绘图信息：
 
 ```py
-`* subplot (True)
+* subplot (True)
 
 * plot (True)
 
@@ -10202,13 +10202,13 @@ ULTOSC([input_arrays], [timeperiod1=7], [timeperiod2=14], [timeperiod3=28])
 
 * plotmaster (None)
 
-* plotyticks ([])` 
+* plotyticks ([])
 ```
 
 绘图线：
 
 ```py
-`* real: - ls (-)` 
+* real: - ls (-)
 ```
 
 ### VAR
@@ -10220,39 +10220,39 @@ VAR([input_arrays], [timeperiod=5], [nbdev=1])
 输入：
 
 ```py
-`price: (any ndarray)` 
+price: (any ndarray)
 ```
 
 参数：
 
 ```py
-`timeperiod: 5 nbdev: 1` 
+timeperiod: 5 nbdev: 1
 ```
 
 输出：
 
 ```py
-`real` 
+real
 ```
 
 线：
 
 ```py
-`* real` 
+* real
 ```
 
 参数：
 
 ```py
-`* timeperiod (5)
+* timeperiod (5)
 
-* nbdev (1)` 
+* nbdev (1)
 ```
 
 绘图信息：
 
 ```py
-`* subplot (True)
+* subplot (True)
 
 * plot (True)
 
@@ -10274,13 +10274,13 @@ VAR([input_arrays], [timeperiod=5], [nbdev=1])
 
 * plotmaster (None)
 
-* plotyticks ([])` 
+* plotyticks ([])
 ```
 
 绘图线：
 
 ```py
-`* real: - ls (-)` 
+* real: - ls (-)
 ```
 
 ### WCLPRICE
@@ -10292,25 +10292,25 @@ WCLPRICE([input_arrays])
 输入：
 
 ```py
-`prices: [‘high’, ‘low’, ‘close’]` 
+prices: [‘high’, ‘low’, ‘close’]
 ```
 
 输出：
 
 ```py
-`real` 
+real
 ```
 
 线：
 
 ```py
-`* real` 
+* real
 ```
 
 绘图信息：
 
 ```py
-`* subplot (False)
+* subplot (False)
 
 * plot (True)
 
@@ -10332,13 +10332,13 @@ WCLPRICE([input_arrays])
 
 * plotmaster (None)
 
-* plotyticks ([])` 
+* plotyticks ([])
 ```
 
 绘图线：
 
 ```py
-`* real: - ls (-)` 
+* real: - ls (-)
 ```
 
 ### WILLR
@@ -10350,37 +10350,37 @@ WILLR([input_arrays], [timeperiod=14])
 输入：
 
 ```py
-`prices: [‘high’, ‘low’, ‘close’]` 
+prices: [‘high’, ‘low’, ‘close’]
 ```
 
 参数：
 
 ```py
-`timeperiod: 14` 
+timeperiod: 14
 ```
 
 输出：
 
 ```py
-`real` 
+real
 ```
 
 线：
 
 ```py
-`* real` 
+* real
 ```
 
 参数：
 
 ```py
-`* timeperiod (14)` 
+* timeperiod (14)
 ```
 
 绘图信息：
 
 ```py
-`* subplot (True)
+* subplot (True)
 
 * plot (True)
 
@@ -10402,13 +10402,13 @@ WILLR([input_arrays], [timeperiod=14])
 
 * plotmaster (None)
 
-* plotyticks ([])` 
+* plotyticks ([])
 ```
 
 绘图线：
 
 ```py
-`* real: - ls (-)` 
+* real: - ls (-)
 ```
 
 ### WMA
@@ -10420,37 +10420,37 @@ WMA([input_arrays], [timeperiod=30])
 输入：
 
 ```py
-`price: (any ndarray)` 
+price: (any ndarray)
 ```
 
 参数：
 
 ```py
-`timeperiod: 30` 
+timeperiod: 30
 ```
 
 输出：
 
 ```py
-`real` 
+real
 ```
 
 线：
 
 ```py
-`* real` 
+* real
 ```
 
 参数：
 
 ```py
-`* timeperiod (30)` 
+* timeperiod (30)
 ```
 
 绘图信息：
 
 ```py
-`* subplot (False)
+* subplot (False)
 
 * plot (True)
 
@@ -10472,11 +10472,11 @@ WMA([input_arrays], [timeperiod=30])
 
 * plotmaster (None)
 
-* plotyticks ([])` 
+* plotyticks ([])
 ```
 
 绘图线：
 
 ```py
-`* real: - ls (-)` 
+* real: - ls (-)
 ```

@@ -119,9 +119,9 @@ Bar 管理将由 SimpleFilterWrapper 类完成，该类在 DataBase.addfilter_si
 参见：
 
 ```py
-`* [`en.wikipedia.org/wiki/Candlestick_chart#Heikin_Ashi_candlesticks`](https://en.wikipedia.org/wiki/Candlestick_chart#Heikin_Ashi_candlesticks)
+* [`en.wikipedia.org/wiki/Candlestick_chart#Heikin_Ashi_candlesticks`](https://en.wikipedia.org/wiki/Candlestick_chart#Heikin_Ashi_candlesticks)
 
-* [`stockcharts.com/school/doku.php?id=chart_school:chart_analysis:heikin_ashi`](http://stockcharts.com/school/doku.php?id=chart_school:chart_analysis:heikin_ashi)` 
+* [`stockcharts.com/school/doku.php?id=chart_school:chart_analysis:heikin_ashi`](http://stockcharts.com/school/doku.php?id=chart_school:chart_analysis:heikin_ashi)
 ```
 
 ## 砖形图（Renko）
@@ -151,5 +151,5 @@ Bar 管理将由 SimpleFilterWrapper 类完成，该类在 DataBase.addfilter_si
 参见：
 
 ```py
-`* [`stockcharts.com/school/doku.php?id=chart_school:chart_analysis:renko`](http://stockcharts.com/school/doku.php?id=chart_school:chart_analysis:renko)` 
+* [`stockcharts.com/school/doku.php?id=chart_school:chart_analysis:renko`](http://stockcharts.com/school/doku.php?id=chart_school:chart_analysis:renko)
 ```

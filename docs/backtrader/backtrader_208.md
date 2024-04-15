@@ -13,7 +13,7 @@
 下面的代码执行此操作，并通过允许自定义第二次平滑的移动平均值添加了一个不错的功能。
 
 ```py
-`class Stochastic_Generic(bt.Indicator):
+class Stochastic_Generic(bt.Indicator):
   '''
  This generic indicator doesn't assume the data feed has the components
  ``high``, ``low`` and ``close``. It needs three data sources passed to it,
@@ -42,7 +42,7 @@
 
         # Smooth k => d
         slowav = self.p.slowav or self.p.movav  # chose slowav
-        self.l.d = slowav(k, period=self.p.pdslow)` 
+        self.l.d = slowav(k, period=self.p.pdslow)
 ```
 
 当然，需要验证当给定相同的输入集时，该指标是否确实产生与标准指标相同的结果。下面的图表是使用这组指令创建的。
@@ -57,7 +57,7 @@
 
         # These two have generate the same results
         Stochastic_Generic(self.data.high, self.data.low, self.data.close)
-        bt.ind.Stochastic(self.data)` 
+        bt.ind.Stochastic(self.data)
 ```
 
 这里是指标如何工作的视图

@@ -21,7 +21,7 @@
 首先，让我们使用*backtrader*内置的*Signal*技术将两个非常快速的策略添加到脚本中
 
 ```py
-`class St0(bt.SignalStrategy):
+class St0(bt.SignalStrategy):
     def __init__(self):
         sma1, sma2 = bt.ind.SMA(period=10), bt.ind.SMA(period=30)
         crossover = bt.ind.CrossOver(sma1, sma2)
@@ -31,7 +31,7 @@ class St1(bt.SignalStrategy):
     def __init__(self):
         sma1 = bt.ind.SMA(period=10)
         crossover = bt.ind.CrossOver(self.data.close, sma1)
-        self.signal_add(bt.SIGNAL_LONG, crossover)` 
+        self.signal_add(bt.SIGNAL_LONG, crossover)
 ```
 
 这再也不能更简单了。
@@ -39,14 +39,14 @@ class St1(bt.SignalStrategy):
 现在让我们来展示这两个策略的魔力。
 
 ```py
-`class StFetcher(object):
+class StFetcher(object):
     _STRATS = [St0, St1]
 
     def __new__(cls, *args, **kwargs):
         idx = kwargs.pop('idx')
 
         obj = cls._STRATSidx
-        return obj` 
+        return obj
 ```
 
 Et voilá！当类`StFetcher`被实例化时，方法`__new__`控制实例的创建。在这种情况下：
@@ -66,7 +66,7 @@ Et voilá！当类`StFetcher`被实例化时，方法`__new__`控制实例的创
 ```py
  `cerebro.addanalyzer(bt.analyzers.Returns)
     cerebro.optstrategy(StFetcher, idx=[0, 1])
-    results = cerebro.run(maxcpus=args.maxcpus, optreturn=args.optreturn)` 
+    results = cerebro.run(maxcpus=args.maxcpus, optreturn=args.optreturn)
 ```
 
 确实！优化就是这样！我们不再使用`addstrategy`，而是使用`optstrategy`并传递一个`idx`值的数组。这些值将被优化引擎迭代。
@@ -80,19 +80,19 @@ Et voilá！当类`StFetcher`被实例化时，方法`__new__`控制实例的创
     for i, strat in enumerate(strats):
         rets = strat.analyzers.returns.get_analysis()
         print('Strat {} Name {}:\n - analyzer: {}\n'.format(
-            i, strat.__class__.__name__, rets))` 
+            i, strat.__class__.__name__, rets))
 ```
 
 ## 一个示例运行
 
 ```py
-`./strategy-selection.py
+./strategy-selection.py
 
 Strat 0 Name St0:
   - analyzer: OrderedDict([(u'rtot', 0.04847392369449283), (u'ravg', 9.467563221580632e-05), (u'rnorm', 0.02414514457151587), (u'rnorm100', 2.414514457151587)])
 
 Strat 1 Name St1:
-  - analyzer: OrderedDict([(u'rtot', 0.05124714332260593), (u'ravg', 0.00010009207680196471), (u'rnorm', 0.025543999840699633), (u'rnorm100', 2.5543999840699634)])` 
+  - analyzer: OrderedDict([(u'rtot', 0.05124714332260593), (u'ravg', 0.00010009207680196471), (u'rnorm', 0.025543999840699633), (u'rnorm100', 2.5543999840699634)])
 ```
 
 我们的 2 个策略已经运行并交付了（如预期的）不同的结果。
@@ -108,7 +108,7 @@ Strat 1 Name St1:
 ### 示例用法
 
 ```py
-`$ ./strategy-selection.py --help
+$ ./strategy-selection.py --help
 usage: strategy-selection.py [-h] [--data DATA] [--maxcpus MAXCPUS]
                              [--optreturn]
 
@@ -119,7 +119,7 @@ optional arguments:
   --data DATA        Data to be read in (default:
                      ../../datas/2005-2006-day-001.txt)
   --maxcpus MAXCPUS  Limit the numer of CPUs to use (default: None)
-  --optreturn        Return reduced/mocked strategy object (default: False)` 
+  --optreturn        Return reduced/mocked strategy object (default: False)
 ```
 
 ### 代码
@@ -127,7 +127,7 @@ optional arguments:
 这已经包含在 backtrader 的源代码中
 
 ```py
-`from __future__ import (absolute_import, division, print_function,
+from __future__ import (absolute_import, division, print_function,
                         unicode_literals)
 
 import argparse
@@ -192,5 +192,5 @@ def parse_args(pargs=None):
     return parser.parse_args(pargs)
 
 if __name__ == '__main__':
-    runstrat()` 
+    runstrat()
 ```

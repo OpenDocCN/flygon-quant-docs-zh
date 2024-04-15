@@ -9,7 +9,7 @@
 别名：
 
 ```py
-`* SMA_CrossOver` 
+* SMA_CrossOver
 ```
 
 这是一个仅限开多头的策略，基于移动平均线交叉
@@ -17,47 +17,47 @@
 注意：
 
 ```py
-`* Although the default` 
+* Although the default
 ```
 
 买入逻辑：
 
 ```py
-`* No position is open on the data
+* No position is open on the data
 
 * The `fast` moving averagecrosses over the `slow` strategy to the
-  upside.` 
+  upside.
 ```
 
 卖出逻辑：
 
 ```py
-`* A position exists on the data
+* A position exists on the data
 
 * The `fast` moving average crosses over the `slow` strategy to the
-  downside` 
+  downside
 ```
 
 订单执行类型：
 
 ```py
-`* Market` 
+* Market
 ```
 
 线：
 
 ```py
-`* datetime` 
+* datetime
 ```
 
 参数：
 
 ```py
-`* fast (10)
+* fast (10)
 
 * slow (30)
 
-* _movav (<class ‘backtrader.indicators.sma.SMA’>)` 
+* _movav (<class ‘backtrader.indicators.sma.SMA’>)
 ```
 
 ### SignalStrategy
@@ -131,17 +131,17 @@
 线：
 
 ```py
-`* datetime` 
+* datetime
 ```
 
 参数：
 
 ```py
-`* signals ([])
+* signals ([])
 
 * _accumulate (False)
 
 * _concurrent (False)
 
-* _data (None)` 
+* _data (None)
 ```

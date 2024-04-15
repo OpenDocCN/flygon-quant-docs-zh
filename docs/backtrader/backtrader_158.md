@@ -65,7 +65,7 @@
 这两个 *Sizers* 将与一个非常简单的策略结合在一起。
 
 ```py
-`class CloseSMA(bt.Strategy):
+class CloseSMA(bt.Strategy):
     params = (('period', 15),)
 
     def __init__(self):
@@ -77,7 +77,7 @@
             self.buy()
 
         elif self.crossover < 0:
-            self.sell()` 
+            self.sell()
 ```
 
 注意策略如何使用 *Close-SMA* 交叉信号发出 *buy* 和 *sell* 命令，并考虑到一个重要的事情：
@@ -90,7 +90,7 @@
  `if args.longonly:
         cerebro.addsizer(LongOnly, stake=args.stake)
     else:
-        cerebro.addsizer(FixedReverser, stake=args.stake)` 
+        cerebro.addsizer(FixedReverser, stake=args.stake)
 ```
 
 ## 仅限多头执行
@@ -98,7 +98,7 @@
 用命令完成：
 
 ```py
-`$ ./sizertest.py --longonly --plot` 
+$ ./sizertest.py --longonly --plot
 ```
 
 这个输出。
@@ -110,7 +110,7 @@
 用命令完成：
 
 ```py
-`$ ./sizertest.py --plot` 
+$ ./sizertest.py --plot
 ```
 
 并输出如下结果。
@@ -126,7 +126,7 @@
 ## 使用示例
 
 ```py
-`$ ./sizertest.py --help
+$ ./sizertest.py --help
 usage: sizertest.py [-h] [--data0 DATA0] [--fromdate FROMDATE]
                     [--todate TODATE] [--cash CASH] [--longonly]
                     [--stake STAKE] [--period PERIOD] [--plot [kwargs]]
@@ -147,13 +147,13 @@ optional arguments:
   --plot [kwargs], -p [kwargs]
                         Plot the read data applying any kwargs passed For
                         example: --plot style="candle" (to plot candles)
-                        (default: None)` 
+                        (default: None)
 ```
 
 ### 完整代码
 
 ```py
-`from __future__ import (absolute_import, division, print_function,
+from __future__ import (absolute_import, division, print_function,
                         unicode_literals)
 
 import argparse
@@ -279,5 +279,5 @@ def parse_args(pargs=None):
     return parser.parse_args()
 
 if __name__ == '__main__':
-    runstrat()` 
+    runstrat()
 ```

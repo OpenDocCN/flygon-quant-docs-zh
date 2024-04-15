@@ -45,7 +45,7 @@
 下面的示例已配置为*获胜设置*，但第一次执行将遵守解释的规则。
 
 ```py
-`$ ./btfd.py --plot --strat approach="'closeclose'"` 
+$ ./btfd.py --plot --strat approach="'closeclose'"
 ```
 
 注意
@@ -75,7 +75,7 @@
 好的。`BTFD`谜题的第一部分… *已解决*！但我们仍然有一个问题，这是匹配*Dark Bid*实现的性能。毫不犹豫，使用默认的获胜设置运行样本。
 
 ```py
-`$ ./btfd.py --plot --strat approach="'highlow'"` 
+$ ./btfd.py --plot --strat approach="'highlow'"
 ```
 
 注意
@@ -117,7 +117,7 @@
 ## 样本用法
 
 ```py
-`$ ./btfd.py --help
+$ ./btfd.py --help
 usage: btfd.py [-h] [--offline] [--data TICKER]
                [--fromdate YYYY-MM-DD[THH:MM:SS]]
                [--todate YYYY-MM-DD[THH:MM:SS]] [--cerebro kwargs]
@@ -143,13 +143,13 @@ optional arguments:
   --strat kwargs        kwargs in key=value format (default:
                         approach="highlow")
   --comminfo kwargs     kwargs in key=value format (default: leverage=2.0)
-  --plot [kwargs]       kwargs in key=value format (default: )` 
+  --plot [kwargs]       kwargs in key=value format (default: )
 ```
 
 ## 样本代码
 
 ```py
-`from __future__ import (absolute_import, division, print_function,
+from __future__ import (absolute_import, division, print_function,
                         unicode_literals)
 
 # References:
@@ -356,7 +356,7 @@ def parse_args(pargs=None):
     return parser.parse_args(pargs)
 
 if __name__ == '__main__':
-    runstrat()` 
+    runstrat()
 ```
 
 ## 操作日志
@@ -366,13 +366,13 @@ if __name__ == '__main__':
 执行：
 
 ```py
-`$ ./btfd.py --strat approach="'closeclose'",prorder=True,prdata=True` 
+$ ./btfd.py --strat approach="'closeclose'",prorder=True,prdata=True
 ```
 
 结果：
 
 ```py
-`ORDER,Type,Date,Price,Size,Commission
+ORDER,Type,Date,Price,Size,Commission
 DATA,Action,Date,Price,PctDown
 DATA,OPEN,1990-01-09,349.62,-0.0117866530993
 ORDER,BUY,1990-01-09,349.62,572,0.0
@@ -2829,5 +2829,5 @@ ORDER,SELL,2016-06-28,2036.09,-350,0.0
 DATA,OPEN,2016-09-09,2127.81,-0.0245220739926
 ORDER,BUY,2016-09-09,2127.81,336,0.0
 DATA,CLOSE,2016-09-13,2127.02,nan
-ORDER,SELL,2016-09-13,2127.02,-336,0.0` 
+ORDER,SELL,2016-09-13,2127.02,-336,0.0
 ```

@@ -19,11 +19,11 @@
 `RMI`的实现看起来是这样的：
 
 ```py
-`class RelativeMomentumIndex(RSI):
+class RelativeMomentumIndex(RSI):
     alias = ('RMI', )
 
     linealias = (('rsi', 'rmi',),)  # add an alias for this class rmi -> rsi
-    plotlines = dict(rsi=dict(_name='rmi'))  # change line plotting name` 
+    plotlines = dict(rsi=dict(_name='rmi'))  # change line plotting name
 ```
 
 为基类添加了`rsi`线的别名，名称为`rmi`。如果有人想要创建一个子类并使用名称`rmi`，现在是可能的。
@@ -31,12 +31,12 @@
 此外，`rsi`线的绘图名称也更改为`rmi`。还有一种替代实现方式：
 
 ```py
-`class RelativeMomentumIndex(RSI):
+class RelativeMomentumIndex(RSI):
     alias = ('RMI', )
 
     linesoverrride = True  # allow redefinition of the lines hierarcy
     lines = ('rmi',)  # define the line
-    linealias = (('rmi', 'rsi',),)  # add an alias for base class rsi -> rmi` 
+    linealias = (('rmi', 'rsi',),)  # add an alias for base class rsi -> rmi
 ```
 
 在这里，不再考虑`RSI`的现有层次结构，而是使用`lines`来定义唯一的名为`rmi`的线。不需要定义绘图名称，因为唯一的线现在具有预期的名称。
@@ -58,26 +58,26 @@
 作为传统蜡烛图的一个有趣的显示替代方案，这已经被实现为一个过滤器，允许修改数据源以真正提供*平滑蜡烛图*。就像这样：
 
 ```py
-`data0 = MyDataFeed(dataname='xxx', timeframe=bt.TimeFrame.Days, compression=1)
+data0 = MyDataFeed(dataname='xxx', timeframe=bt.TimeFrame.Days, compression=1)
 data0.addfilter(bt.filters.HeikinAshi)
-cerebro.adddata(data0)` 
+cerebro.adddata(data0)
 ```
 
 任何人都可以通过这段代码快速比较蜡烛图：
 
 ```py
-`data0 = MyDataFeed(dataname='xxx', timeframe=bt.TimeFrame.Days, compression=1)
+data0 = MyDataFeed(dataname='xxx', timeframe=bt.TimeFrame.Days, compression=1)
 cerebro.adddata(data0)
 
 data1 = data0.clone()
 data1.addfilter(bt.filters.HeikinAshi)
-cerebro.adddata(data1)` 
+cerebro.adddata(data1)
 ```
 
 要绘制蜡烛图，请记住执行：
 
 ```py
-`cerebro.plot(style='candle')` 
+cerebro.plot(style='candle')
 ```
 
 使用样本每日数据来自 2005 年和 2006 年的来源。
@@ -95,10 +95,10 @@ cerebro.adddata(data1)`
 现在可以使用`plotylimited`来控制行为，例如：
 
 ```py
-`...
+...
 data0 = MyDataFeed(dataname='xxx', timeframe=bt.TimeFrame.Days, compression=1)
 data0.plotinfo.plotlog = False  # allow other actors to resize the axis
-...` 
+...
 ```
 
 在下图中，底部的数据源使用了`plotylimited=False`进行绘制。*布林带*不会超出图表，因为它们会影响缩放，并且一切都适合图表中。
@@ -112,12 +112,12 @@ data0.plotinfo.plotlog = False  # allow other actors to resize the axis
 现在可以使用半对数刻度（y 轴刻度）绘制单个轴。例如：
 
 ```py
-`...
+...
 data0 = MyDataFeed(dataname='xxx', timeframe=bt.TimeFrame.Days, compression=1)
 data0.plotinfo.plotlog = True
 data0.plotinfo.plotylimited = True
 cerebro.adddata(data0)
-...` 
+...
 ```
 
 这意味着由此数据源控制的轴将使用对数刻度，但其他轴不会，因此
@@ -139,23 +139,23 @@ cerebro.adddata(data0)
 在同一轴上绘制多个数据源已经是可能的，但是一个小麻烦不允许设置`plotinfo.plotmaster`值的干净循环。之前必须执行以下操作：
 
 ```py
-`mydatas = []
+mydatas = []
 data = MyDataFeed(dataname=mytickers[0], timeframe=..., compression=...)
 mydatafeeds.append(data)
 for ticker in mytickers[1:]
     data = MyDataFeed(dataname=ticker, timeframe=..., compression=...)
     mydatafeeds.append(data)
-    data.plotinfo.plotmaster = mydatas[0]` 
+    data.plotinfo.plotmaster = mydatas[0]
 ```
 
 现在可以使用更清晰的循环：
 
 ```py
-`mydatas = []
+mydatas = []
 for ticker in mytickers:
     data = MyDataFeed(dataname=ticker, timeframe=..., compression=...)
     mydatafeeds.append(data)
-    data.plotinfo.plotmaster = mydatas[0]` 
+    data.plotinfo.plotmaster = mydatas[0]
 ```
 
 ## 并且`dnames`已经被记录了
@@ -163,21 +163,21 @@ for ticker in mytickers:
 引用数据源的名称已经可用，但它被忽略了，没有出现在文档中，因此它是一个隐藏的宝藏。策略中的 `dnames` 属性支持*点表示法*和*[]*表示法（实际上是一个 `dict` 子类）。如果我们首先添加一些数据源：
 
 ```py
-`mytickers = ['YHOO', 'IBM', 'AAPL']
+mytickers = ['YHOO', 'IBM', 'AAPL']
 for t in mytickers:
-  d = bt.feeds.YahooFinanceData(dataname=t, fromdate=..., name=t.lower())` 
+  d = bt.feeds.YahooFinanceData(dataname=t, fromdate=..., name=t.lower())
 ```
 
 在策略中稍后可以执行以下操作：
 
 ```py
-`def __init__(self):
+def __init__(self):
   yhoosma = bt.ind.SMA(self.dnames.yhoo, period=20)
   aaplsma = bt.ind.SMA(self.dnames['aapl'], period=30)
 
   # or even go over the keys/items/values like in a regular dict
   # for example with a dictionary comprehension
-  stocs = {name: bt.ind.Stochastic(data) for name, data in self.dnames.items()}` 
+  stocs = {name: bt.ind.Stochastic(data) for name, data in self.dnames.items()}
 ```
 
 ## 结论

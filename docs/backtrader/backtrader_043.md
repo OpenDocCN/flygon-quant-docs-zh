@@ -48,7 +48,7 @@
 对于大多数情况和常规使用模式，这将是这样的：
 
 ```py
-`class MyStrategy(bt.Strategy):
+class MyStrategy(bt.Strategy):
 
     def __init__(self):
         self.sma = btind.SimpleMovingAverage(period=15)
@@ -60,7 +60,7 @@
 
         elif self.sma < self.data.close:
             # Do something else
-            pass` 
+            pass
 ```
 
 在这个片段中：

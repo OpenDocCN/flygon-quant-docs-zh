@@ -13,14 +13,14 @@
 让我们使用已经开发的`Trix`“组合”`MyTrixSignal`
 
 ```py
-`class MyTrixSignalComposed(bt.Indicator):
+class MyTrixSignalComposed(bt.Indicator):
 
     lines = ('trix', 'signal')
     params = (('period', 15), ('sigperiod', 9))
 
     def __init__(self):
         self.lines.trix = MyTrix(self.data, period=self.p.period)
-        self.lines.signal = btind.EMA(self.lines.trix, period=self.p.sigperiod)` 
+        self.lines.signal = btind.EMA(self.lines.trix, period=self.p.sigperiod)
 ```
 
 在定义中有一些必须重复的内容，比如`trix`线的名称和用于计算的`period`。定义了一个新的`signal`线和相应的`sigperiod`参数。
@@ -30,7 +30,7 @@
 现在让我们来看看*继承*，但首先回顾一下`Trix`的样子：
 
 ```py
-`class MyTrix(bt.Indicator):
+class MyTrix(bt.Indicator):
 
     lines = ('trix',)
     params = (('period', 15),)
@@ -40,20 +40,20 @@
         ema2 = btind.EMA(ema1, period=self.p.period)
         ema3 = btind.EMA(ema2, period=self.p.period)
 
-        self.lines.trix = 100.0 * (ema3 - ema3(-1)) / ema3(-1)` 
+        self.lines.trix = 100.0 * (ema3 - ema3(-1)) / ema3(-1)
 ```
 
 使用`Trix`作为基类，这是`TrixSignal`的外观
 
 ```py
-`class MyTrixSignalInherited(MyTrix):
+class MyTrixSignalInherited(MyTrix):
 
     lines = ('signal',)
     params = (('sigperiod', 9),)
 
     def __init__(self):
         super(MyTrixSignalInherited, self).__init__()
-        self.lines.signal = btind.EMA(self.lines.trix, period=self.p.sigperiod)` 
+        self.lines.signal = btind.EMA(self.lines.trix, period=self.p.sigperiod)
 ```
 
 继承的指标最终也是一个两行代码，但是：
@@ -77,7 +77,7 @@
 1.  第一个展示了**继承**版本
 
 ```py
-`from __future__ import (absolute_import, division, print_function,
+from __future__ import (absolute_import, division, print_function,
                         unicode_literals)
 
 import backtrader as bt
@@ -110,7 +110,7 @@ if __name__ == '__main__':
     cerebro.run()
 
     # Plot the result
-    cerebro.plot()` 
+    cerebro.plot()
 ```
 
 ![image](img/5fa99326087f82b641e9122a0b357a80.png)
@@ -118,7 +118,7 @@ if __name__ == '__main__':
 1.  第一个展示了**组合**版本
 
 ```py
-`from __future__ import (absolute_import, division, print_function,
+from __future__ import (absolute_import, division, print_function,
                         unicode_literals)
 
 import backtrader as bt
@@ -151,7 +151,7 @@ if __name__ == '__main__':
     cerebro.run()
 
     # Plot the result
-    cerebro.plot()` 
+    cerebro.plot()
 ```
 
 ![image](img/6ed94b76514d24a5264cd5970ee8145b.png)

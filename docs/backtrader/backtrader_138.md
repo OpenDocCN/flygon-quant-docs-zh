@@ -61,7 +61,7 @@
 运行示例：
 
 ```py
-`$ ./gold-vs-sp500.py --cerebro stdstats=False --plot volume=False` 
+$ ./gold-vs-sp500.py --cerebro stdstats=False --plot volume=False
 ```
 
 注意
@@ -83,7 +83,7 @@
 ## 示例用法
 
 ```py
-`$ ./gold-vs-sp500.py --help
+$ ./gold-vs-sp500.py --help
 usage: gold-vs-sp500.py [-h] [--data0 TICKER] [--data1 TICKER] [--offline]
                         [--fromdate FROMDATE] [--todate TODATE]
                         [--cerebro kwargs] [--broker kwargs] [--sizer kwargs]
@@ -105,13 +105,13 @@ optional arguments:
   --broker kwargs      kwargs in key=value format (default: )
   --sizer kwargs       kwargs in key=value format (default: )
   --strat kwargs       kwargs in key=value format (default: )
-  --plot [kwargs]      kwargs in key=value format (default: )` 
+  --plot [kwargs]      kwargs in key=value format (default: )
 ```
 
 ## 示例代码
 
 ```py
-`from __future__ import (absolute_import, division, print_function,
+from __future__ import (absolute_import, division, print_function,
                         unicode_literals)
 
 # Reference
@@ -245,5 +245,5 @@ def parse_args(pargs=None):
     return parser.parse_args(pargs)
 
 if __name__ == '__main__':
-    runstrat()` 
+    runstrat()
 ```

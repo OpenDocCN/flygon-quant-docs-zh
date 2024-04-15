@@ -81,14 +81,14 @@
 参数：
 
 ```py
-`* `barplot` (default: `False`) Plot buy signals below the minimum and
+* `barplot` (default: `False`) Plot buy signals below the minimum and
   sell signals above the maximum.
 
   If `False` it will plot on the average price of executions during a
   bar
 
 * `bardist` (default: `0.015` 1.5%) Distance to max/min when
-  `barplot` is `True`` 
+  `barplot` is `True`
 ```
 
 ## 回撤
@@ -140,10 +140,10 @@
 参数：
 
 ```py
-`* `pnlcomm` (def: `True`)
+* `pnlcomm` (def: `True`)
 
   Show net/profit and loss, i.e.: after commission. If set to `False`
-  if will show the result of trades before commission` 
+  if will show the result of trades before commission
 ```
 
 ## 对数收益

@@ -61,7 +61,7 @@ runonce 方法规则使得与索引 0 的点的获取/设置无效，并依赖�
 一张图值千言，而在这种情况下可能还有一个例子。一个简单移动平均能够解释它：
 
 ```py
-`class SimpleMovingAverage(Indicator):
+class SimpleMovingAverage(Indicator):
     lines = ('sma',)
     params = dict(period=20)
 
@@ -77,13 +77,13 @@ runonce 方法规则使得与索引 0 的点的获取/设置无效，并依赖�
         self.next()
 
     def next(self):
-        print('next:: current period:', len(self))` 
+        print('next:: current period:', len(self))
 ```
 
 实例化可能如下所示：
 
 ```py
-`sma = btind.SimpleMovingAverage(self.data, period=25)` 
+sma = btind.SimpleMovingAverage(self.data, period=25)
 ```
 
 简要解释：
@@ -101,9 +101,9 @@ runonce 方法规则使得与索引 0 的点的获取/设置无效，并依赖�
 让我们来看一个致命的指标：*另一个简单移动平均值*的*a SimpleMovingAverage*。实例化可能如下所示：
 
 ```py
-`sma1 = btind.SimpleMovingAverage(self.data, period=25)
+sma1 = btind.SimpleMovingAverage(self.data, period=25)
 
-sma2 = btind.SimpleMovingAverage(sma1, period=20)` 
+sma2 = btind.SimpleMovingAverage(sma1, period=20)
 ```
 
 现在发生的情况是：
@@ -171,7 +171,7 @@ sma2 = btind.SimpleMovingAverage(sma1, period=20)`
 设置 Yahoo Finance 数据源的示例：
 
 ```py
-`import backtrader as bt
+import backtrader as bt
 import backtrader.feeds as btfeeds
 
 ...
@@ -180,7 +180,7 @@ datapath = 'path/to/your/yahoo/data.csv'
 
 data = btfeeds.YahooFinanceCSVData(
     dataname=datapath,
-    reversed=True)` 
+    reversed=True)
 ```
 
 显示了雅虎的可选`reversed`参数，因为直接从雅虎下载的 CSV 文件从最新日期开始，而不是从最旧日期开始。
@@ -188,11 +188,11 @@ data = btfeeds.YahooFinanceCSVData(
 如果您的数据跨越了大的时间范围，则实际加载的数据可以限制如下：
 
 ```py
-`data = btfeeds.YahooFinanceCSVData(
+data = btfeeds.YahooFinanceCSVData(
     dataname=datapath,
     reversed=True
     fromdate=datetime.datetime(2014, 1, 1),
-    todate=datetime.datetime(2014, 12, 31))` 
+    todate=datetime.datetime(2014, 12, 31))
 ```
 
 如果存在，*fromdate*和*todate*都将被包含在数据源中。
@@ -200,7 +200,7 @@ data = btfeeds.YahooFinanceCSVData(
 如已提及的时间段、压缩和名称可添加：
 
 ```py
-`data = btfeeds.YahooFinanceCSVData(
+data = btfeeds.YahooFinanceCSVData(
     dataname=datapath,
     reversed=True
     fromdate=datetime.datetime(2014, 1, 1),
@@ -208,7 +208,7 @@ data = btfeeds.YahooFinanceCSVData(
     timeframe=bt.TimeFrame.Days,
     compression=1,
     name='Yahoo'
-   )` 
+   )
 ```
 
 如果数据已绘制，则将使用这些值。
@@ -242,7 +242,7 @@ data = btfeeds.YahooFinanceCSVData(
 一个基本的派生自类的策略：
 
 ```py
-`class MyStrategy(bt.Strategy):
+class MyStrategy(bt.Strategy):
 
     def __init__(self):
 
@@ -254,13 +254,13 @@ data = btfeeds.YahooFinanceCSVData(
             self.buy()
 
         elif self.sma < self.data.close:
-            self.sell()` 
+            self.sell()
 ```
 
 策略具有其他方法（或挂钩点）可以重写：
 
 ```py
-`class MyStrategy(bt.Strategy):
+class MyStrategy(bt.Strategy):
 
     def __init__(self):
 
@@ -281,7 +281,7 @@ data = btfeeds.YahooFinanceCSVData(
         print('Backtesting is finished')
 
     def notify_order(self, order):
-        print('An order new/changed/executed/canceled has been received')` 
+        print('An order new/changed/executed/canceled has been received')
 ```
 
 `start`和`stop`方法应该是不言而喻的。与预期的一样，并且遵循打印函数中的文本，当策略需要通知时，将调用`notify_order`方法。用例：
@@ -319,7 +319,7 @@ data = btfeeds.YahooFinanceCSVData(
 策略是*Lines*对象，这些对象支持参数，这些参数使用标准 Python kwargs 参数进行收集：
 
 ```py
-`class MyStrategy(bt.Strategy):
+class MyStrategy(bt.Strategy):
 
     params = (('period', 20),)
 
@@ -328,7 +328,7 @@ data = btfeeds.YahooFinanceCSVData(
         self.sma = btind.SimpleMovingAverage(self.data, period=self.params.period)
 
     ...
-    ...` 
+    ...
 ```
 
 注意`SimpleMovingAverage`如何不再以固定值 20 进行实例化，而是使用已为策略定义的参数“period”进行实例化。
@@ -338,7 +338,7 @@ data = btfeeds.YahooFinanceCSVData(
 一旦数据源可用并且策略已定义，Cerebro 实例就是将所有内容汇集在一起并执行操作的工具。实例化一个很容易：
 
 ```py
-`cerebro = bt.Cerebro()` 
+cerebro = bt.Cerebro()
 ```
 
 如果没有特殊要求，则默认情况下会进行处理。
@@ -358,9 +358,9 @@ data = btfeeds.YahooFinanceCSVData(
 由于数据源已经可用，策略也已经创建（之前创建），将它们组合在一起并使其运行的标准方法是：
 
 ```py
-`cerebro.adddata(data)
+cerebro.adddata(data)
 cerebro.addstrategy(MyStrategy, period=25)
-cerebro.run()` 
+cerebro.run()
 ```
 
 请注意以下内容：

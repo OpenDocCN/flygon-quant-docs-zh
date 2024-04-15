@@ -21,7 +21,7 @@
 ## 买入并忘记
 
 ```py
-`class BuyAndHold_1(bt.Strategy):
+class BuyAndHold_1(bt.Strategy):
     def start(self):
         self.val_start = self.broker.get_cash()  # keep the starting cash
 
@@ -33,11 +33,11 @@
     def stop(self):
         # calculate the actual returns
         self.roi = (self.broker.get_value() / self.val_start) - 1.0
-        print('ROI: {:.2f}%'.format(100.0 * self.roi))` 
+        print('ROI: {:.2f}%'.format(100.0 * self.roi))
 ```
 
 ```py
-`class BuyAndHold_1(bt.Strategy):
+class BuyAndHold_1(bt.Strategy):
     def start(self):
         self.val_start = self.broker.get_cash()  # keep the starting cash
 
@@ -48,7 +48,7 @@
     def stop(self):
         # calculate the actual returns
         self.roi = (self.broker.get_value() / self.val_start) - 1.0
-        print('ROI: {:.2f}%'.format(100.0 * self.roi))` 
+        print('ROI: {:.2f}%'.format(100.0 * self.roi))
 ```
 
 这里发生了以下情况：
@@ -78,19 +78,19 @@
 如果存在多个数据源，则可以使用命名参数`data`来选择目标，如下所示
 
 ```py
- `self.buy(data=the_desired_data, size=calculated_size)` 
+ `self.buy(data=the_desired_data, size=calculated_size)
 ```
 
 下面的示例脚本可以按以下方式执行
 
 ```py
-`$ ./buy-and-hold.py --bh-buy --plot
-ROI:        34.50%` 
+$ ./buy-and-hold.py --bh-buy --plot
+ROI:        34.50%
 ```
 
 ```py
-`$ ./buy-and-hold.py --bh-target --plot
-ROI:        34.50%` 
+$ ./buy-and-hold.py --bh-target --plot
+ROI:        34.50%
 ```
 
 图形输出对于两者都是相同的
@@ -112,7 +112,7 @@ ROI:        34.50%`
 下面的示例中只使用`order_target_value`方法。
 
 ```py
-`class BuyAndHold_More(bt.Strategy):
+class BuyAndHold_More(bt.Strategy):
     params = dict(
         monthly_cash=1000.0,  # amount of cash to buy every month
     )
@@ -139,7 +139,7 @@ ROI:        34.50%`
     def stop(self):
         # calculate the actual returns
         self.roi = (self.broker.get_value() / self.cash_start) - 1.0
-        print('ROI: {:.2f}%'.format(self.roi))` 
+        print('ROI: {:.2f}%'.format(self.roi))
 ```
 
 在`start`阶段添加了一个计时器
@@ -150,7 +150,7 @@ ROI:        34.50%`
             bt.timer.SESSION_END,  # when it will be called
             monthdays=[1],  # called on the 1st day of the month
             monthcarry=True,  # called on the 2nd day if the 1st is holiday
-        )` 
+        )
 ```
 
 +   将在会话结束时调用的计时器（`bt.timer.SESSION_END`）
@@ -172,7 +172,7 @@ ROI:        34.50%`
 
         # buy available cash
         target_value = self.broker.get_value() + self.p.monthly_cash
-        self.order_target_value(target=target_value)` 
+        self.order_target_value(target=target_value)
 ```
 
 提示
@@ -190,13 +190,13 @@ ROI:        34.50%`
 执行
 
 ```py
-`$ ./buy-and-hold.py --bh-more --plot
-ROI:        320.96%` 
+$ ./buy-and-hold.py --bh-more --plot
+ROI:        320.96%
 ```
 
 ```py
-`$ ./buy-and-hold.py --bh-more --strat monthly_cash=5000.0
-ROI:        1460.99%` 
+$ ./buy-and-hold.py --bh-more --strat monthly_cash=5000.0
+ROI:        1460.99%
 ```
 
 **雷霆万钧！！！**默认的`1000`货币单位的`ROI`为`320.96%`，而`5000`货币单位的`ROI`更高，为`1460.99%`。我们可能找到了一台印钞机...
@@ -236,7 +236,7 @@ ROI:        1460.99%`
 幸运的是，*backtrader*已经可以自动完成所有这些。
 
 ```py
-`class BuyAndHold_More_Fund(bt.Strategy):
+class BuyAndHold_More_Fund(bt.Strategy):
     params = dict(
         monthly_cash=1000.0,  # amount of cash to buy every month
     )
@@ -268,7 +268,7 @@ ROI:        1460.99%`
         self.roi = (self.broker.get_value() - self.cash_start) - 1.0
         self.froi = self.broker.get_fundvalue() - self.val_start
         print('ROI: {:.2f}%'.format(self.roi))
-        print('Fund Value: {:.2f}%'.format(self.froi))` 
+        print('Fund Value: {:.2f}%'.format(self.froi))
 ```
 
 在`start`期间
@@ -295,9 +295,9 @@ ROI:        1460.99%`
 执行
 
 ```py
-`$ ./buy-and-hold.py --bh-more-fund --strat monthly_cash=5000 --plot
+$ ./buy-and-hold.py --bh-more-fund --strat monthly_cash=5000 --plot
 ROI:        1460.99%
-Fund Value: 37.31%` 
+Fund Value: 37.31%
 ```
 
 在这种情况下：
@@ -313,7 +313,7 @@ Fund Value: 37.31%`
 ## 示例脚本
 
 ```py
-`import argparse
+import argparse
 import datetime
 
 import backtrader as bt
@@ -506,11 +506,11 @@ def parse_args(pargs=None):
     return parser.parse_args(pargs)
 
 if __name__ == '__main__':
-    run()` 
+    run()
 ```
 
 ```py
-`$ ./buy-and-hold.py --help
+$ ./buy-and-hold.py --help
 usage: buy-and-hold.py [-h] [--data DATA] [--dargs kwargs]
                        [--fromdate FROMDATE] [--todate TODATE]
                        [--cerebro kwargs] [--broker kwargs] [--sizer kwargs]
@@ -535,5 +535,5 @@ optional arguments:
   --bh-buy              Buy and Hold with buy method (default: False)
   --bh-target           Buy and Hold with order_target method (default: False)
   --bh-more             Buy and Hold More (default: False)
-  --bh-more-fund        Buy and Hold More with Fund ROI (default: False)` 
+  --bh-more-fund        Buy and Hold More with Fund ROI (default: False)
 ```

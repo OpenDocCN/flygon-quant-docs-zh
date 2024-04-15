@@ -9,9 +9,9 @@
 所有小代码示例都假设以下导入可用：
 
 ```py
-`import backtrader as bt
+import backtrader as bt
 import backtrader.indicators as btind
-import backtrader.feeds as btfeeds` 
+import backtrader.feeds as btfeeds
 ```
 
 注意
@@ -19,14 +19,14 @@ import backtrader.feeds as btfeeds`
 访问子模块的另一种替代语法，如*指标*和*数据源*：
 
 ```py
-`import backtrader as bt` 
+import backtrader as bt
 ```
 
 然后：
 
 ```py
-`thefeed = bt.feeds.OneOfTheFeeds(...)
-theind = bt.indicators.SimpleMovingAverage(...)` 
+thefeed = bt.feeds.OneOfTheFeeds(...)
+theind = bt.indicators.SimpleMovingAverage(...)
 ```
 
 ## 数据源 - 传递它们
@@ -38,7 +38,7 @@ theind = bt.indicators.SimpleMovingAverage(...)`
 策略派生类声明和运行平台的快速预览：
 
 ```py
-`class MyStrategy(bt.Strategy):
+class MyStrategy(bt.Strategy):
     params = dict(period=20)
 
     def __init__(self):
@@ -58,7 +58,7 @@ cerebro.adddata(data)
 
 cerebro.addstrategy(MyStrategy, period=30)
 
-...` 
+...
 ```
 
 注意以下内容：
@@ -84,14 +84,14 @@ cerebro.addstrategy(MyStrategy, period=30)
 然后的示例：
 
 ```py
-`class MyStrategy(bt.Strategy):
+class MyStrategy(bt.Strategy):
     params = dict(period=20)
 
     def __init__(self):
 
         sma = btind.SimpleMovingAverage(self.data, period=self.params.period)
 
-    ...` 
+    ...
 ```
 
 ### 省略数据源
@@ -99,14 +99,14 @@ cerebro.addstrategy(MyStrategy, period=30)
 上述示例可以进一步简化为：
 
 ```py
-`class MyStrategy(bt.Strategy):
+class MyStrategy(bt.Strategy):
     params = dict(period=20)
 
     def __init__(self):
 
         sma = btind.SimpleMovingAverage(period=self.params.period)
 
-    ...` 
+    ...
 ```
 
 `self.data`已从`SimpleMovingAverage`的调用中完全移除。如果这样做，指标（在本例中为`SimpleMovingAverage`）将接收正在创建的对象的第一个数据（*策略*），即`self.data`（又名`self.data0`或`self.datas[0]`）
@@ -118,7 +118,7 @@ cerebro.addstrategy(MyStrategy, period=30)
 在上一个示例中，`SimpleMovingAverage`将`self.datas[0]`作为输入进行操作。具有操作和额外指标的示例：
 
 ```py
-`class MyStrategy(bt.Strategy):
+class MyStrategy(bt.Strategy):
     params = dict(period1=20, period2=25, period3=10, period4)
 
     def __init__(self):
@@ -141,7 +141,7 @@ cerebro.addstrategy(MyStrategy, period=30)
         # This 4th Moving Average operates using greater  as "data"
         sma3 = btind.SimpleMovingAverage(greater, period=self.p.period4)
 
-    ...` 
+    ...
 ```
 
 基本上，一旦被操作，一切都会转换为可以用作数据源的对象。
@@ -159,21 +159,21 @@ cerebro.addstrategy(MyStrategy, period=30)
 前面的快速策略预览已经包含了一个参数示例，但为了冗余起见，再次，只关注参数。使用*元组*：
 
 ```py
-`class MyStrategy(bt.Strategy):
+class MyStrategy(bt.Strategy):
     params = (('period', 20),)
 
     def __init__(self):
-        sma = btind.SimpleMovingAverage(self.data, period=self.p.period)` 
+        sma = btind.SimpleMovingAverage(self.data, period=self.p.period)
 ```
 
 并且使用一个`dict`：
 
 ```py
-`class MyStrategy(bt.Strategy):
+class MyStrategy(bt.Strategy):
     params = dict(period=20)
 
     def __init__(self):
-        sma = btind.SimpleMovingAverage(self.data, period=self.p.period)` 
+        sma = btind.SimpleMovingAverage(self.data, period=self.p.period)
 ```
 
 ## 行
@@ -187,7 +187,7 @@ cerebro.addstrategy(MyStrategy, period=30)
 平台的常规使用只关注**访问**`lines`。前面的迷你策略示例，稍微扩展一下，再次派上用场：
 
 ```py
-`class MyStrategy(bt.Strategy):
+class MyStrategy(bt.Strategy):
     params = dict(period=20)
 
     def __init__(self):
@@ -196,7 +196,7 @@ cerebro.addstrategy(MyStrategy, period=30)
 
     def next(self):
         if self.movav.lines.sma[0] > self.data.lines.close[0]:
-            print('Simple Moving Average is greater than the closing price')` 
+            print('Simple Moving Average is greater than the closing price')
 ```
 
 已公开两个具有`lines`的对象：
@@ -242,10 +242,10 @@ cerebro.addstrategy(MyStrategy, period=30)
 对于简单移动平均线，应该这样做：
 
 ```py
-`class SimpleMovingAverage(Indicator):
+class SimpleMovingAverage(Indicator):
     lines = ('sma',)
 
-    ...` 
+    ...
 ```
 
 注
@@ -281,7 +281,7 @@ cerebro.addstrategy(MyStrategy, period=30)
 例如：
 
 ```py
-`data = btfeeds.BacktraderCSVData(dataname='mydata.csv')
+data = btfeeds.BacktraderCSVData(dataname='mydata.csv')
 
 ...
 
@@ -292,7 +292,7 @@ class MyStrategy(bt.Strategy):
     def next(self):
 
         if self.data.close[0] > 30.0:
-            ...` 
+            ...
 ```
 
 这似乎比也有效的更自然：`if self.data.lines.close[0] > 30.0:`。同样的情况不适用于带有以下理由的`Indicators`：
@@ -360,9 +360,9 @@ class MyStrategy(bt.Strategy):
 在之前的快速策略示例中，`next`方法被简要看到：
 
 ```py
-`def next(self):
+def next(self):
     if self.movav.lines.sma[0] > self.data.lines.close[0]:
-        print('Simple Moving Average is greater than the closing price')` 
+        print('Simple Moving Average is greater than the closing price')
 ```
 
 逻辑是通过应用索引`0` *获取*移动平均值和当前收盘价的当前值。
@@ -372,8 +372,8 @@ class MyStrategy(bt.Strategy):
 实际上，对于索引`0`，并且在应用逻辑/算术运算符时，可以直接进行比较，如下所示：
 
 ```py
-`if self.movav.lines.sma > self.data.lines.close:
-    ...` 
+if self.movav.lines.sma > self.data.lines.close:
+    ...
 ```
 
 在文档后面看运算符的解释。
@@ -383,8 +383,8 @@ class MyStrategy(bt.Strategy):
 可以按以下方式计算当前获取/设置点的 SimpleMovingAverage：
 
 ```py
-`def next(self):
-  self.line[0] = math.fsum(self.data.get(0, size=self.p.period)) / self.p.period` 
+def next(self):
+  self.line[0] = math.fsum(self.data.get(0, size=self.p.period)) / self.p.period
 ```
 
 访问先前设置的点是按照 Python 为访问数组/可迭代时定义的`-1`进行建模
@@ -396,9 +396,9 @@ class MyStrategy(bt.Strategy):
 因此，将当前`close`与*前一个*`close`进行比较是一个`0` vs `-1`的事情。例如，在策略中：
 
 ```py
-`def next(self):
+def next(self):
     if self.data.close[0] > self.data.close[-1]:
-        print('Closing price is higher today')` 
+        print('Closing price is higher today')
 ```
 
 当然，从`-1`之前设置的价格将使用`-2、-3、...`进行访问。
@@ -408,13 +408,13 @@ class MyStrategy(bt.Strategy):
 *backtrader*不支持对*lines*对象进行切片，这是一种设计决策，遵循了`[0]`和`[-1]`索引方案。对于常规可索引的 Python 对象，您会执行以下操作：
 
 ```py
-`myslice = self.my_sma[0:]  # slice from the beginning til the end` 
+myslice = self.my_sma[0:]  # slice from the beginning til the end
 ```
 
 但请记住，在选择为`0`时……实际上是当前交付的值，后面没有了。另外：
 
 ```py
-`myslice = self.my_sma[0:-1]  # slice from the beginning til the end` 
+myslice = self.my_sma[0:-1]  # slice from the beginning til the end
 ```
 
 再次……`0`是当前值，`-1`是最新（先前）的交付值。这就是为什么在*backtrader*生态系统中从`0` -> `-1`切片没有意义的原因。
@@ -422,19 +422,19 @@ class MyStrategy(bt.Strategy):
 如果支持切片，将如下所示：
 
 ```py
-`myslice = self.my_sma[:0]  # slice from current point backwards to the beginning` 
+myslice = self.my_sma[:0]  # slice from current point backwards to the beginning
 ```
 
 或：
 
 ```py
-`myslice = self.my_sma[-1:0]  # last value and current value` 
+myslice = self.my_sma[-1:0]  # last value and current value
 ```
 
 或：
 
 ```py
-`myslice = self.my_sma[-3:-1]  # from last value backwards to the 3rd last value` 
+myslice = self.my_sma[-3:-1]  # from last value backwards to the 3rd last value
 ```
 
 ### 获取一个切片
@@ -442,7 +442,7 @@ class MyStrategy(bt.Strategy):
 仍然可以获取具有最新值的数组。语法：
 
 ```py
-`myslice = self.my_sma.get(ago=0, size=1)  # default values shown` 
+myslice = self.my_sma.get(ago=0, size=1)  # default values shown
 ```
 
 这将返回一个具有`1`值（`size=1`）的数组，当前时刻`0`作为向后查找的起始点。
@@ -450,7 +450,7 @@ class MyStrategy(bt.Strategy):
 要从当前时间点获取 10 个值（即：最后 10 个值）：
 
 ```py
-`myslice = self.my_sma.get(size=10)  # ago defaults to 0` 
+myslice = self.my_sma.get(size=10)  # ago defaults to 0
 ```
 
 当然，数组具有您期望的顺序。最左边的值是最旧的值，最右边的值是最新的值（它是一个常规的 Python 数组，而不是一个*lines*对象）
@@ -458,7 +458,7 @@ class MyStrategy(bt.Strategy):
 要获取最后 10 个值，仅跳过当前点：
 
 ```py
-`myslice = self.my_sma.get(ago=-1, size=10)` 
+myslice = self.my_sma.get(ago=-1, size=10)
 ```
 
 ## 行：延迟索引
@@ -468,7 +468,7 @@ class MyStrategy(bt.Strategy):
 假设逻辑的兴趣是将前一个*close*值与*简单移动平均值*的实际值进行比较。而不是在每个`next`迭代中手动执行，可以生成一个预先定义的*lines*对象：
 
 ```py
-`class MyStrategy(bt.Strategy):
+class MyStrategy(bt.Strategy):
     params = dict(period=20)
 
     def __init__(self):
@@ -478,7 +478,7 @@ class MyStrategy(bt.Strategy):
 
     def next(self):
         if self.cmpval[0]:
-            print('Previous close is higher than the moving average')` 
+            print('Previous close is higher than the moving average')
 ```
 
 在这里，正在使用`(delay)`符号：
@@ -510,7 +510,7 @@ class MyStrategy(bt.Strategy):
 `()`（空调用）符号来拯救：
 
 ```py
-`class MyStrategy(bt.Strategy):
+class MyStrategy(bt.Strategy):
     params = dict(period=20)
 
     def __init__(self):
@@ -524,7 +524,7 @@ class MyStrategy(bt.Strategy):
 
     def next(self):
         if self.buysig[0]:
-            print('daily sma is greater than weekly sma1')` 
+            print('daily sma is greater than weekly sma1')
 ```
 
 在这里，较大时间框架指标`sma1`与每日时间框架耦合为`sma1()`。这返回一个与`sma0`的更大柱状图兼容的对象，并复制由`sma1`产生的值，有效地将 52 周柱状图分散在 250 日柱状图中
@@ -542,7 +542,7 @@ class MyStrategy(bt.Strategy):
 简单移动平均指标`__init__`中的代码可能如下所示：
 
 ```py
-`def __init__(self):
+def __init__(self):
     # Sum N period values - datasum is now a *Lines* object
     # that when queried with the operator [] and index 0
     # returns the current sum
@@ -562,13 +562,13 @@ class MyStrategy(bt.Strategy):
     # line this indicator delivers. Other objects using this
     # indicator will have direct access to the calculation
 
-    self.line.sma = av` 
+    self.line.sma = av
 ```
 
 在策略初始化期间展示了一个更完整的用例：
 
 ```py
-`class MyStrategy(bt.Strategy):
+class MyStrategy(bt.Strategy):
 
     def __init__(self):
 
@@ -583,7 +583,7 @@ class MyStrategy(bt.Strategy):
         # a language construct and not an operator and thus a
         # function has to be provided by the platform to emulate it
 
-        sell_sig = bt.And(close_over_sma, sma_dist_small)` 
+        sell_sig = bt.And(close_over_sma, sma_dist_small)
 ```
 
 在上述操作完成后，*sell_sig*是一个*Lines*对象，可以在策略的逻辑中稍后使用，指示条件是否满足。
@@ -593,7 +593,7 @@ class MyStrategy(bt.Strategy):
 让我们首先记住，策略有一个`next`方法，系统处理每个柱状图时都会调用该方法。这就是运算符实际处于第 2 阶段模式的地方。在前面的示例基础上构建：
 
 ```py
-`class MyStrategy(bt.Strategy):
+class MyStrategy(bt.Strategy):
 
     def __init__(self):
 
@@ -628,7 +628,7 @@ class MyStrategy(bt.Strategy):
             print('sell sig is False')
 
         if self.sma_dist_to_high > 5.0:
-            print('distance from sma to hig is greater than 5.0')` 
+            print('distance from sma to hig is greater than 5.0')
 ```
 
 不是一个非常有用的策略，只是一个例子。在第 2 阶段，运算符返回预期的值（如果测试真实性则返回布尔值，如果与浮点数比较则返回浮点数），算术运算也是如此。
@@ -682,7 +682,7 @@ Python 不允许覆盖所有内容，因此提供了一些函数来处理这些�
 一个生成非常愚蠢买入信号的例子：
 
 ```py
-`class MyStrategy(bt.Strategy):
+class MyStrategy(bt.Strategy):
 
     def __init__(self):
 
@@ -691,7 +691,7 @@ Python 不允许覆盖所有内容，因此提供了一些函数来处理这些�
 
     def next(self):
         if self.buysig[0]:
-            pass  # do something here` 
+            pass  # do something here
 ```
 
 很明显，如果`sma1`高于最高价，那么它必须高于收盘价。但重点是说明`bt.And`的用法。
@@ -699,13 +699,13 @@ Python 不允许覆盖所有内容，因此提供了一些函数来处理这些�
 使用`bt.If`：
 
 ```py
-`class MyStrategy(bt.Strategy):
+class MyStrategy(bt.Strategy):
 
     def __init__(self):
 
         sma1 = btind.SMA(self.data.close, period=15)
         high_or_low = bt.If(sma1 > self.data.close, self.data.low, self.data.high)
-        sma2 = btind.SMA(high_or_low, period=15)` 
+        sma2 = btind.SMA(high_or_low, period=15)
 ```
 
 分解：
@@ -725,13 +725,13 @@ Python 不允许覆盖所有内容，因此提供了一些函数来处理这些�
 这些**函数**也接受数值。同样的例子，稍作修改：
 
 ```py
-`class MyStrategy(bt.Strategy):
+class MyStrategy(bt.Strategy):
 
     def __init__(self):
 
         sma1 = btind.SMA(self.data.close, period=15)
         high_or_30 = bt.If(sma1 > self.data.close, 30.0, self.data.high)
-        sma2 = btind.SMA(high_or_30, period=15)` 
+        sma2 = btind.SMA(high_or_30, period=15)
 ```
 
 现在第 2 个移动平均值使用`30.0`或`high`价格执行计算，取决于`sma`与`close`的逻辑状态

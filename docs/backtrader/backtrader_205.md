@@ -11,7 +11,7 @@ Google 提供的此指标参考文献：
 两个来源对公式都表示同意，尽管术语不同（见下文）。 应按以下方式计算 *Connors RSI*：
 
 ```py
- `CRSI(3, 2, 100) = [RSI(3) + RSI(Streak, 2) + PercentRank(100)] / 3` 
+ `CRSI(3, 2, 100) = [RSI(3) + RSI(Streak, 2) + PercentRank(100)] / 3
 ```
 
 注意
@@ -29,7 +29,7 @@ Google 提供的此指标参考文献：
 手头有公式，理解需要使用 `PercentRank` 以及对 `Streak`（或 `UpDown`）有清晰定义，创建 `ConnorsRSI` 指标应该轻而易举。
 
 ```py
-`class Streak(bt.ind.PeriodN):
+class Streak(bt.ind.PeriodN):
   '''
  Keeps a counter of the current upwards/downwards/neutral streak
  '''
@@ -66,7 +66,7 @@ class ConnorsRSI(bt.Indicator):
         prank = bt.ind.PercentRank(self.data, period=self.p.prank)
 
         # Apply the formula
-        self.l.crsi = (rsi + rsi_streak + prank) / 3.0` 
+        self.l.crsi = (rsi + rsi_streak + prank) / 3.0
 ```
 
 这里展示了指标的工作原理，还包括`Streak`辅助指标，以便视觉上验证实际连续数的输出。

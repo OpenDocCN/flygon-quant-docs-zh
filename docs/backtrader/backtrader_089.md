@@ -159,7 +159,7 @@
 `VCDATA`中定义了输出*时区*的`International Indices`列表：
 
 ```py
-`'096.FTSE': 'Europe/London',
+'096.FTSE': 'Europe/London',
 '096.FTEU3': 'Europe/London',
 '096.MIB30': 'Europe/Berlin',
 '096.SSMI': 'Europe/Berlin',
@@ -168,7 +168,7 @@
 '096.MERVAL': 'America/Argentina/Buenos_Aires',
 '096.DJI': 'US/Eastern',
 '096.IXIC': 'US/Eastern',
-'096.NDX': 'US/Eastern',` 
+'096.NDX': 'US/Eastern',
 ```
 
 #### 小时间问题
@@ -218,7 +218,7 @@
 为了克服这一点，并允许跟踪*连续未来*并交易*真实资产*的策略，在数据实例化期间可以指定以下内容：
 
 ```py
-`data = vcstore.getdata(dataname='001ES', tradename='ESU16')` 
+data = vcstore.getdata(dataname='001ES', tradename='ESU16')
 ```
 
 交易将在`ESU16`上进行，但数据源将来自`001ES`（数据相同，为期 3 个月）
@@ -248,13 +248,13 @@
 *策略*内的一个示例：
 
 ```py
-`class VCStrategy(bt.Strategy):
+class VCStrategy(bt.Strategy):
 
     def notify_data(self, data, status, *args, **kwargs):
 
         if status == data.LIVE:  # the data has switched to live data
            # do something
-           pass` 
+           pass
 ```
 
 系统发生变化后将发送以下通知：
@@ -302,11 +302,11 @@
 使用*Store*模型（首选）：
 
 ```py
-`import backtrader as bt
+import backtrader as bt
 
 cerebro = bt.Cerebro()
 vcstore = bt.stores.VCStore()
-cerebro.broker = vcstore.getbroker()  # or cerebro.setbroker(...)` 
+cerebro.broker = vcstore.getbroker()  # or cerebro.setbroker(...)
 ```
 
 ### 经纪人参数

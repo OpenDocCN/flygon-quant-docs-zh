@@ -35,7 +35,7 @@
 然后让我们开发我们的`EMA`
 
 ```py
-`import backtrader as bt
+import backtrader as bt
 
 class EMA(bt.indicators.PeriodN):
     params = {'period': 30}  # even if defined, we can redefine the default value
@@ -49,7 +49,7 @@ class EMA(bt.indicators.PeriodN):
 
     def next(self):
         ema1 = self.lines.ema[-1]  # previous EMA value
-        self.lines.ema[0] = ema1 * (1.0 - self.alpha) + self.data[0] * self.alpha` 
+        self.lines.ema[0] = ema1 * (1.0 - self.alpha) + self.data[0] * self.alpha
 ```
 
 几乎比说更容易。关键在于在`nextstart`中提供种子值，其中
@@ -65,16 +65,16 @@ class EMA(bt.indicators.PeriodN):
 作为一个移动平均线，如果指标绘制在计算平均值的数据的同一轴上会很好。因为我们从`PeriodN`继承了绘图的默认值（在文档中查看）：
 
 ```py
-`subplot=True` 
+subplot=True
 ```
 
 这当然意味着我们的指标将创建一个`subplot`（图表上的另一个轴）。这可以很容易地被覆盖。
 
 ```py
-`import backtrader as bt
+import backtrader as bt
 
 class EMA(bt.indicators.PeriodN):
-    plot = dict(subplot=False)` 
+    plot = dict(subplot=False)
 ```
 
 完成。如果您想控制更多绘图选项，请查看[文档 - 绘图](https://www.backtrader.com/docu/plotting/plotting.html)

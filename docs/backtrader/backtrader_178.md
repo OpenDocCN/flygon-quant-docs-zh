@@ -51,7 +51,7 @@
 与此同时，`RelativeVolumeByBar` 指标的代码如下所示。在指标内部进行“period”/“buffer” 计算不是首选模式，但在这种情况下它能够达到目的。
 
 ```py
-`from __future__ import (absolute_import, division, print_function,
+from __future__ import (absolute_import, division, print_function,
                         unicode_literals)
 
 import collections
@@ -179,13 +179,13 @@ class RelativeVolumeByBar(bt.Indicator):
 
         minbuffer = (minbuffer // tcomp) + tcomp
 
-        return minbuffer` 
+        return minbuffer
 ```
 
 通过脚本调用，可以如下使用：
 
 ```py
-`$ ./relative-volume.py --help
+$ ./relative-volume.py --help
 usage: relative-volume.py [-h] [--data DATA] [--prestart PRESTART]
                           [--start START] [--end END] [--fromdate FROMDATE]
                           [--todate TODATE] [--writer] [--wrcsv] [--plot]
@@ -207,13 +207,13 @@ optional arguments:
   --wrcsv, -wc          Enable CSV Output in the writer
   --plot, -p            Plot the read data
   --numfigs NUMFIGS, -n NUMFIGS
-                        Plot using numfigs figures` 
+                        Plot using numfigs figures
 ```
 
 测试调用：
 
 ```py
-`$ ./relative-volume.py --plot` 
+$ ./relative-volume.py --plot
 ```
 
 生成此图表：
@@ -223,7 +223,7 @@ optional arguments:
 脚本代码。
 
 ```py
-`from __future__ import (absolute_import, division, print_function,
+from __future__ import (absolute_import, division, print_function,
                         unicode_literals)
 
 import argparse
@@ -320,5 +320,5 @@ def parse_args():
     return parser.parse_args()
 
 if __name__ == '__main__':
-    runstrategy()` 
+    runstrategy()
 ```

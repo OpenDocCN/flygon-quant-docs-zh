@@ -17,13 +17,13 @@
 快速示例：
 
 ```py
-`import backtrader as bt
+import backtrader as bt
 
 data = bt.feeds.OneOfTheFeeds(dataname='mydataname')
 cerebro.adddata(data)
 
 cerebro.add_signal(bt.SIGNAL_LONGSHORT, MySignal)
-cerebro.run()` 
+cerebro.run()
 ```
 
 Et voilá!。
@@ -37,12 +37,12 @@ Et voilá!。
 定义：
 
 ```py
-`class MySignal(bt.Indicator):
+class MySignal(bt.Indicator):
     lines = ('signal',)
     params = (('period', 30),)
 
     def __init__(self):
-        self.lines.signal = self.data - bt.indicators.SMA(period=self.p.period)` 
+        self.lines.signal = self.data - bt.indicators.SMA(period=self.p.period)
 ```
 
 现在真的完成了。当执行`run`时，*Cerebro*将负责实例化一个特殊的*策略*实例，该实例知道如何处理*信号*。
@@ -98,9 +98,9 @@ Et voilá!。
 下面示例中指示的*常量*直接从主*backtrader*模块中获取，如：
 
 ```py
-`import backtrader as bt
+import backtrader as bt
 
-bt.SIGNAL_LONG` 
+bt.SIGNAL_LONG
 ```
 
 有 5 种*信号*类型，分为 2 组。
@@ -166,31 +166,31 @@ bt.SIGNAL_LONG`
 要使用的主要信号。
 
 ```py
-`class SMACloseSignal(bt.Indicator):
+class SMACloseSignal(bt.Indicator):
     lines = ('signal',)
     params = (('period', 30),)
 
     def __init__(self):
-        self.lines.signal = self.data - bt.indicators.SMA(period=self.p.period)` 
+        self.lines.signal = self.data - bt.indicators.SMA(period=self.p.period)
 ```
 
 以及如果指定了选项，则*退出信号*。
 
 ```py
-`class SMAExitSignal(bt.Indicator):
+class SMAExitSignal(bt.Indicator):
     lines = ('signal',)
     params = (('p1', 5), ('p2', 30),)
 
     def __init__(self):
         sma1 = bt.indicators.SMA(period=self.p.p1)
         sma2 = bt.indicators.SMA(period=self.p.p2)
-        self.lines.signal = sma1 - sma2` 
+        self.lines.signal = sma1 - sma2
 ```
 
 ### 第一次运行：多头和空头
 
 ```py
-`$ ./signals-strategy.py --plot --signal longshort` 
+$ ./signals-strategy.py --plot --signal longshort
 ```
 
 输出
@@ -208,7 +208,7 @@ bt.SIGNAL_LONG`
 ### 第二次运行：仅多头
 
 ```py
-`$ ./signals-strategy.py --plot --signal longonly` 
+$ ./signals-strategy.py --plot --signal longonly
 ```
 
 输出
@@ -224,7 +224,7 @@ bt.SIGNAL_LONG`
 ### 第三次运行：仅空头
 
 ```py
-`$ ./signals-strategy.py --plot --signal shortonly` 
+$ ./signals-strategy.py --plot --signal shortonly
 ```
 
 输出
@@ -242,7 +242,7 @@ bt.SIGNAL_LONG`
 ### 第四次运行：多头 + 多头退出
 
 ```py
-`$ ./signals-strategy.py --plot --signal longonly --exitsignal longexit` 
+$ ./signals-strategy.py --plot --signal longonly --exitsignal longexit
 ```
 
 输出
@@ -260,7 +260,7 @@ bt.SIGNAL_LONG`
 ### 用法
 
 ```py
-`$ ./signals-strategy.py --help
+$ ./signals-strategy.py --help
 usage: signals-strategy.py [-h] [--data DATA] [--fromdate FROMDATE]
                            [--todate TODATE] [--cash CASH]
                            [--smaperiod SMAPERIOD] [--exitperiod EXITPERIOD]
@@ -289,13 +289,13 @@ optional arguments:
   --plot [kwargs], -p [kwargs]
                         Plot the read data applying any kwargs passed For
                         example: --plot style="candle" (to plot candles)
-                        (default: None)` 
+                        (default: None)
 ```
 
 ### 代码
 
 ```py
-`from __future__ import (absolute_import, division, print_function,
+from __future__ import (absolute_import, division, print_function,
                         unicode_literals)
 
 import argparse
@@ -419,5 +419,5 @@ def parse_args(pargs=None):
     return parser.parse_args()
 
 if __name__ == '__main__':
-    runstrat()` 
+    runstrat()
 ```

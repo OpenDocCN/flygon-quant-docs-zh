@@ -37,11 +37,11 @@
 参数也可以通过*broker*使用以下方法设置：
 
 ```py
-`def setcommission(self,
+def setcommission(self,
                   commission=0.0, margin=None, mult=1.0,
                   commtype=None, percabs=True, stocklike=False,
                   interest=0.0, interest_long=False,
-                  name=None)` 
+                  name=None)
 ```
 
 其中 `interest` 和 `interest_long` 显然与上文的含义相同。
@@ -51,7 +51,7 @@
 对于佣金百分比的股票，带有*credit interest*的典型使用场景如下
 
 ```py
-`import backtrader as bt
+import backtrader as bt
 
 cerebro = bt.Cerebro()
 comminfo = bt.CommissionInfo(commtype=bt.CommissionInfo.COMM_PERC,  # % commission
@@ -62,7 +62,7 @@ comminfo = bt.CommissionInfo(commtype=bt.CommissionInfo.COMM_PERC,  # % commissi
                             )
 
 cerebro.broker.addcommissioninfo(comminfo)
-...` 
+...
 ```
 
 如果最终用户有自己的佣金方案，这将非常有用。
@@ -70,7 +70,7 @@ cerebro.broker.addcommissioninfo(comminfo)
 一个更简单的案例与`setcommission`：
 
 ```py
-`import backtrader as bt
+import backtrader as bt
 
 cerebro = bt.Cerebro()
 cerebro.broker.setcommission(commtype=bt.CommissionInfo.COMM_PERC,  # % commission
@@ -80,7 +80,7 @@ cerebro.broker.setcommission(commtype=bt.CommissionInfo.COMM_PERC,  # % commissi
                              interest=0.05,  # 5% anual credit interest rate
                             )
 
-...` 
+...
 ```
 
 其余的和任何其他常规的*backtrader*脚本一样。
@@ -92,8 +92,8 @@ cerebro.broker.setcommission(commtype=bt.CommissionInfo.COMM_PERC,  # % commissi
 为了建立一个最低基线，让我们先不要利息，只让脚本进入市场并避免退出。
 
 ```py
-`$ ./credit-interest.py --plot --stocklike --long --no-exit
-01 2005-04-11 23:59:59 BUY  Size: +10 / Price: 3088.47` 
+$ ./credit-interest.py --plot --stocklike --long --no-exit
+01 2005-04-11 23:59:59 BUY  Size: +10 / Price: 3088.47
 ```
 
 ![image](img/aab6804c68219829704d595573a5bd8d.png)
@@ -105,8 +105,8 @@ cerebro.broker.setcommission(commtype=bt.CommissionInfo.COMM_PERC,  # % commissi
 让我们尝试添加利息，看看会发生什么（我们将添加一个巨大的`15%`利息来尝试注意到这些动向）
 
 ```py
-`$ ./credit-interest.py --plot --stocklike --long --no-exit --interest 0.15
-01 2005-04-11 23:59:59 BUY  Size: +10 / Price: 3088.47` 
+$ ./credit-interest.py --plot --stocklike --long --no-exit --interest 0.15
+01 2005-04-11 23:59:59 BUY  Size: +10 / Price: 3088.47
 ```
 
 ![image](img/d0ce920dc1c754919fb336946b4d9e85.png)
@@ -116,8 +116,8 @@ cerebro.broker.setcommission(commtype=bt.CommissionInfo.COMM_PERC,  # % commissi
 让我们告诉脚本也要为`long`头寸做这个
 
 ```py
-`$ ./credit-interest.py --plot --stocklike --long --no-exit --interest 0.15 --interest_long
-01 2005-04-11 23:59:59 BUY  Size: +10 / Price: 3088.47` 
+$ ./credit-interest.py --plot --stocklike --long --no-exit --interest 0.15 --interest_long
+01 2005-04-11 23:59:59 BUY  Size: +10 / Price: 3088.47
 ```
 
 ![image](img/7947fc049a3af4a9caf33d2419b0db7f.png)
@@ -129,13 +129,13 @@ cerebro.broker.setcommission(commtype=bt.CommissionInfo.COMM_PERC,  # % commissi
 这将模拟类似于具有年度利息的`ETF`，可以是常规的或反向的。首先让我们建立基线。
 
 ```py
-`$ ./credit-interest.py --plot --stocklike
+$ ./credit-interest.py --plot --stocklike
 01 2005-03-22 23:59:59 SELL Size: -10 / Price: 3040.55
 02 2005-04-11 23:59:59 BUY  Size: +10 / Price: 3088.47
 ...
 ...
 34 2006-12-19 23:59:59 BUY  Size: +10 / Price: 4121.01
-35 2006-12-19 23:59:59 BUY  Size: +10 / Price: 4121.01` 
+35 2006-12-19 23:59:59 BUY  Size: +10 / Price: 4121.01
 ```
 
 还有更多操作，系统始终*在市场中*。
@@ -145,12 +145,12 @@ cerebro.broker.setcommission(commtype=bt.CommissionInfo.COMM_PERC,  # % commissi
 由于`ETF`将对多头和空头操作收取利息，现在利息将同时增加：
 
 ```py
-`$ ./credit-interest.py --plot --stocklike --interest 0.15 --interest_long
+$ ./credit-interest.py --plot --stocklike --interest 0.15 --interest_long
 01 2005-03-22 23:59:59 SELL Size: -10 / Price: 3040.55
 02 2005-04-11 23:59:59 BUY  Size: +10 / Price: 3088.47
 ...
 ...
-34 2006-12-19 23:59:59 BUY  Size: +10 / Price: 4121.01` 
+34 2006-12-19 23:59:59 BUY  Size: +10 / Price: 4121.01
 ```
 
 ![图片](img/b7ac7979c5ba9cd44a9c9b23ce9247fc.png)
@@ -162,13 +162,13 @@ cerebro.broker.setcommission(commtype=bt.CommissionInfo.COMM_PERC,  # % commissi
 从*多头*操作中去除利息费用（即使对于*ETF*来说并非真实）将使系统能够结束：
 
 ```py
-`$ ./credit-interest.py --plot --stocklike --interest 0.15
+$ ./credit-interest.py --plot --stocklike --interest 0.15
 01 2005-03-22 23:59:59 SELL Size: -10 / Price: 3040.55
 02 2005-04-11 23:59:59 BUY  Size: +10 / Price: 3088.47
 ...
 ...
 34 2006-12-19 23:59:59 BUY  Size: +10 / Price: 4121.01
-35 2006-12-19 23:59:59 BUY  Size: +10 / Price: 4121.01` 
+35 2006-12-19 23:59:59 BUY  Size: +10 / Price: 4121.01
 ```
 
 回到业务，直到第`35`次操作。
@@ -184,7 +184,7 @@ cerebro.broker.setcommission(commtype=bt.CommissionInfo.COMM_PERC,  # % commissi
 ## 示例用法
 
 ```py
-`$ ./credit-interest.py --help
+$ ./credit-interest.py --help
 usage: credit-interest.py [-h] [--data DATA] [--fromdate FROMDATE]
                           [--todate TODATE] [--cash CASH] [--period1 PERIOD1]
                           [--period2 PERIOD2] [--interest INTEREST]
@@ -217,13 +217,13 @@ optional arguments:
   --plot [kwargs], -p [kwargs]
                         Plot the read data applying any kwargs passed For
                         example: --plot style="candle" (to plot candles)
-                        (default: None)` 
+                        (default: None)
 ```
 
 ## 示例代码
 
 ```py
-`from __future__ import (absolute_import, division, print_function,
+from __future__ import (absolute_import, division, print_function,
                         unicode_literals)
 
 import argparse
@@ -388,5 +388,5 @@ def parse_args(pargs=None):
     return parser.parse_args()
 
 if __name__ == '__main__':
-    runstrat()` 
+    runstrat()
 ```

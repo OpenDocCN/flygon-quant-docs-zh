@@ -39,17 +39,17 @@
 给定现有的数据源，您可以使用数据源的`addfilter`方法：
 
 ```py
-`data = MyDataFeed(dataname=myname)
+data = MyDataFeed(dataname=myname)
 data.addfilter(filter, *args, **kwargs)
-cerebro.addata(data)` 
+cerebro.addata(data)
 ```
 
 即使它恰好与*重新采样/重播*过滤器兼容，也可以执行以下操作：
 
 ```py
-`data = MyDataFeed(dataname=myname)
+data = MyDataFeed(dataname=myname)
 data.addfilter(filter, *args, **kwargs)
-cerebro.replaydata(data)` 
+cerebro.replaydata(data)
 ```
 
 ## 过滤器接口
@@ -108,7 +108,7 @@ cerebro.replaydata(data)`
 很明显，如果*过滤器*根本不支持任何参数，并且将添加而无任何参数，则签名可以简化为：
 
 ```py
-`def __init__(self, data, *args, **kwargs) -> def __init__(self, data)` 
+def __init__(self, data, *args, **kwargs) -> def __init__(self, data)
 ```
 
 ## 一个示例过滤器
@@ -116,7 +116,7 @@ cerebro.replaydata(data)`
 一个非常快速的过滤器实现：
 
 ```py
-`class SessionFilter(object):
+class SessionFilter(object):
     def __init__(self, data):
         pass
 
@@ -127,7 +127,7 @@ cerebro.replaydata(data)`
 
         # bar outside of the regular session times
         data.backwards()  # remove bar from data stack
-        return True  # tell outer data loop to fetch a new bar` 
+        return True  # tell outer data loop to fetch a new bar
 ```
 
 这个过滤器：
@@ -215,7 +215,7 @@ cerebro.replaydata(data)`
 代码：
 
 ```py
-`class DaySplitter_Close(bt.with_metaclass(bt.MetaParams, object)):
+class DaySplitter_Close(bt.with_metaclass(bt.MetaParams, object)):
   '''
  Splits a daily bar in two parts simulating 2 ticks which will be used to
  replay the data:
@@ -297,5 +297,5 @@ cerebro.replaydata(data)`
         # Add 2nd part to stash to delay processing to next round
         data._add2stack(closebar, stash=True)
 
-        return False  # initial tick can be further processed from stack` 
+        return False  # initial tick can be further processed from stack
 ```

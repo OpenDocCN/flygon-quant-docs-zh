@@ -21,10 +21,10 @@
 *backtrader* 支持数据源的过滤器，其中一个允许
 
 ```py
-`breaking a *daily bar* in 2 parts to let people buy after having seen only the
+breaking a *daily bar* in 2 parts to let people buy after having seen only the
 opening price. The 2nd part of the day (high, low, close) is evaluated in a
 2nd tick. This effectively achieves the *uses daily data (vs minute or tick
-data) for intraday trading*.` 
+data) for intraday trading*.
 ```
 
 这个筛选器试图进行完整的*重播*操作，而不涉及内置的重播器。
@@ -36,13 +36,13 @@ data) for intraday trading*.`
 这在可用的样本中使用`-no-replay`。一个执行：
 
 ```py
-`$ ./pinkfish-challenge.py --no-replay` 
+$ ./pinkfish-challenge.py --no-replay
 ```
 
 输出的一部分：
 
 ```py
-`...
+...
 0955,0478,0478,2006-11-22T00:00:00,27.51,28.56,27.29,28.49,16027900.00,0.00
 High 28.56 > Highest 28.56
 LAST 19 highs: array('d', [25.33, 25.6, 26.4, 26.7, 26.62, 26.6, 26.7, 26.7, 27.15, 27.25, 27.65, 27.5, 27.62,   27.5, 27.5, 27.33, 27.05, 27.04, 27.34])
@@ -50,7 +50,7 @@ LAST 19 highs: array('d', [25.33, 25.6, 26.4, 26.7, 26.62, 26.6, 26.7, 26.7, 27.
 -- BUY Completed on: 2006-11-22
 -- BUY Price: 28.49
 0956,0478,0478,2006-11-22T23:59:59.999989,27.51,28.56,27.29,28.49,32055800.00,0.00
-...` 
+...
 ```
 
 它有效…
@@ -70,13 +70,13 @@ LAST 19 highs: array('d', [25.33, 25.6, 26.4, 26.7, 26.62, 26.6, 26.7, 26.7, 27.
 这实际上不是一个**重播**解决方案，如果将订单的*执行类型*从`Close`更改为`Market`，就会看到这一点。一个新的执行：
 
 ```py
-`$ ./pinkfish-challenge.py --no-replay --market` 
+$ ./pinkfish-challenge.py --no-replay --market
 ```
 
 现在与上述相同期间的输出：
 
 ```py
-`...
+...
 0955,0478,0478,2006-11-22T00:00:00,27.51,28.56,27.29,28.49,16027900.00,0.00
 High 28.56 > Highest 28.56
 LAST 19 highs: array('d', [25.33, 25.6, 26.4, 26.7, 26.62, 26.6, 26.7, 26.7, 27.15, 27.25, 27.65, 27.5, 27.62, 27.5, 27.5, 27.33, 27.05, 27.04, 27.34])
@@ -84,7 +84,7 @@ LAST 19 highs: array('d', [25.33, 25.6, 26.4, 26.7, 26.62, 26.6, 26.7, 26.7, 27.
 -- BUY Completed on: 2006-11-22
 -- BUY Price: 27.51
 0956,0478,0478,2006-11-22T23:59:59.999989,27.51,28.56,27.29,28.49,32055800.00,0.00
-...` 
+...
 ```
 
 问题很容易被识别出来
@@ -191,19 +191,19 @@ LAST 19 highs: array('d', [25.33, 25.6, 26.4, 26.7, 26.62, 26.6, 26.7, 26.7, 27.
         # Add 2nd part to stash to delay processing to next round
         data._add2stack(closebar, stash=True)
 
-        return False  # the length of the stream was not changed` 
+        return False  # the length of the stream was not changed
 ```
 
 在不禁用*回放*和`Close`的情况下执行（让我们添加绘图）：
 
 ```py
-`$ ./pinkfish-challenge.py --plot` 
+$ ./pinkfish-challenge.py --plot
 ```
 
 同一时期的输出：
 
 ```py
-`...
+...
 0955,0478,0478,2006-11-22T00:00:00,27.51,28.56,27.29,27.79,16027900.00,0.00
 High 28.56 > Highest 28.56
 LAST 19 highs: array('d', [25.33, 25.6, 26.4, 26.7, 26.62, 26.6, 26.7, 26.7, 27.15, 27.25, 27.65, 27.5, 27.62, 27.5, 27.5, 27.33, 27.05, 27.04, 27.34])
@@ -211,7 +211,7 @@ LAST 19 highs: array('d', [25.33, 25.6, 26.4, 26.7, 26.62, 26.6, 26.7, 26.7, 27.
 -- BUY Completed on: 2006-11-22
 -- BUY Price: 28.49
 0956,0478,0478,2006-11-22T23:59:59.999989,27.51,28.56,27.29,28.49,32055800.00,0.00
-...` 
+...
 ```
 
 一切正常，已记录*收盘*价为`28.49`。
@@ -223,13 +223,13 @@ LAST 19 highs: array('d', [25.33, 25.6, 26.4, 26.7, 26.62, 26.6, 26.7, 26.7, 27.
 最后但同样重要的是检查修改是否有意义：
 
 ```py
-`$ ./pinkfish-challenge.py --market` 
+$ ./pinkfish-challenge.py --market
 ```
 
 相同时期的输出：
 
 ```py
-`...
+...
 0955,0478,0478,2006-11-22T00:00:00,27.51,28.56,27.29,27.79,16027900.00,0.00
 High 28.56 > Highest 28.56
 LAST 19 highs: array('d', [25.33, 25.6, 26.4, 26.7, 26.62, 26.6, 26.7, 26.7, 27.15, 27.25, 27.65, 27.5, 27.62, 27.5, 27.5, 27.33, 27.05, 27.04, 27.34])
@@ -237,7 +237,7 @@ LAST 19 highs: array('d', [25.33, 25.6, 26.4, 26.7, 26.62, 26.6, 26.7, 26.7, 27.
 -- BUY Completed on: 2006-11-22
 -- BUY Price: 28.49
 0956,0478,0478,2006-11-22T23:59:59.999989,27.51,28.56,27.29,28.49,32055800.00,0.00
-..` 
+..
 ```
 
 现在`Market`订单正在以与`Close`订单相同的价格`28.49`拾取，这在这个特定的用例中是预期的，因为*重播*正在发生，而破碎的日线的第二部分有一个单一的*标记*：`28.49`，这是*收盘*价
@@ -245,7 +245,7 @@ LAST 19 highs: array('d', [25.33, 25.6, 26.4, 26.7, 26.62, 26.6, 26.7, 26.7, 27.
 ## 示例的用法
 
 ```py
-`$ ./pinkfish-challenge.py --help
+$ ./pinkfish-challenge.py --help
 usage: pinkfish-challenge.py [-h] [--data DATA] [--fromdate FROMDATE]
                              [--todate TODATE] [--cash CASH]
                              [--sellafter SELLAFTER] [--highperiod HIGHPERIOD]
@@ -273,13 +273,13 @@ optional arguments:
   --plot [kwargs], -p [kwargs]
                         Plot the read data applying any kwargs passed For
                         example (escape the quotes if needed): --plot
-                        style="candle" (to plot candles) (default: None)` 
+                        style="candle" (to plot candles) (default: None)
 ```
 
 ## 并且代码本身
 
 ```py
-`from __future__ import (absolute_import, division, print_function,
+from __future__ import (absolute_import, division, print_function,
                         unicode_literals)
 
 import argparse
@@ -597,5 +597,5 @@ def parse_args(pargs=None):
     return parser.parse_args()
 
 if __name__ == '__main__':
-    runstrat()` 
+    runstrat()
 ```

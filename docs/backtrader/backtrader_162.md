@@ -39,13 +39,13 @@
 下面呈现了完整的代码。让我们看一个使用`255`个*每日*柱状图的众所周知的数据的示例运行：
 
 ```py
-`$ ./daysteps.py --data ../../datas/2006-day-001.txt` 
+$ ./daysteps.py --data ../../datas/2006-day-001.txt
 ```
 
 输出：
 
 ```py
-`Calls,Len Strat,Len Data,Datetime,Open,High,Low,Close,Volume,OpenInterest
+Calls,Len Strat,Len Data,Datetime,Open,High,Low,Close,Volume,OpenInterest
 0001,0001,0001,2006-01-02T23:59:59,3578.73,3578.73,3578.73,3578.73,0.00,0.00
 - I could issue a buy order during the Opening
 0002,0001,0001,2006-01-02T23:59:59,3578.73,3605.95,3578.73,3604.33,0.00,0.00
@@ -65,7 +65,7 @@
 0508,0254,0254,2006-12-28T23:59:59,4137.44,4142.06,4125.14,4130.66,0.00,0.00
 0509,0255,0255,2006-12-29T23:59:59,4130.12,4130.12,4130.12,4130.12,0.00,0.00
 - I could issue a buy order during the Opening
-0510,0255,0255,2006-12-29T23:59:59,4130.12,4142.01,4119.94,4119.94,0.00,0.00` 
+0510,0255,0255,2006-12-29T23:59:59,4130.12,4142.01,4119.94,4119.94,0.00,0.00
 ```
 
 以下情况发生：
@@ -87,7 +87,7 @@
 包括过滤器的示例代码。
 
 ```py
-`from __future__ import (absolute_import, division, print_function,
+from __future__ import (absolute_import, division, print_function,
                         unicode_literals)
 
 import argparse
@@ -208,5 +208,5 @@ def parse_args():
     return parser.parse_args()
 
 if __name__ == '__main__':
-    runstrat()` 
+    runstrat()
 ```

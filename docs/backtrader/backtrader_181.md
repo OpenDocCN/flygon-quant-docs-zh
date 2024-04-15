@@ -84,7 +84,7 @@
 具有**多空**策略的长期示例（请参阅下面的完整代码），使用 Close-SMA 交叉作为信号进行执行：
 
 ```py
-`$ ./writer-test.py` 
+$ ./writer-test.py
 ```
 
 图表：
@@ -94,7 +94,7 @@
 具有以下输出：
 
 ```py
-`===============================================================================
+===============================================================================
 Cerebro:
   -----------------------------------------------------------------------------
   - Datas:
@@ -152,7 +152,7 @@ Cerebro:
           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
           - Analysis:
             - sqn: 0.05
-            - trades: 22` 
+            - trades: 22
 ```
 
 运行后，我们有了一个完整的摘要，显示系统的设置以及分析器的意见。 在这种情况下，分析器是
@@ -166,7 +166,7 @@ Cerebro:
 测试脚本允许我们调整策略以变为**仅多头**：
 
 ```py
-`$ ./writer-test.py --onlylong --plot` 
+$ ./writer-test.py --onlylong --plot
 ```
 
 图表：
@@ -176,7 +176,7 @@ Cerebro:
 现在的输出是：
 
 ```py
-`===============================================================================
+===============================================================================
 Cerebro:
   -----------------------------------------------------------------------------
   - Datas:
@@ -234,7 +234,7 @@ Cerebro:
           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
           - Analysis:
             - sqn: 0.91
-            - trades: 11` 
+            - trades: 11
 ```
 
 “params”对策略的更改可见（onlylong 已转为 True），分析器讲述了一个不同的故事：
@@ -248,13 +248,13 @@ Cerebro:
 但是仍然看不到 CSV 输出。 让我们运行脚本来打开它：
 
 ```py
-`$ ./writer-test.py --onlylong --writercsv` 
+$ ./writer-test.py --onlylong --writercsv
 ```
 
 带有更新的输出：
 
 ```py
-`===============================================================================
+===============================================================================
 Id,2006-day-001,len,datetime,open,high,low,close,volume,openinterest,LongShortStrategy,len,Broker,len,cash,value,Buy
 Sell,len,buy,sell,Trades,len,pnlplus,pnlminus
 1,2006-day-001,1,2006-01-02 23:59:59+00:00,3578.73,3605.95,3578.73,3604.33,0.0,0.0,LongShortStrategy,1,Broker,1,1000
@@ -269,7 +269,7 @@ Sell,len,buy,sell,Trades,len,pnlplus,pnlminus
 Cerebro:
   -----------------------------------------------------------------------------
 ...
-...` 
+...
 ```
 
 我们可以跳过大部分的 CSV 流和已经看过的摘要。CSV 流已经打印出以下内容
@@ -291,19 +291,19 @@ Cerebro:
 让我们运行脚本并附加一个参数，将 CrossOver 指示器添加到 CSV 流中：
 
 ```py
-`$ ./writer-test.py --onlylong --writercsv --csvcross` 
+$ ./writer-test.py --onlylong --writercsv --csvcross
 ```
 
 输出：
 
 ```py
-`===============================================================================
+===============================================================================
 Id,2006-day-001,len,datetime,open,high,low,close,volume,openinterest,LongShortStrategy,len,CrossOver,len,crossover,B
 roker,len,cash,value,BuySell,len,buy,sell,Trades,len,pnlplus,pnlminus
 1,2006-day-001,1,2006-01-02 23:59:59+00:00,3578.73,3605.95,3578.73,3604.33,0.0,0.0,LongShortStrategy,1,CrossOver,1,,
 Broker,1,100000.0,100000.0,BuySell,1,,,Trades,1,,
 ...
-...` 
+...
 ```
 
 这展示了写入器的一些功能。该类的进一步文档仍然是一个待办事项。
@@ -313,7 +313,7 @@ Broker,1,100000.0,100000.0,BuySell,1,,,Trades,1,,
 用法：
 
 ```py
-`$ ./writer-test.py --help
+$ ./writer-test.py --help
 usage: writer-test.py [-h] [--data DATA] [--fromdate FROMDATE]
                       [--todate TODATE] [--period PERIOD] [--onlylong]
                       [--writercsv] [--csvcross] [--cash CASH] [--comm COMM]
@@ -340,13 +340,13 @@ optional arguments:
   --stake STAKE         Stake to apply in each operation
   --plot, -p            Plot the read data
   --numfigs NUMFIGS, -n NUMFIGS
-                        Plot using numfigs figures` 
+                        Plot using numfigs figures
 ```
 
 和测试脚本。
 
 ```py
-`from __future__ import (absolute_import, division, print_function,
+from __future__ import (absolute_import, division, print_function,
                         unicode_literals)
 
 import argparse
@@ -538,5 +538,5 @@ def parse_args():
     return parser.parse_args()
 
 if __name__ == '__main__':
-    runstrategy()` 
+    runstrategy()
 ```

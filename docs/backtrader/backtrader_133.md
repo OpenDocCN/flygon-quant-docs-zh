@@ -7,7 +7,7 @@
 最近，`@randyt`提交了一个拉取请求，集成了一个名为`PercentRank`的新指标。以下是原始代码
 
 ```py
-`class PercentRank(bt.Indicator):
+class PercentRank(bt.Indicator):
     lines = ('pctrank',)
     params = (('period', 50),)
 
@@ -19,13 +19,13 @@
             (math.fsum([x < self.data[0]
                        for x in self.data.get(size=self.p.period)])
             / self.p.period)
-        super(PercentRank, self).__init__()` 
+        super(PercentRank, self).__init__()
 ```
 
 这真的展示了某人如何深入研究*backtrader*的源代码，提出了一些问题，并理解了一些概念。这真的很棒：
 
 ```py
-`self.addminperiod(self.p.period)` 
+self.addminperiod(self.p.period)
 ```
 
 出乎意料，因为最终用户甚至不会预期到某人可以在*lines*对象中使用该 API 调用。这个调用告诉机器确保指标至少有`self.p.period`个*data feeds*样本可用，因为它们需要用于计算。
@@ -37,14 +37,14 @@
 代码可以重新编写以利用预先存在的旨在减轻开发的实用程序。没有什么最终用户必须知道的，但如果一个人不断开发或原型化指标，则是了解的好时机。
 
 ```py
-`class PercentRank_PeriodN1(bt.ind.PeriodN):
+class PercentRank_PeriodN1(bt.ind.PeriodN):
     lines = ('pctrank',)
     params = (('period', 50),)
 
     def next(self):
         d0 = self.data[0]  # avoid dict/array lookups each time
         dx = self.data.get(size=self.p.period)
-        self.l.pctrank[0] = math.fsum((x < d0 for x in dx)) / self.p.period` 
+        self.l.pctrank[0] = math.fsum((x < d0 for x in dx)) / self.p.period
 ```
 
 重新使用`PeriodN`是关键，以消除`self.addminperiod`的魔术，并使指标在某种程度上更易处理。`PeriodN`已经具有一个`period`参数，并将为用户调用（如果`__init__`被覆盖，则记得调用`super(cls, self).__init__()`）。
@@ -62,16 +62,16 @@
 知道了这一点，我们可以尝试一下显而易见的
 
 ```py
-`class PercentRank_OperationN1(bt.ind.OperationN):
+class PercentRank_OperationN1(bt.ind.OperationN):
     lines = ('pctrank',)
     params = (('period', 50),)
-    func = (lambda d: math.fsum((x < d[-1] for x in d)) / self.p.period)` 
+    func = (lambda d: math.fsum((x < d[-1] for x in d)) / self.p.period)
 ```
 
 降至 4 行。但这将失败，只需要最后一行：
 
 ```py
-`TypeError: <lambda>() takes 1 positional argument but 2 were given` 
+TypeError: <lambda>() takes 1 positional argument but 2 were given
 ```
 
 （使用`--strat n1=True`使示例失败）
@@ -79,10 +79,10 @@
 通过将我们的无名函数放入`func`中，似乎已将其转换为方法，因为它需要两个参数。这可以很快解决。
 
 ```py
-`class PercentRank_OperationN2(bt.ind.OperationN):
+class PercentRank_OperationN2(bt.ind.OperationN):
     lines = ('pctrank',)
     params = (('period', 50),)
-    func = (lambda self, d: math.fsum((x < d[-1] for x in d)) / self.p.period)` 
+    func = (lambda self, d: math.fsum((x < d[-1] for x in d)) / self.p.period)
 ```
 
 它起作用了。但有一些不好看的地方：这不是大多数情况下人们期望传递函数的方式，即：将`self`作为参数。在这种情况下，我们控制函数，但这并不总是情况（可能需要一个包装器来解决）
@@ -94,10 +94,10 @@
 现在是新代码。
 
 ```py
-`class PercentRank_OperationN3(bt.ind.OperationN):
+class PercentRank_OperationN3(bt.ind.OperationN):
     lines = ('pctrank',)
     params = (('period', 50),)
-    func = staticmethod(lambda d: math.fsum((x < d[-1] for x in d)) / len(d))` 
+    func = staticmethod(lambda d: math.fsum((x < d[-1] for x in d)) / len(d))
 ```
 
 一切都很好，但这让人思考为什么以前没有考虑让用户有机会传递自己的函数。子类化`OperationN`是一个不错的选择，但可能有更好的方法，避免使用`staticmethod`或将`self`作为参数并构建在*backtrader*中的机制之上。
@@ -105,13 +105,13 @@
 让我们定义`OperationN`的一个方便的子类。
 
 ```py
-`class ApplyN(bt.ind.OperationN):
+class ApplyN(bt.ind.OperationN):
     lines = ('apply',)
     params = (('func', None),)
 
     def __init__(self):
         self.func = self.p.func
-        super(ApplyN, self).__init__()` 
+        super(ApplyN, self).__init__()
 ```
 
 这应该很久以前就在平台上了。唯一真正需要考虑的是`lines = ('apply',)`是否必须存在，或者用户是否可以自由定义该行和其他一些行。在集成之前需要考虑的事情。
@@ -119,11 +119,11 @@
 有了`ApplyN`，`PercentRank`的最终版本完全符合我们的所有预期。首先，手动平均计算版本。
 
 ```py
-`class PercentRank_ApplyN(ApplyN):
+class PercentRank_ApplyN(ApplyN):
     params = (
         ('period', 50),
         ('func', lambda d: math.fsum((x < d[-1] for x in d)) / len(d)),
-    )` 
+    )
 ```
 
 在不违反`PEP-8`的情况下，我们仍然可以重新格式化两者以适应 3 行... 很好！
@@ -143,7 +143,7 @@
 ## 示例用法
 
 ```py
-`$ ./percentrank.py --help
+$ ./percentrank.py --help
 usage: percentrank.py [-h] [--data0 DATA0] [--fromdate FROMDATE]
                       [--todate TODATE] [--cerebro kwargs] [--broker kwargs]
                       [--sizer kwargs] [--strat kwargs] [--plot [kwargs]]
@@ -160,13 +160,13 @@ optional arguments:
   --broker kwargs      kwargs in key=value format (default: )
   --sizer kwargs       kwargs in key=value format (default: )
   --strat kwargs       kwargs in key=value format (default: )
-  --plot [kwargs]      kwargs in key=value format (default: )` 
+  --plot [kwargs]      kwargs in key=value format (default: )
 ```
 
 ## 示例代码
 
 ```py
-`from __future__ import (absolute_import, division, print_function,
+from __future__ import (absolute_import, division, print_function,
                         unicode_literals)
 
 import argparse
@@ -315,5 +315,5 @@ def parse_args(pargs=None):
     return parser.parse_args(pargs)
 
 if __name__ == '__main__':
-    runstrat()` 
+    runstrat()
 ```

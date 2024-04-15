@@ -37,13 +37,13 @@
 样本使用`random.randint`来决定何时*买入*/*卖出*，所以这只是一个检查是否工作的简单检查：
 
 ```py
-`$ ./pyfoliotest.py --printout --no-pyfolio --plot` 
+$ ./pyfoliotest.py --printout --no-pyfolio --plot
 ```
 
 输出：
 
 ```py
-`Len,Datetime,Open,High,Low,Close,Volume,OpenInterest
+Len,Datetime,Open,High,Low,Close,Volume,OpenInterest
 0001,2005-01-03T23:59:59,38.36,38.90,37.65,38.18,25482800.00,0.00
 BUY  1000 @%23.58
 0002,2005-01-04T23:59:59,38.45,38.54,36.46,36.58,26625300.00,0.00
@@ -55,7 +55,7 @@ SELL 500 @%37.51
 0502,2006-12-28T23:59:59,25.62,25.72,25.30,25.36,11908400.00,0.00
 0503,2006-12-29T23:59:59,25.42,25.82,25.33,25.54,16297800.00,0.00
 SELL 250 @%17.14
-SELL 250 @%37.01` 
+SELL 250 @%37.01
 ```
 
 ![image](img/6590d4b5b999ca99374182ff16e6fbe6.png)
@@ -71,11 +71,11 @@ SELL 250 @%37.01`
 `runstrat` 在此处使用[]作为参数运行，默认参数并跳过*笔记本*本身传递的参数
 
 ```py
-`%matplotlib inline` 
+%matplotlib inline
 ```
 
 ```py
-`from __future__ import (absolute_import, division, print_function,
+from __future__ import (absolute_import, division, print_function,
                         unicode_literals)
 
 import argparse
@@ -237,23 +237,23 @@ def parse_args(args=None):
 
     import sys
     aargs = args if args is not None else sys.argv[1:]
-    return parser.parse_args(aargs)` 
+    return parser.parse_args(aargs)
 ```
 
 ```py
-`runstrat([])` 
+runstrat([])
 ```
 
 ```py
-`Entire data start date: 2005-01-03
+Entire data start date: 2005-01-03
 Entire data end date: 2006-12-29
 
 Out-of-Sample Months: 20
-Backtest Months: 3` 
+Backtest Months: 3
 ```
 
 ```py
-`[-0.012 -0.025]` 
+[-0.012 -0.025]
 ```
 
 ![image](img/f294045046f7426c2da90377918d6922.png)
@@ -263,15 +263,15 @@ Backtest Months: 3`
 ![image](img/7eccfc571305f671a20e0b095569d4c4.png)
 
 ```py
-`pyfolioplotting.py:1210: FutureWarning: .resample() is now a deferred operation
+pyfolioplotting.py:1210: FutureWarning: .resample() is now a deferred operation
 use .resample(...).mean() instead of .resample(...)
-  **kwargs)` 
+  **kwargs)
 ```
 
 ![image](img/defc3b507734c37f4c41a5d900f95d95.png)
 
 ```py
-`<matplotlib.figure.Figure at 0x23982b70>` 
+<matplotlib.figure.Figure at 0x23982b70>
 ```
 
 ![image](img/a2b2f399d20c481ab001d7f83a44605b.png)
@@ -279,7 +279,7 @@ use .resample(...).mean() instead of .resample(...)
 样本的使用：
 
 ```py
-`$ ./pyfoliotest.py --help
+$ ./pyfoliotest.py --help
 usage: pyfoliotest.py [-h] [--data0 DATA0] [--data1 DATA1] [--data2 DATA2]
                       [--fromdate FROMDATE] [--todate TODATE] [--printout]
                       [--cash CASH] [--plot] [--plot-style {bar,candle,line}]
@@ -303,5 +303,5 @@ optional arguments:
   --plot                Plot the result (default: False)
   --plot-style {bar,candle,line}
                         Plot style (default: bar)
-  --no-pyfolio          Do not do pyfolio things (default: False)` 
+  --no-pyfolio          Do not do pyfolio things (default: False)
 ```

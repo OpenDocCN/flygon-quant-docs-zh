@@ -49,11 +49,11 @@
 除了经纪人的变化外，*分析器*和*观察者*也已经适应（那些与净资产价值有关的）以支持`fund`参数，以决定实际应该追踪什么。例如`TimeReturn`：
 
 ```py
-`...
+...
 cerebro.addanalyzer(bt.analyzers.TimeReturn)  # auto-detect broker mode
 cerebro.addanalyzer(bt.analyzers.TimeReturn, fund=True)  # track fund value
 cerebro.addanalyzer(bt.analyzers.TimeReturn, fund=False)  # track net asset value
-...` 
+...
 ```
 
 ## 这是什么*基金追踪*？
@@ -75,7 +75,7 @@ cerebro.addanalyzer(bt.analyzers.TimeReturn, fund=False)  # track net asset valu
 因为我们每次添加`100.0`货币单位且没有执行任何操作：
 
 ```py
-`- ``100.0 / 100.0 = 1 share```
+- ``100.0 / 100.0 = 1 share```
 
 ```py
 

@@ -7,7 +7,7 @@
 +   [`school.stockcharts.com/doku.php?id=technical_indicators:money_flow_index_mfi`](https://school.stockcharts.com/doku.php?id=technical_indicators:money_flow_index_mfi)
 
 ```py
-`class MFI(bt.Indicator):
+class MFI(bt.Indicator):
     lines = ('mfi',)
     params = dict(period=14)
 
@@ -21,7 +21,7 @@
         flowneg = bt.ind.SumN(mfraw * (tprice < tprice(-1)), period=self.p.period)
 
         mfiratio = bt.ind.DivByZero(flowpos, flowneg, zero=100.0)
-        self.l.mfi = 100.0 - 100.0 / (1.0 + mfiratio)` 
+        self.l.mfi = 100.0 - 100.0 / (1.0 + mfiratio)
 ```
 
 这是指标运作的一个视角

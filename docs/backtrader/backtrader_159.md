@@ -41,7 +41,7 @@
 因此，可以像这样跟踪投资组合的年度回报：
 
 ```py
-`import backtrader as bt
+import backtrader as bt
 
 cerebro = bt.Cerebro()
 cerebro.addanalyzer(bt.analyzers.TimeReturn, timeframe=bt.TimeFrame.Years)
@@ -53,13 +53,13 @@ strat0 = results[0]
 
 # If no name has been specified, the name is the class name lowercased
 tret_analyzer = strat0.analyzers.getbyname('timereturn')
-print(tret_analyzer.get_analysis())` 
+print(tret_analyzer.get_analysis())
 ```
 
 如果我们想要跟踪*数据*的回报：
 
 ```py
-`import backtrader as bt
+import backtrader as bt
 
 cerebro = bt.Cerebro()
 
@@ -76,13 +76,13 @@ strat0 = results[0]
 
 # If no name has been specified, the name is the class name lowercased
 tret_analyzer = strat0.analyzers.getbyname('timereturn')
-print(tret_analyzer.get_analysis())` 
+print(tret_analyzer.get_analysis())
 ```
 
 如果两者都要被跟踪，最好给*分析器*分配名称：
 
 ```py
-`import backtrader as bt
+import backtrader as bt
 
 cerebro = bt.Cerebro()
 
@@ -104,7 +104,7 @@ strat0 = results[0]
 tret_analyzer = strat0.analyzers.getbyname('timereturns')
 print(tret_analyzer.get_analysis())
 tdata_analyzer = strat0.analyzers.getbyname('datareturns')
-print(tdata_analyzer.get_analysis())` 
+print(tdata_analyzer.get_analysis())
 ```
 
 ## 观察者 - 基准测试
@@ -124,7 +124,7 @@ print(tdata_analyzer.get_analysis())`
 执行：
 
 ```py
-`$ ./observer-benchmark.py --plot --timereturn --timeframe notimeframe` 
+$ ./observer-benchmark.py --plot --timereturn --timeframe notimeframe
 ```
 
 输出。
@@ -146,7 +146,7 @@ print(tdata_analyzer.get_analysis())`
 因为*基准*也会显示*时间回报率*的结果，让我们运行相同的内容，但激活*基准*：
 
 ```py
-`$ ./observer-benchmark.py --plot --timeframe notimeframe` 
+$ ./observer-benchmark.py --plot --timeframe notimeframe
 ```
 
 输出。
@@ -162,7 +162,7 @@ print(tdata_analyzer.get_analysis())`
 转而以*年度*为基础追踪事物：
 
 ```py
-`$ ./observer-benchmark.py --plot --timeframe years` 
+$ ./observer-benchmark.py --plot --timeframe years
 ```
 
 输出
@@ -180,7 +180,7 @@ print(tdata_analyzer.get_analysis())`
 转换到较低的时间范围，比如*周*，整个情况都会改变：
 
 ```py
-`$ ./observer-benchmark.py --plot --timeframe weeks` 
+$ ./observer-benchmark.py --plot --timeframe weeks
 ```
 
 输出
@@ -198,7 +198,7 @@ print(tdata_analyzer.get_analysis())`
 该样本允许针对不同的数据进行基准测试。默认情况下，使用`--benchdata1`时，基准测试的对象是*Oracle*。考虑整个数据集，使用`--timeframe notimeframe`：
 
 ```py
-`$ ./observer-benchmark.py --plot --timeframe notimeframe --benchdata1` 
+$ ./observer-benchmark.py --plot --timeframe notimeframe --benchdata1
 ```
 
 输出：
@@ -228,7 +228,7 @@ print(tdata_analyzer.get_analysis())`
 使用样本的方法：
 
 ```py
-`$ ./observer-benchmark.py --help
+$ ./observer-benchmark.py --help
 usage: observer-benchmark.py [-h] [--data0 DATA0] [--data1 DATA1]
                              [--benchdata1] [--fromdate FROMDATE]
                              [--todate TODATE] [--printout] [--cash CASH]
@@ -259,13 +259,13 @@ optional arguments:
   --plot [kwargs], -p [kwargs]
                         Plot the read data applying any kwargs passed For
                         example: --plot style="candle" (to plot candles)
-                        (default: None)` 
+                        (default: None)
 ```
 
 ### 代码
 
 ```py
-`from __future__ import (absolute_import, division, print_function,
+from __future__ import (absolute_import, division, print_function,
                         unicode_literals)
 
 import argparse
@@ -444,5 +444,5 @@ def parse_args(pargs=None):
     return parser.parse_args()
 
 if __name__ == '__main__':
-    runstrat()` 
+    runstrat()
 ```

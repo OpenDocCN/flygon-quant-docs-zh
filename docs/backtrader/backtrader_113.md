@@ -15,7 +15,7 @@
 因此，策略将从这个简单的框架开始
 
 ```py
-`class BaseStrategy(bt.Strategy):
+class BaseStrategy(bt.Strategy):
     params = dict(
         fast_ma=10,
         slow_ma=20,
@@ -26,7 +26,7 @@
         fast_ma = bt.ind.EMA(period=self.p.fast_ma)
         slow_ma = bt.ind.EMA(period=self.p.slow_ma)
         # our entry point
-        self.crossup = bt.ind.CrossUp(fast_ma, slow_ma)` 
+        self.crossup = bt.ind.CrossUp(fast_ma, slow_ma)
 ```
 
 并且使用继承，我们将解决如何实现*Stops*的不同方法
@@ -40,7 +40,7 @@
 +   或设置一个动态的`StopTrail`，它随着价格的变动而移动（在这种情况下使用点）
 
 ```py
-`class ManualStopOrStopTrail(BaseStrategy):
+class ManualStopOrStopTrail(BaseStrategy):
     params = dict(
         stop_loss=0.02,  # price is 2% less than the entry point
         trail=False,
@@ -66,7 +66,7 @@
     def next(self):
         if not self.position and self.crossup > 0:
             # not in the market and signal triggered
-            self.buy()` 
+            self.buy()
 ```
 
 正如您所见，我们已添加了参数：
@@ -86,10 +86,10 @@
 让我们使用固定的`Stop`执行我们的脚本：
 
 ```py
-`$ ./stop-loss-approaches.py manual --plot
+$ ./stop-loss-approaches.py manual --plot
 BUY @price: 3073.40
 SELL@price: 3009.93
-BUY @price: 3034.88` 
+BUY @price: 3034.88
 ```
 
 以及图表
@@ -111,7 +111,7 @@ BUY @price: 3034.88`
 让我们使用相同的方法，但应用`StopTrail`订单：
 
 ```py
-`$ ./stop-loss-approaches.py manual --plot --strat trail=20
+$ ./stop-loss-approaches.py manual --plot --strat trail=20
 BUY @price: 3073.40
 SELL@price: 3070.72
 BUY @price: 3034.88
@@ -129,7 +129,7 @@ SELL@price: 3650.75
 BUY @price: 3635.17
 SELL@price: 3661.55
 BUY @price: 4100.49
-SELL@price: 4120.66` 
+SELL@price: 4120.66
 ```
 
 以及图表
@@ -151,7 +151,7 @@ SELL@price: 4120.66`
 让我们简化回测方法，使用 backtrader 提供的`cheat-on-close`模式。
 
 ```py
-`class ManualStopOrStopTrailCheat(BaseStrategy):
+class ManualStopOrStopTrailCheat(BaseStrategy):
     params = dict(
         stop_loss=0.02,  # price is 2% less than the entry point
         trail=False,
@@ -182,7 +182,7 @@ SELL@price: 4120.66`
                 self.sell(exectype=bt.Order.Stop, price=stop_price)
             else:
                 self.sell(exectype=bt.Order.StopTrail,
-                          trailamount=self.p.trail)` 
+                          trailamount=self.p.trail)
 ```
 
 在这种情况下：
@@ -198,7 +198,7 @@ SELL@price: 4120.66`
 使用 `StopTrail` 进行示例运行：
 
 ```py
-`$ ./stop-loss-approaches.py manualcheat --plot --strat trail=20
+$ ./stop-loss-approaches.py manualcheat --plot --strat trail=20
 BUY @price: 3076.23
 SELL@price: 3070.72
 BUY @price: 3036.30
@@ -216,7 +216,7 @@ SELL@price: 3650.75
 BUY @price: 3631.50
 SELL@price: 3661.55
 BUY @price: 4094.33
-SELL@price: 4120.66` 
+SELL@price: 4120.66
 ```
 
 和图表
@@ -244,7 +244,7 @@ SELL@price: 4120.66`
 参见：[Bracket Orders](https://www.backtrader.com/docu/order-creation-execution/bracket/bracket.html)
 
 ```py
-`class AutoStopOrStopTrail(BaseStrategy):
+class AutoStopOrStopTrail(BaseStrategy):
     params = dict(
         stop_loss=0.02,  # price is 2% less than the entry point
         trail=False,
@@ -292,7 +292,7 @@ SELL@price: 4120.66`
             else:
                 self.sell(exectype=bt.Order.StopTrail,
                           trailamount=self.p.trail,
-                          parent=self.buy_order)` 
+                          parent=self.buy_order)
 ```
 
 这种新策略仍然基于 `BaseStrategy`，做了以下工作：
@@ -324,7 +324,7 @@ SELL@price: 4120.66`
 使用 `StopTrail` 进行示例运行：
 
 ```py
-`$ ./stop-loss-approaches.py auto --plot --strat trail=30,buy_limit=0.005
+$ ./stop-loss-approaches.py auto --plot --strat trail=30,buy_limit=0.005
 BUY @price: 3060.85
 SELL@price: 3050.54
 CANCEL@price: 0.00 buy
@@ -341,7 +341,7 @@ BUY @price: 3644.61
 SELL@price: 3624.02
 CANCEL@price: 0.00 buy
 CANCEL@price: 0.00 sell
-BUY @price: 4073.86` 
+BUY @price: 4073.86
 ```
 
 和图表
@@ -359,7 +359,7 @@ BUY @price: 4073.86`
 ## 脚本用法
 
 ```py
-`$ ./stop-loss-approaches.py --help
+$ ./stop-loss-approaches.py --help
 usage: stop-loss-approaches.py [-h] [--data0 DATA0] [--fromdate FROMDATE]
                                [--todate TODATE] [--cerebro kwargs]
                                [--broker kwargs] [--sizer kwargs]
@@ -382,13 +382,13 @@ optional arguments:
   --broker kwargs       kwargs in key=value format (default: )
   --sizer kwargs        kwargs in key=value format (default: )
   --strat kwargs        kwargs in key=value format (default: )
-  --plot [kwargs]       kwargs in key=value format (default: )` 
+  --plot [kwargs]       kwargs in key=value format (default: )
 ```
 
 ## 该代码
 
 ```py
-`from __future__ import (absolute_import, division, print_function,
+from __future__ import (absolute_import, division, print_function,
                         unicode_literals)
 
 import argparse
@@ -601,5 +601,5 @@ def parse_args(pargs=None):
     return parser.parse_args(pargs)
 
 if __name__ == '__main__':
-    runstrat()` 
+    runstrat()
 ```

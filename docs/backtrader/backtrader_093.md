@@ -21,7 +21,7 @@
 发行版 `1.9.33.116` 解决了这个效果，并允许完全在同一轴上绘制。用法模式与决定与哪些其他数据一起绘制的模式相似。从前一篇帖子中。
 
 ```py
-`import backtrader as bt
+import backtrader as bt
 
 cerebro = bt.Cerebro()
 
@@ -36,7 +36,7 @@ cerebro.adddata(data1)
 
 ...
 
-cerebro.run()` 
+cerebro.run()
 ```
 
 `data1` 获得一些 `plotinfo` 值以：
@@ -50,7 +50,7 @@ cerebro.run()`
 前面的示例获取了一个额外的选项，以在 `sameaxis` 上绘制。一个示例执行：
 
 ```py
-`$ ./future-spot.py --sameaxis` 
+$ ./future-spot.py --sameaxis
 ```
 
 以及产生的图表
@@ -66,7 +66,7 @@ cerebro.run()`
 ## 示例用法
 
 ```py
-`$ ./future-spot.py --help
+$ ./future-spot.py --help
 usage: future-spot.py [-h] [--no-comp] [--sameaxis]
 
 Compensation example
@@ -74,13 +74,13 @@ Compensation example
 optional arguments:
   -h, --help  show this help message and exit
   --no-comp
-  --sameaxis` 
+  --sameaxis
 ```
 
 ## 示例代码
 
 ```py
-`from __future__ import (absolute_import, division, print_function,
+from __future__ import (absolute_import, division, print_function,
                         unicode_literals)
 
 import argparse
@@ -149,5 +149,5 @@ def parse_args(pargs=None):
     return parser.parse_args(pargs)
 
 if __name__ == '__main__':
-    runstrat()` 
+    runstrat()
 ```

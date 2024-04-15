@@ -31,7 +31,7 @@
 让我们看一个从每日到每周的手工脚本示例：
 
 ```py
-`$ ./resampling-example.py --timeframe weekly --compression 1` 
+$ ./resampling-example.py --timeframe weekly --compression 1
 ```
 
 输出：
@@ -41,7 +41,7 @@
 我们可以将其与原始的每日数据进行比较：
 
 ```py
-`$ ./resampling-example.py --timeframe daily --compression 1` 
+$ ./resampling-example.py --timeframe daily --compression 1
 ```
 
 输出：
@@ -74,13 +74,13 @@
     # Add the resample data instead of the original
     cerebro.resampledata(data,
                          timeframe=tframes[args.timeframe],
-                         compression=args.compression)` 
+                         compression=args.compression)
 ```
 
 最后一个示例，我们首先将时间框架从每日更改为每周，然后应用 3 比 1 的压缩：
 
 ```py
-`$ ./resampling-example.py --timeframe weekly --compression 3` 
+$ ./resampling-example.py --timeframe weekly --compression 3
 ```
 
 输出：
@@ -130,7 +130,7 @@
 重采样测试脚本的示例代码。
 
 ```py
-`from __future__ import (absolute_import, division, print_function,
+from __future__ import (absolute_import, division, print_function,
                         unicode_literals)
 
 import argparse
@@ -185,5 +185,5 @@ def parse_args():
     return parser.parse_args()
 
 if __name__ == '__main__':
-    runstrat()` 
+    runstrat()
 ```

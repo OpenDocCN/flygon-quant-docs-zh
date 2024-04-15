@@ -27,13 +27,13 @@
 通过使用以下命令仍然可以使用旧行为：
 
 ```py
-`cerebro = bt.Cerebro(oldsync=True)` 
+cerebro = bt.Cerebro(oldsync=True)
 ```
 
 或：
 
 ```py
-`cerebro.run(oldsync=True)` 
+cerebro.run(oldsync=True)
 ```
 
 ## 通过示例查看
@@ -51,20 +51,20 @@
 执行：
 
 ```py
-`$ ./multidata-strategy-unaligned.py --oldsync --plot` 
+$ ./multidata-strategy-unaligned.py --oldsync --plot
 ```
 
 从输出来看，重要部分就在最后：
 
 ```py
-`...
+...
 Self  len: 753
 Data0 len: 753
 Data1 len: 750
 Data0 len == Data1 len: False
 Data0 dt: 2005-12-27 23:59:59
 Data1 dt: 2005-12-27 23:59:59
-...` 
+...
 ```
 
 注意：
@@ -86,20 +86,20 @@ Data1 dt: 2005-12-27 23:59:59
 执行：
 
 ```py
-`$ ./multidata-strategy-unaligned.py --plot` 
+$ ./multidata-strategy-unaligned.py --plot
 ```
 
 从输出来看，重要部分就在最后：
 
 ```py
-`...
+...
 Self  len: 756
 Data0 len: 753
 Data1 len: 753
 Data0 len == Data1 len: True
 Data0 dt: 2005-12-27 23:59:59
 Data1 dt: 2005-12-30 23:59:59
-...` 
+...
 ```
 
 行为显然已经改善：
@@ -131,7 +131,7 @@ Data1 dt: 2005-12-30 23:59:59
 ## 示例用法
 
 ```py
-`$ ./multidata-strategy-unaligned.py --help
+$ ./multidata-strategy-unaligned.py --help
 usage: multidata-strategy-unaligned.py [-h] [--data0 DATA0] [--data1 DATA1]
                                        [--fromdate FROMDATE] [--todate TODATE]
                                        [--period PERIOD] [--cash CASH]
@@ -160,13 +160,13 @@ optional arguments:
   --stake STAKE         Stake to apply in each operation
   --plot, -p            Plot the read data
   --numfigs NUMFIGS, -n NUMFIGS
-                        Plot using numfigs figures` 
+                        Plot using numfigs figures
 ```
 
 ## 示例代码
 
 ```py
-`from __future__ import (absolute_import, division, print_function,
+from __future__ import (absolute_import, division, print_function,
                         unicode_literals)
 
 import argparse
@@ -355,5 +355,5 @@ def parse_args():
     return parser.parse_args()
 
 if __name__ == '__main__':
-    runstrategy()` 
+    runstrategy()
 ```

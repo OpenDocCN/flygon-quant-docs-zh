@@ -29,17 +29,17 @@
 `backtrader` 提供的许多示例，以及文档和/或博客中提供的示例，都使用 `tuple of tuples` 模式进行参数设置。例如，来自代码的示例：
 
 ```py
-`class Momentum(bt.Indicator):
+class Momentum(bt.Indicator):
     lines = ('trend',)
-    params = (('period', 90),)` 
+    params = (('period', 90),)
 ```
 
 在这种范例中，一直有机会使用 `dict`。
 
 ```py
-`class Momentum(bt.Indicator):
+class Momentum(bt.Indicator):
     lines = ('trend',)
-    params = dict(period=90)  # or params = {'period': 90}` 
+    params = dict(period=90)  # or params = {'period': 90}
 ```
 
 随着时间的推移，这种方式变得更易于使用，并成为作者首选的模式。
@@ -63,7 +63,7 @@
 在文章中，这就是指标的定义方式
 
 ```py
-`class Momentum(bt.Indicator):
+class Momentum(bt.Indicator):
     lines = ('trend',)
     params = (('period', 90),)
 
@@ -75,7 +75,7 @@
         x = np.arange(len(returns))
         slope, _, rvalue, _, _ = linregress(x, returns)
         annualized = (1 + slope) ** 252
-        self.lines.trend[0] = annualized * (rvalue ** 2)` 
+        self.lines.trend[0] = annualized * (rvalue ** 2)
 ```
 
 **使用力量**，即使用已经存在的东西，比如 `PeriodN` 指标，它：
@@ -85,12 +85,12 @@
 因此，这可能更好
 
 ```py
-`class Momentum(bt.ind.PeriodN):
+class Momentum(bt.ind.PeriodN):
     lines = ('trend',)
     params = dict(period=50)
 
     def next(self):
-        ...` 
+        ...
 ```
 
 我们已经跳过了为了使用 `addminperiod` 而定义 `__init__` 的需要，这只应在特殊情况下使用。
@@ -100,7 +100,7 @@
 有了这个想法，一个人可以将以下内容想象成潜在的代码
 
 ```py
-`def momentum_func(the_array):
+def momentum_func(the_array):
     r = np.log(the_array)
     slope, _, rvalue, _, _ = linregress(np.arange(len(r)), r)
     annualized = (1 + slope) ** 252
@@ -109,7 +109,7 @@
 class Momentum(bt.ind.OperationN):
     lines = ('trend',)
     params = dict(period=50)
-    func = momentum_func` 
+    func = momentum_func
 ```
 
 这意味着我们已经将指标的复杂性移出了指标。我们甚至可以从外部库导入 `momentum_func`，如果底层函数发生变化，指标就不需要进行任何更改以反映新的行为。作为额外的奖励，我们拥有**纯粹**的声明性指标。没有 `__init__`，没有 `addminperiod`，也没有 `next`。
@@ -119,7 +119,7 @@ class Momentum(bt.ind.OperationN):
 让我们看看 `__init__` 部分。
 
 ```py
-`class Strategy(bt.Strategy):
+class Strategy(bt.Strategy):
     def __init__(self):
         self.i = 0
         self.inds = {}
@@ -135,7 +135,7 @@ class Momentum(bt.ind.OperationN):
             self.inds[d]["sma100"] = bt.indicators.SimpleMovingAverage(d.close,
                                                                        period=100)
             self.inds[d]["atr20"] = bt.indicators.ATR(d,
-                                                      period=20)` 
+                                                      period=20)
 ```
 
 关于风格的一些事情：
@@ -151,7 +151,7 @@ class Momentum(bt.ind.OperationN):
 一个人应该考虑的第一件事：*如果可能的话，将一切都保持为参数*。因此
 
 ```py
-`class Strategy(bt.Strategy):
+class Strategy(bt.Strategy):
     params = dict(
         momentum=Momentum,  # parametrize the momentum and its period
         momentum_period=90,
@@ -178,7 +178,7 @@ class Momentum(bt.ind.OperationN):
         for d in self.stocks:
             self.inds[d]['mom'] = self.p.momentum(d, period=self.momentum_period)
             self.inds[d]['mav'] = self.p.movav(d, period=self.p.stock_period)
-            self.inds[d]['vol'] = self.p.volatr(d, period=self.p.vol_period)` 
+            self.inds[d]['vol'] = self.p.volatr(d, period=self.p.vol_period)
 ```
 
 通过使用 `params` 并更改几个命名约定，我们使 `__init__`（以及策略）完全可定制且通用（任何地方都没有 `spy` 的引用）
@@ -195,7 +195,7 @@ class Momentum(bt.ind.OperationN):
             self.rebalance_portfolio()
         if self.i % 10 == 0:
             self.rebalance_positions()
-        self.i += 1` 
+        self.i += 1
 ```
 
 Python 的 `len` 范式正是所需之处。让我们来使用它。
@@ -206,7 +206,7 @@ Python 的 `len` 范式正是所需之处。让我们来使用它。
         if l % 5 == 0:
             self.rebalance_portfolio()
         if l % 10 == 0:
-            self.rebalance_positions()` 
+            self.rebalance_positions()
 ```
 
 正如你所见，没有必要保留 `self.i` 计数器。策略和大多数对象的长度由系统一直提供、计算和更新。
@@ -218,7 +218,7 @@ Python 的 `len` 范式正是所需之处。让我们来使用它。
 ```py
  `def prenext(self):
         # call next() even when data is not available for all tickers
-        self.next()` 
+        self.next()
 ```
 
 在进入 `next` 时没有保障
@@ -227,7 +227,7 @@ Python 的 `len` 范式正是所需之处。让我们来使用它。
  `def next(self):
         if self.i % 5 == 0:
             self.rebalance_portfolio()
-        ...` 
+        ...
 ```
 
 好吧，我们知道正在使用一个无幸存者偏差的数据集，但一般来说，不保护 `prenext => next` 转发不是一个好主意。
@@ -247,7 +247,7 @@ Python 的 `len` 范式正是所需之处。让我们来使用它。
 
     def next(self):
         d_with_len = [d for d in self.datas if len(d)]
-        ...` 
+        ...
 ```
 
 这意味着只有来自`self.datas`的子集`d_with_len`才能得到保证使用。
@@ -278,7 +278,7 @@ Python 的 `len` 范式正是所需之处。让我们来使用它。
 
     def next(self):
         # we can now always work with self.d_with_len with no calculation
-        ...` 
+        ...
 ```
 
 保护计算已移至`prenext`，当保证满足时将停止调用它。然后将调用`nextstart`，通过重写它，我们可以重置数据集的`list`，以便与之一起工作，即：`self.datas`
@@ -304,7 +304,7 @@ Python 的 `len` 范式正是所需之处。让我们来使用它。
 让我们在我们的策略中为`params`和`__init__`增加一点魔法
 
 ```py
-`class Strategy(bt.Strategy):
+class Strategy(bt.Strategy):
     params = dict(
        ...
        rebal_weekday=5,  # rebalance 5 is Friday
@@ -317,7 +317,7 @@ Python 的 `len` 范式正是所需之处。让我们来使用它。
             weekdays=[self.p.rebal_weekday],
             weekcarry=True,  # if a day isn't there, execute on the next
         )
-        ...` 
+        ...
 ```
 
 现在我们已经准备好知道今天是星期五了。即使星期五恰好是交易日，添加`weekcarry=True`也确保我们会在星期一收到通知（或者如果星期一也是假日则为星期二，等等）
@@ -325,8 +325,8 @@ Python 的 `len` 范式正是所需之处。让我们来使用它。
 定时器的通知在`notify_timer`中进行
 
 ```py
-`def notify_timer(self, timer, when, *args, **kwargs):
-    self.rebalance_portfolio()` 
+def notify_timer(self, timer, when, *args, **kwargs):
+    self.rebalance_portfolio()
 ```
 
 因为原始代码中还有每`10`个条形图进行一次`rebalance_positions`，所以可以：
@@ -353,7 +353,7 @@ Python 的 `len` 范式正是所需之处。让我们来使用它。
 
 ```py
  `if self.spy < self.spy_sma200:
-            return` 
+            return
 ```
 
 我们可以做以下事情。首先在`__init__`期间
@@ -361,14 +361,14 @@ Python 的 `len` 范式正是所需之处。让我们来使用它。
 ```py
  `def __init__(self):
         ...
-        self.spy_filter = self.spe < self.spy_sma200` 
+        self.spy_filter = self.spe < self.spy_sma200
 ```
 
 以后
 
 ```py
  `if self.spy_filter:
-            return` 
+            return
 ```
 
 考虑到这一点，如果我们想要改变`spy_filter`条件，我们只需在`__init__`中执行一次，而不是在代码中的多个位置执行。
@@ -380,7 +380,7 @@ Python 的 `len` 范式正是所需之处。让我们来使用它。
         for i, d in enumerate(self.rankings):
             if self.getposition(self.data).size:
                 if i > num_stocks * 0.2 or d < self.inds[d]["sma100"]:
-                    self.close(d)` 
+                    self.close(d)
 ```
 
 这也可以在`__init__`期间预先构建，并因此更改为如下所示
@@ -390,7 +390,7 @@ Python 的 `len` 范式正是所需之处。让我们来使用它。
         for i, d in enumerate(self.rankings):
             if self.getposition(self.data).size:
                 if i > num_stocks * 0.2 or self.inds[d]['sma_signal']:
-                    self.close(d)` 
+                    self.close(d)
 ```
 
 **个人喜好 2**

@@ -7,7 +7,7 @@
 行：
 
 ```py
-`* close
+* close
 
 * low
 
@@ -19,13 +19,13 @@
 
 * openinterest
 
-* datetime` 
+* datetime
 ```
 
 参数：
 
 ```py
-`* dataname (None)
+* dataname (None)
 
 * name ()
 
@@ -49,7 +49,7 @@
 
 * qcheck (0.0)
 
-* calendar (None)` 
+* calendar (None)
 ```
 
 ### BacktraderCSVData
@@ -63,7 +63,7 @@
 行：
 
 ```py
-`* close
+* close
 
 * low
 
@@ -75,13 +75,13 @@
 
 * openinterest
 
-* datetime` 
+* datetime
 ```
 
 参数：
 
 ```py
-`* dataname (None)
+* dataname (None)
 
 * name ()
 
@@ -109,7 +109,7 @@
 
 * headers (True)
 
-* separator (,)` 
+* separator (,)
 ```
 
 ### CSVDataBase
@@ -127,7 +127,7 @@
 行：
 
 ```py
-`* close
+* close
 
 * low
 
@@ -139,13 +139,13 @@
 
 * openinterest
 
-* datetime` 
+* datetime
 ```
 
 参数：
 
 ```py
-`* dataname (None)
+* dataname (None)
 
 * name ()
 
@@ -173,7 +173,7 @@
 
 * headers (True)
 
-* separator (,)` 
+* separator (,)
 ```
 
 ### Chainer
@@ -183,7 +183,7 @@
 行：
 
 ```py
-`* close
+* close
 
 * low
 
@@ -195,13 +195,13 @@
 
 * openinterest
 
-* datetime` 
+* datetime
 ```
 
 参数：
 
 ```py
-`* dataname (None)
+* dataname (None)
 
 * name ()
 
@@ -225,7 +225,7 @@
 
 * qcheck (0.0)
 
-* calendar (None)` 
+* calendar (None)
 ```
 
 ### DataClone
@@ -233,7 +233,7 @@
 行：
 
 ```py
-`* close
+* close
 
 * low
 
@@ -245,13 +245,13 @@
 
 * openinterest
 
-* datetime` 
+* datetime
 ```
 
 参数：
 
 ```py
-`* dataname (None)
+* dataname (None)
 
 * name ()
 
@@ -275,7 +275,7 @@
 
 * qcheck (0.0)
 
-* calendar (None)` 
+* calendar (None)
 ```
 
 ### DataFiller
@@ -293,20 +293,20 @@
 参数：
 
 ```py
-`* `fill_price` (def: None): if None (or evaluates to False),the
+* `fill_price` (def: None): if None (or evaluates to False),the
   closing price will be used, else the passed value (which can be
   for example ‘NaN’ to have a missing bar in terms of evaluation but
   present in terms of time
 
 * `fill_vol` (def: NaN): used to fill the volume of missing bars
 
-* `fill_oi` (def: NaN): used to fill the openinterest of missing bars` 
+* `fill_oi` (def: NaN): used to fill the openinterest of missing bars
 ```
 
 行：
 
 ```py
-`* close
+* close
 
 * low
 
@@ -318,13 +318,13 @@
 
 * openinterest
 
-* datetime` 
+* datetime
 ```
 
 参数：
 
 ```py
-`* dataname (None)
+* dataname (None)
 
 * name ()
 
@@ -354,7 +354,7 @@
 
 * fill_vol (nan)
 
-* fill_oi (nan)` 
+* fill_oi (nan)
 ```
 
 ### DataFilter
@@ -374,7 +374,7 @@
 行：
 
 ```py
-`* close
+* close
 
 * low
 
@@ -386,13 +386,13 @@
 
 * openinterest
 
-* datetime` 
+* datetime
 ```
 
 参数：
 
 ```py
-`* dataname (None)
+* dataname (None)
 
 * name ()
 
@@ -418,7 +418,7 @@
 
 * calendar (None)
 
-* funcfilter (None)` 
+* funcfilter (None)
 ```
 
 ### GenericCSVData
@@ -456,7 +456,7 @@
 行：
 
 ```py
-`* close
+* close
 
 * low
 
@@ -468,13 +468,13 @@
 
 * openinterest
 
-* datetime` 
+* datetime
 ```
 
 参数：
 
 ```py
-`* dataname (None)
+* dataname (None)
 
 * name ()
 
@@ -524,7 +524,7 @@
 
 * volume (5)
 
-* openinterest (6)` 
+* openinterest (6)
 ```
 
 ### IBData
@@ -658,7 +658,7 @@
 Lines:
 
 ```py
-`* close
+* close
 
 * low
 
@@ -670,13 +670,13 @@ Lines:
 
 * openinterest
 
-* datetime` 
+* datetime
 ```
 
 参数：
 
 ```py
-`* dataname (None)
+* dataname (None)
 
 * name ()
 
@@ -724,7 +724,7 @@ Lines:
 
 * latethrough (False)
 
-* tradename (None)` 
+* tradename (None)
 ```
 
 ### InfluxDB
@@ -732,7 +732,7 @@ Lines:
 Lines:
 
 ```py
-`* close
+* close
 
 * low
 
@@ -744,13 +744,13 @@ Lines:
 
 * openinterest
 
-* datetime` 
+* datetime
 ```
 
 参数：
 
 ```py
-`* dataname (None)
+* dataname (None)
 
 * name ()
 
@@ -798,7 +798,7 @@ Lines:
 
 * volume (volume)
 
-* ointerest (oi)` 
+* ointerest (oi)
 ```
 
 ### MT4CSVData
@@ -814,7 +814,7 @@ Lines:
 Lines:
 
 ```py
-`* close
+* close
 
 * low
 
@@ -826,13 +826,13 @@ Lines:
 
 * openinterest
 
-* datetime` 
+* datetime
 ```
 
 参数：
 
 ```py
-`* dataname (None)
+* dataname (None)
 
 * name ()
 
@@ -882,7 +882,7 @@ Lines:
 
 * volume (6)
 
-* openinterest (-1)` 
+* openinterest (-1)
 ```
 
 ### OandaData
@@ -944,7 +944,7 @@ Oanda 数据源。
 此数据源仅支持与 OANDA API 开发人员指南中的定义相符的`timeframe`和`compression`的此映射：
 
 ```py
-`(TimeFrame.Seconds, 5): 'S5',
+(TimeFrame.Seconds, 5): 'S5',
 (TimeFrame.Seconds, 10): 'S10',
 (TimeFrame.Seconds, 15): 'S15',
 (TimeFrame.Seconds, 30): 'S30',
@@ -964,7 +964,7 @@ Oanda 数据源。
 (TimeFrame.Minutes, 480): 'H8',
 (TimeFrame.Days, 1): 'D',
 (TimeFrame.Weeks, 1): 'W',
-(TimeFrame.Months, 1): 'M',` 
+(TimeFrame.Months, 1): 'M',
 ```
 
 任何其他组合都将被拒绝
@@ -972,7 +972,7 @@ Oanda 数据源。
 行：
 
 ```py
-`* close
+* close
 
 * low
 
@@ -984,13 +984,13 @@ Oanda 数据源。
 
 * openinterest
 
-* datetime` 
+* datetime
 ```
 
 参数：
 
 ```py
-`* dataname (None)
+* dataname (None)
 
 * name ()
 
@@ -1034,7 +1034,7 @@ Oanda 数据源。
 
 * reconnections (-1)
 
-* reconntimeout (5.0)` 
+* reconntimeout (5.0)
 ```
 
 ### PandasData
@@ -1070,7 +1070,7 @@ Oanda 数据源。
 行：
 
 ```py
-`* close
+* close
 
 * low
 
@@ -1082,13 +1082,13 @@ Oanda 数据源。
 
 * openinterest
 
-* datetime` 
+* datetime
 ```
 
 参数：
 
 ```py
-`* dataname (None)
+* dataname (None)
 
 * name ()
 
@@ -1128,7 +1128,7 @@ Oanda 数据源。
 
 * volume (-1)
 
-* openinterest (-1)` 
+* openinterest (-1)
 ```
 
 ### PandasDirectData
@@ -1146,7 +1146,7 @@ Oanda 数据源。
 行：
 
 ```py
-`* close
+* close
 
 * low
 
@@ -1158,13 +1158,13 @@ Oanda 数据源。
 
 * openinterest
 
-* datetime` 
+* datetime
 ```
 
 参数：
 
 ```py
-`* dataname (None)
+* dataname (None)
 
 * name ()
 
@@ -1202,7 +1202,7 @@ Oanda 数据源。
 
 * volume (5)
 
-* openinterest (6)` 
+* openinterest (6)
 ```
 
 ### Quandl
@@ -1246,7 +1246,7 @@ Oanda 数据源。
 行：
 
 ```py
-`* close
+* close
 
 * low
 
@@ -1258,13 +1258,13 @@ Oanda 数据源。
 
 * openinterest
 
-* datetime` 
+* datetime
 ```
 
 参数：
 
 ```py
-`* dataname (None)
+* dataname (None)
 
 * name ()
 
@@ -1310,7 +1310,7 @@ Oanda 数据源。
 
 * apikey (None)
 
-* dataset (WIKI)` 
+* dataset (WIKI)
 ```
 
 ### QuandlCSV
@@ -1340,7 +1340,7 @@ Oanda 数据源。
 行：
 
 ```py
-`* close
+* close
 
 * low
 
@@ -1352,13 +1352,13 @@ Oanda 数据源。
 
 * openinterest
 
-* datetime` 
+* datetime
 ```
 
 参数：
 
 ```py
-`* dataname (None)
+* dataname (None)
 
 * name ()
 
@@ -1394,7 +1394,7 @@ Oanda 数据源。
 
 * round (False)
 
-* decimals (2)` 
+* decimals (2)
 ```
 
 ### RollOver
@@ -1424,7 +1424,7 @@ Oanda 数据源。
 如果商品在三月的第三个星期五到期，`checkdate` 可能会在到期周的整个周返回 `True`。
 
 ```py
-`* `False`: the expiration cannot take place` 
+* `False`: the expiration cannot take place
 ```
 
 +   `checkcondition`（默认值：`None`）
@@ -1452,13 +1452,13 @@ Oanda 数据源。
 跟随 `checkdate` 的示例，这可能表示仅当 `d0` 中的 *volume* 已经小于 `d1` 中的 volume 时，才能发生滚动
 
 ```py
-`* `False`: the expiration cannot take place` 
+* `False`: the expiration cannot take place
 ```
 
 行：
 
 ```py
-`* close
+* close
 
 * low
 
@@ -1470,13 +1470,13 @@ Oanda 数据源。
 
 * openinterest
 
-* datetime` 
+* datetime
 ```
 
 参数：
 
 ```py
-`* dataname (None)
+* dataname (None)
 
 * name ()
 
@@ -1504,7 +1504,7 @@ Oanda 数据源。
 
 * checkdate (None)
 
-* checkcondition (None)` 
+* checkcondition (None)
 ```
 
 ### SierraChartCSVData
@@ -1520,7 +1520,7 @@ Oanda 数据源。
 行：
 
 ```py
-`* close
+* close
 
 * low
 
@@ -1532,13 +1532,13 @@ Oanda 数据源。
 
 * openinterest
 
-* datetime` 
+* datetime
 ```
 
 参数：
 
 ```py
-`* dataname (None)
+* dataname (None)
 
 * name ()
 
@@ -1588,7 +1588,7 @@ Oanda 数据源。
 
 * volume (5)
 
-* openinterest (6)` 
+* openinterest (6)
 ```
 
 ### VCData
@@ -1626,7 +1626,7 @@ VisualChart 数据源。
 行数：
 
 ```py
-`* close
+* close
 
 * low
 
@@ -1638,13 +1638,13 @@ VisualChart 数据源。
 
 * openinterest
 
-* datetime` 
+* datetime
 ```
 
 参数：
 
 ```py
-`* dataname (None)
+* dataname (None)
 
 * name ()
 
@@ -1676,7 +1676,7 @@ VisualChart 数据源。
 
 * tradename (None)
 
-* usetimezones (True)` 
+* usetimezones (True)
 ```
 
 ### VChartCSVData
@@ -1690,7 +1690,7 @@ VisualChart 数据源。
 行数：
 
 ```py
-`* close
+* close
 
 * low
 
@@ -1702,13 +1702,13 @@ VisualChart 数据源。
 
 * openinterest
 
-* datetime` 
+* datetime
 ```
 
 参数：
 
 ```py
-`* dataname (None)
+* dataname (None)
 
 * name ()
 
@@ -1736,7 +1736,7 @@ VisualChart 数据源。
 
 * headers (True)
 
-* separator (,)` 
+* separator (,)
 ```
 
 ### VChartData
@@ -1754,7 +1754,7 @@ VisualChart 数据源。
 行数：
 
 ```py
-`* close
+* close
 
 * low
 
@@ -1766,13 +1766,13 @@ VisualChart 数据源。
 
 * openinterest
 
-* datetime` 
+* datetime
 ```
 
 参数：
 
 ```py
-`* dataname (None)
+* dataname (None)
 
 * name ()
 
@@ -1796,7 +1796,7 @@ VisualChart 数据源。
 
 * qcheck (0.0)
 
-* calendar (None)` 
+* calendar (None)
 ```
 
 ### VChartFile
@@ -1810,7 +1810,7 @@ VisualChart 数据源。
 行数：
 
 ```py
-`* close
+* close
 
 * low
 
@@ -1822,13 +1822,13 @@ VisualChart 数据源。
 
 * openinterest
 
-* datetime` 
+* datetime
 ```
 
 参数：
 
 ```py
-`* dataname (None)
+* dataname (None)
 
 * name ()
 
@@ -1852,7 +1852,7 @@ VisualChart 数据源。
 
 * qcheck (0.0)
 
-* calendar (None)` 
+* calendar (None)
 ```
 
 ### YahooFinanceCSVData
@@ -1894,7 +1894,7 @@ VisualChart 数据源。
 行数：
 
 ```py
-`* close
+* close
 
 * low
 
@@ -1908,13 +1908,13 @@ VisualChart 数据源。
 
 * datetime
 
-* adjclose` 
+* adjclose
 ```
 
 参数：
 
 ```py
-`* dataname (None)
+* dataname (None)
 
 * name ()
 
@@ -1956,7 +1956,7 @@ VisualChart 数据源。
 
 * roundvolume (False)
 
-* swapcloses (False)` 
+* swapcloses (False)
 ```
 
 ### YahooFinanceData
@@ -2000,7 +2000,7 @@ VisualChart 数据源。
 行：
 
 ```py
-`* close
+* close
 
 * low
 
@@ -2014,13 +2014,13 @@ VisualChart 数据源。
 
 * datetime
 
-* adjclose` 
+* adjclose
 ```
 
 参数：
 
 ```py
-`* dataname (None)
+* dataname (None)
 
 * name ()
 
@@ -2072,7 +2072,7 @@ VisualChart 数据源。
 
 * urldown ([`query1.finance.yahoo.com/v7/finance/download`](https://query1.finance.yahoo.com/v7/finance/download))
 
-* retries (3)` 
+* retries (3)
 ```
 
 ### YahooLegacyCSV
@@ -2082,7 +2082,7 @@ VisualChart 数据源。
 行：
 
 ```py
-`* close
+* close
 
 * low
 
@@ -2096,13 +2096,13 @@ VisualChart 数据源。
 
 * datetime
 
-* adjclose` 
+* adjclose
 ```
 
 参数：
 
 ```py
-`* dataname (None)
+* dataname (None)
 
 * name ()
 
@@ -2146,5 +2146,5 @@ VisualChart 数据源。
 
 * swapcloses (False)
 
-* version ()` 
+* version ()
 ```

@@ -3,7 +3,7 @@
 > 原文：[`www.backtrader.com/recipes/indicators/donchian/donchian/`](https://www.backtrader.com/recipes/indicators/donchian/donchian/)
 
 ```py
-`class DonchianChannels(bt.Indicator):
+class DonchianChannels(bt.Indicator):
   '''
  Params Note:
  - `lookback` (default: -1)
@@ -36,5 +36,5 @@
 
         self.l.dch = bt.ind.Highest(hi, period=self.p.period)
         self.l.dcl = bt.ind.Lowest(lo, period=self.p.period)
-        self.l.dcm = (self.l.dch + self.l.dcl) / 2.0  # avg of the above` 
+        self.l.dcm = (self.l.dch + self.l.dcl) / 2.0  # avg of the above
 ```

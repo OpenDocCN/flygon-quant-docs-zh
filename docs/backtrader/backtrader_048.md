@@ -43,13 +43,13 @@
 所以它可以是：
 
 ```py
-`class DummyInd(bt.Indicator):
+class DummyInd(bt.Indicator):
     lines = ('dummyline',)
 
     params = (('value', 5),)
 
     def __init__(self):
-        self.lines.dummyline = bt.Max(0.0, self.params.value)` 
+        self.lines.dummyline = bt.Max(0.0, self.params.value)
 ```
 
 完成！指标将始终输出相同的值：如果大于 0.0，则为 0.0 或 self.params.value。
@@ -57,13 +57,13 @@
 相同的指标，但使用了下一个方法：
 
 ```py
-`class DummyInd(bt.Indicator):
+class DummyInd(bt.Indicator):
     lines = ('dummyline',)
 
     params = (('value', 5),)
 
     def next(self):
-        self.lines.dummyline[0] = max(0.0, self.params.value)` 
+        self.lines.dummyline[0] = max(0.0, self.params.value)
 ```
 
 完成！相同的行为。
@@ -91,7 +91,7 @@
 第三个版本提供了一个额外的`once`方法来优化计算：
 
 ```py
-`class DummyInd(bt.Indicator):
+class DummyInd(bt.Indicator):
     lines = ('dummyline',)
 
     params = (('value', 5),)
@@ -103,7 +103,7 @@
        dummy_array = self.lines.dummyline.array
 
        for i in xrange(start, end):
-           dummy_array[i] = max(0.0, self.params.value)` 
+           dummy_array[i] = max(0.0, self.params.value)
 ```
 
 更有效，但开发`once`方法已迫使深入挖掘。实际上已经查看了内部情况。
@@ -127,13 +127,13 @@
 这是一个*简单移动平均*的潜在实现：
 
 ```py
-`class SimpleMovingAverage1(Indicator):
+class SimpleMovingAverage1(Indicator):
     lines = ('sma',)
     params = (('period', 20),)
 
     def next(self):
         datasum = math.fsum(self.data.get(size=self.p.period))
-        self.lines.sma[0] = datasum / self.p.period` 
+        self.lines.sma[0] = datasum / self.p.period
 ```
 
 尽管看起来合理，但平台并不知道最小周期是多少，即使参数被命名为“period”（名称可能会误导，并且一些指标接收到多个具有不同用途的“period”）
@@ -161,7 +161,7 @@
 缓解情况的方法如下：
 
 ```py
-`class SimpleMovingAverage1(Indicator):
+class SimpleMovingAverage1(Indicator):
     lines = ('sma',)
     params = (('period', 20),)
 
@@ -170,7 +170,7 @@
 
     def next(self):
         datasum = math.fsum(self.data.get(size=self.p.period))
-        self.lines.sma[0] = datasum / self.p.period` 
+        self.lines.sma[0] = datasum / self.p.period
 ```
 
 `addminperiod` 方法告诉系统考虑该指标所需的额外*周期*柱到任何可能存在的最小周期。
@@ -180,7 +180,7 @@
 带有直方图的快速*MACD*实现：
 
 ```py
-`from backtrader.indicators import EMA
+from backtrader.indicators import EMA
 
 class MACD(Indicator):
     lines = ('macd', 'signal', 'histo',)
@@ -191,7 +191,7 @@ class MACD(Indicator):
         me2 = EMA(self.data, period=self.p.period_me2)
         self.l.macd = me1 - me2
         self.l.signal = EMA(self.l.macd, period=self.p.period_signal)
-        self.l.histo = self.l.macd - self.l.signal` 
+        self.l.histo = self.l.macd - self.l.signal
 ```
 
 完成！不需要考虑最小周期。
@@ -213,7 +213,7 @@ class MACD(Indicator):
 让我们开发一个简单的自定义指标，用于“指示”移动平均线（可以通过参数进行修改）是否高于给定数据：
 
 ```py
-`import backtrader as bt
+import backtrader as bt
 import backtrader.indicators as btind
 
 class OverUnderMovAv(bt.Indicator):
@@ -222,7 +222,7 @@ class OverUnderMovAv(bt.Indicator):
 
     def __init__(self):
         movav = self.p.movav(self.data, period=self.p.period)
-        self.l.overunder = bt.Cmp(movav, self.data)` 
+        self.l.overunder = bt.Cmp(movav, self.data)
 ```
 
 完成！如果平均值高于数据，则指标将具有“1”值，如果低于数据，则为“-1”。
@@ -232,7 +232,7 @@ class OverUnderMovAv(bt.Indicator):
 尽管在*绘图*部分可以看到更多内容，并且为了在绘图世界中表现良好，可以添加一些内容：
 
 ```py
-`import backtrader as bt
+import backtrader as bt
 import backtrader.indicators as btind
 
 class OverUnderMovAv(bt.Indicator):
@@ -267,5 +267,5 @@ class OverUnderMovAv(bt.Indicator):
 
     def __init__(self):
         movav = self.p.movav(self.data, period=self.p.period)
-        self.l.overunder = bt.Cmp(movav, self.data)` 
+        self.l.overunder = bt.Cmp(movav, self.data)
 ```

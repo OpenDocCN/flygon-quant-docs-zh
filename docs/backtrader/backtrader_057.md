@@ -19,13 +19,13 @@
 使用模式尽量保持用户友好。因此，如果策略中的逻辑决定发出订单，使用`OCO`可以这样做：
 
 ```py
-`def next(self):
+def next(self):
     ...
     o1 = self.buy(...)
     ...
     o2 = self.buy(..., oco=o1)
     ...
-    o3 = self.buy(..., oco=o1)  # or even oco=o2, o2 is already in o1 group` 
+    o3 = self.buy(..., oco=o1)  # or even oco=o2, o2 is already in o1 group
 ```
 
 简单。第 1 个订单`o1`将成为组长。`o2`和`o3`通过指定`o1`的`oco`命名参数成为**OCO 组**的一部分。请注意代码片段中的注释指出，`o3`也可以通过指定`o2`（已经是组的一部分）成为组的一部分
@@ -37,7 +37,7 @@
 下面的示例展示了`OCO`概念的运用。一个带有绘图的标准执行：
 
 ```py
-`$ ./oco.py --broker cash=50000 --plot` 
+$ ./oco.py --broker cash=50000 --plot
 ```
 
 注意
@@ -73,7 +73,7 @@
 为了尝试跟踪实际执行情况，会产生文本输出。其中一些内容：
 
 ```py
-`2005-01-28: Oref 1 / Buy at 2941.11055
+2005-01-28: Oref 1 / Buy at 2941.11055
 2005-01-28: Oref 2 / Buy at 2896.7722
 2005-01-28: Oref 3 / Buy at 2822.87495
 2005-01-31: Order ref: 1 / Type Buy / Status Submitted
@@ -111,7 +111,7 @@
 2006-12-12: Order ref: 65 / Type Buy / Status Accepted
 2006-12-15: Order ref: 63 / Type Buy / Status Expired
 2006-12-15: Order ref: 65 / Type Buy / Status Canceled
-2006-12-15: Order ref: 64 / Type Buy / Status Canceled` 
+2006-12-15: Order ref: 64 / Type Buy / Status Canceled
 ```
 
 出现了以下情况：
@@ -125,7 +125,7 @@
 现在让我们来检查一下没有`OCO`时的行为：
 
 ```py
-`$ ./oco.py --strat do_oco=False --broker cash=50000
+$ ./oco.py --strat do_oco=False --broker cash=50000
 
 2005-01-28: Oref 1 / Buy at 2941.11055
 2005-01-28: Oref 2 / Buy at 2896.7722
@@ -136,7 +136,7 @@
 2005-01-31: Order ref: 1 / Type Buy / Status Accepted
 2005-01-31: Order ref: 2 / Type Buy / Status Accepted
 2005-01-31: Order ref: 3 / Type Buy / Status Accepted
-2005-02-01: Order ref: 1 / Type Buy / Status Expired` 
+2005-02-01: Order ref: 1 / Type Buy / Status Expired
 ```
 
 这就是全部，其实并不多（没有顺序执行，也不需要太多图表）
@@ -152,7 +152,7 @@
 ## 使用示例
 
 ```py
-`$ ./oco.py --help
+$ ./oco.py --help
 usage: oco.py [-h] [--data0 DATA0] [--fromdate FROMDATE] [--todate TODATE]
               [--cerebro kwargs] [--broker kwargs] [--sizer kwargs]
               [--strat kwargs] [--plot [kwargs]]
@@ -169,13 +169,13 @@ optional arguments:
   --broker kwargs      kwargs in key=value format (default: )
   --sizer kwargs       kwargs in key=value format (default: )
   --strat kwargs       kwargs in key=value format (default: )
-  --plot [kwargs]      kwargs in key=value format (default: )` 
+  --plot [kwargs]      kwargs in key=value format (default: )
 ```
 
 ## 代码示例
 
 ```py
-`from __future__ import (absolute_import, division, print_function,
+from __future__ import (absolute_import, division, print_function,
                         unicode_literals)
 
 import argparse
@@ -332,5 +332,5 @@ def parse_args(pargs=None):
     return parser.parse_args(pargs)
 
 if __name__ == '__main__':
-    runstrat()` 
+    runstrat()
 ```
