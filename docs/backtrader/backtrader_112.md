@@ -183,20 +183,20 @@ class MyStrategy(bt.Strategy)
 +   如果用户没有传递特定函数，则使用占位符函数的保护措施：
 
     ```py
-    `# Safeguard for not set function
+    # Safeguard for not set function
     self._fn = self.p.fn or lambda x, y: x` 
     ```
 
 +   并且我们使用函数（或占位符）进行计算：
 
     ```py
-    `self.lines.dyn_highest[0] = self._fn(self.data[0], self.dyn_highest[-1])` 
+    self.lines.dyn_highest[0] = self._fn(self.data[0], self.dyn_highest[-1])` 
     ```
 
 +   在我们（现在命名为）`DynamicFn` 指标的调用中声明我们想要使用的函数… `max`（这里没有惊喜）：
 
     ```py
-    `self.dyn_highest = DynamicHighest(self.data.high, fn=max)` 
+    self.dyn_highest = DynamicHighest(self.data.high, fn=max)` 
     ```
 
 今天剩下的不多了…享受它！！！

@@ -88,7 +88,7 @@
   bar
 
 * `bardist` (default: `0.015` 1.5%) Distance to max/min when
-  `barplot` is `True`
+  `barplot` is `True
 ```
 
 ## 回撤

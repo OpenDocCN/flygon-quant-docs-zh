@@ -15,7 +15,7 @@
 1.  在模块`errors`内，例如可以通过以下方式访问：
 
     ```py
-    `import backtrader as bt
+    import backtrader as bt
 
     class Strategy(bt.Strategy):
 
@@ -27,7 +27,7 @@
 1.  直接来自`backtrader`，如下所示：
 
     ```py
-    `import backtrader as bt
+    import backtrader as bt
 
     class Strategy(bt.Strategy):
 

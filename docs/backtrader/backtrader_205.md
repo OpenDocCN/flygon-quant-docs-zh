@@ -11,7 +11,7 @@ Google 提供的此指标参考文献：
 两个来源对公式都表示同意，尽管术语不同（见下文）。 应按以下方式计算 *Connors RSI*：
 
 ```py
- `CRSI(3, 2, 100) = [RSI(3) + RSI(Streak, 2) + PercentRank(100)] / 3
+ CRSI(3, 2, 100) = [RSI(3) + RSI(Streak, 2) + PercentRank(100)] / 3
 ```
 
 注意

@@ -35,7 +35,7 @@
 +   `LongOnly`：如果当前位置为 0，则返回固定大小的仓位，并且如果已经在市场上，则返回相同的固定大小以关闭它。
 
     ```py
-    `class LongOnly(bt.Sizer):
+    class LongOnly(bt.Sizer):
         params = (('stake', 1),)
 
         def _getsizing(self, comminfo, cash, data, isbuy):
@@ -53,7 +53,7 @@
 +   `FixedReverser`：如果市场上没有，将返回固定大小的赌注，如果已经在市场上，则将返回加倍的固定大小的赌注，以便进行逆转
 
     ```py
-    `class FixedReverser(bt.Sizer):
+    class FixedReverser(bt.Sizer):
         params = (('stake', 1),)
 
         def _getsizing(self, comminfo, cash, data, isbuy):
@@ -87,7 +87,7 @@ class CloseSMA(bt.Strategy):
 与下面的执行中看到的相同策略通过在样本中使用此代码（通过开关 `--longonly` 控制）仅通过更改 *sizer* 的行为从 *long-only* 变为 *long-short*。
 
 ```py
- `if args.longonly:
+ if args.longonly:
         cerebro.addsizer(LongOnly, stake=args.stake)
     else:
         cerebro.addsizer(FixedReverser, stake=args.stake)

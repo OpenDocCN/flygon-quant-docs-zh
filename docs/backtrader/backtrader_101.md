@@ -135,7 +135,7 @@ Length of data feeds:        20000
 要使用的选项将是`exactbars=True`。从`exactbars`的文档中（这是在实例化`Cerebro`时或在调用`run`时传递给`Cerebro`的参数）
 
 ```py
- ``True` or `1`: all “lines” objects reduce memory usage to the
+ `True` or `1`: all “lines” objects reduce memory usage to the
   automatically calculated minimum period.
 
   If a Simple Moving Average has a period of 30, the underlying data

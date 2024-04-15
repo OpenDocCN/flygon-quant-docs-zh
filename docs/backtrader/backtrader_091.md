@@ -210,7 +210,7 @@ sma.plotinfo.plotname = 'mysma'
     来自`MACDHisto`的示例。这里`histo`线路被绘制为`bar`，这是行业的事实标准。在`MACDHisto`的定义中可以找到以下定义：
 
     ```py
-    `lines = ('histo',)
+    lines = ('histo',)
     plotlines = dict(histo=dict(_method='bar', alpha=0.50, width=1.0))` 
     ```
 
@@ -241,7 +241,7 @@ sma.plotinfo.plotname = 'mysma'
     示例：
 
     ```py
-    `# Fill for myline when above other_line with colour red
+    # Fill for myline when above other_line with colour red
     plotlines = dict(
         myline=dict(_fill_gt('other_line', 'red'))
     )
@@ -351,7 +351,7 @@ plotlines = dict(percD=dict(_name='%D', ls='--'),
     从 `RSI` 指标的一个例子：
 
     ```py
-    `def _plotlabel(self):
+    def _plotlabel(self):
         plabels = [self.p.period]
         plabels += [self.p.movav] * self.p.notdefault('movav')
         return plabels` 
@@ -368,7 +368,7 @@ plotlines = dict(percD=dict(_name='%D', ls='--'),
     在绘图开始时调用，执行指标可能需要的任何特定初始化。再次，来自 `RSI` 的一个例子：
 
     ```py
-    `def _plotinit(self):
+    def _plotinit(self):
         self.plotinfo.plotyhlines = [self.p.upperband, self.p.lowerband]` 
     ```
 

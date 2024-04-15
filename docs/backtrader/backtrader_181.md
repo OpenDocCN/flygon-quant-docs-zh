@@ -21,7 +21,7 @@
 +   CSV 输出
 
     ```py
-    `- `datas` added to the system (can be switched off)
+    - `datas` added to the system (can be switched off)
 
     - `strategies` (a Strategy can have named lines)
 
@@ -66,7 +66,7 @@
 1.  使用`writer`参数到`cerebro`：
 
     ```py
-    `cerebro = bt.Cerebro(writer=True)` 
+    cerebro = bt.Cerebro(writer=True)` 
     ```
 
     这创建了一个默认实例。
@@ -74,7 +74,7 @@
 1.  具体添加：
 
     ```py
-    `cerebro = bt.Cerebro()
+    cerebro = bt.Cerebro()
 
     cerebro.addwriter(bt.WriterFile, csv=False)` 
     ```

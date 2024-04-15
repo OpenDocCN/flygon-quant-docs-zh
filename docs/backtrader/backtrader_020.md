@@ -378,7 +378,7 @@ cerebro.run()
 +   决定预加载和操作模式：
 
     ```py
-    `cerebro = bt.Cerebro(runonce=True, preload=True)` 
+    cerebro = bt.Cerebro(runonce=True, preload=True)` 
     ```
 
     这里有一个约束：`runonce`需要预加载（如果不是，批处理操作将无法运行）。当然，预加载数据源并不强制执行`runonce`
@@ -390,7 +390,7 @@ cerebro.run()
 +   绘图。在常规情况下，就像这样简单：
 
     ```py
-    `cerebro.run()
+    cerebro.run()
     cerebro.plot()` 
     ```
 
@@ -419,7 +419,7 @@ cerebro.run()
     请求优化如下：
 
     ```py
-    `cerebro.optstrategy(MyStrategy, period=xrange(10, 20))` 
+    cerebro.optstrategy(MyStrategy, period=xrange(10, 20))` 
     ```
 
     方法`optstrategy`具有与`addstrategy`相同的签名，但会进行额外的管理工作以确保优化按预期运行。一个策略可能期望一个*范围*作为策略的正常参数，而`addstrategy`不会对传递的参数做任何假设。
@@ -431,7 +431,7 @@ cerebro.run()
     如果开发了更复杂的策略并具有额外的参数，它们都可以传递给*optstrategy*。必须不经过优化的参数可以直接传递，而无需最终用户创建一个仅包含一个值的虚拟可迭代对象。例如：
 
     ```py
-    `cerebro.optstrategy(MyStrategy, period=xrange(10, 20), factor=3.5)` 
+    cerebro.optstrategy(MyStrategy, period=xrange(10, 20), factor=3.5)` 
     ```
 
     `optstrategy`方法看到因子并在后台为具有单个元素的因子创建（所需的）虚拟可迭代对象（例如 3.5 中的示例）。

@@ -31,7 +31,7 @@
     鉴于标准的 `WriterFile` 不会默认输出 `csv`，以下 `addwriter` 调用将负责处理：
 
     ```py
-    `cerebro.addwriter(bt.WriterFile, csv=True)` 
+    cerebro.addwriter(bt.WriterFile, csv=True)` 
     ```
 
 ## 参考文献

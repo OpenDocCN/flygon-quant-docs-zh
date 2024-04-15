@@ -77,5 +77,5 @@
 参数：
 
 ```py
- `* `percents` (default: `100`)
+ * `percents` (default: `100`)
 ```

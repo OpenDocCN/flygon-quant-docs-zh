@@ -150,7 +150,7 @@ class MFI_Canonical(bt.Indicator):
 还要注意，*规范*版本也像逐步`next`代码一样考虑了公式中可能出现的*除零*情况。
 
 ```py
- `if neg_period == 0:
+ if neg_period == 0:
             self.lines.mfi[0] = 100
             return
 
@@ -160,7 +160,7 @@ class MFI_Canonical(bt.Indicator):
 这是另一种方法
 
 ```py
- `mfiratio = bt.ind.DivByZero(flowpos, flowneg, zero=100.0)
+ mfiratio = bt.ind.DivByZero(flowpos, flowneg, zero=100.0)
         self.l.mfi = 100.0 - 100.0 / (1.0 + mfiratio)
 ```
 

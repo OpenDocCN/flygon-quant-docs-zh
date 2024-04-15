@@ -78,7 +78,7 @@ class BuyAndHold_1(bt.Strategy):
 如果存在多个数据源，则可以使用命名参数`data`来选择目标，如下所示
 
 ```py
- `self.buy(data=the_desired_data, size=calculated_size)
+ self.buy(data=the_desired_data, size=calculated_size)
 ```
 
 下面的示例脚本可以按以下方式执行
@@ -145,7 +145,7 @@ class BuyAndHold_More(bt.Strategy):
 在`start`阶段添加了一个计时器
 
 ```py
- `# Add a timer which will be called on the 1st trading day of the month
+ # Add a timer which will be called on the 1st trading day of the month
         self.add_timer(
             bt.timer.SESSION_END,  # when it will be called
             monthdays=[1],  # called on the 1st day of the month
@@ -166,7 +166,7 @@ class BuyAndHold_More(bt.Strategy):
 计时器在`notify_timer`方法中接收，该方法被重写以执行市场操作。
 
 ```py
- `def notify_timer(self, timer, when, *args, **kwargs):
+ def notify_timer(self, timer, when, *args, **kwargs):
         # Add the influx of monthly cash to the broker
         self.broker.add_cash(self.p.monthly_cash)
 
@@ -276,7 +276,7 @@ class BuyAndHold_More_Fund(bt.Strategy):
 +   使用默认的起始值`100.0`激活基金模式。
 
     ```py
-     `def start(self):
+     def start(self):
             # Activate the fund mode and set the default value at 100
             self.broker.set_fundmode(fundmode=True, fundstartval=100.00)` 
     ```
@@ -286,7 +286,7 @@ class BuyAndHold_More_Fund(bt.Strategy):
 +   计算基金的`ROI`。因为起始值为`100.0`，所以操作相当简单
 
     ```py
-     `def stop(self):
+     def stop(self):
             # calculate the actual returns
             ...
             self.froi = self.broker.get_fundvalue() - self.val_start` 

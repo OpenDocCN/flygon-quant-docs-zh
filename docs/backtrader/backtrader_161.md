@@ -53,7 +53,7 @@ callable(order, price, ago)
     例如，要访问柱状图体积，请执行以下操作：
 
     ```py
-    `barvolume = order.data.volume[ago]` 
+    barvolume = order.data.volume[ago]` 
     ```
 
 可调用对象可以是一个函数，或者例如支持`__call__`方法的类的实例，如：

@@ -179,7 +179,7 @@ Cerebro:
 核心相当小：
 
 ```py
- `cerebro = bt.Cerebro()
+ cerebro = bt.Cerebro()
     for ticker in args.tickers.split(','):
         data = bt.feeds.YahooFinanceData(dataname=ticker,
                                          fromdate=fromdate, todate=todate)

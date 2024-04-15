@@ -136,7 +136,7 @@ Python 的`and`运算符不能被重载，迫使平台定义自己的`And`。其
     如果需要，有一个辅助的 `LinePlotterIndicator`，它可以使用以下方法绘制此类操作：
 
     ```py
-    `close_over_sma = self.data.close > self.sma
+    close_over_sma = self.data.close > self.sma
     LinePlotterIndicator(close_over_sma, name='Close_over_SMA')` 
     ```
 
@@ -186,7 +186,7 @@ myind = MyIndicator(self.data, someparams=value, subplot=True)
     像 DI+ 这样的指标将声明如下：
 
     ```py
-    `class DIPlus(bt.Indicator):
+    class DIPlus(bt.Indicator):
         plotinfo=dict(plotname='DI+')` 
     ```
 

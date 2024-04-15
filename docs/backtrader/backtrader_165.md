@@ -53,9 +53,9 @@
 !!! 注意
 
 ```py
- `If no `pytz` is detected and no `tzinfo` compatible instance is
+ If no `pytz` is detected and no `tzinfo` compatible instance is
   supplied to the *data feed*, the time delivered by the platform will be
-  `UTC`
+  `UTC
 ```
 
 尽可能多地进行了文档记录，并且可以在通常的文档链接中找到：

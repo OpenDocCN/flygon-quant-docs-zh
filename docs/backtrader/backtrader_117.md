@@ -30,7 +30,7 @@ cerebro.run()
     **注意**：它必须按排序（或产生排序元素）
 
     ```py
-    `datetime ascending` 
+    datetime ascending` 
     ```
 
     其中：

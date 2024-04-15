@@ -17,7 +17,7 @@
 1.  首先创建一个`cerebro`：
 
     ```py
-    `cerebro = bt.Cerebro(**kwargs)` 
+    cerebro = bt.Cerebro(**kwargs)` 
     ```
 
     支持一些`**kwargs`来控制执行，参见参考文献（这些参数后来也可以应用于`run`方法）
@@ -27,21 +27,21 @@
     最常见的模式是`cerebro.adddata(data)`，其中`data`已经实例化为*数据源*。例如：
 
     ```py
-    `data = bt.BacktraderCSVData(dataname='mypath.days', timeframe=bt.TimeFrame.Days)
+    data = bt.BacktraderCSVData(dataname='mypath.days', timeframe=bt.TimeFrame.Days)
     cerebro.adddata(data)` 
     ```
 
     *重新采样*和*回放*数据是可能的，遵循相同的模式：
 
     ```py
-    `data = bt.BacktraderCSVData(dataname='mypath.min', timeframe=bt.TimeFrame.Minutes)
+    data = bt.BacktraderCSVData(dataname='mypath.min', timeframe=bt.TimeFrame.Minutes)
     cerebro.resampledata(data, timeframe=bt.TimeFrame.Days)` 
     ```
 
     或：
 
     ```py
-    `data = bt.BacktraderCSVData(dataname='mypath.min', timeframe=bt.TimeFrame.Minutes)
+    data = bt.BacktraderCSVData(dataname='mypath.min', timeframe=bt.TimeFrame.Minutes)
     cerebro.replaydatadata(data, timeframe=bt.TimeFrame.Days)` 
     ```
 
@@ -54,13 +54,13 @@
     即使没有运行*优化*，该模式仍然适用：
 
     ```py
-    `cerebro.addstrategy(MyStrategy, myparam1=value1, myparam2=value2)` 
+    cerebro.addstrategy(MyStrategy, myparam1=value1, myparam2=value2)` 
     ```
 
     当*优化*参数时，必须添加为可迭代对象。详细说明请参见*优化*部分。基本模式：
 
     ```py
-    `cerebro.optstrategy(MyStrategy, myparam1=range(10, 20))` 
+    cerebro.optstrategy(MyStrategy, myparam1=range(10, 20))` 
     ```
 
     运行`MyStrategy` 10 次，其中`myparam1`的值从 10 到 19（请记住，Python 中的范围是半开放的，`20`不会被包含）
@@ -80,7 +80,7 @@
     Cerebro 将在`backtrader`中使用默认经纪人，但可以被覆盖：
 
     ```py
-    `broker = MyBroker()
+    broker = MyBroker()
     cerebro.broker = broker  # property using getbroker/setbroker methods` 
     ```
 
@@ -91,7 +91,7 @@
     +   通过`addnotifycallback(callback)`调用向`cerebro`实例添加*回调*。回调函数必须支持此签名：
 
     ```py
-    `callback(msg, *args, **kwargs)` 
+    callback(msg, *args, **kwargs)` 
     ```
 
     实际的`msg`、`*args`和`**kwargs`接收的内容是实现定义的（完全取决于*数据/经纪人/存储*），但一般可以期望它们是*可打印*的，以便接收和实验。
@@ -179,7 +179,7 @@ cerebro.plot()
     其他数据源或多或少是`datamaster`的从属，且：
 
     ```py
-     `* If the next tick to deliver is newer (datetime-wise) than the one
+     * If the next tick to deliver is newer (datetime-wise) than the one
        delivered by the `datamaster` it will not be delivered
 
      * May return without delivering a new tick for a number of reasons` 

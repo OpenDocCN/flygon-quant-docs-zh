@@ -159,7 +159,7 @@ data = bt.feeds.IBData(dataname='EUR.USD-CASH-IDEALPRO',
     !!! 注意
 
     ```py
-     ``RealTimeBars` do not work with the TWS Demo` 
+     `RealTimeBars` do not work with the TWS Demo` 
     ```
 
     默认行为是在大多数情况下使用：`tickString`，除非用户明确希望使用`RealTimeBars`
@@ -384,7 +384,7 @@ TWS Demo 在没有数据下载权限的资产的时区报告方面并不准确�
 +   重采样配置为*Seconds/5*，具有：
 
     ```py
-    `cerebro.resampledata(data, timeframe=bt.TimeFrame.Seconds, compression=5)` 
+    cerebro.resampledata(data, timeframe=bt.TimeFrame.Seconds, compression=5)` 
     ```
 
 +   一个时间为`23:05:27.325000`的 tick 被交付
@@ -414,7 +414,7 @@ TWS Demo 在没有数据下载权限的资产的时区报告方面并不准确�
 +   增加`qcheck`值，以考虑延迟消息：
 
     ```py
-    `data = ibstore.getdata('TWTR', qcheck=2.0, ...)` 
+    data = ibstore.getdata('TWTR', qcheck=2.0, ...)` 
     ```
 
 这应该增加额外的空间，即使延迟了*重采样/重播*条的交付
@@ -428,13 +428,13 @@ TWS Demo 在没有数据下载权限的资产的时区报告方面并不准确�
 +   在`getdata` / `IBData`的参数中设置`_latethrough`为`True`：
 
     ```py
-    `data = ibstore.getdata('TWTR', _latethrough=True, ...)` 
+    data = ibstore.getdata('TWTR', _latethrough=True, ...)` 
     ```
 
 +   在*重采样/重播*时设置`takelate`为`True`：
 
     ```py
-    `cerebro.resampledata(data, takelate=True)` 
+    cerebro.resampledata(data, takelate=True)` 
     ```
 
 ## IBBroker - 实时交易

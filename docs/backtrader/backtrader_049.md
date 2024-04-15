@@ -137,7 +137,7 @@ $ ./mixing-timeframes.py --multi --plot
     `line`
 
     ```py
-    `* If the default `-1` is given, all *lines* are coupled.
+    * If the default `-1` is given, all *lines* are coupled.
 
     * If another integer (for example, `0` or `1`) a single line will be
       coupled and fetched by index (from `obj.lines[x]`)

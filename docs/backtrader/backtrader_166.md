@@ -31,7 +31,7 @@
     可能的值：
 
     ```py
-    `- `True` or `1`: all “lines” objects reduce memory usage to the
+    - `True` or `1`: all “lines” objects reduce memory usage to the
       automatically calculated minimum period.
 
       If a Simple Moving Average has a period of 30, the underlying data

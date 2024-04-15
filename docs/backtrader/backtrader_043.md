@@ -17,7 +17,7 @@
     显然这是在实例化期间调用的：`indicators` 将在此处创建以及其他所需的属性。例如：
 
     ```py
-    `def __init__(self):
+    def __init__(self):
         self.sma = btind.SimpleMovingAverage(period=15)` 
     ```
 
@@ -164,7 +164,7 @@ class MyStrategy(bt.Strategy):
     例如: 如果 `backtrader` 直接支持的 4 种订单执行类型不够用，例如 *Interactive Brokers* 的情况下可以将以下内容作为 *kwargs* 传递:
 
     ```py
-    `orderType='LIT', lmtPrice=10.0, auxPrice=9.8` 
+    orderType='LIT', lmtPrice=10.0, auxPrice=9.8` 
     ```
 
     这将覆盖 `backtrader` 创建的设置，并生成一个 *touched* 价格为 9.8， *limit* 价格为 10.0 的 `LIMIT IF TOUCHED` 订单。
@@ -192,7 +192,7 @@ class MyStrategy(bt.Strategy):
     例如如果对数据进行重采样如下:
 
     ```py
-    `...
+    ...
     data0 = bt.feeds.YahooFinanceData(datname='YHOO', fromdate=..., name='days')
     cerebro.adddata(data0)
     cerebro.resampledata(data0, timeframe=bt.TimeFrame.Weeks, name='weeks')
@@ -202,7 +202,7 @@ class MyStrategy(bt.Strategy):
     策略中可以像这样为每个创建指标:
 
     ```py
-    `...
+    ...
     smadays = bt.ind.SMA(self.dnames.days, period=30)  # or self.dnames['days']
     smaweeks = bt.ind.SMA(self.dnames.weeks, period=10)  # or self.dnames['weeks']
     ...` 
@@ -363,7 +363,7 @@ class MyStrategy(bt.Strategy):
     示例：如果直接由`backtrader`支持的 4 种订单执行类型不够，例如*Interactive Brokers*的情况下，可以将以下内容作为*kwargs*传递：
 
     ```py
-    `orderType='LIT', lmtPrice=10.0, auxPrice=9.8` 
+    orderType='LIT', lmtPrice=10.0, auxPrice=9.8` 
     ```
 
     这将覆盖`backtrader`创建的设置，并生成一个*touched*价格为 9.8，*limit*价格为 10.0 的`LIMIT IF TOUCHED`订单。

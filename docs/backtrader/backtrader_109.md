@@ -190,7 +190,7 @@ class Strategy(bt.Strategy):
 让我们看看 `next` 发生了什么
 
 ```py
- `def next(self):
+ def next(self):
         if self.i % 5 == 0:
             self.rebalance_portfolio()
         if self.i % 10 == 0:
@@ -201,7 +201,7 @@ class Strategy(bt.Strategy):
 Python 的 `len` 范式正是所需之处。让我们来使用它。
 
 ```py
- `def next(self):
+ def next(self):
         l = len(self)
         if l % 5 == 0:
             self.rebalance_portfolio()
@@ -216,7 +216,7 @@ Python 的 `len` 范式正是所需之处。让我们来使用它。
 代码包含了这种转发
 
 ```py
- `def prenext(self):
+ def prenext(self):
         # call next() even when data is not available for all tickers
         self.next()
 ```
@@ -224,7 +224,7 @@ Python 的 `len` 范式正是所需之处。让我们来使用它。
 在进入 `next` 时没有保障
 
 ```py
- `def next(self):
+ def next(self):
         if self.i % 5 == 0:
             self.rebalance_portfolio()
         ...
@@ -241,7 +241,7 @@ Python 的 `len` 范式正是所需之处。让我们来使用它。
 在一般情况下，`prenext => next`转发应该有这样的保护措施：
 
 ```py
- `def prenext(self):
+ def prenext(self):
         # call next() even when data is not available for all tickers
         self.next()
 
@@ -259,7 +259,7 @@ Python 的 `len` 范式正是所需之处。让我们来使用它。
 因为对于策略的整个生命周期来说这样做似乎是毫无意义的，可以进行如此优化
 
 ```py
- `def __init__(self):
+ def __init__(self):
         ...
         self.d_with_len = []
 
@@ -352,14 +352,14 @@ def notify_timer(self, timer, when, *args, **kwargs):
 始终使用预先构建的比较而不是在`next`期间比较事物。例如来自代码（多次使用）
 
 ```py
- `if self.spy < self.spy_sma200:
+ if self.spy < self.spy_sma200:
             return
 ```
 
 我们可以做以下事情。首先在`__init__`期间
 
 ```py
- `def __init__(self):
+ def __init__(self):
         ...
         self.spy_filter = self.spe < self.spy_sma200
 ```
@@ -367,7 +367,7 @@ def notify_timer(self, timer, when, *args, **kwargs):
 以后
 
 ```py
- `if self.spy_filter:
+ if self.spy_filter:
             return
 ```
 
@@ -376,7 +376,7 @@ def notify_timer(self, timer, when, *args, **kwargs):
 同样的情况也可能适用于此处的另一个比较`d < self.inds[d]["sma100"]`：
 
 ```py
- `# sell stocks based on criteria
+ # sell stocks based on criteria
         for i, d in enumerate(self.rankings):
             if self.getposition(self.data).size:
                 if i > num_stocks * 0.2 or d < self.inds[d]["sma100"]:
@@ -386,7 +386,7 @@ def notify_timer(self, timer, when, *args, **kwargs):
 这也可以在`__init__`期间预先构建，并因此更改为如下所示
 
 ```py
- `# sell stocks based on criteria
+ # sell stocks based on criteria
         for i, d in enumerate(self.rankings):
             if self.getposition(self.data).size:
                 if i > num_stocks * 0.2 or self.inds[d]['sma_signal']:

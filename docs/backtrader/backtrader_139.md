@@ -39,7 +39,7 @@ class MyBuySell(bt.observers.BuySell):
 和：
 
 ```py
- `# Patch observer if needed
+ # Patch observer if needed
     if args.myobserver:
         bt.observers.BuySell = MyBuySell
 ```

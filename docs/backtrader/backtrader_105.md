@@ -116,14 +116,14 @@ class St(bt.Strategy):
 在任何其他事情之前，创建一个小的日志记录方法，它将允许记录组合如何重新平衡。
 
 ```py
- `def log(self, arg):
+ def log(self, arg):
         print('{}  {}'.format(self.datetime.date(), arg))
 ```
 
 在`__init__`方法的开头，计算要排名的股票数量，并应用保留资本参数以确定银行的每只股票百分比。
 
 ```py
- `def __init__(self):
+ def __init__(self):
         # calculate 1st the amount of stocks that will be selected
         self.selnum = int(len(self.datas) * self.p.selcperc)
 
@@ -137,7 +137,7 @@ class St(bt.Strategy):
 最后，初始化完成，计算每只股票的波动率和动量指标，然后将其应用于每只股票的排名公式计算中。
 
 ```py
- `# returns, volatilities and momentums
+ # returns, volatilities and momentums
         rs = [bt.ind.PctChange(d, period=self.p.rperiod) for d in self.datas]
         vs = [bt.ind.StdDev(ret, period=self.p.vperiod) for ret in rs]
         ms = [bt.ind.ROC(d, period=self.p.mperiod) for d in self.datas]
@@ -150,7 +150,7 @@ class St(bt.Strategy):
 现在是每个月迭代的时候了。排名在`self.ranks`字典中可用。每次迭代都必须对键/值对进行排序，以确定哪些项必须离开，哪些项必须成为组合的一部分（保留或添加）。
 
 ```py
- `def next(self):
+ def next(self):
         # sort data and current rank
         ranks = sorted(
             self.ranks.items(),  # get the (d, rank), pair
@@ -166,7 +166,7 @@ class St(bt.Strategy):
 ### 重新平衡 1：获取排名靠前和具有开仓头寸的股票。
 
 ```py
- `# put top ranked in dict with data as key to test for presence
+ # put top ranked in dict with data as key to test for presence
         rtop = dict(ranks[:self.selnum])
 
         # For logging purposes of stocks leaving the portfolio
@@ -180,7 +180,7 @@ class St(bt.Strategy):
 为了后续区分必须离开投资组合的股票、那些只需重新平衡的股票以及新的排名靠前的股票，准备了投资组合中当前的股票列表。
 
 ```py
- `# prepare quick lookup list of stocks currently holding a position
+ # prepare quick lookup list of stocks currently holding a position
         posdata = [d for d, pos in self.getpositions().items() if pos]
 ```
 
@@ -189,7 +189,7 @@ class St(bt.Strategy):
 就像在现实世界中一样，在*backtrader*生态系统中，在买入之前卖出是必须的，以确保有足够的现金。
 
 ```py
- `# remove those no longer top ranked
+ # remove those no longer top ranked
         # do this first to issue sell orders and free cash
         for d in (d for d in posdata if d not in rtop):
             self.log('Exit {} - Rank {:.2f}'.format(d._name, rbot[d][0]))
@@ -207,7 +207,7 @@ class St(bt.Strategy):
 总投资组合价值随时间变化，已经在投资组合中的股票可能必须略微增加/减少当前仓位以匹配预期的百分比。`order_target_percent`是进入市场的理想方法，因为它会自动计算是否需要`buy`或`sell`订单。
 
 ```py
- `# rebalance those already top ranked and still there
+ # rebalance those already top ranked and still there
         for d in (d for d in posdata if d in rtop):
             self.log('Rebal {} - Rank {:.2f}'.format(d._name, rtop[d][0]))
             self.order_target_percent(d, target=self.perctarget)
@@ -217,7 +217,7 @@ class St(bt.Strategy):
 在将新股票添加到投资组合之前，重新平衡已有仓位的股票，因为新股票只会发布`buy`订单并消耗现金。在重新平衡后从`rtop[data].pop()`中移除现有股票后，`rtop`中剩余的股票是将新添加到投资组合中的股票。
 
 ```py
- `# issue a target order for the newly top ranked stocks
+ # issue a target order for the newly top ranked stocks
         # do this last, as this will generate buy orders consuming cash
         for d in rtop:
             self.log('Enter {} - Rank {:.2f}'.format(d._name, rtop[d][0]))

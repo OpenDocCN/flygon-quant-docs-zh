@@ -57,7 +57,7 @@ actual behavior of the strategy under real conditions
 以下是一些示例，但首先是测试脚本的源代码，其中加载数据并传递给重放器...并且使用`preload=False`来禁用预加载（强制）
 
 ```py
- `dataname=datapath)
+ dataname=datapath)
 
     tframes = dict(
         daily=bt.TimeFrame.Days,

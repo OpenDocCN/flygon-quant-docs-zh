@@ -17,7 +17,7 @@
     在这里，过滤器转换了传入*数据源*的`时间框架`和`压缩`。例如：
 
     ```py
-    `(Seconds, 1) -> (Days, 1)` 
+    (Seconds, 1) -> (Days, 1)` 
     ```
 
     这意味着原始数据提供的是分辨率为*1 秒*的柱状图。 *重新采样*过滤器拦截数据并将其缓冲，直到可以提供*1 天*柱状图。当看到下一天的*1 秒*柱状图时，将会发生这种情况。
@@ -59,7 +59,7 @@ cerebro.replaydata(data)
 +   一个可调用的函数，接受此签名：
 
     ```py
-    `callable(data, *args, **kwargs)` 
+    callable(data, *args, **kwargs)` 
     ```
 
 或者
@@ -69,13 +69,13 @@ cerebro.replaydata(data)
     +   在实例化期间，`__init__`方法必须支持此签名：
 
     ```py
-    `def __init__(self, data, *args, **kwargs)` 
+    def __init__(self, data, *args, **kwargs)` 
     ```
 
     +   `__call__`方法具有以下签名：
 
     ```py
-    `def __call__(self, data, *args, **kwargs)` 
+    def __call__(self, data, *args, **kwargs)` 
     ```
 
     对于来自*数据源*的每个新输入值，将调用该实例。 `\*args`和`\*kwargs`与`__init__`传递的相同。
@@ -83,7 +83,7 @@ cerebro.replaydata(data)
     **返回值**：
 
     ```py
-    `* `True`: the inner data fetching loop of the data feed must retry
+    * `True`: the inner data fetching loop of the data feed must retry
       fetching data from the feed, becaue the length of the stream was
       manipulated
 
@@ -96,7 +96,7 @@ cerebro.replaydata(data)
     +   具有以下签名的`last`：
 
     ```py
-    `def last(self, data, *args, **kwargs)` 
+    def last(self, data, *args, **kwargs)` 
     ```
 
     当*数据源*结束时，将调用此方法，允许过滤器传递它可能已经缓冲的数据。一个典型的情况是*重新采样*，因为柱状图被缓冲，直到看到下一个时间段的数据。当数据源结束时，没有新数据来推送缓冲的数据出去。
@@ -177,7 +177,7 @@ class SessionFilter(object):
 +   这两个部分通过*重播*链接以在流中发生以下情况：
 
     ```py
-    `With Len X     -> OHL
+    With Len X     -> OHL
     With Len X     -> OHLC
     With Len X + 1 -> OHL
     With Len X + 1 -> OHLC

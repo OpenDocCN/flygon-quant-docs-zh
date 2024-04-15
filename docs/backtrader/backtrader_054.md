@@ -79,7 +79,7 @@
     例如：如果`backtrader`直接支持的 4 种订单执行类型不够用，例如*Interactive Brokers*的情况下，可以将以下内容作为*kwargs*传递：
 
     ```py
-    `orderType='LIT', lmtPrice=10.0, auxPrice=9.8` 
+    orderType='LIT', lmtPrice=10.0, auxPrice=9.8` 
     ```
 
     这将覆盖由`backtrader`创建的设置，并生成具有*touched*价格为 9.8 和*limit*价格为 10.0 的`LIMIT IF TOUCHED`订单。

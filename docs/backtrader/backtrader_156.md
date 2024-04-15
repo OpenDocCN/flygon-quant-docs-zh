@@ -156,7 +156,7 @@ LAST 19 highs: array('d', [25.33, 25.6, 26.4, 26.7, 26.62, 26.6, 26.7, 26.7, 27.
 代码：
 
 ```py
- `# Make a copy of current data for ohlbar
+ # Make a copy of current data for ohlbar
         ohlbar = [data.lines[i][0] for i in range(data.size())]
         closebar = ohlbar[:]  # Make a copy for the close
 

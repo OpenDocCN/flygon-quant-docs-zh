@@ -64,7 +64,7 @@ class St1(bt.SignalStrategy):
 在将策略工厂添加到系统中并使用 `optstrategy` 时，过去的手动 `[0, 1]` 列表可以完全替换为对 `StFetcher.COUNT()` 的透明调用。硬编码已经结束。
 
 ```py
- `cerebro.optstrategy(StFetcher, idx=StFetcher.COUNT())
+ cerebro.optstrategy(StFetcher, idx=StFetcher.COUNT())
 ```
 
 ## 一个样本运行

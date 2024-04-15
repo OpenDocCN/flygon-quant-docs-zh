@@ -379,7 +379,7 @@ strategy notify_timer with tid 0, when 2006-01-02 09:00:00 cheat False
     要实现类似上面规则的内容：
 
     ```py
-    `class FutOpExp(object):
+    class FutOpExp(object):
         def __init__(self):
             self.fridays = 0
             self.curmonth = -1
@@ -452,7 +452,7 @@ strategy notify_timer with tid 0, when 2006-01-02 09:00:00 cheat False
     **注意**：如果`when`是`SESSION_START`或者
 
     ```py
-     ``SESSION_END` and `tzdata` is `None`, the 1st *data feed*
+     `SESSION_END` and `tzdata` is `None`, the 1st *data feed*
       in the system (aka `self.data0`) will be used as the reference
       to find out the session times.` 
     ```

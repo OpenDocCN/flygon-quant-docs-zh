@@ -23,7 +23,7 @@
 1.  将在线雅虎数据源实例化为：
 
     ```py
-    `data = bt.feeds.YahooFinanceData(
+    data = bt.feeds.YahooFinanceData(
         ...
         version='',
         ...
@@ -33,7 +33,7 @@
     离线雅虎数据源为：
 
     ```py
-    `data = bt.feeds.YahooFinanceCSVData(
+    data = bt.feeds.YahooFinanceCSVData(
         ...
         version='',
         ...
@@ -47,7 +47,7 @@
 1.  仅对在更改发生之前下载的离线文件，也可以进行以下操作：
 
     ```py
-    `data = bt.feeds.YahooLegacyCSV(
+    data = bt.feeds.YahooLegacyCSV(
         ...
         ...
     )` 

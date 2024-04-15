@@ -11,13 +11,13 @@
 +   如果复制到文件中，请从文件中导入它
 
     ```py
-    `from myfile import TheIndicator` 
+    from myfile import TheIndicator` 
     ```
 
 +   并将其纳入你的策略中
 
     ```py
-    `class MyStrategy(bt.Strategy):
+    class MyStrategy(bt.Strategy):
         def __init__(self):
             self.myind = TheIndicator(self.data, param1=value1, ...)` 
     ```

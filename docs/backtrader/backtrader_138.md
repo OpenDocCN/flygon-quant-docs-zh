@@ -17,7 +17,7 @@
     为了完成这一壮举，而不是从头开始编写代码，我们展示了如何使用`scipy`函数来完成。代码如下：
 
     ```py
-    `class PearsonR(bt.ind.PeriodN):
+    class PearsonR(bt.ind.PeriodN):
         _mindatas = 2  # hint to the platform
 
         lines = ('correlation',)
@@ -41,7 +41,7 @@
 +   允许在数据绘图中加入数据（轻松）。就像这样：
 
     ```py
-     `# Data feeds
+     # Data feeds
         data0 = YahooData(dataname=args.data0, **kwargs)
         # cerebro.adddata(data0)
         cerebro.resampledata(data0, timeframe=bt.TimeFrame.Weeks)

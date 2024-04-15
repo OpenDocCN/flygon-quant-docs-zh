@@ -55,7 +55,7 @@ $ ./plot-same-axis.py
     在这种情况下，由于`__init__`中的局部变量被命名为`stoc`代表 Stochastic 和`rsi`代表 RSI，看起来像是：
 
     ```py
-    `rsi.plotinfo.plotmaster = stoc` 
+    rsi.plotinfo.plotmaster = stoc` 
     ```
 
 执行：

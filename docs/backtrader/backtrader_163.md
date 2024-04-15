@@ -55,7 +55,7 @@
 +   传递带有 *时间* 组件的 *datetime*（而不是默认的 *00:00:00*）似乎会在 *COM* API 中创建一个 *时间过滤器*。例如，如果您想要 *Minute* 数据，从 3 天前开始到 *14:30*，您可以这样做：
 
     ```py
-    `dt = datetime.now() - timedelta(days=3)
+    dt = datetime.now() - timedelta(days=3)
     dt.replace(hour=14, minute=30)
 
     vcstore.getdata(dataname='001ES', fromdate=dt)` 

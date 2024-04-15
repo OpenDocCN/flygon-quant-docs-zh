@@ -31,7 +31,7 @@
 这意味着当用户在默认配置中执行以下操作时：
 
 ```py
- `def next(self):
+ def next(self):
         # Apply 50% of the portfolio to buy the main asset
         self.order_target_percent(target=0.5)
 ```
@@ -86,7 +86,7 @@ class CommInfoFractional(bt.CommissionInfo):
 代码后面，该方案将被添加（通过命令行参数控制），如下所示
 
 ```py
- `if args.fractional:  # use the fractional scheme if requested
+ if args.fractional:  # use the fractional scheme if requested
         cerebro.broker.addcommissioninfo(CommInfoFractional())
 ```
 

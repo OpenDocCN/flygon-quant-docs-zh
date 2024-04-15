@@ -33,7 +33,7 @@
 以下是一些示例，但首先是测试脚本的来源。
 
 ```py
- `# Load the Data
+ # Load the Data
     datapath = args.dataname or '../../datas/2006-day-001.txt'
     data = btfeeds.BacktraderCSVData(dataname=datapath)
     cerebro.adddata(data)  # First add the original data - smaller timeframe

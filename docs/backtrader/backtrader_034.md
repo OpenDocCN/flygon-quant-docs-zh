@@ -77,7 +77,7 @@
 下面是一些示例，但首先是测试脚本的源码，其中数据被加载并通过`replaydata`传递给 cerebro，然后运行。
 
 ```py
- `# Load the Data
+ # Load the Data
     datapath = args.dataname or '../../datas/2006-day-001.txt'
     data = btfeeds.BacktraderCSVData(dataname=datapath)
 

@@ -79,7 +79,7 @@ $ ./updaystreaks.py --data 099I-DJI --upstreak hilo=True
 在排名第 1 和第 2 的 remarkable 日期中，我们有：
 
 ```py
- `count  rank  upstreak       upleg   upleg %  drawdown  rel drawdown
+ count  rank  upstreak       upleg   upleg %  drawdown  rel drawdown
 1987-01-02      1     1        13  219.069946  0.116193  0.017616      0.171407
 2017-02-09      2     2        12  822.109375  0.041074  0.001875      0.047548
 1970-11-19      3     2        12   66.900024  0.088986  0.010321      0.127055

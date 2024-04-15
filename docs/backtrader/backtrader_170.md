@@ -45,7 +45,7 @@ Date,Time,Symbol,Status,Bid,Ask,Bid Vol,Ask Vol
 使用`GenericCSVData`将数据转换为 OHLC 格式：
 
 ```py
- `data = btfeeds.GenericCSVData(
+ data = btfeeds.GenericCSVData(
         dataname=args.data,
         dtformat='%d/%m/%y',
         # tmformat='%H%M%S',  # already the default value
@@ -79,7 +79,7 @@ Date,Time,Symbol,Status,Bid,Ask,Bid Vol,Ask Vol
 一旦数据准备就绪，就只需对其进行重新采样：
 
 ```py
- `cerebro.resampledata(data,
+ cerebro.resampledata(data,
                          timeframe=bt.TimeFrame.Ticks,
                          compression=args.compression)
 ```

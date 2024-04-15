@@ -82,7 +82,7 @@ cerebro.run()
     这必须是一个*可调用*对象，具有以下签名：
 
     ```py
-    `checkdate(dt, d):` 
+    checkdate(dt, d):` 
     ```
 
     其中：
@@ -110,7 +110,7 @@ cerebro.run()
     否则，这必须是一个具有此签名的*可调用*对象：
 
     ```py
-    `checkcondition(d0, d1)` 
+    checkcondition(d0, d1)` 
     ```
 
     其中：

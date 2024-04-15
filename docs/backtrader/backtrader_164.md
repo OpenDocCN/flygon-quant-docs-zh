@@ -39,19 +39,19 @@ UO = 100 x [(4 x Average7)+(2 x Average14)+Average28]/(4+2+1)
 +   首先从`bt.Indicator`中派生子类，以确保整个机制运作正常：
 
     ```py
-    `class UltimateOscillator(bt.Indicator):` 
+    class UltimateOscillator(bt.Indicator):` 
     ```
 
 +   它有 1 个输出行：我们将命名为`uo`：
 
     ```py
-    `lines = ('uo',)` 
+    lines = ('uo',)` 
     ```
 
 +   它有 3 个参数，定义了 3 个周期，默认值为`7`、`14`和`28`。将命名为`p1`、`p2`和`p3`：
 
     ```py
-    `params = (('p1', 7),
+    params = (('p1', 7),
               ('p2', 14),
               ('p3', 28),
     )` 
@@ -62,19 +62,19 @@ UO = 100 x [(4 x Average7)+(2 x Average14)+Average28]/(4+2+1)
     +   `最小（低价或前收盘价）`：这是由*Welles Wilder*为`RSI`指标定义的`TrueLow`。因此，可以计算出`BP`或*买入压力*：
 
     ```py
-    `bp = self.data.close - TrueLow(self.data)` 
+    bp = self.data.close - TrueLow(self.data)` 
     ```
 
     +   `最大（低价或前收盘价） - 最小（低价或前收盘价）`：这是由*Welles Wilder*为`RSI`指标定义的`TrueRange`（可以表示为`TrueHigh - TrueLow`）。因此，下一个计算就像这样简单：
 
     ```py
-    `tr = TrueRange(self.data)` 
+    tr = TrueRange(self.data)` 
     ```
 
     +   其余部分都是纯数学运算，使用`SumN`来加上最新的`p1`、`p2`、`p3`周期的`bp`和`tr`，加上加权计算：
 
     ```py
-    `av7 = SumN(bp, period=self.p.p1) / SumN(tr, period=self.p.p1)
+    av7 = SumN(bp, period=self.p.p1) / SumN(tr, period=self.p.p1)
     av14 = SumN(bp, period=self.p.p2) / SumN(tr, period=self.p.p2)
     av28 = SumN(bp, period=self.p.p3) / SumN(tr, period=self.p.p3)
 
@@ -84,7 +84,7 @@ UO = 100 x [(4 x Average7)+(2 x Average14)+Average28]/(4+2+1)
     +   最后将计算分配给定义的`uo`线：
 
     ```py
-    `self.lines.uo = uo` 
+    self.lines.uo = uo` 
     ```
 
 看起来比实际长度长（包括导入的全部代码）位于底部。
@@ -94,14 +94,14 @@ UO = 100 x [(4 x Average7)+(2 x Average14)+Average28]/(4+2+1)
 +   2 个参数确定放置水平线的位置，以限定*超买*和*超卖*区域（类似于`RSI`或`Stochastic`）：
 
     ```py
-    `('upperband', 70.0),
+    ('upperband', 70.0),
     ('lowerband', 30.0),` 
     ```
 
 +   以及绘图初始化代码以使用参数。像*Stockcharts*中的绘图一样，在`10`、`50`和`90`处添加刻度：
 
     ```py
-    `def _plotinit(self):
+    def _plotinit(self):
         baseticks = [10.0, 50.0, 90.0]
         hlines = [self.p.upperband, self.p.lowerband]
 

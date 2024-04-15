@@ -48,7 +48,7 @@ class Stochastic_Generic(bt.Indicator):
 当然，需要验证当给定相同的输入集时，该指标是否确实产生与标准指标相同的结果。下面的图表是使用这组指令创建的。
 
 ```py
- `# Generate 3 data feeds
+ # Generate 3 data feeds
         d0 = bt.ind.EMA(self.data.high, period=14)
         d1 = bt.ind.EMA(self.data.low, period=14)
         d2 = bt.ind.EMA(self.data.close, period=14)

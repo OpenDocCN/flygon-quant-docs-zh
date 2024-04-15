@@ -107,7 +107,7 @@
 +   操作符在可能的情况下进行重载，以提供自然语言构造，例如：
 
     ```py
-    `av_diff = bt.ind.SMA(period=30) - bt.ind.SMA(period=15)` 
+    av_diff = bt.ind.SMA(period=30) - bt.ind.SMA(period=15)` 
     ```
 
     其中`av_diff`将包含`30`和`15`周期的简单移动平均线的差值
@@ -115,5 +115,5 @@
 +   对于语言结构，不能被覆盖，比如`and`，`or`，`if`，提供了等效的*函数*以确保没有功能丢失，例如
 
     ```py
-    `av_and = bt.And(av_diff > 0, self.data.close < bt.ind.SMA(period=30))` 
+    av_and = bt.And(av_diff > 0, self.data.close < bt.ind.SMA(period=30))` 
     ```

@@ -59,7 +59,7 @@ $ ./data-resampling.py --timeframe daily --compression 1
 示例代码（底部的整个脚本）。
 
 ```py
- `# Load the Data
+ # Load the Data
     datapath = args.dataname or '../datas/sample/2006-day-001.txt'
     data = btfeeds.BacktraderCSVData(
         dataname=datapath)

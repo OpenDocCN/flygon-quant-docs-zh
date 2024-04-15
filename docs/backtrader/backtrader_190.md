@@ -70,7 +70,7 @@ class DataBase(six.with_metaclass(MetaDataBase, dataseries.OHLCDateTime)):
 在`__init__`期间，为每种类型设置不同的常量。
 
 ```py
- `def __init__(self):
+ def __init__(self):
         super(VChartData, self).__init__()
 
         # Use the informative "timeframe" parameter to understand if the
@@ -92,7 +92,7 @@ class DataBase(six.with_metaclass(MetaDataBase, dataseries.OHLCDateTime)):
 在`start`方法中，除非传递了类似文件的对象，否则将打开二进制文件。
 
 ```py
- `def start(self):
+ def start(self):
         # the feed must start ... get the file open (or see if it was open)
         self.f = None
         if hasattr(self.p.dataname, 'read'):
@@ -110,7 +110,7 @@ class DataBase(six.with_metaclass(MetaDataBase, dataseries.OHLCDateTime)):
 如果文件已打开，则将关闭
 
 ```py
- `def stop(self):
+ def stop(self):
         # Close the file if any
         if self.f is not None:
             self.f.close()
@@ -132,7 +132,7 @@ class DataBase(six.with_metaclass(MetaDataBase, dataseries.OHLCDateTime)):
 +   返回`True`表示数据集加载成功
 
 ```py
- `def _load(self):
+ def _load(self):
         if self.f is None:
             # if no file ... no parsing
             return False

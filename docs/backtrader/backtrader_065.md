@@ -39,7 +39,7 @@ callable(order, price, ago)
     例如，要访问条形图的体积：
 
     ```py
-    `barvolume = order.data.volume[ago]` 
+    barvolume = order.data.volume[ago]` 
     ```
 
 可调用对象可以是函数，也可以是例如支持 `__call__` 方法的类的实例，如：

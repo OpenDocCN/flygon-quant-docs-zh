@@ -31,32 +31,32 @@ source backtesting library
 1.  将`PyFolio`分析器添加到`cerebro`混合中：
 
     ```py
-    `cerebro.addanalyzer(bt.analyzers.PyFolio)` 
+    cerebro.addanalyzer(bt.analyzers.PyFolio)` 
     ```
 
 1.  运行并检索第 1 个策略：
 
     ```py
-    `strats = cerebro.run()
+    strats = cerebro.run()
     strat0 = strats[0]` 
     ```
 
 1.  使用您指定的名称或默认名称`pyfolio`检索分析器。例如：
 
     ```py
-    `pyfolio = strats.analyzers.getbyname('pyfolio')` 
+    pyfolio = strats.analyzers.getbyname('pyfolio')` 
     ```
 
 1.  使用分析器方法`get_pf_items`检索后续需要用于`pyfolio`的 4 个组件：
 
     ```py
-    `returns, positions, transactions, gross_lev = pyfoliozer.get_pf_items()` 
+    returns, positions, transactions, gross_lev = pyfoliozer.get_pf_items()` 
     ```
 
     !!! 注意
 
     ```py
-    `The integration was done looking at test samples available with
+    The integration was done looking at test samples available with
     `pyfolio` and the same headers (or absence of) has been replicated` 
     ```
 

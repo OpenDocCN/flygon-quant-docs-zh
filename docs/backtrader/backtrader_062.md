@@ -112,7 +112,7 @@ cash.
     *Cheat-On-Close* 将其设置为`True`并使用`set_coc`启用
 
     ```py
-    `matching a `Market` order to the closing price of the bar in which
+    matching a `Market` order to the closing price of the bar in which
     the order was issued. This is actually *cheating*, because the bar
     is *closed* and any order should first be matched against the prices
     in the next bar` 
@@ -123,7 +123,7 @@ cash.
     *Cheat-On-Open* 将其设置为`True`并使用`set_coo`启用
 
     ```py
-    `matching a `Market` order to the opening price, by for example
+    matching a `Market` order to the opening price, by for example
     using a timer with `cheat` set to `True`, because such a timer
     gets executed before the broker has evaluated` 
     ```

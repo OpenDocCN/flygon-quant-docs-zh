@@ -23,7 +23,7 @@
     简单地更改默认参数可能就足够了。`backtrader` 已经在模块 `backtrader.commissions` 中的一些定义中这样做了。期货的常规行业标准是每个合同和每轮的固定金额。定义如下：
 
     ```py
-    `class CommInfo_Futures_Fixed(CommInfoBase):
+    class CommInfo_Futures_Fixed(CommInfoBase):
         params = (
             ('stocklike', False),
             ('commtype', CommInfoBase.COMM_FIXED),
@@ -33,7 +33,7 @@
     对于股票和百分比佣金：
 
     ```py
-    `class CommInfo_Stocks_Perc(CommInfoBase):
+    class CommInfo_Stocks_Perc(CommInfoBase):
         params = (
             ('stocklike', True),
             ('commtype', CommInfoBase.COMM_PERC),
@@ -43,7 +43,7 @@
     如上所述，这里对百分比的解释的默认是：**xx%**。如果希望使用旧的/其他行为 **0.xx**，可以轻松实现：
 
     ```py
-    `class CommInfo_Stocks_PercAbs(CommInfoBase):
+    class CommInfo_Stocks_PercAbs(CommInfoBase):
         params = (
             ('stocklike', True),
             ('commtype', CommInfoBase.COMM_PERC),
@@ -56,7 +56,7 @@
     定义如下：
 
     ```py
-    `def _getcommission(self, size, price, pseudoexec):
+    def _getcommission(self, size, price, pseudoexec):
       '''Calculates the commission of an operation at a given price
 
      pseudoexec: if True the operation has not yet been executed

@@ -87,7 +87,7 @@
 +   将经纪人替换为：
 
     ```py
-    `import backtrader as bt
+    import backtrader as bt
 
     cerebro = bt.Cerebro()
     cerebro.broker = bt.brokers.BackBroker(slip_perc=0.005)  # 0.5%` 

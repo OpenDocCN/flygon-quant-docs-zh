@@ -73,7 +73,7 @@ class PivotPoint1(bt.Indicator):
 该策略将查看参数 `usepp1` 来使用此 `PivotPoint1`
 
 ```py
- `def __init__(self):
+ def __init__(self):
         if self.p.usepp1:
             self.pp = PivotPoint1(self.data1)
         else:
@@ -83,7 +83,7 @@ class PivotPoint1(bt.Indicator):
 输出由一个简单的 `next` 方法控制
 
 ```py
- `def next(self):
+ def next(self):
         txt = ','.join(
             ['%04d' % len(self),
              '%04d' % len(self.data0),
@@ -160,7 +160,7 @@ Once Pivot Points are set, they do not change and remain in play throughout ...
 指标已经可以使用。让我们开始绘图吧。绘图参数已经设置好。
 
 ```py
- `plotinfo = dict(subplot=False)
+ plotinfo = dict(subplot=False)
 ```
 
 计算出的值与数据比例一致，并且就像*移动平均线*一样，可以沿着数据绘制（因此`subplot=False`）

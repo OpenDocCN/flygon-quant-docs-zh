@@ -54,7 +54,7 @@
 
 ```py
 * `self.dataX_Y` where X is a reference to `self.datas[X]` and `Y`
-  refers to the line, finally pointing to: `self.datas[X].lines[Y]`
+  refers to the line, finally pointing to: `self.datas[X].lines[Y]
 ```
 
 如果线条有名称，还可以获得以下内容：
@@ -67,13 +67,13 @@
 对于第一个数据，最后两个快捷方式也可用，无需初始的 `X` 数字引用。例如：
 
 ```py
-* `self.data_2` refers to `self.datas[0].lines[2]`
+* `self.data_2` refers to `self.datas[0].lines[2]
 ```
 
 和
 
 ```py
-* `self.data_close` refers to `self.datas[0].close`
+* `self.data_close` refers to `self.datas[0].close
 ```
 
 ### 返回分析结果

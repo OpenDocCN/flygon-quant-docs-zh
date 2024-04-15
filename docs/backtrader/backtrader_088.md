@@ -67,7 +67,7 @@
     +   根据 Oanda 的指南，*EUR/USDD*必须指定为`EUR_USD`。实例化如下：
 
     ```py
-    `data = oandastore.getdata(dataname='EUR_USD', ...)` 
+    data = oandastore.getdata(dataname='EUR_USD', ...)` 
     ```
 
 ### 时间管理

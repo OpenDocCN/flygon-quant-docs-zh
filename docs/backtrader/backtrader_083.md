@@ -36,7 +36,7 @@ class SizerFix(SizerBase):
     添加一个将应用于添加到*cerebro*的任何策略的*Sizer*。这可以说是默认的*Sizer*。例如：
 
     ```py
-    `cerebro = bt.Cerebro()
+    cerebro = bt.Cerebro()
     cerebro.addsizer(bt.sizers.SizerFix, stake=20)  # default sizer for strategies` 
     ```
 
@@ -47,7 +47,7 @@ class SizerFix(SizerBase):
     这个`idx`可以从`addstrategy`的返回值中获取。就像这样：
 
     ```py
-    `cerebro = bt.Cerebro()
+    cerebro = bt.Cerebro()
     cerebro.addsizer(bt.sizers.SizerFix, stake=20)  # default sizer for strategies
 
     idx = cerebro.addstrategy(MyStrategy, myparam=myvalue)
@@ -93,7 +93,7 @@ class SizerFix(SizerBase):
 +   在`__init__`期间使用`Sizer`或`setsizer`属性设置，如：
 
     ```py
-    `class MyStrategy(bt.Strategy):
+    class MyStrategy(bt.Strategy):
         params = (('sizer', None),)
 
         def __init__(self):
@@ -263,7 +263,7 @@ cerebro.run()
     提供了策略的整个 api 访问权限，例如如果在`_getsizing`中需要实际数据位置：
 
     ```py
-    `position = self.strategy.getposition(data)` 
+    position = self.strategy.getposition(data)` 
     ```
 
 +   `broker`：将由工作在其中的 Sizer 的策略设置

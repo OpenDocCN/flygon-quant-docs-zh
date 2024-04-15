@@ -97,7 +97,7 @@
     因此，只有在处理秒数时，最终用户才需要执行：
 
     ```py
-    `vcstore = bt.stores.VCStore()
+    vcstore = bt.stores.VCStore()
     vcstore.getdata(dataname='015ES', timeframe=bt.TimeFrame.Ticks)
     cerebro.resampledata(data, timeframe=bt.TimeFrame.Seconds, compression=5)` 
     ```
@@ -105,7 +105,7 @@
     在所有其他情况下，仅需要：
 
     ```py
-    `vcstore = bt.stores.VCStore()
+    vcstore = bt.stores.VCStore()
     data = vcstore.getdata(dataname='015ES', timeframe=bt.TimeFrame.Minutes, compression=2)
     cerebro.addata(data)` 
     ```
@@ -119,13 +119,13 @@
     +   *ES-Mini* 显示为 `001 ES`。 实例化它为：
 
     ```py
-    `data = vcstore.getdata(dataname='001ES', ...)` 
+    data = vcstore.getdata(dataname='001ES', ...)` 
     ```
 
     +   *EuroStoxx 50* 显示为 `015 ES`。 实例化它为：
 
     ```py
-    `data = vcstore.getdata(dataname='015ES', ...)` 
+    data = vcstore.getdata(dataname='015ES', ...)` 
     ```
 
 注意
@@ -180,13 +180,13 @@
 +   请仅向 `VCData` 传递**完整日期**，如下所示：
 
     ```py
-    `data = vcstore.getdata(dataname='001ES', fromdate=datetime(2016, 5, 15))` 
+    data = vcstore.getdata(dataname='001ES', fromdate=datetime(2016, 5, 15))` 
     ```
 
     并非::
 
     ```py
-    `data = vcstore.getdata(dataname=‘001ES’, fromdate=datetime(2016, 5, 15, 8, 30))` 
+    data = vcstore.getdata(dataname=‘001ES’, fromdate=datetime(2016, 5, 15, 8, 30))` 
     ```
 
 #### 补偿时间长度

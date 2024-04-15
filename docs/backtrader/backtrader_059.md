@@ -48,7 +48,7 @@ cerebro.run()
 +   通过重复使用相同的数据源并添加一个过滤器，该过滤器将随机将价格移动到上/下几个点，以创建一个价差，来模拟类似但不同的价格。如下所示：
 
     ```py
-    `# The filter which changes the close price
+    # The filter which changes the close price
     def close_changer(data, *args, **kwargs):
         data.close[0] += 50.0 * random.randint(-1, 1)
         return False  # length of stream is unchanged` 
@@ -63,7 +63,7 @@ cerebro.run()
 !!! 注意
 
 ```py
- `A simulation including execution on the spot price on the day of
+ A simulation including execution on the spot price on the day of
   future expiration would require activating `cheat-on-close` to
   make sure the orders are executed when the future expires. This is
   not needed in this sample, because the expiration is being chosen
@@ -77,7 +77,7 @@ cerebro.run()
     +   `sell`操作在`data1`上执行。
 
     ```py
-    `class St(bt.Strategy):
+    class St(bt.Strategy):
         def __init__(self):
             bt.obs.BuySell(self.data0, barplot=True)  # done here for
             BuySellArrows(self.data1, barplot=True)  # different markers per data

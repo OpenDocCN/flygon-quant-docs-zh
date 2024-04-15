@@ -23,7 +23,7 @@
 所有版本都似乎很复杂，由于语言和平台实现的原因，`MQL5` 版本有 227 行代码（当然包括一些注释），并且有轻微的差异，因此有必要确定一个合适的定义。在查看不同版本后的伪代码定义：
 
 ```py
- `# p0 is the current price and p1 is the previous price
+ # p0 is the current price and p1 is the previous price
   if mode is RSI:
     bulls = 0.5 * abs(p0 - p1) + p0 - p1
     bears = 0.5 * abs(p0 - p1) - p0 + p1

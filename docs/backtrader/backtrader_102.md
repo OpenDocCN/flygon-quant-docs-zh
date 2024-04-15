@@ -111,7 +111,7 @@ elif price0 < channel_low_1:
 作为一个谨慎的程序员，不知道*backtrader*中*唐奇安通道*的默认设置是有突破的，代码被移植过来，如下所示
 
 ```py
- `def __init__(self):
+ def __init__(self):
         self.donchian = DonchianChannels()
 
     def next(self):
@@ -124,7 +124,7 @@ elif price0 < channel_low_1:
 这是错误的！！！因为突破发生在比较的同时。正确的代码：
 
 ```py
- `def __init__(self):
+ def __init__(self):
         self.donchian = DonchianChannels()
 
     def next(self):

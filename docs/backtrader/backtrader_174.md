@@ -25,7 +25,7 @@ data.addfilter(filter, *args, **kwargs)
 +   一个接受此签名的可调用对象：
 
     ```py
-    `callable(data, *args, **kwargs)` 
+    callable(data, *args, **kwargs)` 
     ```
 
 或者
@@ -35,13 +35,13 @@ data.addfilter(filter, *args, **kwargs)
     +   在实例化期间，**init**方法必须支持以下签名：
 
     ```py
-    `def __init__(self, data, *args, **kwargs)` 
+    def __init__(self, data, *args, **kwargs)` 
     ```
 
     +   这个对象的**call**和 last 方法如下：
 
     ```py
-    `def __call__(self, data)
+    def __call__(self, data)
 
     def last(self, data)` 
     ```

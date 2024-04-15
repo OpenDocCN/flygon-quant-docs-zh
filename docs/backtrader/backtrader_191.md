@@ -116,7 +116,7 @@ order = self.broker.submit(order)
     如果策略中的逻辑如下：
 
     ```py
-     `if self.data.close > self.sma:  # where sma is a Simple Moving Average
+     if self.data.close > self.sma:  # where sma is a Simple Moving Average
          self.buy()
 
     The expectation CANNOT be that the order will be executed with the
@@ -255,7 +255,7 @@ order = self.broker.submit(order)
 请在图表中查看订单如何在生成信号后一根棒棒后以开盘价执行。
 
 ```py
- `if self.p.exectype == 'Market':
+ if self.p.exectype == 'Market':
                 self.buy(exectype=bt.Order.Market)  # default if not given
 
                 self.log('BUY CREATE, exectype Market, price %.2f' %
@@ -292,7 +292,7 @@ $ ./order-execution-samples.py --exectype Market
 现在订单也是在信号后一根棒棒后执行，但是使用的是收盘价。
 
 ```py
- `elif self.p.exectype == 'Close':
+ elif self.p.exectype == 'Close':
                 self.buy(exectype=bt.Order.Close)
 
                 self.log('BUY CREATE, exectype Close, price %.2f' %
@@ -331,7 +331,7 @@ $ ./order-execution-samples.py --exectype Close
 在几行之前计算有效性以防已作为参数传递。
 
 ```py
- `if self.p.valid:
+ if self.p.valid:
                 valid = self.data.datetime.date(0) + \
                         datetime.timedelta(days=self.p.valid)
             else:
@@ -341,7 +341,7 @@ $ ./order-execution-samples.py --exectype Close
 设置了信号生成价格（信号条的收盘价）下跌 1％的限价。请注意，这阻止了上面许多订单的执行。
 
 ```py
- `elif self.p.exectype == 'Limit':
+ elif self.p.exectype == 'Limit':
                 price = self.data.close * (1.0 - self.p.perc1 / 100.0)
 
                 self.buy(exectype=bt.Order.Limit, price=price, valid=valid)
@@ -442,7 +442,7 @@ $ ./order-execution-samples.py --exectype Limit --perc1 1 --valid 4
 这完全改变了执行情况。
 
 ```py
- `elif self.p.exectype == 'Stop':
+ elif self.p.exectype == 'Stop':
                 price = self.data.close * (1.0 + self.p.perc1 / 100.0)
 
                 self.buy(exectype=bt.Order.Stop, price=price, valid=valid)
@@ -499,7 +499,7 @@ $ ./order-execution-samples.py --exectype Stop --perc1 1
 有效期限制为 20（日历）天
 
 ```py
- `elif self.p.exectype == 'StopLimit':
+ elif self.p.exectype == 'StopLimit':
                 price = self.data.close * (1.0 + self.p.perc1 / 100.0)
 
                 plimit = self.data.close * (1.0 + self.p.perc2 / 100.0)

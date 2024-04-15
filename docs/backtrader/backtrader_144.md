@@ -64,7 +64,7 @@ Et voilá！当类`StFetcher`被实例化时，方法`__new__`控制实例的创
 ## 运行展示
 
 ```py
- `cerebro.addanalyzer(bt.analyzers.Returns)
+ cerebro.addanalyzer(bt.analyzers.Returns)
     cerebro.optstrategy(StFetcher, idx=[0, 1])
     results = cerebro.run(maxcpus=args.maxcpus, optreturn=args.optreturn)
 ```
@@ -76,7 +76,7 @@ Et voilá！当类`StFetcher`被实例化时，方法`__new__`控制实例的创
 在我们的情况下，每次只有 1 个策略，我们可以快速展平结果并提取我们添加的分析器的值。
 
 ```py
- `strats = [x[0] for x in results]  # flatten the result
+ strats = [x[0] for x in results]  # flatten the result
     for i, strat in enumerate(strats):
         rets = strat.analyzers.returns.get_analysis()
         print('Strat {} Name {}:\n - analyzer: {}\n'.format(

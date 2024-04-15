@@ -96,7 +96,7 @@ mycrossover = bt.ind.CrossOver(bt.ind.RSI(), 50.0)
     这告诉系统，如果没有向指标传递任何数据源，系统应该从父级复制第一个数据源。如果没有这个，例如实例化`RelativeStrengthIndicator`应该这样做：
 
     ```py
-    `class Strategy(bt.Indicator):
+    class Strategy(bt.Indicator):
         def __init__(self):
             rsi = bt.ind.RSI(self.data0)` 
     ```
@@ -104,7 +104,7 @@ mycrossover = bt.ind.CrossOver(bt.ind.RSI(), 50.0)
     但是使用`_mindatas`给出的默认指示，以下是可能的：
 
     ```py
-    `class Strategy(bt.Indicator):
+    class Strategy(bt.Indicator):
         def __init__(self):
             rsi = bt.ind.RSI()` 
     ```
@@ -122,7 +122,7 @@ mycrossover = bt.ind.CrossOver(bt.ind.RSI(), 50.0)
 +   如果只传递了 1 个数据，尝试将下一个传入的参数转换为 *lines* 对象，以便有 2 个数据源可用。对于普通浮点数的线穿越用例很有用。再次参考：
 
     ```py
-    `mycrossover = bt.ind.CrossOver(bt.ind.RSI(), 50.0)` 
+    mycrossover = bt.ind.CrossOver(bt.ind.RSI(), 50.0)` 
     ```
 
 +   如果向 `CrossOver` 传递了 2 个或更多个数据源，则不执行任何操作，并继续执行。
