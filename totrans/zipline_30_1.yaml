@@ -1,0 +1,652 @@
+- en: Installation
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://zipline.ml4trading.io/install.html](https://zipline.ml4trading.io/install.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: You can install Zipline either using [pip](https://pip.pypa.io/en/stable/),
+    the Python package installer, or [conda](https://docs.conda.io/projects/conda/en/latest/index.html),
+    the package and environment management system that runs on Windows, macOS, and
+    Linux. In case you are installing zipline-reloaded alongside other packages and
+    encounter [conflict errors]([conda/conda#9707](https://github.com/conda/conda/issues/9707)),
+    consider using [mamba]([mamba-org/mamba](https://github.com/mamba-org/mamba))
+    instead.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Zipline runs on Python 3.8, 3.9, 3.10 and 3.11\. To install and use different
+    Python versions in parallel as well as create a virtual environment, you may want
+    to use [pyenv](https://github.com/pyenv/pyenv).
+  prefs: []
+  type: TYPE_NORMAL
+- en: Installing with `pip`
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: Installing Zipline via `pip` is slightly more involved than the average Python
+    package.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'There are two reasons for the additional complexity:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Zipline ships several C extensions that require access to the CPython C API.
+    In order to build these C extensions, `pip` needs access to the CPython header
+    files for your Python installation.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Zipline depends on [NumPy](https://www.numpy.org/), the core library for numerical
+    array computing in Python. NumPy, in turn, depends on the [LAPACK](https://www.netlib.org/lapack)
+    linear algebra routines.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: 'Because LAPACK and the CPython headers are non-Python dependencies, the correct
+    way to install them varies from platform to platform. If you’d rather use a single
+    tool to install Python and non-Python dependencies, or if you’re already using
+    [Anaconda](https://www.anaconda.com/distribution/) as your Python distribution,
+    you can skip to the :ref: conda section.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Once you’ve installed the necessary additional dependencies (see below for
+    your particular platform), you should be able to simply run (preferably inside
+    an activated virtual environment):'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: If you use Python for anything other than Zipline, we **strongly** recommend
+    that you install in a [virtualenv](https://virtualenv.readthedocs.org/en/latest).
+    The [Hitchhiker’s Guide to Python](https://docs.python-guide.org/en/latest/) provides
+    an [excellent tutorial on virtualenv](https://docs.python-guide.org/en/latest/dev/virtualenvs/).
+  prefs: []
+  type: TYPE_NORMAL
+- en: GNU/Linux
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Dependencies
+  prefs:
+  - PREF_H4
+  type: TYPE_NORMAL
+- en: 'On [Debian-derived](https://www.debian.org/derivatives/) Linux distributions,
+    you can acquire all the necessary binary dependencies from `apt` by running:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'On recent [RHEL-derived](https://en.wikipedia.org/wiki/Red_Hat_Enterprise_Linux_derivatives)
+    derived Linux distributions (e.g. Fedora), the following should be sufficient
+    to acquire the necessary additional dependencies:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'On [Arch Linux](https://www.archlinux.org/), you can acquire the additional
+    dependencies via `pacman`:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE3]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'There are also AUR packages available for installing [ta-lib](https://aur.archlinux.org/packages/ta-lib/).
+    Python 3 is also installable via:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE4]'
+  prefs: []
+  type: TYPE_PRE
+- en: Compiling TA-Lib
+  prefs:
+  - PREF_H4
+  type: TYPE_NORMAL
+- en: You will also need to compile the [TA-Lib](https://www.ta-lib.org/) library
+    for technical analysis so its headers become available.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'You can accomplish this as follows:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE5]'
+  prefs: []
+  type: TYPE_PRE
+- en: This will allow you to install the Python wrapper with `pip` as expected by
+    the binary wheel.
+  prefs: []
+  type: TYPE_NORMAL
+- en: macOS
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: The version of Python shipped with macOS is generally out of date, and has a
+    number of quirks because it’s used directly by the operating system. For these
+    reasons, many developers choose to install and use a separate Python installation.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The [Hitchhiker’s Guide to Python](https://docs.python-guide.org/en/latest/)
+    provides an excellent guide to [Installing Python on macOS](https://docs.python-guide.org/en/latest/),
+    which explains how to install Python with the [Homebrew](https://brew.sh/) manager.
+    Alternatively, you could use [pyenv](https://github.com/pyenv/pyenv).
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Assuming you’ve installed Python with `brew`, you’ll also likely need the following
+    packages:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE6]'
+  prefs: []
+  type: TYPE_PRE
+- en: Windows
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: For Windows, the easiest and best supported way to install Zipline is to use
+    `conda`.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '## Installing with `conda`'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Another way to install Zipline is via the `conda` package manager, which comes
+    as part of the [Anaconda](https://www.anaconda.com/distribution/) distribution.
+    Alternatively, you can use the related but more lightweight [Miniconda](https://docs.conda.io/en/latest/miniconda.html#)
+    or [Miniforge](https://github.com/conda-forge/miniforge) installers.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The primary advantage of using Conda over `pip` is that `conda` natively understands
+    the complex binary dependencies of packages like `numpy` and `scipy`. This means
+    that `conda` can install Zipline and its dependencies without requiring the use
+    of a second tool to acquire Zipline’s non-Python dependencies.
+  prefs: []
+  type: TYPE_NORMAL
+- en: For instructions on how to install `conda`, see the [Conda Installation Documentation](https://conda.io/projects/conda/en/latest/user-guide/install/index.html).
+  prefs: []
+  type: TYPE_NORMAL
+- en: Once `conda` has been set up you can install Zipline from the `conda-forge`
+    channel.
+  prefs: []
+  type: TYPE_NORMAL
+- en: See [here]([conda-forge/zipline-reloaded-feedstock](https://github.com/conda-forge/zipline-reloaded-feedstock))
+    for the latest installation details.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '### Managing `conda` environments'
+  prefs: []
+  type: TYPE_NORMAL
+- en: It is recommended to install Zipline in an isolated `conda` environment. Installing
+    Zipline in `conda` environments will not interfere your default Python deployment
+    or site-packages, which will prevent any possible conflict with your global libraries.
+    For more information on `conda` environment, see the [Conda User Guide](https://conda.io/projects/conda/en/latest/user-guide/tasks/manage-environments.html).
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Assuming `conda` has been set up, you can create a `conda` environment:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE7]'
+  prefs: []
+  type: TYPE_PRE
+- en: Now you have set up an isolated environment called `env_zipline`, a sandbox-like
+    structure to install Zipline. Then you should activate the conda environment by
+    using the command
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE8]'
+  prefs: []
+  type: TYPE_PRE
+- en: You can install Zipline by running
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE9]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'To deactivate the `conda` environment:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE10]'
+  prefs: []
+  type: TYPE_PRE
+- en: Note
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`conda activate` and `conda deactivate` only work on conda 4.6 and later versions.
+    For conda versions prior to 4.6, run:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Windows: `activate` or `deactivate`'
+  prefs:
+  - PREF_BQ
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: ''
+  prefs:
+  - PREF_BQ
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: ''
+  prefs:
+  - PREF_BQ
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: 'Linux and macOS: `source activate` or `source deactivate`'
+  prefs:
+  - PREF_BQ
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Installing with `pip`
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: Installing Zipline via `pip` is slightly more involved than the average Python
+    package.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'There are two reasons for the additional complexity:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Zipline ships several C extensions that require access to the CPython C API.
+    In order to build these C extensions, `pip` needs access to the CPython header
+    files for your Python installation.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Zipline depends on [NumPy](https://www.numpy.org/), the core library for numerical
+    array computing in Python. NumPy, in turn, depends on the [LAPACK](https://www.netlib.org/lapack)
+    linear algebra routines.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: 'Because LAPACK and the CPython headers are non-Python dependencies, the correct
+    way to install them varies from platform to platform. If you’d rather use a single
+    tool to install Python and non-Python dependencies, or if you’re already using
+    [Anaconda](https://www.anaconda.com/distribution/) as your Python distribution,
+    you can skip to the :ref: conda section.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Once you’ve installed the necessary additional dependencies (see below for
+    your particular platform), you should be able to simply run (preferably inside
+    an activated virtual environment):'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE11]'
+  prefs: []
+  type: TYPE_PRE
+- en: If you use Python for anything other than Zipline, we **strongly** recommend
+    that you install in a [virtualenv](https://virtualenv.readthedocs.org/en/latest).
+    The [Hitchhiker’s Guide to Python](https://docs.python-guide.org/en/latest/) provides
+    an [excellent tutorial on virtualenv](https://docs.python-guide.org/en/latest/dev/virtualenvs/).
+  prefs: []
+  type: TYPE_NORMAL
+- en: GNU/Linux
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Dependencies
+  prefs:
+  - PREF_H4
+  type: TYPE_NORMAL
+- en: 'On [Debian-derived](https://www.debian.org/derivatives/) Linux distributions,
+    you can acquire all the necessary binary dependencies from `apt` by running:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE12]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'On recent [RHEL-derived](https://en.wikipedia.org/wiki/Red_Hat_Enterprise_Linux_derivatives)
+    derived Linux distributions (e.g. Fedora), the following should be sufficient
+    to acquire the necessary additional dependencies:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE13]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'On [Arch Linux](https://www.archlinux.org/), you can acquire the additional
+    dependencies via `pacman`:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE14]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'There are also AUR packages available for installing [ta-lib](https://aur.archlinux.org/packages/ta-lib/).
+    Python 3 is also installable via:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE15]'
+  prefs: []
+  type: TYPE_PRE
+- en: Compiling TA-Lib
+  prefs:
+  - PREF_H4
+  type: TYPE_NORMAL
+- en: You will also need to compile the [TA-Lib](https://www.ta-lib.org/) library
+    for technical analysis so its headers become available.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'You can accomplish this as follows:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE16]'
+  prefs: []
+  type: TYPE_PRE
+- en: This will allow you to install the Python wrapper with `pip` as expected by
+    the binary wheel.
+  prefs: []
+  type: TYPE_NORMAL
+- en: macOS
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: The version of Python shipped with macOS is generally out of date, and has a
+    number of quirks because it’s used directly by the operating system. For these
+    reasons, many developers choose to install and use a separate Python installation.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The [Hitchhiker’s Guide to Python](https://docs.python-guide.org/en/latest/)
+    provides an excellent guide to [Installing Python on macOS](https://docs.python-guide.org/en/latest/),
+    which explains how to install Python with the [Homebrew](https://brew.sh/) manager.
+    Alternatively, you could use [pyenv](https://github.com/pyenv/pyenv).
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Assuming you’ve installed Python with `brew`, you’ll also likely need the following
+    packages:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE17]'
+  prefs: []
+  type: TYPE_PRE
+- en: Windows
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: For Windows, the easiest and best supported way to install Zipline is to use
+    `conda`.
+  prefs: []
+  type: TYPE_NORMAL
+- en: GNU/Linux
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Dependencies
+  prefs:
+  - PREF_H4
+  type: TYPE_NORMAL
+- en: 'On [Debian-derived](https://www.debian.org/derivatives/) Linux distributions,
+    you can acquire all the necessary binary dependencies from `apt` by running:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE18]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'On recent [RHEL-derived](https://en.wikipedia.org/wiki/Red_Hat_Enterprise_Linux_derivatives)
+    derived Linux distributions (e.g. Fedora), the following should be sufficient
+    to acquire the necessary additional dependencies:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE19]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'On [Arch Linux](https://www.archlinux.org/), you can acquire the additional
+    dependencies via `pacman`:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE20]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'There are also AUR packages available for installing [ta-lib](https://aur.archlinux.org/packages/ta-lib/).
+    Python 3 is also installable via:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE21]'
+  prefs: []
+  type: TYPE_PRE
+- en: Compiling TA-Lib
+  prefs:
+  - PREF_H4
+  type: TYPE_NORMAL
+- en: You will also need to compile the [TA-Lib](https://www.ta-lib.org/) library
+    for technical analysis so its headers become available.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'You can accomplish this as follows:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE22]'
+  prefs: []
+  type: TYPE_PRE
+- en: This will allow you to install the Python wrapper with `pip` as expected by
+    the binary wheel.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Dependencies
+  prefs:
+  - PREF_H4
+  type: TYPE_NORMAL
+- en: 'On [Debian-derived](https://www.debian.org/derivatives/) Linux distributions,
+    you can acquire all the necessary binary dependencies from `apt` by running:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE23]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'On recent [RHEL-derived](https://en.wikipedia.org/wiki/Red_Hat_Enterprise_Linux_derivatives)
+    derived Linux distributions (e.g. Fedora), the following should be sufficient
+    to acquire the necessary additional dependencies:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE24]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'On [Arch Linux](https://www.archlinux.org/), you can acquire the additional
+    dependencies via `pacman`:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE25]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'There are also AUR packages available for installing [ta-lib](https://aur.archlinux.org/packages/ta-lib/).
+    Python 3 is also installable via:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE26]'
+  prefs: []
+  type: TYPE_PRE
+- en: Compiling TA-Lib
+  prefs:
+  - PREF_H4
+  type: TYPE_NORMAL
+- en: You will also need to compile the [TA-Lib](https://www.ta-lib.org/) library
+    for technical analysis so its headers become available.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'You can accomplish this as follows:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE27]'
+  prefs: []
+  type: TYPE_PRE
+- en: This will allow you to install the Python wrapper with `pip` as expected by
+    the binary wheel.
+  prefs: []
+  type: TYPE_NORMAL
+- en: macOS
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: The version of Python shipped with macOS is generally out of date, and has a
+    number of quirks because it’s used directly by the operating system. For these
+    reasons, many developers choose to install and use a separate Python installation.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The [Hitchhiker’s Guide to Python](https://docs.python-guide.org/en/latest/)
+    provides an excellent guide to [Installing Python on macOS](https://docs.python-guide.org/en/latest/),
+    which explains how to install Python with the [Homebrew](https://brew.sh/) manager.
+    Alternatively, you could use [pyenv](https://github.com/pyenv/pyenv).
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Assuming you’ve installed Python with `brew`, you’ll also likely need the following
+    packages:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE28]'
+  prefs: []
+  type: TYPE_PRE
+- en: Windows
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: For Windows, the easiest and best supported way to install Zipline is to use
+    `conda`.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '## Installing with `conda`'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Another way to install Zipline is via the `conda` package manager, which comes
+    as part of the [Anaconda](https://www.anaconda.com/distribution/) distribution.
+    Alternatively, you can use the related but more lightweight [Miniconda](https://docs.conda.io/en/latest/miniconda.html#)
+    or [Miniforge](https://github.com/conda-forge/miniforge) installers.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The primary advantage of using Conda over `pip` is that `conda` natively understands
+    the complex binary dependencies of packages like `numpy` and `scipy`. This means
+    that `conda` can install Zipline and its dependencies without requiring the use
+    of a second tool to acquire Zipline’s non-Python dependencies.
+  prefs: []
+  type: TYPE_NORMAL
+- en: For instructions on how to install `conda`, see the [Conda Installation Documentation](https://conda.io/projects/conda/en/latest/user-guide/install/index.html).
+  prefs: []
+  type: TYPE_NORMAL
+- en: Once `conda` has been set up you can install Zipline from the `conda-forge`
+    channel.
+  prefs: []
+  type: TYPE_NORMAL
+- en: See [here]([conda-forge/zipline-reloaded-feedstock](https://github.com/conda-forge/zipline-reloaded-feedstock))
+    for the latest installation details.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '### Managing `conda` environments'
+  prefs: []
+  type: TYPE_NORMAL
+- en: It is recommended to install Zipline in an isolated `conda` environment. Installing
+    Zipline in `conda` environments will not interfere your default Python deployment
+    or site-packages, which will prevent any possible conflict with your global libraries.
+    For more information on `conda` environment, see the [Conda User Guide](https://conda.io/projects/conda/en/latest/user-guide/tasks/manage-environments.html).
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Assuming `conda` has been set up, you can create a `conda` environment:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE29]'
+  prefs: []
+  type: TYPE_PRE
+- en: Now you have set up an isolated environment called `env_zipline`, a sandbox-like
+    structure to install Zipline. Then you should activate the conda environment by
+    using the command
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE30]'
+  prefs: []
+  type: TYPE_PRE
+- en: You can install Zipline by running
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE31]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'To deactivate the `conda` environment:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE32]'
+  prefs: []
+  type: TYPE_PRE
+- en: Note
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`conda activate` and `conda deactivate` only work on conda 4.6 and later versions.
+    For conda versions prior to 4.6, run:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Windows: `activate` or `deactivate`'
+  prefs:
+  - PREF_BQ
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: ''
+  prefs:
+  - PREF_BQ
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: ''
+  prefs:
+  - PREF_BQ
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: 'Linux and macOS: `source activate` or `source deactivate`  ### Managing `conda`
+    environments'
+  prefs:
+  - PREF_BQ
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: It is recommended to install Zipline in an isolated `conda` environment. Installing
+    Zipline in `conda` environments will not interfere your default Python deployment
+    or site-packages, which will prevent any possible conflict with your global libraries.
+    For more information on `conda` environment, see the [Conda User Guide](https://conda.io/projects/conda/en/latest/user-guide/tasks/manage-environments.html).
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Assuming `conda` has been set up, you can create a `conda` environment:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE33]'
+  prefs: []
+  type: TYPE_PRE
+- en: Now you have set up an isolated environment called `env_zipline`, a sandbox-like
+    structure to install Zipline. Then you should activate the conda environment by
+    using the command
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE34]'
+  prefs: []
+  type: TYPE_PRE
+- en: You can install Zipline by running
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE35]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'To deactivate the `conda` environment:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE36]'
+  prefs: []
+  type: TYPE_PRE
+- en: Note
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`conda activate` and `conda deactivate` only work on conda 4.6 and later versions.
+    For conda versions prior to 4.6, run:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Windows: `activate` or `deactivate`'
+  prefs:
+  - PREF_BQ
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: ''
+  prefs:
+  - PREF_BQ
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: ''
+  prefs:
+  - PREF_BQ
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: 'Linux and macOS: `source activate` or `source deactivate`'
+  prefs:
+  - PREF_BQ
+  - PREF_UL
+  type: TYPE_NORMAL

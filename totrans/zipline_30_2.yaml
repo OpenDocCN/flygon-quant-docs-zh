@@ -1,0 +1,1229 @@
+- en: Tutorial
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://zipline.ml4trading.io/beginner-tutorial.html](https://zipline.ml4trading.io/beginner-tutorial.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: Zipline is an [open-source](https://github.com/stefan-jansen/zipline-reloaded)
+    algorithmic trading simulator written in Python.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Some benefits include:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Realistic**: slippage, transaction costs, order delays.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Stream-based**: Process each event individually, avoids look-ahead bias.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Batteries included**: Common transforms (moving average) as well as common
+    risk calculations (Sharpe) can be computed efficiently while executing a backtest.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: This tutorial assumes that you have Zipline correctly installed, see the [Installation](install.html#install)
+    instructions if you haven’t done so yet.
+  prefs: []
+  type: TYPE_NORMAL
+- en: How to construct an algorithm
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: 'Every Zipline algorithm consists of two functions you have to define:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`initialize(context)`'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`handle_data(context, data)`'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Before the start of the algorithm, Zipline calls the `initialize()` function
+    and passes in a `context` variable. `context` is a persistent namespace for you
+    to store variables you need to access from one algorithm iteration to the next.
+  prefs: []
+  type: TYPE_NORMAL
+- en: After the algorithm has been initialized, Zipline calls the `handle_data()`
+    function once for each event. At every call, it passes the same `context` variable
+    and an event-frame called `data` containing the current trading bar with open,
+    high, low, and close (OHLC) prices as well as volume for each stock in your universe.
+  prefs: []
+  type: TYPE_NORMAL
+- en: A simple example
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Let’s take a look at a very simple algorithm from the [zipline/examples](https://github.com/stefan-jansen/zipline-reloaded/tree/main/src/zipline/examples)
+    directory, `buyapple.py`. Each period, which is a trading day, it orders 10 shares
+    of the Apple stock and records the price.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'As you can see, we first have to import some functions we would like to use.
+    All functions commonly used in your algorithm can be found in `zipline.api`. Here
+    we are using [`order()`](api-reference.html#zipline.api.order "zipline.api.order")
+    which takes two arguments: a security object, and a number specifying how many
+    stocks you would like to order (if negative, [`order()`](api-reference.html#zipline.api.order
+    "zipline.api.order") will sell/short stocks). In this case we want to order 10
+    shares of Apple at each iteration.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Finally, the [`record()`](api-reference.html#zipline.api.record "zipline.api.record")
+    function allows you to save the value of a variable at each iteration. You provide
+    it with a name for the variable together with the variable itself: `varname=var`.
+    After the algorithm finished running you will have access to each variable value
+    you tracked with [`record()`](api-reference.html#zipline.api.record "zipline.api.record")
+    under the name you provided (we will see this further below). You also see how
+    we can access the current price data of the AAPL stock in the `data` event frame.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: How to run the algorithm
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: 'To now test this algorithm on financial data, Zipline provides three interfaces:
+    1\. the command line via the `zipline` command, 2\. the `Jupyter Notebook` via
+    the `zipline` magic, and 3\. the [`run_algorithm()`](api-reference.html#zipline.run_algorithm
+    "zipline.run_algorithm") to execute your algo like any Python script, for example
+    in your IDE.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Before we can run any algorithms, we need some data.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Ingesting Data
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'If you haven’t ingested data yet, then run:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: where `<bundle>` is the name of the bundle to ingest. You can use the default
+    quandl for now to work with the [Quandl WIKI price data](https://www.quandl.com/databases/WIKIP/documentation?anchor=companies).
+    Check out the [ingesting data](bundles.html#ingesting-data) section for more detail
+    on how to obtain other new data.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Command Line Interface
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'After you installed Zipline you should be able to execute the following from
+    your command line (e.g. `cmd.exe` on Windows, the Terminal app on OSX, or e.g.
+    the bash shell on Linux):'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE3]'
+  prefs: []
+  type: TYPE_PRE
+- en: '[PRE4]'
+  prefs: []
+  type: TYPE_PRE
+- en: As you can see there are a couple of flags that specify where to find your algorithm
+    (`-f`) as well as parameters specifying which data to use, defaulting to `quandl`.
+  prefs: []
+  type: TYPE_NORMAL
+- en: There are also arguments for the date range to run the algorithm over (`--start`
+    and `--end`).To use a benchmark, you need to choose one of the benchmark options
+    listed before. You can always use the option (`--no-benchmark`) that uses zero
+    returns as a benchmark ( alpha, beta and benchmark metrics are not calculated
+    in this case).
+  prefs: []
+  type: TYPE_NORMAL
+- en: Finally, you’ll want to save the performance metrics of your algorithm so that
+    you can analyze how it performed. This is done via the `--output` flag and will
+    cause it to write the performance `DataFrame` in the pickle Python file format.
+    Note that you can also define a configuration file with these parameters that
+    you can then conveniently pass to the `-c` option so that you don’t have to supply
+    the command line args all the time (see the .conf files in the examples directory).
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Thus, to execute our algorithm from above and save the results to `buyapple_out.pickle`,
+    we call `zipline run` as follows:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE5]'
+  prefs: []
+  type: TYPE_PRE
+- en: '[PRE6]'
+  prefs: []
+  type: TYPE_PRE
+- en: '`run` first calls the `initialize()` function, and then streams the historical
+    stock price day-by-day through `handle_data()`. After each call to `handle_data()`
+    we instruct `zipline` to order 10 stocks of AAPL. After the call of the `order()`
+    function, `zipline` enters the ordered stock and amount in the order book. After
+    the `handle_data()` function has finished, `zipline` looks for any open orders
+    and tries to fill them. If the trading volume is high enough for this stock, the
+    order is executed after adding the commission and applying the slippage model
+    which models the influence of your order on the stock price, so your algorithm
+    will be charged more than just the stock price * 10\. (Note, that you can also
+    change the commission and slippage model that `zipline` uses, see the.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Let’s take a quick look at the performance `DataFrame`. For this, we use `pandas`
+    from inside the IPython Notebook and print the first ten rows. Note that `zipline`
+    makes heavy usage of `pandas`, especially for data input and outputting so it’s
+    worth spending some time to learn it.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE7]'
+  prefs: []
+  type: TYPE_PRE
+- en: '|  | AAPL | algo_volatility | algorithm_period_return | alpha | benchmark_period_return
+    | benchmark_volatility | beta | capital_used | ending_cash | ending_exposure |
+    ending_value | excess_return | gross_leverage | long_exposure | long_value | longs_count
+    | max_drawdown | max_leverage | net_leverage | orders | period_close | period_label
+    | period_open | pnl | portfolio_value | positions | returns | sharpe | short_exposure
+    | short_value | shorts_count | sortino | starting_cash | starting_exposure | starting_value
+    | trading_days | transactions | treasury_period_return |'
+  prefs: []
+  type: TYPE_TB
+- en: '| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | ---
+    | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | ---
+    | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | ---
+    |'
+  prefs: []
+  type: TYPE_TB
+- en: '| 2016-01-04 21:00:00+00:00 | 105.35 | NaN | 0.000000e+00 | NaN | -0.013983
+    | NaN | NaN | 0.0 | 10000000.0 | 0.0 | 0.0 | 0.0 | 0.000000 | 0.0 | 0.0 | 0 |
+    0.000000e+00 | 0.0 | 0.000000 | [{\''dt\'': 2016-01-04 21:00:00+00:00, \''reason\'':
+    N... | 2016-01-04 21:00:00+00:00 | 2016-01 | 2016-01-04 14:31:00+00:00 | 0.0 |
+    10000000.0 | [] | 0.000000e+00 | NaN | 0 | 0 | 0 | NaN | 10000000.0 | 0.0 | 0.0
+    | 1 | [] | 0.0 |'
+  prefs: []
+  type: TYPE_TB
+- en: '| 2016-01-05 21:00:00+00:00 | 102.71 | 0.000001 | -1.000000e-07 | -0.000022
+    | -0.012312 | 0.175994 | -0.000006 | -1028.1 | 9998971.9 | 1027.1 | 1027.1 | 0.0
+    | 0.000103 | 1027.1 | 1027.1 | 1 | -1.000000e-07 | 0.0 | 0.000103 | [{\''dt\'':
+    2016-01-05 21:00:00+00:00, \''reason\'': N... | 2016-01-05 21:00:00+00:00 | 2016-01
+    | 2016-01-05 14:31:00+00:00 | -1.0 | 9999999.0 | [{\''sid\'': Equity(8 [AAPL]),
+    \''last_sale_price\'': ... | -1.000000e-07 | -11.224972 | 0 | 0 | 0 | -11.224972
+    | 10000000.0 | 0.0 | 0.0 | 2 | [{\''order_id\'': \''4011063b5c094e82a5391527044098b...
+    | 0.0 |'
+  prefs: []
+  type: TYPE_TB
+- en: '| 2016-01-06 21:00:00+00:00 | 100.70 | 0.000019 | -2.210000e-06 | -0.000073
+    | -0.024771 | 0.137853 | 0.000054 | -1008.0 | 9997963.9 | 2014.0 | 2014.0 | 0.0
+    | 0.000201 | 2014.0 | 2014.0 | 1 | -2.210000e-06 | 0.0 | 0.000201 | [{\''dt\'':
+    2016-01-06 21:00:00+00:00, \''reason\'': N... | 2016-01-06 21:00:00+00:00 | 2016-01
+    | 2016-01-06 14:31:00+00:00 | -21.1 | 9999977.9 | [{\''sid\'': Equity(8 [AAPL]),
+    \''last_sale_price\'': ... | -2.110000e-06 | -9.823839 | 0 | 0 | 0 | -9.588756
+    | 9998971.9 | 1027.1 | 1027.1 | 3 | [{\''order_id\'': \''3bf9fe20cc46468d99f741474226c03...
+    | 0.0 |'
+  prefs: []
+  type: TYPE_TB
+- en: '| 2016-01-07 21:00:00+00:00 | 96.45 | 0.000064 | -1.081000e-05 | 0.000243 |
+    -0.048168 | 0.167868 | 0.000300 | -965.5 | 9996998.4 | 2893.5 | 2893.5 | 0.0 |
+    0.000289 | 2893.5 | 2893.5 | 1 | -1.081000e-05 | 0.0 | 0.000289 | [{\''dt\'':
+    2016-01-07 21:00:00+00:00, \''reason\'': N... | 2016-01-07 21:00:00+00:00 | 2016-01
+    | 2016-01-07 14:31:00+00:00 | -86.0 | 9999891.9 | [{\''sid\'': Equity(8 [AAPL]),
+    \''last_sale_price\'': ... | -8.600019e-06 | -10.592737 | 0 | 0 | 0 | -9.688947
+    | 9997963.9 | 2014.0 | 2014.0 | 4 | [{\''order_id\'': \''6af6aed9fbb44a6bba17e802051b94d...
+    | 0.0 |'
+  prefs: []
+  type: TYPE_TB
+- en: '| 2016-01-08 21:00:00+00:00 | 96.96 | 0.000063 | -9.380000e-06 | 0.000466 |
+    -0.058601 | 0.145654 | 0.000311 | -970.6 | 9996027.8 | 3878.4 | 3878.4 | 0.0 |
+    0.000388 | 3878.4 | 3878.4 | 1 | -1.081000e-05 | 0.0 | 0.000388 | [{\''dt\'':
+    2016-01-08 21:00:00+00:00, \''reason\'': N... | 2016-01-08 21:00:00+00:00 | 2016-01
+    | 2016-01-08 14:31:00+00:00 | 14.3 | 9999906.2 | [{\''sid\'': Equity(8 [AAPL]),
+    \''last_sale_price\'': ... | 1.430015e-06 | -7.511729 | 0 | 0 | 0 | -7.519659
+    | 9996998.4 | 2893.5 | 2893.5 | 5 | [{\''order_id\'': \''18f64975732449a18fca06e9c69bf5c...
+    | 0.0 |'
+  prefs: []
+  type: TYPE_TB
+- en: As you can see, there is a row for each trading day, starting on the first business
+    day of 2016\. In the columns you can find various information about the state
+    of your algorithm. The very first column `AAPL` was placed there by the `record()`
+    function mentioned earlier and allows us to plot the price of apple. For example,
+    we could easily examine now how our portfolio value changed over time compared
+    to the AAPL stock price.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE8]'
+  prefs: []
+  type: TYPE_PRE
+- en: '[PRE9]'
+  prefs: []
+  type: TYPE_PRE
+- en: '[PRE10]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![_images/tutorial_11_2.png](../Images/b731cbe4c5b44f822b43d68ecaf39c56.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: As you can see, our algorithm performance as assessed by the `portfolio_value`
+    closely matches that of the AAPL stock price. This is not surprising as our algorithm
+    only bought AAPL every chance it got.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Jupyter Notebook
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: The [Jupyter Notebook](https://jupyter.org/) is a very powerful browser-based
+    interface to a Python interpreter (this tutorial was written in it). As it is
+    a very popular interface for many quantitative researchers, Zipline provides an
+    easy way to run your algorithm inside the Notebook without requiring you to use
+    the CLI.
+  prefs: []
+  type: TYPE_NORMAL
+- en: To use it you have to write your algorithm in a cell and let Zipline know that
+    it is supposed to run this algorithm. This is done via the `%%zipline` IPython
+    magic command that is available after you `import zipline` from within the IPython
+    Notebook. This magic takes the same arguments as the command line interface described
+    above. Thus to run the algorithm from above with the same parameters we just have
+    to execute the following cell after importing `zipline` to register the magic.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE11]'
+  prefs: []
+  type: TYPE_PRE
+- en: '[PRE12]'
+  prefs: []
+  type: TYPE_PRE
+- en: Note that we did not have to specify an input file as above since the magic
+    will use the contents of the cell and look for your algorithm functions there.
+    Also, instead of defining an output file we are specifying a variable name with
+    `-o` that will be created in the name space and contain the performance `DataFrame`
+    we looked at above.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE13]'
+  prefs: []
+  type: TYPE_PRE
+- en: '|  | AAPL | algo_volatility | algorithm_period_return | alpha | benchmark_period_return
+    | benchmark_volatility | beta | capital_used | ending_cash | ending_exposure |
+    ending_value | excess_return | gross_leverage | long_exposure | long_value | longs_count
+    | max_drawdown | max_leverage | net_leverage | orders | period_close | period_label
+    | period_open | pnl | portfolio_value | positions | returns | sharpe | short_exposure
+    | short_value | shorts_count | sortino | starting_cash | starting_exposure | starting_value
+    | trading_days | transactions | treasury_period_return |'
+  prefs: []
+  type: TYPE_TB
+- en: '| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | ---
+    | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | ---
+    | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | ---
+    |'
+  prefs: []
+  type: TYPE_TB
+- en: '| 2016-01-04 21:00:00+00:00 | 105.35 | NaN | 0.000000e+00 | NaN | -0.013983
+    | NaN | NaN | 0.00 | 10000000.00 | 0.0 | 0.0 | 0.0 | 0.000000 | 0.0 | 0.0 | 0
+    | 0.000000e+00 | 0.0 | 0.000000 | [{\''created\'': 2016-01-04 21:00:00+00:00,
+    \''reaso... | 2016-01-04 21:00:00+00:00 | 2016-01 | 2016-01-04 14:31:00+00:00
+    | 0.00 | 10000000.00 | [] | 0.000000e+00 | NaN | 0 | 0 | 0 | NaN | 10000000.00
+    | 0.0 | 0.0 | 1 | [] | 0.0 |'
+  prefs: []
+  type: TYPE_TB
+- en: '| 2016-01-05 21:00:00+00:00 | 102.71 | 1.122497e-08 | -1.000000e-09 | -2.247510e-07
+    | -0.012312 | 0.175994 | -6.378047e-08 | -1027.11 | 9998972.89 | 1027.1 | 1027.1
+    | 0.0 | 0.000103 | 1027.1 | 1027.1 | 1 | -9.999999e-10 | 0.0 | 0.000103 | [{\''created\'':
+    2016-01-04 21:00:00+00:00, \''reaso... | 2016-01-05 21:00:00+00:00 | 2016-01 |
+    2016-01-05 14:31:00+00:00 | -0.01 | 9999999.99 | [{\''amount\'': 10, \''cost_basis\'':
+    102.711000000000... | -1.000000e-09 | -11.224972 | 0 | 0 | 0 | -11.224972 | 10000000.00
+    | 0.0 | 0.0 | 2 | [{\''dt\'': 2016-01-05 21:00:00+00:00, \''order_id\'':... |
+    0.0 |'
+  prefs: []
+  type: TYPE_TB
+- en: '| 2016-01-06 21:00:00+00:00 | 100.70 | 1.842654e-05 | -2.012000e-06 | -4.883861e-05
+    | -0.024771 | 0.137853 | 5.744807e-05 | -1007.01 | 9997965.88 | 2014.0 | 2014.0
+    | 0.0 | 0.000201 | 2014.0 | 2014.0 | 1 | -2.012000e-06 | 0.0 | 0.000201 | [{\''created\'':
+    2016-01-05 21:00:00+00:00, \''reaso... | 2016-01-06 21:00:00+00:00 | 2016-01 |
+    2016-01-06 14:31:00+00:00 | -20.11 | 9999979.88 | [{\''amount\'': 20, \''cost_basis\'':
+    101.706000000000... | -2.011000e-06 | -9.171989 | 0 | 0 | 0 | -9.169708 | 9998972.89
+    | 1027.1 | 1027.1 | 3 | [{\''dt\'': 2016-01-06 21:00:00+00:00, \''order_id\'':...
+    | 0.0 |'
+  prefs: []
+  type: TYPE_TB
+- en: '| 2016-01-07 21:00:00+00:00 | 96.45 | 6.394658e-05 | -1.051300e-05 | 2.633450e-04
+    | -0.048168 | 0.167868 | 3.005102e-04 | -964.51 | 9997001.37 | 2893.5 | 2893.5
+    | 0.0 | 0.000289 | 2893.5 | 2893.5 | 1 | -1.051300e-05 | 0.0 | 0.000289 | [{\''created\'':
+    2016-01-06 21:00:00+00:00, \''reaso... | 2016-01-07 21:00:00+00:00 | 2016-01 |
+    2016-01-07 14:31:00+00:00 | -85.01 | 9999894.87 | [{\''amount\'': 30, \''cost_basis\'':
+    99.9543333333335... | -8.501017e-06 | -10.357397 | 0 | 0 | 0 | -9.552189 | 9997965.88
+    | 2014.0 | 2014.0 | 4 | [{\''dt\'': 2016-01-07 21:00:00+00:00, \''order_id\'':...
+    | 0.0 |'
+  prefs: []
+  type: TYPE_TB
+- en: '| 2016-01-08 21:00:00+00:00 | 96.96 | 6.275294e-05 | -8.984000e-06 | 4.879306e-04
+    | -0.058601 | 0.145654 | 3.118401e-04 | -969.61 | 9996031.76 | 3878.4 | 3878.4
+    | 0.0 | 0.000388 | 3878.4 | 3878.4 | 1 | -1.051300e-05 | 0.0 | 0.000388 | [{\''created\'':
+    2016-01-07 21:00:00+00:00, \''reaso... | 2016-01-08 21:00:00+00:00 | 2016-01 |
+    2016-01-08 14:31:00+00:00 | 15.29 | 9999910.16 | [{\''amount\'': 40, \''cost_basis\'':
+    99.2060000000002... | 1.529016e-06 | -7.215497 | 0 | 0 | 0 | -7.301134 | 9997001.37
+    | 2893.5 | 2893.5 | 5 | [{\''dt\'': 2016-01-08 21:00:00+00:00, \''order_id\'':...
+    | 0.0 |'
+  prefs: []
+  type: TYPE_TB
+- en: IDE via [`run_algorithm()`](api-reference.html#zipline.run_algorithm "zipline.run_algorithm")
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: To execute an algorithm like a Python script in your favorite IDE, use the [`run_algorithm()`](api-reference.html#zipline.run_algorithm
+    "zipline.run_algorithm") (see [API Reference](api-reference.html#api-reference)).
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'To adapt the `buyapple.py` example from above (see `buyapple_ide.py` in the
+    same directory), simply add the following:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE14]'
+  prefs: []
+  type: TYPE_PRE
+- en: We pass the key algo parameters to [`run_algorithm()`](api-reference.html#zipline.run_algorithm
+    "zipline.run_algorithm"), including some benchmark data for the S&P 500 that we
+    download from the [Federal Reserve Economic Data Service](https://fred.stlouisfed.org/series/SP500)
+    (available for the last 10 years).
+  prefs: []
+  type: TYPE_NORMAL
+- en: The `result` return value contains the same `DataFrame` as in the previous example.
+    Instead of defining an `analyze()` function as part of the algorithm, you can
+    apply your preferred logic to this `DataFrame`.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'How to use historical prices: a dual Moving Average Cross-Over example'
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: The Dual Moving Average (DMA) is a classic momentum strategy. It’s probably
+    not used by any serious trader anymore but is still very instructive. The basic
+    idea is that we compute two rolling or moving averages (mavg) – one with a longer
+    window that is supposed to capture long-term trends and one shorter window that
+    is supposed to capture short-term trends. Once the short-mavg crosses the long-mavg
+    from below we assume that the stock price has upwards momentum and long the stock.
+    If the short-mavg crosses from above we exit the positions as we assume the stock
+    to go down further.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'As we need to have access to previous prices to implement this strategy we
+    need a new concept: History'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`data.history()` is a convenience function that keeps a rolling window of data
+    for you. The first argument is the number of bars you want to collect, the second
+    argument is the unit (either `''1d''` or `''1m''`, but note that you need to have
+    minute-level data for using `1m`). For a more detailed description of `history()`’s
+    features, see the [API Reference](api-reference.html#api-reference). Let’s look
+    at the strategy which should make this clear:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE15]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![_images/tutorial_22_1.png](../Images/fb9083c2bb352fd43c1bf11750fbc684.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Here we are explicitly defining an `analyze()` function that gets automatically
+    called once the backtest is done.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Although it might not be directly apparent, the power of `history()` (pun intended)
+    can not be under-estimated as most algorithms make use of prior market developments
+    in one form or another. You could easily devise a strategy that trains a classifier
+    with [scikit-learn](https://scikit-learn.org/stable/) which tries to predict future
+    market movements based on past prices (note, that most of the `scikit-learn` functions
+    require `numpy.ndarray`s rather than `pandas.DataFrame`s, so you can simply pass
+    the underlying `ndarray` of a `DataFrame` via `.to_numpy()`).
+  prefs: []
+  type: TYPE_NORMAL
+- en: We also used the `order_target()` function above. This and other functions like
+    it can make order management and portfolio rebalancing much easier. See the [API
+    Reference](api-reference.html#api-reference) for more details.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Conclusions
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: We hope that this tutorial gave you a little insight into the architecture,
+    API, and features of `zipline`. For next steps, check out some of the [examples](https://github.com/stefan-jansen/zipline-reloaded/tree/main/src/zipline/examples).
+  prefs: []
+  type: TYPE_NORMAL
+- en: Feel free to ask questions on [our mailing list](https://groups.google.com/forum/#!forum/zipline),
+    report problems on our [GitHub issue tracker](https://github.com/stefan-jansen/zipline-reloaded/issues?state=open),
+    or [get involved](https://exchange.ml4trading.io).
+  prefs: []
+  type: TYPE_NORMAL
+- en: How to construct an algorithm
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: 'Every Zipline algorithm consists of two functions you have to define:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`initialize(context)`'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`handle_data(context, data)`'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Before the start of the algorithm, Zipline calls the `initialize()` function
+    and passes in a `context` variable. `context` is a persistent namespace for you
+    to store variables you need to access from one algorithm iteration to the next.
+  prefs: []
+  type: TYPE_NORMAL
+- en: After the algorithm has been initialized, Zipline calls the `handle_data()`
+    function once for each event. At every call, it passes the same `context` variable
+    and an event-frame called `data` containing the current trading bar with open,
+    high, low, and close (OHLC) prices as well as volume for each stock in your universe.
+  prefs: []
+  type: TYPE_NORMAL
+- en: A simple example
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Let’s take a look at a very simple algorithm from the [zipline/examples](https://github.com/stefan-jansen/zipline-reloaded/tree/main/src/zipline/examples)
+    directory, `buyapple.py`. Each period, which is a trading day, it orders 10 shares
+    of the Apple stock and records the price.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE16]'
+  prefs: []
+  type: TYPE_PRE
+- en: '[PRE17]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'As you can see, we first have to import some functions we would like to use.
+    All functions commonly used in your algorithm can be found in `zipline.api`. Here
+    we are using [`order()`](api-reference.html#zipline.api.order "zipline.api.order")
+    which takes two arguments: a security object, and a number specifying how many
+    stocks you would like to order (if negative, [`order()`](api-reference.html#zipline.api.order
+    "zipline.api.order") will sell/short stocks). In this case we want to order 10
+    shares of Apple at each iteration.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Finally, the [`record()`](api-reference.html#zipline.api.record "zipline.api.record")
+    function allows you to save the value of a variable at each iteration. You provide
+    it with a name for the variable together with the variable itself: `varname=var`.
+    After the algorithm finished running you will have access to each variable value
+    you tracked with [`record()`](api-reference.html#zipline.api.record "zipline.api.record")
+    under the name you provided (we will see this further below). You also see how
+    we can access the current price data of the AAPL stock in the `data` event frame.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: A simple example
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Let’s take a look at a very simple algorithm from the [zipline/examples](https://github.com/stefan-jansen/zipline-reloaded/tree/main/src/zipline/examples)
+    directory, `buyapple.py`. Each period, which is a trading day, it orders 10 shares
+    of the Apple stock and records the price.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE18]'
+  prefs: []
+  type: TYPE_PRE
+- en: '[PRE19]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'As you can see, we first have to import some functions we would like to use.
+    All functions commonly used in your algorithm can be found in `zipline.api`. Here
+    we are using [`order()`](api-reference.html#zipline.api.order "zipline.api.order")
+    which takes two arguments: a security object, and a number specifying how many
+    stocks you would like to order (if negative, [`order()`](api-reference.html#zipline.api.order
+    "zipline.api.order") will sell/short stocks). In this case we want to order 10
+    shares of Apple at each iteration.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Finally, the [`record()`](api-reference.html#zipline.api.record "zipline.api.record")
+    function allows you to save the value of a variable at each iteration. You provide
+    it with a name for the variable together with the variable itself: `varname=var`.
+    After the algorithm finished running you will have access to each variable value
+    you tracked with [`record()`](api-reference.html#zipline.api.record "zipline.api.record")
+    under the name you provided (we will see this further below). You also see how
+    we can access the current price data of the AAPL stock in the `data` event frame.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: How to run the algorithm
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: 'To now test this algorithm on financial data, Zipline provides three interfaces:
+    1\. the command line via the `zipline` command, 2\. the `Jupyter Notebook` via
+    the `zipline` magic, and 3\. the [`run_algorithm()`](api-reference.html#zipline.run_algorithm
+    "zipline.run_algorithm") to execute your algo like any Python script, for example
+    in your IDE.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Before we can run any algorithms, we need some data.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Ingesting Data
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'If you haven’t ingested data yet, then run:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE20]'
+  prefs: []
+  type: TYPE_PRE
+- en: where `<bundle>` is the name of the bundle to ingest. You can use the default
+    quandl for now to work with the [Quandl WIKI price data](https://www.quandl.com/databases/WIKIP/documentation?anchor=companies).
+    Check out the [ingesting data](bundles.html#ingesting-data) section for more detail
+    on how to obtain other new data.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Command Line Interface
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'After you installed Zipline you should be able to execute the following from
+    your command line (e.g. `cmd.exe` on Windows, the Terminal app on OSX, or e.g.
+    the bash shell on Linux):'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE21]'
+  prefs: []
+  type: TYPE_PRE
+- en: '[PRE22]'
+  prefs: []
+  type: TYPE_PRE
+- en: As you can see there are a couple of flags that specify where to find your algorithm
+    (`-f`) as well as parameters specifying which data to use, defaulting to `quandl`.
+  prefs: []
+  type: TYPE_NORMAL
+- en: There are also arguments for the date range to run the algorithm over (`--start`
+    and `--end`).To use a benchmark, you need to choose one of the benchmark options
+    listed before. You can always use the option (`--no-benchmark`) that uses zero
+    returns as a benchmark ( alpha, beta and benchmark metrics are not calculated
+    in this case).
+  prefs: []
+  type: TYPE_NORMAL
+- en: Finally, you’ll want to save the performance metrics of your algorithm so that
+    you can analyze how it performed. This is done via the `--output` flag and will
+    cause it to write the performance `DataFrame` in the pickle Python file format.
+    Note that you can also define a configuration file with these parameters that
+    you can then conveniently pass to the `-c` option so that you don’t have to supply
+    the command line args all the time (see the .conf files in the examples directory).
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Thus, to execute our algorithm from above and save the results to `buyapple_out.pickle`,
+    we call `zipline run` as follows:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE23]'
+  prefs: []
+  type: TYPE_PRE
+- en: '[PRE24]'
+  prefs: []
+  type: TYPE_PRE
+- en: '`run` first calls the `initialize()` function, and then streams the historical
+    stock price day-by-day through `handle_data()`. After each call to `handle_data()`
+    we instruct `zipline` to order 10 stocks of AAPL. After the call of the `order()`
+    function, `zipline` enters the ordered stock and amount in the order book. After
+    the `handle_data()` function has finished, `zipline` looks for any open orders
+    and tries to fill them. If the trading volume is high enough for this stock, the
+    order is executed after adding the commission and applying the slippage model
+    which models the influence of your order on the stock price, so your algorithm
+    will be charged more than just the stock price * 10\. (Note, that you can also
+    change the commission and slippage model that `zipline` uses, see the.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Let’s take a quick look at the performance `DataFrame`. For this, we use `pandas`
+    from inside the IPython Notebook and print the first ten rows. Note that `zipline`
+    makes heavy usage of `pandas`, especially for data input and outputting so it’s
+    worth spending some time to learn it.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE25]'
+  prefs: []
+  type: TYPE_PRE
+- en: '|  | AAPL | algo_volatility | algorithm_period_return | alpha | benchmark_period_return
+    | benchmark_volatility | beta | capital_used | ending_cash | ending_exposure |
+    ending_value | excess_return | gross_leverage | long_exposure | long_value | longs_count
+    | max_drawdown | max_leverage | net_leverage | orders | period_close | period_label
+    | period_open | pnl | portfolio_value | positions | returns | sharpe | short_exposure
+    | short_value | shorts_count | sortino | starting_cash | starting_exposure | starting_value
+    | trading_days | transactions | treasury_period_return |'
+  prefs: []
+  type: TYPE_TB
+- en: '| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | ---
+    | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | ---
+    | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | ---
+    |'
+  prefs: []
+  type: TYPE_TB
+- en: '| 2016-01-04 21:00:00+00:00 | 105.35 | NaN | 0.000000e+00 | NaN | -0.013983
+    | NaN | NaN | 0.0 | 10000000.0 | 0.0 | 0.0 | 0.0 | 0.000000 | 0.0 | 0.0 | 0 |
+    0.000000e+00 | 0.0 | 0.000000 | [{\''dt\'': 2016-01-04 21:00:00+00:00, \''reason\'':
+    N... | 2016-01-04 21:00:00+00:00 | 2016-01 | 2016-01-04 14:31:00+00:00 | 0.0 |
+    10000000.0 | [] | 0.000000e+00 | NaN | 0 | 0 | 0 | NaN | 10000000.0 | 0.0 | 0.0
+    | 1 | [] | 0.0 |'
+  prefs: []
+  type: TYPE_TB
+- en: '| 2016-01-05 21:00:00+00:00 | 102.71 | 0.000001 | -1.000000e-07 | -0.000022
+    | -0.012312 | 0.175994 | -0.000006 | -1028.1 | 9998971.9 | 1027.1 | 1027.1 | 0.0
+    | 0.000103 | 1027.1 | 1027.1 | 1 | -1.000000e-07 | 0.0 | 0.000103 | [{\''dt\'':
+    2016-01-05 21:00:00+00:00, \''reason\'': N... | 2016-01-05 21:00:00+00:00 | 2016-01
+    | 2016-01-05 14:31:00+00:00 | -1.0 | 9999999.0 | [{\''sid\'': Equity(8 [AAPL]),
+    \''last_sale_price\'': ... | -1.000000e-07 | -11.224972 | 0 | 0 | 0 | -11.224972
+    | 10000000.0 | 0.0 | 0.0 | 2 | [{\''order_id\'': \''4011063b5c094e82a5391527044098b...
+    | 0.0 |'
+  prefs: []
+  type: TYPE_TB
+- en: '| 2016-01-06 21:00:00+00:00 | 100.70 | 0.000019 | -2.210000e-06 | -0.000073
+    | -0.024771 | 0.137853 | 0.000054 | -1008.0 | 9997963.9 | 2014.0 | 2014.0 | 0.0
+    | 0.000201 | 2014.0 | 2014.0 | 1 | -2.210000e-06 | 0.0 | 0.000201 | [{\''dt\'':
+    2016-01-06 21:00:00+00:00, \''reason\'': N... | 2016-01-06 21:00:00+00:00 | 2016-01
+    | 2016-01-06 14:31:00+00:00 | -21.1 | 9999977.9 | [{\''sid\'': Equity(8 [AAPL]),
+    \''last_sale_price\'': ... | -2.110000e-06 | -9.823839 | 0 | 0 | 0 | -9.588756
+    | 9998971.9 | 1027.1 | 1027.1 | 3 | [{\''order_id\'': \''3bf9fe20cc46468d99f741474226c03...
+    | 0.0 |'
+  prefs: []
+  type: TYPE_TB
+- en: '| 2016-01-07 21:00:00+00:00 | 96.45 | 0.000064 | -1.081000e-05 | 0.000243 |
+    -0.048168 | 0.167868 | 0.000300 | -965.5 | 9996998.4 | 2893.5 | 2893.5 | 0.0 |
+    0.000289 | 2893.5 | 2893.5 | 1 | -1.081000e-05 | 0.0 | 0.000289 | [{\''dt\'':
+    2016-01-07 21:00:00+00:00, \''reason\'': N... | 2016-01-07 21:00:00+00:00 | 2016-01
+    | 2016-01-07 14:31:00+00:00 | -86.0 | 9999891.9 | [{\''sid\'': Equity(8 [AAPL]),
+    \''last_sale_price\'': ... | -8.600019e-06 | -10.592737 | 0 | 0 | 0 | -9.688947
+    | 9997963.9 | 2014.0 | 2014.0 | 4 | [{\''order_id\'': \''6af6aed9fbb44a6bba17e802051b94d...
+    | 0.0 |'
+  prefs: []
+  type: TYPE_TB
+- en: '| 2016-01-08 21:00:00+00:00 | 96.96 | 0.000063 | -9.380000e-06 | 0.000466 |
+    -0.058601 | 0.145654 | 0.000311 | -970.6 | 9996027.8 | 3878.4 | 3878.4 | 0.0 |
+    0.000388 | 3878.4 | 3878.4 | 1 | -1.081000e-05 | 0.0 | 0.000388 | [{\''dt\'':
+    2016-01-08 21:00:00+00:00, \''reason\'': N... | 2016-01-08 21:00:00+00:00 | 2016-01
+    | 2016-01-08 14:31:00+00:00 | 14.3 | 9999906.2 | [{\''sid\'': Equity(8 [AAPL]),
+    \''last_sale_price\'': ... | 1.430015e-06 | -7.511729 | 0 | 0 | 0 | -7.519659
+    | 9996998.4 | 2893.5 | 2893.5 | 5 | [{\''order_id\'': \''18f64975732449a18fca06e9c69bf5c...
+    | 0.0 |'
+  prefs: []
+  type: TYPE_TB
+- en: As you can see, there is a row for each trading day, starting on the first business
+    day of 2016\. In the columns you can find various information about the state
+    of your algorithm. The very first column `AAPL` was placed there by the `record()`
+    function mentioned earlier and allows us to plot the price of apple. For example,
+    we could easily examine now how our portfolio value changed over time compared
+    to the AAPL stock price.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE26]'
+  prefs: []
+  type: TYPE_PRE
+- en: '[PRE27]'
+  prefs: []
+  type: TYPE_PRE
+- en: '[PRE28]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![_images/tutorial_11_2.png](../Images/b731cbe4c5b44f822b43d68ecaf39c56.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: As you can see, our algorithm performance as assessed by the `portfolio_value`
+    closely matches that of the AAPL stock price. This is not surprising as our algorithm
+    only bought AAPL every chance it got.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Jupyter Notebook
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: The [Jupyter Notebook](https://jupyter.org/) is a very powerful browser-based
+    interface to a Python interpreter (this tutorial was written in it). As it is
+    a very popular interface for many quantitative researchers, Zipline provides an
+    easy way to run your algorithm inside the Notebook without requiring you to use
+    the CLI.
+  prefs: []
+  type: TYPE_NORMAL
+- en: To use it you have to write your algorithm in a cell and let Zipline know that
+    it is supposed to run this algorithm. This is done via the `%%zipline` IPython
+    magic command that is available after you `import zipline` from within the IPython
+    Notebook. This magic takes the same arguments as the command line interface described
+    above. Thus to run the algorithm from above with the same parameters we just have
+    to execute the following cell after importing `zipline` to register the magic.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE29]'
+  prefs: []
+  type: TYPE_PRE
+- en: '[PRE30]'
+  prefs: []
+  type: TYPE_PRE
+- en: Note that we did not have to specify an input file as above since the magic
+    will use the contents of the cell and look for your algorithm functions there.
+    Also, instead of defining an output file we are specifying a variable name with
+    `-o` that will be created in the name space and contain the performance `DataFrame`
+    we looked at above.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE31]'
+  prefs: []
+  type: TYPE_PRE
+- en: '|  | AAPL | algo_volatility | algorithm_period_return | alpha | benchmark_period_return
+    | benchmark_volatility | beta | capital_used | ending_cash | ending_exposure |
+    ending_value | excess_return | gross_leverage | long_exposure | long_value | longs_count
+    | max_drawdown | max_leverage | net_leverage | orders | period_close | period_label
+    | period_open | pnl | portfolio_value | positions | returns | sharpe | short_exposure
+    | short_value | shorts_count | sortino | starting_cash | starting_exposure | starting_value
+    | trading_days | transactions | treasury_period_return |'
+  prefs: []
+  type: TYPE_TB
+- en: '| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | ---
+    | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | ---
+    | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | ---
+    |'
+  prefs: []
+  type: TYPE_TB
+- en: '| 2016-01-04 21:00:00+00:00 | 105.35 | NaN | 0.000000e+00 | NaN | -0.013983
+    | NaN | NaN | 0.00 | 10000000.00 | 0.0 | 0.0 | 0.0 | 0.000000 | 0.0 | 0.0 | 0
+    | 0.000000e+00 | 0.0 | 0.000000 | [{\''created\'': 2016-01-04 21:00:00+00:00,
+    \''reaso... | 2016-01-04 21:00:00+00:00 | 2016-01 | 2016-01-04 14:31:00+00:00
+    | 0.00 | 10000000.00 | [] | 0.000000e+00 | NaN | 0 | 0 | 0 | NaN | 10000000.00
+    | 0.0 | 0.0 | 1 | [] | 0.0 |'
+  prefs: []
+  type: TYPE_TB
+- en: '| 2016-01-05 21:00:00+00:00 | 102.71 | 1.122497e-08 | -1.000000e-09 | -2.247510e-07
+    | -0.012312 | 0.175994 | -6.378047e-08 | -1027.11 | 9998972.89 | 1027.1 | 1027.1
+    | 0.0 | 0.000103 | 1027.1 | 1027.1 | 1 | -9.999999e-10 | 0.0 | 0.000103 | [{\''created\'':
+    2016-01-04 21:00:00+00:00, \''reaso... | 2016-01-05 21:00:00+00:00 | 2016-01 |
+    2016-01-05 14:31:00+00:00 | -0.01 | 9999999.99 | [{\''amount\'': 10, \''cost_basis\'':
+    102.711000000000... | -1.000000e-09 | -11.224972 | 0 | 0 | 0 | -11.224972 | 10000000.00
+    | 0.0 | 0.0 | 2 | [{\''dt\'': 2016-01-05 21:00:00+00:00, \''order_id\'':... |
+    0.0 |'
+  prefs: []
+  type: TYPE_TB
+- en: '| 2016-01-06 21:00:00+00:00 | 100.70 | 1.842654e-05 | -2.012000e-06 | -4.883861e-05
+    | -0.024771 | 0.137853 | 5.744807e-05 | -1007.01 | 9997965.88 | 2014.0 | 2014.0
+    | 0.0 | 0.000201 | 2014.0 | 2014.0 | 1 | -2.012000e-06 | 0.0 | 0.000201 | [{\''created\'':
+    2016-01-05 21:00:00+00:00, \''reaso... | 2016-01-06 21:00:00+00:00 | 2016-01 |
+    2016-01-06 14:31:00+00:00 | -20.11 | 9999979.88 | [{\''amount\'': 20, \''cost_basis\'':
+    101.706000000000... | -2.011000e-06 | -9.171989 | 0 | 0 | 0 | -9.169708 | 9998972.89
+    | 1027.1 | 1027.1 | 3 | [{\''dt\'': 2016-01-06 21:00:00+00:00, \''order_id\'':...
+    | 0.0 |'
+  prefs: []
+  type: TYPE_TB
+- en: '| 2016-01-07 21:00:00+00:00 | 96.45 | 6.394658e-05 | -1.051300e-05 | 2.633450e-04
+    | -0.048168 | 0.167868 | 3.005102e-04 | -964.51 | 9997001.37 | 2893.5 | 2893.5
+    | 0.0 | 0.000289 | 2893.5 | 2893.5 | 1 | -1.051300e-05 | 0.0 | 0.000289 | [{\''created\'':
+    2016-01-06 21:00:00+00:00, \''reaso... | 2016-01-07 21:00:00+00:00 | 2016-01 |
+    2016-01-07 14:31:00+00:00 | -85.01 | 9999894.87 | [{\''amount\'': 30, \''cost_basis\'':
+    99.9543333333335... | -8.501017e-06 | -10.357397 | 0 | 0 | 0 | -9.552189 | 9997965.88
+    | 2014.0 | 2014.0 | 4 | [{\''dt\'': 2016-01-07 21:00:00+00:00, \''order_id\'':...
+    | 0.0 |'
+  prefs: []
+  type: TYPE_TB
+- en: '| 2016-01-08 21:00:00+00:00 | 96.96 | 6.275294e-05 | -8.984000e-06 | 4.879306e-04
+    | -0.058601 | 0.145654 | 3.118401e-04 | -969.61 | 9996031.76 | 3878.4 | 3878.4
+    | 0.0 | 0.000388 | 3878.4 | 3878.4 | 1 | -1.051300e-05 | 0.0 | 0.000388 | [{\''created\'':
+    2016-01-07 21:00:00+00:00, \''reaso... | 2016-01-08 21:00:00+00:00 | 2016-01 |
+    2016-01-08 14:31:00+00:00 | 15.29 | 9999910.16 | [{\''amount\'': 40, \''cost_basis\'':
+    99.2060000000002... | 1.529016e-06 | -7.215497 | 0 | 0 | 0 | -7.301134 | 9997001.37
+    | 2893.5 | 2893.5 | 5 | [{\''dt\'': 2016-01-08 21:00:00+00:00, \''order_id\'':...
+    | 0.0 |'
+  prefs: []
+  type: TYPE_TB
+- en: IDE via [`run_algorithm()`](api-reference.html#zipline.run_algorithm "zipline.run_algorithm")
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: To execute an algorithm like a Python script in your favorite IDE, use the [`run_algorithm()`](api-reference.html#zipline.run_algorithm
+    "zipline.run_algorithm") (see [API Reference](api-reference.html#api-reference)).
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'To adapt the `buyapple.py` example from above (see `buyapple_ide.py` in the
+    same directory), simply add the following:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE32]'
+  prefs: []
+  type: TYPE_PRE
+- en: We pass the key algo parameters to [`run_algorithm()`](api-reference.html#zipline.run_algorithm
+    "zipline.run_algorithm"), including some benchmark data for the S&P 500 that we
+    download from the [Federal Reserve Economic Data Service](https://fred.stlouisfed.org/series/SP500)
+    (available for the last 10 years).
+  prefs: []
+  type: TYPE_NORMAL
+- en: The `result` return value contains the same `DataFrame` as in the previous example.
+    Instead of defining an `analyze()` function as part of the algorithm, you can
+    apply your preferred logic to this `DataFrame`.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Ingesting Data
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'If you haven’t ingested data yet, then run:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE33]'
+  prefs: []
+  type: TYPE_PRE
+- en: where `<bundle>` is the name of the bundle to ingest. You can use the default
+    quandl for now to work with the [Quandl WIKI price data](https://www.quandl.com/databases/WIKIP/documentation?anchor=companies).
+    Check out the [ingesting data](bundles.html#ingesting-data) section for more detail
+    on how to obtain other new data.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Command Line Interface
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'After you installed Zipline you should be able to execute the following from
+    your command line (e.g. `cmd.exe` on Windows, the Terminal app on OSX, or e.g.
+    the bash shell on Linux):'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE34]'
+  prefs: []
+  type: TYPE_PRE
+- en: '[PRE35]'
+  prefs: []
+  type: TYPE_PRE
+- en: As you can see there are a couple of flags that specify where to find your algorithm
+    (`-f`) as well as parameters specifying which data to use, defaulting to `quandl`.
+  prefs: []
+  type: TYPE_NORMAL
+- en: There are also arguments for the date range to run the algorithm over (`--start`
+    and `--end`).To use a benchmark, you need to choose one of the benchmark options
+    listed before. You can always use the option (`--no-benchmark`) that uses zero
+    returns as a benchmark ( alpha, beta and benchmark metrics are not calculated
+    in this case).
+  prefs: []
+  type: TYPE_NORMAL
+- en: Finally, you’ll want to save the performance metrics of your algorithm so that
+    you can analyze how it performed. This is done via the `--output` flag and will
+    cause it to write the performance `DataFrame` in the pickle Python file format.
+    Note that you can also define a configuration file with these parameters that
+    you can then conveniently pass to the `-c` option so that you don’t have to supply
+    the command line args all the time (see the .conf files in the examples directory).
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Thus, to execute our algorithm from above and save the results to `buyapple_out.pickle`,
+    we call `zipline run` as follows:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE36]'
+  prefs: []
+  type: TYPE_PRE
+- en: '[PRE37]'
+  prefs: []
+  type: TYPE_PRE
+- en: '`run` first calls the `initialize()` function, and then streams the historical
+    stock price day-by-day through `handle_data()`. After each call to `handle_data()`
+    we instruct `zipline` to order 10 stocks of AAPL. After the call of the `order()`
+    function, `zipline` enters the ordered stock and amount in the order book. After
+    the `handle_data()` function has finished, `zipline` looks for any open orders
+    and tries to fill them. If the trading volume is high enough for this stock, the
+    order is executed after adding the commission and applying the slippage model
+    which models the influence of your order on the stock price, so your algorithm
+    will be charged more than just the stock price * 10\. (Note, that you can also
+    change the commission and slippage model that `zipline` uses, see the.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Let’s take a quick look at the performance `DataFrame`. For this, we use `pandas`
+    from inside the IPython Notebook and print the first ten rows. Note that `zipline`
+    makes heavy usage of `pandas`, especially for data input and outputting so it’s
+    worth spending some time to learn it.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE38]'
+  prefs: []
+  type: TYPE_PRE
+- en: '|  | AAPL | algo_volatility | algorithm_period_return | alpha | benchmark_period_return
+    | benchmark_volatility | beta | capital_used | ending_cash | ending_exposure |
+    ending_value | excess_return | gross_leverage | long_exposure | long_value | longs_count
+    | max_drawdown | max_leverage | net_leverage | orders | period_close | period_label
+    | period_open | pnl | portfolio_value | positions | returns | sharpe | short_exposure
+    | short_value | shorts_count | sortino | starting_cash | starting_exposure | starting_value
+    | trading_days | transactions | treasury_period_return |'
+  prefs: []
+  type: TYPE_TB
+- en: '| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | ---
+    | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | ---
+    | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | ---
+    |'
+  prefs: []
+  type: TYPE_TB
+- en: '| 2016-01-04 21:00:00+00:00 | 105.35 | NaN | 0.000000e+00 | NaN | -0.013983
+    | NaN | NaN | 0.0 | 10000000.0 | 0.0 | 0.0 | 0.0 | 0.000000 | 0.0 | 0.0 | 0 |
+    0.000000e+00 | 0.0 | 0.000000 | [{\''dt\'': 2016-01-04 21:00:00+00:00, \''reason\'':
+    N... | 2016-01-04 21:00:00+00:00 | 2016-01 | 2016-01-04 14:31:00+00:00 | 0.0 |
+    10000000.0 | [] | 0.000000e+00 | NaN | 0 | 0 | 0 | NaN | 10000000.0 | 0.0 | 0.0
+    | 1 | [] | 0.0 |'
+  prefs: []
+  type: TYPE_TB
+- en: '| 2016-01-05 21:00:00+00:00 | 102.71 | 0.000001 | -1.000000e-07 | -0.000022
+    | -0.012312 | 0.175994 | -0.000006 | -1028.1 | 9998971.9 | 1027.1 | 1027.1 | 0.0
+    | 0.000103 | 1027.1 | 1027.1 | 1 | -1.000000e-07 | 0.0 | 0.000103 | [{\''dt\'':
+    2016-01-05 21:00:00+00:00, \''reason\'': N... | 2016-01-05 21:00:00+00:00 | 2016-01
+    | 2016-01-05 14:31:00+00:00 | -1.0 | 9999999.0 | [{\''sid\'': Equity(8 [AAPL]),
+    \''last_sale_price\'': ... | -1.000000e-07 | -11.224972 | 0 | 0 | 0 | -11.224972
+    | 10000000.0 | 0.0 | 0.0 | 2 | [{\''order_id\'': \''4011063b5c094e82a5391527044098b...
+    | 0.0 |'
+  prefs: []
+  type: TYPE_TB
+- en: '| 2016-01-06 21:00:00+00:00 | 100.70 | 0.000019 | -2.210000e-06 | -0.000073
+    | -0.024771 | 0.137853 | 0.000054 | -1008.0 | 9997963.9 | 2014.0 | 2014.0 | 0.0
+    | 0.000201 | 2014.0 | 2014.0 | 1 | -2.210000e-06 | 0.0 | 0.000201 | [{\''dt\'':
+    2016-01-06 21:00:00+00:00, \''reason\'': N... | 2016-01-06 21:00:00+00:00 | 2016-01
+    | 2016-01-06 14:31:00+00:00 | -21.1 | 9999977.9 | [{\''sid\'': Equity(8 [AAPL]),
+    \''last_sale_price\'': ... | -2.110000e-06 | -9.823839 | 0 | 0 | 0 | -9.588756
+    | 9998971.9 | 1027.1 | 1027.1 | 3 | [{\''order_id\'': \''3bf9fe20cc46468d99f741474226c03...
+    | 0.0 |'
+  prefs: []
+  type: TYPE_TB
+- en: '| 2016-01-07 21:00:00+00:00 | 96.45 | 0.000064 | -1.081000e-05 | 0.000243 |
+    -0.048168 | 0.167868 | 0.000300 | -965.5 | 9996998.4 | 2893.5 | 2893.5 | 0.0 |
+    0.000289 | 2893.5 | 2893.5 | 1 | -1.081000e-05 | 0.0 | 0.000289 | [{\''dt\'':
+    2016-01-07 21:00:00+00:00, \''reason\'': N... | 2016-01-07 21:00:00+00:00 | 2016-01
+    | 2016-01-07 14:31:00+00:00 | -86.0 | 9999891.9 | [{\''sid\'': Equity(8 [AAPL]),
+    \''last_sale_price\'': ... | -8.600019e-06 | -10.592737 | 0 | 0 | 0 | -9.688947
+    | 9997963.9 | 2014.0 | 2014.0 | 4 | [{\''order_id\'': \''6af6aed9fbb44a6bba17e802051b94d...
+    | 0.0 |'
+  prefs: []
+  type: TYPE_TB
+- en: '| 2016-01-08 21:00:00+00:00 | 96.96 | 0.000063 | -9.380000e-06 | 0.000466 |
+    -0.058601 | 0.145654 | 0.000311 | -970.6 | 9996027.8 | 3878.4 | 3878.4 | 0.0 |
+    0.000388 | 3878.4 | 3878.4 | 1 | -1.081000e-05 | 0.0 | 0.000388 | [{\''dt\'':
+    2016-01-08 21:00:00+00:00, \''reason\'': N... | 2016-01-08 21:00:00+00:00 | 2016-01
+    | 2016-01-08 14:31:00+00:00 | 14.3 | 9999906.2 | [{\''sid\'': Equity(8 [AAPL]),
+    \''last_sale_price\'': ... | 1.430015e-06 | -7.511729 | 0 | 0 | 0 | -7.519659
+    | 9996998.4 | 2893.5 | 2893.5 | 5 | [{\''order_id\'': \''18f64975732449a18fca06e9c69bf5c...
+    | 0.0 |'
+  prefs: []
+  type: TYPE_TB
+- en: As you can see, there is a row for each trading day, starting on the first business
+    day of 2016\. In the columns you can find various information about the state
+    of your algorithm. The very first column `AAPL` was placed there by the `record()`
+    function mentioned earlier and allows us to plot the price of apple. For example,
+    we could easily examine now how our portfolio value changed over time compared
+    to the AAPL stock price.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE39]'
+  prefs: []
+  type: TYPE_PRE
+- en: '[PRE40]'
+  prefs: []
+  type: TYPE_PRE
+- en: '[PRE41]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![_images/tutorial_11_2.png](../Images/b731cbe4c5b44f822b43d68ecaf39c56.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: As you can see, our algorithm performance as assessed by the `portfolio_value`
+    closely matches that of the AAPL stock price. This is not surprising as our algorithm
+    only bought AAPL every chance it got.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Jupyter Notebook
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: The [Jupyter Notebook](https://jupyter.org/) is a very powerful browser-based
+    interface to a Python interpreter (this tutorial was written in it). As it is
+    a very popular interface for many quantitative researchers, Zipline provides an
+    easy way to run your algorithm inside the Notebook without requiring you to use
+    the CLI.
+  prefs: []
+  type: TYPE_NORMAL
+- en: To use it you have to write your algorithm in a cell and let Zipline know that
+    it is supposed to run this algorithm. This is done via the `%%zipline` IPython
+    magic command that is available after you `import zipline` from within the IPython
+    Notebook. This magic takes the same arguments as the command line interface described
+    above. Thus to run the algorithm from above with the same parameters we just have
+    to execute the following cell after importing `zipline` to register the magic.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE42]'
+  prefs: []
+  type: TYPE_PRE
+- en: '[PRE43]'
+  prefs: []
+  type: TYPE_PRE
+- en: Note that we did not have to specify an input file as above since the magic
+    will use the contents of the cell and look for your algorithm functions there.
+    Also, instead of defining an output file we are specifying a variable name with
+    `-o` that will be created in the name space and contain the performance `DataFrame`
+    we looked at above.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE44]'
+  prefs: []
+  type: TYPE_PRE
+- en: '|  | AAPL | algo_volatility | algorithm_period_return | alpha | benchmark_period_return
+    | benchmark_volatility | beta | capital_used | ending_cash | ending_exposure |
+    ending_value | excess_return | gross_leverage | long_exposure | long_value | longs_count
+    | max_drawdown | max_leverage | net_leverage | orders | period_close | period_label
+    | period_open | pnl | portfolio_value | positions | returns | sharpe | short_exposure
+    | short_value | shorts_count | sortino | starting_cash | starting_exposure | starting_value
+    | trading_days | transactions | treasury_period_return |'
+  prefs: []
+  type: TYPE_TB
+- en: '| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | ---
+    | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | ---
+    | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | ---
+    |'
+  prefs: []
+  type: TYPE_TB
+- en: '| 2016-01-04 21:00:00+00:00 | 105.35 | NaN | 0.000000e+00 | NaN | -0.013983
+    | NaN | NaN | 0.00 | 10000000.00 | 0.0 | 0.0 | 0.0 | 0.000000 | 0.0 | 0.0 | 0
+    | 0.000000e+00 | 0.0 | 0.000000 | [{\''created\'': 2016-01-04 21:00:00+00:00,
+    \''reaso... | 2016-01-04 21:00:00+00:00 | 2016-01 | 2016-01-04 14:31:00+00:00
+    | 0.00 | 10000000.00 | [] | 0.000000e+00 | NaN | 0 | 0 | 0 | NaN | 10000000.00
+    | 0.0 | 0.0 | 1 | [] | 0.0 |'
+  prefs: []
+  type: TYPE_TB
+- en: '| 2016-01-05 21:00:00+00:00 | 102.71 | 1.122497e-08 | -1.000000e-09 | -2.247510e-07
+    | -0.012312 | 0.175994 | -6.378047e-08 | -1027.11 | 9998972.89 | 1027.1 | 1027.1
+    | 0.0 | 0.000103 | 1027.1 | 1027.1 | 1 | -9.999999e-10 | 0.0 | 0.000103 | [{\''created\'':
+    2016-01-04 21:00:00+00:00, \''reaso... | 2016-01-05 21:00:00+00:00 | 2016-01 |
+    2016-01-05 14:31:00+00:00 | -0.01 | 9999999.99 | [{\''amount\'': 10, \''cost_basis\'':
+    102.711000000000... | -1.000000e-09 | -11.224972 | 0 | 0 | 0 | -11.224972 | 10000000.00
+    | 0.0 | 0.0 | 2 | [{\''dt\'': 2016-01-05 21:00:00+00:00, \''order_id\'':... |
+    0.0 |'
+  prefs: []
+  type: TYPE_TB
+- en: '| 2016-01-06 21:00:00+00:00 | 100.70 | 1.842654e-05 | -2.012000e-06 | -4.883861e-05
+    | -0.024771 | 0.137853 | 5.744807e-05 | -1007.01 | 9997965.88 | 2014.0 | 2014.0
+    | 0.0 | 0.000201 | 2014.0 | 2014.0 | 1 | -2.012000e-06 | 0.0 | 0.000201 | [{\''created\'':
+    2016-01-05 21:00:00+00:00, \''reaso... | 2016-01-06 21:00:00+00:00 | 2016-01 |
+    2016-01-06 14:31:00+00:00 | -20.11 | 9999979.88 | [{\''amount\'': 20, \''cost_basis\'':
+    101.706000000000... | -2.011000e-06 | -9.171989 | 0 | 0 | 0 | -9.169708 | 9998972.89
+    | 1027.1 | 1027.1 | 3 | [{\''dt\'': 2016-01-06 21:00:00+00:00, \''order_id\'':...
+    | 0.0 |'
+  prefs: []
+  type: TYPE_TB
+- en: '| 2016-01-07 21:00:00+00:00 | 96.45 | 6.394658e-05 | -1.051300e-05 | 2.633450e-04
+    | -0.048168 | 0.167868 | 3.005102e-04 | -964.51 | 9997001.37 | 2893.5 | 2893.5
+    | 0.0 | 0.000289 | 2893.5 | 2893.5 | 1 | -1.051300e-05 | 0.0 | 0.000289 | [{\''created\'':
+    2016-01-06 21:00:00+00:00, \''reaso... | 2016-01-07 21:00:00+00:00 | 2016-01 |
+    2016-01-07 14:31:00+00:00 | -85.01 | 9999894.87 | [{\''amount\'': 30, \''cost_basis\'':
+    99.9543333333335... | -8.501017e-06 | -10.357397 | 0 | 0 | 0 | -9.552189 | 9997965.88
+    | 2014.0 | 2014.0 | 4 | [{\''dt\'': 2016-01-07 21:00:00+00:00, \''order_id\'':...
+    | 0.0 |'
+  prefs: []
+  type: TYPE_TB
+- en: '| 2016-01-08 21:00:00+00:00 | 96.96 | 6.275294e-05 | -8.984000e-06 | 4.879306e-04
+    | -0.058601 | 0.145654 | 3.118401e-04 | -969.61 | 9996031.76 | 3878.4 | 3878.4
+    | 0.0 | 0.000388 | 3878.4 | 3878.4 | 1 | -1.051300e-05 | 0.0 | 0.000388 | [{\''created\'':
+    2016-01-07 21:00:00+00:00, \''reaso... | 2016-01-08 21:00:00+00:00 | 2016-01 |
+    2016-01-08 14:31:00+00:00 | 15.29 | 9999910.16 | [{\''amount\'': 40, \''cost_basis\'':
+    99.2060000000002... | 1.529016e-06 | -7.215497 | 0 | 0 | 0 | -7.301134 | 9997001.37
+    | 2893.5 | 2893.5 | 5 | [{\''dt\'': 2016-01-08 21:00:00+00:00, \''order_id\'':...
+    | 0.0 |'
+  prefs: []
+  type: TYPE_TB
+- en: IDE via [`run_algorithm()`](api-reference.html#zipline.run_algorithm "zipline.run_algorithm")
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: To execute an algorithm like a Python script in your favorite IDE, use the [`run_algorithm()`](api-reference.html#zipline.run_algorithm
+    "zipline.run_algorithm") (see [API Reference](api-reference.html#api-reference)).
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'To adapt the `buyapple.py` example from above (see `buyapple_ide.py` in the
+    same directory), simply add the following:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE45]'
+  prefs: []
+  type: TYPE_PRE
+- en: We pass the key algo parameters to [`run_algorithm()`](api-reference.html#zipline.run_algorithm
+    "zipline.run_algorithm"), including some benchmark data for the S&P 500 that we
+    download from the [Federal Reserve Economic Data Service](https://fred.stlouisfed.org/series/SP500)
+    (available for the last 10 years).
+  prefs: []
+  type: TYPE_NORMAL
+- en: The `result` return value contains the same `DataFrame` as in the previous example.
+    Instead of defining an `analyze()` function as part of the algorithm, you can
+    apply your preferred logic to this `DataFrame`.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'How to use historical prices: a dual Moving Average Cross-Over example'
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: The Dual Moving Average (DMA) is a classic momentum strategy. It’s probably
+    not used by any serious trader anymore but is still very instructive. The basic
+    idea is that we compute two rolling or moving averages (mavg) – one with a longer
+    window that is supposed to capture long-term trends and one shorter window that
+    is supposed to capture short-term trends. Once the short-mavg crosses the long-mavg
+    from below we assume that the stock price has upwards momentum and long the stock.
+    If the short-mavg crosses from above we exit the positions as we assume the stock
+    to go down further.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'As we need to have access to previous prices to implement this strategy we
+    need a new concept: History'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`data.history()` is a convenience function that keeps a rolling window of data
+    for you. The first argument is the number of bars you want to collect, the second
+    argument is the unit (either `''1d''` or `''1m''`, but note that you need to have
+    minute-level data for using `1m`). For a more detailed description of `history()`’s
+    features, see the [API Reference](api-reference.html#api-reference). Let’s look
+    at the strategy which should make this clear:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE46]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![_images/tutorial_22_1.png](../Images/fb9083c2bb352fd43c1bf11750fbc684.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Here we are explicitly defining an `analyze()` function that gets automatically
+    called once the backtest is done.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Although it might not be directly apparent, the power of `history()` (pun intended)
+    can not be under-estimated as most algorithms make use of prior market developments
+    in one form or another. You could easily devise a strategy that trains a classifier
+    with [scikit-learn](https://scikit-learn.org/stable/) which tries to predict future
+    market movements based on past prices (note, that most of the `scikit-learn` functions
+    require `numpy.ndarray`s rather than `pandas.DataFrame`s, so you can simply pass
+    the underlying `ndarray` of a `DataFrame` via `.to_numpy()`).
+  prefs: []
+  type: TYPE_NORMAL
+- en: We also used the `order_target()` function above. This and other functions like
+    it can make order management and portfolio rebalancing much easier. See the [API
+    Reference](api-reference.html#api-reference) for more details.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Conclusions
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: We hope that this tutorial gave you a little insight into the architecture,
+    API, and features of `zipline`. For next steps, check out some of the [examples](https://github.com/stefan-jansen/zipline-reloaded/tree/main/src/zipline/examples).
+  prefs: []
+  type: TYPE_NORMAL
+- en: Feel free to ask questions on [our mailing list](https://groups.google.com/forum/#!forum/zipline),
+    report problems on our [GitHub issue tracker](https://github.com/stefan-jansen/zipline-reloaded/issues?state=open),
+    or [get involved](https://exchange.ml4trading.io).
+  prefs: []
+  type: TYPE_NORMAL
+- en: Conclusions
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: We hope that this tutorial gave you a little insight into the architecture,
+    API, and features of `zipline`. For next steps, check out some of the [examples](https://github.com/stefan-jansen/zipline-reloaded/tree/main/src/zipline/examples).
+  prefs: []
+  type: TYPE_NORMAL
+- en: Feel free to ask questions on [our mailing list](https://groups.google.com/forum/#!forum/zipline),
+    report problems on our [GitHub issue tracker](https://github.com/stefan-jansen/zipline-reloaded/issues?state=open),
+    or [get involved](https://exchange.ml4trading.io).
+  prefs: []
+  type: TYPE_NORMAL

@@ -1,0 +1,490 @@
+- en: Backtest your Trading Strategies
+  id: totrans-0
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://zipline.ml4trading.io/index.html](https://zipline.ml4trading.io/index.html)
+  id: totrans-1
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: Zipline is a Pythonic event-driven system for backtesting, developed and used
+    as the backtesting and live-trading engine by [crowd-sourced investment fund Quantopian](https://www.bizjournals.com/boston/news/2020/11/10/quantopian-shuts-down-cofounders-head-elsewhere.html).
+    Since it closed late 2020, the domain that had hosted these docs expired. The
+    library is used extensively in the book [Machine Larning for Algorithmic Trading](https://ml4trading.io)
+    by [Stefan Jansen](https://www.linkedin.com/in/applied-ai/) who is trying to keep
+    the library up to date and available to his readers and the wider Python algotrading
+    community.
+  id: totrans-2
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Join our Community!](https://exchange.ml4trading.io)'
+  id: totrans-3
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Documentation](https://zipline.ml4trading.io)'
+  id: totrans-4
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Features
+  id: totrans-5
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '**Ease of Use:** Zipline tries to get out of your way so that you can focus
+    on algorithm development. See below for a code example.'
+  id: totrans-6
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Batteries Included:** many common statistics like moving average and linear
+    regression can be readily accessed from within a user-written algorithm.'
+  id: totrans-7
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**PyData Integration:** Input of historical data and output of performance
+    statistics are based on Pandas DataFrames to integrate nicely into the existing
+    PyData ecosystem.'
+  id: totrans-8
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Statistics and Machine Learning Libraries:** You can use libraries like matplotlib,
+    scipy, statsmodels, and scikit-klearn to support development, analysis, and visualization
+    of state-of-the-art trading systems.'
+  id: totrans-9
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Note:** Release 3.0 updates Zipline to use [pandas](https://pandas.pydata.org/pandas-docs/stable/whatsnew/v2.0.0.html)
+    >= 2.0 and [SQLAlchemy](https://docs.sqlalchemy.org/en/20/) > 2.0\. These are
+    major version updates that may break existing code; please review the linked docs.'
+  id: totrans-10
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: ''
+  id: totrans-11
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '**Note:** Release 2.4 updates Zipline to use [exchange_calendars](https://github.com/gerrymanoim/exchange_calendars)
+    >= 4.2\. This is a major version update and may break existing code (which we
+    have tried to avoid but cannot guarantee). Please review the changes [here](https://github.com/gerrymanoim/exchange_calendars/issues/61).'
+  id: totrans-12
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: Installation
+  id: totrans-13
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: Zipline supports Python >= 3.8 and is compatible with current versions of the
+    relevant [NumFOCUS](https://numfocus.org/sponsored-projects?_sft_project_category=python-interface)
+    libraries, including [pandas](https://pandas.pydata.org/) and [scikit-learn](https://scikit-learn.org/stable/index.html).
+  id: totrans-14
+  prefs: []
+  type: TYPE_NORMAL
+- en: Using `pip`
+  id: totrans-15
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'If your system meets the pre-requisites described in the [installation instructions](https://zipline.ml4trading.io/install.html),
+    you can install Zipline using `pip` by running:'
+  id: totrans-16
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  id: totrans-17
+  prefs: []
+  type: TYPE_PRE
+  zh: '[PRE0]'
+- en: Using `conda`
+  id: totrans-18
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'If you are using the [Anaconda](https://www.anaconda.com/products/individual)
+    or [miniconda](https://docs.conda.io/en/latest/miniconda.html) distributions,
+    you install `zipline-reloaded` from the channel `conda-forge` like so:'
+  id: totrans-19
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  id: totrans-20
+  prefs: []
+  type: TYPE_PRE
+  zh: '[PRE1]'
+- en: You can also [enable](https://docs.conda.io/projects/conda/en/latest/user-guide/tasks/manage-channels.html)
+    `conda-forge` by listing it in your `.condarc`.
+  id: totrans-21
+  prefs: []
+  type: TYPE_NORMAL
+- en: In case you are installing `zipline-reloaded` alongside other packages and encounter
+    [conflict errors](https://github.com/conda/conda/issues/9707), consider using
+    [mamba](https://github.com/mamba-org/mamba) instead.
+  id: totrans-22
+  prefs: []
+  type: TYPE_NORMAL
+- en: See the [installation](https://zipline.ml4trading.io/install.html) section of
+    the docs for more detailed instructions and the corresponding [conda-forge site](https://github.com/conda-forge/zipline-reloaded-feedstock).
+  id: totrans-23
+  prefs: []
+  type: TYPE_NORMAL
+- en: Quickstart
+  id: totrans-24
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: See our [getting started tutorial](https://zipline.ml4trading.io/beginner-tutorial).
+  id: totrans-25
+  prefs: []
+  type: TYPE_NORMAL
+- en: The following code implements a simple dual moving average algorithm.
+  id: totrans-26
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  id: totrans-27
+  prefs: []
+  type: TYPE_PRE
+  zh: '[PRE2]'
+- en: 'You can then run this algorithm using the Zipline CLI. But first, you need
+    to download some market data with historical prices and trading volumes:'
+  id: totrans-28
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE3]'
+  id: totrans-29
+  prefs: []
+  type: TYPE_PRE
+  zh: '[PRE3]'
+- en: This will download asset pricing data sourced from [Quandl](https://www.quandl.com/databases/WIKIP/documentation?anchor=companies)
+    (since [acquisition](https://www.nasdaq.com/about/press-center/nasdaq-acquires-quandl-advance-use-alternative-data)
+    hosted by NASDAQ), and stream it through the algorithm over the specified time
+    range. Then, the resulting performance DataFrame is saved as `dma.pickle`, which
+    you can load and analyze from Python.
+  id: totrans-30
+  prefs: []
+  type: TYPE_NORMAL
+- en: You can find other examples in the [zipline/examples](https://github.com/stefan-jansen/zipline-reloaded/tree/main/src/zipline/examples)
+    directory.
+  id: totrans-31
+  prefs: []
+  type: TYPE_NORMAL
+- en: Questions, suggestions, bugs?
+  id: totrans-32
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: If you find a bug or have other questions about the library, feel free to [open
+    an issue](https://github.com/stefan-jansen/zipline/issues/new) and fill out the
+    template.
+  id: totrans-33
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Installation](install.html)'
+  id: totrans-34
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Tutorial](beginner-tutorial.html)'
+  id: totrans-35
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Data](bundles.html)'
+  id: totrans-36
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Calendars](trading-calendars.html)'
+  id: totrans-37
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Metrics](risk-and-perf-metrics.html)'
+  id: totrans-38
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Development](development-guidelines.html)'
+  id: totrans-39
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[API](api-reference.html)'
+  id: totrans-40
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Releases](releases.html)'
+  id: totrans-41
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Features
+  id: totrans-42
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '**Ease of Use:** Zipline tries to get out of your way so that you can focus
+    on algorithm development. See below for a code example.'
+  id: totrans-43
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Batteries Included:** many common statistics like moving average and linear
+    regression can be readily accessed from within a user-written algorithm.'
+  id: totrans-44
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**PyData Integration:** Input of historical data and output of performance
+    statistics are based on Pandas DataFrames to integrate nicely into the existing
+    PyData ecosystem.'
+  id: totrans-45
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Statistics and Machine Learning Libraries:** You can use libraries like matplotlib,
+    scipy, statsmodels, and scikit-klearn to support development, analysis, and visualization
+    of state-of-the-art trading systems.'
+  id: totrans-46
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Note:** Release 3.0 updates Zipline to use [pandas](https://pandas.pydata.org/pandas-docs/stable/whatsnew/v2.0.0.html)
+    >= 2.0 and [SQLAlchemy](https://docs.sqlalchemy.org/en/20/) > 2.0\. These are
+    major version updates that may break existing code; please review the linked docs.'
+  id: totrans-47
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: ''
+  id: totrans-48
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '**Note:** Release 2.4 updates Zipline to use [exchange_calendars](https://github.com/gerrymanoim/exchange_calendars)
+    >= 4.2\. This is a major version update and may break existing code (which we
+    have tried to avoid but cannot guarantee). Please review the changes [here](https://github.com/gerrymanoim/exchange_calendars/issues/61).'
+  id: totrans-49
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: Installation
+  id: totrans-50
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: Zipline supports Python >= 3.8 and is compatible with current versions of the
+    relevant [NumFOCUS](https://numfocus.org/sponsored-projects?_sft_project_category=python-interface)
+    libraries, including [pandas](https://pandas.pydata.org/) and [scikit-learn](https://scikit-learn.org/stable/index.html).
+  id: totrans-51
+  prefs: []
+  type: TYPE_NORMAL
+- en: Using `pip`
+  id: totrans-52
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'If your system meets the pre-requisites described in the [installation instructions](https://zipline.ml4trading.io/install.html),
+    you can install Zipline using `pip` by running:'
+  id: totrans-53
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE4]'
+  id: totrans-54
+  prefs: []
+  type: TYPE_PRE
+  zh: '[PRE4]'
+- en: Using `conda`
+  id: totrans-55
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'If you are using the [Anaconda](https://www.anaconda.com/products/individual)
+    or [miniconda](https://docs.conda.io/en/latest/miniconda.html) distributions,
+    you install `zipline-reloaded` from the channel `conda-forge` like so:'
+  id: totrans-56
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE5]'
+  id: totrans-57
+  prefs: []
+  type: TYPE_PRE
+  zh: '[PRE5]'
+- en: You can also [enable](https://docs.conda.io/projects/conda/en/latest/user-guide/tasks/manage-channels.html)
+    `conda-forge` by listing it in your `.condarc`.
+  id: totrans-58
+  prefs: []
+  type: TYPE_NORMAL
+- en: In case you are installing `zipline-reloaded` alongside other packages and encounter
+    [conflict errors](https://github.com/conda/conda/issues/9707), consider using
+    [mamba](https://github.com/mamba-org/mamba) instead.
+  id: totrans-59
+  prefs: []
+  type: TYPE_NORMAL
+- en: See the [installation](https://zipline.ml4trading.io/install.html) section of
+    the docs for more detailed instructions and the corresponding [conda-forge site](https://github.com/conda-forge/zipline-reloaded-feedstock).
+  id: totrans-60
+  prefs: []
+  type: TYPE_NORMAL
+- en: Using `pip`
+  id: totrans-61
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'If your system meets the pre-requisites described in the [installation instructions](https://zipline.ml4trading.io/install.html),
+    you can install Zipline using `pip` by running:'
+  id: totrans-62
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE6]'
+  id: totrans-63
+  prefs: []
+  type: TYPE_PRE
+  zh: '[PRE6]'
+- en: Using `conda`
+  id: totrans-64
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'If you are using the [Anaconda](https://www.anaconda.com/products/individual)
+    or [miniconda](https://docs.conda.io/en/latest/miniconda.html) distributions,
+    you install `zipline-reloaded` from the channel `conda-forge` like so:'
+  id: totrans-65
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE7]'
+  id: totrans-66
+  prefs: []
+  type: TYPE_PRE
+  zh: '[PRE7]'
+- en: You can also [enable](https://docs.conda.io/projects/conda/en/latest/user-guide/tasks/manage-channels.html)
+    `conda-forge` by listing it in your `.condarc`.
+  id: totrans-67
+  prefs: []
+  type: TYPE_NORMAL
+- en: In case you are installing `zipline-reloaded` alongside other packages and encounter
+    [conflict errors](https://github.com/conda/conda/issues/9707), consider using
+    [mamba](https://github.com/mamba-org/mamba) instead.
+  id: totrans-68
+  prefs: []
+  type: TYPE_NORMAL
+- en: See the [installation](https://zipline.ml4trading.io/install.html) section of
+    the docs for more detailed instructions and the corresponding [conda-forge site](https://github.com/conda-forge/zipline-reloaded-feedstock).
+  id: totrans-69
+  prefs: []
+  type: TYPE_NORMAL
+- en: Quickstart
+  id: totrans-70
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: See our [getting started tutorial](https://zipline.ml4trading.io/beginner-tutorial).
+  id: totrans-71
+  prefs: []
+  type: TYPE_NORMAL
+- en: The following code implements a simple dual moving average algorithm.
+  id: totrans-72
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE8]'
+  id: totrans-73
+  prefs: []
+  type: TYPE_PRE
+  zh: '[PRE8]'
+- en: 'You can then run this algorithm using the Zipline CLI. But first, you need
+    to download some market data with historical prices and trading volumes:'
+  id: totrans-74
+  prefs: []
+  type: TYPE_NORMAL
+  zh: 然后，您可以使用Zipline CLI运行此算法。但首先，您需要下载一些具有历史价格和交易量的市场数据：
+- en: '[PRE9]'
+  id: totrans-75
+  prefs: []
+  type: TYPE_PRE
+  zh: '[PRE9]'
+- en: This will download asset pricing data sourced from [Quandl](https://www.quandl.com/databases/WIKIP/documentation?anchor=companies)
+    (since [acquisition](https://www.nasdaq.com/about/press-center/nasdaq-acquires-quandl-advance-use-alternative-data)
+    hosted by NASDAQ), and stream it through the algorithm over the specified time
+    range. Then, the resulting performance DataFrame is saved as `dma.pickle`, which
+    you can load and analyze from Python.
+  id: totrans-76
+  prefs: []
+  type: TYPE_NORMAL
+  zh: 这将下载来自[Quandl](https://www.quandl.com/databases/WIKIP/documentation?anchor=companies)（自[收购](https://www.nasdaq.com/about/press-center/nasdaq-acquires-quandl-advance-use-alternative-data)后由纳斯达克托管）的资产定价数据，并在指定的时间范围内通过算法流式传输。然后，将生成的性能DataFrame保存为`dma.pickle`，您可以从Python加载并分析它。
+- en: You can find other examples in the [zipline/examples](https://github.com/stefan-jansen/zipline-reloaded/tree/main/src/zipline/examples)
+    directory.
+  id: totrans-77
+  prefs: []
+  type: TYPE_NORMAL
+  zh: 您可以在[zipline/examples](https://github.com/stefan-jansen/zipline-reloaded/tree/main/src/zipline/examples)目录中找到其他示例。
+- en: Questions, suggestions, bugs?
+  id: totrans-78
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+  zh: 有问题、建议、错误吗？
+- en: If you find a bug or have other questions about the library, feel free to [open
+    an issue](https://github.com/stefan-jansen/zipline/issues/new) and fill out the
+    template.
+  id: totrans-79
+  prefs: []
+  type: TYPE_NORMAL
+  zh: 如果您发现错误或有关于库的其他问题，请随时[打开一个问题](https://github.com/stefan-jansen/zipline/issues/new)并填写模板。
+- en: '[Installation](install.html)'
+  id: totrans-80
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+  zh: '[安装](install.html)'
+- en: '[Tutorial](beginner-tutorial.html)'
+  id: totrans-81
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+  zh: '[教程](beginner-tutorial.html)'
+- en: '[Data](bundles.html)'
+  id: totrans-82
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+  zh: '[数据](bundles.html)'
+- en: '[Calendars](trading-calendars.html)'
+  id: totrans-83
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+  zh: '[日历](trading-calendars.html)'
+- en: '[Metrics](risk-and-perf-metrics.html)'
+  id: totrans-84
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+  zh: '[指标](risk-and-perf-metrics.html)'
+- en: '[Development](development-guidelines.html)'
+  id: totrans-85
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+  zh: '[开发](development-guidelines.html)'
+- en: '[API](api-reference.html)'
+  id: totrans-86
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+  zh: '[API](api-reference.html)'
+- en: '[Releases](releases.html)'
+  id: totrans-87
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+  zh: '[发布](releases.html)'

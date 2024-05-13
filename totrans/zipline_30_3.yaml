@@ -1,0 +1,862 @@
+- en: Data
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://zipline.ml4trading.io/bundles.html](https://zipline.ml4trading.io/bundles.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: A data bundle is a collection of pricing data, adjustment data, and an asset
+    database. Bundles allow us to preload all of the data we will need to run backtests
+    and store the data for future runs.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '## Discovering Available Bundles'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Zipline comes with a default bundle as well as the ability to register new
+    bundles. To see which bundles we may be available, we may run the `bundles` command,
+    for example:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'The output here shows that there are 3 bundles available:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`my-custom-bundle` (added by the user)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`quandl` (provided by Zipline, the default bundle)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: The dates and times next to the name show the times when the data for this bundle
+    was ingested. We have run three different ingestions for `my-custom-bundle`. We
+    have never ingested any data for the `quandl` bundle so it just shows `<no ingestions>`
+    instead.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Note**: Quantopian used to provide a re-packaged version of the `quandl`
+    bundle as `quantopian-quandl` that is still available in April 2021\. While it
+    ingests much faster, it does not have the country code that the library has since
+    come to require and which the current Zipline version inserts for the `quandl`
+    bundle. If you want to use `quantopian-quandl` instead, use [this workaround](https://github.com/quantopian/zipline/issues/2517)
+    to manually update the database.  ## Ingesting Data'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'The first step to using a data bundle is to ingest the data. The ingestion
+    process will invoke some custom bundle command and then write the data to a standard
+    location that Zipline can find. By default the location where ingested data will
+    be written is `$ZIPLINE_ROOT/data/<bundle>` where by default `ZIPLINE_ROOT=~/.zipline`.
+    The ingestion step may take some time as it could involve downloading and processing
+    a lot of data. To ingest a bundle, run:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: where `<bundle>` is the name of the bundle to ingest, defaulting to `quandl`.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Old Data
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: When the `ingest` command is used it will write the new data to a subdirectory
+    of `$ZIPLINE_ROOT/data/<bundle>` which is named with the current date. This makes
+    it possible to look at older data or even run backtests with the older copies.
+    Running a backtest with an old ingestion makes it easier to reproduce backtest
+    results later.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'One drawback of saving all of the data by default is that the data directory
+    may grow quite large even if you do not want to use the data. As shown earlier,
+    we can list all of the ingestions with the [bundles command](#bundles-command).
+    To solve the problem of leaking old data there is another command: `clean`, which
+    will clear data bundles based on some time constraints.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'For example:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: Running Backtests with Data Bundles
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: 'Now that the data has been ingested we can use it to run backtests with the
+    `run` command. The bundle to use can be specified with the `--bundle` option like:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE3]'
+  prefs: []
+  type: TYPE_PRE
+- en: We may also specify the date to use to look up the bundle data with the `--bundle-timestamp`
+    option. Setting the `--bundle-timestamp` will cause `run` to use the most recent
+    bundle ingestion that is less than or equal to the `bundle-timestamp`. This is
+    how we can run backtests with older data. `bundle-timestamp` uses a less-than-or-equal-to
+    relationship so that we can specify the date that we ran an old backtest and get
+    the same data that would have been available to us on that date. The `bundle-timestamp`
+    defaults to the current day to use the most recent data.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Default Data Bundles
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '### Quandl WIKI Bundle'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'By default Zipline comes with the `quandl` data bundle which uses Quandl’s
+    [WIKI dataset](https://www.quandl.com/data/WIKI). The Quandl data bundle includes
+    daily pricing data, splits, cash dividends, and asset metadata. To ingest the
+    `quandl` data bundle, run either of the following commands:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE4]'
+  prefs: []
+  type: TYPE_PRE
+- en: Either command should only take a few minutes to download and process the data.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Note
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Quandl has discontinued this dataset early 2018 and it no longer updates. Regardless,
+    it is a useful starting point to try out Zipline without setting up your own dataset.  ##
+    Writing a New Bundle'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Data bundles exist to make it easy to use different data sources with Zipline.
+    To add a new bundle, one must implement an `ingest` function.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The `ingest` function is responsible for loading the data into memory and passing
+    it to a set of writer objects provided by Zipline to convert the data to Zipline’s
+    internal format. The ingest function may work by downloading data from a remote
+    location like the `quandl` bundle or it may just load files that are already on
+    the machine. The function is provided with writers that will write the data to
+    the correct location. If an ingestion fails part way through the bundle will not
+    be written in an incomplete state.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'The signature of the ingest function should be:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE5]'
+  prefs: []
+  type: TYPE_PRE
+- en: '`environ`'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '`environ` is a mapping representing the environment variables to use. This
+    is where any custom arguments needed for the ingestion should be passed, for example:
+    the `quandl` bundle uses the environment to pass the API key and the download
+    retry attempt count.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`asset_db_writer`'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '`asset_db_writer` is an instance of [`AssetDBWriter`](api-reference.html#zipline.assets.AssetDBWriter
+    "zipline.assets.AssetDBWriter"). This is the writer for the asset metadata which
+    provides the asset lifetimes and the symbol to asset id (sid) mapping. This may
+    also contain the asset name, exchange and a few other columns. To write data,
+    invoke [`write()`](api-reference.html#zipline.assets.AssetDBWriter.write "zipline.assets.AssetDBWriter.write")
+    with dataframes for the various pieces of metadata. More information about the
+    format of the data exists in the docs for write.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`minute_bar_writer`'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '`minute_bar_writer` is an instance of `BcolzMinuteBarWriter`. This writer is
+    used to convert data to Zipline’s internal bcolz format to later be read by a
+    `BcolzMinuteBarReader`. If minute data is provided, users should call `write()`
+    with an iterable of (sid, dataframe) tuples. The `show_progress` argument should
+    also be forwarded to this method. If the data source does not provide minute level
+    data, then there is no need to call the write method. It is also acceptable to
+    pass an empty iterator to `write()` to signal that there is no minutely data.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Note
+  prefs: []
+  type: TYPE_NORMAL
+- en: The data passed to `write()` may be a lazy iterator or generator to avoid loading
+    all of the minute data into memory at a single time. A given sid may also appear
+    multiple times in the data as long as the dates are strictly increasing.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`daily_bar_writer`'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '`daily_bar_writer` is an instance of [`BcolzDailyBarWriter`](api-reference.html#zipline.data.bcolz_daily_bars.BcolzDailyBarWriter
+    "zipline.data.bcolz_daily_bars.BcolzDailyBarWriter"). This writer is used to convert
+    data into Zipline’s internal bcolz format to later be read by a [`BcolzDailyBarReader`](api-reference.html#zipline.data.bcolz_daily_bars.BcolzDailyBarReader
+    "zipline.data.bcolz_daily_bars.BcolzDailyBarReader"). If daily data is provided,
+    users should call `write()` with an iterable of (sid dataframe) tuples. The `show_progress`
+    argument should also be forwarded to this method. If the data source does not
+    provide daily data, then there is no need to call the write method. It is also
+    acceptable to pass an empty iterable to `write()` to signal that there is no daily
+    data. If no daily data is provided but minute data is provided, a daily rollup
+    will happen to service daily history requests.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Note
+  prefs: []
+  type: TYPE_NORMAL
+- en: Like the `minute_bar_writer`, the data passed to `write()` may be a lazy iterable
+    or generator to avoid loading all of the data into memory at once. Unlike the
+    `minute_bar_writer`, a sid may only appear once in the data iterable.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`adjustment_writer`'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '`adjustment_writer` is an instance of [`SQLiteAdjustmentWriter`](api-reference.html#zipline.data.adjustments.SQLiteAdjustmentWriter
+    "zipline.data.adjustments.SQLiteAdjustmentWriter"). This writer is used to store
+    splits, mergers, dividends, and stock dividends. The data should be provided as
+    dataframes and passed to [`write()`](api-reference.html#zipline.data.adjustments.SQLiteAdjustmentWriter.write
+    "zipline.data.adjustments.SQLiteAdjustmentWriter.write"). Each of these fields
+    are optional, but the writer can accept as much of the data as you have.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`calendar`'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '`calendar` is an instance of `zipline.utils.calendars.TradingCalendar`. The
+    calendar is provided to help some bundles generate queries for the days needed.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`start_session`'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '`start_session` is a [`pandas.Timestamp`](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.Timestamp.html#pandas.Timestamp
+    "(in pandas v2.0.3)") object indicating the first day that the bundle should load
+    data for.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`end_session`'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '`end_session` is a [`pandas.Timestamp`](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.Timestamp.html#pandas.Timestamp
+    "(in pandas v2.0.3)") object indicating the last day that the bundle should load
+    data for.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`cache`'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '`cache` is an instance of [`dataframe_cache`](api-reference.html#zipline.utils.cache.dataframe_cache
+    "zipline.utils.cache.dataframe_cache"). This object is a mapping from strings
+    to dataframes. This object is provided in case an ingestion crashes part way through.
+    The idea is that the ingest function should check the cache for raw data, if it
+    doesn’t exist in the cache, it should acquire it and then store it in the cache.
+    Then it can parse and write the data. The cache will be cleared only after a successful
+    load, this prevents the ingest function from needing to re-download all the data
+    if there is some bug in the parsing. If it is very fast to get the data, for example
+    if it is coming from another local file, then there is no need to use this cache.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`show_progress`'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '`show_progress` is a boolean indicating that the user would like to receive
+    feedback about the ingest function’s progress fetching and writing the data. Some
+    examples for where to show how many files you have downloaded out of the total
+    needed, or how far into some data conversion the ingest function is. One tool
+    that may help with implementing `show_progress` for a loop is [`maybe_show_progress`](api-reference.html#zipline.utils.cli.maybe_show_progress
+    "zipline.utils.cli.maybe_show_progress"). This argument should always be forwarded
+    to `minute_bar_writer.write` and `daily_bar_writer.write`.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`output_dir`'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '`output_dir` is a string representing the file path where all the data will
+    be written. `output_dir` will be some subdirectory of `$ZIPLINE_ROOT` and will
+    contain the time of the start of the current ingestion. This can be used to directly
+    move resources here if for some reason your ingest function can produce it’s own
+    outputs without the writers. For example, the `quantopian:quandl` bundle uses
+    this to directly untar the bundle into the `output_dir`.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Ingesting Data from .csv Files
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: Zipline provides a bundle called `csvdir`, which allows users to ingest data
+    from `.csv` files. The format of the files should be in OHLCV format, with dates,
+    dividends, and splits. A sample is provided below. There are other samples for
+    testing purposes in `zipline/tests/resources/csvdir_samples`.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE6]'
+  prefs: []
+  type: TYPE_PRE
+- en: Once you have your data in the correct format, you can edit your `extension.py`
+    file in `~/.zipline/extension.py` and import the csvdir bundle, along with `pandas`.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE7]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'We’ll then want to specify the start and end sessions of our bundle data:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE8]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'And then we can `register()` our bundle, and pass the location of the directory
+    in which our `.csv` files exist:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE9]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'To finally ingest our data, we can run:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE10]'
+  prefs: []
+  type: TYPE_PRE
+- en: If you would like to use equities that are not in the NYSE calendar, or the
+    existing Zipline calendars, you can look at the `Trading Calendar Tutorial` to
+    build a custom trading calendar that you can then pass the name of to `register()`.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Practical Examples
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: See examples for [Algoseek](https://www.algoseek.com/) [minute data](https://github.com/stefan-jansen/machine-learning-for-trading/tree/master/08_ml4t_workflow/04_ml4t_workflow_with_zipline/01_custom_bundles)
+    and [Japanese equities](https://github.com/stefan-jansen/machine-learning-for-trading/tree/master/11_decision_trees_random_forests/00_custom_bundle)
+    at daily frequency from the book [Machine Learning for Trading](https://www.amazon.com/Machine-Learning-Algorithmic-Trading-alternative/dp/1839217715?pf_rd_r=GZH2XZ35GB3BET09PCCA&pf_rd_p=c5b6893a-24f2-4a59-9d4b-aff5065c90ec&pd_rd_r=91a679c7-f069-4a6e-bdbb-a2b3f548f0c8&pd_rd_w=2B0Q0&pd_rd_wg=GMY5S&ref_=pd_gw_ci_mcx_mr_hp_d).
+  prefs: []
+  type: TYPE_NORMAL
+- en: '## Discovering Available Bundles'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Zipline comes with a default bundle as well as the ability to register new
+    bundles. To see which bundles we may be available, we may run the `bundles` command,
+    for example:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE11]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'The output here shows that there are 3 bundles available:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`my-custom-bundle` (added by the user)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`quandl` (provided by Zipline, the default bundle)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: The dates and times next to the name show the times when the data for this bundle
+    was ingested. We have run three different ingestions for `my-custom-bundle`. We
+    have never ingested any data for the `quandl` bundle so it just shows `<no ingestions>`
+    instead.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Note**: Quantopian used to provide a re-packaged version of the `quandl`
+    bundle as `quantopian-quandl` that is still available in April 2021\. While it
+    ingests much faster, it does not have the country code that the library has since
+    come to require and which the current Zipline version inserts for the `quandl`
+    bundle. If you want to use `quantopian-quandl` instead, use [this workaround](https://github.com/quantopian/zipline/issues/2517)
+    to manually update the database.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '## Ingesting Data'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'The first step to using a data bundle is to ingest the data. The ingestion
+    process will invoke some custom bundle command and then write the data to a standard
+    location that Zipline can find. By default the location where ingested data will
+    be written is `$ZIPLINE_ROOT/data/<bundle>` where by default `ZIPLINE_ROOT=~/.zipline`.
+    The ingestion step may take some time as it could involve downloading and processing
+    a lot of data. To ingest a bundle, run:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE12]'
+  prefs: []
+  type: TYPE_PRE
+- en: where `<bundle>` is the name of the bundle to ingest, defaulting to `quandl`.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Old Data
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: When the `ingest` command is used it will write the new data to a subdirectory
+    of `$ZIPLINE_ROOT/data/<bundle>` which is named with the current date. This makes
+    it possible to look at older data or even run backtests with the older copies.
+    Running a backtest with an old ingestion makes it easier to reproduce backtest
+    results later.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'One drawback of saving all of the data by default is that the data directory
+    may grow quite large even if you do not want to use the data. As shown earlier,
+    we can list all of the ingestions with the [bundles command](#bundles-command).
+    To solve the problem of leaking old data there is another command: `clean`, which
+    will clear data bundles based on some time constraints.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'For example:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE13]'
+  prefs: []
+  type: TYPE_PRE
+- en: Running Backtests with Data Bundles
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: 'Now that the data has been ingested we can use it to run backtests with the
+    `run` command. The bundle to use can be specified with the `--bundle` option like:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE14]'
+  prefs: []
+  type: TYPE_PRE
+- en: We may also specify the date to use to look up the bundle data with the `--bundle-timestamp`
+    option. Setting the `--bundle-timestamp` will cause `run` to use the most recent
+    bundle ingestion that is less than or equal to the `bundle-timestamp`. This is
+    how we can run backtests with older data. `bundle-timestamp` uses a less-than-or-equal-to
+    relationship so that we can specify the date that we ran an old backtest and get
+    the same data that would have been available to us on that date. The `bundle-timestamp`
+    defaults to the current day to use the most recent data.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Default Data Bundles
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '### Quandl WIKI Bundle'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'By default Zipline comes with the `quandl` data bundle which uses Quandl’s
+    [WIKI dataset](https://www.quandl.com/data/WIKI). The Quandl data bundle includes
+    daily pricing data, splits, cash dividends, and asset metadata. To ingest the
+    `quandl` data bundle, run either of the following commands:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE15]'
+  prefs: []
+  type: TYPE_PRE
+- en: Either command should only take a few minutes to download and process the data.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Note
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Quandl has discontinued this dataset early 2018 and it no longer updates. Regardless,
+    it is a useful starting point to try out Zipline without setting up your own dataset.  ###
+    Quandl WIKI Bundle'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'By default Zipline comes with the `quandl` data bundle which uses Quandl’s
+    [WIKI dataset](https://www.quandl.com/data/WIKI). The Quandl data bundle includes
+    daily pricing data, splits, cash dividends, and asset metadata. To ingest the
+    `quandl` data bundle, run either of the following commands:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE16]'
+  prefs: []
+  type: TYPE_PRE
+- en: Either command should only take a few minutes to download and process the data.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Note
+  prefs: []
+  type: TYPE_NORMAL
+- en: Quandl has discontinued this dataset early 2018 and it no longer updates. Regardless,
+    it is a useful starting point to try out Zipline without setting up your own dataset.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '## Writing a New Bundle'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Data bundles exist to make it easy to use different data sources with Zipline.
+    To add a new bundle, one must implement an `ingest` function.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The `ingest` function is responsible for loading the data into memory and passing
+    it to a set of writer objects provided by Zipline to convert the data to Zipline’s
+    internal format. The ingest function may work by downloading data from a remote
+    location like the `quandl` bundle or it may just load files that are already on
+    the machine. The function is provided with writers that will write the data to
+    the correct location. If an ingestion fails part way through the bundle will not
+    be written in an incomplete state.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'The signature of the ingest function should be:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE17]'
+  prefs: []
+  type: TYPE_PRE
+- en: '`environ`'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '`environ` is a mapping representing the environment variables to use. This
+    is where any custom arguments needed for the ingestion should be passed, for example:
+    the `quandl` bundle uses the environment to pass the API key and the download
+    retry attempt count.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`asset_db_writer`'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '`asset_db_writer` is an instance of [`AssetDBWriter`](api-reference.html#zipline.assets.AssetDBWriter
+    "zipline.assets.AssetDBWriter"). This is the writer for the asset metadata which
+    provides the asset lifetimes and the symbol to asset id (sid) mapping. This may
+    also contain the asset name, exchange and a few other columns. To write data,
+    invoke [`write()`](api-reference.html#zipline.assets.AssetDBWriter.write "zipline.assets.AssetDBWriter.write")
+    with dataframes for the various pieces of metadata. More information about the
+    format of the data exists in the docs for write.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`minute_bar_writer`'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '`minute_bar_writer` is an instance of `BcolzMinuteBarWriter`. This writer is
+    used to convert data to Zipline’s internal bcolz format to later be read by a
+    `BcolzMinuteBarReader`. If minute data is provided, users should call `write()`
+    with an iterable of (sid, dataframe) tuples. The `show_progress` argument should
+    also be forwarded to this method. If the data source does not provide minute level
+    data, then there is no need to call the write method. It is also acceptable to
+    pass an empty iterator to `write()` to signal that there is no minutely data.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Note
+  prefs: []
+  type: TYPE_NORMAL
+- en: The data passed to `write()` may be a lazy iterator or generator to avoid loading
+    all of the minute data into memory at a single time. A given sid may also appear
+    multiple times in the data as long as the dates are strictly increasing.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`daily_bar_writer`'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '`daily_bar_writer` is an instance of [`BcolzDailyBarWriter`](api-reference.html#zipline.data.bcolz_daily_bars.BcolzDailyBarWriter
+    "zipline.data.bcolz_daily_bars.BcolzDailyBarWriter"). This writer is used to convert
+    data into Zipline’s internal bcolz format to later be read by a [`BcolzDailyBarReader`](api-reference.html#zipline.data.bcolz_daily_bars.BcolzDailyBarReader
+    "zipline.data.bcolz_daily_bars.BcolzDailyBarReader"). If daily data is provided,
+    users should call `write()` with an iterable of (sid dataframe) tuples. The `show_progress`
+    argument should also be forwarded to this method. If the data source does not
+    provide daily data, then there is no need to call the write method. It is also
+    acceptable to pass an empty iterable to `write()` to signal that there is no daily
+    data. If no daily data is provided but minute data is provided, a daily rollup
+    will happen to service daily history requests.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Note
+  prefs: []
+  type: TYPE_NORMAL
+- en: Like the `minute_bar_writer`, the data passed to `write()` may be a lazy iterable
+    or generator to avoid loading all of the data into memory at once. Unlike the
+    `minute_bar_writer`, a sid may only appear once in the data iterable.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`adjustment_writer`'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '`adjustment_writer` is an instance of [`SQLiteAdjustmentWriter`](api-reference.html#zipline.data.adjustments.SQLiteAdjustmentWriter
+    "zipline.data.adjustments.SQLiteAdjustmentWriter"). This writer is used to store
+    splits, mergers, dividends, and stock dividends. The data should be provided as
+    dataframes and passed to [`write()`](api-reference.html#zipline.data.adjustments.SQLiteAdjustmentWriter.write
+    "zipline.data.adjustments.SQLiteAdjustmentWriter.write"). Each of these fields
+    are optional, but the writer can accept as much of the data as you have.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`calendar`'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '`calendar` is an instance of `zipline.utils.calendars.TradingCalendar`. The
+    calendar is provided to help some bundles generate queries for the days needed.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`start_session`'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '`start_session` is a [`pandas.Timestamp`](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.Timestamp.html#pandas.Timestamp
+    "(in pandas v2.0.3)") object indicating the first day that the bundle should load
+    data for.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`end_session`'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '`end_session` is a [`pandas.Timestamp`](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.Timestamp.html#pandas.Timestamp
+    "(in pandas v2.0.3)") object indicating the last day that the bundle should load
+    data for.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`cache`'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '`cache` is an instance of [`dataframe_cache`](api-reference.html#zipline.utils.cache.dataframe_cache
+    "zipline.utils.cache.dataframe_cache"). This object is a mapping from strings
+    to dataframes. This object is provided in case an ingestion crashes part way through.
+    The idea is that the ingest function should check the cache for raw data, if it
+    doesn’t exist in the cache, it should acquire it and then store it in the cache.
+    Then it can parse and write the data. The cache will be cleared only after a successful
+    load, this prevents the ingest function from needing to re-download all the data
+    if there is some bug in the parsing. If it is very fast to get the data, for example
+    if it is coming from another local file, then there is no need to use this cache.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`show_progress`'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '`show_progress` is a boolean indicating that the user would like to receive
+    feedback about the ingest function’s progress fetching and writing the data. Some
+    examples for where to show how many files you have downloaded out of the total
+    needed, or how far into some data conversion the ingest function is. One tool
+    that may help with implementing `show_progress` for a loop is [`maybe_show_progress`](api-reference.html#zipline.utils.cli.maybe_show_progress
+    "zipline.utils.cli.maybe_show_progress"). This argument should always be forwarded
+    to `minute_bar_writer.write` and `daily_bar_writer.write`.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`output_dir`'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '`output_dir` is a string representing the file path where all the data will
+    be written. `output_dir` will be some subdirectory of `$ZIPLINE_ROOT` and will
+    contain the time of the start of the current ingestion. This can be used to directly
+    move resources here if for some reason your ingest function can produce it’s own
+    outputs without the writers. For example, the `quantopian:quandl` bundle uses
+    this to directly untar the bundle into the `output_dir`.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`environ`'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '`environ` is a mapping representing the environment variables to use. This
+    is where any custom arguments needed for the ingestion should be passed, for example:
+    the `quandl` bundle uses the environment to pass the API key and the download
+    retry attempt count.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`asset_db_writer`'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '`asset_db_writer` is an instance of [`AssetDBWriter`](api-reference.html#zipline.assets.AssetDBWriter
+    "zipline.assets.AssetDBWriter"). This is the writer for the asset metadata which
+    provides the asset lifetimes and the symbol to asset id (sid) mapping. This may
+    also contain the asset name, exchange and a few other columns. To write data,
+    invoke [`write()`](api-reference.html#zipline.assets.AssetDBWriter.write "zipline.assets.AssetDBWriter.write")
+    with dataframes for the various pieces of metadata. More information about the
+    format of the data exists in the docs for write.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`minute_bar_writer`'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '`minute_bar_writer` is an instance of `BcolzMinuteBarWriter`. This writer is
+    used to convert data to Zipline’s internal bcolz format to later be read by a
+    `BcolzMinuteBarReader`. If minute data is provided, users should call `write()`
+    with an iterable of (sid, dataframe) tuples. The `show_progress` argument should
+    also be forwarded to this method. If the data source does not provide minute level
+    data, then there is no need to call the write method. It is also acceptable to
+    pass an empty iterator to `write()` to signal that there is no minutely data.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Note
+  prefs: []
+  type: TYPE_NORMAL
+- en: The data passed to `write()` may be a lazy iterator or generator to avoid loading
+    all of the minute data into memory at a single time. A given sid may also appear
+    multiple times in the data as long as the dates are strictly increasing.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`daily_bar_writer`'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '`daily_bar_writer` is an instance of [`BcolzDailyBarWriter`](api-reference.html#zipline.data.bcolz_daily_bars.BcolzDailyBarWriter
+    "zipline.data.bcolz_daily_bars.BcolzDailyBarWriter"). This writer is used to convert
+    data into Zipline’s internal bcolz format to later be read by a [`BcolzDailyBarReader`](api-reference.html#zipline.data.bcolz_daily_bars.BcolzDailyBarReader
+    "zipline.data.bcolz_daily_bars.BcolzDailyBarReader"). If daily data is provided,
+    users should call `write()` with an iterable of (sid dataframe) tuples. The `show_progress`
+    argument should also be forwarded to this method. If the data source does not
+    provide daily data, then there is no need to call the write method. It is also
+    acceptable to pass an empty iterable to `write()` to signal that there is no daily
+    data. If no daily data is provided but minute data is provided, a daily rollup
+    will happen to service daily history requests.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Note
+  prefs: []
+  type: TYPE_NORMAL
+- en: Like the `minute_bar_writer`, the data passed to `write()` may be a lazy iterable
+    or generator to avoid loading all of the data into memory at once. Unlike the
+    `minute_bar_writer`, a sid may only appear once in the data iterable.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`adjustment_writer`'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '`adjustment_writer` is an instance of [`SQLiteAdjustmentWriter`](api-reference.html#zipline.data.adjustments.SQLiteAdjustmentWriter
+    "zipline.data.adjustments.SQLiteAdjustmentWriter"). This writer is used to store
+    splits, mergers, dividends, and stock dividends. The data should be provided as
+    dataframes and passed to [`write()`](api-reference.html#zipline.data.adjustments.SQLiteAdjustmentWriter.write
+    "zipline.data.adjustments.SQLiteAdjustmentWriter.write"). Each of these fields
+    are optional, but the writer can accept as much of the data as you have.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`calendar`'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '`calendar` is an instance of `zipline.utils.calendars.TradingCalendar`. The
+    calendar is provided to help some bundles generate queries for the days needed.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`start_session`'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '`start_session` is a [`pandas.Timestamp`](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.Timestamp.html#pandas.Timestamp
+    "(in pandas v2.0.3)") object indicating the first day that the bundle should load
+    data for.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`end_session`'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '`end_session` is a [`pandas.Timestamp`](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.Timestamp.html#pandas.Timestamp
+    "(in pandas v2.0.3)") object indicating the last day that the bundle should load
+    data for.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`cache`'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '`cache` is an instance of [`dataframe_cache`](api-reference.html#zipline.utils.cache.dataframe_cache
+    "zipline.utils.cache.dataframe_cache"). This object is a mapping from strings
+    to dataframes. This object is provided in case an ingestion crashes part way through.
+    The idea is that the ingest function should check the cache for raw data, if it
+    doesn’t exist in the cache, it should acquire it and then store it in the cache.
+    Then it can parse and write the data. The cache will be cleared only after a successful
+    load, this prevents the ingest function from needing to re-download all the data
+    if there is some bug in the parsing. If it is very fast to get the data, for example
+    if it is coming from another local file, then there is no need to use this cache.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`show_progress`'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '`show_progress` is a boolean indicating that the user would like to receive
+    feedback about the ingest function’s progress fetching and writing the data. Some
+    examples for where to show how many files you have downloaded out of the total
+    needed, or how far into some data conversion the ingest function is. One tool
+    that may help with implementing `show_progress` for a loop is [`maybe_show_progress`](api-reference.html#zipline.utils.cli.maybe_show_progress
+    "zipline.utils.cli.maybe_show_progress"). This argument should always be forwarded
+    to `minute_bar_writer.write` and `daily_bar_writer.write`.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`output_dir`'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '`output_dir` is a string representing the file path where all the data will
+    be written. `output_dir` will be some subdirectory of `$ZIPLINE_ROOT` and will
+    contain the time of the start of the current ingestion. This can be used to directly
+    move resources here if for some reason your ingest function can produce it’s own
+    outputs without the writers. For example, the `quantopian:quandl` bundle uses
+    this to directly untar the bundle into the `output_dir`.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Ingesting Data from .csv Files
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: Zipline provides a bundle called `csvdir`, which allows users to ingest data
+    from `.csv` files. The format of the files should be in OHLCV format, with dates,
+    dividends, and splits. A sample is provided below. There are other samples for
+    testing purposes in `zipline/tests/resources/csvdir_samples`.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE18]'
+  prefs: []
+  type: TYPE_PRE
+- en: Once you have your data in the correct format, you can edit your `extension.py`
+    file in `~/.zipline/extension.py` and import the csvdir bundle, along with `pandas`.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE19]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'We’ll then want to specify the start and end sessions of our bundle data:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE20]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'And then we can `register()` our bundle, and pass the location of the directory
+    in which our `.csv` files exist:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE21]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'To finally ingest our data, we can run:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE22]'
+  prefs: []
+  type: TYPE_PRE
+- en: If you would like to use equities that are not in the NYSE calendar, or the
+    existing Zipline calendars, you can look at the `Trading Calendar Tutorial` to
+    build a custom trading calendar that you can then pass the name of to `register()`.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Practical Examples
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: See examples for [Algoseek](https://www.algoseek.com/) [minute data](https://github.com/stefan-jansen/machine-learning-for-trading/tree/master/08_ml4t_workflow/04_ml4t_workflow_with_zipline/01_custom_bundles)
+    and [Japanese equities](https://github.com/stefan-jansen/machine-learning-for-trading/tree/master/11_decision_trees_random_forests/00_custom_bundle)
+    at daily frequency from the book [Machine Learning for Trading](https://www.amazon.com/Machine-Learning-Algorithmic-Trading-alternative/dp/1839217715?pf_rd_r=GZH2XZ35GB3BET09PCCA&pf_rd_p=c5b6893a-24f2-4a59-9d4b-aff5065c90ec&pd_rd_r=91a679c7-f069-4a6e-bdbb-a2b3f548f0c8&pd_rd_w=2B0Q0&pd_rd_wg=GMY5S&ref_=pd_gw_ci_mcx_mr_hp_d).
+  prefs: []
+  type: TYPE_NORMAL

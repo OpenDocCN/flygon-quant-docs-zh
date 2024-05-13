@@ -1,0 +1,369 @@
+- en: Development
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://zipline.ml4trading.io/development-guidelines.html](https://zipline.ml4trading.io/development-guidelines.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: This page is intended for developers of Zipline, people who want to contribute
+    to the Zipline codebase or documentation, or people who want to install from source
+    and make local changes to their copy of Zipline.
+  prefs: []
+  type: TYPE_NORMAL
+- en: All contributions, bug reports, bug fixes, documentation improvements, enhancements
+    and ideas are welcome. We [track issues](https://github.com/stefan-jansen/zipline-reloaded/issues)
+    on [GitHub](https://github.com/) and also have a [mailing list](https://exchange.ml4trading.io/)
+    where you can ask questions.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Creating a Development Environment
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: 'First, you’ll need to clone Zipline by running:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Then check out to a new branch where you can make your changes:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: If you don’t already have them, you’ll need some C library dependencies. You
+    can follow the [install guide](install.rst) to get the appropriate dependencies.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Once you’ve created and activated a [virtual environment](https://docs.python.org/3/library/venv.html)
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Or, using [virtualenvwrapper](https://virtualenvwrapper.readthedocs.io/en/latest/):'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE3]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'run the `pip install -e .[test]` to install :'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'After installation, you should be able to use the `zipline` command line interface
+    from your virtualenv:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE4]'
+  prefs: []
+  type: TYPE_PRE
+- en: To finish, make sure [tests](#style-guide-running-tests) pass.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'During development, you can rebuild the C extensions by running:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE5]'
+  prefs: []
+  type: TYPE_PRE
+- en: Style Guide & Running Tests
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: We use [flake8](https://flake8.pycqa.org/en/latest/) for checking style requirements,
+    [black](https://black.readthedocs.io/en/stable/) for code formatting and [pytest](https://docs.pytest.org/en/latest/)
+    to run Zipline tests. Our [continuous integration](https://en.wikipedia.org/wiki/Continuous_integration)
+    tools will run these commands.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Before submitting patches or pull requests, please ensure that your changes
+    pass when running:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE6]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'In order to run tests locally, you’ll need [TA-lib](https://mrjbq7.github.io/ta-lib/install.html),
+    which you can install on Linux by running:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE7]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'And for `TA-lib` on OS X you can just run:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE8]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Then run `pip install` TA-lib:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'You should now be free to run tests:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE9]'
+  prefs: []
+  type: TYPE_PRE
+- en: Continuous Integration
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '[TODO]'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Packaging
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '[TODO]'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Contributing to the Docs
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: If you’d like to contribute to the documentation on zipline.io, you can navigate
+    to `docs/source/` where each [reStructuredText](https://en.wikipedia.org/wiki/ReStructuredText)
+    (`.rst`) file is a separate section there. To add a section, create a new file
+    called `some-descriptive-name.rst` and add `some-descriptive-name` to `appendix.rst`.
+    To edit a section, simply open up one of the existing files, make your changes,
+    and save them.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'We use [Sphinx](https://www.sphinx-doc.org/en/master/) to generate documentation
+    for Zipline, which you will need to install by running:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: If you would like to use Anaconda, please follow [the installation guide](install.html#managing-conda-environments)
+    to create and activate an environment, and then run the command above.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'To build and view the docs locally, run:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE10]'
+  prefs: []
+  type: TYPE_PRE
+- en: Commit messages
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: 'Standard prefixes to start a commit message:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE11]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Some commit style guidelines:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Commit lines should be no longer than [72 characters](https://git-scm.com/book/en/v2/Distributed-Git-Contributing-to-a-Project).
+    The first line of the commit should include one of the above prefixes. There should
+    be an empty line between the commit subject and the body of the commit. In general,
+    the message should be in the imperative tense. Best practice is to include not
+    only what the change is, but why the change was made.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Example:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE12]'
+  prefs: []
+  type: TYPE_PRE
+- en: Formatting Docstrings
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: When adding or editing docstrings for classes, functions, etc, we use [numpy](https://github.com/numpy/numpy/blob/master/doc/HOWTO_DOCUMENT.rst.txt)
+    as the canonical reference.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Updating the Whatsnew
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: We have a set of [whatsnew](https://github.com/stefan-jansen/zipline-reloaded/tree/main/docs/source/whatsnew)
+    files that are used for documenting changes that have occurred between different
+    versions of Zipline. Once you’ve made a change to Zipline, in your Pull Request,
+    please update the most recent `whatsnew` file with a comment about what you changed.
+    You can find examples in previous `whatsnew` files.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Creating a Development Environment
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: 'First, you’ll need to clone Zipline by running:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE13]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Then check out to a new branch where you can make your changes:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE14]'
+  prefs: []
+  type: TYPE_PRE
+- en: If you don’t already have them, you’ll need some C library dependencies. You
+    can follow the [install guide](install.rst) to get the appropriate dependencies.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Once you’ve created and activated a [virtual environment](https://docs.python.org/3/library/venv.html)
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE15]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Or, using [virtualenvwrapper](https://virtualenvwrapper.readthedocs.io/en/latest/):'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE16]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'run the `pip install -e .[test]` to install :'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'After installation, you should be able to use the `zipline` command line interface
+    from your virtualenv:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE17]'
+  prefs: []
+  type: TYPE_PRE
+- en: To finish, make sure [tests](#style-guide-running-tests) pass.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'During development, you can rebuild the C extensions by running:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE18]'
+  prefs: []
+  type: TYPE_PRE
+- en: Style Guide & Running Tests
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: We use [flake8](https://flake8.pycqa.org/en/latest/) for checking style requirements,
+    [black](https://black.readthedocs.io/en/stable/) for code formatting and [pytest](https://docs.pytest.org/en/latest/)
+    to run Zipline tests. Our [continuous integration](https://en.wikipedia.org/wiki/Continuous_integration)
+    tools will run these commands.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Before submitting patches or pull requests, please ensure that your changes
+    pass when running:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE19]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'In order to run tests locally, you’ll need [TA-lib](https://mrjbq7.github.io/ta-lib/install.html),
+    which you can install on Linux by running:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE20]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'And for `TA-lib` on OS X you can just run:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE21]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Then run `pip install` TA-lib:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'You should now be free to run tests:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE22]'
+  prefs: []
+  type: TYPE_PRE
+- en: Continuous Integration
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '[TODO]'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Packaging
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '[TODO]'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Contributing to the Docs
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: If you’d like to contribute to the documentation on zipline.io, you can navigate
+    to `docs/source/` where each [reStructuredText](https://en.wikipedia.org/wiki/ReStructuredText)
+    (`.rst`) file is a separate section there. To add a section, create a new file
+    called `some-descriptive-name.rst` and add `some-descriptive-name` to `appendix.rst`.
+    To edit a section, simply open up one of the existing files, make your changes,
+    and save them.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'We use [Sphinx](https://www.sphinx-doc.org/en/master/) to generate documentation
+    for Zipline, which you will need to install by running:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: If you would like to use Anaconda, please follow [the installation guide](install.html#managing-conda-environments)
+    to create and activate an environment, and then run the command above.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'To build and view the docs locally, run:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE23]'
+  prefs: []
+  type: TYPE_PRE
+- en: Commit messages
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: 'Standard prefixes to start a commit message:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE24]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Some commit style guidelines:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Commit lines should be no longer than [72 characters](https://git-scm.com/book/en/v2/Distributed-Git-Contributing-to-a-Project).
+    The first line of the commit should include one of the above prefixes. There should
+    be an empty line between the commit subject and the body of the commit. In general,
+    the message should be in the imperative tense. Best practice is to include not
+    only what the change is, but why the change was made.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Example:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE25]'
+  prefs: []
+  type: TYPE_PRE
+- en: Formatting Docstrings
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: When adding or editing docstrings for classes, functions, etc, we use [numpy](https://github.com/numpy/numpy/blob/master/doc/HOWTO_DOCUMENT.rst.txt)
+    as the canonical reference.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Updating the Whatsnew
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: We have a set of [whatsnew](https://github.com/stefan-jansen/zipline-reloaded/tree/main/docs/source/whatsnew)
+    files that are used for documenting changes that have occurred between different
+    versions of Zipline. Once you’ve made a change to Zipline, in your Pull Request,
+    please update the most recent `whatsnew` file with a comment about what you changed.
+    You can find examples in previous `whatsnew` files.
+  prefs: []
+  type: TYPE_NORMAL

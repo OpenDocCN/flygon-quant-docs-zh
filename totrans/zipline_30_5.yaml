@@ -1,0 +1,830 @@
+- en: Metrics
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://zipline.ml4trading.io/risk-and-perf-metrics.html](https://zipline.ml4trading.io/risk-and-perf-metrics.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: The risk and performance metrics are summarizing values calculated by Zipline
+    when running a simulation. These metrics can be about the performance of an algorithm,
+    like returns or cash flow, or the riskiness of an algorithm, like volatility or
+    beta. Metrics may be reported minutely, daily, or once at the end of a simulation.
+    A single metric may choose to report at multiple time-scales where appropriate.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Metrics Sets
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: Zipline groups risk and performance metrics into collections called “metrics
+    sets”. A single metrics set defines all of the metrics to track during a single
+    backtest. A metrics set may contain metrics that report at different time scales.
+    The default metrics set will compute a host of metrics, such as algorithm returns,
+    volatility, Sharpe ratio, and beta.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Selecting the Metrics Set
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: When running a simulation, the user may select the metrics set to report. How
+    you select the metrics set depends on the interface being used to run the algorithm.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Command Line and IPython Magic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'When running with the command line or IPython magic interfaces, the metrics
+    set may be selected by passing the `--metrics-set` argument. For example:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: '`run_algorithm`'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'When running through the [`run_algorithm()`](api-reference.html#zipline.run_algorithm
+    "zipline.run_algorithm") interface, the metrics set may be passed with the `metrics_set`
+    argument. This may either be the name of a registered metrics set, or a set of
+    metric object. For example:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: Running Without Metrics
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: 'Computing risk and performance metrics is not free, and contributes to the
+    total runtime of a backtest. When actively developing an algorithm, it is often
+    helpful to skip these computations to speed up the debugging cycle. To disable
+    the calculation and reporting of all metrics, users may select the built-in metrics
+    set `none`. For example:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: Defining New Metrics
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: 'A metric is any object that implements some subset of the following methods:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`start_of_simulation`'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`end_of_simulation`'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`start_of_session`'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`end_of_session`'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`end_of_bar`'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: These functions will be called at the time indicated by their name, at which
+    point the metric object may collect any needed information and optionally report
+    a computed value. If a metric does not need to do any processing at one of these
+    times, it may omit a definition for the given method.
+  prefs: []
+  type: TYPE_NORMAL
+- en: A metric should be reusable, meaning that a single instance of a metric class
+    should be able to be used across multiple backtests. Metrics do not need to support
+    multiple simulations at once, meaning that internal caches and data are consistent
+    between `start_of_simulation` and `end_of_simulation`.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`start_of_simulation`'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: The `start_of_simulation` method should be thought of as a per-simulation constructor.
+    This method should initialize any caches needed for the duration of a single simulation.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'The `start_of_simulation` method should have the following signature:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE3]'
+  prefs: []
+  type: TYPE_PRE
+- en: '`ledger` is an instance of [`Ledger`](api-reference.html#zipline.finance.ledger.Ledger
+    "zipline.finance.ledger.Ledger") which is maintaining the simulation’s state.
+    This may be used to lookup the algorithm’s starting portfolio values.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`emission_rate` is a string representing the smallest frequency at which metrics
+    should be reported. `emission_rate` will be either `minute` or `daily`. When `emission_rate`
+    is `daily`, `end_of_bar` will not be called at all.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`trading_calendar` is an instance of `TradingCalendar` which is the trading
+    calendar being used by the simulation.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`sessions` is a [`pandas.DatetimeIndex`](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DatetimeIndex.html#pandas.DatetimeIndex
+    "(in pandas v2.0.3)") which is holds the session labels, in sorted order, that
+    the simulation will execute.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`benchmark_source` is an instance of [`BenchmarkSource`](api-reference.html#zipline.sources.benchmark_source.BenchmarkSource
+    "zipline.sources.benchmark_source.BenchmarkSource") which is the interface to
+    the returns of the benchmark specified by [`set_benchmark()`](api-reference.html#zipline.api.set_benchmark
+    "zipline.api.set_benchmark").'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`end_of_simulation`'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'The `end_of_simulation` method should have the following signature:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE4]'
+  prefs: []
+  type: TYPE_PRE
+- en: '`ledger` is an instance of [`Ledger`](api-reference.html#zipline.finance.ledger.Ledger
+    "zipline.finance.ledger.Ledger") which is maintaining the simulation’s state.
+    This may be used to lookup the algorithm’s final portfolio values.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`packet` is a dictionary to write the end of simulation values for the given
+    metric into.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`trading_calendar` is an instance of `TradingCalendar` which is the trading
+    calendar being used by the simulation.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`sessions` is a [`pandas.DatetimeIndex`](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DatetimeIndex.html#pandas.DatetimeIndex
+    "(in pandas v2.0.3)") which is holds the session labels, in sorted order, that
+    the simulation has executed.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`data_portal` is an instance of [`DataPortal`](api-reference.html#zipline.data.data_portal.DataPortal
+    "zipline.data.data_portal.DataPortal") which is the metric’s interface to pricing
+    data.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`benchmark_source` is an instance of [`BenchmarkSource`](api-reference.html#zipline.sources.benchmark_source.BenchmarkSource
+    "zipline.sources.benchmark_source.BenchmarkSource") which is the interface to
+    the returns of the benchmark specified by [`set_benchmark()`](api-reference.html#zipline.api.set_benchmark
+    "zipline.api.set_benchmark").'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`start_of_session`'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: The `start_of_session` method may see a slightly different view of the `ledger`
+    or `data_portal` than the previous `end_of_session` if the price of any futures
+    owned move between trading sessions or if a capital change occurs.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'The `start_of_session` method should have the following signature:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE5]'
+  prefs: []
+  type: TYPE_PRE
+- en: '`ledger` is an instance of [`Ledger`](api-reference.html#zipline.finance.ledger.Ledger
+    "zipline.finance.ledger.Ledger") which is maintaining the simulation’s state.
+    This may be used to lookup the algorithm’s current portfolio values.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`session_label` is a [`Timestamp`](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.Timestamp.html#pandas.Timestamp
+    "(in pandas v2.0.3)") which is the label of the session which is about to run.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`data_portal` is an instance of [`DataPortal`](api-reference.html#zipline.data.data_portal.DataPortal
+    "zipline.data.data_portal.DataPortal") which is the metric’s interface to pricing
+    data.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`end_of_session`'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'The `end_of_session` method should have the following signature:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE6]'
+  prefs: []
+  type: TYPE_PRE
+- en: '`packet` is a dictionary to write the end of session values. This dictionary
+    contains two sub-dictionaries: `daily_perf` and `cumulative_perf`. When applicable,
+    the `daily_perf` should hold the current day’s value, and `cumulative_perf` should
+    hold a cumulative value for the entire simulation up to the current time.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`ledger` is an instance of [`Ledger`](api-reference.html#zipline.finance.ledger.Ledger
+    "zipline.finance.ledger.Ledger") which is maintaining the simulation’s state.
+    This may be used to lookup the algorithm’s current portfolio values.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`session_label` is a [`Timestamp`](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.Timestamp.html#pandas.Timestamp
+    "(in pandas v2.0.3)") which is the label of the session which is has just completed.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`session_ix` is an [`int`](https://docs.python.org/3/library/functions.html#int
+    "(in Python v3.11)") which is the index of the current trading session being run.
+    This is provided to allow for efficient access to the daily returns through `ledger.daily_returns_array[:session_ix
+    + 1]`.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`data_portal` is an instance of [`DataPortal`](api-reference.html#zipline.data.data_portal.DataPortal
+    "zipline.data.data_portal.DataPortal") which is the metric’s interface to pricing
+    data'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`end_of_bar`'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Note
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`end_of_bar` is only called when `emission_mode` is `minute`.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'The `end_of_bar` method should have the following signature:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE7]'
+  prefs: []
+  type: TYPE_PRE
+- en: '`packet` is a dictionary to write the end of session values. This dictionary
+    contains two sub-dictionaries: `minute_perf` and `cumulative_perf`. When applicable,
+    the `minute_perf` should hold the current partial day’s value, and `cumulative_perf`
+    should hold a cumulative value for the entire simulation up to the current time.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`ledger` is an instance of [`Ledger`](api-reference.html#zipline.finance.ledger.Ledger
+    "zipline.finance.ledger.Ledger") which is maintaining the simulation’s state.
+    This may be used to lookup the algorithm’s current portfolio values.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`dt` is a [`Timestamp`](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.Timestamp.html#pandas.Timestamp
+    "(in pandas v2.0.3)") which is the label of bar that has just completed.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`session_ix` is an [`int`](https://docs.python.org/3/library/functions.html#int
+    "(in Python v3.11)") which is the index of the current trading session being run.
+    This is provided to allow for efficient access to the daily returns through `ledger.daily_returns_array[:session_ix
+    + 1]`.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`data_portal` is an instance of [`DataPortal`](api-reference.html#zipline.data.data_portal.DataPortal
+    "zipline.data.data_portal.DataPortal") which is the metric’s interface to pricing
+    data.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Defining New Metrics Sets
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: 'Users may use [`zipline.finance.metrics.register()`](api-reference.html#zipline.finance.metrics.register
+    "zipline.finance.metrics.register") to register a new metrics set. This may be
+    used to decorate a function taking no arguments which returns a new set of metric
+    object instances. For example:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE8]'
+  prefs: []
+  type: TYPE_PRE
+- en: This may be embedded in the user’s `extension.py`.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The reason that a metrics set is defined as a function which produces a set,
+    instead of just a set, is that users may want to fetch external data or resources
+    to construct their metrics. By putting this behind a callable, users do not need
+    to fetch the resources when the metrics set is not being used.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Metrics Sets
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: Zipline groups risk and performance metrics into collections called “metrics
+    sets”. A single metrics set defines all of the metrics to track during a single
+    backtest. A metrics set may contain metrics that report at different time scales.
+    The default metrics set will compute a host of metrics, such as algorithm returns,
+    volatility, Sharpe ratio, and beta.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Selecting the Metrics Set
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: When running a simulation, the user may select the metrics set to report. How
+    you select the metrics set depends on the interface being used to run the algorithm.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Command Line and IPython Magic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'When running with the command line or IPython magic interfaces, the metrics
+    set may be selected by passing the `--metrics-set` argument. For example:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE9]'
+  prefs: []
+  type: TYPE_PRE
+- en: '`run_algorithm`'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'When running through the [`run_algorithm()`](api-reference.html#zipline.run_algorithm
+    "zipline.run_algorithm") interface, the metrics set may be passed with the `metrics_set`
+    argument. This may either be the name of a registered metrics set, or a set of
+    metric object. For example:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE10]'
+  prefs: []
+  type: TYPE_PRE
+- en: Command Line and IPython Magic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'When running with the command line or IPython magic interfaces, the metrics
+    set may be selected by passing the `--metrics-set` argument. For example:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE11]'
+  prefs: []
+  type: TYPE_PRE
+- en: '`run_algorithm`'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'When running through the [`run_algorithm()`](api-reference.html#zipline.run_algorithm
+    "zipline.run_algorithm") interface, the metrics set may be passed with the `metrics_set`
+    argument. This may either be the name of a registered metrics set, or a set of
+    metric object. For example:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE12]'
+  prefs: []
+  type: TYPE_PRE
+- en: Running Without Metrics
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: 'Computing risk and performance metrics is not free, and contributes to the
+    total runtime of a backtest. When actively developing an algorithm, it is often
+    helpful to skip these computations to speed up the debugging cycle. To disable
+    the calculation and reporting of all metrics, users may select the built-in metrics
+    set `none`. For example:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE13]'
+  prefs: []
+  type: TYPE_PRE
+- en: Defining New Metrics
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: 'A metric is any object that implements some subset of the following methods:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`start_of_simulation`'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`end_of_simulation`'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`start_of_session`'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`end_of_session`'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`end_of_bar`'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: These functions will be called at the time indicated by their name, at which
+    point the metric object may collect any needed information and optionally report
+    a computed value. If a metric does not need to do any processing at one of these
+    times, it may omit a definition for the given method.
+  prefs: []
+  type: TYPE_NORMAL
+- en: A metric should be reusable, meaning that a single instance of a metric class
+    should be able to be used across multiple backtests. Metrics do not need to support
+    multiple simulations at once, meaning that internal caches and data are consistent
+    between `start_of_simulation` and `end_of_simulation`.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`start_of_simulation`'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: The `start_of_simulation` method should be thought of as a per-simulation constructor.
+    This method should initialize any caches needed for the duration of a single simulation.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'The `start_of_simulation` method should have the following signature:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE14]'
+  prefs: []
+  type: TYPE_PRE
+- en: '`ledger` is an instance of [`Ledger`](api-reference.html#zipline.finance.ledger.Ledger
+    "zipline.finance.ledger.Ledger") which is maintaining the simulation’s state.
+    This may be used to lookup the algorithm’s starting portfolio values.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`emission_rate` is a string representing the smallest frequency at which metrics
+    should be reported. `emission_rate` will be either `minute` or `daily`. When `emission_rate`
+    is `daily`, `end_of_bar` will not be called at all.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`trading_calendar` is an instance of `TradingCalendar` which is the trading
+    calendar being used by the simulation.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`sessions` is a [`pandas.DatetimeIndex`](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DatetimeIndex.html#pandas.DatetimeIndex
+    "(in pandas v2.0.3)") which is holds the session labels, in sorted order, that
+    the simulation will execute.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`benchmark_source` is an instance of [`BenchmarkSource`](api-reference.html#zipline.sources.benchmark_source.BenchmarkSource
+    "zipline.sources.benchmark_source.BenchmarkSource") which is the interface to
+    the returns of the benchmark specified by [`set_benchmark()`](api-reference.html#zipline.api.set_benchmark
+    "zipline.api.set_benchmark").'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`end_of_simulation`'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'The `end_of_simulation` method should have the following signature:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE15]'
+  prefs: []
+  type: TYPE_PRE
+- en: '`ledger` is an instance of [`Ledger`](api-reference.html#zipline.finance.ledger.Ledger
+    "zipline.finance.ledger.Ledger") which is maintaining the simulation’s state.
+    This may be used to lookup the algorithm’s final portfolio values.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`packet` is a dictionary to write the end of simulation values for the given
+    metric into.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`trading_calendar` is an instance of `TradingCalendar` which is the trading
+    calendar being used by the simulation.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`sessions` is a [`pandas.DatetimeIndex`](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DatetimeIndex.html#pandas.DatetimeIndex
+    "(in pandas v2.0.3)") which is holds the session labels, in sorted order, that
+    the simulation has executed.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`data_portal` is an instance of [`DataPortal`](api-reference.html#zipline.data.data_portal.DataPortal
+    "zipline.data.data_portal.DataPortal") which is the metric’s interface to pricing
+    data.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`benchmark_source` is an instance of [`BenchmarkSource`](api-reference.html#zipline.sources.benchmark_source.BenchmarkSource
+    "zipline.sources.benchmark_source.BenchmarkSource") which is the interface to
+    the returns of the benchmark specified by [`set_benchmark()`](api-reference.html#zipline.api.set_benchmark
+    "zipline.api.set_benchmark").'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`start_of_session`'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: The `start_of_session` method may see a slightly different view of the `ledger`
+    or `data_portal` than the previous `end_of_session` if the price of any futures
+    owned move between trading sessions or if a capital change occurs.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'The `start_of_session` method should have the following signature:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE16]'
+  prefs: []
+  type: TYPE_PRE
+- en: '`ledger` is an instance of [`Ledger`](api-reference.html#zipline.finance.ledger.Ledger
+    "zipline.finance.ledger.Ledger") which is maintaining the simulation’s state.
+    This may be used to lookup the algorithm’s current portfolio values.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`session_label` is a [`Timestamp`](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.Timestamp.html#pandas.Timestamp
+    "(in pandas v2.0.3)") which is the label of the session which is about to run.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`data_portal` is an instance of [`DataPortal`](api-reference.html#zipline.data.data_portal.DataPortal
+    "zipline.data.data_portal.DataPortal") which is the metric’s interface to pricing
+    data.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`end_of_session`'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'The `end_of_session` method should have the following signature:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE17]'
+  prefs: []
+  type: TYPE_PRE
+- en: '`packet` is a dictionary to write the end of session values. This dictionary
+    contains two sub-dictionaries: `daily_perf` and `cumulative_perf`. When applicable,
+    the `daily_perf` should hold the current day’s value, and `cumulative_perf` should
+    hold a cumulative value for the entire simulation up to the current time.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`ledger` is an instance of [`Ledger`](api-reference.html#zipline.finance.ledger.Ledger
+    "zipline.finance.ledger.Ledger") which is maintaining the simulation’s state.
+    This may be used to lookup the algorithm’s current portfolio values.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`session_label` is a [`Timestamp`](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.Timestamp.html#pandas.Timestamp
+    "(in pandas v2.0.3)") which is the label of the session which is has just completed.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`session_ix` is an [`int`](https://docs.python.org/3/library/functions.html#int
+    "(in Python v3.11)") which is the index of the current trading session being run.
+    This is provided to allow for efficient access to the daily returns through `ledger.daily_returns_array[:session_ix
+    + 1]`.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`data_portal` is an instance of [`DataPortal`](api-reference.html#zipline.data.data_portal.DataPortal
+    "zipline.data.data_portal.DataPortal") which is the metric’s interface to pricing
+    data'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`end_of_bar`'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Note
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`end_of_bar` is only called when `emission_mode` is `minute`.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'The `end_of_bar` method should have the following signature:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE18]'
+  prefs: []
+  type: TYPE_PRE
+- en: '`packet` is a dictionary to write the end of session values. This dictionary
+    contains two sub-dictionaries: `minute_perf` and `cumulative_perf`. When applicable,
+    the `minute_perf` should hold the current partial day’s value, and `cumulative_perf`
+    should hold a cumulative value for the entire simulation up to the current time.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`ledger` is an instance of [`Ledger`](api-reference.html#zipline.finance.ledger.Ledger
+    "zipline.finance.ledger.Ledger") which is maintaining the simulation’s state.
+    This may be used to lookup the algorithm’s current portfolio values.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`dt` is a [`Timestamp`](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.Timestamp.html#pandas.Timestamp
+    "(in pandas v2.0.3)") which is the label of bar that has just completed.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`session_ix` is an [`int`](https://docs.python.org/3/library/functions.html#int
+    "(in Python v3.11)") which is the index of the current trading session being run.
+    This is provided to allow for efficient access to the daily returns through `ledger.daily_returns_array[:session_ix
+    + 1]`.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`data_portal` is an instance of [`DataPortal`](api-reference.html#zipline.data.data_portal.DataPortal
+    "zipline.data.data_portal.DataPortal") which is the metric’s interface to pricing
+    data.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`start_of_simulation`'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: The `start_of_simulation` method should be thought of as a per-simulation constructor.
+    This method should initialize any caches needed for the duration of a single simulation.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'The `start_of_simulation` method should have the following signature:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE19]'
+  prefs: []
+  type: TYPE_PRE
+- en: '`ledger` is an instance of [`Ledger`](api-reference.html#zipline.finance.ledger.Ledger
+    "zipline.finance.ledger.Ledger") which is maintaining the simulation’s state.
+    This may be used to lookup the algorithm’s starting portfolio values.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`emission_rate` is a string representing the smallest frequency at which metrics
+    should be reported. `emission_rate` will be either `minute` or `daily`. When `emission_rate`
+    is `daily`, `end_of_bar` will not be called at all.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`trading_calendar` is an instance of `TradingCalendar` which is the trading
+    calendar being used by the simulation.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`sessions` is a [`pandas.DatetimeIndex`](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DatetimeIndex.html#pandas.DatetimeIndex
+    "(in pandas v2.0.3)") which is holds the session labels, in sorted order, that
+    the simulation will execute.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`benchmark_source` is an instance of [`BenchmarkSource`](api-reference.html#zipline.sources.benchmark_source.BenchmarkSource
+    "zipline.sources.benchmark_source.BenchmarkSource") which is the interface to
+    the returns of the benchmark specified by [`set_benchmark()`](api-reference.html#zipline.api.set_benchmark
+    "zipline.api.set_benchmark").'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`end_of_simulation`'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'The `end_of_simulation` method should have the following signature:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE20]'
+  prefs: []
+  type: TYPE_PRE
+- en: '`ledger` is an instance of [`Ledger`](api-reference.html#zipline.finance.ledger.Ledger
+    "zipline.finance.ledger.Ledger") which is maintaining the simulation’s state.
+    This may be used to lookup the algorithm’s final portfolio values.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`packet` is a dictionary to write the end of simulation values for the given
+    metric into.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`trading_calendar` is an instance of `TradingCalendar` which is the trading
+    calendar being used by the simulation.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`sessions` is a [`pandas.DatetimeIndex`](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DatetimeIndex.html#pandas.DatetimeIndex
+    "(in pandas v2.0.3)") which is holds the session labels, in sorted order, that
+    the simulation has executed.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`data_portal` is an instance of [`DataPortal`](api-reference.html#zipline.data.data_portal.DataPortal
+    "zipline.data.data_portal.DataPortal") which is the metric’s interface to pricing
+    data.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`benchmark_source` is an instance of [`BenchmarkSource`](api-reference.html#zipline.sources.benchmark_source.BenchmarkSource
+    "zipline.sources.benchmark_source.BenchmarkSource") which is the interface to
+    the returns of the benchmark specified by [`set_benchmark()`](api-reference.html#zipline.api.set_benchmark
+    "zipline.api.set_benchmark").'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`start_of_session`'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: The `start_of_session` method may see a slightly different view of the `ledger`
+    or `data_portal` than the previous `end_of_session` if the price of any futures
+    owned move between trading sessions or if a capital change occurs.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'The `start_of_session` method should have the following signature:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE21]'
+  prefs: []
+  type: TYPE_PRE
+- en: '`ledger` is an instance of [`Ledger`](api-reference.html#zipline.finance.ledger.Ledger
+    "zipline.finance.ledger.Ledger") which is maintaining the simulation’s state.
+    This may be used to lookup the algorithm’s current portfolio values.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`session_label` is a [`Timestamp`](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.Timestamp.html#pandas.Timestamp
+    "(in pandas v2.0.3)") which is the label of the session which is about to run.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`data_portal` is an instance of [`DataPortal`](api-reference.html#zipline.data.data_portal.DataPortal
+    "zipline.data.data_portal.DataPortal") which is the metric’s interface to pricing
+    data.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`end_of_session`'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'The `end_of_session` method should have the following signature:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE22]'
+  prefs: []
+  type: TYPE_PRE
+- en: '`packet` is a dictionary to write the end of session values. This dictionary
+    contains two sub-dictionaries: `daily_perf` and `cumulative_perf`. When applicable,
+    the `daily_perf` should hold the current day’s value, and `cumulative_perf` should
+    hold a cumulative value for the entire simulation up to the current time.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`ledger` is an instance of [`Ledger`](api-reference.html#zipline.finance.ledger.Ledger
+    "zipline.finance.ledger.Ledger") which is maintaining the simulation’s state.
+    This may be used to lookup the algorithm’s current portfolio values.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`session_label` is a [`Timestamp`](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.Timestamp.html#pandas.Timestamp
+    "(in pandas v2.0.3)") which is the label of the session which is has just completed.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`session_ix` is an [`int`](https://docs.python.org/3/library/functions.html#int
+    "(in Python v3.11)") which is the index of the current trading session being run.
+    This is provided to allow for efficient access to the daily returns through `ledger.daily_returns_array[:session_ix
+    + 1]`.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`data_portal` is an instance of [`DataPortal`](api-reference.html#zipline.data.data_portal.DataPortal
+    "zipline.data.data_portal.DataPortal") which is the metric’s interface to pricing
+    data'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`end_of_bar`'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Note
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`end_of_bar` is only called when `emission_mode` is `minute`.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'The `end_of_bar` method should have the following signature:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE23]'
+  prefs: []
+  type: TYPE_PRE
+- en: '`packet` is a dictionary to write the end of session values. This dictionary
+    contains two sub-dictionaries: `minute_perf` and `cumulative_perf`. When applicable,
+    the `minute_perf` should hold the current partial day’s value, and `cumulative_perf`
+    should hold a cumulative value for the entire simulation up to the current time.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`ledger` is an instance of [`Ledger`](api-reference.html#zipline.finance.ledger.Ledger
+    "zipline.finance.ledger.Ledger") which is maintaining the simulation’s state.
+    This may be used to lookup the algorithm’s current portfolio values.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`dt` is a [`Timestamp`](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.Timestamp.html#pandas.Timestamp
+    "(in pandas v2.0.3)") which is the label of bar that has just completed.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`session_ix` is an [`int`](https://docs.python.org/3/library/functions.html#int
+    "(in Python v3.11)") which is the index of the current trading session being run.
+    This is provided to allow for efficient access to the daily returns through `ledger.daily_returns_array[:session_ix
+    + 1]`.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`data_portal` is an instance of [`DataPortal`](api-reference.html#zipline.data.data_portal.DataPortal
+    "zipline.data.data_portal.DataPortal") which is the metric’s interface to pricing
+    data.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Defining New Metrics Sets
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: 'Users may use [`zipline.finance.metrics.register()`](api-reference.html#zipline.finance.metrics.register
+    "zipline.finance.metrics.register") to register a new metrics set. This may be
+    used to decorate a function taking no arguments which returns a new set of metric
+    object instances. For example:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE24]'
+  prefs: []
+  type: TYPE_PRE
+- en: This may be embedded in the user’s `extension.py`.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The reason that a metrics set is defined as a function which produces a set,
+    instead of just a set, is that users may want to fetch external data or resources
+    to construct their metrics. By putting this behind a callable, users do not need
+    to fetch the resources when the metrics set is not being used.
+  prefs: []
+  type: TYPE_NORMAL
