@@ -1,119 +1,182 @@
 - en: Bitstamp Example
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: Bitstamp 示例
 - en: 原文：[https://gbeced.github.io/pyalgotrade/docs/v0.20/html/bitstamp_example.html](https://gbeced.github.io/pyalgotrade/docs/v0.20/html/bitstamp_example.html)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://gbeced.github.io/pyalgotrade/docs/v0.20/html/bitstamp_example.html](https://gbeced.github.io/pyalgotrade/docs/v0.20/html/bitstamp_example.html)
 - en: This goal of this simple SMA crossover example is to show how to put all the
     pieces together to paper trade a strategy using realtime feeds supplied by Bitstamp
     ([https://www.bitstamp.net/](https://www.bitstamp.net/)).
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: 这个简单的SMA交叉示例的目标是展示如何将所有要素组合在一起，利用Bitstamp提供的实时数据源进行模拟交易策略（[https://www.bitstamp.net/](https://www.bitstamp.net/)）。
 - en: This example assumes that you’re already familiar with the basic concepts presented
     in the [*Tutorial*](tutorial.html#tutorial-label) section.
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: 这个示例假设您已经熟悉了[*教程*](tutorial.html#tutorial-label)部分提出的基本概念。
 - en: 'The key things to highlight are:'
+  id: totrans-4
   prefs: []
   type: TYPE_NORMAL
+  zh: 需要强调的关键点是：
 - en: We’re using [`pyalgotrade.strategy.BaseStrategy`](strategy.html#pyalgotrade.strategy.BaseStrategy
     "pyalgotrade.strategy.BaseStrategy") instead of [`pyalgotrade.strategy.BacktestingStrategy`](strategy.html#pyalgotrade.strategy.BacktestingStrategy
     "pyalgotrade.strategy.BacktestingStrategy") as the base class. This is not a backtest.
+  id: totrans-5
   prefs:
   - PREF_BQ
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 我们使用[`pyalgotrade.strategy.BaseStrategy`](strategy.html#pyalgotrade.strategy.BaseStrategy
+    "pyalgotrade.strategy.BaseStrategy")作为基类，而不是[`pyalgotrade.strategy.BacktestingStrategy`](strategy.html#pyalgotrade.strategy.BacktestingStrategy
+    "pyalgotrade.strategy.BacktestingStrategy")。这不是一次回测。
 - en: Trade events get notified via the call to **onBars**. No need to manually subscribe.
+  id: totrans-6
   prefs:
   - PREF_BQ
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 交易事件通过调用**onBars**来通知。无需手动订阅。
 - en: Order book update events are handled by manually subscribing to [`pyalgotrade.bitstamp.barfeed.LiveTradeFeed.getOrderBookUpdateEvent`](bitstamp_ref.html#pyalgotrade.bitstamp.barfeed.LiveTradeFeed.getOrderBookUpdateEvent
     "pyalgotrade.bitstamp.barfeed.LiveTradeFeed.getOrderBookUpdateEvent"). This is
     needed to stay up to date with latest bid and ask prices.
+  id: totrans-7
   prefs:
   - PREF_BQ
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 订单簿更新事件通过手动订阅[`pyalgotrade.bitstamp.barfeed.LiveTradeFeed.getOrderBookUpdateEvent`](bitstamp_ref.html#pyalgotrade.bitstamp.barfeed.LiveTradeFeed.getOrderBookUpdateEvent
+    "pyalgotrade.bitstamp.barfeed.LiveTradeFeed.getOrderBookUpdateEvent")来处理。这是为了与最新的买入和卖出价格保持同步所需的。
 - en: '[PRE0]'
+  id: totrans-8
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: 'The output should look like this:'
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: 输出应该如下所示：
 - en: '[PRE1]'
+  id: totrans-10
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE1]'
 - en: In order to live trade this strategy you should use [`pyalgotrade.bitstamp.broker.LiveBroker`](bitstamp_ref.html#pyalgotrade.bitstamp.broker.LiveBroker
     "pyalgotrade.bitstamp.broker.LiveBroker") instead of [`pyalgotrade.bitstamp.broker.PaperTradingBroker`](bitstamp_ref.html#pyalgotrade.bitstamp.broker.PaperTradingBroker
     "pyalgotrade.bitstamp.broker.PaperTradingBroker").
+  id: totrans-11
   prefs: []
   type: TYPE_NORMAL
+  zh: 为了实时交易这个策略，你应该使用[`pyalgotrade.bitstamp.broker.LiveBroker`](bitstamp_ref.html#pyalgotrade.bitstamp.broker.LiveBroker
+    "pyalgotrade.bitstamp.broker.LiveBroker")而不是[`pyalgotrade.bitstamp.broker.PaperTradingBroker`](bitstamp_ref.html#pyalgotrade.bitstamp.broker.PaperTradingBroker
+    "pyalgotrade.bitstamp.broker.PaperTradingBroker")。
 - en: '**Note that if you try to live trade this strategy you will probably loose
     money.** Before jumping into live trading, be sure to write your own strategy,
     backtest and paper trade it thoroughly before risking real money.'
+  id: totrans-12
   prefs: []
   type: TYPE_NORMAL
+  zh: '**请注意，如果您尝试实时交易此策略，您可能会损失金钱。** 在进行实时交易之前，请务必编写您自己的策略，进行彻底的回测和模拟交易，然后再冒险使用真实资金。'
 - en: Previous topic
+  id: totrans-13
   prefs:
   - PREF_H4
   type: TYPE_NORMAL
+  zh: 上一个主题
 - en: '[bitstamp – Bitstamp reference](bitstamp_ref.html "previous chapter")'
+  id: totrans-14
   prefs: []
   type: TYPE_NORMAL
+  zh: '[bitstamp – Bitstamp 参考](bitstamp_ref.html "上一章节")'
 - en: Next topic
+  id: totrans-15
   prefs:
   - PREF_H4
   type: TYPE_NORMAL
+  zh: 下一个主题
 - en: '[Bitcoin Charts support](bitcoincharts.html "next chapter")'
+  id: totrans-16
   prefs: []
   type: TYPE_NORMAL
+  zh: '[比特币图表支持](bitcoincharts.html "下一章节")'
 - en: This Page
+  id: totrans-17
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 本页
 - en: '[Show Source](_sources/bitstamp_example.txt)'
+  id: totrans-18
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[显示源代码](_sources/bitstamp_example.txt)'
 - en: Quick search
+  id: totrans-19
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 快速搜索
 - en: Enter search terms or a module, class or function name.
+  id: totrans-20
   prefs: []
   type: TYPE_NORMAL
+  zh: 输入搜索词或模块、类或函数名称。
 - en: Navigation
+  id: totrans-21
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 导航
 - en: '[index](genindex.html "General Index")'
+  id: totrans-22
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[索引](genindex.html "总目录")'
 - en: '[modules](py-modindex.html "Python Module Index") |'
+  id: totrans-23
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[模块](py-modindex.html "Python 模块索引") |'
 - en: '[next](bitcoincharts.html "Bitcoin Charts support") |'
+  id: totrans-24
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[下一页](bitcoincharts.html "比特币图表支持") |'
 - en: '[previous](bitstamp_ref.html "bitstamp – Bitstamp reference") |'
+  id: totrans-25
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[上一页](bitstamp_ref.html "bitstamp – Bitstamp 参考") |'
 - en: '[PyAlgoTrade 0.20 documentation](index.html) »'
+  id: totrans-26
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[PyAlgoTrade 0.20 文档](index.html) »'
 - en: '[Bitcoin](bitcoin.html) »'
+  id: totrans-27
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[比特币](bitcoin.html) »'
 - en: '[Bitstamp support](bitstamp.html) »'
+  id: totrans-28
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[Bitstamp 支持](bitstamp.html) »'
