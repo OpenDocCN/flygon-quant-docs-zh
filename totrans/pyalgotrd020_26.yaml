@@ -1,953 +1,1450 @@
 - en: TA-Lib integration
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: TA-Lib 集成
 - en: 原文：[https://gbeced.github.io/pyalgotrade/docs/v0.20/html/talib.html](https://gbeced.github.io/pyalgotrade/docs/v0.20/html/talib.html)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://gbeced.github.io/pyalgotrade/docs/v0.20/html/talib.html](https://gbeced.github.io/pyalgotrade/docs/v0.20/html/talib.html)
 - en: The **pyalgotrade.talibext.indicator** module provides integration with Python
     wrapper for TA-Lib ([http://mrjbq7.github.com/ta-lib/](http://mrjbq7.github.com/ta-lib/))
     to enable calling TA-Lib functions directly with [`pyalgotrade.dataseries.DataSeries`](dataseries.html#pyalgotrade.dataseries.DataSeries
     "pyalgotrade.dataseries.DataSeries") or [`pyalgotrade.dataseries.bards.BarDataSeries`](dataseries.html#pyalgotrade.dataseries.bards.BarDataSeries
     "pyalgotrade.dataseries.bards.BarDataSeries") instances instead of numpy arrays.
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: '**pyalgotrade.talibext.indicator** 模块提供了与 TA-Lib 的 Python 包装器集成的功能（[http://mrjbq7.github.com/ta-lib/](http://mrjbq7.github.com/ta-lib/)），使得可以直接使用
+    [`pyalgotrade.dataseries.DataSeries`](dataseries.html#pyalgotrade.dataseries.DataSeries
+    "pyalgotrade.dataseries.DataSeries") 或 [`pyalgotrade.dataseries.bards.BarDataSeries`](dataseries.html#pyalgotrade.dataseries.bards.BarDataSeries
+    "pyalgotrade.dataseries.bards.BarDataSeries") 实例调用 TA-Lib 函数，而不是使用 numpy 数组。'
 - en: 'If you’re familiar with the **talib** module, then using the **pyalgotrade.talibext.indicator**
     module should be straightforward. When using **talib** standalone you do something
     like this:'
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果您熟悉**talib**模块，那么使用**pyalgotrade.talibext.indicator**模块应该很简单。在独立使用**talib**时，您会像这样做：
 - en: '[PRE0]'
+  id: totrans-4
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: 'To use the **pyalgotrade.talibext.indicator** module in your strategies you
     should do something like this:'
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: 要在您的策略中使用**pyalgotrade.talibext.indicator**模块，您应该这样做：
 - en: '[PRE1]'
+  id: totrans-6
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE1]'
 - en: Every function in the **pyalgotrade.talibext.indicator** module receives one
     or more dataseries (most receive just one) and the number of values to use from
     the dataseries. In the example above, we’re calculating Bollinger Bands over the
     last 100 closing prices.
+  id: totrans-7
   prefs: []
   type: TYPE_NORMAL
+  zh: '**pyalgotrade.talibext.indicator** 模块中的每个函数接收一个或多个数据序列（大多数只接收一个）以及要从数据序列中使用的值的数量。在上面的例子中，我们正在计算过去
+    100 个收盘价的布林带。'
 - en: If the parameter name is **ds**, then you should pass a regular [`pyalgotrade.dataseries.DataSeries`](dataseries.html#pyalgotrade.dataseries.DataSeries
     "pyalgotrade.dataseries.DataSeries") instance, like the one shown in the example
     above.
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果参数名称是**ds**，那么你应该传递一个常规的[`pyalgotrade.dataseries.DataSeries`](dataseries.html#pyalgotrade.dataseries.DataSeries
+    "pyalgotrade.dataseries.DataSeries")实例，就像上面的例子中所示的那样。
 - en: 'If the parameter name is **barDs**, then you should pass a [`pyalgotrade.dataseries.bards.BarDataSeries`](dataseries.html#pyalgotrade.dataseries.bards.BarDataSeries
     "pyalgotrade.dataseries.bards.BarDataSeries") instance, like in the next example:'
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果参数名称是**barDs**，那么你应该传递一个[`pyalgotrade.dataseries.bards.BarDataSeries`](dataseries.html#pyalgotrade.dataseries.bards.BarDataSeries
+    "pyalgotrade.dataseries.bards.BarDataSeries")实例，就像下一个例子中所示的那样：
 - en: '[PRE2]'
+  id: totrans-10
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE2]'
 - en: 'The following TA-Lib functions are available through the **pyalgotrade.talibext.indicator**
     module:'
+  id: totrans-11
   prefs: []
   type: TYPE_NORMAL
+  zh: 通过**pyalgotrade.talibext.indicator**模块可用以下 TA-Lib 函数：
 - en: '`pyalgotrade.talibext.indicator.``AD`(*barDs*, *count*)'
+  id: totrans-12
   prefs: []
   type: TYPE_NORMAL
+  zh: '`pyalgotrade.talibext.indicator.``AD`(*barDs*, *count*)'
 - en: Chaikin A/D Line
+  id: totrans-13
   prefs: []
   type: TYPE_NORMAL
+  zh: 查金 A/D 线
 - en: '`pyalgotrade.talibext.indicator.``ADOSC`(*barDs*, *count*, *fastperiod=-2147483648*,
     *slowperiod=-2147483648*)'
+  id: totrans-14
   prefs: []
   type: TYPE_NORMAL
+  zh: '`pyalgotrade.talibext.indicator.``ADOSC`(*barDs*, *count*, *fastperiod=-2147483648*,
+    *slowperiod=-2147483648*)'
 - en: Chaikin A/D Oscillator
+  id: totrans-15
   prefs: []
   type: TYPE_NORMAL
+  zh: 查金 A/D 振荡器
 - en: '`pyalgotrade.talibext.indicator.``ADX`(*barDs*, *count*, *timeperiod=-2147483648*)'
+  id: totrans-16
   prefs: []
   type: TYPE_NORMAL
+  zh: '`pyalgotrade.talibext.indicator.``ADX`(*barDs*, *count*, *timeperiod=-2147483648*)'
 - en: Average Directional Movement Index
+  id: totrans-17
   prefs: []
   type: TYPE_NORMAL
+  zh: 平均方向运动指数
 - en: '`pyalgotrade.talibext.indicator.``ADXR`(*barDs*, *count*, *timeperiod=-2147483648*)'
+  id: totrans-18
   prefs: []
   type: TYPE_NORMAL
+  zh: '`pyalgotrade.talibext.indicator.``ADXR`(*barDs*, *count*, *timeperiod=-2147483648*)'
 - en: Average Directional Movement Index Rating
+  id: totrans-19
   prefs: []
   type: TYPE_NORMAL
+  zh: 平均方向运动指数评分
 - en: '`pyalgotrade.talibext.indicator.``APO`(*ds*, *count*, *fastperiod=-2147483648*,
     *slowperiod=-2147483648*, *matype=0*)'
+  id: totrans-20
   prefs: []
   type: TYPE_NORMAL
+  zh: '`pyalgotrade.talibext.indicator.``APO`(*ds*, *count*, *fastperiod=-2147483648*,
+    *slowperiod=-2147483648*, *matype=0*)'
 - en: Absolute Price Oscillator
+  id: totrans-21
   prefs: []
   type: TYPE_NORMAL
+  zh: 绝对价格振荡器
 - en: '`pyalgotrade.talibext.indicator.``AROON`(*barDs*, *count*, *timeperiod=-2147483648*)'
+  id: totrans-22
   prefs: []
   type: TYPE_NORMAL
+  zh: '`pyalgotrade.talibext.indicator.``AROON`(*barDs*, *count*, *timeperiod=-2147483648*)'
 - en: Aroon
+  id: totrans-23
   prefs: []
   type: TYPE_NORMAL
+  zh: 阿隆
 - en: '`pyalgotrade.talibext.indicator.``AROONOSC`(*barDs*, *count*, *timeperiod=-2147483648*)'
+  id: totrans-24
   prefs: []
   type: TYPE_NORMAL
+  zh: '`pyalgotrade.talibext.indicator.``AROONOSC`(*barDs*, *count*, *timeperiod=-2147483648*)'
 - en: Aroon Oscillator
+  id: totrans-25
   prefs: []
   type: TYPE_NORMAL
+  zh: 阿隆振荡器
 - en: '`pyalgotrade.talibext.indicator.``ATR`(*barDs*, *count*, *timeperiod=-2147483648*)'
+  id: totrans-26
   prefs: []
   type: TYPE_NORMAL
+  zh: '`pyalgotrade.talibext.indicator.``ATR`(*barDs*, *count*, *timeperiod=-2147483648*)'
 - en: Average True Range
+  id: totrans-27
   prefs: []
   type: TYPE_NORMAL
+  zh: 平均真实波幅
 - en: '`pyalgotrade.talibext.indicator.``AVGPRICE`(*barDs*, *count*)'
+  id: totrans-28
   prefs: []
   type: TYPE_NORMAL
+  zh: '`pyalgotrade.talibext.indicator.``AVGPRICE`(*barDs*, *count*)'
 - en: Average Price
+  id: totrans-29
   prefs: []
   type: TYPE_NORMAL
+  zh: 平均价格
 - en: '`pyalgotrade.talibext.indicator.``BBANDS`(*ds*, *count*, *timeperiod=-2147483648*,
     *nbdevup=-4e+37*, *nbdevdn=-4e+37*, *matype=0*)'
+  id: totrans-30
   prefs: []
   type: TYPE_NORMAL
+  zh: '`pyalgotrade.talibext.indicator.``BBANDS`(*ds*, *count*, *timeperiod=-2147483648*,
+    *nbdevup=-4e+37*, *nbdevdn=-4e+37*, *matype=0*)'
 - en: Bollinger Bands
+  id: totrans-31
   prefs: []
   type: TYPE_NORMAL
+  zh: 布林带
 - en: '`pyalgotrade.talibext.indicator.``BETA`(*ds1*, *ds2*, *count*, *timeperiod=-2147483648*)'
+  id: totrans-32
   prefs: []
   type: TYPE_NORMAL
 - en: Beta
+  id: totrans-33
   prefs: []
   type: TYPE_NORMAL
 - en: '`pyalgotrade.talibext.indicator.``BOP`(*barDs*, *count*)'
+  id: totrans-34
   prefs: []
   type: TYPE_NORMAL
 - en: Balance Of Power
+  id: totrans-35
   prefs: []
   type: TYPE_NORMAL
 - en: '`pyalgotrade.talibext.indicator.``CCI`(*barDs*, *count*, *timeperiod=-2147483648*)'
+  id: totrans-36
   prefs: []
   type: TYPE_NORMAL
 - en: Commodity Channel Index
+  id: totrans-37
   prefs: []
   type: TYPE_NORMAL
 - en: '`pyalgotrade.talibext.indicator.``CDL2CROWS`(*barDs*, *count*)'
+  id: totrans-38
   prefs: []
   type: TYPE_NORMAL
 - en: Two Crows
+  id: totrans-39
   prefs: []
   type: TYPE_NORMAL
 - en: '`pyalgotrade.talibext.indicator.``CDL3BLACKCROWS`(*barDs*, *count*)'
+  id: totrans-40
   prefs: []
   type: TYPE_NORMAL
 - en: Three Black Crows
+  id: totrans-41
   prefs: []
   type: TYPE_NORMAL
 - en: '`pyalgotrade.talibext.indicator.``CDL3INSIDE`(*barDs*, *count*)'
+  id: totrans-42
   prefs: []
   type: TYPE_NORMAL
 - en: Three Inside Up/Down
+  id: totrans-43
   prefs: []
   type: TYPE_NORMAL
 - en: '`pyalgotrade.talibext.indicator.``CDL3LINESTRIKE`(*barDs*, *count*)'
+  id: totrans-44
   prefs: []
   type: TYPE_NORMAL
 - en: Three-Line Strike
+  id: totrans-45
   prefs: []
   type: TYPE_NORMAL
 - en: '`pyalgotrade.talibext.indicator.``CDL3OUTSIDE`(*barDs*, *count*)'
+  id: totrans-46
   prefs: []
   type: TYPE_NORMAL
 - en: Three Outside Up/Down
+  id: totrans-47
   prefs: []
   type: TYPE_NORMAL
 - en: '`pyalgotrade.talibext.indicator.``CDL3STARSINSOUTH`(*barDs*, *count*)'
+  id: totrans-48
   prefs: []
   type: TYPE_NORMAL
 - en: Three Stars In The South
+  id: totrans-49
   prefs: []
   type: TYPE_NORMAL
 - en: '`pyalgotrade.talibext.indicator.``CDL3WHITESOLDIERS`(*barDs*, *count*)'
+  id: totrans-50
   prefs: []
   type: TYPE_NORMAL
 - en: Three Advancing White Soldiers
+  id: totrans-51
   prefs: []
   type: TYPE_NORMAL
 - en: '`pyalgotrade.talibext.indicator.``CDLABANDONEDBABY`(*barDs*, *count*, *penetration=-4e+37*)'
+  id: totrans-52
   prefs: []
   type: TYPE_NORMAL
 - en: Abandoned Baby
+  id: totrans-53
   prefs: []
   type: TYPE_NORMAL
 - en: '`pyalgotrade.talibext.indicator.``CDLADVANCEBLOCK`(*barDs*, *count*)'
+  id: totrans-54
   prefs: []
   type: TYPE_NORMAL
 - en: Advance Block
+  id: totrans-55
   prefs: []
   type: TYPE_NORMAL
 - en: '`pyalgotrade.talibext.indicator.``CDLBELTHOLD`(*barDs*, *count*)'
+  id: totrans-56
   prefs: []
   type: TYPE_NORMAL
 - en: Belt-hold
+  id: totrans-57
   prefs: []
   type: TYPE_NORMAL
 - en: '`pyalgotrade.talibext.indicator.``CDLBREAKAWAY`(*barDs*, *count*)'
+  id: totrans-58
   prefs: []
   type: TYPE_NORMAL
 - en: Breakaway
+  id: totrans-59
   prefs: []
   type: TYPE_NORMAL
 - en: '`pyalgotrade.talibext.indicator.``CDLCLOSINGMARUBOZU`(*barDs*, *count*)'
+  id: totrans-60
   prefs: []
   type: TYPE_NORMAL
 - en: Closing Marubozu
+  id: totrans-61
   prefs: []
   type: TYPE_NORMAL
 - en: '`pyalgotrade.talibext.indicator.``CDLCONCEALBABYSWALL`(*barDs*, *count*)'
+  id: totrans-62
   prefs: []
   type: TYPE_NORMAL
 - en: Concealing Baby Swallow
+  id: totrans-63
   prefs: []
   type: TYPE_NORMAL
 - en: '`pyalgotrade.talibext.indicator.``CDLCOUNTERATTACK`(*barDs*, *count*)'
+  id: totrans-64
   prefs: []
   type: TYPE_NORMAL
 - en: Counterattack
+  id: totrans-65
   prefs: []
   type: TYPE_NORMAL
 - en: '`pyalgotrade.talibext.indicator.``CDLDARKCLOUDCOVER`(*barDs*, *count*, *penetration=-4e+37*)'
+  id: totrans-66
   prefs: []
   type: TYPE_NORMAL
 - en: Dark Cloud Cover
+  id: totrans-67
   prefs: []
   type: TYPE_NORMAL
 - en: '`pyalgotrade.talibext.indicator.``CDLDOJI`(*barDs*, *count*)'
+  id: totrans-68
   prefs: []
   type: TYPE_NORMAL
 - en: Doji
+  id: totrans-69
   prefs: []
   type: TYPE_NORMAL
 - en: '`pyalgotrade.talibext.indicator.``CDLDOJISTAR`(*barDs*, *count*)'
+  id: totrans-70
   prefs: []
   type: TYPE_NORMAL
 - en: Doji Star
+  id: totrans-71
   prefs: []
   type: TYPE_NORMAL
 - en: '`pyalgotrade.talibext.indicator.``CDLDRAGONFLYDOJI`(*barDs*, *count*)'
+  id: totrans-72
   prefs: []
   type: TYPE_NORMAL
 - en: Dragonfly Doji
+  id: totrans-73
   prefs: []
   type: TYPE_NORMAL
 - en: '`pyalgotrade.talibext.indicator.``CDLENGULFING`(*barDs*, *count*)'
+  id: totrans-74
   prefs: []
   type: TYPE_NORMAL
 - en: Engulfing Pattern
+  id: totrans-75
   prefs: []
   type: TYPE_NORMAL
 - en: '`pyalgotrade.talibext.indicator.``CDLEVENINGDOJISTAR`(*barDs*, *count*, *penetration=-4e+37*)'
+  id: totrans-76
   prefs: []
   type: TYPE_NORMAL
 - en: Evening Doji Star
+  id: totrans-77
   prefs: []
   type: TYPE_NORMAL
 - en: '`pyalgotrade.talibext.indicator.``CDLEVENINGSTAR`(*barDs*, *count*, *penetration=-4e+37*)'
+  id: totrans-78
   prefs: []
   type: TYPE_NORMAL
 - en: Evening Star
+  id: totrans-79
   prefs: []
   type: TYPE_NORMAL
 - en: '`pyalgotrade.talibext.indicator.``CDLGAPSIDESIDEWHITE`(*barDs*, *count*)'
+  id: totrans-80
   prefs: []
   type: TYPE_NORMAL
 - en: Up/Down-gap side-by-side white lines
+  id: totrans-81
   prefs: []
   type: TYPE_NORMAL
 - en: '`pyalgotrade.talibext.indicator.``CDLGRAVESTONEDOJI`(*barDs*, *count*)'
+  id: totrans-82
   prefs: []
   type: TYPE_NORMAL
 - en: Gravestone Doji
+  id: totrans-83
   prefs: []
   type: TYPE_NORMAL
 - en: '`pyalgotrade.talibext.indicator.``CDLHAMMER`(*barDs*, *count*)'
+  id: totrans-84
   prefs: []
   type: TYPE_NORMAL
 - en: Hammer
+  id: totrans-85
   prefs: []
   type: TYPE_NORMAL
 - en: '`pyalgotrade.talibext.indicator.``CDLHANGINGMAN`(*barDs*, *count*)'
+  id: totrans-86
   prefs: []
   type: TYPE_NORMAL
 - en: Hanging Man
+  id: totrans-87
   prefs: []
   type: TYPE_NORMAL
 - en: '`pyalgotrade.talibext.indicator.``CDLHARAMI`(*barDs*, *count*)'
+  id: totrans-88
   prefs: []
   type: TYPE_NORMAL
 - en: Harami Pattern
+  id: totrans-89
   prefs: []
   type: TYPE_NORMAL
 - en: '`pyalgotrade.talibext.indicator.``CDLHARAMICROSS`(*barDs*, *count*)'
+  id: totrans-90
   prefs: []
   type: TYPE_NORMAL
 - en: Harami Cross Pattern
+  id: totrans-91
   prefs: []
   type: TYPE_NORMAL
 - en: '`pyalgotrade.talibext.indicator.``CDLHIGHWAVE`(*barDs*, *count*)'
+  id: totrans-92
   prefs: []
   type: TYPE_NORMAL
 - en: High-Wave Candle
+  id: totrans-93
   prefs: []
   type: TYPE_NORMAL
 - en: '`pyalgotrade.talibext.indicator.``CDLHIKKAKE`(*barDs*, *count*)'
+  id: totrans-94
   prefs: []
   type: TYPE_NORMAL
 - en: Hikkake Pattern
+  id: totrans-95
   prefs: []
   type: TYPE_NORMAL
 - en: '`pyalgotrade.talibext.indicator.``CDLHIKKAKEMOD`(*barDs*, *count*)'
+  id: totrans-96
   prefs: []
   type: TYPE_NORMAL
 - en: Modified Hikkake Pattern
+  id: totrans-97
   prefs: []
   type: TYPE_NORMAL
 - en: '`pyalgotrade.talibext.indicator.``CDLHOMINGPIGEON`(*barDs*, *count*)'
+  id: totrans-98
   prefs: []
   type: TYPE_NORMAL
 - en: Homing Pigeon
+  id: totrans-99
   prefs: []
   type: TYPE_NORMAL
 - en: '`pyalgotrade.talibext.indicator.``CDLIDENTICAL3CROWS`(*barDs*, *count*)'
+  id: totrans-100
   prefs: []
   type: TYPE_NORMAL
 - en: Identical Three Crows
+  id: totrans-101
   prefs: []
   type: TYPE_NORMAL
 - en: '`pyalgotrade.talibext.indicator.``CDLINNECK`(*barDs*, *count*)'
+  id: totrans-102
   prefs: []
   type: TYPE_NORMAL
 - en: In-Neck Pattern
+  id: totrans-103
   prefs: []
   type: TYPE_NORMAL
 - en: '`pyalgotrade.talibext.indicator.``CDLINVERTEDHAMMER`(*barDs*, *count*)'
+  id: totrans-104
   prefs: []
   type: TYPE_NORMAL
 - en: Inverted Hammer
+  id: totrans-105
   prefs: []
   type: TYPE_NORMAL
 - en: '`pyalgotrade.talibext.indicator.``CDLKICKING`(*barDs*, *count*)'
+  id: totrans-106
   prefs: []
   type: TYPE_NORMAL
 - en: Kicking
+  id: totrans-107
   prefs: []
   type: TYPE_NORMAL
 - en: '`pyalgotrade.talibext.indicator.``CDLKICKINGBYLENGTH`(*barDs*, *count*)'
+  id: totrans-108
   prefs: []
   type: TYPE_NORMAL
 - en: Kicking - bull/bear determined by the longer marubozu
+  id: totrans-109
   prefs: []
   type: TYPE_NORMAL
 - en: '`pyalgotrade.talibext.indicator.``CDLLADDERBOTTOM`(*barDs*, *count*)'
+  id: totrans-110
   prefs: []
   type: TYPE_NORMAL
 - en: Ladder Bottom
+  id: totrans-111
   prefs: []
   type: TYPE_NORMAL
 - en: '`pyalgotrade.talibext.indicator.``CDLLONGLEGGEDDOJI`(*barDs*, *count*)'
+  id: totrans-112
   prefs: []
   type: TYPE_NORMAL
 - en: Long Legged Doji
+  id: totrans-113
   prefs: []
   type: TYPE_NORMAL
 - en: '`pyalgotrade.talibext.indicator.``CDLLONGLINE`(*barDs*, *count*)'
+  id: totrans-114
   prefs: []
   type: TYPE_NORMAL
 - en: Long Line Candle
+  id: totrans-115
   prefs: []
   type: TYPE_NORMAL
 - en: '`pyalgotrade.talibext.indicator.``CDLMARUBOZU`(*barDs*, *count*)'
+  id: totrans-116
   prefs: []
   type: TYPE_NORMAL
 - en: Marubozu
+  id: totrans-117
   prefs: []
   type: TYPE_NORMAL
 - en: '`pyalgotrade.talibext.indicator.``CDLMATCHINGLOW`(*barDs*, *count*)'
+  id: totrans-118
   prefs: []
   type: TYPE_NORMAL
 - en: Matching Low
+  id: totrans-119
   prefs: []
   type: TYPE_NORMAL
 - en: '`pyalgotrade.talibext.indicator.``CDLMATHOLD`(*barDs*, *count*, *penetration=-4e+37*)'
+  id: totrans-120
   prefs: []
   type: TYPE_NORMAL
 - en: Mat Hold
+  id: totrans-121
   prefs: []
   type: TYPE_NORMAL
 - en: '`pyalgotrade.talibext.indicator.``CDLMORNINGDOJISTAR`(*barDs*, *count*, *penetration=-4e+37*)'
+  id: totrans-122
   prefs: []
   type: TYPE_NORMAL
 - en: Morning Doji Star
+  id: totrans-123
   prefs: []
   type: TYPE_NORMAL
 - en: '`pyalgotrade.talibext.indicator.``CDLMORNINGSTAR`(*barDs*, *count*, *penetration=-4e+37*)'
+  id: totrans-124
   prefs: []
   type: TYPE_NORMAL
 - en: Morning Star
+  id: totrans-125
   prefs: []
   type: TYPE_NORMAL
 - en: '`pyalgotrade.talibext.indicator.``CDLONNECK`(*barDs*, *count*)'
+  id: totrans-126
   prefs: []
   type: TYPE_NORMAL
 - en: On-Neck Pattern
+  id: totrans-127
   prefs: []
   type: TYPE_NORMAL
 - en: '`pyalgotrade.talibext.indicator.``CDLPIERCING`(*barDs*, *count*)'
+  id: totrans-128
   prefs: []
   type: TYPE_NORMAL
 - en: Piercing Pattern
+  id: totrans-129
   prefs: []
   type: TYPE_NORMAL
 - en: '`pyalgotrade.talibext.indicator.``CDLRICKSHAWMAN`(*barDs*, *count*)'
+  id: totrans-130
   prefs: []
   type: TYPE_NORMAL
 - en: Rickshaw Man
+  id: totrans-131
   prefs: []
   type: TYPE_NORMAL
 - en: '`pyalgotrade.talibext.indicator.``CDLRISEFALL3METHODS`(*barDs*, *count*)'
+  id: totrans-132
   prefs: []
   type: TYPE_NORMAL
 - en: Rising/Falling Three Methods
+  id: totrans-133
   prefs: []
   type: TYPE_NORMAL
 - en: '`pyalgotrade.talibext.indicator.``CDLSEPARATINGLINES`(*barDs*, *count*)'
+  id: totrans-134
   prefs: []
   type: TYPE_NORMAL
 - en: Separating Lines
+  id: totrans-135
   prefs: []
   type: TYPE_NORMAL
 - en: '`pyalgotrade.talibext.indicator.``CDLSHOOTINGSTAR`(*barDs*, *count*)'
+  id: totrans-136
   prefs: []
   type: TYPE_NORMAL
 - en: Shooting Star
+  id: totrans-137
   prefs: []
   type: TYPE_NORMAL
 - en: '`pyalgotrade.talibext.indicator.``CDLSHORTLINE`(*barDs*, *count*)'
+  id: totrans-138
   prefs: []
   type: TYPE_NORMAL
 - en: Short Line Candle
+  id: totrans-139
   prefs: []
   type: TYPE_NORMAL
 - en: '`pyalgotrade.talibext.indicator.``CDLSPINNINGTOP`(*barDs*, *count*)'
+  id: totrans-140
   prefs: []
   type: TYPE_NORMAL
 - en: Spinning Top
+  id: totrans-141
   prefs: []
   type: TYPE_NORMAL
 - en: '`pyalgotrade.talibext.indicator.``CDLSTALLEDPATTERN`(*barDs*, *count*)'
+  id: totrans-142
   prefs: []
   type: TYPE_NORMAL
 - en: Stalled Pattern
+  id: totrans-143
   prefs: []
   type: TYPE_NORMAL
 - en: '`pyalgotrade.talibext.indicator.``CDLSTICKSANDWICH`(*barDs*, *count*)'
+  id: totrans-144
   prefs: []
   type: TYPE_NORMAL
 - en: Stick Sandwich
+  id: totrans-145
   prefs: []
   type: TYPE_NORMAL
 - en: '`pyalgotrade.talibext.indicator.``CDLTAKURI`(*barDs*, *count*)'
+  id: totrans-146
   prefs: []
   type: TYPE_NORMAL
 - en: Takuri (Dragonfly Doji with very long lower shadow)
+  id: totrans-147
   prefs: []
   type: TYPE_NORMAL
 - en: '`pyalgotrade.talibext.indicator.``CDLTASUKIGAP`(*barDs*, *count*)'
+  id: totrans-148
   prefs: []
   type: TYPE_NORMAL
 - en: Tasuki Gap
+  id: totrans-149
   prefs: []
   type: TYPE_NORMAL
 - en: '`pyalgotrade.talibext.indicator.``CDLTHRUSTING`(*barDs*, *count*)'
+  id: totrans-150
   prefs: []
   type: TYPE_NORMAL
 - en: Thrusting Pattern
+  id: totrans-151
   prefs: []
   type: TYPE_NORMAL
 - en: '`pyalgotrade.talibext.indicator.``CDLTRISTAR`(*barDs*, *count*)'
+  id: totrans-152
   prefs: []
   type: TYPE_NORMAL
 - en: Tristar Pattern
+  id: totrans-153
   prefs: []
   type: TYPE_NORMAL
 - en: '`pyalgotrade.talibext.indicator.``CDLUNIQUE3RIVER`(*barDs*, *count*)'
+  id: totrans-154
   prefs: []
   type: TYPE_NORMAL
 - en: Unique 3 River
+  id: totrans-155
   prefs: []
   type: TYPE_NORMAL
 - en: '`pyalgotrade.talibext.indicator.``CDLUPSIDEGAP2CROWS`(*barDs*, *count*)'
+  id: totrans-156
   prefs: []
   type: TYPE_NORMAL
 - en: Upside Gap Two Crows
+  id: totrans-157
   prefs: []
   type: TYPE_NORMAL
 - en: '`pyalgotrade.talibext.indicator.``CDLXSIDEGAP3METHODS`(*barDs*, *count*)'
+  id: totrans-158
   prefs: []
   type: TYPE_NORMAL
 - en: Upside/Downside Gap Three Methods
+  id: totrans-159
   prefs: []
   type: TYPE_NORMAL
 - en: '`pyalgotrade.talibext.indicator.``CMO`(*ds*, *count*, *timeperiod=-2147483648*)'
+  id: totrans-160
   prefs: []
   type: TYPE_NORMAL
 - en: Chande Momentum Oscillator
+  id: totrans-161
   prefs: []
   type: TYPE_NORMAL
 - en: '`pyalgotrade.talibext.indicator.``CORREL`(*ds1*, *ds2*, *count*, *timeperiod=-2147483648*)'
+  id: totrans-162
   prefs: []
   type: TYPE_NORMAL
 - en: Pearson’s Correlation Coefficient (r)
+  id: totrans-163
   prefs: []
   type: TYPE_NORMAL
 - en: '`pyalgotrade.talibext.indicator.``DEMA`(*ds*, *count*, *timeperiod=-2147483648*)'
+  id: totrans-164
   prefs: []
   type: TYPE_NORMAL
 - en: Double Exponential Moving Average
+  id: totrans-165
   prefs: []
   type: TYPE_NORMAL
+  zh: 双指数移动平均
 - en: '`pyalgotrade.talibext.indicator.``DX`(*barDs*, *count*, *timeperiod=-2147483648*)'
+  id: totrans-166
   prefs: []
   type: TYPE_NORMAL
+  zh: '`pyalgotrade.talibext.indicator.``DX`(*barDs*, *count*, *timeperiod=-2147483648*)'
 - en: Directional Movement Index
+  id: totrans-167
   prefs: []
   type: TYPE_NORMAL
+  zh: 方向运动指数
 - en: '`pyalgotrade.talibext.indicator.``EMA`(*ds*, *count*, *timeperiod=-2147483648*)'
+  id: totrans-168
   prefs: []
   type: TYPE_NORMAL
+  zh: '`pyalgotrade.talibext.indicator.``EMA`(*ds*, *count*, *timeperiod=-2147483648*)'
 - en: Exponential Moving Average
+  id: totrans-169
   prefs: []
   type: TYPE_NORMAL
+  zh: 指数移动平均
 - en: '`pyalgotrade.talibext.indicator.``HT_DCPERIOD`(*ds*, *count*)'
+  id: totrans-170
   prefs: []
   type: TYPE_NORMAL
+  zh: '`pyalgotrade.talibext.indicator.``HT_DCPERIOD`(*ds*, *count*)'
 - en: Hilbert Transform - Dominant Cycle Period
+  id: totrans-171
   prefs: []
   type: TYPE_NORMAL
+  zh: Hilbert 变换 - 主导周期
 - en: '`pyalgotrade.talibext.indicator.``HT_DCPHASE`(*ds*, *count*)'
+  id: totrans-172
   prefs: []
   type: TYPE_NORMAL
+  zh: '`pyalgotrade.talibext.indicator.``HT_DCPHASE`(*ds*, *count*)'
 - en: Hilbert Transform - Dominant Cycle Phase
+  id: totrans-173
   prefs: []
   type: TYPE_NORMAL
+  zh: Hilbert 变换 - 主导周期相位
 - en: '`pyalgotrade.talibext.indicator.``HT_PHASOR`(*ds*, *count*)'
+  id: totrans-174
   prefs: []
   type: TYPE_NORMAL
+  zh: '`pyalgotrade.talibext.indicator.``HT_PHASOR`(*ds*, *count*)'
 - en: Hilbert Transform - Phasor Components
+  id: totrans-175
   prefs: []
   type: TYPE_NORMAL
+  zh: Hilbert 变换 - 相量分量
 - en: '`pyalgotrade.talibext.indicator.``HT_SINE`(*ds*, *count*)'
+  id: totrans-176
   prefs: []
   type: TYPE_NORMAL
+  zh: '`pyalgotrade.talibext.indicator.``HT_SINE`(*ds*, *count*)'
 - en: Hilbert Transform - SineWave
+  id: totrans-177
   prefs: []
   type: TYPE_NORMAL
+  zh: Hilbert 变换 - 正弦波
 - en: '`pyalgotrade.talibext.indicator.``HT_TRENDLINE`(*ds*, *count*)'
+  id: totrans-178
   prefs: []
   type: TYPE_NORMAL
+  zh: '`pyalgotrade.talibext.indicator.``HT_TRENDLINE`(*ds*, *count*)'
 - en: Hilbert Transform - Instantaneous Trendline
+  id: totrans-179
   prefs: []
   type: TYPE_NORMAL
+  zh: Hilbert 变换 - 瞬时趋势线
 - en: '`pyalgotrade.talibext.indicator.``HT_TRENDMODE`(*ds*, *count*)'
+  id: totrans-180
   prefs: []
   type: TYPE_NORMAL
+  zh: '`pyalgotrade.talibext.indicator.``HT_TRENDMODE`(*ds*, *count*)'
 - en: Hilbert Transform - Trend vs Cycle Mode
+  id: totrans-181
   prefs: []
   type: TYPE_NORMAL
+  zh: Hilbert 变换 - 趋势 vs 周期模式
 - en: '`pyalgotrade.talibext.indicator.``KAMA`(*ds*, *count*, *timeperiod=-2147483648*)'
+  id: totrans-182
   prefs: []
   type: TYPE_NORMAL
+  zh: '`pyalgotrade.talibext.indicator.``KAMA`(*ds*, *count*, *timeperiod=-2147483648*)'
 - en: Kaufman Adaptive Moving Average
+  id: totrans-183
   prefs: []
   type: TYPE_NORMAL
+  zh: Kaufman 自适应移动平均
 - en: '`pyalgotrade.talibext.indicator.``LINEARREG`(*ds*, *count*, *timeperiod=-2147483648*)'
+  id: totrans-184
   prefs: []
   type: TYPE_NORMAL
+  zh: '`pyalgotrade.talibext.indicator.``LINEARREG`(*ds*, *count*, *timeperiod=-2147483648*)'
 - en: Linear Regression
+  id: totrans-185
   prefs: []
   type: TYPE_NORMAL
+  zh: 线性回归
 - en: '`pyalgotrade.talibext.indicator.``LINEARREG_ANGLE`(*ds*, *count*, *timeperiod=-2147483648*)'
+  id: totrans-186
   prefs: []
   type: TYPE_NORMAL
+  zh: '`pyalgotrade.talibext.indicator.``LINEARREG_ANGLE`(*ds*, *count*, *timeperiod=-2147483648*)'
 - en: Linear Regression Angle
+  id: totrans-187
   prefs: []
   type: TYPE_NORMAL
+  zh: 线性回归角度
 - en: '`pyalgotrade.talibext.indicator.``LINEARREG_INTERCEPT`(*ds*, *count*, *timeperiod=-2147483648*)'
+  id: totrans-188
   prefs: []
   type: TYPE_NORMAL
+  zh: '`pyalgotrade.talibext.indicator.``LINEARREG_INTERCEPT`(*ds*, *count*, *timeperiod=-2147483648*)'
 - en: Linear Regression Intercept
+  id: totrans-189
   prefs: []
   type: TYPE_NORMAL
+  zh: 线性回归截距
 - en: '`pyalgotrade.talibext.indicator.``LINEARREG_SLOPE`(*ds*, *count*, *timeperiod=-2147483648*)'
+  id: totrans-190
   prefs: []
   type: TYPE_NORMAL
+  zh: '`pyalgotrade.talibext.indicator.``LINEARREG_SLOPE`(*ds*, *count*, *timeperiod=-2147483648*)'
 - en: Linear Regression Slope
+  id: totrans-191
   prefs: []
   type: TYPE_NORMAL
+  zh: 线性回归斜率
 - en: '`pyalgotrade.talibext.indicator.``MA`(*ds*, *count*, *timeperiod=-2147483648*,
     *matype=0*)'
+  id: totrans-192
   prefs: []
   type: TYPE_NORMAL
+  zh: '`pyalgotrade.talibext.indicator.``MA`(*ds*, *count*, *timeperiod=-2147483648*,
+    *matype=0*)'
 - en: All Moving Average
+  id: totrans-193
   prefs: []
   type: TYPE_NORMAL
+  zh: 所有移动平均
 - en: '`pyalgotrade.talibext.indicator.``MACD`(*ds*, *count*, *fastperiod=-2147483648*,
     *slowperiod=-2147483648*, *signalperiod=-2147483648*)'
+  id: totrans-194
   prefs: []
   type: TYPE_NORMAL
+  zh: '`pyalgotrade.talibext.indicator.``MACD`(*ds*, *count*, *fastperiod=-2147483648*,
+    *slowperiod=-2147483648*, *signalperiod=-2147483648*)'
 - en: Moving Average Convergence/Divergence
+  id: totrans-195
   prefs: []
   type: TYPE_NORMAL
+  zh: 移动平均收敛/发散
 - en: '`pyalgotrade.talibext.indicator.``MACDEXT`(*ds*, *count*, *fastperiod=-2147483648*,
     *fastmatype=0*, *slowperiod=-2147483648*, *slowmatype=0*, *signalperiod=-2147483648*,
     *signalmatype=0*)'
+  id: totrans-196
   prefs: []
   type: TYPE_NORMAL
+  zh: '`pyalgotrade.talibext.indicator.``MACDEXT`(*ds*, *count*, *fastperiod=-2147483648*,
+    *fastmatype=0*, *slowperiod=-2147483648*, *slowmatype=0*, *signalperiod=-2147483648*,
+    *signalmatype=0*)'
 - en: MACD with controllable MA type
+  id: totrans-197
   prefs: []
   type: TYPE_NORMAL
+  zh: 具有可控制 MA 类型的 MACD
 - en: '`pyalgotrade.talibext.indicator.``MACDFIX`(*ds*, *count*, *signalperiod=-2147483648*)'
+  id: totrans-198
   prefs: []
   type: TYPE_NORMAL
+  zh: '`pyalgotrade.talibext.indicator.``MACDFIX`(*ds*, *count*, *signalperiod=-2147483648*)'
 - en: Moving Average Convergence/Divergence Fix 12/26
+  id: totrans-199
   prefs: []
   type: TYPE_NORMAL
+  zh: 移动平均收敛/发散 修正 12/26
 - en: '`pyalgotrade.talibext.indicator.``MAMA`(*ds*, *count*, *fastlimit=-4e+37*,
     *slowlimit=-4e+37*)'
+  id: totrans-200
   prefs: []
   type: TYPE_NORMAL
+  zh: '`pyalgotrade.talibext.indicator.``MAMA`(*ds*, *count*, *fastlimit=-4e+37*,
+    *slowlimit=-4e+37*)'
 - en: MESA Adaptive Moving Average
+  id: totrans-201
   prefs: []
   type: TYPE_NORMAL
+  zh: MESA 自适应移动平均
 - en: '`pyalgotrade.talibext.indicator.``MAX`(*ds*, *count*, *timeperiod=-2147483648*)'
+  id: totrans-202
   prefs: []
   type: TYPE_NORMAL
+  zh: '`pyalgotrade.talibext.indicator.``MAX`(*ds*, *count*, *timeperiod=-2147483648*)'
 - en: Highest value over a specified period
+  id: totrans-203
   prefs: []
   type: TYPE_NORMAL
+  zh: 一段时间内的最高值
 - en: '`pyalgotrade.talibext.indicator.``MAXINDEX`(*ds*, *count*, *timeperiod=-2147483648*)'
+  id: totrans-204
   prefs: []
   type: TYPE_NORMAL
+  zh: '`pyalgotrade.talibext.indicator.``MAXINDEX`(*ds*, *count*, *timeperiod=-2147483648*)'
 - en: Index of highest value over a specified period
+  id: totrans-205
   prefs: []
   type: TYPE_NORMAL
+  zh: 指定周期内最高值的索引
 - en: '`pyalgotrade.talibext.indicator.``MEDPRICE`(*barDs*, *count*)'
+  id: totrans-206
   prefs: []
   type: TYPE_NORMAL
+  zh: '`pyalgotrade.talibext.indicator.``MEDPRICE`(*barDs*, *count*)'
 - en: Median Price
+  id: totrans-207
   prefs: []
   type: TYPE_NORMAL
+  zh: 中位价
 - en: '`pyalgotrade.talibext.indicator.``MFI`(*barDs*, *count*, *timeperiod=-2147483648*)'
+  id: totrans-208
   prefs: []
   type: TYPE_NORMAL
+  zh: '`pyalgotrade.talibext.indicator.``MFI`(*barDs*, *count*, *timeperiod=-2147483648*)'
 - en: Money Flow Index
+  id: totrans-209
   prefs: []
   type: TYPE_NORMAL
+  zh: 资金流量指标
 - en: '`pyalgotrade.talibext.indicator.``MIDPOINT`(*ds*, *count*, *timeperiod=-2147483648*)'
+  id: totrans-210
   prefs: []
   type: TYPE_NORMAL
+  zh: '`pyalgotrade.talibext.indicator.``MIDPOINT`(*ds*, *count*, *timeperiod=-2147483648*)'
 - en: MidPoint over period
+  id: totrans-211
   prefs: []
   type: TYPE_NORMAL
+  zh: 一段时间内的中点
 - en: '`pyalgotrade.talibext.indicator.``MIDPRICE`(*barDs*, *count*, *timeperiod=-2147483648*)'
+  id: totrans-212
   prefs: []
   type: TYPE_NORMAL
+  zh: '`pyalgotrade.talibext.indicator.``MIDPRICE`(*barDs*, *count*, *timeperiod=-2147483648*)'
 - en: Midpoint Price over period
+  id: totrans-213
   prefs: []
   type: TYPE_NORMAL
+  zh: 一段时间内的中点价格
 - en: '`pyalgotrade.talibext.indicator.``MIN`(*ds*, *count*, *timeperiod=-2147483648*)'
+  id: totrans-214
   prefs: []
   type: TYPE_NORMAL
+  zh: '`pyalgotrade.talibext.indicator.``MIN`(*ds*, *count*, *timeperiod=-2147483648*)'
 - en: Lowest value over a specified period
+  id: totrans-215
   prefs: []
   type: TYPE_NORMAL
+  zh: 指定周期内的最低值
 - en: '`pyalgotrade.talibext.indicator.``MININDEX`(*ds*, *count*, *timeperiod=-2147483648*)'
+  id: totrans-216
   prefs: []
   type: TYPE_NORMAL
+  zh: '`pyalgotrade.talibext.indicator.``MININDEX`(*ds*, *count*, *timeperiod=-2147483648*)'
 - en: Index of lowest value over a specified period
+  id: totrans-217
   prefs: []
   type: TYPE_NORMAL
+  zh: 在指定时间段内的最低值的指数
 - en: '`pyalgotrade.talibext.indicator.``MINMAX`(*ds*, *count*, *timeperiod=-2147483648*)'
+  id: totrans-218
   prefs: []
   type: TYPE_NORMAL
+  zh: '`pyalgotrade.talibext.indicator.``MINMAX`(*ds*, *count*, *timeperiod=-2147483648*)'
 - en: Lowest and highest values over a specified period
+  id: totrans-219
   prefs: []
   type: TYPE_NORMAL
+  zh: 在指定时间段内的最低值和最高值
 - en: '`pyalgotrade.talibext.indicator.``MINMAXINDEX`(*ds*, *count*, *timeperiod=-2147483648*)'
+  id: totrans-220
   prefs: []
   type: TYPE_NORMAL
+  zh: '`pyalgotrade.talibext.indicator.``MINMAXINDEX`(*ds*, *count*, *timeperiod=-2147483648*)'
 - en: Indexes of lowest and highest values over a specified period
+  id: totrans-221
   prefs: []
   type: TYPE_NORMAL
+  zh: 在指定时间段内的最低值和最高值的指数
 - en: '`pyalgotrade.talibext.indicator.``MINUS_DI`(*barDs*, *count*, *timeperiod=-2147483648*)'
+  id: totrans-222
   prefs: []
   type: TYPE_NORMAL
+  zh: '`pyalgotrade.talibext.indicator.``MINUS_DI`(*barDs*, *count*, *timeperiod=-2147483648*)'
 - en: Minus Directional Indicator
+  id: totrans-223
   prefs: []
   type: TYPE_NORMAL
+  zh: 负向动向指标
 - en: '`pyalgotrade.talibext.indicator.``MINUS_DM`(*barDs*, *count*, *timeperiod=-2147483648*)'
+  id: totrans-224
   prefs: []
   type: TYPE_NORMAL
+  zh: '`pyalgotrade.talibext.indicator.``MINUS_DM`(*barDs*, *count*, *timeperiod=-2147483648*)'
 - en: Minus Directional Movement
+  id: totrans-225
   prefs: []
   type: TYPE_NORMAL
+  zh: 负向动向指数
 - en: '`pyalgotrade.talibext.indicator.``MOM`(*ds*, *count*, *timeperiod=-2147483648*)'
+  id: totrans-226
   prefs: []
   type: TYPE_NORMAL
+  zh: '`pyalgotrade.talibext.indicator.``MOM`(*ds*, *count*, *timeperiod=-2147483648*)'
 - en: Momentum
+  id: totrans-227
   prefs: []
   type: TYPE_NORMAL
+  zh: 动量
 - en: '`pyalgotrade.talibext.indicator.``NATR`(*barDs*, *count*, *timeperiod=-2147483648*)'
+  id: totrans-228
   prefs: []
   type: TYPE_NORMAL
+  zh: '`pyalgotrade.talibext.indicator.``NATR`(*barDs*, *count*, *timeperiod=-2147483648*)'
 - en: Normalized Average True Range
+  id: totrans-229
   prefs: []
   type: TYPE_NORMAL
+  zh: 归一化平均真实波幅
 - en: '`pyalgotrade.talibext.indicator.``OBV`(*ds1*, *volumeDs*, *count*)'
+  id: totrans-230
   prefs: []
   type: TYPE_NORMAL
+  zh: '`pyalgotrade.talibext.indicator.``OBV`(*ds1*, *volumeDs*, *count*)'
 - en: On Balance Volume
+  id: totrans-231
   prefs: []
   type: TYPE_NORMAL
+  zh: 量价均衡指标
 - en: '`pyalgotrade.talibext.indicator.``PLUS_DI`(*barDs*, *count*, *timeperiod=-2147483648*)'
+  id: totrans-232
   prefs: []
   type: TYPE_NORMAL
+  zh: '`pyalgotrade.talibext.indicator.``PLUS_DI`(*barDs*, *count*, *timeperiod=-2147483648*)'
 - en: Plus Directional Indicator
+  id: totrans-233
   prefs: []
   type: TYPE_NORMAL
+  zh: 正向动向指数
 - en: '`pyalgotrade.talibext.indicator.``PLUS_DM`(*barDs*, *count*, *timeperiod=-2147483648*)'
+  id: totrans-234
   prefs: []
   type: TYPE_NORMAL
+  zh: '`pyalgotrade.talibext.indicator.``PLUS_DM`(*barDs*, *count*, *timeperiod=-2147483648*)'
 - en: Plus Directional Movement
+  id: totrans-235
   prefs: []
   type: TYPE_NORMAL
+  zh: 正向动向指数
 - en: '`pyalgotrade.talibext.indicator.``PPO`(*ds*, *count*, *fastperiod=-2147483648*,
     *slowperiod=-2147483648*, *matype=0*)'
+  id: totrans-236
   prefs: []
   type: TYPE_NORMAL
+  zh: '`pyalgotrade.talibext.indicator.``PPO`(*ds*, *count*, *fastperiod=-2147483648*,
+    *slowperiod=-2147483648*, *matype=0*)'
 - en: Percentage Price Oscillator
+  id: totrans-237
   prefs: []
   type: TYPE_NORMAL
+  zh: 百分比价格振荡器
 - en: '`pyalgotrade.talibext.indicator.``ROC`(*ds*, *count*, *timeperiod=-2147483648*)'
+  id: totrans-238
   prefs: []
   type: TYPE_NORMAL
+  zh: '`pyalgotrade.talibext.indicator.``ROC`(*ds*, *count*, *timeperiod=-2147483648*)'
 - en: 'Rate of change : ((price/prevPrice)-1)*100'
+  id: totrans-239
   prefs: []
   type: TYPE_NORMAL
+  zh: '变化率: ((price/prevPrice)-1)*100'
 - en: '`pyalgotrade.talibext.indicator.``ROCP`(*ds*, *count*, *timeperiod=-2147483648*)'
+  id: totrans-240
   prefs: []
   type: TYPE_NORMAL
+  zh: '`pyalgotrade.talibext.indicator.``ROCP`(*ds*, *count*, *timeperiod=-2147483648*)'
 - en: 'Rate of change Percentage: (price-prevPrice)/prevPrice'
+  id: totrans-241
   prefs: []
   type: TYPE_NORMAL
+  zh: '百分比价格波动率: (price-prevPrice)/prevPrice'
 - en: '`pyalgotrade.talibext.indicator.``ROCR`(*ds*, *count*, *timeperiod=-2147483648*)'
+  id: totrans-242
   prefs: []
   type: TYPE_NORMAL
+  zh: '`pyalgotrade.talibext.indicator.``ROCR`(*ds*, *count*, *timeperiod=-2147483648*)'
 - en: 'Rate of change ratio: (price/prevPrice)'
+  id: totrans-243
   prefs: []
   type: TYPE_NORMAL
+  zh: '变化率比率: (price/prevPrice)'
 - en: '`pyalgotrade.talibext.indicator.``ROCR100`(*ds*, *count*, *timeperiod=-2147483648*)'
+  id: totrans-244
   prefs: []
   type: TYPE_NORMAL
+  zh: '`pyalgotrade.talibext.indicator.``ROCR100`(*ds*, *count*, *timeperiod=-2147483648*)'
 - en: 'Rate of change ratio 100 scale: (price/prevPrice)*100'
+  id: totrans-245
   prefs: []
   type: TYPE_NORMAL
+  zh: '变化率比率 100 比例: (price/prevPrice)*100'
 - en: '`pyalgotrade.talibext.indicator.``RSI`(*ds*, *count*, *timeperiod=-2147483648*)'
+  id: totrans-246
   prefs: []
   type: TYPE_NORMAL
+  zh: '`pyalgotrade.talibext.indicator.``RSI`(*ds*, *count*, *timeperiod=-2147483648*)'
 - en: Relative Strength Index
+  id: totrans-247
   prefs: []
   type: TYPE_NORMAL
+  zh: 相对强弱指标
 - en: '`pyalgotrade.talibext.indicator.``SAR`(*barDs*, *count*, *acceleration=-4e+37*,
     *maximum=-4e+37*)'
+  id: totrans-248
   prefs: []
   type: TYPE_NORMAL
+  zh: '`pyalgotrade.talibext.indicator.``SAR`(*barDs*, *count*, *acceleration=-4e+37*,
+    *maximum=-4e+37*)'
 - en: Parabolic SAR
+  id: totrans-249
   prefs: []
   type: TYPE_NORMAL
+  zh: 抛物线转向
 - en: '`pyalgotrade.talibext.indicator.``SAREXT`(*barDs*, *count*, *startvalue=-4e+37*,
     *offsetonreverse=-4e+37*, *accelerationinitlong=-4e+37*, *accelerationlong=-4e+37*,
     *accelerationmaxlong=-4e+37*, *accelerationinitshort=-4e+37*, *accelerationshort=-4e+37*,
     *accelerationmaxshort=-4e+37*)'
+  id: totrans-250
   prefs: []
   type: TYPE_NORMAL
+  zh: '`pyalgotrade.talibext.indicator.``SAREXT`(*barDs*, *count*, *startvalue=-4e+37*,
+    *offsetonreverse=-4e+37*, *accelerationinitlong=-4e+37*, *accelerationlong=-4e+37*,
+    *accelerationmaxlong=-4e+37*, *accelerationinitshort=-4e+37*, *accelerationshort=-4e+37*,
+    *accelerationmaxshort=-4e+37*)'
 - en: Parabolic SAR - Extended
+  id: totrans-251
   prefs: []
   type: TYPE_NORMAL
+  zh: 抛物线转向-扩展
 - en: '`pyalgotrade.talibext.indicator.``SMA`(*ds*, *count*, *timeperiod=-2147483648*)'
+  id: totrans-252
   prefs: []
   type: TYPE_NORMAL
+  zh: '`pyalgotrade.talibext.indicator.``SMA`(*ds*, *count*, *timeperiod=-2147483648*)'
 - en: Simple Moving Average
+  id: totrans-253
   prefs: []
   type: TYPE_NORMAL
+  zh: 简单移动平均线
 - en: '`pyalgotrade.talibext.indicator.``STDDEV`(*ds*, *count*, *timeperiod=-2147483648*,
     *nbdev=-4e+37*)'
+  id: totrans-254
   prefs: []
   type: TYPE_NORMAL
+  zh: '`pyalgotrade.talibext.indicator.``STDDEV`(*ds*, *count*, *timeperiod=-2147483648*,
+    *nbdev=-4e+37*)'
 - en: Standard Deviation
+  id: totrans-255
   prefs: []
   type: TYPE_NORMAL
+  zh: 标准差
 - en: '`pyalgotrade.talibext.indicator.``STOCH`(*barDs*, *count*, *fastk_period=-2147483648*,
     *slowk_period=-2147483648*, *slowk_matype=0*, *slowd_period=-2147483648*, *slowd_matype=0*)'
+  id: totrans-256
   prefs: []
   type: TYPE_NORMAL
+  zh: '`pyalgotrade.talibext.indicator.``STOCH`(*barDs*, *count*, *fastk_period=-2147483648*,
+    *slowk_period=-2147483648*, *slowk_matype=0*, *slowd_period=-2147483648*, *slowd_matype=0*)'
 - en: Stochastic
+  id: totrans-257
   prefs: []
   type: TYPE_NORMAL
+  zh: 随机指标
 - en: '`pyalgotrade.talibext.indicator.``STOCHF`(*barDs*, *count*, *fastk_period=-2147483648*,
     *fastd_period=-2147483648*, *fastd_matype=0*)'
+  id: totrans-258
   prefs: []
   type: TYPE_NORMAL
+  zh: '`pyalgotrade.talibext.indicator.``STOCHF`(*barDs*, *count*, *fastk_period=-2147483648*,
+    *fastd_period=-2147483648*, *fastd_matype=0*)'
 - en: Stochastic Fast
+  id: totrans-259
   prefs: []
   type: TYPE_NORMAL
+  zh: 快速随机指标
 - en: '`pyalgotrade.talibext.indicator.``STOCHRSI`(*ds*, *count*, *timeperiod=-2147483648*,
     *fastk_period=-2147483648*, *fastd_period=-2147483648*, *fastd_matype=0*)'
+  id: totrans-260
   prefs: []
   type: TYPE_NORMAL
+  zh: '`pyalgotrade.talibext.indicator.``STOCHRSI`(*ds*, *count*, *timeperiod=-2147483648*,
+    *fastk_period=-2147483648*, *fastd_period=-2147483648*, *fastd_matype=0*)'
 - en: Stochastic Relative Strength Index
+  id: totrans-261
   prefs: []
   type: TYPE_NORMAL
+  zh: 随机相对强度指数
 - en: '`pyalgotrade.talibext.indicator.``SUM`(*ds*, *count*, *timeperiod=-2147483648*)'
+  id: totrans-262
   prefs: []
   type: TYPE_NORMAL
+  zh: '`pyalgotrade.talibext.indicator.``SUM`(*ds*, *count*, *timeperiod=-2147483648*)'
 - en: Summation
+  id: totrans-263
   prefs: []
   type: TYPE_NORMAL
+  zh: 求和
 - en: '`pyalgotrade.talibext.indicator.``T3`(*ds*, *count*, *timeperiod=-2147483648*,
     *vfactor=-4e+37*)'
+  id: totrans-264
   prefs: []
   type: TYPE_NORMAL
+  zh: '`pyalgotrade.talibext.indicator.``T3`(*ds*, *count*, *timeperiod=-2147483648*,
+    *vfactor=-4e+37*)'
 - en: Triple Exponential Moving Average (T3)
+  id: totrans-265
   prefs: []
   type: TYPE_NORMAL
+  zh: 三重指数移动平均线（T3）
 - en: '`pyalgotrade.talibext.indicator.``TEMA`(*ds*, *count*, *timeperiod=-2147483648*)'
+  id: totrans-266
   prefs: []
   type: TYPE_NORMAL
+  zh: '`pyalgotrade.talibext.indicator.``TEMA`(*ds*, *count*, *timeperiod=-2147483648*)'
 - en: Triple Exponential Moving Average
+  id: totrans-267
   prefs: []
   type: TYPE_NORMAL
+  zh: 三重指数移动平均线
 - en: '`pyalgotrade.talibext.indicator.``TRANGE`(*barDs*, *count*)'
+  id: totrans-268
   prefs: []
   type: TYPE_NORMAL
+  zh: '`pyalgotrade.talibext.indicator.``TRANGE`(*barDs*, *count*)'
 - en: True Range
+  id: totrans-269
   prefs: []
   type: TYPE_NORMAL
+  zh: 真实范围
 - en: '`pyalgotrade.talibext.indicator.``TRIMA`(*ds*, *count*, *timeperiod=-2147483648*)'
+  id: totrans-270
   prefs: []
   type: TYPE_NORMAL
+  zh: '`pyalgotrade.talibext.indicator.``TRIMA`(*ds*, *count*, *timeperiod=-2147483648*)'
 - en: Triangular Moving Average
+  id: totrans-271
   prefs: []
   type: TYPE_NORMAL
+  zh: 三角形移动平均
 - en: '`pyalgotrade.talibext.indicator.``TRIX`(*ds*, *count*, *timeperiod=-2147483648*)'
+  id: totrans-272
   prefs: []
   type: TYPE_NORMAL
+  zh: '`pyalgotrade.talibext.indicator.``TRIX`(*ds*, *count*, *timeperiod=-2147483648*)'
 - en: 1-day Rate-Of-Change (ROC) of a Triple Smooth EMA
+  id: totrans-273
   prefs: []
   type: TYPE_NORMAL
+  zh: 三重平滑EMA的1日变化率（ROC）
 - en: '`pyalgotrade.talibext.indicator.``TSF`(*ds*, *count*, *timeperiod=-2147483648*)'
+  id: totrans-274
   prefs: []
   type: TYPE_NORMAL
+  zh: '`pyalgotrade.talibext.indicator.``TSF`(*ds*, *count*, *timeperiod=-2147483648*)'
 - en: Time Series Forecast
+  id: totrans-275
   prefs: []
   type: TYPE_NORMAL
+  zh: 时间序列预测
 - en: '`pyalgotrade.talibext.indicator.``TYPPRICE`(*barDs*, *count*)'
+  id: totrans-276
   prefs: []
   type: TYPE_NORMAL
+  zh: '`pyalgotrade.talibext.indicator.``TYPPRICE`(*barDs*, *count*)'
 - en: Typical Price
+  id: totrans-277
   prefs: []
   type: TYPE_NORMAL
+  zh: 典型价格
 - en: '`pyalgotrade.talibext.indicator.``ULTOSC`(*barDs*, *count*, *timeperiod1=-2147483648*,
     *timeperiod2=-2147483648*, *timeperiod3=-2147483648*)'
+  id: totrans-278
   prefs: []
   type: TYPE_NORMAL
+  zh: '`pyalgotrade.talibext.indicator.``ULTOSC`(*barDs*, *count*, *timeperiod1=-2147483648*,
+    *timeperiod2=-2147483648*, *timeperiod3=-2147483648*)'
 - en: Ultimate Oscillator
+  id: totrans-279
   prefs: []
   type: TYPE_NORMAL
+  zh: 终极振荡器
 - en: '`pyalgotrade.talibext.indicator.``VAR`(*ds*, *count*, *timeperiod=-2147483648*,
     *nbdev=-4e+37*)'
+  id: totrans-280
   prefs: []
   type: TYPE_NORMAL
+  zh: '`pyalgotrade.talibext.indicator.``VAR`(*ds*, *count*, *timeperiod=-2147483648*,
+    *nbdev=-4e+37*)'
 - en: Variance
+  id: totrans-281
   prefs: []
   type: TYPE_NORMAL
+  zh: 方差
 - en: '`pyalgotrade.talibext.indicator.``WCLPRICE`(*barDs*, *count*)'
+  id: totrans-282
   prefs: []
   type: TYPE_NORMAL
+  zh: '`pyalgotrade.talibext.indicator.``WCLPRICE`(*barDs*, *count*)'
 - en: Weighted Close Price
+  id: totrans-283
   prefs: []
   type: TYPE_NORMAL
+  zh: 加权收盘价
 - en: '`pyalgotrade.talibext.indicator.``WILLR`(*barDs*, *count*, *timeperiod=-2147483648*)'
+  id: totrans-284
   prefs: []
   type: TYPE_NORMAL
+  zh: '`pyalgotrade.talibext.indicator.``WILLR`(*barDs*, *count*, *timeperiod=-2147483648*)'
 - en: Williams’ %R
+  id: totrans-285
   prefs: []
   type: TYPE_NORMAL
+  zh: 威廉%R
 - en: '`pyalgotrade.talibext.indicator.``WMA`(*ds*, *count*, *timeperiod=-2147483648*)'
+  id: totrans-286
   prefs: []
   type: TYPE_NORMAL
+  zh: '`pyalgotrade.talibext.indicator.``WMA`(*ds*, *count*, *timeperiod=-2147483648*)'
 - en: Weighted Moving Average
+  id: totrans-287
   prefs: []
   type: TYPE_NORMAL
+  zh: 加权移动平均线
 - en: Previous topic
+  id: totrans-288
   prefs:
   - PREF_H4
   type: TYPE_NORMAL
+  zh: 上一个主题
 - en: '[Twitter Example](twitter_example.html "previous chapter")'
+  id: totrans-289
   prefs: []
   type: TYPE_NORMAL
+  zh: '[Twitter 示例](twitter_example.html "上一章节")'
 - en: Next topic
+  id: totrans-290
   prefs:
   - PREF_H4
   type: TYPE_NORMAL
+  zh: 下一个主题
 - en: '[Computational Investing Part I](compinvpart1.html "next chapter")'
+  id: totrans-291
   prefs: []
   type: TYPE_NORMAL
+  zh: '[计算投资 第一部分](compinvpart1.html "下一章节")'
 - en: This Page
+  id: totrans-292
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 此页
 - en: '[Show Source](_sources/talib.txt)'
+  id: totrans-293
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[显示源代码](_sources/talib.txt)'
 - en: Quick search
+  id: totrans-294
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 快速搜索
 - en: Enter search terms or a module, class or function name.
+  id: totrans-295
   prefs: []
   type: TYPE_NORMAL
+  zh: 输入搜索词或模块、类或函数名称。
 - en: Navigation
+  id: totrans-296
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 导航
 - en: '[index](genindex.html "General Index")'
+  id: totrans-297
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[索引](genindex.html "总目录")'
 - en: '[modules](py-modindex.html "Python Module Index") |'
+  id: totrans-298
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[模块](py-modindex.html "Python 模块索引") |'
 - en: '[next](compinvpart1.html "Computational Investing Part I") |'
+  id: totrans-299
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[下一个](compinvpart1.html "计算投资 第一部分") |'
 - en: '[previous](twitter_example.html "Twitter Example") |'
+  id: totrans-300
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[上一个](twitter_example.html "Twitter 示例") |'
 - en: '[PyAlgoTrade 0.20 documentation](index.html) »'
+  id: totrans-301
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[PyAlgoTrade 0.20 文档](index.html) »'

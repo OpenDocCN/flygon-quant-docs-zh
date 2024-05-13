@@ -1,122 +1,186 @@
 - en: Twitter Example
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: Twitter 示例
 - en: 原文：[https://gbeced.github.io/pyalgotrade/docs/v0.20/html/twitter_example.html](https://gbeced.github.io/pyalgotrade/docs/v0.20/html/twitter_example.html)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://gbeced.github.io/pyalgotrade/docs/v0.20/html/twitter_example.html](https://gbeced.github.io/pyalgotrade/docs/v0.20/html/twitter_example.html)
 - en: This goal of this simple example is to show you how to put all the pieces together
     to incorporate Twitter events in a strategy. We will be using Bitstamp’s live
     feed since backtesting with Twitter is not supported so please take a look at
     the [*Bitstamp Example*](bitstamp_example.html#bitstamp-tutorial-label) section
     before moving forward.
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: 这个简单示例的目标是向你展示如何将所有部分组合起来，将 Twitter 事件纳入策略中。我们将使用 Bitstamp 的实时反馈，因为不支持使用 Twitter
+    进行回测，请在继续之前查看[*Bitstamp 示例*](bitstamp_example.html#bitstamp-tutorial-label) 部分。
 - en: 'In order to connect to Twitter’s API you’ll need:'
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: 要连接到 Twitter 的 API，您需要：
 - en: Consumer key
+  id: totrans-4
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 使用者密钥
 - en: Consumer secret
+  id: totrans-5
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 使用者密钥
 - en: Access token
+  id: totrans-6
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 访问令牌
 - en: Access token secret
+  id: totrans-7
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 访问令牌密钥
 - en: Go to [http://dev.twitter.com](http://dev.twitter.com) and create an app. The
     consumer key and secret will be generated for you after that. Then you’ll need
     to create an access token under the “Your access token” section.
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: 转到 [http://dev.twitter.com](http://dev.twitter.com) 并创建一个应用程序。然后，会为您生成使用者密钥和密钥。然后，您需要在“您的访问令牌”部分下创建一个访问令牌。
 - en: 'The key things to highlight are:'
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: 强调的关键点是：
 - en: We’re using [`pyalgotrade.strategy.BaseStrategy`](strategy.html#pyalgotrade.strategy.BaseStrategy
     "pyalgotrade.strategy.BaseStrategy") instead of [`pyalgotrade.strategy.BacktestingStrategy`](strategy.html#pyalgotrade.strategy.BacktestingStrategy
     "pyalgotrade.strategy.BacktestingStrategy") as the base class. This is not a backtest.
+  id: totrans-10
   prefs:
   - PREF_BQ
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 我们使用[`pyalgotrade.strategy.BaseStrategy`](strategy.html#pyalgotrade.strategy.BaseStrategy
+    "pyalgotrade.strategy.BaseStrategy") 而不是 [`pyalgotrade.strategy.BacktestingStrategy`](strategy.html#pyalgotrade.strategy.BacktestingStrategy
+    "pyalgotrade.strategy.BacktestingStrategy") 作为基类。这不是一次回测。
 - en: The [`pyalgotrade.twitter.feed.TwitterFeed`](twitter_ref.html#pyalgotrade.twitter.feed.TwitterFeed
     "pyalgotrade.twitter.feed.TwitterFeed") instance has to be included in the strategy
     event dispatch loop before running the strategy.
+  id: totrans-11
   prefs:
   - PREF_BQ
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 在运行策略之前，必须将[`pyalgotrade.twitter.feed.TwitterFeed`](twitter_ref.html#pyalgotrade.twitter.feed.TwitterFeed
+    "pyalgotrade.twitter.feed.TwitterFeed") 实例包含在策略事件分派循环中。
 - en: '[PRE0]'
+  id: totrans-12
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: 'The output should look like this:'
+  id: totrans-13
   prefs: []
   type: TYPE_NORMAL
+  zh: 输出应如下所示：
 - en: '[PRE1]'
+  id: totrans-14
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE1]'
 - en: Previous topic
+  id: totrans-15
   prefs:
   - PREF_H4
   type: TYPE_NORMAL
+  zh: 上一个主题
 - en: '[twitter – Twitter feed reference](twitter_ref.html "previous chapter")'
+  id: totrans-16
   prefs: []
   type: TYPE_NORMAL
+  zh: '[twitter – Twitter feed reference](twitter_ref.html "上一章")'
 - en: Next topic
+  id: totrans-17
   prefs:
   - PREF_H4
   type: TYPE_NORMAL
+  zh: 下一个主题
 - en: '[TA-Lib integration](talib.html "next chapter")'
+  id: totrans-18
   prefs: []
   type: TYPE_NORMAL
+  zh: '[TA-Lib 集成](talib.html "下一章")'
 - en: This Page
+  id: totrans-19
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 本页
 - en: '[Show Source](_sources/twitter_example.txt)'
+  id: totrans-20
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[显示源码](_sources/twitter_example.txt)'
 - en: Quick search
+  id: totrans-21
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 快速搜索
 - en: Enter search terms or a module, class or function name.
+  id: totrans-22
   prefs: []
   type: TYPE_NORMAL
+  zh: 输入搜索词或模块、类或函数名称。
 - en: Navigation
+  id: totrans-23
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 导航
 - en: '[index](genindex.html "General Index")'
+  id: totrans-24
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[索引](genindex.html "常规索引")'
 - en: '[modules](py-modindex.html "Python Module Index") |'
+  id: totrans-25
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[模块](py-modindex.html "Python 模块索引") |'
 - en: '[next](talib.html "TA-Lib integration") |'
+  id: totrans-26
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[下一个](talib.html "TA-Lib 集成") |'
 - en: '[previous](twitter_ref.html "twitter – Twitter feed reference") |'
+  id: totrans-27
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[上一个](twitter_ref.html "twitter – Twitter feed reference") |'
 - en: '[PyAlgoTrade 0.20 documentation](index.html) »'
+  id: totrans-28
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[PyAlgoTrade 0.20 文档](index.html) »'
 - en: '[Twitter support](twitter.html) »'
+  id: totrans-29
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[Twitter 支持](twitter.html) »'
