@@ -1,107 +1,164 @@
 - en: Bitcoin Charts example
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 比特币图表示例
 - en: 原文：[https://gbeced.github.io/pyalgotrade/docs/v0.20/html/bitcoincharts_example.html](https://gbeced.github.io/pyalgotrade/docs/v0.20/html/bitcoincharts_example.html)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://gbeced.github.io/pyalgotrade/docs/v0.20/html/bitcoincharts_example.html](https://gbeced.github.io/pyalgotrade/docs/v0.20/html/bitcoincharts_example.html)
 - en: Although it is absolutely possible to backtest a strategy with tick data as
     supplied by [http://www.bitcoincharts.com/about/markets-api/](http://www.bitcoincharts.com/about/markets-api/)
     using [`pyalgotrade.bitcoincharts.barfeed.CSVTradeFeed`](bitcoincharts_ref.html#pyalgotrade.bitcoincharts.barfeed.CSVTradeFeed
     "pyalgotrade.bitcoincharts.barfeed.CSVTradeFeed"), you may want to to backtest
     using summarized bars at a different frequency to make backtesting faster.
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: 尽管使用[http://www.bitcoincharts.com/about/markets-api/](http://www.bitcoincharts.com/about/markets-api/)提供的刻度数据可以完全进行策略回测，使用[`pyalgotrade.bitcoincharts.barfeed.CSVTradeFeed`](bitcoincharts_ref.html#pyalgotrade.bitcoincharts.barfeed.CSVTradeFeed
+    "pyalgotrade.bitcoincharts.barfeed.CSVTradeFeed")，但您可能希望使用不同频率的汇总柱状图进行回测，以加快回测速度。
 - en: 'As of 12-Aug-2014, [http://api.bitcoincharts.com/v1/csv/bitstampUSD.csv.gz](http://api.bitcoincharts.com/v1/csv/bitstampUSD.csv.gz)
     has 4588830 events so we’ll transform a portion of it into 30 minute bars for
     backtesting purposes with the following script:'
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: 截至2014年8月12日，[http://api.bitcoincharts.com/v1/csv/bitstampUSD.csv.gz](http://api.bitcoincharts.com/v1/csv/bitstampUSD.csv.gz)
+    有4588830个事件，因此我们将使用以下脚本将其中的一部分转换为30分钟的柱状图，用于回测目的：
 - en: '[PRE0]'
+  id: totrans-4
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: 'It will take some time to execute, so be patient. The resampled file should
     look like this:'
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: 执行需要一些时间，所以请耐心等待。重新采样后的文件应该是这样的：
 - en: '[PRE1]'
+  id: totrans-6
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE1]'
 - en: 'We can now take advantage of [`pyalgotrade.barfeed.csvfeed.GenericBarFeed`](barfeed.html#pyalgotrade.barfeed.csvfeed.GenericBarFeed
     "pyalgotrade.barfeed.csvfeed.GenericBarFeed") to load the resampled file and backtest
     a Bitcoin strategy. We’ll be using a VWAP momentum strategy for illustration purposes:'
+  id: totrans-7
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在我们可以利用[`pyalgotrade.barfeed.csvfeed.GenericBarFeed`](barfeed.html#pyalgotrade.barfeed.csvfeed.GenericBarFeed
+    "pyalgotrade.barfeed.csvfeed.GenericBarFeed")来加载重新采样后的文件，并回测比特币策略。我们将使用VWAP动量策略进行说明：
 - en: '[PRE2]'
+  id: totrans-8
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE2]'
 - en: 'This is what the plot looks like:'
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: 这是绘图的样子：
 - en: '![_images/bccharts_example_2.png](../Images/1e42a08e1bb2862d7946aa1a4133547e.png)'
+  id: totrans-10
   prefs: []
   type: TYPE_IMG
+  zh: '![_images/bccharts_example_2.png](../Images/1e42a08e1bb2862d7946aa1a4133547e.png)'
 - en: Previous topic
+  id: totrans-11
   prefs:
   - PREF_H4
   type: TYPE_NORMAL
+  zh: 上一个主题
 - en: '[bitcoincharts – Bitcoin Charts reference](bitcoincharts_ref.html "previous
     chapter")'
+  id: totrans-12
   prefs: []
   type: TYPE_NORMAL
+  zh: '[bitcoincharts – 比特币图表参考](bitcoincharts_ref.html "上一章")'
 - en: Next topic
+  id: totrans-13
   prefs:
   - PREF_H4
   type: TYPE_NORMAL
+  zh: 下一个主题
 - en: '[Twitter support](twitter.html "next chapter")'
+  id: totrans-14
   prefs: []
   type: TYPE_NORMAL
+  zh: '[Twitter支持](twitter.html "下一章")'
 - en: This Page
+  id: totrans-15
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 本页
 - en: '[Show Source](_sources/bitcoincharts_example.txt)'
+  id: totrans-16
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[显示源码](_sources/bitcoincharts_example.txt)'
 - en: Quick search
+  id: totrans-17
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 快速搜索
 - en: Enter search terms or a module, class or function name.
+  id: totrans-18
   prefs: []
   type: TYPE_NORMAL
+  zh: 输入搜索词或模块、类或函数名称。
 - en: Navigation
+  id: totrans-19
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 导航
 - en: '[index](genindex.html "General Index")'
+  id: totrans-20
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[索引](genindex.html "总索引")'
 - en: '[modules](py-modindex.html "Python Module Index") |'
+  id: totrans-21
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[模块](py-modindex.html "Python模块索引") |'
 - en: '[next](twitter.html "Twitter support") |'
+  id: totrans-22
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[下一页](twitter.html "Twitter支持") |'
 - en: '[previous](bitcoincharts_ref.html "bitcoincharts – Bitcoin Charts reference")
     |'
+  id: totrans-23
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[上一页](bitcoincharts_ref.html "bitcoincharts – 比特币图表参考") |'
 - en: '[PyAlgoTrade 0.20 documentation](index.html) »'
+  id: totrans-24
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[PyAlgoTrade 0.20 文档](index.html) »'
 - en: '[Bitcoin](bitcoin.html) »'
+  id: totrans-25
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[比特币](bitcoin.html) »'
 - en: '[Bitcoin Charts support](bitcoincharts.html) »'
+  id: totrans-26
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[比特币图表支持](bitcoincharts.html) »'

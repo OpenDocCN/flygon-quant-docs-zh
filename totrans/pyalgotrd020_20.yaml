@@ -1,90 +1,138 @@
 - en: Bitcoin Charts support
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: Bitcoin 图表支持
 - en: 原文：[https://gbeced.github.io/pyalgotrade/docs/v0.20/html/bitcoincharts.html](https://gbeced.github.io/pyalgotrade/docs/v0.20/html/bitcoincharts.html)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://gbeced.github.io/pyalgotrade/docs/v0.20/html/bitcoincharts.html](https://gbeced.github.io/pyalgotrade/docs/v0.20/html/bitcoincharts.html)
 - en: The bitcoincharts package adds support for integrating with historical trade
     data supplied by [http://www.bitcoincharts.com/](http://www.bitcoincharts.com/)
     for backtesting Bitcoin strategies.
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: bitcoincharts 包增加了对由 [http://www.bitcoincharts.com/](http://www.bitcoincharts.com/)
+    提供的历史交易数据与比特币策略回测的支持。
 - en: Historical trade data in CSV format is described in [http://www.bitcoincharts.com/about/markets-api/](http://www.bitcoincharts.com/about/markets-api/),
     and files can be downloaded from [http://api.bitcoincharts.com/v1/csv/](http://api.bitcoincharts.com/v1/csv/).
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: 历史交易数据以 CSV 格式描述，详情请见 [http://www.bitcoincharts.com/about/markets-api/](http://www.bitcoincharts.com/about/markets-api/)，文件可从
+    [http://api.bitcoincharts.com/v1/csv/](http://api.bitcoincharts.com/v1/csv/) 下载。
 - en: 'Contents:'
+  id: totrans-4
   prefs: []
   type: TYPE_NORMAL
+  zh: 目录：
 - en: '[bitcoincharts – Bitcoin Charts reference](bitcoincharts_ref.html)'
+  id: totrans-5
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[bitcoincharts – Bitcoin 图表参考](bitcoincharts_ref.html)'
 - en: '[Feeds](bitcoincharts_ref.html#module-pyalgotrade.bitcoincharts.barfeed)'
+  id: totrans-6
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[Feeds](bitcoincharts_ref.html#module-pyalgotrade.bitcoincharts.barfeed)'
 - en: '[Bitcoin Charts example](bitcoincharts_example.html)'
+  id: totrans-7
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[Bitcoin 图表示例](bitcoincharts_example.html)'
 - en: Previous topic
+  id: totrans-8
   prefs:
   - PREF_H4
   type: TYPE_NORMAL
+  zh: 上一个主题
 - en: '[Bitstamp Example](bitstamp_example.html "previous chapter")'
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: '[Bitstamp 示例](bitstamp_example.html "上一章")'
 - en: Next topic
+  id: totrans-10
   prefs:
   - PREF_H4
   type: TYPE_NORMAL
+  zh: 下一个主题
 - en: '[bitcoincharts – Bitcoin Charts reference](bitcoincharts_ref.html "next chapter")'
+  id: totrans-11
   prefs: []
   type: TYPE_NORMAL
+  zh: '[bitcoincharts – Bitcoin 图表参考](bitcoincharts_ref.html "下一章")'
 - en: This Page
+  id: totrans-12
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 此页面
 - en: '[Show Source](_sources/bitcoincharts.txt)'
+  id: totrans-13
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[显示源代码](_sources/bitcoincharts.txt)'
 - en: Quick search
+  id: totrans-14
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 快速搜索
 - en: Enter search terms or a module, class or function name.
+  id: totrans-15
   prefs: []
   type: TYPE_NORMAL
+  zh: 输入搜索术语或模块、类或函数名称。
 - en: Navigation
+  id: totrans-16
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 导航
 - en: '[index](genindex.html "General Index")'
+  id: totrans-17
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[索引](genindex.html "总索引")'
 - en: '[modules](py-modindex.html "Python Module Index") |'
+  id: totrans-18
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[模块](py-modindex.html "Python 模块索引") |'
 - en: '[next](bitcoincharts_ref.html "bitcoincharts – Bitcoin Charts reference") |'
+  id: totrans-19
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[下一章](bitcoincharts_ref.html "bitcoincharts – Bitcoin 图表参考") |'
 - en: '[previous](bitstamp_example.html "Bitstamp Example") |'
+  id: totrans-20
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[上一章](bitstamp_example.html "Bitstamp 示例") |'
 - en: '[PyAlgoTrade 0.20 documentation](index.html) »'
+  id: totrans-21
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[PyAlgoTrade 0.20 文档](index.html) »'
 - en: '[Bitcoin](bitcoin.html) »'
+  id: totrans-22
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[比特币](bitcoin.html) »'

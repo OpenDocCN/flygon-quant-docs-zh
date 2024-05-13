@@ -1,179 +1,274 @@
 - en: bitcoincharts – Bitcoin Charts reference
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: bitcoincharts – Bitcoin Charts 参考
 - en: 原文：[https://gbeced.github.io/pyalgotrade/docs/v0.20/html/bitcoincharts_ref.html](https://gbeced.github.io/pyalgotrade/docs/v0.20/html/bitcoincharts_ref.html)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://gbeced.github.io/pyalgotrade/docs/v0.20/html/bitcoincharts_ref.html](https://gbeced.github.io/pyalgotrade/docs/v0.20/html/bitcoincharts_ref.html)
 - en: '## Feeds'
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: '## 饲料'
 - en: '*class* `pyalgotrade.bitcoincharts.barfeed.``CSVTradeFeed`(*timezone=None*,
     *maxLen=None*)'
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: '*类* `pyalgotrade.bitcoincharts.barfeed.``CSVTradeFeed`(*时区=None*, *maxLen=None*)'
 - en: 'Bases: [`pyalgotrade.barfeed.csvfeed.BarFeed`](barfeed.html#pyalgotrade.barfeed.csvfeed.BarFeed
     "pyalgotrade.barfeed.csvfeed.BarFeed")'
+  id: totrans-4
   prefs: []
   type: TYPE_NORMAL
+  zh: '基类: [`pyalgotrade.barfeed.csvfeed.BarFeed`](barfeed.html#pyalgotrade.barfeed.csvfeed.BarFeed
+    "pyalgotrade.barfeed.csvfeed.BarFeed")'
 - en: A BarFeed that builds bars from a Historic Trade Data CSV file as described
     in [http://www.bitcoincharts.com/about/markets-api/](http://www.bitcoincharts.com/about/markets-api/).
     Files can be downloaded from [http://api.bitcoincharts.com/v1/csv/](http://api.bitcoincharts.com/v1/csv/).
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: 一个从历史交易数据 CSV 文件构建条形图的 BarFeed，如[http://www.bitcoincharts.com/about/markets-api/](http://www.bitcoincharts.com/about/markets-api/)所述。文件可从[http://api.bitcoincharts.com/v1/csv/](http://api.bitcoincharts.com/v1/csv/)下载。
 - en: '| Parameters: |'
+  id: totrans-6
   prefs: []
   type: TYPE_TB
+  zh: '| 参数: |'
 - en: '**timezone** (*A pytz timezone.*) – An optional default timezone to use to
     localize bars. By default bars are loaded in UTC.'
+  id: totrans-7
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**时区** (*A pytz 时区.*) – 一个可选的默认时区，用于本地化条形图。默认情况下，条形图以 UTC 加载。'
 - en: '**maxLen** (*int.*) – The maximum number of values that the [`pyalgotrade.dataseries.bards.BarDataSeries`](dataseries.html#pyalgotrade.dataseries.bards.BarDataSeries
     "pyalgotrade.dataseries.bards.BarDataSeries") will hold. If not None, it must
     be greater than 0. Once a bounded length is full, when new items are added, a
     corresponding number of items are discarded from the opposite end. If None then
     dataseries.DEFAULT_MAX_LEN is used.'
+  id: totrans-8
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**maxLen** (*整数.*) – [`pyalgotrade.dataseries.bards.BarDataSeries`](dataseries.html#pyalgotrade.dataseries.bards.BarDataSeries
+    "pyalgotrade.dataseries.bards.BarDataSeries")将保存的值的最大数量。如果不是 None，则必须大于 0。一旦有界长度已满，当添加新项时，相应数量的项将从相反的一端丢弃。如果为
+    None，则使用 dataseries.DEFAULT_MAX_LEN。'
 - en: '|'
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: '|'
 - en: Note
+  id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: 注意
 - en: A [`pyalgotrade.bar.Bar`](bar.html#pyalgotrade.bar.Bar "pyalgotrade.bar.Bar")
     instance will be created for every trade, so open, high, low and close values
     will all be the same.
+  id: totrans-11
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 对于每一笔交易，都会创建一个[`pyalgotrade.bar.Bar`](bar.html#pyalgotrade.bar.Bar "pyalgotrade.bar.Bar")
+    实例，因此开盘价、最高价、最低价和收盘价都相同。
 - en: Files must be sorted with the **unixtime** column in ascending order.
+  id: totrans-12
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 文件必须按升序排列**unixtime**列。
 - en: '`addBarsFromCSV`(*path*, *instrument=''BTC''*, *timezone=None*, *fromDateTime=None*,
     *toDateTime=None*)'
+  id: totrans-13
   prefs: []
   type: TYPE_NORMAL
+  zh: '`addBarsFromCSV`(*路径*, *instrument=''BTC''*, *时区=None*, *fromDateTime=None*,
+    *toDateTime=None*)'
 - en: Loads bars from a trades CSV formatted file.
+  id: totrans-14
   prefs: []
   type: TYPE_NORMAL
+  zh: 从交易 CSV 格式的文件加载条形图。
 - en: '| Parameters: |'
+  id: totrans-15
   prefs: []
   type: TYPE_TB
+  zh: '| 参数: |'
 - en: '**path** (*string.*) – The path to the file.'
+  id: totrans-16
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**路径** (*字符串.*) – 文件的路径。'
 - en: '**instrument** (*string.*) – The instrument identifier.'
+  id: totrans-17
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**instrument** (*字符串.*) – 仪器标识符。'
 - en: '**timezone** (*A pytz timezone.*) – An optional timezone to use to localize
     bars. By default bars are loaded in UTC.'
+  id: totrans-18
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**时区** (*A pytz 时区.*) – 一个可选的用于本地化条形图的时区。默认情况下，条形图以 UTC 加载。'
 - en: '**fromDateTime** (*datetime.datetime.*) – An optional datetime to use to filter
     bars to load. If supplied only those bars whose datetime is greater than or equal
     to fromDateTime are loaded.'
+  id: totrans-19
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**fromDateTime** (*datetime.datetime.*) – 一个可选的日期时间，用于过滤要加载的条形图。如果提供，则只加载其日期时间大于或等于
+    fromDateTime 的那些条。'
 - en: '**toDateTime** (*datetime.datetime.*) – An optional datetime to use to filter
     bars to load. If supplied only those bars whose datetime is lower than or equal
     to toDateTime are loaded.'
+  id: totrans-20
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**toDateTime** (*datetime.datetime.*) – 一个可选的日期时间，用于过滤要加载的条形图。如果提供，则只加载其日期时间低于或等于
+    toDateTime 的那些条。'
 - en: '|'
+  id: totrans-21
   prefs: []
   type: TYPE_NORMAL
+  zh: '|'
 - en: Note
+  id: totrans-22
   prefs: []
   type: TYPE_NORMAL
+  zh: 注意
 - en: Every file that you load bars from must have trades in the same currency.
+  id: totrans-23
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 您从中加载条形图的每个文件必须具有相同货币的交易。
 - en: If fromDateTime or toDateTime are naive, they are treated as UTC.
+  id: totrans-24
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 如果 fromDateTime 或 toDateTime 是幼稚的，则将其视为 UTC。
 - en: '[Table Of Contents](index.html)'
+  id: totrans-25
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: '[目录](index.html)'
 - en: '[bitcoincharts – Bitcoin Charts reference](#)'
+  id: totrans-26
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[bitcoincharts – Bitcoin Charts 参考](#)'
 - en: '[Feeds](#module-pyalgotrade.bitcoincharts.barfeed)'
+  id: totrans-27
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[Feeds](#module-pyalgotrade.bitcoincharts.barfeed)'
 - en: Previous topic
+  id: totrans-28
   prefs:
   - PREF_H4
   type: TYPE_NORMAL
+  zh: 上一个主题
 - en: '[Bitcoin Charts support](bitcoincharts.html "previous chapter")'
+  id: totrans-29
   prefs: []
   type: TYPE_NORMAL
+  zh: '[Bitcoin Charts 支持](bitcoincharts.html "前一章节")'
 - en: Next topic
+  id: totrans-30
   prefs:
   - PREF_H4
   type: TYPE_NORMAL
+  zh: 下一个主题
 - en: '[Bitcoin Charts example](bitcoincharts_example.html "next chapter")'
+  id: totrans-31
   prefs: []
   type: TYPE_NORMAL
+  zh: '[Bitcoin Charts 示例](bitcoincharts_example.html "下一章节")'
 - en: This Page
+  id: totrans-32
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 本页
 - en: '[Show Source](_sources/bitcoincharts_ref.txt)'
+  id: totrans-33
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[查看源代码](_sources/bitcoincharts_ref.txt)'
 - en: Quick search
+  id: totrans-34
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 快速搜索
 - en: Enter search terms or a module, class or function name.
+  id: totrans-35
   prefs: []
   type: TYPE_NORMAL
+  zh: 输入搜索词或模块、类或函数名称。
 - en: Navigation
+  id: totrans-36
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 导航
 - en: '[index](genindex.html "General Index")'
+  id: totrans-37
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[索引](genindex.html "总索引")'
 - en: '[modules](py-modindex.html "Python Module Index") |'
+  id: totrans-38
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[模块](py-modindex.html "Python 模块索引") |'
 - en: '[next](bitcoincharts_example.html "Bitcoin Charts example") |'
+  id: totrans-39
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[下一页](bitcoincharts_example.html "比特币图表示例") |'
 - en: '[previous](bitcoincharts.html "Bitcoin Charts support") |'
+  id: totrans-40
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[上一页](bitcoincharts.html "比特币图表支持") |'
 - en: '[PyAlgoTrade 0.20 documentation](index.html) »'
+  id: totrans-41
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[PyAlgoTrade 0.20 文档](index.html) »'
 - en: '[Bitcoin](bitcoin.html) »'
+  id: totrans-42
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[比特币](bitcoin.html) »'
 - en: '[Bitcoin Charts support](bitcoincharts.html) »'
+  id: totrans-43
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[比特币图表支持](bitcoincharts.html) »'
