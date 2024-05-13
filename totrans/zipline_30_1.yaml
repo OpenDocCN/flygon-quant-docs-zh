@@ -1,11 +1,15 @@
 - en: Installation
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 安装
 - en: 原文：[https://zipline.ml4trading.io/install.html](https://zipline.ml4trading.io/install.html)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://zipline.ml4trading.io/install.html](https://zipline.ml4trading.io/install.html)
 - en: You can install Zipline either using [pip](https://pip.pypa.io/en/stable/),
     the Python package installer, or [conda](https://docs.conda.io/projects/conda/en/latest/index.html),
     the package and environment management system that runs on Windows, macOS, and
@@ -13,640 +17,962 @@
     encounter [conflict errors]([conda/conda#9707](https://github.com/conda/conda/issues/9707)),
     consider using [mamba]([mamba-org/mamba](https://github.com/mamba-org/mamba))
     instead.
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: 您可以使用[pip](https://pip.pypa.io/en/stable/)，Python包安装程序，或[conda](https://docs.conda.io/projects/conda/en/latest/index.html)，跨Windows、macOS和Linux的包和环境管理系统来安装Zipline。如果您在安装zipline-reloaded的同时安装其他包并遇到[冲突错误](https://github.com/conda/conda/issues/9707)，请考虑使用[mamba](https://github.com/mamba-org/mamba)代替。
 - en: Zipline runs on Python 3.8, 3.9, 3.10 and 3.11\. To install and use different
     Python versions in parallel as well as create a virtual environment, you may want
     to use [pyenv](https://github.com/pyenv/pyenv).
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: Zipline支持Python 3.8、3.9、3.10和3.11。要安装和并行使用不同版本的Python以及创建虚拟环境，您可能希望使用[pyenv](https://github.com/pyenv/pyenv)。
 - en: Installing with `pip`
+  id: totrans-4
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 使用`pip`安装
 - en: Installing Zipline via `pip` is slightly more involved than the average Python
     package.
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: 通过`pip`安装Zipline比一般的Python包稍微复杂一些。
 - en: 'There are two reasons for the additional complexity:'
+  id: totrans-6
   prefs: []
   type: TYPE_NORMAL
+  zh: 增加复杂性的原因有两个：
 - en: Zipline ships several C extensions that require access to the CPython C API.
     In order to build these C extensions, `pip` needs access to the CPython header
     files for your Python installation.
+  id: totrans-7
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: Zipline提供了几个需要访问CPython C API的C扩展。为了构建这些C扩展，`pip`需要访问您的Python安装的CPython头文件。
 - en: Zipline depends on [NumPy](https://www.numpy.org/), the core library for numerical
     array computing in Python. NumPy, in turn, depends on the [LAPACK](https://www.netlib.org/lapack)
     linear algebra routines.
+  id: totrans-8
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: Zipline依赖于[NumPy](https://www.numpy.org/)，这是Python中用于数值数组计算的核心库。而NumPy又依赖于[LAPACK](https://www.netlib.org/lapack)线性代数例程。
 - en: 'Because LAPACK and the CPython headers are non-Python dependencies, the correct
     way to install them varies from platform to platform. If you’d rather use a single
     tool to install Python and non-Python dependencies, or if you’re already using
     [Anaconda](https://www.anaconda.com/distribution/) as your Python distribution,
     you can skip to the :ref: conda section.'
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: '由于LAPACK和CPython头文件是非Python依赖项，因此安装它们的方法因平台而异。如果您更愿意使用单一工具来安装Python和非Python依赖项，或者如果您已经在使用[Anaconda](https://www.anaconda.com/distribution/)作为您的Python发行版，您可以直接跳到:ref:
+    conda部分。'
 - en: 'Once you’ve installed the necessary additional dependencies (see below for
     your particular platform), you should be able to simply run (preferably inside
     an activated virtual environment):'
+  id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: 一旦您安装了必要的额外依赖项（请参阅下面针对您特定平台的说明），您应该能够简单地运行（最好在激活的虚拟环境中）：
 - en: '[PRE0]'
+  id: totrans-11
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: If you use Python for anything other than Zipline, we **strongly** recommend
     that you install in a [virtualenv](https://virtualenv.readthedocs.org/en/latest).
     The [Hitchhiker’s Guide to Python](https://docs.python-guide.org/en/latest/) provides
     an [excellent tutorial on virtualenv](https://docs.python-guide.org/en/latest/dev/virtualenvs/).
+  id: totrans-12
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果您使用Python进行除Zipline之外的任何操作，我们**强烈**建议您在[virtualenv](https://virtualenv.readthedocs.org/en/latest/)中安装。《Python编程指南》提供了一个[关于virtualenv的优秀教程](https://docs.python-guide.org/en/latest/dev/virtualenvs/)。
 - en: GNU/Linux
+  id: totrans-13
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: GNU/Linux
 - en: Dependencies
+  id: totrans-14
   prefs:
   - PREF_H4
   type: TYPE_NORMAL
+  zh: 依赖项
 - en: 'On [Debian-derived](https://www.debian.org/derivatives/) Linux distributions,
     you can acquire all the necessary binary dependencies from `apt` by running:'
+  id: totrans-15
   prefs: []
   type: TYPE_NORMAL
+  zh: 在[Debian衍生](https://www.debian.org/derivatives/)的Linux发行版上，您可以通过运行以下命令从`apt`获取所有必要的二进制依赖项：
 - en: '[PRE1]'
+  id: totrans-16
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE1]'
 - en: 'On recent [RHEL-derived](https://en.wikipedia.org/wiki/Red_Hat_Enterprise_Linux_derivatives)
     derived Linux distributions (e.g. Fedora), the following should be sufficient
     to acquire the necessary additional dependencies:'
+  id: totrans-17
   prefs: []
   type: TYPE_NORMAL
+  zh: 在最近的[RHEL衍生](https://en.wikipedia.org/wiki/Red_Hat_Enterprise_Linux_derivatives)Linux发行版（例如Fedora）上，以下步骤应该足以获取必要的额外依赖项：
 - en: '[PRE2]'
+  id: totrans-18
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE2]'
 - en: 'On [Arch Linux](https://www.archlinux.org/), you can acquire the additional
     dependencies via `pacman`:'
+  id: totrans-19
   prefs: []
   type: TYPE_NORMAL
+  zh: 在[Arch Linux](https://www.archlinux.org/)上，您可以通过`pacman`获取额外的依赖项：
 - en: '[PRE3]'
+  id: totrans-20
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE3]'
 - en: 'There are also AUR packages available for installing [ta-lib](https://aur.archlinux.org/packages/ta-lib/).
     Python 3 is also installable via:'
+  id: totrans-21
   prefs: []
   type: TYPE_NORMAL
+  zh: 还有适用于安装[ta-lib](https://aur.archlinux.org/packages/ta-lib/)的AUR包。Python 3也可以通过以下方式安装：
 - en: '[PRE4]'
+  id: totrans-22
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE4]'
 - en: Compiling TA-Lib
+  id: totrans-23
   prefs:
   - PREF_H4
   type: TYPE_NORMAL
+  zh: 编译TA-Lib
 - en: You will also need to compile the [TA-Lib](https://www.ta-lib.org/) library
     for technical analysis so its headers become available.
+  id: totrans-24
   prefs: []
   type: TYPE_NORMAL
+  zh: 你还需要编译[TA-Lib](https://www.ta-lib.org/)库以进行技术分析，以便其头文件可用。
 - en: 'You can accomplish this as follows:'
+  id: totrans-25
   prefs: []
   type: TYPE_NORMAL
+  zh: 你可以按照以下步骤进行操作：
 - en: '[PRE5]'
+  id: totrans-26
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE5]'
 - en: This will allow you to install the Python wrapper with `pip` as expected by
     the binary wheel.
+  id: totrans-27
   prefs: []
   type: TYPE_NORMAL
+  zh: 这将允许你使用`pip`安装Python包装器，正如二进制轮子所预期的那样。
 - en: macOS
+  id: totrans-28
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: macOS
 - en: The version of Python shipped with macOS is generally out of date, and has a
     number of quirks because it’s used directly by the operating system. For these
     reasons, many developers choose to install and use a separate Python installation.
+  id: totrans-29
   prefs: []
   type: TYPE_NORMAL
+  zh: macOS随附的Python版本通常已过时，并且由于操作系统直接使用它而存在一些怪癖。出于这些原因，许多开发人员选择安装并使用单独的Python安装。
 - en: The [Hitchhiker’s Guide to Python](https://docs.python-guide.org/en/latest/)
     provides an excellent guide to [Installing Python on macOS](https://docs.python-guide.org/en/latest/),
     which explains how to install Python with the [Homebrew](https://brew.sh/) manager.
     Alternatively, you could use [pyenv](https://github.com/pyenv/pyenv).
+  id: totrans-30
   prefs: []
   type: TYPE_NORMAL
+  zh: '[Python搭车指南](https://docs.python-guide.org/en/latest/)提供了关于[在macOS上安装Python](https://docs.python-guide.org/en/latest/)的优秀指南，该指南解释了如何使用[Homebrew](https://brew.sh/)管理器安装Python。或者，你也可以使用[pyenv](https://github.com/pyenv/pyenv)。'
 - en: 'Assuming you’ve installed Python with `brew`, you’ll also likely need the following
     packages:'
+  id: totrans-31
   prefs: []
   type: TYPE_NORMAL
+  zh: 假设你已经使用`brew`安装了Python，那么你可能还需要以下包：
 - en: '[PRE6]'
+  id: totrans-32
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE6]'
 - en: Windows
+  id: totrans-33
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: Windows
 - en: For Windows, the easiest and best supported way to install Zipline is to use
     `conda`.
+  id: totrans-34
   prefs: []
   type: TYPE_NORMAL
+  zh: 对于Windows，安装Zipline最简单且最支持的方法是使用`conda`。
 - en: '## Installing with `conda`'
+  id: totrans-35
   prefs: []
   type: TYPE_NORMAL
+  zh: '## 使用`conda`安装'
 - en: Another way to install Zipline is via the `conda` package manager, which comes
     as part of the [Anaconda](https://www.anaconda.com/distribution/) distribution.
     Alternatively, you can use the related but more lightweight [Miniconda](https://docs.conda.io/en/latest/miniconda.html#)
     or [Miniforge](https://github.com/conda-forge/miniforge) installers.
+  id: totrans-36
   prefs: []
   type: TYPE_NORMAL
+  zh: 另一种安装Zipline的方法是通过`conda`包管理器，它是[Anaconda](https://www.anaconda.com/distribution/)发行版的一部分。或者，你可以使用相关但更轻量级的[Miniconda](https://docs.conda.io/en/latest/miniconda.html#)或[Miniforge](https://github.com/conda-forge/miniforge)安装程序。
 - en: The primary advantage of using Conda over `pip` is that `conda` natively understands
     the complex binary dependencies of packages like `numpy` and `scipy`. This means
     that `conda` can install Zipline and its dependencies without requiring the use
     of a second tool to acquire Zipline’s non-Python dependencies.
+  id: totrans-37
   prefs: []
   type: TYPE_NORMAL
+  zh: 使用Conda而不是`pip`的主要优点是，`conda`原生理解像`numpy`和`scipy`这样的包的复杂二进制依赖关系。这意味着`conda`可以安装Zipline及其依赖项，而不需要使用第二个工具来获取Zipline的非Python依赖项。
 - en: For instructions on how to install `conda`, see the [Conda Installation Documentation](https://conda.io/projects/conda/en/latest/user-guide/install/index.html).
+  id: totrans-38
   prefs: []
   type: TYPE_NORMAL
+  zh: 有关如何安装`conda`的说明，请参阅[Conda安装文档](https://conda.io/projects/conda/en/latest/user-guide/install/index.html)。
 - en: Once `conda` has been set up you can install Zipline from the `conda-forge`
     channel.
+  id: totrans-39
   prefs: []
   type: TYPE_NORMAL
+  zh: 一旦设置了`conda`，你就可以从`conda-forge`频道安装Zipline。
 - en: See [here]([conda-forge/zipline-reloaded-feedstock](https://github.com/conda-forge/zipline-reloaded-feedstock))
     for the latest installation details.
+  id: totrans-40
   prefs: []
   type: TYPE_NORMAL
+  zh: 请参阅[此处](https://github.com/conda-forge/zipline-reloaded-feedstock)了解最新的安装详细信息。
 - en: '### Managing `conda` environments'
+  id: totrans-41
   prefs: []
   type: TYPE_NORMAL
+  zh: '### 管理`conda`环境'
 - en: It is recommended to install Zipline in an isolated `conda` environment. Installing
     Zipline in `conda` environments will not interfere your default Python deployment
     or site-packages, which will prevent any possible conflict with your global libraries.
     For more information on `conda` environment, see the [Conda User Guide](https://conda.io/projects/conda/en/latest/user-guide/tasks/manage-environments.html).
+  id: totrans-42
   prefs: []
   type: TYPE_NORMAL
+  zh: 建议在隔离的`conda`环境中安装Zipline。在`conda`环境中安装Zipline不会干扰你的默认Python部署或site-packages，这将防止与你的全局库发生任何可能的冲突。有关`conda`环境的更多信息，请参阅[Conda用户指南](https://conda.io/projects/conda/en/latest/user-guide/tasks/manage-environments.html)。
 - en: 'Assuming `conda` has been set up, you can create a `conda` environment:'
+  id: totrans-43
   prefs: []
   type: TYPE_NORMAL
+  zh: 假设已经设置了`conda`，你可以创建一个`conda`环境：
 - en: '[PRE7]'
+  id: totrans-44
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE7]'
 - en: Now you have set up an isolated environment called `env_zipline`, a sandbox-like
     structure to install Zipline. Then you should activate the conda environment by
     using the command
+  id: totrans-45
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在你已经设置了一个名为`env_zipline`的隔离环境，这是一个类似沙盒的结构，用于安装Zipline。然后你应该使用以下命令激活conda环境：
 - en: '[PRE8]'
+  id: totrans-46
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE8]'
 - en: You can install Zipline by running
+  id: totrans-47
   prefs: []
   type: TYPE_NORMAL
+  zh: 你可以通过运行以下命令来安装Zipline：
 - en: '[PRE9]'
+  id: totrans-48
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE9]'
 - en: 'To deactivate the `conda` environment:'
+  id: totrans-49
   prefs: []
   type: TYPE_NORMAL
+  zh: 要停用`conda`环境：
 - en: '[PRE10]'
+  id: totrans-50
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE10]'
 - en: Note
+  id: totrans-51
   prefs: []
   type: TYPE_NORMAL
+  zh: 注意
 - en: '`conda activate` and `conda deactivate` only work on conda 4.6 and later versions.
     For conda versions prior to 4.6, run:'
+  id: totrans-52
   prefs: []
   type: TYPE_NORMAL
+  zh: '`conda activate` 和 `conda deactivate` 仅适用于 conda 4.6 及更高版本。对于 conda 4.6 之前的版本，请运行：'
 - en: 'Windows: `activate` or `deactivate`'
+  id: totrans-53
   prefs:
   - PREF_BQ
   - PREF_UL
   type: TYPE_NORMAL
+  zh: Windows：`activate` 或 `deactivate`
 - en: ''
+  id: totrans-54
   prefs:
   - PREF_BQ
   - PREF_IND
   type: TYPE_NORMAL
 - en: ''
+  id: totrans-55
   prefs:
   - PREF_BQ
   - PREF_IND
   type: TYPE_NORMAL
 - en: 'Linux and macOS: `source activate` or `source deactivate`'
+  id: totrans-56
   prefs:
   - PREF_BQ
   - PREF_UL
   type: TYPE_NORMAL
+  zh: Linux 和 macOS：`source activate` 或 `source deactivate`
 - en: Installing with `pip`
+  id: totrans-57
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 使用 `pip` 安装
 - en: Installing Zipline via `pip` is slightly more involved than the average Python
     package.
+  id: totrans-58
   prefs: []
   type: TYPE_NORMAL
+  zh: 通过 `pip` 安装 Zipline 比一般的 Python 包稍微复杂一些。
 - en: 'There are two reasons for the additional complexity:'
+  id: totrans-59
   prefs: []
   type: TYPE_NORMAL
+  zh: 增加复杂性的原因有两个：
 - en: Zipline ships several C extensions that require access to the CPython C API.
     In order to build these C extensions, `pip` needs access to the CPython header
     files for your Python installation.
+  id: totrans-60
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: Zipline 提供了多个需要访问 CPython C API 的 C 扩展。为了构建这些 C 扩展，`pip` 需要访问您 Python 安装的 CPython
+    头文件。
 - en: Zipline depends on [NumPy](https://www.numpy.org/), the core library for numerical
     array computing in Python. NumPy, in turn, depends on the [LAPACK](https://www.netlib.org/lapack)
     linear algebra routines.
+  id: totrans-61
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: Zipline 依赖于 [NumPy](https://www.numpy.org/)，这是 Python 中用于数值数组计算的核心库。NumPy 反过来又依赖于
+    [LAPACK](https://www.netlib.org/lapack) 线性代数例程。
 - en: 'Because LAPACK and the CPython headers are non-Python dependencies, the correct
     way to install them varies from platform to platform. If you’d rather use a single
     tool to install Python and non-Python dependencies, or if you’re already using
     [Anaconda](https://www.anaconda.com/distribution/) as your Python distribution,
     you can skip to the :ref: conda section.'
+  id: totrans-62
   prefs: []
   type: TYPE_NORMAL
+  zh: '由于 LAPACK 和 CPython 头文件是非 Python 依赖项，因此安装它们的方法因平台而异。如果您更愿意使用单个工具来安装 Python
+    和非 Python 依赖项，或者如果您已经在使用 [Anaconda](https://www.anaconda.com/distribution/) 作为您的
+    Python 发行版，则可以跳至 :ref: conda 部分。'
 - en: 'Once you’ve installed the necessary additional dependencies (see below for
     your particular platform), you should be able to simply run (preferably inside
     an activated virtual environment):'
+  id: totrans-63
   prefs: []
   type: TYPE_NORMAL
+  zh: 一旦您安装了必要的额外依赖项（请参阅下面的特定平台），您应该能够简单地运行（最好在激活的虚拟环境中）：
 - en: '[PRE11]'
+  id: totrans-64
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE11]'
 - en: If you use Python for anything other than Zipline, we **strongly** recommend
     that you install in a [virtualenv](https://virtualenv.readthedocs.org/en/latest).
     The [Hitchhiker’s Guide to Python](https://docs.python-guide.org/en/latest/) provides
     an [excellent tutorial on virtualenv](https://docs.python-guide.org/en/latest/dev/virtualenvs/).
+  id: totrans-65
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果您使用 Python 进行除 Zipline 之外的任何操作，我们**强烈**建议您在 [virtualenv](https://virtualenv.readthedocs.org/en/latest/)
+    中安装。《Python 漫游者指南》提供了一个关于 virtualenv 的[优秀教程](https://docs.python-guide.org/en/latest/dev/virtualenvs/)。
 - en: GNU/Linux
+  id: totrans-66
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: GNU/Linux
 - en: Dependencies
+  id: totrans-67
   prefs:
   - PREF_H4
   type: TYPE_NORMAL
+  zh: 依赖项
 - en: 'On [Debian-derived](https://www.debian.org/derivatives/) Linux distributions,
     you can acquire all the necessary binary dependencies from `apt` by running:'
+  id: totrans-68
   prefs: []
   type: TYPE_NORMAL
+  zh: 在 [Debian 派生](https://www.debian.org/derivatives/)的 Linux 发行版上，您可以通过运行以下命令从
+    `apt` 获取所有必要的二进制依赖项：
 - en: '[PRE12]'
+  id: totrans-69
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE12]'
 - en: 'On recent [RHEL-derived](https://en.wikipedia.org/wiki/Red_Hat_Enterprise_Linux_derivatives)
     derived Linux distributions (e.g. Fedora), the following should be sufficient
     to acquire the necessary additional dependencies:'
+  id: totrans-70
   prefs: []
   type: TYPE_NORMAL
+  zh: 在最近的 [RHEL 派生](https://en.wikipedia.org/wiki/Red_Hat_Enterprise_Linux_derivatives)的
+    Linux 发行版（例如 Fedora）上，以下内容应该足以获取必要的额外依赖项：
 - en: '[PRE13]'
+  id: totrans-71
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE13]'
 - en: 'On [Arch Linux](https://www.archlinux.org/), you can acquire the additional
     dependencies via `pacman`:'
+  id: totrans-72
   prefs: []
   type: TYPE_NORMAL
+  zh: 在 [Arch Linux](https://www.archlinux.org/) 上，您可以通过 `pacman` 获取额外的依赖项：
 - en: '[PRE14]'
+  id: totrans-73
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE14]'
 - en: 'There are also AUR packages available for installing [ta-lib](https://aur.archlinux.org/packages/ta-lib/).
     Python 3 is also installable via:'
+  id: totrans-74
   prefs: []
   type: TYPE_NORMAL
+  zh: 也有 AUR 包可用于安装 [ta-lib](https://aur.archlinux.org/packages/ta-lib/)。Python 3
+    也可以通过以下方式安装：
 - en: '[PRE15]'
+  id: totrans-75
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE15]'
 - en: Compiling TA-Lib
+  id: totrans-76
   prefs:
   - PREF_H4
   type: TYPE_NORMAL
+  zh: 编译 TA-Lib
 - en: You will also need to compile the [TA-Lib](https://www.ta-lib.org/) library
     for technical analysis so its headers become available.
+  id: totrans-77
   prefs: []
   type: TYPE_NORMAL
+  zh: 您还需要编译 [TA-Lib](https://www.ta-lib.org/) 库以进行技术分析，以便其头文件可用。
 - en: 'You can accomplish this as follows:'
+  id: totrans-78
   prefs: []
   type: TYPE_NORMAL
+  zh: 您可以按照以下步骤操作：
 - en: '[PRE16]'
+  id: totrans-79
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE16]'
 - en: This will allow you to install the Python wrapper with `pip` as expected by
     the binary wheel.
+  id: totrans-80
   prefs: []
   type: TYPE_NORMAL
+  zh: 这将允许您按照二进制轮子的预期使用 `pip` 安装 Python 包装器。
 - en: macOS
+  id: totrans-81
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: macOS
 - en: The version of Python shipped with macOS is generally out of date, and has a
     number of quirks because it’s used directly by the operating system. For these
     reasons, many developers choose to install and use a separate Python installation.
+  id: totrans-82
   prefs: []
   type: TYPE_NORMAL
+  zh: macOS 随附的 Python 版本通常已过时，并且由于操作系统直接使用它而存在一些特殊情况。出于这些原因，许多开发者选择安装并使用单独的 Python
+    安装。
 - en: The [Hitchhiker’s Guide to Python](https://docs.python-guide.org/en/latest/)
     provides an excellent guide to [Installing Python on macOS](https://docs.python-guide.org/en/latest/),
     which explains how to install Python with the [Homebrew](https://brew.sh/) manager.
     Alternatively, you could use [pyenv](https://github.com/pyenv/pyenv).
+  id: totrans-83
   prefs: []
   type: TYPE_NORMAL
+  zh: '[Python漫游指南](https://docs.python-guide.org/en/latest/)提供了[在macOS上安装Python](https://docs.python-guide.org/en/latest/)的优秀指南，解释了如何使用[Homebrew](https://brew.sh/)管理器安装Python。或者，您可以使用[pyenv](https://github.com/pyenv/pyenv)。'
 - en: 'Assuming you’ve installed Python with `brew`, you’ll also likely need the following
     packages:'
+  id: totrans-84
   prefs: []
   type: TYPE_NORMAL
+  zh: 假设您已经使用`brew`安装了Python，您可能还需要以下包：
 - en: '[PRE17]'
+  id: totrans-85
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE17]'
 - en: Windows
+  id: totrans-86
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: Windows
 - en: For Windows, the easiest and best supported way to install Zipline is to use
     `conda`.
+  id: totrans-87
   prefs: []
   type: TYPE_NORMAL
+  zh: 对于Windows，安装Zipline最简单且最支持的方法是使用`conda`。
 - en: GNU/Linux
+  id: totrans-88
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: GNU/Linux
 - en: Dependencies
+  id: totrans-89
   prefs:
   - PREF_H4
   type: TYPE_NORMAL
+  zh: 依赖项
 - en: 'On [Debian-derived](https://www.debian.org/derivatives/) Linux distributions,
     you can acquire all the necessary binary dependencies from `apt` by running:'
+  id: totrans-90
   prefs: []
   type: TYPE_NORMAL
+  zh: 在[Debian衍生](https://www.debian.org/derivatives/)的Linux发行版上，您可以通过运行以下命令从`apt`获取所有必要的二进制依赖项：
 - en: '[PRE18]'
+  id: totrans-91
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE18]'
 - en: 'On recent [RHEL-derived](https://en.wikipedia.org/wiki/Red_Hat_Enterprise_Linux_derivatives)
     derived Linux distributions (e.g. Fedora), the following should be sufficient
     to acquire the necessary additional dependencies:'
+  id: totrans-92
   prefs: []
   type: TYPE_NORMAL
+  zh: 在最近的[RHEL衍生](https://en.wikipedia.org/wiki/Red_Hat_Enterprise_Linux_derivatives)的Linux发行版（例如Fedora）上，以下步骤应该足以获取必要的额外依赖项：
 - en: '[PRE19]'
+  id: totrans-93
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE19]'
 - en: 'On [Arch Linux](https://www.archlinux.org/), you can acquire the additional
     dependencies via `pacman`:'
+  id: totrans-94
   prefs: []
   type: TYPE_NORMAL
+  zh: 在[Arch Linux](https://www.archlinux.org/)上，您可以通过`pacman`获取额外的依赖项：
 - en: '[PRE20]'
+  id: totrans-95
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE20]'
 - en: 'There are also AUR packages available for installing [ta-lib](https://aur.archlinux.org/packages/ta-lib/).
     Python 3 is also installable via:'
+  id: totrans-96
   prefs: []
   type: TYPE_NORMAL
+  zh: 也有AUR包可用于安装[ta-lib](https://aur.archlinux.org/packages/ta-lib/)。Python 3也可以通过以下方式安装：
 - en: '[PRE21]'
+  id: totrans-97
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE21]'
 - en: Compiling TA-Lib
+  id: totrans-98
   prefs:
   - PREF_H4
   type: TYPE_NORMAL
+  zh: 编译TA-Lib
 - en: You will also need to compile the [TA-Lib](https://www.ta-lib.org/) library
     for technical analysis so its headers become available.
+  id: totrans-99
   prefs: []
   type: TYPE_NORMAL
+  zh: 您还需要编译[TA-Lib](https://www.ta-lib.org/)技术分析库，以便其头文件可用。
 - en: 'You can accomplish this as follows:'
+  id: totrans-100
   prefs: []
   type: TYPE_NORMAL
+  zh: 您可以按照以下步骤操作：
 - en: '[PRE22]'
+  id: totrans-101
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE22]'
 - en: This will allow you to install the Python wrapper with `pip` as expected by
     the binary wheel.
+  id: totrans-102
   prefs: []
   type: TYPE_NORMAL
+  zh: 这将允许您按照二进制轮子的预期使用`pip`安装Python包装器。
 - en: Dependencies
+  id: totrans-103
   prefs:
   - PREF_H4
   type: TYPE_NORMAL
+  zh: 依赖项
 - en: 'On [Debian-derived](https://www.debian.org/derivatives/) Linux distributions,
     you can acquire all the necessary binary dependencies from `apt` by running:'
+  id: totrans-104
   prefs: []
   type: TYPE_NORMAL
+  zh: 在[Debian衍生](https://www.debian.org/derivatives/)的Linux发行版上，您可以通过运行以下命令从`apt`获取所有必要的二进制依赖项：
 - en: '[PRE23]'
+  id: totrans-105
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE23]'
 - en: 'On recent [RHEL-derived](https://en.wikipedia.org/wiki/Red_Hat_Enterprise_Linux_derivatives)
     derived Linux distributions (e.g. Fedora), the following should be sufficient
     to acquire the necessary additional dependencies:'
+  id: totrans-106
   prefs: []
   type: TYPE_NORMAL
+  zh: 在最近的[RHEL衍生](https://en.wikipedia.org/wiki/Red_Hat_Enterprise_Linux_derivatives)的Linux发行版（例如Fedora）上，以下步骤应该足以获取必要的额外依赖项：
 - en: '[PRE24]'
+  id: totrans-107
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE24]'
 - en: 'On [Arch Linux](https://www.archlinux.org/), you can acquire the additional
     dependencies via `pacman`:'
+  id: totrans-108
   prefs: []
   type: TYPE_NORMAL
+  zh: 在[Arch Linux](https://www.archlinux.org/)上，您可以通过`pacman`获取额外的依赖项：
 - en: '[PRE25]'
+  id: totrans-109
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE25]'
 - en: 'There are also AUR packages available for installing [ta-lib](https://aur.archlinux.org/packages/ta-lib/).
     Python 3 is also installable via:'
+  id: totrans-110
   prefs: []
   type: TYPE_NORMAL
+  zh: 也有AUR包可用于安装[ta-lib](https://aur.archlinux.org/packages/ta-lib/)。Python 3也可以通过以下方式安装：
 - en: '[PRE26]'
+  id: totrans-111
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE26]'
 - en: Compiling TA-Lib
+  id: totrans-112
   prefs:
   - PREF_H4
   type: TYPE_NORMAL
+  zh: 编译TA-Lib
 - en: You will also need to compile the [TA-Lib](https://www.ta-lib.org/) library
     for technical analysis so its headers become available.
+  id: totrans-113
   prefs: []
   type: TYPE_NORMAL
+  zh: 您还需要编译[TA-Lib](https://www.ta-lib.org/)技术分析库，以便其头文件可用。
 - en: 'You can accomplish this as follows:'
+  id: totrans-114
   prefs: []
   type: TYPE_NORMAL
+  zh: 您可以按照以下步骤操作：
 - en: '[PRE27]'
+  id: totrans-115
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE27]'
 - en: This will allow you to install the Python wrapper with `pip` as expected by
     the binary wheel.
+  id: totrans-116
   prefs: []
   type: TYPE_NORMAL
+  zh: 这将允许您按照二进制轮子的预期使用`pip`安装Python包装器。
 - en: macOS
+  id: totrans-117
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: macOS
 - en: The version of Python shipped with macOS is generally out of date, and has a
     number of quirks because it’s used directly by the operating system. For these
     reasons, many developers choose to install and use a separate Python installation.
+  id: totrans-118
   prefs: []
   type: TYPE_NORMAL
+  zh: macOS随附的Python版本通常已过时，并且由于操作系统直接使用它而存在一些怪癖。出于这些原因，许多开发人员选择安装并使用单独的Python安装。
 - en: The [Hitchhiker’s Guide to Python](https://docs.python-guide.org/en/latest/)
     provides an excellent guide to [Installing Python on macOS](https://docs.python-guide.org/en/latest/),
     which explains how to install Python with the [Homebrew](https://brew.sh/) manager.
     Alternatively, you could use [pyenv](https://github.com/pyenv/pyenv).
+  id: totrans-119
   prefs: []
   type: TYPE_NORMAL
+  zh: '[Python漫游指南](https://docs.python-guide.org/en/latest/)提供了[在macOS上安装Python](https://docs.python-guide.org/en/latest/)的优秀指南，解释了如何使用[Homebrew](https://brew.sh/)管理器安装Python。或者，您可以使用[pyenv](https://github.com/pyenv/pyenv)。'
 - en: 'Assuming you’ve installed Python with `brew`, you’ll also likely need the following
     packages:'
+  id: totrans-120
   prefs: []
   type: TYPE_NORMAL
+  zh: 假设您已使用`brew`安装了Python，您可能还需要以下包：
 - en: '[PRE28]'
+  id: totrans-121
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE28]'
 - en: Windows
+  id: totrans-122
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: Windows
 - en: For Windows, the easiest and best supported way to install Zipline is to use
     `conda`.
+  id: totrans-123
   prefs: []
   type: TYPE_NORMAL
+  zh: 对于Windows，安装Zipline最简单且最支持的方法是使用`conda`。
 - en: '## Installing with `conda`'
+  id: totrans-124
   prefs: []
   type: TYPE_NORMAL
+  zh: '## 使用`conda`安装'
 - en: Another way to install Zipline is via the `conda` package manager, which comes
     as part of the [Anaconda](https://www.anaconda.com/distribution/) distribution.
     Alternatively, you can use the related but more lightweight [Miniconda](https://docs.conda.io/en/latest/miniconda.html#)
     or [Miniforge](https://github.com/conda-forge/miniforge) installers.
+  id: totrans-125
   prefs: []
   type: TYPE_NORMAL
+  zh: 另一种安装Zipline的方法是通过`conda`包管理器，该管理器包含在[Anaconda](https://www.anaconda.com/distribution/)发行版中。或者，您可以使用相关但更轻量级的[Miniconda](https://docs.conda.io/en/latest/miniconda.html#)或[Miniforge](https://github.com/conda-forge/miniforge)安装程序。
 - en: The primary advantage of using Conda over `pip` is that `conda` natively understands
     the complex binary dependencies of packages like `numpy` and `scipy`. This means
     that `conda` can install Zipline and its dependencies without requiring the use
     of a second tool to acquire Zipline’s non-Python dependencies.
+  id: totrans-126
   prefs: []
   type: TYPE_NORMAL
+  zh: 使用Conda而非`pip`的主要优势在于，`conda`原生理解`numpy`和`scipy`等包的复杂二进制依赖关系。这意味着`conda`可以安装Zipline及其依赖项，而无需使用第二个工具来获取Zipline的非Python依赖项。
 - en: For instructions on how to install `conda`, see the [Conda Installation Documentation](https://conda.io/projects/conda/en/latest/user-guide/install/index.html).
+  id: totrans-127
   prefs: []
   type: TYPE_NORMAL
+  zh: 有关如何安装`conda`的说明，请参阅[Conda安装文档](https://conda.io/projects/conda/en/latest/user-guide/install/index.html)。
 - en: Once `conda` has been set up you can install Zipline from the `conda-forge`
     channel.
+  id: totrans-128
   prefs: []
   type: TYPE_NORMAL
+  zh: 一旦设置了`conda`，您就可以从`conda-forge`频道安装Zipline。
 - en: See [here]([conda-forge/zipline-reloaded-feedstock](https://github.com/conda-forge/zipline-reloaded-feedstock))
     for the latest installation details.
+  id: totrans-129
   prefs: []
   type: TYPE_NORMAL
+  zh: 有关最新安装详细信息，请参见[此处](https://github.com/conda-forge/zipline-reloaded-feedstock)。
 - en: '### Managing `conda` environments'
+  id: totrans-130
   prefs: []
   type: TYPE_NORMAL
+  zh: '### 管理`conda`环境'
 - en: It is recommended to install Zipline in an isolated `conda` environment. Installing
     Zipline in `conda` environments will not interfere your default Python deployment
     or site-packages, which will prevent any possible conflict with your global libraries.
     For more information on `conda` environment, see the [Conda User Guide](https://conda.io/projects/conda/en/latest/user-guide/tasks/manage-environments.html).
+  id: totrans-131
   prefs: []
   type: TYPE_NORMAL
+  zh: 建议在隔离的`conda`环境中安装Zipline。在`conda`环境中安装Zipline不会干扰您的默认Python部署或site-packages，这将防止与您的全局库发生任何可能的冲突。有关`conda`环境的更多信息，请参阅[Conda用户指南](https://conda.io/projects/conda/en/latest/user-guide/tasks/manage-environments.html)。
 - en: 'Assuming `conda` has been set up, you can create a `conda` environment:'
+  id: totrans-132
   prefs: []
   type: TYPE_NORMAL
+  zh: 假设已经设置了`conda`，您可以创建一个`conda`环境：
 - en: '[PRE29]'
+  id: totrans-133
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE29]'
 - en: Now you have set up an isolated environment called `env_zipline`, a sandbox-like
     structure to install Zipline. Then you should activate the conda environment by
     using the command
+  id: totrans-134
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在，您已经设置了一个名为`env_zipline`的隔离环境，这是一个类似沙箱的结构，用于安装Zipline。然后，您应该通过使用以下命令来激活conda环境：
 - en: '[PRE30]'
+  id: totrans-135
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE30]'
 - en: You can install Zipline by running
+  id: totrans-136
   prefs: []
   type: TYPE_NORMAL
+  zh: 您可以通过运行以下命令来安装Zipline：
 - en: '[PRE31]'
+  id: totrans-137
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE31]'
 - en: 'To deactivate the `conda` environment:'
+  id: totrans-138
   prefs: []
   type: TYPE_NORMAL
+  zh: 要停用`conda`环境：
 - en: '[PRE32]'
+  id: totrans-139
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE32]'
 - en: Note
+  id: totrans-140
   prefs: []
   type: TYPE_NORMAL
+  zh: 注意
 - en: '`conda activate` and `conda deactivate` only work on conda 4.6 and later versions.
     For conda versions prior to 4.6, run:'
+  id: totrans-141
   prefs: []
   type: TYPE_NORMAL
+  zh: '`conda activate` 和 `conda deactivate` 仅适用于conda 4.6及更高版本。对于conda 4.6之前的版本，请运行：'
 - en: 'Windows: `activate` or `deactivate`'
+  id: totrans-142
   prefs:
   - PREF_BQ
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 'Windows: `activate` 或 `deactivate`'
 - en: ''
+  id: totrans-143
   prefs:
   - PREF_BQ
   - PREF_IND
   type: TYPE_NORMAL
 - en: ''
+  id: totrans-144
   prefs:
   - PREF_BQ
   - PREF_IND
   type: TYPE_NORMAL
 - en: 'Linux and macOS: `source activate` or `source deactivate`  ### Managing `conda`
     environments'
+  id: totrans-145
   prefs:
   - PREF_BQ
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 'Linux和macOS: `source activate` 或 `source deactivate`  ### 管理`conda`环境'
 - en: It is recommended to install Zipline in an isolated `conda` environment. Installing
     Zipline in `conda` environments will not interfere your default Python deployment
     or site-packages, which will prevent any possible conflict with your global libraries.
     For more information on `conda` environment, see the [Conda User Guide](https://conda.io/projects/conda/en/latest/user-guide/tasks/manage-environments.html).
+  id: totrans-146
   prefs: []
   type: TYPE_NORMAL
+  zh: 建议在隔离的`conda`环境中安装Zipline。在`conda`环境中安装Zipline不会干扰您的默认Python部署或site-packages，这将防止与您的全局库发生任何可能的冲突。有关`conda`环境的更多信息，请参阅[Conda用户指南](https://conda.io/projects/conda/en/latest/user-guide/tasks/manage-environments.html)。
 - en: 'Assuming `conda` has been set up, you can create a `conda` environment:'
+  id: totrans-147
   prefs: []
   type: TYPE_NORMAL
+  zh: 假设已经设置了`conda`，您可以创建一个`conda`环境：
 - en: '[PRE33]'
+  id: totrans-148
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE33]'
 - en: Now you have set up an isolated environment called `env_zipline`, a sandbox-like
     structure to install Zipline. Then you should activate the conda environment by
     using the command
+  id: totrans-149
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在，您已经设置了一个名为`env_zipline`的隔离环境，这是一个类似沙箱的结构，用于安装Zipline。然后，您应该通过使用以下命令来激活conda环境：
 - en: '[PRE34]'
+  id: totrans-150
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE34]'
 - en: You can install Zipline by running
+  id: totrans-151
   prefs: []
   type: TYPE_NORMAL
+  zh: 您可以通过运行以下命令来安装Zipline：
 - en: '[PRE35]'
+  id: totrans-152
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE35]'
 - en: 'To deactivate the `conda` environment:'
+  id: totrans-153
   prefs: []
   type: TYPE_NORMAL
+  zh: 要停用 `conda` 环境：
 - en: '[PRE36]'
+  id: totrans-154
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE36]'
 - en: Note
+  id: totrans-155
   prefs: []
   type: TYPE_NORMAL
+  zh: 注意
 - en: '`conda activate` and `conda deactivate` only work on conda 4.6 and later versions.
     For conda versions prior to 4.6, run:'
+  id: totrans-156
   prefs: []
   type: TYPE_NORMAL
+  zh: '`conda activate` 和 `conda deactivate` 仅适用于 conda 4.6 及更高版本。对于 conda 4.6 之前的版本，请运行：'
 - en: 'Windows: `activate` or `deactivate`'
+  id: totrans-157
   prefs:
   - PREF_BQ
   - PREF_UL
   type: TYPE_NORMAL
+  zh: Windows：`activate` 或 `deactivate`
 - en: ''
+  id: totrans-158
   prefs:
   - PREF_BQ
   - PREF_IND
   type: TYPE_NORMAL
 - en: ''
+  id: totrans-159
   prefs:
   - PREF_BQ
   - PREF_IND
   type: TYPE_NORMAL
 - en: 'Linux and macOS: `source activate` or `source deactivate`'
+  id: totrans-160
   prefs:
   - PREF_BQ
   - PREF_UL
   type: TYPE_NORMAL
+  zh: Linux 和 macOS：`source activate` 或 `source deactivate`

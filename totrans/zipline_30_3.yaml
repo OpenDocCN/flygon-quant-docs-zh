@@ -1,101 +1,150 @@
 - en: Data
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: Data
 - en: 原文：[https://zipline.ml4trading.io/bundles.html](https://zipline.ml4trading.io/bundles.html)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://zipline.ml4trading.io/bundles.html](https://zipline.ml4trading.io/bundles.html)
 - en: A data bundle is a collection of pricing data, adjustment data, and an asset
     database. Bundles allow us to preload all of the data we will need to run backtests
     and store the data for future runs.
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: 数据包是一组定价数据、调整数据和资产数据库的集合。数据包使我们能够预加载运行回测所需的所有数据，并将数据存储起来以备将来使用。
 - en: '## Discovering Available Bundles'
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: '## 发现可用的数据包'
 - en: 'Zipline comes with a default bundle as well as the ability to register new
     bundles. To see which bundles we may be available, we may run the `bundles` command,
     for example:'
+  id: totrans-4
   prefs: []
   type: TYPE_NORMAL
+  zh: Zipline 自带一个默认数据包，并允许注册新的数据包。要查看哪些数据包可能可用，我们可以运行 `bundles` 命令，例如：
 - en: '[PRE0]'
+  id: totrans-5
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: 'The output here shows that there are 3 bundles available:'
+  id: totrans-6
   prefs: []
   type: TYPE_NORMAL
+  zh: 这里的输出显示有3个数据包可用：
 - en: '`my-custom-bundle` (added by the user)'
+  id: totrans-7
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`my-custom-bundle`（用户添加）'
 - en: '`quandl` (provided by Zipline, the default bundle)'
+  id: totrans-8
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`quandl`（由 Zipline 提供，默认数据包）'
 - en: The dates and times next to the name show the times when the data for this bundle
     was ingested. We have run three different ingestions for `my-custom-bundle`. We
     have never ingested any data for the `quandl` bundle so it just shows `<no ingestions>`
     instead.
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: 名称旁边的日期和时间显示了该数据包数据导入的时间。我们已经为 `my-custom-bundle` 运行了三次不同的导入。我们从未为 `quandl`
+    数据包导入任何数据，因此它只显示 `<no ingestions>`。
 - en: '**Note**: Quantopian used to provide a re-packaged version of the `quandl`
     bundle as `quantopian-quandl` that is still available in April 2021\. While it
     ingests much faster, it does not have the country code that the library has since
     come to require and which the current Zipline version inserts for the `quandl`
     bundle. If you want to use `quantopian-quandl` instead, use [this workaround](https://github.com/quantopian/zipline/issues/2517)
     to manually update the database.  ## Ingesting Data'
+  id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: '**注意**：Quantopian 曾经提供了一个重新打包的 `quandl` 数据包版本，名为 `quantopian-quandl`，截至2021年4月仍然可用。虽然它导入速度更快，但它没有该库后来要求的国别代码，而当前的
+    Zipline 版本为 `quandl` 数据包插入了这些代码。如果你想使用 `quantopian-quandl`，请使用[这个解决方案](https://github.com/quantopian/zipline/issues/2517)手动更新数据库。
+    ## 数据导入'
 - en: 'The first step to using a data bundle is to ingest the data. The ingestion
     process will invoke some custom bundle command and then write the data to a standard
     location that Zipline can find. By default the location where ingested data will
     be written is `$ZIPLINE_ROOT/data/<bundle>` where by default `ZIPLINE_ROOT=~/.zipline`.
     The ingestion step may take some time as it could involve downloading and processing
     a lot of data. To ingest a bundle, run:'
+  id: totrans-11
   prefs: []
   type: TYPE_NORMAL
+  zh: 使用数据包的第一步是导入数据。导入过程将调用一些自定义数据包命令，然后将数据写入 Zipline 可以找到的标准位置。默认情况下，导入的数据将写入的位置是
+    `$ZIPLINE_ROOT/data/<bundle>`，默认情况下 `ZIPLINE_ROOT=~/.zipline`。导入步骤可能需要一些时间，因为它可能涉及下载和处理大量数据。要导入数据包，请运行：
 - en: '[PRE1]'
+  id: totrans-12
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE1]'
 - en: where `<bundle>` is the name of the bundle to ingest, defaulting to `quandl`.
+  id: totrans-13
   prefs: []
   type: TYPE_NORMAL
+  zh: 其中 `<bundle>` 是要导入的数据包的名称，默认为 `quandl`。
 - en: Old Data
+  id: totrans-14
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: Old Data
 - en: When the `ingest` command is used it will write the new data to a subdirectory
     of `$ZIPLINE_ROOT/data/<bundle>` which is named with the current date. This makes
     it possible to look at older data or even run backtests with the older copies.
     Running a backtest with an old ingestion makes it easier to reproduce backtest
     results later.
+  id: totrans-15
   prefs: []
   type: TYPE_NORMAL
+  zh: “ingest”命令使用时，它会将新数据写入 `$ZIPLINE_ROOT/data/<bundle>` 的子目录，该子目录以当前日期命名。这使得查看旧数据或甚至使用旧副本运行回测成为可能。使用旧的导入数据运行回测使得稍后重现回测结果变得更加容易。
 - en: 'One drawback of saving all of the data by default is that the data directory
     may grow quite large even if you do not want to use the data. As shown earlier,
     we can list all of the ingestions with the [bundles command](#bundles-command).
     To solve the problem of leaking old data there is another command: `clean`, which
     will clear data bundles based on some time constraints.'
+  id: totrans-16
   prefs: []
   type: TYPE_NORMAL
+  zh: 默认情况下保存所有数据的缺点是，即使您不想使用这些数据，数据目录也可能变得非常大。如前所述，我们可以使用 [bundles 命令](#bundles-command)
+    列出所有导入。为了解决旧数据泄露的问题，还有一个命令：`clean`，它将根据某些时间约束清除数据包。
 - en: 'For example:'
+  id: totrans-17
   prefs: []
   type: TYPE_NORMAL
+  zh: 例如：
 - en: '[PRE2]'
+  id: totrans-18
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE2]'
 - en: Running Backtests with Data Bundles
+  id: totrans-19
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 使用数据包运行回测
 - en: 'Now that the data has been ingested we can use it to run backtests with the
     `run` command. The bundle to use can be specified with the `--bundle` option like:'
+  id: totrans-20
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在数据已经导入，我们可以使用它来运行回测，使用 `run` 命令。可以使用 `--bundle` 选项指定要使用的数据包，例如：
 - en: '[PRE3]'
+  id: totrans-21
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE3]'
 - en: We may also specify the date to use to look up the bundle data with the `--bundle-timestamp`
     option. Setting the `--bundle-timestamp` will cause `run` to use the most recent
     bundle ingestion that is less than or equal to the `bundle-timestamp`. This is
@@ -103,39 +152,58 @@
     relationship so that we can specify the date that we ran an old backtest and get
     the same data that would have been available to us on that date. The `bundle-timestamp`
     defaults to the current day to use the most recent data.
+  id: totrans-22
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们还可以使用`--bundle-timestamp`选项指定查找捆绑数据所用的日期。设置`--bundle-timestamp`将导致`run`使用小于或等于`bundle-timestamp`的最新的捆绑数据摄取。这就是我们如何使用旧数据进行回测。`bundle-timestamp`使用小于或等于的关系，因此我们可以指定运行旧回测的日期，并获取该日期对我们可用的相同数据。`bundle-timestamp`默认设置为当前日期，以使用最新的数据。
 - en: Default Data Bundles
+  id: totrans-23
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 默认数据捆绑包
 - en: '### Quandl WIKI Bundle'
+  id: totrans-24
   prefs: []
   type: TYPE_NORMAL
+  zh: '### Quandl WIKI捆绑包'
 - en: 'By default Zipline comes with the `quandl` data bundle which uses Quandl’s
     [WIKI dataset](https://www.quandl.com/data/WIKI). The Quandl data bundle includes
     daily pricing data, splits, cash dividends, and asset metadata. To ingest the
     `quandl` data bundle, run either of the following commands:'
+  id: totrans-25
   prefs: []
   type: TYPE_NORMAL
+  zh: 默认情况下，Zipline附带了`quandl`数据捆绑包，该捆绑包使用Quandl的[WIKI数据集](https://www.quandl.com/data/WIKI)。Quandl数据捆绑包包括每日定价数据、拆分、现金股息和资产元数据。要摄取`quandl`数据捆绑包，请运行以下任一命令：
 - en: '[PRE4]'
+  id: totrans-26
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE4]'
 - en: Either command should only take a few minutes to download and process the data.
+  id: totrans-27
   prefs: []
   type: TYPE_NORMAL
+  zh: 任一命令下载和处理数据应该只需要几分钟。
 - en: Note
+  id: totrans-28
   prefs: []
   type: TYPE_NORMAL
+  zh: 注意
 - en: 'Quandl has discontinued this dataset early 2018 and it no longer updates. Regardless,
     it is a useful starting point to try out Zipline without setting up your own dataset.  ##
     Writing a New Bundle'
+  id: totrans-29
   prefs: []
   type: TYPE_NORMAL
+  zh: Quandl在2018年初停止了这个数据集的更新，不再更新。尽管如此，它仍然是一个有用的起点，可以在不设置自己的数据集的情况下尝试Zipline。##
+    编写新的捆绑包
 - en: Data bundles exist to make it easy to use different data sources with Zipline.
     To add a new bundle, one must implement an `ingest` function.
+  id: totrans-30
   prefs: []
   type: TYPE_NORMAL
+  zh: 数据捆绑包的存在是为了方便使用不同的数据源与Zipline。要添加新的捆绑包，必须实现一个`ingest`函数。
 - en: The `ingest` function is responsible for loading the data into memory and passing
     it to a set of writer objects provided by Zipline to convert the data to Zipline’s
     internal format. The ingest function may work by downloading data from a remote
@@ -143,28 +211,40 @@
     the machine. The function is provided with writers that will write the data to
     the correct location. If an ingestion fails part way through the bundle will not
     be written in an incomplete state.
+  id: totrans-31
   prefs: []
   type: TYPE_NORMAL
+  zh: '`ingest`函数负责将数据加载到内存中，并将其传递给一组由Zipline提供的写入器对象，以将数据转换为Zipline的内部格式。`ingest`函数可以通过从远程位置（如`quandl`捆绑包）下载数据或仅加载机器上已有的文件来工作。该函数提供了将数据写入正确位置的写入器。如果摄取部分失败，捆绑包将不会处于不完整状态。'
 - en: 'The signature of the ingest function should be:'
+  id: totrans-32
   prefs: []
   type: TYPE_NORMAL
+  zh: '`ingest`函数的签名应为：'
 - en: '[PRE5]'
+  id: totrans-33
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE5]'
 - en: '`environ`'
+  id: totrans-34
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: '`environ`'
 - en: '`environ` is a mapping representing the environment variables to use. This
     is where any custom arguments needed for the ingestion should be passed, for example:
     the `quandl` bundle uses the environment to pass the API key and the download
     retry attempt count.'
+  id: totrans-35
   prefs: []
   type: TYPE_NORMAL
+  zh: '`environ`是一个映射，表示要使用的环境变量。这是传递任何摄取所需的定制参数的地方，例如：`quandl`捆绑包使用环境传递API密钥和下载重试尝试次数。'
 - en: '`asset_db_writer`'
+  id: totrans-36
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: '`asset_db_writer`'
 - en: '`asset_db_writer` is an instance of [`AssetDBWriter`](api-reference.html#zipline.assets.AssetDBWriter
     "zipline.assets.AssetDBWriter"). This is the writer for the asset metadata which
     provides the asset lifetimes and the symbol to asset id (sid) mapping. This may
@@ -172,12 +252,18 @@
     invoke [`write()`](api-reference.html#zipline.assets.AssetDBWriter.write "zipline.assets.AssetDBWriter.write")
     with dataframes for the various pieces of metadata. More information about the
     format of the data exists in the docs for write.'
+  id: totrans-37
   prefs: []
   type: TYPE_NORMAL
+  zh: '`asset_db_writer`是[`AssetDBWriter`](api-reference.html#zipline.assets.AssetDBWriter
+    "zipline.assets.AssetDBWriter")的一个实例。这是资产元数据的写入器，提供资产生命周期和符号到资产ID（sid）的映射。这可能还包括资产名称、交易所和其他一些列。要写入数据，请使用各种元数据的数据框调用[`write()`](api-reference.html#zipline.assets.AssetDBWriter.write
+    "zipline.assets.AssetDBWriter.write")。有关数据格式的更多信息，请参阅write的文档。'
 - en: '`minute_bar_writer`'
+  id: totrans-38
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: '`minute_bar_writer`'
 - en: '`minute_bar_writer` is an instance of `BcolzMinuteBarWriter`. This writer is
     used to convert data to Zipline’s internal bcolz format to later be read by a
     `BcolzMinuteBarReader`. If minute data is provided, users should call `write()`
@@ -185,20 +271,30 @@
     also be forwarded to this method. If the data source does not provide minute level
     data, then there is no need to call the write method. It is also acceptable to
     pass an empty iterator to `write()` to signal that there is no minutely data.'
+  id: totrans-39
   prefs: []
   type: TYPE_NORMAL
+  zh: '`分钟条形写入器` 是 `BcolzMinuteBarWriter` 的一个实例。该写入器用于将数据转换为 Zipline 的内部 bcolz 格式，以便稍后由
+    `BcolzMinuteBarReader` 读取。如果提供分钟数据，用户应该使用 (sid, 数据框) 元组的可迭代对象调用 `write()`。`show_progress`
+    参数也应该传递给此方法。如果数据源不提供分钟级数据，则无需调用写入方法。向 `write()` 传递一个空的迭代器也是可接受的，以表明没有分钟数据。'
 - en: Note
+  id: totrans-40
   prefs: []
   type: TYPE_NORMAL
+  zh: 注意
 - en: The data passed to `write()` may be a lazy iterator or generator to avoid loading
     all of the minute data into memory at a single time. A given sid may also appear
     multiple times in the data as long as the dates are strictly increasing.
+  id: totrans-41
   prefs: []
   type: TYPE_NORMAL
+  zh: 传递给 `write()` 的数据可以是惰性迭代器或生成器，以避免一次性将所有分钟数据加载到内存中。只要日期严格递增，给定的 sid 也可以在数据中出现多次。
 - en: '`daily_bar_writer`'
+  id: totrans-42
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: '`日条形写入器`'
 - en: '`daily_bar_writer` is an instance of [`BcolzDailyBarWriter`](api-reference.html#zipline.data.bcolz_daily_bars.BcolzDailyBarWriter
     "zipline.data.bcolz_daily_bars.BcolzDailyBarWriter"). This writer is used to convert
     data into Zipline’s internal bcolz format to later be read by a [`BcolzDailyBarReader`](api-reference.html#zipline.data.bcolz_daily_bars.BcolzDailyBarReader
@@ -209,58 +305,93 @@
     acceptable to pass an empty iterable to `write()` to signal that there is no daily
     data. If no daily data is provided but minute data is provided, a daily rollup
     will happen to service daily history requests.'
+  id: totrans-43
   prefs: []
   type: TYPE_NORMAL
+  zh: '`日条形写入器` 是 [`BcolzDailyBarWriter`](api-reference.html#zipline.data.bcolz_daily_bars.BcolzDailyBarWriter
+    "zipline.data.bcolz_daily_bars.BcolzDailyBarWriter") 的一个实例。该写入器用于将数据转换为 Zipline
+    的内部 bcolz 格式，以便稍后由 [`BcolzDailyBarReader`](api-reference.html#zipline.data.bcolz_daily_bars.BcolzDailyBarReader
+    "zipline.data.bcolz_daily_bars.BcolzDailyBarReader") 读取。如果提供日数据，用户应该使用可迭代对象的 (sid,
+    数据框) 元组调用 `write()`。`show_progress` 参数也应该传递给此方法。如果数据源不提供日数据，则无需调用写入方法。向 `write()`
+    传递一个空的可迭代对象也是可接受的，以表明没有日数据。如果没有提供日数据但提供了分钟数据，则会进行日汇总以满足日历史请求。'
 - en: Note
+  id: totrans-44
   prefs: []
   type: TYPE_NORMAL
+  zh: 注意
 - en: Like the `minute_bar_writer`, the data passed to `write()` may be a lazy iterable
     or generator to avoid loading all of the data into memory at once. Unlike the
     `minute_bar_writer`, a sid may only appear once in the data iterable.
+  id: totrans-45
   prefs: []
   type: TYPE_NORMAL
+  zh: 与 `分钟条形写入器` 类似，传递给 `write()` 的数据可以是惰性可迭代对象或生成器，以避免一次性将所有数据加载到内存中。与 `分钟条形写入器`
+    不同的是，sid 在数据可迭代对象中只能出现一次。
 - en: '`adjustment_writer`'
+  id: totrans-46
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: '`调整写入器`'
 - en: '`adjustment_writer` is an instance of [`SQLiteAdjustmentWriter`](api-reference.html#zipline.data.adjustments.SQLiteAdjustmentWriter
     "zipline.data.adjustments.SQLiteAdjustmentWriter"). This writer is used to store
     splits, mergers, dividends, and stock dividends. The data should be provided as
     dataframes and passed to [`write()`](api-reference.html#zipline.data.adjustments.SQLiteAdjustmentWriter.write
     "zipline.data.adjustments.SQLiteAdjustmentWriter.write"). Each of these fields
     are optional, but the writer can accept as much of the data as you have.'
+  id: totrans-47
   prefs: []
   type: TYPE_NORMAL
+  zh: '`调整写入器`是 [`SQLiteAdjustmentWriter`](api-reference.html#zipline.data.adjustments.SQLiteAdjustmentWriter
+    "zipline.data.adjustments.SQLiteAdjustmentWriter") 的一个实例。该写入器用于存储拆分、合并、股息和股票股息。数据应以数据框的形式提供，并传递给
+    [`write()`](api-reference.html#zipline.data.adjustments.SQLiteAdjustmentWriter.write
+    "zipline.data.adjustments.SQLiteAdjustmentWriter.write")。这些字段都是可选的，但写入器可以接受您拥有的尽可能多的数据。'
 - en: '`calendar`'
+  id: totrans-48
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: '`日历`'
 - en: '`calendar` is an instance of `zipline.utils.calendars.TradingCalendar`. The
     calendar is provided to help some bundles generate queries for the days needed.'
+  id: totrans-49
   prefs: []
   type: TYPE_NORMAL
+  zh: '`日历` 是 `zipline.utils.calendars.TradingCalendar` 的一个实例。提供日历是为了帮助一些捆绑包生成所需日期的查询。'
 - en: '`start_session`'
+  id: totrans-50
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: '`开始会话`'
 - en: '`start_session` is a [`pandas.Timestamp`](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.Timestamp.html#pandas.Timestamp
     "(in pandas v2.0.3)") object indicating the first day that the bundle should load
     data for.'
+  id: totrans-51
   prefs: []
   type: TYPE_NORMAL
+  zh: '`开始会话` 是一个 [`pandas.Timestamp`](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.Timestamp.html#pandas.Timestamp
+    "(in pandas v2.0.3)") 对象，指示捆绑包应该加载数据的第一天。'
 - en: '`end_session`'
+  id: totrans-52
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: '`结束会话`'
 - en: '`end_session` is a [`pandas.Timestamp`](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.Timestamp.html#pandas.Timestamp
     "(in pandas v2.0.3)") object indicating the last day that the bundle should load
     data for.'
+  id: totrans-53
   prefs: []
   type: TYPE_NORMAL
+  zh: '`结束会话`是一个[`pandas.Timestamp`](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.Timestamp.html#pandas.Timestamp
+    "(in pandas v2.0.3)")对象，表示包应加载数据的最后一天。'
 - en: '`cache`'
+  id: totrans-54
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: '`缓存`'
 - en: '`cache` is an instance of [`dataframe_cache`](api-reference.html#zipline.utils.cache.dataframe_cache
     "zipline.utils.cache.dataframe_cache"). This object is a mapping from strings
     to dataframes. This object is provided in case an ingestion crashes part way through.
@@ -270,12 +401,17 @@
     load, this prevents the ingest function from needing to re-download all the data
     if there is some bug in the parsing. If it is very fast to get the data, for example
     if it is coming from another local file, then there is no need to use this cache.'
+  id: totrans-55
   prefs: []
   type: TYPE_NORMAL
+  zh: '`缓存`是[`dataframe_cache`](api-reference.html#zipline.utils.cache.dataframe_cache
+    "zipline.utils.cache.dataframe_cache")的一个实例。这个对象是一个从字符串到数据框的映射。这个对象是在摄取过程中崩溃时提供的。其想法是，摄取函数应该检查缓存中是否存在原始数据，如果不存在，则应该获取它，然后将其存储在缓存中。然后它可以解析并写入数据。只有在成功加载后，缓存才会被清除，这可以防止摄取函数在解析中出现错误时需要重新下载所有数据。如果获取数据非常快，例如如果它来自另一个本地文件，则不需要使用此缓存。'
 - en: '`show_progress`'
+  id: totrans-56
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: '`显示进度`'
 - en: '`show_progress` is a boolean indicating that the user would like to receive
     feedback about the ingest function’s progress fetching and writing the data. Some
     examples for where to show how many files you have downloaded out of the total
@@ -283,161 +419,238 @@
     that may help with implementing `show_progress` for a loop is [`maybe_show_progress`](api-reference.html#zipline.utils.cli.maybe_show_progress
     "zipline.utils.cli.maybe_show_progress"). This argument should always be forwarded
     to `minute_bar_writer.write` and `daily_bar_writer.write`.'
+  id: totrans-57
   prefs: []
   type: TYPE_NORMAL
+  zh: '`显示进度`是一个布尔值，表示用户希望接收关于摄取函数获取和写入数据的进度的反馈。例如，显示已下载的文件数量占所需总量的百分比，或者显示数据转换的进度。实现循环中`显示进度`的一个有用工具是[`maybe_show_progress`](api-reference.html#zipline.utils.cli.maybe_show_progress
+    "zipline.utils.cli.maybe_show_progress")。这个参数应该总是被转发到`minute_bar_writer.write`和`daily_bar_writer.write`。'
 - en: '`output_dir`'
+  id: totrans-58
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: '`输出目录`'
 - en: '`output_dir` is a string representing the file path where all the data will
     be written. `output_dir` will be some subdirectory of `$ZIPLINE_ROOT` and will
     contain the time of the start of the current ingestion. This can be used to directly
     move resources here if for some reason your ingest function can produce it’s own
     outputs without the writers. For example, the `quantopian:quandl` bundle uses
     this to directly untar the bundle into the `output_dir`.'
+  id: totrans-59
   prefs: []
   type: TYPE_NORMAL
+  zh: '`输出目录`是一个字符串，表示所有数据将被写入的文件路径。`输出目录`将是`$ZIPLINE_ROOT`的某个子目录，并将包含当前摄取的开始时间。如果由于某些原因您的摄取函数可以不使用写入器而直接产生输出，则可以直接将资源移动到这里。例如，`quantopian:quandl`包使用这个直接将包解压到`输出目录`。'
 - en: Ingesting Data from .csv Files
+  id: totrans-60
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 从.csv文件摄取数据
 - en: Zipline provides a bundle called `csvdir`, which allows users to ingest data
     from `.csv` files. The format of the files should be in OHLCV format, with dates,
     dividends, and splits. A sample is provided below. There are other samples for
     testing purposes in `zipline/tests/resources/csvdir_samples`.
+  id: totrans-61
   prefs: []
   type: TYPE_NORMAL
+  zh: Zipline提供了一个名为`csvdir`的包，允许用户从`.csv`文件中摄取数据。文件格式应为OHLCV格式，包含日期、股息和拆分。下面提供了一个示例。在`zipline/tests/resources/csvdir_samples`中还有其他用于测试目的的示例。
 - en: '[PRE6]'
+  id: totrans-62
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE6]'
 - en: Once you have your data in the correct format, you can edit your `extension.py`
     file in `~/.zipline/extension.py` and import the csvdir bundle, along with `pandas`.
+  id: totrans-63
   prefs: []
   type: TYPE_NORMAL
+  zh: 一旦您的数据格式正确，您可以编辑`~/.zipline/extension.py`文件中的`extension.py`文件，并导入csvdir包和`pandas`。
 - en: '[PRE7]'
+  id: totrans-64
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE7]'
 - en: 'We’ll then want to specify the start and end sessions of our bundle data:'
+  id: totrans-65
   prefs: []
   type: TYPE_NORMAL
+  zh: 然后，我们希望指定我们的包数据的开始和结束会话：
 - en: '[PRE8]'
+  id: totrans-66
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE8]'
 - en: 'And then we can `register()` our bundle, and pass the location of the directory
     in which our `.csv` files exist:'
+  id: totrans-67
   prefs: []
   type: TYPE_NORMAL
+  zh: 然后我们可以`注册()`我们的包，并传递我们的`.csv`文件所在的目录位置：
 - en: '[PRE9]'
+  id: totrans-68
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE9]'
 - en: 'To finally ingest our data, we can run:'
+  id: totrans-69
   prefs: []
   type: TYPE_NORMAL
+  zh: 最后，我们可以运行以下命令来摄取我们的数据：
 - en: '[PRE10]'
+  id: totrans-70
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE10]'
 - en: If you would like to use equities that are not in the NYSE calendar, or the
     existing Zipline calendars, you can look at the `Trading Calendar Tutorial` to
     build a custom trading calendar that you can then pass the name of to `register()`.
+  id: totrans-71
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果你想使用不在NYSE日历或现有Zipline日历中的股票，你可以查看`Trading Calendar Tutorial`来构建一个自定义交易日历，然后你可以将名称传递给`register()`。
 - en: Practical Examples
+  id: totrans-72
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 实用示例
 - en: See examples for [Algoseek](https://www.algoseek.com/) [minute data](https://github.com/stefan-jansen/machine-learning-for-trading/tree/master/08_ml4t_workflow/04_ml4t_workflow_with_zipline/01_custom_bundles)
     and [Japanese equities](https://github.com/stefan-jansen/machine-learning-for-trading/tree/master/11_decision_trees_random_forests/00_custom_bundle)
     at daily frequency from the book [Machine Learning for Trading](https://www.amazon.com/Machine-Learning-Algorithmic-Trading-alternative/dp/1839217715?pf_rd_r=GZH2XZ35GB3BET09PCCA&pf_rd_p=c5b6893a-24f2-4a59-9d4b-aff5065c90ec&pd_rd_r=91a679c7-f069-4a6e-bdbb-a2b3f548f0c8&pd_rd_w=2B0Q0&pd_rd_wg=GMY5S&ref_=pd_gw_ci_mcx_mr_hp_d).
+  id: totrans-73
   prefs: []
   type: TYPE_NORMAL
+  zh: 请参阅[Algoseek](https://www.algoseek.com/)的[分钟数据](https://github.com/stefan-jansen/machine-learning-for-trading/tree/master/08_ml4t_workflow/04_ml4t_workflow_with_zipline/01_custom_bundles)和[日本股票](https://github.com/stefan-jansen/machine-learning-for-trading/tree/master/11_decision_trees_random_forests/00_custom_bundle)的每日频率示例，来自书籍[机器学习交易](https://www.amazon.com/Machine-Learning-Algorithmic-Trading-alternative/dp/1839217715?pf_rd_r=GZH2XZ35GB3BET09PCCA&pf_rd_p=c5b6893a-24f2-4a59-9d4b-aff5065c90ec&pd_rd_r=91a679c7-f069-4a6e-bdbb-a2b3f548f0c8&pd_rd_w=2B0Q0&pd_rd_wg=GMY5S&ref_=pd_gw_ci_mcx_mr_hp_d)。
 - en: '## Discovering Available Bundles'
+  id: totrans-74
   prefs: []
   type: TYPE_NORMAL
+  zh: '## 发现可用的捆绑包'
 - en: 'Zipline comes with a default bundle as well as the ability to register new
     bundles. To see which bundles we may be available, we may run the `bundles` command,
     for example:'
+  id: totrans-75
   prefs: []
   type: TYPE_NORMAL
+  zh: Zipline自带一个默认捆绑包，以及注册新捆绑包的能力。要查看哪些捆绑包可能可用，我们可以运行`bundles`命令，例如：
 - en: '[PRE11]'
+  id: totrans-76
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE11]'
 - en: 'The output here shows that there are 3 bundles available:'
+  id: totrans-77
   prefs: []
   type: TYPE_NORMAL
+  zh: 这里的输出显示有3个可用的捆绑包：
 - en: '`my-custom-bundle` (added by the user)'
+  id: totrans-78
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`my-custom-bundle`（由用户添加）'
 - en: '`quandl` (provided by Zipline, the default bundle)'
+  id: totrans-79
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`quandl`（由Zipline提供，默认捆绑包）'
 - en: The dates and times next to the name show the times when the data for this bundle
     was ingested. We have run three different ingestions for `my-custom-bundle`. We
     have never ingested any data for the `quandl` bundle so it just shows `<no ingestions>`
     instead.
+  id: totrans-80
   prefs: []
   type: TYPE_NORMAL
+  zh: 名称旁边的日期和时间显示了该捆绑包数据被摄取的时间。我们为`my-custom-bundle`进行了三次不同的数据摄取。我们从未为`quandl`捆绑包摄取过任何数据，因此它只显示`<no
+    ingestions>`。
 - en: '**Note**: Quantopian used to provide a re-packaged version of the `quandl`
     bundle as `quantopian-quandl` that is still available in April 2021\. While it
     ingests much faster, it does not have the country code that the library has since
     come to require and which the current Zipline version inserts for the `quandl`
     bundle. If you want to use `quantopian-quandl` instead, use [this workaround](https://github.com/quantopian/zipline/issues/2517)
     to manually update the database.'
+  id: totrans-81
   prefs: []
   type: TYPE_NORMAL
+  zh: '**注意**：Quantopian曾经提供了一个重新打包的`quandl`捆绑包版本，名为`quantopian-quandl`，截至2021年4月仍然可用。虽然它摄取速度更快，但它没有库后来要求的国别代码，而当前的Zipline版本为`quandl`捆绑包插入了国别代码。如果你想使用`quantopian-quandl`，请使用[这个解决方法](https://github.com/quantopian/zipline/issues/2517)手动更新数据库。'
 - en: '## Ingesting Data'
+  id: totrans-82
   prefs: []
   type: TYPE_NORMAL
+  zh: '## 摄取数据'
 - en: 'The first step to using a data bundle is to ingest the data. The ingestion
     process will invoke some custom bundle command and then write the data to a standard
     location that Zipline can find. By default the location where ingested data will
     be written is `$ZIPLINE_ROOT/data/<bundle>` where by default `ZIPLINE_ROOT=~/.zipline`.
     The ingestion step may take some time as it could involve downloading and processing
     a lot of data. To ingest a bundle, run:'
+  id: totrans-83
   prefs: []
   type: TYPE_NORMAL
+  zh: 使用数据捆绑包的第一步是摄取数据。摄取过程将调用一些自定义捆绑包命令，然后将数据写入Zipline可以找到的标准位置。默认情况下，摄取的数据将被写入的位置是`$ZIPLINE_ROOT/data/<bundle>`，默认情况下`ZIPLINE_ROOT=~/.zipline`。摄取步骤可能需要一些时间，因为它可能涉及下载和处理大量数据。要摄取捆绑包，请运行：
 - en: '[PRE12]'
+  id: totrans-84
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE12]'
 - en: where `<bundle>` is the name of the bundle to ingest, defaulting to `quandl`.
+  id: totrans-85
   prefs: []
   type: TYPE_NORMAL
+  zh: 其中`<bundle>`是要摄取的捆绑包的名称，默认为`quandl`。
 - en: Old Data
+  id: totrans-86
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 旧数据
 - en: When the `ingest` command is used it will write the new data to a subdirectory
     of `$ZIPLINE_ROOT/data/<bundle>` which is named with the current date. This makes
     it possible to look at older data or even run backtests with the older copies.
     Running a backtest with an old ingestion makes it easier to reproduce backtest
     results later.
+  id: totrans-87
   prefs: []
   type: TYPE_NORMAL
+  zh: 当使用`ingest`命令时，它会将新数据写入到以当前日期命名的`$ZIPLINE_ROOT/data/<bundle>`的子目录中。这使得查看旧数据或甚至使用旧副本运行回测成为可能。使用旧的数据摄取运行回测使得稍后更容易重现回测结果。
 - en: 'One drawback of saving all of the data by default is that the data directory
     may grow quite large even if you do not want to use the data. As shown earlier,
     we can list all of the ingestions with the [bundles command](#bundles-command).
     To solve the problem of leaking old data there is another command: `clean`, which
     will clear data bundles based on some time constraints.'
+  id: totrans-88
   prefs: []
   type: TYPE_NORMAL
+  zh: 默认情况下保存所有数据的缺点是，即使您不想使用数据，数据目录也可能变得很大。如前所述，我们可以使用 [bundles 命令](#bundles-command)
+    列出所有导入。为了解决旧数据泄露的问题，还有另一个命令：`clean`，它将根据某些时间约束清除数据包。
 - en: 'For example:'
+  id: totrans-89
   prefs: []
   type: TYPE_NORMAL
+  zh: 例如：
 - en: '[PRE13]'
+  id: totrans-90
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE13]'
 - en: Running Backtests with Data Bundles
+  id: totrans-91
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 使用数据包运行回测
 - en: 'Now that the data has been ingested we can use it to run backtests with the
     `run` command. The bundle to use can be specified with the `--bundle` option like:'
+  id: totrans-92
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在数据已经导入，我们可以使用它来运行回测，使用 `run` 命令。可以使用 `--bundle` 选项指定要使用的数据包，例如：
 - en: '[PRE14]'
+  id: totrans-93
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE14]'
 - en: We may also specify the date to use to look up the bundle data with the `--bundle-timestamp`
     option. Setting the `--bundle-timestamp` will cause `run` to use the most recent
     bundle ingestion that is less than or equal to the `bundle-timestamp`. This is
@@ -445,61 +658,96 @@
     relationship so that we can specify the date that we ran an old backtest and get
     the same data that would have been available to us on that date. The `bundle-timestamp`
     defaults to the current day to use the most recent data.
+  id: totrans-94
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们还可以使用 `--bundle-timestamp` 选项指定要查找数据包数据的日期。设置 `--bundle-timestamp` 将导致 `run`
+    使用不大于或等于 `bundle-timestamp` 的最新数据包导入。这就是我们如何使用旧数据运行回测。`bundle-timestamp` 使用小于或等于的关系，因此我们可以指定运行旧回测的日期，并获取该日期对我们可用的相同数据。`bundle-timestamp`
+    默认为当前日期，以使用最新数据。
 - en: Default Data Bundles
+  id: totrans-95
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 默认数据包
 - en: '### Quandl WIKI Bundle'
+  id: totrans-96
   prefs: []
   type: TYPE_NORMAL
+  zh: '### Quandl WIKI 数据包'
 - en: 'By default Zipline comes with the `quandl` data bundle which uses Quandl’s
     [WIKI dataset](https://www.quandl.com/data/WIKI). The Quandl data bundle includes
     daily pricing data, splits, cash dividends, and asset metadata. To ingest the
     `quandl` data bundle, run either of the following commands:'
+  id: totrans-97
   prefs: []
   type: TYPE_NORMAL
+  zh: 默认情况下，Zipline 附带了使用 Quandl 的 [WIKI 数据集](https://www.quandl.com/data/WIKI) 的
+    `quandl` 数据包。Quandl 数据包包括每日价格数据、拆分、现金股息和资产元数据。要导入 `quandl` 数据包，请运行以下任一命令：
 - en: '[PRE15]'
+  id: totrans-98
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE15]'
 - en: Either command should only take a few minutes to download and process the data.
+  id: totrans-99
   prefs: []
   type: TYPE_NORMAL
+  zh: 任一命令下载和处理数据的时间应该只需几分钟。
 - en: Note
+  id: totrans-100
   prefs: []
   type: TYPE_NORMAL
+  zh: 注意
 - en: 'Quandl has discontinued this dataset early 2018 and it no longer updates. Regardless,
     it is a useful starting point to try out Zipline without setting up your own dataset.  ###
     Quandl WIKI Bundle'
+  id: totrans-101
   prefs: []
   type: TYPE_NORMAL
+  zh: Quandl 已于 2018 年初停止更新此数据集。尽管如此，它仍然是一个有用的起点，可以在不设置自己的数据集的情况下尝试 Zipline。### Quandl
+    WIKI 数据包
 - en: 'By default Zipline comes with the `quandl` data bundle which uses Quandl’s
     [WIKI dataset](https://www.quandl.com/data/WIKI). The Quandl data bundle includes
     daily pricing data, splits, cash dividends, and asset metadata. To ingest the
     `quandl` data bundle, run either of the following commands:'
+  id: totrans-102
   prefs: []
   type: TYPE_NORMAL
+  zh: 默认情况下，Zipline 附带了使用 Quandl 的 [WIKI 数据集](https://www.quandl.com/data/WIKI) 的
+    `quandl` 数据包。Quandl 数据包包括每日价格数据、拆分、现金股息和资产元数据。要导入 `quandl` 数据包，请运行以下任一命令：
 - en: '[PRE16]'
+  id: totrans-103
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE16]'
 - en: Either command should only take a few minutes to download and process the data.
+  id: totrans-104
   prefs: []
   type: TYPE_NORMAL
+  zh: 任一命令下载和处理数据的时间应该只需几分钟。
 - en: Note
+  id: totrans-105
   prefs: []
   type: TYPE_NORMAL
+  zh: 注意
 - en: Quandl has discontinued this dataset early 2018 and it no longer updates. Regardless,
     it is a useful starting point to try out Zipline without setting up your own dataset.
+  id: totrans-106
   prefs: []
   type: TYPE_NORMAL
+  zh: Quandl 已于 2018 年初停止更新此数据集。尽管如此，它仍然是一个有用的起点，可以在不设置自己的数据集的情况下尝试 Zipline。
 - en: '## Writing a New Bundle'
+  id: totrans-107
   prefs: []
   type: TYPE_NORMAL
+  zh: '## 编写新的数据包'
 - en: Data bundles exist to make it easy to use different data sources with Zipline.
     To add a new bundle, one must implement an `ingest` function.
+  id: totrans-108
   prefs: []
   type: TYPE_NORMAL
+  zh: 数据包的存在是为了方便使用不同的数据源与 Zipline。要添加新的数据包，必须实现一个 `ingest` 函数。
 - en: The `ingest` function is responsible for loading the data into memory and passing
     it to a set of writer objects provided by Zipline to convert the data to Zipline’s
     internal format. The ingest function may work by downloading data from a remote
@@ -507,28 +755,42 @@
     the machine. The function is provided with writers that will write the data to
     the correct location. If an ingestion fails part way through the bundle will not
     be written in an incomplete state.
+  id: totrans-109
   prefs: []
   type: TYPE_NORMAL
+  zh: '`ingest` 函数负责将数据加载到内存中，并将其传递给 Zipline 提供的一组写入器对象，以将数据转换为 Zipline 的内部格式。ingest
+    函数可以通过下载远程位置的数据来工作，例如 `quandl` 包，或者只是加载已经在机器上的文件。函数会提供写入器，将数据写入正确的位置。如果部分 ingestion
+    失败，包将不会处于不完整状态。'
 - en: 'The signature of the ingest function should be:'
+  id: totrans-110
   prefs: []
   type: TYPE_NORMAL
+  zh: ingest 函数的签名应该是：
 - en: '[PRE17]'
+  id: totrans-111
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE17]'
 - en: '`environ`'
+  id: totrans-112
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: '`environ`'
 - en: '`environ` is a mapping representing the environment variables to use. This
     is where any custom arguments needed for the ingestion should be passed, for example:
     the `quandl` bundle uses the environment to pass the API key and the download
     retry attempt count.'
+  id: totrans-113
   prefs: []
   type: TYPE_NORMAL
+  zh: '`environ` 是一个映射，表示要使用的环境变量。这是传递任何自定义参数的地方，例如：`quandl` 包使用环境变量传递 API 密钥和下载重试次数。'
 - en: '`asset_db_writer`'
+  id: totrans-114
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: '`asset_db_writer`'
 - en: '`asset_db_writer` is an instance of [`AssetDBWriter`](api-reference.html#zipline.assets.AssetDBWriter
     "zipline.assets.AssetDBWriter"). This is the writer for the asset metadata which
     provides the asset lifetimes and the symbol to asset id (sid) mapping. This may
@@ -536,12 +798,19 @@
     invoke [`write()`](api-reference.html#zipline.assets.AssetDBWriter.write "zipline.assets.AssetDBWriter.write")
     with dataframes for the various pieces of metadata. More information about the
     format of the data exists in the docs for write.'
+  id: totrans-115
   prefs: []
   type: TYPE_NORMAL
+  zh: '`asset_db_writer` 是 [`AssetDBWriter`](api-reference.html#zipline.assets.AssetDBWriter
+    "zipline.assets.AssetDBWriter") 的一个实例。它是用于资产元数据的写入器，提供资产生命周期和符号到资产ID（sid）的映射。它还可能包含资产名称、交易所和其他一些列。要写入数据，请调用
+    [`write()`](api-reference.html#zipline.assets.AssetDBWriter.write "zipline.assets.AssetDBWriter.write")
+    方法，并传入各个元数据的数据框。关于数据格式的更多信息，请参阅 write 的文档。'
 - en: '`minute_bar_writer`'
+  id: totrans-116
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: '`minute_bar_writer`'
 - en: '`minute_bar_writer` is an instance of `BcolzMinuteBarWriter`. This writer is
     used to convert data to Zipline’s internal bcolz format to later be read by a
     `BcolzMinuteBarReader`. If minute data is provided, users should call `write()`
@@ -549,20 +818,31 @@
     also be forwarded to this method. If the data source does not provide minute level
     data, then there is no need to call the write method. It is also acceptable to
     pass an empty iterator to `write()` to signal that there is no minutely data.'
+  id: totrans-117
   prefs: []
   type: TYPE_NORMAL
+  zh: '`minute_bar_writer` 是 `BcolzMinuteBarWriter` 的一个实例。这个写入器用于将数据转换为 Zipline 内部
+    bcolz 格式，以便稍后由 `BcolzMinuteBarReader` 读取。如果提供了分钟数据，用户应该调用 `write()` 方法，并传入一个 (sid,
+    dataframe) 元组的迭代器。`show_progress` 参数也应该传递给这个方法。如果数据源不提供分钟级数据，则无需调用 write 方法。向
+    `write()` 传递一个空迭代器也是可接受的，以表示没有分钟级数据。'
 - en: Note
+  id: totrans-118
   prefs: []
   type: TYPE_NORMAL
+  zh: 注意
 - en: The data passed to `write()` may be a lazy iterator or generator to avoid loading
     all of the minute data into memory at a single time. A given sid may also appear
     multiple times in the data as long as the dates are strictly increasing.
+  id: totrans-119
   prefs: []
   type: TYPE_NORMAL
+  zh: '`write()` 方法接收的数据可以是惰性迭代器或生成器，以避免一次性将所有分钟数据加载到内存中。只要日期严格递增，一个给定的 sid 也可以在数据中出现多次。'
 - en: '`daily_bar_writer`'
+  id: totrans-120
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: '`daily_bar_writer`'
 - en: '`daily_bar_writer` is an instance of [`BcolzDailyBarWriter`](api-reference.html#zipline.data.bcolz_daily_bars.BcolzDailyBarWriter
     "zipline.data.bcolz_daily_bars.BcolzDailyBarWriter"). This writer is used to convert
     data into Zipline’s internal bcolz format to later be read by a [`BcolzDailyBarReader`](api-reference.html#zipline.data.bcolz_daily_bars.BcolzDailyBarReader
@@ -573,58 +853,93 @@
     acceptable to pass an empty iterable to `write()` to signal that there is no daily
     data. If no daily data is provided but minute data is provided, a daily rollup
     will happen to service daily history requests.'
+  id: totrans-121
   prefs: []
   type: TYPE_NORMAL
+  zh: '`daily_bar_writer` 是 [`BcolzDailyBarWriter`](api-reference.html#zipline.data.bcolz_daily_bars.BcolzDailyBarWriter
+    "zipline.data.bcolz_daily_bars.BcolzDailyBarWriter") 的一个实例。该写入器用于将数据转换为 Zipline
+    的内部 bcolz 格式，以便稍后由 [`BcolzDailyBarReader`](api-reference.html#zipline.data.bcolz_daily_bars.BcolzDailyBarReader
+    "zipline.data.bcolz_daily_bars.BcolzDailyBarReader") 读取。如果提供了每日数据，用户应该使用可迭代对象的
+    (sid, dataframe) 元组调用 `write()`。`show_progress` 参数也应该转发给此方法。如果数据源不提供每日数据，则无需调用
+    write 方法。向 `write()` 传递一个空的可迭代对象以表示没有每日数据也是可接受的。如果没有提供每日数据但提供了分钟数据，则会进行每日汇总以服务每日历史请求。'
 - en: Note
+  id: totrans-122
   prefs: []
   type: TYPE_NORMAL
+  zh: Note
 - en: Like the `minute_bar_writer`, the data passed to `write()` may be a lazy iterable
     or generator to avoid loading all of the data into memory at once. Unlike the
     `minute_bar_writer`, a sid may only appear once in the data iterable.
+  id: totrans-123
   prefs: []
   type: TYPE_NORMAL
+  zh: 与 `minute_bar_writer` 类似，传递给 `write()` 的数据可以是惰性可迭代对象或生成器，以避免一次性将所有数据加载到内存中。与
+    `minute_bar_writer` 不同的是，sid 在数据可迭代对象中只能出现一次。
 - en: '`adjustment_writer`'
+  id: totrans-124
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: '`adjustment_writer`'
 - en: '`adjustment_writer` is an instance of [`SQLiteAdjustmentWriter`](api-reference.html#zipline.data.adjustments.SQLiteAdjustmentWriter
     "zipline.data.adjustments.SQLiteAdjustmentWriter"). This writer is used to store
     splits, mergers, dividends, and stock dividends. The data should be provided as
     dataframes and passed to [`write()`](api-reference.html#zipline.data.adjustments.SQLiteAdjustmentWriter.write
     "zipline.data.adjustments.SQLiteAdjustmentWriter.write"). Each of these fields
     are optional, but the writer can accept as much of the data as you have.'
+  id: totrans-125
   prefs: []
   type: TYPE_NORMAL
+  zh: '`adjustment_writer` 是 [`SQLiteAdjustmentWriter`](api-reference.html#zipline.data.adjustments.SQLiteAdjustmentWriter
+    "zipline.data.adjustments.SQLiteAdjustmentWriter") 的一个实例。该写入器用于存储拆分、合并、股息和股票股息。数据应以数据框的形式提供，并传递给
+    [`write()`](api-reference.html#zipline.data.adjustments.SQLiteAdjustmentWriter.write
+    "zipline.data.adjustments.SQLiteAdjustmentWriter.write")。这些字段都是可选的，但写入器可以接受您拥有的尽可能多的数据。'
 - en: '`calendar`'
+  id: totrans-126
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: '`calendar`'
 - en: '`calendar` is an instance of `zipline.utils.calendars.TradingCalendar`. The
     calendar is provided to help some bundles generate queries for the days needed.'
+  id: totrans-127
   prefs: []
   type: TYPE_NORMAL
+  zh: '`calendar` 是 `zipline.utils.calendars.TradingCalendar` 的一个实例。提供日历是为了帮助某些捆绑包生成所需日期的查询。'
 - en: '`start_session`'
+  id: totrans-128
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: '`start_session`'
 - en: '`start_session` is a [`pandas.Timestamp`](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.Timestamp.html#pandas.Timestamp
     "(in pandas v2.0.3)") object indicating the first day that the bundle should load
     data for.'
+  id: totrans-129
   prefs: []
   type: TYPE_NORMAL
+  zh: '`start_session` 是一个 [`pandas.Timestamp`](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.Timestamp.html#pandas.Timestamp
+    "(in pandas v2.0.3)") 对象，表示该捆绑包应该加载数据的第一天。'
 - en: '`end_session`'
+  id: totrans-130
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: '`end_session`'
 - en: '`end_session` is a [`pandas.Timestamp`](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.Timestamp.html#pandas.Timestamp
     "(in pandas v2.0.3)") object indicating the last day that the bundle should load
     data for.'
+  id: totrans-131
   prefs: []
   type: TYPE_NORMAL
+  zh: '`end_session` 是一个 [`pandas.Timestamp`](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.Timestamp.html#pandas.Timestamp
+    "(in pandas v2.0.3)") 对象，表示该捆绑包应该加载数据的最后一天。'
 - en: '`cache`'
+  id: totrans-132
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: '`cache`'
 - en: '`cache` is an instance of [`dataframe_cache`](api-reference.html#zipline.utils.cache.dataframe_cache
     "zipline.utils.cache.dataframe_cache"). This object is a mapping from strings
     to dataframes. This object is provided in case an ingestion crashes part way through.
@@ -634,12 +949,17 @@
     load, this prevents the ingest function from needing to re-download all the data
     if there is some bug in the parsing. If it is very fast to get the data, for example
     if it is coming from another local file, then there is no need to use this cache.'
+  id: totrans-133
   prefs: []
   type: TYPE_NORMAL
+  zh: '`cache` 是 [`dataframe_cache`](api-reference.html#zipline.utils.cache.dataframe_cache
+    "zipline.utils.cache.dataframe_cache") 的一个实例。这个对象是一个字符串到数据框的映射。如果摄取过程中发生崩溃，这个对象会被提供。其想法是，摄取函数应该检查缓存中是否存在原始数据，如果不存在，则应该获取它并将其存储在缓存中。然后它可以解析并写入数据。只有在成功加载后，缓存才会被清除，这可以防止摄取函数在解析中出现错误时需要重新下载所有数据。如果获取数据非常快，例如如果它来自另一个本地文件，则不需要使用此缓存。'
 - en: '`show_progress`'
+  id: totrans-134
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: '`show_progress`'
 - en: '`show_progress` is a boolean indicating that the user would like to receive
     feedback about the ingest function’s progress fetching and writing the data. Some
     examples for where to show how many files you have downloaded out of the total
@@ -647,34 +967,50 @@
     that may help with implementing `show_progress` for a loop is [`maybe_show_progress`](api-reference.html#zipline.utils.cli.maybe_show_progress
     "zipline.utils.cli.maybe_show_progress"). This argument should always be forwarded
     to `minute_bar_writer.write` and `daily_bar_writer.write`.'
+  id: totrans-135
   prefs: []
   type: TYPE_NORMAL
+  zh: '`show_progress` 是一个布尔值，表示用户希望接收关于摄取函数在获取和写入数据方面的进度反馈。例如，显示已下载的文件数量占所需总数的百分比，或者数据转换的进度。实现
+    `show_progress` 的一个有用工具是 [`maybe_show_progress`](api-reference.html#zipline.utils.cli.maybe_show_progress
+    "zipline.utils.cli.maybe_show_progress")。这个参数应该始终传递给 `minute_bar_writer.write`
+    和 `daily_bar_writer.write`。'
 - en: '`output_dir`'
+  id: totrans-136
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: '`output_dir`'
 - en: '`output_dir` is a string representing the file path where all the data will
     be written. `output_dir` will be some subdirectory of `$ZIPLINE_ROOT` and will
     contain the time of the start of the current ingestion. This can be used to directly
     move resources here if for some reason your ingest function can produce it’s own
     outputs without the writers. For example, the `quantopian:quandl` bundle uses
     this to directly untar the bundle into the `output_dir`.'
+  id: totrans-137
   prefs: []
   type: TYPE_NORMAL
+  zh: '`output_dir` 是一个字符串，表示所有数据将被写入的文件路径。`output_dir` 将是 `$ZIPLINE_ROOT` 的某个子目录，并包含当前摄取开始的时间。如果您的摄取函数可以直接生成输出而不需要写入器，则可以直接将资源移动到这里。例如，`quantopian:quandl`
+    包使用这个直接将包解压到 `output_dir`。'
 - en: '`environ`'
+  id: totrans-138
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: '`environ`'
 - en: '`environ` is a mapping representing the environment variables to use. This
     is where any custom arguments needed for the ingestion should be passed, for example:
     the `quandl` bundle uses the environment to pass the API key and the download
     retry attempt count.'
+  id: totrans-139
   prefs: []
   type: TYPE_NORMAL
+  zh: '`environ` 是一个映射，代表要使用的环境变量。这是传递任何摄取所需的定制参数的地方，例如：`quandl` 包使用环境变量传递 API 密钥和下载重试次数。'
 - en: '`asset_db_writer`'
+  id: totrans-140
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: '`asset_db_writer`'
 - en: '`asset_db_writer` is an instance of [`AssetDBWriter`](api-reference.html#zipline.assets.AssetDBWriter
     "zipline.assets.AssetDBWriter"). This is the writer for the asset metadata which
     provides the asset lifetimes and the symbol to asset id (sid) mapping. This may
@@ -682,12 +1018,19 @@
     invoke [`write()`](api-reference.html#zipline.assets.AssetDBWriter.write "zipline.assets.AssetDBWriter.write")
     with dataframes for the various pieces of metadata. More information about the
     format of the data exists in the docs for write.'
+  id: totrans-141
   prefs: []
   type: TYPE_NORMAL
+  zh: '`asset_db_writer` 是 [`AssetDBWriter`](api-reference.html#zipline.assets.AssetDBWriter
+    "zipline.assets.AssetDBWriter") 的一个实例。它是用于资产元数据的写入器，提供资产生命周期和符号到资产ID（sid）的映射。它还可能包含资产名称、交易所和其他一些列。要写入数据，请调用
+    [`write()`](api-reference.html#zipline.assets.AssetDBWriter.write "zipline.assets.AssetDBWriter.write")
+    方法，并传入各个元数据的数据框。关于数据格式的更多信息，请参阅 write 的文档。'
 - en: '`minute_bar_writer`'
+  id: totrans-142
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: '`minute_bar_writer`'
 - en: '`minute_bar_writer` is an instance of `BcolzMinuteBarWriter`. This writer is
     used to convert data to Zipline’s internal bcolz format to later be read by a
     `BcolzMinuteBarReader`. If minute data is provided, users should call `write()`
@@ -695,20 +1038,29 @@
     also be forwarded to this method. If the data source does not provide minute level
     data, then there is no need to call the write method. It is also acceptable to
     pass an empty iterator to `write()` to signal that there is no minutely data.'
+  id: totrans-143
   prefs: []
   type: TYPE_NORMAL
+  zh: '`minute_bar_writer`是`BcolzMinuteBarWriter`的一个实例。该写入器用于将数据转换为Zipline的内部bcolz格式，以便稍后由`BcolzMinuteBarReader`读取。如果提供了分钟数据，用户应该使用可迭代的(sid,
+    dataframe)元组调用`write()`。`show_progress`参数也应该传递给此方法。如果数据源不提供分钟级数据，则无需调用write方法。向`write()`传递一个空迭代器也是可接受的，以表明没有分钟数据。'
 - en: Note
+  id: totrans-144
   prefs: []
   type: TYPE_NORMAL
+  zh: 注意
 - en: The data passed to `write()` may be a lazy iterator or generator to avoid loading
     all of the minute data into memory at a single time. A given sid may also appear
     multiple times in the data as long as the dates are strictly increasing.
+  id: totrans-145
   prefs: []
   type: TYPE_NORMAL
+  zh: 传递给`write()`的数据可以是惰性迭代器或生成器，以避免一次性将所有分钟数据加载到内存中。只要日期严格递增，一个给定的sid也可以在数据中出现多次。
 - en: '`daily_bar_writer`'
+  id: totrans-146
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: '`daily_bar_writer`'
 - en: '`daily_bar_writer` is an instance of [`BcolzDailyBarWriter`](api-reference.html#zipline.data.bcolz_daily_bars.BcolzDailyBarWriter
     "zipline.data.bcolz_daily_bars.BcolzDailyBarWriter"). This writer is used to convert
     data into Zipline’s internal bcolz format to later be read by a [`BcolzDailyBarReader`](api-reference.html#zipline.data.bcolz_daily_bars.BcolzDailyBarReader
@@ -719,58 +1071,89 @@
     acceptable to pass an empty iterable to `write()` to signal that there is no daily
     data. If no daily data is provided but minute data is provided, a daily rollup
     will happen to service daily history requests.'
+  id: totrans-147
   prefs: []
   type: TYPE_NORMAL
+  zh: '`daily_bar_writer`是[`BcolzDailyBarWriter`](api-reference.html#zipline.data.bcolz_daily_bars.BcolzDailyBarWriter
+    "zipline.data.bcolz_daily_bars.BcolzDailyBarWriter")的一个实例。该写入器用于将数据转换为Zipline的内部bcolz格式，以便稍后由[`BcolzDailyBarReader`](api-reference.html#zipline.data.bcolz_daily_bars.BcolzDailyBarReader
+    "zipline.data.bcolz_daily_bars.BcolzDailyBarReader")读取。如果提供了每日数据，用户应该使用可迭代的(sid,
+    dataframe)元组调用`write()`。`show_progress`参数也应该传递给此方法。如果数据源不提供每日数据，则无需调用write方法。向`write()`传递一个空迭代器也是可接受的，以表明没有每日数据。如果没有提供每日数据但提供了分钟数据，则会进行每日汇总以服务每日历史请求。'
 - en: Note
+  id: totrans-148
   prefs: []
   type: TYPE_NORMAL
+  zh: 注意
 - en: Like the `minute_bar_writer`, the data passed to `write()` may be a lazy iterable
     or generator to avoid loading all of the data into memory at once. Unlike the
     `minute_bar_writer`, a sid may only appear once in the data iterable.
+  id: totrans-149
   prefs: []
   type: TYPE_NORMAL
+  zh: 与`minute_bar_writer`类似，传递给`write()`的数据可以是惰性迭代器或生成器，以避免一次性将所有数据加载到内存中。与`minute_bar_writer`不同的是，一个sid只能在数据迭代器中出现一次。
 - en: '`adjustment_writer`'
+  id: totrans-150
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: '`adjustment_writer`'
 - en: '`adjustment_writer` is an instance of [`SQLiteAdjustmentWriter`](api-reference.html#zipline.data.adjustments.SQLiteAdjustmentWriter
     "zipline.data.adjustments.SQLiteAdjustmentWriter"). This writer is used to store
     splits, mergers, dividends, and stock dividends. The data should be provided as
     dataframes and passed to [`write()`](api-reference.html#zipline.data.adjustments.SQLiteAdjustmentWriter.write
     "zipline.data.adjustments.SQLiteAdjustmentWriter.write"). Each of these fields
     are optional, but the writer can accept as much of the data as you have.'
+  id: totrans-151
   prefs: []
   type: TYPE_NORMAL
+  zh: '`adjustment_writer`是[`SQLiteAdjustmentWriter`](api-reference.html#zipline.data.adjustments.SQLiteAdjustmentWriter
+    "zipline.data.adjustments.SQLiteAdjustmentWriter")的一个实例。该写入器用于存储拆分、合并、股息和股票股息。数据应以数据框的形式提供，并传递给[`write()`](api-reference.html#zipline.data.adjustments.SQLiteAdjustmentWriter.write
+    "zipline.data.adjustments.SQLiteAdjustmentWriter.write")。这些字段中的每一个都是可选的，但写入器可以接受您拥有的尽可能多的数据。'
 - en: '`calendar`'
+  id: totrans-152
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: '`calendar`'
 - en: '`calendar` is an instance of `zipline.utils.calendars.TradingCalendar`. The
     calendar is provided to help some bundles generate queries for the days needed.'
+  id: totrans-153
   prefs: []
   type: TYPE_NORMAL
+  zh: '`calendar`是`zipline.utils.calendars.TradingCalendar`的一个实例。日历提供给一些捆绑包，以帮助生成所需日期的查询。'
 - en: '`start_session`'
+  id: totrans-154
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: '`start_session`'
 - en: '`start_session` is a [`pandas.Timestamp`](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.Timestamp.html#pandas.Timestamp
     "(in pandas v2.0.3)") object indicating the first day that the bundle should load
     data for.'
+  id: totrans-155
   prefs: []
   type: TYPE_NORMAL
+  zh: '`start_session`是一个[`pandas.Timestamp`](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.Timestamp.html#pandas.Timestamp
+    "(in pandas v2.0.3)")对象，指示捆绑包应该加载数据的第一天。'
 - en: '`end_session`'
+  id: totrans-156
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: '`end_session`'
 - en: '`end_session` is a [`pandas.Timestamp`](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.Timestamp.html#pandas.Timestamp
     "(in pandas v2.0.3)") object indicating the last day that the bundle should load
     data for.'
+  id: totrans-157
   prefs: []
   type: TYPE_NORMAL
+  zh: '`end_session` 是一个 [`pandas.Timestamp`](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.Timestamp.html#pandas.Timestamp
+    "(in pandas v2.0.3)") 对象，表示包应该加载数据的最后一天。'
 - en: '`cache`'
+  id: totrans-158
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: '`cache`'
 - en: '`cache` is an instance of [`dataframe_cache`](api-reference.html#zipline.utils.cache.dataframe_cache
     "zipline.utils.cache.dataframe_cache"). This object is a mapping from strings
     to dataframes. This object is provided in case an ingestion crashes part way through.
@@ -780,12 +1163,17 @@
     load, this prevents the ingest function from needing to re-download all the data
     if there is some bug in the parsing. If it is very fast to get the data, for example
     if it is coming from another local file, then there is no need to use this cache.'
+  id: totrans-159
   prefs: []
   type: TYPE_NORMAL
+  zh: '`cache` 是 [`dataframe_cache`](api-reference.html#zipline.utils.cache.dataframe_cache
+    "zipline.utils.cache.dataframe_cache") 的一个实例。这个对象是一个从字符串到数据框的映射。如果摄取过程中途崩溃，这个对象会被提供。其想法是，摄取函数应该检查缓存中是否存在原始数据，如果不存在，则应该获取它，然后将其存储在缓存中。然后它可以解析并写入数据。只有在成功加载后，缓存才会被清除，这可以防止摄取函数在解析中出现错误时需要重新下载所有数据。如果获取数据非常快，例如如果数据来自另一个本地文件，则不需要使用此缓存。'
 - en: '`show_progress`'
+  id: totrans-160
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: '`show_progress`'
 - en: '`show_progress` is a boolean indicating that the user would like to receive
     feedback about the ingest function’s progress fetching and writing the data. Some
     examples for where to show how many files you have downloaded out of the total
@@ -793,70 +1181,110 @@
     that may help with implementing `show_progress` for a loop is [`maybe_show_progress`](api-reference.html#zipline.utils.cli.maybe_show_progress
     "zipline.utils.cli.maybe_show_progress"). This argument should always be forwarded
     to `minute_bar_writer.write` and `daily_bar_writer.write`.'
+  id: totrans-161
   prefs: []
   type: TYPE_NORMAL
+  zh: '`show_progress` 是一个布尔值，表示用户希望接收关于摄取函数获取和写入数据进度的反馈。例如，显示已下载的文件数量占所需总数的比例，或者摄取函数在进行某些数据转换时的进度。实现
+    `show_progress` 循环的一个有用工具是 [`maybe_show_progress`](api-reference.html#zipline.utils.cli.maybe_show_progress
+    "zipline.utils.cli.maybe_show_progress")。这个参数应该始终传递给 `minute_bar_writer.write`
+    和 `daily_bar_writer.write`。'
 - en: '`output_dir`'
+  id: totrans-162
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: '`output_dir`'
 - en: '`output_dir` is a string representing the file path where all the data will
     be written. `output_dir` will be some subdirectory of `$ZIPLINE_ROOT` and will
     contain the time of the start of the current ingestion. This can be used to directly
     move resources here if for some reason your ingest function can produce it’s own
     outputs without the writers. For example, the `quantopian:quandl` bundle uses
     this to directly untar the bundle into the `output_dir`.'
+  id: totrans-163
   prefs: []
   type: TYPE_NORMAL
+  zh: '`output_dir` 是一个字符串，表示所有数据将被写入的文件路径。`output_dir` 将是 `$ZIPLINE_ROOT` 的某个子目录，并且将包含当前摄取开始的时间。如果由于某种原因，您的摄取函数可以不通过写入器产生自己的输出，那么可以直接将资源移动到这里。例如，`quantopian:quandl`
+    包使用这个功能直接将包解压到 `output_dir` 中。'
 - en: Ingesting Data from .csv Files
+  id: totrans-164
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 从 .csv 文件中摄取数据
 - en: Zipline provides a bundle called `csvdir`, which allows users to ingest data
     from `.csv` files. The format of the files should be in OHLCV format, with dates,
     dividends, and splits. A sample is provided below. There are other samples for
     testing purposes in `zipline/tests/resources/csvdir_samples`.
+  id: totrans-165
   prefs: []
   type: TYPE_NORMAL
+  zh: Zipline 提供了一个名为 `csvdir` 的包，允许用户从 `.csv` 文件中摄取数据。文件格式应为 OHLCV 格式，包含日期、股息和拆分。下面提供了一个示例。在
+    `zipline/tests/resources/csvdir_samples` 中还有其他用于测试目的的示例。
 - en: '[PRE18]'
+  id: totrans-166
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE18]'
 - en: Once you have your data in the correct format, you can edit your `extension.py`
     file in `~/.zipline/extension.py` and import the csvdir bundle, along with `pandas`.
+  id: totrans-167
   prefs: []
   type: TYPE_NORMAL
+  zh: 一旦您的数据格式正确，您可以编辑 `~/.zipline/extension.py` 文件中的 `extension.py` 文件，并导入 csvdir
+    包以及 `pandas`。
 - en: '[PRE19]'
+  id: totrans-168
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE19]'
 - en: 'We’ll then want to specify the start and end sessions of our bundle data:'
+  id: totrans-169
   prefs: []
   type: TYPE_NORMAL
+  zh: 然后，我们想要指定我们的包数据的开始和结束会话：
 - en: '[PRE20]'
+  id: totrans-170
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE20]'
 - en: 'And then we can `register()` our bundle, and pass the location of the directory
     in which our `.csv` files exist:'
+  id: totrans-171
   prefs: []
   type: TYPE_NORMAL
+  zh: 然后我们可以 `register()` 我们的包，并传递我们的 `.csv` 文件所在的目录位置：
 - en: '[PRE21]'
+  id: totrans-172
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE21]'
 - en: 'To finally ingest our data, we can run:'
+  id: totrans-173
   prefs: []
   type: TYPE_NORMAL
+  zh: 最后，我们可以运行以下命令来摄取我们的数据：
 - en: '[PRE22]'
+  id: totrans-174
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE22]'
 - en: If you would like to use equities that are not in the NYSE calendar, or the
     existing Zipline calendars, you can look at the `Trading Calendar Tutorial` to
     build a custom trading calendar that you can then pass the name of to `register()`.
+  id: totrans-175
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果你想使用不在纽约证券交易所日历或现有Zipline日历中的股票，你可以查看`Trading Calendar Tutorial`来构建一个自定义交易日历，然后将其名称传递给`register()`。
 - en: Practical Examples
+  id: totrans-176
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 实用示例
 - en: See examples for [Algoseek](https://www.algoseek.com/) [minute data](https://github.com/stefan-jansen/machine-learning-for-trading/tree/master/08_ml4t_workflow/04_ml4t_workflow_with_zipline/01_custom_bundles)
     and [Japanese equities](https://github.com/stefan-jansen/machine-learning-for-trading/tree/master/11_decision_trees_random_forests/00_custom_bundle)
     at daily frequency from the book [Machine Learning for Trading](https://www.amazon.com/Machine-Learning-Algorithmic-Trading-alternative/dp/1839217715?pf_rd_r=GZH2XZ35GB3BET09PCCA&pf_rd_p=c5b6893a-24f2-4a59-9d4b-aff5065c90ec&pd_rd_r=91a679c7-f069-4a6e-bdbb-a2b3f548f0c8&pd_rd_w=2B0Q0&pd_rd_wg=GMY5S&ref_=pd_gw_ci_mcx_mr_hp_d).
+  id: totrans-177
   prefs: []
   type: TYPE_NORMAL
+  zh: 查看书籍[机器学习在交易中的应用](https://www.amazon.com/Machine-Learning-Algorithmic-Trading-alternative/dp/1839217715?pf_rd_r=GZH2XZ35GB3BET09PCCA&pf_rd_p=c5b6893a-24f2-4a59-9d4b-aff5065c90ec&pd_rd_r=91a679c7-f069-4a6e-bdbb-a2b3f548f0c8&pd_rd_w=2B0Q0&pd_rd_wg=GMY5S&ref_=pd_gw_ci_mcx_mr_hp_d)中的示例，包括[Algoseek](https://www.algoseek.com/)的[分钟数据](https://github.com/stefan-jansen/machine-learning-for-trading/tree/master/08_ml4t_workflow/04_ml4t_workflow_with_zipline/01_custom_bundles)和[日本股票](https://github.com/stefan-jansen/machine-learning-for-trading/tree/master/11_decision_trees_random_forests/00_custom_bundle)的日频数据。

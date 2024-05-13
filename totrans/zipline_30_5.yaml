@@ -1,830 +1,1296 @@
 - en: Metrics
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 度量
 - en: 原文：[https://zipline.ml4trading.io/risk-and-perf-metrics.html](https://zipline.ml4trading.io/risk-and-perf-metrics.html)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://zipline.ml4trading.io/risk-and-perf-metrics.html](https://zipline.ml4trading.io/risk-and-perf-metrics.html)
 - en: The risk and performance metrics are summarizing values calculated by Zipline
     when running a simulation. These metrics can be about the performance of an algorithm,
     like returns or cash flow, or the riskiness of an algorithm, like volatility or
     beta. Metrics may be reported minutely, daily, or once at the end of a simulation.
     A single metric may choose to report at multiple time-scales where appropriate.
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: 风险和性能度量是Zipline在运行模拟时计算的汇总值。这些度量可以是关于算法性能的，如回报或现金流，或者是算法的风险性，如波动性或贝塔。度量可以每分钟、每天或一次在模拟结束时报告。单个度量可以选择在适当的情况下在多个时间尺度上报。
 - en: Metrics Sets
+  id: totrans-3
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 度量集
 - en: Zipline groups risk and performance metrics into collections called “metrics
     sets”. A single metrics set defines all of the metrics to track during a single
     backtest. A metrics set may contain metrics that report at different time scales.
     The default metrics set will compute a host of metrics, such as algorithm returns,
     volatility, Sharpe ratio, and beta.
+  id: totrans-4
   prefs: []
   type: TYPE_NORMAL
+  zh: Zipline将风险和性能度量分组为称为“度量集”的集合。单个度量集定义了单个回测期间要跟踪的所有度量。度量集可以包含在不同时间尺度上报的度量。默认度量集将计算一系列度量，如算法回报、波动性、夏普比率和贝塔。
 - en: Selecting the Metrics Set
+  id: totrans-5
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 选择度量集
 - en: When running a simulation, the user may select the metrics set to report. How
     you select the metrics set depends on the interface being used to run the algorithm.
+  id: totrans-6
   prefs: []
   type: TYPE_NORMAL
+  zh: 在运行模拟时，用户可以选择要报告的度量集。选择度量集的方式取决于运行算法的接口。
 - en: Command Line and IPython Magic
+  id: totrans-7
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 命令行和IPython魔术
 - en: 'When running with the command line or IPython magic interfaces, the metrics
     set may be selected by passing the `--metrics-set` argument. For example:'
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: 在使用命令行或IPython魔术接口运行时，可以通过传递`--metrics-set`参数来选择度量集。例如：
 - en: '[PRE0]'
+  id: totrans-9
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: '`run_algorithm`'
+  id: totrans-10
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: '`run_algorithm`'
 - en: 'When running through the [`run_algorithm()`](api-reference.html#zipline.run_algorithm
     "zipline.run_algorithm") interface, the metrics set may be passed with the `metrics_set`
     argument. This may either be the name of a registered metrics set, or a set of
     metric object. For example:'
+  id: totrans-11
   prefs: []
   type: TYPE_NORMAL
+  zh: 在使用[`run_algorithm()`](api-reference.html#zipline.run_algorithm "zipline.run_algorithm")接口运行时，可以通过`metrics_set`参数传递度量集。这可以是已注册度量集的名称，也可以是一组度量对象。例如：
 - en: '[PRE1]'
+  id: totrans-12
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE1]'
 - en: Running Without Metrics
+  id: totrans-13
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 不带度量运行
 - en: 'Computing risk and performance metrics is not free, and contributes to the
     total runtime of a backtest. When actively developing an algorithm, it is often
     helpful to skip these computations to speed up the debugging cycle. To disable
     the calculation and reporting of all metrics, users may select the built-in metrics
     set `none`. For example:'
+  id: totrans-14
   prefs: []
   type: TYPE_NORMAL
+  zh: 计算风险和性能度量并非免费，这会增加回测的总运行时间。在积极开发算法时，通常有助于跳过这些计算以加快调试周期。要禁用所有度量的计算和报告，用户可以选择内置度量集`none`。例如：
 - en: '[PRE2]'
+  id: totrans-15
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE2]'
 - en: Defining New Metrics
+  id: totrans-16
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 定义新度量
 - en: 'A metric is any object that implements some subset of the following methods:'
+  id: totrans-17
   prefs: []
   type: TYPE_NORMAL
+  zh: 度量是实现以下方法子集的任何对象：
 - en: '`start_of_simulation`'
+  id: totrans-18
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`start_of_simulation`'
 - en: '`end_of_simulation`'
+  id: totrans-19
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`end_of_simulation`'
 - en: '`start_of_session`'
+  id: totrans-20
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`start_of_session`'
 - en: '`end_of_session`'
+  id: totrans-21
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`end_of_session`'
 - en: '`end_of_bar`'
+  id: totrans-22
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`end_of_bar`'
 - en: These functions will be called at the time indicated by their name, at which
     point the metric object may collect any needed information and optionally report
     a computed value. If a metric does not need to do any processing at one of these
     times, it may omit a definition for the given method.
+  id: totrans-23
   prefs: []
   type: TYPE_NORMAL
+  zh: 这些函数将在其名称指示的时间被调用，此时度量对象可以收集任何所需信息，并可选地报告计算值。如果度量在某个时间不需要进行任何处理，则可以省略对该方法的定义。
 - en: A metric should be reusable, meaning that a single instance of a metric class
     should be able to be used across multiple backtests. Metrics do not need to support
     multiple simulations at once, meaning that internal caches and data are consistent
     between `start_of_simulation` and `end_of_simulation`.
+  id: totrans-24
   prefs: []
   type: TYPE_NORMAL
+  zh: 度量应该是可重用的，这意味着单个度量类实例可以用于多个回测。度量不需要同时支持多个模拟，这意味着内部缓存和数据在`start_of_simulation`和`end_of_simulation`之间是一致的。
 - en: '`start_of_simulation`'
+  id: totrans-25
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: '`start_of_simulation`'
 - en: The `start_of_simulation` method should be thought of as a per-simulation constructor.
     This method should initialize any caches needed for the duration of a single simulation.
+  id: totrans-26
   prefs: []
   type: TYPE_NORMAL
+  zh: '`start_of_simulation`方法应被视为每个模拟的构造函数。该方法应初始化单个模拟期间所需的任何缓存。'
 - en: 'The `start_of_simulation` method should have the following signature:'
+  id: totrans-27
   prefs: []
   type: TYPE_NORMAL
+  zh: '`start_of_simulation`方法应具有以下签名：'
 - en: '[PRE3]'
+  id: totrans-28
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE3]'
 - en: '`ledger` is an instance of [`Ledger`](api-reference.html#zipline.finance.ledger.Ledger
     "zipline.finance.ledger.Ledger") which is maintaining the simulation’s state.
     This may be used to lookup the algorithm’s starting portfolio values.'
+  id: totrans-29
   prefs: []
   type: TYPE_NORMAL
+  zh: '`ledger` 是 [`Ledger`](api-reference.html#zipline.finance.ledger.Ledger "zipline.finance.ledger.Ledger")
+    的一个实例，它维护着模拟的状态。这可以用来查找算法的起始投资组合价值。'
 - en: '`emission_rate` is a string representing the smallest frequency at which metrics
     should be reported. `emission_rate` will be either `minute` or `daily`. When `emission_rate`
     is `daily`, `end_of_bar` will not be called at all.'
+  id: totrans-30
   prefs: []
   type: TYPE_NORMAL
+  zh: '`emission_rate` 是一个表示度量报告的最小频率的字符串。`emission_rate` 将是 `minute` 或 `daily`。当
+    `emission_rate` 是 `daily` 时，`end_of_bar` 将根本不会被调用。'
 - en: '`trading_calendar` is an instance of `TradingCalendar` which is the trading
     calendar being used by the simulation.'
+  id: totrans-31
   prefs: []
   type: TYPE_NORMAL
+  zh: '`trading_calendar` 是 `TradingCalendar` 的一个实例，它是模拟所使用的交易日历。'
 - en: '`sessions` is a [`pandas.DatetimeIndex`](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DatetimeIndex.html#pandas.DatetimeIndex
     "(in pandas v2.0.3)") which is holds the session labels, in sorted order, that
     the simulation will execute.'
+  id: totrans-32
   prefs: []
   type: TYPE_NORMAL
+  zh: '`sessions` 是一个 [`pandas.DatetimeIndex`](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DatetimeIndex.html#pandas.DatetimeIndex
+    "(in pandas v2.0.3)")，它持有模拟将要执行的会话标签，按排序顺序。'
 - en: '`benchmark_source` is an instance of [`BenchmarkSource`](api-reference.html#zipline.sources.benchmark_source.BenchmarkSource
     "zipline.sources.benchmark_source.BenchmarkSource") which is the interface to
     the returns of the benchmark specified by [`set_benchmark()`](api-reference.html#zipline.api.set_benchmark
     "zipline.api.set_benchmark").'
+  id: totrans-33
   prefs: []
   type: TYPE_NORMAL
+  zh: '`benchmark_source` 是 [`BenchmarkSource`](api-reference.html#zipline.sources.benchmark_source.BenchmarkSource
+    "zipline.sources.benchmark_source.BenchmarkSource") 的一个实例，它是 [`set_benchmark()`](api-reference.html#zipline.api.set_benchmark
+    "zipline.api.set_benchmark") 指定的基准回报的接口。'
 - en: '`end_of_simulation`'
+  id: totrans-34
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: '`end_of_simulation`'
 - en: 'The `end_of_simulation` method should have the following signature:'
+  id: totrans-35
   prefs: []
   type: TYPE_NORMAL
+  zh: '`end_of_simulation` 方法应具有以下签名：'
 - en: '[PRE4]'
+  id: totrans-36
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE4]'
 - en: '`ledger` is an instance of [`Ledger`](api-reference.html#zipline.finance.ledger.Ledger
     "zipline.finance.ledger.Ledger") which is maintaining the simulation’s state.
     This may be used to lookup the algorithm’s final portfolio values.'
+  id: totrans-37
   prefs: []
   type: TYPE_NORMAL
+  zh: '`ledger` 是 [`Ledger`](api-reference.html#zipline.finance.ledger.Ledger "zipline.finance.ledger.Ledger")
+    的一个实例，它维护着模拟的状态。这可以用来查找算法的最终投资组合价值。'
 - en: '`packet` is a dictionary to write the end of simulation values for the given
     metric into.'
+  id: totrans-38
   prefs: []
   type: TYPE_NORMAL
+  zh: '`packet` 是一个字典，用于写入给定度量的模拟结束值。'
 - en: '`trading_calendar` is an instance of `TradingCalendar` which is the trading
     calendar being used by the simulation.'
+  id: totrans-39
   prefs: []
   type: TYPE_NORMAL
+  zh: '`trading_calendar` 是 `TradingCalendar` 的一个实例，它是模拟所使用的交易日历。'
 - en: '`sessions` is a [`pandas.DatetimeIndex`](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DatetimeIndex.html#pandas.DatetimeIndex
     "(in pandas v2.0.3)") which is holds the session labels, in sorted order, that
     the simulation has executed.'
+  id: totrans-40
   prefs: []
   type: TYPE_NORMAL
+  zh: '`sessions` 是一个 [`pandas.DatetimeIndex`](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DatetimeIndex.html#pandas.DatetimeIndex
+    "(in pandas v2.0.3)")，它持有模拟已经执行的会话标签，按排序顺序。'
 - en: '`data_portal` is an instance of [`DataPortal`](api-reference.html#zipline.data.data_portal.DataPortal
     "zipline.data.data_portal.DataPortal") which is the metric’s interface to pricing
     data.'
+  id: totrans-41
   prefs: []
   type: TYPE_NORMAL
+  zh: '`data_portal` 是 [`DataPortal`](api-reference.html#zipline.data.data_portal.DataPortal
+    "zipline.data.data_portal.DataPortal") 的一个实例，它是度量对定价数据的接口。'
 - en: '`benchmark_source` is an instance of [`BenchmarkSource`](api-reference.html#zipline.sources.benchmark_source.BenchmarkSource
     "zipline.sources.benchmark_source.BenchmarkSource") which is the interface to
     the returns of the benchmark specified by [`set_benchmark()`](api-reference.html#zipline.api.set_benchmark
     "zipline.api.set_benchmark").'
+  id: totrans-42
   prefs: []
   type: TYPE_NORMAL
+  zh: '`benchmark_source` 是 [`BenchmarkSource`](api-reference.html#zipline.sources.benchmark_source.BenchmarkSource
+    "zipline.sources.benchmark_source.BenchmarkSource") 的一个实例，它是 [`set_benchmark()`](api-reference.html#zipline.api.set_benchmark
+    "zipline.api.set_benchmark") 指定的基准回报的接口。'
 - en: '`start_of_session`'
+  id: totrans-43
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: '`start_of_session`'
 - en: The `start_of_session` method may see a slightly different view of the `ledger`
     or `data_portal` than the previous `end_of_session` if the price of any futures
     owned move between trading sessions or if a capital change occurs.
+  id: totrans-44
   prefs: []
   type: TYPE_NORMAL
+  zh: '`start_of_session` 方法可能会看到与之前的 `end_of_session` 略有不同的 `ledger` 或 `data_portal`
+    视图，如果拥有的任何期货的价格在交易会话之间移动或发生资本变动。'
 - en: 'The `start_of_session` method should have the following signature:'
+  id: totrans-45
   prefs: []
   type: TYPE_NORMAL
+  zh: '`start_of_session` 方法应具有以下签名：'
 - en: '[PRE5]'
+  id: totrans-46
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE5]'
 - en: '`ledger` is an instance of [`Ledger`](api-reference.html#zipline.finance.ledger.Ledger
     "zipline.finance.ledger.Ledger") which is maintaining the simulation’s state.
     This may be used to lookup the algorithm’s current portfolio values.'
+  id: totrans-47
   prefs: []
   type: TYPE_NORMAL
+  zh: '`ledger` 是 [`Ledger`](api-reference.html#zipline.finance.ledger.Ledger "zipline.finance.ledger.Ledger")
+    的一个实例，它维护着模拟的状态。这可以用来查找算法的当前投资组合价值。'
 - en: '`session_label` is a [`Timestamp`](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.Timestamp.html#pandas.Timestamp
     "(in pandas v2.0.3)") which is the label of the session which is about to run.'
+  id: totrans-48
   prefs: []
   type: TYPE_NORMAL
+  zh: '`session_label` 是一个 [`Timestamp`](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.Timestamp.html#pandas.Timestamp
+    "(in pandas v2.0.3)")，它是即将运行的会话的标签。'
 - en: '`data_portal` is an instance of [`DataPortal`](api-reference.html#zipline.data.data_portal.DataPortal
     "zipline.data.data_portal.DataPortal") which is the metric’s interface to pricing
     data.'
+  id: totrans-49
   prefs: []
   type: TYPE_NORMAL
+  zh: '`data_portal` 是 [`DataPortal`](api-reference.html#zipline.data.data_portal.DataPortal
+    "zipline.data.data_portal.DataPortal") 的一个实例，它是度量与定价数据接口。'
 - en: '`end_of_session`'
+  id: totrans-50
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: '`end_of_session`'
 - en: 'The `end_of_session` method should have the following signature:'
+  id: totrans-51
   prefs: []
   type: TYPE_NORMAL
+  zh: '`end_of_session` 方法应具有以下签名：'
 - en: '[PRE6]'
+  id: totrans-52
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE6]'
 - en: '`packet` is a dictionary to write the end of session values. This dictionary
     contains two sub-dictionaries: `daily_perf` and `cumulative_perf`. When applicable,
     the `daily_perf` should hold the current day’s value, and `cumulative_perf` should
     hold a cumulative value for the entire simulation up to the current time.'
+  id: totrans-53
   prefs: []
   type: TYPE_NORMAL
+  zh: '`packet` 是一个用于写入会话结束值的字典。该字典包含两个子字典：`daily_perf` 和 `cumulative_perf`。在适用的情况下，`daily_perf`
+    应包含当前日的价值，而 `cumulative_perf` 应包含到当前时间为止的整个模拟的累积价值。'
 - en: '`ledger` is an instance of [`Ledger`](api-reference.html#zipline.finance.ledger.Ledger
     "zipline.finance.ledger.Ledger") which is maintaining the simulation’s state.
     This may be used to lookup the algorithm’s current portfolio values.'
+  id: totrans-54
   prefs: []
   type: TYPE_NORMAL
+  zh: '`ledger` 是 [`Ledger`](api-reference.html#zipline.finance.ledger.Ledger "zipline.finance.ledger.Ledger")
+    的一个实例，它维护着模拟的状态。这可以用来查找算法的当前投资组合价值。'
 - en: '`session_label` is a [`Timestamp`](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.Timestamp.html#pandas.Timestamp
     "(in pandas v2.0.3)") which is the label of the session which is has just completed.'
+  id: totrans-55
   prefs: []
   type: TYPE_NORMAL
+  zh: '`session_label` 是一个 [`Timestamp`](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.Timestamp.html#pandas.Timestamp
+    "(in pandas v2.0.3)")，它是刚刚完成的会话的标签。'
 - en: '`session_ix` is an [`int`](https://docs.python.org/3/library/functions.html#int
     "(in Python v3.11)") which is the index of the current trading session being run.
     This is provided to allow for efficient access to the daily returns through `ledger.daily_returns_array[:session_ix
     + 1]`.'
+  id: totrans-56
   prefs: []
   type: TYPE_NORMAL
+  zh: '`session_ix` 是一个 [`int`](https://docs.python.org/3/library/functions.html#int
+    "(in Python v3.11)")，它是当前正在运行的交易会话的索引。这提供了通过 `ledger.daily_returns_array[:session_ix
+    + 1]` 高效访问每日回报的方式。'
 - en: '`data_portal` is an instance of [`DataPortal`](api-reference.html#zipline.data.data_portal.DataPortal
     "zipline.data.data_portal.DataPortal") which is the metric’s interface to pricing
     data'
+  id: totrans-57
   prefs: []
   type: TYPE_NORMAL
+  zh: '`data_portal` 是 [`DataPortal`](api-reference.html#zipline.data.data_portal.DataPortal
+    "zipline.data.data_portal.DataPortal") 的一个实例，它是度量与定价数据接口。'
 - en: '`end_of_bar`'
+  id: totrans-58
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: '`end_of_bar`'
 - en: Note
+  id: totrans-59
   prefs: []
   type: TYPE_NORMAL
+  zh: 注意
 - en: '`end_of_bar` is only called when `emission_mode` is `minute`.'
+  id: totrans-60
   prefs: []
   type: TYPE_NORMAL
+  zh: '`end_of_bar` 仅在 `emission_mode` 为 `minute` 时调用。'
 - en: 'The `end_of_bar` method should have the following signature:'
+  id: totrans-61
   prefs: []
   type: TYPE_NORMAL
+  zh: '`end_of_bar` 方法应具有以下签名：'
 - en: '[PRE7]'
+  id: totrans-62
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE7]'
 - en: '`packet` is a dictionary to write the end of session values. This dictionary
     contains two sub-dictionaries: `minute_perf` and `cumulative_perf`. When applicable,
     the `minute_perf` should hold the current partial day’s value, and `cumulative_perf`
     should hold a cumulative value for the entire simulation up to the current time.'
+  id: totrans-63
   prefs: []
   type: TYPE_NORMAL
+  zh: '`packet` 是一个用于写入会话结束值的字典。该字典包含两个子字典：`minute_perf` 和 `cumulative_perf`。在适用的情况下，`minute_perf`
+    应包含当前部分日的价值，而 `cumulative_perf` 应包含到当前时间为止的整个模拟的累积价值。'
 - en: '`ledger` is an instance of [`Ledger`](api-reference.html#zipline.finance.ledger.Ledger
     "zipline.finance.ledger.Ledger") which is maintaining the simulation’s state.
     This may be used to lookup the algorithm’s current portfolio values.'
+  id: totrans-64
   prefs: []
   type: TYPE_NORMAL
+  zh: '`ledger` 是 [`Ledger`](api-reference.html#zipline.finance.ledger.Ledger "zipline.finance.ledger.Ledger")
+    的一个实例，它维护着模拟的状态。这可以用来查找算法的当前投资组合价值。'
 - en: '`dt` is a [`Timestamp`](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.Timestamp.html#pandas.Timestamp
     "(in pandas v2.0.3)") which is the label of bar that has just completed.'
+  id: totrans-65
   prefs: []
   type: TYPE_NORMAL
+  zh: '`dt` 是一个 [`Timestamp`](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.Timestamp.html#pandas.Timestamp
+    "(in pandas v2.0.3)")，它是刚刚完成的条形的标签。'
 - en: '`session_ix` is an [`int`](https://docs.python.org/3/library/functions.html#int
     "(in Python v3.11)") which is the index of the current trading session being run.
     This is provided to allow for efficient access to the daily returns through `ledger.daily_returns_array[:session_ix
     + 1]`.'
+  id: totrans-66
   prefs: []
   type: TYPE_NORMAL
+  zh: '`session_ix`是一个[`int`](https://docs.python.org/3/library/functions.html#int
+    "(in Python v3.11)")，它是当前正在运行的交易会话的索引。这提供了通过`ledger.daily_returns_array[:session_ix
+    + 1]`高效访问每日回报的方式。'
 - en: '`data_portal` is an instance of [`DataPortal`](api-reference.html#zipline.data.data_portal.DataPortal
     "zipline.data.data_portal.DataPortal") which is the metric’s interface to pricing
     data.'
+  id: totrans-67
   prefs: []
   type: TYPE_NORMAL
+  zh: '`data_portal`是[`DataPortal`](api-reference.html#zipline.data.data_portal.DataPortal
+    "zipline.data.data_portal.DataPortal")的一个实例，它是度量对定价数据的接口。'
 - en: Defining New Metrics Sets
+  id: totrans-68
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 定义新的度量集
 - en: 'Users may use [`zipline.finance.metrics.register()`](api-reference.html#zipline.finance.metrics.register
     "zipline.finance.metrics.register") to register a new metrics set. This may be
     used to decorate a function taking no arguments which returns a new set of metric
     object instances. For example:'
+  id: totrans-69
   prefs: []
   type: TYPE_NORMAL
+  zh: 用户可以使用[`zipline.finance.metrics.register()`](api-reference.html#zipline.finance.metrics.register
+    "zipline.finance.metrics.register")注册新的度量集。这可以用于装饰一个不带参数的函数，该函数返回一组新的度量对象实例。例如：
 - en: '[PRE8]'
+  id: totrans-70
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE8]'
 - en: This may be embedded in the user’s `extension.py`.
+  id: totrans-71
   prefs: []
   type: TYPE_NORMAL
+  zh: 这可以嵌入用户的`extension.py`中。
 - en: The reason that a metrics set is defined as a function which produces a set,
     instead of just a set, is that users may want to fetch external data or resources
     to construct their metrics. By putting this behind a callable, users do not need
     to fetch the resources when the metrics set is not being used.
+  id: totrans-72
   prefs: []
   type: TYPE_NORMAL
+  zh: 将度量集定义为生成一组的函数，而不是仅仅是一组，是因为用户可能想要获取外部数据或资源来构建他们的度量。通过将此置于可调用对象后面，用户不需要在未使用度量集时获取资源。
 - en: Metrics Sets
+  id: totrans-73
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 度量集
 - en: Zipline groups risk and performance metrics into collections called “metrics
     sets”. A single metrics set defines all of the metrics to track during a single
     backtest. A metrics set may contain metrics that report at different time scales.
     The default metrics set will compute a host of metrics, such as algorithm returns,
     volatility, Sharpe ratio, and beta.
+  id: totrans-74
   prefs: []
   type: TYPE_NORMAL
+  zh: Zipline将风险和性能度量分组到称为“度量集”的集合中。单个度量集定义了在单个回测期间要跟踪的所有度量。度量集可以包含在不同时间尺度上报的度量。默认度量集将计算一系列度量，如算法回报、波动性、夏普比率和贝塔。
 - en: Selecting the Metrics Set
+  id: totrans-75
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 选择度量集
 - en: When running a simulation, the user may select the metrics set to report. How
     you select the metrics set depends on the interface being used to run the algorithm.
+  id: totrans-76
   prefs: []
   type: TYPE_NORMAL
+  zh: 在运行模拟时，用户可以选择要报告的度量集。如何选择度量集取决于用于运行算法的接口。
 - en: Command Line and IPython Magic
+  id: totrans-77
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 命令行和IPython魔法
 - en: 'When running with the command line or IPython magic interfaces, the metrics
     set may be selected by passing the `--metrics-set` argument. For example:'
+  id: totrans-78
   prefs: []
   type: TYPE_NORMAL
+  zh: 当通过命令行或IPython魔法接口运行时，可以通过传递`--metrics-set`参数来选择度量集。例如：
 - en: '[PRE9]'
+  id: totrans-79
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE9]'
 - en: '`run_algorithm`'
+  id: totrans-80
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: '`run_algorithm`'
 - en: 'When running through the [`run_algorithm()`](api-reference.html#zipline.run_algorithm
     "zipline.run_algorithm") interface, the metrics set may be passed with the `metrics_set`
     argument. This may either be the name of a registered metrics set, or a set of
     metric object. For example:'
+  id: totrans-81
   prefs: []
   type: TYPE_NORMAL
+  zh: 当通过[`run_algorithm()`](api-reference.html#zipline.run_algorithm "zipline.run_algorithm")接口运行时，可以通过`metrics_set`参数传递度量集。这可以是已注册度量集的名称，也可以是一组度量对象。例如：
 - en: '[PRE10]'
+  id: totrans-82
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE10]'
 - en: Command Line and IPython Magic
+  id: totrans-83
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 命令行和IPython魔法
 - en: 'When running with the command line or IPython magic interfaces, the metrics
     set may be selected by passing the `--metrics-set` argument. For example:'
+  id: totrans-84
   prefs: []
   type: TYPE_NORMAL
+  zh: 当通过命令行或IPython魔法接口运行时，可以通过传递`--metrics-set`参数来选择度量集。例如：
 - en: '[PRE11]'
+  id: totrans-85
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE11]'
 - en: '`run_algorithm`'
+  id: totrans-86
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: '`run_algorithm`'
 - en: 'When running through the [`run_algorithm()`](api-reference.html#zipline.run_algorithm
     "zipline.run_algorithm") interface, the metrics set may be passed with the `metrics_set`
     argument. This may either be the name of a registered metrics set, or a set of
     metric object. For example:'
+  id: totrans-87
   prefs: []
   type: TYPE_NORMAL
+  zh: 当通过[`run_algorithm()`](api-reference.html#zipline.run_algorithm "zipline.run_algorithm")接口运行时，可以通过`metrics_set`参数传递度量集。这可以是已注册度量集的名称，也可以是一组度量对象。例如：
 - en: '[PRE12]'
+  id: totrans-88
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE12]'
 - en: Running Without Metrics
+  id: totrans-89
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 不带度量运行
 - en: 'Computing risk and performance metrics is not free, and contributes to the
     total runtime of a backtest. When actively developing an algorithm, it is often
     helpful to skip these computations to speed up the debugging cycle. To disable
     the calculation and reporting of all metrics, users may select the built-in metrics
     set `none`. For example:'
+  id: totrans-90
   prefs: []
   type: TYPE_NORMAL
+  zh: 计算风险和性能指标不是免费的，它会增加回测的总运行时间。在积极开发算法时，通常有助于跳过这些计算以加快调试周期。要禁用所有指标的计算和报告，用户可以选择内置的指标集
+    `none`。例如：
 - en: '[PRE13]'
+  id: totrans-91
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE13]'
 - en: Defining New Metrics
+  id: totrans-92
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 定义新指标
 - en: 'A metric is any object that implements some subset of the following methods:'
+  id: totrans-93
   prefs: []
   type: TYPE_NORMAL
+  zh: 指标是实现以下方法子集的任何对象：
 - en: '`start_of_simulation`'
+  id: totrans-94
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`start_of_simulation`'
 - en: '`end_of_simulation`'
+  id: totrans-95
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`end_of_simulation`'
 - en: '`start_of_session`'
+  id: totrans-96
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`start_of_session`'
 - en: '`end_of_session`'
+  id: totrans-97
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`end_of_session`'
 - en: '`end_of_bar`'
+  id: totrans-98
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`end_of_bar`'
 - en: These functions will be called at the time indicated by their name, at which
     point the metric object may collect any needed information and optionally report
     a computed value. If a metric does not need to do any processing at one of these
     times, it may omit a definition for the given method.
+  id: totrans-99
   prefs: []
   type: TYPE_NORMAL
+  zh: 这些函数将在其名称指示的时间被调用，届时指标对象可以收集任何所需信息，并可选择报告计算值。如果某个指标在这些时间不需要进行任何处理，则可以省略对该方法的定义。
 - en: A metric should be reusable, meaning that a single instance of a metric class
     should be able to be used across multiple backtests. Metrics do not need to support
     multiple simulations at once, meaning that internal caches and data are consistent
     between `start_of_simulation` and `end_of_simulation`.
+  id: totrans-100
   prefs: []
   type: TYPE_NORMAL
+  zh: 指标应该是可重用的，这意味着单个指标类实例应该能够用于多个回测。指标不需要同时支持多个模拟，这意味着内部缓存和数据在 `start_of_simulation`
+    和 `end_of_simulation` 之间是一致的。
 - en: '`start_of_simulation`'
+  id: totrans-101
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: '`start_of_simulation`'
 - en: The `start_of_simulation` method should be thought of as a per-simulation constructor.
     This method should initialize any caches needed for the duration of a single simulation.
+  id: totrans-102
   prefs: []
   type: TYPE_NORMAL
+  zh: 应将 `start_of_simulation` 方法视为每个模拟的构造函数。该方法应初始化单个模拟期间所需的任何缓存。
 - en: 'The `start_of_simulation` method should have the following signature:'
+  id: totrans-103
   prefs: []
   type: TYPE_NORMAL
+  zh: '`start_of_simulation` 方法应具有以下签名：'
 - en: '[PRE14]'
+  id: totrans-104
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE14]'
 - en: '`ledger` is an instance of [`Ledger`](api-reference.html#zipline.finance.ledger.Ledger
     "zipline.finance.ledger.Ledger") which is maintaining the simulation’s state.
     This may be used to lookup the algorithm’s starting portfolio values.'
+  id: totrans-105
   prefs: []
   type: TYPE_NORMAL
+  zh: '`ledger` 是 [`Ledger`](api-reference.html#zipline.finance.ledger.Ledger "zipline.finance.ledger.Ledger")
+    的一个实例，它维护着模拟的状态。这可以用来查找算法的起始投资组合价值。'
 - en: '`emission_rate` is a string representing the smallest frequency at which metrics
     should be reported. `emission_rate` will be either `minute` or `daily`. When `emission_rate`
     is `daily`, `end_of_bar` will not be called at all.'
+  id: totrans-106
   prefs: []
   type: TYPE_NORMAL
+  zh: '`emission_rate` 是一个字符串，表示指标应报告的最小频率。`emission_rate` 将是 `minute` 或 `daily`。当
+    `emission_rate` 为 `daily` 时，`end_of_bar` 将根本不会被调用。'
 - en: '`trading_calendar` is an instance of `TradingCalendar` which is the trading
     calendar being used by the simulation.'
+  id: totrans-107
   prefs: []
   type: TYPE_NORMAL
+  zh: '`trading_calendar` 是 `TradingCalendar` 的一个实例，它是模拟所使用的交易日历。'
 - en: '`sessions` is a [`pandas.DatetimeIndex`](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DatetimeIndex.html#pandas.DatetimeIndex
     "(in pandas v2.0.3)") which is holds the session labels, in sorted order, that
     the simulation will execute.'
+  id: totrans-108
   prefs: []
   type: TYPE_NORMAL
+  zh: '`sessions` 是一个 [`pandas.DatetimeIndex`](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DatetimeIndex.html#pandas.DatetimeIndex
+    "(in pandas v2.0.3)")，它保存了模拟将执行的会话标签，按排序顺序排列。'
 - en: '`benchmark_source` is an instance of [`BenchmarkSource`](api-reference.html#zipline.sources.benchmark_source.BenchmarkSource
     "zipline.sources.benchmark_source.BenchmarkSource") which is the interface to
     the returns of the benchmark specified by [`set_benchmark()`](api-reference.html#zipline.api.set_benchmark
     "zipline.api.set_benchmark").'
+  id: totrans-109
   prefs: []
   type: TYPE_NORMAL
+  zh: '`benchmark_source` 是 [`BenchmarkSource`](api-reference.html#zipline.sources.benchmark_source.BenchmarkSource
+    "zipline.sources.benchmark_source.BenchmarkSource") 的一个实例，它是指定基准的回报接口，由 [`set_benchmark()`](api-reference.html#zipline.api.set_benchmark
+    "zipline.api.set_benchmark") 指定。'
 - en: '`end_of_simulation`'
+  id: totrans-110
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: '`end_of_simulation`'
 - en: 'The `end_of_simulation` method should have the following signature:'
+  id: totrans-111
   prefs: []
   type: TYPE_NORMAL
+  zh: '`end_of_simulation` 方法应具有以下签名：'
 - en: '[PRE15]'
+  id: totrans-112
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE15]'
 - en: '`ledger` is an instance of [`Ledger`](api-reference.html#zipline.finance.ledger.Ledger
     "zipline.finance.ledger.Ledger") which is maintaining the simulation’s state.
     This may be used to lookup the algorithm’s final portfolio values.'
+  id: totrans-113
   prefs: []
   type: TYPE_NORMAL
+  zh: '`ledger` 是 [`Ledger`](api-reference.html#zipline.finance.ledger.Ledger "zipline.finance.ledger.Ledger")
+    的一个实例，它维护着模拟的状态。这可以用来查找算法的最终投资组合价值。'
 - en: '`packet` is a dictionary to write the end of simulation values for the given
     metric into.'
+  id: totrans-114
   prefs: []
   type: TYPE_NORMAL
+  zh: '`packet` 是一个字典，用于写入给定指标的模拟结束值。'
 - en: '`trading_calendar` is an instance of `TradingCalendar` which is the trading
     calendar being used by the simulation.'
+  id: totrans-115
   prefs: []
   type: TYPE_NORMAL
+  zh: '`trading_calendar` 是 `TradingCalendar` 的一个实例，它是模拟使用的交易日历。'
 - en: '`sessions` is a [`pandas.DatetimeIndex`](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DatetimeIndex.html#pandas.DatetimeIndex
     "(in pandas v2.0.3)") which is holds the session labels, in sorted order, that
     the simulation has executed.'
+  id: totrans-116
   prefs: []
   type: TYPE_NORMAL
+  zh: '`sessions` 是一个 [`pandas.DatetimeIndex`](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DatetimeIndex.html#pandas.DatetimeIndex
+    "(in pandas v2.0.3)")，它保存了模拟已执行的交易时段标签，按排序顺序排列。'
 - en: '`data_portal` is an instance of [`DataPortal`](api-reference.html#zipline.data.data_portal.DataPortal
     "zipline.data.data_portal.DataPortal") which is the metric’s interface to pricing
     data.'
+  id: totrans-117
   prefs: []
   type: TYPE_NORMAL
+  zh: '`data_portal` 是 [`DataPortal`](api-reference.html#zipline.data.data_portal.DataPortal
+    "zipline.data.data_portal.DataPortal") 的一个实例，它是度量标准对定价数据的接口。'
 - en: '`benchmark_source` is an instance of [`BenchmarkSource`](api-reference.html#zipline.sources.benchmark_source.BenchmarkSource
     "zipline.sources.benchmark_source.BenchmarkSource") which is the interface to
     the returns of the benchmark specified by [`set_benchmark()`](api-reference.html#zipline.api.set_benchmark
     "zipline.api.set_benchmark").'
+  id: totrans-118
   prefs: []
   type: TYPE_NORMAL
+  zh: '`benchmark_source` 是 [`BenchmarkSource`](api-reference.html#zipline.sources.benchmark_source.BenchmarkSource
+    "zipline.sources.benchmark_source.BenchmarkSource") 的一个实例，它是返回由 [`set_benchmark()`](api-reference.html#zipline.api.set_benchmark
+    "zipline.api.set_benchmark") 指定的基准的接口。'
 - en: '`start_of_session`'
+  id: totrans-119
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: '`start_of_session`'
 - en: The `start_of_session` method may see a slightly different view of the `ledger`
     or `data_portal` than the previous `end_of_session` if the price of any futures
     owned move between trading sessions or if a capital change occurs.
+  id: totrans-120
   prefs: []
   type: TYPE_NORMAL
+  zh: '`start_of_session` 方法可能会看到与之前的 `end_of_session` 略有不同的 `ledger` 或 `data_portal`
+    视图，如果拥有的任何期货的价格在交易时段之间移动或发生资本变动。'
 - en: 'The `start_of_session` method should have the following signature:'
+  id: totrans-121
   prefs: []
   type: TYPE_NORMAL
+  zh: 方法 `start_of_session` 应该具有以下签名：
 - en: '[PRE16]'
+  id: totrans-122
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE16]'
 - en: '`ledger` is an instance of [`Ledger`](api-reference.html#zipline.finance.ledger.Ledger
     "zipline.finance.ledger.Ledger") which is maintaining the simulation’s state.
     This may be used to lookup the algorithm’s current portfolio values.'
+  id: totrans-123
   prefs: []
   type: TYPE_NORMAL
+  zh: '`ledger` 是 [`Ledger`](api-reference.html#zipline.finance.ledger.Ledger "zipline.finance.ledger.Ledger")
+    的一个实例，它维护模拟的状态。这可以用来查找算法的当前投资组合价值。'
 - en: '`session_label` is a [`Timestamp`](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.Timestamp.html#pandas.Timestamp
     "(in pandas v2.0.3)") which is the label of the session which is about to run.'
+  id: totrans-124
   prefs: []
   type: TYPE_NORMAL
+  zh: '`session_label` 是一个 [`Timestamp`](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.Timestamp.html#pandas.Timestamp
+    "(in pandas v2.0.3)")，表示即将运行的交易时段的标签。'
 - en: '`data_portal` is an instance of [`DataPortal`](api-reference.html#zipline.data.data_portal.DataPortal
     "zipline.data.data_portal.DataPortal") which is the metric’s interface to pricing
     data.'
+  id: totrans-125
   prefs: []
   type: TYPE_NORMAL
+  zh: '`data_portal` 是 [`DataPortal`](api-reference.html#zipline.data.data_portal.DataPortal
+    "zipline.data.data_portal.DataPortal") 的一个实例，它是度量标准对定价数据的接口。'
 - en: '`end_of_session`'
+  id: totrans-126
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: '`end_of_session`'
 - en: 'The `end_of_session` method should have the following signature:'
+  id: totrans-127
   prefs: []
   type: TYPE_NORMAL
+  zh: 方法 `end_of_session` 应该具有以下签名：
 - en: '[PRE17]'
+  id: totrans-128
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE17]'
 - en: '`packet` is a dictionary to write the end of session values. This dictionary
     contains two sub-dictionaries: `daily_perf` and `cumulative_perf`. When applicable,
     the `daily_perf` should hold the current day’s value, and `cumulative_perf` should
     hold a cumulative value for the entire simulation up to the current time.'
+  id: totrans-129
   prefs: []
   type: TYPE_NORMAL
+  zh: '`packet` 是一个用于写入交易时段结束值的字典。该字典包含两个子字典：`daily_perf` 和 `cumulative_perf`。在适用的情况下，`daily_perf`
+    应包含当天的值，而 `cumulative_perf` 应包含到当前时间为止的整个模拟的累积值。'
 - en: '`ledger` is an instance of [`Ledger`](api-reference.html#zipline.finance.ledger.Ledger
     "zipline.finance.ledger.Ledger") which is maintaining the simulation’s state.
     This may be used to lookup the algorithm’s current portfolio values.'
+  id: totrans-130
   prefs: []
   type: TYPE_NORMAL
+  zh: '`ledger` 是 [`Ledger`](api-reference.html#zipline.finance.ledger.Ledger "zipline.finance.ledger.Ledger")
+    的一个实例，它维护模拟的状态。这可以用来查找算法的当前投资组合价值。'
 - en: '`session_label` is a [`Timestamp`](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.Timestamp.html#pandas.Timestamp
     "(in pandas v2.0.3)") which is the label of the session which is has just completed.'
+  id: totrans-131
   prefs: []
   type: TYPE_NORMAL
+  zh: '`session_label` 是一个 [`Timestamp`](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.Timestamp.html#pandas.Timestamp
+    "(in pandas v2.0.3)")，表示刚刚完成的交易时段的标签。'
 - en: '`session_ix` is an [`int`](https://docs.python.org/3/library/functions.html#int
     "(in Python v3.11)") which is the index of the current trading session being run.
     This is provided to allow for efficient access to the daily returns through `ledger.daily_returns_array[:session_ix
     + 1]`.'
+  id: totrans-132
   prefs: []
   type: TYPE_NORMAL
+  zh: '`session_ix` 是一个 [`int`](https://docs.python.org/3/library/functions.html#int
+    "(in Python v3.11)")，表示当前正在运行的交易时段的索引。提供这个索引是为了通过 `ledger.daily_returns_array[:session_ix
+    + 1]` 高效访问每日回报。'
 - en: '`data_portal` is an instance of [`DataPortal`](api-reference.html#zipline.data.data_portal.DataPortal
     "zipline.data.data_portal.DataPortal") which is the metric’s interface to pricing
     data'
+  id: totrans-133
   prefs: []
   type: TYPE_NORMAL
+  zh: '`data_portal` 是 [`DataPortal`](api-reference.html#zipline.data.data_portal.DataPortal
+    "zipline.data.data_portal.DataPortal") 的一个实例，它是度量标准与定价数据接口的接口。'
 - en: '`end_of_bar`'
+  id: totrans-134
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: '`end_of_bar`'
 - en: Note
+  id: totrans-135
   prefs: []
   type: TYPE_NORMAL
+  zh: 注意
 - en: '`end_of_bar` is only called when `emission_mode` is `minute`.'
+  id: totrans-136
   prefs: []
   type: TYPE_NORMAL
+  zh: '`end_of_bar` 仅在 `emission_mode` 为 `minute` 时被调用。'
 - en: 'The `end_of_bar` method should have the following signature:'
+  id: totrans-137
   prefs: []
   type: TYPE_NORMAL
+  zh: '`end_of_bar` 方法应具有以下签名：'
 - en: '[PRE18]'
+  id: totrans-138
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE18]'
 - en: '`packet` is a dictionary to write the end of session values. This dictionary
     contains two sub-dictionaries: `minute_perf` and `cumulative_perf`. When applicable,
     the `minute_perf` should hold the current partial day’s value, and `cumulative_perf`
     should hold a cumulative value for the entire simulation up to the current time.'
+  id: totrans-139
   prefs: []
   type: TYPE_NORMAL
+  zh: '`packet` 是一个字典，用于写入会话结束时的值。该字典包含两个子字典：`minute_perf` 和 `cumulative_perf`。在适用的情况下，`minute_perf`
+    应包含当前部分日的值，而 `cumulative_perf` 应包含到当前时间为止的整个模拟的累积值。'
 - en: '`ledger` is an instance of [`Ledger`](api-reference.html#zipline.finance.ledger.Ledger
     "zipline.finance.ledger.Ledger") which is maintaining the simulation’s state.
     This may be used to lookup the algorithm’s current portfolio values.'
+  id: totrans-140
   prefs: []
   type: TYPE_NORMAL
+  zh: '`ledger` 是 [`Ledger`](api-reference.html#zipline.finance.ledger.Ledger "zipline.finance.ledger.Ledger")
+    的一个实例，它维护模拟的状态。这可以用来查找算法当前的资产组合值。'
 - en: '`dt` is a [`Timestamp`](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.Timestamp.html#pandas.Timestamp
     "(in pandas v2.0.3)") which is the label of bar that has just completed.'
+  id: totrans-141
   prefs: []
   type: TYPE_NORMAL
+  zh: '`dt` 是一个 [`Timestamp`](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.Timestamp.html#pandas.Timestamp
+    "(in pandas v2.0.3)")，它是刚刚完成的条形的标签。'
 - en: '`session_ix` is an [`int`](https://docs.python.org/3/library/functions.html#int
     "(in Python v3.11)") which is the index of the current trading session being run.
     This is provided to allow for efficient access to the daily returns through `ledger.daily_returns_array[:session_ix
     + 1]`.'
+  id: totrans-142
   prefs: []
   type: TYPE_NORMAL
+  zh: '`session_ix` 是一个 [`int`](https://docs.python.org/3/library/functions.html#int
+    "(in Python v3.11)")，它是当前正在运行的交易会话的索引。这提供给允许通过 `ledger.daily_returns_array[:session_ix
+    + 1]` 高效访问每日回报。'
 - en: '`data_portal` is an instance of [`DataPortal`](api-reference.html#zipline.data.data_portal.DataPortal
     "zipline.data.data_portal.DataPortal") which is the metric’s interface to pricing
     data.'
+  id: totrans-143
   prefs: []
   type: TYPE_NORMAL
+  zh: '`data_portal` 是 [`DataPortal`](api-reference.html#zipline.data.data_portal.DataPortal
+    "zipline.data.data_portal.DataPortal") 的一个实例，它是度量标准与定价数据接口的接口。'
 - en: '`start_of_simulation`'
+  id: totrans-144
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: '`start_of_simulation`'
 - en: The `start_of_simulation` method should be thought of as a per-simulation constructor.
     This method should initialize any caches needed for the duration of a single simulation.
+  id: totrans-145
   prefs: []
   type: TYPE_NORMAL
+  zh: '`start_of_simulation` 方法应被视为每个模拟的构造函数。该方法应初始化单个模拟期间所需的任何缓存。'
 - en: 'The `start_of_simulation` method should have the following signature:'
+  id: totrans-146
   prefs: []
   type: TYPE_NORMAL
+  zh: '`start_of_simulation` 方法应具有以下签名：'
 - en: '[PRE19]'
+  id: totrans-147
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE19]'
 - en: '`ledger` is an instance of [`Ledger`](api-reference.html#zipline.finance.ledger.Ledger
     "zipline.finance.ledger.Ledger") which is maintaining the simulation’s state.
     This may be used to lookup the algorithm’s starting portfolio values.'
+  id: totrans-148
   prefs: []
   type: TYPE_NORMAL
+  zh: '`ledger` 是 [`Ledger`](api-reference.html#zipline.finance.ledger.Ledger "zipline.finance.ledger.Ledger")
+    的一个实例，它维护模拟的状态。这可以用来查找算法起始的资产组合值。'
 - en: '`emission_rate` is a string representing the smallest frequency at which metrics
     should be reported. `emission_rate` will be either `minute` or `daily`. When `emission_rate`
     is `daily`, `end_of_bar` will not be called at all.'
+  id: totrans-149
   prefs: []
   type: TYPE_NORMAL
+  zh: '`emission_rate` 是一个字符串，表示度量标准应报告的最小频率。`emission_rate` 将是 `minute` 或 `daily`
+    之一。当 `emission_rate` 为 `daily` 时，`end_of_bar` 根本不会被调用。'
 - en: '`trading_calendar` is an instance of `TradingCalendar` which is the trading
     calendar being used by the simulation.'
+  id: totrans-150
   prefs: []
   type: TYPE_NORMAL
+  zh: '`trading_calendar` 是 `TradingCalendar` 的一个实例，它是模拟使用的交易日历。'
 - en: '`sessions` is a [`pandas.DatetimeIndex`](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DatetimeIndex.html#pandas.DatetimeIndex
     "(in pandas v2.0.3)") which is holds the session labels, in sorted order, that
     the simulation will execute.'
+  id: totrans-151
   prefs: []
   type: TYPE_NORMAL
+  zh: '`sessions` 是一个 [`pandas.DatetimeIndex`](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DatetimeIndex.html#pandas.DatetimeIndex
+    "(in pandas v2.0.3)")，它保存模拟将执行的会话标签，按排序顺序排列。'
 - en: '`benchmark_source` is an instance of [`BenchmarkSource`](api-reference.html#zipline.sources.benchmark_source.BenchmarkSource
     "zipline.sources.benchmark_source.BenchmarkSource") which is the interface to
     the returns of the benchmark specified by [`set_benchmark()`](api-reference.html#zipline.api.set_benchmark
     "zipline.api.set_benchmark").'
+  id: totrans-152
   prefs: []
   type: TYPE_NORMAL
+  zh: '`benchmark_source` 是 [`BenchmarkSource`](api-reference.html#zipline.sources.benchmark_source.BenchmarkSource
+    "zipline.sources.benchmark_source.BenchmarkSource") 的一个实例，它是 [`set_benchmark()`](api-reference.html#zipline.api.set_benchmark
+    "zipline.api.set_benchmark") 指定的基准的回报接口。'
 - en: '`end_of_simulation`'
+  id: totrans-153
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: '`end_of_simulation`'
 - en: 'The `end_of_simulation` method should have the following signature:'
+  id: totrans-154
   prefs: []
   type: TYPE_NORMAL
+  zh: '`end_of_simulation` 方法应该具有以下签名：'
 - en: '[PRE20]'
+  id: totrans-155
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE20]'
 - en: '`ledger` is an instance of [`Ledger`](api-reference.html#zipline.finance.ledger.Ledger
     "zipline.finance.ledger.Ledger") which is maintaining the simulation’s state.
     This may be used to lookup the algorithm’s final portfolio values.'
+  id: totrans-156
   prefs: []
   type: TYPE_NORMAL
+  zh: '`ledger` 是 [`Ledger`](api-reference.html#zipline.finance.ledger.Ledger "zipline.finance.ledger.Ledger")
+    的一个实例，它维护模拟的状态。这可以用来查找算法的最终投资组合值。'
 - en: '`packet` is a dictionary to write the end of simulation values for the given
     metric into.'
+  id: totrans-157
   prefs: []
   type: TYPE_NORMAL
+  zh: '`packet` 是一个字典，用于将给定度量的模拟结束值写入。'
 - en: '`trading_calendar` is an instance of `TradingCalendar` which is the trading
     calendar being used by the simulation.'
+  id: totrans-158
   prefs: []
   type: TYPE_NORMAL
+  zh: '`trading_calendar` 是 `TradingCalendar` 的一个实例，它是模拟使用的交易日历。'
 - en: '`sessions` is a [`pandas.DatetimeIndex`](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DatetimeIndex.html#pandas.DatetimeIndex
     "(in pandas v2.0.3)") which is holds the session labels, in sorted order, that
     the simulation has executed.'
+  id: totrans-159
   prefs: []
   type: TYPE_NORMAL
+  zh: '`sessions` 是一个 [`pandas.DatetimeIndex`](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DatetimeIndex.html#pandas.DatetimeIndex
+    "(in pandas v2.0.3)")，它保存了模拟执行的会话标签，按排序顺序排列。'
 - en: '`data_portal` is an instance of [`DataPortal`](api-reference.html#zipline.data.data_portal.DataPortal
     "zipline.data.data_portal.DataPortal") which is the metric’s interface to pricing
     data.'
+  id: totrans-160
   prefs: []
   type: TYPE_NORMAL
+  zh: '`data_portal` 是 [`DataPortal`](api-reference.html#zipline.data.data_portal.DataPortal
+    "zipline.data.data_portal.DataPortal") 的一个实例，它是度量与定价数据接口的接口。'
 - en: '`benchmark_source` is an instance of [`BenchmarkSource`](api-reference.html#zipline.sources.benchmark_source.BenchmarkSource
     "zipline.sources.benchmark_source.BenchmarkSource") which is the interface to
     the returns of the benchmark specified by [`set_benchmark()`](api-reference.html#zipline.api.set_benchmark
     "zipline.api.set_benchmark").'
+  id: totrans-161
   prefs: []
   type: TYPE_NORMAL
+  zh: '`benchmark_source` 是 [`BenchmarkSource`](api-reference.html#zipline.sources.benchmark_source.BenchmarkSource
+    "zipline.sources.benchmark_source.BenchmarkSource") 的一个实例，它是与 [`set_benchmark()`](api-reference.html#zipline.api.set_benchmark
+    "zipline.api.set_benchmark") 指定的基准的回报接口。'
 - en: '`start_of_session`'
+  id: totrans-162
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: '`start_of_session`'
 - en: The `start_of_session` method may see a slightly different view of the `ledger`
     or `data_portal` than the previous `end_of_session` if the price of any futures
     owned move between trading sessions or if a capital change occurs.
+  id: totrans-163
   prefs: []
   type: TYPE_NORMAL
+  zh: '`start_of_session` 方法可能会看到与之前的 `end_of_session` 略有不同的 `ledger` 或 `data_portal`
+    视图，如果任何拥有的期货的价格在交易会话之间移动或发生资本变动。'
 - en: 'The `start_of_session` method should have the following signature:'
+  id: totrans-164
   prefs: []
   type: TYPE_NORMAL
+  zh: '`start_of_session` 方法应该具有以下签名：'
 - en: '[PRE21]'
+  id: totrans-165
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE21]'
 - en: '`ledger` is an instance of [`Ledger`](api-reference.html#zipline.finance.ledger.Ledger
     "zipline.finance.ledger.Ledger") which is maintaining the simulation’s state.
     This may be used to lookup the algorithm’s current portfolio values.'
+  id: totrans-166
   prefs: []
   type: TYPE_NORMAL
+  zh: '`ledger` 是 [`Ledger`](api-reference.html#zipline.finance.ledger.Ledger "zipline.finance.ledger.Ledger")
+    的一个实例，它维护模拟的状态。这可以用来查找算法的当前投资组合值。'
 - en: '`session_label` is a [`Timestamp`](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.Timestamp.html#pandas.Timestamp
     "(in pandas v2.0.3)") which is the label of the session which is about to run.'
+  id: totrans-167
   prefs: []
   type: TYPE_NORMAL
+  zh: '`session_label` 是一个 [`Timestamp`](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.Timestamp.html#pandas.Timestamp
+    "(in pandas v2.0.3)")，它是即将运行的会话的标签。'
 - en: '`data_portal` is an instance of [`DataPortal`](api-reference.html#zipline.data.data_portal.DataPortal
     "zipline.data.data_portal.DataPortal") which is the metric’s interface to pricing
     data.'
+  id: totrans-168
   prefs: []
   type: TYPE_NORMAL
+  zh: '`data_portal` 是 [`DataPortal`](api-reference.html#zipline.data.data_portal.DataPortal
+    "zipline.data.data_portal.DataPortal") 的一个实例，它是度量与定价数据接口的接口。'
 - en: '`end_of_session`'
+  id: totrans-169
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: '`end_of_session`'
 - en: 'The `end_of_session` method should have the following signature:'
+  id: totrans-170
   prefs: []
   type: TYPE_NORMAL
+  zh: '`end_of_session` 方法应该具有以下签名：'
 - en: '[PRE22]'
+  id: totrans-171
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE22]'
 - en: '`packet` is a dictionary to write the end of session values. This dictionary
     contains two sub-dictionaries: `daily_perf` and `cumulative_perf`. When applicable,
     the `daily_perf` should hold the current day’s value, and `cumulative_perf` should
     hold a cumulative value for the entire simulation up to the current time.'
+  id: totrans-172
   prefs: []
   type: TYPE_NORMAL
+  zh: '`packet` 是一个字典，用于写入会话结束值。该字典包含两个子字典：`daily_perf` 和 `cumulative_perf`。在适用的情况下，`daily_perf`
+    应包含当天的当前值，而 `cumulative_perf` 应包含截至当前时间的整个模拟的累积值。'
 - en: '`ledger` is an instance of [`Ledger`](api-reference.html#zipline.finance.ledger.Ledger
     "zipline.finance.ledger.Ledger") which is maintaining the simulation’s state.
     This may be used to lookup the algorithm’s current portfolio values.'
+  id: totrans-173
   prefs: []
   type: TYPE_NORMAL
+  zh: '`ledger` 是 [`Ledger`](api-reference.html#zipline.finance.ledger.Ledger "zipline.finance.ledger.Ledger")
+    的一个实例，它维护模拟的状态。这可以用来查找算法的当前投资组合值。'
 - en: '`session_label` is a [`Timestamp`](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.Timestamp.html#pandas.Timestamp
     "(in pandas v2.0.3)") which is the label of the session which is has just completed.'
+  id: totrans-174
   prefs: []
   type: TYPE_NORMAL
+  zh: '`session_label` 是一个 [`Timestamp`](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.Timestamp.html#pandas.Timestamp
+    "(in pandas v2.0.3)")，它是刚刚完成的会话的标签。'
 - en: '`session_ix` is an [`int`](https://docs.python.org/3/library/functions.html#int
     "(in Python v3.11)") which is the index of the current trading session being run.
     This is provided to allow for efficient access to the daily returns through `ledger.daily_returns_array[:session_ix
     + 1]`.'
+  id: totrans-175
   prefs: []
   type: TYPE_NORMAL
+  zh: '`session_ix` 是一个 [`int`](https://docs.python.org/3/library/functions.html#int
+    "(in Python v3.11)")，它是当前正在运行的交易会话的索引。提供这个参数是为了通过 `ledger.daily_returns_array[:session_ix
+    + 1]` 高效访问每日回报。'
 - en: '`data_portal` is an instance of [`DataPortal`](api-reference.html#zipline.data.data_portal.DataPortal
     "zipline.data.data_portal.DataPortal") which is the metric’s interface to pricing
     data'
+  id: totrans-176
   prefs: []
   type: TYPE_NORMAL
+  zh: '`data_portal` 是 [`DataPortal`](api-reference.html#zipline.data.data_portal.DataPortal
+    "zipline.data.data_portal.DataPortal") 的一个实例，它是度量与定价数据接口。'
 - en: '`end_of_bar`'
+  id: totrans-177
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: '`end_of_bar`'
 - en: Note
+  id: totrans-178
   prefs: []
   type: TYPE_NORMAL
+  zh: 注意
 - en: '`end_of_bar` is only called when `emission_mode` is `minute`.'
+  id: totrans-179
   prefs: []
   type: TYPE_NORMAL
+  zh: '`end_of_bar` 仅在 `emission_mode` 为 `minute` 时被调用。'
 - en: 'The `end_of_bar` method should have the following signature:'
+  id: totrans-180
   prefs: []
   type: TYPE_NORMAL
+  zh: '`end_of_bar` 方法应该具有以下签名：'
 - en: '[PRE23]'
+  id: totrans-181
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE23]'
 - en: '`packet` is a dictionary to write the end of session values. This dictionary
     contains two sub-dictionaries: `minute_perf` and `cumulative_perf`. When applicable,
     the `minute_perf` should hold the current partial day’s value, and `cumulative_perf`
     should hold a cumulative value for the entire simulation up to the current time.'
+  id: totrans-182
   prefs: []
   type: TYPE_NORMAL
+  zh: '`packet` 是一个字典，用于写入会话结束时的值。该字典包含两个子字典：`minute_perf` 和 `cumulative_perf`。在适用的情况下，`minute_perf`
+    应包含当前部分日的值，而 `cumulative_perf` 应包含到当前时间为止的整个模拟的累积值。'
 - en: '`ledger` is an instance of [`Ledger`](api-reference.html#zipline.finance.ledger.Ledger
     "zipline.finance.ledger.Ledger") which is maintaining the simulation’s state.
     This may be used to lookup the algorithm’s current portfolio values.'
+  id: totrans-183
   prefs: []
   type: TYPE_NORMAL
+  zh: '`ledger` 是 [`Ledger`](api-reference.html#zipline.finance.ledger.Ledger "zipline.finance.ledger.Ledger")
+    的一个实例，它维护着模拟的状态。这可以用来查找算法当前的资产组合价值。'
 - en: '`dt` is a [`Timestamp`](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.Timestamp.html#pandas.Timestamp
     "(in pandas v2.0.3)") which is the label of bar that has just completed.'
+  id: totrans-184
   prefs: []
   type: TYPE_NORMAL
+  zh: '`dt` 是一个 [`Timestamp`](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.Timestamp.html#pandas.Timestamp
+    "(in pandas v2.0.3)")，它是刚刚完成的条形的标签。'
 - en: '`session_ix` is an [`int`](https://docs.python.org/3/library/functions.html#int
     "(in Python v3.11)") which is the index of the current trading session being run.
     This is provided to allow for efficient access to the daily returns through `ledger.daily_returns_array[:session_ix
     + 1]`.'
+  id: totrans-185
   prefs: []
   type: TYPE_NORMAL
+  zh: '`session_ix` 是一个 [`int`](https://docs.python.org/3/library/functions.html#int
+    "(in Python v3.11)")，它是当前正在运行的交易会话的索引。提供这个参数是为了通过 `ledger.daily_returns_array[:session_ix
+    + 1]` 高效访问每日回报。'
 - en: '`data_portal` is an instance of [`DataPortal`](api-reference.html#zipline.data.data_portal.DataPortal
     "zipline.data.data_portal.DataPortal") which is the metric’s interface to pricing
     data.'
+  id: totrans-186
   prefs: []
   type: TYPE_NORMAL
+  zh: '`data_portal` 是 [`DataPortal`](api-reference.html#zipline.data.data_portal.DataPortal
+    "zipline.data.data_portal.DataPortal") 的一个实例，它是度量与定价数据接口。'
 - en: Defining New Metrics Sets
+  id: totrans-187
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 定义新的度量集
 - en: 'Users may use [`zipline.finance.metrics.register()`](api-reference.html#zipline.finance.metrics.register
     "zipline.finance.metrics.register") to register a new metrics set. This may be
     used to decorate a function taking no arguments which returns a new set of metric
     object instances. For example:'
+  id: totrans-188
   prefs: []
   type: TYPE_NORMAL
+  zh: 用户可以使用 [`zipline.finance.metrics.register()`](api-reference.html#zipline.finance.metrics.register
+    "zipline.finance.metrics.register") 来注册一个新的度量集。这可以用来装饰一个不接受参数并返回一组新的度量对象实例的函数。例如：
 - en: '[PRE24]'
+  id: totrans-189
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE24]'
 - en: This may be embedded in the user’s `extension.py`.
+  id: totrans-190
   prefs: []
   type: TYPE_NORMAL
+  zh: 这可以嵌入到用户的 `extension.py` 中。
 - en: The reason that a metrics set is defined as a function which produces a set,
     instead of just a set, is that users may want to fetch external data or resources
     to construct their metrics. By putting this behind a callable, users do not need
     to fetch the resources when the metrics set is not being used.
+  id: totrans-191
   prefs: []
   type: TYPE_NORMAL
+  zh: 将度量集定义为生成一组度量的函数，而不是直接定义一组度量，是因为用户可能想要获取外部数据或资源来构建他们的度量。通过将这个过程放在一个可调用的对象后面，用户不需要在度量集未被使用时获取资源。

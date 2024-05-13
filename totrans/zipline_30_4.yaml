@@ -1,377 +1,519 @@
 - en: Calendars
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 日历
 - en: 原文：[https://zipline.ml4trading.io/trading-calendars.html](https://zipline.ml4trading.io/trading-calendars.html)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://zipline.ml4trading.io/trading-calendars.html](https://zipline.ml4trading.io/trading-calendars.html)
 - en: '## What is a Trading Calendar?'
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: '## 什么是交易日历？'
 - en: 'A trading calendar represents the timing information of a single market exchange.
     The timing information is made up of two parts: sessions, and opens/closes. This
     is represented by the Zipline `TradingCalendar` class, and is used as the parent
     class for all new `TradingCalendar` classes.'
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: 交易日历代表单个市场交易所的时间信息。时间信息由两部分组成：时段和开/闭市时间。这由Zipline的`TradingCalendar`类表示，并作为所有新的`TradingCalendar`类的父类。
 - en: A session represents a contiguous set of minutes, and has a label that is midnight
     UTC. It is important to note that a session label should not be considered a specific
     point in time, and that midnight UTC is just being used for convenience.
+  id: totrans-4
   prefs: []
   type: TYPE_NORMAL
+  zh: 一个时段代表一组连续的分钟，并且有一个标签，该标签是UTC午夜。重要的是要注意，时段标签不应该被视为一个特定的时间点，而UTC午夜只是为了方便而使用。
 - en: For an average day of the [New York Stock Exchange](https://www.nyse.com/index),
     the market opens at 9:30AM and closes at 4PM. Trading sessions can change depending
     on the exchange, day of the year, etc.
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: 对于[纽约证券交易所](https://www.nyse.com/index)的普通交易日，市场在上午9:30开市，下午4:00闭市。交易时段可能会根据交易所、一年中的某一天等因素而变化。
 - en: Why Should You Care About Trading Calendars?
+  id: totrans-6
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 为什么你应该关注交易日历？
 - en: Let’s say you want to buy a share of some equity on Tuesday, and then sell it
     on Saturday. If the exchange in which you’re trading that equity is not open on
     Saturday, then in reality it would not be possible to trade that equity at that
     time, and you would have to wait until some other number of days past Saturday.
     Since you wouldn’t be able to place the trade in reality, it would also be unreasonable
     for your backtest to place a trade on Saturday.
+  id: totrans-7
   prefs: []
   type: TYPE_NORMAL
+  zh: 假设你想在周二买入某只股票，然后在周六卖出。如果你交易的那个股票所在的交易所周六不开放，那么在现实中你将无法在那个时间交易那只股票，你将不得不等到周六之后的某个其他天数。既然你无法在现实中进行交易，那么你的回测在周六进行交易也是不合理的。
 - en: In order for you to backtest your strategy, the dates in that are accounted
     for in your [data bundle](https://zipline.ml4trading.io/bundles.html) and the
     dates in your `TradingCalendar` should match up; if the dates don’t match up,
     then you you’re going to see some errors along the way. This holds for both minutely
     and daily data.
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: 为了让你能够回测你的策略，你的[数据包](https://zipline.ml4trading.io/bundles.html)中的日期和你的`TradingCalendar`中的日期应该匹配；如果日期不匹配，那么你将会在过程中遇到一些错误。这对分钟级和日级数据都适用。
 - en: The TradingCalendar Class
+  id: totrans-9
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: '`TradingCalendar`类'
 - en: 'The `TradingCalendar` class has many properties we should be thinking about
     if we were to build our own `TradingCalendar` for an exchange. These include properties
     such as:'
+  id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: '`TradingCalendar`类有许多属性，如果我们需要为自己的交易所构建一个`TradingCalendar`，我们应该考虑这些属性。这些属性包括：'
 - en: Name of the Exchange
+  id: totrans-11
   prefs:
   - PREF_BQ
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 交易所名称
 - en: ''
+  id: totrans-12
   prefs:
   - PREF_BQ
   - PREF_IND
   type: TYPE_NORMAL
 - en: ''
+  id: totrans-13
   prefs:
   - PREF_BQ
   - PREF_IND
   type: TYPE_NORMAL
 - en: Timezone
+  id: totrans-14
   prefs:
   - PREF_BQ
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 时区
 - en: ''
+  id: totrans-15
   prefs:
   - PREF_BQ
   - PREF_IND
   type: TYPE_NORMAL
 - en: ''
+  id: totrans-16
   prefs:
   - PREF_BQ
   - PREF_IND
   type: TYPE_NORMAL
 - en: Open Time
+  id: totrans-17
   prefs:
   - PREF_BQ
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 开市时间
 - en: ''
+  id: totrans-18
   prefs:
   - PREF_BQ
   - PREF_IND
   type: TYPE_NORMAL
 - en: ''
+  id: totrans-19
   prefs:
   - PREF_BQ
   - PREF_IND
   type: TYPE_NORMAL
 - en: Close Time
+  id: totrans-20
   prefs:
   - PREF_BQ
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 闭市时间
 - en: ''
+  id: totrans-21
   prefs:
   - PREF_BQ
   - PREF_IND
   type: TYPE_NORMAL
 - en: ''
+  id: totrans-22
   prefs:
   - PREF_BQ
   - PREF_IND
   type: TYPE_NORMAL
 - en: Regular & Ad hoc Holidays
+  id: totrans-23
   prefs:
   - PREF_BQ
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 常规与临时假日
 - en: ''
+  id: totrans-24
   prefs:
   - PREF_BQ
   - PREF_IND
   type: TYPE_NORMAL
 - en: ''
+  id: totrans-25
   prefs:
   - PREF_BQ
   - PREF_IND
   type: TYPE_NORMAL
 - en: Special Opens & Closes
+  id: totrans-26
   prefs:
   - PREF_BQ
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 特殊开市与闭市
 - en: And several others. If you’d like to see all of the properties and methods available
     to you through the `TradingCalendar` API, please take a look at the [API Reference](https://ml4t.zipline.io/api_reference.html#trading-calendar-api)
+  id: totrans-27
   prefs: []
   type: TYPE_NORMAL
+  zh: 以及其他一些。如果你想查看`TradingCalendar` API提供的所有属性和方法，请查看[API参考](https://ml4t.zipline.io/api_reference.html#trading-calendar-api)。
 - en: 'Now we’ll take a look at the London Stock Exchange Calendar `LSEExchangeCalendar`
     as an example below:'
+  id: totrans-28
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在我们将以伦敦证券交易所日历`LSEExchangeCalendar`为例进行说明：
 - en: '[PRE0]'
+  id: totrans-29
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: You can create the `Holiday` objects mentioned in `def regular_holidays(self)`
     using the [pandas](https://pandas.pydata.org/pandas-docs/stable/) module `pandas.tseries.holiday.Holiday`.
+  id: totrans-30
   prefs: []
   type: TYPE_NORMAL
+  zh: 你可以使用[pandas](https://pandas.pydata.org/pandas-docs/stable/)模块的`pandas.tseries.holiday.Holiday`来创建在`def
+    regular_holidays(self)`中提到的`Holiday`对象。
 - en: Take a look at the [LSEExchangeCalendar](https://github.com/quantopian/zipline/blob/master/zipline/utils/calendars/exchange_calendar_lse.py)
     code above as an example, as well as at the code snippet below.
+  id: totrans-31
   prefs: []
   type: TYPE_NORMAL
+  zh: 以上面的[LSEExchangeCalendar](https://github.com/quantopian/zipline/blob/master/zipline/utils/calendars/exchange_calendar_lse.py)代码为例，同时也请查看下面的代码片段。
 - en: '[PRE1]'
+  id: totrans-32
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE1]'
 - en: Building a Custom Trading Calendar
+  id: totrans-33
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 构建自定义交易日历
 - en: Now we’ll build our own custom trading calendar. This calendar will be used
     for trading assets that can be traded on a 24/7 exchange calendar. This means
     that it will be open on Monday, Tuesday, Wednesday, Thursday, Friday, Saturday,
     and Sunday, and the exchange will open at 12AM and close at 11:59PM. The timezone
     which we’ll use is UTC.
+  id: totrans-34
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在我们将构建我们自己的自定义交易日历。这个日历将用于交易可以在24/7交易所日历上交易的资产。这意味着它将在周一、周二、周三、周四、周五、周六和周日开放，交易所将在12AM开放，并在11:59PM关闭。我们将使用的时区是UTC。
 - en: First we’ll start off by importing some modules that will be useful to us.
+  id: totrans-35
   prefs: []
   type: TYPE_NORMAL
+  zh: 首先，我们将开始导入一些对我们有用的模块。
 - en: '[PRE2]'
+  id: totrans-36
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE2]'
 - en: 'And now we’ll actually build this calendar, which we’ll call `TFSExchangeCalendar`:'
+  id: totrans-37
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在我们将实际构建这个日历，我们将其称为`TFSExchangeCalendar`。
 - en: '[PRE3]'
+  id: totrans-38
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE3]'
 - en: Conclusions
+  id: totrans-39
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 结论
 - en: In order for you to run your algorithm with this calendar, you’ll need have
     a data bundle in which your assets have dates that run through all days of the
     week. You can read about how to make your own data bundle in the section [Writing
     a New Bundle](bundles.html#new-bundle) of this documentation, or use the code
     in [csvdir bundle](https://github.com/stefan-jansen/zipline-reloaded/blob/master/zipline/data/bundles/csvdir.py)
     for creating a bundle from CSV files.
+  id: totrans-40
   prefs: []
   type: TYPE_NORMAL
+  zh: 为了让你能够使用这个日历运行你的算法，你需要有一个数据包，其中你的资产的日期涵盖了一周的所有天数。你可以在本文档的[编写新包](bundles.html#new-bundle)部分了解如何创建自己的数据包，或者使用[csvdir包](https://github.com/stefan-jansen/zipline-reloaded/blob/master/zipline/data/bundles/csvdir.py)中的代码从CSV文件创建包。
 - en: What is a Trading Calendar?
+  id: totrans-41
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 什么是交易日历？
 - en: 'A trading calendar represents the timing information of a single market exchange.
     The timing information is made up of two parts: sessions, and opens/closes. This
     is represented by the Zipline `TradingCalendar` class, and is used as the parent
     class for all new `TradingCalendar` classes.'
+  id: totrans-42
   prefs: []
   type: TYPE_NORMAL
+  zh: 交易日历代表单个市场交易所的时间信息。时间信息由两部分组成：会话和开/关。这由Zipline的`TradingCalendar`类表示，并作为所有新的`TradingCalendar`类的父类使用。
 - en: A session represents a contiguous set of minutes, and has a label that is midnight
     UTC. It is important to note that a session label should not be considered a specific
     point in time, and that midnight UTC is just being used for convenience.
+  id: totrans-43
   prefs: []
   type: TYPE_NORMAL
+  zh: 一个会话代表一组连续的分钟，并且有一个标签是UTC午夜。重要的是要注意，会话标签不应该被视为一个特定的时间点，而UTC午夜只是为了方便而使用。
 - en: For an average day of the [New York Stock Exchange](https://www.nyse.com/index),
     the market opens at 9:30AM and closes at 4PM. Trading sessions can change depending
     on the exchange, day of the year, etc.
+  id: totrans-44
   prefs: []
   type: TYPE_NORMAL
+  zh: 对于[纽约证券交易所](https://www.nyse.com/index)的普通交易日，市场在9:30AM开放，在4PM关闭。交易时段可能会根据交易所、一年中的某一天等而变化。
 - en: Why Should You Care About Trading Calendars?
+  id: totrans-45
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 为什么你应该关心交易日历？
 - en: Let’s say you want to buy a share of some equity on Tuesday, and then sell it
     on Saturday. If the exchange in which you’re trading that equity is not open on
     Saturday, then in reality it would not be possible to trade that equity at that
     time, and you would have to wait until some other number of days past Saturday.
     Since you wouldn’t be able to place the trade in reality, it would also be unreasonable
     for your backtest to place a trade on Saturday.
+  id: totrans-46
   prefs: []
   type: TYPE_NORMAL
+  zh: 假设你想在周二购买某只股票的股份，然后在周六卖出。如果你交易的那个股票所在的交易所周六不开放，那么实际上在那个时间交易那只股票是不可能的，你将不得不等到周六之后的其他几天。由于你不能在现实中进行交易，因此你的回测在周六进行交易也是不合理的。
 - en: In order for you to backtest your strategy, the dates in that are accounted
     for in your [data bundle](https://zipline.ml4trading.io/bundles.html) and the
     dates in your `TradingCalendar` should match up; if the dates don’t match up,
     then you you’re going to see some errors along the way. This holds for both minutely
     and daily data.
+  id: totrans-47
   prefs: []
   type: TYPE_NORMAL
+  zh: 为了让你能够回测你的策略，你的[数据包](https://zipline.ml4trading.io/bundles.html)中的日期和你的`TradingCalendar`中的日期应该匹配；如果日期不匹配，那么你将会在过程中遇到一些错误。这对分钟数据和日数据都适用。
 - en: The TradingCalendar Class
+  id: totrans-48
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: TradingCalendar类
 - en: 'The `TradingCalendar` class has many properties we should be thinking about
     if we were to build our own `TradingCalendar` for an exchange. These include properties
     such as:'
+  id: totrans-49
   prefs: []
   type: TYPE_NORMAL
+  zh: '`TradingCalendar`类有许多属性，如果我们想为交易所构建自己的`TradingCalendar`，我们应该考虑这些属性。这些属性包括：'
 - en: Name of the Exchange
+  id: totrans-50
   prefs:
   - PREF_BQ
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 交易所名称
 - en: ''
+  id: totrans-51
   prefs:
   - PREF_BQ
   - PREF_IND
   type: TYPE_NORMAL
 - en: ''
+  id: totrans-52
   prefs:
   - PREF_BQ
   - PREF_IND
   type: TYPE_NORMAL
 - en: Timezone
+  id: totrans-53
   prefs:
   - PREF_BQ
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 时区
 - en: ''
+  id: totrans-54
   prefs:
   - PREF_BQ
   - PREF_IND
   type: TYPE_NORMAL
 - en: ''
+  id: totrans-55
   prefs:
   - PREF_BQ
   - PREF_IND
   type: TYPE_NORMAL
 - en: Open Time
+  id: totrans-56
   prefs:
   - PREF_BQ
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 开放时间
 - en: ''
+  id: totrans-57
   prefs:
   - PREF_BQ
   - PREF_IND
   type: TYPE_NORMAL
 - en: ''
+  id: totrans-58
   prefs:
   - PREF_BQ
   - PREF_IND
   type: TYPE_NORMAL
 - en: Close Time
+  id: totrans-59
   prefs:
   - PREF_BQ
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 关闭时间
 - en: ''
+  id: totrans-60
   prefs:
   - PREF_BQ
   - PREF_IND
   type: TYPE_NORMAL
 - en: ''
+  id: totrans-61
   prefs:
   - PREF_BQ
   - PREF_IND
   type: TYPE_NORMAL
 - en: Regular & Ad hoc Holidays
+  id: totrans-62
   prefs:
   - PREF_BQ
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 常规和特别假日
 - en: ''
+  id: totrans-63
   prefs:
   - PREF_BQ
   - PREF_IND
   type: TYPE_NORMAL
 - en: ''
+  id: totrans-64
   prefs:
   - PREF_BQ
   - PREF_IND
   type: TYPE_NORMAL
 - en: Special Opens & Closes
+  id: totrans-65
   prefs:
   - PREF_BQ
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 特别开放和关闭
 - en: And several others. If you’d like to see all of the properties and methods available
     to you through the `TradingCalendar` API, please take a look at the [API Reference](https://ml4t.zipline.io/api_reference.html#trading-calendar-api)
+  id: totrans-66
   prefs: []
   type: TYPE_NORMAL
+  zh: 以及其他几个。如果您想查看`TradingCalendar` API提供的所有属性和方法，请查看[API参考](https://ml4t.zipline.io/api_reference.html#trading-calendar-api)。
 - en: 'Now we’ll take a look at the London Stock Exchange Calendar `LSEExchangeCalendar`
     as an example below:'
+  id: totrans-67
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在我们将以下面的伦敦证券交易所日历`LSEExchangeCalendar`为例：
 - en: '[PRE4]'
+  id: totrans-68
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE4]'
 - en: You can create the `Holiday` objects mentioned in `def regular_holidays(self)`
     using the [pandas](https://pandas.pydata.org/pandas-docs/stable/) module `pandas.tseries.holiday.Holiday`.
+  id: totrans-69
   prefs: []
   type: TYPE_NORMAL
+  zh: 您可以使用[pandas](https://pandas.pydata.org/pandas-docs/stable/)模块`pandas.tseries.holiday.Holiday`创建在`def
+    regular_holidays(self)`中提到的`Holiday`对象。
 - en: Take a look at the [LSEExchangeCalendar](https://github.com/quantopian/zipline/blob/master/zipline/utils/calendars/exchange_calendar_lse.py)
     code above as an example, as well as at the code snippet below.
+  id: totrans-70
   prefs: []
   type: TYPE_NORMAL
+  zh: 请查看上面的[LSEExchangeCalendar](https://github.com/quantopian/zipline/blob/master/zipline/utils/calendars/exchange_calendar_lse.py)代码作为示例，以及下面的代码片段。
 - en: '[PRE5]'
+  id: totrans-71
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE5]'
 - en: Building a Custom Trading Calendar
+  id: totrans-72
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 构建自定义交易日历
 - en: Now we’ll build our own custom trading calendar. This calendar will be used
     for trading assets that can be traded on a 24/7 exchange calendar. This means
     that it will be open on Monday, Tuesday, Wednesday, Thursday, Friday, Saturday,
     and Sunday, and the exchange will open at 12AM and close at 11:59PM. The timezone
     which we’ll use is UTC.
+  id: totrans-73
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在，我们将构建我们自己的自定义交易日历。该日历将用于交易可以在24/7交易平台上交易的资产。这意味着它将在周一、周二、周三、周四、周五、周六和周日开放，交易平台将在凌晨12点开放，晚上11:59关闭。我们将使用的时区是UTC。
 - en: First we’ll start off by importing some modules that will be useful to us.
+  id: totrans-74
   prefs: []
   type: TYPE_NORMAL
+  zh: 首先，我们将导入一些对我们有用的模块。
 - en: '[PRE6]'
+  id: totrans-75
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE6]'
 - en: 'And now we’ll actually build this calendar, which we’ll call `TFSExchangeCalendar`:'
+  id: totrans-76
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在我们将实际构建这个日历，我们将其称为`TFSExchangeCalendar`：
 - en: '[PRE7]'
+  id: totrans-77
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE7]'
 - en: Conclusions
+  id: totrans-78
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 结论
 - en: In order for you to run your algorithm with this calendar, you’ll need have
     a data bundle in which your assets have dates that run through all days of the
     week. You can read about how to make your own data bundle in the section [Writing
     a New Bundle](bundles.html#new-bundle) of this documentation, or use the code
     in [csvdir bundle](https://github.com/stefan-jansen/zipline-reloaded/blob/master/zipline/data/bundles/csvdir.py)
     for creating a bundle from CSV files.
+  id: totrans-79
   prefs: []
   type: TYPE_NORMAL
+  zh: 为了使您的算法能够使用此日历运行，您需要拥有一个数据包，其中您的资产日期涵盖了一周的所有天数。您可以在本文档的[编写新包](bundles.html#new-bundle)部分了解如何创建自己的数据包，或者使用[csvdir包](https://github.com/stefan-jansen/zipline-reloaded/blob/master/zipline/data/bundles/csvdir.py)中的代码从CSV文件创建包。
