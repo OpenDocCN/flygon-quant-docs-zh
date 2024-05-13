@@ -1,121 +1,187 @@
 - en: Introduction
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 介绍
 - en: 原文：[https://gbeced.github.io/pyalgotrade/docs/v0.20/html/intro.html](https://gbeced.github.io/pyalgotrade/docs/v0.20/html/intro.html)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://gbeced.github.io/pyalgotrade/docs/v0.20/html/intro.html](https://gbeced.github.io/pyalgotrade/docs/v0.20/html/intro.html)
 - en: 'PyAlgoTrade is an event driven algorithmic trading Python library with support
     for:'
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: PyAlgoTrade 是一个支持事件驱动的算法交易 Python 库，支持：
 - en: Backtesting with historical data from CSV files.
+  id: totrans-3
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 使用来自 CSV 文件的历史数据进行回测。
 - en: Paper trading using [*Bitstamp*](bitstamp_example.html#bitstamp-tutorial-label)
     live feeds.
+  id: totrans-4
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 使用 [*Bitstamp*](bitstamp_example.html#bitstamp-tutorial-label) 实时数据进行模拟交易。
 - en: Real trading on Bitstamp.
+  id: totrans-5
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 在 Bitstamp 上进行真实交易。
 - en: It should also make it easy to optimize a strategy using multiple computers.
+  id: totrans-6
   prefs: []
   type: TYPE_NORMAL
+  zh: 它还应该使得使用多台计算机优化策略变得容易。
 - en: 'PyAlgoTrade is developed and tested using Python 2.7/3.7 and depends on:'
+  id: totrans-7
   prefs: []
   type: TYPE_NORMAL
+  zh: PyAlgoTrade 是使用 Python 2.7/3.7 开发和测试的，依赖于：
 - en: NumPy and SciPy ([http://numpy.scipy.org/](http://numpy.scipy.org/)).
+  id: totrans-8
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: NumPy 和 SciPy ([http://numpy.scipy.org/](http://numpy.scipy.org/))。
 - en: pytz ([http://pytz.sourceforge.net/](http://pytz.sourceforge.net/)).
+  id: totrans-9
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: pytz ([http://pytz.sourceforge.net/](http://pytz.sourceforge.net/))。
 - en: matplotlib ([http://matplotlib.sourceforge.net/](http://matplotlib.sourceforge.net/))
     for plotting support.
+  id: totrans-10
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: matplotlib ([http://matplotlib.sourceforge.net/](http://matplotlib.sourceforge.net/))
+    用于绘图支持。
 - en: ws4py ([https://github.com/Lawouach/WebSocket-for-Python](https://github.com/Lawouach/WebSocket-for-Python))
     for Bitstamp support.
+  id: totrans-11
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: ws4py ([https://github.com/Lawouach/WebSocket-for-Python](https://github.com/Lawouach/WebSocket-for-Python))
+    支持 Bitstamp。
 - en: tornado ([http://www.tornadoweb.org/en/stable/](http://www.tornadoweb.org/en/stable/))
     for Bitstamp support.
+  id: totrans-12
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: tornado ([http://www.tornadoweb.org/en/stable/](http://www.tornadoweb.org/en/stable/))
+    支持 Bitstamp。
 - en: tweepy ([https://github.com/tweepy/tweepy](https://github.com/tweepy/tweepy))
     for Twitter support.
+  id: totrans-13
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: tweepy ([https://github.com/tweepy/tweepy](https://github.com/tweepy/tweepy))
+    支持 Twitter。
 - en: so you need to have those installed in order to use this library.
+  id: totrans-14
   prefs: []
   type: TYPE_NORMAL
+  zh: 因此，您需要安装这些才能使用此库。
 - en: 'You can install PyAlgoTrade using pip like this:'
+  id: totrans-15
   prefs: []
   type: TYPE_NORMAL
+  zh: 您可以像这样使用 pip 安装 PyAlgoTrade：
 - en: '[PRE0]'
+  id: totrans-16
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: Previous topic
+  id: totrans-17
   prefs:
   - PREF_H4
   type: TYPE_NORMAL
+  zh: 上一个主题
 - en: '[PyAlgoTrade documentation](index.html "previous chapter")'
+  id: totrans-18
   prefs: []
   type: TYPE_NORMAL
+  zh: '[PyAlgoTrade 文档](index.html "上一章节")'
 - en: Next topic
+  id: totrans-19
   prefs:
   - PREF_H4
   type: TYPE_NORMAL
+  zh: 下一个主题
 - en: '[Tutorial](tutorial.html "next chapter")'
+  id: totrans-20
   prefs: []
   type: TYPE_NORMAL
+  zh: '[教程](tutorial.html "下一章节")'
 - en: This Page
+  id: totrans-21
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 此页
 - en: '[Show Source](_sources/intro.txt)'
+  id: totrans-22
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[显示源码](_sources/intro.txt)'
 - en: Quick search
+  id: totrans-23
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 快速搜索
 - en: Enter search terms or a module, class or function name.
+  id: totrans-24
   prefs: []
   type: TYPE_NORMAL
+  zh: 输入搜索词或模块、类或函数名称。
 - en: Navigation
+  id: totrans-25
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 导航
 - en: '[index](genindex.html "General Index")'
+  id: totrans-26
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[索引](genindex.html "通用索引")'
 - en: '[modules](py-modindex.html "Python Module Index") |'
+  id: totrans-27
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[模块](py-modindex.html "Python 模块索引") |'
 - en: '[next](tutorial.html "Tutorial") |'
+  id: totrans-28
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[下一章节](tutorial.html "教程") |'
 - en: '[previous](index.html "PyAlgoTrade documentation") |'
+  id: totrans-29
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[上一章节](index.html "PyAlgoTrade 文档") |'
 - en: '[PyAlgoTrade 0.20 documentation](index.html) »'
+  id: totrans-30
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[PyAlgoTrade 0.20 文档](index.html) »'

@@ -1,317 +1,505 @@
 - en: dataseries – Basic dataseries classes
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: dataseries – 基本数据系列类
 - en: 原文：[https://gbeced.github.io/pyalgotrade/docs/v0.20/html/dataseries.html](https://gbeced.github.io/pyalgotrade/docs/v0.20/html/dataseries.html)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://gbeced.github.io/pyalgotrade/docs/v0.20/html/dataseries.html](https://gbeced.github.io/pyalgotrade/docs/v0.20/html/dataseries.html)
 - en: Data series are abstractions used to manage time-series data.
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: 数据系列是用于管理时间序列数据的抽象。
 - en: '*class* `pyalgotrade.dataseries.``DataSeries`'
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: '*class* `pyalgotrade.dataseries.``DataSeries`'
 - en: 'Bases: `object`'
+  id: totrans-4
   prefs: []
   type: TYPE_NORMAL
+  zh: 基类：`object`
 - en: Base class for data series.
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: 数据系列的基类。
 - en: Note
+  id: totrans-6
   prefs: []
   type: TYPE_NORMAL
+  zh: 注意
 - en: This is a base class and should not be used directly.
+  id: totrans-7
   prefs: []
   type: TYPE_NORMAL
+  zh: 这是一个基类，不应直接使用。
 - en: '`__getitem__`(*key*)'
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: '`__getitem__`(*key*)'
 - en: Returns the value at a given position/slice. It raises IndexError if the position
     is invalid, or TypeError if the key type is invalid.
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: 返回给定位置/切片的值。如果位置无效，则引发 IndexError，如果键类型无效，则引发 TypeError。
 - en: '`__len__`()'
+  id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: '`__len__`()'
 - en: Returns the number of elements in the data series.
+  id: totrans-11
   prefs: []
   type: TYPE_NORMAL
+  zh: 返回数据系列中的元素数量。
 - en: '`getDateTimes`()'
+  id: totrans-12
   prefs: []
   type: TYPE_NORMAL
+  zh: '`getDateTimes`()'
 - en: Returns a list of `datetime.datetime` associated with each value.
+  id: totrans-13
   prefs: []
   type: TYPE_NORMAL
+  zh: 返回与每个值关联的 `datetime.datetime` 列表。
 - en: '*class* `pyalgotrade.dataseries.``SequenceDataSeries`(*maxLen=None*)'
+  id: totrans-14
   prefs: []
   type: TYPE_NORMAL
+  zh: '*class* `pyalgotrade.dataseries.``SequenceDataSeries`(*maxLen=None*)'
 - en: 'Bases: [`pyalgotrade.dataseries.DataSeries`](#pyalgotrade.dataseries.DataSeries
     "pyalgotrade.dataseries.DataSeries")'
+  id: totrans-15
   prefs: []
   type: TYPE_NORMAL
+  zh: 基类：[`pyalgotrade.dataseries.DataSeries`](#pyalgotrade.dataseries.DataSeries
+    "pyalgotrade.dataseries.DataSeries")
 - en: A DataSeries that holds values in a sequence in memory.
+  id: totrans-16
   prefs: []
   type: TYPE_NORMAL
+  zh: 一个在内存中按顺序保存值的 DataSeries。
 - en: '| Parameters: | **maxLen** (*int.*) – The maximum number of values to hold.
     Once a bounded length is full, when new items are added, a corresponding number
     of items are discarded from the opposite end. If None then dataseries.DEFAULT_MAX_LEN
     is used. |'
+  id: totrans-17
   prefs: []
   type: TYPE_TB
+  zh: '| 参数： | **maxLen** (*int.*) – 要保存的最大值数量。一旦有界长度已满，当添加新项时，将从相反端丢弃相应数量的项。如果为 None，则使用
+    dataseries.DEFAULT_MAX_LEN。'
 - en: '`append`(*value*)'
+  id: totrans-18
   prefs: []
   type: TYPE_NORMAL
+  zh: '`append`(*value*)'
 - en: Appends a value.
+  id: totrans-19
   prefs: []
   type: TYPE_NORMAL
+  zh: 追加一个值。
 - en: '`appendWithDateTime`(*dateTime*, *value*)'
+  id: totrans-20
   prefs: []
   type: TYPE_NORMAL
+  zh: '`appendWithDateTime`(*dateTime*, *value*)'
 - en: Appends a value with an associated datetime.
+  id: totrans-21
   prefs: []
   type: TYPE_NORMAL
+  zh: 追加一个带有关联日期时间的值。
 - en: Note
+  id: totrans-22
   prefs: []
   type: TYPE_NORMAL
+  zh: 注意
 - en: If dateTime is not None, it must be greater than the last one.
+  id: totrans-23
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果 dateTime 不为 None，则必须大于最后一个。
 - en: '`getMaxLen`()'
+  id: totrans-24
   prefs: []
   type: TYPE_NORMAL
+  zh: '`getMaxLen`()'
 - en: Returns the maximum number of values to hold.
+  id: totrans-25
   prefs: []
   type: TYPE_NORMAL
+  zh: 返回要保存的最大值数量。
 - en: '`setMaxLen`(*maxLen*)'
+  id: totrans-26
   prefs: []
   type: TYPE_NORMAL
+  zh: '`setMaxLen`(*maxLen*)'
 - en: Sets the maximum number of values to hold and resizes accordingly if necessary.
+  id: totrans-27
   prefs: []
   type: TYPE_NORMAL
+  zh: 设置要保存的最大值数量，并在必要时调整大小。
 - en: '`pyalgotrade.dataseries.aligned.``datetime_aligned`(*ds1*, *ds2*, *maxLen=None*)'
+  id: totrans-28
   prefs: []
   type: TYPE_NORMAL
+  zh: '`pyalgotrade.dataseries.aligned.``datetime_aligned`(*ds1*, *ds2*, *maxLen=None*)'
 - en: Returns two dataseries that exhibit only those values whose datetimes are in
     both dataseries.
+  id: totrans-29
   prefs: []
   type: TYPE_NORMAL
+  zh: 返回两个 DataSeries，其中仅包含两个 DataSeries 中都存在的日期时间的值。
 - en: '| Parameters: |'
+  id: totrans-30
   prefs: []
   type: TYPE_TB
+  zh: '| 参数： |'
 - en: '**ds1** (`DataSeries`.) – A DataSeries instance.'
+  id: totrans-31
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**ds1** (`DataSeries`.) – 一个 DataSeries 实例。'
 - en: '**ds2** (`DataSeries`.) – A DataSeries instance.'
+  id: totrans-32
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**ds2** (`DataSeries`.) – 一个 DataSeries 实例。'
 - en: '**maxLen** (*int.*) – The maximum number of values to hold for the returned
     `DataSeries`. Once a bounded length is full, when new items are added, a corresponding
     number of items are discarded from the opposite end. If None then dataseries.DEFAULT_MAX_LEN
     is used.'
+  id: totrans-33
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**maxLen** (*int.*) – 返回的 `DataSeries` 可以容纳的最大值数量。一旦有界长度已满，当添加新项时，将从相反端丢弃相应数量的项。如果为
+    None，则使用 dataseries.DEFAULT_MAX_LEN。'
 - en: '|'
+  id: totrans-34
   prefs: []
   type: TYPE_NORMAL
+  zh: '|'
 - en: '*class* `pyalgotrade.dataseries.bards.``BarDataSeries`(*maxLen=None*)'
+  id: totrans-35
   prefs: []
   type: TYPE_NORMAL
+  zh: '*class* `pyalgotrade.dataseries.bards.``BarDataSeries`(*maxLen=None*)'
 - en: 'Bases: [`pyalgotrade.dataseries.SequenceDataSeries`](#pyalgotrade.dataseries.SequenceDataSeries
     "pyalgotrade.dataseries.SequenceDataSeries")'
+  id: totrans-36
   prefs: []
   type: TYPE_NORMAL
+  zh: 基类：[`pyalgotrade.dataseries.SequenceDataSeries`](#pyalgotrade.dataseries.SequenceDataSeries
+    "pyalgotrade.dataseries.SequenceDataSeries")
 - en: A DataSeries of [`pyalgotrade.bar.Bar`](bar.html#pyalgotrade.bar.Bar "pyalgotrade.bar.Bar")
     instances.
+  id: totrans-37
   prefs: []
   type: TYPE_NORMAL
+  zh: 一个由 [`pyalgotrade.bar.Bar`](bar.html#pyalgotrade.bar.Bar "pyalgotrade.bar.Bar")
+    实例组成的 DataSeries。
 - en: '| Parameters: | **maxLen** (*int.*) – The maximum number of values to hold.
     Once a bounded length is full, when new items are added, a corresponding number
     of items are discarded from the opposite end. If None then dataseries.DEFAULT_MAX_LEN
     is used. |'
+  id: totrans-38
   prefs: []
   type: TYPE_TB
+  zh: '| 参数： | **maxLen** (*int.*) – 要保存的最大值数量。一旦有界长度已满，当添加新项时，将从相反端丢弃相应数量的项。如果为 None，则使用
+    dataseries.DEFAULT_MAX_LEN。'
 - en: '`getAdjCloseDataSeries`()'
+  id: totrans-39
   prefs: []
   type: TYPE_NORMAL
+  zh: '`getAdjCloseDataSeries`()'
 - en: Returns a [`pyalgotrade.dataseries.DataSeries`](#pyalgotrade.dataseries.DataSeries
     "pyalgotrade.dataseries.DataSeries") with the adjusted close prices.
+  id: totrans-40
   prefs: []
   type: TYPE_NORMAL
+  zh: 返回一个具有调整后的收盘价格的 [`pyalgotrade.dataseries.DataSeries`](#pyalgotrade.dataseries.DataSeries
+    "pyalgotrade.dataseries.DataSeries")。
 - en: '`getCloseDataSeries`()'
+  id: totrans-41
   prefs: []
   type: TYPE_NORMAL
+  zh: '`getCloseDataSeries`()'
 - en: Returns a [`pyalgotrade.dataseries.DataSeries`](#pyalgotrade.dataseries.DataSeries
     "pyalgotrade.dataseries.DataSeries") with the close prices.
+  id: totrans-42
   prefs: []
   type: TYPE_NORMAL
+  zh: 返回一个[`pyalgotrade.dataseries.DataSeries`](#pyalgotrade.dataseries.DataSeries
+    "pyalgotrade.dataseries.DataSeries")，其中包含收盘价格。
 - en: '`getExtraDataSeries`(*name*)'
+  id: totrans-43
   prefs: []
   type: TYPE_NORMAL
+  zh: '`getExtraDataSeries`（*name*）'
 - en: Returns a [`pyalgotrade.dataseries.DataSeries`](#pyalgotrade.dataseries.DataSeries
     "pyalgotrade.dataseries.DataSeries") for an extra column.
+  id: totrans-44
   prefs: []
   type: TYPE_NORMAL
+  zh: 返回一个[`pyalgotrade.dataseries.DataSeries`](#pyalgotrade.dataseries.DataSeries
+    "pyalgotrade.dataseries.DataSeries")，用于额外的列。
 - en: '`getHighDataSeries`()'
+  id: totrans-45
   prefs: []
   type: TYPE_NORMAL
+  zh: '`getHighDataSeries`（）'
 - en: Returns a [`pyalgotrade.dataseries.DataSeries`](#pyalgotrade.dataseries.DataSeries
     "pyalgotrade.dataseries.DataSeries") with the high prices.
+  id: totrans-46
   prefs: []
   type: TYPE_NORMAL
+  zh: 返回一个[`pyalgotrade.dataseries.DataSeries`](#pyalgotrade.dataseries.DataSeries
+    "pyalgotrade.dataseries.DataSeries")，其中包含最高价格。
 - en: '`getLowDataSeries`()'
+  id: totrans-47
   prefs: []
   type: TYPE_NORMAL
+  zh: '`getLowDataSeries`（）'
 - en: Returns a [`pyalgotrade.dataseries.DataSeries`](#pyalgotrade.dataseries.DataSeries
     "pyalgotrade.dataseries.DataSeries") with the low prices.
+  id: totrans-48
   prefs: []
   type: TYPE_NORMAL
+  zh: 返回一个[`pyalgotrade.dataseries.DataSeries`](#pyalgotrade.dataseries.DataSeries
+    "pyalgotrade.dataseries.DataSeries")，其中包含最低价格。
 - en: '`getOpenDataSeries`()'
+  id: totrans-49
   prefs: []
   type: TYPE_NORMAL
+  zh: '`getOpenDataSeries`（）'
 - en: Returns a [`pyalgotrade.dataseries.DataSeries`](#pyalgotrade.dataseries.DataSeries
     "pyalgotrade.dataseries.DataSeries") with the open prices.
+  id: totrans-50
   prefs: []
   type: TYPE_NORMAL
+  zh: 返回一个[`pyalgotrade.dataseries.DataSeries`](#pyalgotrade.dataseries.DataSeries
+    "pyalgotrade.dataseries.DataSeries")，其中包含开盘价格。
 - en: '`getPriceDataSeries`()'
+  id: totrans-51
   prefs: []
   type: TYPE_NORMAL
+  zh: '`getPriceDataSeries`（）'
 - en: Returns a [`pyalgotrade.dataseries.DataSeries`](#pyalgotrade.dataseries.DataSeries
     "pyalgotrade.dataseries.DataSeries") with the close or adjusted close prices.
+  id: totrans-52
   prefs: []
   type: TYPE_NORMAL
+  zh: 返回一个[`pyalgotrade.dataseries.DataSeries`](#pyalgotrade.dataseries.DataSeries
+    "pyalgotrade.dataseries.DataSeries")，其中包含收盘或调整后的收盘价格。
 - en: '`getVolumeDataSeries`()'
+  id: totrans-53
   prefs: []
   type: TYPE_NORMAL
+  zh: '`getVolumeDataSeries`（）'
 - en: Returns a [`pyalgotrade.dataseries.DataSeries`](#pyalgotrade.dataseries.DataSeries
     "pyalgotrade.dataseries.DataSeries") with the volume.
+  id: totrans-54
   prefs: []
   type: TYPE_NORMAL
+  zh: 返回一个[`pyalgotrade.dataseries.DataSeries`](#pyalgotrade.dataseries.DataSeries
+    "pyalgotrade.dataseries.DataSeries")，其中包含交易量。
 - en: '*class* `pyalgotrade.dataseries.resampled.``ResampledBarDataSeries`(*dataSeries*,
     *frequency*, *maxLen=None*)'
+  id: totrans-55
   prefs: []
   type: TYPE_NORMAL
+  zh: '*class* `pyalgotrade.dataseries.resampled.` `ResampledBarDataSeries`（*dataSeries*，*frequency*，*maxLen=None*）'
 - en: 'Bases: [`pyalgotrade.dataseries.bards.BarDataSeries`](#pyalgotrade.dataseries.bards.BarDataSeries
     "pyalgotrade.dataseries.bards.BarDataSeries"), `pyalgotrade.dataseries.resampled.DSResampler`'
+  id: totrans-56
   prefs: []
   type: TYPE_NORMAL
+  zh: 基础：[`pyalgotrade.dataseries.bards.BarDataSeries`](#pyalgotrade.dataseries.bards.BarDataSeries
+    "pyalgotrade.dataseries.bards.BarDataSeries")，`pyalgotrade.dataseries.resampled.DSResampler`
 - en: A BarDataSeries that will build on top of another, higher frequency, BarDataSeries.
     Resampling will take place as new values get pushed into the dataseries being
     resampled.
+  id: totrans-57
   prefs: []
   type: TYPE_NORMAL
+  zh: 一个 BarDataSeries，将建立在另一个更高频率的 BarDataSeries 之上。随着新值被推送到被重新采样的数据系列中，重新采样将会发生。
 - en: '| Parameters: |'
+  id: totrans-58
   prefs: []
   type: TYPE_TB
+  zh: '| 参数： |'
 - en: '**dataSeries** ([`pyalgotrade.dataseries.bards.BarDataSeries`](#pyalgotrade.dataseries.bards.BarDataSeries
     "pyalgotrade.dataseries.bards.BarDataSeries")) – The DataSeries instance being
     resampled.'
+  id: totrans-59
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**dataSeries**（[`pyalgotrade.dataseries.bards.BarDataSeries`](#pyalgotrade.dataseries.bards.BarDataSeries
+    "pyalgotrade.dataseries.bards.BarDataSeries")） - 正在重新采样的 DataSeries 实例。'
 - en: '**frequency** – The grouping frequency in seconds. Must be > 0.'
+  id: totrans-60
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**frequency** - 以秒为单位的分组频率。必须大于 0。'
 - en: '**maxLen** (*int.*) – The maximum number of values to hold. Once a bounded
     length is full, when new items are added, a corresponding number of items are
     discarded from the opposite end.'
+  id: totrans-61
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**maxLen**（*int.*） - 最大保存值的数量。一旦有限长度已满，当添加新项目时，将从另一端丢弃相应数量的项目。'
 - en: '|'
+  id: totrans-62
   prefs: []
   type: TYPE_NORMAL
+  zh: '|'
 - en: Note
+  id: totrans-63
   prefs: []
   type: TYPE_NORMAL
+  zh: 注：
 - en: 'Supported resampling frequencies are:'
+  id: totrans-64
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 支持的重新采样频率包括：
 - en: Less than bar.Frequency.DAY
+  id: totrans-65
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 小于 bar.Frequency.DAY
 - en: bar.Frequency.DAY
+  id: totrans-66
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: bar.Frequency.DAY
 - en: bar.Frequency.MONTH
+  id: totrans-67
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: bar.Frequency.MONTH
 - en: '`checkNow`(*dateTime*)'
+  id: totrans-68
   prefs: []
   type: TYPE_NORMAL
+  zh: '`checkNow`（*dateTime*）'
 - en: Forces a resample check. Depending on the resample frequency, and the current
     datetime, a new value may be generated.
+  id: totrans-69
   prefs: []
   type: TYPE_NORMAL
+  zh: 强制进行重新采样检查。根据重新采样频率和当前日期时间，可能会生成一个新值。
 - en: '| Parameters: | **dateTime** (`datetime.datetime`) – The current datetime.
     |'
+  id: totrans-70
   prefs: []
   type: TYPE_TB
+  zh: '| 参数： | **dateTime**（`datetime.datetime`） - 当前日期时间。 |'
 - en: Previous topic
+  id: totrans-71
   prefs:
   - PREF_H4
   type: TYPE_NORMAL
+  zh: 上一个主题
 - en: '[bar – Instrument prices](bar.html "previous chapter")'
+  id: totrans-72
   prefs: []
   type: TYPE_NORMAL
+  zh: '[bar - 仪器价格](bar.html "上一个章节")'
 - en: Next topic
+  id: totrans-73
   prefs:
   - PREF_H4
   type: TYPE_NORMAL
+  zh: 下一个主题
 - en: '[feed – Basic feeds](feed.html "next chapter")'
+  id: totrans-74
   prefs: []
   type: TYPE_NORMAL
+  zh: '[feed - 基本订阅](feed.html "下一章")'
 - en: This Page
+  id: totrans-75
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 本页
 - en: '[Show Source](_sources/dataseries.txt)'
+  id: totrans-76
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[显示源码](_sources/dataseries.txt)'
 - en: Quick search
+  id: totrans-77
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 快速搜索
 - en: Enter search terms or a module, class or function name.
+  id: totrans-78
   prefs: []
   type: TYPE_NORMAL
+  zh: 输入搜索术语、模块、类或函数名称。
 - en: Navigation
+  id: totrans-79
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 导航
 - en: '[index](genindex.html "General Index")'
+  id: totrans-80
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[索引](genindex.html "通用索引")'
 - en: '[modules](py-modindex.html "Python Module Index") |'
+  id: totrans-81
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[模块](py-modindex.html "Python 模块索引") |'
 - en: '[next](feed.html "feed – Basic feeds") |'
+  id: totrans-82
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[下一个](feed.html "feed - 基本订阅") |'
 - en: '[previous](bar.html "bar – Instrument prices") |'
+  id: totrans-83
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[前一个](bar.html "bar - 仪器价格") |'
 - en: '[PyAlgoTrade 0.20 documentation](index.html) »'
+  id: totrans-84
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[PyAlgoTrade 0.20 文档](index.html) »'
 - en: '[Documentation for the code](code.html) »'
+  id: totrans-85
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[代码文档](code.html) »'

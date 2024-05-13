@@ -1,629 +1,918 @@
 - en: Tutorial
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 教程
 - en: 原文：[https://gbeced.github.io/pyalgotrade/docs/v0.20/html/tutorial.html](https://gbeced.github.io/pyalgotrade/docs/v0.20/html/tutorial.html)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://gbeced.github.io/pyalgotrade/docs/v0.20/html/tutorial.html](https://gbeced.github.io/pyalgotrade/docs/v0.20/html/tutorial.html)
 - en: The goal of this tutorial is to give you a quick introduction to PyAlgoTrade.
     As described in the introduction, the goal of PyAlgoTrade is to help you backtest
     stock trading strategies. Let’s say you have an idea for a trading strategy and
     you’d like to evaluate it with historical data and see how it behaves, then PyAlgoTrade
     should allow you to do so with minimal effort.
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: 本教程的目标是为您快速介绍PyAlgoTrade。如介绍所述，PyAlgoTrade的目标是帮助您回测股票交易策略。假设你有一个交易策略的想法，并且想用历史数据评估它的表现，PyAlgoTrade应该能够让你以最少的努力实现这一点。
 - en: Before I move on I would like to thank Pablo Jorge who helped reviewing the
     initial design and documentation.
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: 在我继续之前，我想感谢Pablo Jorge，他帮助审查了最初的设计和文档。
 - en: '**This tutorial was developed on a UNIX environment, but the steps to adapt
     it to a Windows environment should be straightforward.**'
+  id: totrans-4
   prefs: []
   type: TYPE_NORMAL
+  zh: '**本教程是在UNIX环境下开发的，但是将其调整到Windows环境应该很简单。**'
 - en: 'PyAlgoTrade has 6 main components:'
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: PyAlgoTrade有6个主要组件：
 - en: Strategies
+  id: totrans-6
   prefs:
   - PREF_BQ
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 策略
 - en: Feeds
+  id: totrans-7
   prefs:
   - PREF_BQ
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 数据源
 - en: Brokers
+  id: totrans-8
   prefs:
   - PREF_BQ
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 经纪人
 - en: DataSeries
+  id: totrans-9
   prefs:
   - PREF_BQ
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 数据系列
 - en: Technicals
+  id: totrans-10
   prefs:
   - PREF_BQ
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 技术指标
 - en: Optimizer
+  id: totrans-11
   prefs:
   - PREF_BQ
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 优化器
 - en: Strategies
+  id: totrans-12
   prefs: []
   type: TYPE_NORMAL
+  zh: 策略
 - en: These are the classes that you define that implement the trading logic. When
     to buy, when to sell, etc.
+  id: totrans-13
   prefs: []
   type: TYPE_NORMAL
+  zh: 这些是你定义的类，实现了交易逻辑。什么时候买，什么时候卖，等等。
 - en: Feeds
+  id: totrans-14
   prefs: []
   type: TYPE_NORMAL
+  zh: 数据源
 - en: These are data providing abstractions. For example, you’ll use a CSV feed that
     loads bars from a CSV (Comma-separated values) formatted file to feed data to
     a strategy. Feeds are not limited to bars. For example, there is a Twitter feed
     that allows incorporating Twitter events into trading decisions.
+  id: totrans-15
   prefs: []
   type: TYPE_NORMAL
+  zh: 这些是提供数据的抽象。例如，你将使用一个CSV数据源，从CSV（逗号分隔值）格式的文件中加载柱状图，以向策略提供数据。数据源不限于柱状图。例如，有一个Twitter数据源，允许将Twitter事件纳入交易决策中。
 - en: Brokers
+  id: totrans-16
   prefs: []
   type: TYPE_NORMAL
+  zh: 经纪人
 - en: Brokers are responsible for executing orders.
+  id: totrans-17
   prefs: []
   type: TYPE_NORMAL
+  zh: 经纪人负责执行订单。
 - en: DataSeries
+  id: totrans-18
   prefs: []
   type: TYPE_NORMAL
+  zh: 数据系列
 - en: A data series is an abstraction used to manage time series data.
+  id: totrans-19
   prefs: []
   type: TYPE_NORMAL
+  zh: 数据系列是用于管理时间序列数据的抽象。
 - en: Technicals
+  id: totrans-20
   prefs: []
   type: TYPE_NORMAL
+  zh: 技术指标
 - en: These are a set of filters that you use to make calculations on top of DataSeries.
     For example SMA (Simple Moving Average), RSI (Relative Strength Index), etc. These
     filters are modeled as DataSeries decorators.
+  id: totrans-21
   prefs: []
   type: TYPE_NORMAL
+  zh: 这些是一组过滤器，你用它们对DataSeries进行计算。例如SMA（简单移动平均）、RSI（相对强弱指标）等。这些过滤器被建模为DataSeries装饰器。
 - en: Optimizer
+  id: totrans-22
   prefs: []
   type: TYPE_NORMAL
+  zh: 优化器
 - en: These are a set of classes that allow you to distribute backtesting among different
     computers, or different processes running in the same computer, or a combination
     of both. They make horizontal scaling easy.
+  id: totrans-23
   prefs: []
   type: TYPE_NORMAL
+  zh: 这些是一组允许您在不同计算机之间分发回测的类，或者在同一计算机上运行的不同进程之间分发回测的类，或者两者兼而有之。它们使水平扩展变得容易。
 - en: 'Having said all that, the first thing that we’ll need to test our strategies
     is some data. Let’s use Oracle’s stock prices for year 2000, which we’ll download
     with the following command:'
+  id: totrans-24
   prefs: []
   type: TYPE_NORMAL
+  zh: 说了这么多，我们测试策略所需的第一件事是一些数据。让我们使用2000年Oracle的股价，我们将使用以下命令下载：
 - en: '[PRE0]'
+  id: totrans-25
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: 'The pyalgotrade.tools.quandl tool downloads CSV formatted data from [Quandl](https://www.quandl.com/).
     The first few lines of `WIKI-ORCL-2000-quandl.csv` should look like this:'
+  id: totrans-26
   prefs: []
   type: TYPE_NORMAL
+  zh: pyalgotrade.tools.quandl工具从[Quandl](https://www.quandl.com/)下载CSV格式的数据。`WIKI-ORCL-2000-quandl.csv`的前几行应该是这样的：
 - en: '[PRE1]'
+  id: totrans-27
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE1]'
 - en: 'Let’s start with a simple strategy, that is, one that just prints closing prices
     as they are processed:'
+  id: totrans-28
   prefs: []
   type: TYPE_NORMAL
+  zh: 让我们从一个简单的策略开始，即一个只是打印处理的收盘价的策略：
 - en: '[PRE2]'
+  id: totrans-29
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE2]'
 - en: 'The code is doing 3 main things:'
+  id: totrans-30
   prefs: []
   type: TYPE_NORMAL
+  zh: 代码正在做三件主要的事情：
 - en: Declaring a new strategy. There is only one method that has to be defined, *onBars*,
     which is called for every bar in the feed.
+  id: totrans-31
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 声明一个新策略。只需定义一个方法，*onBars*，它会在每个数据源的柱状图上调用。
 - en: Loading the feed from a CSV file.
+  id: totrans-32
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 从CSV文件加载数据源。
 - en: Running the strategy with the bars supplied by the feed.
+  id: totrans-33
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 用数据源提供的柱状图运行策略。
 - en: 'If you run the script you should see the closing prices in order:'
+  id: totrans-34
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果你运行这个脚本，你应该按顺序看到收盘价：
 - en: '[PRE3]'
+  id: totrans-35
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE3]'
 - en: 'Let’s move on with a strategy that prints closing SMA prices, to illustrate
     how technicals are used:'
+  id: totrans-36
   prefs: []
   type: TYPE_NORMAL
+  zh: 让我们继续使用一个打印收盘SMA价格的策略，以说明技术指标的使用方法：
 - en: '[PRE4]'
+  id: totrans-37
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE4]'
 - en: 'This is very similar to the previous example, except that:'
+  id: totrans-38
   prefs: []
   type: TYPE_NORMAL
+  zh: 这与前面的示例非常相似，只是：
 - en: We’re initializing an SMA filter over the closing price data series.
+  id: totrans-39
   prefs:
   - PREF_BQ
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 我们正在对收盘价数据系列初始化SMA过滤器。
 - en: We’re printing the current SMA value along with the closing price.
+  id: totrans-40
   prefs:
   - PREF_BQ
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 我们打印当前SMA值以及收盘价。
 - en: 'If you run the script you should see the closing prices and the corresponding
     SMA values, but in this case the first 14 SMA values are None. That is because
     we need at least 15 values to get something out of the SMA:'
+  id: totrans-41
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果你运行脚本，你应该会看到收盘价和相应的SMA值，但在这种情况下，前14个SMA值为None。这是因为我们需要至少15个值才能从SMA中得到结果：
 - en: '[PRE5]'
+  id: totrans-42
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE5]'
 - en: All the technicals will return None when the value can’t be calculated at a
     given time.
+  id: totrans-43
   prefs: []
   type: TYPE_NORMAL
+  zh: 当值无法在给定时间计算时，所有的技术指标都将返回None。
 - en: 'One important thing about technicals is that they can be combined. That is
     because they’re modeled as DataSeries as well. For example, getting an SMA over
     the RSI over the closing prices is as simple as this:'
+  id: totrans-44
   prefs: []
   type: TYPE_NORMAL
+  zh: 有关技术指标的一个重要事项是它们可以组合使用。这是因为它们也被建模为DataSeries。例如，获取收盘价上的RSI上的SMA就像这样简单：
 - en: '[PRE6]'
+  id: totrans-45
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE6]'
 - en: 'If you run the script you should see a bunch of values on the screen where:'
+  id: totrans-46
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果你运行脚本，你应该会在屏幕上看到一堆值，其中：
 - en: The first 14 RSI values are None. That is because we need at least 15 values
     to get an RSI value.
+  id: totrans-47
   prefs:
   - PREF_BQ
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 前14个RSI值为None。这是因为我们需要至少15个值才能得到一个RSI值。
 - en: The first 28 SMA values are None. That is because the first 14 RSI values are
     None, and the 15th one is the first not None value that the SMA filter receives.
     We can calculate the SMA(15) only when we have 15 not None values .
+  id: totrans-48
   prefs:
   - PREF_BQ
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 前28个SMA值为None。这是因为前14个RSI值为None，而第15个是SMA过滤器收到的第一个非None值。只有当我们有15个非None值时，才能计算SMA（15）。
 - en: '[PRE7]'
+  id: totrans-49
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE7]'
 - en: Trading
+  id: totrans-50
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 交易
 - en: 'Let’s move on with a simple strategy, this time simulating actual trading.
     The idea is very simple:'
+  id: totrans-51
   prefs: []
   type: TYPE_NORMAL
+  zh: 让我们用一个简单的策略继续，这次模拟实际交易。这个想法非常简单：
 - en: If the adjusted close price is above the SMA(15) we enter a long position (we
     place a buy market order).
+  id: totrans-52
   prefs:
   - PREF_BQ
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 如果调整后的收盘价高于SMA（15），我们就进入多头头寸（我们放置一个市价买单）。
 - en: If a long position is in place, and the adjusted close price drops below the
     SMA(15) we exit the long position (we place a sell market order).
+  id: totrans-53
   prefs:
   - PREF_BQ
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 如果已经存在多头头寸，并且调整后的收盘价低于SMA（15），我们就退出多头头寸（我们放置一个卖市价单）。
 - en: '[PRE8]'
+  id: totrans-54
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE8]'
 - en: 'If you run the script you should see something like this:'
+  id: totrans-55
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果你运行脚本，你应该会看到类似于这样的东西：
 - en: '[PRE9]'
+  id: totrans-56
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE9]'
 - en: 'But what if we used 30 as the SMA period instead of 15 ? Would that yield better
     results or worse ? We could certainly do something like this:'
+  id: totrans-57
   prefs: []
   type: TYPE_NORMAL
+  zh: 但是，如果我们使用30作为SMA周期，而不是15？那会产生更好的结果还是更差的结果？我们当然可以做这样的事情：
 - en: '[PRE10]'
+  id: totrans-58
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE10]'
 - en: 'and we would find out that we can get better results with a SMA(20):'
+  id: totrans-59
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们会发现，使用SMA（20）可以获得更好的结果：
 - en: '[PRE11]'
+  id: totrans-60
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE11]'
 - en: This is ok if we only have to try a limited set of parameters values. But if
     we have to test a strategy with multiple parameters, then the serial approach
     is definitely not going to scale as strategies get more complex.
+  id: totrans-61
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果我们只需要尝试有限的参数值集合，那么这是可以的。但是如果我们必须测试一个具有多个参数的策略，那么串行方法肯定不会随着策略变得更加复杂而扩展。
 - en: Optimizing
+  id: totrans-62
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 优化
 - en: 'Meet the optimizer component. The idea is very simple:'
+  id: totrans-63
   prefs: []
   type: TYPE_NORMAL
+  zh: 满足优化器组件。这个想法非常简单：
 - en: 'There is one server responsible for:'
+  id: totrans-64
   prefs:
   - PREF_BQ
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 有一个负责的服务器：
 - en: ''
+  id: totrans-65
   prefs:
   - PREF_BQ
   - PREF_IND
   type: TYPE_NORMAL
 - en: ''
+  id: totrans-66
   prefs:
   - PREF_BQ
   - PREF_IND
   type: TYPE_NORMAL
 - en: ''
+  id: totrans-67
   prefs:
   - PREF_BQ
   - PREF_IND
   type: TYPE_NORMAL
 - en: ''
+  id: totrans-68
   prefs:
   - PREF_BQ
   - PREF_IND
   type: TYPE_NORMAL
 - en: ''
+  id: totrans-69
   prefs:
   - PREF_BQ
   - PREF_IND
   type: TYPE_NORMAL
 - en: Providing the bars to run the strategy.
+  id: totrans-70
   prefs:
   - PREF_BQ
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 提供运行策略的条形图。
 - en: Providing the parameters to run the strategy.
+  id: totrans-71
   prefs:
   - PREF_BQ
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 提供运行策略的参数。
 - en: Recording the strategy results from each of the workers.
+  id: totrans-72
   prefs:
   - PREF_BQ
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 记录每个工作人员的策略结果。
 - en: ''
+  id: totrans-73
   prefs:
   - PREF_BQ
   - PREF_IND
   type: TYPE_NORMAL
 - en: ''
+  id: totrans-74
   prefs:
   - PREF_BQ
   - PREF_IND
   type: TYPE_NORMAL
 - en: ''
+  id: totrans-75
   prefs:
   - PREF_BQ
   - PREF_IND
   type: TYPE_NORMAL
 - en: ''
+  id: totrans-76
   prefs:
   - PREF_BQ
   - PREF_IND
   type: TYPE_NORMAL
 - en: 'There are multiple workers responsible for:'
+  id: totrans-77
   prefs:
   - PREF_BQ
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 有多个负责的工作人员：
 - en: ''
+  id: totrans-78
   prefs:
   - PREF_BQ
   - PREF_IND
   type: TYPE_NORMAL
 - en: ''
+  id: totrans-79
   prefs:
   - PREF_BQ
   - PREF_IND
   type: TYPE_NORMAL
 - en: ''
+  id: totrans-80
   prefs:
   - PREF_BQ
   - PREF_IND
   type: TYPE_NORMAL
 - en: ''
+  id: totrans-81
   prefs:
   - PREF_BQ
   - PREF_IND
   type: TYPE_NORMAL
 - en: ''
+  id: totrans-82
   prefs:
   - PREF_BQ
   - PREF_IND
   type: TYPE_NORMAL
 - en: Running the strategy with the bars and parameters provided by the server.
+  id: totrans-83
   prefs:
   - PREF_BQ
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 使用服务器提供的条形图和参数运行策略。
 - en: 'To illustrate this we’ll use a strategy known as [RSI2](http://stockcharts.com/school/doku.php?id=chart_school:trading_strategies:rsi2)
     which requires the following parameters:'
+  id: totrans-84
   prefs: []
   type: TYPE_NORMAL
+  zh: 为了说明这一点，我们将使用一个称为[RSI2](http://stockcharts.com/school/doku.php?id=chart_school:trading_strategies:rsi2)的策略，它需要以下参数：
 - en: An SMA period for trend identification. We’ll call this entrySMA and will range
     between 150 and 250.
+  id: totrans-85
   prefs:
   - PREF_BQ
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 用于趋势识别的SMA周期。我们将其称为entrySMA，范围在150到250之间。
 - en: A smaller SMA period for the exit point. We’ll call this exitSMA and will range
     between 5 and 15.
+  id: totrans-86
   prefs:
   - PREF_BQ
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 退出点使用较小的SMA周期。我们将其称为exitSMA，范围在5到15之间。
 - en: An RSI period for entering both short/long positions. We’ll call this rsiPeriod
     and will range between 2 and 10.
+  id: totrans-87
   prefs:
   - PREF_BQ
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 用于进入短头寸/多头头寸的RSI周期。我们将其称为rsiPeriod，范围在2到10之间。
 - en: An RSI oversold threshold for long position entry. We’ll call this overSoldThreshold
     and will range between 5 and 25.
+  id: totrans-88
   prefs:
   - PREF_BQ
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 用于多头头寸进入的RSI超卖阈值。我们将其称为overSoldThreshold，范围在5到25之间。
 - en: An RSI overbought threshold for short position entry. We’ll call this overBoughtThreshold
     and will range between 75 and 95.
+  id: totrans-89
   prefs:
   - PREF_BQ
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 用于短头寸进入的RSI超买阈值。我们将其称为overBoughtThreshold，范围在75到95之间。
 - en: If my math is ok, those are 4409559 different combinations.
+  id: totrans-90
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果我的数学没错的话，这些是4409559个不同的组合。
 - en: Testing this strategy for one set of parameters took me about 0.16 seconds.
     If I execute all the combinations serially it’ll take me about 8.5 days to evaluate
     all of them and find the best set of parameters. That is a long time, but if I
     can get ten 8-core computers to do the job then the total time will go down to
     about 2.5 hours.
+  id: totrans-91
   prefs: []
   type: TYPE_NORMAL
+  zh: 对于一个参数集测试该策略大约需要 0.16 秒。如果我串行执行所有组合，那么评估它们并找到最佳参数组合将需要大约 8.5 天的时间。那是一个很长的时间，但如果我可以让十台
+    8 核计算机来做这个工作，那么总时间将缩短到约 2.5 小时。
 - en: Long story short, **we need to go parallel**.
+  id: totrans-92
   prefs: []
   type: TYPE_NORMAL
+  zh: 长话短说，**我们需要并行化**。
 - en: 'Let’s start by downloading 3 years of daily bars for ‘IBM’:'
+  id: totrans-93
   prefs: []
   type: TYPE_NORMAL
+  zh: 让我们从下载“IBM”的 3 年每日柱开始：
 - en: '[PRE12]'
+  id: totrans-94
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE12]'
 - en: 'Save this code as rsi2.py:'
+  id: totrans-95
   prefs: []
   type: TYPE_NORMAL
+  zh: 将此代码保存为 rsi2.py：
 - en: '[PRE13]'
+  id: totrans-96
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE13]'
 - en: 'This is the server script:'
+  id: totrans-97
   prefs: []
   type: TYPE_NORMAL
+  zh: 这是服务器脚本：
 - en: '[PRE14]'
+  id: totrans-98
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE14]'
 - en: 'The server code is doing 3 things:'
+  id: totrans-99
   prefs: []
   type: TYPE_NORMAL
+  zh: 服务器代码正在做 3 件事：
 - en: Declaring a generator function that yields different parameter combinations
     for the strategy.
+  id: totrans-100
   prefs:
   - PREF_BQ
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 声明一个生成器函数，产生策略的不同参数组合。
 - en: Loading the feed with the CSV files we downloaded.
+  id: totrans-101
   prefs:
   - PREF_BQ
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 使用我们下载的 CSV 文件加载源数据。
 - en: Running the server that will wait for incoming connections on port 5000.
+  id: totrans-102
   prefs:
   - PREF_BQ
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 运行服务器，它将在端口 5000 上等待传入连接。
 - en: 'This is the worker script that uses the **pyalgotrade.optimizer.worker** module
     to run the strategy in parallel with the data supplied by the server:'
+  id: totrans-103
   prefs: []
   type: TYPE_NORMAL
+  zh: 这是工作脚本，使用 **pyalgotrade.optimizer.worker** 模块并行运行由服务器提供数据的策略：
 - en: '[PRE15]'
+  id: totrans-104
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE15]'
 - en: 'When you run the server and the client/s you’ll see something like this on
     the server console:'
+  id: totrans-105
   prefs: []
   type: TYPE_NORMAL
+  zh: 当你运行服务器和客户端时，你会在服务器控制台上看到类似这样的东西：
 - en: '[PRE16]'
+  id: totrans-106
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE16]'
 - en: 'and something like this on the worker/s console:'
+  id: totrans-107
   prefs: []
   type: TYPE_NORMAL
+  zh: 以及在工作节点控制台上看到类似这样的东西：
 - en: '[PRE17]'
+  id: totrans-108
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE17]'
 - en: Note that you should run **only one server and one or more workers**.
+  id: totrans-109
   prefs: []
   type: TYPE_NORMAL
+  zh: 请注意，你应该运行 **只有一个服务器和一个或多个工作节点**。
 - en: 'If you just want to run strategies in parallel in your own desktop you can
     take advantage of the **pyalgotrade.optimizer.local** module like this:'
+  id: totrans-110
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果你只想在自己的桌面上并行运行策略，你可以像这样利用 **pyalgotrade.optimizer.local** 模块：
 - en: '[PRE18]'
+  id: totrans-111
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE18]'
 - en: 'The code is doing 3 things:'
+  id: totrans-112
   prefs: []
   type: TYPE_NORMAL
+  zh: 该代码正在做 3 件事：
 - en: Declaring a generator function that yields different parameter combinations.
+  id: totrans-113
   prefs:
   - PREF_BQ
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 声明一个生成器函数，产生不同的参数组合。
 - en: Loading the feed with the CSV files we downloaded.
+  id: totrans-114
   prefs:
   - PREF_BQ
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 使用我们下载的 CSV 文件加载源数据。
 - en: Using the **pyalgotrade.optimizer.local** module to run the strategy in parallel
     and find the best result.
+  id: totrans-115
   prefs:
   - PREF_BQ
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 使用 **pyalgotrade.optimizer.local** 模块并行运行策略，找到最佳结果。
 - en: 'When you run this code you should see something like this:'
+  id: totrans-116
   prefs: []
   type: TYPE_NORMAL
+  zh: 当你运行此代码时，你应该看到类似这样的东西：
 - en: '[PRE19]'
+  id: totrans-117
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE19]'
 - en: Plotting
+  id: totrans-118
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 绘图
 - en: PyAlgoTrade makes it very easy to plot a strategy execution.
+  id: totrans-119
   prefs: []
   type: TYPE_NORMAL
+  zh: PyAlgoTrade 可以很容易地绘制策略执行。
 - en: 'Save this as sma_crossover.py:'
+  id: totrans-120
   prefs: []
   type: TYPE_NORMAL
+  zh: 将此保存为 sma_crossover.py：
 - en: '[PRE20]'
+  id: totrans-121
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE20]'
 - en: 'and save this code to a different file:'
+  id: totrans-122
   prefs: []
   type: TYPE_NORMAL
+  zh: 并将此代码保存到不同的文件中：
 - en: '[PRE21]'
+  id: totrans-123
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE21]'
 - en: 'The code is doing 3 things:'
+  id: totrans-124
   prefs: []
   type: TYPE_NORMAL
+  zh: 该代码正在做 3 件事：
 - en: Loading the feed from a CSV file.
+  id: totrans-125
   prefs:
   - PREF_BQ
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 从 CSV 文件加载源数据。
 - en: Running the strategy with the bars supplied by the feed and a StrategyPlotter
     attached.
+  id: totrans-126
   prefs:
   - PREF_BQ
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 使用由 feed 提供的柱和附加了 StrategyPlotter 的策略运行。
 - en: Plotting the strategy.
+  id: totrans-127
   prefs:
   - PREF_BQ
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 绘制策略。
 - en: 'This is what the plot looks like:'
+  id: totrans-128
   prefs: []
   type: TYPE_NORMAL
+  zh: 这就是绘图的样子：
 - en: '![_images/tutorial-5.png](../Images/adf109cd9cbc1bdf84dfc928d2c438d1.png)'
+  id: totrans-129
   prefs: []
   type: TYPE_IMG
+  zh: '![_images/tutorial-5.png](../Images/adf109cd9cbc1bdf84dfc928d2c438d1.png)'
 - en: 'I hope you enjoyed this quick introduction. I’d recommend you to download PyAlgoTrade
     here: [http://gbeced.github.io/pyalgotrade/downloads/index.html](http://gbeced.github.io/pyalgotrade/downloads/index.html)
     and get started writing you own strategies.'
+  id: totrans-130
   prefs: []
   type: TYPE_NORMAL
+  zh: 希望您喜欢这个快速介绍。我建议您在这里下载 PyAlgoTrade：[http://gbeced.github.io/pyalgotrade/downloads/index.html](http://gbeced.github.io/pyalgotrade/downloads/index.html)，并开始编写您自己的策略。
 - en: You can also find more examples in the [*Sample strategies*](samples.html#samples-label)
     section.
+  id: totrans-131
   prefs: []
   type: TYPE_NORMAL
+  zh: 您也可以在[*示例策略*](samples.html#samples-label) 部分找到更多示例。
 - en: '[Table Of Contents](index.html)'
+  id: totrans-132
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: '[目录](index.html)'
 - en: '[Tutorial](#)'
+  id: totrans-133
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[教程](#)'
 - en: '[Trading](#trading)'
+  id: totrans-134
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[交易](#trading)'
 - en: '[Optimizing](#optimizing)'
+  id: totrans-135
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[优化](#optimizing)'
 - en: '[Plotting](#plotting)'
+  id: totrans-136
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[绘图](#plotting)'
 - en: Previous topic
+  id: totrans-137
   prefs:
   - PREF_H4
   type: TYPE_NORMAL
+  zh: 上一个主题
 - en: '[Introduction](intro.html "previous chapter")'
+  id: totrans-138
   prefs: []
   type: TYPE_NORMAL
+  zh: '[介绍](intro.html "上一章")'
 - en: Next topic
+  id: totrans-139
   prefs:
   - PREF_H4
   type: TYPE_NORMAL
+  zh: 下一个主题
 - en: '[Documentation for the code](code.html "next chapter")'
+  id: totrans-140
   prefs: []
   type: TYPE_NORMAL
+  zh: '[代码文档](code.html "下一章")'
 - en: This Page
+  id: totrans-141
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 本页
 - en: '[Show Source](_sources/tutorial.txt)'
+  id: totrans-142
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[显示源代码](_sources/tutorial.txt)'
 - en: Quick search
+  id: totrans-143
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 快速搜索
 - en: Enter search terms or a module, class or function name.
+  id: totrans-144
   prefs: []
   type: TYPE_NORMAL
+  zh: 输入搜索词或模块、类或函数名称。
 - en: Navigation
+  id: totrans-145
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 导航
 - en: '[index](genindex.html "General Index")'
+  id: totrans-146
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[索引](genindex.html "通用索引")'
 - en: '[modules](py-modindex.html "Python Module Index") |'
+  id: totrans-147
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[模块](py-modindex.html "Python 模块索引") |'
 - en: '[next](code.html "Documentation for the code") |'
+  id: totrans-148
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[下一个](code.html "代码文档") |'
 - en: '[previous](intro.html "Introduction") |'
+  id: totrans-149
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[上一个](intro.html "介绍") |'
 - en: '[PyAlgoTrade 0.20 documentation](index.html) »'
+  id: totrans-150
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[PyAlgoTrade 0.20 文档](index.html) »'

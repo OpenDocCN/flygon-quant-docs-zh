@@ -1,208 +1,304 @@
 - en: Documentation for the code
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 代码文档
 - en: 原文：[https://gbeced.github.io/pyalgotrade/docs/v0.20/html/code.html](https://gbeced.github.io/pyalgotrade/docs/v0.20/html/code.html)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://gbeced.github.io/pyalgotrade/docs/v0.20/html/code.html](https://gbeced.github.io/pyalgotrade/docs/v0.20/html/code.html)
 - en: 'Contents:'
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: 目录：
 - en: '[bar – Instrument prices](bar.html)'
+  id: totrans-3
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[K 线 – 工具价格](bar.html)'
 - en: '[dataseries – Basic dataseries classes](dataseries.html)'
+  id: totrans-4
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[数据序列 – 基本数据序列类](dataseries.html)'
 - en: '[feed – Basic feeds](feed.html)'
+  id: totrans-5
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[数据源 – 基本数据源](feed.html)'
 - en: '[CSV support](feed.html#module-pyalgotrade.feed.csvfeed)'
+  id: totrans-6
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[CSV 支持](feed.html#module-pyalgotrade.feed.csvfeed)'
 - en: '[CSV support Example](feed.html#csv-support-example)'
+  id: totrans-7
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[CSV 支持示例](feed.html#csv-support-example)'
 - en: '[barfeed – Bar providers](barfeed.html)'
+  id: totrans-8
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[K 线数据源 – K 线提供者](barfeed.html)'
 - en: '[CSV](barfeed.html#module-pyalgotrade.barfeed.csvfeed)'
+  id: totrans-9
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[CSV](barfeed.html#module-pyalgotrade.barfeed.csvfeed)'
 - en: '[Yahoo! Finance](barfeed.html#module-pyalgotrade.barfeed.yahoofeed)'
+  id: totrans-10
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[Yahoo! Finance](barfeed.html#module-pyalgotrade.barfeed.yahoofeed)'
 - en: '[Google Finance](barfeed.html#module-pyalgotrade.barfeed.googlefeed)'
+  id: totrans-11
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[Google Finance](barfeed.html#module-pyalgotrade.barfeed.googlefeed)'
 - en: '[Quandl](barfeed.html#module-pyalgotrade.barfeed.quandlfeed)'
+  id: totrans-12
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[Quandl](barfeed.html#module-pyalgotrade.barfeed.quandlfeed)'
 - en: '[Ninja Trader](barfeed.html#module-pyalgotrade.barfeed.ninjatraderfeed)'
+  id: totrans-13
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[Ninja Trader](barfeed.html#module-pyalgotrade.barfeed.ninjatraderfeed)'
 - en: '[technical – Technical indicators](technical.html)'
+  id: totrans-14
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[技术指标 – 技术指标](technical.html)'
 - en: '[Example](technical.html#example)'
+  id: totrans-15
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[示例](technical.html#example)'
 - en: '[Moving Averages](technical.html#module-pyalgotrade.technical.ma)'
+  id: totrans-16
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[移动平均线](technical.html#module-pyalgotrade.technical.ma)'
 - en: '[Momentum Indicators](technical.html#module-pyalgotrade.technical.macd)'
+  id: totrans-17
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[动量指标](technical.html#module-pyalgotrade.technical.macd)'
 - en: '[Other Indicators](technical.html#module-pyalgotrade.technical.atr)'
+  id: totrans-18
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[其他指标](technical.html#module-pyalgotrade.technical.atr)'
 - en: '[broker – Order management classes](broker.html)'
+  id: totrans-19
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[经纪人 – 订单管理类](broker.html)'
 - en: '[Base module and classes](broker.html#module-pyalgotrade.broker)'
+  id: totrans-20
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[基础模块和类](broker.html#module-pyalgotrade.broker)'
 - en: '[Backtesting module and classes](broker.html#module-pyalgotrade.broker.backtesting)'
+  id: totrans-21
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[回测模块和类](broker.html#module-pyalgotrade.broker.backtesting)'
 - en: '[strategy – Basic strategy classes](strategy.html)'
+  id: totrans-22
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[策略 – 基本策略类](strategy.html)'
 - en: '[Strategy](strategy.html#module-pyalgotrade.strategy)'
+  id: totrans-23
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[策略](strategy.html#module-pyalgotrade.strategy)'
 - en: '[Position](strategy.html#module-pyalgotrade.strategy.position)'
+  id: totrans-24
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[持仓](strategy.html#module-pyalgotrade.strategy.position)'
 - en: '[stratanalyzer – Strategy analyzers](stratanalyzer.html)'
+  id: totrans-25
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[策略分析器 – 策略分析器](stratanalyzer.html)'
 - en: '[Returns](stratanalyzer.html#module-pyalgotrade.stratanalyzer.returns)'
+  id: totrans-26
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[收益率](stratanalyzer.html#module-pyalgotrade.stratanalyzer.returns)'
 - en: '[Sharpe Ratio](stratanalyzer.html#module-pyalgotrade.stratanalyzer.sharpe)'
+  id: totrans-27
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[夏普比率](stratanalyzer.html#module-pyalgotrade.stratanalyzer.sharpe)'
 - en: '[DrawDown](stratanalyzer.html#module-pyalgotrade.stratanalyzer.drawdown)'
+  id: totrans-28
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[回撤](stratanalyzer.html#module-pyalgotrade.stratanalyzer.drawdown)'
 - en: '[Trades](stratanalyzer.html#module-pyalgotrade.stratanalyzer.trades)'
+  id: totrans-29
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[交易](stratanalyzer.html#module-pyalgotrade.stratanalyzer.trades)'
 - en: '[Example](stratanalyzer.html#example)'
+  id: totrans-30
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[示例](stratanalyzer.html#example)'
 - en: '[plotter – Strategy plotter](plotter.html)'
+  id: totrans-31
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[绘图器 – 策略绘图器](plotter.html)'
 - en: '[optimizer – Parallel optimizers](optimizer.html)'
+  id: totrans-32
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[优化器 – 并行优化器](optimizer.html)'
 - en: '[marketsession – Market sessions](marketsession.html)'
+  id: totrans-33
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[市场交易时段](marketsession.html)'
 - en: Previous topic
+  id: totrans-34
   prefs:
   - PREF_H4
   type: TYPE_NORMAL
+  zh: 上一个主题
 - en: '[Tutorial](tutorial.html "previous chapter")'
+  id: totrans-35
   prefs: []
   type: TYPE_NORMAL
+  zh: '[教程](tutorial.html "上一章节")'
 - en: Next topic
+  id: totrans-36
   prefs:
   - PREF_H4
   type: TYPE_NORMAL
+  zh: 下一个主题
 - en: '[bar – Instrument prices](bar.html "next chapter")'
+  id: totrans-37
   prefs: []
   type: TYPE_NORMAL
+  zh: '[K 线 – 工具价格](bar.html "下一章节")'
 - en: This Page
+  id: totrans-38
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 此页面
 - en: '[Show Source](_sources/code.txt)'
+  id: totrans-39
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[显示源代码](_sources/code.txt)'
 - en: Quick search
+  id: totrans-40
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 快速搜索
 - en: Enter search terms or a module, class or function name.
+  id: totrans-41
   prefs: []
   type: TYPE_NORMAL
+  zh: 输入搜索词或模块、类或函数名称。
 - en: Navigation
+  id: totrans-42
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 导航
 - en: '[index](genindex.html "General Index")'
+  id: totrans-43
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[索引](genindex.html "总索引")'
 - en: '[modules](py-modindex.html "Python Module Index") |'
+  id: totrans-44
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[模块](py-modindex.html "Python 模块索引") |'
 - en: '[next](bar.html "bar – Instrument prices") |'
+  id: totrans-45
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[下一个](bar.html "K 线 – 工具价格") |'
 - en: '[previous](tutorial.html "Tutorial") |'
+  id: totrans-46
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[上一个](tutorial.html "教程") |'
 - en: '[PyAlgoTrade 0.20 documentation](index.html) »'
+  id: totrans-47
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[PyAlgoTrade 0.20 文档](index.html) »'

@@ -1,229 +1,368 @@
 - en: bar – Instrument prices
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 条形 – 工具价格
 - en: 原文：[https://gbeced.github.io/pyalgotrade/docs/v0.20/html/bar.html](https://gbeced.github.io/pyalgotrade/docs/v0.20/html/bar.html)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://gbeced.github.io/pyalgotrade/docs/v0.20/html/bar.html](https://gbeced.github.io/pyalgotrade/docs/v0.20/html/bar.html)
 - en: '*class* `pyalgotrade.bar.``Frequency`'
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: '*class* `pyalgotrade.bar.``Frequency`'
 - en: 'Bases: `object`'
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: '基类: `object`'
 - en: 'Enum like class for bar frequencies. Valid values are:'
+  id: totrans-4
   prefs: []
   type: TYPE_NORMAL
+  zh: 枚举类似于条形频率。有效值为：
 - en: '**Frequency.TRADE**: The bar represents a single trade.'
+  id: totrans-5
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**Frequency.TRADE**: 每个条形代表一次交易。'
 - en: '**Frequency.SECOND**: The bar summarizes the trading activity during 1 second.'
+  id: totrans-6
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**Frequency.SECOND**: 每个条形总结了一秒的交易活动。'
 - en: '**Frequency.MINUTE**: The bar summarizes the trading activity during 1 minute.'
+  id: totrans-7
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**Frequency.MINUTE**: 每个条形总结了一分钟的交易活动。'
 - en: '**Frequency.HOUR**: The bar summarizes the trading activity during 1 hour.'
+  id: totrans-8
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**Frequency.HOUR**: 每个条形总结了一小时的交易活动。'
 - en: '**Frequency.DAY**: The bar summarizes the trading activity during 1 day.'
+  id: totrans-9
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**Frequency.DAY**: 每个条形总结了一天的交易活动。'
 - en: '**Frequency.WEEK**: The bar summarizes the trading activity during 1 week.'
+  id: totrans-10
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**Frequency.WEEK**: 每个条形总结了一周的交易活动。'
 - en: '**Frequency.MONTH**: The bar summarizes the trading activity during 1 month.'
+  id: totrans-11
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**Frequency.MONTH**: 每个条形总结了一月的交易活动。'
 - en: '*class* `pyalgotrade.bar.``Bar`'
+  id: totrans-12
   prefs: []
   type: TYPE_NORMAL
+  zh: '*class* `pyalgotrade.bar.``Bar`'
 - en: 'Bases: `object`'
+  id: totrans-13
   prefs: []
   type: TYPE_NORMAL
+  zh: '基类: `object`'
 - en: A Bar is a summary of the trading activity for a security in a given period.
+  id: totrans-14
   prefs: []
   type: TYPE_NORMAL
+  zh: 条形是给定期间内安全性交易活动的摘要。
 - en: Note
+  id: totrans-15
   prefs: []
   type: TYPE_NORMAL
+  zh: 注意
 - en: This is a base class and should not be used directly.
+  id: totrans-16
   prefs: []
   type: TYPE_NORMAL
+  zh: 这是一个基类，不应直接使用。
 - en: '`getDateTime`()'
+  id: totrans-17
   prefs: []
   type: TYPE_NORMAL
+  zh: '`getDateTime`()'
 - en: Returns the `datetime.datetime`.
+  id: totrans-18
   prefs: []
   type: TYPE_NORMAL
+  zh: 返回`datetime.datetime`。
 - en: '`getOpen`(*adjusted=False*)'
+  id: totrans-19
   prefs: []
   type: TYPE_NORMAL
+  zh: '`getOpen`(*adjusted=False*)'
 - en: Returns the opening price.
+  id: totrans-20
   prefs: []
   type: TYPE_NORMAL
+  zh: 返回开盘价。
 - en: '`getHigh`(*adjusted=False*)'
+  id: totrans-21
   prefs: []
   type: TYPE_NORMAL
+  zh: '`getHigh`(*adjusted=False*)'
 - en: Returns the highest price.
+  id: totrans-22
   prefs: []
   type: TYPE_NORMAL
+  zh: 返回最高价格。
 - en: '`getLow`(*adjusted=False*)'
+  id: totrans-23
   prefs: []
   type: TYPE_NORMAL
+  zh: '`getLow`(*adjusted=False*)'
 - en: Returns the lowest price.
+  id: totrans-24
   prefs: []
   type: TYPE_NORMAL
+  zh: 返回最低价格。
 - en: '`getClose`(*adjusted=False*)'
+  id: totrans-25
   prefs: []
   type: TYPE_NORMAL
+  zh: '`getClose`(*adjusted=False*)'
 - en: Returns the closing price.
+  id: totrans-26
   prefs: []
   type: TYPE_NORMAL
+  zh: 返回收盘价。
 - en: '`getVolume`()'
+  id: totrans-27
   prefs: []
   type: TYPE_NORMAL
+  zh: '`getVolume`()'
 - en: Returns the volume.
+  id: totrans-28
   prefs: []
   type: TYPE_NORMAL
+  zh: 返回成交量。
 - en: '`getAdjClose`()'
+  id: totrans-29
   prefs: []
   type: TYPE_NORMAL
+  zh: '`getAdjClose`()'
 - en: Returns the adjusted closing price.
+  id: totrans-30
   prefs: []
   type: TYPE_NORMAL
+  zh: 返回调整后的收盘价。
 - en: '`getFrequency`()'
+  id: totrans-31
   prefs: []
   type: TYPE_NORMAL
+  zh: '`getFrequency`()'
 - en: The bar’s period.
+  id: totrans-32
   prefs: []
   type: TYPE_NORMAL
+  zh: 条形的周期。
 - en: '`getTypicalPrice`()'
+  id: totrans-33
   prefs: []
   type: TYPE_NORMAL
+  zh: '`getTypicalPrice`()'
 - en: Returns the typical price.
+  id: totrans-34
   prefs: []
   type: TYPE_NORMAL
+  zh: 返回典型价格。
 - en: '`getPrice`()'
+  id: totrans-35
   prefs: []
   type: TYPE_NORMAL
+  zh: '`getPrice`()'
 - en: Returns the closing or adjusted closing price.
+  id: totrans-36
   prefs: []
   type: TYPE_NORMAL
+  zh: 返回收盘或调整后的收盘价。
 - en: '*class* `pyalgotrade.bar.``Bars`(*barDict*)'
+  id: totrans-37
   prefs: []
   type: TYPE_NORMAL
+  zh: '*class* `pyalgotrade.bar.``Bars`(*barDict*)'
 - en: 'Bases: `object`'
+  id: totrans-38
   prefs: []
   type: TYPE_NORMAL
+  zh: '基类: `object`'
 - en: A group of [`Bar`](#pyalgotrade.bar.Bar "pyalgotrade.bar.Bar") objects.
+  id: totrans-39
   prefs: []
   type: TYPE_NORMAL
+  zh: 一组[`Bar`](#pyalgotrade.bar.Bar "pyalgotrade.bar.Bar")对象。
 - en: '| Parameters: | **barDict** (*map.*) – A map of instrument to [`Bar`](#pyalgotrade.bar.Bar
     "pyalgotrade.bar.Bar") objects. |'
+  id: totrans-40
   prefs: []
   type: TYPE_TB
+  zh: '| 参数: | **barDict** (*map.*) – 工具到[`Bar`](#pyalgotrade.bar.Bar "pyalgotrade.bar.Bar")对象的映射。
+    |'
 - en: Note
+  id: totrans-41
   prefs: []
   type: TYPE_NORMAL
+  zh: 注意
 - en: All bars must have the same datetime.
+  id: totrans-42
   prefs: []
   type: TYPE_NORMAL
+  zh: 所有条形必须具有相同的日期时间。
 - en: '`__getitem__`(*instrument*)'
+  id: totrans-43
   prefs: []
   type: TYPE_NORMAL
+  zh: '`__getitem__`(*instrument*)'
 - en: Returns the [`pyalgotrade.bar.Bar`](#pyalgotrade.bar.Bar "pyalgotrade.bar.Bar")
     for the given instrument. If the instrument is not found an exception is raised.
+  id: totrans-44
   prefs: []
   type: TYPE_NORMAL
+  zh: 返回给定工具的[`pyalgotrade.bar.Bar`](#pyalgotrade.bar.Bar "pyalgotrade.bar.Bar")。如果未找到该工具，则会引发异常。
 - en: '`__contains__`(*instrument*)'
+  id: totrans-45
   prefs: []
   type: TYPE_NORMAL
+  zh: '`__contains__`(*instrument*)'
 - en: Returns True if a [`pyalgotrade.bar.Bar`](#pyalgotrade.bar.Bar "pyalgotrade.bar.Bar")
     for the given instrument is available.
+  id: totrans-46
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果给定工具的[`pyalgotrade.bar.Bar`](#pyalgotrade.bar.Bar "pyalgotrade.bar.Bar")可用，则返回
+    True。
 - en: '`getInstruments`()'
+  id: totrans-47
   prefs: []
   type: TYPE_NORMAL
+  zh: '`getInstruments`()'
 - en: Returns the instrument symbols.
+  id: totrans-48
   prefs: []
   type: TYPE_NORMAL
+  zh: 返回工具符号。
 - en: '`getDateTime`()'
+  id: totrans-49
   prefs: []
   type: TYPE_NORMAL
+  zh: '`getDateTime`()'
 - en: Returns the `datetime.datetime` for this set of bars.
+  id: totrans-50
   prefs: []
   type: TYPE_NORMAL
+  zh: 返回此条形的`datetime.datetime`。
 - en: '`getBar`(*instrument*)'
+  id: totrans-51
   prefs: []
   type: TYPE_NORMAL
+  zh: '`getBar`(*instrument*)'
 - en: Returns the [`pyalgotrade.bar.Bar`](#pyalgotrade.bar.Bar "pyalgotrade.bar.Bar")
     for the given instrument or None if the instrument is not found.
+  id: totrans-52
   prefs: []
   type: TYPE_NORMAL
+  zh: 返回给定工具的[`pyalgotrade.bar.Bar`](#pyalgotrade.bar.Bar "pyalgotrade.bar.Bar")或者如果未找到该工具则返回
+    None。
 - en: Previous topic
+  id: totrans-53
   prefs:
   - PREF_H4
   type: TYPE_NORMAL
+  zh: 上一个主题
 - en: '[Documentation for the code](code.html "previous chapter")'
+  id: totrans-54
   prefs: []
   type: TYPE_NORMAL
+  zh: '[代码文档](code.html "上一章节")'
 - en: Next topic
+  id: totrans-55
   prefs:
   - PREF_H4
   type: TYPE_NORMAL
+  zh: 下一个主题
 - en: '[dataseries – Basic dataseries classes](dataseries.html "next chapter")'
+  id: totrans-56
   prefs: []
   type: TYPE_NORMAL
+  zh: '[dataseries – 基本数据系列类](dataseries.html "下一章节")'
 - en: This Page
+  id: totrans-57
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 本页
 - en: '[Show Source](_sources/bar.txt)'
+  id: totrans-58
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[显示源码](_sources/bar.txt)'
 - en: Quick search
+  id: totrans-59
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 快速搜索
 - en: Enter search terms or a module, class or function name.
+  id: totrans-60
   prefs: []
   type: TYPE_NORMAL
+  zh: 输入搜索词或模块、类或函数名称。
 - en: Navigation
+  id: totrans-61
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 导航
 - en: '[index](genindex.html "General Index")'
+  id: totrans-62
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[索引](genindex.html "通用索引")'
 - en: '[modules](py-modindex.html "Python Module Index") |'
+  id: totrans-63
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[模块](py-modindex.html "Python 模块索引") |'
 - en: '[next](dataseries.html "dataseries – Basic dataseries classes") |'
+  id: totrans-64
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[下一个](dataseries.html "dataseries – 基本数据系列类") |'
 - en: '[previous](code.html "Documentation for the code") |'
+  id: totrans-65
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[前一个](code.html "代码文档") |'
 - en: '[PyAlgoTrade 0.20 documentation](index.html) »'
+  id: totrans-66
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[PyAlgoTrade 0.20 文档](index.html) »'
 - en: '[Documentation for the code](code.html) »'
+  id: totrans-67
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[代码文档](code.html) »'
