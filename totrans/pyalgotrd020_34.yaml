@@ -1,121 +1,185 @@
 - en: RSI2
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: RSI2
 - en: 原文：[https://gbeced.github.io/pyalgotrade/docs/v0.20/html/sample_rsi2.html](https://gbeced.github.io/pyalgotrade/docs/v0.20/html/sample_rsi2.html)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文链接：[https://gbeced.github.io/pyalgotrade/docs/v0.20/html/sample_rsi2.html](https://gbeced.github.io/pyalgotrade/docs/v0.20/html/sample_rsi2.html)
 - en: 'This example is based on a strategy known as RSI2 ([http://stockcharts.com/school/doku.php?id=chart_school:trading_strategies:rsi2](http://stockcharts.com/school/doku.php?id=chart_school:trading_strategies:rsi2))
     which requires the following parameters:'
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: 此示例基于一种称为RSI2的策略([http://stockcharts.com/school/doku.php?id=chart_school:trading_strategies:rsi2](http://stockcharts.com/school/doku.php?id=chart_school:trading_strategies:rsi2))，需要以下参数：
 - en: An SMA period for trend identification. We’ll call this entrySMA.
+  id: totrans-3
   prefs:
   - PREF_BQ
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 用于趋势识别的SMA周期。我们将其称为entrySMA。
 - en: A smaller SMA period for the exit point. We’ll call this exitSMA.
+  id: totrans-4
   prefs:
   - PREF_BQ
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 用于退出点的较小SMA周期。我们将其称为exitSMA。
 - en: An RSI period for entering both short/long positions. We’ll call this rsiPeriod.
+  id: totrans-5
   prefs:
   - PREF_BQ
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 一个用于进入多空仓位的RSI期间。我们将其称为rsiPeriod。
 - en: An RSI oversold threshold for long position entry. We’ll call this overSoldThreshold.
+  id: totrans-6
   prefs:
   - PREF_BQ
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 一个用于多仓位进入的RSI超卖阈值。我们将其称为overSoldThreshold。
 - en: An RSI overbought threshold for short position entry. We’ll call this overBoughtThreshold.
+  id: totrans-7
   prefs:
   - PREF_BQ
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 用于空仓位进入的RSI超买阈值。我们将其称为overBoughtThreshold。
 - en: 'Save this code as rsi2.py:'
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: 将此代码保存为rsi2.py：
 - en: '[PRE0]'
+  id: totrans-9
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: 'and use the following code to execute the strategy:'
+  id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: 并使用以下代码执行策略：
 - en: '[PRE1]'
+  id: totrans-11
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE1]'
 - en: 'This is what the output should look like:'
+  id: totrans-12
   prefs: []
   type: TYPE_NORMAL
+  zh: 输出应该如下所示：
 - en: '[PRE2]'
+  id: totrans-13
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE2]'
 - en: 'and this is what the plot should look like:'
+  id: totrans-14
   prefs: []
   type: TYPE_NORMAL
+  zh: 并且图表应该如下所示：
 - en: '![_images/rsi2_sample.png](../Images/05a62b8912ec5b6e062a400eafc6486f.png)'
+  id: totrans-15
   prefs: []
   type: TYPE_IMG
+  zh: '![_images/rsi2_sample.png](../Images/05a62b8912ec5b6e062a400eafc6486f.png)'
 - en: You can get better returns by tunning the different parameters.
+  id: totrans-16
   prefs: []
   type: TYPE_NORMAL
+  zh: 通过调整不同参数，您可以获得更好的回报。
 - en: Previous topic
+  id: totrans-17
   prefs:
   - PREF_H4
   type: TYPE_NORMAL
+  zh: 上一个话题
 - en: '[Bollinger Bands](sample_bbands.html "previous chapter")'
+  id: totrans-18
   prefs: []
   type: TYPE_NORMAL
+  zh: '[布林带](sample_bbands.html "上一章节")'
 - en: Next topic
+  id: totrans-19
   prefs:
   - PREF_H4
   type: TYPE_NORMAL
+  zh: 下一个话题
 - en: '[Quandl integration](sample_quandl.html "next chapter")'
+  id: totrans-20
   prefs: []
   type: TYPE_NORMAL
+  zh: '[Quandl集成](sample_quandl.html "下一章节")'
 - en: This Page
+  id: totrans-21
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 本页
 - en: '[Show Source](_sources/sample_rsi2.txt)'
+  id: totrans-22
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[显示源代码](_sources/sample_rsi2.txt)'
 - en: Quick search
+  id: totrans-23
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 快速搜索
 - en: Enter search terms or a module, class or function name.
+  id: totrans-24
   prefs: []
   type: TYPE_NORMAL
+  zh: 输入搜索词或模块、类或函数名称。
 - en: Navigation
+  id: totrans-25
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 导航
 - en: '[index](genindex.html "General Index")'
+  id: totrans-26
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[索引](genindex.html "总目录")'
 - en: '[modules](py-modindex.html "Python Module Index") |'
+  id: totrans-27
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[模块](py-modindex.html "Python模块索引") |'
 - en: '[next](sample_quandl.html "Quandl integration") |'
+  id: totrans-28
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[下一章节](sample_quandl.html "Quandl集成") |'
 - en: '[previous](sample_bbands.html "Bollinger Bands") |'
+  id: totrans-29
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[上一章节](sample_bbands.html "布林带") |'
 - en: '[PyAlgoTrade 0.20 documentation](index.html) »'
+  id: totrans-30
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[PyAlgoTrade 0.20文档](index.html) »'
 - en: '[Sample strategies](samples.html) »'
+  id: totrans-31
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[示例策略](samples.html) »'

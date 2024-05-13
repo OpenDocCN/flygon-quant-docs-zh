@@ -1,93 +1,143 @@
 - en: Bollinger Bands
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 布林带
 - en: 原文：[https://gbeced.github.io/pyalgotrade/docs/v0.20/html/sample_bbands.html](https://gbeced.github.io/pyalgotrade/docs/v0.20/html/sample_bbands.html)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://gbeced.github.io/pyalgotrade/docs/v0.20/html/sample_bbands.html](https://gbeced.github.io/pyalgotrade/docs/v0.20/html/sample_bbands.html)
 - en: 'This example is based on:'
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: 此示例基于：
 - en: '[http://www.investopedia.com/articles/trading/07/bollinger.asp](http://www.investopedia.com/articles/trading/07/bollinger.asp)'
+  id: totrans-3
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[http://www.investopedia.com/articles/trading/07/bollinger.asp](http://www.investopedia.com/articles/trading/07/bollinger.asp)'
 - en: '[PRE0]'
+  id: totrans-4
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: 'this is what the output should look like:'
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: 这就是输出的样子：
 - en: '[PRE1]'
+  id: totrans-6
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE1]'
 - en: 'and this is what the plot should look like:'
+  id: totrans-7
   prefs: []
   type: TYPE_NORMAL
+  zh: 这就是图表的样子：
 - en: '![_images/bbands.png](../Images/944149bd4e229629875693b273c43376.png)'
+  id: totrans-8
   prefs: []
   type: TYPE_IMG
+  zh: '![_images/bbands.png](../Images/944149bd4e229629875693b273c43376.png)'
 - en: You can get better returns by tunning the Bollinger Bands period as well as
     the entry and exit points.
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: 通过调整布林带的周期以及进出点，您可以获得更好的回报。
 - en: Previous topic
+  id: totrans-10
   prefs:
   - PREF_H4
   type: TYPE_NORMAL
+  zh: 上一个主题
 - en: '[Ernie Chan’s Gold vs. Gold Miners](sample_statarb_erniechan.html "previous
     chapter")'
+  id: totrans-11
   prefs: []
   type: TYPE_NORMAL
+  zh: '[陈启发的黄金对比黄金矿工](sample_statarb_erniechan.html "上一章")'
 - en: Next topic
+  id: totrans-12
   prefs:
   - PREF_H4
   type: TYPE_NORMAL
+  zh: 下一个主题
 - en: '[RSI2](sample_rsi2.html "next chapter")'
+  id: totrans-13
   prefs: []
   type: TYPE_NORMAL
+  zh: '[RSI2](sample_rsi2.html "下一章")'
 - en: This Page
+  id: totrans-14
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 此页面
 - en: '[Show Source](_sources/sample_bbands.txt)'
+  id: totrans-15
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[显示源代码](_sources/sample_bbands.txt)'
 - en: Quick search
+  id: totrans-16
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 快速搜索
 - en: Enter search terms or a module, class or function name.
+  id: totrans-17
   prefs: []
   type: TYPE_NORMAL
+  zh: 输入搜索词或模块、类或函数名称。
 - en: Navigation
+  id: totrans-18
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 导航
 - en: '[index](genindex.html "General Index")'
+  id: totrans-19
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[index](genindex.html "通用索引")'
 - en: '[modules](py-modindex.html "Python Module Index") |'
+  id: totrans-20
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[模块](py-modindex.html "Python 模块索引") |'
 - en: '[next](sample_rsi2.html "RSI2") |'
+  id: totrans-21
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[下一章](sample_rsi2.html "RSI2") |'
 - en: '[previous](sample_statarb_erniechan.html "Ernie Chan’s Gold vs. Gold Miners")
     |'
+  id: totrans-22
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[上一章](sample_statarb_erniechan.html "陈启发的黄金对比黄金矿工") |'
 - en: '[PyAlgoTrade 0.20 documentation](index.html) »'
+  id: totrans-23
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[PyAlgoTrade 0.20 文档](index.html) »'
 - en: '[Sample strategies](samples.html) »'
+  id: totrans-24
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[示例策略](samples.html) »'
