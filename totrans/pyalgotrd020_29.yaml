@@ -1,0 +1,86 @@
+- en: VWAP Momentum Trade
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://gbeced.github.io/pyalgotrade/docs/v0.20/html/sample_vwap_momentum.html](https://gbeced.github.io/pyalgotrade/docs/v0.20/html/sample_vwap_momentum.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: This example is based on [Momentum Trade](https://www.quantopian.com/posts/momentum-trade)
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'this is what the output should look like:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'and this is what the plot should look like:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![_images/vwap_momentum.png](../Images/4f3180a40c8d9d45bc38ecbf00f4e37f.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: You can get better returns by tunning the VWAP and threshold parameters.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Previous topic
+  prefs:
+  - PREF_H4
+  type: TYPE_NORMAL
+- en: '[Sample strategies](samples.html "previous chapter")'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Next topic
+  prefs:
+  - PREF_H4
+  type: TYPE_NORMAL
+- en: '[SMA Crossover](sample_sma_crossover.html "next chapter")'
+  prefs: []
+  type: TYPE_NORMAL
+- en: This Page
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Show Source](_sources/sample_vwap_momentum.txt)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Quick search
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Enter search terms or a module, class or function name.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Navigation
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[index](genindex.html "General Index")'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[modules](py-modindex.html "Python Module Index") |'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[next](sample_sma_crossover.html "SMA Crossover") |'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[previous](samples.html "Sample strategies") |'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[PyAlgoTrade 0.20 documentation](index.html) »'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Sample strategies](samples.html) »'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

@@ -1,0 +1,297 @@
+- en: plotter – Strategy plotter
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://gbeced.github.io/pyalgotrade/docs/v0.20/html/plotter.html](https://gbeced.github.io/pyalgotrade/docs/v0.20/html/plotter.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '*class* `pyalgotrade.plotter.``Subplot`'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Bases: `object`'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`addCallback`(*label*, *callback*, *defaultClass=<class ''pyalgotrade.plotter.LineMarker''>*)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Add a callback that will be called on each bar.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '| Parameters: |'
+  prefs: []
+  type: TYPE_TB
+- en: '**label** (*string.*) – A name for the series values.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**callback** – A function that receives a [`pyalgotrade.bar.Bars`](bar.html#pyalgotrade.bar.Bars
+    "pyalgotrade.bar.Bars") instance as a parameter and returns a number or None.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '|'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`addDataSeries`(*label*, *dataSeries*, *defaultClass=<class ''pyalgotrade.plotter.LineMarker''>*)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Add a DataSeries to the subplot.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '| Parameters: |'
+  prefs: []
+  type: TYPE_TB
+- en: '**label** (*string.*) – A name for the DataSeries values.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**dataSeries** ([`pyalgotrade.dataseries.DataSeries`](dataseries.html#pyalgotrade.dataseries.DataSeries
+    "pyalgotrade.dataseries.DataSeries").) – The DataSeries to add.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '|'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`addLine`(*label*, *level*)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Add a horizontal line to the plot.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '| Parameters: |'
+  prefs: []
+  type: TYPE_TB
+- en: '**label** (*string.*) – A label.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**level** (*int/float.*) – The position for the line.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '|'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*class* `pyalgotrade.plotter.``InstrumentSubplot`(*instrument*, *plotBuySell*)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Bases: [`pyalgotrade.plotter.Subplot`](#pyalgotrade.plotter.Subplot "pyalgotrade.plotter.Subplot")'
+  prefs: []
+  type: TYPE_NORMAL
+- en: A Subplot responsible for plotting an instrument.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*class* `pyalgotrade.plotter.``StrategyPlotter`(*strat*, *plotAllInstruments=True*,
+    *plotBuySell=True*, *plotPortfolio=True*)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Bases: `object`'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Class responsible for plotting a strategy execution.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '| Parameters: |'
+  prefs: []
+  type: TYPE_TB
+- en: '**strat** ([`pyalgotrade.strategy.BaseStrategy`](strategy.html#pyalgotrade.strategy.BaseStrategy
+    "pyalgotrade.strategy.BaseStrategy").) – The strategy to plot.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**plotAllInstruments** (*boolean.*) – Set to True to get a subplot for each
+    instrument available.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**plotBuySell** (*boolean.*) – Set to True to get the buy/sell events plotted
+    for each instrument available.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**plotPortfolio** (*boolean.*) – Set to True to get the portfolio value (shares
+    + cash) plotted.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '|'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`buildFigureAndSubplots`(*fromDateTime=None*, *toDateTime=None*, *postPlotFun=<function
+    _post_plot_fun at 0x108da0b18>*)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Build a matplotlib.figure.Figure with the subplots. Must be called after running
+    the strategy.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '| Parameters: |'
+  prefs: []
+  type: TYPE_TB
+- en: '**fromDateTime** (*datetime.datetime*) – An optional starting datetime.datetime.
+    Everything before it won’t get plotted.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**toDateTime** (*datetime.datetime*) – An optional ending datetime.datetime.
+    Everything after it won’t get plotted.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '|'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '| Return type: | A 2 element tuple with matplotlib.figure.Figure and subplots.
+    |'
+  prefs: []
+  type: TYPE_TB
+- en: '`getInstrumentSubplot`(*instrument*)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Returns the InstrumentSubplot for a given instrument
+  prefs: []
+  type: TYPE_NORMAL
+- en: '| Return type: | [`InstrumentSubplot`](#pyalgotrade.plotter.InstrumentSubplot
+    "pyalgotrade.plotter.InstrumentSubplot"). |'
+  prefs: []
+  type: TYPE_TB
+- en: '`getOrCreateSubplot`(*name*)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Returns a Subplot by name. If the subplot doesn’t exist, it gets created.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '| Parameters: | **name** (*string.*) – The name of the Subplot to get or create.
+    |'
+  prefs: []
+  type: TYPE_TB
+- en: '| Return type: | [`Subplot`](#pyalgotrade.plotter.Subplot "pyalgotrade.plotter.Subplot").
+    |'
+  prefs: []
+  type: TYPE_TB
+- en: '`getPortfolioSubplot`()'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Returns the subplot where the portfolio values get plotted.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '| Return type: | [`Subplot`](#pyalgotrade.plotter.Subplot "pyalgotrade.plotter.Subplot").
+    |'
+  prefs: []
+  type: TYPE_TB
+- en: '`plot`(*fromDateTime=None*, *toDateTime=None*, *postPlotFun=<function _post_plot_fun
+    at 0x108da0b18>*)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Plot the strategy execution. Must be called after running the strategy.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '| Parameters: |'
+  prefs: []
+  type: TYPE_TB
+- en: '**fromDateTime** (*datetime.datetime*) – An optional starting datetime.datetime.
+    Everything before it won’t get plotted.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**toDateTime** (*datetime.datetime*) – An optional ending datetime.datetime.
+    Everything after it won’t get plotted.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '|'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`savePlot`(*filename*, *dpi=None*, *format=''png''*, *fromDateTime=None*, *toDateTime=None*)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Plot the strategy execution into a file. Must be called after running the strategy.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '| Parameters: |'
+  prefs: []
+  type: TYPE_TB
+- en: '**filename** – The filename.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**dpi** – The resolution in dots per inch.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**format** – The file extension.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**fromDateTime** (*datetime.datetime*) – An optional starting datetime.datetime.
+    Everything before it won’t get plotted.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**toDateTime** (*datetime.datetime*) – An optional ending datetime.datetime.
+    Everything after it won’t get plotted.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '|'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Previous topic
+  prefs:
+  - PREF_H4
+  type: TYPE_NORMAL
+- en: '[stratanalyzer – Strategy analyzers](stratanalyzer.html "previous chapter")'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Next topic
+  prefs:
+  - PREF_H4
+  type: TYPE_NORMAL
+- en: '[optimizer – Parallel optimizers](optimizer.html "next chapter")'
+  prefs: []
+  type: TYPE_NORMAL
+- en: This Page
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Show Source](_sources/plotter.txt)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Quick search
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Enter search terms or a module, class or function name.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Navigation
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[index](genindex.html "General Index")'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[modules](py-modindex.html "Python Module Index") |'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[next](optimizer.html "optimizer – Parallel optimizers") |'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[previous](stratanalyzer.html "stratanalyzer – Strategy analyzers") |'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[PyAlgoTrade 0.20 documentation](index.html) »'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Documentation for the code](code.html) »'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

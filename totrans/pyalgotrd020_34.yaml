@@ -1,0 +1,121 @@
+- en: RSI2
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://gbeced.github.io/pyalgotrade/docs/v0.20/html/sample_rsi2.html](https://gbeced.github.io/pyalgotrade/docs/v0.20/html/sample_rsi2.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: 'This example is based on a strategy known as RSI2 ([http://stockcharts.com/school/doku.php?id=chart_school:trading_strategies:rsi2](http://stockcharts.com/school/doku.php?id=chart_school:trading_strategies:rsi2))
+    which requires the following parameters:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: An SMA period for trend identification. We’ll call this entrySMA.
+  prefs:
+  - PREF_BQ
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: A smaller SMA period for the exit point. We’ll call this exitSMA.
+  prefs:
+  - PREF_BQ
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: An RSI period for entering both short/long positions. We’ll call this rsiPeriod.
+  prefs:
+  - PREF_BQ
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: An RSI oversold threshold for long position entry. We’ll call this overSoldThreshold.
+  prefs:
+  - PREF_BQ
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: An RSI overbought threshold for short position entry. We’ll call this overBoughtThreshold.
+  prefs:
+  - PREF_BQ
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'Save this code as rsi2.py:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'and use the following code to execute the strategy:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'This is what the output should look like:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'and this is what the plot should look like:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![_images/rsi2_sample.png](../Images/05a62b8912ec5b6e062a400eafc6486f.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: You can get better returns by tunning the different parameters.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Previous topic
+  prefs:
+  - PREF_H4
+  type: TYPE_NORMAL
+- en: '[Bollinger Bands](sample_bbands.html "previous chapter")'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Next topic
+  prefs:
+  - PREF_H4
+  type: TYPE_NORMAL
+- en: '[Quandl integration](sample_quandl.html "next chapter")'
+  prefs: []
+  type: TYPE_NORMAL
+- en: This Page
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Show Source](_sources/sample_rsi2.txt)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Quick search
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Enter search terms or a module, class or function name.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Navigation
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[index](genindex.html "General Index")'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[modules](py-modindex.html "Python Module Index") |'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[next](sample_quandl.html "Quandl integration") |'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[previous](sample_bbands.html "Bollinger Bands") |'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[PyAlgoTrade 0.20 documentation](index.html) »'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Sample strategies](samples.html) »'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

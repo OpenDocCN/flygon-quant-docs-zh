@@ -1,0 +1,87 @@
+- en: Twitter support
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://gbeced.github.io/pyalgotrade/docs/v0.20/html/twitter.html](https://gbeced.github.io/pyalgotrade/docs/v0.20/html/twitter.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: The twitter package adds support for receiving Twitter events in your strategy
+    and incorporate those in your trading decisions. Note that since this is a realtime
+    feed, it only makes sense in paper trading or real trading scenarios, but not
+    in backtesting.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Twitter support depends on **tweepy** ([https://github.com/tweepy/tweepy](https://github.com/tweepy/tweepy))
+    so be sure to have it installed before moving forward.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Contents:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[twitter – Twitter feed reference](twitter_ref.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Feed](twitter_ref.html#module-pyalgotrade.twitter.feed)'
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Twitter Example](twitter_example.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Previous topic
+  prefs:
+  - PREF_H4
+  type: TYPE_NORMAL
+- en: '[Bitcoin Charts example](bitcoincharts_example.html "previous chapter")'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Next topic
+  prefs:
+  - PREF_H4
+  type: TYPE_NORMAL
+- en: '[twitter – Twitter feed reference](twitter_ref.html "next chapter")'
+  prefs: []
+  type: TYPE_NORMAL
+- en: This Page
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Show Source](_sources/twitter.txt)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Quick search
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Enter search terms or a module, class or function name.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Navigation
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[index](genindex.html "General Index")'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[modules](py-modindex.html "Python Module Index") |'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[next](twitter_ref.html "twitter – Twitter feed reference") |'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[previous](bitcoincharts_example.html "Bitcoin Charts example") |'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[PyAlgoTrade 0.20 documentation](index.html) »'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

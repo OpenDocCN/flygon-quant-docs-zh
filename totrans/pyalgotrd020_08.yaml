@@ -1,0 +1,1327 @@
+- en: broker – Order management classes
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://gbeced.github.io/pyalgotrade/docs/v0.20/html/broker.html](https://gbeced.github.io/pyalgotrade/docs/v0.20/html/broker.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '## Base module and classes'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*class* `pyalgotrade.broker.``Order`(*type_*, *action*, *instrument*, *quantity*,
+    *instrumentTraits*)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Bases: `object`'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Base class for orders.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '| Parameters: |'
+  prefs: []
+  type: TYPE_TB
+- en: '**type** (`Order.Type`) – The order type'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**action** (`Order.Action`) – The order action.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**instrument** (*string.*) – Instrument identifier.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**quantity** (*int/float.*) – Order quantity.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '|'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Note
+  prefs: []
+  type: TYPE_NORMAL
+- en: This is a base class and should not be used directly.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Valid **type** parameter values are:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Order.Type.MARKET
+  prefs:
+  - PREF_BQ
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Order.Type.LIMIT
+  prefs:
+  - PREF_BQ
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Order.Type.STOP
+  prefs:
+  - PREF_BQ
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Order.Type.STOP_LIMIT
+  prefs:
+  - PREF_BQ
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'Valid **action** parameter values are:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Order.Action.BUY
+  prefs:
+  - PREF_BQ
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Order.Action.BUY_TO_COVER
+  prefs:
+  - PREF_BQ
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Order.Action.SELL
+  prefs:
+  - PREF_BQ
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Order.Action.SELL_SHORT
+  prefs:
+  - PREF_BQ
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`getId`()'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Returns the order id.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Note
+  prefs: []
+  type: TYPE_NORMAL
+- en: This will be None if the order was not submitted.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`getType`()'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Returns the order type. Valid order types are:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Order.Type.MARKET
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Order.Type.LIMIT
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Order.Type.STOP
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Order.Type.STOP_LIMIT
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`getSubmitDateTime`()'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Returns the datetime when the order was submitted.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`getAction`()'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Returns the order action. Valid order actions are:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Order.Action.BUY
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Order.Action.BUY_TO_COVER
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Order.Action.SELL
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Order.Action.SELL_SHORT
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`getState`()'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Returns the order state. Valid order states are:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Order.State.INITIAL (the initial state).
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Order.State.SUBMITTED
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Order.State.ACCEPTED
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Order.State.CANCELED
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Order.State.PARTIALLY_FILLED
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Order.State.FILLED
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`isActive`()'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Returns True if the order is active.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`isInitial`()'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Returns True if the order state is Order.State.INITIAL.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`isSubmitted`()'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Returns True if the order state is Order.State.SUBMITTED.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`isAccepted`()'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Returns True if the order state is Order.State.ACCEPTED.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`isCanceled`()'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Returns True if the order state is Order.State.CANCELED.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`isPartiallyFilled`()'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Returns True if the order state is Order.State.PARTIALLY_FILLED.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`isFilled`()'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Returns True if the order state is Order.State.FILLED.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`getInstrument`()'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Returns the instrument identifier.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`getQuantity`()'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Returns the quantity.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`getFilled`()'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Returns the number of shares that have been executed.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`getRemaining`()'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Returns the number of shares still outstanding.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`getAvgFillPrice`()'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Returns the average price of the shares that have been executed, or None if
+    nothing has been filled.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`getGoodTillCanceled`()'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Returns True if the order is good till canceled.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`setGoodTillCanceled`(*goodTillCanceled*)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Sets if the order should be good till canceled. Orders that are not filled by
+    the time the session closes will be will be automatically canceled if they were
+    not set as good till canceled
+  prefs: []
+  type: TYPE_NORMAL
+- en: '| Parameters: | **goodTillCanceled** (*boolean.*) – True if the order should
+    be good till canceled. |'
+  prefs: []
+  type: TYPE_TB
+- en: Note
+  prefs: []
+  type: TYPE_NORMAL
+- en: This can’t be changed once the order is submitted.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`getAllOrNone`()'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Returns True if the order should be completely filled or else canceled.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`setAllOrNone`(*allOrNone*)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Sets the All-Or-None property for this order.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '| Parameters: | **allOrNone** (*boolean.*) – True if the order should be completely
+    filled. |'
+  prefs: []
+  type: TYPE_TB
+- en: Note
+  prefs: []
+  type: TYPE_NORMAL
+- en: This can’t be changed once the order is submitted.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`getExecutionInfo`()'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Returns the last execution information for this order, or None if nothing has
+    been filled so far. This will be different every time an order, or part of it,
+    gets filled.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '| Return type: | [`OrderExecutionInfo`](#pyalgotrade.broker.OrderExecutionInfo
+    "pyalgotrade.broker.OrderExecutionInfo"). |'
+  prefs: []
+  type: TYPE_TB
+- en: '*class* `pyalgotrade.broker.``MarketOrder`(*action*, *instrument*, *quantity*,
+    *onClose*, *instrumentTraits*)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Bases: [`pyalgotrade.broker.Order`](#pyalgotrade.broker.Order "pyalgotrade.broker.Order")'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Base class for market orders.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Note
+  prefs: []
+  type: TYPE_NORMAL
+- en: This is a base class and should not be used directly.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`getFillOnClose`()'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Returns True if the order should be filled as close to the closing price as
+    possible (Market-On-Close order).
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*class* `pyalgotrade.broker.``LimitOrder`(*action*, *instrument*, *limitPrice*,
+    *quantity*, *instrumentTraits*)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Bases: [`pyalgotrade.broker.Order`](#pyalgotrade.broker.Order "pyalgotrade.broker.Order")'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Base class for limit orders.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Note
+  prefs: []
+  type: TYPE_NORMAL
+- en: This is a base class and should not be used directly.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`getLimitPrice`()'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Returns the limit price.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*class* `pyalgotrade.broker.``StopOrder`(*action*, *instrument*, *stopPrice*,
+    *quantity*, *instrumentTraits*)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Bases: [`pyalgotrade.broker.Order`](#pyalgotrade.broker.Order "pyalgotrade.broker.Order")'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Base class for stop orders.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Note
+  prefs: []
+  type: TYPE_NORMAL
+- en: This is a base class and should not be used directly.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`getStopPrice`()'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Returns the stop price.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*class* `pyalgotrade.broker.``StopLimitOrder`(*action*, *instrument*, *stopPrice*,
+    *limitPrice*, *quantity*, *instrumentTraits*)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Bases: [`pyalgotrade.broker.Order`](#pyalgotrade.broker.Order "pyalgotrade.broker.Order")'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Base class for stop limit orders.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Note
+  prefs: []
+  type: TYPE_NORMAL
+- en: This is a base class and should not be used directly.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`getStopPrice`()'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Returns the stop price.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`getLimitPrice`()'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Returns the limit price.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*class* `pyalgotrade.broker.``OrderExecutionInfo`(*price*, *quantity*, *commission*,
+    *dateTime*)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Bases: `object`'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Execution information for an order.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`getPrice`()'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Returns the fill price.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`getQuantity`()'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Returns the quantity.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`getCommission`()'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Returns the commission applied.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`getDateTime`()'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Returns the `datatime.datetime` when the order was executed.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*class* `pyalgotrade.broker.``Broker`'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Bases: `pyalgotrade.observer.Subject`'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Base class for brokers.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Note
+  prefs: []
+  type: TYPE_NORMAL
+- en: This is a base class and should not be used directly.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`getCash`(*includeShort=True*)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Returns the available cash.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '| Parameters: | **includeShort** (*boolean.*) – Include cash from short positions.
+    |'
+  prefs: []
+  type: TYPE_TB
+- en: '`getShares`(*instrument*)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Returns the number of shares for an instrument.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`getPositions`()'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Returns a dictionary that maps instruments to shares.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`getActiveOrders`(*instrument=None*)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Returns a sequence with the orders that are still active.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '| Parameters: | **instrument** (*string.*) – An optional instrument identifier
+    to return only the active orders for the given instrument. |'
+  prefs: []
+  type: TYPE_TB
+- en: '`submitOrder`(*order*)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Submits an order.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '| Parameters: | **order** ([`Order`](#pyalgotrade.broker.Order "pyalgotrade.broker.Order").)
+    – The order to submit. |'
+  prefs: []
+  type: TYPE_TB
+- en: Note
+  prefs: []
+  type: TYPE_NORMAL
+- en: After this call the order is in SUBMITTED state and an event is not triggered
+    for this transition.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Calling this twice on the same order will raise an exception.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`createMarketOrder`(*action*, *instrument*, *quantity*, *onClose=False*)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Creates a Market order. A market order is an order to buy or sell a stock at
+    the best available price. Generally, this type of order will be executed immediately.
+    However, the price at which a market order will be executed is not guaranteed.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '| Parameters: |'
+  prefs: []
+  type: TYPE_TB
+- en: '**action** (*Order.Action.BUY, or Order.Action.BUY_TO_COVER, or Order.Action.SELL
+    or Order.Action.SELL_SHORT.*) – The order action.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**instrument** (*string.*) – Instrument identifier.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**quantity** (*int/float.*) – Order quantity.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**onClose** (*boolean.*) – True if the order should be filled as close to the
+    closing price as possible (Market-On-Close order). Default is False.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '|'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '| Return type: | A [`MarketOrder`](#pyalgotrade.broker.MarketOrder "pyalgotrade.broker.MarketOrder")
+    subclass. |'
+  prefs: []
+  type: TYPE_TB
+- en: '`createLimitOrder`(*action*, *instrument*, *limitPrice*, *quantity*)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Creates a Limit order. A limit order is an order to buy or sell a stock at a
+    specific price or better. A buy limit order can only be executed at the limit
+    price or lower, and a sell limit order can only be executed at the limit price
+    or higher.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '| Parameters: |'
+  prefs: []
+  type: TYPE_TB
+- en: '**action** (*Order.Action.BUY, or Order.Action.BUY_TO_COVER, or Order.Action.SELL
+    or Order.Action.SELL_SHORT.*) – The order action.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**instrument** (*string.*) – Instrument identifier.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**limitPrice** (*float*) – The order price.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**quantity** (*int/float.*) – Order quantity.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '|'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '| Return type: | A [`LimitOrder`](#pyalgotrade.broker.LimitOrder "pyalgotrade.broker.LimitOrder")
+    subclass. |'
+  prefs: []
+  type: TYPE_TB
+- en: '`createStopOrder`(*action*, *instrument*, *stopPrice*, *quantity*)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Creates a Stop order. A stop order, also referred to as a stop-loss order, is
+    an order to buy or sell a stock once the price of the stock reaches a specified
+    price, known as the stop price. When the stop price is reached, a stop order becomes
+    a market order. A buy stop order is entered at a stop price above the current
+    market price. Investors generally use a buy stop order to limit a loss or to protect
+    a profit on a stock that they have sold short. A sell stop order is entered at
+    a stop price below the current market price. Investors generally use a sell stop
+    order to limit a loss or to protect a profit on a stock that they own.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '| Parameters: |'
+  prefs: []
+  type: TYPE_TB
+- en: '**action** (*Order.Action.BUY, or Order.Action.BUY_TO_COVER, or Order.Action.SELL
+    or Order.Action.SELL_SHORT.*) – The order action.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**instrument** (*string.*) – Instrument identifier.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**stopPrice** (*float*) – The trigger price.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**quantity** (*int/float.*) – Order quantity.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '|'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '| Return type: | A [`StopOrder`](#pyalgotrade.broker.StopOrder "pyalgotrade.broker.StopOrder")
+    subclass. |'
+  prefs: []
+  type: TYPE_TB
+- en: '`createStopLimitOrder`(*action*, *instrument*, *stopPrice*, *limitPrice*, *quantity*)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Creates a Stop-Limit order. A stop-limit order is an order to buy or sell a
+    stock that combines the features of a stop order and a limit order. Once the stop
+    price is reached, a stop-limit order becomes a limit order that will be executed
+    at a specified price (or better). The benefit of a stop-limit order is that the
+    investor can control the price at which the order can be executed.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '| Parameters: |'
+  prefs: []
+  type: TYPE_TB
+- en: '**action** (*Order.Action.BUY, or Order.Action.BUY_TO_COVER, or Order.Action.SELL
+    or Order.Action.SELL_SHORT.*) – The order action.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**instrument** (*string.*) – Instrument identifier.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**stopPrice** (*float*) – The trigger price.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**limitPrice** (*float*) – The price for the limit order.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**quantity** (*int/float.*) – Order quantity.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '|'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '| Return type: | A [`StopLimitOrder`](#pyalgotrade.broker.StopLimitOrder "pyalgotrade.broker.StopLimitOrder")
+    subclass. |'
+  prefs: []
+  type: TYPE_TB
+- en: '`cancelOrder`(*order*)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Requests an order to be canceled. If the order is filled an Exception is raised.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '| Parameters: | **order** ([`Order`](#pyalgotrade.broker.Order "pyalgotrade.broker.Order").)
+    – The order to cancel. |  ## Backtesting module and classes'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*class* `pyalgotrade.broker.backtesting.``Commission`'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Bases: `object`'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Base class for implementing different commission schemes.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Note
+  prefs: []
+  type: TYPE_NORMAL
+- en: This is a base class and should not be used directly.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`calculate`(*order*, *price*, *quantity*)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Calculates the commission for an order execution.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '| Parameters: |'
+  prefs: []
+  type: TYPE_TB
+- en: '**order** ([`pyalgotrade.broker.Order`](#pyalgotrade.broker.Order "pyalgotrade.broker.Order").)
+    – The order being executed.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**price** (*float.*) – The price for each share.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**quantity** (*float.*) – The order size.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '|'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '| Return type: | float. |'
+  prefs: []
+  type: TYPE_TB
+- en: '*class* `pyalgotrade.broker.backtesting.``NoCommission`'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Bases: [`pyalgotrade.broker.backtesting.Commission`](#pyalgotrade.broker.backtesting.Commission
+    "pyalgotrade.broker.backtesting.Commission")'
+  prefs: []
+  type: TYPE_NORMAL
+- en: A [`Commission`](#pyalgotrade.broker.backtesting.Commission "pyalgotrade.broker.backtesting.Commission")
+    class that always returns 0.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*class* `pyalgotrade.broker.backtesting.``FixedPerTrade`(*amount*)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Bases: [`pyalgotrade.broker.backtesting.Commission`](#pyalgotrade.broker.backtesting.Commission
+    "pyalgotrade.broker.backtesting.Commission")'
+  prefs: []
+  type: TYPE_NORMAL
+- en: A [`Commission`](#pyalgotrade.broker.backtesting.Commission "pyalgotrade.broker.backtesting.Commission")
+    class that charges a fixed amount for the whole trade.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '| Parameters: | **amount** (*float.*) – The commission for an order. |'
+  prefs: []
+  type: TYPE_TB
+- en: '*class* `pyalgotrade.broker.backtesting.``TradePercentage`(*percentage*)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Bases: [`pyalgotrade.broker.backtesting.Commission`](#pyalgotrade.broker.backtesting.Commission
+    "pyalgotrade.broker.backtesting.Commission")'
+  prefs: []
+  type: TYPE_NORMAL
+- en: A [`Commission`](#pyalgotrade.broker.backtesting.Commission "pyalgotrade.broker.backtesting.Commission")
+    class that charges a percentage of the whole trade.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '| Parameters: | **percentage** (*float.*) – The percentage to charge. 0.01
+    means 1%, and so on. It must be smaller than 1. |'
+  prefs: []
+  type: TYPE_TB
+- en: '*class* `pyalgotrade.broker.backtesting.``Broker`(*cash*, *barFeed*, *commission=None*)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Bases: [`pyalgotrade.broker.Broker`](#pyalgotrade.broker.Broker "pyalgotrade.broker.Broker")'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Backtesting broker.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '| Parameters: |'
+  prefs: []
+  type: TYPE_TB
+- en: '**cash** (*int/float.*) – The initial amount of cash.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**barFeed** (`pyalgotrade.barfeed.BarFeed`) – The bar feed that will provide
+    the bars.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**commission** ([`Commission`](#pyalgotrade.broker.backtesting.Commission "pyalgotrade.broker.backtesting.Commission"))
+    – An object responsible for calculating order commissions.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '|'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`getCommission`()'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Returns the strategy used to calculate order commissions.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '| Return type: | [`Commission`](#pyalgotrade.broker.backtesting.Commission
+    "pyalgotrade.broker.backtesting.Commission"). |'
+  prefs: []
+  type: TYPE_TB
+- en: '`getEquity`()'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Returns the portfolio value (cash + shares * price).
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`getFillStrategy`()'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Returns the [`pyalgotrade.broker.fillstrategy.FillStrategy`](#pyalgotrade.broker.fillstrategy.FillStrategy
+    "pyalgotrade.broker.fillstrategy.FillStrategy") currently set.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`setCommission`(*commission*)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Sets the strategy to use to calculate order commissions.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '| Parameters: | **commission** ([`Commission`](#pyalgotrade.broker.backtesting.Commission
+    "pyalgotrade.broker.backtesting.Commission").) – An object responsible for calculating
+    order commissions. |'
+  prefs: []
+  type: TYPE_TB
+- en: '`setFillStrategy`(*strategy*)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Sets the [`pyalgotrade.broker.fillstrategy.FillStrategy`](#pyalgotrade.broker.fillstrategy.FillStrategy
+    "pyalgotrade.broker.fillstrategy.FillStrategy") to use.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`setShares`(*instrument*, *quantity*, *price*)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Set existing shares before the strategy starts executing.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '| Parameters: |'
+  prefs: []
+  type: TYPE_TB
+- en: '**instrument** – Instrument identifier.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**quantity** – The number of shares for the given instrument.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**price** – The price for each share.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '|'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*class* `pyalgotrade.broker.slippage.``SlippageModel`'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Bases: `object`'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Base class for slippage models.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Note
+  prefs: []
+  type: TYPE_NORMAL
+- en: This is a base class and should not be used directly.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`calculatePrice`(*order*, *price*, *quantity*, *bar*, *volumeUsed*)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Returns the slipped price per share for an order.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '| Parameters: |'
+  prefs: []
+  type: TYPE_TB
+- en: '**order** ([`pyalgotrade.broker.Order`](#pyalgotrade.broker.Order "pyalgotrade.broker.Order").)
+    – The order being filled.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**price** (*float.*) – The price for each share before slippage.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**quantity** (*float.*) – The amount of shares that will get filled at this
+    time for this order.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**bar** ([`pyalgotrade.bar.Bar`](bar.html#pyalgotrade.bar.Bar "pyalgotrade.bar.Bar").)
+    – The current bar.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**volumeUsed** (*float.*) – The volume size that was taken so far from the
+    current bar.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '|'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '| Return type: | float. |'
+  prefs: []
+  type: TYPE_TB
+- en: '*class* `pyalgotrade.broker.slippage.``NoSlippage`'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Bases: [`pyalgotrade.broker.slippage.SlippageModel`](#pyalgotrade.broker.slippage.SlippageModel
+    "pyalgotrade.broker.slippage.SlippageModel")'
+  prefs: []
+  type: TYPE_NORMAL
+- en: A no slippage model.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*class* `pyalgotrade.broker.slippage.``VolumeShareSlippage`(*priceImpact=0.1*)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Bases: [`pyalgotrade.broker.slippage.SlippageModel`](#pyalgotrade.broker.slippage.SlippageModel
+    "pyalgotrade.broker.slippage.SlippageModel")'
+  prefs: []
+  type: TYPE_NORMAL
+- en: A volume share slippage model as defined in Zipline’s VolumeShareSlippage model.
+    The slippage is calculated by multiplying the price impact constant by the square
+    of the ratio of the order to the total volume.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Check [https://www.quantopian.com/help#ide-slippage](https://www.quantopian.com/help#ide-slippage)
+    for more details.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '| Parameters: | **priceImpact** (*float.*) – Defines how large of an impact
+    your order will have on the backtester’s price calculation. |'
+  prefs: []
+  type: TYPE_TB
+- en: '*class* `pyalgotrade.broker.fillstrategy.``FillStrategy`'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Bases: `object`'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Base class for order filling strategies for the backtester.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`fillLimitOrder`(*broker_*, *order*, *bar*)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Override to return the fill price and quantity for a limit order or None if
+    the order can’t be filled at the given time.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '| Parameters: |'
+  prefs: []
+  type: TYPE_TB
+- en: '**broker** (`Broker`) – The broker.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**order** ([`pyalgotrade.broker.LimitOrder`](#pyalgotrade.broker.LimitOrder
+    "pyalgotrade.broker.LimitOrder")) – The order.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**bar** ([`pyalgotrade.bar.Bar`](bar.html#pyalgotrade.bar.Bar "pyalgotrade.bar.Bar"))
+    – The current bar.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '|'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '| Return type: | A `FillInfo` or None if the order should not be filled. |'
+  prefs: []
+  type: TYPE_TB
+- en: '`fillMarketOrder`(*broker_*, *order*, *bar*)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Override to return the fill price and quantity for a market order or None if
+    the order can’t be filled at the given time.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '| Parameters: |'
+  prefs: []
+  type: TYPE_TB
+- en: '**broker** (`Broker`) – The broker.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**order** ([`pyalgotrade.broker.MarketOrder`](#pyalgotrade.broker.MarketOrder
+    "pyalgotrade.broker.MarketOrder")) – The order.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**bar** ([`pyalgotrade.bar.Bar`](bar.html#pyalgotrade.bar.Bar "pyalgotrade.bar.Bar"))
+    – The current bar.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '|'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '| Return type: | A `FillInfo` or None if the order should not be filled. |'
+  prefs: []
+  type: TYPE_TB
+- en: '`fillStopLimitOrder`(*broker_*, *order*, *bar*)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Override to return the fill price and quantity for a stop limit order or None
+    if the order can’t be filled at the given time.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '| Parameters: |'
+  prefs: []
+  type: TYPE_TB
+- en: '**broker** (`Broker`) – The broker.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**order** ([`pyalgotrade.broker.StopLimitOrder`](#pyalgotrade.broker.StopLimitOrder
+    "pyalgotrade.broker.StopLimitOrder")) – The order.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**bar** ([`pyalgotrade.bar.Bar`](bar.html#pyalgotrade.bar.Bar "pyalgotrade.bar.Bar"))
+    – The current bar.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '|'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '| Return type: | A `FillInfo` or None if the order should not be filled. |'
+  prefs: []
+  type: TYPE_TB
+- en: '`fillStopOrder`(*broker_*, *order*, *bar*)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Override to return the fill price and quantity for a stop order or None if the
+    order can’t be filled at the given time.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '| Parameters: |'
+  prefs: []
+  type: TYPE_TB
+- en: '**broker** (`Broker`) – The broker.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**order** ([`pyalgotrade.broker.StopOrder`](#pyalgotrade.broker.StopOrder "pyalgotrade.broker.StopOrder"))
+    – The order.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**bar** ([`pyalgotrade.bar.Bar`](bar.html#pyalgotrade.bar.Bar "pyalgotrade.bar.Bar"))
+    – The current bar.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '|'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '| Return type: | A `FillInfo` or None if the order should not be filled. |'
+  prefs: []
+  type: TYPE_TB
+- en: '`onBars`(*broker_*, *bars*)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Override (optional) to get notified when the broker is about to process new
+    bars.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '| Parameters: |'
+  prefs: []
+  type: TYPE_TB
+- en: '**broker** (`Broker`) – The broker.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**bars** ([`pyalgotrade.bar.Bars`](bar.html#pyalgotrade.bar.Bars "pyalgotrade.bar.Bars"))
+    – The current bars.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '|'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`onOrderFilled`(*broker_*, *order*)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Override (optional) to get notified when an order was filled, or partially filled.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '| Parameters: |'
+  prefs: []
+  type: TYPE_TB
+- en: '**broker** (`Broker`) – The broker.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**order** ([`pyalgotrade.broker.Order`](#pyalgotrade.broker.Order "pyalgotrade.broker.Order"))
+    – The order filled.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '|'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*class* `pyalgotrade.broker.fillstrategy.``DefaultStrategy`(*volumeLimit=0.25*)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Bases: [`pyalgotrade.broker.fillstrategy.FillStrategy`](#pyalgotrade.broker.fillstrategy.FillStrategy
+    "pyalgotrade.broker.fillstrategy.FillStrategy")'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Default fill strategy.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '| Parameters: | **volumeLimit** (*float*) – The proportion of the volume that
+    orders can take up in a bar. Must be > 0 and <= 1. If None, then volume limit
+    is not checked. |'
+  prefs: []
+  type: TYPE_TB
+- en: 'This strategy works as follows:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: A [`pyalgotrade.broker.MarketOrder`](#pyalgotrade.broker.MarketOrder "pyalgotrade.broker.MarketOrder")
+    is always filled using the open/close price.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'A [`pyalgotrade.broker.LimitOrder`](#pyalgotrade.broker.LimitOrder "pyalgotrade.broker.LimitOrder")
+    will be filled like this:'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: If the limit price was penetrated with the open price, then the open price is
+    used.
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: If the bar includes the limit price, then the limit price is used.
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Note that when buying the price is penetrated if it gets <= the limit price,
+    and when selling the price is penetrated if it gets >= the limit price
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'A [`pyalgotrade.broker.StopOrder`](#pyalgotrade.broker.StopOrder "pyalgotrade.broker.StopOrder")
+    will be filled like this:'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: If the stop price was penetrated with the open price, then the open price is
+    used.
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: If the bar includes the stop price, then the stop price is used.
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Note that when buying the price is penetrated if it gets >= the stop price,
+    and when selling the price is penetrated if it gets <= the stop price
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'A [`pyalgotrade.broker.StopLimitOrder`](#pyalgotrade.broker.StopLimitOrder
+    "pyalgotrade.broker.StopLimitOrder") will be filled like this:'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: If the stop price was penetrated with the open price, or if the bar includes
+    the stop price, then the limit order becomes active.
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'If the limit order is active:'
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: If the limit order was activated in this same bar and the limit price is penetrated
+    as well, then the best between the stop price and the limit fill price (as described
+    earlier) is used.
+  prefs:
+  - PREF_IND
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: If the limit order was activated at a previous bar then the limit fill price
+    (as described earlier) is used.
+  prefs:
+  - PREF_IND
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Note
+  prefs: []
+  type: TYPE_NORMAL
+- en: This is the default strategy used by the Broker.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: It uses [`pyalgotrade.broker.slippage.NoSlippage`](#pyalgotrade.broker.slippage.NoSlippage
+    "pyalgotrade.broker.slippage.NoSlippage") slippage model by default.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: If volumeLimit is 0.25, and a certain bar’s volume is 100, then no more than
+    25 shares can be used by all orders that get processed at that bar.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: If using trade bars, then all the volume from that bar can be used.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`setSlippageModel`(*slippageModel*)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Set the slippage model to use.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '| Parameters: | **slippageModel** ([`pyalgotrade.broker.slippage.SlippageModel`](#pyalgotrade.broker.slippage.SlippageModel
+    "pyalgotrade.broker.slippage.SlippageModel")) – The slippage model. |'
+  prefs: []
+  type: TYPE_TB
+- en: '`setVolumeLimit`(*volumeLimit*)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Set the volume limit.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '| Parameters: | **volumeLimit** (*float*) – The proportion of the volume that
+    orders can take up in a bar. Must be > 0 and <= 1. If None, then volume limit
+    is not checked. |'
+  prefs: []
+  type: TYPE_TB
+- en: '[Table Of Contents](index.html)'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[broker – Order management classes](#)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Base module and classes](#module-pyalgotrade.broker)'
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Backtesting module and classes](#module-pyalgotrade.broker.backtesting)'
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Previous topic
+  prefs:
+  - PREF_H4
+  type: TYPE_NORMAL
+- en: '[technical – Technical indicators](technical.html "previous chapter")'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Next topic
+  prefs:
+  - PREF_H4
+  type: TYPE_NORMAL
+- en: '[strategy – Basic strategy classes](strategy.html "next chapter")'
+  prefs: []
+  type: TYPE_NORMAL
+- en: This Page
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Show Source](_sources/broker.txt)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Quick search
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Enter search terms or a module, class or function name.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Navigation
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[index](genindex.html "General Index")'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[modules](py-modindex.html "Python Module Index") |'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[next](strategy.html "strategy – Basic strategy classes") |'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[previous](technical.html "technical – Technical indicators") |'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[PyAlgoTrade 0.20 documentation](index.html) »'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Documentation for the code](code.html) »'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

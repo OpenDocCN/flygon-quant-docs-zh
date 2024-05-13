@@ -1,0 +1,131 @@
+- en: Computational Investing Part I
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://gbeced.github.io/pyalgotrade/docs/v0.20/html/compinvpart1.html](https://gbeced.github.io/pyalgotrade/docs/v0.20/html/compinvpart1.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: As I was taking the [Computational Investing Part I](https://class.coursera.org/compinvesting1-2012-001/class)
+    course in 2012 I had to work on a set of assignments and for one of them I used
+    PyAlgoTrade.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Homework 1
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: 'For this assignment I had to pick 4 stocks, invest a total of $1000000 during
+    2011, and calculate:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Final portfolio value
+  prefs:
+  - PREF_BQ
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Anual return
+  prefs:
+  - PREF_BQ
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Average daily return
+  prefs:
+  - PREF_BQ
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Std. dev. of daily returns
+  prefs:
+  - PREF_BQ
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Sharpe ratio
+  prefs:
+  - PREF_BQ
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'Download the data with the following commands:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Although the deliverable was an Excel spreadsheet, I validated the results
+    using this piece of code:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'The results were:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: '[Table Of Contents](index.html)'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Computational Investing Part I](#)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Homework 1](#homework-1)'
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Previous topic
+  prefs:
+  - PREF_H4
+  type: TYPE_NORMAL
+- en: '[TA-Lib integration](talib.html "previous chapter")'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Next topic
+  prefs:
+  - PREF_H4
+  type: TYPE_NORMAL
+- en: '[Sample strategies](samples.html "next chapter")'
+  prefs: []
+  type: TYPE_NORMAL
+- en: This Page
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Show Source](_sources/compinvpart1.txt)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Quick search
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Enter search terms or a module, class or function name.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Navigation
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[index](genindex.html "General Index")'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[modules](py-modindex.html "Python Module Index") |'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[next](samples.html "Sample strategies") |'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[previous](talib.html "TA-Lib integration") |'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[PyAlgoTrade 0.20 documentation](index.html) »'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

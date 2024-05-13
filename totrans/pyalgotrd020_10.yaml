@@ -1,0 +1,362 @@
+- en: stratanalyzer – Strategy analyzers
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://gbeced.github.io/pyalgotrade/docs/v0.20/html/stratanalyzer.html](https://gbeced.github.io/pyalgotrade/docs/v0.20/html/stratanalyzer.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: Strategy analyzers provide an extensible way to attach different calculations
+    to strategy executions.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*class* `pyalgotrade.stratanalyzer.``StrategyAnalyzer`'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Bases: `object`'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Base class for strategy analyzers.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Note
+  prefs: []
+  type: TYPE_NORMAL
+- en: This is a base class and should not be used directly.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '## Returns'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*class* `pyalgotrade.stratanalyzer.returns.``Returns`(*maxLen=None*)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Bases: [`pyalgotrade.stratanalyzer.StrategyAnalyzer`](#pyalgotrade.stratanalyzer.StrategyAnalyzer
+    "pyalgotrade.stratanalyzer.StrategyAnalyzer")'
+  prefs: []
+  type: TYPE_NORMAL
+- en: A [`pyalgotrade.stratanalyzer.StrategyAnalyzer`](#pyalgotrade.stratanalyzer.StrategyAnalyzer
+    "pyalgotrade.stratanalyzer.StrategyAnalyzer") that calculates time-weighted returns
+    for the whole portfolio.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '| Parameters: | **maxLen** (*int.*) – The maximum number of values to hold
+    in net and cumulative returs dataseries. Once a bounded length is full, when new
+    items are added, a corresponding number of items are discarded from the opposite
+    end. If None then dataseries.DEFAULT_MAX_LEN is used. |'
+  prefs: []
+  type: TYPE_TB
+- en: '`getCumulativeReturns`()'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Returns a [`pyalgotrade.dataseries.DataSeries`](dataseries.html#pyalgotrade.dataseries.DataSeries
+    "pyalgotrade.dataseries.DataSeries") with the cumulative returns for each bar.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`getReturns`()'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Returns a [`pyalgotrade.dataseries.DataSeries`](dataseries.html#pyalgotrade.dataseries.DataSeries
+    "pyalgotrade.dataseries.DataSeries") with the returns for each bar.  ## Sharpe
+    Ratio'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*class* `pyalgotrade.stratanalyzer.sharpe.``SharpeRatio`(*useDailyReturns=True*)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Bases: [`pyalgotrade.stratanalyzer.StrategyAnalyzer`](#pyalgotrade.stratanalyzer.StrategyAnalyzer
+    "pyalgotrade.stratanalyzer.StrategyAnalyzer")'
+  prefs: []
+  type: TYPE_NORMAL
+- en: A [`pyalgotrade.stratanalyzer.StrategyAnalyzer`](#pyalgotrade.stratanalyzer.StrategyAnalyzer
+    "pyalgotrade.stratanalyzer.StrategyAnalyzer") that calculates Sharpe ratio for
+    the whole portfolio.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '| Parameters: | **useDailyReturns** (*boolean.*) – True if daily returns should
+    be used instead of the returns for each bar. |'
+  prefs: []
+  type: TYPE_TB
+- en: '`getSharpeRatio`(*riskFreeRate*, *annualized=True*)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Returns the Sharpe ratio for the strategy execution. If the volatility is 0,
+    0 is returned.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '| Parameters: |'
+  prefs: []
+  type: TYPE_TB
+- en: '**riskFreeRate** (*int/float.*) – The risk free rate per annum.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**annualized** (*boolean.*) – True if the sharpe ratio should be annualized.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '|  ## DrawDown'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*class* `pyalgotrade.stratanalyzer.drawdown.``DrawDown`'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Bases: [`pyalgotrade.stratanalyzer.StrategyAnalyzer`](#pyalgotrade.stratanalyzer.StrategyAnalyzer
+    "pyalgotrade.stratanalyzer.StrategyAnalyzer")'
+  prefs: []
+  type: TYPE_NORMAL
+- en: A [`pyalgotrade.stratanalyzer.StrategyAnalyzer`](#pyalgotrade.stratanalyzer.StrategyAnalyzer
+    "pyalgotrade.stratanalyzer.StrategyAnalyzer") that calculates max. drawdown and
+    longest drawdown duration for the portfolio.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`getLongestDrawDownDuration`()'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Returns the duration of the longest drawdown.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '| Return type: | `datetime.timedelta`. |'
+  prefs: []
+  type: TYPE_TB
+- en: Note
+  prefs: []
+  type: TYPE_NORMAL
+- en: Note that this is the duration of the longest drawdown, not necessarily the
+    deepest one.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`getMaxDrawDown`()'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Returns the max. (deepest) drawdown.  ## Trades'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*class* `pyalgotrade.stratanalyzer.trades.``Trades`'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Bases: [`pyalgotrade.stratanalyzer.StrategyAnalyzer`](#pyalgotrade.stratanalyzer.StrategyAnalyzer
+    "pyalgotrade.stratanalyzer.StrategyAnalyzer")'
+  prefs: []
+  type: TYPE_NORMAL
+- en: A [`pyalgotrade.stratanalyzer.StrategyAnalyzer`](#pyalgotrade.stratanalyzer.StrategyAnalyzer
+    "pyalgotrade.stratanalyzer.StrategyAnalyzer") that records the profit/loss and
+    returns of every completed trade.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Note
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'This analyzer operates on individual completed trades. For example, lets say
+    you start with a $1000 cash, and then you buy 1 share of XYZ for $10 and later
+    sell it for $20:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The trade’s profit was $10.
+  prefs:
+  - PREF_BQ
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: The trade’s return is 100%, even though your whole portfolio went from $1000
+    to $1020, a 2% return.
+  prefs:
+  - PREF_BQ
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`getCount`()'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Returns the total number of trades.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`getProfitableCount`()'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Returns the number of profitable trades.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`getUnprofitableCount`()'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Returns the number of unprofitable trades.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`getEvenCount`()'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Returns the number of trades whose net profit was 0.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`getAll`()'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Returns a numpy.array with the profits/losses for each trade.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`getProfits`()'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Returns a numpy.array with the profits for each profitable trade.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`getLosses`()'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Returns a numpy.array with the losses for each unprofitable trade.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`getAllReturns`()'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Returns a numpy.array with the returns for each trade.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`getPositiveReturns`()'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Returns a numpy.array with the positive returns for each trade.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`getNegativeReturns`()'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Returns a numpy.array with the negative returns for each trade.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`getCommissionsForAllTrades`()'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Returns a numpy.array with the commissions for each trade.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`getCommissionsForProfitableTrades`()'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Returns a numpy.array with the commissions for each profitable trade.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`getCommissionsForUnprofitableTrades`()'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Returns a numpy.array with the commissions for each unprofitable trade.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`getCommissionsForEvenTrades`()'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Returns a numpy.array with the commissions for each trade whose net profit was
+    0.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Example
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: 'Save this code as sma_crossover.py:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'and save this code in a different file:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'The output should look like this:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: '[Table Of Contents](index.html)'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[stratanalyzer – Strategy analyzers](#)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Returns](#module-pyalgotrade.stratanalyzer.returns)'
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Sharpe Ratio](#module-pyalgotrade.stratanalyzer.sharpe)'
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[DrawDown](#module-pyalgotrade.stratanalyzer.drawdown)'
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Trades](#module-pyalgotrade.stratanalyzer.trades)'
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Example](#example)'
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Previous topic
+  prefs:
+  - PREF_H4
+  type: TYPE_NORMAL
+- en: '[strategy – Basic strategy classes](strategy.html "previous chapter")'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Next topic
+  prefs:
+  - PREF_H4
+  type: TYPE_NORMAL
+- en: '[plotter – Strategy plotter](plotter.html "next chapter")'
+  prefs: []
+  type: TYPE_NORMAL
+- en: This Page
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Show Source](_sources/stratanalyzer.txt)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Quick search
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Enter search terms or a module, class or function name.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Navigation
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[index](genindex.html "General Index")'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[modules](py-modindex.html "Python Module Index") |'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[next](plotter.html "plotter – Strategy plotter") |'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[previous](strategy.html "strategy – Basic strategy classes") |'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[PyAlgoTrade 0.20 documentation](index.html) »'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Documentation for the code](code.html) »'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

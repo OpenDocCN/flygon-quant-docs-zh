@@ -1,0 +1,119 @@
+- en: Bitstamp Example
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://gbeced.github.io/pyalgotrade/docs/v0.20/html/bitstamp_example.html](https://gbeced.github.io/pyalgotrade/docs/v0.20/html/bitstamp_example.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: This goal of this simple SMA crossover example is to show how to put all the
+    pieces together to paper trade a strategy using realtime feeds supplied by Bitstamp
+    ([https://www.bitstamp.net/](https://www.bitstamp.net/)).
+  prefs: []
+  type: TYPE_NORMAL
+- en: This example assumes that you’re already familiar with the basic concepts presented
+    in the [*Tutorial*](tutorial.html#tutorial-label) section.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'The key things to highlight are:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: We’re using [`pyalgotrade.strategy.BaseStrategy`](strategy.html#pyalgotrade.strategy.BaseStrategy
+    "pyalgotrade.strategy.BaseStrategy") instead of [`pyalgotrade.strategy.BacktestingStrategy`](strategy.html#pyalgotrade.strategy.BacktestingStrategy
+    "pyalgotrade.strategy.BacktestingStrategy") as the base class. This is not a backtest.
+  prefs:
+  - PREF_BQ
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Trade events get notified via the call to **onBars**. No need to manually subscribe.
+  prefs:
+  - PREF_BQ
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Order book update events are handled by manually subscribing to [`pyalgotrade.bitstamp.barfeed.LiveTradeFeed.getOrderBookUpdateEvent`](bitstamp_ref.html#pyalgotrade.bitstamp.barfeed.LiveTradeFeed.getOrderBookUpdateEvent
+    "pyalgotrade.bitstamp.barfeed.LiveTradeFeed.getOrderBookUpdateEvent"). This is
+    needed to stay up to date with latest bid and ask prices.
+  prefs:
+  - PREF_BQ
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'The output should look like this:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: In order to live trade this strategy you should use [`pyalgotrade.bitstamp.broker.LiveBroker`](bitstamp_ref.html#pyalgotrade.bitstamp.broker.LiveBroker
+    "pyalgotrade.bitstamp.broker.LiveBroker") instead of [`pyalgotrade.bitstamp.broker.PaperTradingBroker`](bitstamp_ref.html#pyalgotrade.bitstamp.broker.PaperTradingBroker
+    "pyalgotrade.bitstamp.broker.PaperTradingBroker").
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Note that if you try to live trade this strategy you will probably loose
+    money.** Before jumping into live trading, be sure to write your own strategy,
+    backtest and paper trade it thoroughly before risking real money.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Previous topic
+  prefs:
+  - PREF_H4
+  type: TYPE_NORMAL
+- en: '[bitstamp – Bitstamp reference](bitstamp_ref.html "previous chapter")'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Next topic
+  prefs:
+  - PREF_H4
+  type: TYPE_NORMAL
+- en: '[Bitcoin Charts support](bitcoincharts.html "next chapter")'
+  prefs: []
+  type: TYPE_NORMAL
+- en: This Page
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Show Source](_sources/bitstamp_example.txt)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Quick search
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Enter search terms or a module, class or function name.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Navigation
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[index](genindex.html "General Index")'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[modules](py-modindex.html "Python Module Index") |'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[next](bitcoincharts.html "Bitcoin Charts support") |'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[previous](bitstamp_ref.html "bitstamp – Bitstamp reference") |'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[PyAlgoTrade 0.20 documentation](index.html) »'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Bitcoin](bitcoin.html) »'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Bitstamp support](bitstamp.html) »'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

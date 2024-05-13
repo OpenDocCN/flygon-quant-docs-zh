@@ -1,0 +1,229 @@
+- en: feed – Basic feeds
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://gbeced.github.io/pyalgotrade/docs/v0.20/html/feed.html](https://gbeced.github.io/pyalgotrade/docs/v0.20/html/feed.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: Feeds are time series data providing abstractions. When these are included in
+    the event dispatch loop, they emit an event as new data is available. Feeds are
+    also responsible for updating the [`pyalgotrade.dataseries.DataSeries`](dataseries.html#pyalgotrade.dataseries.DataSeries
+    "pyalgotrade.dataseries.DataSeries") associated with each piece of data that the
+    feed provides.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**This package has basic feeds. For bar feeds refer to the** [*barfeed – Bar
+    providers*](barfeed.html#barfeed-label) **section.**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*class* `pyalgotrade.feed.``BaseFeed`(*maxLen*)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Bases: `pyalgotrade.observer.Subject`'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Base class for feeds.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '| Parameters: | **maxLen** (*int.*) – The maximum number of values that each
+    [`pyalgotrade.dataseries.DataSeries`](dataseries.html#pyalgotrade.dataseries.DataSeries
+    "pyalgotrade.dataseries.DataSeries") will hold. Once a bounded length is full,
+    when new items are added, a corresponding number of items are discarded from the
+    opposite end. |'
+  prefs: []
+  type: TYPE_TB
+- en: Note
+  prefs: []
+  type: TYPE_NORMAL
+- en: This is a base class and should not be used directly.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`__contains__`(*key*)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Returns True if a [`pyalgotrade.dataseries.DataSeries`](dataseries.html#pyalgotrade.dataseries.DataSeries
+    "pyalgotrade.dataseries.DataSeries") for the given key is available.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`__getitem__`(*key*)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Returns the [`pyalgotrade.dataseries.DataSeries`](dataseries.html#pyalgotrade.dataseries.DataSeries
+    "pyalgotrade.dataseries.DataSeries") for a given key.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`getNewValuesEvent`()'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Returns the event that will be emitted when new values are available. To subscribe
+    you need to pass in a callable object that receives two parameters:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: A `datetime.datetime` instance.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: The new value.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: '## CSV support'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*class* `pyalgotrade.feed.csvfeed.``Feed`(*dateTimeColumn*, *dateTimeFormat*,
+    *converter=None*, *delimiter=''*, *''*, *timezone=None*, *maxLen=None*)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Bases: `pyalgotrade.feed.csvfeed.BaseFeed`'
+  prefs: []
+  type: TYPE_NORMAL
+- en: A feed that loads values from CSV formatted files.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '| Parameters: |'
+  prefs: []
+  type: TYPE_TB
+- en: '**dateTimeColumn** (*string.*) – The name of the column that has the datetime
+    information.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**dateTimeFormat** (*string.*) – The datetime format. datetime.datetime.strptime
+    will be used to parse the column.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**converter** (*function.*) – A function with two parameters (column name and
+    value) used to convert the string value to something else. The default coverter
+    will try to convert the value to a float. If that fails the original string is
+    returned.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**delimiter** (*string.*) – The string used to separate values.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**timezone** (*A pytz timezone.*) – The timezone to use to localize datetimes.
+    Check [`pyalgotrade.marketsession`](marketsession.html#module-pyalgotrade.marketsession
+    "pyalgotrade.marketsession").'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**maxLen** (*int.*) – The maximum number of values that each [`pyalgotrade.dataseries.DataSeries`](dataseries.html#pyalgotrade.dataseries.DataSeries
+    "pyalgotrade.dataseries.DataSeries") will hold. Once a bounded length is full,
+    when new items are added, a corresponding number of items are discarded from the
+    opposite end. If None then dataseries.DEFAULT_MAX_LEN is used.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '|'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`addValuesFromCSV`(*path*)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Loads values from a file.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '| Parameters: | **path** (*string.*) – The path to the CSV file. |'
+  prefs: []
+  type: TYPE_TB
+- en: CSV support Example
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: A file with the following format
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'can be loaded like this:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'and the output should look like this:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: '[Table Of Contents](index.html)'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[feed – Basic feeds](#)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[CSV support](#module-pyalgotrade.feed.csvfeed)'
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[CSV support Example](#csv-support-example)'
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Previous topic
+  prefs:
+  - PREF_H4
+  type: TYPE_NORMAL
+- en: '[dataseries – Basic dataseries classes](dataseries.html "previous chapter")'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Next topic
+  prefs:
+  - PREF_H4
+  type: TYPE_NORMAL
+- en: '[barfeed – Bar providers](barfeed.html "next chapter")'
+  prefs: []
+  type: TYPE_NORMAL
+- en: This Page
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Show Source](_sources/feed.txt)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Quick search
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Enter search terms or a module, class or function name.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Navigation
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[index](genindex.html "General Index")'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[modules](py-modindex.html "Python Module Index") |'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[next](barfeed.html "barfeed – Bar providers") |'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[previous](dataseries.html "dataseries – Basic dataseries classes") |'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[PyAlgoTrade 0.20 documentation](index.html) »'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Documentation for the code](code.html) »'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

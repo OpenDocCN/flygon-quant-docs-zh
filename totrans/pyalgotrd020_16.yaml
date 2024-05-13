@@ -1,0 +1,92 @@
+- en: Bitcoin
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://gbeced.github.io/pyalgotrade/docs/v0.20/html/bitcoin.html](https://gbeced.github.io/pyalgotrade/docs/v0.20/html/bitcoin.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: 'Contents:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Bitstamp support](bitstamp.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[bitstamp – Bitstamp reference](bitstamp_ref.html)'
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Bitstamp Example](bitstamp_example.html)'
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Bitcoin Charts support](bitcoincharts.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[bitcoincharts – Bitcoin Charts reference](bitcoincharts_ref.html)'
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Bitcoin Charts example](bitcoincharts_example.html)'
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Previous topic
+  prefs:
+  - PREF_H4
+  type: TYPE_NORMAL
+- en: '[Event profiler](eventprofiler.html "previous chapter")'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Next topic
+  prefs:
+  - PREF_H4
+  type: TYPE_NORMAL
+- en: '[Bitstamp support](bitstamp.html "next chapter")'
+  prefs: []
+  type: TYPE_NORMAL
+- en: This Page
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Show Source](_sources/bitcoin.txt)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Quick search
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Enter search terms or a module, class or function name.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Navigation
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[index](genindex.html "General Index")'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[modules](py-modindex.html "Python Module Index") |'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[next](bitstamp.html "Bitstamp support") |'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[previous](eventprofiler.html "Event profiler") |'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[PyAlgoTrade 0.20 documentation](index.html) »'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

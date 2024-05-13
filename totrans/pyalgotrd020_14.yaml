@@ -1,0 +1,320 @@
+- en: Tools
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://gbeced.github.io/pyalgotrade/docs/v0.20/html/tools.html](https://gbeced.github.io/pyalgotrade/docs/v0.20/html/tools.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '## Quandl'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`pyalgotrade.tools.quandl.``build_feed`(*sourceCode*, *tableCodes*, *fromYear*,
+    *toYear*, *storage*, *frequency=86400*, *timezone=None*, *skipErrors=False*, *authToken=None*,
+    *columnNames={}*, *forceDownload=False*, *skipMalformedBars=False*)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Build and load a [`pyalgotrade.barfeed.quandlfeed.Feed`](barfeed.html#pyalgotrade.barfeed.quandlfeed.Feed
+    "pyalgotrade.barfeed.quandlfeed.Feed") using CSV files downloaded from Quandl.
+    CSV files are downloaded if they haven’t been downloaded before.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '| Parameters: |'
+  prefs: []
+  type: TYPE_TB
+- en: '**sourceCode** (*string.*) – The dataset source code.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**tableCodes** (*list.*) – The dataset table codes.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**fromYear** (*int.*) – The first year.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**toYear** (*int.*) – The last year.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**storage** (*string.*) – The path were the files will be loaded from, or downloaded
+    to.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**frequency** – The frequency of the bars. Only **pyalgotrade.bar.Frequency.DAY**
+    or **pyalgotrade.bar.Frequency.WEEK** are supported.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**timezone** (*A pytz timezone.*) – The default timezone to use to localize
+    bars. Check [`pyalgotrade.marketsession`](marketsession.html#module-pyalgotrade.marketsession
+    "pyalgotrade.marketsession").'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**skipErrors** (*boolean.*) – True to keep on loading/downloading files in
+    case of errors.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**authToken** (*string.*) – Optional. An authentication token needed if you’re
+    doing more than 50 calls per day.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**columnNames** (*dict.*) –'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'Optional. A dictionary to map column names. Valid key values are:'
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: datetime
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: open
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: high
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: low
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: close
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: volume
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: adj_close
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**skipMalformedBars** (*boolean.*) – True to skip errors while parsing bars.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '|'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '| Return type: | [`pyalgotrade.barfeed.quandlfeed.Feed`](barfeed.html#pyalgotrade.barfeed.quandlfeed.Feed
+    "pyalgotrade.barfeed.quandlfeed.Feed"). |'
+  prefs: []
+  type: TYPE_TB
+- en: '`pyalgotrade.tools.quandl.``download_daily_bars`(*sourceCode*, *tableCode*,
+    *year*, *csvFile*, *authToken=None*)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Download daily bars from Quandl for a given year.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '| Parameters: |'
+  prefs: []
+  type: TYPE_TB
+- en: '**sourceCode** (*string.*) – The dataset’s source code.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**tableCode** (*string.*) – The dataset’s table code.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**year** (*int.*) – The year.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**csvFile** (*string.*) – The path to the CSV file to write.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**authToken** (*string.*) – Optional. An authentication token needed if you’re
+    doing more than 50 calls per day.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '|'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`pyalgotrade.tools.quandl.``download_weekly_bars`(*sourceCode*, *tableCode*,
+    *year*, *csvFile*, *authToken=None*)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Download weekly bars from Quandl for a given year.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '| Parameters: |'
+  prefs: []
+  type: TYPE_TB
+- en: '**sourceCode** (*string.*) – The dataset’s source code.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**tableCode** (*string.*) – The dataset’s table code.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**year** (*int.*) – The year.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**csvFile** (*string.*) – The path to the CSV file to write.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**authToken** (*string.*) – Optional. An authentication token needed if you’re
+    doing more than 50 calls per day.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '|  ## BarFeed resampling'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`pyalgotrade.tools.resample.``resample_to_csv`(*barFeed*, *frequency*, *csvFile*)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Resample a BarFeed into a CSV file grouping bars by a certain frequency. The
+    resulting file can be loaded using [`pyalgotrade.barfeed.csvfeed.GenericBarFeed`](barfeed.html#pyalgotrade.barfeed.csvfeed.GenericBarFeed
+    "pyalgotrade.barfeed.csvfeed.GenericBarFeed"). The CSV file will have the following
+    format:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: '| Parameters: |'
+  prefs: []
+  type: TYPE_TB
+- en: '**barFeed** (`pyalgotrade.barfeed.BarFeed`) – The bar feed that will provide
+    the bars. It should only hold bars from a single instrument.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**frequency** – The grouping frequency in seconds. Must be > 0.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**csvFile** (*string.*) – The path to the CSV file to write.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '|'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Note
+  prefs: []
+  type: TYPE_NORMAL
+- en: Datetimes are stored without timezone information.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Adj Close** column may be empty if the input bar feed doesn’t have that info.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'Supported resampling frequencies are:'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Less than bar.Frequency.DAY
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: bar.Frequency.DAY
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: bar.Frequency.MONTH
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Table Of Contents](index.html)'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Tools](#)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Quandl](#module-pyalgotrade.tools.quandl)'
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[BarFeed resampling](#module-pyalgotrade.tools.resample)'
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Previous topic
+  prefs:
+  - PREF_H4
+  type: TYPE_NORMAL
+- en: '[marketsession – Market sessions](marketsession.html "previous chapter")'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Next topic
+  prefs:
+  - PREF_H4
+  type: TYPE_NORMAL
+- en: '[Event profiler](eventprofiler.html "next chapter")'
+  prefs: []
+  type: TYPE_NORMAL
+- en: This Page
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Show Source](_sources/tools.txt)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Quick search
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Enter search terms or a module, class or function name.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Navigation
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[index](genindex.html "General Index")'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[modules](py-modindex.html "Python Module Index") |'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[next](eventprofiler.html "Event profiler") |'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[previous](marketsession.html "marketsession – Market sessions") |'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[PyAlgoTrade 0.20 documentation](index.html) »'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

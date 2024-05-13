@@ -1,0 +1,223 @@
+- en: optimizer – Parallel optimizers
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://gbeced.github.io/pyalgotrade/docs/v0.20/html/optimizer.html](https://gbeced.github.io/pyalgotrade/docs/v0.20/html/optimizer.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '*class* `pyalgotrade.optimizer.server.``Results`(*parameters*, *result*)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Bases: `object`'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The results of the strategy executions.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`getParameters`()'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Returns a sequence of parameter values.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`getResult`()'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Returns the result for a given set of parameters.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`pyalgotrade.optimizer.server.``serve`(*barFeed*, *strategyParameters*, *address*,
+    *port*, *batchSize=200*)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Executes a server that will provide bars and strategy parameters for workers
+    to use.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '| Parameters: |'
+  prefs: []
+  type: TYPE_TB
+- en: '**barFeed** (`pyalgotrade.barfeed.BarFeed`.) – The bar feed that each worker
+    will use to backtest the strategy.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**strategyParameters** – The set of parameters to use for backtesting. An iterable
+    object where **each element is a tuple that holds parameter values**.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**address** (*string.*) – The address to listen for incoming worker connections.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**port** (*int.*) – The port to listen for incoming worker connections.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**batchSize** (*int.*) – The number of strategy executions that are delivered
+    to each worker.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '|'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '| Return type: | A [`Results`](#pyalgotrade.optimizer.server.Results "pyalgotrade.optimizer.server.Results")
+    instance with the best results found or None if no results were obtained. |'
+  prefs: []
+  type: TYPE_TB
+- en: '`pyalgotrade.optimizer.worker.``run`(*strategyClass*, *address*, *port*, *workerCount=None*,
+    *workerName=None*)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Executes one or more worker processes that will run a strategy with the bars
+    and parameters supplied by the server.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '| Parameters: |'
+  prefs: []
+  type: TYPE_TB
+- en: '**strategyClass** – The strategy class.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**address** (*string.*) – The address of the server.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**port** (*int.*) – The port where the server is listening for incoming connections.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**workerCount** (*int.*) – The number of worker processes to run. If None then
+    as many workers as CPUs are used.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**workerName** (*string.*) – A name for the worker. A name that identifies
+    the worker. If None, the hostname is used.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '|'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`pyalgotrade.optimizer.local.``run`(*strategyClass*, *barFeed*, *strategyParameters*,
+    *workerCount=None*, *logLevel=40*, *batchSize=200*)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Executes many instances of a strategy in parallel and finds the parameters that
+    yield the best results.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '| Parameters: |'
+  prefs: []
+  type: TYPE_TB
+- en: '**strategyClass** – The strategy class.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**barFeed** (`pyalgotrade.barfeed.BarFeed`.) – The bar feed to use to backtest
+    the strategy.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**strategyParameters** – The set of parameters to use for backtesting. An iterable
+    object where **each element is a tuple that holds parameter values**.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**workerCount** (*int.*) – The number of strategies to run in parallel. If
+    None then as many workers as CPUs are used.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**logLevel** – The log level. Defaults to **logging.ERROR**.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**batchSize** (*int.*) – The number of strategy executions that are delivered
+    to each worker.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '|'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '| Return type: | A `Results` instance with the best results found. |'
+  prefs: []
+  type: TYPE_TB
+- en: Note
+  prefs: []
+  type: TYPE_NORMAL
+- en: The server component will split strategy executions in chunks which are distributed
+    among the different workers. You can optionally set the chunk size by passing
+    in **batchSize** to the constructor of **pyalgotrade.optimizer.xmlrpcserver.Server**.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: The `pyalgotrade.strategy.BaseStrategy.getResult()` method is used to select
+    the best strategy execution. You can override that method to rank executions using
+    a different criteria.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Previous topic
+  prefs:
+  - PREF_H4
+  type: TYPE_NORMAL
+- en: '[plotter – Strategy plotter](plotter.html "previous chapter")'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Next topic
+  prefs:
+  - PREF_H4
+  type: TYPE_NORMAL
+- en: '[marketsession – Market sessions](marketsession.html "next chapter")'
+  prefs: []
+  type: TYPE_NORMAL
+- en: This Page
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Show Source](_sources/optimizer.txt)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Quick search
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Enter search terms or a module, class or function name.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Navigation
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[index](genindex.html "General Index")'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[modules](py-modindex.html "Python Module Index") |'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[next](marketsession.html "marketsession – Market sessions") |'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[previous](plotter.html "plotter – Strategy plotter") |'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[PyAlgoTrade 0.20 documentation](index.html) »'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Documentation for the code](code.html) »'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

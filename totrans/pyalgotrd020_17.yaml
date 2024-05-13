@@ -1,0 +1,109 @@
+- en: Bitstamp support
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://gbeced.github.io/pyalgotrade/docs/v0.20/html/bitstamp.html](https://gbeced.github.io/pyalgotrade/docs/v0.20/html/bitstamp.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: The bitstamp package adds support for paper trading and live trading Bitcoin
+    strategies through Bitstamp ([https://www.bitstamp.net/](https://www.bitstamp.net/)).
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Bitstamp support depends on:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**ws4py** ([https://github.com/Lawouach/WebSocket-for-Python](https://github.com/Lawouach/WebSocket-for-Python))'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**tornado** ([http://www.tornadoweb.org/en/stable/](http://www.tornadoweb.org/en/stable/))'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: so be sure to have those installed before moving forward.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Contents:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[bitstamp – Bitstamp reference](bitstamp_ref.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[WebSocket](bitstamp_ref.html#websocket)'
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Feeds](bitstamp_ref.html#module-pyalgotrade.bitstamp.barfeed)'
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Brokers](bitstamp_ref.html#module-pyalgotrade.bitstamp.broker)'
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Bitstamp Example](bitstamp_example.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Previous topic
+  prefs:
+  - PREF_H4
+  type: TYPE_NORMAL
+- en: '[Bitcoin](bitcoin.html "previous chapter")'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Next topic
+  prefs:
+  - PREF_H4
+  type: TYPE_NORMAL
+- en: '[bitstamp – Bitstamp reference](bitstamp_ref.html "next chapter")'
+  prefs: []
+  type: TYPE_NORMAL
+- en: This Page
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Show Source](_sources/bitstamp.txt)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Quick search
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Enter search terms or a module, class or function name.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Navigation
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[index](genindex.html "General Index")'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[modules](py-modindex.html "Python Module Index") |'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[next](bitstamp_ref.html "bitstamp – Bitstamp reference") |'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[previous](bitcoin.html "Bitcoin") |'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[PyAlgoTrade 0.20 documentation](index.html) »'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Bitcoin](bitcoin.html) »'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

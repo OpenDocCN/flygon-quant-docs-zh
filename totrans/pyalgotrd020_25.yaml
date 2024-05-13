@@ -1,0 +1,122 @@
+- en: Twitter Example
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://gbeced.github.io/pyalgotrade/docs/v0.20/html/twitter_example.html](https://gbeced.github.io/pyalgotrade/docs/v0.20/html/twitter_example.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: This goal of this simple example is to show you how to put all the pieces together
+    to incorporate Twitter events in a strategy. We will be using Bitstamp’s live
+    feed since backtesting with Twitter is not supported so please take a look at
+    the [*Bitstamp Example*](bitstamp_example.html#bitstamp-tutorial-label) section
+    before moving forward.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'In order to connect to Twitter’s API you’ll need:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Consumer key
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Consumer secret
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Access token
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Access token secret
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Go to [http://dev.twitter.com](http://dev.twitter.com) and create an app. The
+    consumer key and secret will be generated for you after that. Then you’ll need
+    to create an access token under the “Your access token” section.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'The key things to highlight are:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: We’re using [`pyalgotrade.strategy.BaseStrategy`](strategy.html#pyalgotrade.strategy.BaseStrategy
+    "pyalgotrade.strategy.BaseStrategy") instead of [`pyalgotrade.strategy.BacktestingStrategy`](strategy.html#pyalgotrade.strategy.BacktestingStrategy
+    "pyalgotrade.strategy.BacktestingStrategy") as the base class. This is not a backtest.
+  prefs:
+  - PREF_BQ
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: The [`pyalgotrade.twitter.feed.TwitterFeed`](twitter_ref.html#pyalgotrade.twitter.feed.TwitterFeed
+    "pyalgotrade.twitter.feed.TwitterFeed") instance has to be included in the strategy
+    event dispatch loop before running the strategy.
+  prefs:
+  - PREF_BQ
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'The output should look like this:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: Previous topic
+  prefs:
+  - PREF_H4
+  type: TYPE_NORMAL
+- en: '[twitter – Twitter feed reference](twitter_ref.html "previous chapter")'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Next topic
+  prefs:
+  - PREF_H4
+  type: TYPE_NORMAL
+- en: '[TA-Lib integration](talib.html "next chapter")'
+  prefs: []
+  type: TYPE_NORMAL
+- en: This Page
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Show Source](_sources/twitter_example.txt)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Quick search
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Enter search terms or a module, class or function name.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Navigation
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[index](genindex.html "General Index")'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[modules](py-modindex.html "Python Module Index") |'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[next](talib.html "TA-Lib integration") |'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[previous](twitter_ref.html "twitter – Twitter feed reference") |'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[PyAlgoTrade 0.20 documentation](index.html) »'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Twitter support](twitter.html) »'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

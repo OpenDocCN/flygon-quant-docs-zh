@@ -1,0 +1,90 @@
+- en: Bitcoin Charts support
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://gbeced.github.io/pyalgotrade/docs/v0.20/html/bitcoincharts.html](https://gbeced.github.io/pyalgotrade/docs/v0.20/html/bitcoincharts.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: The bitcoincharts package adds support for integrating with historical trade
+    data supplied by [http://www.bitcoincharts.com/](http://www.bitcoincharts.com/)
+    for backtesting Bitcoin strategies.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Historical trade data in CSV format is described in [http://www.bitcoincharts.com/about/markets-api/](http://www.bitcoincharts.com/about/markets-api/),
+    and files can be downloaded from [http://api.bitcoincharts.com/v1/csv/](http://api.bitcoincharts.com/v1/csv/).
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Contents:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[bitcoincharts – Bitcoin Charts reference](bitcoincharts_ref.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Feeds](bitcoincharts_ref.html#module-pyalgotrade.bitcoincharts.barfeed)'
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Bitcoin Charts example](bitcoincharts_example.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Previous topic
+  prefs:
+  - PREF_H4
+  type: TYPE_NORMAL
+- en: '[Bitstamp Example](bitstamp_example.html "previous chapter")'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Next topic
+  prefs:
+  - PREF_H4
+  type: TYPE_NORMAL
+- en: '[bitcoincharts – Bitcoin Charts reference](bitcoincharts_ref.html "next chapter")'
+  prefs: []
+  type: TYPE_NORMAL
+- en: This Page
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Show Source](_sources/bitcoincharts.txt)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Quick search
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Enter search terms or a module, class or function name.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Navigation
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[index](genindex.html "General Index")'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[modules](py-modindex.html "Python Module Index") |'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[next](bitcoincharts_ref.html "bitcoincharts – Bitcoin Charts reference") |'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[previous](bitstamp_example.html "Bitstamp Example") |'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[PyAlgoTrade 0.20 documentation](index.html) »'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Bitcoin](bitcoin.html) »'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

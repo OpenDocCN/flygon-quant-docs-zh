@@ -1,0 +1,154 @@
+- en: twitter – Twitter feed reference
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://gbeced.github.io/pyalgotrade/docs/v0.20/html/twitter_ref.html](https://gbeced.github.io/pyalgotrade/docs/v0.20/html/twitter_ref.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '## Feed'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*class* `pyalgotrade.twitter.feed.``TwitterFeed`(*consumerKey*, *consumerSecret*,
+    *accessToken*, *accessTokenSecret*, *track=*[], *follow=*[], *languages=*[])'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Bases: `pyalgotrade.observer.Subject`'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Class responsible for connecting to Twitter’s public stream API and dispatching
+    events. Check [https://dev.twitter.com/docs/streaming-apis/streams/public](https://dev.twitter.com/docs/streaming-apis/streams/public)
+    for more information.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '| Parameters: |'
+  prefs: []
+  type: TYPE_TB
+- en: '**consumerKey** (*string.*) – Consumer key.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**consumerSecret** (*string.*) – Consumer secret.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**accessToken** (*string.*) – Access token.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**accessTokenSecret** (*string.*) – Access token secret.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**track** (*list.*) – A list of phrases which will be used to determine what
+    Tweets will be delivered on the stream. A phrase may be one or more terms separated
+    by spaces, and a phrase will match if all of the terms in the phrase are present
+    in the Tweet, regardless of order and ignoring case.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**follow** (*list.*) – A list of user IDs, indicating the users whose Tweets
+    should be delivered on the stream. Following protected users is not supported.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**languages** (*list.*) – A list of language IDs a defined in [http://tools.ietf.org/html/bcp47](http://tools.ietf.org/html/bcp47).'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '|'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Note
+  prefs: []
+  type: TYPE_NORMAL
+- en: Go to [http://dev.twitter.com](http://dev.twitter.com) and create an app. The
+    consumer key and secret will be generated for you after that.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Create an access token under the “Your access token” section.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: At least **track** or **follow** have to be set.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`subscribe`(*callback*)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Subscribe to Twitter events. The event handler will receive a dictionary with
+    the data as defined in: [https://dev.twitter.com/docs/streaming-apis/messages#Public_stream_messages](https://dev.twitter.com/docs/streaming-apis/messages#Public_stream_messages).'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Table Of Contents](index.html)'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[twitter – Twitter feed reference](#)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Feed](#module-pyalgotrade.twitter.feed)'
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Previous topic
+  prefs:
+  - PREF_H4
+  type: TYPE_NORMAL
+- en: '[Twitter support](twitter.html "previous chapter")'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Next topic
+  prefs:
+  - PREF_H4
+  type: TYPE_NORMAL
+- en: '[Twitter Example](twitter_example.html "next chapter")'
+  prefs: []
+  type: TYPE_NORMAL
+- en: This Page
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Show Source](_sources/twitter_ref.txt)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Quick search
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Enter search terms or a module, class or function name.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Navigation
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[index](genindex.html "General Index")'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[modules](py-modindex.html "Python Module Index") |'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[next](twitter_example.html "Twitter Example") |'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[previous](twitter.html "Twitter support") |'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[PyAlgoTrade 0.20 documentation](index.html) »'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Twitter support](twitter.html) »'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

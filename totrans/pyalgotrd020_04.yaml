@@ -1,0 +1,317 @@
+- en: dataseries – Basic dataseries classes
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://gbeced.github.io/pyalgotrade/docs/v0.20/html/dataseries.html](https://gbeced.github.io/pyalgotrade/docs/v0.20/html/dataseries.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: Data series are abstractions used to manage time-series data.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*class* `pyalgotrade.dataseries.``DataSeries`'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Bases: `object`'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Base class for data series.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Note
+  prefs: []
+  type: TYPE_NORMAL
+- en: This is a base class and should not be used directly.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`__getitem__`(*key*)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Returns the value at a given position/slice. It raises IndexError if the position
+    is invalid, or TypeError if the key type is invalid.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`__len__`()'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Returns the number of elements in the data series.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`getDateTimes`()'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Returns a list of `datetime.datetime` associated with each value.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*class* `pyalgotrade.dataseries.``SequenceDataSeries`(*maxLen=None*)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Bases: [`pyalgotrade.dataseries.DataSeries`](#pyalgotrade.dataseries.DataSeries
+    "pyalgotrade.dataseries.DataSeries")'
+  prefs: []
+  type: TYPE_NORMAL
+- en: A DataSeries that holds values in a sequence in memory.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '| Parameters: | **maxLen** (*int.*) – The maximum number of values to hold.
+    Once a bounded length is full, when new items are added, a corresponding number
+    of items are discarded from the opposite end. If None then dataseries.DEFAULT_MAX_LEN
+    is used. |'
+  prefs: []
+  type: TYPE_TB
+- en: '`append`(*value*)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Appends a value.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`appendWithDateTime`(*dateTime*, *value*)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Appends a value with an associated datetime.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Note
+  prefs: []
+  type: TYPE_NORMAL
+- en: If dateTime is not None, it must be greater than the last one.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`getMaxLen`()'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Returns the maximum number of values to hold.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`setMaxLen`(*maxLen*)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Sets the maximum number of values to hold and resizes accordingly if necessary.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`pyalgotrade.dataseries.aligned.``datetime_aligned`(*ds1*, *ds2*, *maxLen=None*)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Returns two dataseries that exhibit only those values whose datetimes are in
+    both dataseries.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '| Parameters: |'
+  prefs: []
+  type: TYPE_TB
+- en: '**ds1** (`DataSeries`.) – A DataSeries instance.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**ds2** (`DataSeries`.) – A DataSeries instance.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**maxLen** (*int.*) – The maximum number of values to hold for the returned
+    `DataSeries`. Once a bounded length is full, when new items are added, a corresponding
+    number of items are discarded from the opposite end. If None then dataseries.DEFAULT_MAX_LEN
+    is used.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '|'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*class* `pyalgotrade.dataseries.bards.``BarDataSeries`(*maxLen=None*)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Bases: [`pyalgotrade.dataseries.SequenceDataSeries`](#pyalgotrade.dataseries.SequenceDataSeries
+    "pyalgotrade.dataseries.SequenceDataSeries")'
+  prefs: []
+  type: TYPE_NORMAL
+- en: A DataSeries of [`pyalgotrade.bar.Bar`](bar.html#pyalgotrade.bar.Bar "pyalgotrade.bar.Bar")
+    instances.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '| Parameters: | **maxLen** (*int.*) – The maximum number of values to hold.
+    Once a bounded length is full, when new items are added, a corresponding number
+    of items are discarded from the opposite end. If None then dataseries.DEFAULT_MAX_LEN
+    is used. |'
+  prefs: []
+  type: TYPE_TB
+- en: '`getAdjCloseDataSeries`()'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Returns a [`pyalgotrade.dataseries.DataSeries`](#pyalgotrade.dataseries.DataSeries
+    "pyalgotrade.dataseries.DataSeries") with the adjusted close prices.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`getCloseDataSeries`()'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Returns a [`pyalgotrade.dataseries.DataSeries`](#pyalgotrade.dataseries.DataSeries
+    "pyalgotrade.dataseries.DataSeries") with the close prices.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`getExtraDataSeries`(*name*)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Returns a [`pyalgotrade.dataseries.DataSeries`](#pyalgotrade.dataseries.DataSeries
+    "pyalgotrade.dataseries.DataSeries") for an extra column.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`getHighDataSeries`()'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Returns a [`pyalgotrade.dataseries.DataSeries`](#pyalgotrade.dataseries.DataSeries
+    "pyalgotrade.dataseries.DataSeries") with the high prices.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`getLowDataSeries`()'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Returns a [`pyalgotrade.dataseries.DataSeries`](#pyalgotrade.dataseries.DataSeries
+    "pyalgotrade.dataseries.DataSeries") with the low prices.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`getOpenDataSeries`()'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Returns a [`pyalgotrade.dataseries.DataSeries`](#pyalgotrade.dataseries.DataSeries
+    "pyalgotrade.dataseries.DataSeries") with the open prices.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`getPriceDataSeries`()'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Returns a [`pyalgotrade.dataseries.DataSeries`](#pyalgotrade.dataseries.DataSeries
+    "pyalgotrade.dataseries.DataSeries") with the close or adjusted close prices.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`getVolumeDataSeries`()'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Returns a [`pyalgotrade.dataseries.DataSeries`](#pyalgotrade.dataseries.DataSeries
+    "pyalgotrade.dataseries.DataSeries") with the volume.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*class* `pyalgotrade.dataseries.resampled.``ResampledBarDataSeries`(*dataSeries*,
+    *frequency*, *maxLen=None*)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Bases: [`pyalgotrade.dataseries.bards.BarDataSeries`](#pyalgotrade.dataseries.bards.BarDataSeries
+    "pyalgotrade.dataseries.bards.BarDataSeries"), `pyalgotrade.dataseries.resampled.DSResampler`'
+  prefs: []
+  type: TYPE_NORMAL
+- en: A BarDataSeries that will build on top of another, higher frequency, BarDataSeries.
+    Resampling will take place as new values get pushed into the dataseries being
+    resampled.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '| Parameters: |'
+  prefs: []
+  type: TYPE_TB
+- en: '**dataSeries** ([`pyalgotrade.dataseries.bards.BarDataSeries`](#pyalgotrade.dataseries.bards.BarDataSeries
+    "pyalgotrade.dataseries.bards.BarDataSeries")) – The DataSeries instance being
+    resampled.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**frequency** – The grouping frequency in seconds. Must be > 0.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**maxLen** (*int.*) – The maximum number of values to hold. Once a bounded
+    length is full, when new items are added, a corresponding number of items are
+    discarded from the opposite end.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '|'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Note
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Supported resampling frequencies are:'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Less than bar.Frequency.DAY
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: bar.Frequency.DAY
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: bar.Frequency.MONTH
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`checkNow`(*dateTime*)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Forces a resample check. Depending on the resample frequency, and the current
+    datetime, a new value may be generated.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '| Parameters: | **dateTime** (`datetime.datetime`) – The current datetime.
+    |'
+  prefs: []
+  type: TYPE_TB
+- en: Previous topic
+  prefs:
+  - PREF_H4
+  type: TYPE_NORMAL
+- en: '[bar – Instrument prices](bar.html "previous chapter")'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Next topic
+  prefs:
+  - PREF_H4
+  type: TYPE_NORMAL
+- en: '[feed – Basic feeds](feed.html "next chapter")'
+  prefs: []
+  type: TYPE_NORMAL
+- en: This Page
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Show Source](_sources/dataseries.txt)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Quick search
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Enter search terms or a module, class or function name.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Navigation
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[index](genindex.html "General Index")'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[modules](py-modindex.html "Python Module Index") |'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[next](feed.html "feed – Basic feeds") |'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[previous](bar.html "bar – Instrument prices") |'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[PyAlgoTrade 0.20 documentation](index.html) »'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Documentation for the code](code.html) »'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

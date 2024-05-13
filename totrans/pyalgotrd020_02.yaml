@@ -1,0 +1,208 @@
+- en: Documentation for the code
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://gbeced.github.io/pyalgotrade/docs/v0.20/html/code.html](https://gbeced.github.io/pyalgotrade/docs/v0.20/html/code.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: 'Contents:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[bar – Instrument prices](bar.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[dataseries – Basic dataseries classes](dataseries.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[feed – Basic feeds](feed.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[CSV support](feed.html#module-pyalgotrade.feed.csvfeed)'
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[CSV support Example](feed.html#csv-support-example)'
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[barfeed – Bar providers](barfeed.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[CSV](barfeed.html#module-pyalgotrade.barfeed.csvfeed)'
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Yahoo! Finance](barfeed.html#module-pyalgotrade.barfeed.yahoofeed)'
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Google Finance](barfeed.html#module-pyalgotrade.barfeed.googlefeed)'
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Quandl](barfeed.html#module-pyalgotrade.barfeed.quandlfeed)'
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Ninja Trader](barfeed.html#module-pyalgotrade.barfeed.ninjatraderfeed)'
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[technical – Technical indicators](technical.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Example](technical.html#example)'
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Moving Averages](technical.html#module-pyalgotrade.technical.ma)'
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Momentum Indicators](technical.html#module-pyalgotrade.technical.macd)'
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Other Indicators](technical.html#module-pyalgotrade.technical.atr)'
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[broker – Order management classes](broker.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Base module and classes](broker.html#module-pyalgotrade.broker)'
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Backtesting module and classes](broker.html#module-pyalgotrade.broker.backtesting)'
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[strategy – Basic strategy classes](strategy.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Strategy](strategy.html#module-pyalgotrade.strategy)'
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Position](strategy.html#module-pyalgotrade.strategy.position)'
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[stratanalyzer – Strategy analyzers](stratanalyzer.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Returns](stratanalyzer.html#module-pyalgotrade.stratanalyzer.returns)'
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Sharpe Ratio](stratanalyzer.html#module-pyalgotrade.stratanalyzer.sharpe)'
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[DrawDown](stratanalyzer.html#module-pyalgotrade.stratanalyzer.drawdown)'
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Trades](stratanalyzer.html#module-pyalgotrade.stratanalyzer.trades)'
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Example](stratanalyzer.html#example)'
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[plotter – Strategy plotter](plotter.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[optimizer – Parallel optimizers](optimizer.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[marketsession – Market sessions](marketsession.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Previous topic
+  prefs:
+  - PREF_H4
+  type: TYPE_NORMAL
+- en: '[Tutorial](tutorial.html "previous chapter")'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Next topic
+  prefs:
+  - PREF_H4
+  type: TYPE_NORMAL
+- en: '[bar – Instrument prices](bar.html "next chapter")'
+  prefs: []
+  type: TYPE_NORMAL
+- en: This Page
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Show Source](_sources/code.txt)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Quick search
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Enter search terms or a module, class or function name.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Navigation
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[index](genindex.html "General Index")'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[modules](py-modindex.html "Python Module Index") |'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[next](bar.html "bar – Instrument prices") |'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[previous](tutorial.html "Tutorial") |'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[PyAlgoTrade 0.20 documentation](index.html) »'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

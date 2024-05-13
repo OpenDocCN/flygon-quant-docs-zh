@@ -1,0 +1,1051 @@
+- en: technical – Technical indicators
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://gbeced.github.io/pyalgotrade/docs/v0.20/html/technical.html](https://gbeced.github.io/pyalgotrade/docs/v0.20/html/technical.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '*class* `pyalgotrade.technical.``EventWindow`(*windowSize*, *dtype=<type ''float''>*,
+    *skipNone=True*)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Bases: `object`'
+  prefs: []
+  type: TYPE_NORMAL
+- en: An EventWindow class is responsible for making calculation over a moving window
+    of values.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '| Parameters: |'
+  prefs: []
+  type: TYPE_TB
+- en: '**windowSize** (*int.*) – The size of the window. Must be greater than 0.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**dtype** (*data-type.*) – The desired data-type for the array.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**skipNone** (*boolean.*) – True if None values should not be included in the
+    window.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '|'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Note
+  prefs: []
+  type: TYPE_NORMAL
+- en: This is a base class and should not be used directly.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`getValue`()'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Override to calculate a value using the values in the window.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`getValues`()'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Returns a numpy.array with the values in the window.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`getWindowSize`()'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Returns the window size.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*class* `pyalgotrade.technical.``EventBasedFilter`(*dataSeries*, *eventWindow*,
+    *maxLen=None*)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Bases: [`pyalgotrade.dataseries.SequenceDataSeries`](dataseries.html#pyalgotrade.dataseries.SequenceDataSeries
+    "pyalgotrade.dataseries.SequenceDataSeries")'
+  prefs: []
+  type: TYPE_NORMAL
+- en: An EventBasedFilter class is responsible for capturing new values in a [`pyalgotrade.dataseries.DataSeries`](dataseries.html#pyalgotrade.dataseries.DataSeries
+    "pyalgotrade.dataseries.DataSeries") and using an [`EventWindow`](#pyalgotrade.technical.EventWindow
+    "pyalgotrade.technical.EventWindow") to calculate new values.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '| Parameters: |'
+  prefs: []
+  type: TYPE_TB
+- en: '**dataSeries** ([`pyalgotrade.dataseries.DataSeries`](dataseries.html#pyalgotrade.dataseries.DataSeries
+    "pyalgotrade.dataseries.DataSeries").) – The DataSeries instance being filtered.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**eventWindow** ([`EventWindow`](#pyalgotrade.technical.EventWindow "pyalgotrade.technical.EventWindow").)
+    – The EventWindow instance to use to calculate new values.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**maxLen** (*int.*) – The maximum number of values to hold. Once a bounded
+    length is full, when new items are added, a corresponding number of items are
+    discarded from the opposite end. If None then dataseries.DEFAULT_MAX_LEN is used.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '|'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Example
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: 'The following example shows how to combine an [`EventWindow`](#pyalgotrade.technical.EventWindow
+    "pyalgotrade.technical.EventWindow") and an [`EventBasedFilter`](#pyalgotrade.technical.EventBasedFilter
+    "pyalgotrade.technical.EventBasedFilter") to build a custom filter:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'The output should be:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: '## Moving Averages'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*class* `pyalgotrade.technical.ma.``SMA`(*dataSeries*, *period*, *maxLen=None*)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Bases: [`pyalgotrade.technical.EventBasedFilter`](#pyalgotrade.technical.EventBasedFilter
+    "pyalgotrade.technical.EventBasedFilter")'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Simple Moving Average filter.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '| Parameters: |'
+  prefs: []
+  type: TYPE_TB
+- en: '**dataSeries** ([`pyalgotrade.dataseries.DataSeries`](dataseries.html#pyalgotrade.dataseries.DataSeries
+    "pyalgotrade.dataseries.DataSeries").) – The DataSeries instance being filtered.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**period** (*int.*) – The number of values to use to calculate the SMA.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**maxLen** (*int.*) – The maximum number of values to hold. Once a bounded
+    length is full, when new items are added, a corresponding number of items are
+    discarded from the opposite end. If None then dataseries.DEFAULT_MAX_LEN is used.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '|'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*class* `pyalgotrade.technical.ma.``EMA`(*dataSeries*, *period*, *maxLen=None*)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Bases: [`pyalgotrade.technical.EventBasedFilter`](#pyalgotrade.technical.EventBasedFilter
+    "pyalgotrade.technical.EventBasedFilter")'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Exponential Moving Average filter.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '| Parameters: |'
+  prefs: []
+  type: TYPE_TB
+- en: '**dataSeries** ([`pyalgotrade.dataseries.DataSeries`](dataseries.html#pyalgotrade.dataseries.DataSeries
+    "pyalgotrade.dataseries.DataSeries").) – The DataSeries instance being filtered.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**period** (*int.*) – The number of values to use to calculate the EMA. Must
+    be an integer greater than 1.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**maxLen** (*int.*) – The maximum number of values to hold. Once a bounded
+    length is full, when new items are added, a corresponding number of items are
+    discarded from the opposite end. If None then dataseries.DEFAULT_MAX_LEN is used.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '|'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*class* `pyalgotrade.technical.ma.``WMA`(*dataSeries*, *weights*, *maxLen=None*)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Bases: [`pyalgotrade.technical.EventBasedFilter`](#pyalgotrade.technical.EventBasedFilter
+    "pyalgotrade.technical.EventBasedFilter")'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Weighted Moving Average filter.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '| Parameters: |'
+  prefs: []
+  type: TYPE_TB
+- en: '**dataSeries** ([`pyalgotrade.dataseries.DataSeries`](dataseries.html#pyalgotrade.dataseries.DataSeries
+    "pyalgotrade.dataseries.DataSeries").) – The DataSeries instance being filtered.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**weights** (*list.*) – A list of int/float with the weights.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**maxLen** (*int.*) – The maximum number of values to hold. Once a bounded
+    length is full, when new items are added, a corresponding number of items are
+    discarded from the opposite end. If None then dataseries.DEFAULT_MAX_LEN is used.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '|'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*class* `pyalgotrade.technical.vwap.``VWAP`(*dataSeries*, *period*, *useTypicalPrice=False*,
+    *maxLen=None*)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Bases: [`pyalgotrade.technical.EventBasedFilter`](#pyalgotrade.technical.EventBasedFilter
+    "pyalgotrade.technical.EventBasedFilter")'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Volume Weighted Average Price filter.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '| Parameters: |'
+  prefs: []
+  type: TYPE_TB
+- en: '**dataSeries** ([`pyalgotrade.dataseries.bards.BarDataSeries`](dataseries.html#pyalgotrade.dataseries.bards.BarDataSeries
+    "pyalgotrade.dataseries.bards.BarDataSeries").) – The DataSeries instance being
+    filtered.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**period** (*int.*) – The number of values to use to calculate the VWAP.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**useTypicalPrice** (*boolean.*) – True if the typical price should be used
+    instead of the closing price.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**maxLen** (*int.*) – The maximum number of values to hold. Once a bounded
+    length is full, when new items are added, a corresponding number of items are
+    discarded from the opposite end. If None then dataseries.DEFAULT_MAX_LEN is used.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '|  ## Momentum Indicators'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*class* `pyalgotrade.technical.macd.``MACD`(*dataSeries*, *fastEMA*, *slowEMA*,
+    *signalEMA*, *maxLen=None*)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Bases: [`pyalgotrade.dataseries.SequenceDataSeries`](dataseries.html#pyalgotrade.dataseries.SequenceDataSeries
+    "pyalgotrade.dataseries.SequenceDataSeries")'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Moving Average Convergence-Divergence indicator as described in [http://stockcharts.com/school/doku.php?id=chart_school:technical_indicators:moving_average_convergence_divergence_macd](http://stockcharts.com/school/doku.php?id=chart_school:technical_indicators:moving_average_convergence_divergence_macd).
+  prefs: []
+  type: TYPE_NORMAL
+- en: '| Parameters: |'
+  prefs: []
+  type: TYPE_TB
+- en: '**dataSeries** ([`pyalgotrade.dataseries.DataSeries`](dataseries.html#pyalgotrade.dataseries.DataSeries
+    "pyalgotrade.dataseries.DataSeries").) – The DataSeries instance being filtered.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**fastEMA** (*int.*) – The number of values to use to calculate the fast EMA.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**slowEMA** (*int.*) – The number of values to use to calculate the slow EMA.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**signalEMA** (*int.*) – The number of values to use to calculate the signal
+    EMA.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**maxLen** (*int.*) – The maximum number of values to hold. Once a bounded
+    length is full, when new items are added, a corresponding number of items are
+    discarded from the opposite end. If None then dataseries.DEFAULT_MAX_LEN is used.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '|'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`getHistogram`()'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Returns a [`pyalgotrade.dataseries.DataSeries`](dataseries.html#pyalgotrade.dataseries.DataSeries
+    "pyalgotrade.dataseries.DataSeries") with the histogram (the difference between
+    the MACD and the Signal).
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`getSignal`()'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Returns a [`pyalgotrade.dataseries.DataSeries`](dataseries.html#pyalgotrade.dataseries.DataSeries
+    "pyalgotrade.dataseries.DataSeries") with the EMA over the MACD.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*class* `pyalgotrade.technical.rsi.``RSI`(*dataSeries*, *period*, *maxLen=None*)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Bases: [`pyalgotrade.technical.EventBasedFilter`](#pyalgotrade.technical.EventBasedFilter
+    "pyalgotrade.technical.EventBasedFilter")'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Relative Strength Index filter as described in [http://stockcharts.com/school/doku.php?id=chart_school:technical_indicators:relative_strength_index_rsi](http://stockcharts.com/school/doku.php?id=chart_school:technical_indicators:relative_strength_index_rsi).
+  prefs: []
+  type: TYPE_NORMAL
+- en: '| Parameters: |'
+  prefs: []
+  type: TYPE_TB
+- en: '**dataSeries** ([`pyalgotrade.dataseries.DataSeries`](dataseries.html#pyalgotrade.dataseries.DataSeries
+    "pyalgotrade.dataseries.DataSeries").) – The DataSeries instance being filtered.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**period** (*int.*) – The period. Note that if period is **n**, then **n+1**
+    values are used. Must be > 1.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**maxLen** (*int.*) – The maximum number of values to hold. Once a bounded
+    length is full, when new items are added, a corresponding number of items are
+    discarded from the opposite end. If None then dataseries.DEFAULT_MAX_LEN is used.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '|'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*class* `pyalgotrade.technical.stoch.``StochasticOscillator`(*barDataSeries*,
+    *period*, *dSMAPeriod=3*, *useAdjustedValues=False*, *maxLen=None*)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Bases: [`pyalgotrade.technical.EventBasedFilter`](#pyalgotrade.technical.EventBasedFilter
+    "pyalgotrade.technical.EventBasedFilter")'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Fast Stochastic Oscillator filter as described in [http://stockcharts.com/school/doku.php?st=stochastic+oscillator&id=chart_school:technical_indicators:stochastic_oscillator_fast_slow_and_full](http://stockcharts.com/school/doku.php?st=stochastic+oscillator&id=chart_school:technical_indicators:stochastic_oscillator_fast_slow_and_full).
+    Note that the value returned by this filter is %K. To access %D use [`getD()`](#pyalgotrade.technical.stoch.StochasticOscillator.getD
+    "pyalgotrade.technical.stoch.StochasticOscillator.getD").
+  prefs: []
+  type: TYPE_NORMAL
+- en: '| Parameters: |'
+  prefs: []
+  type: TYPE_TB
+- en: '**barDataSeries** ([`pyalgotrade.dataseries.bards.BarDataSeries`](dataseries.html#pyalgotrade.dataseries.bards.BarDataSeries
+    "pyalgotrade.dataseries.bards.BarDataSeries").) – The BarDataSeries instance being
+    filtered.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**period** (*int.*) – The period. Must be > 1.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**dSMAPeriod** (*int.*) – The %D SMA period. Must be > 1.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**useAdjustedValues** (*boolean.*) – True to use adjusted Low/High/Close values.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**maxLen** (*int.*) – The maximum number of values to hold. Once a bounded
+    length is full, when new items are added, a corresponding number of items are
+    discarded from the opposite end. If None then dataseries.DEFAULT_MAX_LEN is used.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '|'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`getD`()'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Returns a [`pyalgotrade.dataseries.DataSeries`](dataseries.html#pyalgotrade.dataseries.DataSeries
+    "pyalgotrade.dataseries.DataSeries") with the %D values.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*class* `pyalgotrade.technical.roc.``RateOfChange`(*dataSeries*, *valuesAgo*,
+    *maxLen=None*)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Bases: [`pyalgotrade.technical.EventBasedFilter`](#pyalgotrade.technical.EventBasedFilter
+    "pyalgotrade.technical.EventBasedFilter")'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Rate of change filter as described in [http://stockcharts.com/school/doku.php?id=chart_school:technical_indicators:rate_of_change_roc_and_momentum](http://stockcharts.com/school/doku.php?id=chart_school:technical_indicators:rate_of_change_roc_and_momentum).
+  prefs: []
+  type: TYPE_NORMAL
+- en: '| Parameters: |'
+  prefs: []
+  type: TYPE_TB
+- en: '**dataSeries** ([`pyalgotrade.dataseries.DataSeries`](dataseries.html#pyalgotrade.dataseries.DataSeries
+    "pyalgotrade.dataseries.DataSeries").) – The DataSeries instance being filtered.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**valuesAgo** (*int.*) – The number of values back that a given value will
+    compare to. Must be > 0.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**maxLen** (*int.*) – The maximum number of values to hold. Once a bounded
+    length is full, when new items are added, a corresponding number of items are
+    discarded from the opposite end. If None then dataseries.DEFAULT_MAX_LEN is used.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '|  ## Other Indicators'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*class* `pyalgotrade.technical.atr.``ATR`(*barDataSeries*, *period*, *useAdjustedValues=False*,
+    *maxLen=None*)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Bases: [`pyalgotrade.technical.EventBasedFilter`](#pyalgotrade.technical.EventBasedFilter
+    "pyalgotrade.technical.EventBasedFilter")'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Average True Range filter as described in [http://stockcharts.com/school/doku.php?id=chart_school:technical_indicators:average_true_range_atr](http://stockcharts.com/school/doku.php?id=chart_school:technical_indicators:average_true_range_atr)
+  prefs: []
+  type: TYPE_NORMAL
+- en: '| Parameters: |'
+  prefs: []
+  type: TYPE_TB
+- en: '**barDataSeries** ([`pyalgotrade.dataseries.bards.BarDataSeries`](dataseries.html#pyalgotrade.dataseries.bards.BarDataSeries
+    "pyalgotrade.dataseries.bards.BarDataSeries").) – The BarDataSeries instance being
+    filtered.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**period** (*int.*) – The average period. Must be > 1.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**useAdjustedValues** (*boolean.*) – True to use adjusted Low/High/Close values.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**maxLen** (*int.*) – The maximum number of values to hold. Once a bounded
+    length is full, when new items are added, a corresponding number of items are
+    discarded from the opposite end. If None then dataseries.DEFAULT_MAX_LEN is used.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '|'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*class* `pyalgotrade.technical.bollinger.``BollingerBands`(*dataSeries*, *period*,
+    *numStdDev*, *maxLen=None*)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Bases: `object`'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Bollinger Bands filter as described in [http://stockcharts.com/school/doku.php?id=chart_school:technical_indicators:bollinger_bands](http://stockcharts.com/school/doku.php?id=chart_school:technical_indicators:bollinger_bands).
+  prefs: []
+  type: TYPE_NORMAL
+- en: '| Parameters: |'
+  prefs: []
+  type: TYPE_TB
+- en: '**dataSeries** ([`pyalgotrade.dataseries.DataSeries`](dataseries.html#pyalgotrade.dataseries.DataSeries
+    "pyalgotrade.dataseries.DataSeries").) – The DataSeries instance being filtered.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**period** (*int.*) – The number of values to use in the calculation. Must
+    be > 1.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**numStdDev** (*int.*) – The number of standard deviations to use for the upper
+    and lower bands.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**maxLen** (*int.*) – The maximum number of values to hold. Once a bounded
+    length is full, when new items are added, a corresponding number of items are
+    discarded from the opposite end. If None then dataseries.DEFAULT_MAX_LEN is used.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '|'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`getLowerBand`()'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Returns the lower band as a [`pyalgotrade.dataseries.DataSeries`](dataseries.html#pyalgotrade.dataseries.DataSeries
+    "pyalgotrade.dataseries.DataSeries").
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`getMiddleBand`()'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Returns the middle band as a [`pyalgotrade.dataseries.DataSeries`](dataseries.html#pyalgotrade.dataseries.DataSeries
+    "pyalgotrade.dataseries.DataSeries").
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`getUpperBand`()'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Returns the upper band as a [`pyalgotrade.dataseries.DataSeries`](dataseries.html#pyalgotrade.dataseries.DataSeries
+    "pyalgotrade.dataseries.DataSeries").
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`pyalgotrade.technical.cross.``cross_above`(*values1*, *values2*, *start=-2*,
+    *end=None*)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Checks for a cross above conditions over the specified period between two DataSeries
+    objects.
+  prefs: []
+  type: TYPE_NORMAL
+- en: It returns the number of times values1 crossed above values2 during the given
+    period.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '| Parameters: |'
+  prefs: []
+  type: TYPE_TB
+- en: '**values1** ([`pyalgotrade.dataseries.DataSeries`](dataseries.html#pyalgotrade.dataseries.DataSeries
+    "pyalgotrade.dataseries.DataSeries").) – The DataSeries that crosses.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**values2** ([`pyalgotrade.dataseries.DataSeries`](dataseries.html#pyalgotrade.dataseries.DataSeries
+    "pyalgotrade.dataseries.DataSeries").) – The DataSeries being crossed.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**start** (*int.*) – The start of the range.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**end** (*int.*) – The end of the range.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '|'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Note
+  prefs: []
+  type: TYPE_NORMAL
+- en: The default start and end values check for cross above conditions over the last
+    2 values.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`pyalgotrade.technical.cross.``cross_below`(*values1*, *values2*, *start=-2*,
+    *end=None*)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Checks for a cross below conditions over the specified period between two DataSeries
+    objects.
+  prefs: []
+  type: TYPE_NORMAL
+- en: It returns the number of times values1 crossed below values2 during the given
+    period.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '| Parameters: |'
+  prefs: []
+  type: TYPE_TB
+- en: '**values1** ([`pyalgotrade.dataseries.DataSeries`](dataseries.html#pyalgotrade.dataseries.DataSeries
+    "pyalgotrade.dataseries.DataSeries").) – The DataSeries that crosses.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**values2** ([`pyalgotrade.dataseries.DataSeries`](dataseries.html#pyalgotrade.dataseries.DataSeries
+    "pyalgotrade.dataseries.DataSeries").) – The DataSeries being crossed.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**start** (*int.*) – The start of the range.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**end** (*int.*) – The end of the range.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '|'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Note
+  prefs: []
+  type: TYPE_NORMAL
+- en: The default start and end values check for cross below conditions over the last
+    2 values.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*class* `pyalgotrade.technical.cumret.``CumulativeReturn`(*dataSeries*, *maxLen=None*)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Bases: [`pyalgotrade.technical.EventBasedFilter`](#pyalgotrade.technical.EventBasedFilter
+    "pyalgotrade.technical.EventBasedFilter")'
+  prefs: []
+  type: TYPE_NORMAL
+- en: This filter calculates cumulative returns over another dataseries.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '| Parameters: |'
+  prefs: []
+  type: TYPE_TB
+- en: '**dataSeries** ([`pyalgotrade.dataseries.DataSeries`](dataseries.html#pyalgotrade.dataseries.DataSeries
+    "pyalgotrade.dataseries.DataSeries").) – The DataSeries instance being filtered.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**maxLen** (*int.*) – The maximum number of values to hold. Once a bounded
+    length is full, when new items are added, a corresponding number of items are
+    discarded from the opposite end. If None then dataseries.DEFAULT_MAX_LEN is used.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '|'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*class* `pyalgotrade.technical.highlow.``High`(*dataSeries*, *period*, *maxLen=None*)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Bases: [`pyalgotrade.technical.EventBasedFilter`](#pyalgotrade.technical.EventBasedFilter
+    "pyalgotrade.technical.EventBasedFilter")'
+  prefs: []
+  type: TYPE_NORMAL
+- en: This filter calculates the highest value.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '| Parameters: |'
+  prefs: []
+  type: TYPE_TB
+- en: '**dataSeries** ([`pyalgotrade.dataseries.DataSeries`](dataseries.html#pyalgotrade.dataseries.DataSeries
+    "pyalgotrade.dataseries.DataSeries").) – The DataSeries instance being filtered.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**period** (*int.*) – The number of values to use to calculate the highest
+    value.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**maxLen** (*int.*) – The maximum number of values to hold. Once a bounded
+    length is full, when new items are added, a corresponding number of items are
+    discarded from the opposite end. If None then dataseries.DEFAULT_MAX_LEN is used.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '|'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*class* `pyalgotrade.technical.highlow.``Low`(*dataSeries*, *period*, *maxLen=None*)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Bases: [`pyalgotrade.technical.EventBasedFilter`](#pyalgotrade.technical.EventBasedFilter
+    "pyalgotrade.technical.EventBasedFilter")'
+  prefs: []
+  type: TYPE_NORMAL
+- en: This filter calculates the lowest value.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '| Parameters: |'
+  prefs: []
+  type: TYPE_TB
+- en: '**dataSeries** ([`pyalgotrade.dataseries.DataSeries`](dataseries.html#pyalgotrade.dataseries.DataSeries
+    "pyalgotrade.dataseries.DataSeries").) – The DataSeries instance being filtered.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**period** (*int.*) – The number of values to use to calculate the lowest value.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**maxLen** (*int.*) – The maximum number of values to hold. Once a bounded
+    length is full, when new items are added, a corresponding number of items are
+    discarded from the opposite end. If None then dataseries.DEFAULT_MAX_LEN is used.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '|'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*class* `pyalgotrade.technical.hurst.``HurstExponent`(*dataSeries*, *period*,
+    *minLags=2*, *maxLags=20*, *logValues=True*, *maxLen=None*)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Bases: [`pyalgotrade.technical.EventBasedFilter`](#pyalgotrade.technical.EventBasedFilter
+    "pyalgotrade.technical.EventBasedFilter")'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Hurst exponent filter.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '| Parameters: |'
+  prefs: []
+  type: TYPE_TB
+- en: '**dataSeries** ([`pyalgotrade.dataseries.DataSeries`](dataseries.html#pyalgotrade.dataseries.DataSeries
+    "pyalgotrade.dataseries.DataSeries").) – The DataSeries instance being filtered.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**period** (*int.*) – The number of values to use to calculate the hurst exponent.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**minLags** (*int.*) – The minimum number of lags to use. Must be >= 2.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**maxLags** (*int.*) – The maximum number of lags to use. Must be > minLags.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**maxLen** (*int.*) – The maximum number of values to hold. Once a bounded
+    length is full, when new items are added, a corresponding number of items are
+    discarded from the opposite end. If None then dataseries.DEFAULT_MAX_LEN is used.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '|'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*class* `pyalgotrade.technical.linebreak.``Line`(*low*, *high*, *dateTime*,
+    *white*)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Bases: `object`'
+  prefs: []
+  type: TYPE_NORMAL
+- en: A line in a line break chart.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`getDateTime`()'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The datetime.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`getHigh`()'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The high value.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`getLow`()'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The low value.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`isBlack`()'
+  prefs: []
+  type: TYPE_NORMAL
+- en: True if the line is black (falling prices).
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`isWhite`()'
+  prefs: []
+  type: TYPE_NORMAL
+- en: True if the line is white (rising prices).
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*class* `pyalgotrade.technical.linebreak.``LineBreak`(*barDataSeries*, *reversalLines*,
+    *useAdjustedValues=False*, *maxLen=None*)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Bases: [`pyalgotrade.dataseries.SequenceDataSeries`](dataseries.html#pyalgotrade.dataseries.SequenceDataSeries
+    "pyalgotrade.dataseries.SequenceDataSeries")'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Line Break filter as described in [http://stockcharts.com/school/doku.php?id=chart_school:chart_analysis:three_line_break](http://stockcharts.com/school/doku.php?id=chart_school:chart_analysis:three_line_break).
+    . This is a DataSeries of [`Line`](#pyalgotrade.technical.linebreak.Line "pyalgotrade.technical.linebreak.Line")
+    instances.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '| Parameters: |'
+  prefs: []
+  type: TYPE_TB
+- en: '**barDataSeries** ([`pyalgotrade.dataseries.bards.BarDataSeries`](dataseries.html#pyalgotrade.dataseries.bards.BarDataSeries
+    "pyalgotrade.dataseries.bards.BarDataSeries").) – The DataSeries instance being
+    filtered.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**reversalLines** (*int.*) – The number of lines back to check to calculate
+    a reversal. Must be greater than 1.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**useAdjustedValues** (*boolean.*) – True to use adjusted high/low/close values.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**maxLen** (*int.*) – The maximum number of values to hold. Once a bounded
+    length is full, when new items are added, a corresponding number of items are
+    discarded from the opposite end. If None then dataseries.DEFAULT_MAX_LEN is used.
+    This value can’t be smaller than reversalLines.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '|'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*class* `pyalgotrade.technical.linreg.``LeastSquaresRegression`(*dataSeries*,
+    *windowSize*, *maxLen=None*)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Bases: [`pyalgotrade.technical.EventBasedFilter`](#pyalgotrade.technical.EventBasedFilter
+    "pyalgotrade.technical.EventBasedFilter")'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Calculates values based on a least-squares regression.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '| Parameters: |'
+  prefs: []
+  type: TYPE_TB
+- en: '**dataSeries** ([`pyalgotrade.dataseries.DataSeries`](dataseries.html#pyalgotrade.dataseries.DataSeries
+    "pyalgotrade.dataseries.DataSeries").) – The DataSeries instance being filtered.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**windowSize** (*int.*) – The number of values to use to calculate the regression.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**maxLen** (*int.*) – The maximum number of values to hold. Once a bounded
+    length is full, when new items are added, a corresponding number of items are
+    discarded from the opposite end. If None then dataseries.DEFAULT_MAX_LEN is used.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '|'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`getValueAt`(*dateTime*)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Calculates the value at a given time based on the regression line.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '| Parameters: | **dateTime** (`datetime.datetime`.) – The datetime to calculate
+    the value at. Will return None if there are not enough values in the underlying
+    DataSeries. |'
+  prefs: []
+  type: TYPE_TB
+- en: '*class* `pyalgotrade.technical.linreg.``Slope`(*dataSeries*, *period*, *maxLen=None*)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Bases: [`pyalgotrade.technical.EventBasedFilter`](#pyalgotrade.technical.EventBasedFilter
+    "pyalgotrade.technical.EventBasedFilter")'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The Slope filter calculates the slope of a least-squares regression line.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '| Parameters: |'
+  prefs: []
+  type: TYPE_TB
+- en: '**dataSeries** ([`pyalgotrade.dataseries.DataSeries`](dataseries.html#pyalgotrade.dataseries.DataSeries
+    "pyalgotrade.dataseries.DataSeries").) – The DataSeries instance being filtered.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**period** (*int.*) – The number of values to use to calculate the slope.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**maxLen** (*int.*) – The maximum number of values to hold. Once a bounded
+    length is full, when new items are added, a corresponding number of items are
+    discarded from the opposite end. If None then dataseries.DEFAULT_MAX_LEN is used.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '|'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Note
+  prefs: []
+  type: TYPE_NORMAL
+- en: This filter ignores the time elapsed between the different values.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*class* `pyalgotrade.technical.stats.``StdDev`(*dataSeries*, *period*, *ddof=0*,
+    *maxLen=None*)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Bases: [`pyalgotrade.technical.EventBasedFilter`](#pyalgotrade.technical.EventBasedFilter
+    "pyalgotrade.technical.EventBasedFilter")'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Standard deviation filter.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '| Parameters: |'
+  prefs: []
+  type: TYPE_TB
+- en: '**dataSeries** ([`pyalgotrade.dataseries.DataSeries`](dataseries.html#pyalgotrade.dataseries.DataSeries
+    "pyalgotrade.dataseries.DataSeries").) – The DataSeries instance being filtered.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**period** (*int.*) – The number of values to use to calculate the Standard
+    deviation.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**ddof** (*int.*) – Delta degrees of freedom.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**maxLen** (*int.*) – The maximum number of values to hold. Once a bounded
+    length is full, when new items are added, a corresponding number of items are
+    discarded from the opposite end. If None then dataseries.DEFAULT_MAX_LEN is used.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '|'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*class* `pyalgotrade.technical.stats.``ZScore`(*dataSeries*, *period*, *ddof=0*,
+    *maxLen=None*)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Bases: [`pyalgotrade.technical.EventBasedFilter`](#pyalgotrade.technical.EventBasedFilter
+    "pyalgotrade.technical.EventBasedFilter")'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Z-Score filter.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '| Parameters: |'
+  prefs: []
+  type: TYPE_TB
+- en: '**dataSeries** ([`pyalgotrade.dataseries.DataSeries`](dataseries.html#pyalgotrade.dataseries.DataSeries
+    "pyalgotrade.dataseries.DataSeries").) – The DataSeries instance being filtered.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**period** (*int.*) – The number of values to use to calculate the Z-Score.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**ddof** (*int.*) – Delta degrees of freedom to use for the standard deviation.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**maxLen** (*int.*) – The maximum number of values to hold. Once a bounded
+    length is full, when new items are added, a corresponding number of items are
+    discarded from the opposite end. If None then dataseries.DEFAULT_MAX_LEN is used.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '|'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Table Of Contents](index.html)'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[technical – Technical indicators](#)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Example](#example)'
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Moving Averages](#module-pyalgotrade.technical.ma)'
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Momentum Indicators](#module-pyalgotrade.technical.macd)'
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Other Indicators](#module-pyalgotrade.technical.atr)'
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Previous topic
+  prefs:
+  - PREF_H4
+  type: TYPE_NORMAL
+- en: '[barfeed – Bar providers](barfeed.html "previous chapter")'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Next topic
+  prefs:
+  - PREF_H4
+  type: TYPE_NORMAL
+- en: '[broker – Order management classes](broker.html "next chapter")'
+  prefs: []
+  type: TYPE_NORMAL
+- en: This Page
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Show Source](_sources/technical.txt)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Quick search
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Enter search terms or a module, class or function name.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Navigation
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[index](genindex.html "General Index")'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[modules](py-modindex.html "Python Module Index") |'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[next](broker.html "broker – Order management classes") |'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[previous](barfeed.html "barfeed – Bar providers") |'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[PyAlgoTrade 0.20 documentation](index.html) »'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Documentation for the code](code.html) »'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

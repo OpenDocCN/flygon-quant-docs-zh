@@ -1,0 +1,123 @@
+- en: Sample strategies
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://gbeced.github.io/pyalgotrade/docs/v0.20/html/samples.html](https://gbeced.github.io/pyalgotrade/docs/v0.20/html/samples.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '## Momentum'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[VWAP Momentum Trade](sample_vwap_momentum.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[SMA Crossover](sample_sma_crossover.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Market Timing Using Moving-Average Crossovers](sample_market_timing.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Mean Reversion
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '[Ernie Chan’s Gold vs. Gold Miners](sample_statarb_erniechan.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Bollinger Bands](sample_bbands.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[RSI2](sample_rsi2.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Others
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '[Quandl integration](sample_quandl.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Table Of Contents](index.html)'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Sample strategies](#)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Momentum](#momentum)'
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Mean Reversion](#mean-reversion)'
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Others](#others)'
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Previous topic
+  prefs:
+  - PREF_H4
+  type: TYPE_NORMAL
+- en: '[Computational Investing Part I](compinvpart1.html "previous chapter")'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Next topic
+  prefs:
+  - PREF_H4
+  type: TYPE_NORMAL
+- en: '[VWAP Momentum Trade](sample_vwap_momentum.html "next chapter")'
+  prefs: []
+  type: TYPE_NORMAL
+- en: This Page
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Show Source](_sources/samples.txt)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Quick search
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Enter search terms or a module, class or function name.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Navigation
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[index](genindex.html "General Index")'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[modules](py-modindex.html "Python Module Index") |'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[next](sample_vwap_momentum.html "VWAP Momentum Trade") |'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[previous](compinvpart1.html "Computational Investing Part I") |'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[PyAlgoTrade 0.20 documentation](index.html) »'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

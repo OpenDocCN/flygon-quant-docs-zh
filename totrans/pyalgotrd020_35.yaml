@@ -1,0 +1,76 @@
+- en: Quandl integration
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://gbeced.github.io/pyalgotrade/docs/v0.20/html/sample_quandl.html](https://gbeced.github.io/pyalgotrade/docs/v0.20/html/sample_quandl.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: The purpose of this example is to show how to integrate price data along with
+    any time-series data in CSV format from Quandl into a strategy.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'We’ll use the following CSV data from Quandl: [http://www.quandl.com/OFDP-Open-Financial-Data-Project/GOLD_2-LBMA-Gold-Price-London-Fixings-P-M](http://www.quandl.com/OFDP-Open-Financial-Data-Project/GOLD_2-LBMA-Gold-Price-London-Fixings-P-M)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'This is what the output should look like:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'and this is what the plot should look like:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![_images/quandl_sample.png](../Images/a0e3df97bc792937fcffb40e5e5ed71c.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Previous topic
+  prefs:
+  - PREF_H4
+  type: TYPE_NORMAL
+- en: '[RSI2](sample_rsi2.html "previous chapter")'
+  prefs: []
+  type: TYPE_NORMAL
+- en: This Page
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Show Source](_sources/sample_quandl.txt)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Quick search
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Enter search terms or a module, class or function name.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Navigation
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[index](genindex.html "General Index")'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[modules](py-modindex.html "Python Module Index") |'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[previous](sample_rsi2.html "RSI2") |'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[PyAlgoTrade 0.20 documentation](index.html) »'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Sample strategies](samples.html) »'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

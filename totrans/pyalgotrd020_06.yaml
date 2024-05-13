@@ -1,0 +1,595 @@
+- en: barfeed – Bar providers
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://gbeced.github.io/pyalgotrade/docs/v0.20/html/barfeed.html](https://gbeced.github.io/pyalgotrade/docs/v0.20/html/barfeed.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '*class* `pyalgotrade.barfeed.``BaseBarFeed`(*frequency*, *maxLen=None*)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Bases: [`pyalgotrade.feed.BaseFeed`](feed.html#pyalgotrade.feed.BaseFeed "pyalgotrade.feed.BaseFeed")'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Base class for [`pyalgotrade.bar.Bar`](bar.html#pyalgotrade.bar.Bar "pyalgotrade.bar.Bar")
+    providing feeds.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '| Parameters: |'
+  prefs: []
+  type: TYPE_TB
+- en: '**frequency** – The bars frequency. Valid values defined in [`pyalgotrade.bar.Frequency`](bar.html#pyalgotrade.bar.Frequency
+    "pyalgotrade.bar.Frequency").'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**maxLen** (*int.*) – The maximum number of values that the [`pyalgotrade.dataseries.bards.BarDataSeries`](dataseries.html#pyalgotrade.dataseries.bards.BarDataSeries
+    "pyalgotrade.dataseries.bards.BarDataSeries") will hold. Once a bounded length
+    is full, when new items are added, a corresponding number of items are discarded
+    from the opposite end. If None then dataseries.DEFAULT_MAX_LEN is used.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '|'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Note
+  prefs: []
+  type: TYPE_NORMAL
+- en: This is a base class and should not be used directly.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`getNextBars`()'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Override to return the next [`pyalgotrade.bar.Bars`](bar.html#pyalgotrade.bar.Bars
+    "pyalgotrade.bar.Bars") in the feed or None if there are no bars.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Note
+  prefs: []
+  type: TYPE_NORMAL
+- en: This is for BaseBarFeed subclasses and it should not be called directly.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`getCurrentBars`()'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Returns the current [`pyalgotrade.bar.Bars`](bar.html#pyalgotrade.bar.Bars "pyalgotrade.bar.Bars").
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`getLastBar`(*instrument*)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Returns the last [`pyalgotrade.bar.Bar`](bar.html#pyalgotrade.bar.Bar "pyalgotrade.bar.Bar")
+    for a given instrument, or None.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`getDefaultInstrument`()'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Returns the last instrument registered.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`getRegisteredInstruments`()'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Returns a list of registered intstrument names.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`getDataSeries`(*instrument=None*)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Returns the [`pyalgotrade.dataseries.bards.BarDataSeries`](dataseries.html#pyalgotrade.dataseries.bards.BarDataSeries
+    "pyalgotrade.dataseries.bards.BarDataSeries") for a given instrument.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '| Parameters: | **instrument** (*string.*) – Instrument identifier. If None,
+    the default instrument is returned. |'
+  prefs: []
+  type: TYPE_TB
+- en: '| Return type: | [`pyalgotrade.dataseries.bards.BarDataSeries`](dataseries.html#pyalgotrade.dataseries.bards.BarDataSeries
+    "pyalgotrade.dataseries.bards.BarDataSeries"). |'
+  prefs: []
+  type: TYPE_TB
+- en: '## CSV'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*class* `pyalgotrade.barfeed.csvfeed.``BarFeed`(*frequency*, *maxLen=None*)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Bases: `pyalgotrade.barfeed.membf.BarFeed`'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Base class for CSV file based `pyalgotrade.barfeed.BarFeed`.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Note
+  prefs: []
+  type: TYPE_NORMAL
+- en: This is a base class and should not be used directly.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*class* `pyalgotrade.barfeed.csvfeed.``GenericBarFeed`(*frequency*, *timezone=None*,
+    *maxLen=None*)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Bases: [`pyalgotrade.barfeed.csvfeed.BarFeed`](#pyalgotrade.barfeed.csvfeed.BarFeed
+    "pyalgotrade.barfeed.csvfeed.BarFeed")'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'A BarFeed that loads bars from CSV files that have the following format:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: '| Parameters: |'
+  prefs: []
+  type: TYPE_TB
+- en: '**frequency** – The frequency of the bars. Check [`pyalgotrade.bar.Frequency`](bar.html#pyalgotrade.bar.Frequency
+    "pyalgotrade.bar.Frequency").'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**timezone** (*A pytz timezone.*) – The default timezone to use to localize
+    bars. Check [`pyalgotrade.marketsession`](marketsession.html#module-pyalgotrade.marketsession
+    "pyalgotrade.marketsession").'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**maxLen** (*int.*) – The maximum number of values that the [`pyalgotrade.dataseries.bards.BarDataSeries`](dataseries.html#pyalgotrade.dataseries.bards.BarDataSeries
+    "pyalgotrade.dataseries.bards.BarDataSeries") will hold. Once a bounded length
+    is full, when new items are added, a corresponding number of items are discarded
+    from the opposite end. If None then dataseries.DEFAULT_MAX_LEN is used.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '|'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Note
+  prefs: []
+  type: TYPE_NORMAL
+- en: The CSV file **must** have the column names in the first row.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: It is ok if the **Adj Close** column is empty.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'When working with multiple instruments:'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: If all the instruments loaded are in the same timezone, then the timezone parameter
+    may not be specified.
+  prefs:
+  - PREF_BQ
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: If any of the instruments loaded are in different timezones, then the timezone
+    parameter should be set.
+  prefs:
+  - PREF_BQ
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`addBarsFromCSV`(*instrument*, *path*, *timezone=None*, *skipMalformedBars=False*)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Loads bars for a given instrument from a CSV formatted file. The instrument
+    gets registered in the bar feed.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '| Parameters: |'
+  prefs: []
+  type: TYPE_TB
+- en: '**instrument** (*string.*) – Instrument identifier.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**path** (*string.*) – The path to the CSV file.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**timezone** (*A pytz timezone.*) – The timezone to use to localize bars. Check
+    [`pyalgotrade.marketsession`](marketsession.html#module-pyalgotrade.marketsession
+    "pyalgotrade.marketsession").'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**skipMalformedBars** (*boolean.*) – True to skip errors while parsing bars.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '|'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`setDateTimeFormat`(*dateTimeFormat*)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Set the format string to use with strptime to parse datetime column.  ## Yahoo!
+    Finance'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*class* `pyalgotrade.barfeed.yahoofeed.``Feed`(*frequency=86400*, *timezone=None*,
+    *maxLen=None*)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Bases: [`pyalgotrade.barfeed.csvfeed.BarFeed`](#pyalgotrade.barfeed.csvfeed.BarFeed
+    "pyalgotrade.barfeed.csvfeed.BarFeed")'
+  prefs: []
+  type: TYPE_NORMAL
+- en: A [`pyalgotrade.barfeed.csvfeed.BarFeed`](#pyalgotrade.barfeed.csvfeed.BarFeed
+    "pyalgotrade.barfeed.csvfeed.BarFeed") that loads bars from CSV files downloaded
+    from Yahoo! Finance.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '| Parameters: |'
+  prefs: []
+  type: TYPE_TB
+- en: '**frequency** – The frequency of the bars. Only **pyalgotrade.bar.Frequency.DAY**
+    or **pyalgotrade.bar.Frequency.WEEK** are supported.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**timezone** (*A pytz timezone.*) – The default timezone to use to localize
+    bars. Check [`pyalgotrade.marketsession`](marketsession.html#module-pyalgotrade.marketsession
+    "pyalgotrade.marketsession").'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**maxLen** (*int.*) – The maximum number of values that the [`pyalgotrade.dataseries.bards.BarDataSeries`](dataseries.html#pyalgotrade.dataseries.bards.BarDataSeries
+    "pyalgotrade.dataseries.bards.BarDataSeries") will hold. Once a bounded length
+    is full, when new items are added, a corresponding number of items are discarded
+    from the opposite end. If None then dataseries.DEFAULT_MAX_LEN is used.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '|'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Note
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Yahoo! Finance csv files lack timezone information. When working with multiple
+    instruments:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: If all the instruments loaded are in the same timezone, then the timezone parameter
+    may not be specified.
+  prefs:
+  - PREF_BQ
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: If any of the instruments loaded are in different timezones, then the timezone
+    parameter must be set.
+  prefs:
+  - PREF_BQ
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`addBarsFromCSV`(*instrument*, *path*, *timezone=None*)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Loads bars for a given instrument from a CSV formatted file. The instrument
+    gets registered in the bar feed.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '| Parameters: |'
+  prefs: []
+  type: TYPE_TB
+- en: '**instrument** (*string.*) – Instrument identifier.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**path** (*string.*) – The path to the CSV file.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**timezone** (*A pytz timezone.*) – The timezone to use to localize bars. Check
+    [`pyalgotrade.marketsession`](marketsession.html#module-pyalgotrade.marketsession
+    "pyalgotrade.marketsession").'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '|  ## Google Finance'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*class* `pyalgotrade.barfeed.googlefeed.``Feed`(*frequency=86400*, *timezone=None*,
+    *maxLen=None*)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Bases: [`pyalgotrade.barfeed.csvfeed.BarFeed`](#pyalgotrade.barfeed.csvfeed.BarFeed
+    "pyalgotrade.barfeed.csvfeed.BarFeed")'
+  prefs: []
+  type: TYPE_NORMAL
+- en: A [`pyalgotrade.barfeed.csvfeed.BarFeed`](#pyalgotrade.barfeed.csvfeed.BarFeed
+    "pyalgotrade.barfeed.csvfeed.BarFeed") that loads bars from CSV files downloaded
+    from Google Finance.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '| Parameters: |'
+  prefs: []
+  type: TYPE_TB
+- en: '**frequency** – The frequency of the bars. Only **pyalgotrade.bar.Frequency.DAY**
+    is currently supported.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**timezone** (*A pytz timezone.*) – The default timezone to use to localize
+    bars. Check [`pyalgotrade.marketsession`](marketsession.html#module-pyalgotrade.marketsession
+    "pyalgotrade.marketsession").'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**maxLen** (*int.*) – The maximum number of values that the [`pyalgotrade.dataseries.bards.BarDataSeries`](dataseries.html#pyalgotrade.dataseries.bards.BarDataSeries
+    "pyalgotrade.dataseries.bards.BarDataSeries") will hold. Once a bounded length
+    is full, when new items are added, a corresponding number of items are discarded
+    from the opposite end. If None then dataseries.DEFAULT_MAX_LEN is used.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '|'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Note
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Google Finance csv files lack timezone information. When working with multiple
+    instruments:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: If all the instruments loaded are in the same timezone, then the timezone parameter
+    may not be specified.
+  prefs:
+  - PREF_BQ
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: If any of the instruments loaded are in different timezones, then the timezone
+    parameter must be set.
+  prefs:
+  - PREF_BQ
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`addBarsFromCSV`(*instrument*, *path*, *timezone=None*, *skipMalformedBars=False*)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Loads bars for a given instrument from a CSV formatted file. The instrument
+    gets registered in the bar feed.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '| Parameters: |'
+  prefs: []
+  type: TYPE_TB
+- en: '**instrument** (*string.*) – Instrument identifier.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**path** (*string.*) – The path to the CSV file.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**timezone** (*A pytz timezone.*) – The timezone to use to localize bars. Check
+    [`pyalgotrade.marketsession`](marketsession.html#module-pyalgotrade.marketsession
+    "pyalgotrade.marketsession").'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**skipMalformedBars** (*boolean.*) – True to skip errors while parsing bars.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '|  ## Quandl'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*class* `pyalgotrade.barfeed.quandlfeed.``Feed`(*frequency=86400*, *timezone=None*,
+    *maxLen=None*)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Bases: [`pyalgotrade.barfeed.csvfeed.GenericBarFeed`](#pyalgotrade.barfeed.csvfeed.GenericBarFeed
+    "pyalgotrade.barfeed.csvfeed.GenericBarFeed")'
+  prefs: []
+  type: TYPE_NORMAL
+- en: A [`pyalgotrade.barfeed.csvfeed.BarFeed`](#pyalgotrade.barfeed.csvfeed.BarFeed
+    "pyalgotrade.barfeed.csvfeed.BarFeed") that loads bars from CSV files downloaded
+    from Quandl.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '| Parameters: |'
+  prefs: []
+  type: TYPE_TB
+- en: '**frequency** – The frequency of the bars. Only **pyalgotrade.bar.Frequency.DAY**
+    or **pyalgotrade.bar.Frequency.WEEK** are supported.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**timezone** (*A pytz timezone.*) – The default timezone to use to localize
+    bars. Check [`pyalgotrade.marketsession`](marketsession.html#module-pyalgotrade.marketsession
+    "pyalgotrade.marketsession").'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**maxLen** (*int.*) – The maximum number of values that the [`pyalgotrade.dataseries.bards.BarDataSeries`](dataseries.html#pyalgotrade.dataseries.bards.BarDataSeries
+    "pyalgotrade.dataseries.bards.BarDataSeries") will hold. Once a bounded length
+    is full, when new items are added, a corresponding number of items are discarded
+    from the opposite end. If None then dataseries.DEFAULT_MAX_LEN is used.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '|'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Note
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'When working with multiple instruments:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: If all the instruments loaded are in the same timezone, then the timezone parameter
+    may not be specified.
+  prefs:
+  - PREF_BQ
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'If any of the instruments loaded are in different timezones, then the timezone
+    parameter must be set.  ## Ninja Trader'
+  prefs:
+  - PREF_BQ
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '*class* `pyalgotrade.barfeed.ninjatraderfeed.``Feed`(*frequency*, *timezone=None*,
+    *maxLen=None*)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Bases: [`pyalgotrade.barfeed.csvfeed.BarFeed`](#pyalgotrade.barfeed.csvfeed.BarFeed
+    "pyalgotrade.barfeed.csvfeed.BarFeed")'
+  prefs: []
+  type: TYPE_NORMAL
+- en: A [`pyalgotrade.barfeed.csvfeed.BarFeed`](#pyalgotrade.barfeed.csvfeed.BarFeed
+    "pyalgotrade.barfeed.csvfeed.BarFeed") that loads bars from CSV files exported
+    from NinjaTrader.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '| Parameters: |'
+  prefs: []
+  type: TYPE_TB
+- en: '**frequency** – The frequency of the bars. Only **pyalgotrade.bar.Frequency.MINUTE**
+    or **pyalgotrade.bar.Frequency.DAY** are supported.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**timezone** (*A pytz timezone.*) – The default timezone to use to localize
+    bars. Check [`pyalgotrade.marketsession`](marketsession.html#module-pyalgotrade.marketsession
+    "pyalgotrade.marketsession").'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**maxLen** (*int.*) – The maximum number of values that the [`pyalgotrade.dataseries.bards.BarDataSeries`](dataseries.html#pyalgotrade.dataseries.bards.BarDataSeries
+    "pyalgotrade.dataseries.bards.BarDataSeries") will hold. Once a bounded length
+    is full, when new items are added, a corresponding number of items are discarded
+    from the opposite end. If None then dataseries.DEFAULT_MAX_LEN is used.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '|'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`addBarsFromCSV`(*instrument*, *path*, *timezone=None*)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Loads bars for a given instrument from a CSV formatted file. The instrument
+    gets registered in the bar feed.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '| Parameters: |'
+  prefs: []
+  type: TYPE_TB
+- en: '**instrument** (*string.*) – Instrument identifier.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**path** (*string.*) – The path to the file.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**timezone** (*A pytz timezone.*) – The timezone to use to localize bars. Check
+    [`pyalgotrade.marketsession`](marketsession.html#module-pyalgotrade.marketsession
+    "pyalgotrade.marketsession").'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '|'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Table Of Contents](index.html)'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[barfeed – Bar providers](#)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[CSV](#module-pyalgotrade.barfeed.csvfeed)'
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Yahoo! Finance](#module-pyalgotrade.barfeed.yahoofeed)'
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Google Finance](#module-pyalgotrade.barfeed.googlefeed)'
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Quandl](#module-pyalgotrade.barfeed.quandlfeed)'
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Ninja Trader](#module-pyalgotrade.barfeed.ninjatraderfeed)'
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Previous topic
+  prefs:
+  - PREF_H4
+  type: TYPE_NORMAL
+- en: '[feed – Basic feeds](feed.html "previous chapter")'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Next topic
+  prefs:
+  - PREF_H4
+  type: TYPE_NORMAL
+- en: '[technical – Technical indicators](technical.html "next chapter")'
+  prefs: []
+  type: TYPE_NORMAL
+- en: This Page
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Show Source](_sources/barfeed.txt)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Quick search
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Enter search terms or a module, class or function name.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Navigation
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[index](genindex.html "General Index")'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[modules](py-modindex.html "Python Module Index") |'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[next](technical.html "technical – Technical indicators") |'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[previous](feed.html "feed – Basic feeds") |'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[PyAlgoTrade 0.20 documentation](index.html) »'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Documentation for the code](code.html) »'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

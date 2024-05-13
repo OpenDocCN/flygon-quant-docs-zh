@@ -1,0 +1,229 @@
+- en: bar – Instrument prices
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://gbeced.github.io/pyalgotrade/docs/v0.20/html/bar.html](https://gbeced.github.io/pyalgotrade/docs/v0.20/html/bar.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '*class* `pyalgotrade.bar.``Frequency`'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Bases: `object`'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Enum like class for bar frequencies. Valid values are:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Frequency.TRADE**: The bar represents a single trade.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Frequency.SECOND**: The bar summarizes the trading activity during 1 second.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Frequency.MINUTE**: The bar summarizes the trading activity during 1 minute.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Frequency.HOUR**: The bar summarizes the trading activity during 1 hour.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Frequency.DAY**: The bar summarizes the trading activity during 1 day.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Frequency.WEEK**: The bar summarizes the trading activity during 1 week.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Frequency.MONTH**: The bar summarizes the trading activity during 1 month.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '*class* `pyalgotrade.bar.``Bar`'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Bases: `object`'
+  prefs: []
+  type: TYPE_NORMAL
+- en: A Bar is a summary of the trading activity for a security in a given period.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Note
+  prefs: []
+  type: TYPE_NORMAL
+- en: This is a base class and should not be used directly.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`getDateTime`()'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Returns the `datetime.datetime`.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`getOpen`(*adjusted=False*)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Returns the opening price.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`getHigh`(*adjusted=False*)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Returns the highest price.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`getLow`(*adjusted=False*)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Returns the lowest price.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`getClose`(*adjusted=False*)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Returns the closing price.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`getVolume`()'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Returns the volume.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`getAdjClose`()'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Returns the adjusted closing price.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`getFrequency`()'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The bar’s period.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`getTypicalPrice`()'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Returns the typical price.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`getPrice`()'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Returns the closing or adjusted closing price.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*class* `pyalgotrade.bar.``Bars`(*barDict*)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Bases: `object`'
+  prefs: []
+  type: TYPE_NORMAL
+- en: A group of [`Bar`](#pyalgotrade.bar.Bar "pyalgotrade.bar.Bar") objects.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '| Parameters: | **barDict** (*map.*) – A map of instrument to [`Bar`](#pyalgotrade.bar.Bar
+    "pyalgotrade.bar.Bar") objects. |'
+  prefs: []
+  type: TYPE_TB
+- en: Note
+  prefs: []
+  type: TYPE_NORMAL
+- en: All bars must have the same datetime.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`__getitem__`(*instrument*)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Returns the [`pyalgotrade.bar.Bar`](#pyalgotrade.bar.Bar "pyalgotrade.bar.Bar")
+    for the given instrument. If the instrument is not found an exception is raised.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`__contains__`(*instrument*)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Returns True if a [`pyalgotrade.bar.Bar`](#pyalgotrade.bar.Bar "pyalgotrade.bar.Bar")
+    for the given instrument is available.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`getInstruments`()'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Returns the instrument symbols.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`getDateTime`()'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Returns the `datetime.datetime` for this set of bars.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`getBar`(*instrument*)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Returns the [`pyalgotrade.bar.Bar`](#pyalgotrade.bar.Bar "pyalgotrade.bar.Bar")
+    for the given instrument or None if the instrument is not found.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Previous topic
+  prefs:
+  - PREF_H4
+  type: TYPE_NORMAL
+- en: '[Documentation for the code](code.html "previous chapter")'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Next topic
+  prefs:
+  - PREF_H4
+  type: TYPE_NORMAL
+- en: '[dataseries – Basic dataseries classes](dataseries.html "next chapter")'
+  prefs: []
+  type: TYPE_NORMAL
+- en: This Page
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Show Source](_sources/bar.txt)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Quick search
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Enter search terms or a module, class or function name.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Navigation
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[index](genindex.html "General Index")'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[modules](py-modindex.html "Python Module Index") |'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[next](dataseries.html "dataseries – Basic dataseries classes") |'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[previous](code.html "Documentation for the code") |'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[PyAlgoTrade 0.20 documentation](index.html) »'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Documentation for the code](code.html) »'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

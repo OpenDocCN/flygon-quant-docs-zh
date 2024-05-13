@@ -1,0 +1,179 @@
+- en: bitcoincharts – Bitcoin Charts reference
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://gbeced.github.io/pyalgotrade/docs/v0.20/html/bitcoincharts_ref.html](https://gbeced.github.io/pyalgotrade/docs/v0.20/html/bitcoincharts_ref.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '## Feeds'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*class* `pyalgotrade.bitcoincharts.barfeed.``CSVTradeFeed`(*timezone=None*,
+    *maxLen=None*)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Bases: [`pyalgotrade.barfeed.csvfeed.BarFeed`](barfeed.html#pyalgotrade.barfeed.csvfeed.BarFeed
+    "pyalgotrade.barfeed.csvfeed.BarFeed")'
+  prefs: []
+  type: TYPE_NORMAL
+- en: A BarFeed that builds bars from a Historic Trade Data CSV file as described
+    in [http://www.bitcoincharts.com/about/markets-api/](http://www.bitcoincharts.com/about/markets-api/).
+    Files can be downloaded from [http://api.bitcoincharts.com/v1/csv/](http://api.bitcoincharts.com/v1/csv/).
+  prefs: []
+  type: TYPE_NORMAL
+- en: '| Parameters: |'
+  prefs: []
+  type: TYPE_TB
+- en: '**timezone** (*A pytz timezone.*) – An optional default timezone to use to
+    localize bars. By default bars are loaded in UTC.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**maxLen** (*int.*) – The maximum number of values that the [`pyalgotrade.dataseries.bards.BarDataSeries`](dataseries.html#pyalgotrade.dataseries.bards.BarDataSeries
+    "pyalgotrade.dataseries.bards.BarDataSeries") will hold. If not None, it must
+    be greater than 0. Once a bounded length is full, when new items are added, a
+    corresponding number of items are discarded from the opposite end. If None then
+    dataseries.DEFAULT_MAX_LEN is used.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '|'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Note
+  prefs: []
+  type: TYPE_NORMAL
+- en: A [`pyalgotrade.bar.Bar`](bar.html#pyalgotrade.bar.Bar "pyalgotrade.bar.Bar")
+    instance will be created for every trade, so open, high, low and close values
+    will all be the same.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Files must be sorted with the **unixtime** column in ascending order.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`addBarsFromCSV`(*path*, *instrument=''BTC''*, *timezone=None*, *fromDateTime=None*,
+    *toDateTime=None*)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Loads bars from a trades CSV formatted file.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '| Parameters: |'
+  prefs: []
+  type: TYPE_TB
+- en: '**path** (*string.*) – The path to the file.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**instrument** (*string.*) – The instrument identifier.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**timezone** (*A pytz timezone.*) – An optional timezone to use to localize
+    bars. By default bars are loaded in UTC.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**fromDateTime** (*datetime.datetime.*) – An optional datetime to use to filter
+    bars to load. If supplied only those bars whose datetime is greater than or equal
+    to fromDateTime are loaded.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**toDateTime** (*datetime.datetime.*) – An optional datetime to use to filter
+    bars to load. If supplied only those bars whose datetime is lower than or equal
+    to toDateTime are loaded.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '|'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Note
+  prefs: []
+  type: TYPE_NORMAL
+- en: Every file that you load bars from must have trades in the same currency.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: If fromDateTime or toDateTime are naive, they are treated as UTC.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Table Of Contents](index.html)'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[bitcoincharts – Bitcoin Charts reference](#)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Feeds](#module-pyalgotrade.bitcoincharts.barfeed)'
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Previous topic
+  prefs:
+  - PREF_H4
+  type: TYPE_NORMAL
+- en: '[Bitcoin Charts support](bitcoincharts.html "previous chapter")'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Next topic
+  prefs:
+  - PREF_H4
+  type: TYPE_NORMAL
+- en: '[Bitcoin Charts example](bitcoincharts_example.html "next chapter")'
+  prefs: []
+  type: TYPE_NORMAL
+- en: This Page
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Show Source](_sources/bitcoincharts_ref.txt)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Quick search
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Enter search terms or a module, class or function name.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Navigation
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[index](genindex.html "General Index")'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[modules](py-modindex.html "Python Module Index") |'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[next](bitcoincharts_example.html "Bitcoin Charts example") |'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[previous](bitcoincharts.html "Bitcoin Charts support") |'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[PyAlgoTrade 0.20 documentation](index.html) »'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Bitcoin](bitcoin.html) »'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Bitcoin Charts support](bitcoincharts.html) »'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

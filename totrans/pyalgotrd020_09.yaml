@@ -1,0 +1,1237 @@
+- en: strategy – Basic strategy classes
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://gbeced.github.io/pyalgotrade/docs/v0.20/html/strategy.html](https://gbeced.github.io/pyalgotrade/docs/v0.20/html/strategy.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: Strategies are the classes that you define that implement the trading logic,
+    when to buy, when to sell, etc.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Buying and selling can be done in two ways:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Placing individual orders using any of the following methods:'
+  prefs:
+  - PREF_BQ
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: ''
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '[`pyalgotrade.strategy.BaseStrategy.marketOrder()`](#pyalgotrade.strategy.BaseStrategy.marketOrder
+    "pyalgotrade.strategy.BaseStrategy.marketOrder")'
+  prefs:
+  - PREF_BQ
+  - PREF_BQ
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[`pyalgotrade.strategy.BaseStrategy.limitOrder()`](#pyalgotrade.strategy.BaseStrategy.limitOrder
+    "pyalgotrade.strategy.BaseStrategy.limitOrder")'
+  prefs:
+  - PREF_BQ
+  - PREF_BQ
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[`pyalgotrade.strategy.BaseStrategy.stopOrder()`](#pyalgotrade.strategy.BaseStrategy.stopOrder
+    "pyalgotrade.strategy.BaseStrategy.stopOrder")'
+  prefs:
+  - PREF_BQ
+  - PREF_BQ
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[`pyalgotrade.strategy.BaseStrategy.stopLimitOrder()`](#pyalgotrade.strategy.BaseStrategy.stopLimitOrder
+    "pyalgotrade.strategy.BaseStrategy.stopLimitOrder")'
+  prefs:
+  - PREF_BQ
+  - PREF_BQ
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: ''
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: 'Using a higher level interface that wrap a pair of entry/exit orders:'
+  prefs:
+  - PREF_BQ
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: ''
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '[`pyalgotrade.strategy.BaseStrategy.enterLong()`](#pyalgotrade.strategy.BaseStrategy.enterLong
+    "pyalgotrade.strategy.BaseStrategy.enterLong")'
+  prefs:
+  - PREF_BQ
+  - PREF_BQ
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[`pyalgotrade.strategy.BaseStrategy.enterShort()`](#pyalgotrade.strategy.BaseStrategy.enterShort
+    "pyalgotrade.strategy.BaseStrategy.enterShort")'
+  prefs:
+  - PREF_BQ
+  - PREF_BQ
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[`pyalgotrade.strategy.BaseStrategy.enterLongLimit()`](#pyalgotrade.strategy.BaseStrategy.enterLongLimit
+    "pyalgotrade.strategy.BaseStrategy.enterLongLimit")'
+  prefs:
+  - PREF_BQ
+  - PREF_BQ
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[`pyalgotrade.strategy.BaseStrategy.enterShortLimit()`](#pyalgotrade.strategy.BaseStrategy.enterShortLimit
+    "pyalgotrade.strategy.BaseStrategy.enterShortLimit")'
+  prefs:
+  - PREF_BQ
+  - PREF_BQ
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Positions are higher level abstractions for placing orders. They are escentially
+    a pair of entry-exit orders and provide easier tracking for returns and PnL than
+    using individual orders.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '## Strategy'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*class* `pyalgotrade.strategy.``BaseStrategy`(*barFeed*, *broker*)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Bases: `object`'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Base class for strategies.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '| Parameters: |'
+  prefs: []
+  type: TYPE_TB
+- en: '**barFeed** ([`pyalgotrade.barfeed.BaseBarFeed`](barfeed.html#pyalgotrade.barfeed.BaseBarFeed
+    "pyalgotrade.barfeed.BaseBarFeed").) – The bar feed that will supply the bars.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**broker** ([`pyalgotrade.broker.Broker`](broker.html#pyalgotrade.broker.Broker
+    "pyalgotrade.broker.Broker").) – The broker that will handle orders.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '|'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Note
+  prefs: []
+  type: TYPE_NORMAL
+- en: This is a base class and should not be used directly.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`getFeed`()'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Returns the [`pyalgotrade.barfeed.BaseBarFeed`](barfeed.html#pyalgotrade.barfeed.BaseBarFeed
+    "pyalgotrade.barfeed.BaseBarFeed") that this strategy is using.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`getBroker`()'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Returns the [`pyalgotrade.broker.Broker`](broker.html#pyalgotrade.broker.Broker
+    "pyalgotrade.broker.Broker") used to handle order executions.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`getCurrentDateTime`()'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Returns the `datetime.datetime` for the current [`pyalgotrade.bar.Bars`](bar.html#pyalgotrade.bar.Bars
+    "pyalgotrade.bar.Bars").
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`marketOrder`(*instrument*, *quantity*, *onClose=False*, *goodTillCanceled=False*,
+    *allOrNone=False*)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Submits a market order.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '| Parameters: |'
+  prefs: []
+  type: TYPE_TB
+- en: '**instrument** (*string.*) – Instrument identifier.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**quantity** (*int/float.*) – The amount of shares. Positive means buy, negative
+    means sell.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**onClose** (*boolean.*) – True if the order should be filled as close to the
+    closing price as possible (Market-On-Close order). Default is False.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**goodTillCanceled** (*boolean.*) – True if the order is good till canceled.
+    If False then the order gets automatically canceled when the session closes.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**allOrNone** (*boolean.*) – True if the order should be completely filled
+    or not at all.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '|'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '| Return type: | The [`pyalgotrade.broker.MarketOrder`](broker.html#pyalgotrade.broker.MarketOrder
+    "pyalgotrade.broker.MarketOrder") submitted. |'
+  prefs: []
+  type: TYPE_TB
+- en: '`limitOrder`(*instrument*, *limitPrice*, *quantity*, *goodTillCanceled=False*,
+    *allOrNone=False*)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Submits a limit order.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '| Parameters: |'
+  prefs: []
+  type: TYPE_TB
+- en: '**instrument** (*string.*) – Instrument identifier.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**limitPrice** (*float.*) – Limit price.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**quantity** (*int/float.*) – The amount of shares. Positive means buy, negative
+    means sell.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**goodTillCanceled** (*boolean.*) – True if the order is good till canceled.
+    If False then the order gets automatically canceled when the session closes.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**allOrNone** (*boolean.*) – True if the order should be completely filled
+    or not at all.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '|'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '| Return type: | The [`pyalgotrade.broker.LimitOrder`](broker.html#pyalgotrade.broker.LimitOrder
+    "pyalgotrade.broker.LimitOrder") submitted. |'
+  prefs: []
+  type: TYPE_TB
+- en: '`stopOrder`(*instrument*, *stopPrice*, *quantity*, *goodTillCanceled=False*,
+    *allOrNone=False*)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Submits a stop order.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '| Parameters: |'
+  prefs: []
+  type: TYPE_TB
+- en: '**instrument** (*string.*) – Instrument identifier.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**stopPrice** (*float.*) – Stop price.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**quantity** (*int/float.*) – The amount of shares. Positive means buy, negative
+    means sell.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**goodTillCanceled** (*boolean.*) – True if the order is good till canceled.
+    If False then the order gets automatically canceled when the session closes.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**allOrNone** (*boolean.*) – True if the order should be completely filled
+    or not at all.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '|'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '| Return type: | The [`pyalgotrade.broker.StopOrder`](broker.html#pyalgotrade.broker.StopOrder
+    "pyalgotrade.broker.StopOrder") submitted. |'
+  prefs: []
+  type: TYPE_TB
+- en: '`stopLimitOrder`(*instrument*, *stopPrice*, *limitPrice*, *quantity*, *goodTillCanceled=False*,
+    *allOrNone=False*)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Submits a stop limit order.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '| Parameters: |'
+  prefs: []
+  type: TYPE_TB
+- en: '**instrument** (*string.*) – Instrument identifier.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**stopPrice** (*float.*) – Stop price.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**limitPrice** (*float.*) – Limit price.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**quantity** (*int/float.*) – The amount of shares. Positive means buy, negative
+    means sell.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**goodTillCanceled** (*boolean.*) – True if the order is good till canceled.
+    If False then the order gets automatically canceled when the session closes.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**allOrNone** (*boolean.*) – True if the order should be completely filled
+    or not at all.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '|'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '| Return type: | The [`pyalgotrade.broker.StopLimitOrder`](broker.html#pyalgotrade.broker.StopLimitOrder
+    "pyalgotrade.broker.StopLimitOrder") submitted. |'
+  prefs: []
+  type: TYPE_TB
+- en: '`enterLong`(*instrument*, *quantity*, *goodTillCanceled=False*, *allOrNone=False*)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Generates a buy [`pyalgotrade.broker.MarketOrder`](broker.html#pyalgotrade.broker.MarketOrder
+    "pyalgotrade.broker.MarketOrder") to enter a long position.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '| Parameters: |'
+  prefs: []
+  type: TYPE_TB
+- en: '**instrument** (*string.*) – Instrument identifier.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**quantity** (*int.*) – Entry order quantity.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**goodTillCanceled** (*boolean.*) – True if the entry order is good till canceled.
+    If False then the order gets automatically canceled when the session closes.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**allOrNone** (*boolean.*) – True if the orders should be completely filled
+    or not at all.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '|'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '| Return type: | The [`pyalgotrade.strategy.position.Position`](#pyalgotrade.strategy.position.Position
+    "pyalgotrade.strategy.position.Position") entered. |'
+  prefs: []
+  type: TYPE_TB
+- en: '`enterShort`(*instrument*, *quantity*, *goodTillCanceled=False*, *allOrNone=False*)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Generates a sell short [`pyalgotrade.broker.MarketOrder`](broker.html#pyalgotrade.broker.MarketOrder
+    "pyalgotrade.broker.MarketOrder") to enter a short position.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '| Parameters: |'
+  prefs: []
+  type: TYPE_TB
+- en: '**instrument** (*string.*) – Instrument identifier.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**quantity** (*int.*) – Entry order quantity.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**goodTillCanceled** (*boolean.*) – True if the entry order is good till canceled.
+    If False then the order gets automatically canceled when the session closes.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**allOrNone** (*boolean.*) – True if the orders should be completely filled
+    or not at all.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '|'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '| Return type: | The [`pyalgotrade.strategy.position.Position`](#pyalgotrade.strategy.position.Position
+    "pyalgotrade.strategy.position.Position") entered. |'
+  prefs: []
+  type: TYPE_TB
+- en: '`enterLongLimit`(*instrument*, *limitPrice*, *quantity*, *goodTillCanceled=False*,
+    *allOrNone=False*)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Generates a buy [`pyalgotrade.broker.LimitOrder`](broker.html#pyalgotrade.broker.LimitOrder
+    "pyalgotrade.broker.LimitOrder") to enter a long position.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '| Parameters: |'
+  prefs: []
+  type: TYPE_TB
+- en: '**instrument** (*string.*) – Instrument identifier.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**limitPrice** (*float.*) – Limit price.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**quantity** (*int.*) – Entry order quantity.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**goodTillCanceled** (*boolean.*) – True if the entry order is good till canceled.
+    If False then the order gets automatically canceled when the session closes.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**allOrNone** (*boolean.*) – True if the orders should be completely filled
+    or not at all.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '|'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '| Return type: | The [`pyalgotrade.strategy.position.Position`](#pyalgotrade.strategy.position.Position
+    "pyalgotrade.strategy.position.Position") entered. |'
+  prefs: []
+  type: TYPE_TB
+- en: '`enterShortLimit`(*instrument*, *limitPrice*, *quantity*, *goodTillCanceled=False*,
+    *allOrNone=False*)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Generates a sell short [`pyalgotrade.broker.LimitOrder`](broker.html#pyalgotrade.broker.LimitOrder
+    "pyalgotrade.broker.LimitOrder") to enter a short position.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '| Parameters: |'
+  prefs: []
+  type: TYPE_TB
+- en: '**instrument** (*string.*) – Instrument identifier.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**limitPrice** (*float.*) – Limit price.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**quantity** (*int.*) – Entry order quantity.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**goodTillCanceled** (*boolean.*) – True if the entry order is good till canceled.
+    If False then the order gets automatically canceled when the session closes.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**allOrNone** (*boolean.*) – True if the orders should be completely filled
+    or not at all.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '|'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '| Return type: | The [`pyalgotrade.strategy.position.Position`](#pyalgotrade.strategy.position.Position
+    "pyalgotrade.strategy.position.Position") entered. |'
+  prefs: []
+  type: TYPE_TB
+- en: '`enterLongStop`(*instrument*, *stopPrice*, *quantity*, *goodTillCanceled=False*,
+    *allOrNone=False*)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Generates a buy [`pyalgotrade.broker.StopOrder`](broker.html#pyalgotrade.broker.StopOrder
+    "pyalgotrade.broker.StopOrder") to enter a long position.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '| Parameters: |'
+  prefs: []
+  type: TYPE_TB
+- en: '**instrument** (*string.*) – Instrument identifier.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**stopPrice** (*float.*) – Stop price.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**quantity** (*int.*) – Entry order quantity.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**goodTillCanceled** (*boolean.*) – True if the entry order is good till canceled.
+    If False then the order gets automatically canceled when the session closes.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**allOrNone** (*boolean.*) – True if the orders should be completely filled
+    or not at all.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '|'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '| Return type: | The [`pyalgotrade.strategy.position.Position`](#pyalgotrade.strategy.position.Position
+    "pyalgotrade.strategy.position.Position") entered. |'
+  prefs: []
+  type: TYPE_TB
+- en: '`enterShortStop`(*instrument*, *stopPrice*, *quantity*, *goodTillCanceled=False*,
+    *allOrNone=False*)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Generates a sell short [`pyalgotrade.broker.StopOrder`](broker.html#pyalgotrade.broker.StopOrder
+    "pyalgotrade.broker.StopOrder") to enter a short position.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '| Parameters: |'
+  prefs: []
+  type: TYPE_TB
+- en: '**instrument** (*string.*) – Instrument identifier.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**stopPrice** (*float.*) – Stop price.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**quantity** (*int.*) – Entry order quantity.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**goodTillCanceled** (*boolean.*) – True if the entry order is good till canceled.
+    If False then the order gets automatically canceled when the session closes.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**allOrNone** (*boolean.*) – True if the orders should be completely filled
+    or not at all.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '|'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '| Return type: | The [`pyalgotrade.strategy.position.Position`](#pyalgotrade.strategy.position.Position
+    "pyalgotrade.strategy.position.Position") entered. |'
+  prefs: []
+  type: TYPE_TB
+- en: '`enterLongStopLimit`(*instrument*, *stopPrice*, *limitPrice*, *quantity*, *goodTillCanceled=False*,
+    *allOrNone=False*)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Generates a buy [`pyalgotrade.broker.StopLimitOrder`](broker.html#pyalgotrade.broker.StopLimitOrder
+    "pyalgotrade.broker.StopLimitOrder") order to enter a long position.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '| Parameters: |'
+  prefs: []
+  type: TYPE_TB
+- en: '**instrument** (*string.*) – Instrument identifier.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**stopPrice** (*float.*) – Stop price.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**limitPrice** (*float.*) – Limit price.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**quantity** (*int.*) – Entry order quantity.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**goodTillCanceled** (*boolean.*) – True if the entry order is good till canceled.
+    If False then the order gets automatically canceled when the session closes.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**allOrNone** (*boolean.*) – True if the orders should be completely filled
+    or not at all.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '|'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '| Return type: | The [`pyalgotrade.strategy.position.Position`](#pyalgotrade.strategy.position.Position
+    "pyalgotrade.strategy.position.Position") entered. |'
+  prefs: []
+  type: TYPE_TB
+- en: '`enterShortStopLimit`(*instrument*, *stopPrice*, *limitPrice*, *quantity*,
+    *goodTillCanceled=False*, *allOrNone=False*)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Generates a sell short [`pyalgotrade.broker.StopLimitOrder`](broker.html#pyalgotrade.broker.StopLimitOrder
+    "pyalgotrade.broker.StopLimitOrder") order to enter a short position.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '| Parameters: |'
+  prefs: []
+  type: TYPE_TB
+- en: '**instrument** (*string.*) – Instrument identifier.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**stopPrice** (*float.*) – The Stop price.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**limitPrice** (*float.*) – Limit price.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**quantity** (*int.*) – Entry order quantity.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**goodTillCanceled** (*boolean.*) – True if the entry order is good till canceled.
+    If False then the order gets automatically canceled when the session closes.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**allOrNone** (*boolean.*) – True if the orders should be completely filled
+    or not at all.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '|'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '| Return type: | The [`pyalgotrade.strategy.position.Position`](#pyalgotrade.strategy.position.Position
+    "pyalgotrade.strategy.position.Position") entered. |'
+  prefs: []
+  type: TYPE_TB
+- en: '`onEnterOk`(*position*)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Override (optional) to get notified when the order submitted to enter a position
+    was filled. The default implementation is empty.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '| Parameters: | **position** ([`pyalgotrade.strategy.position.Position`](#pyalgotrade.strategy.position.Position
+    "pyalgotrade.strategy.position.Position").) – A position returned by any of the
+    enterLongXXX or enterShortXXX methods. |'
+  prefs: []
+  type: TYPE_TB
+- en: '`onEnterCanceled`(*position*)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Override (optional) to get notified when the order submitted to enter a position
+    was canceled. The default implementation is empty.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '| Parameters: | **position** ([`pyalgotrade.strategy.position.Position`](#pyalgotrade.strategy.position.Position
+    "pyalgotrade.strategy.position.Position").) – A position returned by any of the
+    enterLongXXX or enterShortXXX methods. |'
+  prefs: []
+  type: TYPE_TB
+- en: '`onExitOk`(*position*)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Override (optional) to get notified when the order submitted to exit a position
+    was filled. The default implementation is empty.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '| Parameters: | **position** ([`pyalgotrade.strategy.position.Position`](#pyalgotrade.strategy.position.Position
+    "pyalgotrade.strategy.position.Position").) – A position returned by any of the
+    enterLongXXX or enterShortXXX methods. |'
+  prefs: []
+  type: TYPE_TB
+- en: '`onExitCanceled`(*position*)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Override (optional) to get notified when the order submitted to exit a position
+    was canceled. The default implementation is empty.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '| Parameters: | **position** ([`pyalgotrade.strategy.position.Position`](#pyalgotrade.strategy.position.Position
+    "pyalgotrade.strategy.position.Position").) – A position returned by any of the
+    enterLongXXX or enterShortXXX methods. |'
+  prefs: []
+  type: TYPE_TB
+- en: '`onStart`()'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Override (optional) to get notified when the strategy starts executing. The
+    default implementation is empty.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`onFinish`(*bars*)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Override (optional) to get notified when the strategy finished executing. The
+    default implementation is empty.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '| Parameters: | **bars** ([`pyalgotrade.bar.Bars`](bar.html#pyalgotrade.bar.Bars
+    "pyalgotrade.bar.Bars").) – The last bars processed. |'
+  prefs: []
+  type: TYPE_TB
+- en: '`onIdle`()'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Override (optional) to get notified when there are no events.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Note
+  prefs: []
+  type: TYPE_NORMAL
+- en: In a pure backtesting scenario this will not be called.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`onBars`(*bars*)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Override (**mandatory**) to get notified when new bars are available. The default
+    implementation raises an Exception.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**This is the method to override to enter your trading logic and enter/exit
+    positions**.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '| Parameters: | **bars** ([`pyalgotrade.bar.Bars`](bar.html#pyalgotrade.bar.Bars
+    "pyalgotrade.bar.Bars").) – The current bars. |'
+  prefs: []
+  type: TYPE_TB
+- en: '`onOrderUpdated`(*order*)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Override (optional) to get notified when an order gets updated.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '| Parameters: | **order** ([`pyalgotrade.broker.Order`](broker.html#pyalgotrade.broker.Order
+    "pyalgotrade.broker.Order").) – The order updated. |'
+  prefs: []
+  type: TYPE_TB
+- en: '`run`()'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Call once (**and only once**) to run the strategy.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`stop`()'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Stops a running strategy.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`attachAnalyzer`(*strategyAnalyzer*)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Adds a [`pyalgotrade.stratanalyzer.StrategyAnalyzer`](stratanalyzer.html#pyalgotrade.stratanalyzer.StrategyAnalyzer
+    "pyalgotrade.stratanalyzer.StrategyAnalyzer").
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`debug`(*msg*)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Logs a message with level DEBUG on the strategy logger.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`info`(*msg*)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Logs a message with level INFO on the strategy logger.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`warning`(*msg*)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Logs a message with level WARNING on the strategy logger.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`error`(*msg*)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Logs a message with level ERROR on the strategy logger.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`critical`(*msg*)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Logs a message with level CRITICAL on the strategy logger.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`resampleBarFeed`(*frequency*, *callback*)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Builds a resampled barfeed that groups bars by a certain frequency.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '| Parameters: |'
+  prefs: []
+  type: TYPE_TB
+- en: '**frequency** – The grouping frequency in seconds. Must be > 0.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**callback** – A function similar to onBars that will be called when new bars
+    are available.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '|'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '| Return type: | [`pyalgotrade.barfeed.BaseBarFeed`](barfeed.html#pyalgotrade.barfeed.BaseBarFeed
+    "pyalgotrade.barfeed.BaseBarFeed"). |'
+  prefs: []
+  type: TYPE_TB
+- en: '*class* `pyalgotrade.strategy.``BacktestingStrategy`(*barFeed*, *cash_or_brk=1000000*)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Bases: [`pyalgotrade.strategy.BaseStrategy`](#pyalgotrade.strategy.BaseStrategy
+    "pyalgotrade.strategy.BaseStrategy")'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Base class for backtesting strategies.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '| Parameters: |'
+  prefs: []
+  type: TYPE_TB
+- en: '**barFeed** ([`pyalgotrade.barfeed.BaseBarFeed`](barfeed.html#pyalgotrade.barfeed.BaseBarFeed
+    "pyalgotrade.barfeed.BaseBarFeed").) – The bar feed to use to backtest the strategy.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**cash_or_brk** (int/float or [`pyalgotrade.broker.Broker`](broker.html#pyalgotrade.broker.Broker
+    "pyalgotrade.broker.Broker").) – The starting capital or a broker instance.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '|'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Note
+  prefs: []
+  type: TYPE_NORMAL
+- en: This is a base class and should not be used directly.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`setDebugMode`(*debugOn*)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Enable/disable debug level messages in the strategy and backtesting broker.
+    This is enabled by default.  ## Position'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*class* `pyalgotrade.strategy.position.``Position`(*strategy*, *entryOrder*,
+    *goodTillCanceled*, *allOrNone*)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Bases: `object`'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Base class for positions.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Positions are higher level abstractions for placing orders. They are escentially
+    a pair of entry-exit orders and allow to track returns and PnL easier that placing
+    orders manually.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '| Parameters: |'
+  prefs: []
+  type: TYPE_TB
+- en: '**strategy** ([`pyalgotrade.strategy.BaseStrategy`](#pyalgotrade.strategy.BaseStrategy
+    "pyalgotrade.strategy.BaseStrategy").) – The strategy that this position belongs
+    to.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**entryOrder** ([`pyalgotrade.broker.Order`](broker.html#pyalgotrade.broker.Order
+    "pyalgotrade.broker.Order")) – The order used to enter the position.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**goodTillCanceled** (*boolean.*) – True if the entry order should be set as
+    good till canceled.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**allOrNone** (*boolean.*) – True if the orders should be completely filled
+    or not at all.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '|'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Note
+  prefs: []
+  type: TYPE_NORMAL
+- en: This is a base class and should not be used directly.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`getShares`()'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Returns the number of shares. This will be a possitive number for a long position,
+    and a negative number for a short position.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Note
+  prefs: []
+  type: TYPE_NORMAL
+- en: If the entry order was not filled, or if the position is closed, then the number
+    of shares will be 0.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`entryActive`()'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Returns True if the entry order is active.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`entryFilled`()'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Returns True if the entry order was filled.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`exitActive`()'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Returns True if the exit order is active.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`exitFilled`()'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Returns True if the exit order was filled.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`getEntryOrder`()'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Returns the [`pyalgotrade.broker.Order`](broker.html#pyalgotrade.broker.Order
+    "pyalgotrade.broker.Order") used to enter the position.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`getExitOrder`()'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Returns the [`pyalgotrade.broker.Order`](broker.html#pyalgotrade.broker.Order
+    "pyalgotrade.broker.Order") used to exit the position. If this position hasn’t
+    been closed yet, None is returned.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`getInstrument`()'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Returns the instrument used for this position.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`getReturn`(*includeCommissions=True*)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Calculates cumulative percentage returns up to this point. If the position is
+    not closed, these will be unrealized returns.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`getPnL`(*includeCommissions=True*)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Calculates PnL up to this point. If the position is not closed, these will be
+    unrealized PnL.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`cancelEntry`()'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Cancels the entry order if its active.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`cancelExit`()'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Cancels the exit order if its active.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`exitMarket`(*goodTillCanceled=None*)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Submits a market order to close this position.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '| Parameters: | **goodTillCanceled** (*boolean.*) – True if the exit order
+    is good till canceled. If False then the order gets automatically canceled when
+    the session closes. If None, then it will match the entry order. |'
+  prefs: []
+  type: TYPE_TB
+- en: Note
+  prefs: []
+  type: TYPE_NORMAL
+- en: If the position is closed (entry canceled or exit filled) this won’t have any
+    effect.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: If the exit order for this position is pending, an exception will be raised.
+    The exit order should be canceled first.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: If the entry order is active, cancellation will be requested.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`exitLimit`(*limitPrice*, *goodTillCanceled=None*)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Submits a limit order to close this position.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '| Parameters: |'
+  prefs: []
+  type: TYPE_TB
+- en: '**limitPrice** (*float.*) – The limit price.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**goodTillCanceled** (*boolean.*) – True if the exit order is good till canceled.
+    If False then the order gets automatically canceled when the session closes. If
+    None, then it will match the entry order.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '|'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Note
+  prefs: []
+  type: TYPE_NORMAL
+- en: If the position is closed (entry canceled or exit filled) this won’t have any
+    effect.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: If the exit order for this position is pending, an exception will be raised.
+    The exit order should be canceled first.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: If the entry order is active, cancellation will be requested.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`exitStop`(*stopPrice*, *goodTillCanceled=None*)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Submits a stop order to close this position.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '| Parameters: |'
+  prefs: []
+  type: TYPE_TB
+- en: '**stopPrice** (*float.*) – The stop price.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**goodTillCanceled** (*boolean.*) – True if the exit order is good till canceled.
+    If False then the order gets automatically canceled when the session closes. If
+    None, then it will match the entry order.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '|'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Note
+  prefs: []
+  type: TYPE_NORMAL
+- en: If the position is closed (entry canceled or exit filled) this won’t have any
+    effect.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: If the exit order for this position is pending, an exception will be raised.
+    The exit order should be canceled first.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: If the entry order is active, cancellation will be requested.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`exitStopLimit`(*stopPrice*, *limitPrice*, *goodTillCanceled=None*)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Submits a stop limit order to close this position.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '| Parameters: |'
+  prefs: []
+  type: TYPE_TB
+- en: '**stopPrice** (*float.*) – The stop price.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**limitPrice** (*float.*) – The limit price.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**goodTillCanceled** (*boolean.*) – True if the exit order is good till canceled.
+    If False then the order gets automatically canceled when the session closes. If
+    None, then it will match the entry order.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '|'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Note
+  prefs: []
+  type: TYPE_NORMAL
+- en: If the position is closed (entry canceled or exit filled) this won’t have any
+    effect.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: If the exit order for this position is pending, an exception will be raised.
+    The exit order should be canceled first.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: If the entry order is active, cancellation will be requested.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`isOpen`()'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Returns True if the position is open.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`getAge`()'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Returns the duration in open state.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '| Return type: | datetime.timedelta. |'
+  prefs: []
+  type: TYPE_TB
+- en: Note
+  prefs: []
+  type: TYPE_NORMAL
+- en: If the position is open, then the difference between the entry datetime and
+    the datetime of the last bar is returned.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: If the position is closed, then the difference between the entry datetime and
+    the exit datetime is returned.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Table Of Contents](index.html)'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[strategy – Basic strategy classes](#)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Strategy](#module-pyalgotrade.strategy)'
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Position](#module-pyalgotrade.strategy.position)'
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Previous topic
+  prefs:
+  - PREF_H4
+  type: TYPE_NORMAL
+- en: '[broker – Order management classes](broker.html "previous chapter")'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Next topic
+  prefs:
+  - PREF_H4
+  type: TYPE_NORMAL
+- en: '[stratanalyzer – Strategy analyzers](stratanalyzer.html "next chapter")'
+  prefs: []
+  type: TYPE_NORMAL
+- en: This Page
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Show Source](_sources/strategy.txt)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Quick search
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Enter search terms or a module, class or function name.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Navigation
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[index](genindex.html "General Index")'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[modules](py-modindex.html "Python Module Index") |'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[next](stratanalyzer.html "stratanalyzer – Strategy analyzers") |'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[previous](broker.html "broker – Order management classes") |'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[PyAlgoTrade 0.20 documentation](index.html) »'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Documentation for the code](code.html) »'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

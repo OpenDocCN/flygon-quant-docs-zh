@@ -1,0 +1,121 @@
+- en: Introduction
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://gbeced.github.io/pyalgotrade/docs/v0.20/html/intro.html](https://gbeced.github.io/pyalgotrade/docs/v0.20/html/intro.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: 'PyAlgoTrade is an event driven algorithmic trading Python library with support
+    for:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Backtesting with historical data from CSV files.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Paper trading using [*Bitstamp*](bitstamp_example.html#bitstamp-tutorial-label)
+    live feeds.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Real trading on Bitstamp.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: It should also make it easy to optimize a strategy using multiple computers.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'PyAlgoTrade is developed and tested using Python 2.7/3.7 and depends on:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: NumPy and SciPy ([http://numpy.scipy.org/](http://numpy.scipy.org/)).
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: pytz ([http://pytz.sourceforge.net/](http://pytz.sourceforge.net/)).
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: matplotlib ([http://matplotlib.sourceforge.net/](http://matplotlib.sourceforge.net/))
+    for plotting support.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: ws4py ([https://github.com/Lawouach/WebSocket-for-Python](https://github.com/Lawouach/WebSocket-for-Python))
+    for Bitstamp support.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: tornado ([http://www.tornadoweb.org/en/stable/](http://www.tornadoweb.org/en/stable/))
+    for Bitstamp support.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: tweepy ([https://github.com/tweepy/tweepy](https://github.com/tweepy/tweepy))
+    for Twitter support.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: so you need to have those installed in order to use this library.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'You can install PyAlgoTrade using pip like this:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: Previous topic
+  prefs:
+  - PREF_H4
+  type: TYPE_NORMAL
+- en: '[PyAlgoTrade documentation](index.html "previous chapter")'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Next topic
+  prefs:
+  - PREF_H4
+  type: TYPE_NORMAL
+- en: '[Tutorial](tutorial.html "next chapter")'
+  prefs: []
+  type: TYPE_NORMAL
+- en: This Page
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Show Source](_sources/intro.txt)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Quick search
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Enter search terms or a module, class or function name.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Navigation
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[index](genindex.html "General Index")'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[modules](py-modindex.html "Python Module Index") |'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[next](tutorial.html "Tutorial") |'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[previous](index.html "PyAlgoTrade documentation") |'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[PyAlgoTrade 0.20 documentation](index.html) »'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

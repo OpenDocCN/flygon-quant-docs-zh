@@ -1,0 +1,156 @@
+- en: marketsession – Market sessions
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://gbeced.github.io/pyalgotrade/docs/v0.20/html/marketsession.html](https://gbeced.github.io/pyalgotrade/docs/v0.20/html/marketsession.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '*class* `pyalgotrade.marketsession.``MarketSession`'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Bases: `object`'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Base class for market sessions.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Note
+  prefs: []
+  type: TYPE_NORMAL
+- en: This is a base class and should not be used directly.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*classmethod* `getTimezone`()'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Returns the pytz timezone for the market session.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*class* `pyalgotrade.marketsession.``NASDAQ`'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Bases: [`pyalgotrade.marketsession.MarketSession`](#pyalgotrade.marketsession.MarketSession
+    "pyalgotrade.marketsession.MarketSession")'
+  prefs: []
+  type: TYPE_NORMAL
+- en: NASDAQ market session.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*class* `pyalgotrade.marketsession.``NYSE`'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Bases: [`pyalgotrade.marketsession.MarketSession`](#pyalgotrade.marketsession.MarketSession
+    "pyalgotrade.marketsession.MarketSession")'
+  prefs: []
+  type: TYPE_NORMAL
+- en: New York Stock Exchange market session.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*class* `pyalgotrade.marketsession.``USEquities`'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Bases: [`pyalgotrade.marketsession.MarketSession`](#pyalgotrade.marketsession.MarketSession
+    "pyalgotrade.marketsession.MarketSession")'
+  prefs: []
+  type: TYPE_NORMAL
+- en: US Equities market session.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*class* `pyalgotrade.marketsession.``MERVAL`'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Bases: [`pyalgotrade.marketsession.MarketSession`](#pyalgotrade.marketsession.MarketSession
+    "pyalgotrade.marketsession.MarketSession")'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Buenos Aires (Argentina) market session.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*class* `pyalgotrade.marketsession.``BOVESPA`'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Bases: [`pyalgotrade.marketsession.MarketSession`](#pyalgotrade.marketsession.MarketSession
+    "pyalgotrade.marketsession.MarketSession")'
+  prefs: []
+  type: TYPE_NORMAL
+- en: BOVESPA (Brazil) market session.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*class* `pyalgotrade.marketsession.``FTSE`'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Bases: [`pyalgotrade.marketsession.MarketSession`](#pyalgotrade.marketsession.MarketSession
+    "pyalgotrade.marketsession.MarketSession")'
+  prefs: []
+  type: TYPE_NORMAL
+- en: London Stock Exchange market session.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*class* `pyalgotrade.marketsession.``TSE`'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Bases: [`pyalgotrade.marketsession.MarketSession`](#pyalgotrade.marketsession.MarketSession
+    "pyalgotrade.marketsession.MarketSession")'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Tokyo Stock Exchange market session.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Previous topic
+  prefs:
+  - PREF_H4
+  type: TYPE_NORMAL
+- en: '[optimizer – Parallel optimizers](optimizer.html "previous chapter")'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Next topic
+  prefs:
+  - PREF_H4
+  type: TYPE_NORMAL
+- en: '[Tools](tools.html "next chapter")'
+  prefs: []
+  type: TYPE_NORMAL
+- en: This Page
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Show Source](_sources/marketsession.txt)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Quick search
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Enter search terms or a module, class or function name.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Navigation
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[index](genindex.html "General Index")'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[modules](py-modindex.html "Python Module Index") |'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[next](tools.html "Tools") |'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[previous](optimizer.html "optimizer – Parallel optimizers") |'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[PyAlgoTrade 0.20 documentation](index.html) »'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Documentation for the code](code.html) »'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

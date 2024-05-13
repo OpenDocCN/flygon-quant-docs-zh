@@ -1,0 +1,107 @@
+- en: Bitcoin Charts example
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://gbeced.github.io/pyalgotrade/docs/v0.20/html/bitcoincharts_example.html](https://gbeced.github.io/pyalgotrade/docs/v0.20/html/bitcoincharts_example.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: Although it is absolutely possible to backtest a strategy with tick data as
+    supplied by [http://www.bitcoincharts.com/about/markets-api/](http://www.bitcoincharts.com/about/markets-api/)
+    using [`pyalgotrade.bitcoincharts.barfeed.CSVTradeFeed`](bitcoincharts_ref.html#pyalgotrade.bitcoincharts.barfeed.CSVTradeFeed
+    "pyalgotrade.bitcoincharts.barfeed.CSVTradeFeed"), you may want to to backtest
+    using summarized bars at a different frequency to make backtesting faster.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'As of 12-Aug-2014, [http://api.bitcoincharts.com/v1/csv/bitstampUSD.csv.gz](http://api.bitcoincharts.com/v1/csv/bitstampUSD.csv.gz)
+    has 4588830 events so we’ll transform a portion of it into 30 minute bars for
+    backtesting purposes with the following script:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'It will take some time to execute, so be patient. The resampled file should
+    look like this:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'We can now take advantage of [`pyalgotrade.barfeed.csvfeed.GenericBarFeed`](barfeed.html#pyalgotrade.barfeed.csvfeed.GenericBarFeed
+    "pyalgotrade.barfeed.csvfeed.GenericBarFeed") to load the resampled file and backtest
+    a Bitcoin strategy. We’ll be using a VWAP momentum strategy for illustration purposes:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'This is what the plot looks like:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![_images/bccharts_example_2.png](../Images/1e42a08e1bb2862d7946aa1a4133547e.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Previous topic
+  prefs:
+  - PREF_H4
+  type: TYPE_NORMAL
+- en: '[bitcoincharts – Bitcoin Charts reference](bitcoincharts_ref.html "previous
+    chapter")'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Next topic
+  prefs:
+  - PREF_H4
+  type: TYPE_NORMAL
+- en: '[Twitter support](twitter.html "next chapter")'
+  prefs: []
+  type: TYPE_NORMAL
+- en: This Page
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Show Source](_sources/bitcoincharts_example.txt)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Quick search
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Enter search terms or a module, class or function name.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Navigation
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[index](genindex.html "General Index")'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[modules](py-modindex.html "Python Module Index") |'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[next](twitter.html "Twitter support") |'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[previous](bitcoincharts_ref.html "bitcoincharts – Bitcoin Charts reference")
+    |'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[PyAlgoTrade 0.20 documentation](index.html) »'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Bitcoin](bitcoin.html) »'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Bitcoin Charts support](bitcoincharts.html) »'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

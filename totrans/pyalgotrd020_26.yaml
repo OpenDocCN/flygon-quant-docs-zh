@@ -1,0 +1,953 @@
+- en: TA-Lib integration
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://gbeced.github.io/pyalgotrade/docs/v0.20/html/talib.html](https://gbeced.github.io/pyalgotrade/docs/v0.20/html/talib.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: The **pyalgotrade.talibext.indicator** module provides integration with Python
+    wrapper for TA-Lib ([http://mrjbq7.github.com/ta-lib/](http://mrjbq7.github.com/ta-lib/))
+    to enable calling TA-Lib functions directly with [`pyalgotrade.dataseries.DataSeries`](dataseries.html#pyalgotrade.dataseries.DataSeries
+    "pyalgotrade.dataseries.DataSeries") or [`pyalgotrade.dataseries.bards.BarDataSeries`](dataseries.html#pyalgotrade.dataseries.bards.BarDataSeries
+    "pyalgotrade.dataseries.bards.BarDataSeries") instances instead of numpy arrays.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'If you’re familiar with the **talib** module, then using the **pyalgotrade.talibext.indicator**
+    module should be straightforward. When using **talib** standalone you do something
+    like this:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'To use the **pyalgotrade.talibext.indicator** module in your strategies you
+    should do something like this:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: Every function in the **pyalgotrade.talibext.indicator** module receives one
+    or more dataseries (most receive just one) and the number of values to use from
+    the dataseries. In the example above, we’re calculating Bollinger Bands over the
+    last 100 closing prices.
+  prefs: []
+  type: TYPE_NORMAL
+- en: If the parameter name is **ds**, then you should pass a regular [`pyalgotrade.dataseries.DataSeries`](dataseries.html#pyalgotrade.dataseries.DataSeries
+    "pyalgotrade.dataseries.DataSeries") instance, like the one shown in the example
+    above.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'If the parameter name is **barDs**, then you should pass a [`pyalgotrade.dataseries.bards.BarDataSeries`](dataseries.html#pyalgotrade.dataseries.bards.BarDataSeries
+    "pyalgotrade.dataseries.bards.BarDataSeries") instance, like in the next example:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'The following TA-Lib functions are available through the **pyalgotrade.talibext.indicator**
+    module:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`pyalgotrade.talibext.indicator.``AD`(*barDs*, *count*)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Chaikin A/D Line
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`pyalgotrade.talibext.indicator.``ADOSC`(*barDs*, *count*, *fastperiod=-2147483648*,
+    *slowperiod=-2147483648*)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Chaikin A/D Oscillator
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`pyalgotrade.talibext.indicator.``ADX`(*barDs*, *count*, *timeperiod=-2147483648*)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Average Directional Movement Index
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`pyalgotrade.talibext.indicator.``ADXR`(*barDs*, *count*, *timeperiod=-2147483648*)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Average Directional Movement Index Rating
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`pyalgotrade.talibext.indicator.``APO`(*ds*, *count*, *fastperiod=-2147483648*,
+    *slowperiod=-2147483648*, *matype=0*)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Absolute Price Oscillator
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`pyalgotrade.talibext.indicator.``AROON`(*barDs*, *count*, *timeperiod=-2147483648*)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Aroon
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`pyalgotrade.talibext.indicator.``AROONOSC`(*barDs*, *count*, *timeperiod=-2147483648*)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Aroon Oscillator
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`pyalgotrade.talibext.indicator.``ATR`(*barDs*, *count*, *timeperiod=-2147483648*)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Average True Range
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`pyalgotrade.talibext.indicator.``AVGPRICE`(*barDs*, *count*)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Average Price
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`pyalgotrade.talibext.indicator.``BBANDS`(*ds*, *count*, *timeperiod=-2147483648*,
+    *nbdevup=-4e+37*, *nbdevdn=-4e+37*, *matype=0*)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Bollinger Bands
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`pyalgotrade.talibext.indicator.``BETA`(*ds1*, *ds2*, *count*, *timeperiod=-2147483648*)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Beta
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`pyalgotrade.talibext.indicator.``BOP`(*barDs*, *count*)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Balance Of Power
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`pyalgotrade.talibext.indicator.``CCI`(*barDs*, *count*, *timeperiod=-2147483648*)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Commodity Channel Index
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`pyalgotrade.talibext.indicator.``CDL2CROWS`(*barDs*, *count*)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Two Crows
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`pyalgotrade.talibext.indicator.``CDL3BLACKCROWS`(*barDs*, *count*)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Three Black Crows
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`pyalgotrade.talibext.indicator.``CDL3INSIDE`(*barDs*, *count*)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Three Inside Up/Down
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`pyalgotrade.talibext.indicator.``CDL3LINESTRIKE`(*barDs*, *count*)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Three-Line Strike
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`pyalgotrade.talibext.indicator.``CDL3OUTSIDE`(*barDs*, *count*)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Three Outside Up/Down
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`pyalgotrade.talibext.indicator.``CDL3STARSINSOUTH`(*barDs*, *count*)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Three Stars In The South
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`pyalgotrade.talibext.indicator.``CDL3WHITESOLDIERS`(*barDs*, *count*)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Three Advancing White Soldiers
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`pyalgotrade.talibext.indicator.``CDLABANDONEDBABY`(*barDs*, *count*, *penetration=-4e+37*)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Abandoned Baby
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`pyalgotrade.talibext.indicator.``CDLADVANCEBLOCK`(*barDs*, *count*)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Advance Block
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`pyalgotrade.talibext.indicator.``CDLBELTHOLD`(*barDs*, *count*)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Belt-hold
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`pyalgotrade.talibext.indicator.``CDLBREAKAWAY`(*barDs*, *count*)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Breakaway
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`pyalgotrade.talibext.indicator.``CDLCLOSINGMARUBOZU`(*barDs*, *count*)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Closing Marubozu
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`pyalgotrade.talibext.indicator.``CDLCONCEALBABYSWALL`(*barDs*, *count*)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Concealing Baby Swallow
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`pyalgotrade.talibext.indicator.``CDLCOUNTERATTACK`(*barDs*, *count*)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Counterattack
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`pyalgotrade.talibext.indicator.``CDLDARKCLOUDCOVER`(*barDs*, *count*, *penetration=-4e+37*)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Dark Cloud Cover
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`pyalgotrade.talibext.indicator.``CDLDOJI`(*barDs*, *count*)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Doji
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`pyalgotrade.talibext.indicator.``CDLDOJISTAR`(*barDs*, *count*)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Doji Star
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`pyalgotrade.talibext.indicator.``CDLDRAGONFLYDOJI`(*barDs*, *count*)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Dragonfly Doji
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`pyalgotrade.talibext.indicator.``CDLENGULFING`(*barDs*, *count*)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Engulfing Pattern
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`pyalgotrade.talibext.indicator.``CDLEVENINGDOJISTAR`(*barDs*, *count*, *penetration=-4e+37*)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Evening Doji Star
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`pyalgotrade.talibext.indicator.``CDLEVENINGSTAR`(*barDs*, *count*, *penetration=-4e+37*)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Evening Star
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`pyalgotrade.talibext.indicator.``CDLGAPSIDESIDEWHITE`(*barDs*, *count*)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Up/Down-gap side-by-side white lines
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`pyalgotrade.talibext.indicator.``CDLGRAVESTONEDOJI`(*barDs*, *count*)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Gravestone Doji
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`pyalgotrade.talibext.indicator.``CDLHAMMER`(*barDs*, *count*)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Hammer
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`pyalgotrade.talibext.indicator.``CDLHANGINGMAN`(*barDs*, *count*)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Hanging Man
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`pyalgotrade.talibext.indicator.``CDLHARAMI`(*barDs*, *count*)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Harami Pattern
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`pyalgotrade.talibext.indicator.``CDLHARAMICROSS`(*barDs*, *count*)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Harami Cross Pattern
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`pyalgotrade.talibext.indicator.``CDLHIGHWAVE`(*barDs*, *count*)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: High-Wave Candle
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`pyalgotrade.talibext.indicator.``CDLHIKKAKE`(*barDs*, *count*)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Hikkake Pattern
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`pyalgotrade.talibext.indicator.``CDLHIKKAKEMOD`(*barDs*, *count*)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Modified Hikkake Pattern
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`pyalgotrade.talibext.indicator.``CDLHOMINGPIGEON`(*barDs*, *count*)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Homing Pigeon
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`pyalgotrade.talibext.indicator.``CDLIDENTICAL3CROWS`(*barDs*, *count*)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Identical Three Crows
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`pyalgotrade.talibext.indicator.``CDLINNECK`(*barDs*, *count*)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: In-Neck Pattern
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`pyalgotrade.talibext.indicator.``CDLINVERTEDHAMMER`(*barDs*, *count*)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Inverted Hammer
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`pyalgotrade.talibext.indicator.``CDLKICKING`(*barDs*, *count*)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Kicking
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`pyalgotrade.talibext.indicator.``CDLKICKINGBYLENGTH`(*barDs*, *count*)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Kicking - bull/bear determined by the longer marubozu
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`pyalgotrade.talibext.indicator.``CDLLADDERBOTTOM`(*barDs*, *count*)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Ladder Bottom
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`pyalgotrade.talibext.indicator.``CDLLONGLEGGEDDOJI`(*barDs*, *count*)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Long Legged Doji
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`pyalgotrade.talibext.indicator.``CDLLONGLINE`(*barDs*, *count*)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Long Line Candle
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`pyalgotrade.talibext.indicator.``CDLMARUBOZU`(*barDs*, *count*)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Marubozu
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`pyalgotrade.talibext.indicator.``CDLMATCHINGLOW`(*barDs*, *count*)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Matching Low
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`pyalgotrade.talibext.indicator.``CDLMATHOLD`(*barDs*, *count*, *penetration=-4e+37*)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Mat Hold
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`pyalgotrade.talibext.indicator.``CDLMORNINGDOJISTAR`(*barDs*, *count*, *penetration=-4e+37*)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Morning Doji Star
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`pyalgotrade.talibext.indicator.``CDLMORNINGSTAR`(*barDs*, *count*, *penetration=-4e+37*)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Morning Star
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`pyalgotrade.talibext.indicator.``CDLONNECK`(*barDs*, *count*)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: On-Neck Pattern
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`pyalgotrade.talibext.indicator.``CDLPIERCING`(*barDs*, *count*)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Piercing Pattern
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`pyalgotrade.talibext.indicator.``CDLRICKSHAWMAN`(*barDs*, *count*)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Rickshaw Man
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`pyalgotrade.talibext.indicator.``CDLRISEFALL3METHODS`(*barDs*, *count*)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Rising/Falling Three Methods
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`pyalgotrade.talibext.indicator.``CDLSEPARATINGLINES`(*barDs*, *count*)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Separating Lines
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`pyalgotrade.talibext.indicator.``CDLSHOOTINGSTAR`(*barDs*, *count*)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Shooting Star
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`pyalgotrade.talibext.indicator.``CDLSHORTLINE`(*barDs*, *count*)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Short Line Candle
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`pyalgotrade.talibext.indicator.``CDLSPINNINGTOP`(*barDs*, *count*)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Spinning Top
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`pyalgotrade.talibext.indicator.``CDLSTALLEDPATTERN`(*barDs*, *count*)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Stalled Pattern
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`pyalgotrade.talibext.indicator.``CDLSTICKSANDWICH`(*barDs*, *count*)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Stick Sandwich
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`pyalgotrade.talibext.indicator.``CDLTAKURI`(*barDs*, *count*)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Takuri (Dragonfly Doji with very long lower shadow)
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`pyalgotrade.talibext.indicator.``CDLTASUKIGAP`(*barDs*, *count*)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Tasuki Gap
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`pyalgotrade.talibext.indicator.``CDLTHRUSTING`(*barDs*, *count*)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Thrusting Pattern
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`pyalgotrade.talibext.indicator.``CDLTRISTAR`(*barDs*, *count*)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Tristar Pattern
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`pyalgotrade.talibext.indicator.``CDLUNIQUE3RIVER`(*barDs*, *count*)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Unique 3 River
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`pyalgotrade.talibext.indicator.``CDLUPSIDEGAP2CROWS`(*barDs*, *count*)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Upside Gap Two Crows
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`pyalgotrade.talibext.indicator.``CDLXSIDEGAP3METHODS`(*barDs*, *count*)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Upside/Downside Gap Three Methods
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`pyalgotrade.talibext.indicator.``CMO`(*ds*, *count*, *timeperiod=-2147483648*)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Chande Momentum Oscillator
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`pyalgotrade.talibext.indicator.``CORREL`(*ds1*, *ds2*, *count*, *timeperiod=-2147483648*)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Pearson’s Correlation Coefficient (r)
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`pyalgotrade.talibext.indicator.``DEMA`(*ds*, *count*, *timeperiod=-2147483648*)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Double Exponential Moving Average
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`pyalgotrade.talibext.indicator.``DX`(*barDs*, *count*, *timeperiod=-2147483648*)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Directional Movement Index
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`pyalgotrade.talibext.indicator.``EMA`(*ds*, *count*, *timeperiod=-2147483648*)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Exponential Moving Average
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`pyalgotrade.talibext.indicator.``HT_DCPERIOD`(*ds*, *count*)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Hilbert Transform - Dominant Cycle Period
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`pyalgotrade.talibext.indicator.``HT_DCPHASE`(*ds*, *count*)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Hilbert Transform - Dominant Cycle Phase
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`pyalgotrade.talibext.indicator.``HT_PHASOR`(*ds*, *count*)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Hilbert Transform - Phasor Components
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`pyalgotrade.talibext.indicator.``HT_SINE`(*ds*, *count*)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Hilbert Transform - SineWave
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`pyalgotrade.talibext.indicator.``HT_TRENDLINE`(*ds*, *count*)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Hilbert Transform - Instantaneous Trendline
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`pyalgotrade.talibext.indicator.``HT_TRENDMODE`(*ds*, *count*)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Hilbert Transform - Trend vs Cycle Mode
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`pyalgotrade.talibext.indicator.``KAMA`(*ds*, *count*, *timeperiod=-2147483648*)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Kaufman Adaptive Moving Average
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`pyalgotrade.talibext.indicator.``LINEARREG`(*ds*, *count*, *timeperiod=-2147483648*)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Linear Regression
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`pyalgotrade.talibext.indicator.``LINEARREG_ANGLE`(*ds*, *count*, *timeperiod=-2147483648*)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Linear Regression Angle
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`pyalgotrade.talibext.indicator.``LINEARREG_INTERCEPT`(*ds*, *count*, *timeperiod=-2147483648*)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Linear Regression Intercept
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`pyalgotrade.talibext.indicator.``LINEARREG_SLOPE`(*ds*, *count*, *timeperiod=-2147483648*)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Linear Regression Slope
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`pyalgotrade.talibext.indicator.``MA`(*ds*, *count*, *timeperiod=-2147483648*,
+    *matype=0*)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: All Moving Average
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`pyalgotrade.talibext.indicator.``MACD`(*ds*, *count*, *fastperiod=-2147483648*,
+    *slowperiod=-2147483648*, *signalperiod=-2147483648*)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Moving Average Convergence/Divergence
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`pyalgotrade.talibext.indicator.``MACDEXT`(*ds*, *count*, *fastperiod=-2147483648*,
+    *fastmatype=0*, *slowperiod=-2147483648*, *slowmatype=0*, *signalperiod=-2147483648*,
+    *signalmatype=0*)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: MACD with controllable MA type
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`pyalgotrade.talibext.indicator.``MACDFIX`(*ds*, *count*, *signalperiod=-2147483648*)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Moving Average Convergence/Divergence Fix 12/26
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`pyalgotrade.talibext.indicator.``MAMA`(*ds*, *count*, *fastlimit=-4e+37*,
+    *slowlimit=-4e+37*)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: MESA Adaptive Moving Average
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`pyalgotrade.talibext.indicator.``MAX`(*ds*, *count*, *timeperiod=-2147483648*)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Highest value over a specified period
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`pyalgotrade.talibext.indicator.``MAXINDEX`(*ds*, *count*, *timeperiod=-2147483648*)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Index of highest value over a specified period
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`pyalgotrade.talibext.indicator.``MEDPRICE`(*barDs*, *count*)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Median Price
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`pyalgotrade.talibext.indicator.``MFI`(*barDs*, *count*, *timeperiod=-2147483648*)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Money Flow Index
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`pyalgotrade.talibext.indicator.``MIDPOINT`(*ds*, *count*, *timeperiod=-2147483648*)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: MidPoint over period
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`pyalgotrade.talibext.indicator.``MIDPRICE`(*barDs*, *count*, *timeperiod=-2147483648*)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Midpoint Price over period
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`pyalgotrade.talibext.indicator.``MIN`(*ds*, *count*, *timeperiod=-2147483648*)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Lowest value over a specified period
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`pyalgotrade.talibext.indicator.``MININDEX`(*ds*, *count*, *timeperiod=-2147483648*)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Index of lowest value over a specified period
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`pyalgotrade.talibext.indicator.``MINMAX`(*ds*, *count*, *timeperiod=-2147483648*)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Lowest and highest values over a specified period
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`pyalgotrade.talibext.indicator.``MINMAXINDEX`(*ds*, *count*, *timeperiod=-2147483648*)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Indexes of lowest and highest values over a specified period
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`pyalgotrade.talibext.indicator.``MINUS_DI`(*barDs*, *count*, *timeperiod=-2147483648*)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Minus Directional Indicator
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`pyalgotrade.talibext.indicator.``MINUS_DM`(*barDs*, *count*, *timeperiod=-2147483648*)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Minus Directional Movement
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`pyalgotrade.talibext.indicator.``MOM`(*ds*, *count*, *timeperiod=-2147483648*)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Momentum
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`pyalgotrade.talibext.indicator.``NATR`(*barDs*, *count*, *timeperiod=-2147483648*)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Normalized Average True Range
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`pyalgotrade.talibext.indicator.``OBV`(*ds1*, *volumeDs*, *count*)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: On Balance Volume
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`pyalgotrade.talibext.indicator.``PLUS_DI`(*barDs*, *count*, *timeperiod=-2147483648*)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Plus Directional Indicator
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`pyalgotrade.talibext.indicator.``PLUS_DM`(*barDs*, *count*, *timeperiod=-2147483648*)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Plus Directional Movement
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`pyalgotrade.talibext.indicator.``PPO`(*ds*, *count*, *fastperiod=-2147483648*,
+    *slowperiod=-2147483648*, *matype=0*)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Percentage Price Oscillator
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`pyalgotrade.talibext.indicator.``ROC`(*ds*, *count*, *timeperiod=-2147483648*)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Rate of change : ((price/prevPrice)-1)*100'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`pyalgotrade.talibext.indicator.``ROCP`(*ds*, *count*, *timeperiod=-2147483648*)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Rate of change Percentage: (price-prevPrice)/prevPrice'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`pyalgotrade.talibext.indicator.``ROCR`(*ds*, *count*, *timeperiod=-2147483648*)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Rate of change ratio: (price/prevPrice)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`pyalgotrade.talibext.indicator.``ROCR100`(*ds*, *count*, *timeperiod=-2147483648*)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Rate of change ratio 100 scale: (price/prevPrice)*100'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`pyalgotrade.talibext.indicator.``RSI`(*ds*, *count*, *timeperiod=-2147483648*)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Relative Strength Index
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`pyalgotrade.talibext.indicator.``SAR`(*barDs*, *count*, *acceleration=-4e+37*,
+    *maximum=-4e+37*)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Parabolic SAR
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`pyalgotrade.talibext.indicator.``SAREXT`(*barDs*, *count*, *startvalue=-4e+37*,
+    *offsetonreverse=-4e+37*, *accelerationinitlong=-4e+37*, *accelerationlong=-4e+37*,
+    *accelerationmaxlong=-4e+37*, *accelerationinitshort=-4e+37*, *accelerationshort=-4e+37*,
+    *accelerationmaxshort=-4e+37*)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Parabolic SAR - Extended
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`pyalgotrade.talibext.indicator.``SMA`(*ds*, *count*, *timeperiod=-2147483648*)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Simple Moving Average
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`pyalgotrade.talibext.indicator.``STDDEV`(*ds*, *count*, *timeperiod=-2147483648*,
+    *nbdev=-4e+37*)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Standard Deviation
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`pyalgotrade.talibext.indicator.``STOCH`(*barDs*, *count*, *fastk_period=-2147483648*,
+    *slowk_period=-2147483648*, *slowk_matype=0*, *slowd_period=-2147483648*, *slowd_matype=0*)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Stochastic
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`pyalgotrade.talibext.indicator.``STOCHF`(*barDs*, *count*, *fastk_period=-2147483648*,
+    *fastd_period=-2147483648*, *fastd_matype=0*)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Stochastic Fast
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`pyalgotrade.talibext.indicator.``STOCHRSI`(*ds*, *count*, *timeperiod=-2147483648*,
+    *fastk_period=-2147483648*, *fastd_period=-2147483648*, *fastd_matype=0*)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Stochastic Relative Strength Index
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`pyalgotrade.talibext.indicator.``SUM`(*ds*, *count*, *timeperiod=-2147483648*)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Summation
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`pyalgotrade.talibext.indicator.``T3`(*ds*, *count*, *timeperiod=-2147483648*,
+    *vfactor=-4e+37*)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Triple Exponential Moving Average (T3)
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`pyalgotrade.talibext.indicator.``TEMA`(*ds*, *count*, *timeperiod=-2147483648*)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Triple Exponential Moving Average
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`pyalgotrade.talibext.indicator.``TRANGE`(*barDs*, *count*)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: True Range
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`pyalgotrade.talibext.indicator.``TRIMA`(*ds*, *count*, *timeperiod=-2147483648*)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Triangular Moving Average
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`pyalgotrade.talibext.indicator.``TRIX`(*ds*, *count*, *timeperiod=-2147483648*)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 1-day Rate-Of-Change (ROC) of a Triple Smooth EMA
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`pyalgotrade.talibext.indicator.``TSF`(*ds*, *count*, *timeperiod=-2147483648*)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Time Series Forecast
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`pyalgotrade.talibext.indicator.``TYPPRICE`(*barDs*, *count*)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Typical Price
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`pyalgotrade.talibext.indicator.``ULTOSC`(*barDs*, *count*, *timeperiod1=-2147483648*,
+    *timeperiod2=-2147483648*, *timeperiod3=-2147483648*)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Ultimate Oscillator
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`pyalgotrade.talibext.indicator.``VAR`(*ds*, *count*, *timeperiod=-2147483648*,
+    *nbdev=-4e+37*)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Variance
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`pyalgotrade.talibext.indicator.``WCLPRICE`(*barDs*, *count*)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Weighted Close Price
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`pyalgotrade.talibext.indicator.``WILLR`(*barDs*, *count*, *timeperiod=-2147483648*)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Williams’ %R
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`pyalgotrade.talibext.indicator.``WMA`(*ds*, *count*, *timeperiod=-2147483648*)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Weighted Moving Average
+  prefs: []
+  type: TYPE_NORMAL
+- en: Previous topic
+  prefs:
+  - PREF_H4
+  type: TYPE_NORMAL
+- en: '[Twitter Example](twitter_example.html "previous chapter")'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Next topic
+  prefs:
+  - PREF_H4
+  type: TYPE_NORMAL
+- en: '[Computational Investing Part I](compinvpart1.html "next chapter")'
+  prefs: []
+  type: TYPE_NORMAL
+- en: This Page
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Show Source](_sources/talib.txt)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Quick search
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Enter search terms or a module, class or function name.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Navigation
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[index](genindex.html "General Index")'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[modules](py-modindex.html "Python Module Index") |'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[next](compinvpart1.html "Computational Investing Part I") |'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[previous](twitter_example.html "Twitter Example") |'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[PyAlgoTrade 0.20 documentation](index.html) »'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
