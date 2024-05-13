@@ -1,26 +1,33 @@
 - en: barfeed – Bar providers
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
 - en: 原文：[https://gbeced.github.io/pyalgotrade/docs/v0.20/html/barfeed.html](https://gbeced.github.io/pyalgotrade/docs/v0.20/html/barfeed.html)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
 - en: '*class* `pyalgotrade.barfeed.``BaseBarFeed`(*frequency*, *maxLen=None*)'
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
 - en: 'Bases: [`pyalgotrade.feed.BaseFeed`](feed.html#pyalgotrade.feed.BaseFeed "pyalgotrade.feed.BaseFeed")'
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
 - en: Base class for [`pyalgotrade.bar.Bar`](bar.html#pyalgotrade.bar.Bar "pyalgotrade.bar.Bar")
     providing feeds.
+  id: totrans-4
   prefs: []
   type: TYPE_NORMAL
 - en: '| Parameters: |'
+  id: totrans-5
   prefs: []
   type: TYPE_TB
 - en: '**frequency** – The bars frequency. Valid values defined in [`pyalgotrade.bar.Frequency`](bar.html#pyalgotrade.bar.Frequency
     "pyalgotrade.bar.Frequency").'
+  id: totrans-6
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
@@ -28,299 +35,415 @@
     "pyalgotrade.dataseries.bards.BarDataSeries") will hold. Once a bounded length
     is full, when new items are added, a corresponding number of items are discarded
     from the opposite end. If None then dataseries.DEFAULT_MAX_LEN is used.'
+  id: totrans-7
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: '|'
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
 - en: Note
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
 - en: This is a base class and should not be used directly.
+  id: totrans-10
   prefs: []
   type: TYPE_NORMAL
 - en: '`getNextBars`()'
+  id: totrans-11
   prefs: []
   type: TYPE_NORMAL
 - en: Override to return the next [`pyalgotrade.bar.Bars`](bar.html#pyalgotrade.bar.Bars
     "pyalgotrade.bar.Bars") in the feed or None if there are no bars.
+  id: totrans-12
   prefs: []
   type: TYPE_NORMAL
 - en: Note
+  id: totrans-13
   prefs: []
   type: TYPE_NORMAL
 - en: This is for BaseBarFeed subclasses and it should not be called directly.
+  id: totrans-14
   prefs: []
   type: TYPE_NORMAL
 - en: '`getCurrentBars`()'
+  id: totrans-15
   prefs: []
   type: TYPE_NORMAL
 - en: Returns the current [`pyalgotrade.bar.Bars`](bar.html#pyalgotrade.bar.Bars "pyalgotrade.bar.Bars").
+  id: totrans-16
   prefs: []
   type: TYPE_NORMAL
 - en: '`getLastBar`(*instrument*)'
+  id: totrans-17
   prefs: []
   type: TYPE_NORMAL
 - en: Returns the last [`pyalgotrade.bar.Bar`](bar.html#pyalgotrade.bar.Bar "pyalgotrade.bar.Bar")
     for a given instrument, or None.
+  id: totrans-18
   prefs: []
   type: TYPE_NORMAL
 - en: '`getDefaultInstrument`()'
+  id: totrans-19
   prefs: []
   type: TYPE_NORMAL
 - en: Returns the last instrument registered.
+  id: totrans-20
   prefs: []
   type: TYPE_NORMAL
 - en: '`getRegisteredInstruments`()'
+  id: totrans-21
   prefs: []
   type: TYPE_NORMAL
 - en: Returns a list of registered intstrument names.
+  id: totrans-22
   prefs: []
   type: TYPE_NORMAL
 - en: '`getDataSeries`(*instrument=None*)'
+  id: totrans-23
   prefs: []
   type: TYPE_NORMAL
 - en: Returns the [`pyalgotrade.dataseries.bards.BarDataSeries`](dataseries.html#pyalgotrade.dataseries.bards.BarDataSeries
     "pyalgotrade.dataseries.bards.BarDataSeries") for a given instrument.
+  id: totrans-24
   prefs: []
   type: TYPE_NORMAL
 - en: '| Parameters: | **instrument** (*string.*) – Instrument identifier. If None,
     the default instrument is returned. |'
+  id: totrans-25
   prefs: []
   type: TYPE_TB
 - en: '| Return type: | [`pyalgotrade.dataseries.bards.BarDataSeries`](dataseries.html#pyalgotrade.dataseries.bards.BarDataSeries
     "pyalgotrade.dataseries.bards.BarDataSeries"). |'
+  id: totrans-26
   prefs: []
   type: TYPE_TB
 - en: '## CSV'
+  id: totrans-27
   prefs: []
   type: TYPE_NORMAL
 - en: '*class* `pyalgotrade.barfeed.csvfeed.``BarFeed`(*frequency*, *maxLen=None*)'
+  id: totrans-28
   prefs: []
   type: TYPE_NORMAL
 - en: 'Bases: `pyalgotrade.barfeed.membf.BarFeed`'
+  id: totrans-29
   prefs: []
   type: TYPE_NORMAL
 - en: Base class for CSV file based `pyalgotrade.barfeed.BarFeed`.
+  id: totrans-30
   prefs: []
   type: TYPE_NORMAL
 - en: Note
+  id: totrans-31
   prefs: []
   type: TYPE_NORMAL
 - en: This is a base class and should not be used directly.
+  id: totrans-32
   prefs: []
   type: TYPE_NORMAL
 - en: '*class* `pyalgotrade.barfeed.csvfeed.``GenericBarFeed`(*frequency*, *timezone=None*,
     *maxLen=None*)'
+  id: totrans-33
   prefs: []
   type: TYPE_NORMAL
 - en: 'Bases: [`pyalgotrade.barfeed.csvfeed.BarFeed`](#pyalgotrade.barfeed.csvfeed.BarFeed
     "pyalgotrade.barfeed.csvfeed.BarFeed")'
+  id: totrans-34
   prefs: []
   type: TYPE_NORMAL
 - en: 'A BarFeed that loads bars from CSV files that have the following format:'
+  id: totrans-35
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE0]'
+  id: totrans-36
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: '| Parameters: |'
+  id: totrans-37
   prefs: []
   type: TYPE_TB
 - en: '**frequency** – The frequency of the bars. Check [`pyalgotrade.bar.Frequency`](bar.html#pyalgotrade.bar.Frequency
     "pyalgotrade.bar.Frequency").'
+  id: totrans-38
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: '**timezone** (*A pytz timezone.*) – The default timezone to use to localize
     bars. Check [`pyalgotrade.marketsession`](marketsession.html#module-pyalgotrade.marketsession
     "pyalgotrade.marketsession").'
+  id: totrans-39
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**timezone** (*A pytz timezone.*) – 用于本地化条形图的默认时区。请检查 [`pyalgotrade.marketsession`](marketsession.html#module-pyalgotrade.marketsession
+    "pyalgotrade.marketsession")。'
 - en: '**maxLen** (*int.*) – The maximum number of values that the [`pyalgotrade.dataseries.bards.BarDataSeries`](dataseries.html#pyalgotrade.dataseries.bards.BarDataSeries
     "pyalgotrade.dataseries.bards.BarDataSeries") will hold. Once a bounded length
     is full, when new items are added, a corresponding number of items are discarded
     from the opposite end. If None then dataseries.DEFAULT_MAX_LEN is used.'
+  id: totrans-40
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**maxLen** (*int.*) – [`pyalgotrade.dataseries.bards.BarDataSeries`](dataseries.html#pyalgotrade.dataseries.bards.BarDataSeries
+    "pyalgotrade.dataseries.bards.BarDataSeries") 将保存的值的最大数量。一旦有界长度满了，当添加新项时，相应数量的项将从另一端丢弃。如果为
+    None，则使用 dataseries.DEFAULT_MAX_LEN。'
 - en: '|'
+  id: totrans-41
   prefs: []
   type: TYPE_NORMAL
+  zh: '|'
 - en: Note
+  id: totrans-42
   prefs: []
   type: TYPE_NORMAL
+  zh: 注意
 - en: The CSV file **must** have the column names in the first row.
+  id: totrans-43
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: CSV 文件**必须**在第一行中具有列名。
 - en: It is ok if the **Adj Close** column is empty.
+  id: totrans-44
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 如果**Adj Close**列为空，也没关系。
 - en: 'When working with multiple instruments:'
+  id: totrans-45
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 当使用多个工具时：
 - en: If all the instruments loaded are in the same timezone, then the timezone parameter
     may not be specified.
+  id: totrans-46
   prefs:
   - PREF_BQ
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 如果加载的所有工具都位于相同的时区，则可能不需要指定时区参数。
 - en: If any of the instruments loaded are in different timezones, then the timezone
     parameter should be set.
+  id: totrans-47
   prefs:
   - PREF_BQ
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 如果加载的任何工具位于不同的时区，则应设置时区参数。
 - en: '`addBarsFromCSV`(*instrument*, *path*, *timezone=None*, *skipMalformedBars=False*)'
+  id: totrans-48
   prefs: []
   type: TYPE_NORMAL
+  zh: '`addBarsFromCSV`(*instrument*, *path*, *timezone=None*, *skipMalformedBars=False*)'
 - en: Loads bars for a given instrument from a CSV formatted file. The instrument
     gets registered in the bar feed.
+  id: totrans-49
   prefs: []
   type: TYPE_NORMAL
+  zh: 从 CSV 格式文件中加载给定工具的条形图。该工具将在条形图数据源中注册。
 - en: '| Parameters: |'
+  id: totrans-50
   prefs: []
   type: TYPE_TB
+  zh: '| 参数： |'
 - en: '**instrument** (*string.*) – Instrument identifier.'
+  id: totrans-51
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**instrument** (*string.*) – 工具标识符。'
 - en: '**path** (*string.*) – The path to the CSV file.'
+  id: totrans-52
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**path** (*string.*) – CSV 文件的路径。'
 - en: '**timezone** (*A pytz timezone.*) – The timezone to use to localize bars. Check
     [`pyalgotrade.marketsession`](marketsession.html#module-pyalgotrade.marketsession
     "pyalgotrade.marketsession").'
+  id: totrans-53
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**timezone** (*A pytz timezone.*) – 用于本地化条形图的时区。请检查 [`pyalgotrade.marketsession`](marketsession.html#module-pyalgotrade.marketsession
+    "pyalgotrade.marketsession")。'
 - en: '**skipMalformedBars** (*boolean.*) – True to skip errors while parsing bars.'
+  id: totrans-54
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**skipMalformedBars** (*boolean.*) – 设置为 True 以跳过解析条形图时的错误。'
 - en: '|'
+  id: totrans-55
   prefs: []
   type: TYPE_NORMAL
+  zh: '|'
 - en: '`setDateTimeFormat`(*dateTimeFormat*)'
+  id: totrans-56
   prefs: []
   type: TYPE_NORMAL
+  zh: '`setDateTimeFormat`(*dateTimeFormat*)'
 - en: 'Set the format string to use with strptime to parse datetime column.  ## Yahoo!
     Finance'
+  id: totrans-57
   prefs: []
   type: TYPE_NORMAL
+  zh: 设置要与 strptime 一起使用的格式字符串以解析日期时间列。## 雅虎财经
 - en: '*class* `pyalgotrade.barfeed.yahoofeed.``Feed`(*frequency=86400*, *timezone=None*,
     *maxLen=None*)'
+  id: totrans-58
   prefs: []
   type: TYPE_NORMAL
+  zh: '*class* `pyalgotrade.barfeed.yahoofeed.``Feed`(*frequency=86400*, *timezone=None*,
+    *maxLen=None*)'
 - en: 'Bases: [`pyalgotrade.barfeed.csvfeed.BarFeed`](#pyalgotrade.barfeed.csvfeed.BarFeed
     "pyalgotrade.barfeed.csvfeed.BarFeed")'
+  id: totrans-59
   prefs: []
   type: TYPE_NORMAL
+  zh: 基类：[`pyalgotrade.barfeed.csvfeed.BarFeed`](#pyalgotrade.barfeed.csvfeed.BarFeed
+    "pyalgotrade.barfeed.csvfeed.BarFeed")
 - en: A [`pyalgotrade.barfeed.csvfeed.BarFeed`](#pyalgotrade.barfeed.csvfeed.BarFeed
     "pyalgotrade.barfeed.csvfeed.BarFeed") that loads bars from CSV files downloaded
     from Yahoo! Finance.
+  id: totrans-60
   prefs: []
   type: TYPE_NORMAL
+  zh: 从从雅虎财经下载的 CSV 文件中加载条形图的[`pyalgotrade.barfeed.csvfeed.BarFeed`](#pyalgotrade.barfeed.csvfeed.BarFeed
+    "pyalgotrade.barfeed.csvfeed.BarFeed")。
 - en: '| Parameters: |'
+  id: totrans-61
   prefs: []
   type: TYPE_TB
+  zh: '| 参数： |'
 - en: '**frequency** – The frequency of the bars. Only **pyalgotrade.bar.Frequency.DAY**
     or **pyalgotrade.bar.Frequency.WEEK** are supported.'
+  id: totrans-62
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**frequency** – 条形图的频率。仅支持 **pyalgotrade.bar.Frequency.DAY** 或 **pyalgotrade.bar.Frequency.WEEK**。'
 - en: '**timezone** (*A pytz timezone.*) – The default timezone to use to localize
     bars. Check [`pyalgotrade.marketsession`](marketsession.html#module-pyalgotrade.marketsession
     "pyalgotrade.marketsession").'
+  id: totrans-63
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**timezone** (*A pytz timezone.*) – 用于本地化条形图的默认时区。请检查 [`pyalgotrade.marketsession`](marketsession.html#module-pyalgotrade.marketsession
+    "pyalgotrade.marketsession")。'
 - en: '**maxLen** (*int.*) – The maximum number of values that the [`pyalgotrade.dataseries.bards.BarDataSeries`](dataseries.html#pyalgotrade.dataseries.bards.BarDataSeries
     "pyalgotrade.dataseries.bards.BarDataSeries") will hold. Once a bounded length
     is full, when new items are added, a corresponding number of items are discarded
     from the opposite end. If None then dataseries.DEFAULT_MAX_LEN is used.'
+  id: totrans-64
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**maxLen** (*int.*) – [`pyalgotrade.dataseries.bards.BarDataSeries`](dataseries.html#pyalgotrade.dataseries.bards.BarDataSeries
+    "pyalgotrade.dataseries.bards.BarDataSeries") 将保存的值的最大数量。一旦有界长度满了，当添加新项时，相应数量的项将从另一端丢弃。如果为
+    None，则使用 dataseries.DEFAULT_MAX_LEN。'
 - en: '|'
+  id: totrans-65
   prefs: []
   type: TYPE_NORMAL
+  zh: '|'
 - en: Note
+  id: totrans-66
   prefs: []
   type: TYPE_NORMAL
+  zh: 注意
 - en: 'Yahoo! Finance csv files lack timezone information. When working with multiple
     instruments:'
+  id: totrans-67
   prefs: []
   type: TYPE_NORMAL
+  zh: 雅虎财经 CSV 文件缺乏时区信息。当使用多个工具时：
 - en: If all the instruments loaded are in the same timezone, then the timezone parameter
     may not be specified.
+  id: totrans-68
   prefs:
   - PREF_BQ
   - PREF_UL
   type: TYPE_NORMAL
 - en: If any of the instruments loaded are in different timezones, then the timezone
     parameter must be set.
+  id: totrans-69
   prefs:
   - PREF_BQ
   - PREF_UL
   type: TYPE_NORMAL
 - en: '`addBarsFromCSV`(*instrument*, *path*, *timezone=None*)'
+  id: totrans-70
   prefs: []
   type: TYPE_NORMAL
 - en: Loads bars for a given instrument from a CSV formatted file. The instrument
     gets registered in the bar feed.
+  id: totrans-71
   prefs: []
   type: TYPE_NORMAL
 - en: '| Parameters: |'
+  id: totrans-72
   prefs: []
   type: TYPE_TB
 - en: '**instrument** (*string.*) – Instrument identifier.'
+  id: totrans-73
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: '**path** (*string.*) – The path to the CSV file.'
+  id: totrans-74
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: '**timezone** (*A pytz timezone.*) – The timezone to use to localize bars. Check
     [`pyalgotrade.marketsession`](marketsession.html#module-pyalgotrade.marketsession
     "pyalgotrade.marketsession").'
+  id: totrans-75
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: '|  ## Google Finance'
+  id: totrans-76
   prefs: []
   type: TYPE_NORMAL
 - en: '*class* `pyalgotrade.barfeed.googlefeed.``Feed`(*frequency=86400*, *timezone=None*,
     *maxLen=None*)'
+  id: totrans-77
   prefs: []
   type: TYPE_NORMAL
 - en: 'Bases: [`pyalgotrade.barfeed.csvfeed.BarFeed`](#pyalgotrade.barfeed.csvfeed.BarFeed
     "pyalgotrade.barfeed.csvfeed.BarFeed")'
+  id: totrans-78
   prefs: []
   type: TYPE_NORMAL
 - en: A [`pyalgotrade.barfeed.csvfeed.BarFeed`](#pyalgotrade.barfeed.csvfeed.BarFeed
     "pyalgotrade.barfeed.csvfeed.BarFeed") that loads bars from CSV files downloaded
     from Google Finance.
+  id: totrans-79
   prefs: []
   type: TYPE_NORMAL
 - en: '| Parameters: |'
+  id: totrans-80
   prefs: []
   type: TYPE_TB
 - en: '**frequency** – The frequency of the bars. Only **pyalgotrade.bar.Frequency.DAY**
     is currently supported.'
+  id: totrans-81
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: '**timezone** (*A pytz timezone.*) – The default timezone to use to localize
     bars. Check [`pyalgotrade.marketsession`](marketsession.html#module-pyalgotrade.marketsession
     "pyalgotrade.marketsession").'
+  id: totrans-82
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
@@ -328,86 +451,106 @@
     "pyalgotrade.dataseries.bards.BarDataSeries") will hold. Once a bounded length
     is full, when new items are added, a corresponding number of items are discarded
     from the opposite end. If None then dataseries.DEFAULT_MAX_LEN is used.'
+  id: totrans-83
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: '|'
+  id: totrans-84
   prefs: []
   type: TYPE_NORMAL
 - en: Note
+  id: totrans-85
   prefs: []
   type: TYPE_NORMAL
 - en: 'Google Finance csv files lack timezone information. When working with multiple
     instruments:'
+  id: totrans-86
   prefs: []
   type: TYPE_NORMAL
 - en: If all the instruments loaded are in the same timezone, then the timezone parameter
     may not be specified.
+  id: totrans-87
   prefs:
   - PREF_BQ
   - PREF_UL
   type: TYPE_NORMAL
 - en: If any of the instruments loaded are in different timezones, then the timezone
     parameter must be set.
+  id: totrans-88
   prefs:
   - PREF_BQ
   - PREF_UL
   type: TYPE_NORMAL
 - en: '`addBarsFromCSV`(*instrument*, *path*, *timezone=None*, *skipMalformedBars=False*)'
+  id: totrans-89
   prefs: []
   type: TYPE_NORMAL
 - en: Loads bars for a given instrument from a CSV formatted file. The instrument
     gets registered in the bar feed.
+  id: totrans-90
   prefs: []
   type: TYPE_NORMAL
 - en: '| Parameters: |'
+  id: totrans-91
   prefs: []
   type: TYPE_TB
 - en: '**instrument** (*string.*) – Instrument identifier.'
+  id: totrans-92
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: '**path** (*string.*) – The path to the CSV file.'
+  id: totrans-93
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: '**timezone** (*A pytz timezone.*) – The timezone to use to localize bars. Check
     [`pyalgotrade.marketsession`](marketsession.html#module-pyalgotrade.marketsession
     "pyalgotrade.marketsession").'
+  id: totrans-94
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: '**skipMalformedBars** (*boolean.*) – True to skip errors while parsing bars.'
+  id: totrans-95
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: '|  ## Quandl'
+  id: totrans-96
   prefs: []
   type: TYPE_NORMAL
 - en: '*class* `pyalgotrade.barfeed.quandlfeed.``Feed`(*frequency=86400*, *timezone=None*,
     *maxLen=None*)'
+  id: totrans-97
   prefs: []
   type: TYPE_NORMAL
 - en: 'Bases: [`pyalgotrade.barfeed.csvfeed.GenericBarFeed`](#pyalgotrade.barfeed.csvfeed.GenericBarFeed
     "pyalgotrade.barfeed.csvfeed.GenericBarFeed")'
+  id: totrans-98
   prefs: []
   type: TYPE_NORMAL
 - en: A [`pyalgotrade.barfeed.csvfeed.BarFeed`](#pyalgotrade.barfeed.csvfeed.BarFeed
     "pyalgotrade.barfeed.csvfeed.BarFeed") that loads bars from CSV files downloaded
     from Quandl.
+  id: totrans-99
   prefs: []
   type: TYPE_NORMAL
 - en: '| Parameters: |'
+  id: totrans-100
   prefs: []
   type: TYPE_TB
 - en: '**frequency** – The frequency of the bars. Only **pyalgotrade.bar.Frequency.DAY**
     or **pyalgotrade.bar.Frequency.WEEK** are supported.'
+  id: totrans-101
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: '**timezone** (*A pytz timezone.*) – The default timezone to use to localize
     bars. Check [`pyalgotrade.marketsession`](marketsession.html#module-pyalgotrade.marketsession
     "pyalgotrade.marketsession").'
+  id: totrans-102
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
@@ -415,54 +558,66 @@
     "pyalgotrade.dataseries.bards.BarDataSeries") will hold. Once a bounded length
     is full, when new items are added, a corresponding number of items are discarded
     from the opposite end. If None then dataseries.DEFAULT_MAX_LEN is used.'
+  id: totrans-103
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: '|'
+  id: totrans-104
   prefs: []
   type: TYPE_NORMAL
 - en: Note
+  id: totrans-105
   prefs: []
   type: TYPE_NORMAL
 - en: 'When working with multiple instruments:'
+  id: totrans-106
   prefs: []
   type: TYPE_NORMAL
 - en: If all the instruments loaded are in the same timezone, then the timezone parameter
     may not be specified.
+  id: totrans-107
   prefs:
   - PREF_BQ
   - PREF_UL
   type: TYPE_NORMAL
 - en: 'If any of the instruments loaded are in different timezones, then the timezone
     parameter must be set.  ## Ninja Trader'
+  id: totrans-108
   prefs:
   - PREF_BQ
   - PREF_UL
   type: TYPE_NORMAL
 - en: '*class* `pyalgotrade.barfeed.ninjatraderfeed.``Feed`(*frequency*, *timezone=None*,
     *maxLen=None*)'
+  id: totrans-109
   prefs: []
   type: TYPE_NORMAL
 - en: 'Bases: [`pyalgotrade.barfeed.csvfeed.BarFeed`](#pyalgotrade.barfeed.csvfeed.BarFeed
     "pyalgotrade.barfeed.csvfeed.BarFeed")'
+  id: totrans-110
   prefs: []
   type: TYPE_NORMAL
 - en: A [`pyalgotrade.barfeed.csvfeed.BarFeed`](#pyalgotrade.barfeed.csvfeed.BarFeed
     "pyalgotrade.barfeed.csvfeed.BarFeed") that loads bars from CSV files exported
     from NinjaTrader.
+  id: totrans-111
   prefs: []
   type: TYPE_NORMAL
 - en: '| Parameters: |'
+  id: totrans-112
   prefs: []
   type: TYPE_TB
 - en: '**frequency** – The frequency of the bars. Only **pyalgotrade.bar.Frequency.MINUTE**
     or **pyalgotrade.bar.Frequency.DAY** are supported.'
+  id: totrans-113
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: '**timezone** (*A pytz timezone.*) – The default timezone to use to localize
     bars. Check [`pyalgotrade.marketsession`](marketsession.html#module-pyalgotrade.marketsession
     "pyalgotrade.marketsession").'
+  id: totrans-114
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
@@ -470,126 +625,175 @@
     "pyalgotrade.dataseries.bards.BarDataSeries") will hold. Once a bounded length
     is full, when new items are added, a corresponding number of items are discarded
     from the opposite end. If None then dataseries.DEFAULT_MAX_LEN is used.'
+  id: totrans-115
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: '|'
+  id: totrans-116
   prefs: []
   type: TYPE_NORMAL
 - en: '`addBarsFromCSV`(*instrument*, *path*, *timezone=None*)'
+  id: totrans-117
   prefs: []
   type: TYPE_NORMAL
 - en: Loads bars for a given instrument from a CSV formatted file. The instrument
     gets registered in the bar feed.
+  id: totrans-118
   prefs: []
   type: TYPE_NORMAL
 - en: '| Parameters: |'
+  id: totrans-119
   prefs: []
   type: TYPE_TB
 - en: '**instrument** (*string.*) – Instrument identifier.'
+  id: totrans-120
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: '**path** (*string.*) – The path to the file.'
+  id: totrans-121
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: '**timezone** (*A pytz timezone.*) – The timezone to use to localize bars. Check
     [`pyalgotrade.marketsession`](marketsession.html#module-pyalgotrade.marketsession
     "pyalgotrade.marketsession").'
+  id: totrans-122
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: '|'
+  id: totrans-123
   prefs: []
   type: TYPE_NORMAL
 - en: '[Table Of Contents](index.html)'
+  id: totrans-124
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
 - en: '[barfeed – Bar providers](#)'
+  id: totrans-125
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: '[CSV](#module-pyalgotrade.barfeed.csvfeed)'
+  id: totrans-126
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
 - en: '[Yahoo! Finance](#module-pyalgotrade.barfeed.yahoofeed)'
+  id: totrans-127
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
 - en: '[Google Finance](#module-pyalgotrade.barfeed.googlefeed)'
+  id: totrans-128
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[谷歌财经](#module-pyalgotrade.barfeed.googlefeed)'
 - en: '[Quandl](#module-pyalgotrade.barfeed.quandlfeed)'
+  id: totrans-129
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[Quandl](#module-pyalgotrade.barfeed.quandlfeed)'
 - en: '[Ninja Trader](#module-pyalgotrade.barfeed.ninjatraderfeed)'
+  id: totrans-130
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[忍者交易员](#module-pyalgotrade.barfeed.ninjatraderfeed)'
 - en: Previous topic
+  id: totrans-131
   prefs:
   - PREF_H4
   type: TYPE_NORMAL
+  zh: 上一个主题
 - en: '[feed – Basic feeds](feed.html "previous chapter")'
+  id: totrans-132
   prefs: []
   type: TYPE_NORMAL
+  zh: '[feed – 基本数据源](feed.html "上一章")'
 - en: Next topic
+  id: totrans-133
   prefs:
   - PREF_H4
   type: TYPE_NORMAL
+  zh: 下一个主题
 - en: '[technical – Technical indicators](technical.html "next chapter")'
+  id: totrans-134
   prefs: []
   type: TYPE_NORMAL
+  zh: '[技术指标 – 技术指标](technical.html "下一章")'
 - en: This Page
+  id: totrans-135
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 此页
 - en: '[Show Source](_sources/barfeed.txt)'
+  id: totrans-136
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[显示源代码](_sources/barfeed.txt)'
 - en: Quick search
+  id: totrans-137
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 快速搜索
 - en: Enter search terms or a module, class or function name.
+  id: totrans-138
   prefs: []
   type: TYPE_NORMAL
+  zh: 输入搜索词或模块、类或函数名称。
 - en: Navigation
+  id: totrans-139
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 导航
 - en: '[index](genindex.html "General Index")'
+  id: totrans-140
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[索引](genindex.html "通用索引")'
 - en: '[modules](py-modindex.html "Python Module Index") |'
+  id: totrans-141
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[模块](py-modindex.html "Python 模块索引") |'
 - en: '[next](technical.html "technical – Technical indicators") |'
+  id: totrans-142
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[下一章](technical.html "技术指标 – 技术指标") |'
 - en: '[previous](feed.html "feed – Basic feeds") |'
+  id: totrans-143
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[上一章](feed.html "数据源 – 基本数据源") |'
 - en: '[PyAlgoTrade 0.20 documentation](index.html) »'
+  id: totrans-144
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[PyAlgoTrade 0.20 文档](index.html) »'
 - en: '[Documentation for the code](code.html) »'
+  id: totrans-145
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[代码文档](code.html) »'

@@ -1,229 +1,356 @@
 - en: feed – Basic feeds
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 数据源 - 基本数据源
 - en: 原文：[https://gbeced.github.io/pyalgotrade/docs/v0.20/html/feed.html](https://gbeced.github.io/pyalgotrade/docs/v0.20/html/feed.html)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://gbeced.github.io/pyalgotrade/docs/v0.20/html/feed.html](https://gbeced.github.io/pyalgotrade/docs/v0.20/html/feed.html)
 - en: Feeds are time series data providing abstractions. When these are included in
     the event dispatch loop, they emit an event as new data is available. Feeds are
     also responsible for updating the [`pyalgotrade.dataseries.DataSeries`](dataseries.html#pyalgotrade.dataseries.DataSeries
     "pyalgotrade.dataseries.DataSeries") associated with each piece of data that the
     feed provides.
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: 数据源是提供抽象的时间序列数据。当这些数据源包含在事件分派循环中时，它们会在新数据可用时发出事件。数据源还负责更新与数据源提供的每个数据相关联的[`pyalgotrade.dataseries.DataSeries`](dataseries.html#pyalgotrade.dataseries.DataSeries
+    "pyalgotrade.dataseries.DataSeries")。
 - en: '**This package has basic feeds. For bar feeds refer to the** [*barfeed – Bar
     providers*](barfeed.html#barfeed-label) **section.**'
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: '**该软件包具有基本数据源。有关K线数据源，请参阅** [*barfeed – K线数据源*](barfeed.html#barfeed-label)
+    **部分。**'
 - en: '*class* `pyalgotrade.feed.``BaseFeed`(*maxLen*)'
+  id: totrans-4
   prefs: []
   type: TYPE_NORMAL
+  zh: '*class* `pyalgotrade.feed.``BaseFeed`(*maxLen*)'
 - en: 'Bases: `pyalgotrade.observer.Subject`'
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: 基类：`pyalgotrade.observer.Subject`
 - en: Base class for feeds.
+  id: totrans-6
   prefs: []
   type: TYPE_NORMAL
+  zh: 数据源的基类。
 - en: '| Parameters: | **maxLen** (*int.*) – The maximum number of values that each
     [`pyalgotrade.dataseries.DataSeries`](dataseries.html#pyalgotrade.dataseries.DataSeries
     "pyalgotrade.dataseries.DataSeries") will hold. Once a bounded length is full,
     when new items are added, a corresponding number of items are discarded from the
     opposite end. |'
+  id: totrans-7
   prefs: []
   type: TYPE_TB
+  zh: '| 参数: | **maxLen** (*int.*) – 每个[`pyalgotrade.dataseries.DataSeries`](dataseries.html#pyalgotrade.dataseries.DataSeries
+    "pyalgotrade.dataseries.DataSeries")将保留的最大值数量。一旦有界长度已满，当添加新项目时，相应数量的项目将从另一端丢弃。'
 - en: Note
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: 注
 - en: This is a base class and should not be used directly.
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: 这是一个基类，不应直接使用。
 - en: '`__contains__`(*key*)'
+  id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: '`__contains__`(*key*)'
 - en: Returns True if a [`pyalgotrade.dataseries.DataSeries`](dataseries.html#pyalgotrade.dataseries.DataSeries
     "pyalgotrade.dataseries.DataSeries") for the given key is available.
+  id: totrans-11
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果给定键的[`pyalgotrade.dataseries.DataSeries`](dataseries.html#pyalgotrade.dataseries.DataSeries
+    "pyalgotrade.dataseries.DataSeries")可用，则返回True。
 - en: '`__getitem__`(*key*)'
+  id: totrans-12
   prefs: []
   type: TYPE_NORMAL
+  zh: '`__getitem__`(*key*)'
 - en: Returns the [`pyalgotrade.dataseries.DataSeries`](dataseries.html#pyalgotrade.dataseries.DataSeries
     "pyalgotrade.dataseries.DataSeries") for a given key.
+  id: totrans-13
   prefs: []
   type: TYPE_NORMAL
+  zh: 返回给定键的[`pyalgotrade.dataseries.DataSeries`](dataseries.html#pyalgotrade.dataseries.DataSeries
+    "pyalgotrade.dataseries.DataSeries")。
 - en: '`getNewValuesEvent`()'
+  id: totrans-14
   prefs: []
   type: TYPE_NORMAL
+  zh: '`getNewValuesEvent`()'
 - en: 'Returns the event that will be emitted when new values are available. To subscribe
     you need to pass in a callable object that receives two parameters:'
+  id: totrans-15
   prefs: []
   type: TYPE_NORMAL
+  zh: '返回在新值可用时将发出的事件。要订阅，您需要传入一个可调用对象，该对象接收两个参数:'
 - en: A `datetime.datetime` instance.
+  id: totrans-16
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 一个`datetime.datetime`实例。
 - en: The new value.
+  id: totrans-17
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 新值。
 - en: '## CSV support'
+  id: totrans-18
   prefs: []
   type: TYPE_NORMAL
+  zh: '## CSV支持'
 - en: '*class* `pyalgotrade.feed.csvfeed.``Feed`(*dateTimeColumn*, *dateTimeFormat*,
     *converter=None*, *delimiter=''*, *''*, *timezone=None*, *maxLen=None*)'
+  id: totrans-19
   prefs: []
   type: TYPE_NORMAL
+  zh: '*class* `pyalgotrade.feed.csvfeed.``Feed`(*dateTimeColumn*, *dateTimeFormat*,
+    *converter=None*, *delimiter=''*, *''*, *timezone=None*, *maxLen=None*)'
 - en: 'Bases: `pyalgotrade.feed.csvfeed.BaseFeed`'
+  id: totrans-20
   prefs: []
   type: TYPE_NORMAL
+  zh: 基类：`pyalgotrade.feed.csvfeed.BaseFeed`
 - en: A feed that loads values from CSV formatted files.
+  id: totrans-21
   prefs: []
   type: TYPE_NORMAL
+  zh: 一个从CSV格式文件加载值的数据源。
 - en: '| Parameters: |'
+  id: totrans-22
   prefs: []
   type: TYPE_TB
+  zh: '| 参数: |'
 - en: '**dateTimeColumn** (*string.*) – The name of the column that has the datetime
     information.'
+  id: totrans-23
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**dateTimeColumn** (*string.*) – 具有日期时间信息的列的名称。'
 - en: '**dateTimeFormat** (*string.*) – The datetime format. datetime.datetime.strptime
     will be used to parse the column.'
+  id: totrans-24
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**dateTimeFormat** (*string.*) – 日期时间格式。将使用datetime.datetime.strptime来解析列。'
 - en: '**converter** (*function.*) – A function with two parameters (column name and
     value) used to convert the string value to something else. The default coverter
     will try to convert the value to a float. If that fails the original string is
     returned.'
+  id: totrans-25
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**converter** (*function.*) – 具有两个参数（列名和值）的函数，用于将字符串值转换为其他值。默认转换器将尝试将值转换为浮点数。如果失败，则返回原始字符串。'
 - en: '**delimiter** (*string.*) – The string used to separate values.'
+  id: totrans-26
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**delimiter** (*string.*) – 用于分隔值的字符串。'
 - en: '**timezone** (*A pytz timezone.*) – The timezone to use to localize datetimes.
     Check [`pyalgotrade.marketsession`](marketsession.html#module-pyalgotrade.marketsession
     "pyalgotrade.marketsession").'
+  id: totrans-27
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**timezone** (*一个 pytz 时区.*) – 用于本地化日期时间的时区。检查 [`pyalgotrade.marketsession`](marketsession.html#module-pyalgotrade.marketsession
+    "pyalgotrade.marketsession")。'
 - en: '**maxLen** (*int.*) – The maximum number of values that each [`pyalgotrade.dataseries.DataSeries`](dataseries.html#pyalgotrade.dataseries.DataSeries
     "pyalgotrade.dataseries.DataSeries") will hold. Once a bounded length is full,
     when new items are added, a corresponding number of items are discarded from the
     opposite end. If None then dataseries.DEFAULT_MAX_LEN is used.'
+  id: totrans-28
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**maxLen** (*int.*) – 每个 [`pyalgotrade.dataseries.DataSeries`](dataseries.html#pyalgotrade.dataseries.DataSeries
+    "pyalgotrade.dataseries.DataSeries") 将保存的值的最大数量。一旦有界长度已满，当添加新项时，相应数量的项将从另一端丢弃。如果为
+    None，则使用 dataseries.DEFAULT_MAX_LEN。'
 - en: '|'
+  id: totrans-29
   prefs: []
   type: TYPE_NORMAL
+  zh: '|'
 - en: '`addValuesFromCSV`(*path*)'
+  id: totrans-30
   prefs: []
   type: TYPE_NORMAL
+  zh: '`addValuesFromCSV`(*path*)'
 - en: Loads values from a file.
+  id: totrans-31
   prefs: []
   type: TYPE_NORMAL
+  zh: 从文件中加载值。
 - en: '| Parameters: | **path** (*string.*) – The path to the CSV file. |'
+  id: totrans-32
   prefs: []
   type: TYPE_TB
+  zh: '| 参数： | **path** (*string.*) – CSV 文件的路径。 |'
 - en: CSV support Example
+  id: totrans-33
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: CSV 支持示例
 - en: A file with the following format
+  id: totrans-34
   prefs: []
   type: TYPE_NORMAL
+  zh: 以下是格式如下的文件
 - en: '[PRE0]'
+  id: totrans-35
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: 'can be loaded like this:'
+  id: totrans-36
   prefs: []
   type: TYPE_NORMAL
+  zh: 可以这样加载：
 - en: '[PRE1]'
+  id: totrans-37
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE1]'
 - en: 'and the output should look like this:'
+  id: totrans-38
   prefs: []
   type: TYPE_NORMAL
+  zh: 输出应该是这样的：
 - en: '[PRE2]'
+  id: totrans-39
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE2]'
 - en: '[Table Of Contents](index.html)'
+  id: totrans-40
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: '[目录](index.html)'
 - en: '[feed – Basic feeds](#)'
+  id: totrans-41
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[feed – 基本 feeds](#)'
 - en: '[CSV support](#module-pyalgotrade.feed.csvfeed)'
+  id: totrans-42
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[CSV 支持](#module-pyalgotrade.feed.csvfeed)'
 - en: '[CSV support Example](#csv-support-example)'
+  id: totrans-43
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[CSV 支持示例](#csv-support-example)'
 - en: Previous topic
+  id: totrans-44
   prefs:
   - PREF_H4
   type: TYPE_NORMAL
+  zh: 上一个主题
 - en: '[dataseries – Basic dataseries classes](dataseries.html "previous chapter")'
+  id: totrans-45
   prefs: []
   type: TYPE_NORMAL
+  zh: '[dataseries – 基本数据系列类](dataseries.html "上一章")'
 - en: Next topic
+  id: totrans-46
   prefs:
   - PREF_H4
   type: TYPE_NORMAL
+  zh: 下一个主题
 - en: '[barfeed – Bar providers](barfeed.html "next chapter")'
+  id: totrans-47
   prefs: []
   type: TYPE_NORMAL
+  zh: '[barfeed – Bar 提供者](barfeed.html "下一章")'
 - en: This Page
+  id: totrans-48
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 本页
 - en: '[Show Source](_sources/feed.txt)'
+  id: totrans-49
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[显示源码](_sources/feed.txt)'
 - en: Quick search
+  id: totrans-50
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 快速搜索
 - en: Enter search terms or a module, class or function name.
+  id: totrans-51
   prefs: []
   type: TYPE_NORMAL
+  zh: 输入搜索词或模块、类或函数名称。
 - en: Navigation
+  id: totrans-52
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 导航
 - en: '[index](genindex.html "General Index")'
+  id: totrans-53
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[索引](genindex.html "总索引")'
 - en: '[modules](py-modindex.html "Python Module Index") |'
+  id: totrans-54
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[模块](py-modindex.html "Python 模块索引") |'
 - en: '[next](barfeed.html "barfeed – Bar providers") |'
+  id: totrans-55
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[下一个](barfeed.html "barfeed – Bar 提供者") |'
 - en: '[previous](dataseries.html "dataseries – Basic dataseries classes") |'
+  id: totrans-56
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[上一个](dataseries.html "dataseries – 基本数据系列类") |'
 - en: '[PyAlgoTrade 0.20 documentation](index.html) »'
+  id: totrans-57
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[PyAlgoTrade 0.20 文档](index.html) »'
 - en: '[Documentation for the code](code.html) »'
+  id: totrans-58
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[代码文档](code.html) »'
