@@ -1,1051 +1,1621 @@
 - en: technical – Technical indicators
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 技术 - 技术指标
 - en: 原文：[https://gbeced.github.io/pyalgotrade/docs/v0.20/html/technical.html](https://gbeced.github.io/pyalgotrade/docs/v0.20/html/technical.html)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://gbeced.github.io/pyalgotrade/docs/v0.20/html/technical.html](https://gbeced.github.io/pyalgotrade/docs/v0.20/html/technical.html)
 - en: '*class* `pyalgotrade.technical.``EventWindow`(*windowSize*, *dtype=<type ''float''>*,
     *skipNone=True*)'
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: '*class* `pyalgotrade.technical.``EventWindow`(*windowSize*, *dtype=<type ''float''>*,
+    *skipNone=True*)'
 - en: 'Bases: `object`'
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: 基类：`object`
 - en: An EventWindow class is responsible for making calculation over a moving window
     of values.
+  id: totrans-4
   prefs: []
   type: TYPE_NORMAL
+  zh: 一个 EventWindow 类负责在一系列值的移动窗口上进行计算。
 - en: '| Parameters: |'
+  id: totrans-5
   prefs: []
   type: TYPE_TB
+  zh: '| 参数： |'
 - en: '**windowSize** (*int.*) – The size of the window. Must be greater than 0.'
+  id: totrans-6
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**windowSize**（*int.*） - 窗口的大小。必须大于 0。'
 - en: '**dtype** (*data-type.*) – The desired data-type for the array.'
+  id: totrans-7
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**dtype**（*数据类型.*） - 数组的期望数据类型。'
 - en: '**skipNone** (*boolean.*) – True if None values should not be included in the
     window.'
+  id: totrans-8
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**skipNone**（*布尔.*） - 如果 None 值不应包含在窗口中，则为 True。'
 - en: '|'
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: '|'
 - en: Note
+  id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: 注意
 - en: This is a base class and should not be used directly.
+  id: totrans-11
   prefs: []
   type: TYPE_NORMAL
+  zh: 这是一个基类，不应直接使用。
 - en: '`getValue`()'
+  id: totrans-12
   prefs: []
   type: TYPE_NORMAL
+  zh: '`getValue`()'
 - en: Override to calculate a value using the values in the window.
+  id: totrans-13
   prefs: []
   type: TYPE_NORMAL
+  zh: 重写以使用窗口中的值计算值。
 - en: '`getValues`()'
+  id: totrans-14
   prefs: []
   type: TYPE_NORMAL
+  zh: '`getValues`()'
 - en: Returns a numpy.array with the values in the window.
+  id: totrans-15
   prefs: []
   type: TYPE_NORMAL
+  zh: 返回一个具有窗口中值的 numpy.array。
 - en: '`getWindowSize`()'
+  id: totrans-16
   prefs: []
   type: TYPE_NORMAL
+  zh: '`getWindowSize`()'
 - en: Returns the window size.
+  id: totrans-17
   prefs: []
   type: TYPE_NORMAL
+  zh: 返回窗口大小。
 - en: '*class* `pyalgotrade.technical.``EventBasedFilter`(*dataSeries*, *eventWindow*,
     *maxLen=None*)'
+  id: totrans-18
   prefs: []
   type: TYPE_NORMAL
+  zh: '*class* `pyalgotrade.technical.``EventBasedFilter`(*dataSeries*, *eventWindow*,
+    *maxLen=None*)'
 - en: 'Bases: [`pyalgotrade.dataseries.SequenceDataSeries`](dataseries.html#pyalgotrade.dataseries.SequenceDataSeries
     "pyalgotrade.dataseries.SequenceDataSeries")'
+  id: totrans-19
   prefs: []
   type: TYPE_NORMAL
+  zh: 基类：[`pyalgotrade.dataseries.SequenceDataSeries`](dataseries.html#pyalgotrade.dataseries.SequenceDataSeries
+    "pyalgotrade.dataseries.SequenceDataSeries")
 - en: An EventBasedFilter class is responsible for capturing new values in a [`pyalgotrade.dataseries.DataSeries`](dataseries.html#pyalgotrade.dataseries.DataSeries
     "pyalgotrade.dataseries.DataSeries") and using an [`EventWindow`](#pyalgotrade.technical.EventWindow
     "pyalgotrade.technical.EventWindow") to calculate new values.
+  id: totrans-20
   prefs: []
   type: TYPE_NORMAL
+  zh: EventBasedFilter 类负责捕获 [`pyalgotrade.dataseries.DataSeries`](dataseries.html#pyalgotrade.dataseries.DataSeries
+    "pyalgotrade.dataseries.DataSeries") 中的新值，并使用 [`EventWindow`](#pyalgotrade.technical.EventWindow
+    "pyalgotrade.technical.EventWindow") 计算新值。
 - en: '| Parameters: |'
+  id: totrans-21
   prefs: []
   type: TYPE_TB
+  zh: '| 参数： |'
 - en: '**dataSeries** ([`pyalgotrade.dataseries.DataSeries`](dataseries.html#pyalgotrade.dataseries.DataSeries
     "pyalgotrade.dataseries.DataSeries").) – The DataSeries instance being filtered.'
+  id: totrans-22
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**dataSeries**（[`pyalgotrade.dataseries.DataSeries`](dataseries.html#pyalgotrade.dataseries.DataSeries
+    "pyalgotrade.dataseries.DataSeries").） - 正在过滤的 DataSeries 实例。'
 - en: '**eventWindow** ([`EventWindow`](#pyalgotrade.technical.EventWindow "pyalgotrade.technical.EventWindow").)
     – The EventWindow instance to use to calculate new values.'
+  id: totrans-23
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**eventWindow**（[`EventWindow`](#pyalgotrade.technical.EventWindow "pyalgotrade.technical.EventWindow").）
+    - 用于计算新值的 EventWindow 实例。'
 - en: '**maxLen** (*int.*) – The maximum number of values to hold. Once a bounded
     length is full, when new items are added, a corresponding number of items are
     discarded from the opposite end. If None then dataseries.DEFAULT_MAX_LEN is used.'
+  id: totrans-24
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**maxLen**（*int.*） - 要保持的最大值数。一旦有限长度已满，添加新项时，将从对端丢弃相应数量的项。如果为 None，则使用 dataseries.DEFAULT_MAX_LEN。'
 - en: '|'
+  id: totrans-25
   prefs: []
   type: TYPE_NORMAL
+  zh: '|'
 - en: Example
+  id: totrans-26
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 示例
 - en: 'The following example shows how to combine an [`EventWindow`](#pyalgotrade.technical.EventWindow
     "pyalgotrade.technical.EventWindow") and an [`EventBasedFilter`](#pyalgotrade.technical.EventBasedFilter
     "pyalgotrade.technical.EventBasedFilter") to build a custom filter:'
+  id: totrans-27
   prefs: []
   type: TYPE_NORMAL
+  zh: 以下示例显示如何组合 [`EventWindow`](#pyalgotrade.technical.EventWindow "pyalgotrade.technical.EventWindow")
+    和 [`EventBasedFilter`](#pyalgotrade.technical.EventBasedFilter "pyalgotrade.technical.EventBasedFilter")
+    来构建自定义过滤器：
 - en: '[PRE0]'
+  id: totrans-28
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: 'The output should be:'
+  id: totrans-29
   prefs: []
   type: TYPE_NORMAL
+  zh: 输出应为：
 - en: '[PRE1]'
+  id: totrans-30
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE1]'
 - en: '## Moving Averages'
+  id: totrans-31
   prefs: []
   type: TYPE_NORMAL
+  zh: '## 移动平均'
 - en: '*class* `pyalgotrade.technical.ma.``SMA`(*dataSeries*, *period*, *maxLen=None*)'
+  id: totrans-32
   prefs: []
   type: TYPE_NORMAL
+  zh: '*class* `pyalgotrade.technical.ma.``SMA`(*dataSeries*, *period*, *maxLen=None*)'
 - en: 'Bases: [`pyalgotrade.technical.EventBasedFilter`](#pyalgotrade.technical.EventBasedFilter
     "pyalgotrade.technical.EventBasedFilter")'
+  id: totrans-33
   prefs: []
   type: TYPE_NORMAL
+  zh: 基类：[`pyalgotrade.technical.EventBasedFilter`](#pyalgotrade.technical.EventBasedFilter
+    "pyalgotrade.technical.EventBasedFilter")
 - en: Simple Moving Average filter.
+  id: totrans-34
   prefs: []
   type: TYPE_NORMAL
+  zh: 简单移动平均滤波器。
 - en: '| Parameters: |'
+  id: totrans-35
   prefs: []
   type: TYPE_TB
+  zh: '| 参数： |'
 - en: '**dataSeries** ([`pyalgotrade.dataseries.DataSeries`](dataseries.html#pyalgotrade.dataseries.DataSeries
     "pyalgotrade.dataseries.DataSeries").) – The DataSeries instance being filtered.'
+  id: totrans-36
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**dataSeries**（[`pyalgotrade.dataseries.DataSeries`](dataseries.html#pyalgotrade.dataseries.DataSeries
+    "pyalgotrade.dataseries.DataSeries").） - 正在过滤的 DataSeries 实例。'
 - en: '**period** (*int.*) – The number of values to use to calculate the SMA.'
+  id: totrans-37
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**period**（*int.*） - 用于计算 SMA 的值数。'
 - en: '**maxLen** (*int.*) – The maximum number of values to hold. Once a bounded
     length is full, when new items are added, a corresponding number of items are
     discarded from the opposite end. If None then dataseries.DEFAULT_MAX_LEN is used.'
+  id: totrans-38
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: '|'
+  id: totrans-39
   prefs: []
   type: TYPE_NORMAL
 - en: '*class* `pyalgotrade.technical.ma.``EMA`(*dataSeries*, *period*, *maxLen=None*)'
+  id: totrans-40
   prefs: []
   type: TYPE_NORMAL
 - en: 'Bases: [`pyalgotrade.technical.EventBasedFilter`](#pyalgotrade.technical.EventBasedFilter
     "pyalgotrade.technical.EventBasedFilter")'
+  id: totrans-41
   prefs: []
   type: TYPE_NORMAL
 - en: Exponential Moving Average filter.
+  id: totrans-42
   prefs: []
   type: TYPE_NORMAL
 - en: '| Parameters: |'
+  id: totrans-43
   prefs: []
   type: TYPE_TB
 - en: '**dataSeries** ([`pyalgotrade.dataseries.DataSeries`](dataseries.html#pyalgotrade.dataseries.DataSeries
     "pyalgotrade.dataseries.DataSeries").) – The DataSeries instance being filtered.'
+  id: totrans-44
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: '**period** (*int.*) – The number of values to use to calculate the EMA. Must
     be an integer greater than 1.'
+  id: totrans-45
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: '**maxLen** (*int.*) – The maximum number of values to hold. Once a bounded
     length is full, when new items are added, a corresponding number of items are
     discarded from the opposite end. If None then dataseries.DEFAULT_MAX_LEN is used.'
+  id: totrans-46
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: '|'
+  id: totrans-47
   prefs: []
   type: TYPE_NORMAL
 - en: '*class* `pyalgotrade.technical.ma.``WMA`(*dataSeries*, *weights*, *maxLen=None*)'
+  id: totrans-48
   prefs: []
   type: TYPE_NORMAL
 - en: 'Bases: [`pyalgotrade.technical.EventBasedFilter`](#pyalgotrade.technical.EventBasedFilter
     "pyalgotrade.technical.EventBasedFilter")'
+  id: totrans-49
   prefs: []
   type: TYPE_NORMAL
 - en: Weighted Moving Average filter.
+  id: totrans-50
   prefs: []
   type: TYPE_NORMAL
 - en: '| Parameters: |'
+  id: totrans-51
   prefs: []
   type: TYPE_TB
 - en: '**dataSeries** ([`pyalgotrade.dataseries.DataSeries`](dataseries.html#pyalgotrade.dataseries.DataSeries
     "pyalgotrade.dataseries.DataSeries").) – The DataSeries instance being filtered.'
+  id: totrans-52
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: '**weights** (*list.*) – A list of int/float with the weights.'
+  id: totrans-53
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: '**maxLen** (*int.*) – The maximum number of values to hold. Once a bounded
     length is full, when new items are added, a corresponding number of items are
     discarded from the opposite end. If None then dataseries.DEFAULT_MAX_LEN is used.'
+  id: totrans-54
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: '|'
+  id: totrans-55
   prefs: []
   type: TYPE_NORMAL
 - en: '*class* `pyalgotrade.technical.vwap.``VWAP`(*dataSeries*, *period*, *useTypicalPrice=False*,
     *maxLen=None*)'
+  id: totrans-56
   prefs: []
   type: TYPE_NORMAL
 - en: 'Bases: [`pyalgotrade.technical.EventBasedFilter`](#pyalgotrade.technical.EventBasedFilter
     "pyalgotrade.technical.EventBasedFilter")'
+  id: totrans-57
   prefs: []
   type: TYPE_NORMAL
 - en: Volume Weighted Average Price filter.
+  id: totrans-58
   prefs: []
   type: TYPE_NORMAL
 - en: '| Parameters: |'
+  id: totrans-59
   prefs: []
   type: TYPE_TB
 - en: '**dataSeries** ([`pyalgotrade.dataseries.bards.BarDataSeries`](dataseries.html#pyalgotrade.dataseries.bards.BarDataSeries
     "pyalgotrade.dataseries.bards.BarDataSeries").) – The DataSeries instance being
     filtered.'
+  id: totrans-60
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: '**period** (*int.*) – The number of values to use to calculate the VWAP.'
+  id: totrans-61
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: '**useTypicalPrice** (*boolean.*) – True if the typical price should be used
     instead of the closing price.'
+  id: totrans-62
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: '**maxLen** (*int.*) – The maximum number of values to hold. Once a bounded
     length is full, when new items are added, a corresponding number of items are
     discarded from the opposite end. If None then dataseries.DEFAULT_MAX_LEN is used.'
+  id: totrans-63
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: '|  ## Momentum Indicators'
+  id: totrans-64
   prefs: []
   type: TYPE_NORMAL
 - en: '*class* `pyalgotrade.technical.macd.``MACD`(*dataSeries*, *fastEMA*, *slowEMA*,
     *signalEMA*, *maxLen=None*)'
+  id: totrans-65
   prefs: []
   type: TYPE_NORMAL
 - en: 'Bases: [`pyalgotrade.dataseries.SequenceDataSeries`](dataseries.html#pyalgotrade.dataseries.SequenceDataSeries
     "pyalgotrade.dataseries.SequenceDataSeries")'
+  id: totrans-66
   prefs: []
   type: TYPE_NORMAL
 - en: Moving Average Convergence-Divergence indicator as described in [http://stockcharts.com/school/doku.php?id=chart_school:technical_indicators:moving_average_convergence_divergence_macd](http://stockcharts.com/school/doku.php?id=chart_school:technical_indicators:moving_average_convergence_divergence_macd).
+  id: totrans-67
   prefs: []
   type: TYPE_NORMAL
+  zh: 按照[http://stockcharts.com/school/doku.php?id=chart_school:technical_indicators:moving_average_convergence_divergence_macd](http://stockcharts.com/school/doku.php?id=chart_school:technical_indicators:moving_average_convergence_divergence_macd)中描述的移动平均收敛-背离指标。
 - en: '| Parameters: |'
+  id: totrans-68
   prefs: []
   type: TYPE_TB
+  zh: '| 参数： |'
 - en: '**dataSeries** ([`pyalgotrade.dataseries.DataSeries`](dataseries.html#pyalgotrade.dataseries.DataSeries
     "pyalgotrade.dataseries.DataSeries").) – The DataSeries instance being filtered.'
+  id: totrans-69
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**dataSeries**（[`pyalgotrade.dataseries.DataSeries`](dataseries.html#pyalgotrade.dataseries.DataSeries)）
+    - 正在被过滤的DataSeries实例。'
 - en: '**fastEMA** (*int.*) – The number of values to use to calculate the fast EMA.'
+  id: totrans-70
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**fastEMA**（*整数*） - 用于计算快速EMA的数值数量。'
 - en: '**slowEMA** (*int.*) – The number of values to use to calculate the slow EMA.'
+  id: totrans-71
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**slowEMA**（*整数*） - 用于计算慢速EMA的数值数量。'
 - en: '**signalEMA** (*int.*) – The number of values to use to calculate the signal
     EMA.'
+  id: totrans-72
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**signalEMA**（*整数*） - 用于计算信号EMA的数值数量。'
 - en: '**maxLen** (*int.*) – The maximum number of values to hold. Once a bounded
     length is full, when new items are added, a corresponding number of items are
     discarded from the opposite end. If None then dataseries.DEFAULT_MAX_LEN is used.'
+  id: totrans-73
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**maxLen**（*整数*） - 要保留的最大数值数量。一旦有界长度已满，当添加新项目时，将从相反端丢弃相应数量的项目。如果为None，则使用dataseries.DEFAULT_MAX_LEN。'
 - en: '|'
+  id: totrans-74
   prefs: []
   type: TYPE_NORMAL
+  zh: '|'
 - en: '`getHistogram`()'
+  id: totrans-75
   prefs: []
   type: TYPE_NORMAL
+  zh: '`getHistogram`()'
 - en: Returns a [`pyalgotrade.dataseries.DataSeries`](dataseries.html#pyalgotrade.dataseries.DataSeries
     "pyalgotrade.dataseries.DataSeries") with the histogram (the difference between
     the MACD and the Signal).
+  id: totrans-76
   prefs: []
   type: TYPE_NORMAL
+  zh: 返回一个带有直方图（MACD和信号之间的差异）的[`pyalgotrade.dataseries.DataSeries`](dataseries.html#pyalgotrade.dataseries.DataSeries)。
 - en: '`getSignal`()'
+  id: totrans-77
   prefs: []
   type: TYPE_NORMAL
+  zh: '`getSignal`()'
 - en: Returns a [`pyalgotrade.dataseries.DataSeries`](dataseries.html#pyalgotrade.dataseries.DataSeries
     "pyalgotrade.dataseries.DataSeries") with the EMA over the MACD.
+  id: totrans-78
   prefs: []
   type: TYPE_NORMAL
+  zh: 返回一个带有MACD上的EMA的[`pyalgotrade.dataseries.DataSeries`](dataseries.html#pyalgotrade.dataseries.DataSeries)。
 - en: '*class* `pyalgotrade.technical.rsi.``RSI`(*dataSeries*, *period*, *maxLen=None*)'
+  id: totrans-79
   prefs: []
   type: TYPE_NORMAL
+  zh: '*类* `pyalgotrade.technical.rsi.``RSI`（*dataSeries*, *周期*, *maxLen=None*）'
 - en: 'Bases: [`pyalgotrade.technical.EventBasedFilter`](#pyalgotrade.technical.EventBasedFilter
     "pyalgotrade.technical.EventBasedFilter")'
+  id: totrans-80
   prefs: []
   type: TYPE_NORMAL
+  zh: 基类：[`pyalgotrade.technical.EventBasedFilter`](#pyalgotrade.technical.EventBasedFilter)
 - en: Relative Strength Index filter as described in [http://stockcharts.com/school/doku.php?id=chart_school:technical_indicators:relative_strength_index_rsi](http://stockcharts.com/school/doku.php?id=chart_school:technical_indicators:relative_strength_index_rsi).
+  id: totrans-81
   prefs: []
   type: TYPE_NORMAL
+  zh: 按照[http://stockcharts.com/school/doku.php?id=chart_school:technical_indicators:relative_strength_index_rsi](http://stockcharts.com/school/doku.php?id=chart_school:technical_indicators:relative_strength_index_rsi)中描述的相对强度指数过滤器。
 - en: '| Parameters: |'
+  id: totrans-82
   prefs: []
   type: TYPE_TB
+  zh: '| 参数： |'
 - en: '**dataSeries** ([`pyalgotrade.dataseries.DataSeries`](dataseries.html#pyalgotrade.dataseries.DataSeries
     "pyalgotrade.dataseries.DataSeries").) – The DataSeries instance being filtered.'
+  id: totrans-83
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**dataSeries**（[`pyalgotrade.dataseries.DataSeries`](dataseries.html#pyalgotrade.dataseries.DataSeries)）
+    - 正在被过滤的DataSeries实例。'
 - en: '**period** (*int.*) – The period. Note that if period is **n**, then **n+1**
     values are used. Must be > 1.'
+  id: totrans-84
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**period**（*整数*） - 周期。请注意，如果周期是**n**，则使用**n+1**个值。必须大于1。'
 - en: '**maxLen** (*int.*) – The maximum number of values to hold. Once a bounded
     length is full, when new items are added, a corresponding number of items are
     discarded from the opposite end. If None then dataseries.DEFAULT_MAX_LEN is used.'
+  id: totrans-85
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**maxLen**（*整数*） - 要保留的最大数值数量。一旦有界长度已满，当添加新项目时，将从相反端丢弃相应数量的项目。如果为None，则使用dataseries.DEFAULT_MAX_LEN。'
 - en: '|'
+  id: totrans-86
   prefs: []
   type: TYPE_NORMAL
+  zh: '|'
 - en: '*class* `pyalgotrade.technical.stoch.``StochasticOscillator`(*barDataSeries*,
     *period*, *dSMAPeriod=3*, *useAdjustedValues=False*, *maxLen=None*)'
+  id: totrans-87
   prefs: []
   type: TYPE_NORMAL
+  zh: '*类* `pyalgotrade.technical.stoch.``StochasticOscillator`（*barDataSeries*, *周期*,
+    *dSMAPeriod=3*, *useAdjustedValues=False*, *maxLen=None*）'
 - en: 'Bases: [`pyalgotrade.technical.EventBasedFilter`](#pyalgotrade.technical.EventBasedFilter
     "pyalgotrade.technical.EventBasedFilter")'
+  id: totrans-88
   prefs: []
   type: TYPE_NORMAL
+  zh: 基类：[`pyalgotrade.technical.EventBasedFilter`](#pyalgotrade.technical.EventBasedFilter)
 - en: Fast Stochastic Oscillator filter as described in [http://stockcharts.com/school/doku.php?st=stochastic+oscillator&id=chart_school:technical_indicators:stochastic_oscillator_fast_slow_and_full](http://stockcharts.com/school/doku.php?st=stochastic+oscillator&id=chart_school:technical_indicators:stochastic_oscillator_fast_slow_and_full).
     Note that the value returned by this filter is %K. To access %D use [`getD()`](#pyalgotrade.technical.stoch.StochasticOscillator.getD
     "pyalgotrade.technical.stoch.StochasticOscillator.getD").
+  id: totrans-89
   prefs: []
   type: TYPE_NORMAL
+  zh: 根据 [http://stockcharts.com/school/doku.php?st=stochastic+oscillator&id=chart_school:technical_indicators:stochastic_oscillator_fast_slow_and_full](http://stockcharts.com/school/doku.php?st=stochastic+oscillator&id=chart_school:technical_indicators:stochastic_oscillator_fast_slow_and_full)
+    描述的快速随机振荡器过滤器。注意，此过滤器返回的值是 %K。要访问 %D，请使用 [`getD()`](#pyalgotrade.technical.stoch.StochasticOscillator.getD
+    "pyalgotrade.technical.stoch.StochasticOscillator.getD")。
 - en: '| Parameters: |'
+  id: totrans-90
   prefs: []
   type: TYPE_TB
+  zh: '| 参数: |'
 - en: '**barDataSeries** ([`pyalgotrade.dataseries.bards.BarDataSeries`](dataseries.html#pyalgotrade.dataseries.bards.BarDataSeries
     "pyalgotrade.dataseries.bards.BarDataSeries").) – The BarDataSeries instance being
     filtered.'
+  id: totrans-91
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**barDataSeries** ([`pyalgotrade.dataseries.bards.BarDataSeries`](dataseries.html#pyalgotrade.dataseries.bards.BarDataSeries
+    "pyalgotrade.dataseries.bards.BarDataSeries").) – 正在过滤的 BarDataSeries 实例。'
 - en: '**period** (*int.*) – The period. Must be > 1.'
+  id: totrans-92
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**period** (*int.*) – 期间。必须 > 1。'
 - en: '**dSMAPeriod** (*int.*) – The %D SMA period. Must be > 1.'
+  id: totrans-93
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**dSMAPeriod** (*int.*) – %D 的 SMA 周期。必须 > 1。'
 - en: '**useAdjustedValues** (*boolean.*) – True to use adjusted Low/High/Close values.'
+  id: totrans-94
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**useAdjustedValues** (*boolean.*) – True 表示使用调整后的 Low/High/Close 值。'
 - en: '**maxLen** (*int.*) – The maximum number of values to hold. Once a bounded
     length is full, when new items are added, a corresponding number of items are
     discarded from the opposite end. If None then dataseries.DEFAULT_MAX_LEN is used.'
+  id: totrans-95
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**maxLen** (*int.*) – 持有的最大值数量。一旦有界长度满了，当添加新项时，相应数量的项将从另一端丢弃。如果为 None，则使用 dataseries.DEFAULT_MAX_LEN。'
 - en: '|'
+  id: totrans-96
   prefs: []
   type: TYPE_NORMAL
+  zh: '|'
 - en: '`getD`()'
+  id: totrans-97
   prefs: []
   type: TYPE_NORMAL
+  zh: '`getD`()'
 - en: Returns a [`pyalgotrade.dataseries.DataSeries`](dataseries.html#pyalgotrade.dataseries.DataSeries
     "pyalgotrade.dataseries.DataSeries") with the %D values.
+  id: totrans-98
   prefs: []
   type: TYPE_NORMAL
+  zh: 返回一个 [`pyalgotrade.dataseries.DataSeries`](dataseries.html#pyalgotrade.dataseries.DataSeries
+    "pyalgotrade.dataseries.DataSeries")，其中包含 %D 值。
 - en: '*class* `pyalgotrade.technical.roc.``RateOfChange`(*dataSeries*, *valuesAgo*,
     *maxLen=None*)'
+  id: totrans-99
   prefs: []
   type: TYPE_NORMAL
+  zh: '*class* `pyalgotrade.technical.roc.``RateOfChange`(*dataSeries*, *valuesAgo*,
+    *maxLen=None*)'
 - en: 'Bases: [`pyalgotrade.technical.EventBasedFilter`](#pyalgotrade.technical.EventBasedFilter
     "pyalgotrade.technical.EventBasedFilter")'
+  id: totrans-100
   prefs: []
   type: TYPE_NORMAL
+  zh: '基础: [`pyalgotrade.technical.EventBasedFilter`](#pyalgotrade.technical.EventBasedFilter
+    "pyalgotrade.technical.EventBasedFilter")'
 - en: Rate of change filter as described in [http://stockcharts.com/school/doku.php?id=chart_school:technical_indicators:rate_of_change_roc_and_momentum](http://stockcharts.com/school/doku.php?id=chart_school:technical_indicators:rate_of_change_roc_and_momentum).
+  id: totrans-101
   prefs: []
   type: TYPE_NORMAL
+  zh: 根据 [http://stockcharts.com/school/doku.php?id=chart_school:technical_indicators:rate_of_change_roc_and_momentum](http://stockcharts.com/school/doku.php?id=chart_school:technical_indicators:rate_of_change_roc_and_momentum)
+    描述的变化率过滤器。
 - en: '| Parameters: |'
+  id: totrans-102
   prefs: []
   type: TYPE_TB
+  zh: '| 参数: |'
 - en: '**dataSeries** ([`pyalgotrade.dataseries.DataSeries`](dataseries.html#pyalgotrade.dataseries.DataSeries
     "pyalgotrade.dataseries.DataSeries").) – The DataSeries instance being filtered.'
+  id: totrans-103
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**dataSeries** ([`pyalgotrade.dataseries.DataSeries`](dataseries.html#pyalgotrade.dataseries.DataSeries
+    "pyalgotrade.dataseries.DataSeries").) – 正在过滤的 DataSeries 实例。'
 - en: '**valuesAgo** (*int.*) – The number of values back that a given value will
     compare to. Must be > 0.'
+  id: totrans-104
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**valuesAgo** (*int.*) – 给定值与之比较的值的数量。必须 > 0。'
 - en: '**maxLen** (*int.*) – The maximum number of values to hold. Once a bounded
     length is full, when new items are added, a corresponding number of items are
     discarded from the opposite end. If None then dataseries.DEFAULT_MAX_LEN is used.'
+  id: totrans-105
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**maxLen** (*int.*) – 持有的最大值数量。一旦有界长度满了，当添加新项时，相应数量的项将从另一端丢弃。如果为 None，则使用 dataseries.DEFAULT_MAX_LEN。'
 - en: '|  ## Other Indicators'
+  id: totrans-106
   prefs: []
   type: TYPE_NORMAL
+  zh: '|  ## 其他指'
 - en: '*class* `pyalgotrade.technical.atr.``ATR`(*barDataSeries*, *period*, *useAdjustedValues=False*,
     *maxLen=None*)'
+  id: totrans-107
   prefs: []
   type: TYPE_NORMAL
+  zh: '*class* `pyalgotrade.technical.atr.``ATR`(*barDataSeries*, *period*, *useAdjustedValues=False*,
+    *maxLen=None*)'
 - en: 'Bases: [`pyalgotrade.technical.EventBasedFilter`](#pyalgotrade.technical.EventBasedFilter
     "pyalgotrade.technical.EventBasedFilter")'
+  id: totrans-108
   prefs: []
   type: TYPE_NORMAL
+  zh: '基础: [`pyalgotrade.technical.EventBasedFilter`](#pyalgotrade.technical.EventBasedFilter
+    "pyalgotrade.technical.EventBasedFilter")'
 - en: Average True Range filter as described in [http://stockcharts.com/school/doku.php?id=chart_school:technical_indicators:average_true_range_atr](http://stockcharts.com/school/doku.php?id=chart_school:technical_indicators:average_true_range_atr)
+  id: totrans-109
   prefs: []
   type: TYPE_NORMAL
+  zh: 基于 [http://stockcharts.com/school/doku.php?id=chart_school:technical_indicators:average_true_range_atr](http://stockcharts.com/school/doku.php?id=chart_school:technical_indicators:average_true_range_atr)
+    描述的平均真实范围过滤器
 - en: '| Parameters: |'
+  id: totrans-110
   prefs: []
   type: TYPE_TB
+  zh: '| 参数: |'
 - en: '**barDataSeries** ([`pyalgotrade.dataseries.bards.BarDataSeries`](dataseries.html#pyalgotrade.dataseries.bards.BarDataSeries
     "pyalgotrade.dataseries.bards.BarDataSeries").) – The BarDataSeries instance being
     filtered.'
+  id: totrans-111
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**barDataSeries** ([`pyalgotrade.dataseries.bards.BarDataSeries`](dataseries.html#pyalgotrade.dataseries.bards.BarDataSeries
+    "pyalgotrade.dataseries.bards.BarDataSeries").) – 正在过滤的 BarDataSeries 实例。'
 - en: '**period** (*int.*) – The average period. Must be > 1.'
+  id: totrans-112
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**period** (*整数.*) – 平均周期。必须 > 1。'
 - en: '**useAdjustedValues** (*boolean.*) – True to use adjusted Low/High/Close values.'
+  id: totrans-113
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**useAdjustedValues** (*布尔值.*) – True 表示使用调整后的低/高/收盘价值。'
 - en: '**maxLen** (*int.*) – The maximum number of values to hold. Once a bounded
     length is full, when new items are added, a corresponding number of items are
     discarded from the opposite end. If None then dataseries.DEFAULT_MAX_LEN is used.'
+  id: totrans-114
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**maxLen** (*整数.*) – 持有的最大值数。一旦有界长度已满，当添加新项目时，相应数量的项目将从另一端丢弃。如果为 None，则使用 dataseries.DEFAULT_MAX_LEN。'
 - en: '|'
+  id: totrans-115
   prefs: []
   type: TYPE_NORMAL
+  zh: '|'
 - en: '*class* `pyalgotrade.technical.bollinger.``BollingerBands`(*dataSeries*, *period*,
     *numStdDev*, *maxLen=None*)'
+  id: totrans-116
   prefs: []
   type: TYPE_NORMAL
+  zh: '*类* `pyalgotrade.technical.bollinger.``BollingerBands`(*dataSeries*, *period*,
+    *numStdDev*, *maxLen=None*)'
 - en: 'Bases: `object`'
+  id: totrans-117
   prefs: []
   type: TYPE_NORMAL
+  zh: '基类: `object`'
 - en: Bollinger Bands filter as described in [http://stockcharts.com/school/doku.php?id=chart_school:technical_indicators:bollinger_bands](http://stockcharts.com/school/doku.php?id=chart_school:technical_indicators:bollinger_bands).
+  id: totrans-118
   prefs: []
   type: TYPE_NORMAL
+  zh: Bollinger Bands 过滤器如 [http://stockcharts.com/school/doku.php?id=chart_school:technical_indicators:bollinger_bands](http://stockcharts.com/school/doku.php?id=chart_school:technical_indicators:bollinger_bands)
+    描述的那样。
 - en: '| Parameters: |'
+  id: totrans-119
   prefs: []
   type: TYPE_TB
+  zh: '| 参数: |'
 - en: '**dataSeries** ([`pyalgotrade.dataseries.DataSeries`](dataseries.html#pyalgotrade.dataseries.DataSeries
     "pyalgotrade.dataseries.DataSeries").) – The DataSeries instance being filtered.'
+  id: totrans-120
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**dataSeries** ([`pyalgotrade.dataseries.DataSeries`](dataseries.html#pyalgotrade.dataseries.DataSeries
+    "pyalgotrade.dataseries.DataSeries").) – 正在过滤的 DataSeries 实例。'
 - en: '**period** (*int.*) – The number of values to use in the calculation. Must
     be > 1.'
+  id: totrans-121
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**period** (*整数.*) – 用于计算的值的数量。必须 > 1。'
 - en: '**numStdDev** (*int.*) – The number of standard deviations to use for the upper
     and lower bands.'
+  id: totrans-122
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**numStdDev** (*整数.*) – 用于上部和下部带的标准偏差数量。'
 - en: '**maxLen** (*int.*) – The maximum number of values to hold. Once a bounded
     length is full, when new items are added, a corresponding number of items are
     discarded from the opposite end. If None then dataseries.DEFAULT_MAX_LEN is used.'
+  id: totrans-123
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**maxLen** (*整数.*) – 持有的最大值数。一旦有界长度已满，当添加新项目时，相应数量的项目将从另一端丢弃。如果为 None，则使用 dataseries.DEFAULT_MAX_LEN。'
 - en: '|'
+  id: totrans-124
   prefs: []
   type: TYPE_NORMAL
+  zh: '|'
 - en: '`getLowerBand`()'
+  id: totrans-125
   prefs: []
   type: TYPE_NORMAL
+  zh: '`getLowerBand`()'
 - en: Returns the lower band as a [`pyalgotrade.dataseries.DataSeries`](dataseries.html#pyalgotrade.dataseries.DataSeries
     "pyalgotrade.dataseries.DataSeries").
+  id: totrans-126
   prefs: []
   type: TYPE_NORMAL
+  zh: 返回下部带作为[`pyalgotrade.dataseries.DataSeries`](dataseries.html#pyalgotrade.dataseries.DataSeries
+    "pyalgotrade.dataseries.DataSeries")。
 - en: '`getMiddleBand`()'
+  id: totrans-127
   prefs: []
   type: TYPE_NORMAL
+  zh: '`getMiddleBand`()'
 - en: Returns the middle band as a [`pyalgotrade.dataseries.DataSeries`](dataseries.html#pyalgotrade.dataseries.DataSeries
     "pyalgotrade.dataseries.DataSeries").
+  id: totrans-128
   prefs: []
   type: TYPE_NORMAL
+  zh: 返回中间带作为[`pyalgotrade.dataseries.DataSeries`](dataseries.html#pyalgotrade.dataseries.DataSeries
+    "pyalgotrade.dataseries.DataSeries")。
 - en: '`getUpperBand`()'
+  id: totrans-129
   prefs: []
   type: TYPE_NORMAL
+  zh: '`getUpperBand`()'
 - en: Returns the upper band as a [`pyalgotrade.dataseries.DataSeries`](dataseries.html#pyalgotrade.dataseries.DataSeries
     "pyalgotrade.dataseries.DataSeries").
+  id: totrans-130
   prefs: []
   type: TYPE_NORMAL
+  zh: 返回上部带作为[`pyalgotrade.dataseries.DataSeries`](dataseries.html#pyalgotrade.dataseries.DataSeries
+    "pyalgotrade.dataseries.DataSeries")。
 - en: '`pyalgotrade.technical.cross.``cross_above`(*values1*, *values2*, *start=-2*,
     *end=None*)'
+  id: totrans-131
   prefs: []
   type: TYPE_NORMAL
+  zh: '`pyalgotrade.technical.cross.``cross_above`(*values1*, *values2*, *start=-2*,
+    *end=None*)'
 - en: Checks for a cross above conditions over the specified period between two DataSeries
     objects.
+  id: totrans-132
   prefs: []
   type: TYPE_NORMAL
+  zh: 在两个 DataSeries 对象之间的指定周期内检查交叉条件。
 - en: It returns the number of times values1 crossed above values2 during the given
     period.
+  id: totrans-133
   prefs: []
   type: TYPE_NORMAL
+  zh: 它返回在给定周期内 values1 跨过 values2 的次数。
 - en: '| Parameters: |'
+  id: totrans-134
   prefs: []
   type: TYPE_TB
+  zh: '| 参数: |'
 - en: '**values1** ([`pyalgotrade.dataseries.DataSeries`](dataseries.html#pyalgotrade.dataseries.DataSeries
     "pyalgotrade.dataseries.DataSeries").) – The DataSeries that crosses.'
+  id: totrans-135
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**values1** ([`pyalgotrade.dataseries.DataSeries`](dataseries.html#pyalgotrade.dataseries.DataSeries
+    "pyalgotrade.dataseries.DataSeries").) – 跨过的 DataSeries。'
 - en: '**values2** ([`pyalgotrade.dataseries.DataSeries`](dataseries.html#pyalgotrade.dataseries.DataSeries
     "pyalgotrade.dataseries.DataSeries").) – The DataSeries being crossed.'
+  id: totrans-136
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**values2** ([`pyalgotrade.dataseries.DataSeries`](dataseries.html#pyalgotrade.dataseries.DataSeries
+    "pyalgotrade.dataseries.DataSeries").) – 被跨越的 DataSeries。'
 - en: '**start** (*int.*) – The start of the range.'
+  id: totrans-137
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**start** (*整数.*) – 范围的开始。'
 - en: '**end** (*int.*) – The end of the range.'
+  id: totrans-138
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**end** (*整数.*) – 范围的结束。'
 - en: '|'
+  id: totrans-139
   prefs: []
   type: TYPE_NORMAL
+  zh: '|'
 - en: Note
+  id: totrans-140
   prefs: []
   type: TYPE_NORMAL
+  zh: 注意
 - en: The default start and end values check for cross above conditions over the last
     2 values.
+  id: totrans-141
   prefs: []
   type: TYPE_NORMAL
+  zh: 默认的开始和结束值检查最后 2 个值的交叉条件。
 - en: '`pyalgotrade.technical.cross.``cross_below`(*values1*, *values2*, *start=-2*,
     *end=None*)'
+  id: totrans-142
   prefs: []
   type: TYPE_NORMAL
+  zh: '`pyalgotrade.technical.cross.``cross_below`(*values1*, *values2*, *start=-2*,
+    *end=None*)'
 - en: Checks for a cross below conditions over the specified period between two DataSeries
     objects.
+  id: totrans-143
   prefs: []
   type: TYPE_NORMAL
+  zh: 检查两个 DataSeries 对象之间指定期间内的交叉下方条件。
 - en: It returns the number of times values1 crossed below values2 during the given
     period.
+  id: totrans-144
   prefs: []
   type: TYPE_NORMAL
+  zh: 它返回给定期间内 values1 下方交叉 values2 的次数。
 - en: '| Parameters: |'
+  id: totrans-145
   prefs: []
   type: TYPE_TB
+  zh: '| 参数： |'
 - en: '**values1** ([`pyalgotrade.dataseries.DataSeries`](dataseries.html#pyalgotrade.dataseries.DataSeries
     "pyalgotrade.dataseries.DataSeries").) – The DataSeries that crosses.'
+  id: totrans-146
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**values1**（[`pyalgotrade.dataseries.DataSeries`](dataseries.html#pyalgotrade.dataseries.DataSeries
+    "pyalgotrade.dataseries.DataSeries").）- 进行交叉的 DataSeries。'
 - en: '**values2** ([`pyalgotrade.dataseries.DataSeries`](dataseries.html#pyalgotrade.dataseries.DataSeries
     "pyalgotrade.dataseries.DataSeries").) – The DataSeries being crossed.'
+  id: totrans-147
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**values2**（[`pyalgotrade.dataseries.DataSeries`](dataseries.html#pyalgotrade.dataseries.DataSeries
+    "pyalgotrade.dataseries.DataSeries").）- 被交叉的 DataSeries。'
 - en: '**start** (*int.*) – The start of the range.'
+  id: totrans-148
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**start**（*int.*）- 范围的开始。'
 - en: '**end** (*int.*) – The end of the range.'
+  id: totrans-149
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**end**（*int.*）- 范围的结束。'
 - en: '|'
+  id: totrans-150
   prefs: []
   type: TYPE_NORMAL
+  zh: '|'
 - en: Note
+  id: totrans-151
   prefs: []
   type: TYPE_NORMAL
+  zh: 注意
 - en: The default start and end values check for cross below conditions over the last
     2 values.
+  id: totrans-152
   prefs: []
   type: TYPE_NORMAL
+  zh: 默认的开始和结束值检查最近 2 个值的交叉下方条件。
 - en: '*class* `pyalgotrade.technical.cumret.``CumulativeReturn`(*dataSeries*, *maxLen=None*)'
+  id: totrans-153
   prefs: []
   type: TYPE_NORMAL
+  zh: '*类* `pyalgotrade.technical.cumret.``CumulativeReturn`（*dataSeries*，*maxLen=None*）'
 - en: 'Bases: [`pyalgotrade.technical.EventBasedFilter`](#pyalgotrade.technical.EventBasedFilter
     "pyalgotrade.technical.EventBasedFilter")'
+  id: totrans-154
   prefs: []
   type: TYPE_NORMAL
+  zh: 基类：[`pyalgotrade.technical.EventBasedFilter`](#pyalgotrade.technical.EventBasedFilter
+    "pyalgotrade.technical.EventBasedFilter")
 - en: This filter calculates cumulative returns over another dataseries.
+  id: totrans-155
   prefs: []
   type: TYPE_NORMAL
+  zh: 此过滤器计算另一个数据序列上的累积收益。
 - en: '| Parameters: |'
+  id: totrans-156
   prefs: []
   type: TYPE_TB
+  zh: '| 参数： |'
 - en: '**dataSeries** ([`pyalgotrade.dataseries.DataSeries`](dataseries.html#pyalgotrade.dataseries.DataSeries
     "pyalgotrade.dataseries.DataSeries").) – The DataSeries instance being filtered.'
+  id: totrans-157
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**dataSeries**（[`pyalgotrade.dataseries.DataSeries`](dataseries.html#pyalgotrade.dataseries.DataSeries
+    "pyalgotrade.dataseries.DataSeries").）- 被过滤的 DataSeries 实例。'
 - en: '**maxLen** (*int.*) – The maximum number of values to hold. Once a bounded
     length is full, when new items are added, a corresponding number of items are
     discarded from the opposite end. If None then dataseries.DEFAULT_MAX_LEN is used.'
+  id: totrans-158
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**maxLen**（*int.*）- 最多要保留的值数。一旦有限长度已满，当添加新项时，相应数量的项将从另一端丢弃。如果为 None，则使用 dataseries.DEFAULT_MAX_LEN。'
 - en: '|'
+  id: totrans-159
   prefs: []
   type: TYPE_NORMAL
+  zh: '|'
 - en: '*class* `pyalgotrade.technical.highlow.``High`(*dataSeries*, *period*, *maxLen=None*)'
+  id: totrans-160
   prefs: []
   type: TYPE_NORMAL
+  zh: '*类* `pyalgotrade.technical.highlow.``High`（*dataSeries*，*period*，*maxLen=None*）'
 - en: 'Bases: [`pyalgotrade.technical.EventBasedFilter`](#pyalgotrade.technical.EventBasedFilter
     "pyalgotrade.technical.EventBasedFilter")'
+  id: totrans-161
   prefs: []
   type: TYPE_NORMAL
+  zh: 基类：[`pyalgotrade.technical.EventBasedFilter`](#pyalgotrade.technical.EventBasedFilter
+    "pyalgotrade.technical.EventBasedFilter")
 - en: This filter calculates the highest value.
+  id: totrans-162
   prefs: []
   type: TYPE_NORMAL
+  zh: 此过滤器计算最高值。
 - en: '| Parameters: |'
+  id: totrans-163
   prefs: []
   type: TYPE_TB
+  zh: '| 参数： |'
 - en: '**dataSeries** ([`pyalgotrade.dataseries.DataSeries`](dataseries.html#pyalgotrade.dataseries.DataSeries
     "pyalgotrade.dataseries.DataSeries").) – The DataSeries instance being filtered.'
+  id: totrans-164
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**dataSeries**（[`pyalgotrade.dataseries.DataSeries`](dataseries.html#pyalgotrade.dataseries.DataSeries
+    "pyalgotrade.dataseries.DataSeries").）- 被过滤的 DataSeries 实例。'
 - en: '**period** (*int.*) – The number of values to use to calculate the highest
     value.'
+  id: totrans-165
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**period**（*int.*）- 用于计算最高值的数值数量。'
 - en: '**maxLen** (*int.*) – The maximum number of values to hold. Once a bounded
     length is full, when new items are added, a corresponding number of items are
     discarded from the opposite end. If None then dataseries.DEFAULT_MAX_LEN is used.'
+  id: totrans-166
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**maxLen**（*int.*）- 最多要保留的值数。一旦有限长度已满，当添加新项时，相应数量的项将从另一端丢弃。如果为 None，则使用 dataseries.DEFAULT_MAX_LEN。'
 - en: '|'
+  id: totrans-167
   prefs: []
   type: TYPE_NORMAL
+  zh: '|'
 - en: '*class* `pyalgotrade.technical.highlow.``Low`(*dataSeries*, *period*, *maxLen=None*)'
+  id: totrans-168
   prefs: []
   type: TYPE_NORMAL
+  zh: '*类* `pyalgotrade.technical.highlow.``Low`（*dataSeries*，*period*，*maxLen=None*）'
 - en: 'Bases: [`pyalgotrade.technical.EventBasedFilter`](#pyalgotrade.technical.EventBasedFilter
     "pyalgotrade.technical.EventBasedFilter")'
+  id: totrans-169
   prefs: []
   type: TYPE_NORMAL
+  zh: 基类：[`pyalgotrade.technical.EventBasedFilter`](#pyalgotrade.technical.EventBasedFilter
+    "pyalgotrade.technical.EventBasedFilter")
 - en: This filter calculates the lowest value.
+  id: totrans-170
   prefs: []
   type: TYPE_NORMAL
+  zh: 此过滤器计算最低值。
 - en: '| Parameters: |'
+  id: totrans-171
   prefs: []
   type: TYPE_TB
+  zh: '| 参数： |'
 - en: '**dataSeries** ([`pyalgotrade.dataseries.DataSeries`](dataseries.html#pyalgotrade.dataseries.DataSeries
     "pyalgotrade.dataseries.DataSeries").) – The DataSeries instance being filtered.'
+  id: totrans-172
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**dataSeries**（[`pyalgotrade.dataseries.DataSeries`](dataseries.html#pyalgotrade.dataseries.DataSeries
+    "pyalgotrade.dataseries.DataSeries").）- 被过滤的 DataSeries 实例。'
 - en: '**period** (*int.*) – The number of values to use to calculate the lowest value.'
+  id: totrans-173
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**period**（*int.*）- 用于计算最低值的数值数量。'
 - en: '**maxLen** (*int.*) – The maximum number of values to hold. Once a bounded
     length is full, when new items are added, a corresponding number of items are
     discarded from the opposite end. If None then dataseries.DEFAULT_MAX_LEN is used.'
+  id: totrans-174
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**maxLen**（*int.*）- 最多要保留的值数。一旦有限长度已满，当添加新项时，相应数量的项将从另一端丢弃。如果为 None，则使用 dataseries.DEFAULT_MAX_LEN。'
 - en: '|'
+  id: totrans-175
   prefs: []
   type: TYPE_NORMAL
+  zh: '|'
 - en: '*class* `pyalgotrade.technical.hurst.``HurstExponent`(*dataSeries*, *period*,
     *minLags=2*, *maxLags=20*, *logValues=True*, *maxLen=None*)'
+  id: totrans-176
   prefs: []
   type: TYPE_NORMAL
+  zh: '*类* `pyalgotrade.technical.hurst.``HurstExponent`(*dataSeries*, *period*, *minLags=2*,
+    *maxLags=20*, *logValues=True*, *maxLen=None*)'
 - en: 'Bases: [`pyalgotrade.technical.EventBasedFilter`](#pyalgotrade.technical.EventBasedFilter
     "pyalgotrade.technical.EventBasedFilter")'
+  id: totrans-177
   prefs: []
   type: TYPE_NORMAL
+  zh: 基类：[`pyalgotrade.technical.EventBasedFilter`](#pyalgotrade.technical.EventBasedFilter
+    "pyalgotrade.technical.EventBasedFilter")
 - en: Hurst exponent filter.
+  id: totrans-178
   prefs: []
   type: TYPE_NORMAL
+  zh: 赫斯特指数过滤器。
 - en: '| Parameters: |'
+  id: totrans-179
   prefs: []
   type: TYPE_TB
+  zh: '| 参数: |'
 - en: '**dataSeries** ([`pyalgotrade.dataseries.DataSeries`](dataseries.html#pyalgotrade.dataseries.DataSeries
     "pyalgotrade.dataseries.DataSeries").) – The DataSeries instance being filtered.'
+  id: totrans-180
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**dataSeries** ([`pyalgotrade.dataseries.DataSeries`](dataseries.html#pyalgotrade.dataseries.DataSeries
+    "pyalgotrade.dataseries.DataSeries").) – 正在过滤的DataSeries实例。'
 - en: '**period** (*int.*) – The number of values to use to calculate the hurst exponent.'
+  id: totrans-181
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**period** (*int.*) – 用于计算赫斯特指数的值数量。'
 - en: '**minLags** (*int.*) – The minimum number of lags to use. Must be >= 2.'
+  id: totrans-182
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**minLags** (*int.*) – 要使用的最小滞后数。必须 >= 2。'
 - en: '**maxLags** (*int.*) – The maximum number of lags to use. Must be > minLags.'
+  id: totrans-183
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**maxLags** (*int.*) – 要使用的最大滞后数。必须 > minLags。'
 - en: '**maxLen** (*int.*) – The maximum number of values to hold. Once a bounded
     length is full, when new items are added, a corresponding number of items are
     discarded from the opposite end. If None then dataseries.DEFAULT_MAX_LEN is used.'
+  id: totrans-184
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**maxLen** (*int.*) – 保持的最大值数量。一旦有界长度已满，当添加新项目时，相应数量的项目将从对端丢弃。如果为None，则使用dataseries.DEFAULT_MAX_LEN。'
 - en: '|'
+  id: totrans-185
   prefs: []
   type: TYPE_NORMAL
+  zh: '|'
 - en: '*class* `pyalgotrade.technical.linebreak.``Line`(*low*, *high*, *dateTime*,
     *white*)'
+  id: totrans-186
   prefs: []
   type: TYPE_NORMAL
+  zh: '*类* `pyalgotrade.technical.linebreak.``Line`(*low*, *high*, *dateTime*, *white*)'
 - en: 'Bases: `object`'
+  id: totrans-187
   prefs: []
   type: TYPE_NORMAL
+  zh: 基类：`object`
 - en: A line in a line break chart.
+  id: totrans-188
   prefs: []
   type: TYPE_NORMAL
+  zh: 线性断裂图表中的一条线。
 - en: '`getDateTime`()'
+  id: totrans-189
   prefs: []
   type: TYPE_NORMAL
+  zh: '`getDateTime`()'
 - en: The datetime.
+  id: totrans-190
   prefs: []
   type: TYPE_NORMAL
+  zh: 日期时间。
 - en: '`getHigh`()'
+  id: totrans-191
   prefs: []
   type: TYPE_NORMAL
+  zh: '`getHigh`()'
 - en: The high value.
+  id: totrans-192
   prefs: []
   type: TYPE_NORMAL
+  zh: 高值。
 - en: '`getLow`()'
+  id: totrans-193
   prefs: []
   type: TYPE_NORMAL
+  zh: '`getLow`()'
 - en: The low value.
+  id: totrans-194
   prefs: []
   type: TYPE_NORMAL
+  zh: 低值。
 - en: '`isBlack`()'
+  id: totrans-195
   prefs: []
   type: TYPE_NORMAL
+  zh: '`isBlack`()'
 - en: True if the line is black (falling prices).
+  id: totrans-196
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果线是黑色的（价格下跌），则为True。
 - en: '`isWhite`()'
+  id: totrans-197
   prefs: []
   type: TYPE_NORMAL
+  zh: '`isWhite`()'
 - en: True if the line is white (rising prices).
+  id: totrans-198
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果线是白色的（价格上涨），则为True。
 - en: '*class* `pyalgotrade.technical.linebreak.``LineBreak`(*barDataSeries*, *reversalLines*,
     *useAdjustedValues=False*, *maxLen=None*)'
+  id: totrans-199
   prefs: []
   type: TYPE_NORMAL
+  zh: '*类* `pyalgotrade.technical.linebreak.``LineBreak`(*barDataSeries*, *reversalLines*,
+    *useAdjustedValues=False*, *maxLen=None*)'
 - en: 'Bases: [`pyalgotrade.dataseries.SequenceDataSeries`](dataseries.html#pyalgotrade.dataseries.SequenceDataSeries
     "pyalgotrade.dataseries.SequenceDataSeries")'
+  id: totrans-200
   prefs: []
   type: TYPE_NORMAL
+  zh: 基类：[`pyalgotrade.dataseries.SequenceDataSeries`](dataseries.html#pyalgotrade.dataseries.SequenceDataSeries
+    "pyalgotrade.dataseries.SequenceDataSeries")
 - en: Line Break filter as described in [http://stockcharts.com/school/doku.php?id=chart_school:chart_analysis:three_line_break](http://stockcharts.com/school/doku.php?id=chart_school:chart_analysis:three_line_break).
     . This is a DataSeries of [`Line`](#pyalgotrade.technical.linebreak.Line "pyalgotrade.technical.linebreak.Line")
     instances.
+  id: totrans-201
   prefs: []
   type: TYPE_NORMAL
+  zh: 描述了[线性断裂过滤器](http://stockcharts.com/school/doku.php?id=chart_school:chart_analysis:three_line_break)。这是一个[`Line`](#pyalgotrade.technical.linebreak.Line
+    "pyalgotrade.technical.linebreak.Line")实例的DataSeries。
 - en: '| Parameters: |'
+  id: totrans-202
   prefs: []
   type: TYPE_TB
+  zh: '| 参数: |'
 - en: '**barDataSeries** ([`pyalgotrade.dataseries.bards.BarDataSeries`](dataseries.html#pyalgotrade.dataseries.bards.BarDataSeries
     "pyalgotrade.dataseries.bards.BarDataSeries").) – The DataSeries instance being
     filtered.'
+  id: totrans-203
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**barDataSeries** ([`pyalgotrade.dataseries.bards.BarDataSeries`](dataseries.html#pyalgotrade.dataseries.bards.BarDataSeries
+    "pyalgotrade.dataseries.bards.BarDataSeries").) – 正在过滤的DataSeries实例。'
 - en: '**reversalLines** (*int.*) – The number of lines back to check to calculate
     a reversal. Must be greater than 1.'
+  id: totrans-204
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**reversalLines** (*int.*) – 要检查以计算反转的线数。必须大于1。'
 - en: '**useAdjustedValues** (*boolean.*) – True to use adjusted high/low/close values.'
+  id: totrans-205
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**useAdjustedValues** (*boolean.*) – True 表示使用调整后的高/低/收盘价值。'
 - en: '**maxLen** (*int.*) – The maximum number of values to hold. Once a bounded
     length is full, when new items are added, a corresponding number of items are
     discarded from the opposite end. If None then dataseries.DEFAULT_MAX_LEN is used.
     This value can’t be smaller than reversalLines.'
+  id: totrans-206
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**maxLen** (*int.*) – 保持的最大值数量。一旦有界长度已满，当添加新项目时，相应数量的项目将从对端丢弃。如果为None，则使用dataseries.DEFAULT_MAX_LEN。此值不能小于reversalLines。'
 - en: '|'
+  id: totrans-207
   prefs: []
   type: TYPE_NORMAL
+  zh: '|'
 - en: '*class* `pyalgotrade.technical.linreg.``LeastSquaresRegression`(*dataSeries*,
     *windowSize*, *maxLen=None*)'
+  id: totrans-208
   prefs: []
   type: TYPE_NORMAL
+  zh: '*类* `pyalgotrade.technical.linreg.``LeastSquaresRegression`(*dataSeries*, *windowSize*,
+    *maxLen=None*)'
 - en: 'Bases: [`pyalgotrade.technical.EventBasedFilter`](#pyalgotrade.technical.EventBasedFilter
     "pyalgotrade.technical.EventBasedFilter")'
+  id: totrans-209
   prefs: []
   type: TYPE_NORMAL
+  zh: 基类：[`pyalgotrade.technical.EventBasedFilter`](#pyalgotrade.technical.EventBasedFilter
+    "pyalgotrade.technical.EventBasedFilter")
 - en: Calculates values based on a least-squares regression.
+  id: totrans-210
   prefs: []
   type: TYPE_NORMAL
+  zh: 根据最小二乘法回归计算值。
 - en: '| Parameters: |'
+  id: totrans-211
   prefs: []
   type: TYPE_TB
+  zh: '| 参数: |'
 - en: '**dataSeries** ([`pyalgotrade.dataseries.DataSeries`](dataseries.html#pyalgotrade.dataseries.DataSeries
     "pyalgotrade.dataseries.DataSeries").) – The DataSeries instance being filtered.'
+  id: totrans-212
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**dataSeries**（[`pyalgotrade.dataseries.DataSeries`](dataseries.html#pyalgotrade.dataseries.DataSeries
+    "pyalgotrade.dataseries.DataSeries").）– 要过滤的 DataSeries 实例。'
 - en: '**windowSize** (*int.*) – The number of values to use to calculate the regression.'
+  id: totrans-213
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**windowSize**（*int.*）– 用于计算回归的值的数量。'
 - en: '**maxLen** (*int.*) – The maximum number of values to hold. Once a bounded
     length is full, when new items are added, a corresponding number of items are
     discarded from the opposite end. If None then dataseries.DEFAULT_MAX_LEN is used.'
+  id: totrans-214
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**maxLen**（*int.*）– 要保持的最大值数量。一旦有限长度已满，当添加新项时，相应数量的项将从相反端丢弃。如果为 None，则使用 dataseries.DEFAULT_MAX_LEN。'
 - en: '|'
+  id: totrans-215
   prefs: []
   type: TYPE_NORMAL
+  zh: '|'
 - en: '`getValueAt`(*dateTime*)'
+  id: totrans-216
   prefs: []
   type: TYPE_NORMAL
+  zh: '`getValueAt`（*dateTime*）'
 - en: Calculates the value at a given time based on the regression line.
+  id: totrans-217
   prefs: []
   type: TYPE_NORMAL
+  zh: 根据回归线在给定时间计算值。
 - en: '| Parameters: | **dateTime** (`datetime.datetime`.) – The datetime to calculate
     the value at. Will return None if there are not enough values in the underlying
     DataSeries. |'
+  id: totrans-218
   prefs: []
   type: TYPE_TB
+  zh: '| 参数： | **dateTime**（`datetime.datetime`.）– 要计算值的日期时间。如果基础 DataSeries 中的值不足，则返回
+    None。'
 - en: '*class* `pyalgotrade.technical.linreg.``Slope`(*dataSeries*, *period*, *maxLen=None*)'
+  id: totrans-219
   prefs: []
   type: TYPE_NORMAL
+  zh: '*class* `pyalgotrade.technical.linreg.``Slope`（*dataSeries*, *period*, *maxLen=None*）'
 - en: 'Bases: [`pyalgotrade.technical.EventBasedFilter`](#pyalgotrade.technical.EventBasedFilter
     "pyalgotrade.technical.EventBasedFilter")'
+  id: totrans-220
   prefs: []
   type: TYPE_NORMAL
+  zh: 基类：[`pyalgotrade.technical.EventBasedFilter`](#pyalgotrade.technical.EventBasedFilter
+    "pyalgotrade.technical.EventBasedFilter")
 - en: The Slope filter calculates the slope of a least-squares regression line.
+  id: totrans-221
   prefs: []
   type: TYPE_NORMAL
+  zh: 斜率过滤器计算最小二乘回归线的斜率。
 - en: '| Parameters: |'
+  id: totrans-222
   prefs: []
   type: TYPE_TB
+  zh: '| 参数： |'
 - en: '**dataSeries** ([`pyalgotrade.dataseries.DataSeries`](dataseries.html#pyalgotrade.dataseries.DataSeries
     "pyalgotrade.dataseries.DataSeries").) – The DataSeries instance being filtered.'
+  id: totrans-223
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**dataSeries**（[`pyalgotrade.dataseries.DataSeries`](dataseries.html#pyalgotrade.dataseries.DataSeries
+    "pyalgotrade.dataseries.DataSeries").）– 要过滤的 DataSeries 实例。'
 - en: '**period** (*int.*) – The number of values to use to calculate the slope.'
+  id: totrans-224
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**period**（*int.*）– 用于计算斜率的值数量。'
 - en: '**maxLen** (*int.*) – The maximum number of values to hold. Once a bounded
     length is full, when new items are added, a corresponding number of items are
     discarded from the opposite end. If None then dataseries.DEFAULT_MAX_LEN is used.'
+  id: totrans-225
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**maxLen**（*int.*）– 要保持的最大值数量。一旦有限长度已满，当添加新项时，相应数量的项将从相反端丢弃。如果为 None，则使用 dataseries.DEFAULT_MAX_LEN。'
 - en: '|'
+  id: totrans-226
   prefs: []
   type: TYPE_NORMAL
+  zh: '|'
 - en: Note
+  id: totrans-227
   prefs: []
   type: TYPE_NORMAL
+  zh: 注意
 - en: This filter ignores the time elapsed between the different values.
+  id: totrans-228
   prefs: []
   type: TYPE_NORMAL
+  zh: 此过滤器忽略了不同值之间经过的时间。
 - en: '*class* `pyalgotrade.technical.stats.``StdDev`(*dataSeries*, *period*, *ddof=0*,
     *maxLen=None*)'
+  id: totrans-229
   prefs: []
   type: TYPE_NORMAL
+  zh: '*class* `pyalgotrade.technical.stats.``StdDev`（*dataSeries*, *period*, *ddof=0*,
+    *maxLen=None*）'
 - en: 'Bases: [`pyalgotrade.technical.EventBasedFilter`](#pyalgotrade.technical.EventBasedFilter
     "pyalgotrade.technical.EventBasedFilter")'
+  id: totrans-230
   prefs: []
   type: TYPE_NORMAL
+  zh: 基类：[`pyalgotrade.technical.EventBasedFilter`](#pyalgotrade.technical.EventBasedFilter
+    "pyalgotrade.technical.EventBasedFilter")
 - en: Standard deviation filter.
+  id: totrans-231
   prefs: []
   type: TYPE_NORMAL
+  zh: 标准差过滤器。
 - en: '| Parameters: |'
+  id: totrans-232
   prefs: []
   type: TYPE_TB
+  zh: '| 参数： |'
 - en: '**dataSeries** ([`pyalgotrade.dataseries.DataSeries`](dataseries.html#pyalgotrade.dataseries.DataSeries
     "pyalgotrade.dataseries.DataSeries").) – The DataSeries instance being filtered.'
+  id: totrans-233
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**dataSeries**（[`pyalgotrade.dataseries.DataSeries`](dataseries.html#pyalgotrade.dataseries.DataSeries
+    "pyalgotrade.dataseries.DataSeries").）– 要过滤的 DataSeries 实例。'
 - en: '**period** (*int.*) – The number of values to use to calculate the Standard
     deviation.'
+  id: totrans-234
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**period**（*int.*）– 用于计算标准差的值数量。'
 - en: '**ddof** (*int.*) – Delta degrees of freedom.'
+  id: totrans-235
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**ddof**（*int.*）– Delta 自由度。'
 - en: '**maxLen** (*int.*) – The maximum number of values to hold. Once a bounded
     length is full, when new items are added, a corresponding number of items are
     discarded from the opposite end. If None then dataseries.DEFAULT_MAX_LEN is used.'
+  id: totrans-236
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**maxLen**（*int.*）– 要保持的最大值数量。一旦有限长度已满，当添加新项时，相应数量的项将从相反端丢弃。如果为 None，则使用 dataseries.DEFAULT_MAX_LEN。'
 - en: '|'
+  id: totrans-237
   prefs: []
   type: TYPE_NORMAL
+  zh: '|'
 - en: '*class* `pyalgotrade.technical.stats.``ZScore`(*dataSeries*, *period*, *ddof=0*,
     *maxLen=None*)'
+  id: totrans-238
   prefs: []
   type: TYPE_NORMAL
+  zh: '*class* `pyalgotrade.technical.stats.``ZScore`（*dataSeries*, *period*, *ddof=0*,
+    *maxLen=None*）'
 - en: 'Bases: [`pyalgotrade.technical.EventBasedFilter`](#pyalgotrade.technical.EventBasedFilter
     "pyalgotrade.technical.EventBasedFilter")'
+  id: totrans-239
   prefs: []
   type: TYPE_NORMAL
+  zh: 基类：[`pyalgotrade.technical.EventBasedFilter`](#pyalgotrade.technical.EventBasedFilter
+    "pyalgotrade.technical.EventBasedFilter")
 - en: Z-Score filter.
+  id: totrans-240
   prefs: []
   type: TYPE_NORMAL
+  zh: Z-Score 过滤器。
 - en: '| Parameters: |'
+  id: totrans-241
   prefs: []
   type: TYPE_TB
+  zh: '| 参数： |'
 - en: '**dataSeries** ([`pyalgotrade.dataseries.DataSeries`](dataseries.html#pyalgotrade.dataseries.DataSeries
     "pyalgotrade.dataseries.DataSeries").) – The DataSeries instance being filtered.'
+  id: totrans-242
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**dataSeries**（[`pyalgotrade.dataseries.DataSeries`](dataseries.html#pyalgotrade.dataseries.DataSeries
+    "pyalgotrade.dataseries.DataSeries").）– 要过滤的 DataSeries 实例。'
 - en: '**period** (*int.*) – The number of values to use to calculate the Z-Score.'
+  id: totrans-243
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**period**（*int.*）– 用于计算 Z-Score 的值数量。'
 - en: '**ddof** (*int.*) – Delta degrees of freedom to use for the standard deviation.'
+  id: totrans-244
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**ddof** (*int.*) – 用于标准差的 delta 自由度。'
 - en: '**maxLen** (*int.*) – The maximum number of values to hold. Once a bounded
     length is full, when new items are added, a corresponding number of items are
     discarded from the opposite end. If None then dataseries.DEFAULT_MAX_LEN is used.'
+  id: totrans-245
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**maxLen** (*int.*) – 保持的最大值数量。一旦有限长度已满，当添加新项时，相应数量的项将从另一端丢弃。如果为 None，则使用 dataseries.DEFAULT_MAX_LEN。'
 - en: '|'
+  id: totrans-246
   prefs: []
   type: TYPE_NORMAL
+  zh: '|'
 - en: '[Table Of Contents](index.html)'
+  id: totrans-247
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: '[目录](index.html)'
 - en: '[technical – Technical indicators](#)'
+  id: totrans-248
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[技术指标 – Technical indicators](#)'
 - en: '[Example](#example)'
+  id: totrans-249
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[示例](#example)'
 - en: '[Moving Averages](#module-pyalgotrade.technical.ma)'
+  id: totrans-250
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[移动平均线](#module-pyalgotrade.technical.ma)'
 - en: '[Momentum Indicators](#module-pyalgotrade.technical.macd)'
+  id: totrans-251
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[动量指标](#module-pyalgotrade.technical.macd)'
 - en: '[Other Indicators](#module-pyalgotrade.technical.atr)'
+  id: totrans-252
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[其他指标](#module-pyalgotrade.technical.atr)'
 - en: Previous topic
+  id: totrans-253
   prefs:
   - PREF_H4
   type: TYPE_NORMAL
+  zh: 上一个主题
 - en: '[barfeed – Bar providers](barfeed.html "previous chapter")'
+  id: totrans-254
   prefs: []
   type: TYPE_NORMAL
+  zh: '[条形供给 – Bar providers](barfeed.html "上一章")'
 - en: Next topic
+  id: totrans-255
   prefs:
   - PREF_H4
   type: TYPE_NORMAL
+  zh: 下一个主题
 - en: '[broker – Order management classes](broker.html "next chapter")'
+  id: totrans-256
   prefs: []
   type: TYPE_NORMAL
+  zh: '[经纪人 – 订单管理类](broker.html "下一章")'
 - en: This Page
+  id: totrans-257
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 本页
 - en: '[Show Source](_sources/technical.txt)'
+  id: totrans-258
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[显示源码](_sources/technical.txt)'
 - en: Quick search
+  id: totrans-259
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 快速搜索
 - en: Enter search terms or a module, class or function name.
+  id: totrans-260
   prefs: []
   type: TYPE_NORMAL
+  zh: 输入搜索词或模块、类或函数名称。
 - en: Navigation
+  id: totrans-261
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 导航
 - en: '[index](genindex.html "General Index")'
+  id: totrans-262
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[索引](genindex.html "总索引")'
 - en: '[modules](py-modindex.html "Python Module Index") |'
+  id: totrans-263
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[模块](py-modindex.html "Python 模块索引") |'
 - en: '[next](broker.html "broker – Order management classes") |'
+  id: totrans-264
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[下一个](broker.html "经纪人 – 订单管理类") |'
 - en: '[previous](barfeed.html "barfeed – Bar providers") |'
+  id: totrans-265
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[上一个](barfeed.html "条形供给 – Bar providers") |'
 - en: '[PyAlgoTrade 0.20 documentation](index.html) »'
+  id: totrans-266
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[PyAlgoTrade 0.20 文档](index.html) »'
 - en: '[Documentation for the code](code.html) »'
+  id: totrans-267
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[代码文档](code.html) »'
