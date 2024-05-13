@@ -50074,31 +50074,38 @@
   id: totrans-8350
   prefs: []
   type: TYPE_NORMAL
+  zh: 仓位的当前状态。
 - en: 'Returns:'
   id: totrans-8351
   prefs: []
   type: TYPE_NORMAL
+  zh: 返回：
 - en: '**stats** – The current stats position stats.'
   id: totrans-8352
   prefs: []
   type: TYPE_NORMAL
+  zh: '**统计数据** – 当前统计数据的位置统计数据。'
 - en: 'Return type:'
   id: totrans-8353
   prefs: []
   type: TYPE_NORMAL
+  zh: 返回类型：
 - en: '[PositionStats](#zipline.finance._finance_ext.PositionStats "zipline.finance._finance_ext.PositionStats")'
   id: totrans-8354
   prefs: []
   type: TYPE_NORMAL
+  zh: '[PositionStats](#zipline.finance._finance_ext.PositionStats "zipline.finance._finance_ext.PositionStats")'
 - en: Notes
   id: totrans-8355
   prefs: []
   type: TYPE_NORMAL
+  zh: 注释
 - en: This is cached, repeated access will not recompute the stats until the stats
     may have changed.
   id: totrans-8356
   prefs: []
   type: TYPE_NORMAL
+  zh: 这是缓存的，重复访问不会重新计算统计数据，除非统计数据可能已更改。
 - en: '[PRE1235]'
   id: totrans-8357
   prefs: []
@@ -50108,6 +50115,7 @@
   id: totrans-8358
   prefs: []
   type: TYPE_NORMAL
+  zh: 从当前仓位计算的值。
 - en: '[PRE1236]'
   id: totrans-8359
   prefs: []
@@ -50117,14 +50125,17 @@
   id: totrans-8360
   prefs: []
   type: TYPE_NORMAL
+  zh: 总仓位暴露。
 - en: 'Type:'
   id: totrans-8361
   prefs: []
   type: TYPE_NORMAL
+  zh: 类型：
 - en: float64
   id: totrans-8362
   prefs: []
   type: TYPE_NORMAL
+  zh: 浮点数64位
 - en: '[PRE1237]'
   id: totrans-8363
   prefs: []
@@ -50134,14 +50145,17 @@
   id: totrans-8364
   prefs: []
   type: TYPE_NORMAL
+  zh: 总仓位价值。
 - en: 'Type:'
   id: totrans-8365
   prefs: []
   type: TYPE_NORMAL
+  zh: 类型：
 - en: float64
   id: totrans-8366
   prefs: []
   type: TYPE_NORMAL
+  zh: 浮点数64位
 - en: '[PRE1238]'
   id: totrans-8367
   prefs: []
@@ -50151,14 +50165,17 @@
   id: totrans-8368
   prefs: []
   type: TYPE_NORMAL
+  zh: 仅长仓位的暴露。
 - en: 'Type:'
   id: totrans-8369
   prefs: []
   type: TYPE_NORMAL
+  zh: 类型：
 - en: float64
   id: totrans-8370
   prefs: []
   type: TYPE_NORMAL
+  zh: 浮点数64位
 - en: '[PRE1239]'
   id: totrans-8371
   prefs: []
@@ -50168,14 +50185,17 @@
   id: totrans-8372
   prefs: []
   type: TYPE_NORMAL
+  zh: 仅长仓位的价值。
 - en: 'Type:'
   id: totrans-8373
   prefs: []
   type: TYPE_NORMAL
+  zh: 类型：
 - en: float64
   id: totrans-8374
   prefs: []
   type: TYPE_NORMAL
+  zh: 浮点数64位
 - en: '[PRE1240]'
   id: totrans-8375
   prefs: []
@@ -50185,14 +50205,17 @@
   id: totrans-8376
   prefs: []
   type: TYPE_NORMAL
+  zh: 净仓位暴露。
 - en: 'Type:'
   id: totrans-8377
   prefs: []
   type: TYPE_NORMAL
+  zh: 类型：
 - en: float64
   id: totrans-8378
   prefs: []
   type: TYPE_NORMAL
+  zh: 浮点数64位
 - en: '[PRE1241]'
   id: totrans-8379
   prefs: []
@@ -50202,14 +50225,17 @@
   id: totrans-8380
   prefs: []
   type: TYPE_NORMAL
+  zh: 净仓位价值。
 - en: 'Type:'
   id: totrans-8381
   prefs: []
   type: TYPE_NORMAL
+  zh: 类型：
 - en: float64
   id: totrans-8382
   prefs: []
   type: TYPE_NORMAL
+  zh: 浮点数64位
 - en: '[PRE1242]'
   id: totrans-8383
   prefs: []
@@ -50219,14 +50245,17 @@
   id: totrans-8384
   prefs: []
   type: TYPE_NORMAL
+  zh: 仅短仓位的暴露。
 - en: 'Type:'
   id: totrans-8385
   prefs: []
   type: TYPE_NORMAL
+  zh: 类型：
 - en: float64
   id: totrans-8386
   prefs: []
   type: TYPE_NORMAL
+  zh: 浮点数64位
 - en: '[PRE1243]'
   id: totrans-8387
   prefs: []
@@ -50236,14 +50265,17 @@
   id: totrans-8388
   prefs: []
   type: TYPE_NORMAL
+  zh: 仅短仓位的价值。
 - en: 'Type:'
   id: totrans-8389
   prefs: []
   type: TYPE_NORMAL
+  zh: 类型：
 - en: float64
   id: totrans-8390
   prefs: []
   type: TYPE_NORMAL
+  zh: 浮点数64位
 - en: '[PRE1244]'
   id: totrans-8391
   prefs: []
@@ -50253,14 +50285,17 @@
   id: totrans-8392
   prefs: []
   type: TYPE_NORMAL
+  zh: 长仓位的数量。
 - en: 'Type:'
   id: totrans-8393
   prefs: []
   type: TYPE_NORMAL
+  zh: 类型：
 - en: int64
   id: totrans-8394
   prefs: []
   type: TYPE_NORMAL
+  zh: 整数64位
 - en: '[PRE1245]'
   id: totrans-8395
   prefs: []
@@ -50270,14 +50305,17 @@
   id: totrans-8396
   prefs: []
   type: TYPE_NORMAL
+  zh: 短仓位的数量。
 - en: 'Type:'
   id: totrans-8397
   prefs: []
   type: TYPE_NORMAL
+  zh: 类型：
 - en: int64
   id: totrans-8398
   prefs: []
   type: TYPE_NORMAL
+  zh: 整数64位
 - en: '[PRE1246]'
   id: totrans-8399
   prefs: []
@@ -50287,14 +50325,17 @@
   id: totrans-8400
   prefs: []
   type: TYPE_NORMAL
+  zh: 与 `position_tracker.positions` 相同顺序的每个仓位的暴露。
 - en: 'Type:'
   id: totrans-8401
   prefs: []
   type: TYPE_NORMAL
+  zh: 类型：
 - en: np.ndarray[float64]
   id: totrans-8402
   prefs: []
   type: TYPE_NORMAL
+  zh: np.ndarray[float64]
 - en: '[PRE1247]'
   id: totrans-8403
   prefs: []
@@ -50305,24 +50346,29 @@
   id: totrans-8404
   prefs: []
   type: TYPE_NORMAL
+  zh: 与 `position_tracker.positions` 相同顺序的每个仓位的暴露。索引是每个资产的数字 sid。
 - en: 'Type:'
   id: totrans-8405
   prefs: []
   type: TYPE_NORMAL
+  zh: 类型：
 - en: pd.Series[float64]
   id: totrans-8406
   prefs: []
   type: TYPE_NORMAL
+  zh: pd.Series[float64]
 - en: Notes
   id: totrans-8407
   prefs: []
   type: TYPE_NORMAL
+  zh: 注释
 - en: '`position_exposure_array` and `position_exposure_series` share the same underlying
     memory. The array interface should be preferred if you are doing access each minute
     for better performance.'
   id: totrans-8408
   prefs: []
   type: TYPE_NORMAL
+  zh: '`position_exposure_array` 和 `position_exposure_series` 共享相同的底层内存。如果您需要每分钟访问一次，则应首选数组接口以获得更好的性能。'
 - en: '`position_exposure_array` and `position_exposure_series` may be mutated when
     the position tracker next updates the stats. Do not rely on these objects being
     preserved across accesses to `stats`. If you need to freeze the values, you must
@@ -50330,11 +50376,14 @@
   id: totrans-8409
   prefs: []
   type: TYPE_NORMAL
+  zh: '`position_exposure_array` 和 `position_exposure_series` 在仓位跟踪器下一次更新统计数据时可能会被修改。不要依赖这些对象在访问
+    `stats` 时保持不变。如果您需要冻结值，则必须进行复制。'
 - en: Built-in Metrics
   id: totrans-8410
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 内置指标
 - en: '[PRE1248]'
   id: totrans-8411
   prefs: []
@@ -50344,16 +50393,20 @@
   id: totrans-8412
   prefs: []
   type: TYPE_NORMAL
+  zh: 每个条形图或每个会话发出分类账字段的当前值。
 - en: 'Parameters:'
   id: totrans-8413
   prefs: []
   type: TYPE_NORMAL
+  zh: 参数：
 - en: '**ledger_field** ([*str*](https://docs.python.org/3/library/stdtypes.html#str
     "(in Python v3.11)")) – The ledger field to read.'
   id: totrans-8414
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**ledger_field** ([*字符串*](https://docs.python.org/3/library/stdtypes.html#str
+    "(in Python v3.11)")) – 要读取的分类账字段。'
 - en: '**packet_field** ([*str*](https://docs.python.org/3/library/stdtypes.html#str
     "(in Python v3.11)")*,* *optional*) – The name of the field to populate in the
     packet. If not provided, `ledger_field` will be used.'
@@ -50361,6 +50414,8 @@
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**packet_field** ([*字符串*](https://docs.python.org/3/library/stdtypes.html#str
+    "(in Python v3.11)")*,* *可选*) – 要在数据包中填充的字段名称。如果未提供，将使用 `ledger_field`。'
 - en: '[PRE1249]'
   id: totrans-8416
   prefs: []
@@ -50372,16 +50427,22 @@
   id: totrans-8417
   prefs: []
   type: TYPE_NORMAL
+  zh: 类似于 [`SimpleLedgerField`](#zipline.finance.metrics.metric.SimpleLedgerField
+    "zipline.finance.metrics.metric.SimpleLedgerField")，但也将当前值放入 `cumulative_perf`
+    部分。
 - en: 'Parameters:'
   id: totrans-8418
   prefs: []
   type: TYPE_NORMAL
+  zh: 参数：
 - en: '**ledger_field** ([*str*](https://docs.python.org/3/library/stdtypes.html#str
     "(in Python v3.11)")) – The ledger field to read.'
   id: totrans-8419
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**ledger_field** ([*字符串*](https://docs.python.org/3/library/stdtypes.html#str
+    "(in Python v3.11)")) – 要读取的分类账字段。'
 - en: '**packet_field** ([*str*](https://docs.python.org/3/library/stdtypes.html#str
     "(in Python v3.11)")*,* *optional*) – The name of the field to populate in the
     packet. If not provided, `ledger_field` will be used.'
@@ -50389,6 +50450,8 @@
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**packet_field** ([*字符串*](https://docs.python.org/3/library/stdtypes.html#str
+    "(in Python v3.11)")*,* *可选*) – 要在数据包中填充的字段名称。如果未提供，将使用 `ledger_field`。'
 - en: '[PRE1250]'
   id: totrans-8421
   prefs: []
@@ -50398,16 +50461,20 @@
   id: totrans-8422
   prefs: []
   type: TYPE_NORMAL
+  zh: 跟踪分类账字段在周期开始时的价值。
 - en: 'Parameters:'
   id: totrans-8423
   prefs: []
   type: TYPE_NORMAL
+  zh: 参数：
 - en: '**ledger_field** ([*str*](https://docs.python.org/3/library/stdtypes.html#str
     "(in Python v3.11)")) – The ledger field to read.'
   id: totrans-8424
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**ledger_field** ([*字符串*](https://docs.python.org/3/library/stdtypes.html#str
+    "(in Python v3.11)")) – 要读取的分类账字段。'
 - en: '**packet_field** ([*str*](https://docs.python.org/3/library/stdtypes.html#str
     "(in Python v3.11)")*,* *optional*) – The name of the field to populate in the
     packet. If not provided, `ledger_field` will be used.'
@@ -50415,6 +50482,8 @@
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**packet_field** ([*字符串*](https://docs.python.org/3/library/stdtypes.html#str
+    "(in Python v3.11)")*,* *可选*) – 要在数据包中填充的字段名称。如果未提供，将使用 `ledger_field`。'
 - en: '[PRE1251]'
   id: totrans-8426
   prefs: []
@@ -50424,16 +50493,20 @@
   id: totrans-8427
   prefs: []
   type: TYPE_NORMAL
+  zh: 跟踪分类账字段在周期开始时的价值。
 - en: 'Parameters:'
   id: totrans-8428
   prefs: []
   type: TYPE_NORMAL
+  zh: 参数：
 - en: '**ledger_field** ([*str*](https://docs.python.org/3/library/stdtypes.html#str
     "(in Python v3.11)")) – The ledger field to read.'
   id: totrans-8429
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**账本字段** ([*str*](https://docs.python.org/3/library/stdtypes.html#str "(in
+    Python v3.11)")) – 要读取的账本字段。'
 - en: '**packet_field** ([*str*](https://docs.python.org/3/library/stdtypes.html#str
     "(in Python v3.11)")*,* *optional*) – The name of the field to populate in the
     packet. If not provided, `ledger_field` will be used.'
@@ -50441,6 +50514,8 @@
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**数据包字段** ([*str*](https://docs.python.org/3/library/stdtypes.html#str "(in
+    Python v3.11)")*,* *可选*) – 数据包中要填充的字段的名称。如果未提供，将使用 `ledger_field`。'
 - en: '[PRE1252]'
   id: totrans-8431
   prefs: []
@@ -50450,6 +50525,7 @@
   id: totrans-8432
   prefs: []
   type: TYPE_NORMAL
+  zh: 跟踪算法的日回报率和累计回报率。
 - en: '[PRE1253]'
   id: totrans-8433
   prefs: []
@@ -50460,6 +50536,7 @@
   id: totrans-8434
   prefs: []
   type: TYPE_NORMAL
+  zh: 跟踪基准的日回报率和累计回报率，以及基准回报率的波动性。
 - en: '[PRE1254]'
   id: totrans-8435
   prefs: []
@@ -50469,14 +50546,17 @@
   id: totrans-8436
   prefs: []
   type: TYPE_NORMAL
+  zh: 跟踪每日和累计现金流。
 - en: Notes
   id: totrans-8437
   prefs: []
   type: TYPE_NORMAL
+  zh: 注释
 - en: For historical reasons, this field is named ‘capital_used’ in the packets.
   id: totrans-8438
   prefs: []
   type: TYPE_NORMAL
+  zh: 由于历史原因，此字段在数据包中名为‘capital_used’。
 - en: '[PRE1255]'
   id: totrans-8439
   prefs: []
@@ -50486,6 +50566,7 @@
   id: totrans-8440
   prefs: []
   type: TYPE_NORMAL
+  zh: 跟踪每日订单。
 - en: '[PRE1256]'
   id: totrans-8441
   prefs: []
@@ -50495,6 +50576,7 @@
   id: totrans-8442
   prefs: []
   type: TYPE_NORMAL
+  zh: 跟踪每日交易。
 - en: '[PRE1257]'
   id: totrans-8443
   prefs: []
@@ -50504,6 +50586,7 @@
   id: totrans-8444
   prefs: []
   type: TYPE_NORMAL
+  zh: 跟踪每日持仓。
 - en: '[PRE1258]'
   id: totrans-8445
   prefs: []
@@ -50514,15 +50597,18 @@
   id: totrans-8446
   prefs: []
   type: TYPE_NORMAL
+  zh: 报告模拟结束时从算法回报计算出的标量或时间序列的指标。
 - en: 'Parameters:'
   id: totrans-8447
   prefs: []
   type: TYPE_NORMAL
+  zh: 参数：
 - en: '**function** (*callable*) – The function to call on the daily returns.'
   id: totrans-8448
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**函数** (*可调用*) – 用于每日回报的调用函数。'
 - en: '**field_name** ([*str*](https://docs.python.org/3/library/stdtypes.html#str
     "(in Python v3.11)")*,* *optional*) – The name of the field. If not provided,
     it will be `function.__name__`.'
@@ -50530,6 +50616,8 @@
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**字段名称** ([*str*](https://docs.python.org/3/library/stdtypes.html#str "(in
+    Python v3.11)")*,* *可选*) – 字段的名称。如果未提供，则将使用 `function.__name__`。'
 - en: '[PRE1259]'
   id: totrans-8450
   prefs: []
@@ -50539,6 +50627,7 @@
   id: totrans-8451
   prefs: []
   type: TYPE_NORMAL
+  zh: 模拟结束时相对于基准的阿尔法和贝塔。
 - en: '[PRE1260]'
   id: totrans-8452
   prefs: []
@@ -50548,11 +50637,13 @@
   id: totrans-8453
   prefs: []
   type: TYPE_NORMAL
+  zh: 跟踪账户最大杠杆率。
 - en: Metrics Sets
   id: totrans-8454
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 指标集
 - en: '[PRE1261]'
   id: totrans-8455
   prefs: []
@@ -50562,37 +50653,46 @@
   id: totrans-8456
   prefs: []
   type: TYPE_NORMAL
+  zh: 注册新的指标集。
 - en: 'Parameters:'
   id: totrans-8457
   prefs: []
   type: TYPE_NORMAL
+  zh: 参数：
 - en: '**name** ([*str*](https://docs.python.org/3/library/stdtypes.html#str "(in
     Python v3.11)")) – The name of the metrics set'
   id: totrans-8458
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**名称** ([*str*](https://docs.python.org/3/library/stdtypes.html#str "(in Python
+    v3.11)")) – 指标集的名称'
 - en: '**function** (*callable*) – The callable which produces the metrics set.'
   id: totrans-8459
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**函数** (*可调用*) – 产生指标集的可调用对象。'
 - en: Notes
   id: totrans-8460
   prefs: []
   type: TYPE_NORMAL
+  zh: 注释
 - en: This may be used as a decorator if only `name` is passed.
   id: totrans-8461
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果只传递 `name`，则可以用作装饰器。
 - en: See also
   id: totrans-8462
   prefs: []
   type: TYPE_NORMAL
+  zh: 另请参阅
 - en: '`zipline.finance.metrics.get_metrics_set`, `zipline.finance.metrics.unregister_metrics_set`'
   id: totrans-8463
   prefs: []
   type: TYPE_NORMAL
+  zh: '`zipline.finance.metrics.get_metrics_set`, `zipline.finance.metrics.unregister_metrics_set`'
 - en: '[PRE1262]'
   id: totrans-8464
   prefs: []
@@ -50602,31 +50702,39 @@
   id: totrans-8465
   prefs: []
   type: TYPE_NORMAL
+  zh: 返回已使用给定名称注册的指标集的实例。
 - en: 'Returns:'
   id: totrans-8466
   prefs: []
   type: TYPE_NORMAL
+  zh: 返回：
 - en: '**metrics** – A new instance of the metrics set.'
   id: totrans-8467
   prefs: []
   type: TYPE_NORMAL
+  zh: '**指标** – 指标集的新实例。'
 - en: 'Return type:'
   id: totrans-8468
   prefs: []
   type: TYPE_NORMAL
+  zh: 返回类型：
 - en: '[set](https://docs.python.org/3/library/stdtypes.html#set "(in Python v3.11)")[Metric]'
   id: totrans-8469
   prefs: []
   type: TYPE_NORMAL
+  zh: '[set](https://docs.python.org/3/library/stdtypes.html#set "(in Python v3.11)")[Metric]'
 - en: 'Raises:'
   id: totrans-8470
   prefs: []
   type: TYPE_NORMAL
+  zh: 引发：
 - en: '[**ValueError**](https://docs.python.org/3/library/exceptions.html#ValueError
     "(in Python v3.11)") – Raised when no metrics set is registered to `name`'
   id: totrans-8471
   prefs: []
   type: TYPE_NORMAL
+  zh: '[**ValueError**](https://docs.python.org/3/library/exceptions.html#ValueError
+    "(in Python v3.11)") – 当未注册到 `name` 的指标集时引发'
 - en: '[PRE1263]'
   id: totrans-8472
   prefs: []
@@ -50636,23 +50744,29 @@
   id: totrans-8473
   prefs: []
   type: TYPE_NORMAL
+  zh: 注销现有的指标集。
 - en: 'Parameters:'
   id: totrans-8474
   prefs: []
   type: TYPE_NORMAL
+  zh: 参数：
 - en: '**name** ([*str*](https://docs.python.org/3/library/stdtypes.html#str "(in
     Python v3.11)")) – The name of the metrics set'
   id: totrans-8475
   prefs: []
   type: TYPE_NORMAL
+  zh: '**名称** ([*str*](https://docs.python.org/3/library/stdtypes.html#str "(in Python
+    v3.11)")) – 指标集的名称'
 - en: See also
   id: totrans-8476
   prefs: []
   type: TYPE_NORMAL
+  zh: 另请参阅
 - en: '`zipline.finance.metrics.register_metrics_set`'
   id: totrans-8477
   prefs: []
   type: TYPE_NORMAL
+  zh: '`zipline.finance.metrics.register_metrics_set`'
 - en: '[PRE1264]'
   id: totrans-8478
   prefs: []
@@ -50665,16 +50779,21 @@
   id: totrans-8479
   prefs: []
   type: TYPE_NORMAL
+  zh: 已注册的指标集，作为从指标集名称到加载函数的映射。此映射是不可变的，只能通过 [`register()`](#zipline.finance.metrics.register
+    "zipline.finance.metrics.register") 或 [`unregister()`](#zipline.finance.metrics.unregister
+    "zipline.finance.metrics.unregister") 进行更新。
 - en: Utilities
   id: totrans-8480
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 实用工具
 - en: Caching
   id: totrans-8481
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 缓存
 - en: '[PRE1265]'
   id: totrans-8482
   prefs: []
@@ -50684,26 +50803,32 @@
   id: totrans-8483
   prefs: []
   type: TYPE_NORMAL
+  zh: 用于维护带有到期日期的缓存对象的简单结构。
 - en: 'Parameters:'
   id: totrans-8484
   prefs: []
   type: TYPE_NORMAL
+  zh: 参数：
 - en: '**value** ([*object*](https://docs.python.org/3/library/functions.html#object
     "(in Python v3.11)")) – The object to cache.'
   id: totrans-8485
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**值** ([*对象*](https://docs.python.org/3/library/functions.html#object "(in
+    Python v3.11)")) – 要缓存的对象。'
 - en: '**expires** (*datetime-like*) – Expiration date of value. The cache is considered
     invalid for dates **strictly greater** than expires.'
   id: totrans-8486
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**到期** (*datetime-like*) – 值的到期日期。对于**严格大于**到期日期的日期，缓存被认为无效。'
 - en: Examples
   id: totrans-8487
   prefs: []
   type: TYPE_NORMAL
+  zh: 示例
 - en: '[PRE1266]'
   id: totrans-8488
   prefs: []
@@ -50719,10 +50844,12 @@
   id: totrans-8490
   prefs: []
   type: TYPE_NORMAL
+  zh: 一个包含多个CachedObjects的缓存，它会返回包装的值，如果值已过期，则会引发异常并删除CachedObject。
 - en: 'Parameters:'
   id: totrans-8491
   prefs: []
   type: TYPE_NORMAL
+  zh: 参数：
 - en: '**cache** (*dict-like**,* *optional*) – An instance of a dict-like object which
     needs to support at least: __del__, __getitem__, __setitem__ If None, than a dict
     is used as a default.'
@@ -50730,6 +50857,7 @@
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**缓存** (*类似字典**,* *可选*) – 一个类似字典的对象实例，至少需要支持：__del__, __getitem__, __setitem__。如果为None，则默认使用字典。'
 - en: '**cleanup** (*callable**,* *optional*) – A method that takes a single argument,
     a cached object, and is called upon expiry of the cached object, prior to deleting
     the object. If not provided, defaults to a no-op.'
@@ -50737,10 +50865,12 @@
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**清理** (*可调用**,* *可选*) – 一个接受单个参数（一个缓存对象）的方法，在缓存对象过期之前被调用，并在删除对象之前调用。如果没有提供，默认是一个无操作。'
 - en: Examples
   id: totrans-8494
   prefs: []
   type: TYPE_NORMAL
+  zh: 示例
 - en: '[PRE1268]'
   id: totrans-8495
   prefs: []
@@ -50755,16 +50885,19 @@
   id: totrans-8497
   prefs: []
   type: TYPE_NORMAL
+  zh: 用于数据帧的基于磁盘的缓存。
 - en: '`dataframe_cache` is a mutable mapping from string names to pandas DataFrame
     objects. This object may be used as a context manager to delete the cache directory
     on exit.'
   id: totrans-8498
   prefs: []
   type: TYPE_NORMAL
+  zh: '`dataframe_cache`是一个可变的字符串名称到pandas DataFrame对象的映射。该对象可以用作上下文管理器，在退出时删除缓存目录。'
 - en: 'Parameters:'
   id: totrans-8499
   prefs: []
   type: TYPE_NORMAL
+  zh: 参数：
 - en: '**path** ([*str*](https://docs.python.org/3/library/stdtypes.html#str "(in
     Python v3.11)")*,* *optional*) – The directory path to the cache. Files will be
     written as `path/<keyname>`.'
@@ -50772,12 +50905,15 @@
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**路径** ([*str*](https://docs.python.org/3/library/stdtypes.html#str "(in Python
+    v3.11)")*,* *可选*) – 缓存目录的路径。文件将写入为`路径/<键名>`。'
 - en: '**lock** (*Lock**,* *optional*) – Thread lock for multithreaded/multiprocessed
     access to the cache. If not provided no locking will be used.'
   id: totrans-8501
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**锁** (*Lock**,* *可选*) – 用于多线程/多进程访问缓存的线程锁。如果没有提供，则不会使用锁。'
 - en: '**clean_on_failure** ([*bool*](https://docs.python.org/3/library/functions.html#bool
     "(in Python v3.11)")*,* *optional*) – Should the directory be cleaned up if an
     exception is raised in the context manager.'
@@ -50785,6 +50921,8 @@
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**clean_on_failure** ([*bool*](https://docs.python.org/3/library/functions.html#bool
+    "(in Python v3.11)")*,* *可选*) – 如果在上下文管理器中引发异常，是否应该清理目录。'
 - en: '**serialize** (*{''msgpack''**,* *''pickle:<n>''}**,* *optional*) – How should
     the data be serialized. If `''pickle''` is passed, an optional pickle protocol
     can be passed like: `''pickle:3''` which says to use pickle protocol 3.'
@@ -50792,16 +50930,19 @@
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**序列化** (*{''msgpack''**,* *''pickle:<n>''}**,* *可选*) – 数据应该如何进行序列化。如果传递了`''pickle''`，则可以传递一个可选的pickle协议，例如：`''pickle:3''`，表示使用pickle协议3。'
 - en: Notes
   id: totrans-8504
   prefs: []
   type: TYPE_NORMAL
+  zh: 注意
 - en: The syntax `cache[:]` will load all key:value pairs into memory as a dictionary.
     The cache uses a temporary file format that is subject to change between versions
     of zipline.
   id: totrans-8505
   prefs: []
   type: TYPE_NORMAL
+  zh: 语法`缓存[:]`将所有键值对加载到内存中作为一个字典。缓存使用的是一种临时文件格式，这种格式可能会在zipline的不同版本之间发生变化。
 - en: '[PRE1270]'
   id: totrans-8506
   prefs: []
@@ -50812,30 +50953,37 @@
   id: totrans-8507
   prefs: []
   type: TYPE_NORMAL
+  zh: 一个用于管理临时文件的上下文管理器，如果在上下文中没有引发异常，则将移动到非临时位置。
 - en: 'Parameters:'
   id: totrans-8508
   prefs: []
   type: TYPE_NORMAL
+  zh: 参数：
 - en: '**final_path** ([*str*](https://docs.python.org/3/library/stdtypes.html#str
     "(in Python v3.11)")) – The location to move the file when committing.'
   id: totrans-8509
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**最终路径** ([*str*](https://docs.python.org/3/library/stdtypes.html#str "(in
+    Python v3.11)")) – 提交时移动文件的位置。'
 - en: '***args** – Forwarded to NamedTemporaryFile.'
   id: totrans-8510
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '***args** – 转发给NamedTemporaryFile。'
 - en: '****kwargs** – Forwarded to NamedTemporaryFile.'
   id: totrans-8511
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '****kwargs** – 转发给NamedTemporaryFile。'
 - en: Notes
   id: totrans-8512
   prefs: []
   type: TYPE_NORMAL
+  zh: 注意
 - en: The file is moved on __exit__ if there are no exceptions. `working_file` uses
     [`shutil.move()`](https://docs.python.org/3/library/shutil.html#shutil.move "(in
     Python v3.11)") to move the actual files, meaning it has as strong of guarantees
@@ -50844,6 +50992,9 @@
   id: totrans-8513
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果没有异常，文件将在__exit__时移动。`working_file`使用[`shutil.move()`](https://docs.python.org/3/library/shutil.html#shutil.move
+    "(in Python v3.11)")来移动实际文件，这意味着它与[`shutil.move()`](https://docs.python.org/3/library/shutil.html#shutil.move
+    "(in Python v3.11)")具有同样强的保证。
 - en: '[PRE1271]'
   id: totrans-8514
   prefs: []
@@ -50854,41 +51005,50 @@
   id: totrans-8515
   prefs: []
   type: TYPE_NORMAL
+  zh: 一个用于管理临时目录的上下文管理器，如果在上下文中没有引发异常，则将移动到非临时位置。
 - en: 'Parameters:'
   id: totrans-8516
   prefs: []
   type: TYPE_NORMAL
+  zh: 参数：
 - en: '**final_path** ([*str*](https://docs.python.org/3/library/stdtypes.html#str
     "(in Python v3.11)")) – The location to move the file when committing.'
   id: totrans-8517
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**最终路径** ([*str*](https://docs.python.org/3/library/stdtypes.html#str "(in
+    Python v3.11)")) – 提交时移动文件的位置。'
 - en: '***args** – Forwarded to tmp_dir.'
   id: totrans-8518
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '***args** – 转发给tmp_dir。'
 - en: '****kwargs** – Forwarded to tmp_dir.'
   id: totrans-8519
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '****kwargs** – 转发给tmp_dir。'
 - en: Notes
   id: totrans-8520
   prefs: []
   type: TYPE_NORMAL
+  zh: 注意
 - en: The file is moved on __exit__ if there are no exceptions. `working_dir` uses
     `dir_util.copy_tree()` to move the actual files, meaning it has as strong of guarantees
     as `dir_util.copy_tree()`.
   id: totrans-8521
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果没有异常，文件将在__exit__时移动。`working_dir`使用`dir_util.copy_tree()`来移动实际文件，这意味着它与`dir_util.copy_tree()`一样具有强保证。
 - en: Command Line
   id: totrans-8522
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 命令行
 - en: '[PRE1272]'
   id: totrans-8523
   prefs: []
@@ -50898,46 +51058,57 @@
   id: totrans-8524
   prefs: []
   type: TYPE_NORMAL
+  zh: 可选择为给定的迭代器显示进度条。
 - en: 'Parameters:'
   id: totrans-8525
   prefs: []
   type: TYPE_NORMAL
+  zh: 参数：
 - en: '**it** (*iterable*) – The underlying iterator.'
   id: totrans-8526
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**迭代器** (*可迭代*) – 底层迭代器。'
 - en: '**show_progress** ([*bool*](https://docs.python.org/3/library/functions.html#bool
     "(in Python v3.11)")) – Should progress be shown.'
   id: totrans-8527
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**显示进度** ([*布尔*](https://docs.python.org/3/library/functions.html#bool "(在
+    Python v3.11)")) – 是否应显示进度。'
 - en: '****kwargs** – Forwarded to the click progress bar.'
   id: totrans-8528
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '****kwargs** – 转发给click进度条。'
 - en: 'Returns:'
   id: totrans-8529
   prefs: []
   type: TYPE_NORMAL
+  zh: 返回：
 - en: '**itercontext** – A context manager whose enter is the actual iterator to use.'
   id: totrans-8530
   prefs: []
   type: TYPE_NORMAL
+  zh: '**迭代上下文** – 一个上下文管理器，其进入是实际要使用的迭代器。'
 - en: 'Return type:'
   id: totrans-8531
   prefs: []
   type: TYPE_NORMAL
+  zh: 返回类型：
 - en: context manager
   id: totrans-8532
   prefs: []
   type: TYPE_NORMAL
+  zh: 上下文管理器
 - en: Examples
   id: totrans-8533
   prefs: []
   type: TYPE_NORMAL
+  zh: 示例
 - en: '[PRE1273]'
   id: totrans-8534
   prefs: []
@@ -50948,6 +51119,7 @@
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 缓存
 - en: '[PRE1274]'
   id: totrans-8536
   prefs: []
@@ -50957,26 +51129,32 @@
   id: totrans-8537
   prefs: []
   type: TYPE_NORMAL
+  zh: 一个简单的结构，用于维护带有过期日期的缓存对象。
 - en: 'Parameters:'
   id: totrans-8538
   prefs: []
   type: TYPE_NORMAL
+  zh: 参数：
 - en: '**value** ([*object*](https://docs.python.org/3/library/functions.html#object
     "(in Python v3.11)")) – The object to cache.'
   id: totrans-8539
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**值** ([*对象*](https://docs.python.org/3/library/functions.html#object "(在 Python
+    v3.11)")) – 要缓存的对象。'
 - en: '**expires** (*datetime-like*) – Expiration date of value. The cache is considered
     invalid for dates **strictly greater** than expires.'
   id: totrans-8540
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**过期时间** (*类似datetime*) – 值的过期日期。对于**严格大于**过期时间的日期，缓存被认为无效。'
 - en: Examples
   id: totrans-8541
   prefs: []
   type: TYPE_NORMAL
+  zh: 示例
 - en: '[PRE1275]'
   id: totrans-8542
   prefs: []
@@ -50992,10 +51170,12 @@
   id: totrans-8544
   prefs: []
   type: TYPE_NORMAL
+  zh: 多个CachedObjects的缓存，它返回包装的值，如果值已过期，则引发并删除CachedObject。
 - en: 'Parameters:'
   id: totrans-8545
   prefs: []
   type: TYPE_NORMAL
+  zh: 参数：
 - en: '**cache** (*dict-like**,* *optional*) – An instance of a dict-like object which
     needs to support at least: __del__, __getitem__, __setitem__ If None, than a dict
     is used as a default.'
@@ -51003,6 +51183,7 @@
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**缓存** (*类似字典**,* *可选*) – 一个类似字典的对象实例，至少需要支持：__del__, __getitem__, __setitem__。如果为None，则默认使用字典。'
 - en: '**cleanup** (*callable**,* *optional*) – A method that takes a single argument,
     a cached object, and is called upon expiry of the cached object, prior to deleting
     the object. If not provided, defaults to a no-op.'
@@ -51010,10 +51191,12 @@
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**清理** (*可调用**,* *可选*) – 一种方法，它接受一个参数，即缓存的对象，并在缓存对象过期时调用，在删除对象之前。如果不提供，默认为无操作。'
 - en: Examples
   id: totrans-8548
   prefs: []
   type: TYPE_NORMAL
+  zh: 示例
 - en: '[PRE1277]'
   id: totrans-8549
   prefs: []
@@ -51028,16 +51211,19 @@
   id: totrans-8551
   prefs: []
   type: TYPE_NORMAL
+  zh: 用于数据帧的基于磁盘的缓存。
 - en: '`dataframe_cache` is a mutable mapping from string names to pandas DataFrame
     objects. This object may be used as a context manager to delete the cache directory
     on exit.'
   id: totrans-8552
   prefs: []
   type: TYPE_NORMAL
+  zh: '`dataframe_cache` 是一个可变的字符串名称到pandas DataFrame对象的映射。此对象可以用作上下文管理器，在退出时删除缓存目录。'
 - en: 'Parameters:'
   id: totrans-8553
   prefs: []
   type: TYPE_NORMAL
+  zh: 参数：
 - en: '**path** ([*str*](https://docs.python.org/3/library/stdtypes.html#str "(in
     Python v3.11)")*,* *optional*) – The directory path to the cache. Files will be
     written as `path/<keyname>`.'
@@ -51045,12 +51231,15 @@
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**路径** ([*字符串*](https://docs.python.org/3/library/stdtypes.html#str "(在 Python
+    v3.11)")*,* *可选*) – 缓存的目录路径。文件将作为`path/<keyname>`写入。'
 - en: '**lock** (*Lock**,* *optional*) – Thread lock for multithreaded/multiprocessed
     access to the cache. If not provided no locking will be used.'
   id: totrans-8555
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**锁** (*锁**,* *可选*) – 用于多线程/多进程访问缓存的线程锁。如果不提供，将不使用锁定。'
 - en: '**clean_on_failure** ([*bool*](https://docs.python.org/3/library/functions.html#bool
     "(in Python v3.11)")*,* *optional*) – Should the directory be cleaned up if an
     exception is raised in the context manager.'
@@ -51058,6 +51247,8 @@
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**在失败时清理** ([*布尔*](https://docs.python.org/3/library/functions.html#bool "(在
+    Python v3.11)")*,* *可选*) – 如果在上下文管理器中引发异常，是否应该清理目录。'
 - en: '**serialize** (*{''msgpack''**,* *''pickle:<n>''}**,* *optional*) – How should
     the data be serialized. If `''pickle''` is passed, an optional pickle protocol
     can be passed like: `''pickle:3''` which says to use pickle protocol 3.'
@@ -51065,16 +51256,19 @@
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**序列化** (*{''msgpack''**,* *''pickle:<n>''}**,* *可选*) – 数据应该如何被序列化。如果传递了`''pickle''`，可以传递一个可选的pickle协议，例如：`''pickle:3''`，表示使用pickle协议3。'
 - en: Notes
   id: totrans-8558
   prefs: []
   type: TYPE_NORMAL
+  zh: 注意
 - en: The syntax `cache[:]` will load all key:value pairs into memory as a dictionary.
     The cache uses a temporary file format that is subject to change between versions
     of zipline.
   id: totrans-8559
   prefs: []
   type: TYPE_NORMAL
+  zh: 语法`cache[:]`将所有键值对加载到内存中作为字典。缓存使用临时文件格式，该格式可能在zipline的不同版本之间发生变化。
 - en: '[PRE1279]'
   id: totrans-8560
   prefs: []
@@ -51085,16 +51279,20 @@
   id: totrans-8561
   prefs: []
   type: TYPE_NORMAL
+  zh: 一个用于管理临时文件的上下文管理器，如果在上下文中没有引发异常，则该文件将被移动到非临时位置。
 - en: 'Parameters:'
   id: totrans-8562
   prefs: []
   type: TYPE_NORMAL
+  zh: 参数：
 - en: '**final_path** ([*str*](https://docs.python.org/3/library/stdtypes.html#str
     "(in Python v3.11)")) – The location to move the file when committing.'
   id: totrans-8563
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**最终路径** ([*字符串*](https://docs.python.org/3/library/stdtypes.html#str "(在 Python
+    v3.11)")) – 提交时移动文件的位置。'
 - en: '***args** – Forwarded to NamedTemporaryFile.'
   id: totrans-8564
   prefs:
