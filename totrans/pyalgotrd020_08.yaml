@@ -1,594 +1,949 @@
 - en: broker – Order management classes
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 经纪人 - 订单管理类
 - en: 原文：[https://gbeced.github.io/pyalgotrade/docs/v0.20/html/broker.html](https://gbeced.github.io/pyalgotrade/docs/v0.20/html/broker.html)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://gbeced.github.io/pyalgotrade/docs/v0.20/html/broker.html](https://gbeced.github.io/pyalgotrade/docs/v0.20/html/broker.html)
 - en: '## Base module and classes'
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: '## 基础模块和类'
 - en: '*class* `pyalgotrade.broker.``Order`(*type_*, *action*, *instrument*, *quantity*,
     *instrumentTraits*)'
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: '*类* `pyalgotrade.broker.``Order`（*type_*，*action*，*instrument*，*quantity*，*instrumentTraits*）'
 - en: 'Bases: `object`'
+  id: totrans-4
   prefs: []
   type: TYPE_NORMAL
+  zh: 基类：`object`
 - en: Base class for orders.
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: 订单的基类。
 - en: '| Parameters: |'
+  id: totrans-6
   prefs: []
   type: TYPE_TB
+  zh: '| 参数： |'
 - en: '**type** (`Order.Type`) – The order type'
+  id: totrans-7
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**type**（`Order.Type`）– 订单类型'
 - en: '**action** (`Order.Action`) – The order action.'
+  id: totrans-8
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**action**（`Order.Action`）– 订单操作。'
 - en: '**instrument** (*string.*) – Instrument identifier.'
+  id: totrans-9
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**instrument** (*string.*) – 工具标识符。'
 - en: '**quantity** (*int/float.*) – Order quantity.'
+  id: totrans-10
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**quantity**（*int/float.*）– 订单数量。'
 - en: '|'
+  id: totrans-11
   prefs: []
   type: TYPE_NORMAL
+  zh: '|'
 - en: Note
+  id: totrans-12
   prefs: []
   type: TYPE_NORMAL
+  zh: 注
 - en: This is a base class and should not be used directly.
+  id: totrans-13
   prefs: []
   type: TYPE_NORMAL
+  zh: 这是一个基类，不应直接使用。
 - en: 'Valid **type** parameter values are:'
+  id: totrans-14
   prefs: []
   type: TYPE_NORMAL
+  zh: 有效的**type**参数值为：
 - en: Order.Type.MARKET
+  id: totrans-15
   prefs:
   - PREF_BQ
   - PREF_UL
   type: TYPE_NORMAL
+  zh: Order.Type.MARKET
 - en: Order.Type.LIMIT
+  id: totrans-16
   prefs:
   - PREF_BQ
   - PREF_UL
   type: TYPE_NORMAL
+  zh: Order.Type.LIMIT
 - en: Order.Type.STOP
+  id: totrans-17
   prefs:
   - PREF_BQ
   - PREF_UL
   type: TYPE_NORMAL
+  zh: Order.Type.STOP
 - en: Order.Type.STOP_LIMIT
+  id: totrans-18
   prefs:
   - PREF_BQ
   - PREF_UL
   type: TYPE_NORMAL
+  zh: Order.Type.STOP_LIMIT
 - en: 'Valid **action** parameter values are:'
+  id: totrans-19
   prefs: []
   type: TYPE_NORMAL
+  zh: 有效的**action**参数值为：
 - en: Order.Action.BUY
+  id: totrans-20
   prefs:
   - PREF_BQ
   - PREF_UL
   type: TYPE_NORMAL
+  zh: Order.Action.BUY
 - en: Order.Action.BUY_TO_COVER
+  id: totrans-21
   prefs:
   - PREF_BQ
   - PREF_UL
   type: TYPE_NORMAL
+  zh: Order.Action.BUY_TO_COVER
 - en: Order.Action.SELL
+  id: totrans-22
   prefs:
   - PREF_BQ
   - PREF_UL
   type: TYPE_NORMAL
+  zh: Order.Action.SELL
 - en: Order.Action.SELL_SHORT
+  id: totrans-23
   prefs:
   - PREF_BQ
   - PREF_UL
   type: TYPE_NORMAL
+  zh: Order.Action.SELL_SHORT
 - en: '`getId`()'
+  id: totrans-24
   prefs: []
   type: TYPE_NORMAL
+  zh: '`getId`()'
 - en: Returns the order id.
+  id: totrans-25
   prefs: []
   type: TYPE_NORMAL
+  zh: 返回订单ID。
 - en: Note
+  id: totrans-26
   prefs: []
   type: TYPE_NORMAL
+  zh: 注
 - en: This will be None if the order was not submitted.
+  id: totrans-27
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果订单未提交，则此值将为None。
 - en: '`getType`()'
+  id: totrans-28
   prefs: []
   type: TYPE_NORMAL
+  zh: '`getType`()'
 - en: 'Returns the order type. Valid order types are:'
+  id: totrans-29
   prefs: []
   type: TYPE_NORMAL
+  zh: 返回订单类型。有效的订单类型为：
 - en: Order.Type.MARKET
+  id: totrans-30
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: Order.Type.MARKET
 - en: Order.Type.LIMIT
+  id: totrans-31
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: Order.Type.LIMIT
 - en: Order.Type.STOP
+  id: totrans-32
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: Order.Type.STOP
 - en: Order.Type.STOP_LIMIT
+  id: totrans-33
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: Order.Type.STOP_LIMIT
 - en: '`getSubmitDateTime`()'
+  id: totrans-34
   prefs: []
   type: TYPE_NORMAL
+  zh: '`getSubmitDateTime`()'
 - en: Returns the datetime when the order was submitted.
+  id: totrans-35
   prefs: []
   type: TYPE_NORMAL
+  zh: 返回订单提交的日期时间。
 - en: '`getAction`()'
+  id: totrans-36
   prefs: []
   type: TYPE_NORMAL
+  zh: '`getAction`()'
 - en: 'Returns the order action. Valid order actions are:'
+  id: totrans-37
   prefs: []
   type: TYPE_NORMAL
+  zh: 返回订单操作。有效的订单操作包括：
 - en: Order.Action.BUY
+  id: totrans-38
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: Order.Action.BUY
 - en: Order.Action.BUY_TO_COVER
+  id: totrans-39
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: Order.Action.BUY_TO_COVER
 - en: Order.Action.SELL
+  id: totrans-40
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: Order.Action.SELL
 - en: Order.Action.SELL_SHORT
+  id: totrans-41
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: Order.Action.SELL_SHORT
 - en: '`getState`()'
+  id: totrans-42
   prefs: []
   type: TYPE_NORMAL
+  zh: '`getState`()'
 - en: 'Returns the order state. Valid order states are:'
+  id: totrans-43
   prefs: []
   type: TYPE_NORMAL
+  zh: 返回订单状态。有效的订单状态为：
 - en: Order.State.INITIAL (the initial state).
+  id: totrans-44
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: Order.State.INITIAL（初始状态）。
 - en: Order.State.SUBMITTED
+  id: totrans-45
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: Order.State.SUBMITTED
 - en: Order.State.ACCEPTED
+  id: totrans-46
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: Order.State.ACCEPTED
 - en: Order.State.CANCELED
+  id: totrans-47
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: Order.State.CANCELED
 - en: Order.State.PARTIALLY_FILLED
+  id: totrans-48
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: Order.State.PARTIALLY_FILLED
 - en: Order.State.FILLED
+  id: totrans-49
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: Order.State.FILLED
 - en: '`isActive`()'
+  id: totrans-50
   prefs: []
   type: TYPE_NORMAL
+  zh: '`isActive`()'
 - en: Returns True if the order is active.
+  id: totrans-51
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果订单处于活动状态，则返回True。
 - en: '`isInitial`()'
+  id: totrans-52
   prefs: []
   type: TYPE_NORMAL
+  zh: '`isInitial`()'
 - en: Returns True if the order state is Order.State.INITIAL.
+  id: totrans-53
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果订单状态为 Order.State.INITIAL，则返回True。
 - en: '`isSubmitted`()'
+  id: totrans-54
   prefs: []
   type: TYPE_NORMAL
+  zh: '`isSubmitted`()'
 - en: Returns True if the order state is Order.State.SUBMITTED.
+  id: totrans-55
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果订单状态为 Order.State.SUBMITTED，则返回True。
 - en: '`isAccepted`()'
+  id: totrans-56
   prefs: []
   type: TYPE_NORMAL
+  zh: '`isAccepted`()'
 - en: Returns True if the order state is Order.State.ACCEPTED.
+  id: totrans-57
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果订单状态为 Order.State.ACCEPTED，则返回True。
 - en: '`isCanceled`()'
+  id: totrans-58
   prefs: []
   type: TYPE_NORMAL
+  zh: '`isCanceled`()'
 - en: Returns True if the order state is Order.State.CANCELED.
+  id: totrans-59
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果订单状态为 Order.State.CANCELED，则返回True。
 - en: '`isPartiallyFilled`()'
+  id: totrans-60
   prefs: []
   type: TYPE_NORMAL
+  zh: '`isPartiallyFilled`()'
 - en: Returns True if the order state is Order.State.PARTIALLY_FILLED.
+  id: totrans-61
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果订单状态为 Order.State.PARTIALLY_FILLED，则返回True。
 - en: '`isFilled`()'
+  id: totrans-62
   prefs: []
   type: TYPE_NORMAL
+  zh: '`isFilled`()'
 - en: Returns True if the order state is Order.State.FILLED.
+  id: totrans-63
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果订单状态为 Order.State.FILLED，则返回True。
 - en: '`getInstrument`()'
+  id: totrans-64
   prefs: []
   type: TYPE_NORMAL
+  zh: '`getInstrument`()'
 - en: Returns the instrument identifier.
+  id: totrans-65
   prefs: []
   type: TYPE_NORMAL
+  zh: 返回工具标识符。
 - en: '`getQuantity`()'
+  id: totrans-66
   prefs: []
   type: TYPE_NORMAL
+  zh: '`getQuantity`()'
 - en: Returns the quantity.
+  id: totrans-67
   prefs: []
   type: TYPE_NORMAL
+  zh: 返回数量。
 - en: '`getFilled`()'
+  id: totrans-68
   prefs: []
   type: TYPE_NORMAL
+  zh: '`getFilled`()'
 - en: Returns the number of shares that have been executed.
+  id: totrans-69
   prefs: []
   type: TYPE_NORMAL
+  zh: 返回已执行的股票数量。
 - en: '`getRemaining`()'
+  id: totrans-70
   prefs: []
   type: TYPE_NORMAL
+  zh: '`getRemaining`()'
 - en: Returns the number of shares still outstanding.
+  id: totrans-71
   prefs: []
   type: TYPE_NORMAL
+  zh: 返回仍未完成的股票数量。
 - en: '`getAvgFillPrice`()'
+  id: totrans-72
   prefs: []
   type: TYPE_NORMAL
+  zh: '`getAvgFillPrice`()'
 - en: Returns the average price of the shares that have been executed, or None if
     nothing has been filled.
+  id: totrans-73
   prefs: []
   type: TYPE_NORMAL
+  zh: 返回已执行的股票的平均价格，如果没有填充，则返回None。
 - en: '`getGoodTillCanceled`()'
+  id: totrans-74
   prefs: []
   type: TYPE_NORMAL
+  zh: '`getGoodTillCanceled`()'
 - en: Returns True if the order is good till canceled.
+  id: totrans-75
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果订单有效直到取消，则返回True。
 - en: '`setGoodTillCanceled`(*goodTillCanceled*)'
+  id: totrans-76
   prefs: []
   type: TYPE_NORMAL
+  zh: '`setGoodTillCanceled`(*goodTillCanceled*)'
 - en: Sets if the order should be good till canceled. Orders that are not filled by
     the time the session closes will be will be automatically canceled if they were
     not set as good till canceled
+  id: totrans-77
   prefs: []
   type: TYPE_NORMAL
+  zh: 设置订单是否应保持有效直到取消。如果在会话关闭时订单尚未填充，则未填充的订单将自动取消，如果它们未设置为有效直到取消
 - en: '| Parameters: | **goodTillCanceled** (*boolean.*) – True if the order should
     be good till canceled. |'
+  id: totrans-78
   prefs: []
   type: TYPE_TB
+  zh: '| 参数： | **goodTillCanceled** (*boolean.*) – 如果订单应保持有效直到取消，则为True。 |'
 - en: Note
+  id: totrans-79
   prefs: []
   type: TYPE_NORMAL
+  zh: 注
 - en: This can’t be changed once the order is submitted.
+  id: totrans-80
   prefs: []
   type: TYPE_NORMAL
+  zh: 一旦订单提交，就无法更改。
 - en: '`getAllOrNone`()'
+  id: totrans-81
   prefs: []
   type: TYPE_NORMAL
+  zh: '`getAllOrNone`()'
 - en: Returns True if the order should be completely filled or else canceled.
+  id: totrans-82
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果订单应完全执行，则返回True，否则取消。
 - en: '`setAllOrNone`(*allOrNone*)'
+  id: totrans-83
   prefs: []
   type: TYPE_NORMAL
+  zh: '`setAllOrNone`(*allOrNone*)'
 - en: Sets the All-Or-None property for this order.
+  id: totrans-84
   prefs: []
   type: TYPE_NORMAL
+  zh: 设置此订单的全部或无属性。
 - en: '| Parameters: | **allOrNone** (*boolean.*) – True if the order should be completely
     filled. |'
+  id: totrans-85
   prefs: []
   type: TYPE_TB
+  zh: '| 参数： | **allOrNone** (*boolean.*) – 如果订单应完全填充，则为True。 |'
 - en: Note
+  id: totrans-86
   prefs: []
   type: TYPE_NORMAL
+  zh: 注意
 - en: This can’t be changed once the order is submitted.
+  id: totrans-87
   prefs: []
   type: TYPE_NORMAL
+  zh: 一旦提交订单，就无法更改。
 - en: '`getExecutionInfo`()'
+  id: totrans-88
   prefs: []
   type: TYPE_NORMAL
+  zh: '`getExecutionInfo`()'
 - en: Returns the last execution information for this order, or None if nothing has
     been filled so far. This will be different every time an order, or part of it,
     gets filled.
+  id: totrans-89
   prefs: []
   type: TYPE_NORMAL
+  zh: 返回此订单的最后执行信息，如果到目前为止没有填充任何内容，则返回None。每次订单或其部分被填充时，这将不同。
 - en: '| Return type: | [`OrderExecutionInfo`](#pyalgotrade.broker.OrderExecutionInfo
     "pyalgotrade.broker.OrderExecutionInfo"). |'
+  id: totrans-90
   prefs: []
   type: TYPE_TB
+  zh: '| 返回类型： | [`OrderExecutionInfo`](#pyalgotrade.broker.OrderExecutionInfo "pyalgotrade.broker.OrderExecutionInfo").
+    |'
 - en: '*class* `pyalgotrade.broker.``MarketOrder`(*action*, *instrument*, *quantity*,
     *onClose*, *instrumentTraits*)'
+  id: totrans-91
   prefs: []
   type: TYPE_NORMAL
+  zh: '*class* `pyalgotrade.broker.``MarketOrder`(*action*, *instrument*, *quantity*,
+    *onClose*, *instrumentTraits*)'
 - en: 'Bases: [`pyalgotrade.broker.Order`](#pyalgotrade.broker.Order "pyalgotrade.broker.Order")'
+  id: totrans-92
   prefs: []
   type: TYPE_NORMAL
+  zh: 基类：[`pyalgotrade.broker.Order`](#pyalgotrade.broker.Order "pyalgotrade.broker.Order")
 - en: Base class for market orders.
+  id: totrans-93
   prefs: []
   type: TYPE_NORMAL
+  zh: 市价订单的基类。
 - en: Note
+  id: totrans-94
   prefs: []
   type: TYPE_NORMAL
+  zh: 注意
 - en: This is a base class and should not be used directly.
+  id: totrans-95
   prefs: []
   type: TYPE_NORMAL
+  zh: 这是一个基类，不应直接使用。
 - en: '`getFillOnClose`()'
+  id: totrans-96
   prefs: []
   type: TYPE_NORMAL
+  zh: '`getFillOnClose`()'
 - en: Returns True if the order should be filled as close to the closing price as
     possible (Market-On-Close order).
+  id: totrans-97
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果订单应尽可能接近收盘价填充（市价收盘订单），则返回True。
 - en: '*class* `pyalgotrade.broker.``LimitOrder`(*action*, *instrument*, *limitPrice*,
     *quantity*, *instrumentTraits*)'
+  id: totrans-98
   prefs: []
   type: TYPE_NORMAL
+  zh: '*class* `pyalgotrade.broker.``LimitOrder`(*action*, *instrument*, *limitPrice*,
+    *quantity*, *instrumentTraits*)'
 - en: 'Bases: [`pyalgotrade.broker.Order`](#pyalgotrade.broker.Order "pyalgotrade.broker.Order")'
+  id: totrans-99
   prefs: []
   type: TYPE_NORMAL
+  zh: 基类：[`pyalgotrade.broker.Order`](#pyalgotrade.broker.Order "pyalgotrade.broker.Order")
 - en: Base class for limit orders.
+  id: totrans-100
   prefs: []
   type: TYPE_NORMAL
+  zh: 限价单的基类。
 - en: Note
+  id: totrans-101
   prefs: []
   type: TYPE_NORMAL
+  zh: 注意
 - en: This is a base class and should not be used directly.
+  id: totrans-102
   prefs: []
   type: TYPE_NORMAL
+  zh: 这是一个基类，不应直接使用。
 - en: '`getLimitPrice`()'
+  id: totrans-103
   prefs: []
   type: TYPE_NORMAL
+  zh: '`getLimitPrice`()'
 - en: Returns the limit price.
+  id: totrans-104
   prefs: []
   type: TYPE_NORMAL
+  zh: 返回限价。
 - en: '*class* `pyalgotrade.broker.``StopOrder`(*action*, *instrument*, *stopPrice*,
     *quantity*, *instrumentTraits*)'
+  id: totrans-105
   prefs: []
   type: TYPE_NORMAL
+  zh: '*class* `pyalgotrade.broker.``StopOrder`(*action*, *instrument*, *stopPrice*,
+    *quantity*, *instrumentTraits*)'
 - en: 'Bases: [`pyalgotrade.broker.Order`](#pyalgotrade.broker.Order "pyalgotrade.broker.Order")'
+  id: totrans-106
   prefs: []
   type: TYPE_NORMAL
+  zh: 基类：[`pyalgotrade.broker.Order`](#pyalgotrade.broker.Order "pyalgotrade.broker.Order")
 - en: Base class for stop orders.
+  id: totrans-107
   prefs: []
   type: TYPE_NORMAL
+  zh: 停止订单的基类。
 - en: Note
+  id: totrans-108
   prefs: []
   type: TYPE_NORMAL
+  zh: 注意
 - en: This is a base class and should not be used directly.
+  id: totrans-109
   prefs: []
   type: TYPE_NORMAL
+  zh: 这是一个基类，不应直接使用。
 - en: '`getStopPrice`()'
+  id: totrans-110
   prefs: []
   type: TYPE_NORMAL
+  zh: '`getStopPrice`()'
 - en: Returns the stop price.
+  id: totrans-111
   prefs: []
   type: TYPE_NORMAL
+  zh: 返回止损价格。
 - en: '*class* `pyalgotrade.broker.``StopLimitOrder`(*action*, *instrument*, *stopPrice*,
     *limitPrice*, *quantity*, *instrumentTraits*)'
+  id: totrans-112
   prefs: []
   type: TYPE_NORMAL
+  zh: '*class* `pyalgotrade.broker.``StopLimitOrder`(*action*, *instrument*, *stopPrice*,
+    *limitPrice*, *quantity*, *instrumentTraits*)'
 - en: 'Bases: [`pyalgotrade.broker.Order`](#pyalgotrade.broker.Order "pyalgotrade.broker.Order")'
+  id: totrans-113
   prefs: []
   type: TYPE_NORMAL
+  zh: 基类：[`pyalgotrade.broker.Order`](#pyalgotrade.broker.Order "pyalgotrade.broker.Order")
 - en: Base class for stop limit orders.
+  id: totrans-114
   prefs: []
   type: TYPE_NORMAL
+  zh: 停止限价订单的基类。
 - en: Note
+  id: totrans-115
   prefs: []
   type: TYPE_NORMAL
+  zh: 注意
 - en: This is a base class and should not be used directly.
+  id: totrans-116
   prefs: []
   type: TYPE_NORMAL
+  zh: 这是一个基类，不应直接使用。
 - en: '`getStopPrice`()'
+  id: totrans-117
   prefs: []
   type: TYPE_NORMAL
+  zh: '`getStopPrice`()'
 - en: Returns the stop price.
+  id: totrans-118
   prefs: []
   type: TYPE_NORMAL
+  zh: 返回止损价格。
 - en: '`getLimitPrice`()'
+  id: totrans-119
   prefs: []
   type: TYPE_NORMAL
+  zh: '`getLimitPrice`()'
 - en: Returns the limit price.
+  id: totrans-120
   prefs: []
   type: TYPE_NORMAL
+  zh: 返回限价。
 - en: '*class* `pyalgotrade.broker.``OrderExecutionInfo`(*price*, *quantity*, *commission*,
     *dateTime*)'
+  id: totrans-121
   prefs: []
   type: TYPE_NORMAL
+  zh: '*class* `pyalgotrade.broker.``OrderExecutionInfo`(*price*, *quantity*, *commission*,
+    *dateTime*)'
 - en: 'Bases: `object`'
+  id: totrans-122
   prefs: []
   type: TYPE_NORMAL
+  zh: 基类：`object`
 - en: Execution information for an order.
+  id: totrans-123
   prefs: []
   type: TYPE_NORMAL
+  zh: 订单的执行信息。
 - en: '`getPrice`()'
+  id: totrans-124
   prefs: []
   type: TYPE_NORMAL
+  zh: '`getPrice`()'
 - en: Returns the fill price.
+  id: totrans-125
   prefs: []
   type: TYPE_NORMAL
+  zh: 返回填充价格。
 - en: '`getQuantity`()'
+  id: totrans-126
   prefs: []
   type: TYPE_NORMAL
+  zh: '`getQuantity`()'
 - en: Returns the quantity.
+  id: totrans-127
   prefs: []
   type: TYPE_NORMAL
+  zh: 返回数量。
 - en: '`getCommission`()'
+  id: totrans-128
   prefs: []
   type: TYPE_NORMAL
+  zh: '`getCommission`()'
 - en: Returns the commission applied.
+  id: totrans-129
   prefs: []
   type: TYPE_NORMAL
+  zh: 返回应用的佣金。
 - en: '`getDateTime`()'
+  id: totrans-130
   prefs: []
   type: TYPE_NORMAL
+  zh: '`getDateTime`()'
 - en: Returns the `datatime.datetime` when the order was executed.
+  id: totrans-131
   prefs: []
   type: TYPE_NORMAL
+  zh: 返回订单执行的`datatime.datetime`。
 - en: '*class* `pyalgotrade.broker.``Broker`'
+  id: totrans-132
   prefs: []
   type: TYPE_NORMAL
+  zh: '*class* `pyalgotrade.broker.``Broker`'
 - en: 'Bases: `pyalgotrade.observer.Subject`'
+  id: totrans-133
   prefs: []
   type: TYPE_NORMAL
+  zh: 基类：`pyalgotrade.observer.Subject`
 - en: Base class for brokers.
+  id: totrans-134
   prefs: []
   type: TYPE_NORMAL
+  zh: 经纪人的基类。
 - en: Note
+  id: totrans-135
   prefs: []
   type: TYPE_NORMAL
+  zh: 注意
 - en: This is a base class and should not be used directly.
+  id: totrans-136
   prefs: []
   type: TYPE_NORMAL
+  zh: 这是一个基类，不应直接使用。
 - en: '`getCash`(*includeShort=True*)'
+  id: totrans-137
   prefs: []
   type: TYPE_NORMAL
+  zh: '`getCash`(*includeShort=True*)'
 - en: Returns the available cash.
+  id: totrans-138
   prefs: []
   type: TYPE_NORMAL
+  zh: 返回可用现金。
 - en: '| Parameters: | **includeShort** (*boolean.*) – Include cash from short positions.
     |'
+  id: totrans-139
   prefs: []
   type: TYPE_TB
+  zh: '| 参数： | **includeShort** (*boolean.*) – 包括空头头寸的现金。 |'
 - en: '`getShares`(*instrument*)'
+  id: totrans-140
   prefs: []
   type: TYPE_NORMAL
+  zh: '`getShares`(*instrument*)'
 - en: Returns the number of shares for an instrument.
+  id: totrans-141
   prefs: []
   type: TYPE_NORMAL
+  zh: 返回工具的股票数量。
 - en: '`getPositions`()'
+  id: totrans-142
   prefs: []
   type: TYPE_NORMAL
+  zh: '`getPositions`()'
 - en: Returns a dictionary that maps instruments to shares.
+  id: totrans-143
   prefs: []
   type: TYPE_NORMAL
+  zh: 返回一个将工具映射到股票的字典。
 - en: '`getActiveOrders`(*instrument=None*)'
+  id: totrans-144
   prefs: []
   type: TYPE_NORMAL
+  zh: '`getActiveOrders`(*instrument=None*)'
 - en: Returns a sequence with the orders that are still active.
+  id: totrans-145
   prefs: []
   type: TYPE_NORMAL
+  zh: 返回仍然活跃的订单序列。
 - en: '| Parameters: | **instrument** (*string.*) – An optional instrument identifier
     to return only the active orders for the given instrument. |'
+  id: totrans-146
   prefs: []
   type: TYPE_TB
+  zh: '| 参数： | **instrument** (*string.*) – 一个可选的工具标识符，用于仅返回给定工具的活动订单。 |'
 - en: '`submitOrder`(*order*)'
+  id: totrans-147
   prefs: []
   type: TYPE_NORMAL
+  zh: '`submitOrder`(*order*)'
 - en: Submits an order.
+  id: totrans-148
   prefs: []
   type: TYPE_NORMAL
+  zh: 提交一个订单。
 - en: '| Parameters: | **order** ([`Order`](#pyalgotrade.broker.Order "pyalgotrade.broker.Order").)
     – The order to submit. |'
+  id: totrans-149
   prefs: []
   type: TYPE_TB
+  zh: '| 参数： | **order** ([`Order`](#pyalgotrade.broker.Order "pyalgotrade.broker.Order").)
+    – 要提交的订单。 |'
 - en: Note
+  id: totrans-150
   prefs: []
   type: TYPE_NORMAL
+  zh: 注意
 - en: After this call the order is in SUBMITTED state and an event is not triggered
     for this transition.
+  id: totrans-151
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 调用此后，订单处于已提交状态，并且不会为此转换触发事件。
 - en: Calling this twice on the same order will raise an exception.
+  id: totrans-152
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 对同一订单调用两次将引发异常。
 - en: '`createMarketOrder`(*action*, *instrument*, *quantity*, *onClose=False*)'
+  id: totrans-153
   prefs: []
   type: TYPE_NORMAL
+  zh: '`createMarketOrder`(*action*, *instrument*, *quantity*, *onClose=False*)'
 - en: Creates a Market order. A market order is an order to buy or sell a stock at
     the best available price. Generally, this type of order will be executed immediately.
     However, the price at which a market order will be executed is not guaranteed.
+  id: totrans-154
   prefs: []
   type: TYPE_NORMAL
+  zh: 创建一个市价订单。市价订单是以最佳可用价格买入或卖出股票的订单。通常，这种类型的订单将立即执行。但是，市价订单的执行价格不受保证。
 - en: '| Parameters: |'
+  id: totrans-155
   prefs: []
   type: TYPE_TB
+  zh: '| 参数： |'
 - en: '**action** (*Order.Action.BUY, or Order.Action.BUY_TO_COVER, or Order.Action.SELL
     or Order.Action.SELL_SHORT.*) – The order action.'
+  id: totrans-156
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**action** (*Order.Action.BUY，或Order.Action.BUY_TO_COVER，或Order.Action.SELL或Order.Action.SELL_SHORT.*)
+    – 订单操作。'
 - en: '**instrument** (*string.*) – Instrument identifier.'
+  id: totrans-157
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**instrument** (*字符串.*) – 工具标识符。'
 - en: '**quantity** (*int/float.*) – Order quantity.'
+  id: totrans-158
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**quantity** (*int/float.*) – 订单数量。'
 - en: '**onClose** (*boolean.*) – True if the order should be filled as close to the
     closing price as possible (Market-On-Close order). Default is False.'
+  id: totrans-159
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**onClose** (*布尔值.*) – 如果订单应尽可能接近收盘价成交（市价收盘单）。默认为False。'
 - en: '|'
+  id: totrans-160
   prefs: []
   type: TYPE_NORMAL
+  zh: '|'
 - en: '| Return type: | A [`MarketOrder`](#pyalgotrade.broker.MarketOrder "pyalgotrade.broker.MarketOrder")
     subclass. |'
+  id: totrans-161
   prefs: []
   type: TYPE_TB
+  zh: '| 返回类型： | 一个[`MarketOrder`](#pyalgotrade.broker.MarketOrder "pyalgotrade.broker.MarketOrder")子类。
+    |'
 - en: '`createLimitOrder`(*action*, *instrument*, *limitPrice*, *quantity*)'
+  id: totrans-162
   prefs: []
   type: TYPE_NORMAL
+  zh: '`createLimitOrder`(*action*, *instrument*, *limitPrice*, *quantity*)'
 - en: Creates a Limit order. A limit order is an order to buy or sell a stock at a
     specific price or better. A buy limit order can only be executed at the limit
     price or lower, and a sell limit order can only be executed at the limit price
     or higher.
+  id: totrans-163
   prefs: []
   type: TYPE_NORMAL
+  zh: 创建一个限价订单。限价订单是以特定价格或更好的价格买入或卖出股票的订单。买入限价订单只能以限价或更低价格执行，卖出限价订单只能以限价或更高价格执行。
 - en: '| Parameters: |'
+  id: totrans-164
   prefs: []
   type: TYPE_TB
+  zh: '| 参数： |'
 - en: '**action** (*Order.Action.BUY, or Order.Action.BUY_TO_COVER, or Order.Action.SELL
     or Order.Action.SELL_SHORT.*) – The order action.'
+  id: totrans-165
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**action** (*Order.Action.BUY，或Order.Action.BUY_TO_COVER，或Order.Action.SELL或Order.Action.SELL_SHORT.*)
+    – 订单操作。'
 - en: '**instrument** (*string.*) – Instrument identifier.'
+  id: totrans-166
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**instrument** (*字符串.*) – 工具标识符。'
 - en: '**limitPrice** (*float*) – The order price.'
+  id: totrans-167
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**limitPrice** (*float*) – 订单价格。'
 - en: '**quantity** (*int/float.*) – Order quantity.'
+  id: totrans-168
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**quantity** (*int/float.*) – 订单数量。'
 - en: '|'
+  id: totrans-169
   prefs: []
   type: TYPE_NORMAL
+  zh: '|'
 - en: '| Return type: | A [`LimitOrder`](#pyalgotrade.broker.LimitOrder "pyalgotrade.broker.LimitOrder")
     subclass. |'
+  id: totrans-170
   prefs: []
   type: TYPE_TB
+  zh: '| 返回类型： | 一个[`LimitOrder`](#pyalgotrade.broker.LimitOrder "pyalgotrade.broker.LimitOrder")子类。
+    |'
 - en: '`createStopOrder`(*action*, *instrument*, *stopPrice*, *quantity*)'
+  id: totrans-171
   prefs: []
   type: TYPE_NORMAL
+  zh: '`createStopOrder`(*action*, *instrument*, *stopPrice*, *quantity*)'
 - en: Creates a Stop order. A stop order, also referred to as a stop-loss order, is
     an order to buy or sell a stock once the price of the stock reaches a specified
     price, known as the stop price. When the stop price is reached, a stop order becomes
@@ -597,731 +952,1151 @@
     a profit on a stock that they have sold short. A sell stop order is entered at
     a stop price below the current market price. Investors generally use a sell stop
     order to limit a loss or to protect a profit on a stock that they own.
+  id: totrans-172
   prefs: []
   type: TYPE_NORMAL
+  zh: 创建一个止损订单。止损订单，也称为止损单，是一种在股价达到指定价格（止损价格）时买入或卖出股票的订单。当止损价格达到时，止损订单变成市价订单。买入止损订单以高于当前市场价格的止损价格输入。投资者通常使用买入止损订单来限制亏损或保护已卖空的股票的利润。卖出止损订单以低于当前市场价格的止损价格输入。投资者通常使用卖出止损订单来限制亏损或保护他们拥有的股票的利润。
 - en: '| Parameters: |'
+  id: totrans-173
   prefs: []
   type: TYPE_TB
+  zh: '| 参数： |'
 - en: '**action** (*Order.Action.BUY, or Order.Action.BUY_TO_COVER, or Order.Action.SELL
     or Order.Action.SELL_SHORT.*) – The order action.'
+  id: totrans-174
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**action** (*Order.Action.BUY，或Order.Action.BUY_TO_COVER，或Order.Action.SELL或Order.Action.SELL_SHORT.*)
+    – 订单操作。'
 - en: '**instrument** (*string.*) – Instrument identifier.'
+  id: totrans-175
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**instrument** (*字符串.*) – 工具标识符。'
 - en: '**stopPrice** (*float*) – The trigger price.'
+  id: totrans-176
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**stopPrice** (*float*) – 触发价格。'
 - en: '**quantity** (*int/float.*) – Order quantity.'
+  id: totrans-177
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**quantity** (*int/float.*) – 订单数量。'
 - en: '|'
+  id: totrans-178
   prefs: []
   type: TYPE_NORMAL
+  zh: '|'
 - en: '| Return type: | A [`StopOrder`](#pyalgotrade.broker.StopOrder "pyalgotrade.broker.StopOrder")
     subclass. |'
+  id: totrans-179
   prefs: []
   type: TYPE_TB
+  zh: '| 返回类型： | 一个[`StopOrder`](#pyalgotrade.broker.StopOrder "pyalgotrade.broker.StopOrder")子类。
+    |'
 - en: '`createStopLimitOrder`(*action*, *instrument*, *stopPrice*, *limitPrice*, *quantity*)'
+  id: totrans-180
   prefs: []
   type: TYPE_NORMAL
+  zh: '`createStopLimitOrder`(*action*, *instrument*, *stopPrice*, *limitPrice*, *quantity*)'
 - en: Creates a Stop-Limit order. A stop-limit order is an order to buy or sell a
     stock that combines the features of a stop order and a limit order. Once the stop
     price is reached, a stop-limit order becomes a limit order that will be executed
     at a specified price (or better). The benefit of a stop-limit order is that the
     investor can control the price at which the order can be executed.
+  id: totrans-181
   prefs: []
   type: TYPE_NORMAL
+  zh: 创建一个停止限价订单。 停止限价订单是一种买入或卖出股票的订单，结合了停止订单和限价订单的特点。 一旦触发了停止价格，停止限价订单就变成了一个限价订单，以指定的价格（或更好）执行。
+    停止限价订单的好处在于投资者可以控制订单执行的价格。
 - en: '| Parameters: |'
+  id: totrans-182
   prefs: []
   type: TYPE_TB
+  zh: '| 参数： |'
 - en: '**action** (*Order.Action.BUY, or Order.Action.BUY_TO_COVER, or Order.Action.SELL
     or Order.Action.SELL_SHORT.*) – The order action.'
+  id: totrans-183
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**action** (*Order.Action.BUY, or Order.Action.BUY_TO_COVER, or Order.Action.SELL
+    or Order.Action.SELL_SHORT.*) – 订单动作。'
 - en: '**instrument** (*string.*) – Instrument identifier.'
+  id: totrans-184
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**instrument** (*string.*) – 工具标识符。'
 - en: '**stopPrice** (*float*) – The trigger price.'
+  id: totrans-185
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**stopPrice** (*float*) – 触发价格。'
 - en: '**limitPrice** (*float*) – The price for the limit order.'
+  id: totrans-186
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**limitPrice** (*float*) – 限价订单的价格。'
 - en: '**quantity** (*int/float.*) – Order quantity.'
+  id: totrans-187
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**quantity** (*int/float.*) – 订单数量。'
 - en: '|'
+  id: totrans-188
   prefs: []
   type: TYPE_NORMAL
+  zh: '|'
 - en: '| Return type: | A [`StopLimitOrder`](#pyalgotrade.broker.StopLimitOrder "pyalgotrade.broker.StopLimitOrder")
     subclass. |'
+  id: totrans-189
   prefs: []
   type: TYPE_TB
+  zh: '| 返回类型： | 一个 [`StopLimitOrder`](#pyalgotrade.broker.StopLimitOrder "pyalgotrade.broker.StopLimitOrder")
+    的子类。 |'
 - en: '`cancelOrder`(*order*)'
+  id: totrans-190
   prefs: []
   type: TYPE_NORMAL
+  zh: '`cancelOrder`(*order*)'
 - en: Requests an order to be canceled. If the order is filled an Exception is raised.
+  id: totrans-191
   prefs: []
   type: TYPE_NORMAL
+  zh: 请求取消订单。 如果订单已成交，则会引发异常。
 - en: '| Parameters: | **order** ([`Order`](#pyalgotrade.broker.Order "pyalgotrade.broker.Order").)
     – The order to cancel. |  ## Backtesting module and classes'
+  id: totrans-192
   prefs: []
   type: TYPE_NORMAL
+  zh: '| 参数： | **order** ([`Order`](#pyalgotrade.broker.Order "pyalgotrade.broker.Order").)
+    – 要取消的订单。 |  ## 回测模块和类'
 - en: '*class* `pyalgotrade.broker.backtesting.``Commission`'
+  id: totrans-193
   prefs: []
   type: TYPE_NORMAL
+  zh: '*类* `pyalgotrade.broker.backtesting.``Commission`'
 - en: 'Bases: `object`'
+  id: totrans-194
   prefs: []
   type: TYPE_NORMAL
+  zh: 基类：`object`
 - en: Base class for implementing different commission schemes.
+  id: totrans-195
   prefs: []
   type: TYPE_NORMAL
+  zh: 实现不同佣金方案的基类。
 - en: Note
+  id: totrans-196
   prefs: []
   type: TYPE_NORMAL
+  zh: 注意
 - en: This is a base class and should not be used directly.
+  id: totrans-197
   prefs: []
   type: TYPE_NORMAL
+  zh: 这是一个基类，不应直接使用。
 - en: '`calculate`(*order*, *price*, *quantity*)'
+  id: totrans-198
   prefs: []
   type: TYPE_NORMAL
+  zh: '`calculate`(*order*, *price*, *quantity*)'
 - en: Calculates the commission for an order execution.
+  id: totrans-199
   prefs: []
   type: TYPE_NORMAL
+  zh: 计算订单执行的佣金。
 - en: '| Parameters: |'
+  id: totrans-200
   prefs: []
   type: TYPE_TB
+  zh: '| 参数： |'
 - en: '**order** ([`pyalgotrade.broker.Order`](#pyalgotrade.broker.Order "pyalgotrade.broker.Order").)
     – The order being executed.'
+  id: totrans-201
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**order** ([`pyalgotrade.broker.Order`](#pyalgotrade.broker.Order "pyalgotrade.broker.Order").)
+    – 执行的订单。'
 - en: '**price** (*float.*) – The price for each share.'
+  id: totrans-202
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**price** (*float.*) – 每股价格。'
 - en: '**quantity** (*float.*) – The order size.'
+  id: totrans-203
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**quantity** (*float.*) – 订单数量。'
 - en: '|'
+  id: totrans-204
   prefs: []
   type: TYPE_NORMAL
+  zh: '|'
 - en: '| Return type: | float. |'
+  id: totrans-205
   prefs: []
   type: TYPE_TB
+  zh: '| 返回类型： | float。 |'
 - en: '*class* `pyalgotrade.broker.backtesting.``NoCommission`'
+  id: totrans-206
   prefs: []
   type: TYPE_NORMAL
+  zh: '*类* `pyalgotrade.broker.backtesting.``NoCommission`'
 - en: 'Bases: [`pyalgotrade.broker.backtesting.Commission`](#pyalgotrade.broker.backtesting.Commission
     "pyalgotrade.broker.backtesting.Commission")'
+  id: totrans-207
   prefs: []
   type: TYPE_NORMAL
+  zh: 基类：[`pyalgotrade.broker.backtesting.Commission`](#pyalgotrade.broker.backtesting.Commission
+    "pyalgotrade.broker.backtesting.Commission")
 - en: A [`Commission`](#pyalgotrade.broker.backtesting.Commission "pyalgotrade.broker.backtesting.Commission")
     class that always returns 0.
+  id: totrans-208
   prefs: []
   type: TYPE_NORMAL
+  zh: 一个 [`Commission`](#pyalgotrade.broker.backtesting.Commission "pyalgotrade.broker.backtesting.Commission")
+    类，始终返回 0。
 - en: '*class* `pyalgotrade.broker.backtesting.``FixedPerTrade`(*amount*)'
+  id: totrans-209
   prefs: []
   type: TYPE_NORMAL
+  zh: '*类* `pyalgotrade.broker.backtesting.``FixedPerTrade`(*amount*)'
 - en: 'Bases: [`pyalgotrade.broker.backtesting.Commission`](#pyalgotrade.broker.backtesting.Commission
     "pyalgotrade.broker.backtesting.Commission")'
+  id: totrans-210
   prefs: []
   type: TYPE_NORMAL
+  zh: 基类：[`pyalgotrade.broker.backtesting.Commission`](#pyalgotrade.broker.backtesting.Commission
+    "pyalgotrade.broker.backtesting.Commission")
 - en: A [`Commission`](#pyalgotrade.broker.backtesting.Commission "pyalgotrade.broker.backtesting.Commission")
     class that charges a fixed amount for the whole trade.
+  id: totrans-211
   prefs: []
   type: TYPE_NORMAL
+  zh: 一个 [`Commission`](#pyalgotrade.broker.backtesting.Commission "pyalgotrade.broker.backtesting.Commission")
+    类，针对整个交易收取固定金额的手续费。
 - en: '| Parameters: | **amount** (*float.*) – The commission for an order. |'
+  id: totrans-212
   prefs: []
   type: TYPE_TB
+  zh: '| 参数： | **amount** (*float.*) – 一笔订单的手续费。 |'
 - en: '*class* `pyalgotrade.broker.backtesting.``TradePercentage`(*percentage*)'
+  id: totrans-213
   prefs: []
   type: TYPE_NORMAL
+  zh: '*类* `pyalgotrade.broker.backtesting.``TradePercentage`(*percentage*)'
 - en: 'Bases: [`pyalgotrade.broker.backtesting.Commission`](#pyalgotrade.broker.backtesting.Commission
     "pyalgotrade.broker.backtesting.Commission")'
+  id: totrans-214
   prefs: []
   type: TYPE_NORMAL
+  zh: 基类：[`pyalgotrade.broker.backtesting.Commission`](#pyalgotrade.broker.backtesting.Commission
+    "pyalgotrade.broker.backtesting.Commission")
 - en: A [`Commission`](#pyalgotrade.broker.backtesting.Commission "pyalgotrade.broker.backtesting.Commission")
     class that charges a percentage of the whole trade.
+  id: totrans-215
   prefs: []
   type: TYPE_NORMAL
+  zh: 一个 [`Commission`](#pyalgotrade.broker.backtesting.Commission "pyalgotrade.broker.backtesting.Commission")
+    类，按整个交易的百分比收取手续费。
 - en: '| Parameters: | **percentage** (*float.*) – The percentage to charge. 0.01
     means 1%, and so on. It must be smaller than 1. |'
+  id: totrans-216
   prefs: []
   type: TYPE_TB
+  zh: '| 参数: | **percentage** (*float.*) – 要收取的百分比。0.01 表示 1%，以此类推。必须小于 1。 |'
 - en: '*class* `pyalgotrade.broker.backtesting.``Broker`(*cash*, *barFeed*, *commission=None*)'
+  id: totrans-217
   prefs: []
   type: TYPE_NORMAL
+  zh: '*class* `pyalgotrade.broker.backtesting.``Broker`(*cash*, *barFeed*, *commission=None*)'
 - en: 'Bases: [`pyalgotrade.broker.Broker`](#pyalgotrade.broker.Broker "pyalgotrade.broker.Broker")'
+  id: totrans-218
   prefs: []
   type: TYPE_NORMAL
+  zh: '基类: [`pyalgotrade.broker.Broker`](#pyalgotrade.broker.Broker "pyalgotrade.broker.Broker")'
 - en: Backtesting broker.
+  id: totrans-219
   prefs: []
   type: TYPE_NORMAL
+  zh: 回测经纪人。
 - en: '| Parameters: |'
+  id: totrans-220
   prefs: []
   type: TYPE_TB
+  zh: '| 参数: |'
 - en: '**cash** (*int/float.*) – The initial amount of cash.'
+  id: totrans-221
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**cash** (*int/float.*) – 初始现金金额。'
 - en: '**barFeed** (`pyalgotrade.barfeed.BarFeed`) – The bar feed that will provide
     the bars.'
+  id: totrans-222
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**barFeed** (`pyalgotrade.barfeed.BarFeed`) – 将提供条形的 bar feed。'
 - en: '**commission** ([`Commission`](#pyalgotrade.broker.backtesting.Commission "pyalgotrade.broker.backtesting.Commission"))
     – An object responsible for calculating order commissions.'
+  id: totrans-223
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**commission** ([`Commission`](#pyalgotrade.broker.backtesting.Commission "pyalgotrade.broker.backtesting.Commission"))
+    – 负责计算订单佣金的对象。'
 - en: '|'
+  id: totrans-224
   prefs: []
   type: TYPE_NORMAL
+  zh: '|'
 - en: '`getCommission`()'
+  id: totrans-225
   prefs: []
   type: TYPE_NORMAL
+  zh: '`getCommission`()'
 - en: Returns the strategy used to calculate order commissions.
+  id: totrans-226
   prefs: []
   type: TYPE_NORMAL
+  zh: 返回用于计算订单佣金的策略。
 - en: '| Return type: | [`Commission`](#pyalgotrade.broker.backtesting.Commission
     "pyalgotrade.broker.backtesting.Commission"). |'
+  id: totrans-227
   prefs: []
   type: TYPE_TB
+  zh: '| 返回类型: | [`Commission`](#pyalgotrade.broker.backtesting.Commission "pyalgotrade.broker.backtesting.Commission").
+    |'
 - en: '`getEquity`()'
+  id: totrans-228
   prefs: []
   type: TYPE_NORMAL
+  zh: '`getEquity`()'
 - en: Returns the portfolio value (cash + shares * price).
+  id: totrans-229
   prefs: []
   type: TYPE_NORMAL
+  zh: 返回组合价值（现金 + 股票 * 价格）。
 - en: '`getFillStrategy`()'
+  id: totrans-230
   prefs: []
   type: TYPE_NORMAL
+  zh: '`getFillStrategy`()'
 - en: Returns the [`pyalgotrade.broker.fillstrategy.FillStrategy`](#pyalgotrade.broker.fillstrategy.FillStrategy
     "pyalgotrade.broker.fillstrategy.FillStrategy") currently set.
+  id: totrans-231
   prefs: []
   type: TYPE_NORMAL
+  zh: 返回当前设置的 [`pyalgotrade.broker.fillstrategy.FillStrategy`](#pyalgotrade.broker.fillstrategy.FillStrategy
+    "pyalgotrade.broker.fillstrategy.FillStrategy")。
 - en: '`setCommission`(*commission*)'
+  id: totrans-232
   prefs: []
   type: TYPE_NORMAL
+  zh: '`setCommission`(*commission*)'
 - en: Sets the strategy to use to calculate order commissions.
+  id: totrans-233
   prefs: []
   type: TYPE_NORMAL
+  zh: 设置用于计算订单佣金的策略。
 - en: '| Parameters: | **commission** ([`Commission`](#pyalgotrade.broker.backtesting.Commission
     "pyalgotrade.broker.backtesting.Commission").) – An object responsible for calculating
     order commissions. |'
+  id: totrans-234
   prefs: []
   type: TYPE_TB
+  zh: '| 参数: | **commission** ([`Commission`](#pyalgotrade.broker.backtesting.Commission
+    "pyalgotrade.broker.backtesting.Commission").) – 负责计算订单佣金的对象。 |'
 - en: '`setFillStrategy`(*strategy*)'
+  id: totrans-235
   prefs: []
   type: TYPE_NORMAL
+  zh: '`setFillStrategy`(*strategy*)'
 - en: Sets the [`pyalgotrade.broker.fillstrategy.FillStrategy`](#pyalgotrade.broker.fillstrategy.FillStrategy
     "pyalgotrade.broker.fillstrategy.FillStrategy") to use.
+  id: totrans-236
   prefs: []
   type: TYPE_NORMAL
+  zh: 设置要使用的 [`pyalgotrade.broker.fillstrategy.FillStrategy`](#pyalgotrade.broker.fillstrategy.FillStrategy
+    "pyalgotrade.broker.fillstrategy.FillStrategy")。
 - en: '`setShares`(*instrument*, *quantity*, *price*)'
+  id: totrans-237
   prefs: []
   type: TYPE_NORMAL
+  zh: '`setShares`(*instrument*, *quantity*, *price*)'
 - en: Set existing shares before the strategy starts executing.
+  id: totrans-238
   prefs: []
   type: TYPE_NORMAL
+  zh: 在策略开始执行之前设置现有股份。
 - en: '| Parameters: |'
+  id: totrans-239
   prefs: []
   type: TYPE_TB
+  zh: '| 参数: |'
 - en: '**instrument** – Instrument identifier.'
+  id: totrans-240
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**instrument** – 仪器标识符。'
 - en: '**quantity** – The number of shares for the given instrument.'
+  id: totrans-241
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**quantity** – 给定仪器的股票数量。'
 - en: '**price** – The price for each share.'
+  id: totrans-242
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**price** – 每股的价格。'
 - en: '|'
+  id: totrans-243
   prefs: []
   type: TYPE_NORMAL
+  zh: '|'
 - en: '*class* `pyalgotrade.broker.slippage.``SlippageModel`'
+  id: totrans-244
   prefs: []
   type: TYPE_NORMAL
+  zh: '*class* `pyalgotrade.broker.slippage.``SlippageModel`'
 - en: 'Bases: `object`'
+  id: totrans-245
   prefs: []
   type: TYPE_NORMAL
+  zh: '基类: `object`'
 - en: Base class for slippage models.
+  id: totrans-246
   prefs: []
   type: TYPE_NORMAL
+  zh: 滑点模型的基类。
 - en: Note
+  id: totrans-247
   prefs: []
   type: TYPE_NORMAL
+  zh: 注意
 - en: This is a base class and should not be used directly.
+  id: totrans-248
   prefs: []
   type: TYPE_NORMAL
+  zh: 这是一个基类，不应直接使用。
 - en: '`calculatePrice`(*order*, *price*, *quantity*, *bar*, *volumeUsed*)'
+  id: totrans-249
   prefs: []
   type: TYPE_NORMAL
+  zh: '`calculatePrice`(*order*, *price*, *quantity*, *bar*, *volumeUsed*)'
 - en: Returns the slipped price per share for an order.
+  id: totrans-250
   prefs: []
   type: TYPE_NORMAL
+  zh: 返回订单的每股滑点价格。
 - en: '| Parameters: |'
+  id: totrans-251
   prefs: []
   type: TYPE_TB
+  zh: '| 参数: |'
 - en: '**order** ([`pyalgotrade.broker.Order`](#pyalgotrade.broker.Order "pyalgotrade.broker.Order").)
     – The order being filled.'
+  id: totrans-252
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**order** ([`pyalgotrade.broker.Order`](#pyalgotrade.broker.Order "pyalgotrade.broker.Order").)
+    – 被填充的订单。'
 - en: '**price** (*float.*) – The price for each share before slippage.'
+  id: totrans-253
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**price** (*float.*) – 滑点之前每股的价格。'
 - en: '**quantity** (*float.*) – The amount of shares that will get filled at this
     time for this order.'
+  id: totrans-254
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**quantity** (*float.*) – 此次订单将填充的股票数量。'
 - en: '**bar** ([`pyalgotrade.bar.Bar`](bar.html#pyalgotrade.bar.Bar "pyalgotrade.bar.Bar").)
     – The current bar.'
+  id: totrans-255
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**bar** ([`pyalgotrade.bar.Bar`](bar.html#pyalgotrade.bar.Bar "pyalgotrade.bar.Bar").)
+    – 当前的 bar。'
 - en: '**volumeUsed** (*float.*) – The volume size that was taken so far from the
     current bar.'
+  id: totrans-256
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**volumeUsed** (*float.*) – 到目前为止从当前 bar 获取的体积大小。'
 - en: '|'
+  id: totrans-257
   prefs: []
   type: TYPE_NORMAL
+  zh: '|'
 - en: '| Return type: | float. |'
+  id: totrans-258
   prefs: []
   type: TYPE_TB
+  zh: '| 返回类型: | float. |'
 - en: '*class* `pyalgotrade.broker.slippage.``NoSlippage`'
+  id: totrans-259
   prefs: []
   type: TYPE_NORMAL
+  zh: '*class* `pyalgotrade.broker.slippage.``NoSlippage`'
 - en: 'Bases: [`pyalgotrade.broker.slippage.SlippageModel`](#pyalgotrade.broker.slippage.SlippageModel
     "pyalgotrade.broker.slippage.SlippageModel")'
+  id: totrans-260
   prefs: []
   type: TYPE_NORMAL
+  zh: '基类: [`pyalgotrade.broker.slippage.SlippageModel`](#pyalgotrade.broker.slippage.SlippageModel
+    "pyalgotrade.broker.slippage.SlippageModel")'
 - en: A no slippage model.
+  id: totrans-261
   prefs: []
   type: TYPE_NORMAL
+  zh: 无滑点模型。
 - en: '*class* `pyalgotrade.broker.slippage.``VolumeShareSlippage`(*priceImpact=0.1*)'
+  id: totrans-262
   prefs: []
   type: TYPE_NORMAL
+  zh: '*class* `pyalgotrade.broker.slippage.``VolumeShareSlippage`(*priceImpact=0.1*)'
 - en: 'Bases: [`pyalgotrade.broker.slippage.SlippageModel`](#pyalgotrade.broker.slippage.SlippageModel
     "pyalgotrade.broker.slippage.SlippageModel")'
+  id: totrans-263
   prefs: []
   type: TYPE_NORMAL
+  zh: 基类：[`pyalgotrade.broker.slippage.SlippageModel`](#pyalgotrade.broker.slippage.SlippageModel
+    "pyalgotrade.broker.slippage.SlippageModel")
 - en: A volume share slippage model as defined in Zipline’s VolumeShareSlippage model.
     The slippage is calculated by multiplying the price impact constant by the square
     of the ratio of the order to the total volume.
+  id: totrans-264
   prefs: []
   type: TYPE_NORMAL
+  zh: 定义在 Zipline 的 VolumeShareSlippage 模型中的成交量份额滑点模型。滑点是通过将价格影响常数乘以订单与总成交量比率的平方来计算的。
 - en: Check [https://www.quantopian.com/help#ide-slippage](https://www.quantopian.com/help#ide-slippage)
     for more details.
+  id: totrans-265
   prefs: []
   type: TYPE_NORMAL
+  zh: 查看 [https://www.quantopian.com/help#ide-slippage](https://www.quantopian.com/help#ide-slippage)
+    获取更多详细信息。
 - en: '| Parameters: | **priceImpact** (*float.*) – Defines how large of an impact
     your order will have on the backtester’s price calculation. |'
+  id: totrans-266
   prefs: []
   type: TYPE_TB
+  zh: '| 参数： | **priceImpact** (*float.*) – 定义您的订单对回测价格计算的影响程度。'
 - en: '*class* `pyalgotrade.broker.fillstrategy.``FillStrategy`'
+  id: totrans-267
   prefs: []
   type: TYPE_NORMAL
+  zh: '*class* `pyalgotrade.broker.fillstrategy.``FillStrategy`'
 - en: 'Bases: `object`'
+  id: totrans-268
   prefs: []
   type: TYPE_NORMAL
+  zh: 基类：`object`
 - en: Base class for order filling strategies for the backtester.
+  id: totrans-269
   prefs: []
   type: TYPE_NORMAL
+  zh: 用于回测的订单填充策略的基类。
 - en: '`fillLimitOrder`(*broker_*, *order*, *bar*)'
+  id: totrans-270
   prefs: []
   type: TYPE_NORMAL
+  zh: '`fillLimitOrder`(*broker_*, *order*, *bar*)'
 - en: Override to return the fill price and quantity for a limit order or None if
     the order can’t be filled at the given time.
+  id: totrans-271
   prefs: []
   type: TYPE_NORMAL
+  zh: 覆盖以返回限价订单的成交价格和数量，如果在给定时间无法成交订单，则返回 None。
 - en: '| Parameters: |'
+  id: totrans-272
   prefs: []
   type: TYPE_TB
+  zh: '| 参数： |'
 - en: '**broker** (`Broker`) – The broker.'
+  id: totrans-273
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**broker** (`Broker`) – 经纪人。'
 - en: '**order** ([`pyalgotrade.broker.LimitOrder`](#pyalgotrade.broker.LimitOrder
     "pyalgotrade.broker.LimitOrder")) – The order.'
+  id: totrans-274
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**order** ([`pyalgotrade.broker.LimitOrder`](#pyalgotrade.broker.LimitOrder
+    "pyalgotrade.broker.LimitOrder")) – 订单。'
 - en: '**bar** ([`pyalgotrade.bar.Bar`](bar.html#pyalgotrade.bar.Bar "pyalgotrade.bar.Bar"))
     – The current bar.'
+  id: totrans-275
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**bar** ([`pyalgotrade.bar.Bar`](bar.html#pyalgotrade.bar.Bar "pyalgotrade.bar.Bar"))
+    – 当前柱形图。'
 - en: '|'
+  id: totrans-276
   prefs: []
   type: TYPE_NORMAL
+  zh: '|'
 - en: '| Return type: | A `FillInfo` or None if the order should not be filled. |'
+  id: totrans-277
   prefs: []
   type: TYPE_TB
+  zh: '| 返回类型： | 一个 `FillInfo` 或者如果订单不应该被填充则返回 None。 |'
 - en: '`fillMarketOrder`(*broker_*, *order*, *bar*)'
+  id: totrans-278
   prefs: []
   type: TYPE_NORMAL
+  zh: '`fillMarketOrder`(*broker_*, *order*, *bar*)'
 - en: Override to return the fill price and quantity for a market order or None if
     the order can’t be filled at the given time.
+  id: totrans-279
   prefs: []
   type: TYPE_NORMAL
+  zh: 覆盖以返回市价订单的成交价格和数量，如果在给定时间无法成交订单，则返回 None。
 - en: '| Parameters: |'
+  id: totrans-280
   prefs: []
   type: TYPE_TB
+  zh: '| 参数： |'
 - en: '**broker** (`Broker`) – The broker.'
+  id: totrans-281
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**broker** (`Broker`) – 经纪人。'
 - en: '**order** ([`pyalgotrade.broker.MarketOrder`](#pyalgotrade.broker.MarketOrder
     "pyalgotrade.broker.MarketOrder")) – The order.'
+  id: totrans-282
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**order** ([`pyalgotrade.broker.MarketOrder`](#pyalgotrade.broker.MarketOrder
+    "pyalgotrade.broker.MarketOrder")) – 订单。'
 - en: '**bar** ([`pyalgotrade.bar.Bar`](bar.html#pyalgotrade.bar.Bar "pyalgotrade.bar.Bar"))
     – The current bar.'
+  id: totrans-283
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**bar** ([`pyalgotrade.bar.Bar`](bar.html#pyalgotrade.bar.Bar "pyalgotrade.bar.Bar"))
+    – 当前柱形图。'
 - en: '|'
+  id: totrans-284
   prefs: []
   type: TYPE_NORMAL
+  zh: '|'
 - en: '| Return type: | A `FillInfo` or None if the order should not be filled. |'
+  id: totrans-285
   prefs: []
   type: TYPE_TB
+  zh: '| 返回类型： | 一个 `FillInfo` 或者如果订单不应该被填充则返回 None。 |'
 - en: '`fillStopLimitOrder`(*broker_*, *order*, *bar*)'
+  id: totrans-286
   prefs: []
   type: TYPE_NORMAL
+  zh: '`fillStopLimitOrder`(*broker_*, *order*, *bar*)'
 - en: Override to return the fill price and quantity for a stop limit order or None
     if the order can’t be filled at the given time.
+  id: totrans-287
   prefs: []
   type: TYPE_NORMAL
+  zh: 覆盖以返回停止限价订单的成交价格和数量，如果在给定时间无法成交订单，则返回 None。
 - en: '| Parameters: |'
+  id: totrans-288
   prefs: []
   type: TYPE_TB
+  zh: '| 参数： |'
 - en: '**broker** (`Broker`) – The broker.'
+  id: totrans-289
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**broker** (`Broker`) – 经纪人。'
 - en: '**order** ([`pyalgotrade.broker.StopLimitOrder`](#pyalgotrade.broker.StopLimitOrder
     "pyalgotrade.broker.StopLimitOrder")) – The order.'
+  id: totrans-290
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**order** ([`pyalgotrade.broker.StopLimitOrder`](#pyalgotrade.broker.StopLimitOrder
+    "pyalgotrade.broker.StopLimitOrder")) – 订单。'
 - en: '**bar** ([`pyalgotrade.bar.Bar`](bar.html#pyalgotrade.bar.Bar "pyalgotrade.bar.Bar"))
     – The current bar.'
+  id: totrans-291
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**bar** ([`pyalgotrade.bar.Bar`](bar.html#pyalgotrade.bar.Bar "pyalgotrade.bar.Bar"))
+    – 当前柱形图。'
 - en: '|'
+  id: totrans-292
   prefs: []
   type: TYPE_NORMAL
+  zh: '|'
 - en: '| Return type: | A `FillInfo` or None if the order should not be filled. |'
+  id: totrans-293
   prefs: []
   type: TYPE_TB
+  zh: '| 返回类型： | 一个 `FillInfo` 或者如果订单不应该被填充则返回 None。 |'
 - en: '`fillStopOrder`(*broker_*, *order*, *bar*)'
+  id: totrans-294
   prefs: []
   type: TYPE_NORMAL
+  zh: '`fillStopOrder`(*broker_*, *order*, *bar*)'
 - en: Override to return the fill price and quantity for a stop order or None if the
     order can’t be filled at the given time.
+  id: totrans-295
   prefs: []
   type: TYPE_NORMAL
+  zh: 覆盖以返回停止订单的成交价格和数量，如果在给定时间无法成交订单，则返回 None。
 - en: '| Parameters: |'
+  id: totrans-296
   prefs: []
   type: TYPE_TB
+  zh: '| 参数： |'
 - en: '**broker** (`Broker`) – The broker.'
+  id: totrans-297
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**broker** (`Broker`) – 经纪人。'
 - en: '**order** ([`pyalgotrade.broker.StopOrder`](#pyalgotrade.broker.StopOrder "pyalgotrade.broker.StopOrder"))
     – The order.'
+  id: totrans-298
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**order** ([`pyalgotrade.broker.StopOrder`](#pyalgotrade.broker.StopOrder "pyalgotrade.broker.StopOrder"))
+    – 订单。'
 - en: '**bar** ([`pyalgotrade.bar.Bar`](bar.html#pyalgotrade.bar.Bar "pyalgotrade.bar.Bar"))
     – The current bar.'
+  id: totrans-299
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**bar** ([`pyalgotrade.bar.Bar`](bar.html#pyalgotrade.bar.Bar "pyalgotrade.bar.Bar"))
+    – 当前柱形图。'
 - en: '|'
+  id: totrans-300
   prefs: []
   type: TYPE_NORMAL
+  zh: '|'
 - en: '| Return type: | A `FillInfo` or None if the order should not be filled. |'
+  id: totrans-301
   prefs: []
   type: TYPE_TB
+  zh: '| 返回类型： | 一个 `FillInfo` 或者如果订单不应该被填充则返回 None。 |'
 - en: '`onBars`(*broker_*, *bars*)'
+  id: totrans-302
   prefs: []
   type: TYPE_NORMAL
+  zh: '`onBars`(*broker_*, *bars*)'
 - en: Override (optional) to get notified when the broker is about to process new
     bars.
+  id: totrans-303
   prefs: []
   type: TYPE_NORMAL
+  zh: 覆盖（可选）以在经纪人处理新柱形图时收到通知。
 - en: '| Parameters: |'
+  id: totrans-304
   prefs: []
   type: TYPE_TB
+  zh: '| 参数： |'
 - en: '**broker** (`Broker`) – The broker.'
+  id: totrans-305
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**broker**（`Broker`）- 经纪人。'
 - en: '**bars** ([`pyalgotrade.bar.Bars`](bar.html#pyalgotrade.bar.Bars "pyalgotrade.bar.Bars"))
     – The current bars.'
+  id: totrans-306
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**bars**（[`pyalgotrade.bar.Bars`](bar.html#pyalgotrade.bar.Bars "pyalgotrade.bar.Bars")）-
+    当前的条形图。'
 - en: '|'
+  id: totrans-307
   prefs: []
   type: TYPE_NORMAL
+  zh: '|'
 - en: '`onOrderFilled`(*broker_*, *order*)'
+  id: totrans-308
   prefs: []
   type: TYPE_NORMAL
+  zh: '`onOrderFilled`（*broker_*, *order*）'
 - en: Override (optional) to get notified when an order was filled, or partially filled.
+  id: totrans-309
   prefs: []
   type: TYPE_NORMAL
+  zh: 重写（可选）以在订单被填充或部分填充时收到通知。
 - en: '| Parameters: |'
+  id: totrans-310
   prefs: []
   type: TYPE_TB
+  zh: '| 参数： |'
 - en: '**broker** (`Broker`) – The broker.'
+  id: totrans-311
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**broker**（`Broker`）- 经纪人。'
 - en: '**order** ([`pyalgotrade.broker.Order`](#pyalgotrade.broker.Order "pyalgotrade.broker.Order"))
     – The order filled.'
+  id: totrans-312
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**order**（[`pyalgotrade.broker.Order`](#pyalgotrade.broker.Order "pyalgotrade.broker.Order")）-
+    填充的订单。'
 - en: '|'
+  id: totrans-313
   prefs: []
   type: TYPE_NORMAL
+  zh: '|'
 - en: '*class* `pyalgotrade.broker.fillstrategy.``DefaultStrategy`(*volumeLimit=0.25*)'
+  id: totrans-314
   prefs: []
   type: TYPE_NORMAL
+  zh: '*class* `pyalgotrade.broker.fillstrategy.``DefaultStrategy`（*volumeLimit=0.25*）'
 - en: 'Bases: [`pyalgotrade.broker.fillstrategy.FillStrategy`](#pyalgotrade.broker.fillstrategy.FillStrategy
     "pyalgotrade.broker.fillstrategy.FillStrategy")'
+  id: totrans-315
   prefs: []
   type: TYPE_NORMAL
+  zh: 基类：[`pyalgotrade.broker.fillstrategy.FillStrategy`](#pyalgotrade.broker.fillstrategy.FillStrategy
+    "pyalgotrade.broker.fillstrategy.FillStrategy")
 - en: Default fill strategy.
+  id: totrans-316
   prefs: []
   type: TYPE_NORMAL
+  zh: 默认填充策略。
 - en: '| Parameters: | **volumeLimit** (*float*) – The proportion of the volume that
     orders can take up in a bar. Must be > 0 and <= 1. If None, then volume limit
     is not checked. |'
+  id: totrans-317
   prefs: []
   type: TYPE_TB
+  zh: '| 参数： | **volumeLimit**（*float*）- 订单在一根条中可以占用的交易量的比例。必须> 0且<= 1。如果为None，则不检查交易量限制。
+    |'
 - en: 'This strategy works as follows:'
+  id: totrans-318
   prefs: []
   type: TYPE_NORMAL
+  zh: 此策略的工作方式如下：
 - en: A [`pyalgotrade.broker.MarketOrder`](#pyalgotrade.broker.MarketOrder "pyalgotrade.broker.MarketOrder")
     is always filled using the open/close price.
+  id: totrans-319
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 一个[`pyalgotrade.broker.MarketOrder`](#pyalgotrade.broker.MarketOrder "pyalgotrade.broker.MarketOrder")始终使用开盘/收盘价填充。
 - en: 'A [`pyalgotrade.broker.LimitOrder`](#pyalgotrade.broker.LimitOrder "pyalgotrade.broker.LimitOrder")
     will be filled like this:'
+  id: totrans-320
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 一个[`pyalgotrade.broker.LimitOrder`](#pyalgotrade.broker.LimitOrder "pyalgotrade.broker.LimitOrder")将会被如下方式填充：
 - en: If the limit price was penetrated with the open price, then the open price is
     used.
+  id: totrans-321
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 如果限价已与开盘价突破，则使用开盘价。
 - en: If the bar includes the limit price, then the limit price is used.
+  id: totrans-322
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 如果该条包含限价，则使用限价。
 - en: Note that when buying the price is penetrated if it gets <= the limit price,
     and when selling the price is penetrated if it gets >= the limit price
+  id: totrans-323
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 请注意，在买入时，如果价格达到或低于限价，则价格会被突破，而在卖出时，如果价格达到或超过限价，则价格会被突破。
 - en: 'A [`pyalgotrade.broker.StopOrder`](#pyalgotrade.broker.StopOrder "pyalgotrade.broker.StopOrder")
     will be filled like this:'
+  id: totrans-324
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 一个[`pyalgotrade.broker.StopOrder`](#pyalgotrade.broker.StopOrder "pyalgotrade.broker.StopOrder")将会被如下方式填充：
 - en: If the stop price was penetrated with the open price, then the open price is
     used.
+  id: totrans-325
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 如果止损价已与开盘价突破，则使用开盘价。
 - en: If the bar includes the stop price, then the stop price is used.
+  id: totrans-326
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 如果该条包含止损价，则使用止损价。
 - en: Note that when buying the price is penetrated if it gets >= the stop price,
     and when selling the price is penetrated if it gets <= the stop price
+  id: totrans-327
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 请注意，在买入时，如果价格达到或超过止损价，则价格会被突破，而在卖出时，如果价格达到或低于止损价，则价格会被突破。
 - en: 'A [`pyalgotrade.broker.StopLimitOrder`](#pyalgotrade.broker.StopLimitOrder
     "pyalgotrade.broker.StopLimitOrder") will be filled like this:'
+  id: totrans-328
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 一个[`pyalgotrade.broker.StopLimitOrder`](#pyalgotrade.broker.StopLimitOrder "pyalgotrade.broker.StopLimitOrder")将会被如下方式填充：
 - en: If the stop price was penetrated with the open price, or if the bar includes
     the stop price, then the limit order becomes active.
+  id: totrans-329
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 如果止损价已与开盘价突破，或者如果该条包含止损价，则限价单将变为活动状态。
 - en: 'If the limit order is active:'
+  id: totrans-330
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 如果限价单处于活动状态：
 - en: If the limit order was activated in this same bar and the limit price is penetrated
     as well, then the best between the stop price and the limit fill price (as described
     earlier) is used.
+  id: totrans-331
   prefs:
   - PREF_IND
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 如果在同一根条中激活了限价单，并且限价也被突破，则使用止损价和限价填充价格中较好的那个（如前所述）。
 - en: If the limit order was activated at a previous bar then the limit fill price
     (as described earlier) is used.
+  id: totrans-332
   prefs:
   - PREF_IND
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 如果限价单在先前的条中激活，则使用限价填充价格（如前所述）。
 - en: Note
+  id: totrans-333
   prefs: []
   type: TYPE_NORMAL
+  zh: 注意
 - en: This is the default strategy used by the Broker.
+  id: totrans-334
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 这是经纪人使用的默认策略。
 - en: It uses [`pyalgotrade.broker.slippage.NoSlippage`](#pyalgotrade.broker.slippage.NoSlippage
     "pyalgotrade.broker.slippage.NoSlippage") slippage model by default.
+  id: totrans-335
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 默认情况下，它使用[`pyalgotrade.broker.slippage.NoSlippage`](#pyalgotrade.broker.slippage.NoSlippage
+    "pyalgotrade.broker.slippage.NoSlippage")滑点模型。
 - en: If volumeLimit is 0.25, and a certain bar’s volume is 100, then no more than
     25 shares can be used by all orders that get processed at that bar.
+  id: totrans-336
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 如果volumeLimit为0.25，而某个条的交易量为100，则在该条处理的所有订单中最多只能使用25股。
 - en: If using trade bars, then all the volume from that bar can be used.
+  id: totrans-337
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 如果使用交易条形图，则该条的所有交易量都可以使用。
 - en: '`setSlippageModel`(*slippageModel*)'
+  id: totrans-338
   prefs: []
   type: TYPE_NORMAL
+  zh: '`setSlippageModel`（*slippageModel*）'
 - en: Set the slippage model to use.
+  id: totrans-339
   prefs: []
   type: TYPE_NORMAL
+  zh: 设置滑点模型以使用。
 - en: '| Parameters: | **slippageModel** ([`pyalgotrade.broker.slippage.SlippageModel`](#pyalgotrade.broker.slippage.SlippageModel
     "pyalgotrade.broker.slippage.SlippageModel")) – The slippage model. |'
+  id: totrans-340
   prefs: []
   type: TYPE_TB
+  zh: '| 参数: | **slippageModel** ([`pyalgotrade.broker.slippage.SlippageModel`](#pyalgotrade.broker.slippage.SlippageModel
+    "pyalgotrade.broker.slippage.SlippageModel")) – 滑点模型。 |'
 - en: '`setVolumeLimit`(*volumeLimit*)'
+  id: totrans-341
   prefs: []
   type: TYPE_NORMAL
+  zh: '`setVolumeLimit`(*volumeLimit*)'
 - en: Set the volume limit.
+  id: totrans-342
   prefs: []
   type: TYPE_NORMAL
+  zh: 设定体积限制。
 - en: '| Parameters: | **volumeLimit** (*float*) – The proportion of the volume that
     orders can take up in a bar. Must be > 0 and <= 1. If None, then volume limit
     is not checked. |'
+  id: totrans-343
   prefs: []
   type: TYPE_TB
+  zh: '| 参数: | **volumeLimit** (*float*) – 订单在柱状图中可以占用的体积比例。必须 > 0 且 <= 1。如果为 None，则不检查体积限制。
+    |'
 - en: '[Table Of Contents](index.html)'
+  id: totrans-344
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: '[目录](index.html)'
 - en: '[broker – Order management classes](#)'
+  id: totrans-345
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[经纪人 – 订单管理类](#)'
 - en: '[Base module and classes](#module-pyalgotrade.broker)'
+  id: totrans-346
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[基础模块和类](#module-pyalgotrade.broker)'
 - en: '[Backtesting module and classes](#module-pyalgotrade.broker.backtesting)'
+  id: totrans-347
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[回测模块和类](#module-pyalgotrade.broker.backtesting)'
 - en: Previous topic
+  id: totrans-348
   prefs:
   - PREF_H4
   type: TYPE_NORMAL
+  zh: 上一个主题
 - en: '[technical – Technical indicators](technical.html "previous chapter")'
+  id: totrans-349
   prefs: []
   type: TYPE_NORMAL
+  zh: '[技术指标 – Technical indicators](technical.html "上一章")'
 - en: Next topic
+  id: totrans-350
   prefs:
   - PREF_H4
   type: TYPE_NORMAL
+  zh: 下一个主题
 - en: '[strategy – Basic strategy classes](strategy.html "next chapter")'
+  id: totrans-351
   prefs: []
   type: TYPE_NORMAL
+  zh: '[策略 – 基本策略类](strategy.html "下一章")'
 - en: This Page
+  id: totrans-352
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 此页面
 - en: '[Show Source](_sources/broker.txt)'
+  id: totrans-353
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[显示源代码](_sources/broker.txt)'
 - en: Quick search
+  id: totrans-354
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 快速搜索
 - en: Enter search terms or a module, class or function name.
+  id: totrans-355
   prefs: []
   type: TYPE_NORMAL
+  zh: 输入搜索词或模块、类或函数名称。
 - en: Navigation
+  id: totrans-356
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 导航
 - en: '[index](genindex.html "General Index")'
+  id: totrans-357
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[索引](genindex.html "总索引")'
 - en: '[modules](py-modindex.html "Python Module Index") |'
+  id: totrans-358
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[模块](py-modindex.html "Python模块索引") |'
 - en: '[next](strategy.html "strategy – Basic strategy classes") |'
+  id: totrans-359
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[下一章](strategy.html "策略 – 基本策略类") |'
 - en: '[previous](technical.html "technical – Technical indicators") |'
+  id: totrans-360
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[上一章](technical.html "技术指标 – Technical indicators") |'
 - en: '[PyAlgoTrade 0.20 documentation](index.html) »'
+  id: totrans-361
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[PyAlgoTrade 0.20 文档](index.html) »'
 - en: '[Documentation for the code](code.html) »'
+  id: totrans-362
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[代码文档](code.html) »'
