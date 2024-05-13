@@ -1,87 +1,131 @@
 - en: Twitter support
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: Twitter 支持
 - en: 原文：[https://gbeced.github.io/pyalgotrade/docs/v0.20/html/twitter.html](https://gbeced.github.io/pyalgotrade/docs/v0.20/html/twitter.html)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://gbeced.github.io/pyalgotrade/docs/v0.20/html/twitter.html](https://gbeced.github.io/pyalgotrade/docs/v0.20/html/twitter.html)
 - en: The twitter package adds support for receiving Twitter events in your strategy
     and incorporate those in your trading decisions. Note that since this is a realtime
     feed, it only makes sense in paper trading or real trading scenarios, but not
     in backtesting.
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: Twitter 包添加了对在您的策略中接收 Twitter 事件并将其纳入您的交易决策中的支持。请注意，由于这是一个实时数据源，因此仅在模拟交易或实际交易场景中才有意义，而不适用于回测。
 - en: Twitter support depends on **tweepy** ([https://github.com/tweepy/tweepy](https://github.com/tweepy/tweepy))
     so be sure to have it installed before moving forward.
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: Twitter 支持依赖于**tweepy** ([https://github.com/tweepy/tweepy](https://github.com/tweepy/tweepy))，所以在继续之前确保已安装。
 - en: 'Contents:'
+  id: totrans-4
   prefs: []
   type: TYPE_NORMAL
+  zh: 目录：
 - en: '[twitter – Twitter feed reference](twitter_ref.html)'
+  id: totrans-5
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[twitter – Twitter feed reference](twitter_ref.html)'
 - en: '[Feed](twitter_ref.html#module-pyalgotrade.twitter.feed)'
+  id: totrans-6
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[Feed](twitter_ref.html#module-pyalgotrade.twitter.feed)'
 - en: '[Twitter Example](twitter_example.html)'
+  id: totrans-7
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[Twitter 示例](twitter_example.html)'
 - en: Previous topic
+  id: totrans-8
   prefs:
   - PREF_H4
   type: TYPE_NORMAL
+  zh: 上一个主题
 - en: '[Bitcoin Charts example](bitcoincharts_example.html "previous chapter")'
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: '[比特币图表示例](bitcoincharts_example.html "上一章")'
 - en: Next topic
+  id: totrans-10
   prefs:
   - PREF_H4
   type: TYPE_NORMAL
+  zh: 下一个主题
 - en: '[twitter – Twitter feed reference](twitter_ref.html "next chapter")'
+  id: totrans-11
   prefs: []
   type: TYPE_NORMAL
+  zh: '[twitter – Twitter feed reference](twitter_ref.html "下一章")'
 - en: This Page
+  id: totrans-12
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 本页面
 - en: '[Show Source](_sources/twitter.txt)'
+  id: totrans-13
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[显示源代码](_sources/twitter.txt)'
 - en: Quick search
+  id: totrans-14
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 快速搜索
 - en: Enter search terms or a module, class or function name.
+  id: totrans-15
   prefs: []
   type: TYPE_NORMAL
+  zh: 输入搜索项或模块、类或函数名称。
 - en: Navigation
+  id: totrans-16
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 导航
 - en: '[index](genindex.html "General Index")'
+  id: totrans-17
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[索引](genindex.html "通用索引")'
 - en: '[modules](py-modindex.html "Python Module Index") |'
+  id: totrans-18
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[模块](py-modindex.html "Python 模块索引") |'
 - en: '[next](twitter_ref.html "twitter – Twitter feed reference") |'
+  id: totrans-19
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[下一页](twitter_ref.html "twitter – Twitter feed reference") |'
 - en: '[previous](bitcoincharts_example.html "Bitcoin Charts example") |'
+  id: totrans-20
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[前一页](bitcoincharts_example.html "比特币图表示例") |'
 - en: '[PyAlgoTrade 0.20 documentation](index.html) »'
+  id: totrans-21
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[PyAlgoTrade 0.20 文档](index.html) »'

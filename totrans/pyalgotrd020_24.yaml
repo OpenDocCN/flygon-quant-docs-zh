@@ -1,154 +1,233 @@
 - en: twitter – Twitter feed reference
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: twitter – Twitter feed reference
 - en: 原文：[https://gbeced.github.io/pyalgotrade/docs/v0.20/html/twitter_ref.html](https://gbeced.github.io/pyalgotrade/docs/v0.20/html/twitter_ref.html)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://gbeced.github.io/pyalgotrade/docs/v0.20/html/twitter_ref.html](https://gbeced.github.io/pyalgotrade/docs/v0.20/html/twitter_ref.html)
 - en: '## Feed'
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: '## Feed'
 - en: '*class* `pyalgotrade.twitter.feed.``TwitterFeed`(*consumerKey*, *consumerSecret*,
     *accessToken*, *accessTokenSecret*, *track=*[], *follow=*[], *languages=*[])'
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: '*类* `pyalgotrade.twitter.feed.``TwitterFeed`(*consumerKey*, *consumerSecret*,
+    *accessToken*, *accessTokenSecret*, *track=*[], *follow=*[], *languages=*[])'
 - en: 'Bases: `pyalgotrade.observer.Subject`'
+  id: totrans-4
   prefs: []
   type: TYPE_NORMAL
+  zh: '基类: `pyalgotrade.observer.Subject`'
 - en: Class responsible for connecting to Twitter’s public stream API and dispatching
     events. Check [https://dev.twitter.com/docs/streaming-apis/streams/public](https://dev.twitter.com/docs/streaming-apis/streams/public)
     for more information.
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: 负责连接到Twitter的公共流API并分发事件的类。有关更多信息，请查看[https://dev.twitter.com/docs/streaming-apis/streams/public](https://dev.twitter.com/docs/streaming-apis/streams/public)。
 - en: '| Parameters: |'
+  id: totrans-6
   prefs: []
   type: TYPE_TB
+  zh: '| 参数: |'
 - en: '**consumerKey** (*string.*) – Consumer key.'
+  id: totrans-7
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**consumerKey** (*字符串.*) – 消费者密钥。'
 - en: '**consumerSecret** (*string.*) – Consumer secret.'
+  id: totrans-8
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**consumerSecret** (*字符串.*) – 消费者密钥。'
 - en: '**accessToken** (*string.*) – Access token.'
+  id: totrans-9
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**accessToken** (*字符串.*) – 访问令牌。'
 - en: '**accessTokenSecret** (*string.*) – Access token secret.'
+  id: totrans-10
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**accessTokenSecret** (*字符串.*) – 访问令牌密钥。'
 - en: '**track** (*list.*) – A list of phrases which will be used to determine what
     Tweets will be delivered on the stream. A phrase may be one or more terms separated
     by spaces, and a phrase will match if all of the terms in the phrase are present
     in the Tweet, regardless of order and ignoring case.'
+  id: totrans-11
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**track** (*列表.*) – 用于确定将在流上发布哪些推文的短语列表。一个短语可以是一个或多个由空格分隔的术语，并且如果短语中的所有术语都出现在推文中，则匹配短语，无论顺序如何并且忽略大小写。'
 - en: '**follow** (*list.*) – A list of user IDs, indicating the users whose Tweets
     should be delivered on the stream. Following protected users is not supported.'
+  id: totrans-12
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**follow** (*列表.*) – 一个用户ID列表，表示应该在流上发布推文的用户。不支持关注受保护的用户。'
 - en: '**languages** (*list.*) – A list of language IDs a defined in [http://tools.ietf.org/html/bcp47](http://tools.ietf.org/html/bcp47).'
+  id: totrans-13
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**languages** (*列表.*) – 语言ID列表，定义在[http://tools.ietf.org/html/bcp47](http://tools.ietf.org/html/bcp47)中。'
 - en: '|'
+  id: totrans-14
   prefs: []
   type: TYPE_NORMAL
+  zh: '|'
 - en: Note
+  id: totrans-15
   prefs: []
   type: TYPE_NORMAL
+  zh: 注
 - en: Go to [http://dev.twitter.com](http://dev.twitter.com) and create an app. The
     consumer key and secret will be generated for you after that.
+  id: totrans-16
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 转到[http://dev.twitter.com](http://dev.twitter.com)并创建一个应用程序。之后，消费者密钥和密钥将为您生成。
 - en: Create an access token under the “Your access token” section.
+  id: totrans-17
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 在“您的访问令牌”部分创建一个访问令牌。
 - en: At least **track** or **follow** have to be set.
+  id: totrans-18
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 至少**track**或**follow**必须设置。
 - en: '`subscribe`(*callback*)'
+  id: totrans-19
   prefs: []
   type: TYPE_NORMAL
+  zh: '`subscribe`(*回调*)'
 - en: 'Subscribe to Twitter events. The event handler will receive a dictionary with
     the data as defined in: [https://dev.twitter.com/docs/streaming-apis/messages#Public_stream_messages](https://dev.twitter.com/docs/streaming-apis/messages#Public_stream_messages).'
+  id: totrans-20
   prefs: []
   type: TYPE_NORMAL
+  zh: 订阅Twitter事件。事件处理程序将接收一个与[https://dev.twitter.com/docs/streaming-apis/messages#Public_stream_messages](https://dev.twitter.com/docs/streaming-apis/messages#Public_stream_messages)中定义的数据相符的字典。
 - en: '[Table Of Contents](index.html)'
+  id: totrans-21
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: '[目录](index.html)'
 - en: '[twitter – Twitter feed reference](#)'
+  id: totrans-22
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[twitter – Twitter feed reference](#)'
 - en: '[Feed](#module-pyalgotrade.twitter.feed)'
+  id: totrans-23
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[Feed](#module-pyalgotrade.twitter.feed)'
 - en: Previous topic
+  id: totrans-24
   prefs:
   - PREF_H4
   type: TYPE_NORMAL
+  zh: 上一个主题
 - en: '[Twitter support](twitter.html "previous chapter")'
+  id: totrans-25
   prefs: []
   type: TYPE_NORMAL
+  zh: '[Twitter支持](twitter.html "上一章节")'
 - en: Next topic
+  id: totrans-26
   prefs:
   - PREF_H4
   type: TYPE_NORMAL
+  zh: 下一个主题
 - en: '[Twitter Example](twitter_example.html "next chapter")'
+  id: totrans-27
   prefs: []
   type: TYPE_NORMAL
+  zh: '[Twitter示例](twitter_example.html "下一章节")'
 - en: This Page
+  id: totrans-28
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 此页面
 - en: '[Show Source](_sources/twitter_ref.txt)'
+  id: totrans-29
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[显示源代码](_sources/twitter_ref.txt)'
 - en: Quick search
+  id: totrans-30
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 快速搜索
 - en: Enter search terms or a module, class or function name.
+  id: totrans-31
   prefs: []
   type: TYPE_NORMAL
+  zh: 输入搜索词或模块、类或函数名称。
 - en: Navigation
+  id: totrans-32
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 导航
 - en: '[index](genindex.html "General Index")'
+  id: totrans-33
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[索引](genindex.html "通用索引")'
 - en: '[modules](py-modindex.html "Python Module Index") |'
+  id: totrans-34
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[模块](py-modindex.html "Python模块索引") |'
 - en: '[next](twitter_example.html "Twitter Example") |'
+  id: totrans-35
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[下一个](twitter_example.html "Twitter示例") |'
 - en: '[previous](twitter.html "Twitter support") |'
+  id: totrans-36
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[前一页](twitter.html "Twitter支持") |'
 - en: '[PyAlgoTrade 0.20 documentation](index.html) »'
+  id: totrans-37
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[PyAlgoTrade 0.20文档](index.html) »'
 - en: '[Twitter support](twitter.html) »'
+  id: totrans-38
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[Twitter支持](twitter.html) »'
