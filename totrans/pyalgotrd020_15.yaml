@@ -1,8 +1,10 @@
 - en: Event profiler
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
 - en: 原文：[https://gbeced.github.io/pyalgotrade/docs/v0.20/html/eventprofiler.html](https://gbeced.github.io/pyalgotrade/docs/v0.20/html/eventprofiler.html)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
@@ -11,261 +13,359 @@
     future equity prices. The event profiler scans over historical data for a specified
     event and then calculates the impact of that event on the equity prices in the
     past and the future over a certain lookback period.
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
 - en: '**The goal of this tool is to help you quickly validate an idea, before moving
     forward with the backtesting process.**'
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
 - en: '*class* `pyalgotrade.eventprofiler.``Results`(*eventsDict*, *lookBack*, *lookForward*)'
+  id: totrans-4
   prefs: []
   type: TYPE_NORMAL
 - en: 'Bases: `object`'
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
 - en: Results from the profiler.
+  id: totrans-6
   prefs: []
   type: TYPE_NORMAL
 - en: '`getEventCount`()'
+  id: totrans-7
   prefs: []
   type: TYPE_NORMAL
 - en: Returns the number of events occurred. Events that are on the boundary are skipped.
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
 - en: '*class* `pyalgotrade.eventprofiler.``Predicate`'
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
 - en: 'Bases: `object`'
+  id: totrans-10
   prefs: []
   type: TYPE_NORMAL
 - en: Base class for event identification. You should subclass this to implement the
     event identification logic.
+  id: totrans-11
   prefs: []
   type: TYPE_NORMAL
 - en: '`eventOccurred`(*instrument*, *bards*)'
+  id: totrans-12
   prefs: []
   type: TYPE_NORMAL
 - en: Override (**mandatory**) to determine if an event took place in the last bar
     (bards[-1]).
+  id: totrans-13
   prefs: []
   type: TYPE_NORMAL
 - en: '| Parameters: |'
+  id: totrans-14
   prefs: []
   type: TYPE_TB
 - en: '**instrument** (*string.*) – Instrument identifier.'
+  id: totrans-15
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: '**bards** ([`pyalgotrade.dataseries.bards.BarDataSeries`](dataseries.html#pyalgotrade.dataseries.bards.BarDataSeries
     "pyalgotrade.dataseries.bards.BarDataSeries").) – The BarDataSeries for the given
     instrument.'
+  id: totrans-16
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: '|'
+  id: totrans-17
   prefs: []
   type: TYPE_NORMAL
 - en: '| Return type: | boolean. |'
+  id: totrans-18
   prefs: []
   type: TYPE_TB
 - en: '*class* `pyalgotrade.eventprofiler.``Profiler`(*predicate*, *lookBack*, *lookForward*)'
+  id: totrans-19
   prefs: []
   type: TYPE_NORMAL
 - en: 'Bases: `object`'
+  id: totrans-20
   prefs: []
   type: TYPE_NORMAL
 - en: This class is responsible for scanning over historical data and analyzing returns
     before and after the events.
+  id: totrans-21
   prefs: []
   type: TYPE_NORMAL
 - en: '| Parameters: |'
+  id: totrans-22
   prefs: []
   type: TYPE_TB
 - en: '**predicate** ([`Predicate`](#pyalgotrade.eventprofiler.Predicate "pyalgotrade.eventprofiler.Predicate").)
     – A [`Predicate`](#pyalgotrade.eventprofiler.Predicate "pyalgotrade.eventprofiler.Predicate")
     subclass responsible for identifying events.'
+  id: totrans-23
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: '**lookBack** (*int.*) – The number of bars before the event to analyze. Must
     be > 0.'
+  id: totrans-24
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: '**lookForward** (*int.*) – The number of bars after the event to analyze. Must
     be > 0.'
+  id: totrans-25
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: '|'
+  id: totrans-26
   prefs: []
   type: TYPE_NORMAL
 - en: '`getResults`()'
+  id: totrans-27
   prefs: []
   type: TYPE_NORMAL
 - en: Returns the results of the analysis.
+  id: totrans-28
   prefs: []
   type: TYPE_NORMAL
 - en: '| Return type: | [`Results`](#pyalgotrade.eventprofiler.Results "pyalgotrade.eventprofiler.Results").
     |'
+  id: totrans-29
   prefs: []
   type: TYPE_TB
 - en: '`run`(*feed*, *useAdjustedCloseForReturns=True*)'
+  id: totrans-30
   prefs: []
   type: TYPE_NORMAL
 - en: Runs the analysis using the bars supplied by the feed.
+  id: totrans-31
   prefs: []
   type: TYPE_NORMAL
 - en: '| Parameters: |'
+  id: totrans-32
   prefs: []
   type: TYPE_TB
 - en: '**barFeed** (`pyalgotrade.barfeed.BarFeed`.) – The bar feed to use to run the
     analysis.'
+  id: totrans-33
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: '**useAdjustedCloseForReturns** (*boolean.*) – True if adjusted close values
     should be used to calculate returns.'
+  id: totrans-34
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: '|'
+  id: totrans-35
   prefs: []
   type: TYPE_NORMAL
 - en: '`pyalgotrade.eventprofiler.``plot`(*profilerResults*)'
+  id: totrans-36
   prefs: []
   type: TYPE_NORMAL
 - en: Plots the result of the analysis.
+  id: totrans-37
   prefs: []
   type: TYPE_NORMAL
 - en: '| Parameters: | **profilerResults** ([`Results`](#pyalgotrade.eventprofiler.Results
     "pyalgotrade.eventprofiler.Results").) – The result of the analysis |'
+  id: totrans-38
   prefs: []
   type: TYPE_TB
 - en: Example
+  id: totrans-39
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
 - en: 'The following example is inspired on the ‘Buy-on-Gap Model’ from Ernie Chan’s
     book: ‘Algorithmic Trading: Winning Strategies and Their Rationale’:'
+  id: totrans-40
   prefs: []
   type: TYPE_NORMAL
+  zh: '以下示例受到Ernie Chan的书籍《Algorithmic Trading: Winning Strategies and Their Rationale》中的“买入跳空模型”的启发：'
 - en: The idea is to select a stock near the market open whose returns from their
     previous day’s lows to today’s open are lower that one standard deviation. The
     standard deviation is computed using the daily close-to-close returns of the last
     90 days. These are the stocks that “gapped down”.
+  id: totrans-41
   prefs:
   - PREF_BQ
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 思路是选择在市场开盘附近的一只股票，其从前一日最低点到今日开盘的收益低于一个标准偏差。标准偏差是使用过去90天的每日收盘至收盘收益率计算的。这些是“跳空下跌”的股票。
 - en: This is narrowed down by requiring the open price to be higher than the 20-day
     moving average of the closing price.
+  id: totrans-42
   prefs:
   - PREF_BQ
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 这是通过要求开盘价高于收盘价的20日移动平均线来缩小范围的。
 - en: '[PRE0]'
+  id: totrans-43
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: 'The code is doing 4 things:'
+  id: totrans-44
   prefs: []
   type: TYPE_NORMAL
+  zh: 代码正在做4件事情：
 - en: Declaring a [`Predicate`](#pyalgotrade.eventprofiler.Predicate "pyalgotrade.eventprofiler.Predicate")
     that implements the ‘Buy-on-Gap Model’ event identification.
+  id: totrans-45
   prefs:
   - PREF_BQ
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 声明一个[`Predicate`](#pyalgotrade.eventprofiler.Predicate "pyalgotrade.eventprofiler.Predicate")，实现“买入跳空模型”事件识别。
 - en: Loading bars for some stocks.
+  id: totrans-46
   prefs:
   - PREF_BQ
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 为某些股票加载进度条。
 - en: Running the analysis.
+  id: totrans-47
   prefs:
   - PREF_BQ
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 运行分析。
 - en: Plotting the results.
+  id: totrans-48
   prefs:
   - PREF_BQ
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 绘制结果。
 - en: 'This is what the output should look like:'
+  id: totrans-49
   prefs: []
   type: TYPE_NORMAL
+  zh: 输出应如下所示：
 - en: '![_images/eventstudy.png](../Images/a03a792a6355509ff13bc5bf73fd3938.png)'
+  id: totrans-50
   prefs: []
   type: TYPE_IMG
+  zh: '![_images/eventstudy.png](../Images/a03a792a6355509ff13bc5bf73fd3938.png)'
 - en: '[PRE1]'
+  id: totrans-51
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE1]'
 - en: Note that **Cummulative returns are normalized to the time of the event**.
+  id: totrans-52
   prefs: []
   type: TYPE_NORMAL
+  zh: 请注意**累积收益已归一化至事件发生时间**。
 - en: '[Table Of Contents](index.html)'
+  id: totrans-53
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: '[目录](index.html)'
 - en: '[Event profiler](#)'
+  id: totrans-54
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[事件分析器](#)'
 - en: '[Example](#example)'
+  id: totrans-55
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[示例](#示例)'
 - en: Previous topic
+  id: totrans-56
   prefs:
   - PREF_H4
   type: TYPE_NORMAL
+  zh: 上一个主题
 - en: '[Tools](tools.html "previous chapter")'
+  id: totrans-57
   prefs: []
   type: TYPE_NORMAL
+  zh: '[工具](tools.html "上一章节")'
 - en: Next topic
+  id: totrans-58
   prefs:
   - PREF_H4
   type: TYPE_NORMAL
+  zh: 下一个主题
 - en: '[Bitcoin](bitcoin.html "next chapter")'
+  id: totrans-59
   prefs: []
   type: TYPE_NORMAL
+  zh: '[比特币](bitcoin.html "下一章节")'
 - en: This Page
+  id: totrans-60
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 本页
 - en: '[Show Source](_sources/eventprofiler.txt)'
+  id: totrans-61
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[显示源代码](_sources/eventprofiler.txt)'
 - en: Quick search
+  id: totrans-62
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 快速搜索
 - en: Enter search terms or a module, class or function name.
+  id: totrans-63
   prefs: []
   type: TYPE_NORMAL
+  zh: 输入搜索词或模块、类或函数名称。
 - en: Navigation
+  id: totrans-64
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 导航
 - en: '[index](genindex.html "General Index")'
+  id: totrans-65
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[索引](genindex.html "总索引")'
 - en: '[modules](py-modindex.html "Python Module Index") |'
+  id: totrans-66
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[模块](py-modindex.html "Python模块索引") |'
 - en: '[next](bitcoin.html "Bitcoin") |'
+  id: totrans-67
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[下一个](bitcoin.html "比特币") |'
 - en: '[previous](tools.html "Tools") |'
+  id: totrans-68
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[上一个](tools.html "工具") |'
 - en: '[PyAlgoTrade 0.20 documentation](index.html) »'
+  id: totrans-69
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[PyAlgoTrade 0.20 文档](index.html) »'

@@ -3,195 +3,239 @@
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 优化器 – 并行优化器
 - en: 原文：[https://gbeced.github.io/pyalgotrade/docs/v0.20/html/optimizer.html](https://gbeced.github.io/pyalgotrade/docs/v0.20/html/optimizer.html)
   id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://gbeced.github.io/pyalgotrade/docs/v0.20/html/optimizer.html](https://gbeced.github.io/pyalgotrade/docs/v0.20/html/optimizer.html)
 - en: '*class* `pyalgotrade.optimizer.server.``Results`(*parameters*, *result*)'
   id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: '*类* `pyalgotrade.optimizer.server.``Results`（*parameters*, *result*）'
 - en: 'Bases: `object`'
   id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: 基类：`object`
 - en: The results of the strategy executions.
   id: totrans-4
   prefs: []
   type: TYPE_NORMAL
+  zh: 策略执行的结果。
 - en: '`getParameters`()'
   id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: '`getParameters`()'
 - en: Returns a sequence of parameter values.
   id: totrans-6
   prefs: []
   type: TYPE_NORMAL
+  zh: 返回参数值序列。
 - en: '`getResult`()'
   id: totrans-7
   prefs: []
   type: TYPE_NORMAL
+  zh: '`getResult`() '
 - en: Returns the result for a given set of parameters.
   id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: 返回给定参数集的结果。
 - en: '`pyalgotrade.optimizer.server.``serve`(*barFeed*, *strategyParameters*, *address*,
     *port*, *batchSize=200*)'
   id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: '`pyalgotrade.optimizer.server.``serve`(*barFeed*, *strategyParameters*, *address*,
+    *port*, *batchSize=200*)'
 - en: Executes a server that will provide bars and strategy parameters for workers
     to use.
   id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: 执行一个服务器，该服务器将为工作者提供K线数据和策略参数。
 - en: '| Parameters: |'
   id: totrans-11
   prefs: []
   type: TYPE_TB
+  zh: '| 参数： |'
 - en: '**barFeed** (`pyalgotrade.barfeed.BarFeed`.) – The bar feed that each worker
     will use to backtest the strategy.'
   id: totrans-12
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**barFeed**（`pyalgotrade.barfeed.BarFeed`）– 每个工作者将用于回测策略的K线数据源。'
 - en: '**strategyParameters** – The set of parameters to use for backtesting. An iterable
     object where **each element is a tuple that holds parameter values**.'
   id: totrans-13
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**strategyParameters** – 用于回测的参数集。一个可迭代对象，其中**每个元素都是一个保存参数值的元组**。'
 - en: '**address** (*string.*) – The address to listen for incoming worker connections.'
   id: totrans-14
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**address**（*string.*）– 监听传入工作连接的地址。'
 - en: '**port** (*int.*) – The port to listen for incoming worker connections.'
   id: totrans-15
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**端口**（*int.*）– 监听传入工作连接的端口。'
 - en: '**batchSize** (*int.*) – The number of strategy executions that are delivered
     to each worker.'
   id: totrans-16
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**batchSize**（*int.*）– 交付给每个工作者的策略执行数量。'
 - en: '|'
   id: totrans-17
   prefs: []
   type: TYPE_NORMAL
+  zh: '|'
 - en: '| Return type: | A [`Results`](#pyalgotrade.optimizer.server.Results "pyalgotrade.optimizer.server.Results")
     instance with the best results found or None if no results were obtained. |'
   id: totrans-18
   prefs: []
   type: TYPE_TB
+  zh: '| 返回类型： | 一个[`Results`](#pyalgotrade.optimizer.server.Results "pyalgotrade.optimizer.server.Results")实例，其中包含找到的最佳结果，如果没有获得结果，则为None。
+    |'
 - en: '`pyalgotrade.optimizer.worker.``run`(*strategyClass*, *address*, *port*, *workerCount=None*,
     *workerName=None*)'
   id: totrans-19
   prefs: []
   type: TYPE_NORMAL
+  zh: '`pyalgotrade.optimizer.worker.``run`(*strategyClass*, *address*, *port*, *workerCount=None*,
+    *workerName=None*)'
 - en: Executes one or more worker processes that will run a strategy with the bars
     and parameters supplied by the server.
   id: totrans-20
   prefs: []
   type: TYPE_NORMAL
+  zh: 执行一个或多个工作进程，这些进程将使用服务器提供的K线数据和参数运行策略。
 - en: '| Parameters: |'
   id: totrans-21
   prefs: []
   type: TYPE_TB
+  zh: '| 参数： |'
 - en: '**strategyClass** – The strategy class.'
   id: totrans-22
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**strategyClass** – 策略类。'
 - en: '**address** (*string.*) – The address of the server.'
   id: totrans-23
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**address**（*string.*）– 服务器地址。'
 - en: '**port** (*int.*) – The port where the server is listening for incoming connections.'
   id: totrans-24
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**port**（*int.*）– 服务器监听传入连接的端口。'
 - en: '**workerCount** (*int.*) – The number of worker processes to run. If None then
     as many workers as CPUs are used.'
   id: totrans-25
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**workerCount**（*int.*）– 要运行的工作者进程数。如果为None，则使用与CPU数量相同的工作者。'
 - en: '**workerName** (*string.*) – A name for the worker. A name that identifies
     the worker. If None, the hostname is used.'
   id: totrans-26
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**workerName**（*string.*）– 工作者的名称。标识工作者的名称。如果为None，则使用主机名。'
 - en: '|'
   id: totrans-27
   prefs: []
   type: TYPE_NORMAL
+  zh: '|'
 - en: '`pyalgotrade.optimizer.local.``run`(*strategyClass*, *barFeed*, *strategyParameters*,
     *workerCount=None*, *logLevel=40*, *batchSize=200*)'
   id: totrans-28
   prefs: []
   type: TYPE_NORMAL
+  zh: '`pyalgotrade.optimizer.local.``run`(*strategyClass*, *barFeed*, *strategyParameters*,
+    *workerCount=None*, *logLevel=40*, *batchSize=200*)'
 - en: Executes many instances of a strategy in parallel and finds the parameters that
     yield the best results.
   id: totrans-29
   prefs: []
   type: TYPE_NORMAL
+  zh: 并行执行多个策略实例，并找到产生最佳结果的参数。
 - en: '| Parameters: |'
   id: totrans-30
   prefs: []
   type: TYPE_TB
+  zh: '| 参数： |'
 - en: '**strategyClass** – The strategy class.'
   id: totrans-31
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**strategyClass** – 策略类。'
 - en: '**barFeed** (`pyalgotrade.barfeed.BarFeed`.) – The bar feed to use to backtest
     the strategy.'
   id: totrans-32
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**barFeed**（`pyalgotrade.barfeed.BarFeed`）– 用于回测策略的K线数据源。'
 - en: '**strategyParameters** – The set of parameters to use for backtesting. An iterable
     object where **each element is a tuple that holds parameter values**.'
   id: totrans-33
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**strategyParameters** – 用于回测的参数集。一个可迭代对象，其中**每个元素都是一个保存参数值的元组**。'
 - en: '**workerCount** (*int.*) – The number of strategies to run in parallel. If
     None then as many workers as CPUs are used.'
   id: totrans-34
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**workerCount**（*int.*）– 并行运行的策略数量。如果为None，则使用与CPU数量相同的工作者。'
 - en: '**logLevel** – The log level. Defaults to **logging.ERROR**.'
   id: totrans-35
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**logLevel** – 日志级别。默认为**logging.ERROR**。'
 - en: '**batchSize** (*int.*) – The number of strategy executions that are delivered
     to each worker.'
   id: totrans-36
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**batchSize**（*int.*）– 交付给每个工作者的策略执行数量。'
 - en: '|'
   id: totrans-37
   prefs: []
   type: TYPE_NORMAL
+  zh: '|'
 - en: '| Return type: | A `Results` instance with the best results found. |'
   id: totrans-38
   prefs: []
   type: TYPE_TB
+  zh: '| 返回类型： | 一个`Results`实例，其中包含找到的最佳结果。 |'
 - en: Note
   id: totrans-39
   prefs: []
   type: TYPE_NORMAL
+  zh: 注意
 - en: The server component will split strategy executions in chunks which are distributed
     among the different workers. You can optionally set the chunk size by passing
     in **batchSize** to the constructor of **pyalgotrade.optimizer.xmlrpcserver.Server**.

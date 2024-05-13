@@ -1,320 +1,480 @@
 - en: Tools
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 工具
 - en: 原文：[https://gbeced.github.io/pyalgotrade/docs/v0.20/html/tools.html](https://gbeced.github.io/pyalgotrade/docs/v0.20/html/tools.html)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://gbeced.github.io/pyalgotrade/docs/v0.20/html/tools.html](https://gbeced.github.io/pyalgotrade/docs/v0.20/html/tools.html)
 - en: '## Quandl'
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: '## Quandl'
 - en: '`pyalgotrade.tools.quandl.``build_feed`(*sourceCode*, *tableCodes*, *fromYear*,
     *toYear*, *storage*, *frequency=86400*, *timezone=None*, *skipErrors=False*, *authToken=None*,
     *columnNames={}*, *forceDownload=False*, *skipMalformedBars=False*)'
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: '`pyalgotrade.tools.quandl.``build_feed`（*sourceCode*，*tableCodes*，*fromYear*，*toYear*，*storage*，*frequency=86400*，*timezone=None*，*skipErrors=False*，*authToken=None*，*columnNames={}*，*forceDownload=False*，*skipMalformedBars=False*）'
 - en: Build and load a [`pyalgotrade.barfeed.quandlfeed.Feed`](barfeed.html#pyalgotrade.barfeed.quandlfeed.Feed
     "pyalgotrade.barfeed.quandlfeed.Feed") using CSV files downloaded from Quandl.
     CSV files are downloaded if they haven’t been downloaded before.
+  id: totrans-4
   prefs: []
   type: TYPE_NORMAL
+  zh: 使用从 Quandl 下载的 CSV 文件构建和加载 [`pyalgotrade.barfeed.quandlfeed.Feed`](barfeed.html#pyalgotrade.barfeed.quandlfeed.Feed)。如果以前未下载过
+    CSV 文件，则会下载它们。
 - en: '| Parameters: |'
+  id: totrans-5
   prefs: []
   type: TYPE_TB
+  zh: '| 参数: |'
 - en: '**sourceCode** (*string.*) – The dataset source code.'
+  id: totrans-6
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**sourceCode**（*字符串.*）- 数据集来源代码。'
 - en: '**tableCodes** (*list.*) – The dataset table codes.'
+  id: totrans-7
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**tableCodes**（*列表.*）- 数据集表代码。'
 - en: '**fromYear** (*int.*) – The first year.'
+  id: totrans-8
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**fromYear**（*整数.*）- 第一年。'
 - en: '**toYear** (*int.*) – The last year.'
+  id: totrans-9
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**toYear**（*整数.*）- 最后一年。'
 - en: '**storage** (*string.*) – The path were the files will be loaded from, or downloaded
     to.'
+  id: totrans-10
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**storage**（*字符串.*）- 文件加载或下载的路径。'
 - en: '**frequency** – The frequency of the bars. Only **pyalgotrade.bar.Frequency.DAY**
     or **pyalgotrade.bar.Frequency.WEEK** are supported.'
+  id: totrans-11
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**frequency** – bars 的频率。仅支持 **pyalgotrade.bar.Frequency.DAY** 或 **pyalgotrade.bar.Frequency.WEEK**。'
 - en: '**timezone** (*A pytz timezone.*) – The default timezone to use to localize
     bars. Check [`pyalgotrade.marketsession`](marketsession.html#module-pyalgotrade.marketsession
     "pyalgotrade.marketsession").'
+  id: totrans-12
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**timezone**（*pytz 时区.*）- 用于本地化 bars 的默认时区。请检查 [`pyalgotrade.marketsession`](marketsession.html#module-pyalgotrade.marketsession
+    "pyalgotrade.marketsession")。'
 - en: '**skipErrors** (*boolean.*) – True to keep on loading/downloading files in
     case of errors.'
+  id: totrans-13
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**skipErrors**（*布尔值.*）- 如果发生错误，继续加载/下载文件。'
 - en: '**authToken** (*string.*) – Optional. An authentication token needed if you’re
     doing more than 50 calls per day.'
+  id: totrans-14
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**authToken**（*字符串.*）- 可选。如果每天的调用次数超过 50 次，则需要身份验证令牌。'
 - en: '**columnNames** (*dict.*) –'
+  id: totrans-15
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**columnNames**（*字典.*）-'
 - en: 'Optional. A dictionary to map column names. Valid key values are:'
+  id: totrans-16
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 可选。一个字典，用于映射列名。有效的键值为：
 - en: datetime
+  id: totrans-17
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: datetime
 - en: open
+  id: totrans-18
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: open
 - en: high
+  id: totrans-19
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: high
 - en: low
+  id: totrans-20
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: low
 - en: close
+  id: totrans-21
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: close
 - en: volume
+  id: totrans-22
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: volume
 - en: adj_close
+  id: totrans-23
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: adj_close
 - en: '**skipMalformedBars** (*boolean.*) – True to skip errors while parsing bars.'
+  id: totrans-24
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**skipMalformedBars**（*布尔值.*）- 如果在解析 bars 时出现错误，则为 True。'
 - en: '|'
+  id: totrans-25
   prefs: []
   type: TYPE_NORMAL
+  zh: '|'
 - en: '| Return type: | [`pyalgotrade.barfeed.quandlfeed.Feed`](barfeed.html#pyalgotrade.barfeed.quandlfeed.Feed
     "pyalgotrade.barfeed.quandlfeed.Feed"). |'
+  id: totrans-26
   prefs: []
   type: TYPE_TB
+  zh: '| 返回类型: | [`pyalgotrade.barfeed.quandlfeed.Feed`](barfeed.html#pyalgotrade.barfeed.quandlfeed.Feed)。
+    |'
 - en: '`pyalgotrade.tools.quandl.``download_daily_bars`(*sourceCode*, *tableCode*,
     *year*, *csvFile*, *authToken=None*)'
+  id: totrans-27
   prefs: []
   type: TYPE_NORMAL
+  zh: '`pyalgotrade.tools.quandl.``download_daily_bars`（*sourceCode*，*tableCode*，*year*，*csvFile*，*authToken=None*）'
 - en: Download daily bars from Quandl for a given year.
+  id: totrans-28
   prefs: []
   type: TYPE_NORMAL
+  zh: 从 Quandl 下载给定年份的每日 bars。
 - en: '| Parameters: |'
+  id: totrans-29
   prefs: []
   type: TYPE_TB
+  zh: '| 参数: |'
 - en: '**sourceCode** (*string.*) – The dataset’s source code.'
+  id: totrans-30
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**sourceCode**（*字符串.*）- 数据集的来源代码。'
 - en: '**tableCode** (*string.*) – The dataset’s table code.'
+  id: totrans-31
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**tableCode**（*字符串.*）- 数据集的表代码。'
 - en: '**year** (*int.*) – The year.'
+  id: totrans-32
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**year**（*整数.*）- 年份。'
 - en: '**csvFile** (*string.*) – The path to the CSV file to write.'
+  id: totrans-33
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**csvFile**（*字符串.*）- 要写入的 CSV 文件的路径。'
 - en: '**authToken** (*string.*) – Optional. An authentication token needed if you’re
     doing more than 50 calls per day.'
+  id: totrans-34
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**authToken**（*字符串.*）- 可选。如果每天的调用次数超过 50 次，则需要身份验证令牌。'
 - en: '|'
+  id: totrans-35
   prefs: []
   type: TYPE_NORMAL
+  zh: '|'
 - en: '`pyalgotrade.tools.quandl.``download_weekly_bars`(*sourceCode*, *tableCode*,
     *year*, *csvFile*, *authToken=None*)'
+  id: totrans-36
   prefs: []
   type: TYPE_NORMAL
+  zh: '`pyalgotrade.tools.quandl.``download_weekly_bars`（*sourceCode*，*tableCode*，*year*，*csvFile*，*authToken=None*）'
 - en: Download weekly bars from Quandl for a given year.
+  id: totrans-37
   prefs: []
   type: TYPE_NORMAL
+  zh: 从 Quandl 下载给定年份的每周 bars。
 - en: '| Parameters: |'
+  id: totrans-38
   prefs: []
   type: TYPE_TB
+  zh: '| 参数: |'
 - en: '**sourceCode** (*string.*) – The dataset’s source code.'
+  id: totrans-39
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**sourceCode**（*字符串.*）- 数据集的来源代码。'
 - en: '**tableCode** (*string.*) – The dataset’s table code.'
+  id: totrans-40
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**tableCode**（*字符串.*）- 数据集的表代码。'
 - en: '**year** (*int.*) – The year.'
+  id: totrans-41
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**year**（*整数.*）- 年份。'
 - en: '**csvFile** (*string.*) – The path to the CSV file to write.'
+  id: totrans-42
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**csvFile**（*字符串.*）- 要写入的 CSV 文件的路径。'
 - en: '**authToken** (*string.*) – Optional. An authentication token needed if you’re
     doing more than 50 calls per day.'
+  id: totrans-43
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**authToken**（*字符串.*）- 可选。如果每天的调用次数超过 50 次，则需要身份验证令牌。'
 - en: '|  ## BarFeed resampling'
+  id: totrans-44
   prefs: []
   type: TYPE_NORMAL
+  zh: '|  ## BarFeed 重新采样'
 - en: '`pyalgotrade.tools.resample.``resample_to_csv`(*barFeed*, *frequency*, *csvFile*)'
+  id: totrans-45
   prefs: []
   type: TYPE_NORMAL
+  zh: '`pyalgotrade.tools.resample.``resample_to_csv`（*barFeed*，*frequency*，*csvFile*）'
 - en: 'Resample a BarFeed into a CSV file grouping bars by a certain frequency. The
     resulting file can be loaded using [`pyalgotrade.barfeed.csvfeed.GenericBarFeed`](barfeed.html#pyalgotrade.barfeed.csvfeed.GenericBarFeed
     "pyalgotrade.barfeed.csvfeed.GenericBarFeed"). The CSV file will have the following
     format:'
+  id: totrans-46
   prefs: []
   type: TYPE_NORMAL
+  zh: 将 BarFeed 重采样为 CSV 文件，按照一定频率对 bars 进行分组。生成的文件可以使用 [`pyalgotrade.barfeed.csvfeed.GenericBarFeed`](barfeed.html#pyalgotrade.barfeed.csvfeed.GenericBarFeed
+    "pyalgotrade.barfeed.csvfeed.GenericBarFeed") 进行加载。CSV 文件的格式如下：
 - en: '[PRE0]'
+  id: totrans-47
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: '| Parameters: |'
+  id: totrans-48
   prefs: []
   type: TYPE_TB
+  zh: '| 参数: |'
 - en: '**barFeed** (`pyalgotrade.barfeed.BarFeed`) – The bar feed that will provide
     the bars. It should only hold bars from a single instrument.'
+  id: totrans-49
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**barFeed** (`pyalgotrade.barfeed.BarFeed`) – 将提供数据的 bar feed。它应该只包含单个工具的数据。'
 - en: '**frequency** – The grouping frequency in seconds. Must be > 0.'
+  id: totrans-50
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**frequency** – 分组的频率，单位为秒。必须 > 0。'
 - en: '**csvFile** (*string.*) – The path to the CSV file to write.'
+  id: totrans-51
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**csvFile** (*字符串.*) – 要写入的 CSV 文件路径。'
 - en: '|'
+  id: totrans-52
   prefs: []
   type: TYPE_NORMAL
+  zh: '|'
 - en: Note
+  id: totrans-53
   prefs: []
   type: TYPE_NORMAL
+  zh: 注意
 - en: Datetimes are stored without timezone information.
+  id: totrans-54
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 时间将不包含时区信息。
 - en: '**Adj Close** column may be empty if the input bar feed doesn’t have that info.'
+  id: totrans-55
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 如果输入的 bar feed 没有该信息，则**Adj Close** 列可能为空。
 - en: 'Supported resampling frequencies are:'
+  id: totrans-56
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 支持的重采样频率包括：
 - en: Less than bar.Frequency.DAY
+  id: totrans-57
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 少于 bar.Frequency.DAY
 - en: bar.Frequency.DAY
+  id: totrans-58
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: bar.Frequency.DAY
 - en: bar.Frequency.MONTH
+  id: totrans-59
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: bar.Frequency.MONTH
 - en: '[Table Of Contents](index.html)'
+  id: totrans-60
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: '[目录](index.html)'
 - en: '[Tools](#)'
+  id: totrans-61
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[工具](#)'
 - en: '[Quandl](#module-pyalgotrade.tools.quandl)'
+  id: totrans-62
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[Quandl](#module-pyalgotrade.tools.quandl)'
 - en: '[BarFeed resampling](#module-pyalgotrade.tools.resample)'
+  id: totrans-63
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[BarFeed 重采样](#module-pyalgotrade.tools.resample)'
 - en: Previous topic
+  id: totrans-64
   prefs:
   - PREF_H4
   type: TYPE_NORMAL
+  zh: 上一个主题
 - en: '[marketsession – Market sessions](marketsession.html "previous chapter")'
+  id: totrans-65
   prefs: []
   type: TYPE_NORMAL
+  zh: '[市场交易时间 - 市场交易时间](marketsession.html "上一章节")'
 - en: Next topic
+  id: totrans-66
   prefs:
   - PREF_H4
   type: TYPE_NORMAL
+  zh: 下一个主题
 - en: '[Event profiler](eventprofiler.html "next chapter")'
+  id: totrans-67
   prefs: []
   type: TYPE_NORMAL
+  zh: '[事件分析器](eventprofiler.html "下一章节")'
 - en: This Page
+  id: totrans-68
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 本页
 - en: '[Show Source](_sources/tools.txt)'
+  id: totrans-69
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[显示源代码](_sources/tools.txt)'
 - en: Quick search
+  id: totrans-70
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 快速搜索
 - en: Enter search terms or a module, class or function name.
+  id: totrans-71
   prefs: []
   type: TYPE_NORMAL
+  zh: 输入搜索项或模块、类或函数名称。
 - en: Navigation
+  id: totrans-72
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 导航
 - en: '[index](genindex.html "General Index")'
+  id: totrans-73
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[索引](genindex.html "总目录")'
 - en: '[modules](py-modindex.html "Python Module Index") |'
+  id: totrans-74
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[模块](py-modindex.html "Python 模块索引") |'
 - en: '[next](eventprofiler.html "Event profiler") |'
+  id: totrans-75
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[下一章节](eventprofiler.html "事件分析器") |'
 - en: '[previous](marketsession.html "marketsession – Market sessions") |'
+  id: totrans-76
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[上一章节](marketsession.html "市场交易时间 - 市场交易时间") |'
 - en: '[PyAlgoTrade 0.20 documentation](index.html) »'
+  id: totrans-77
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[PyAlgoTrade 0.20 文档](index.html) »'

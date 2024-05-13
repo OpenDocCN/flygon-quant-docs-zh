@@ -1,156 +1,253 @@
 - en: marketsession – Market sessions
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: marketsession – 市场交易时段
 - en: 原文：[https://gbeced.github.io/pyalgotrade/docs/v0.20/html/marketsession.html](https://gbeced.github.io/pyalgotrade/docs/v0.20/html/marketsession.html)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://gbeced.github.io/pyalgotrade/docs/v0.20/html/marketsession.html](https://gbeced.github.io/pyalgotrade/docs/v0.20/html/marketsession.html)
 - en: '*class* `pyalgotrade.marketsession.``MarketSession`'
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: '*class* `pyalgotrade.marketsession.``MarketSession`'
 - en: 'Bases: `object`'
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: 基类：`object`
 - en: Base class for market sessions.
+  id: totrans-4
   prefs: []
   type: TYPE_NORMAL
+  zh: 市场交易时段的基类。
 - en: Note
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: 注意
 - en: This is a base class and should not be used directly.
+  id: totrans-6
   prefs: []
   type: TYPE_NORMAL
+  zh: 这是一个基类，不应直接使用。
 - en: '*classmethod* `getTimezone`()'
+  id: totrans-7
   prefs: []
   type: TYPE_NORMAL
+  zh: '*classmethod* `getTimezone`()'
 - en: Returns the pytz timezone for the market session.
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: 返回市场交易时段的 pytz 时区。
 - en: '*class* `pyalgotrade.marketsession.``NASDAQ`'
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: '*class* `pyalgotrade.marketsession.``NASDAQ`'
 - en: 'Bases: [`pyalgotrade.marketsession.MarketSession`](#pyalgotrade.marketsession.MarketSession
     "pyalgotrade.marketsession.MarketSession")'
+  id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: 基类：[`pyalgotrade.marketsession.MarketSession`](#pyalgotrade.marketsession.MarketSession
+    "pyalgotrade.marketsession.MarketSession")
 - en: NASDAQ market session.
+  id: totrans-11
   prefs: []
   type: TYPE_NORMAL
+  zh: 纳斯达克市场交易时段。
 - en: '*class* `pyalgotrade.marketsession.``NYSE`'
+  id: totrans-12
   prefs: []
   type: TYPE_NORMAL
+  zh: '*class* `pyalgotrade.marketsession.``NYSE`'
 - en: 'Bases: [`pyalgotrade.marketsession.MarketSession`](#pyalgotrade.marketsession.MarketSession
     "pyalgotrade.marketsession.MarketSession")'
+  id: totrans-13
   prefs: []
   type: TYPE_NORMAL
+  zh: 基类：[`pyalgotrade.marketsession.MarketSession`](#pyalgotrade.marketsession.MarketSession
+    "pyalgotrade.marketsession.MarketSession")
 - en: New York Stock Exchange market session.
+  id: totrans-14
   prefs: []
   type: TYPE_NORMAL
+  zh: 纽约证券交易所市场交易时段。
 - en: '*class* `pyalgotrade.marketsession.``USEquities`'
+  id: totrans-15
   prefs: []
   type: TYPE_NORMAL
+  zh: '*class* `pyalgotrade.marketsession.``USEquities`'
 - en: 'Bases: [`pyalgotrade.marketsession.MarketSession`](#pyalgotrade.marketsession.MarketSession
     "pyalgotrade.marketsession.MarketSession")'
+  id: totrans-16
   prefs: []
   type: TYPE_NORMAL
+  zh: 基类：[`pyalgotrade.marketsession.MarketSession`](#pyalgotrade.marketsession.MarketSession
+    "pyalgotrade.marketsession.MarketSession")
 - en: US Equities market session.
+  id: totrans-17
   prefs: []
   type: TYPE_NORMAL
+  zh: 美国股票市场交易时段。
 - en: '*class* `pyalgotrade.marketsession.``MERVAL`'
+  id: totrans-18
   prefs: []
   type: TYPE_NORMAL
+  zh: '*class* `pyalgotrade.marketsession.``MERVAL`'
 - en: 'Bases: [`pyalgotrade.marketsession.MarketSession`](#pyalgotrade.marketsession.MarketSession
     "pyalgotrade.marketsession.MarketSession")'
+  id: totrans-19
   prefs: []
   type: TYPE_NORMAL
+  zh: 基类：[`pyalgotrade.marketsession.MarketSession`](#pyalgotrade.marketsession.MarketSession
+    "pyalgotrade.marketsession.MarketSession")
 - en: Buenos Aires (Argentina) market session.
+  id: totrans-20
   prefs: []
   type: TYPE_NORMAL
+  zh: 布宜诺斯艾利斯（阿根廷）市场交易时段。
 - en: '*class* `pyalgotrade.marketsession.``BOVESPA`'
+  id: totrans-21
   prefs: []
   type: TYPE_NORMAL
+  zh: '*class* `pyalgotrade.marketsession.``BOVESPA`'
 - en: 'Bases: [`pyalgotrade.marketsession.MarketSession`](#pyalgotrade.marketsession.MarketSession
     "pyalgotrade.marketsession.MarketSession")'
+  id: totrans-22
   prefs: []
   type: TYPE_NORMAL
+  zh: 基类：[`pyalgotrade.marketsession.MarketSession`](#pyalgotrade.marketsession.MarketSession
+    "pyalgotrade.marketsession.MarketSession")
 - en: BOVESPA (Brazil) market session.
+  id: totrans-23
   prefs: []
   type: TYPE_NORMAL
+  zh: 巴西圣保罗证券交易所市场交易时段。
 - en: '*class* `pyalgotrade.marketsession.``FTSE`'
+  id: totrans-24
   prefs: []
   type: TYPE_NORMAL
+  zh: '*class* `pyalgotrade.marketsession.``FTSE`'
 - en: 'Bases: [`pyalgotrade.marketsession.MarketSession`](#pyalgotrade.marketsession.MarketSession
     "pyalgotrade.marketsession.MarketSession")'
+  id: totrans-25
   prefs: []
   type: TYPE_NORMAL
+  zh: 基类：[`pyalgotrade.marketsession.MarketSession`](#pyalgotrade.marketsession.MarketSession
+    "pyalgotrade.marketsession.MarketSession")
 - en: London Stock Exchange market session.
+  id: totrans-26
   prefs: []
   type: TYPE_NORMAL
+  zh: 伦敦证券交易所市场交易时段。
 - en: '*class* `pyalgotrade.marketsession.``TSE`'
+  id: totrans-27
   prefs: []
   type: TYPE_NORMAL
+  zh: '*class* `pyalgotrade.marketsession.``TSE`'
 - en: 'Bases: [`pyalgotrade.marketsession.MarketSession`](#pyalgotrade.marketsession.MarketSession
     "pyalgotrade.marketsession.MarketSession")'
+  id: totrans-28
   prefs: []
   type: TYPE_NORMAL
+  zh: 基类：[`pyalgotrade.marketsession.MarketSession`](#pyalgotrade.marketsession.MarketSession
+    "pyalgotrade.marketsession.MarketSession")
 - en: Tokyo Stock Exchange market session.
+  id: totrans-29
   prefs: []
   type: TYPE_NORMAL
+  zh: 东京证券交易所市场交易时段。
 - en: Previous topic
+  id: totrans-30
   prefs:
   - PREF_H4
   type: TYPE_NORMAL
+  zh: 上一个主题
 - en: '[optimizer – Parallel optimizers](optimizer.html "previous chapter")'
+  id: totrans-31
   prefs: []
   type: TYPE_NORMAL
+  zh: '[optimizer – 并行优化器](optimizer.html "上一章")'
 - en: Next topic
+  id: totrans-32
   prefs:
   - PREF_H4
   type: TYPE_NORMAL
+  zh: 下一个主题
 - en: '[Tools](tools.html "next chapter")'
+  id: totrans-33
   prefs: []
   type: TYPE_NORMAL
+  zh: '[工具](tools.html "下一章")'
 - en: This Page
+  id: totrans-34
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 此页
 - en: '[Show Source](_sources/marketsession.txt)'
+  id: totrans-35
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[显示源码](_sources/marketsession.txt)'
 - en: Quick search
+  id: totrans-36
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 快速搜索
 - en: Enter search terms or a module, class or function name.
+  id: totrans-37
   prefs: []
   type: TYPE_NORMAL
+  zh: 输入搜索词或模块、类或函数名称。
 - en: Navigation
+  id: totrans-38
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 导航
 - en: '[index](genindex.html "General Index")'
+  id: totrans-39
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[索引](genindex.html "通用索引")'
 - en: '[modules](py-modindex.html "Python Module Index") |'
+  id: totrans-40
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[模块](py-modindex.html "Python 模块索引") |'
 - en: '[next](tools.html "Tools") |'
+  id: totrans-41
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[下一个](tools.html "工具") |'
 - en: '[previous](optimizer.html "optimizer – Parallel optimizers") |'
+  id: totrans-42
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[上一个](optimizer.html "optimizer – 并行优化器") |'
 - en: '[PyAlgoTrade 0.20 documentation](index.html) »'
+  id: totrans-43
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[PyAlgoTrade 0.20 文档](index.html) »'
 - en: '[Documentation for the code](code.html) »'
+  id: totrans-44
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[代码文档](code.html) »'
