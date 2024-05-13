@@ -1,131 +1,198 @@
 - en: Computational Investing Part I
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 计算投资 Part I
 - en: 原文：[https://gbeced.github.io/pyalgotrade/docs/v0.20/html/compinvpart1.html](https://gbeced.github.io/pyalgotrade/docs/v0.20/html/compinvpart1.html)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://gbeced.github.io/pyalgotrade/docs/v0.20/html/compinvpart1.html](https://gbeced.github.io/pyalgotrade/docs/v0.20/html/compinvpart1.html)
 - en: As I was taking the [Computational Investing Part I](https://class.coursera.org/compinvesting1-2012-001/class)
     course in 2012 I had to work on a set of assignments and for one of them I used
     PyAlgoTrade.
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: 2012 年我参加了 [计算投资 Part I](https://class.coursera.org/compinvesting1-2012-001/class)
+    课程，我必须完成一系列的作业，其中之一我使用了 PyAlgoTrade。
 - en: Homework 1
+  id: totrans-3
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 作业 1
 - en: 'For this assignment I had to pick 4 stocks, invest a total of $1000000 during
     2011, and calculate:'
+  id: totrans-4
   prefs: []
   type: TYPE_NORMAL
+  zh: 对于这个作业，我必须选择 4 只股票，在 2011 年投资总额为 $1000000，并计算：
 - en: Final portfolio value
+  id: totrans-5
   prefs:
   - PREF_BQ
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 最终投资组合价值
 - en: Anual return
+  id: totrans-6
   prefs:
   - PREF_BQ
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 年度回报
 - en: Average daily return
+  id: totrans-7
   prefs:
   - PREF_BQ
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 平均每日回报
 - en: Std. dev. of daily returns
+  id: totrans-8
   prefs:
   - PREF_BQ
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 每日回报的标准差
 - en: Sharpe ratio
+  id: totrans-9
   prefs:
   - PREF_BQ
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 夏普比率
 - en: 'Download the data with the following commands:'
+  id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: 使用以下命令下载数据：
 - en: '[PRE0]'
+  id: totrans-11
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: 'Although the deliverable was an Excel spreadsheet, I validated the results
     using this piece of code:'
+  id: totrans-12
   prefs: []
   type: TYPE_NORMAL
+  zh: 尽管交付成果是一个 Excel 电子表格，但我使用了这段代码验证了结果：
 - en: '[PRE1]'
+  id: totrans-13
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE1]'
 - en: 'The results were:'
+  id: totrans-14
   prefs: []
   type: TYPE_NORMAL
+  zh: 结果如下：
 - en: '[PRE2]'
+  id: totrans-15
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE2]'
 - en: '[Table Of Contents](index.html)'
+  id: totrans-16
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: '[目录](index.html) '
 - en: '[Computational Investing Part I](#)'
+  id: totrans-17
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[计算投资 Part I](#)'
 - en: '[Homework 1](#homework-1)'
+  id: totrans-18
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[作业 1](#homework-1)'
 - en: Previous topic
+  id: totrans-19
   prefs:
   - PREF_H4
   type: TYPE_NORMAL
+  zh: 上一个主题
 - en: '[TA-Lib integration](talib.html "previous chapter")'
+  id: totrans-20
   prefs: []
   type: TYPE_NORMAL
+  zh: '[TA-Lib 集成](talib.html "上一章节")'
 - en: Next topic
+  id: totrans-21
   prefs:
   - PREF_H4
   type: TYPE_NORMAL
+  zh: 下一个主题
 - en: '[Sample strategies](samples.html "next chapter")'
+  id: totrans-22
   prefs: []
   type: TYPE_NORMAL
+  zh: '[示例策略](samples.html "下一章节")'
 - en: This Page
+  id: totrans-23
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 本页
 - en: '[Show Source](_sources/compinvpart1.txt)'
+  id: totrans-24
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[显示源代码](_sources/compinvpart1.txt)'
 - en: Quick search
+  id: totrans-25
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 快速搜索
 - en: Enter search terms or a module, class or function name.
+  id: totrans-26
   prefs: []
   type: TYPE_NORMAL
+  zh: 输入搜索词或模块、类或函数名。
 - en: Navigation
+  id: totrans-27
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 导航
 - en: '[index](genindex.html "General Index")'
+  id: totrans-28
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[索引](genindex.html "总索引")'
 - en: '[modules](py-modindex.html "Python Module Index") |'
+  id: totrans-29
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[模块](py-modindex.html "Python 模块索引") |'
 - en: '[next](samples.html "Sample strategies") |'
+  id: totrans-30
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[下一个](samples.html "示例策略") |'
 - en: '[previous](talib.html "TA-Lib integration") |'
+  id: totrans-31
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[上一页](talib.html "TA-Lib 集成") |'
 - en: '[PyAlgoTrade 0.20 documentation](index.html) »'
+  id: totrans-32
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[PyAlgoTrade 0.20 文档](index.html) »'

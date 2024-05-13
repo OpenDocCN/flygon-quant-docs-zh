@@ -190,534 +190,667 @@
   id: totrans-32
   prefs: []
   type: TYPE_NORMAL
+  zh: '`pyalgotrade.talibext.indicator.``BETA`(*ds1*, *ds2*, *count*, *timeperiod=-2147483648*)'
 - en: Beta
   id: totrans-33
   prefs: []
   type: TYPE_NORMAL
+  zh: 贝塔
 - en: '`pyalgotrade.talibext.indicator.``BOP`(*barDs*, *count*)'
   id: totrans-34
   prefs: []
   type: TYPE_NORMAL
+  zh: '`pyalgotrade.talibext.indicator.``BOP`(*barDs*, *count*)'
 - en: Balance Of Power
   id: totrans-35
   prefs: []
   type: TYPE_NORMAL
+  zh: 力量平衡
 - en: '`pyalgotrade.talibext.indicator.``CCI`(*barDs*, *count*, *timeperiod=-2147483648*)'
   id: totrans-36
   prefs: []
   type: TYPE_NORMAL
+  zh: '`pyalgotrade.talibext.indicator.``CCI`(*barDs*, *count*, *timeperiod=-2147483648*)'
 - en: Commodity Channel Index
   id: totrans-37
   prefs: []
   type: TYPE_NORMAL
+  zh: 商品通道指数
 - en: '`pyalgotrade.talibext.indicator.``CDL2CROWS`(*barDs*, *count*)'
   id: totrans-38
   prefs: []
   type: TYPE_NORMAL
+  zh: '`pyalgotrade.talibext.indicator.``CDL2CROWS`(*barDs*, *count*)'
 - en: Two Crows
   id: totrans-39
   prefs: []
   type: TYPE_NORMAL
+  zh: 两只乌鸦
 - en: '`pyalgotrade.talibext.indicator.``CDL3BLACKCROWS`(*barDs*, *count*)'
   id: totrans-40
   prefs: []
   type: TYPE_NORMAL
+  zh: '`pyalgotrade.talibext.indicator.``CDL3BLACKCROWS`(*barDs*, *count*)'
 - en: Three Black Crows
   id: totrans-41
   prefs: []
   type: TYPE_NORMAL
+  zh: 三只黑乌鸦
 - en: '`pyalgotrade.talibext.indicator.``CDL3INSIDE`(*barDs*, *count*)'
   id: totrans-42
   prefs: []
   type: TYPE_NORMAL
+  zh: '`pyalgotrade.talibext.indicator.``CDL3INSIDE`(*barDs*, *count*)'
 - en: Three Inside Up/Down
   id: totrans-43
   prefs: []
   type: TYPE_NORMAL
+  zh: 三内上涨/下跌
 - en: '`pyalgotrade.talibext.indicator.``CDL3LINESTRIKE`(*barDs*, *count*)'
   id: totrans-44
   prefs: []
   type: TYPE_NORMAL
+  zh: '`pyalgotrade.talibext.indicator.``CDL3LINESTRIKE`(*barDs*, *count*)'
 - en: Three-Line Strike
   id: totrans-45
   prefs: []
   type: TYPE_NORMAL
+  zh: 三线攻击
 - en: '`pyalgotrade.talibext.indicator.``CDL3OUTSIDE`(*barDs*, *count*)'
   id: totrans-46
   prefs: []
   type: TYPE_NORMAL
+  zh: '`pyalgotrade.talibext.indicator.``CDL3OUTSIDE`(*barDs*, *count*)'
 - en: Three Outside Up/Down
   id: totrans-47
   prefs: []
   type: TYPE_NORMAL
+  zh: 三外上涨/下跌
 - en: '`pyalgotrade.talibext.indicator.``CDL3STARSINSOUTH`(*barDs*, *count*)'
   id: totrans-48
   prefs: []
   type: TYPE_NORMAL
+  zh: '`pyalgotrade.talibext.indicator.``CDL3STARSINSOUTH`(*barDs*, *count*)'
 - en: Three Stars In The South
   id: totrans-49
   prefs: []
   type: TYPE_NORMAL
+  zh: 南方三星
 - en: '`pyalgotrade.talibext.indicator.``CDL3WHITESOLDIERS`(*barDs*, *count*)'
   id: totrans-50
   prefs: []
   type: TYPE_NORMAL
+  zh: '`pyalgotrade.talibext.indicator.``CDL3WHITESOLDIERS`(*barDs*, *count*)'
 - en: Three Advancing White Soldiers
   id: totrans-51
   prefs: []
   type: TYPE_NORMAL
+  zh: 三个白兵
 - en: '`pyalgotrade.talibext.indicator.``CDLABANDONEDBABY`(*barDs*, *count*, *penetration=-4e+37*)'
   id: totrans-52
   prefs: []
   type: TYPE_NORMAL
+  zh: '`pyalgotrade.talibext.indicator.``CDLABANDONEDBABY`(*barDs*, *count*, *penetration=-4e+37*)'
 - en: Abandoned Baby
   id: totrans-53
   prefs: []
   type: TYPE_NORMAL
+  zh: 遗弃的婴儿
 - en: '`pyalgotrade.talibext.indicator.``CDLADVANCEBLOCK`(*barDs*, *count*)'
   id: totrans-54
   prefs: []
   type: TYPE_NORMAL
+  zh: '`pyalgotrade.talibext.indicator.``CDLADVANCEBLOCK`(*barDs*, *count*)'
 - en: Advance Block
   id: totrans-55
   prefs: []
   type: TYPE_NORMAL
+  zh: 先进块
 - en: '`pyalgotrade.talibext.indicator.``CDLBELTHOLD`(*barDs*, *count*)'
   id: totrans-56
   prefs: []
   type: TYPE_NORMAL
+  zh: '`pyalgotrade.talibext.indicator.``CDLBELTHOLD`(*barDs*, *count*)'
 - en: Belt-hold
   id: totrans-57
   prefs: []
   type: TYPE_NORMAL
+  zh: 饽饽持仓
 - en: '`pyalgotrade.talibext.indicator.``CDLBREAKAWAY`(*barDs*, *count*)'
   id: totrans-58
   prefs: []
   type: TYPE_NORMAL
+  zh: '`pyalgotrade.talibext.indicator.``CDLBREAKAWAY`(*barDs*, *count*)'
 - en: Breakaway
   id: totrans-59
   prefs: []
   type: TYPE_NORMAL
+  zh: 脱钩
 - en: '`pyalgotrade.talibext.indicator.``CDLCLOSINGMARUBOZU`(*barDs*, *count*)'
   id: totrans-60
   prefs: []
   type: TYPE_NORMAL
+  zh: '`pyalgotrade.talibext.indicator.``CDLCLOSINGMARUBOZU`(*barDs*, *count*)'
 - en: Closing Marubozu
   id: totrans-61
   prefs: []
   type: TYPE_NORMAL
+  zh: 收盘光头光脚
 - en: '`pyalgotrade.talibext.indicator.``CDLCONCEALBABYSWALL`(*barDs*, *count*)'
   id: totrans-62
   prefs: []
   type: TYPE_NORMAL
+  zh: '`pyalgotrade.talibext.indicator.``CDLCONCEALBABYSWALL`(*barDs*, *count*)'
 - en: Concealing Baby Swallow
   id: totrans-63
   prefs: []
   type: TYPE_NORMAL
+  zh: 掩盖婴儿燕
 - en: '`pyalgotrade.talibext.indicator.``CDLCOUNTERATTACK`(*barDs*, *count*)'
   id: totrans-64
   prefs: []
   type: TYPE_NORMAL
+  zh: '`pyalgotrade.talibext.indicator.``CDLCOUNTERATTACK`(*barDs*, *count*)'
 - en: Counterattack
   id: totrans-65
   prefs: []
   type: TYPE_NORMAL
+  zh: 反击模式
 - en: '`pyalgotrade.talibext.indicator.``CDLDARKCLOUDCOVER`(*barDs*, *count*, *penetration=-4e+37*)'
   id: totrans-66
   prefs: []
   type: TYPE_NORMAL
+  zh: '`pyalgotrade.talibext.indicator.``CDLDARKCLOUDCOVER`(*barDs*, *count*, *penetration=-4e+37*)'
 - en: Dark Cloud Cover
   id: totrans-67
   prefs: []
   type: TYPE_NORMAL
+  zh: 乌云压顶
 - en: '`pyalgotrade.talibext.indicator.``CDLDOJI`(*barDs*, *count*)'
   id: totrans-68
   prefs: []
   type: TYPE_NORMAL
+  zh: '`pyalgotrade.talibext.indicator.``CDLDOJI`(*barDs*, *count*)'
 - en: Doji
   id: totrans-69
   prefs: []
   type: TYPE_NORMAL
+  zh: 十字星
 - en: '`pyalgotrade.talibext.indicator.``CDLDOJISTAR`(*barDs*, *count*)'
   id: totrans-70
   prefs: []
   type: TYPE_NORMAL
+  zh: '`pyalgotrade.talibext.indicator.``CDLDOJISTAR`(*barDs*, *count*)'
 - en: Doji Star
   id: totrans-71
   prefs: []
   type: TYPE_NORMAL
+  zh: 十字星
 - en: '`pyalgotrade.talibext.indicator.``CDLDRAGONFLYDOJI`(*barDs*, *count*)'
   id: totrans-72
   prefs: []
   type: TYPE_NORMAL
+  zh: '`pyalgotrade.talibext.indicator.``CDLDRAGONFLYDOJI`(*barDs*, *count*)'
 - en: Dragonfly Doji
   id: totrans-73
   prefs: []
   type: TYPE_NORMAL
+  zh: 蜻蜓十字
 - en: '`pyalgotrade.talibext.indicator.``CDLENGULFING`(*barDs*, *count*)'
   id: totrans-74
   prefs: []
   type: TYPE_NORMAL
+  zh: '`pyalgotrade.talibext.indicator.``CDLENGULFING`(*barDs*, *count*)'
 - en: Engulfing Pattern
   id: totrans-75
   prefs: []
   type: TYPE_NORMAL
+  zh: 吞没模式
 - en: '`pyalgotrade.talibext.indicator.``CDLEVENINGDOJISTAR`(*barDs*, *count*, *penetration=-4e+37*)'
   id: totrans-76
   prefs: []
   type: TYPE_NORMAL
+  zh: '`pyalgotrade.talibext.indicator.``CDLEVENINGDOJISTAR`(*barDs*, *count*, *penetration=-4e+37*)'
 - en: Evening Doji Star
   id: totrans-77
   prefs: []
   type: TYPE_NORMAL
+  zh: 傍晚十字星
 - en: '`pyalgotrade.talibext.indicator.``CDLEVENINGSTAR`(*barDs*, *count*, *penetration=-4e+37*)'
   id: totrans-78
   prefs: []
   type: TYPE_NORMAL
+  zh: '`pyalgotrade.talibext.indicator.``CDLEVENINGSTAR`(*barDs*, *count*, *penetration=-4e+37*)'
 - en: Evening Star
   id: totrans-79
   prefs: []
   type: TYPE_NORMAL
+  zh: 傍晚之星
 - en: '`pyalgotrade.talibext.indicator.``CDLGAPSIDESIDEWHITE`(*barDs*, *count*)'
   id: totrans-80
   prefs: []
   type: TYPE_NORMAL
+  zh: '`pyalgotrade.talibext.indicator.``CDLGAPSIDESIDEWHITE`(*barDs*, *count*)'
 - en: Up/Down-gap side-by-side white lines
   id: totrans-81
   prefs: []
   type: TYPE_NORMAL
+  zh: 上/下缺口并排的白色线条
 - en: '`pyalgotrade.talibext.indicator.``CDLGRAVESTONEDOJI`(*barDs*, *count*)'
   id: totrans-82
   prefs: []
   type: TYPE_NORMAL
+  zh: '`pyalgotrade.talibext.indicator.``CDLGRAVESTONEDOJI`(*barDs*, *count*)'
 - en: Gravestone Doji
   id: totrans-83
   prefs: []
   type: TYPE_NORMAL
+  zh: 墓碑十字
 - en: '`pyalgotrade.talibext.indicator.``CDLHAMMER`(*barDs*, *count*)'
   id: totrans-84
   prefs: []
   type: TYPE_NORMAL
+  zh: '`pyalgotrade.talibext.indicator.``CDLHAMMER`(*barDs*, *count*)'
 - en: Hammer
   id: totrans-85
   prefs: []
   type: TYPE_NORMAL
+  zh: 锤子
 - en: '`pyalgotrade.talibext.indicator.``CDLHANGINGMAN`(*barDs*, *count*)'
   id: totrans-86
   prefs: []
   type: TYPE_NORMAL
+  zh: '`pyalgotrade.talibext.indicator.``CDLHANGINGMAN`(*barDs*, *count*)'
 - en: Hanging Man
   id: totrans-87
   prefs: []
   type: TYPE_NORMAL
+  zh: 吊人
 - en: '`pyalgotrade.talibext.indicator.``CDLHARAMI`(*barDs*, *count*)'
   id: totrans-88
   prefs: []
   type: TYPE_NORMAL
+  zh: '`pyalgotrade.talibext.indicator.``CDLHARAMI`(*barDs*, *count*)'
 - en: Harami Pattern
   id: totrans-89
   prefs: []
   type: TYPE_NORMAL
+  zh: 孕线模式
 - en: '`pyalgotrade.talibext.indicator.``CDLHARAMICROSS`(*barDs*, *count*)'
   id: totrans-90
   prefs: []
   type: TYPE_NORMAL
+  zh: '`pyalgotrade.talibext.indicator.``CDLHARAMICROSS`(*barDs*, *count*)'
 - en: Harami Cross Pattern
   id: totrans-91
   prefs: []
   type: TYPE_NORMAL
+  zh: 孕线交叉模式
 - en: '`pyalgotrade.talibext.indicator.``CDLHIGHWAVE`(*barDs*, *count*)'
   id: totrans-92
   prefs: []
   type: TYPE_NORMAL
+  zh: '`pyalgotrade.talibext.indicator.``CDLHIGHWAVE`(*barDs*, *count*)'
 - en: High-Wave Candle
   id: totrans-93
   prefs: []
   type: TYPE_NORMAL
+  zh: 高浪蜡烛
 - en: '`pyalgotrade.talibext.indicator.``CDLHIKKAKE`(*barDs*, *count*)'
   id: totrans-94
   prefs: []
   type: TYPE_NORMAL
+  zh: '`pyalgotrade.talibext.indicator.``CDLHIKKAKE`(*barDs*, *count*)'
 - en: Hikkake Pattern
   id: totrans-95
   prefs: []
   type: TYPE_NORMAL
+  zh: 吸星大法
 - en: '`pyalgotrade.talibext.indicator.``CDLHIKKAKEMOD`(*barDs*, *count*)'
   id: totrans-96
   prefs: []
   type: TYPE_NORMAL
+  zh: '`pyalgotrade.talibext.indicator.``CDLHIKKAKEMOD`(*barDs*, *count*)'
 - en: Modified Hikkake Pattern
   id: totrans-97
   prefs: []
   type: TYPE_NORMAL
+  zh: 修改的吸星大法
 - en: '`pyalgotrade.talibext.indicator.``CDLHOMINGPIGEON`(*barDs*, *count*)'
   id: totrans-98
   prefs: []
   type: TYPE_NORMAL
+  zh: '`pyalgotrade.talibext.indicator.``CDLHOMINGPIGEON`(*barDs*, *count*)'
 - en: Homing Pigeon
   id: totrans-99
   prefs: []
   type: TYPE_NORMAL
+  zh: 家鸽
 - en: '`pyalgotrade.talibext.indicator.``CDLIDENTICAL3CROWS`(*barDs*, *count*)'
   id: totrans-100
   prefs: []
   type: TYPE_NORMAL
+  zh: '`pyalgotrade.talibext.indicator.``CDLIDENTICAL3CROWS`(*barDs*, *count*)'
 - en: Identical Three Crows
   id: totrans-101
   prefs: []
   type: TYPE_NORMAL
+  zh: 相同的三乌鸦
 - en: '`pyalgotrade.talibext.indicator.``CDLINNECK`(*barDs*, *count*)'
   id: totrans-102
   prefs: []
   type: TYPE_NORMAL
+  zh: '`pyalgotrade.talibext.indicator.``CDLINNECK`(*barDs*, *count*)'
 - en: In-Neck Pattern
   id: totrans-103
   prefs: []
   type: TYPE_NORMAL
+  zh: 脖颈模式
 - en: '`pyalgotrade.talibext.indicator.``CDLINVERTEDHAMMER`(*barDs*, *count*)'
   id: totrans-104
   prefs: []
   type: TYPE_NORMAL
+  zh: '`pyalgotrade.talibext.indicator.``CDLINVERTEDHAMMER`(*barDs*, *count*)'
 - en: Inverted Hammer
   id: totrans-105
   prefs: []
   type: TYPE_NORMAL
+  zh: 倒锤子
 - en: '`pyalgotrade.talibext.indicator.``CDLKICKING`(*barDs*, *count*)'
   id: totrans-106
   prefs: []
   type: TYPE_NORMAL
+  zh: '`pyalgotrade.talibext.indicator.``CDLKICKING`(*barDs*, *count*)'
 - en: Kicking
   id: totrans-107
   prefs: []
   type: TYPE_NORMAL
+  zh: 踢
 - en: '`pyalgotrade.talibext.indicator.``CDLKICKINGBYLENGTH`(*barDs*, *count*)'
   id: totrans-108
   prefs: []
   type: TYPE_NORMAL
+  zh: '`pyalgotrade.talibext.indicator.``CDLKICKINGBYLENGTH`(*barDs*, *count*)'
 - en: Kicking - bull/bear determined by the longer marubozu
   id: totrans-109
   prefs: []
   type: TYPE_NORMAL
+  zh: 踢 - 牛/熊由更长的光头确定
 - en: '`pyalgotrade.talibext.indicator.``CDLLADDERBOTTOM`(*barDs*, *count*)'
   id: totrans-110
   prefs: []
   type: TYPE_NORMAL
+  zh: '`pyalgotrade.talibext.indicator.``CDLLADDERBOTTOM`(*barDs*, *count*)'
 - en: Ladder Bottom
   id: totrans-111
   prefs: []
   type: TYPE_NORMAL
+  zh: 梯底
 - en: '`pyalgotrade.talibext.indicator.``CDLLONGLEGGEDDOJI`(*barDs*, *count*)'
   id: totrans-112
   prefs: []
   type: TYPE_NORMAL
+  zh: '`pyalgotrade.talibext.indicator.``CDLLONGLEGGEDDOJI`(*barDs*, *count*)'
 - en: Long Legged Doji
   id: totrans-113
   prefs: []
   type: TYPE_NORMAL
+  zh: 长腿十字星
 - en: '`pyalgotrade.talibext.indicator.``CDLLONGLINE`(*barDs*, *count*)'
   id: totrans-114
   prefs: []
   type: TYPE_NORMAL
+  zh: '`pyalgotrade.talibext.indicator.``CDLLONGLINE`(*barDs*, *count*)'
 - en: Long Line Candle
   id: totrans-115
   prefs: []
   type: TYPE_NORMAL
+  zh: 长线蜡烛
 - en: '`pyalgotrade.talibext.indicator.``CDLMARUBOZU`(*barDs*, *count*)'
   id: totrans-116
   prefs: []
   type: TYPE_NORMAL
+  zh: '`pyalgotrade.talibext.indicator.``CDLMARUBOZU`(*barDs*, *count*)'
 - en: Marubozu
   id: totrans-117
   prefs: []
   type: TYPE_NORMAL
+  zh: 光头
 - en: '`pyalgotrade.talibext.indicator.``CDLMATCHINGLOW`(*barDs*, *count*)'
   id: totrans-118
   prefs: []
   type: TYPE_NORMAL
+  zh: '`pyalgotrade.talibext.indicator.``CDLMATCHINGLOW`(*barDs*, *count*)'
 - en: Matching Low
   id: totrans-119
   prefs: []
   type: TYPE_NORMAL
+  zh: 匹配低位
 - en: '`pyalgotrade.talibext.indicator.``CDLMATHOLD`(*barDs*, *count*, *penetration=-4e+37*)'
   id: totrans-120
   prefs: []
   type: TYPE_NORMAL
+  zh: '`pyalgotrade.talibext.indicator.``CDLMATHOLD`(*barDs*, *count*, *penetration=-4e+37*)'
 - en: Mat Hold
   id: totrans-121
   prefs: []
   type: TYPE_NORMAL
+  zh: 矩阵持有
 - en: '`pyalgotrade.talibext.indicator.``CDLMORNINGDOJISTAR`(*barDs*, *count*, *penetration=-4e+37*)'
   id: totrans-122
   prefs: []
   type: TYPE_NORMAL
+  zh: '`pyalgotrade.talibext.indicator.``CDLMORNINGDOJISTAR`(*barDs*, *count*, *penetration=-4e+37*)'
 - en: Morning Doji Star
   id: totrans-123
   prefs: []
   type: TYPE_NORMAL
+  zh: 晨星十字
 - en: '`pyalgotrade.talibext.indicator.``CDLMORNINGSTAR`(*barDs*, *count*, *penetration=-4e+37*)'
   id: totrans-124
   prefs: []
   type: TYPE_NORMAL
+  zh: '`pyalgotrade.talibext.indicator.``CDLMORNINGSTAR`(*barDs*, *count*, *penetration=-4e+37*)'
 - en: Morning Star
   id: totrans-125
   prefs: []
   type: TYPE_NORMAL
+  zh: 晨星
 - en: '`pyalgotrade.talibext.indicator.``CDLONNECK`(*barDs*, *count*)'
   id: totrans-126
   prefs: []
   type: TYPE_NORMAL
+  zh: '`pyalgotrade.talibext.indicator.``CDLONNECK`(*barDs*, *count*)'
 - en: On-Neck Pattern
   id: totrans-127
   prefs: []
   type: TYPE_NORMAL
+  zh: 在脖子模式
 - en: '`pyalgotrade.talibext.indicator.``CDLPIERCING`(*barDs*, *count*)'
   id: totrans-128
   prefs: []
   type: TYPE_NORMAL
+  zh: '`pyalgotrade.talibext.indicator.``CDLPIERCING`(*barDs*, *count*)'
 - en: Piercing Pattern
   id: totrans-129
   prefs: []
   type: TYPE_NORMAL
+  zh: 刺透模式
 - en: '`pyalgotrade.talibext.indicator.``CDLRICKSHAWMAN`(*barDs*, *count*)'
   id: totrans-130
   prefs: []
   type: TYPE_NORMAL
+  zh: '`pyalgotrade.talibext.indicator.``CDLRICKSHAWMAN`(*barDs*, *count*)'
 - en: Rickshaw Man
   id: totrans-131
   prefs: []
   type: TYPE_NORMAL
+  zh: 面包车人
 - en: '`pyalgotrade.talibext.indicator.``CDLRISEFALL3METHODS`(*barDs*, *count*)'
   id: totrans-132
   prefs: []
   type: TYPE_NORMAL
+  zh: '`pyalgotrade.talibext.indicator.``CDLRISEFALL3METHODS`(*barDs*, *count*)'
 - en: Rising/Falling Three Methods
   id: totrans-133
   prefs: []
   type: TYPE_NORMAL
+  zh: 上升/下降三法
 - en: '`pyalgotrade.talibext.indicator.``CDLSEPARATINGLINES`(*barDs*, *count*)'
   id: totrans-134
   prefs: []
   type: TYPE_NORMAL
+  zh: '`pyalgotrade.talibext.indicator.``CDLSEPARATINGLINES`(*barDs*, *count*)'
 - en: Separating Lines
   id: totrans-135
   prefs: []
   type: TYPE_NORMAL
+  zh: 分隔线
 - en: '`pyalgotrade.talibext.indicator.``CDLSHOOTINGSTAR`(*barDs*, *count*)'
   id: totrans-136
   prefs: []
   type: TYPE_NORMAL
+  zh: '`pyalgotrade.talibext.indicator.``CDLSHOOTINGSTAR`(*barDs*, *count*)'
 - en: Shooting Star
   id: totrans-137
   prefs: []
   type: TYPE_NORMAL
+  zh: 长尾锤
 - en: '`pyalgotrade.talibext.indicator.``CDLSHORTLINE`(*barDs*, *count*)'
   id: totrans-138
   prefs: []
   type: TYPE_NORMAL
+  zh: '`pyalgotrade.talibext.indicator.``CDLSHORTLINE`(*barDs*, *count*)'
 - en: Short Line Candle
   id: totrans-139
   prefs: []
   type: TYPE_NORMAL
+  zh: 短线蜡烛
 - en: '`pyalgotrade.talibext.indicator.``CDLSPINNINGTOP`(*barDs*, *count*)'
   id: totrans-140
   prefs: []
   type: TYPE_NORMAL
+  zh: '`pyalgotrade.talibext.indicator.``CDLSPINNINGTOP`(*barDs*, *count*)'
 - en: Spinning Top
   id: totrans-141
   prefs: []
   type: TYPE_NORMAL
+  zh: 陀螺顶
 - en: '`pyalgotrade.talibext.indicator.``CDLSTALLEDPATTERN`(*barDs*, *count*)'
   id: totrans-142
   prefs: []
   type: TYPE_NORMAL
+  zh: '`pyalgotrade.talibext.indicator.``CDLSTALLEDPATTERN`(*barDs*, *count*)'
 - en: Stalled Pattern
   id: totrans-143
   prefs: []
   type: TYPE_NORMAL
+  zh: 停滞模式
 - en: '`pyalgotrade.talibext.indicator.``CDLSTICKSANDWICH`(*barDs*, *count*)'
   id: totrans-144
   prefs: []
   type: TYPE_NORMAL
+  zh: '`pyalgotrade.talibext.indicator.``CDLSTICKSANDWICH`(*barDs*, *count*)'
 - en: Stick Sandwich
   id: totrans-145
   prefs: []
   type: TYPE_NORMAL
+  zh: 杆子三明治
 - en: '`pyalgotrade.talibext.indicator.``CDLTAKURI`(*barDs*, *count*)'
   id: totrans-146
   prefs: []
   type: TYPE_NORMAL
+  zh: '`pyalgotrade.talibext.indicator.``CDLTAKURI`(*barDs*, *count*)'
 - en: Takuri (Dragonfly Doji with very long lower shadow)
   id: totrans-147
   prefs: []
   type: TYPE_NORMAL
+  zh: 打瞌睡（底部）
 - en: '`pyalgotrade.talibext.indicator.``CDLTASUKIGAP`(*barDs*, *count*)'
   id: totrans-148
   prefs: []
   type: TYPE_NORMAL
+  zh: '`pyalgotrade.talibext.indicator.``CDLTASUKIGAP`(*barDs*, *count*)'
 - en: Tasuki Gap
   id: totrans-149
   prefs: []
   type: TYPE_NORMAL
+  zh: 领带缺口
 - en: '`pyalgotrade.talibext.indicator.``CDLTHRUSTING`(*barDs*, *count*)'
   id: totrans-150
   prefs: []
   type: TYPE_NORMAL
+  zh: '`pyalgotrade.talibext.indicator.``CDLTHRUSTING`(*barDs*, *count*)'
 - en: Thrusting Pattern
   id: totrans-151
   prefs: []
   type: TYPE_NORMAL
+  zh: 冲刺模式
 - en: '`pyalgotrade.talibext.indicator.``CDLTRISTAR`(*barDs*, *count*)'
   id: totrans-152
   prefs: []
   type: TYPE_NORMAL
+  zh: '`pyalgotrade.talibext.indicator.``CDLTRISTAR`(*barDs*, *count*)'
 - en: Tristar Pattern
   id: totrans-153
   prefs: []
   type: TYPE_NORMAL
+  zh: 三星模式
 - en: '`pyalgotrade.talibext.indicator.``CDLUNIQUE3RIVER`(*barDs*, *count*)'
   id: totrans-154
   prefs: []
   type: TYPE_NORMAL
+  zh: '`pyalgotrade.talibext.indicator.``CDLUNIQUE3RIVER`(*barDs*, *count*)'
 - en: Unique 3 River
   id: totrans-155
   prefs: []
   type: TYPE_NORMAL
+  zh: 独特的三江
 - en: '`pyalgotrade.talibext.indicator.``CDLUPSIDEGAP2CROWS`(*barDs*, *count*)'
   id: totrans-156
   prefs: []
   type: TYPE_NORMAL
+  zh: '`pyalgotrade.talibext.indicator.``CDLUPSIDEGAP2CROWS`(*barDs*, *count*)'
 - en: Upside Gap Two Crows
   id: totrans-157
   prefs: []
   type: TYPE_NORMAL
+  zh: 上缺口两乌鸦
 - en: '`pyalgotrade.talibext.indicator.``CDLXSIDEGAP3METHODS`(*barDs*, *count*)'
   id: totrans-158
   prefs: []
   type: TYPE_NORMAL
+  zh: '`pyalgotrade.talibext.indicator.``CDLXSIDEGAP3METHODS`(*barDs*, *count*)'
 - en: Upside/Downside Gap Three Methods
   id: totrans-159
   prefs: []
   type: TYPE_NORMAL
+  zh: 上缺口/下缺口三法
 - en: '`pyalgotrade.talibext.indicator.``CMO`(*ds*, *count*, *timeperiod=-2147483648*)'
   id: totrans-160
   prefs: []
   type: TYPE_NORMAL
+  zh: '`pyalgotrade.talibext.indicator.``CMO`(*ds*, *count*, *timeperiod=-2147483648*)'
 - en: Chande Momentum Oscillator
   id: totrans-161
   prefs: []
   type: TYPE_NORMAL
+  zh: 查德动量振荡器
 - en: '`pyalgotrade.talibext.indicator.``CORREL`(*ds1*, *ds2*, *count*, *timeperiod=-2147483648*)'
   id: totrans-162
   prefs: []
   type: TYPE_NORMAL
+  zh: '`pyalgotrade.talibext.indicator.``CORREL`(*ds1*, *ds2*, *count*, *timeperiod=-2147483648*)'
 - en: Pearson’s Correlation Coefficient (r)
   id: totrans-163
   prefs: []
   type: TYPE_NORMAL
+  zh: 皮尔逊相关系数（r）
 - en: '`pyalgotrade.talibext.indicator.``DEMA`(*ds*, *count*, *timeperiod=-2147483648*)'
   id: totrans-164
   prefs: []
   type: TYPE_NORMAL
+  zh: '`pyalgotrade.talibext.indicator.``DEMA`(*ds*, *count*, *timeperiod=-2147483648*)'
 - en: Double Exponential Moving Average
   id: totrans-165
   prefs: []
