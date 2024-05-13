@@ -204,45 +204,56 @@
   id: totrans-34
   prefs: []
   type: TYPE_NORMAL
+  zh: 请注意，这是最长回撤的持续时间，不一定是最深的回撤。
 - en: '`getMaxDrawDown`()'
   id: totrans-35
   prefs: []
   type: TYPE_NORMAL
+  zh: '`getMaxDrawDown`()'
 - en: 'Returns the max. (deepest) drawdown.  ## Trades'
   id: totrans-36
   prefs: []
   type: TYPE_NORMAL
+  zh: 返回最大（最深）回撤。## 交易
 - en: '*class* `pyalgotrade.stratanalyzer.trades.``Trades`'
   id: totrans-37
   prefs: []
   type: TYPE_NORMAL
+  zh: '*类* `pyalgotrade.stratanalyzer.trades.``Trades`'
 - en: 'Bases: [`pyalgotrade.stratanalyzer.StrategyAnalyzer`](#pyalgotrade.stratanalyzer.StrategyAnalyzer
     "pyalgotrade.stratanalyzer.StrategyAnalyzer")'
   id: totrans-38
   prefs: []
   type: TYPE_NORMAL
+  zh: 基类：[`pyalgotrade.stratanalyzer.StrategyAnalyzer`](#pyalgotrade.stratanalyzer.StrategyAnalyzer
+    "pyalgotrade.stratanalyzer.StrategyAnalyzer")
 - en: A [`pyalgotrade.stratanalyzer.StrategyAnalyzer`](#pyalgotrade.stratanalyzer.StrategyAnalyzer
     "pyalgotrade.stratanalyzer.StrategyAnalyzer") that records the profit/loss and
     returns of every completed trade.
   id: totrans-39
   prefs: []
   type: TYPE_NORMAL
+  zh: 一个[`pyalgotrade.stratanalyzer.StrategyAnalyzer`](#pyalgotrade.stratanalyzer.StrategyAnalyzer
+    "pyalgotrade.stratanalyzer.StrategyAnalyzer")，记录每笔已完成交易的利润/损失和回报。
 - en: Note
   id: totrans-40
   prefs: []
   type: TYPE_NORMAL
+  zh: 注意
 - en: 'This analyzer operates on individual completed trades. For example, lets say
     you start with a $1000 cash, and then you buy 1 share of XYZ for $10 and later
     sell it for $20:'
   id: totrans-41
   prefs: []
   type: TYPE_NORMAL
+  zh: 此分析器对单个已完成交易进行操作。例如，假设您从$1000现金开始，然后以$10购买XYZ的1股，后来以$20出售：
 - en: The trade’s profit was $10.
   id: totrans-42
   prefs:
   - PREF_BQ
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 该交易的利润为$10。
 - en: The trade’s return is 100%, even though your whole portfolio went from $1000
     to $1020, a 2% return.
   id: totrans-43
@@ -250,128 +261,159 @@
   - PREF_BQ
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 即使您的整个投资组合从$1000增加到$1020，该交易的回报率为100%。
 - en: '`getCount`()'
   id: totrans-44
   prefs: []
   type: TYPE_NORMAL
+  zh: '`getCount`()'
 - en: Returns the total number of trades.
   id: totrans-45
   prefs: []
   type: TYPE_NORMAL
+  zh: 返回交易总数。
 - en: '`getProfitableCount`()'
   id: totrans-46
   prefs: []
   type: TYPE_NORMAL
+  zh: '`getProfitableCount`()'
 - en: Returns the number of profitable trades.
   id: totrans-47
   prefs: []
   type: TYPE_NORMAL
+  zh: 返回盈利交易的数量。
 - en: '`getUnprofitableCount`()'
   id: totrans-48
   prefs: []
   type: TYPE_NORMAL
+  zh: '`getUnprofitableCount`()'
 - en: Returns the number of unprofitable trades.
   id: totrans-49
   prefs: []
   type: TYPE_NORMAL
+  zh: 返回不盈利交易的数量。
 - en: '`getEvenCount`()'
   id: totrans-50
   prefs: []
   type: TYPE_NORMAL
+  zh: '`getEvenCount`()'
 - en: Returns the number of trades whose net profit was 0.
   id: totrans-51
   prefs: []
   type: TYPE_NORMAL
+  zh: 返回净利润为0的交易数量。
 - en: '`getAll`()'
   id: totrans-52
   prefs: []
   type: TYPE_NORMAL
+  zh: '`getAll`()'
 - en: Returns a numpy.array with the profits/losses for each trade.
   id: totrans-53
   prefs: []
   type: TYPE_NORMAL
+  zh: 返回一个numpy.array，其中包含每个交易的利润/损失。
 - en: '`getProfits`()'
   id: totrans-54
   prefs: []
   type: TYPE_NORMAL
+  zh: '`getProfits`()'
 - en: Returns a numpy.array with the profits for each profitable trade.
   id: totrans-55
   prefs: []
   type: TYPE_NORMAL
+  zh: 返回一个numpy.array，其中包含每个盈利交易的利润。
 - en: '`getLosses`()'
   id: totrans-56
   prefs: []
   type: TYPE_NORMAL
+  zh: '`getLosses`()'
 - en: Returns a numpy.array with the losses for each unprofitable trade.
   id: totrans-57
   prefs: []
   type: TYPE_NORMAL
+  zh: 返回一个numpy.array，其中包含每个亏损交易的损失。
 - en: '`getAllReturns`()'
   id: totrans-58
   prefs: []
   type: TYPE_NORMAL
+  zh: '`getAllReturns`()'
 - en: Returns a numpy.array with the returns for each trade.
   id: totrans-59
   prefs: []
   type: TYPE_NORMAL
+  zh: 返回一个numpy.array，其中包含每个交易的回报。
 - en: '`getPositiveReturns`()'
   id: totrans-60
   prefs: []
   type: TYPE_NORMAL
+  zh: '`getPositiveReturns`()'
 - en: Returns a numpy.array with the positive returns for each trade.
   id: totrans-61
   prefs: []
   type: TYPE_NORMAL
+  zh: 返回一个numpy.array，其中包含每个交易的正回报。
 - en: '`getNegativeReturns`()'
   id: totrans-62
   prefs: []
   type: TYPE_NORMAL
+  zh: '`getNegativeReturns`()'
 - en: Returns a numpy.array with the negative returns for each trade.
   id: totrans-63
   prefs: []
   type: TYPE_NORMAL
+  zh: 返回一个numpy.array，其中包含每个交易的负回报。
 - en: '`getCommissionsForAllTrades`()'
   id: totrans-64
   prefs: []
   type: TYPE_NORMAL
+  zh: '`getCommissionsForAllTrades`()'
 - en: Returns a numpy.array with the commissions for each trade.
   id: totrans-65
   prefs: []
   type: TYPE_NORMAL
+  zh: 返回一个numpy.array，其中包含每个交易的佣金。
 - en: '`getCommissionsForProfitableTrades`()'
   id: totrans-66
   prefs: []
   type: TYPE_NORMAL
+  zh: '`getCommissionsForProfitableTrades`()'
 - en: Returns a numpy.array with the commissions for each profitable trade.
   id: totrans-67
   prefs: []
   type: TYPE_NORMAL
+  zh: 返回一个numpy.array，其中包含每个盈利交易的佣金。
 - en: '`getCommissionsForUnprofitableTrades`()'
   id: totrans-68
   prefs: []
   type: TYPE_NORMAL
+  zh: '`getCommissionsForUnprofitableTrades`()'
 - en: Returns a numpy.array with the commissions for each unprofitable trade.
   id: totrans-69
   prefs: []
   type: TYPE_NORMAL
+  zh: 返回一个numpy.array，其中包含每个亏损交易的佣金。
 - en: '`getCommissionsForEvenTrades`()'
   id: totrans-70
   prefs: []
   type: TYPE_NORMAL
+  zh: '`getCommissionsForEvenTrades`()'
 - en: Returns a numpy.array with the commissions for each trade whose net profit was
     0.
   id: totrans-71
   prefs: []
   type: TYPE_NORMAL
+  zh: 返回一个numpy.array，其中包含净利润为0的每个交易的佣金。
 - en: Example
   id: totrans-72
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 示例
 - en: 'Save this code as sma_crossover.py:'
   id: totrans-73
   prefs: []
   type: TYPE_NORMAL
+  zh: 将此代码保存为sma_crossover.py：
 - en: '[PRE0]'
   id: totrans-74
   prefs: []
@@ -381,6 +423,7 @@
   id: totrans-75
   prefs: []
   type: TYPE_NORMAL
+  zh: 并将此代码保存在不同的文件中：
 - en: '[PRE1]'
   id: totrans-76
   prefs: []
@@ -390,6 +433,7 @@
   id: totrans-77
   prefs: []
   type: TYPE_NORMAL
+  zh: 输出应如下所示：
 - en: '[PRE2]'
   id: totrans-78
   prefs: []
@@ -400,108 +444,129 @@
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: '[目录](index.html)的表'
 - en: '[stratanalyzer – Strategy analyzers](#)'
   id: totrans-80
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[策略分析器 – 策略分析器](#)'
 - en: '[Returns](#module-pyalgotrade.stratanalyzer.returns)'
   id: totrans-81
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[回报](#module-pyalgotrade.stratanalyzer.returns)'
 - en: '[Sharpe Ratio](#module-pyalgotrade.stratanalyzer.sharpe)'
   id: totrans-82
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[夏普比率](#module-pyalgotrade.stratanalyzer.sharpe)'
 - en: '[DrawDown](#module-pyalgotrade.stratanalyzer.drawdown)'
   id: totrans-83
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[回撤](#module-pyalgotrade.stratanalyzer.drawdown)'
 - en: '[Trades](#module-pyalgotrade.stratanalyzer.trades)'
   id: totrans-84
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[交易](#module-pyalgotrade.stratanalyzer.trades)'
 - en: '[Example](#example)'
   id: totrans-85
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[示例](#example)'
 - en: Previous topic
   id: totrans-86
   prefs:
   - PREF_H4
   type: TYPE_NORMAL
+  zh: 上一个主题
 - en: '[strategy – Basic strategy classes](strategy.html "previous chapter")'
   id: totrans-87
   prefs: []
   type: TYPE_NORMAL
+  zh: '[策略 – 基本策略类](strategy.html "上一章")'
 - en: Next topic
   id: totrans-88
   prefs:
   - PREF_H4
   type: TYPE_NORMAL
+  zh: 下一个主题
 - en: '[plotter – Strategy plotter](plotter.html "next chapter")'
   id: totrans-89
   prefs: []
   type: TYPE_NORMAL
+  zh: '[绘图器 – 策略绘图器](plotter.html "下一章")'
 - en: This Page
   id: totrans-90
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 本页
 - en: '[Show Source](_sources/stratanalyzer.txt)'
   id: totrans-91
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[显示源码](_sources/stratanalyzer.txt)'
 - en: Quick search
   id: totrans-92
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 快速搜索
 - en: Enter search terms or a module, class or function name.
   id: totrans-93
   prefs: []
   type: TYPE_NORMAL
+  zh: 输入搜索项或模块、类或函数名称。
 - en: Navigation
   id: totrans-94
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 导航
 - en: '[index](genindex.html "General Index")'
   id: totrans-95
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[索引](genindex.html "总索引")'
 - en: '[modules](py-modindex.html "Python Module Index") |'
   id: totrans-96
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[模块](py-modindex.html "Python模块索引") |'
 - en: '[next](plotter.html "plotter – Strategy plotter") |'
   id: totrans-97
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[下一步](plotter.html "plotter – Strategy plotter") |'
 - en: '[previous](strategy.html "strategy – Basic strategy classes") |'
   id: totrans-98
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[上一个](strategy.html "策略 – 基本策略类") |'
 - en: '[PyAlgoTrade 0.20 documentation](index.html) »'
   id: totrans-99
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[PyAlgoTrade 0.20文档](index.html) »'
 - en: '[Documentation for the code](code.html) »'
   id: totrans-100
   prefs:

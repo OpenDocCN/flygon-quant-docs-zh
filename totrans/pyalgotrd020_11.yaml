@@ -1,297 +1,467 @@
 - en: plotter – Strategy plotter
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: plotter – 策略绘图器
 - en: 原文：[https://gbeced.github.io/pyalgotrade/docs/v0.20/html/plotter.html](https://gbeced.github.io/pyalgotrade/docs/v0.20/html/plotter.html)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://gbeced.github.io/pyalgotrade/docs/v0.20/html/plotter.html](https://gbeced.github.io/pyalgotrade/docs/v0.20/html/plotter.html)
 - en: '*class* `pyalgotrade.plotter.``Subplot`'
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: '*class* `pyalgotrade.plotter.``Subplot`'
 - en: 'Bases: `object`'
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: '基类: `object`'
 - en: '`addCallback`(*label*, *callback*, *defaultClass=<class ''pyalgotrade.plotter.LineMarker''>*)'
+  id: totrans-4
   prefs: []
   type: TYPE_NORMAL
+  zh: '`addCallback`(*label*, *callback*, *defaultClass=<class ''pyalgotrade.plotter.LineMarker''>*)'
 - en: Add a callback that will be called on each bar.
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: 添加一个在每个bar上调用的回调。
 - en: '| Parameters: |'
+  id: totrans-6
   prefs: []
   type: TYPE_TB
+  zh: '| 参数: |'
 - en: '**label** (*string.*) – A name for the series values.'
+  id: totrans-7
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**label** (*string.*) – 系列值的名称。'
 - en: '**callback** – A function that receives a [`pyalgotrade.bar.Bars`](bar.html#pyalgotrade.bar.Bars
     "pyalgotrade.bar.Bars") instance as a parameter and returns a number or None.'
+  id: totrans-8
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**callback** – 一个接收[`pyalgotrade.bar.Bars`](bar.html#pyalgotrade.bar.Bars "pyalgotrade.bar.Bars")实例作为参数并返回一个数字或None的函数。'
 - en: '|'
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: '|'
 - en: '`addDataSeries`(*label*, *dataSeries*, *defaultClass=<class ''pyalgotrade.plotter.LineMarker''>*)'
+  id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: '`addDataSeries`(*label*, *dataSeries*, *defaultClass=<class ''pyalgotrade.plotter.LineMarker''>*)'
 - en: Add a DataSeries to the subplot.
+  id: totrans-11
   prefs: []
   type: TYPE_NORMAL
+  zh: 将一个DataSeries添加到subplot中。
 - en: '| Parameters: |'
+  id: totrans-12
   prefs: []
   type: TYPE_TB
+  zh: '| 参数: |'
 - en: '**label** (*string.*) – A name for the DataSeries values.'
+  id: totrans-13
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**label** (*string.*) – DataSeries值的名称。'
 - en: '**dataSeries** ([`pyalgotrade.dataseries.DataSeries`](dataseries.html#pyalgotrade.dataseries.DataSeries
     "pyalgotrade.dataseries.DataSeries").) – The DataSeries to add.'
+  id: totrans-14
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**dataSeries** ([`pyalgotrade.dataseries.DataSeries`](dataseries.html#pyalgotrade.dataseries.DataSeries
+    "pyalgotrade.dataseries.DataSeries").) – 要添加的DataSeries。'
 - en: '|'
+  id: totrans-15
   prefs: []
   type: TYPE_NORMAL
+  zh: '|'
 - en: '`addLine`(*label*, *level*)'
+  id: totrans-16
   prefs: []
   type: TYPE_NORMAL
+  zh: '`addLine`(*label*, *level*)'
 - en: Add a horizontal line to the plot.
+  id: totrans-17
   prefs: []
   type: TYPE_NORMAL
+  zh: 将水平线添加到绘图中。
 - en: '| Parameters: |'
+  id: totrans-18
   prefs: []
   type: TYPE_TB
+  zh: '| 参数: |'
 - en: '**label** (*string.*) – A label.'
+  id: totrans-19
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**label** (*string.*) – 一个标签。'
 - en: '**level** (*int/float.*) – The position for the line.'
+  id: totrans-20
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**level** (*int/float.*) – 线的位置。'
 - en: '|'
+  id: totrans-21
   prefs: []
   type: TYPE_NORMAL
+  zh: '|'
 - en: '*class* `pyalgotrade.plotter.``InstrumentSubplot`(*instrument*, *plotBuySell*)'
+  id: totrans-22
   prefs: []
   type: TYPE_NORMAL
+  zh: '*class* `pyalgotrade.plotter.``InstrumentSubplot`(*instrument*, *plotBuySell*)'
 - en: 'Bases: [`pyalgotrade.plotter.Subplot`](#pyalgotrade.plotter.Subplot "pyalgotrade.plotter.Subplot")'
+  id: totrans-23
   prefs: []
   type: TYPE_NORMAL
+  zh: '基类: [`pyalgotrade.plotter.Subplot`](#pyalgotrade.plotter.Subplot "pyalgotrade.plotter.Subplot")'
 - en: A Subplot responsible for plotting an instrument.
+  id: totrans-24
   prefs: []
   type: TYPE_NORMAL
+  zh: 负责绘制一个仪器的Subplot。
 - en: '*class* `pyalgotrade.plotter.``StrategyPlotter`(*strat*, *plotAllInstruments=True*,
     *plotBuySell=True*, *plotPortfolio=True*)'
+  id: totrans-25
   prefs: []
   type: TYPE_NORMAL
+  zh: '*class* `pyalgotrade.plotter.``StrategyPlotter`(*strat*, *plotAllInstruments=True*,
+    *plotBuySell=True*, *plotPortfolio=True*)'
 - en: 'Bases: `object`'
+  id: totrans-26
   prefs: []
   type: TYPE_NORMAL
+  zh: '基类: `object`'
 - en: Class responsible for plotting a strategy execution.
+  id: totrans-27
   prefs: []
   type: TYPE_NORMAL
+  zh: 负责绘制策略执行的类。
 - en: '| Parameters: |'
+  id: totrans-28
   prefs: []
   type: TYPE_TB
+  zh: '| 参数: |'
 - en: '**strat** ([`pyalgotrade.strategy.BaseStrategy`](strategy.html#pyalgotrade.strategy.BaseStrategy
     "pyalgotrade.strategy.BaseStrategy").) – The strategy to plot.'
+  id: totrans-29
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**strat** ([`pyalgotrade.strategy.BaseStrategy`](strategy.html#pyalgotrade.strategy.BaseStrategy
+    "pyalgotrade.strategy.BaseStrategy").) – 要绘制的策略。'
 - en: '**plotAllInstruments** (*boolean.*) – Set to True to get a subplot for each
     instrument available.'
+  id: totrans-30
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**plotAllInstruments** (*boolean.*) – 设置为True以获取每个可用仪器的子图。'
 - en: '**plotBuySell** (*boolean.*) – Set to True to get the buy/sell events plotted
     for each instrument available.'
+  id: totrans-31
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**plotBuySell** (*boolean.*) – 设置为True以绘制每个可用仪器的买入/卖出事件。'
 - en: '**plotPortfolio** (*boolean.*) – Set to True to get the portfolio value (shares
     + cash) plotted.'
+  id: totrans-32
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**plotPortfolio** (*boolean.*) – 设置为True以绘制投资组合价值（股票+现金）。'
 - en: '|'
+  id: totrans-33
   prefs: []
   type: TYPE_NORMAL
+  zh: '|'
 - en: '`buildFigureAndSubplots`(*fromDateTime=None*, *toDateTime=None*, *postPlotFun=<function
     _post_plot_fun at 0x108da0b18>*)'
+  id: totrans-34
   prefs: []
   type: TYPE_NORMAL
+  zh: '`buildFigureAndSubplots`(*fromDateTime=None*, *toDateTime=None*, *postPlotFun=<function
+    _post_plot_fun at 0x108da0b18>*)'
 - en: Build a matplotlib.figure.Figure with the subplots. Must be called after running
     the strategy.
+  id: totrans-35
   prefs: []
   type: TYPE_NORMAL
+  zh: 使用子图构建一个matplotlib.figure.Figure。必须在运行策略后调用。
 - en: '| Parameters: |'
+  id: totrans-36
   prefs: []
   type: TYPE_TB
+  zh: '| 参数: |'
 - en: '**fromDateTime** (*datetime.datetime*) – An optional starting datetime.datetime.
     Everything before it won’t get plotted.'
+  id: totrans-37
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**fromDateTime** (*datetime.datetime*) – 可选的开始datetime.datetime。之前的所有内容都不会被绘制。'
 - en: '**toDateTime** (*datetime.datetime*) – An optional ending datetime.datetime.
     Everything after it won’t get plotted.'
+  id: totrans-38
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**toDateTime** (*datetime.datetime*) – 可选的结束datetime.datetime。之后的所有内容都不会被绘制。'
 - en: '|'
+  id: totrans-39
   prefs: []
   type: TYPE_NORMAL
+  zh: '|'
 - en: '| Return type: | A 2 element tuple with matplotlib.figure.Figure and subplots.
     |'
+  id: totrans-40
   prefs: []
   type: TYPE_TB
+  zh: '| 返回类型: | 一个包含matplotlib.figure.Figure和subplots的二元组。 |'
 - en: '`getInstrumentSubplot`(*instrument*)'
+  id: totrans-41
   prefs: []
   type: TYPE_NORMAL
+  zh: '`getInstrumentSubplot`(*instrument*)'
 - en: Returns the InstrumentSubplot for a given instrument
+  id: totrans-42
   prefs: []
   type: TYPE_NORMAL
+  zh: 返回给定仪器的InstrumentSubplot
 - en: '| Return type: | [`InstrumentSubplot`](#pyalgotrade.plotter.InstrumentSubplot
     "pyalgotrade.plotter.InstrumentSubplot"). |'
+  id: totrans-43
   prefs: []
   type: TYPE_TB
+  zh: '| 返回类型: | [`InstrumentSubplot`](#pyalgotrade.plotter.InstrumentSubplot "pyalgotrade.plotter.InstrumentSubplot").
+    |'
 - en: '`getOrCreateSubplot`(*name*)'
+  id: totrans-44
   prefs: []
   type: TYPE_NORMAL
+  zh: '`getOrCreateSubplot`(*name*)'
 - en: Returns a Subplot by name. If the subplot doesn’t exist, it gets created.
+  id: totrans-45
   prefs: []
   type: TYPE_NORMAL
+  zh: 根据名称返回Subplot。如果子图不存在，则会创建。
 - en: '| Parameters: | **name** (*string.*) – The name of the Subplot to get or create.
     |'
+  id: totrans-46
   prefs: []
   type: TYPE_TB
+  zh: '| 参数: | **name** (*字符串.*) – 要获取或创建的子图的名称。 |'
 - en: '| Return type: | [`Subplot`](#pyalgotrade.plotter.Subplot "pyalgotrade.plotter.Subplot").
     |'
+  id: totrans-47
   prefs: []
   type: TYPE_TB
+  zh: '| 返回类型: | [`子图`](#pyalgotrade.plotter.Subplot "pyalgotrade.plotter.Subplot").
+    |'
 - en: '`getPortfolioSubplot`()'
+  id: totrans-48
   prefs: []
   type: TYPE_NORMAL
+  zh: '`getPortfolioSubplot`()'
 - en: Returns the subplot where the portfolio values get plotted.
+  id: totrans-49
   prefs: []
   type: TYPE_NORMAL
+  zh: 返回投资组合价值被绘制的子图。
 - en: '| Return type: | [`Subplot`](#pyalgotrade.plotter.Subplot "pyalgotrade.plotter.Subplot").
     |'
+  id: totrans-50
   prefs: []
   type: TYPE_TB
+  zh: '| 返回类型: | [`子图`](#pyalgotrade.plotter.Subplot "pyalgotrade.plotter.Subplot").
+    |'
 - en: '`plot`(*fromDateTime=None*, *toDateTime=None*, *postPlotFun=<function _post_plot_fun
     at 0x108da0b18>*)'
+  id: totrans-51
   prefs: []
   type: TYPE_NORMAL
+  zh: '`plot`(*fromDateTime=None*, *toDateTime=None*, *postPlotFun=<function _post_plot_fun
+    at 0x108da0b18>*)'
 - en: Plot the strategy execution. Must be called after running the strategy.
+  id: totrans-52
   prefs: []
   type: TYPE_NORMAL
+  zh: 绘制策略执行。必须在运行策略后调用。
 - en: '| Parameters: |'
+  id: totrans-53
   prefs: []
   type: TYPE_TB
+  zh: '| 参数: |'
 - en: '**fromDateTime** (*datetime.datetime*) – An optional starting datetime.datetime.
     Everything before it won’t get plotted.'
+  id: totrans-54
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**fromDateTime** (*datetime.datetime*) – 可选的起始日期时间。该日期时间之前的所有内容都不会被绘制。'
 - en: '**toDateTime** (*datetime.datetime*) – An optional ending datetime.datetime.
     Everything after it won’t get plotted.'
+  id: totrans-55
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**toDateTime** (*datetime.datetime*) – 可选的结束日期时间。该日期时间之后的所有内容都不会被绘制。'
 - en: '|'
+  id: totrans-56
   prefs: []
   type: TYPE_NORMAL
+  zh: '|'
 - en: '`savePlot`(*filename*, *dpi=None*, *format=''png''*, *fromDateTime=None*, *toDateTime=None*)'
+  id: totrans-57
   prefs: []
   type: TYPE_NORMAL
+  zh: '`savePlot`(*filename*, *dpi=None*, *format=''png''*, *fromDateTime=None*, *toDateTime=None*)'
 - en: Plot the strategy execution into a file. Must be called after running the strategy.
+  id: totrans-58
   prefs: []
   type: TYPE_NORMAL
+  zh: 将策略执行绘制到文件中。必须在运行策略后调用。
 - en: '| Parameters: |'
+  id: totrans-59
   prefs: []
   type: TYPE_TB
+  zh: '| 参数: |'
 - en: '**filename** – The filename.'
+  id: totrans-60
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**filename** – 文件名。'
 - en: '**dpi** – The resolution in dots per inch.'
+  id: totrans-61
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**dpi** – 每英寸点数（dots per inch）的分辨率。'
 - en: '**format** – The file extension.'
+  id: totrans-62
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**format** – 文件扩展名。'
 - en: '**fromDateTime** (*datetime.datetime*) – An optional starting datetime.datetime.
     Everything before it won’t get plotted.'
+  id: totrans-63
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**fromDateTime** (*datetime.datetime*) – 可选的起始日期时间。该日期时间之前的所有内容都不会被绘制。'
 - en: '**toDateTime** (*datetime.datetime*) – An optional ending datetime.datetime.
     Everything after it won’t get plotted.'
+  id: totrans-64
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**toDateTime** (*datetime.datetime*) – 可选的结束日期时间。该日期时间之后的所有内容都不会被绘制。'
 - en: '|'
+  id: totrans-65
   prefs: []
   type: TYPE_NORMAL
+  zh: '|'
 - en: Previous topic
+  id: totrans-66
   prefs:
   - PREF_H4
   type: TYPE_NORMAL
+  zh: 上一个主题
 - en: '[stratanalyzer – Strategy analyzers](stratanalyzer.html "previous chapter")'
+  id: totrans-67
   prefs: []
   type: TYPE_NORMAL
+  zh: '[策略分析器 – Strategy analyzers](stratanalyzer.html "前一章")'
 - en: Next topic
+  id: totrans-68
   prefs:
   - PREF_H4
   type: TYPE_NORMAL
+  zh: 下一个主题
 - en: '[optimizer – Parallel optimizers](optimizer.html "next chapter")'
+  id: totrans-69
   prefs: []
   type: TYPE_NORMAL
+  zh: '[优化器 – 并行优化器](optimizer.html "下一章")'
 - en: This Page
+  id: totrans-70
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 此页面
 - en: '[Show Source](_sources/plotter.txt)'
+  id: totrans-71
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[显示源代码](_sources/plotter.txt)'
 - en: Quick search
+  id: totrans-72
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 快速搜索
 - en: Enter search terms or a module, class or function name.
+  id: totrans-73
   prefs: []
   type: TYPE_NORMAL
+  zh: 输入搜索词或模块、类或函数名称。
 - en: Navigation
+  id: totrans-74
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 导航
 - en: '[index](genindex.html "General Index")'
+  id: totrans-75
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[索引](genindex.html "总目录")'
 - en: '[modules](py-modindex.html "Python Module Index") |'
+  id: totrans-76
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[模块](py-modindex.html "Python 模块索引") |'
 - en: '[next](optimizer.html "optimizer – Parallel optimizers") |'
+  id: totrans-77
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[下一个](optimizer.html "优化器 – 并行优化器") |'
 - en: '[previous](stratanalyzer.html "stratanalyzer – Strategy analyzers") |'
+  id: totrans-78
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[上一个](stratanalyzer.html "策略分析器 – Strategy analyzers") |'
 - en: '[PyAlgoTrade 0.20 documentation](index.html) »'
+  id: totrans-79
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[PyAlgoTrade 0.20 文档](index.html) »'
 - en: '[Documentation for the code](code.html) »'
+  id: totrans-80
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[代码文档](code.html) »'
