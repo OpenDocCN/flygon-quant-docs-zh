@@ -1,109 +1,165 @@
 - en: Bitstamp support
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: Bitstamp支持
 - en: 原文：[https://gbeced.github.io/pyalgotrade/docs/v0.20/html/bitstamp.html](https://gbeced.github.io/pyalgotrade/docs/v0.20/html/bitstamp.html)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://gbeced.github.io/pyalgotrade/docs/v0.20/html/bitstamp.html](https://gbeced.github.io/pyalgotrade/docs/v0.20/html/bitstamp.html)
 - en: The bitstamp package adds support for paper trading and live trading Bitcoin
     strategies through Bitstamp ([https://www.bitstamp.net/](https://www.bitstamp.net/)).
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: bitstamp包通过Bitstamp（[https://www.bitstamp.net/](https://www.bitstamp.net/)）为纸上交易和实时交易比特币策略提供支持。
 - en: 'Bitstamp support depends on:'
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: Bitstamp支持依赖于：
 - en: '**ws4py** ([https://github.com/Lawouach/WebSocket-for-Python](https://github.com/Lawouach/WebSocket-for-Python))'
+  id: totrans-4
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**ws4py** ([https://github.com/Lawouach/WebSocket-for-Python](https://github.com/Lawouach/WebSocket-for-Python))'
 - en: '**tornado** ([http://www.tornadoweb.org/en/stable/](http://www.tornadoweb.org/en/stable/))'
+  id: totrans-5
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**tornado** ([http://www.tornadoweb.org/en/stable/](http://www.tornadoweb.org/en/stable/))'
 - en: so be sure to have those installed before moving forward.
+  id: totrans-6
   prefs: []
   type: TYPE_NORMAL
+  zh: 因此，在继续之前，请确保已安装它们。
 - en: 'Contents:'
+  id: totrans-7
   prefs: []
   type: TYPE_NORMAL
+  zh: 目录：
 - en: '[bitstamp – Bitstamp reference](bitstamp_ref.html)'
+  id: totrans-8
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[bitstamp – Bitstamp参考](bitstamp_ref.html)'
 - en: '[WebSocket](bitstamp_ref.html#websocket)'
+  id: totrans-9
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[WebSocket](bitstamp_ref.html#websocket)'
 - en: '[Feeds](bitstamp_ref.html#module-pyalgotrade.bitstamp.barfeed)'
+  id: totrans-10
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[源](bitstamp_ref.html#module-pyalgotrade.bitstamp.barfeed)'
 - en: '[Brokers](bitstamp_ref.html#module-pyalgotrade.bitstamp.broker)'
+  id: totrans-11
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[经纪人](bitstamp_ref.html#module-pyalgotrade.bitstamp.broker)'
 - en: '[Bitstamp Example](bitstamp_example.html)'
+  id: totrans-12
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[Bitstamp示例](bitstamp_example.html)'
 - en: Previous topic
+  id: totrans-13
   prefs:
   - PREF_H4
   type: TYPE_NORMAL
+  zh: 上一个主题
 - en: '[Bitcoin](bitcoin.html "previous chapter")'
+  id: totrans-14
   prefs: []
   type: TYPE_NORMAL
+  zh: '[比特币](bitcoin.html "上一章")'
 - en: Next topic
+  id: totrans-15
   prefs:
   - PREF_H4
   type: TYPE_NORMAL
+  zh: 下一个主题
 - en: '[bitstamp – Bitstamp reference](bitstamp_ref.html "next chapter")'
+  id: totrans-16
   prefs: []
   type: TYPE_NORMAL
+  zh: '[bitstamp – Bitstamp参考](bitstamp_ref.html "下一章")'
 - en: This Page
+  id: totrans-17
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 此页
 - en: '[Show Source](_sources/bitstamp.txt)'
+  id: totrans-18
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[显示源代码](_sources/bitstamp.txt)'
 - en: Quick search
+  id: totrans-19
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 快速搜索
 - en: Enter search terms or a module, class or function name.
+  id: totrans-20
   prefs: []
   type: TYPE_NORMAL
+  zh: 输入搜索词或模块、类或函数名称。
 - en: Navigation
+  id: totrans-21
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 导航
 - en: '[index](genindex.html "General Index")'
+  id: totrans-22
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[索引](genindex.html "总索引")'
 - en: '[modules](py-modindex.html "Python Module Index") |'
+  id: totrans-23
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[模块](py-modindex.html "Python模块索引") |'
 - en: '[next](bitstamp_ref.html "bitstamp – Bitstamp reference") |'
+  id: totrans-24
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[下一页](bitstamp_ref.html "bitstamp – Bitstamp参考") |'
 - en: '[previous](bitcoin.html "Bitcoin") |'
+  id: totrans-25
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[上一页](bitcoin.html "比特币") |'
 - en: '[PyAlgoTrade 0.20 documentation](index.html) »'
+  id: totrans-26
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[PyAlgoTrade 0.20文档](index.html) »'
 - en: '[Bitcoin](bitcoin.html) »'
+  id: totrans-27
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[比特币](bitcoin.html) »'
