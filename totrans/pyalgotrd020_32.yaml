@@ -1,97 +1,149 @@
 - en: Ernie Chan’s Gold vs. Gold Miners
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: Ernie Chan 的黄金与黄金矿业公司
 - en: 原文：[https://gbeced.github.io/pyalgotrade/docs/v0.20/html/sample_statarb_erniechan.html](https://gbeced.github.io/pyalgotrade/docs/v0.20/html/sample_statarb_erniechan.html)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://gbeced.github.io/pyalgotrade/docs/v0.20/html/sample_statarb_erniechan.html](https://gbeced.github.io/pyalgotrade/docs/v0.20/html/sample_statarb_erniechan.html)
 - en: 'This example is based on:'
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: 此示例基于：
 - en: '[http://epchan.blogspot.com.ar/2006/11/gold-vs-gold-miners-another-arbitrage.html](http://epchan.blogspot.com.ar/2006/11/gold-vs-gold-miners-another-arbitrage.html)'
+  id: totrans-3
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[http://epchan.blogspot.com.ar/2006/11/gold-vs-gold-miners-another-arbitrage.html](http://epchan.blogspot.com.ar/2006/11/gold-vs-gold-miners-another-arbitrage.html)'
 - en: '[https://www.quantopian.com/posts/ernie-chans-gold-vs-gold-miners-stat-arb](https://www.quantopian.com/posts/ernie-chans-gold-vs-gold-miners-stat-arb)'
+  id: totrans-4
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[https://www.quantopian.com/posts/ernie-chans-gold-vs-gold-miners-stat-arb](https://www.quantopian.com/posts/ernie-chans-gold-vs-gold-miners-stat-arb)'
 - en: '[PRE0]'
+  id: totrans-5
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: 'this is what the output should look like:'
+  id: totrans-6
   prefs: []
   type: TYPE_NORMAL
+  zh: 这是输出应该的样子：
 - en: '[PRE1]'
+  id: totrans-7
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE1]'
 - en: 'and this is what the plot should look like:'
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: 这是图表应该的样子：
 - en: '![_images/statarb_erniechan.png](../Images/2f7c47220ae1000538fa890a3d4e97f2.png)'
+  id: totrans-9
   prefs: []
   type: TYPE_IMG
+  zh: '![_images/statarb_erniechan.png](../Images/2f7c47220ae1000538fa890a3d4e97f2.png)'
 - en: You can get better returns by tunning the window size as well as the entry and
     exit values for the z-score.
+  id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: 通过调整窗口大小以及 z-score 的入口和出口值，您可以获得更好的回报。
 - en: Previous topic
+  id: totrans-11
   prefs:
   - PREF_H4
   type: TYPE_NORMAL
+  zh: 上一个主题
 - en: '[Market Timing Using Moving-Average Crossovers](sample_market_timing.html "previous
     chapter")'
+  id: totrans-12
   prefs: []
   type: TYPE_NORMAL
+  zh: '[使用移动平均交叉进行市场定时](sample_market_timing.html "上一章节")'
 - en: Next topic
+  id: totrans-13
   prefs:
   - PREF_H4
   type: TYPE_NORMAL
+  zh: 下一个主题
 - en: '[Bollinger Bands](sample_bbands.html "next chapter")'
+  id: totrans-14
   prefs: []
   type: TYPE_NORMAL
+  zh: '[布林带](sample_bbands.html "下一章节")'
 - en: This Page
+  id: totrans-15
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 本页
 - en: '[Show Source](_sources/sample_statarb_erniechan.txt)'
+  id: totrans-16
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[显示源代码](_sources/sample_statarb_erniechan.txt)'
 - en: Quick search
+  id: totrans-17
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 快速搜索
 - en: Enter search terms or a module, class or function name.
+  id: totrans-18
   prefs: []
   type: TYPE_NORMAL
+  zh: 输入搜索项或模块、类或函数名称。
 - en: Navigation
+  id: totrans-19
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 导航
 - en: '[index](genindex.html "General Index")'
+  id: totrans-20
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[索引](genindex.html "总目录")'
 - en: '[modules](py-modindex.html "Python Module Index") |'
+  id: totrans-21
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[模块](py-modindex.html "Python 模块索引") |'
 - en: '[next](sample_bbands.html "Bollinger Bands") |'
+  id: totrans-22
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[下一页](sample_bbands.html "布林带") |'
 - en: '[previous](sample_market_timing.html "Market Timing Using Moving-Average Crossovers")
     |'
+  id: totrans-23
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[前一页](sample_market_timing.html "使用移动平均交叉进行市场定时") |'
 - en: '[PyAlgoTrade 0.20 documentation](index.html) »'
+  id: totrans-24
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[PyAlgoTrade 0.20 文档](index.html) »'
 - en: '[Sample strategies](samples.html) »'
+  id: totrans-25
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[示例策略](samples.html) »'

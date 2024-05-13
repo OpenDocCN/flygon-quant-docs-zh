@@ -1,94 +1,146 @@
 - en: SMA Crossover
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: SMA 交叉
 - en: 原文：[https://gbeced.github.io/pyalgotrade/docs/v0.20/html/sample_sma_crossover.html](https://gbeced.github.io/pyalgotrade/docs/v0.20/html/sample_sma_crossover.html)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://gbeced.github.io/pyalgotrade/docs/v0.20/html/sample_sma_crossover.html](https://gbeced.github.io/pyalgotrade/docs/v0.20/html/sample_sma_crossover.html)
 - en: 'Save this code as sma_crossover.py:'
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: 将此代码保存为 sma_crossover.py：
 - en: '[PRE0]'
+  id: totrans-3
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: 'and use the following code to execute the strategy:'
+  id: totrans-4
   prefs: []
   type: TYPE_NORMAL
+  zh: 并使用以下代码执行策略：
 - en: '[PRE1]'
+  id: totrans-5
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE1]'
 - en: 'This is what the output should look like:'
+  id: totrans-6
   prefs: []
   type: TYPE_NORMAL
+  zh: 这是输出应该呈现的样子：
 - en: '[PRE2]'
+  id: totrans-7
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE2]'
 - en: 'and this is what the plot should look like:'
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: 这是图表应该呈现的样子：
 - en: '![_images/sma_crossover.png](../Images/1f9a962625196c40e4173814cd681065.png)'
+  id: totrans-9
   prefs: []
   type: TYPE_IMG
+  zh: '![_images/sma_crossover.png](../Images/1f9a962625196c40e4173814cd681065.png)'
 - en: You can get better returns by tunning the sma period.
+  id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: 通过调整 sma 周期可以获得更好的回报。
 - en: Previous topic
+  id: totrans-11
   prefs:
   - PREF_H4
   type: TYPE_NORMAL
+  zh: 上一个主题
 - en: '[VWAP Momentum Trade](sample_vwap_momentum.html "previous chapter")'
+  id: totrans-12
   prefs: []
   type: TYPE_NORMAL
+  zh: '[VWAP 动量交易](sample_vwap_momentum.html "上一章")'
 - en: Next topic
+  id: totrans-13
   prefs:
   - PREF_H4
   type: TYPE_NORMAL
+  zh: 下一个主题
 - en: '[Market Timing Using Moving-Average Crossovers](sample_market_timing.html "next
     chapter")'
+  id: totrans-14
   prefs: []
   type: TYPE_NORMAL
+  zh: '[使用移动平均线交叉进行市场定时](sample_market_timing.html "下一章")'
 - en: This Page
+  id: totrans-15
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 此页面
 - en: '[Show Source](_sources/sample_sma_crossover.txt)'
+  id: totrans-16
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[显示源代码](_sources/sample_sma_crossover.txt)'
 - en: Quick search
+  id: totrans-17
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 快速搜索
 - en: Enter search terms or a module, class or function name.
+  id: totrans-18
   prefs: []
   type: TYPE_NORMAL
+  zh: 输入搜索词或模块、类或函数名称。
 - en: Navigation
+  id: totrans-19
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 导航
 - en: '[index](genindex.html "General Index")'
+  id: totrans-20
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[索引](genindex.html "通用索引")'
 - en: '[modules](py-modindex.html "Python Module Index") |'
+  id: totrans-21
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[模块](py-modindex.html "Python 模块索引") |'
 - en: '[next](sample_market_timing.html "Market Timing Using Moving-Average Crossovers")
     |'
+  id: totrans-22
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[下一页](sample_market_timing.html "使用移动平均线交叉进行市场定时") |'
 - en: '[previous](sample_vwap_momentum.html "VWAP Momentum Trade") |'
+  id: totrans-23
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[上一页](sample_vwap_momentum.html "VWAP 动量交易") |'
 - en: '[PyAlgoTrade 0.20 documentation](index.html) »'
+  id: totrans-24
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[PyAlgoTrade 0.20 文档](index.html) »'
 - en: '[Sample strategies](samples.html) »'
+  id: totrans-25
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[示例策略](samples.html) »'

@@ -1,123 +1,185 @@
 - en: Sample strategies
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 示例策略
 - en: 原文：[https://gbeced.github.io/pyalgotrade/docs/v0.20/html/samples.html](https://gbeced.github.io/pyalgotrade/docs/v0.20/html/samples.html)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://gbeced.github.io/pyalgotrade/docs/v0.20/html/samples.html](https://gbeced.github.io/pyalgotrade/docs/v0.20/html/samples.html)
 - en: '## Momentum'
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: '## 动量'
 - en: '[VWAP Momentum Trade](sample_vwap_momentum.html)'
+  id: totrans-3
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[VWAP 动量交易](sample_vwap_momentum.html)'
 - en: '[SMA Crossover](sample_sma_crossover.html)'
+  id: totrans-4
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[SMA 交叉](sample_sma_crossover.html)'
 - en: '[Market Timing Using Moving-Average Crossovers](sample_market_timing.html)'
+  id: totrans-5
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[利用移动平均线交叉进行市场定时](sample_market_timing.html)'
 - en: Mean Reversion
+  id: totrans-6
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 均值回归
 - en: '[Ernie Chan’s Gold vs. Gold Miners](sample_statarb_erniechan.html)'
+  id: totrans-7
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[欧尼·陈的黄金与黄金矿工](sample_statarb_erniechan.html)'
 - en: '[Bollinger Bands](sample_bbands.html)'
+  id: totrans-8
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[布林带](sample_bbands.html)'
 - en: '[RSI2](sample_rsi2.html)'
+  id: totrans-9
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[RSI2](sample_rsi2.html)'
 - en: Others
+  id: totrans-10
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 其他
 - en: '[Quandl integration](sample_quandl.html)'
+  id: totrans-11
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[Quandl 整合](sample_quandl.html)'
 - en: '[Table Of Contents](index.html)'
+  id: totrans-12
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: '[目录](index.html)'
 - en: '[Sample strategies](#)'
+  id: totrans-13
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[示例策略](#)'
 - en: '[Momentum](#momentum)'
+  id: totrans-14
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[动量](#momentum)'
 - en: '[Mean Reversion](#mean-reversion)'
+  id: totrans-15
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[均值回归](#mean-reversion)'
 - en: '[Others](#others)'
+  id: totrans-16
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[其他](#others)'
 - en: Previous topic
+  id: totrans-17
   prefs:
   - PREF_H4
   type: TYPE_NORMAL
+  zh: 上一个主题
 - en: '[Computational Investing Part I](compinvpart1.html "previous chapter")'
+  id: totrans-18
   prefs: []
   type: TYPE_NORMAL
+  zh: '[计算投资第一部分](compinvpart1.html "上一章")'
 - en: Next topic
+  id: totrans-19
   prefs:
   - PREF_H4
   type: TYPE_NORMAL
+  zh: 下一个主题
 - en: '[VWAP Momentum Trade](sample_vwap_momentum.html "next chapter")'
+  id: totrans-20
   prefs: []
   type: TYPE_NORMAL
+  zh: '[VWAP 动量交易](sample_vwap_momentum.html "下一章")'
 - en: This Page
+  id: totrans-21
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 此页面
 - en: '[Show Source](_sources/samples.txt)'
+  id: totrans-22
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[显示源代码](_sources/samples.txt)'
 - en: Quick search
+  id: totrans-23
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 快速搜索
 - en: Enter search terms or a module, class or function name.
+  id: totrans-24
   prefs: []
   type: TYPE_NORMAL
+  zh: 输入搜索词或模块、类或函数名称。
 - en: Navigation
+  id: totrans-25
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 导航
 - en: '[index](genindex.html "General Index")'
+  id: totrans-26
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[索引](genindex.html "通用索引")'
 - en: '[modules](py-modindex.html "Python Module Index") |'
+  id: totrans-27
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[模块](py-modindex.html "Python 模块索引") |'
 - en: '[next](sample_vwap_momentum.html "VWAP Momentum Trade") |'
+  id: totrans-28
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[下一步](sample_vwap_momentum.html "VWAP 动量交易") |'
 - en: '[previous](compinvpart1.html "Computational Investing Part I") |'
+  id: totrans-29
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[上一步](compinvpart1.html "计算投资第一部分") |'
 - en: '[PyAlgoTrade 0.20 documentation](index.html) »'
+  id: totrans-30
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[PyAlgoTrade 0.20 文档](index.html) »'
