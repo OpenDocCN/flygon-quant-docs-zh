@@ -14,32 +14,3 @@ bitcoincharts 包增加了对由 [`www.bitcoincharts.com/`](http://www.bitcoinch
 
 +   Bitcoin 图表示例
 
-#### 上一个主题
-
-Bitstamp 示例
-
-#### 下一个主题
-
-bitcoincharts – Bitcoin 图表参考
-
-### 此页面
-
-+   显示源代码
-
-### 快速搜索
-
-输入搜索术语或模块、类或函数名称。
-
-### 导航
-
-+   索引
-
-+   模块 |
-
-+   下一章 |
-
-+   上一章 |
-
-+   PyAlgoTrade 0.20 文档 »
-
-+   比特币 »

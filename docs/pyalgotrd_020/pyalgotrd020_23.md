@@ -14,30 +14,3 @@ Twitter 支持依赖于**tweepy** ([`github.com/tweepy/tweepy`](https://github.c
 
 +   Twitter 示例
 
-#### 上一个主题
-
-比特币图表示例
-
-#### 下一个主题
-
-twitter – Twitter feed reference
-
-### 本页面
-
-+   显示源代码
-
-### 快速搜索
-
-输入搜索项或模块、类或函数名称。
-
-### 导航
-
-+   索引
-
-+   模块 |
-
-+   下一页 |
-
-+   前一页 |
-
-+   PyAlgoTrade 0.20 文档 »

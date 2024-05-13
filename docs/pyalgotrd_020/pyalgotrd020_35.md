@@ -93,26 +93,3 @@ if __name__ == "__main__":
 
 ![_images/quandl_sample.png](img/a0e3df97bc792937fcffb40e5e5ed71c.png)
 
-#### 上一个主题
-
-RSI2
-
-### 本页
-
-+   显示源码
-
-### 快速搜索
-
-输入搜索项或模块、类或函数名称。
-
-### 导航
-
-+   索引
-
-+   模块 |
-
-+   前一页 |
-
-+   PyAlgoTrade 0.20 文档 »
-
-+   示例策略 »
