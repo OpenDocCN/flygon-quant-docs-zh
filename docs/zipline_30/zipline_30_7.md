@@ -19556,4 +19556,4 @@ zipline.utils.cli.maybe_show_progress(it, show_progress, **kwargs)
 with maybe_show_progress([1, 2, 3], True) as ns:
      for n in ns:
          ... 
-`````````
+```
