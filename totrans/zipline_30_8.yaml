@@ -11103,140 +11103,168 @@
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 修复了期货价格在四舍五入时的精度问题（[1788](https://github.com/stefan-jansen/zipline/issues/1788)）
 - en: Performance
   id: totrans-1708
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 性能
 - en: Avoid repeated recursive calls when getting forward-filled close price ([1735](https://github.com/stefan-jansen/zipline/issues/1735))
   id: totrans-1709
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 在获取前向填充收盘价时避免重复的递归调用（[1735](https://github.com/stefan-jansen/zipline/issues/1735)）
 - en: Maintenance and Refactorings
   id: totrans-1710
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 维护和重构
 - en: Adds linter recommendations to adjustments module ([1712](https://github.com/stefan-jansen/zipline/issues/1712))
   id: totrans-1711
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 为调整模块添加linter建议（[1712](https://github.com/stefan-jansen/zipline/issues/1712)）
 - en: Clears up naming and logic in resample close ([1728](https://github.com/stefan-jansen/zipline/issues/1728))
   id: totrans-1712
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 清理了resample close中的命名和逻辑（[1728](https://github.com/stefan-jansen/zipline/issues/1728)）
 - en: Use March quarterly cycle for several continuous futures ([1762](https://github.com/stefan-jansen/zipline/issues/1762))
   id: totrans-1713
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 为多个连续期货使用3月季度周期（[1762](https://github.com/stefan-jansen/zipline/issues/1762)）
 - en: Use better repr for Transaction objects ([1746](https://github.com/stefan-jansen/zipline/issues/1746))
   id: totrans-1714
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 为Transaction对象使用更好的repr（[1746](https://github.com/stefan-jansen/zipline/issues/1746)）
 - en: Shorten repr for Asset objects ([1786](https://github.com/stefan-jansen/zipline/issues/1786))
   id: totrans-1715
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 缩短Asset对象的repr（[1786](https://github.com/stefan-jansen/zipline/issues/1786)）
 - en: Removes usage of empyrical’s information ratio ([1854](https://github.com/stefan-jansen/zipline/issues/1854))
   id: totrans-1716
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 移除了empyrical的信息比率的使用（[1854](https://github.com/stefan-jansen/zipline/issues/1854)）
 - en: Build
   id: totrans-1717
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 构建
 - en: Adds Python 3.5 packages ([1701](https://github.com/stefan-jansen/zipline/issues/1701))
   id: totrans-1718
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 添加Python 3.5包（[1701](https://github.com/stefan-jansen/zipline/issues/1701)）
 - en: Swap conda-build arguments so we don’t build packages on every CI build ([1813](https://github.com/stefan-jansen/zipline/issues/1813))
   id: totrans-1719
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 交换conda-build参数，这样我们就不必在每次CI构建时构建包（[1813](https://github.com/stefan-jansen/zipline/issues/1813)）
 - en: Documentation
   id: totrans-1720
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 文档
 - en: Adds Zipline Development Guidelines, for people to read about how to contribute
     to zipline ([1820](https://github.com/stefan-jansen/zipline/issues/1820))
   id: totrans-1721
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 添加了Zipline开发指南，供人们阅读如何为Zipline做出贡献（[1820](https://github.com/stefan-jansen/zipline/issues/1820)）
 - en: Show exchange as required for equities ([1731](https://github.com/stefan-jansen/zipline/issues/1731))
   id: totrans-1722
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 显示股票所需的交易所（[1731](https://github.com/stefan-jansen/zipline/issues/1731)）
 - en: Updates the Zipline Beginner Tutorial notebook ([1707](https://github.com/stefan-jansen/zipline/issues/1707))
   id: totrans-1723
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 更新了Zipline入门教程笔记本（[1707](https://github.com/stefan-jansen/zipline/issues/1707)）
 - en: Includes PipelineEngine, pipeline Term, Factors, and other pipeline things to
     docs ([1826](https://github.com/stefan-jansen/zipline/issues/1826))
   id: totrans-1724
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 包括PipelineEngine、pipeline Term、Factors等其他pipeline相关内容到文档中（[1826](https://github.com/stefan-jansen/zipline/issues/1826)）
 - en: Miscellaneous
   id: totrans-1725
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 杂项
 - en: Use csv market data with `run_algorithm` so we don’t try to download data for
     tests ([1793](https://github.com/stefan-jansen/zipline/issues/1793))
   id: totrans-1726
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 使用csv市场数据与`run_algorithm`，这样我们就不必为测试下载数据（[1793](https://github.com/stefan-jansen/zipline/issues/1793)）
 - en: Updates Dockerfile to use Python 3.5
   id: totrans-1727
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 更新Dockerfile以使用Python 3.5
 - en: Release 1.1.0
   id: totrans-1728
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 发布1.1.0
 - en: 'Release:'
   id: totrans-1729
   prefs: []
   type: TYPE_NORMAL
+  zh: 发布：
 - en: 1.1.0
   id: totrans-1730
   prefs: []
   type: TYPE_NORMAL
+  zh: 1.1.0
 - en: 'Date:'
   id: totrans-1731
   prefs: []
   type: TYPE_NORMAL
+  zh: 日期：
 - en: March 10, 2017
   id: totrans-1732
   prefs: []
   type: TYPE_NORMAL
+  zh: 2017年3月10日
 - en: This release is meant to provide zipline support for pandas 0.18, as well as
     several bug fixes, API changes, and many performance changes.
   id: totrans-1733
   prefs: []
   type: TYPE_NORMAL
+  zh: 此次发布旨在为pandas 0.18提供Zipline支持，以及多个错误修复、API变更和许多性能改进。
 - en: Enhancements
   id: totrans-1734
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 增强功能
 - en: Makes the minute bar read catch NoDataOnDate exceptions if dates are not in
     the calendar. Before, the minute bar reader was forward filling, but now it returns
     nan for OHLC and 0 for V. ([1488](https://github.com/stefan-jansen/zipline/issues/1488))
@@ -11244,124 +11272,147 @@
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 如果日期不在日历中，使分钟条形图读取捕获NoDataOnDate异常。之前，分钟条形图阅读器是前向填充的，但现在它为OHLC返回nan，为V返回0。（[1488](https://github.com/stefan-jansen/zipline/issues/1488)）
 - en: Adds `truncate` method to `BcolzMinuteBarWriter` ([1499](https://github.com/stefan-jansen/zipline/issues/1499))
   id: totrans-1736
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 为`BcolzMinuteBarWriter`添加`truncate`方法（[1499](https://github.com/stefan-jansen/zipline/issues/1499)）
 - en: Bumps up to pandas 0.18.1 and numpy 1.11.1 ([1339](https://github.com/stefan-jansen/zipline/issues/1339))
   id: totrans-1737
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 升级到pandas 0.18.1和numpy 1.11.1（[1339](https://github.com/stefan-jansen/zipline/issues/1339)）
 - en: Adds an earnings estimates quarter loader for Pipeline ([1396](https://github.com/stefan-jansen/zipline/issues/1396))
   id: totrans-1738
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 为Pipeline添加了收益估计季度加载器（[1396](https://github.com/stefan-jansen/zipline/issues/1396)）
 - en: Creates a restricted list manager that takes in information about restricted
     sids and stores in memory upon instantiation ([1487](https://github.com/stefan-jansen/zipline/issues/1487))
   id: totrans-1739
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 创建了一个受限列表管理器，该管理器在实例化时接收有关受限sid的信息并将其存储在内存中（[1487](https://github.com/stefan-jansen/zipline/issues/1487)）
 - en: Adds `last_available{session, minute}` args to `DataPortal` ([1528](https://github.com/stefan-jansen/zipline/issues/1528))
   id: totrans-1740
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 为`DataPortal`添加`last_available{session, minute}`参数（[1528](https://github.com/stefan-jansen/zipline/issues/1528)）
 - en: Adds `SpecificAssets` filter ([1530](https://github.com/stefan-jansen/zipline/issues/1530))
   id: totrans-1741
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 增加了`SpecificAssets`过滤器（[1530](https://github.com/stefan-jansen/zipline/issues/1530)）
 - en: Adds the ability for an algorithm to request the current contract for a future
     chain ([1529](https://github.com/stefan-jansen/zipline/issues/1529))
   id: totrans-1742
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 增加了算法请求期货链当前合约的能力（[1529](https://github.com/stefan-jansen/zipline/issues/1529)）
 - en: Adds `chain` field to current and supporting methods in `DataPortal` and `OrderedContracts`
     ([1538](https://github.com/stefan-jansen/zipline/issues/1538))
   id: totrans-1743
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 在`DataPortal`和`OrderedContracts`的当前和支持方法中增加了`chain`字段（[1538](https://github.com/stefan-jansen/zipline/issues/1538)）
 - en: Adds history for continuous futures ([1539](https://github.com/stefan-jansen/zipline/issues/1539))
   id: totrans-1744
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 增加了连续期货的历史数据（[1539](https://github.com/stefan-jansen/zipline/issues/1539)）
 - en: Adds adjusted history for continuous future ([1548](https://github.com/stefan-jansen/zipline/issues/1548))
   id: totrans-1745
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 增加了连续期货的调整历史数据（[1548](https://github.com/stefan-jansen/zipline/issues/1548)）
 - en: Adds roll style which takes the volume of a future contract into account, specifically
     for continuous futures ([1556](https://github.com/stefan-jansen/zipline/issues/1556))
   id: totrans-1746
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 增加了考虑期货合约成交量的滚动风格，特别是针对连续期货（[1556](https://github.com/stefan-jansen/zipline/issues/1556)）
 - en: Adds better error message when calling Zipline API functions outside of a running
     simulation ([1593](https://github.com/stefan-jansen/zipline/issues/1593))
   id: totrans-1747
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 在非运行模拟中调用Zipline API函数时增加了更好的错误信息（[1593](https://github.com/stefan-jansen/zipline/issues/1593)）
 - en: Adds `MACDSignal()`, `MovingAverageConvergenceDivergenceSignal()`, and `AnnualizedVolatility()`
     as built-in factors. ([1588](https://github.com/stefan-jansen/zipline/issues/1588))
   id: totrans-1748
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 增加了`MACDSignal()`、`MovingAverageConvergenceDivergenceSignal()`和`AnnualizedVolatility()`作为内置因子（[1588](https://github.com/stefan-jansen/zipline/issues/1588)）
 - en: Allows running pipelines with custom date chunks in `attach_pipeline` ([1617](https://github.com/stefan-jansen/zipline/issues/1617))
   id: totrans-1749
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 允许在`attach_pipeline`中使用自定义日期块运行管道（[1617](https://github.com/stefan-jansen/zipline/issues/1617)）
 - en: Adds `order_batch` to the trade blotter ([1596](https://github.com/stefan-jansen/zipline/issues/1596))
   id: totrans-1750
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 在交易记录中增加了`order_batch`功能（[1596](https://github.com/stefan-jansen/zipline/issues/1596)）
 - en: Adds vectorized lookup_symbol ([1627](https://github.com/stefan-jansen/zipline/issues/1627))
   id: totrans-1751
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 增加了向量化查找符号功能（[1627](https://github.com/stefan-jansen/zipline/issues/1627)）
 - en: Solidifies equality comparisons for SlippageModel classes ([1657](https://github.com/stefan-jansen/zipline/issues/1657))
   id: totrans-1752
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 加强了SlippageModel类之间的等式比较（[1657](https://github.com/stefan-jansen/zipline/issues/1657)）
 - en: Adds a factor for winsorized results ([1696](https://github.com/stefan-jansen/zipline/issues/1696))
   id: totrans-1753
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 增加了用于缩尾结果的因子（[1696](https://github.com/stefan-jansen/zipline/issues/1696)）
 - en: Bug Fixes
   id: totrans-1754
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 错误修复
 - en: Changes str to string_types to avoid errors when type checking unicode and not
     str type. ([1315](https://github.com/stefan-jansen/zipline/issues/1315))
   id: totrans-1755
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 将`str`改为`string_types`以避免在类型检查unicode而不是str类型时出错（[1315](https://github.com/stefan-jansen/zipline/issues/1315)）
 - en: Algorithms default to quantopian-quandl bundle when no data source is specified
     ([1479](https://github.com/stefan-jansen/zipline/issues/1479)) ([1374](https://github.com/stefan-jansen/zipline/issues/1374))
   id: totrans-1756
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 当未指定数据源时，算法默认使用quantopian-quandl数据包（[1479](https://github.com/stefan-jansen/zipline/issues/1479)）（[1374](https://github.com/stefan-jansen/zipline/issues/1374)）
 - en: Catches all missing data exceptions when computing dividend ratios ([1507](https://github.com/stefan-jansen/zipline/issues/1507))
   id: totrans-1757
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 在计算股息比率时捕获所有缺失数据异常（[1507](https://github.com/stefan-jansen/zipline/issues/1507)）
 - en: Creates adjustments based on ordered assets instead of a set. Before, adjustments
     were created for estimates based on where assets happened to fall in a set rather
     than using ordered assets ([1547](https://github.com/stefan-jansen/zipline/issues/1547))
@@ -11369,12 +11420,14 @@
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 根据有序资产而不是集合创建调整。之前，调整是根据资产在集合中的位置而不是有序资产来估计的（[1547](https://github.com/stefan-jansen/zipline/issues/1547)）
 - en: Fixes blaze pipeline queries for when users query for the `asof_date` column
     ([1608](https://github.com/stefan-jansen/zipline/issues/1608))
   id: totrans-1759
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 修复了用户查询`asof_date`列时的blaze管道查询问题（[1608](https://github.com/stefan-jansen/zipline/issues/1608)）
 - en: Datetimes should be converted in utc. DataFrames being returned were creating
     US/Eastern timestamps out of the ints, potentially changing the date returned
     to be the date before ([1635](https://github.com/stefan-jansen/zipline/issues/1635))
@@ -11382,170 +11435,203 @@
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 应将日期时间转换为UTC格式。返回的DataFrame将整数转换为美国/东部时间戳，可能导致返回的日期变为前一天的日期（[1635](https://github.com/stefan-jansen/zipline/issues/1635)）
 - en: Fixes default inputs for `IchimokuKinkoHyo` factor ([1638](https://github.com/stefan-jansen/zipline/issues/1638))
   id: totrans-1761
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 修复了`IchimokuKinkoHyo`因子的默认输入（[1638](https://github.com/stefan-jansen/zipline/issues/1638)）
 - en: Performance
   id: totrans-1762
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 性能改进
 - en: Removes invocations of `get_calendar('NYSE')` which cuts down zipline import
     time and makes the CLI more responsive and use less memory. ([1471](https://github.com/stefan-jansen/zipline/issues/1471))
   id: totrans-1763
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 移除了`get_calendar('NYSE')`的调用，减少了zipline的导入时间，使CLI更加响应迅速且使用更少的内存（[1471](https://github.com/stefan-jansen/zipline/issues/1471)）
 - en: Refcounts and releases pipeline terms when they are no longer needed ([1484](https://github.com/stefan-jansen/zipline/issues/1484))
   id: totrans-1764
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 在不再需要时对管道术语进行引用计数和释放（[1484](https://github.com/stefan-jansen/zipline/issues/1484)）
 - en: Saves up to 75% of calls to minute_to_session_label ([1492](https://github.com/stefan-jansen/zipline/issues/1492))
   id: totrans-1765
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 最多可减少75%的minute_to_session_label调用次数（[1492](https://github.com/stefan-jansen/zipline/issues/1492)）
 - en: Speeds up counting of number of minutes across contiguous session ([1497](https://github.com/stefan-jansen/zipline/issues/1497))
   id: totrans-1766
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 加快了连续会话中分钟数的计数速度（[1497](https://github.com/stefan-jansen/zipline/issues/1497)）
 - en: Removes/defers calls to get_loc on large indices ([1504](https://github.com/stefan-jansen/zipline/issues/1504))
     ([1503](https://github.com/stefan-jansen/zipline/issues/1503))
   id: totrans-1767
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 移除/推迟了对大型索引的get_loc调用（[1504](https://github.com/stefan-jansen/zipline/issues/1504)）（[1503](https://github.com/stefan-jansen/zipline/issues/1503)）
 - en: Replaces `get_loc` calls in `calc_dividend_ratios` with `get_indexer` ([1510](https://github.com/stefan-jansen/zipline/issues/1510))
   id: totrans-1768
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 在`calc_dividend_ratios`中用`get_indexer`替换了`get_loc`调用（[1510](https://github.com/stefan-jansen/zipline/issues/1510)）
 - en: Speeds up minute to session sampling ([1549](https://github.com/stefan-jansen/zipline/issues/1549))
   id: totrans-1769
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 加快了分钟到会话的采样速度（[1549](https://github.com/stefan-jansen/zipline/issues/1549)）
 - en: Adds some micro optimizations in `data.current` ([1561](https://github.com/stefan-jansen/zipline/issues/1561))
   id: totrans-1770
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 在`data.current`中增加了一些微优化（[1561](https://github.com/stefan-jansen/zipline/issues/1561)）
 - en: Adds optimization for initial workspace for pipelines ([1521](https://github.com/stefan-jansen/zipline/issues/1521))
   id: totrans-1771
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 为管道初始工作区增加了优化（[1521](https://github.com/stefan-jansen/zipline/issues/1521)）
 - en: More memory savings ([1599](https://github.com/stefan-jansen/zipline/issues/1599))
   id: totrans-1772
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 更多的内存节省（[1599](https://github.com/stefan-jansen/zipline/issues/1599)）
 - en: Maintenance and Refactorings
   id: totrans-1773
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 维护和重构
 - en: Updates leveraged ETF list ([747](https://github.com/stefan-jansen/zipline/issues/747))
     ([1434](https://github.com/stefan-jansen/zipline/issues/1434))
   id: totrans-1774
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 更新了杠杆ETF列表（[747](https://github.com/stefan-jansen/zipline/issues/747)）（[1434](https://github.com/stefan-jansen/zipline/issues/1434)）
 - en: Adds additional fields to `__getitem__` for Order class ([1483](https://github.com/stefan-jansen/zipline/issues/1483))
   id: totrans-1775
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 为Order类的`__getitem__`增加了额外的字段（[1483](https://github.com/stefan-jansen/zipline/issues/1483)）
 - en: Adds `BarReader` base class for minute and session readers ([1486](https://github.com/stefan-jansen/zipline/issues/1486))
   id: totrans-1776
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 为分钟和会话阅读器增加了`BarReader`基类（[1486](https://github.com/stefan-jansen/zipline/issues/1486)）
 - en: Removes `future_chain` API method, to be replaced by `data.current_chain` ([1502](https://github.com/stefan-jansen/zipline/issues/1502))
   id: totrans-1777
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 移除了`future_chain` API方法，将由`data.current_chain`替代（[1502](https://github.com/stefan-jansen/zipline/issues/1502)）
 - en: Puts zipline back on blaze master ([1505](https://github.com/stefan-jansen/zipline/issues/1505))
   id: totrans-1778
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 将zipline重新放回blaze master（[1505](https://github.com/stefan-jansen/zipline/issues/1505)）
 - en: Adds Tini and sets version range for numpy, pandas, and scipy in Dockerfile
     ([1514](https://github.com/stefan-jansen/zipline/issues/1514))
   id: totrans-1779
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 在Dockerfile中添加了Tini，并设置了numpy、pandas和scipy的版本范围（[1514](https://github.com/stefan-jansen/zipline/issues/1514)）
 - en: Deprecates `set_do_not_order_list` ([1487](https://github.com/stefan-jansen/zipline/issues/1487))
   id: totrans-1780
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 弃用了`set_do_not_order_list`（[1487](https://github.com/stefan-jansen/zipline/issues/1487)）
 - en: Uses `Timedelta` instead of `DateOffset` ([1487](https://github.com/stefan-jansen/zipline/issues/1487))
   id: totrans-1781
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 使用`Timedelta`代替了`DateOffset`（[1487](https://github.com/stefan-jansen/zipline/issues/1487)）
 - en: Update and pin more dev requirements ([1642](https://github.com/stefan-jansen/zipline/issues/1642))
   id: totrans-1782
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 更新并固定了更多的开发需求（[1642](https://github.com/stefan-jansen/zipline/issues/1642)）
 - en: Build
   id: totrans-1783
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 构建
 - en: Adds binary dependency on numpy for empyrical
   id: totrans-1784
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 为empyrical增加了numpy的二进制依赖
 - en: Removes old numpy/pandas versions from Travis ([1339](https://github.com/stefan-jansen/zipline/issues/1339))
   id: totrans-1785
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 从Travis中移除了旧的numpy/pandas版本（[1339](https://github.com/stefan-jansen/zipline/issues/1339)）
 - en: Updates appveyor.yml for new numpy and pandas ([1339](https://github.com/stefan-jansen/zipline/issues/1339))
   id: totrans-1786
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 更新了appveyor.yml以适配新的numpy和pandas版本（[1339](https://github.com/stefan-jansen/zipline/issues/1339)）
 - en: Downgrades to scipy 0.17 ([1339](https://github.com/stefan-jansen/zipline/issues/1339))
   id: totrans-1787
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 降级到scipy 0.17（[1339](https://github.com/stefan-jansen/zipline/issues/1339)）
 - en: Bumps empyrical to 0.2.2
   id: totrans-1788
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 将empyrical升级到0.2.2
 - en: Documentation
   id: totrans-1789
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 文档
 - en: Updated example notebook for latest zipline cell magic
   id: totrans-1790
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 更新了最新的zipline单元魔法的示例笔记本
 - en: Adds ANACONDA_TOKEN directions ([1589](https://github.com/stefan-jansen/zipline/issues/1589))
   id: totrans-1791
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 增加了ANACONDA_TOKEN的指引（[1589](https://github.com/stefan-jansen/zipline/issues/1589)）
 - en: Miscellaneous
   id: totrans-1792
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 杂项
 - en: Changed the short-opt for `--before` in the `zipline clean` entrypoint. The
     new argument is `-e`. The old argument, `-b`, conflicted with the `--bundle` short-opt
     ([1625](https://github.com/stefan-jansen/zipline/issues/1625)).
@@ -11553,11 +11639,13 @@
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 更改了 `zipline clean` 入口点中 `--before` 的短选项。新参数是 `-e`。旧参数 `-b` 与 `--bundle` 短选项冲突。([1625](https://github.com/stefan-jansen/zipline/issues/1625))
 - en: Enhancements
   id: totrans-1794
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 增强功能
 - en: Makes the minute bar read catch NoDataOnDate exceptions if dates are not in
     the calendar. Before, the minute bar reader was forward filling, but now it returns
     nan for OHLC and 0 for V. ([1488](https://github.com/stefan-jansen/zipline/issues/1488))
@@ -11565,124 +11653,149 @@
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 如果日期不在日历中，分钟条形图读取会捕获 NoDataOnDate 异常。之前，分钟条形图读取器是向前填充的，但现在它为 OHLC 返回 nan，为 V
+    返回 0。([1488](https://github.com/stefan-jansen/zipline/issues/1488))
 - en: Adds `truncate` method to `BcolzMinuteBarWriter` ([1499](https://github.com/stefan-jansen/zipline/issues/1499))
   id: totrans-1796
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 为 `BcolzMinuteBarWriter` 增加了 `truncate` 方法。([1499](https://github.com/stefan-jansen/zipline/issues/1499))
 - en: Bumps up to pandas 0.18.1 and numpy 1.11.1 ([1339](https://github.com/stefan-jansen/zipline/issues/1339))
   id: totrans-1797
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 升级至 pandas 0.18.1 和 numpy 1.11.1。([1339](https://github.com/stefan-jansen/zipline/issues/1339))
 - en: Adds an earnings estimates quarter loader for Pipeline ([1396](https://github.com/stefan-jansen/zipline/issues/1396))
   id: totrans-1798
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 为 Pipeline 增加了季度盈利预测加载器。([1396](https://github.com/stefan-jansen/zipline/issues/1396))
 - en: Creates a restricted list manager that takes in information about restricted
     sids and stores in memory upon instantiation ([1487](https://github.com/stefan-jansen/zipline/issues/1487))
   id: totrans-1799
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 创建了一个受限列表管理器，它在实例化时接收有关受限 sid 的信息并存储在内存中。([1487](https://github.com/stefan-jansen/zipline/issues/1487))
 - en: Adds `last_available{session, minute}` args to `DataPortal` ([1528](https://github.com/stefan-jansen/zipline/issues/1528))
   id: totrans-1800
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 在 `DataPortal` 中增加了 `last_available{session, minute}` 参数。([1528](https://github.com/stefan-jansen/zipline/issues/1528))
 - en: Adds `SpecificAssets` filter ([1530](https://github.com/stefan-jansen/zipline/issues/1530))
   id: totrans-1801
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 增加了 `SpecificAssets` 过滤器。([1530](https://github.com/stefan-jansen/zipline/issues/1530))
 - en: Adds the ability for an algorithm to request the current contract for a future
     chain ([1529](https://github.com/stefan-jansen/zipline/issues/1529))
   id: totrans-1802
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 增加了算法请求未来链当前合约的能力。([1529](https://github.com/stefan-jansen/zipline/issues/1529))
 - en: Adds `chain` field to current and supporting methods in `DataPortal` and `OrderedContracts`
     ([1538](https://github.com/stefan-jansen/zipline/issues/1538))
   id: totrans-1803
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 在 `DataPortal` 和 `OrderedContracts` 的当前和支持方法中增加了 `chain` 字段。([1538](https://github.com/stefan-jansen/zipline/issues/1538))
 - en: Adds history for continuous futures ([1539](https://github.com/stefan-jansen/zipline/issues/1539))
   id: totrans-1804
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 增加了连续期货的历史记录。([1539](https://github.com/stefan-jansen/zipline/issues/1539))
 - en: Adds adjusted history for continuous future ([1548](https://github.com/stefan-jansen/zipline/issues/1548))
   id: totrans-1805
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 为连续期货增加了调整后的历史记录。([1548](https://github.com/stefan-jansen/zipline/issues/1548))
 - en: Adds roll style which takes the volume of a future contract into account, specifically
     for continuous futures ([1556](https://github.com/stefan-jansen/zipline/issues/1556))
   id: totrans-1806
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 增加了考虑未来合约成交量的滚动风格，特别针对连续期货。([1556](https://github.com/stefan-jansen/zipline/issues/1556))
 - en: Adds better error message when calling Zipline API functions outside of a running
     simulation ([1593](https://github.com/stefan-jansen/zipline/issues/1593))
   id: totrans-1807
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 在非运行模拟中调用 Zipline API 函数时，增加了更好的错误消息。([1593](https://github.com/stefan-jansen/zipline/issues/1593))
 - en: Adds `MACDSignal()`, `MovingAverageConvergenceDivergenceSignal()`, and `AnnualizedVolatility()`
     as built-in factors. ([1588](https://github.com/stefan-jansen/zipline/issues/1588))
   id: totrans-1808
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 增加了 `MACDSignal()`、`MovingAverageConvergenceDivergenceSignal()` 和 `AnnualizedVolatility()`
+    作为内置因子。([1588](https://github.com/stefan-jansen/zipline/issues/1588))
 - en: Allows running pipelines with custom date chunks in `attach_pipeline` ([1617](https://github.com/stefan-jansen/zipline/issues/1617))
   id: totrans-1809
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 允许在 `attach_pipeline` 中使用自定义日期块运行管道。([1617](https://github.com/stefan-jansen/zipline/issues/1617))
 - en: Adds `order_batch` to the trade blotter ([1596](https://github.com/stefan-jansen/zipline/issues/1596))
   id: totrans-1810
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 在交易记录中增加了 `order_batch`。([1596](https://github.com/stefan-jansen/zipline/issues/1596))
 - en: Adds vectorized lookup_symbol ([1627](https://github.com/stefan-jansen/zipline/issues/1627))
   id: totrans-1811
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 增加了矢量化的 lookup_symbol。([1627](https://github.com/stefan-jansen/zipline/issues/1627))
 - en: Solidifies equality comparisons for SlippageModel classes ([1657](https://github.com/stefan-jansen/zipline/issues/1657))
   id: totrans-1812
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 加强了 SlippageModel 类的相等比较。([1657](https://github.com/stefan-jansen/zipline/issues/1657))
 - en: Adds a factor for winsorized results ([1696](https://github.com/stefan-jansen/zipline/issues/1696))
   id: totrans-1813
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 增加了截断结果的因素。([1696](https://github.com/stefan-jansen/zipline/issues/1696))
 - en: Bug Fixes
   id: totrans-1814
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 错误修复
 - en: Changes str to string_types to avoid errors when type checking unicode and not
     str type. ([1315](https://github.com/stefan-jansen/zipline/issues/1315))
   id: totrans-1815
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 将 str 改为 string_types 以避免在检查 unicode 类型而非 str 类型时出现错误。([1315](https://github.com/stefan-jansen/zipline/issues/1315))
 - en: Algorithms default to quantopian-quandl bundle when no data source is specified
     ([1479](https://github.com/stefan-jansen/zipline/issues/1479)) ([1374](https://github.com/stefan-jansen/zipline/issues/1374))
   id: totrans-1816
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 当未指定数据源时，算法默认使用quantopian-quandl包（[1479](https://github.com/stefan-jansen/zipline/issues/1479)）（[1374](https://github.com/stefan-jansen/zipline/issues/1374)）
 - en: Catches all missing data exceptions when computing dividend ratios ([1507](https://github.com/stefan-jansen/zipline/issues/1507))
   id: totrans-1817
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 在计算股息比率时捕获所有缺失数据的异常（[1507](https://github.com/stefan-jansen/zipline/issues/1507)）
 - en: Creates adjustments based on ordered assets instead of a set. Before, adjustments
     were created for estimates based on where assets happened to fall in a set rather
     than using ordered assets ([1547](https://github.com/stefan-jansen/zipline/issues/1547))
@@ -11690,12 +11803,14 @@
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 根据有序资产而不是集合创建调整。之前，调整是根据资产在集合中恰好出现的位置而不是使用有序资产来创建的估计（[1547](https://github.com/stefan-jansen/zipline/issues/1547)）
 - en: Fixes blaze pipeline queries for when users query for the `asof_date` column
     ([1608](https://github.com/stefan-jansen/zipline/issues/1608))
   id: totrans-1819
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 修复了当用户查询`asof_date`列时对blaze pipeline查询的修复（[1608](https://github.com/stefan-jansen/zipline/issues/1608)）
 - en: Datetimes should be converted in utc. DataFrames being returned were creating
     US/Eastern timestamps out of the ints, potentially changing the date returned
     to be the date before ([1635](https://github.com/stefan-jansen/zipline/issues/1635))
@@ -11703,170 +11818,203 @@
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 日期时间应以utc转换。返回的DataFrames正在将ints转换为US/Eastern时间戳，可能会将返回的日期更改为前一天的日期（[1635](https://github.com/stefan-jansen/zipline/issues/1635)）
 - en: Fixes default inputs for `IchimokuKinkoHyo` factor ([1638](https://github.com/stefan-jansen/zipline/issues/1638))
   id: totrans-1821
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 修复了`IchimokuKinkoHyo`因子的默认输入（[1638](https://github.com/stefan-jansen/zipline/issues/1638)）
 - en: Performance
   id: totrans-1822
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 性能
 - en: Removes invocations of `get_calendar('NYSE')` which cuts down zipline import
     time and makes the CLI more responsive and use less memory. ([1471](https://github.com/stefan-jansen/zipline/issues/1471))
   id: totrans-1823
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 移除了`get_calendar('NYSE')`的调用，这减少了zipline的导入时间，使CLI更加响应迅速且使用更少的内存（[1471](https://github.com/stefan-jansen/zipline/issues/1471)）
 - en: Refcounts and releases pipeline terms when they are no longer needed ([1484](https://github.com/stefan-jansen/zipline/issues/1484))
   id: totrans-1824
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 在不再需要时对pipeline术语进行引用计数和释放（[1484](https://github.com/stefan-jansen/zipline/issues/1484)）
 - en: Saves up to 75% of calls to minute_to_session_label ([1492](https://github.com/stefan-jansen/zipline/issues/1492))
   id: totrans-1825
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 最多节省了75%的minute_to_session_label调用（[1492](https://github.com/stefan-jansen/zipline/issues/1492)）
 - en: Speeds up counting of number of minutes across contiguous session ([1497](https://github.com/stefan-jansen/zipline/issues/1497))
   id: totrans-1826
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 加快了连续会话中分钟数的计数（[1497](https://github.com/stefan-jansen/zipline/issues/1497)）
 - en: Removes/defers calls to get_loc on large indices ([1504](https://github.com/stefan-jansen/zipline/issues/1504))
     ([1503](https://github.com/stefan-jansen/zipline/issues/1503))
   id: totrans-1827
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 移除或推迟对大型索引的get_loc调用（[1504](https://github.com/stefan-jansen/zipline/issues/1504)）（[1503](https://github.com/stefan-jansen/zipline/issues/1503)）
 - en: Replaces `get_loc` calls in `calc_dividend_ratios` with `get_indexer` ([1510](https://github.com/stefan-jansen/zipline/issues/1510))
   id: totrans-1828
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 在`calc_dividend_ratios`中用`get_indexer`替换`get_loc`调用（[1510](https://github.com/stefan-jansen/zipline/issues/1510)）
 - en: Speeds up minute to session sampling ([1549](https://github.com/stefan-jansen/zipline/issues/1549))
   id: totrans-1829
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 加快了分钟到会话采样（[1549](https://github.com/stefan-jansen/zipline/issues/1549)）
 - en: Adds some micro optimizations in `data.current` ([1561](https://github.com/stefan-jansen/zipline/issues/1561))
   id: totrans-1830
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 在`data.current`中添加了一些微优化（[1561](https://github.com/stefan-jansen/zipline/issues/1561)）
 - en: Adds optimization for initial workspace for pipelines ([1521](https://github.com/stefan-jansen/zipline/issues/1521))
   id: totrans-1831
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 为pipeline的初始工作区添加了优化（[1521](https://github.com/stefan-jansen/zipline/issues/1521)）
 - en: More memory savings ([1599](https://github.com/stefan-jansen/zipline/issues/1599))
   id: totrans-1832
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 更多的内存节省（[1599](https://github.com/stefan-jansen/zipline/issues/1599)）
 - en: Maintenance and Refactorings
   id: totrans-1833
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 维护和重构
 - en: Updates leveraged ETF list ([747](https://github.com/stefan-jansen/zipline/issues/747))
     ([1434](https://github.com/stefan-jansen/zipline/issues/1434))
   id: totrans-1834
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 更新了杠杆ETF列表（[747](https://github.com/stefan-jansen/zipline/issues/747)）（[1434](https://github.com/stefan-jansen/zipline/issues/1434)）
 - en: Adds additional fields to `__getitem__` for Order class ([1483](https://github.com/stefan-jansen/zipline/issues/1483))
   id: totrans-1835
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 为Order类的`__getitem__`添加了其他字段（[1483](https://github.com/stefan-jansen/zipline/issues/1483)）
 - en: Adds `BarReader` base class for minute and session readers ([1486](https://github.com/stefan-jansen/zipline/issues/1486))
   id: totrans-1836
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 为分钟和会话阅读器添加了`BarReader`基类（[1486](https://github.com/stefan-jansen/zipline/issues/1486)）
 - en: Removes `future_chain` API method, to be replaced by `data.current_chain` ([1502](https://github.com/stefan-jansen/zipline/issues/1502))
   id: totrans-1837
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 移除了`future_chain` API方法，将由`data.current_chain`替换（[1502](https://github.com/stefan-jansen/zipline/issues/1502)）
 - en: Puts zipline back on blaze master ([1505](https://github.com/stefan-jansen/zipline/issues/1505))
   id: totrans-1838
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 将zipline重新放回blaze主分支（[1505](https://github.com/stefan-jansen/zipline/issues/1505)）
 - en: Adds Tini and sets version range for numpy, pandas, and scipy in Dockerfile
     ([1514](https://github.com/stefan-jansen/zipline/issues/1514))
   id: totrans-1839
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 在Dockerfile中添加了Tini，并设置了numpy、pandas和scipy的版本范围（[1514](https://github.com/stefan-jansen/zipline/issues/1514)）
 - en: Deprecates `set_do_not_order_list` ([1487](https://github.com/stefan-jansen/zipline/issues/1487))
   id: totrans-1840
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 弃用了`set_do_not_order_list`（[1487](https://github.com/stefan-jansen/zipline/issues/1487)）
 - en: Uses `Timedelta` instead of `DateOffset` ([1487](https://github.com/stefan-jansen/zipline/issues/1487))
   id: totrans-1841
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 使用`Timedelta`代替`DateOffset`（[1487](https://github.com/stefan-jansen/zipline/issues/1487)）
 - en: Update and pin more dev requirements ([1642](https://github.com/stefan-jansen/zipline/issues/1642))
   id: totrans-1842
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 更新并固定更多的开发要求（[1642](https://github.com/stefan-jansen/zipline/issues/1642)）
 - en: Build
   id: totrans-1843
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 构建
 - en: Adds binary dependency on numpy for empyrical
   id: totrans-1844
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 为empyrical添加了numpy的二进制依赖
 - en: Removes old numpy/pandas versions from Travis ([1339](https://github.com/stefan-jansen/zipline/issues/1339))
   id: totrans-1845
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 从Travis中移除了旧的numpy/pandas版本（[1339](https://github.com/stefan-jansen/zipline/issues/1339)）
 - en: Updates appveyor.yml for new numpy and pandas ([1339](https://github.com/stefan-jansen/zipline/issues/1339))
   id: totrans-1846
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 更新了appveyor.yml以适应新的numpy和pandas（[1339](https://github.com/stefan-jansen/zipline/issues/1339)）
 - en: Downgrades to scipy 0.17 ([1339](https://github.com/stefan-jansen/zipline/issues/1339))
   id: totrans-1847
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 降级到scipy 0.17（[1339](https://github.com/stefan-jansen/zipline/issues/1339)）
 - en: Bumps empyrical to 0.2.2
   id: totrans-1848
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 将empyrical升级到0.2.2
 - en: Documentation
   id: totrans-1849
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 文档
 - en: Updated example notebook for latest zipline cell magic
   id: totrans-1850
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 更新了最新的zipline单元魔法示例笔记本
 - en: Adds ANACONDA_TOKEN directions ([1589](https://github.com/stefan-jansen/zipline/issues/1589))
   id: totrans-1851
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 添加了ANACONDA_TOKEN指令（[1589](https://github.com/stefan-jansen/zipline/issues/1589)）
 - en: Miscellaneous
   id: totrans-1852
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 杂项
 - en: Changed the short-opt for `--before` in the `zipline clean` entrypoint. The
     new argument is `-e`. The old argument, `-b`, conflicted with the `--bundle` short-opt
     ([1625](https://github.com/stefan-jansen/zipline/issues/1625)).
@@ -11874,32 +12022,39 @@
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 在`zipline clean`入口点中更改了`--before`的短选项。新的参数是`-e`。旧参数`-b`与`--bundle`短选项冲突（[1625](https://github.com/stefan-jansen/zipline/issues/1625)）。
 - en: Release 1.0.2
   id: totrans-1854
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 发布1.0.2
 - en: 'Release:'
   id: totrans-1855
   prefs: []
   type: TYPE_NORMAL
+  zh: 发布：
 - en: 1.0.2
   id: totrans-1856
   prefs: []
   type: TYPE_NORMAL
+  zh: 1.0.2
 - en: 'Date:'
   id: totrans-1857
   prefs: []
   type: TYPE_NORMAL
+  zh: 日期：
 - en: September 8, 2016
   id: totrans-1858
   prefs: []
   type: TYPE_NORMAL
+  zh: 2016年9月8日
 - en: Enhancements
   id: totrans-1859
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 增强功能
 - en: Adds forward fill checkpoint tables for the blaze core loader. This allow the
     loader to more efficiently forward fill the data by capping the lower date it
     must search for when querying data. The checkpoints should have novel deltas applied
@@ -11908,29 +12063,34 @@
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 为blaze核心加载器添加了前向填充检查点表。这允许加载器更有效地通过限制必须搜索的较低日期来查询数据时进行前向填充。检查点应该应用新的增量（[1276](https://github.com/stefan-jansen/zipline/issues/1276)）。
 - en: Updated VagrantFile to include all dev requirements and use a newer image ([1310](https://github.com/stefan-jansen/zipline/issues/1310)).
   id: totrans-1861
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 更新了VagrantFile以包含所有开发要求并使用更新的镜像（[1310](https://github.com/stefan-jansen/zipline/issues/1310)）。
 - en: Allow correlations and regressions to be computed between two 2D factors by
     doing computations asset-wise ([1307](https://github.com/stefan-jansen/zipline/issues/1307)).
   id: totrans-1862
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 允许在两个2D因子之间计算相关性和回归，通过进行资产级别的计算（[1307](https://github.com/stefan-jansen/zipline/issues/1307)）。
 - en: Filters have been made window_safe by default. Now they can be passed in as
     arguments to other Filters, Factors and Classifiers ([1338](https://github.com/stefan-jansen/zipline/issues/1338)).
   id: totrans-1863
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 过滤器默认已设置为窗口安全。现在它们可以作为参数传递给其他过滤器、因子和分类器（[1338](https://github.com/stefan-jansen/zipline/issues/1338)）。
 - en: Added an optional `groupby` parameter to `rank()`, `top()`, and `bottom()`.
     ([1349](https://github.com/stefan-jansen/zipline/issues/1349)).
   id: totrans-1864
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 为`rank()`、`top()`和`bottom()`添加了可选的`groupby`参数（[1349](https://github.com/stefan-jansen/zipline/issues/1349)）。
 - en: Added new pipeline filters, [`All`](api-reference.html#zipline.pipeline.filters.All
     "zipline.pipeline.filters.All") and [`Any`](api-reference.html#zipline.pipeline.filters.Any
     "zipline.pipeline.filters.Any"), which takes another filter and returns True if
@@ -11940,6 +12100,8 @@
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 添加了新的管道过滤器，[`All`](api-reference.html#zipline.pipeline.filters.All "zipline.pipeline.filters.All")
+    和 [`Any`](api-reference.html#zipline.pipeline.filters.Any "zipline.pipeline.filters.Any")，它接受另一个过滤器，并返回True，如果资产在前`window_length`天内为任何/所有天产生True（[1358](https://github.com/stefan-jansen/zipline/issues/1358)）。
 - en: Added new pipeline filter [`AtLeastN`](api-reference.html#zipline.pipeline.filters.AtLeastN
     "zipline.pipeline.filters.AtLeastN"), which takes another filter and an int N
     and returns True if an asset produced a True on N or more days in the previous
@@ -11948,6 +12110,8 @@
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 添加了新的管道过滤器[`AtLeastN`](api-reference.html#zipline.pipeline.filters.AtLeastN
+    "zipline.pipeline.filters.AtLeastN")，它接受另一个过滤器和一个整数N，如果资产在之前的`window_length`天内产生True的天数为N或更多，则返回True。([1367](https://github.com/stefan-jansen/zipline/issues/1367))
 - en: Use external library empyrical for risk calculations. Empyrical unifies risk
     metric calculations between pyfolio and zipline. Empyrical adds custom annualization
     options for returns of custom frequencies. ([855](https://github.com/stefan-jansen/zipline/issues/855))
@@ -11955,21 +12119,25 @@
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 使用外部库empyrical进行风险计算。Empyrical统一了pyfolio和zipline之间的风险度量计算。Empyrical为自定义频率的回报添加了自定义年化选项。([855](https://github.com/stefan-jansen/zipline/issues/855))
 - en: Add Aroon factor. ([1258](https://github.com/stefan-jansen/zipline/issues/1258))
   id: totrans-1868
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 添加Aroon因子。([1258](https://github.com/stefan-jansen/zipline/issues/1258))
 - en: Add fast stochastic oscillator factor. ([1255](https://github.com/stefan-jansen/zipline/issues/1255))
   id: totrans-1869
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 添加快速随机振荡器因子。([1255](https://github.com/stefan-jansen/zipline/issues/1255))
 - en: Add a Dockerfile. ([1254](https://github.com/stefan-jansen/zipline/issues/1254))
   id: totrans-1870
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 添加Dockerfile。([1254](https://github.com/stefan-jansen/zipline/issues/1254))
 - en: New trading calendar which supports sessions which span across midnights, e.g.
     24 hour 6:01PM-6:00PM sessions for futures trading. zipline.utils.tradingcalendar
     is now deprecated. ([1138](https://github.com/stefan-jansen/zipline/issues/1138))
@@ -11978,86 +12146,104 @@
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 新增支持跨午夜时段的交易日历，例如期货交易的24小时6:01PM-6:00PM时段。zipline.utils.tradingcalendar现已弃用。([1138](https://github.com/stefan-jansen/zipline/issues/1138))
+    ([1312](https://github.com/stefan-jansen/zipline/issues/1312))
 - en: Allow slicing a single column out of a Factor/Filter/Classifier. ([1267](https://github.com/stefan-jansen/zipline/issues/1267))
   id: totrans-1872
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 允许从因子/过滤器/分类器中提取单个列。([1267](https://github.com/stefan-jansen/zipline/issues/1267))
 - en: Provide Ichimoku Cloud factor ([1263](https://github.com/stefan-jansen/zipline/issues/1263))
   id: totrans-1873
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 提供Ichimoku云因子。([1263](https://github.com/stefan-jansen/zipline/issues/1263))
 - en: Allow default parameters on Pipeline terms. ([1263](https://github.com/stefan-jansen/zipline/issues/1263))
   id: totrans-1874
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 允许在管道术语上设置默认参数。([1263](https://github.com/stefan-jansen/zipline/issues/1263))
 - en: Provide rate of change percentage factor. ([1324](https://github.com/stefan-jansen/zipline/issues/1324))
   id: totrans-1875
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 提供变化率百分比因子。([1324](https://github.com/stefan-jansen/zipline/issues/1324))
 - en: Provide linear weighted moving average factor. ([1325](https://github.com/stefan-jansen/zipline/issues/1325))
   id: totrans-1876
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 提供线性加权移动平均因子。([1325](https://github.com/stefan-jansen/zipline/issues/1325))
 - en: Add `NotNullFilter`. ([1345](https://github.com/stefan-jansen/zipline/issues/1345))
   id: totrans-1877
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 添加`NotNullFilter`。([1345](https://github.com/stefan-jansen/zipline/issues/1345))
 - en: Allow capital changes to be defined by a target value. ([1337](https://github.com/stefan-jansen/zipline/issues/1337))
   id: totrans-1878
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 允许通过目标值定义资本变动。([1337](https://github.com/stefan-jansen/zipline/issues/1337))
 - en: Add `TrueRange` factor. ([1348](https://github.com/stefan-jansen/zipline/issues/1348))
   id: totrans-1879
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 添加`TrueRange`因子。([1348](https://github.com/stefan-jansen/zipline/issues/1348))
 - en: Add point in time lookups to `assets.db`. ([1361](https://github.com/stefan-jansen/zipline/issues/1361))
   id: totrans-1880
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 为`assets.db`添加时点查询功能。([1361](https://github.com/stefan-jansen/zipline/issues/1361))
 - en: Make `can_trade` aware of the asset’s exchange . ([1346](https://github.com/stefan-jansen/zipline/issues/1346))
   id: totrans-1881
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 使`can_trade`意识到资产的交易所。([1346](https://github.com/stefan-jansen/zipline/issues/1346))
 - en: Add `downsample` method to all computable terms. ([1394](https://github.com/stefan-jansen/zipline/issues/1394))
   id: totrans-1882
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 为所有可计算术语添加`downsample`方法。([1394](https://github.com/stefan-jansen/zipline/issues/1394))
 - en: Add QuantopianUSFuturesCalendar. ([1414](https://github.com/stefan-jansen/zipline/issues/1414))
   id: totrans-1883
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 添加QuantopianUSFuturesCalendar。([1414](https://github.com/stefan-jansen/zipline/issues/1414))
 - en: Enable publishing of old `assets.db` versions. ([1430](https://github.com/stefan-jansen/zipline/issues/1430))
   id: totrans-1884
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 允许发布旧版本的`assets.db`。([1430](https://github.com/stefan-jansen/zipline/issues/1430))
 - en: Enable `schedule_function` for Futures trading calendar. ([1442](https://github.com/stefan-jansen/zipline/issues/1442))
   id: totrans-1885
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 为期货交易日历启用`schedule_function`。([1442](https://github.com/stefan-jansen/zipline/issues/1442))
 - en: Disallow regressions of length 1\. ([1466](https://github.com/stefan-jansen/zipline/issues/1466))
   id: totrans-1886
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 不允许长度为1的回归。([1466](https://github.com/stefan-jansen/zipline/issues/1466))
 - en: Experimental
   id: totrans-1887
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 实验性
 - en: Add support for comingled Future and Equity history windows, and enable other
     Future data access via data portal. ([1435](https://github.com/stefan-jansen/zipline/issues/1435))
     ([1432](https://github.com/stefan-jansen/zipline/issues/1432))
@@ -12065,11 +12251,14 @@
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 增加对混合期货和股票历史窗口的支持，并通过数据门户启用其他期货数据访问。([1435](https://github.com/stefan-jansen/zipline/issues/1435))
+    ([1432](https://github.com/stefan-jansen/zipline/issues/1432))
 - en: Bug Fixes
   id: totrans-1889
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 错误修复
 - en: Changes [`AverageDollarVolume`](api-reference.html#zipline.pipeline.factors.AverageDollarVolume
     "zipline.pipeline.factors.AverageDollarVolume") built-in factor to treat missing
     close or volume values as 0\. Previously, NaNs were simply discarded before averaging,
@@ -12078,12 +12267,14 @@
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 更改内置因子`AverageDollarVolume`以将缺失的收盘价或成交量值视为0。以前，在平均之前简单地丢弃了NaNs，给剩余的值赋予了过多的权重([1309](https://github.com/stefan-jansen/zipline/issues/1309))。
 - en: Remove risk-free rate from sharpe ratio calculation. The ratio is now the average
     of risk adjusted returns over violatility of adjusted returns. ([853](https://github.com/stefan-jansen/zipline/issues/853))
   id: totrans-1891
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 从夏普比率计算中移除无风险利率。现在，该比率是调整后的回报率波动性的平均值。([853](https://github.com/stefan-jansen/zipline/issues/853))
 - en: Sortino ratio will return calculation instead of np.nan when required returns
     are equal to zero. The ratio now returns the average of risk adjusted returns
     over downside risk. Fixed mislabeled API by converting mar to downside_risk. ([747](https://github.com/stefan-jansen/zipline/issues/747))
@@ -12091,142 +12282,168 @@
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 当所需回报率为零时，Sortino比率将返回计算结果而非np.nan。现在，该比率返回的是下行风险调整后的回报率的平均值。通过将mar转换为downside_risk，修正了API标签错误的问题。([747](https://github.com/stefan-jansen/zipline/issues/747))
 - en: Downside risk now returns the square root of the mean of downside difference
     squares. ([747](https://github.com/stefan-jansen/zipline/issues/747))
   id: totrans-1893
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 下行风险现在返回下行差分平方的平均值的平方根。([747](https://github.com/stefan-jansen/zipline/issues/747))
 - en: Information ratio updated to return mean of risk adjusted returns over standard
     deviation of risk adjusted returns. ([1322](https://github.com/stefan-jansen/zipline/issues/1322))
   id: totrans-1894
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 信息比率更新为返回风险调整后的回报率的标准差的风险调整后的回报率的平均值。([1322](https://github.com/stefan-jansen/zipline/issues/1322))
 - en: Alpha and sharpe ratio are now annualized. ([1322](https://github.com/stefan-jansen/zipline/issues/1322))
   id: totrans-1895
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 阿尔法和夏普比率现在已年化。([1322](https://github.com/stefan-jansen/zipline/issues/1322))
 - en: Fix units during reading and writing of daily bar `first_trading_day` attribute.
     ([1245](https://github.com/stefan-jansen/zipline/issues/1245))
   id: totrans-1896
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 修复每日条形图`first_trading_day`属性在读写时的单位问题。([1245](https://github.com/stefan-jansen/zipline/issues/1245))
 - en: Optional dispatch modules, when missing, no longer cause a NameError. ([1246](https://github.com/stefan-jansen/zipline/issues/1246))
   id: totrans-1897
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 当缺少可选分派模块时，不再引发NameError。([1246](https://github.com/stefan-jansen/zipline/issues/1246))
 - en: Treat `schedule_function` argument as a time rule when a time rule, but no date
     rule is supplied. ([1221](https://github.com/stefan-jansen/zipline/issues/1221))
   id: totrans-1898
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 当提供时间规则但没有日期规则时，将`schedule_function`参数视为时间规则。([1221](https://github.com/stefan-jansen/zipline/issues/1221))
 - en: Protect against boundary conditions at beginning and end trading day in schedule
     function. ([1226](https://github.com/stefan-jansen/zipline/issues/1226))
   id: totrans-1899
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 在schedule函数中保护交易日的开始和结束边界条件。([1226](https://github.com/stefan-jansen/zipline/issues/1226))
 - en: Apply adjustments to previous day when using history with a frequency of 1d.
     ([1256](https://github.com/stefan-jansen/zipline/issues/1256))
   id: totrans-1900
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 在使用频率为1d的历史数据时，将调整应用于前一天。([1256](https://github.com/stefan-jansen/zipline/issues/1256))
 - en: Fail fast on invalid pipeline columns, instead of attempting to access the nonexistent
     column. ([1280](https://github.com/stefan-jansen/zipline/issues/1280))
   id: totrans-1901
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 在尝试访问不存在的列之前，快速失败于无效的管道列。([1280](https://github.com/stefan-jansen/zipline/issues/1280))
 - en: Fix `AverageDollarVolume` NaN handling. ([1309](https://github.com/stefan-jansen/zipline/issues/1309))
   id: totrans-1902
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 修复`AverageDollarVolume`处理NaN的问题。([1309](https://github.com/stefan-jansen/zipline/issues/1309))
 - en: Performance
   id: totrans-1903
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 性能
 - en: Performance improvements to blaze core loader. ([1227](https://github.com/stefan-jansen/zipline/issues/1227))
   id: totrans-1904
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 对blaze核心加载器的性能改进。([1227](https://github.com/stefan-jansen/zipline/issues/1227))
 - en: Allow concurrent blaze queries. ([1323](https://github.com/stefan-jansen/zipline/issues/1323))
   id: totrans-1905
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 允许并发blaze查询。([1323](https://github.com/stefan-jansen/zipline/issues/1323))
 - en: Prevent missing leading bcolz minute data from doing repeated unnecessary lookups.
     ([1451](https://github.com/stefan-jansen/zipline/issues/1451))
   id: totrans-1906
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 防止由于缺少bcolz分钟数据而进行重复的不必要查找。([1451](https://github.com/stefan-jansen/zipline/issues/1451))
 - en: Cache future chain lookups. ([1455](https://github.com/stefan-jansen/zipline/issues/1455))
   id: totrans-1907
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 缓存未来链查找。([1455](https://github.com/stefan-jansen/zipline/issues/1455))
 - en: Maintenance and Refactorings
   id: totrans-1908
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 维护和重构
 - en: Removed remaining mentions of `add_history`. ([1287](https://github.com/stefan-jansen/zipline/issues/1287))
   id: totrans-1909
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 移除剩余的`add_history`提及。([1287](https://github.com/stefan-jansen/zipline/issues/1287))
 - en: Documentation
   id: totrans-1910
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 文档
 - en: Testing
   id: totrans-1911
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 测试
 - en: Add test fixture which sources daily pricing data from minute pricing data fixtures.
     ([1243](https://github.com/stefan-jansen/zipline/issues/1243))
   id: totrans-1912
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 添加测试装置，该装置从分钟定价数据装置中获取每日定价数据。([1243](https://github.com/stefan-jansen/zipline/issues/1243))
 - en: Data Format Changes
   id: totrans-1913
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 数据格式更改
 - en: '`BcolzDailyBarReader` and `BcolzDailyBarWriter` use trading calendar instance,
     instead of trading days serialized to `JSON`. ([1330](https://github.com/stefan-jansen/zipline/issues/1330))'
   id: totrans-1914
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`BcolzDailyBarReader`和`BcolzDailyBarWriter`使用交易日历实例，而不是序列化为`JSON`的交易日。([1330](https://github.com/stefan-jansen/zipline/issues/1330))'
 - en: Change format of `assets.db` to support point in time lookups. ([1361](https://github.com/stefan-jansen/zipline/issues/1361))
   id: totrans-1915
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 将`assets.db`的格式更改为支持按时间点查找。([1361](https://github.com/stefan-jansen/zipline/issues/1361))
 - en: Change `BcolzMinuteBarReader``and ``BcolzMinuteBarWriter` to support varying
     tick sizes. ([1428](https://github.com/stefan-jansen/zipline/issues/1428))
   id: totrans-1916
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 更改`BcolzMinuteBarReader`和`BcolzMinuteBarWriter`以支持不同的最小变动价位。([1428](https://github.com/stefan-jansen/zipline/issues/1428))
 - en: Enhancements
   id: totrans-1917
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 增强功能
 - en: Adds forward fill checkpoint tables for the blaze core loader. This allow the
     loader to more efficiently forward fill the data by capping the lower date it
     must search for when querying data. The checkpoints should have novel deltas applied
@@ -12235,29 +12452,34 @@
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 为blaze核心加载器添加前向填充检查点表。这允许加载器通过限制必须搜索数据的较低日期来更有效地前向填充数据。检查点应该应用新的增量([1276](https://github.com/stefan-jansen/zipline/issues/1276))。
 - en: Updated VagrantFile to include all dev requirements and use a newer image ([1310](https://github.com/stefan-jansen/zipline/issues/1310)).
   id: totrans-1919
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 更新VagrantFile以包含所有开发需求并使用更新的镜像([1310](https://github.com/stefan-jansen/zipline/issues/1310))。
 - en: Allow correlations and regressions to be computed between two 2D factors by
     doing computations asset-wise ([1307](https://github.com/stefan-jansen/zipline/issues/1307)).
   id: totrans-1920
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 允许通过逐资产计算来计算两个2D因子之间的相关性和回归([1307](https://github.com/stefan-jansen/zipline/issues/1307))。
 - en: Filters have been made window_safe by default. Now they can be passed in as
     arguments to other Filters, Factors and Classifiers ([1338](https://github.com/stefan-jansen/zipline/issues/1338)).
   id: totrans-1921
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 过滤器默认设置为window_safe。现在它们可以作为参数传递给其他过滤器、因子和分类器([1338](https://github.com/stefan-jansen/zipline/issues/1338))。
 - en: Added an optional `groupby` parameter to `rank()`, `top()`, and `bottom()`.
     ([1349](https://github.com/stefan-jansen/zipline/issues/1349)).
   id: totrans-1922
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 为`rank()`、`top()`和`bottom()`添加可选的`groupby`参数。([1349](https://github.com/stefan-jansen/zipline/issues/1349))
 - en: Added new pipeline filters, [`All`](api-reference.html#zipline.pipeline.filters.All
     "zipline.pipeline.filters.All") and [`Any`](api-reference.html#zipline.pipeline.filters.Any
     "zipline.pipeline.filters.Any"), which takes another filter and returns True if
@@ -12267,6 +12489,9 @@
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 添加新的管道过滤器，[`All`](api-reference.html#zipline.pipeline.filters.All "zipline.pipeline.filters.All")和[`Any`](api-reference.html#zipline.pipeline.filters.Any
+    "zipline.pipeline.filters.Any")，它接受另一个过滤器，如果资产在前`window_length`天内对任何/所有天产生True，则返回True
+    ([1358](https://github.com/stefan-jansen/zipline/issues/1358))。
 - en: Added new pipeline filter [`AtLeastN`](api-reference.html#zipline.pipeline.filters.AtLeastN
     "zipline.pipeline.filters.AtLeastN"), which takes another filter and an int N
     and returns True if an asset produced a True on N or more days in the previous
@@ -12275,6 +12500,8 @@
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 添加新的管道过滤器[`AtLeastN`](api-reference.html#zipline.pipeline.filters.AtLeastN "zipline.pipeline.filters.AtLeastN")，它接受另一个过滤器和一个整数N，如果资产在前`window_length`天内产生True的天数为N或更多，则返回True
+    ([1367](https://github.com/stefan-jansen/zipline/issues/1367))。
 - en: Use external library empyrical for risk calculations. Empyrical unifies risk
     metric calculations between pyfolio and zipline. Empyrical adds custom annualization
     options for returns of custom frequencies. ([855](https://github.com/stefan-jansen/zipline/issues/855))
@@ -12282,21 +12509,25 @@
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 使用外部库empyrical进行风险计算。Empyrical统一了pyfolio和zipline之间的风险度量计算。Empyrical为自定义频率的回报添加了自定义年化选项。([855](https://github.com/stefan-jansen/zipline/issues/855))
 - en: Add Aroon factor. ([1258](https://github.com/stefan-jansen/zipline/issues/1258))
   id: totrans-1926
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 添加Aroon因子。([1258](https://github.com/stefan-jansen/zipline/issues/1258))
 - en: Add fast stochastic oscillator factor. ([1255](https://github.com/stefan-jansen/zipline/issues/1255))
   id: totrans-1927
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 添加快速随机振荡器因子。([1255](https://github.com/stefan-jansen/zipline/issues/1255))
 - en: Add a Dockerfile. ([1254](https://github.com/stefan-jansen/zipline/issues/1254))
   id: totrans-1928
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 添加一个Dockerfile。([1254](https://github.com/stefan-jansen/zipline/issues/1254))
 - en: New trading calendar which supports sessions which span across midnights, e.g.
     24 hour 6:01PM-6:00PM sessions for futures trading. zipline.utils.tradingcalendar
     is now deprecated. ([1138](https://github.com/stefan-jansen/zipline/issues/1138))
@@ -12305,86 +12536,104 @@
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 新的交易日历支持跨越午夜的会话，例如期货交易的24小时6:01PM-6:00PM会话。zipline.utils.tradingcalendar现已弃用。([1138](https://github.com/stefan-jansen/zipline/issues/1138))
+    ([1312](https://github.com/stefan-jansen/zipline/issues/1312))
 - en: Allow slicing a single column out of a Factor/Filter/Classifier. ([1267](https://github.com/stefan-jansen/zipline/issues/1267))
   id: totrans-1930
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 允许从因子/筛选器/分类器中提取单个列。([1267](https://github.com/stefan-jansen/zipline/issues/1267))
 - en: Provide Ichimoku Cloud factor ([1263](https://github.com/stefan-jansen/zipline/issues/1263))
   id: totrans-1931
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 提供Ichimoku Cloud因子 ([1263](https://github.com/stefan-jansen/zipline/issues/1263))
 - en: Allow default parameters on Pipeline terms. ([1263](https://github.com/stefan-jansen/zipline/issues/1263))
   id: totrans-1932
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 允许在管道项上使用默认参数。([1263](https://github.com/stefan-jansen/zipline/issues/1263))
 - en: Provide rate of change percentage factor. ([1324](https://github.com/stefan-jansen/zipline/issues/1324))
   id: totrans-1933
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 提供变化率百分比因子。([1324](https://github.com/stefan-jansen/zipline/issues/1324))
 - en: Provide linear weighted moving average factor. ([1325](https://github.com/stefan-jansen/zipline/issues/1325))
   id: totrans-1934
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 提供线性加权移动平均因子。([1325](https://github.com/stefan-jansen/zipline/issues/1325))
 - en: Add `NotNullFilter`. ([1345](https://github.com/stefan-jansen/zipline/issues/1345))
   id: totrans-1935
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 添加`NotNullFilter`。([1345](https://github.com/stefan-jansen/zipline/issues/1345))
 - en: Allow capital changes to be defined by a target value. ([1337](https://github.com/stefan-jansen/zipline/issues/1337))
   id: totrans-1936
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 允许通过目标值定义资本变动。([1337](https://github.com/stefan-jansen/zipline/issues/1337))
 - en: Add `TrueRange` factor. ([1348](https://github.com/stefan-jansen/zipline/issues/1348))
   id: totrans-1937
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 添加`TrueRange`因子。([1348](https://github.com/stefan-jansen/zipline/issues/1348))
 - en: Add point in time lookups to `assets.db`. ([1361](https://github.com/stefan-jansen/zipline/issues/1361))
   id: totrans-1938
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 为`assets.db`添加实时查找功能。([1361](https://github.com/stefan-jansen/zipline/issues/1361))
 - en: Make `can_trade` aware of the asset’s exchange . ([1346](https://github.com/stefan-jansen/zipline/issues/1346))
   id: totrans-1939
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 使`can_trade`意识到资产的交易所。([1346](https://github.com/stefan-jansen/zipline/issues/1346))
 - en: Add `downsample` method to all computable terms. ([1394](https://github.com/stefan-jansen/zipline/issues/1394))
   id: totrans-1940
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 为所有可计算项添加`downsample`方法。([1394](https://github.com/stefan-jansen/zipline/issues/1394))
 - en: Add QuantopianUSFuturesCalendar. ([1414](https://github.com/stefan-jansen/zipline/issues/1414))
   id: totrans-1941
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 添加QuantopianUSFuturesCalendar。([1414](https://github.com/stefan-jansen/zipline/issues/1414))
 - en: Enable publishing of old `assets.db` versions. ([1430](https://github.com/stefan-jansen/zipline/issues/1430))
   id: totrans-1942
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 启用旧版`assets.db`版本的发布。([1430](https://github.com/stefan-jansen/zipline/issues/1430))
 - en: Enable `schedule_function` for Futures trading calendar. ([1442](https://github.com/stefan-jansen/zipline/issues/1442))
   id: totrans-1943
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 为期货交易日历启用`schedule_function`。([1442](https://github.com/stefan-jansen/zipline/issues/1442))
 - en: Disallow regressions of length 1\. ([1466](https://github.com/stefan-jansen/zipline/issues/1466))
   id: totrans-1944
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 不允许长度为1的回归。([1466](https://github.com/stefan-jansen/zipline/issues/1466))
 - en: Experimental
   id: totrans-1945
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 实验性功能
 - en: Add support for comingled Future and Equity history windows, and enable other
     Future data access via data portal. ([1435](https://github.com/stefan-jansen/zipline/issues/1435))
     ([1432](https://github.com/stefan-jansen/zipline/issues/1432))
@@ -12392,11 +12641,14 @@
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 添加对混合的未来和股票历史窗口的支持，并通过数据门户启用其他未来数据访问。([1435](https://github.com/stefan-jansen/zipline/issues/1435))
+    ([1432](https://github.com/stefan-jansen/zipline/issues/1432))
 - en: Bug Fixes
   id: totrans-1947
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 错误修复
 - en: Changes [`AverageDollarVolume`](api-reference.html#zipline.pipeline.factors.AverageDollarVolume
     "zipline.pipeline.factors.AverageDollarVolume") built-in factor to treat missing
     close or volume values as 0\. Previously, NaNs were simply discarded before averaging,
@@ -12405,12 +12657,14 @@
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 将内置因子`AverageDollarVolume`的更改处理缺失的收盘价或成交量值为0。以前，NaN值在平均之前被简单丢弃，导致剩余值权重过大 ([1309](https://github.com/stefan-jansen/zipline/issues/1309))。
 - en: Remove risk-free rate from sharpe ratio calculation. The ratio is now the average
     of risk adjusted returns over violatility of adjusted returns. ([853](https://github.com/stefan-jansen/zipline/issues/853))
   id: totrans-1949
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 从夏普比率计算中移除无风险利率。现在该比率是风险调整后回报的平均值除以调整后回报的波动性。([853](https://github.com/stefan-jansen/zipline/issues/853))
 - en: Sortino ratio will return calculation instead of np.nan when required returns
     are equal to zero. The ratio now returns the average of risk adjusted returns
     over downside risk. Fixed mislabeled API by converting mar to downside_risk. ([747](https://github.com/stefan-jansen/zipline/issues/747))
