@@ -7501,17 +7501,20 @@
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 新增了`get_column()`方法，用于通过名称查找列（[2210](https://github.com/stefan-jansen/zipline/issues/2210)）
 - en: Added `CheckWindowsClassifier` that allows us to test lookback windows of categorical
     and string columns using Pipeline. ([2458](https://github.com/stefan-jansen/zipline/issues/2458))
   id: totrans-1141
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 添加了`CheckWindowsClassifier`，允许我们使用Pipeline测试分类和字符串列的回溯窗口。（[2458](https://github.com/stefan-jansen/zipline/issues/2458)）
 - en: Added `PipelineHooks` which is now used to display Pipline progress bars ([2467](https://github.com/stefan-jansen/zipline/issues/2467))
   id: totrans-1142
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 添加了`PipelineHooks`，现在用于显示Pipeline进度条。（[2467](https://github.com/stefan-jansen/zipline/issues/2467)）
 - en: '[`BoundColumn`](api-reference.html#zipline.pipeline.data.BoundColumn "zipline.pipeline.data.dataset.BoundColumn")
     comparisons will now result in an error. This prevents writing `EquityPricing.volume
     > 1000` (silently returning bad data) insteads of `EquityPricing.volume.latest
@@ -7520,74 +7523,89 @@
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[`BoundColumn`](api-reference.html#zipline.pipeline.data.BoundColumn "zipline.pipeline.data.dataset.BoundColumn")比较现在会导致错误。这防止了编写`EquityPricing.volume
+    > 1000`（静默返回错误数据）而不是`EquityPricing.volume.latest > 1000`。（[2537](https://github.com/stefan-jansen/zipline/issues/2537)）'
 - en: Added currency conversion support to Pipeline. ([2586](https://github.com/stefan-jansen/zipline/issues/2586))
   id: totrans-1144
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 为Pipeline添加了货币转换支持。（[2586](https://github.com/stefan-jansen/zipline/issues/2586)）
 - en: Added `--benchmark-file` and `--benchmark-symbol` command line arguments to
     make it easier to provide benchmark data. ([2642](https://github.com/stefan-jansen/zipline/issues/2642))
   id: totrans-1145
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 添加了`--benchmark-file`和`--benchmark-symbol`命令行参数，以便更容易提供基准数据。（[2642](https://github.com/stefan-jansen/zipline/issues/2642)）
 - en: Added support for Python 3.6 ([2643](https://github.com/stefan-jansen/zipline/issues/2643))
   id: totrans-1146
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 添加了对Python 3.6的支持。（[2643](https://github.com/stefan-jansen/zipline/issues/2643)）
 - en: Added `mask` argument to Factor.peer_count. ([2676](https://github.com/stefan-jansen/zipline/issues/2676))
   id: totrans-1147
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 为Factor.peer_count添加了`mask`参数。（[2676](https://github.com/stefan-jansen/zipline/issues/2676)）
 - en: Added `if_else()` and `fillna()` for allowing conditional logic in Pipelines.
     ([2691](https://github.com/stefan-jansen/zipline/issues/2691))
   id: totrans-1148
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 添加了`if_else()`和`fillna()`，允许在Pipelines中使用条件逻辑。（[2691](https://github.com/stefan-jansen/zipline/issues/2691)）
 - en: Added daily summary methods to Factor for collecting summary statistics for
     the entire universe. ([2697](https://github.com/stefan-jansen/zipline/issues/2697))
   id: totrans-1149
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 为Factor添加了每日汇总方法，用于为整个宇宙收集汇总统计数据。（[2697](https://github.com/stefan-jansen/zipline/issues/2697)）
 - en: Added `clip()` method for clipping values to a range. ([2708](https://github.com/stefan-jansen/zipline/issues/2708))
   id: totrans-1150
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 添加了`clip()`方法，用于将值裁剪到一定范围内。（[2708](https://github.com/stefan-jansen/zipline/issues/2708)）
 - en: Added support for Pipeline term arithmetic with more than 32 terms. ([2727](https://github.com/stefan-jansen/zipline/issues/2727))
   id: totrans-1151
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 添加了对Pipeline项算术运算超过32项的支持。（[2727](https://github.com/stefan-jansen/zipline/issues/2727)）
 - en: Bug Fixes
   id: totrans-1152
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 错误修复
 - en: Fixed support for non unique sid->exchange mappings. ([2289](https://github.com/stefan-jansen/zipline/issues/2289))
   id: totrans-1153
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 修复了对非唯一sid->exchange映射的支持。（[2289](https://github.com/stefan-jansen/zipline/issues/2289)）
 - en: Fixed crash on dividend warning. ([2323](https://github.com/stefan-jansen/zipline/issues/2323))
   id: totrans-1154
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 修复了股息警告导致的崩溃。（[2323](https://github.com/stefan-jansen/zipline/issues/2323)）
 - en: Fixed `week_start` when Monday precedes the New Year. ([2394](https://github.com/stefan-jansen/zipline/issues/2394))
   id: totrans-1155
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 修复了周一在新年前的情况下的`week_start`。（[2394](https://github.com/stefan-jansen/zipline/issues/2394)）
 - en: Ensured correct dtypes when unpacking empty dataframes. ([2444](https://github.com/stefan-jansen/zipline/issues/2444))
   id: totrans-1156
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 确保在解包空数据帧时dtype正确。（[2444](https://github.com/stefan-jansen/zipline/issues/2444)）
 - en: Fixed a bug where a Pipeline term with `window_length=0` would not copy the
     input before calling `compute()` which could cause incorrect results if the input
     was reused in the Pipeline. ([2723](https://github.com/stefan-jansen/zipline/issues/2723))
@@ -7595,11 +7613,13 @@
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 修复了一个bug，其中`window_length=0`的Pipeline项在调用`compute()`之前不会复制输入，这可能导致如果输入在Pipeline中被重用，则结果不正确。（[2723](https://github.com/stefan-jansen/zipline/issues/2723)）
 - en: Performance
   id: totrans-1158
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 性能
 - en: Added `HDF5DailyBarWriter`, which writes daily pricing in a new format as an
     HDF5 file. Each OHLCV field is stored as a 2D array in a chunked HDF5 dataset,
     with a row per sid and a column per day. The file also supports multiple countries.
@@ -7609,11 +7629,13 @@
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 添加了`HDF5DailyBarWriter`，它以新的HDF5文件格式写入每日定价。每个OHLCV字段都存储为块状HDF5数据集中的2D数组，每行代表一个sid，每列代表一天。该文件还支持多个国家。添加了`HDF5DailyBarReader`，它实现了BarReader接口，并可以读取由HDF5DailyBarWriter编写的文件。（[2295](https://github.com/stefan-jansen/zipline/issues/2295)）
 - en: Vectorized dividend ratio calculation ([2298](https://github.com/stefan-jansen/zipline/issues/2298))
   id: totrans-1160
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 矢量化股息比率计算（[2298](https://github.com/stefan-jansen/zipline/issues/2298)）
 - en: Improved performance of the [`RollingPearson`](api-reference.html#zipline.pipeline.factors.RollingPearson
     "zipline.pipeline.factors.RollingPearson") and [`RollingPearsonOfReturns`](api-reference.html#zipline.pipeline.factors.RollingPearsonOfReturns
     "zipline.pipeline.factors.RollingPearsonOfReturns") pipeline factors. ([2071](https://github.com/stefan-jansen/zipline/issues/2071))
@@ -7621,35 +7643,44 @@
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 改进了[`RollingPearson`](api-reference.html#zipline.pipeline.factors.RollingPearson
+    "zipline.pipeline.factors.RollingPearson")和[`RollingPearsonOfReturns`](api-reference.html#zipline.pipeline.factors.RollingPearsonOfReturns
+    "zipline.pipeline.factors.RollingPearsonOfReturns")管道因子的性能。（[2071](https://github.com/stefan-jansen/zipline/issues/2071)）
 - en: Maintenance and Refactorings
   id: totrans-1162
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 维护和重构
 - en: Made `parameter_space()` reset instance fixtures between runs ([2433](https://github.com/stefan-jansen/zipline/issues/2433))
   id: totrans-1163
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 使`parameter_space()`在运行之间重置实例固定装置（[2433](https://github.com/stefan-jansen/zipline/issues/2433)）
 - en: Removed unused treasury curves data handling. ([2626](https://github.com/stefan-jansen/zipline/issues/2626))
   id: totrans-1164
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 删除了未使用的国债曲线数据处理。（[2626](https://github.com/stefan-jansen/zipline/issues/2626)）
 - en: Miscellaneous
   id: totrans-1165
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 杂项
 - en: International Pipelines
   id: totrans-1166
   prefs:
   - PREF_H4
   type: TYPE_NORMAL
+  zh: 国际管道
 - en: Pipeline now supports international data.
   id: totrans-1167
   prefs: []
   type: TYPE_NORMAL
+  zh: 管道现在支持国际数据。
 - en: Pipeline is a tool that allows you to define computations over a universe of
     assets and a period of time. In the past, you could only run pipelines on the
     US equity market. Now, you can now specify a domain over which a pipeline should
@@ -7660,11 +7691,13 @@
   id: totrans-1168
   prefs: []
   type: TYPE_NORMAL
+  zh: 管道是一种工具，允许您在资产集合和时间段上定义计算。过去，您只能在美国的股票市场上运行管道。现在，您可以指定一个域，在该域上应该计算管道。“域”一词指的是数学概念中的“函数的域”，即函数的可能输入集合。在管道的上下文中，域指定了一组资产和相应的交易日历，在该日历上应该计算管道的表达式。
 - en: For example, the following pipeline returns the latest close price and volume
     for all Canadian equities, every day.
   id: totrans-1169
   prefs: []
   type: TYPE_NORMAL
+  zh: 例如，以下管道返回所有加拿大股票的最新收盘价和成交量，每天。
 - en: '[PRE33]'
   id: totrans-1170
   prefs: []
@@ -7677,6 +7710,7 @@
   id: totrans-1171
   prefs: []
   type: TYPE_NORMAL
+  zh: 与货币相关的另一个挑战是，一些交易所不要求股票以当地货币列出。例如，伦敦证券交易所只有大约75%的上市股票以英镑计价。其余25%主要以欧元或美元计价。这使得进行跨部门比较变得困难。
 - en: To solve this problem, most people rely on currency conversions to bring price-based
     fields into the same currency. Pipeline columns now support an `fx` method for
     specifying what currency the data should be viewed as. This method is only available
@@ -7685,242 +7719,290 @@
   id: totrans-1172
   prefs: []
   type: TYPE_NORMAL
+  zh: 为了解决这个问题，大多数人依赖货币转换将基于价格的字段转换为同一货币。管道列现在支持一个`fx`方法，用于指定数据应以哪种货币查看。此方法仅适用于“货币感知”期限，例如开盘或收盘，但不适用于不关心货币的期限，如成交量。
 - en: Currently, there is no way to load international data into a bundle. We are
     working on ways to make it easy to get international data into Zipline.
   id: totrans-1173
   prefs: []
   type: TYPE_NORMAL
+  zh: 目前，没有办法将国际数据加载到包中。我们正在寻找方法，使将国际数据导入Zipline变得容易。
 - en: ([2265](https://github.com/stefan-jansen/zipline/issues/2265), [2262](https://github.com/stefan-jansen/zipline/issues/2262),
     and many others)
   id: totrans-1174
   prefs: []
   type: TYPE_NORMAL
+  zh: （[2265](https://github.com/stefan-jansen/zipline/issues/2265)，[2262](https://github.com/stefan-jansen/zipline/issues/2262)，以及许多其他）
 - en: 'The domains that Zipline currently supports for running pipelines (using the
     latest [trading-calendars](https://pypi.org/project/trading-calendars/) package)
     are the following:'
   id: totrans-1175
   prefs: []
   type: TYPE_NORMAL
+  zh: Zipline目前支持运行管道的域（使用最新的[trading-calendars](https://pypi.org/project/trading-calendars/)包）如下：
 - en: Argentina
   id: totrans-1176
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 阿根廷
 - en: Australia
   id: totrans-1177
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 澳大利亚
 - en: Austria
   id: totrans-1178
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 奥地利
 - en: Belgium
   id: totrans-1179
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 比利时
 - en: Brazil
   id: totrans-1180
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 巴西
 - en: Canada
   id: totrans-1181
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 加拿大
 - en: Chile
   id: totrans-1182
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 智利
 - en: China
   id: totrans-1183
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 中国
 - en: Czech Republic
   id: totrans-1184
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 捷克共和国
 - en: Colombia
   id: totrans-1185
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 哥伦比亚
 - en: Czechia
   id: totrans-1186
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 捷克共和国
 - en: Finland
   id: totrans-1187
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 芬兰
 - en: France
   id: totrans-1188
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 法国
 - en: Germany
   id: totrans-1189
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 德国
 - en: Greece
   id: totrans-1190
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 希腊
 - en: Hong Kong
   id: totrans-1191
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 香港
 - en: Hungary
   id: totrans-1192
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 匈牙利
 - en: India
   id: totrans-1193
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 印度
 - en: Indonesia
   id: totrans-1194
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 印度尼西亚
 - en: Ireland
   id: totrans-1195
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 爱尔兰
 - en: Italy
   id: totrans-1196
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 意大利
 - en: Japan
   id: totrans-1197
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 日本
 - en: Malaysia
   id: totrans-1198
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 马来西亚
 - en: Mexico
   id: totrans-1199
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 墨西哥
 - en: Netherlands
   id: totrans-1200
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 荷兰
 - en: New Zealand
   id: totrans-1201
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 新西兰
 - en: Norway
   id: totrans-1202
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 挪威
 - en: Pakistan
   id: totrans-1203
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 巴基斯坦
 - en: Peru
   id: totrans-1204
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 秘鲁
 - en: Philippines
   id: totrans-1205
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 菲律宾
 - en: Poland
   id: totrans-1206
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 波兰
 - en: Portugal
   id: totrans-1207
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 葡萄牙
 - en: Russia
   id: totrans-1208
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 俄罗斯
 - en: Singapore
   id: totrans-1209
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 新加坡
 - en: Spain
   id: totrans-1210
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 西班牙
 - en: Sweden
   id: totrans-1211
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 瑞典
 - en: Taiwan
   id: totrans-1212
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 台湾
 - en: Thailand
   id: totrans-1213
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 泰国
 - en: Turkey
   id: totrans-1214
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 土耳其
 - en: United Kingdom
   id: totrans-1215
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 英国
 - en: United States
   id: totrans-1216
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 美国
 - en: South Africa
   id: totrans-1217
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 南非
 - en: South Korea
   id: totrans-1218
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 韩国
 - en: Switzerland
   id: totrans-1219
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 瑞士
 - en: ([2301](https://github.com/stefan-jansen/zipline/issues/2301), [2333](https://github.com/stefan-jansen/zipline/issues/2333),
     [2338](https://github.com/stefan-jansen/zipline/issues/2338), [2355](https://github.com/stefan-jansen/zipline/issues/2355),
     [2369](https://github.com/stefan-jansen/zipline/issues/2369), [2550](https://github.com/stefan-jansen/zipline/issues/2550),
@@ -7928,11 +8010,16 @@
   id: totrans-1220
   prefs: []
   type: TYPE_NORMAL
+  zh: ([2301](https://github.com/stefan-jansen/zipline/issues/2301), [2333](https://github.com/stefan-jansen/zipline/issues/2333),
+    [2338](https://github.com/stefan-jansen/zipline/issues/2338), [2355](https://github.com/stefan-jansen/zipline/issues/2355),
+    [2369](https://github.com/stefan-jansen/zipline/issues/2369), [2550](https://github.com/stefan-jansen/zipline/issues/2550),
+    [2552](https://github.com/stefan-jansen/zipline/issues/2552), [2559](https://github.com/stefan-jansen/zipline/issues/2559))
 - en: DataSetFamily
   id: totrans-1221
   prefs:
   - PREF_H4
   type: TYPE_NORMAL
+  zh: DataSetFamily
 - en: Dataset families are used to represent data where the unique identifier for
     a row requires more than just asset and date coordinates. A [`DataSetFamily`](api-reference.html#zipline.pipeline.data.DataSetFamily
     "zipline.pipeline.data.DataSetFamily") can also be thought of as a collection
@@ -7942,6 +8029,9 @@
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 数据集家族用于表示数据，其中行的唯一标识符需要不仅仅是资产和日期坐标。一个 [`DataSetFamily`](api-reference.html#zipline.pipeline.data.DataSetFamily
+    "zipline.pipeline.data.DataSetFamily") 也可以被认为是一组 [`DataSet`](api-reference.html#zipline.pipeline.data.DataSet
+    "zipline.pipeline.data.DataSet") 对象，每个对象都有相同的列、域和 ndim。
 - en: ''
   id: totrans-1223
   prefs:
@@ -7954,6 +8044,9 @@
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: '[`DataSetFamily`](api-reference.html#zipline.pipeline.data.DataSetFamily "zipline.pipeline.data.DataSetFamily")
+    对象是通过一个或多个 [`Column`](api-reference.html#zipline.pipeline.data.Column "zipline.pipeline.data.Column")
+    对象以及一个额外的字段：`extra_dims` 来定义的。'
 - en: ''
   id: totrans-1225
   prefs:
@@ -7966,6 +8059,7 @@
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: '`extra_dims` 字段定义了除资产和日期之外的坐标，这些坐标必须固定以生成逻辑时间序列。列对象确定将由家族的切片共享的列。'
 - en: ''
   id: totrans-1227
   prefs:
@@ -7977,6 +8071,7 @@
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: '`extra_dims` 表示为有序字典，其中键是维度名称，值是沿该维度的唯一值的集合。'
 - en: ''
   id: totrans-1229
   prefs:
@@ -7991,6 +8086,10 @@
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 要在流水线表达式中使用 [`DataSetFamily`](api-reference.html#zipline.pipeline.data.DataSetFamily
+    "zipline.pipeline.data.DataSetFamily")，必须为每个额外的维度选择一个特定的值，使用 [`slice()`](api-reference.html#zipline.pipeline.data.DataSetFamily.slice
+    "zipline.pipeline.data.DataSetFamily.slice") 方法。例如，给定一个 [`DataSetFamily`](api-reference.html#zipline.pipeline.data.DataSetFamily
+    "zipline.pipeline.data.DataSetFamily")：
 - en: ''
   id: totrans-1231
   prefs:
@@ -8012,6 +8111,7 @@
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 此数据集可能表示具有以下列的表：
 - en: ''
   id: totrans-1235
   prefs:
@@ -8034,6 +8134,7 @@
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 在这里，我们看到了隐含的 `sid`、`asof_date` 和 `timestamp` 列以及额外的维度列。
 - en: ''
   id: totrans-1239
   prefs:
@@ -8046,6 +8147,9 @@
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 这个 [`DataSetFamily`](api-reference.html#zipline.pipeline.data.DataSetFamily
+    "zipline.pipeline.data.DataSetFamily") 可以转换为常规的 [`DataSet`](api-reference.html#zipline.pipeline.data.DataSet
+    "zipline.pipeline.data.DataSet") 使用：
 - en: ''
   id: totrans-1241
   prefs:
@@ -8068,20 +8172,25 @@
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 这个切片数据集表示来自更高维数据集的行，其中 `(dimension_0 == 'a') & (dimension_1 == 'e')`。
 - en: ([2402](https://github.com/stefan-jansen/zipline/issues/2402), [2452](https://github.com/stefan-jansen/zipline/issues/2452),
     [2456](https://github.com/stefan-jansen/zipline/issues/2456))
   id: totrans-1245
   prefs: []
   type: TYPE_NORMAL
+  zh: ([2402](https://github.com/stefan-jansen/zipline/issues/2402), [2452](https://github.com/stefan-jansen/zipline/issues/2452),
+    [2456](https://github.com/stefan-jansen/zipline/issues/2456))
 - en: International Pipelines
   id: totrans-1246
   prefs:
   - PREF_H4
   type: TYPE_NORMAL
+  zh: 国际管道
 - en: Pipeline now supports international data.
   id: totrans-1247
   prefs: []
   type: TYPE_NORMAL
+  zh: 流水线现在支持国际数据。
 - en: Pipeline is a tool that allows you to define computations over a universe of
     assets and a period of time. In the past, you could only run pipelines on the
     US equity market. Now, you can now specify a domain over which a pipeline should
@@ -8092,11 +8201,13 @@
   id: totrans-1248
   prefs: []
   type: TYPE_NORMAL
+  zh: 管道是一个工具，允许你在一个资产宇宙和一段时间内定义计算。过去，你只能在美国的股票市场上运行管道。现在，你可以指定一个域，在这个域上应该计算管道。“域”这个名字指的是数学中“函数的域”的概念，即函数可能的输入集合。在管道的上下文中，域指定了资产集合和相应的交易日历，在这个日历上应该计算管道的表达式。
 - en: For example, the following pipeline returns the latest close price and volume
     for all Canadian equities, every day.
   id: totrans-1249
   prefs: []
   type: TYPE_NORMAL
+  zh: 例如，以下管道返回所有加拿大股票的最新收盘价和成交量，每天。
 - en: '[PRE37]'
   id: totrans-1250
   prefs: []
@@ -8109,6 +8220,7 @@
   id: totrans-1251
   prefs: []
   type: TYPE_NORMAL
+  zh: 与货币相关的另一个挑战是，一些交易所不要求股票以当地货币列出。例如，伦敦证券交易所只有大约75%的上市股票以英镑计价。其余25%主要以欧元或美元计价。这使得进行跨部门比较变得困难。
 - en: To solve this problem, most people rely on currency conversions to bring price-based
     fields into the same currency. Pipeline columns now support an `fx` method for
     specifying what currency the data should be viewed as. This method is only available
@@ -8117,242 +8229,291 @@
   id: totrans-1252
   prefs: []
   type: TYPE_NORMAL
+  zh: 为了解决这个问题，大多数人依赖货币转换将基于价格的字段转换为相同的货币。管道列现在支持一个`fx`方法，用于指定数据应该以哪种货币查看。此方法仅适用于“货币感知”的术语，例如开盘或收盘，但不适用于不关心货币的术语，如成交量。
 - en: Currently, there is no way to load international data into a bundle. We are
     working on ways to make it easy to get international data into Zipline.
   id: totrans-1253
   prefs: []
   type: TYPE_NORMAL
+  zh: 目前，没有办法将国际数据加载到包中。我们正在寻找方法，使将国际数据导入Zipline变得容易。
 - en: ([2265](https://github.com/stefan-jansen/zipline/issues/2265), [2262](https://github.com/stefan-jansen/zipline/issues/2262),
     and many others)
   id: totrans-1254
   prefs: []
   type: TYPE_NORMAL
+  zh: ([2265](https://github.com/stefan-jansen/zipline/issues/2265), [2262](https://github.com/stefan-jansen/zipline/issues/2262),
+    以及其他许多)
 - en: 'The domains that Zipline currently supports for running pipelines (using the
     latest [trading-calendars](https://pypi.org/project/trading-calendars/) package)
     are the following:'
   id: totrans-1255
   prefs: []
   type: TYPE_NORMAL
+  zh: 目前，Zipline支持运行管道的域（使用最新的[trading-calendars](https://pypi.org/project/trading-calendars/)包）如下：
 - en: Argentina
   id: totrans-1256
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 阿根廷
 - en: Australia
   id: totrans-1257
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 澳大利亚
 - en: Austria
   id: totrans-1258
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 奥地利
 - en: Belgium
   id: totrans-1259
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 比利时
 - en: Brazil
   id: totrans-1260
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 巴西
 - en: Canada
   id: totrans-1261
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 加拿大
 - en: Chile
   id: totrans-1262
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 智利
 - en: China
   id: totrans-1263
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 中国
 - en: Czech Republic
   id: totrans-1264
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 捷克共和国
 - en: Colombia
   id: totrans-1265
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 哥伦比亚
 - en: Czechia
   id: totrans-1266
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 捷克
 - en: Finland
   id: totrans-1267
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 芬兰
 - en: France
   id: totrans-1268
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 法国
 - en: Germany
   id: totrans-1269
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 德国
 - en: Greece
   id: totrans-1270
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 希腊
 - en: Hong Kong
   id: totrans-1271
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 香港
 - en: Hungary
   id: totrans-1272
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 匈牙利
 - en: India
   id: totrans-1273
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 印度
 - en: Indonesia
   id: totrans-1274
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 印度尼西亚
 - en: Ireland
   id: totrans-1275
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 爱尔兰
 - en: Italy
   id: totrans-1276
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 意大利
 - en: Japan
   id: totrans-1277
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 日本
 - en: Malaysia
   id: totrans-1278
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 马来西亚
 - en: Mexico
   id: totrans-1279
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 墨西哥
 - en: Netherlands
   id: totrans-1280
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 荷兰
 - en: New Zealand
   id: totrans-1281
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 新西兰
 - en: Norway
   id: totrans-1282
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 挪威
 - en: Pakistan
   id: totrans-1283
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 巴基斯坦
 - en: Peru
   id: totrans-1284
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 秘鲁
 - en: Philippines
   id: totrans-1285
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 菲律宾
 - en: Poland
   id: totrans-1286
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 波兰
 - en: Portugal
   id: totrans-1287
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 葡萄牙
 - en: Russia
   id: totrans-1288
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 俄罗斯
 - en: Singapore
   id: totrans-1289
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 新加坡
 - en: Spain
   id: totrans-1290
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 西班牙
 - en: Sweden
   id: totrans-1291
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 瑞典
 - en: Taiwan
   id: totrans-1292
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 台湾
 - en: Thailand
   id: totrans-1293
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 泰国
 - en: Turkey
   id: totrans-1294
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 土耳其
 - en: United Kingdom
   id: totrans-1295
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 英国
 - en: United States
   id: totrans-1296
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 美国
 - en: South Africa
   id: totrans-1297
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 南非
 - en: South Korea
   id: totrans-1298
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 韩国
 - en: Switzerland
   id: totrans-1299
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 瑞士
 - en: ([2301](https://github.com/stefan-jansen/zipline/issues/2301), [2333](https://github.com/stefan-jansen/zipline/issues/2333),
     [2338](https://github.com/stefan-jansen/zipline/issues/2338), [2355](https://github.com/stefan-jansen/zipline/issues/2355),
     [2369](https://github.com/stefan-jansen/zipline/issues/2369), [2550](https://github.com/stefan-jansen/zipline/issues/2550),
@@ -8360,11 +8521,16 @@
   id: totrans-1300
   prefs: []
   type: TYPE_NORMAL
+  zh: ([2301](https://github.com/stefan-jansen/zipline/issues/2301), [2333](https://github.com/stefan-jansen/zipline/issues/2333),
+    [2338](https://github.com/stefan-jansen/zipline/issues/2338), [2355](https://github.com/stefan-jansen/zipline/issues/2355),
+    [2369](https://github.com/stefan-jansen/zipline/issues/2369), [2550](https://github.com/stefan-jansen/zipline/issues/2550),
+    [2552](https://github.com/stefan-jansen/zipline/issues/2552), [2559](https://github.com/stefan-jansen/zipline/issues/2559))
 - en: DataSetFamily
   id: totrans-1301
   prefs:
   - PREF_H4
   type: TYPE_NORMAL
+  zh: 数据集家族
 - en: Dataset families are used to represent data where the unique identifier for
     a row requires more than just asset and date coordinates. A [`DataSetFamily`](api-reference.html#zipline.pipeline.data.DataSetFamily
     "zipline.pipeline.data.DataSetFamily") can also be thought of as a collection
@@ -8374,6 +8540,9 @@
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 数据集家族用于表示行唯一标识符需要超过资产和日期坐标的场景。[`DataSetFamily`](api-reference.html#zipline.pipeline.data.DataSetFamily
+    "zipline.pipeline.data.DataSetFamily")也可以被视为一组[`DataSet`](api-reference.html#zipline.pipeline.data.DataSet
+    "zipline.pipeline.data.DataSet")对象，每个对象都有相同的列、域和维度。
 - en: ''
   id: totrans-1303
   prefs:
@@ -8386,6 +8555,8 @@
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: '[`DataSetFamily`](api-reference.html#zipline.pipeline.data.DataSetFamily "zipline.pipeline.data.DataSetFamily")对象是通过一个或多个[`Column`](api-reference.html#zipline.pipeline.data.Column
+    "zipline.pipeline.data.Column")对象定义的，再加上一个额外的字段：`extra_dims`。'
 - en: ''
   id: totrans-1305
   prefs:
@@ -8398,6 +8569,7 @@
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: '`extra_dims`字段定义了除资产和日期之外的坐标，这些坐标必须固定以产生逻辑时间序列。列对象确定将由家族切片共享的列。'
 - en: ''
   id: totrans-1307
   prefs:
@@ -8409,6 +8581,7 @@
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: '`extra_dims`被表示为一个有序字典，其中键是维度名称，值是沿着该维度的唯一值集合。'
 - en: ''
   id: totrans-1309
   prefs:
@@ -8423,6 +8596,10 @@
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 要在管道表达式中使用[`DataSetFamily`](api-reference.html#zipline.pipeline.data.DataSetFamily
+    "zipline.pipeline.data.DataSetFamily")，必须使用[`slice()`](api-reference.html#zipline.pipeline.data.DataSetFamily.slice
+    "zipline.pipeline.data.DataSetFamily.slice")方法为每个额外维度选择一个特定值。例如，给定一个[`DataSetFamily`](api-reference.html#zipline.pipeline.data.DataSetFamily
+    "zipline.pipeline.data.DataSetFamily")：
 - en: ''
   id: totrans-1311
   prefs:
@@ -8444,6 +8621,7 @@
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 这个数据集可能代表具有以下列的表：
 - en: ''
   id: totrans-1315
   prefs:
@@ -8466,6 +8644,7 @@
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 在这里我们可以看到隐含的`sid`、`asof_date`和`timestamp`列，以及额外的维度列。
 - en: ''
   id: totrans-1319
   prefs:
@@ -8478,6 +8657,8 @@
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 这个[`DataSetFamily`](api-reference.html#zipline.pipeline.data.DataSetFamily "zipline.pipeline.data.DataSetFamily")可以通过以下方式转换为常规[`DataSet`](api-reference.html#zipline.pipeline.data.DataSet
+    "zipline.pipeline.data.DataSet")：
 - en: ''
   id: totrans-1321
   prefs:
@@ -8500,58 +8681,71 @@
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 这个切片数据集代表了高维数据集中满足`(dimension_0 == 'a') & (dimension_1 == 'e')`条件的行。
 - en: ([2402](https://github.com/stefan-jansen/zipline/issues/2402), [2452](https://github.com/stefan-jansen/zipline/issues/2452),
     [2456](https://github.com/stefan-jansen/zipline/issues/2456))
   id: totrans-1325
   prefs: []
   type: TYPE_NORMAL
+  zh: ([2402](https://github.com/stefan-jansen/zipline/issues/2402), [2452](https://github.com/stefan-jansen/zipline/issues/2452),
+    [2456](https://github.com/stefan-jansen/zipline/issues/2456))
 - en: Release 1.3.0
   id: totrans-1326
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 发布版本1.3.0
 - en: 'Release:'
   id: totrans-1327
   prefs: []
   type: TYPE_NORMAL
+  zh: 发布说明：
 - en: 1.3.0
   id: totrans-1328
   prefs: []
   type: TYPE_NORMAL
+  zh: 1.3.0
 - en: 'Date:'
   id: totrans-1329
   prefs: []
   type: TYPE_NORMAL
+  zh: 日期：
 - en: July 16, 2018
   id: totrans-1330
   prefs: []
   type: TYPE_NORMAL
+  zh: 2018年7月16日
 - en: This release includes several enhancements and performance improvements along
     with a small number of bug fixes. We recommend that all users upgrade to this
     version.
   id: totrans-1331
   prefs: []
   type: TYPE_NORMAL
+  zh: 此版本包含多项增强功能和性能改进，以及少量错误修复。我们建议所有用户升级到此版本。
 - en: Note
   id: totrans-1332
   prefs: []
   type: TYPE_NORMAL
+  zh: 注意
 - en: This will likely be the last minor release in the Zipline 1.x series. The release
     next will be Zipline 2.0, which will include a number of small breaking changes
     required to support international equities.
   id: totrans-1333
   prefs: []
   type: TYPE_NORMAL
+  zh: 这很可能是Zipline 1.x系列的最后一个次要版本。下一个版本将是Zipline 2.0，它将包含一些小的破坏性更改，以支持国际股票。
 - en: Highlights
   id: totrans-1334
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 亮点
 - en: Support for Newer Numpy/Pandas Versions
   id: totrans-1335
   prefs:
   - PREF_H4
   type: TYPE_NORMAL
+  zh: 支持更新的Numpy/Pandas版本
 - en: Zipline has historically been very conservative when updating versions of numpy,
     pandas, and other “PyData” ecosystem packages. This conservatism is primarily
     due to the fact that Zipline is used as the backtesting engine for [Quantopian](https://www.quantopian.com/),
@@ -8562,26 +8756,31 @@
   id: totrans-1336
   prefs: []
   type: TYPE_NORMAL
+  zh: Zipline在更新numpy、pandas和其他“PyData”生态系统包的版本时一直非常保守。这种保守主要是因为Zipline被用作[Quantopian](https://www.quantopian.com/)的回测引擎，这意味着更新包版本可能会破坏大量的已安装代码库。当然，许多Zipline用户并没有Quantopian那样的向后兼容性要求，他们希望能够使用最新和最棒的包版本。
 - en: 'As part of this release, we’re now building and testing Zipline with two package
     configurations:'
   id: totrans-1337
   prefs: []
   type: TYPE_NORMAL
+  zh: 作为本次发布的一部分，我们现在使用两种包配置构建和测试Zipline：
 - en: “Stable”, using numpy version 1.11 and pandas version 0.18.1.
   id: totrans-1338
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: “稳定版”，使用numpy版本1.11和pandas版本0.18.1。
 - en: “Latest”, using numpy version 1.14 and pandas version 0.22.0.
   id: totrans-1339
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: “最新版”，使用numpy版本1.14和pandas版本0.22.0。
 - en: Other combinations of numpy and pandas **may** work, but these package sets
     will be built and tested during our normal development cycle.
   id: totrans-1340
   prefs: []
   type: TYPE_NORMAL
+  zh: 其他组合的numpy和pandas**可能**可以工作，但这些包集合将在我们的正常开发周期中进行构建和测试。
 - en: Moving forward, our goal is to continue to maintain support for two sets of
     packages at any given time. The “stable” package set will change relatively infrequently,
     and will contain the versions of numpy and pandas supported on Quantopian. The
@@ -8590,17 +8789,20 @@
   id: totrans-1341
   prefs: []
   type: TYPE_NORMAL
+  zh: 展望未来，我们的目标是继续在任何给定时间维护两套包的支持。“稳定版”包集合变化相对不频繁，并将包含Quantopian支持的numpy和pandas版本。“最新版”包集合将定期变化，并将包含最近发布的numpy和pandas版本。
 - en: Our hope with these changes is to strike a balance between stability and novelty
     without taking on too great a maintenance burden by supporting every possible
     combination of packages. ([2194](https://github.com/stefan-jansen/zipline/issues/2194))
   id: totrans-1342
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们希望通过这些变化在稳定性和新颖性之间取得平衡，而不承担支持每种可能的包组合的维护负担。([2194](https://github.com/stefan-jansen/zipline/issues/2194))
 - en: Standalone `trading_calendars` Module
   id: totrans-1343
   prefs:
   - PREF_H4
   type: TYPE_NORMAL
+  zh: 独立的`trading_calendars`模块
 - en: One of the most popular features of Zipline is its collection of trading calendars,
     which provide information about holidays and trading hours of various markets.
     As part of this release, Zipline’s calendar-related functionality has been moved
@@ -8610,6 +8812,7 @@
   id: totrans-1344
   prefs: []
   type: TYPE_NORMAL
+  zh: Zipline最受欢迎的功能之一是其交易日历集合，提供各种市场的假日和交易时间信息。作为本次发布的一部分，Zipline的日历相关功能已移至单独的[trading-calendars](https://pypi.org/project/trading-calendars/)包，允许只需要访问日历的用户在不承担Zipline其他依赖的情况下使用它们。
 - en: For backwards compability, Zipline will continue to re-export calendar-related
     functions. For example, `zipline.get_calendar()` still exists, but is now an alias
     for `trading_calendars.get_calendar`. Users that depend on this functionality
@@ -8618,11 +8821,13 @@
   id: totrans-1345
   prefs: []
   type: TYPE_NORMAL
+  zh: 为了向后兼容，Zipline将继续重新导出与日历相关的函数。例如，`zipline.get_calendar()`仍然存在，但现在它是`trading_calendars.get_calendar`的别名。依赖此功能的用户应将其导入更新到`trading_calendars`中的新位置。([2219](https://github.com/stefan-jansen/zipline/issues/2219))
 - en: Custom Blotters
   id: totrans-1346
   prefs:
   - PREF_H4
   type: TYPE_NORMAL
+  zh: 自定义Blotters
 - en: This release adds experimental support for running Zipline with user-defined
     subclasses of [`Blotter`](api-reference.html#zipline.finance.blotter.blotter.Blotter
     "zipline.finance.blotter.blotter.Blotter"). The primary motivation for this change
@@ -8630,10 +8835,12 @@
   id: totrans-1347
   prefs: []
   type: TYPE_NORMAL
+  zh: 本次发布增加了对使用用户定义的`Blotter`子类的实验性支持。这一变化的主要动机是使从Zipline CLI运行实时算法变得更加容易。
 - en: 'There are two primary ways to configure a custom blotter:'
   id: totrans-1348
   prefs: []
   type: TYPE_NORMAL
+  zh: 配置自定义blotter主要有两种方式：
 - en: You can pass an instance of [`Blotter`](api-reference.html#zipline.finance.blotter.blotter.Blotter
     "zipline.finance.blotter.blotter.Blotter") as the `blotter` parameter to [`zipline.run_algorithm()`](api-reference.html#zipline.run_algorithm
     "zipline.run_algorithm"). (This functionality had existed previously, but wasn’t
@@ -8642,20 +8849,26 @@
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 您可以将 [`Blotter`](api-reference.html#zipline.finance.blotter.blotter.Blotter
+    "zipline.finance.blotter.blotter.Blotter") 实例作为 `blotter` 参数传递给 [`zipline.run_algorithm()`](api-reference.html#zipline.run_algorithm
+    "zipline.run_algorithm")。（此功能之前已存在，但未得到很好的文档记录。）
 - en: You can register a named **factory** for a blotter in your `extension.py` and
     pass the name on the command line via the `--blotter` flag.
   id: totrans-1350
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 您可以在 `extension.py` 中注册一个名为 **工厂** 的 blotter，并通过 `--blotter` 标志在命令行上传递名称。
 - en: 'An example usage of **(2)** might look like this:'
   id: totrans-1351
   prefs: []
   type: TYPE_NORMAL
+  zh: '**(2)** 的一个示例用法可能如下所示：'
 - en: ~/.zipline/extension.py
   id: totrans-1352
   prefs: []
   type: TYPE_NORMAL
+  zh: ~/.zipline/extension.py
 - en: '[PRE41]'
   id: totrans-1353
   prefs: []
@@ -8666,6 +8879,7 @@
   id: totrans-1354
   prefs: []
   type: TYPE_NORMAL
+  zh: 要在从命令行运行 zipline 时使用此工厂，我们将以这种方式调用 zipline：
 - en: '[PRE42]'
   id: totrans-1355
   prefs: []
@@ -8678,15 +8892,20 @@
   id: totrans-1356
   prefs: []
   type: TYPE_NORMAL
+  zh: 作为此更改的一部分，[`Blotter`](api-reference.html#zipline.finance.blotter.blotter.Blotter
+    "zipline.finance.blotter.blotter.Blotter") 类已被转换为抽象基类。模拟中使用的默认 blotter 现在名为 [`zipline.finance.blotter.SimulationBlotter`](api-reference.html#zipline.finance.blotter.SimulationBlotter
+    "zipline.finance.blotter.SimulationBlotter")。
 - en: ([2210](https://github.com/stefan-jansen/zipline/issues/2210), [2251](https://github.com/stefan-jansen/zipline/issues/2251))
   id: totrans-1357
   prefs: []
   type: TYPE_NORMAL
+  zh: ([2210](https://github.com/stefan-jansen/zipline/issues/2210), [2251](https://github.com/stefan-jansen/zipline/issues/2251))
 - en: Custom Command-Line Arguments
   id: totrans-1358
   prefs:
   - PREF_H4
   type: TYPE_NORMAL
+  zh: 自定义命令行参数
 - en: 'This release adds support for passing custom arguments to the `zipline` command-line
     interface. Custom command-line arguments are passed via the `-x` flag followed
     by a `key=value` pair. Arguments passed this way can be accessed from Python code
@@ -8695,6 +8914,8 @@
   id: totrans-1359
   prefs: []
   type: TYPE_NORMAL
+  zh: 此版本增加了对向 `zipline` 命令行界面传递自定义参数的支持。自定义命令行参数通过 `-x` 标志后跟一个 `key=value` 对来传递。通过这种方式传递的参数可以从
+    Python 代码（例如，算法或扩展）通过 `zipline.extension_args` 的属性访问。例如，如果以这种方式调用 zipline：
 - en: '[PRE43]'
   id: totrans-1360
   prefs: []
@@ -8704,11 +8925,13 @@
   id: totrans-1361
   prefs: []
   type: TYPE_NORMAL
+  zh: 那么 `zipline.extension_args.argle` 的结果将是字符串 `"bargle"`。
 - en: 'Custom arguments can be grouped into namespaces by including `.` characters
     in keys. For example, if zipline is invoked like this:'
   id: totrans-1362
   prefs: []
   type: TYPE_NORMAL
+  zh: 自定义参数可以通过在键中包含 `.` 字符来分组到命名空间中。例如，如果以这种方式调用 zipline：
 - en: '[PRE44]'
   id: totrans-1363
   prefs: []
@@ -8720,41 +8943,50 @@
   id: totrans-1364
   prefs: []
   type: TYPE_NORMAL
+  zh: 那么 `zipline.extension_args.argle` 将包含一个具有 `bargle` 属性的对象，该属性包含字符串 `"foo"`。键可以包含多个点来创建嵌套的命名空间。([2210](https://github.com/stefan-jansen/zipline/issues/2210))
 - en: Enhancements
   id: totrans-1365
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 增强功能
 - en: Added support for pandas 0.22 and numpy 1.14\. See above for details. ([2194](https://github.com/stefan-jansen/zipline/issues/2194))
   id: totrans-1366
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 增加了对 pandas 0.22 和 numpy 1.14 的支持。详情请参阅上文。([2194](https://github.com/stefan-jansen/zipline/issues/2194))
 - en: Moved `zipline.utils.calendars` into a separately-installable [trading-calendars](https://pypi.org/project/trading-calendars/)
     package. ([2219](https://github.com/stefan-jansen/zipline/issues/2219))
   id: totrans-1367
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 将 `zipline.utils.calendars` 移至可单独安装的 [trading-calendars](https://pypi.org/project/trading-calendars/)
+    包中。([2219](https://github.com/stefan-jansen/zipline/issues/2219))
 - en: Added support for specifying custom string arguments with the `-x` flag. See
     above for details. ([2210](https://github.com/stefan-jansen/zipline/issues/2210))
   id: totrans-1368
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 增加了对使用 `-x` 标志指定自定义字符串参数的支持。详情请参阅上文。([2210](https://github.com/stefan-jansen/zipline/issues/2210))
 - en: Experimental Features
   id: totrans-1369
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 实验性功能
 - en: Warning
   id: totrans-1370
   prefs: []
   type: TYPE_NORMAL
+  zh: 警告
 - en: Experimental features are subject to change.
   id: totrans-1371
   prefs: []
   type: TYPE_NORMAL
+  zh: 实验性功能可能会发生变化。
 - en: Added support for registering custom subclass of `zipline.finance.blotter.Blotter`.
     See above for details. ([2210](https://github.com/stefan-jansen/zipline/issues/2210),
     [2251](https://github.com/stefan-jansen/zipline/issues/2251))
@@ -8762,11 +8994,14 @@
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 增加了对注册 `zipline.finance.blotter.Blotter` 的自定义子类的支持。详情请参阅上文。([2210](https://github.com/stefan-jansen/zipline/issues/2210),
+    [2251](https://github.com/stefan-jansen/zipline/issues/2251))
 - en: Bug Fixes
   id: totrans-1373
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 错误修复
 - en: Fixed a bug in [`zipline.pipeline.Factor.winsorize()`](api-reference.html#zipline.pipeline.Factor.winsorize
     "zipline.pipeline.Factor.winsorize") where NaN values were incorrectly included
     in value counts when determining cutoff thresholds for winsorization. ([2138](https://github.com/stefan-jansen/zipline/issues/2138))
@@ -8774,18 +9009,24 @@
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 修复了在 [`zipline.pipeline.Factor.winsorize()`](api-reference.html#zipline.pipeline.Factor.winsorize
+    "zipline.pipeline.Factor.winsorize") 中 NaN 值在确定 winsorization 的截止阈值时被错误地包含在值计数中的
+    bug。([2138](https://github.com/stefan-jansen/zipline/issues/2138))
 - en: Fixed a crash in [`zipline.pipeline.Factor.top()`](api-reference.html#zipline.pipeline.Factor.top
     "zipline.pipeline.Factor.top") with a count of 1 and no groupby. ([2218](https://github.com/stefan-jansen/zipline/issues/2218))
   id: totrans-1375
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 修复了在 [`zipline.pipeline.Factor.top()`](api-reference.html#zipline.pipeline.Factor.top
+    "zipline.pipeline.Factor.top") 中计数为 1 且没有 groupby 时的崩溃问题。([2218](https://github.com/stefan-jansen/zipline/issues/2218))
 - en: Fixed a bug where calling `data.history` with a negative lookback would fetch
     prices from the future. ([2164](https://github.com/stefan-jansen/zipline/issues/2164))
   id: totrans-1376
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 修复了一个 bug，即在调用 `data.history` 时使用负的回溯会从未来获取价格。([2164](https://github.com/stefan-jansen/zipline/issues/2164))
 - en: Fixed a bug where `StopOrder``, [`zipline.finance.execution.LimitOrder`](api-reference.html#zipline.finance.execution.LimitOrder
     "zipline.finance.execution.LimitOrder"), and [`zipline.finance.execution.StopLimitOrder`](api-reference.html#zipline.finance.execution.StopLimitOrder
     "zipline.finance.execution.StopLimitOrder") prices were being rounded to the nearest
@@ -8795,28 +9036,36 @@
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 修复了一个 bug，其中 `StopOrder`、[`zipline.finance.execution.LimitOrder`](api-reference.html#zipline.finance.execution.LimitOrder
+    "zipline.finance.execution.LimitOrder") 和 [`zipline.finance.execution.StopLimitOrder`](api-reference.html#zipline.finance.execution.StopLimitOrder
+    "zipline.finance.execution.StopLimitOrder") 的价格被四舍五入到最接近的便士，而不管资产的刻度大小。现在，价格根据所订购资产的
+    `tick_size` 属性进行四舍五入。([2211](https://github.com/stefan-jansen/zipline/issues/2211))
 - en: Performance
   id: totrans-1378
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 性能
 - en: Improved performance when fetching minutely prices for assets that trade regularly.
     ([2108](https://github.com/stefan-jansen/zipline/issues/2108))
   id: totrans-1379
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 改进了定期交易的资产获取每分钟价格的性能。([2108](https://github.com/stefan-jansen/zipline/issues/2108))
 - en: Improved performance when fetching minutely prices for many assets by tuning
     cache sizes. ([2110](https://github.com/stefan-jansen/zipline/issues/2110))
   id: totrans-1380
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 通过调整缓存大小，改进了获取许多资产的每分钟价格的性能。([2110](https://github.com/stefan-jansen/zipline/issues/2110))
 - en: Maintenance and Refactorings
   id: totrans-1381
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 维护和重构
 - en: Refactored large parts of the Zipline test suite to make it easier to change
     the signature of `zipline.algorithm.TradingAlgorithm`. ([2169](https://github.com/stefan-jansen/zipline/issues/2169),
     [2168](https://github.com/stefan-jansen/zipline/issues/2168), [2165](https://github.com/stefan-jansen/zipline/issues/2165),
@@ -8825,31 +9074,39 @@
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 重构了 Zipline 测试套件的大部分内容，使其更容易更改 `zipline.algorithm.TradingAlgorithm` 的签名。([2169](https://github.com/stefan-jansen/zipline/issues/2169),
+    [2168](https://github.com/stefan-jansen/zipline/issues/2168), [2165](https://github.com/stefan-jansen/zipline/issues/2165),
+    [2171](https://github.com/stefan-jansen/zipline/issues/2171))
 - en: Build
   id: totrans-1383
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 构建
 - en: Added support for running travis builds with pandas 0.18 and 0.22. ([2194](https://github.com/stefan-jansen/zipline/issues/2194))
   id: totrans-1384
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 添加了使用 pandas 0.18 和 0.22 运行 travis 构建的支持。([2194](https://github.com/stefan-jansen/zipline/issues/2194))
 - en: Added OSX builds to the travis build matrix. ([2244](https://github.com/stefan-jansen/zipline/issues/2244))
   id: totrans-1385
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 在 travis 构建矩阵中添加了 OSX 构建。([2244](https://github.com/stefan-jansen/zipline/issues/2244))
 - en: Highlights
   id: totrans-1386
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 亮点
 - en: Support for Newer Numpy/Pandas Versions
   id: totrans-1387
   prefs:
   - PREF_H4
   type: TYPE_NORMAL
+  zh: 支持更新的 Numpy/Pandas 版本
 - en: Zipline has historically been very conservative when updating versions of numpy,
     pandas, and other “PyData” ecosystem packages. This conservatism is primarily
     due to the fact that Zipline is used as the backtesting engine for [Quantopian](https://www.quantopian.com/),
@@ -8860,26 +9117,33 @@
   id: totrans-1388
   prefs: []
   type: TYPE_NORMAL
+  zh: 在历史上，Zipline 在更新 numpy、pandas 以及其他“PyData”生态系统包的版本时一直非常保守。这种保守主要是因为 Zipline
+    被用作 [Quantopian](https://www.quantopian.com/) 的回测引擎，这意味着更新包版本可能会破坏大量的已安装代码库。当然，许多
+    Zipline 用户并没有 Quantopian 那样的向后兼容性要求，他们希望能够使用最新、最棒的包版本。
 - en: 'As part of this release, we’re now building and testing Zipline with two package
     configurations:'
   id: totrans-1389
   prefs: []
   type: TYPE_NORMAL
+  zh: 作为此次发布的一部分，我们现在使用两种包配置构建和测试 Zipline：
 - en: “Stable”, using numpy version 1.11 and pandas version 0.18.1.
   id: totrans-1390
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: “稳定版”，使用 numpy 版本 1.11 和 pandas 版本 0.18.1。
 - en: “Latest”, using numpy version 1.14 and pandas version 0.22.0.
   id: totrans-1391
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: “最新”，使用numpy版本1.14和pandas版本0.22.0。
 - en: Other combinations of numpy and pandas **may** work, but these package sets
     will be built and tested during our normal development cycle.
   id: totrans-1392
   prefs: []
   type: TYPE_NORMAL
+  zh: 其他numpy和pandas的组合**可能**有效，但这些包集将在我们的正常开发周期中进行构建和测试。
 - en: Moving forward, our goal is to continue to maintain support for two sets of
     packages at any given time. The “stable” package set will change relatively infrequently,
     and will contain the versions of numpy and pandas supported on Quantopian. The
@@ -8888,17 +9152,20 @@
   id: totrans-1393
   prefs: []
   type: TYPE_NORMAL
+  zh: 展望未来，我们的目标是继续在任何给定时间维护对两组包的支持。“稳定”包集将相对不频繁地变化，并将包含Quantopian支持的numpy和pandas版本。“最新”包集将定期变化，并将包含最近发布的numpy和pandas版本。
 - en: Our hope with these changes is to strike a balance between stability and novelty
     without taking on too great a maintenance burden by supporting every possible
     combination of packages. ([2194](https://github.com/stefan-jansen/zipline/issues/2194))
   id: totrans-1394
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们希望通过这些改变在稳定性和新颖性之间取得平衡，而不承担过大的维护负担，即支持所有可能的包组合。([2194](https://github.com/stefan-jansen/zipline/issues/2194))
 - en: Standalone `trading_calendars` Module
   id: totrans-1395
   prefs:
   - PREF_H4
   type: TYPE_NORMAL
+  zh: 独立的`trading_calendars`模块
 - en: One of the most popular features of Zipline is its collection of trading calendars,
     which provide information about holidays and trading hours of various markets.
     As part of this release, Zipline’s calendar-related functionality has been moved
@@ -8908,6 +9175,7 @@
   id: totrans-1396
   prefs: []
   type: TYPE_NORMAL
+  zh: Zipline最受欢迎的功能之一是其交易日历集合，这些日历提供了关于各种市场假日和交易时间的信息。作为此版本的一部分，Zipline的日历相关功能已被移动到一个单独的[trading-calendars](https://pypi.org/project/trading-calendars/)包中，允许只需要访问日历的用户使用它们，而不必承担Zipline其余部分的依赖。
 - en: For backwards compability, Zipline will continue to re-export calendar-related
     functions. For example, `zipline.get_calendar()` still exists, but is now an alias
     for `trading_calendars.get_calendar`. Users that depend on this functionality
@@ -8916,11 +9184,13 @@
   id: totrans-1397
   prefs: []
   type: TYPE_NORMAL
+  zh: 为了向后兼容，Zipline将继续重新导出与日历相关的函数。例如，`zipline.get_calendar()`仍然存在，但现在它是`trading_calendars.get_calendar`的别名。依赖此功能的用户被鼓励更新他们的导入到`trading_calendars`中的新位置。([2219](https://github.com/stefan-jansen/zipline/issues/2219))
 - en: Custom Blotters
   id: totrans-1398
   prefs:
   - PREF_H4
   type: TYPE_NORMAL
+  zh: 自定义交易记录器
 - en: This release adds experimental support for running Zipline with user-defined
     subclasses of [`Blotter`](api-reference.html#zipline.finance.blotter.blotter.Blotter
     "zipline.finance.blotter.blotter.Blotter"). The primary motivation for this change
@@ -8928,10 +9198,12 @@
   id: totrans-1399
   prefs: []
   type: TYPE_NORMAL
+  zh: 此版本增加了对使用用户定义的`Blotter`子类运行Zipline的实验性支持。这一变化的主要动机是使从Zipline CLI运行实时算法变得更加容易。
 - en: 'There are two primary ways to configure a custom blotter:'
   id: totrans-1400
   prefs: []
   type: TYPE_NORMAL
+  zh: 配置自定义交易记录器主要有两种方式：
 - en: You can pass an instance of [`Blotter`](api-reference.html#zipline.finance.blotter.blotter.Blotter
     "zipline.finance.blotter.blotter.Blotter") as the `blotter` parameter to [`zipline.run_algorithm()`](api-reference.html#zipline.run_algorithm
     "zipline.run_algorithm"). (This functionality had existed previously, but wasn’t
@@ -8940,20 +9212,24 @@
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 您可以将`Blotter`实例作为`blotter`参数传递给`zipline.run_algorithm()`。（此功能之前已经存在，但文档不够完善。）
 - en: You can register a named **factory** for a blotter in your `extension.py` and
     pass the name on the command line via the `--blotter` flag.
   id: totrans-1402
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 您可以在`extension.py`中注册一个名为**工厂**的交易记录器，并通过命令行上的`--blotter`标志传递名称。
 - en: 'An example usage of **(2)** might look like this:'
   id: totrans-1403
   prefs: []
   type: TYPE_NORMAL
+  zh: 对于**(2)**的一个示例用法可能如下所示：
 - en: ~/.zipline/extension.py
   id: totrans-1404
   prefs: []
   type: TYPE_NORMAL
+  zh: ~/.zipline/extension.py
 - en: '[PRE45]'
   id: totrans-1405
   prefs: []
@@ -8964,6 +9240,7 @@
   id: totrans-1406
   prefs: []
   type: TYPE_NORMAL
+  zh: 要在命令行上运行zipline时使用此工厂，我们将这样调用zipline：
 - en: '[PRE46]'
   id: totrans-1407
   prefs: []
@@ -8976,15 +9253,20 @@
   id: totrans-1408
   prefs: []
   type: TYPE_NORMAL
+  zh: 作为此次变更的一部分，[`Blotter`](api-reference.html#zipline.finance.blotter.blotter.Blotter
+    "zipline.finance.blotter.blotter.Blotter")类已被转换为抽象基类。模拟中使用的默认账本现在名为[`zipline.finance.blotter.SimulationBlotter`](api-reference.html#zipline.finance.blotter.SimulationBlotter
+    "zipline.finance.blotter.SimulationBlotter")。
 - en: ([2210](https://github.com/stefan-jansen/zipline/issues/2210), [2251](https://github.com/stefan-jansen/zipline/issues/2251))
   id: totrans-1409
   prefs: []
   type: TYPE_NORMAL
+  zh: （[2210](https://github.com/stefan-jansen/zipline/issues/2210)，[2251](https://github.com/stefan-jansen/zipline/issues/2251)）
 - en: Custom Command-Line Arguments
   id: totrans-1410
   prefs:
   - PREF_H4
   type: TYPE_NORMAL
+  zh: 自定义命令行参数
 - en: 'This release adds support for passing custom arguments to the `zipline` command-line
     interface. Custom command-line arguments are passed via the `-x` flag followed
     by a `key=value` pair. Arguments passed this way can be accessed from Python code
@@ -8993,6 +9275,7 @@
   id: totrans-1411
   prefs: []
   type: TYPE_NORMAL
+  zh: 此版本增加了对将自定义参数传递给`zipline`命令行界面的支持。自定义命令行参数通过`-x`标志后跟一个`key=value`对来传递。通过这种方式传递的参数可以从Python代码（例如，算法或扩展）通过`zipline.extension_args`的属性访问。例如，如果以这种方式调用zipline：
 - en: '[PRE47]'
   id: totrans-1412
   prefs: []
@@ -9002,11 +9285,13 @@
   id: totrans-1413
   prefs: []
   type: TYPE_NORMAL
+  zh: 那么`zipline.extension_args.argle`的结果将是字符串`"bargle"`。
 - en: 'Custom arguments can be grouped into namespaces by including `.` characters
     in keys. For example, if zipline is invoked like this:'
   id: totrans-1414
   prefs: []
   type: TYPE_NORMAL
+  zh: 自定义参数可以通过在键中包含`.`字符来分组到命名空间中。例如，如果以这种方式调用zipline：
 - en: '[PRE48]'
   id: totrans-1415
   prefs: []
@@ -9018,11 +9303,13 @@
   id: totrans-1416
   prefs: []
   type: TYPE_NORMAL
+  zh: 那么`zipline.extension_args.argle`将包含一个具有`bargle`属性的对象，该属性包含字符串`"foo"`。键可以包含多个点来创建嵌套的命名空间。（[2210](https://github.com/stefan-jansen/zipline/issues/2210)）
 - en: Support for Newer Numpy/Pandas Versions
   id: totrans-1417
   prefs:
   - PREF_H4
   type: TYPE_NORMAL
+  zh: 支持更新的Numpy/Pandas版本
 - en: Zipline has historically been very conservative when updating versions of numpy,
     pandas, and other “PyData” ecosystem packages. This conservatism is primarily
     due to the fact that Zipline is used as the backtesting engine for [Quantopian](https://www.quantopian.com/),
@@ -9033,26 +9320,31 @@
   id: totrans-1418
   prefs: []
   type: TYPE_NORMAL
+  zh: Zipline在更新numpy、pandas和其他“PyData”生态系统包的版本时历来非常保守。这种保守主要是因为Zipline被用作[Quantopian](https://www.quantopian.com/)的回测引擎，这意味着更新包版本可能会破坏大量已安装的代码库。当然，许多Zipline用户没有Quantopian那样的向后兼容性要求，他们希望能够使用最新和最棒的包版本。
 - en: 'As part of this release, we’re now building and testing Zipline with two package
     configurations:'
   id: totrans-1419
   prefs: []
   type: TYPE_NORMAL
+  zh: 作为此次发布的一部分，我们现在使用两种包配置构建和测试Zipline：
 - en: “Stable”, using numpy version 1.11 and pandas version 0.18.1.
   id: totrans-1420
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: “稳定”，使用numpy版本1.11和pandas版本0.18.1。
 - en: “Latest”, using numpy version 1.14 and pandas version 0.22.0.
   id: totrans-1421
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: “最新”，使用numpy版本1.14和pandas版本0.22.0。
 - en: Other combinations of numpy and pandas **may** work, but these package sets
     will be built and tested during our normal development cycle.
   id: totrans-1422
   prefs: []
   type: TYPE_NORMAL
+  zh: numpy和pandas的其他组合**可能**有效，但这些包组将在我们的正常开发周期中构建和测试。
 - en: Moving forward, our goal is to continue to maintain support for two sets of
     packages at any given time. The “stable” package set will change relatively infrequently,
     and will contain the versions of numpy and pandas supported on Quantopian. The
@@ -9061,17 +9353,20 @@
   id: totrans-1423
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们的目标是在任何给定时间继续维护两组包的支持。“稳定”包组相对变化不大，将包含Quantopian支持的numpy和pandas版本。“最新”包组将定期变化，将包含最近发布的numpy和pandas版本。
 - en: Our hope with these changes is to strike a balance between stability and novelty
     without taking on too great a maintenance burden by supporting every possible
     combination of packages. ([2194](https://github.com/stefan-jansen/zipline/issues/2194))
   id: totrans-1424
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们希望通过这些变化在稳定性和新颖性之间取得平衡，而不承担支持每种可能的包组合的过重维护负担。（[2194](https://github.com/stefan-jansen/zipline/issues/2194)）
 - en: Standalone `trading_calendars` Module
   id: totrans-1425
   prefs:
   - PREF_H4
   type: TYPE_NORMAL
+  zh: 独立的`trading_calendars`模块
 - en: One of the most popular features of Zipline is its collection of trading calendars,
     which provide information about holidays and trading hours of various markets.
     As part of this release, Zipline’s calendar-related functionality has been moved
