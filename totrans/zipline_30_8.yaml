@@ -12672,168 +12672,200 @@
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 当所需回报等于零时，索提诺比率将返回计算结果而不是np.nan。现在，该比率返回风险调整后的回报平均值除以下行风险。通过将mar转换为downside_risk来修复错误标记的API。([747](https://github.com/stefan-jansen/zipline/issues/747))
 - en: Downside risk now returns the square root of the mean of downside difference
     squares. ([747](https://github.com/stefan-jansen/zipline/issues/747))
   id: totrans-1951
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 下行风险现在返回下行差平方的平均值的平方根。([747](https://github.com/stefan-jansen/zipline/issues/747))
 - en: Information ratio updated to return mean of risk adjusted returns over standard
     deviation of risk adjusted returns. ([1322](https://github.com/stefan-jansen/zipline/issues/1322))
   id: totrans-1952
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 信息比率更新为返回风险调整后的回报平均值除以风险调整后的回报标准差。([1322](https://github.com/stefan-jansen/zipline/issues/1322))
 - en: Alpha and sharpe ratio are now annualized. ([1322](https://github.com/stefan-jansen/zipline/issues/1322))
   id: totrans-1953
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 阿尔法和夏普比率现在已年化。([1322](https://github.com/stefan-jansen/zipline/issues/1322))
 - en: Fix units during reading and writing of daily bar `first_trading_day` attribute.
     ([1245](https://github.com/stefan-jansen/zipline/issues/1245))
   id: totrans-1954
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 在读写每日栏的`first_trading_day`属性时修复单位。([1245](https://github.com/stefan-jansen/zipline/issues/1245))
 - en: Optional dispatch modules, when missing, no longer cause a NameError. ([1246](https://github.com/stefan-jansen/zipline/issues/1246))
   id: totrans-1955
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 当缺少可选分派模块时，不再导致NameError。([1246](https://github.com/stefan-jansen/zipline/issues/1246))
 - en: Treat `schedule_function` argument as a time rule when a time rule, but no date
     rule is supplied. ([1221](https://github.com/stefan-jansen/zipline/issues/1221))
   id: totrans-1956
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 当提供时间规则而没有日期规则时，将`schedule_function`参数视为时间规则。([1221](https://github.com/stefan-jansen/zipline/issues/1221))
 - en: Protect against boundary conditions at beginning and end trading day in schedule
     function. ([1226](https://github.com/stefan-jansen/zipline/issues/1226))
   id: totrans-1957
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 在schedule函数中保护交易日的开始和结束边界条件。([1226](https://github.com/stefan-jansen/zipline/issues/1226))
 - en: Apply adjustments to previous day when using history with a frequency of 1d.
     ([1256](https://github.com/stefan-jansen/zipline/issues/1256))
   id: totrans-1958
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 使用频率为1d的历史记录时，将调整应用于前一天。([1256](https://github.com/stefan-jansen/zipline/issues/1256))
 - en: Fail fast on invalid pipeline columns, instead of attempting to access the nonexistent
     column. ([1280](https://github.com/stefan-jansen/zipline/issues/1280))
   id: totrans-1959
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 在尝试访问不存在的列之前，快速失败无效的管道列。([1280](https://github.com/stefan-jansen/zipline/issues/1280))
 - en: Fix `AverageDollarVolume` NaN handling. ([1309](https://github.com/stefan-jansen/zipline/issues/1309))
   id: totrans-1960
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 修复`AverageDollarVolume`的NaN处理。([1309](https://github.com/stefan-jansen/zipline/issues/1309))
 - en: Performance
   id: totrans-1961
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 性能
 - en: Performance improvements to blaze core loader. ([1227](https://github.com/stefan-jansen/zipline/issues/1227))
   id: totrans-1962
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 对blaze核心加载器的性能改进。([1227](https://github.com/stefan-jansen/zipline/issues/1227))
 - en: Allow concurrent blaze queries. ([1323](https://github.com/stefan-jansen/zipline/issues/1323))
   id: totrans-1963
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 允许并发blaze查询。([1323](https://github.com/stefan-jansen/zipline/issues/1323))
 - en: Prevent missing leading bcolz minute data from doing repeated unnecessary lookups.
     ([1451](https://github.com/stefan-jansen/zipline/issues/1451))
   id: totrans-1964
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 防止缺少领先bcolz分钟数据进行重复的不必要查找。([1451](https://github.com/stefan-jansen/zipline/issues/1451))
 - en: Cache future chain lookups. ([1455](https://github.com/stefan-jansen/zipline/issues/1455))
   id: totrans-1965
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 缓存未来链查找。([1455](https://github.com/stefan-jansen/zipline/issues/1455))
 - en: Maintenance and Refactorings
   id: totrans-1966
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 维护和重构
 - en: Removed remaining mentions of `add_history`. ([1287](https://github.com/stefan-jansen/zipline/issues/1287))
   id: totrans-1967
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 删除了剩余的`add_history`提及。([1287](https://github.com/stefan-jansen/zipline/issues/1287))
 - en: Documentation
   id: totrans-1968
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 文档
 - en: Testing
   id: totrans-1969
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 测试
 - en: Add test fixture which sources daily pricing data from minute pricing data fixtures.
     ([1243](https://github.com/stefan-jansen/zipline/issues/1243))
   id: totrans-1970
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 添加测试夹具，该夹具从分钟定价数据夹具中获取每日定价数据。([1243](https://github.com/stefan-jansen/zipline/issues/1243))
 - en: Data Format Changes
   id: totrans-1971
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 数据格式更改
 - en: '`BcolzDailyBarReader` and `BcolzDailyBarWriter` use trading calendar instance,
     instead of trading days serialized to `JSON`. ([1330](https://github.com/stefan-jansen/zipline/issues/1330))'
   id: totrans-1972
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`BcolzDailyBarReader`和`BcolzDailyBarWriter`使用交易日历实例，而不是交易日期序列化为`JSON`。([1330](https://github.com/stefan-jansen/zipline/issues/1330))'
 - en: Change format of `assets.db` to support point in time lookups. ([1361](https://github.com/stefan-jansen/zipline/issues/1361))
   id: totrans-1973
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 将`assets.db`的格式更改为支持点对点查找。([1361](https://github.com/stefan-jansen/zipline/issues/1361))
 - en: Change `BcolzMinuteBarReader``and ``BcolzMinuteBarWriter` to support varying
     tick sizes. ([1428](https://github.com/stefan-jansen/zipline/issues/1428))
   id: totrans-1974
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 将`BcolzMinuteBarReader`和`BcolzMinuteBarWriter`更改为支持不同的刻度大小。([1428](https://github.com/stefan-jansen/zipline/issues/1428))
 - en: Release 1.0.1
   id: totrans-1975
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 发布1.0.1
 - en: 'Release:'
   id: totrans-1976
   prefs: []
   type: TYPE_NORMAL
+  zh: 发布：
 - en: 1.0.1
   id: totrans-1977
   prefs: []
   type: TYPE_NORMAL
+  zh: 1.0.1
 - en: 'Date:'
   id: totrans-1978
   prefs: []
   type: TYPE_NORMAL
+  zh: 日期：
 - en: May 27, 2016
   id: totrans-1979
   prefs: []
   type: TYPE_NORMAL
+  zh: 2016年5月27日
 - en: This is a minor bug-fix release from 1.0.0 and includes a small number of bug
     fixes and documentation improvements.
   id: totrans-1980
   prefs: []
   type: TYPE_NORMAL
+  zh: 这是从1.0.0版本开始的一个小错误修复版本，包括少量错误修复和文档改进。
 - en: Enhancements
   id: totrans-1981
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 增强功能
 - en: Added support for user-defined commission models. See the [`zipline.finance.commission.CommissionModel`](api-reference.html#zipline.finance.commission.CommissionModel
     "zipline.finance.commission.CommissionModel") class for more details on implementing
     a commision model. ([1213](https://github.com/stefan-jansen/zipline/issues/1213))
@@ -12841,11 +12873,14 @@
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 增加了对用户定义的佣金模型的支持。有关实现佣金模型的更多详细信息，请参阅[`zipline.finance.commission.CommissionModel`](api-reference.html#zipline.finance.commission.CommissionModel
+    "zipline.finance.commission.CommissionModel")类（[1213](https://github.com/stefan-jansen/zipline/issues/1213)）。
 - en: Added support for non-float columns to Blaze-backed Pipeline datasets ([1201](https://github.com/stefan-jansen/zipline/issues/1201)).
   id: totrans-1983
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 增加了对Blaze支持的Pipeline数据集中非浮点列的支持（[1201](https://github.com/stefan-jansen/zipline/issues/1201)）。
 - en: Added `zipline.pipeline.slice.Slice`, a new pipeline term designed to extract
     a single column from another term. Slices can be created by indexing into a term,
     keyed by asset. ([1267](https://github.com/stefan-jansen/zipline/issues/1267))
@@ -12853,11 +12888,13 @@
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 添加了`zipline.pipeline.slice.Slice`，这是一种新的管道术语，旨在从另一个术语中提取单个列。可以通过对术语进行索引并按资产键来创建切片（[1267](https://github.com/stefan-jansen/zipline/issues/1267)）。
 - en: Bug Fixes
   id: totrans-1985
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 错误修复
 - en: Fixed a bug where Pipeline loaders were not properly initialized by [`zipline.run_algorithm()`](api-reference.html#zipline.run_algorithm
     "zipline.run_algorithm"). This also affected invocations of `zipline run` from
     the CLI.
@@ -12865,11 +12902,14 @@
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 修复了一个错误，该错误导致Pipeline加载器未被[`zipline.run_algorithm()`](api-reference.html#zipline.run_algorithm
+    "zipline.run_algorithm")正确初始化。这也影响了从CLI调用`zipline run`。
 - en: Fixed a bug that caused the `%%zipline` IPython cell magic to fail ([533233fae43c7ff74abfb0044f046978817cb4e4](https://github.com/stefan-jansen/zipline/commit/533233fae43c7ff74abfb0044f046978817cb4e4)).
   id: totrans-1987
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 修复了一个导致`%%zipline` IPython单元格魔法失败的错误（[533233fae43c7ff74abfb0044f046978817cb4e4](https://github.com/stefan-jansen/zipline/commit/533233fae43c7ff74abfb0044f046978817cb4e4)）。
 - en: Fixed a bug in the [`PerTrade`](api-reference.html#zipline.finance.commission.PerTrade
     "zipline.finance.commission.PerTrade") commission model where commissions were
     incorrectly applied to each partial-fill of an order rather than on the order
@@ -12879,12 +12919,14 @@
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 修复了在[`PerTrade`](api-reference.html#zipline.finance.commission.PerTrade "zipline.finance.commission.PerTrade")佣金模型中的一个错误，该错误导致佣金被错误地应用于订单的每个部分填充，而不是订单本身，导致在下单大额订单时算法被收取过多的佣金。
 - en: '[`PerTrade`](api-reference.html#zipline.finance.commission.PerTrade "zipline.finance.commission.PerTrade")
     now correctly applies commissions on a per-order basis ([1213](https://github.com/stefan-jansen/zipline/issues/1213)).'
   id: totrans-1989
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: '[`PerTrade`](api-reference.html#zipline.finance.commission.PerTrade "zipline.finance.commission.PerTrade")现在正确地按订单基础应用佣金（[1213](https://github.com/stefan-jansen/zipline/issues/1213)）。'
 - en: Attribute accesses on [`CustomFactors`](api-reference.html#zipline.pipeline.CustomFactor
     "zipline.pipeline.CustomFactor") defining multiple outputs will now correctly
     return an output slice when the output is also the name of a `Factor` method ([1214](https://github.com/stefan-jansen/zipline/issues/1214)).
@@ -12892,33 +12934,39 @@
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 在定义多个输出的[`CustomFactors`](api-reference.html#zipline.pipeline.CustomFactor "zipline.pipeline.CustomFactor")上访问属性时，现在将正确返回输出切片，即使输出也是`Factor`方法的名称（[1214](https://github.com/stefan-jansen/zipline/issues/1214)）。
 - en: Replaced deprecated usage of `pandas.io.data` with `pandas_datareader` ([1218](https://github.com/stefan-jansen/zipline/issues/1218)).
   id: totrans-1991
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 用`pandas_datareader`替换了已弃用的`pandas.io.data`的使用（[1218](https://github.com/stefan-jansen/zipline/issues/1218)）。
 - en: Fixed an issue where `.pyi` stub files for `zipline.api` were accidentally excluded
     from the PyPI source distribution. Conda users should be unaffected ([1230](https://github.com/stefan-jansen/zipline/issues/1230)).
   id: totrans-1992
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 修复了一个问题，即`zipline.api`的`.pyi`存根文件意外地从PyPI源代码分发中排除。Conda用户应该不受影响（[1230](https://github.com/stefan-jansen/zipline/issues/1230)）。
 - en: Documentation
   id: totrans-1993
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 文档
 - en: Added a new example, `zipline.examples.momentum_pipeline`, which exercises the
     Pipeline API ([1230](https://github.com/stefan-jansen/zipline/issues/1230)).
   id: totrans-1994
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 新增了一个示例，`zipline.examples.momentum_pipeline`，该示例展示了Pipeline API的使用（[1230](https://github.com/stefan-jansen/zipline/issues/1230)）。
 - en: Enhancements
   id: totrans-1995
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 增强功能
 - en: Added support for user-defined commission models. See the [`zipline.finance.commission.CommissionModel`](api-reference.html#zipline.finance.commission.CommissionModel
     "zipline.finance.commission.CommissionModel") class for more details on implementing
     a commision model. ([1213](https://github.com/stefan-jansen/zipline/issues/1213))
@@ -12926,11 +12974,14 @@
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 添加了对用户定义的佣金模型的支持。有关实现佣金模型的更多详细信息，请参阅[`zipline.finance.commission.CommissionModel`](api-reference.html#zipline.finance.commission.CommissionModel
+    "zipline.finance.commission.CommissionModel")类（[1213](https://github.com/stefan-jansen/zipline/issues/1213)）。
 - en: Added support for non-float columns to Blaze-backed Pipeline datasets ([1201](https://github.com/stefan-jansen/zipline/issues/1201)).
   id: totrans-1997
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 为Blaze支持的Pipeline数据集添加了对非浮点列的支持（[1201](https://github.com/stefan-jansen/zipline/issues/1201)）。
 - en: Added `zipline.pipeline.slice.Slice`, a new pipeline term designed to extract
     a single column from another term. Slices can be created by indexing into a term,
     keyed by asset. ([1267](https://github.com/stefan-jansen/zipline/issues/1267))
@@ -12938,11 +12989,13 @@
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 添加了`zipline.pipeline.slice.Slice`，这是一种新的Pipeline术语，旨在从另一个术语中提取单个列。可以通过对术语进行索引并按资产键来创建切片（[1267](https://github.com/stefan-jansen/zipline/issues/1267)）。
 - en: Bug Fixes
   id: totrans-1999
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 错误修复
 - en: Fixed a bug where Pipeline loaders were not properly initialized by [`zipline.run_algorithm()`](api-reference.html#zipline.run_algorithm
     "zipline.run_algorithm"). This also affected invocations of `zipline run` from
     the CLI.
@@ -12950,11 +13003,14 @@
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 修复了一个错误，该错误导致Pipeline加载器未被[`zipline.run_algorithm()`](api-reference.html#zipline.run_algorithm
+    "zipline.run_algorithm")正确初始化。这也影响了从CLI调用`zipline run`。
 - en: Fixed a bug that caused the `%%zipline` IPython cell magic to fail ([533233fae43c7ff74abfb0044f046978817cb4e4](https://github.com/stefan-jansen/zipline/commit/533233fae43c7ff74abfb0044f046978817cb4e4)).
   id: totrans-2001
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 修复了一个导致`%%zipline` IPython单元格魔法失败的错误（[533233fae43c7ff74abfb0044f046978817cb4e4](https://github.com/stefan-jansen/zipline/commit/533233fae43c7ff74abfb0044f046978817cb4e4)）。
 - en: Fixed a bug in the [`PerTrade`](api-reference.html#zipline.finance.commission.PerTrade
     "zipline.finance.commission.PerTrade") commission model where commissions were
     incorrectly applied to each partial-fill of an order rather than on the order
@@ -12964,12 +13020,14 @@
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 修复了在[`PerTrade`](api-reference.html#zipline.finance.commission.PerTrade "zipline.finance.commission.PerTrade")佣金模型中的一个错误，该错误导致佣金被错误地应用于订单的每个部分填充，而不是订单本身，导致在下单大额订单时算法被收取过多的佣金。
 - en: '[`PerTrade`](api-reference.html#zipline.finance.commission.PerTrade "zipline.finance.commission.PerTrade")
     now correctly applies commissions on a per-order basis ([1213](https://github.com/stefan-jansen/zipline/issues/1213)).'
   id: totrans-2003
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: '[`PerTrade`](api-reference.html#zipline.finance.commission.PerTrade "zipline.finance.commission.PerTrade")现在正确地按订单收取佣金（[1213](https://github.com/stefan-jansen/zipline/issues/1213)）。'
 - en: Attribute accesses on [`CustomFactors`](api-reference.html#zipline.pipeline.CustomFactor
     "zipline.pipeline.CustomFactor") defining multiple outputs will now correctly
     return an output slice when the output is also the name of a `Factor` method ([1214](https://github.com/stefan-jansen/zipline/issues/1214)).
@@ -12977,64 +13035,77 @@
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 在定义多个输出的[`CustomFactors`](api-reference.html#zipline.pipeline.CustomFactor "zipline.pipeline.CustomFactor")上的属性访问现在将正确返回输出切片，即使输出也是`Factor`方法的名称（[1214](https://github.com/stefan-jansen/zipline/issues/1214)）。
 - en: Replaced deprecated usage of `pandas.io.data` with `pandas_datareader` ([1218](https://github.com/stefan-jansen/zipline/issues/1218)).
   id: totrans-2005
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 将已弃用的`pandas.io.data`替换为`pandas_datareader`（[1218](https://github.com/stefan-jansen/zipline/issues/1218)）。
 - en: Fixed an issue where `.pyi` stub files for `zipline.api` were accidentally excluded
     from the PyPI source distribution. Conda users should be unaffected ([1230](https://github.com/stefan-jansen/zipline/issues/1230)).
   id: totrans-2006
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 修复了一个问题，即`.pyi`存根文件对于`zipline.api`被意外地从PyPI源分发中排除。使用Conda的用户应该不受影响（[1230](https://github.com/stefan-jansen/zipline/issues/1230)）。
 - en: Documentation
   id: totrans-2007
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 文档
 - en: Added a new example, `zipline.examples.momentum_pipeline`, which exercises the
     Pipeline API ([1230](https://github.com/stefan-jansen/zipline/issues/1230)).
   id: totrans-2008
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 添加了一个新示例，`zipline.examples.momentum_pipeline`，该示例使用了Pipeline API（[1230](https://github.com/stefan-jansen/zipline/issues/1230)）。
 - en: Release 1.0.0
   id: totrans-2009
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 发布 1.0.0
 - en: 'Release:'
   id: totrans-2010
   prefs: []
   type: TYPE_NORMAL
+  zh: 发布：
 - en: 1.0.0
   id: totrans-2011
   prefs: []
   type: TYPE_NORMAL
+  zh: 1.0.0
 - en: 'Date:'
   id: totrans-2012
   prefs: []
   type: TYPE_NORMAL
+  zh: 日期：
 - en: May 19, 2016
   id: totrans-2013
   prefs: []
   type: TYPE_NORMAL
+  zh: 2016年5月19日
 - en: Highlights
   id: totrans-2014
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 亮点
 - en: Zipline 1.0 Rewrite ([1105](https://github.com/stefan-jansen/zipline/issues/1105))
   id: totrans-2015
   prefs:
   - PREF_H4
   type: TYPE_NORMAL
+  zh: Zipline 1.0重写（[1105](https://github.com/stefan-jansen/zipline/issues/1105)）
 - en: We have rewritten a lot of Zipline and its basic concepts in order to improve
     runtime performance. At the same time, we’ve introduced several new APIs.
   id: totrans-2016
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们对Zipline及其基本概念进行了大量重写，以提高运行时性能。同时，我们引入了几个新的API。
 - en: At a high level, earlier versions of Zipline simulations pulled from a multiplexed
     stream of data sources, which were merged via heapq. This stream was fed to the
     main simulation loop, driving the clock forward. This strong dependency on reading
@@ -13044,6 +13115,7 @@
   id: totrans-2017
   prefs: []
   type: TYPE_NORMAL
+  zh: 在较高层次上，Zipline早期版本的模拟从多个数据源的复用流中提取数据，这些数据源通过heapq合并。这个数据流被输入到主模拟循环中，推动时钟前进。由于对读取所有数据的强烈依赖，优化模拟性能变得困难，因为我们获取的数据量与算法实际使用的数据量之间没有联系。
 - en: Now, we only fetch data when the algorithm needs it. A new class, [`DataPortal`](api-reference.html#zipline.data.data_portal.DataPortal
     "zipline.data.data_portal.DataPortal"), dispatches data requests to various data
     sources and returns the requested values. This makes the runtime of a simulation
@@ -13052,6 +13124,8 @@
   id: totrans-2018
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在，我们只在算法需要数据时才获取数据。一个新类，[`DataPortal`](api-reference.html#zipline.data.data_portal.DataPortal
+    "zipline.data.data_portal.DataPortal")，将数据请求分派到各种数据源，并返回请求的值。这使得模拟的运行时间更紧密地与算法的复杂性而不是数据源提供的资产数量成比例。
 - en: Instead of the data stream driving the clock, now simulations iterate through
     a pre-calculated set of day or minute timestamps. The timestamps are emitted by
     `MinuteSimulationClock` and `DailySimulationClock`, and consumed by the main loop
@@ -13059,6 +13133,7 @@
   id: totrans-2019
   prefs: []
   type: TYPE_NORMAL
+  zh: 不再是数据流驱动时钟，现在模拟通过预先计算的一组日或分钟时间戳进行迭代。时间戳由`MinuteSimulationClock`和`DailySimulationClock`发出，并由`transform()`中的主循环消费。
 - en: 'We’ve retired the `data[sid(N)]` and `history` APIs, replacing them with several
     methods on the [`BarData`](api-reference.html#zipline.protocol.BarData "zipline.protocol.BarData")
     object: [`current()`](api-reference.html#zipline.protocol.BarData.current "zipline.protocol.BarData.current"),
@@ -13069,6 +13144,12 @@
   id: totrans-2020
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们已弃用`data[sid(N)]`和`history` API，用[`BarData`](api-reference.html#zipline.protocol.BarData
+    "zipline.protocol.BarData")对象上的几个方法替换它们：[`current()`](api-reference.html#zipline.protocol.BarData.current
+    "zipline.protocol.BarData.current")，[`history()`](api-reference.html#zipline.protocol.BarData.history
+    "zipline.protocol.BarData.history")，[`can_trade()`](api-reference.html#zipline.protocol.BarData.can_trade
+    "zipline.protocol.BarData.can_trade")，和[`is_stale()`](api-reference.html#zipline.protocol.BarData.is_stale
+    "zipline.protocol.BarData.is_stale")。旧的API将继续工作，但现在会发出弃用警告。
 - en: You can now pass in an adjustments source to the [`DataPortal`](api-reference.html#zipline.data.data_portal.DataPortal
     "zipline.data.data_portal.DataPortal"), and we will apply adjustments to the pricing
     data when looking backwards at data. Prices and volumes for execution and presented
@@ -13076,38 +13157,46 @@
   id: totrans-2021
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在可以将调整源传递给[`DataPortal`](api-reference.html#zipline.data.data_portal.DataPortal
+    "zipline.data.data_portal.DataPortal")，当我们回顾数据时，我们将对定价数据应用调整。执行和呈现给算法的数据的当前价格和成交量是资产的实际交易价值。
 - en: New Entry Points ([1173](https://github.com/stefan-jansen/zipline/issues/1173)
     and [1178](https://github.com/stefan-jansen/zipline/issues/1178))
   id: totrans-2022
   prefs:
   - PREF_H4
   type: TYPE_NORMAL
+  zh: 新入口点（[1173](https://github.com/stefan-jansen/zipline/issues/1173) 和 [1178](https://github.com/stefan-jansen/zipline/issues/1178)）
 - en: 'In order to make it easier to use zipline we have updated the entry points
     for a backtest. The three supported ways to run a backtest are now:'
   id: totrans-2023
   prefs: []
   type: TYPE_NORMAL
+  zh: 为了更容易使用Zipline，我们更新了回测的入口点。现在支持运行回测的三种方式是：
 - en: '`zipline.run_algo()`'
   id: totrans-2024
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: '`zipline.run_algo()`'
 - en: '`$ zipline run`'
   id: totrans-2025
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: '`$ zipline run`'
 - en: '`%zipline` (IPython magic)'
   id: totrans-2026
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: '`%zipline`（IPython魔法命令）'
 - en: Data Bundles ([1173](https://github.com/stefan-jansen/zipline/issues/1173) and
     [1178](https://github.com/stefan-jansen/zipline/issues/1178))
   id: totrans-2027
   prefs:
   - PREF_H4
   type: TYPE_NORMAL
+  zh: 数据包（[1173](https://github.com/stefan-jansen/zipline/issues/1173) 和 [1178](https://github.com/stefan-jansen/zipline/issues/1178)）
 - en: 1.0.0 introduces data bundles. Data bundles are groups of data that should be
     preloaded and used to run backtests later. This allows users to not need to specify
     which tickers they are interested in each time they run an algorithm. This also
@@ -13115,6 +13204,7 @@
   id: totrans-2028
   prefs: []
   type: TYPE_NORMAL
+  zh: 1.0.0引入了数据包。数据包是一组应该预先加载并在以后用于运行回测的数据。这允许用户不需要每次运行算法时都指定他们感兴趣的标记。这也允许我们在运行之间缓存数据。
 - en: 'By default, the `quantopian-quandl` bundle will be used which pulls data from
     Quantopian’s mirror of the quandl [WIKI dataset](https://www.quandl.com/data/WIKI).
     New bundles may be registered with [`zipline.data.bundles.register()`](api-reference.html#zipline.data.bundles.register
@@ -13122,6 +13212,9 @@
   id: totrans-2029
   prefs: []
   type: TYPE_NORMAL
+  zh: 默认情况下，将使用 `quantopian-quandl` 包，该包从 Quantopian 的 quandl [WIKI 数据集](https://www.quandl.com/data/WIKI)镜像中提取数据。可以通过
+    [`zipline.data.bundles.register()`](api-reference.html#zipline.data.bundles.register
+    "zipline.data.bundles.register") 注册新包，例如：
 - en: '[PRE53]'
   id: totrans-2030
   prefs: []
@@ -13133,21 +13226,26 @@
   id: totrans-2031
   prefs: []
   type: TYPE_NORMAL
+  zh: 该函数应检索所需数据，然后使用已传递的写入器将该数据写入磁盘上的位置，以便 zipline 稍后可以找到。
 - en: This data can be used in backtests by passing the name as the `-b / --bundle`
     argument to `$ zipline run` or as the `bundle` argument to [`zipline.run_algorithm()`](api-reference.html#zipline.run_algorithm
     "zipline.run_algorithm").
   id: totrans-2032
   prefs: []
   type: TYPE_NORMAL
+  zh: 通过将名称作为 `-b / --bundle` 参数传递给 `$ zipline run` 或作为 [`zipline.run_algorithm()`](api-reference.html#zipline.run_algorithm
+    "zipline.run_algorithm") 的 `bundle` 参数，可以在回测中使用此数据。
 - en: For more information see [Data](bundles.html#data-bundles) for more information.
   id: totrans-2033
   prefs: []
   type: TYPE_NORMAL
+  zh: 有关更多信息，请参阅 [Data](bundles.html#data-bundles) 了解更多信息。
 - en: String Support in Pipeline ([1174](https://github.com/stefan-jansen/zipline/issues/1174))
   id: totrans-2034
   prefs:
   - PREF_H4
   type: TYPE_NORMAL
+  zh: 流水线中的字符串支持 ([1174](https://github.com/stefan-jansen/zipline/issues/1174))
 - en: Added support for string data in Pipeline. [`zipline.pipeline.data.Column`](api-reference.html#zipline.pipeline.data.Column
     "zipline.pipeline.data.Column") now accepts `object` as a dtype, which signifies
     that loaders for that column should emit windowed iterators over the experimental
@@ -13155,18 +13253,24 @@
   id: totrans-2035
   prefs: []
   type: TYPE_NORMAL
+  zh: 增加了对流水线中字符串数据的支持。[`zipline.pipeline.data.Column`](api-reference.html#zipline.pipeline.data.Column
+    "zipline.pipeline.data.Column") 现在接受 `object` 作为数据类型，表示该列的加载器应发出实验性新 `LabelArray`
+    类的窗口迭代器。
 - en: 'Several new `Classifier` methods have also been added for constructing [`Filter`](api-reference.html#zipline.pipeline.Filter
     "zipline.pipeline.Filter") instances based on string operations. The new methods
     are:'
   id: totrans-2036
   prefs: []
   type: TYPE_NORMAL
+  zh: 还添加了几个新的 `Classifier` 方法，用于构建基于字符串操作的 [`Filter`](api-reference.html#zipline.pipeline.Filter
+    "zipline.pipeline.Filter") 实例。新方法包括：
 - en: '`element_of()`'
   id: totrans-2037
   prefs:
   - PREF_BQ
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`element_of()`'
 - en: ''
   id: totrans-2038
   prefs:
@@ -13185,6 +13289,7 @@
   - PREF_BQ
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`startswith()`'
 - en: ''
   id: totrans-2041
   prefs:
@@ -13203,6 +13308,7 @@
   - PREF_BQ
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`endswith()`'
 - en: ''
   id: totrans-2044
   prefs:
@@ -13221,6 +13327,7 @@
   - PREF_BQ
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`has_substring()`'
 - en: ''
   id: totrans-2047
   prefs:
@@ -13239,6 +13346,7 @@
   - PREF_BQ
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`matches()`'
 - en: ''
   id: totrans-2050
   prefs:
@@ -13262,11 +13370,13 @@
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: '`element_of` 对所有分类器都进行了定义。其余方法仅对字符串数据类型的分类器进行了定义。'
 - en: Enhancements
   id: totrans-2054
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 增强功能
 - en: Made the data loading classes have more consistent interfaces. This includes
     the equity bar writers, adjustment writer, and asset db writer. The new interface
     is that the resource to be written to is passed at construction time and the data
@@ -13278,6 +13388,8 @@
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 使数据加载类具有更一致的接口。这包括股票条形写入器、调整写入器和资产数据库写入器。新接口是在构造时传递要写入的资源，稍后将数据提供给写入方法，作为数据帧或一些数据帧的迭代器。这种模型允许我们将这些写入器对象作为其他类和函数消耗的资源传递
+    ([1109](https://github.com/stefan-jansen/zipline/issues/1109) 和 [1149](https://github.com/stefan-jansen/zipline/issues/1149))。
 - en: Added masking to [`zipline.pipeline.CustomFactor`](api-reference.html#zipline.pipeline.CustomFactor
     "zipline.pipeline.CustomFactor"). Custom factors can now be passed a Filter upon
     instantiation. This tells the factor to only compute over stocks for which the
@@ -13287,6 +13399,9 @@
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 为 [`zipline.pipeline.CustomFactor`](api-reference.html#zipline.pipeline.CustomFactor
+    "zipline.pipeline.CustomFactor") 添加了掩码。自定义因子现在可以在实例化时传递一个过滤器。这告诉因子仅在过滤器返回 True
+    的股票上计算，而不是始终在整个股票宇宙上计算。([1095](https://github.com/stefan-jansen/zipline/issues/1095))
 - en: Added [`zipline.utils.cache.ExpiringCache`](api-reference.html#zipline.utils.cache.ExpiringCache
     "zipline.utils.cache.ExpiringCache"). A cache which wraps entries in a [`zipline.utils.cache.CachedObject`](api-reference.html#zipline.utils.cache.CachedObject
     "zipline.utils.cache.CachedObject"), which manages expiration of entries based
@@ -13295,12 +13410,16 @@
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 增加了[`zipline.utils.cache.ExpiringCache`](api-reference.html#zipline.utils.cache.ExpiringCache
+    "zipline.utils.cache.ExpiringCache")。这是一个缓存，它将条目包装在[`zipline.utils.cache.CachedObject`](api-reference.html#zipline.utils.cache.CachedObject
+    "zipline.utils.cache.CachedObject")中，该缓存根据get方法提供的dt管理条目的过期。（[1130](https://github.com/stefan-jansen/zipline/issues/1130)）
 - en: Implemented `zipline.pipeline.factors.RecarrayField`, a new pipeline term designed
     to be the output type of a CustomFactor with multiple outputs. ([1119](https://github.com/stefan-jansen/zipline/issues/1119))
   id: totrans-2058
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 实现了`zipline.pipeline.factors.RecarrayField`，这是一种新的管道术语，设计用于自定义因子具有多个输出时的输出类型。（[1119](https://github.com/stefan-jansen/zipline/issues/1119)）
 - en: Added optional outputs parameter to [`zipline.pipeline.CustomFactor`](api-reference.html#zipline.pipeline.CustomFactor
     "zipline.pipeline.CustomFactor"). Custom factors are now capable of computing
     and returning multiple outputs, each of which are themselves a Factor. ([1119](https://github.com/stefan-jansen/zipline/issues/1119))
@@ -13308,6 +13427,8 @@
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 在[`zipline.pipeline.CustomFactor`](api-reference.html#zipline.pipeline.CustomFactor
+    "zipline.pipeline.CustomFactor")中增加了可选的outputs参数。现在，自定义因子能够计算并返回多个输出，每个输出本身都是一个因子。（[1119](https://github.com/stefan-jansen/zipline/issues/1119)）
 - en: Added support for string-dtype pipeline columns. Loaders for thse columns should
     produce instances of `zipline.lib.labelarray.LabelArray` when traversed. [`latest()`](api-reference.html#zipline.pipeline.data.BoundColumn.latest
     "zipline.pipeline.data.BoundColumn.latest") on string columns produces a string-dtype
@@ -13316,23 +13437,29 @@
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 增加了对字符串类型数据管道列的支持。这些列的加载器在遍历时应生成`zipline.lib.labelarray.LabelArray`实例。在字符串列上调用[`latest()`](api-reference.html#zipline.pipeline.data.BoundColumn.latest
+    "zipline.pipeline.data.BoundColumn.latest")将产生一个字符串类型的`zipline.pipeline.Classifier`。（[1174](https://github.com/stefan-jansen/zipline/issues/1174)）
 - en: Added several methods for converting Classifiers into Filters.
   id: totrans-2061
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 增加了将分类器转换为过滤器的多种方法。
 - en: 'The new methods are: - `element_of()` - `startswith()` - `endswith()` - `has_substring()`
     - `matches()`'
   id: totrans-2062
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 新增方法包括：- `element_of()` - `startswith()` - `endswith()` - `has_substring()`
+    - `matches()`
 - en: '`element_of` is defined for all classifiers. The remaining methods are only
     defined for strings. ([1174](https://github.com/stefan-jansen/zipline/issues/1174))'
   id: totrans-2063
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: '`element_of` 定义了所有分类器。其余方法仅对字符串定义。（[1174](https://github.com/stefan-jansen/zipline/issues/1174)）'
 - en: 'Added [`BollingerBands`](api-reference.html#zipline.pipeline.factors.BollingerBands
     "zipline.pipeline.factors.BollingerBands") factor. This factor implements the
     Bollinger Bands technical indicator: [https://en.wikipedia.org/wiki/Bollinger_Bands](https://en.wikipedia.org/wiki/Bollinger_Bands)
@@ -13341,11 +13468,14 @@
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 增加了[`BollingerBands`](api-reference.html#zipline.pipeline.factors.BollingerBands
+    "zipline.pipeline.factors.BollingerBands")因子。该因子实现了布林带技术指标：[https://en.wikipedia.org/wiki/Bollinger_Bands](https://en.wikipedia.org/wiki/Bollinger_Bands)（[1199](https://github.com/stefan-jansen/zipline/issues/1199)）。
 - en: Fetcher has been moved from Quantopian internal code into Zipline ([1105](https://github.com/stefan-jansen/zipline/issues/1105)).
   id: totrans-2065
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 将Fetcher从Quantopian内部代码迁移到Zipline中（[1105](https://github.com/stefan-jansen/zipline/issues/1105)）。
 - en: Added new built-in factors, [`RollingPearsonOfReturns`](api-reference.html#zipline.pipeline.factors.RollingPearsonOfReturns
     "zipline.pipeline.factors.RollingPearsonOfReturns"), [`RollingSpearmanOfReturns`](api-reference.html#zipline.pipeline.factors.RollingSpearmanOfReturns
     "zipline.pipeline.factors.RollingSpearmanOfReturns") and [`RollingLinearRegressionOfReturns`](api-reference.html#zipline.pipeline.factors.RollingLinearRegressionOfReturns
@@ -13354,19 +13484,26 @@
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 增加了新的内置因子，[`RollingPearsonOfReturns`](api-reference.html#zipline.pipeline.factors.RollingPearsonOfReturns
+    "zipline.pipeline.factors.RollingPearsonOfReturns")，[`RollingSpearmanOfReturns`](api-reference.html#zipline.pipeline.factors.RollingSpearmanOfReturns
+    "zipline.pipeline.factors.RollingSpearmanOfReturns")和[`RollingLinearRegressionOfReturns`](api-reference.html#zipline.pipeline.factors.RollingLinearRegressionOfReturns
+    "zipline.pipeline.factors.RollingLinearRegressionOfReturns"）（[1154](https://github.com/stefan-jansen/zipline/issues/1154)）
 - en: Experimental Features
   id: totrans-2067
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 实验性功能
 - en: Warning
   id: totrans-2068
   prefs: []
   type: TYPE_NORMAL
+  zh: 警告
 - en: Experimental features are subject to change.
   id: totrans-2069
   prefs: []
   type: TYPE_NORMAL
+  zh: 实验性功能可能会发生变化。
 - en: Added a new `zipline.lib.labelarray.LabelArray` class for efficiently representing
     and computing on string data with numpy. This class is conceptually similar to
     [`pandas.Categorical`](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.Categorical.html#pandas.Categorical
@@ -13376,62 +13513,76 @@
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 新增了`zipline.lib.labelarray.LabelArray`类，用于高效地表示和计算numpy中的字符串数据。该类在概念上类似于[`pandas.Categorical`](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.Categorical.html#pandas.Categorical
+    "(in pandas v2.0.3)")，它将字符串数组表示为索引数组，这些索引指向一个（较小的）唯一字符串值数组。([1174](https://github.com/stefan-jansen/zipline/issues/1174))
 - en: Bug Fixes
   id: totrans-2071
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 错误修复
 - en: None
   id: totrans-2072
   prefs: []
   type: TYPE_NORMAL
+  zh: 无
 - en: Performance
   id: totrans-2073
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 性能
 - en: None
   id: totrans-2074
   prefs: []
   type: TYPE_NORMAL
+  zh: 无
 - en: Maintenance and Refactorings
   id: totrans-2075
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 维护和重构
 - en: None
   id: totrans-2076
   prefs: []
   type: TYPE_NORMAL
+  zh: 无
 - en: Build
   id: totrans-2077
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 构建
 - en: None
   id: totrans-2078
   prefs: []
   type: TYPE_NORMAL
+  zh: 无
 - en: Documentation
   id: totrans-2079
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 文档
 - en: Updated documentation for the API methods ([1188](https://github.com/stefan-jansen/zipline/issues/1188)).
   id: totrans-2080
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 更新了API方法的文档 ([1188](https://github.com/stefan-jansen/zipline/issues/1188))。
 - en: Updated release process to mention that docs should be built with python 3 ([1188](https://github.com/stefan-jansen/zipline/issues/1188)).
   id: totrans-2081
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 更新了发布流程，提到文档应该使用python 3构建 ([1188](https://github.com/stefan-jansen/zipline/issues/1188))。
 - en: Miscellaneous
   id: totrans-2082
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 杂项
 - en: Zipline now provides a [stub file](https://www.python.org/dev/peps/pep-0484/#stub-files)
     for the `zipline.api` module. This module is normally dynamically created so the
     stub file provides some static information for utilities that can consume it,
@@ -13440,21 +13591,26 @@
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: Zipline现在为`zipline.api`模块提供了一个[存根文件](https://www.python.org/dev/peps/pep-0484/#stub-files)。该模块通常是动态创建的，因此存根文件为可以消费它的实用程序提供了一些静态信息，例如PyCharm
+    ([1208](https://github.com/stefan-jansen/zipline/issues/1208))。
 - en: Highlights
   id: totrans-2084
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 亮点
 - en: Zipline 1.0 Rewrite ([1105](https://github.com/stefan-jansen/zipline/issues/1105))
   id: totrans-2085
   prefs:
   - PREF_H4
   type: TYPE_NORMAL
+  zh: Zipline 1.0重写 ([1105](https://github.com/stefan-jansen/zipline/issues/1105))
 - en: We have rewritten a lot of Zipline and its basic concepts in order to improve
     runtime performance. At the same time, we’ve introduced several new APIs.
   id: totrans-2086
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们对Zipline及其基本概念进行了大量重写，以提高运行时性能。同时，我们还引入了几个新的API。
 - en: At a high level, earlier versions of Zipline simulations pulled from a multiplexed
     stream of data sources, which were merged via heapq. This stream was fed to the
     main simulation loop, driving the clock forward. This strong dependency on reading
@@ -13464,6 +13620,7 @@
   id: totrans-2087
   prefs: []
   type: TYPE_NORMAL
+  zh: 从高层次来看，早期版本的Zipline模拟从多路复用的数据源流中提取数据，这些数据源通过heapq合并。这个流被送入主模拟循环，推动时钟前进。这种对读取所有数据的强烈依赖使得优化模拟性能变得困难，因为我们在获取的数据量和算法实际使用的数据量之间没有联系。
 - en: Now, we only fetch data when the algorithm needs it. A new class, [`DataPortal`](api-reference.html#zipline.data.data_portal.DataPortal
     "zipline.data.data_portal.DataPortal"), dispatches data requests to various data
     sources and returns the requested values. This makes the runtime of a simulation
@@ -13472,6 +13629,8 @@
   id: totrans-2088
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在，我们只在算法需要时才获取数据。一个新类，[`DataPortal`](api-reference.html#zipline.data.data_portal.DataPortal
+    "zipline.data.data_portal.DataPortal")，将数据请求分派到各种数据源，并返回请求的值。这使得模拟的运行时间更紧密地与算法的复杂性而不是数据源提供的资产数量成比例。
 - en: Instead of the data stream driving the clock, now simulations iterate through
     a pre-calculated set of day or minute timestamps. The timestamps are emitted by
     `MinuteSimulationClock` and `DailySimulationClock`, and consumed by the main loop
@@ -13479,6 +13638,7 @@
   id: totrans-2089
   prefs: []
   type: TYPE_NORMAL
+  zh: 不再是数据流驱动时钟，现在模拟迭代通过一个预先计算的日或分钟时间戳集合。时间戳由`MinuteSimulationClock`和`DailySimulationClock`发出，并由`transform()`中的主循环消费。
 - en: 'We’ve retired the `data[sid(N)]` and `history` APIs, replacing them with several
     methods on the [`BarData`](api-reference.html#zipline.protocol.BarData "zipline.protocol.BarData")
     object: [`current()`](api-reference.html#zipline.protocol.BarData.current "zipline.protocol.BarData.current"),
@@ -13489,6 +13649,12 @@
   id: totrans-2090
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们已弃用`data[sid(N)]`和`history` API，用`[BarData](api-reference.html#zipline.protocol.BarData
+    "zipline.protocol.BarData")`对象上的几个方法取而代之：`[current()](api-reference.html#zipline.protocol.BarData.current
+    "zipline.protocol.BarData.current")`，`[history()](api-reference.html#zipline.protocol.BarData.history
+    "zipline.protocol.BarData.history")`，`[can_trade()](api-reference.html#zipline.protocol.BarData.can_trade
+    "zipline.protocol.BarData.can_trade")`，和`[is_stale()](api-reference.html#zipline.protocol.BarData.is_stale
+    "zipline.protocol.BarData.is_stale")`。旧的API目前仍可使用，但会发出弃用警告。
 - en: You can now pass in an adjustments source to the [`DataPortal`](api-reference.html#zipline.data.data_portal.DataPortal
     "zipline.data.data_portal.DataPortal"), and we will apply adjustments to the pricing
     data when looking backwards at data. Prices and volumes for execution and presented
@@ -13496,38 +13662,46 @@
   id: totrans-2091
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在可以将调整源传递给`[DataPortal](api-reference.html#zipline.data.data_portal.DataPortal
+    "zipline.data.data_portal.DataPortal")`，当我们回顾数据时，我们将对定价数据应用调整。算法在data.current中接收到的执行价格和交易量是资产的实际交易价值。
 - en: New Entry Points ([1173](https://github.com/stefan-jansen/zipline/issues/1173)
     and [1178](https://github.com/stefan-jansen/zipline/issues/1178))
   id: totrans-2092
   prefs:
   - PREF_H4
   type: TYPE_NORMAL
+  zh: 新入口点（[1173](https://github.com/stefan-jansen/zipline/issues/1173)和[1178](https://github.com/stefan-jansen/zipline/issues/1178)）
 - en: 'In order to make it easier to use zipline we have updated the entry points
     for a backtest. The three supported ways to run a backtest are now:'
   id: totrans-2093
   prefs: []
   type: TYPE_NORMAL
+  zh: 为了使使用zipline更加容易，我们更新了回测的入口点。现在支持的三种运行回测的方式是：
 - en: '`zipline.run_algo()`'
   id: totrans-2094
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: '`zipline.run_algo()`'
 - en: '`$ zipline run`'
   id: totrans-2095
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: '`$ zipline run`'
 - en: '`%zipline` (IPython magic)'
   id: totrans-2096
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: '`%zipline`（IPython magic）'
 - en: Data Bundles ([1173](https://github.com/stefan-jansen/zipline/issues/1173) and
     [1178](https://github.com/stefan-jansen/zipline/issues/1178))
   id: totrans-2097
   prefs:
   - PREF_H4
   type: TYPE_NORMAL
+  zh: 数据包（[1173](https://github.com/stefan-jansen/zipline/issues/1173)和[1178](https://github.com/stefan-jansen/zipline/issues/1178)）
 - en: 1.0.0 introduces data bundles. Data bundles are groups of data that should be
     preloaded and used to run backtests later. This allows users to not need to specify
     which tickers they are interested in each time they run an algorithm. This also
@@ -13535,6 +13709,7 @@
   id: totrans-2098
   prefs: []
   type: TYPE_NORMAL
+  zh: 1.0.0引入了数据包。数据包是应预加载并用于运行回测的一组数据。这允许用户无需每次运行算法时都指定他们感兴趣的符号。这也允许我们在运行之间缓存数据。
 - en: 'By default, the `quantopian-quandl` bundle will be used which pulls data from
     Quantopian’s mirror of the quandl [WIKI dataset](https://www.quandl.com/data/WIKI).
     New bundles may be registered with [`zipline.data.bundles.register()`](api-reference.html#zipline.data.bundles.register
@@ -13542,6 +13717,8 @@
   id: totrans-2099
   prefs: []
   type: TYPE_NORMAL
+  zh: 默认情况下，将使用`quantopian-quandl`包，该包从Quantopian的quandl [WIKI数据集](https://www.quandl.com/data/WIKI)镜像中提取数据。可以使用`[zipline.data.bundles.register()](api-reference.html#zipline.data.bundles.register
+    "zipline.data.bundles.register")`注册新包，例如：
 - en: '[PRE54]'
   id: totrans-2100
   prefs: []
@@ -13553,21 +13730,26 @@
   id: totrans-2101
   prefs: []
   type: TYPE_NORMAL
+  zh: 此函数应检索所需数据，然后使用已传递的写入器将该数据写入磁盘上的位置，以便zipline稍后可以找到。
 - en: This data can be used in backtests by passing the name as the `-b / --bundle`
     argument to `$ zipline run` or as the `bundle` argument to [`zipline.run_algorithm()`](api-reference.html#zipline.run_algorithm
     "zipline.run_algorithm").
   id: totrans-2102
   prefs: []
   type: TYPE_NORMAL
+  zh: 通过将名称作为`-b / --bundle`参数传递给`$ zipline run`或作为`[zipline.run_algorithm()](api-reference.html#zipline.run_algorithm
+    "zipline.run_algorithm")`的`bundle`参数，可以在回测中使用此数据。
 - en: For more information see [Data](bundles.html#data-bundles) for more information.
   id: totrans-2103
   prefs: []
   type: TYPE_NORMAL
+  zh: 如需了解更多信息，请参阅[数据](bundles.html#data-bundles)。
 - en: String Support in Pipeline ([1174](https://github.com/stefan-jansen/zipline/issues/1174))
   id: totrans-2104
   prefs:
   - PREF_H4
   type: TYPE_NORMAL
+  zh: 流水线中的字符串支持（[1174](https://github.com/stefan-jansen/zipline/issues/1174)）
 - en: Added support for string data in Pipeline. [`zipline.pipeline.data.Column`](api-reference.html#zipline.pipeline.data.Column
     "zipline.pipeline.data.Column") now accepts `object` as a dtype, which signifies
     that loaders for that column should emit windowed iterators over the experimental
@@ -13575,18 +13757,23 @@
   id: totrans-2105
   prefs: []
   type: TYPE_NORMAL
+  zh: 增加了对Pipeline中字符串数据的支持。[`zipline.pipeline.data.Column`](api-reference.html#zipline.pipeline.data.Column
+    "zipline.pipeline.data.Column")现在接受`object`作为dtype，这意味着该列的加载器应该发出实验性的新`LabelArray`类的窗口迭代器。
 - en: 'Several new `Classifier` methods have also been added for constructing [`Filter`](api-reference.html#zipline.pipeline.Filter
     "zipline.pipeline.Filter") instances based on string operations. The new methods
     are:'
   id: totrans-2106
   prefs: []
   type: TYPE_NORMAL
+  zh: 还添加了几个新的`分类器`方法，用于构建基于字符串操作的[`过滤器`](api-reference.html#zipline.pipeline.Filter
+    "zipline.pipeline.Filter")实例。新方法包括：
 - en: '`element_of()`'
   id: totrans-2107
   prefs:
   - PREF_BQ
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`element_of()`'
 - en: ''
   id: totrans-2108
   prefs:
@@ -13605,6 +13792,7 @@
   - PREF_BQ
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`startswith()`'
 - en: ''
   id: totrans-2111
   prefs:
@@ -13623,6 +13811,7 @@
   - PREF_BQ
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`endswith()`'
 - en: ''
   id: totrans-2114
   prefs:
@@ -13641,6 +13830,7 @@
   - PREF_BQ
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`has_substring()`'
 - en: ''
   id: totrans-2117
   prefs:
@@ -13659,6 +13849,7 @@
   - PREF_BQ
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`matches()`'
 - en: ''
   id: totrans-2120
   prefs:
@@ -13682,16 +13873,19 @@
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: '`element_of` 为所有分类器定义。剩余的方法仅对字符串类型的分类器定义。'
 - en: Zipline 1.0 Rewrite ([1105](https://github.com/stefan-jansen/zipline/issues/1105))
   id: totrans-2124
   prefs:
   - PREF_H4
   type: TYPE_NORMAL
+  zh: Zipline 1.0 重写 ([1105](https://github.com/stefan-jansen/zipline/issues/1105))
 - en: We have rewritten a lot of Zipline and its basic concepts in order to improve
     runtime performance. At the same time, we’ve introduced several new APIs.
   id: totrans-2125
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们对Zipline及其基本概念进行了大量重写，以提高运行时性能。同时，我们引入了几个新的API。
 - en: At a high level, earlier versions of Zipline simulations pulled from a multiplexed
     stream of data sources, which were merged via heapq. This stream was fed to the
     main simulation loop, driving the clock forward. This strong dependency on reading
@@ -13701,6 +13895,7 @@
   id: totrans-2126
   prefs: []
   type: TYPE_NORMAL
+  zh: 从高层次来看，早期版本的Zipline模拟从多路复用的数据源流中提取数据，这些数据源通过heapq合并。这个流被送入主模拟循环，推动时钟前进。这种对读取所有数据的强烈依赖使得优化模拟性能变得困难，因为我们获取的数据量与算法实际使用的数据量之间没有联系。
 - en: Now, we only fetch data when the algorithm needs it. A new class, [`DataPortal`](api-reference.html#zipline.data.data_portal.DataPortal
     "zipline.data.data_portal.DataPortal"), dispatches data requests to various data
     sources and returns the requested values. This makes the runtime of a simulation
@@ -13709,6 +13904,8 @@
   id: totrans-2127
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在，我们只在算法需要时获取数据。一个新的类，[`数据门户`](api-reference.html#zipline.data.data_portal.DataPortal
+    "zipline.data.data_portal.DataPortal")，将数据请求分发到各种数据源并返回请求的值。这使得模拟运行的时长更紧密地与算法的复杂性而不是数据源提供的资产数量成比例。
 - en: Instead of the data stream driving the clock, now simulations iterate through
     a pre-calculated set of day or minute timestamps. The timestamps are emitted by
     `MinuteSimulationClock` and `DailySimulationClock`, and consumed by the main loop
@@ -13716,6 +13913,7 @@
   id: totrans-2128
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在，模拟不再由数据流驱动时钟，而是迭代通过一组预先计算的日或分钟时间戳。这些时间戳由`MinuteSimulationClock`和`DailySimulationClock`发出，并由`transform()`中的主循环消费。
 - en: 'We’ve retired the `data[sid(N)]` and `history` APIs, replacing them with several
     methods on the [`BarData`](api-reference.html#zipline.protocol.BarData "zipline.protocol.BarData")
     object: [`current()`](api-reference.html#zipline.protocol.BarData.current "zipline.protocol.BarData.current"),
@@ -13726,6 +13924,12 @@
   id: totrans-2129
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们退役了`data[sid(N)]`和`history` API，用[`BarData`](api-reference.html#zipline.protocol.BarData
+    "zipline.protocol.BarData")对象上的几个方法取而代之：[`current()`](api-reference.html#zipline.protocol.BarData.current
+    "zipline.protocol.BarData.current")、[`history()`](api-reference.html#zipline.protocol.BarData.history
+    "zipline.protocol.BarData.history")、[`can_trade()`](api-reference.html#zipline.protocol.BarData.can_trade
+    "zipline.protocol.BarData.can_trade")和[`is_stale()`](api-reference.html#zipline.protocol.BarData.is_stale
+    "zipline.protocol.BarData.is_stale")。旧的API将继续工作，但现在会发出弃用警告。
 - en: You can now pass in an adjustments source to the [`DataPortal`](api-reference.html#zipline.data.data_portal.DataPortal
     "zipline.data.data_portal.DataPortal"), and we will apply adjustments to the pricing
     data when looking backwards at data. Prices and volumes for execution and presented
@@ -13733,38 +13937,46 @@
   id: totrans-2130
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在，您可以将调整源传递给[`DataPortal`](api-reference.html#zipline.data.data_portal.DataPortal
+    "zipline.data.data_portal.DataPortal")，我们将对定价数据应用调整，以便在查看数据时向后看。执行和呈现给算法的数据的当前价格和成交量是资产的交易价值。
 - en: New Entry Points ([1173](https://github.com/stefan-jansen/zipline/issues/1173)
     and [1178](https://github.com/stefan-jansen/zipline/issues/1178))
   id: totrans-2131
   prefs:
   - PREF_H4
   type: TYPE_NORMAL
+  zh: 新入口点（[1173](https://github.com/stefan-jansen/zipline/issues/1173)和[1178](https://github.com/stefan-jansen/zipline/issues/1178)）
 - en: 'In order to make it easier to use zipline we have updated the entry points
     for a backtest. The three supported ways to run a backtest are now:'
   id: totrans-2132
   prefs: []
   type: TYPE_NORMAL
+  zh: 为了使zipline的使用更加便捷，我们更新了回测的入口点。现在支持的三种运行回测的方式包括：
 - en: '`zipline.run_algo()`'
   id: totrans-2133
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: '`zipline.run_algo()`'
 - en: '`$ zipline run`'
   id: totrans-2134
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: '`$ zipline run`'
 - en: '`%zipline` (IPython magic)'
   id: totrans-2135
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: '`%zipline`（IPython magic）'
 - en: Data Bundles ([1173](https://github.com/stefan-jansen/zipline/issues/1173) and
     [1178](https://github.com/stefan-jansen/zipline/issues/1178))
   id: totrans-2136
   prefs:
   - PREF_H4
   type: TYPE_NORMAL
+  zh: 数据包（[1173](https://github.com/stefan-jansen/zipline/issues/1173)和[1178](https://github.com/stefan-jansen/zipline/issues/1178)）
 - en: 1.0.0 introduces data bundles. Data bundles are groups of data that should be
     preloaded and used to run backtests later. This allows users to not need to specify
     which tickers they are interested in each time they run an algorithm. This also
@@ -13772,6 +13984,7 @@
   id: totrans-2137
   prefs: []
   type: TYPE_NORMAL
+  zh: 1.0.0引入了数据包。数据包是应预加载并用于稍后运行回测的数据组。这允许用户无需每次运行算法时指定他们感兴趣的符号。这也允许我们在运行之间缓存数据。
 - en: 'By default, the `quantopian-quandl` bundle will be used which pulls data from
     Quantopian’s mirror of the quandl [WIKI dataset](https://www.quandl.com/data/WIKI).
     New bundles may be registered with [`zipline.data.bundles.register()`](api-reference.html#zipline.data.bundles.register
@@ -13779,6 +13992,8 @@
   id: totrans-2138
   prefs: []
   type: TYPE_NORMAL
+  zh: 默认情况下，将使用`quantopian-quandl`包，该包从Quantopian的quandl镜像中提取数据[WIKI数据集](https://www.quandl.com/data/WIKI)。可以通过[`zipline.data.bundles.register()`](api-reference.html#zipline.data.bundles.register
+    "zipline.data.bundles.register")注册新包，例如：
 - en: '[PRE55]'
   id: totrans-2139
   prefs: []
@@ -13790,21 +14005,26 @@
   id: totrans-2140
   prefs: []
   type: TYPE_NORMAL
+  zh: 此函数应检索所需数据，然后使用已传递的写入器将该数据写入磁盘上的位置，以便zipline稍后可以找到。
 - en: This data can be used in backtests by passing the name as the `-b / --bundle`
     argument to `$ zipline run` or as the `bundle` argument to [`zipline.run_algorithm()`](api-reference.html#zipline.run_algorithm
     "zipline.run_algorithm").
   id: totrans-2141
   prefs: []
   type: TYPE_NORMAL
+  zh: 通过将名称作为`-b / --bundle`参数传递给 `$ zipline run` 或作为 `bundle` 参数传递给 [`zipline.run_algorithm()`](api-reference.html#zipline.run_algorithm
+    "zipline.run_algorithm")，可以在回测中使用此数据。
 - en: For more information see [Data](bundles.html#data-bundles) for more information.
   id: totrans-2142
   prefs: []
   type: TYPE_NORMAL
+  zh: 有关更多信息，请参阅[数据](bundles.html#data-bundles)了解更多信息。
 - en: String Support in Pipeline ([1174](https://github.com/stefan-jansen/zipline/issues/1174))
   id: totrans-2143
   prefs:
   - PREF_H4
   type: TYPE_NORMAL
+  zh: 管道中的字符串支持（[1174](https://github.com/stefan-jansen/zipline/issues/1174)）
 - en: Added support for string data in Pipeline. [`zipline.pipeline.data.Column`](api-reference.html#zipline.pipeline.data.Column
     "zipline.pipeline.data.Column") now accepts `object` as a dtype, which signifies
     that loaders for that column should emit windowed iterators over the experimental
@@ -13812,18 +14032,23 @@
   id: totrans-2144
   prefs: []
   type: TYPE_NORMAL
+  zh: 增加了对管道中字符串数据的支持。[`zipline.pipeline.data.Column`](api-reference.html#zipline.pipeline.data.Column
+    "zipline.pipeline.data.Column")现在接受`object`作为数据类型，这表示该列的加载器应发出实验性新`LabelArray`类的窗口迭代器。
 - en: 'Several new `Classifier` methods have also been added for constructing [`Filter`](api-reference.html#zipline.pipeline.Filter
     "zipline.pipeline.Filter") instances based on string operations. The new methods
     are:'
   id: totrans-2145
   prefs: []
   type: TYPE_NORMAL
+  zh: 还新增了多个`分类器`方法，用于构建基于字符串操作的[`过滤器`](api-reference.html#zipline.pipeline.Filter
+    "zipline.pipeline.Filter")实例。新增的方法有：
 - en: '`element_of()`'
   id: totrans-2146
   prefs:
   - PREF_BQ
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`element_of()`'
 - en: ''
   id: totrans-2147
   prefs:
@@ -13842,6 +14067,7 @@
   - PREF_BQ
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`startswith()`'
 - en: ''
   id: totrans-2150
   prefs:
@@ -13860,6 +14086,7 @@
   - PREF_BQ
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`endswith()`'
 - en: ''
   id: totrans-2153
   prefs:
@@ -13878,6 +14105,7 @@
   - PREF_BQ
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`has_substring()`'
 - en: ''
   id: totrans-2156
   prefs:
@@ -13896,6 +14124,7 @@
   - PREF_BQ
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`matches()`'
 - en: ''
   id: totrans-2159
   prefs:
@@ -13919,11 +14148,13 @@
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: '`element_of` 为所有分类器定义。其余方法仅针对字符串数据类型的分类器定义。'
 - en: Enhancements
   id: totrans-2163
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 增强功能
 - en: Made the data loading classes have more consistent interfaces. This includes
     the equity bar writers, adjustment writer, and asset db writer. The new interface
     is that the resource to be written to is passed at construction time and the data
@@ -13935,6 +14166,7 @@
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 使数据加载类具有更一致的接口。这包括股票条形写入器、调整写入器和资产数据库写入器。新的接口是在构造时传递要写入的资源，稍后将数据提供给write方法，作为数据帧或数据帧的某些迭代器。这种模式允许我们将这些写入器对象作为其他类和函数可以消费的资源传递（[1109](https://github.com/stefan-jansen/zipline/issues/1109)和[1149](https://github.com/stefan-jansen/zipline/issues/1149)）。
 - en: Added masking to [`zipline.pipeline.CustomFactor`](api-reference.html#zipline.pipeline.CustomFactor
     "zipline.pipeline.CustomFactor"). Custom factors can now be passed a Filter upon
     instantiation. This tells the factor to only compute over stocks for which the
@@ -13944,6 +14176,8 @@
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 为[`zipline.pipeline.CustomFactor`](api-reference.html#zipline.pipeline.CustomFactor
+    "zipline.pipeline.CustomFactor")添加了掩码功能。自定义因子现在可以在实例化时传递一个过滤器。这告诉因子只计算过滤器返回True的股票，而不是总是计算整个股票宇宙。（[1095](https://github.com/stefan-jansen/zipline/issues/1095)）
 - en: Added [`zipline.utils.cache.ExpiringCache`](api-reference.html#zipline.utils.cache.ExpiringCache
     "zipline.utils.cache.ExpiringCache"). A cache which wraps entries in a [`zipline.utils.cache.CachedObject`](api-reference.html#zipline.utils.cache.CachedObject
     "zipline.utils.cache.CachedObject"), which manages expiration of entries based
@@ -13952,12 +14186,16 @@
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 新增了[`zipline.utils.cache.ExpiringCache`](api-reference.html#zipline.utils.cache.ExpiringCache
+    "zipline.utils.cache.ExpiringCache")。这是一个缓存，它将条目包装在[`zipline.utils.cache.CachedObject`](api-reference.html#zipline.utils.cache.CachedObject
+    "zipline.utils.cache.CachedObject")中，该缓存根据get方法提供的dt管理条目的过期。（[1130](https://github.com/stefan-jansen/zipline/issues/1130)）
 - en: Implemented `zipline.pipeline.factors.RecarrayField`, a new pipeline term designed
     to be the output type of a CustomFactor with multiple outputs. ([1119](https://github.com/stefan-jansen/zipline/issues/1119))
   id: totrans-2167
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 实现了`zipline.pipeline.factors.RecarrayField`，这是一个新的管道术语，设计为具有多个输出的自定义因子的输出类型。（[1119](https://github.com/stefan-jansen/zipline/issues/1119)）
 - en: Added optional outputs parameter to [`zipline.pipeline.CustomFactor`](api-reference.html#zipline.pipeline.CustomFactor
     "zipline.pipeline.CustomFactor"). Custom factors are now capable of computing
     and returning multiple outputs, each of which are themselves a Factor. ([1119](https://github.com/stefan-jansen/zipline/issues/1119))
@@ -13965,6 +14203,8 @@
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 为[`zipline.pipeline.CustomFactor`](api-reference.html#zipline.pipeline.CustomFactor
+    "zipline.pipeline.CustomFactor")添加了可选的outputs参数。自定义因子现在能够计算并返回多个输出，每个输出本身都是一个因子。（[1119](https://github.com/stefan-jansen/zipline/issues/1119)）
 - en: Added support for string-dtype pipeline columns. Loaders for thse columns should
     produce instances of `zipline.lib.labelarray.LabelArray` when traversed. [`latest()`](api-reference.html#zipline.pipeline.data.BoundColumn.latest
     "zipline.pipeline.data.BoundColumn.latest") on string columns produces a string-dtype
@@ -13973,23 +14213,29 @@
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 增加了对字符串数据类型管道列的支持。这些列的加载器在遍历时应该生成`zipline.lib.labelarray.LabelArray`的实例。字符串列上的[`latest()`](api-reference.html#zipline.pipeline.data.BoundColumn.latest
+    "zipline.pipeline.data.BoundColumn.latest")生成一个字符串数据类型的`zipline.pipeline.Classifier`。（[1174](https://github.com/stefan-jansen/zipline/issues/1174)）
 - en: Added several methods for converting Classifiers into Filters.
   id: totrans-2170
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 增加了几种将分类器转换为过滤器的方法。
 - en: 'The new methods are: - `element_of()` - `startswith()` - `endswith()` - `has_substring()`
     - `matches()`'
   id: totrans-2171
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 新增的方法包括：- `element_of()` - `startswith()` - `endswith()` - `has_substring()`
+    - `matches()`
 - en: '`element_of` is defined for all classifiers. The remaining methods are only
     defined for strings. ([1174](https://github.com/stefan-jansen/zipline/issues/1174))'
   id: totrans-2172
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: '`element_of` 为所有分类器定义。其余方法仅对字符串定义。（[1174](https://github.com/stefan-jansen/zipline/issues/1174)）'
 - en: 'Added [`BollingerBands`](api-reference.html#zipline.pipeline.factors.BollingerBands
     "zipline.pipeline.factors.BollingerBands") factor. This factor implements the
     Bollinger Bands technical indicator: [https://en.wikipedia.org/wiki/Bollinger_Bands](https://en.wikipedia.org/wiki/Bollinger_Bands)
@@ -13998,11 +14244,15 @@
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 新增了 [`BollingerBands`](api-reference.html#zipline.pipeline.factors.BollingerBands
+    "zipline.pipeline.factors.BollingerBands") 因子。该因子实现了布林带技术指标：[https://en.wikipedia.org/wiki/Bollinger_Bands](https://en.wikipedia.org/wiki/Bollinger_Bands)
+    ([1199](https://github.com/stefan-jansen/zipline/issues/1199))。
 - en: Fetcher has been moved from Quantopian internal code into Zipline ([1105](https://github.com/stefan-jansen/zipline/issues/1105)).
   id: totrans-2174
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: Fetcher 已从 Quantopian 内部代码移至 Zipline ([1105](https://github.com/stefan-jansen/zipline/issues/1105))。
 - en: Added new built-in factors, [`RollingPearsonOfReturns`](api-reference.html#zipline.pipeline.factors.RollingPearsonOfReturns
     "zipline.pipeline.factors.RollingPearsonOfReturns"), [`RollingSpearmanOfReturns`](api-reference.html#zipline.pipeline.factors.RollingSpearmanOfReturns
     "zipline.pipeline.factors.RollingSpearmanOfReturns") and [`RollingLinearRegressionOfReturns`](api-reference.html#zipline.pipeline.factors.RollingLinearRegressionOfReturns
@@ -14011,19 +14261,26 @@
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 新增了新的内置因子，[`RollingPearsonOfReturns`](api-reference.html#zipline.pipeline.factors.RollingPearsonOfReturns
+    "zipline.pipeline.factors.RollingPearsonOfReturns")、[`RollingSpearmanOfReturns`](api-reference.html#zipline.pipeline.factors.RollingSpearmanOfReturns
+    "zipline.pipeline.factors.RollingSpearmanOfReturns") 和 [`RollingLinearRegressionOfReturns`](api-reference.html#zipline.pipeline.factors.RollingLinearRegressionOfReturns
+    "zipline.pipeline.factors.RollingLinearRegressionOfReturns") ([1154](https://github.com/stefan-jansen/zipline/issues/1154))
 - en: Experimental Features
   id: totrans-2176
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 实验性功能
 - en: Warning
   id: totrans-2177
   prefs: []
   type: TYPE_NORMAL
+  zh: 警告
 - en: Experimental features are subject to change.
   id: totrans-2178
   prefs: []
   type: TYPE_NORMAL
+  zh: 实验性功能可能会发生变化。
 - en: Added a new `zipline.lib.labelarray.LabelArray` class for efficiently representing
     and computing on string data with numpy. This class is conceptually similar to
     [`pandas.Categorical`](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.Categorical.html#pandas.Categorical
@@ -14033,62 +14290,77 @@
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 新增了一个新的 `zipline.lib.labelarray.LabelArray` 类，用于高效地表示和计算 numpy 中的字符串数据。这个类在概念上类似于
+    [`pandas.Categorical`](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.Categorical.html#pandas.Categorical
+    "(in pandas v2.0.3)")，它将字符串数组表示为索引数组，索引指向一个（较小的）唯一字符串值数组。([1174](https://github.com/stefan-jansen/zipline/issues/1174))
 - en: Bug Fixes
   id: totrans-2180
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 错误修复
 - en: None
   id: totrans-2181
   prefs: []
   type: TYPE_NORMAL
+  zh: 无
 - en: Performance
   id: totrans-2182
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 性能
 - en: None
   id: totrans-2183
   prefs: []
   type: TYPE_NORMAL
+  zh: 无
 - en: Maintenance and Refactorings
   id: totrans-2184
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 维护和重构
 - en: None
   id: totrans-2185
   prefs: []
   type: TYPE_NORMAL
+  zh: 无
 - en: Build
   id: totrans-2186
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 构建
 - en: None
   id: totrans-2187
   prefs: []
   type: TYPE_NORMAL
+  zh: 无
 - en: Documentation
   id: totrans-2188
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 文档
 - en: Updated documentation for the API methods ([1188](https://github.com/stefan-jansen/zipline/issues/1188)).
   id: totrans-2189
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 更新了 API 方法的文档 ([1188](https://github.com/stefan-jansen/zipline/issues/1188))。
 - en: Updated release process to mention that docs should be built with python 3 ([1188](https://github.com/stefan-jansen/zipline/issues/1188)).
   id: totrans-2190
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 更新了发布流程，提到文档应该使用 Python 3 构建 ([1188](https://github.com/stefan-jansen/zipline/issues/1188))。
 - en: Miscellaneous
   id: totrans-2191
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 杂项
 - en: Zipline now provides a [stub file](https://www.python.org/dev/peps/pep-0484/#stub-files)
     for the `zipline.api` module. This module is normally dynamically created so the
     stub file provides some static information for utilities that can consume it,
@@ -14097,48 +14369,59 @@
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: Zipline 现在为 `zipline.api` 模块提供了一个 [stub 文件](https://www.python.org/dev/peps/pep-0484/#stub-files)。该模块通常是动态创建的，因此
+    stub 文件为能够消费它的工具提供了一些静态信息，例如 PyCharm ([1208](https://github.com/stefan-jansen/zipline/issues/1208))。
 - en: Release 0.9.0
   id: totrans-2193
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 发布 0.9.0
 - en: 'Release:'
   id: totrans-2194
   prefs: []
   type: TYPE_NORMAL
+  zh: 发布：
 - en: 0.9.0
   id: totrans-2195
   prefs: []
   type: TYPE_NORMAL
+  zh: 0.9.0
 - en: 'Date:'
   id: totrans-2196
   prefs: []
   type: TYPE_NORMAL
+  zh: 日期：
 - en: March 29, 2016
   id: totrans-2197
   prefs: []
   type: TYPE_NORMAL
+  zh: 2016年3月29日
 - en: Highlights
   id: totrans-2198
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 亮点
 - en: Added classifiers and normalization methods to pipeline, along with new datasets
     and factors.
   id: totrans-2199
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 为管道增加了分类器和归一化方法，以及新的数据集和因子。
 - en: Added support for Windows with continuous integration on AppVeyor.
   id: totrans-2200
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 增加了对 Windows 的支持，并在 AppVeyor 上进行持续集成。
 - en: Enhancements
   id: totrans-2201
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 增强功能
 - en: Added new datasets `CashBuybackAuthorizations` and `ShareBuybackAuthorizations`
     for use in the Pipeline API. These datasets provide an abstract interface for
     adding cash and share buyback authorizations data, respectively, to a new algorithm.
@@ -14149,6 +14432,7 @@
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 新增了`CashBuybackAuthorizations`和`ShareBuybackAuthorizations`两个数据集，用于管道API。这些数据集提供了一个抽象接口，用于分别向新算法添加现金和股票回购授权数据。基于pandas的这些数据集的参考实现可以在`zipline.pipeline.loaders.buyback_auth`中找到，而基于blaze的实验性实现可以在`zipline.pipeline.loaders.blaze.buyback_auth`中找到。([1022](https://github.com/stefan-jansen/zipline/issues/1022))
 - en: Added new datasets `DividendsByExDate`, `DividendsByPayDate`, and `DividendsByAnnouncementDate`
     for use in the Pipeline API. These datasets provide an abstract interface for
     adding dividends data organized by ex date, pay date, and announcement date, respectively,
@@ -14159,6 +14443,7 @@
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 新增了`DividendsByExDate`、`DividendsByPayDate`和`DividendsByAnnouncementDate`三个数据集，用于管道API。这些数据集提供了一个抽象接口，用于按除息日、支付日和公告日分别向新算法添加股息数据。基于pandas的这些数据集的参考实现可以在`zipline.pipeline.loaders.dividends`中找到，而基于blaze的实验性实现可以在`zipline.pipeline.loaders.blaze.dividends`中找到。([1093](https://github.com/stefan-jansen/zipline/issues/1093))
 - en: Added new built-in factors, `zipline.pipeline.factors.BusinessDaysSinceCashBuybackAuth`
     and `zipline.pipeline.factors.BusinessDaysSinceShareBuybackAuth`. These factors
     use the new `CashBuybackAuthorizations` and `ShareBuybackAuthorizations` datasets,
@@ -14167,6 +14452,7 @@
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 新增了内置因子`zipline.pipeline.factors.BusinessDaysSinceCashBuybackAuth`和`zipline.pipeline.factors.BusinessDaysSinceShareBuybackAuth`。这些因子分别使用新的`CashBuybackAuthorizations`和`ShareBuybackAuthorizations`数据集。([1022](https://github.com/stefan-jansen/zipline/issues/1022))
 - en: Added new built-in factors, `zipline.pipeline.factors.BusinessDaysSinceDividendAnnouncement`,
     `zipline.pipeline.factors.BusinessDaysUntilNextExDate`, and `zipline.pipeline.factors.BusinessDaysSincePreviousExDate`.
     These factors use the new `DividendsByAnnouncementDate` and ``DividendsByExDate`
@@ -14175,6 +14461,7 @@
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 新增了内置因子`zipline.pipeline.factors.BusinessDaysSinceDividendAnnouncement`、`zipline.pipeline.factors.BusinessDaysUntilNextExDate`和`zipline.pipeline.factors.BusinessDaysSincePreviousExDate`。这些因子分别使用新的`DividendsByAnnouncementDate`和`DividendsByExDate`数据集。([1093](https://github.com/stefan-jansen/zipline/issues/1093))
 - en: Implemented `zipline.pipeline.Classifier`, a new core pipeline API term representing
     grouping keys. Classifiers are primarily used by passing them as the `groupby`
     parameter to factor normalization methods. ([1046](https://github.com/stefan-jansen/zipline/issues/1046))
@@ -14182,6 +14469,7 @@
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 实现了`zipline.pipeline.Classifier`，这是一个新的核心管道API术语，代表分组键。分类器主要通过将它们作为`groupby`参数传递给因子归一化方法来使用。([1046](https://github.com/stefan-jansen/zipline/issues/1046))
 - en: 'Added factor normalization methods: [`zipline.pipeline.Factor.demean()`](api-reference.html#zipline.pipeline.Factor.demean
     "zipline.pipeline.Factor.demean") and [`zipline.pipeline.Factor.zscore()`](api-reference.html#zipline.pipeline.Factor.zscore
     "zipline.pipeline.Factor.zscore"). ([1046](https://github.com/stefan-jansen/zipline/issues/1046))'
@@ -14189,6 +14477,9 @@
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 新增了因子归一化方法：[`zipline.pipeline.Factor.demean()`](api-reference.html#zipline.pipeline.Factor.demean
+    "zipline.pipeline.Factor.demean")和[`zipline.pipeline.Factor.zscore()`](api-reference.html#zipline.pipeline.Factor.zscore
+    "zipline.pipeline.Factor.zscore")。([1046](https://github.com/stefan-jansen/zipline/issues/1046))
 - en: Added [`zipline.pipeline.Factor.quantiles()`](api-reference.html#zipline.pipeline.Factor.quantiles
     "zipline.pipeline.Factor.quantiles"), a method for computing a Classifier from
     a Factor by partitioning into equally-sized buckets. Also added helpers for common
