@@ -1,362 +1,510 @@
 - en: stratanalyzer – Strategy analyzers
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: stratanalyzer – 策略分析器
 - en: 原文：[https://gbeced.github.io/pyalgotrade/docs/v0.20/html/stratanalyzer.html](https://gbeced.github.io/pyalgotrade/docs/v0.20/html/stratanalyzer.html)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://gbeced.github.io/pyalgotrade/docs/v0.20/html/stratanalyzer.html](https://gbeced.github.io/pyalgotrade/docs/v0.20/html/stratanalyzer.html)
 - en: Strategy analyzers provide an extensible way to attach different calculations
     to strategy executions.
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: 策略分析器提供了一种可扩展的方式，用于将不同的计算附加到策略执行上。
 - en: '*class* `pyalgotrade.stratanalyzer.``StrategyAnalyzer`'
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: '*类* `pyalgotrade.stratanalyzer.``StrategyAnalyzer`'
 - en: 'Bases: `object`'
+  id: totrans-4
   prefs: []
   type: TYPE_NORMAL
+  zh: '基类: `object`'
 - en: Base class for strategy analyzers.
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: 策略分析器的基类。
 - en: Note
+  id: totrans-6
   prefs: []
   type: TYPE_NORMAL
+  zh: 注意
 - en: This is a base class and should not be used directly.
+  id: totrans-7
   prefs: []
   type: TYPE_NORMAL
+  zh: 这是一个基类，不应直接使用。
 - en: '## Returns'
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: '## 返回'
 - en: '*class* `pyalgotrade.stratanalyzer.returns.``Returns`(*maxLen=None*)'
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: '*类* `pyalgotrade.stratanalyzer.returns.``Returns`(*maxLen=None*)'
 - en: 'Bases: [`pyalgotrade.stratanalyzer.StrategyAnalyzer`](#pyalgotrade.stratanalyzer.StrategyAnalyzer
     "pyalgotrade.stratanalyzer.StrategyAnalyzer")'
+  id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: '基类: [`pyalgotrade.stratanalyzer.StrategyAnalyzer`](#pyalgotrade.stratanalyzer.StrategyAnalyzer
+    "pyalgotrade.stratanalyzer.StrategyAnalyzer")'
 - en: A [`pyalgotrade.stratanalyzer.StrategyAnalyzer`](#pyalgotrade.stratanalyzer.StrategyAnalyzer
     "pyalgotrade.stratanalyzer.StrategyAnalyzer") that calculates time-weighted returns
     for the whole portfolio.
+  id: totrans-11
   prefs: []
   type: TYPE_NORMAL
+  zh: 一个 [`pyalgotrade.stratanalyzer.StrategyAnalyzer`](#pyalgotrade.stratanalyzer.StrategyAnalyzer
+    "pyalgotrade.stratanalyzer.StrategyAnalyzer") ，用于计算整个投资组合的时间加权收益。
 - en: '| Parameters: | **maxLen** (*int.*) – The maximum number of values to hold
     in net and cumulative returs dataseries. Once a bounded length is full, when new
     items are added, a corresponding number of items are discarded from the opposite
     end. If None then dataseries.DEFAULT_MAX_LEN is used. |'
+  id: totrans-12
   prefs: []
   type: TYPE_TB
+  zh: '| 参数: | **maxLen** (*整数.*) – 在净和累积收益数据序列中保留的最大值数。一旦有界长度已满，当添加新项时，相应数量的项将从相反端丢弃。如果为None，则使用dataseries.DEFAULT_MAX_LEN。
+    |'
 - en: '`getCumulativeReturns`()'
+  id: totrans-13
   prefs: []
   type: TYPE_NORMAL
+  zh: '`getCumulativeReturns`()'
 - en: Returns a [`pyalgotrade.dataseries.DataSeries`](dataseries.html#pyalgotrade.dataseries.DataSeries
     "pyalgotrade.dataseries.DataSeries") with the cumulative returns for each bar.
+  id: totrans-14
   prefs: []
   type: TYPE_NORMAL
+  zh: 返回一个[`pyalgotrade.dataseries.DataSeries`](dataseries.html#pyalgotrade.dataseries.DataSeries
+    "pyalgotrade.dataseries.DataSeries") ，其中包含每个条的累积收益。
 - en: '`getReturns`()'
+  id: totrans-15
   prefs: []
   type: TYPE_NORMAL
+  zh: '`getReturns`()'
 - en: 'Returns a [`pyalgotrade.dataseries.DataSeries`](dataseries.html#pyalgotrade.dataseries.DataSeries
     "pyalgotrade.dataseries.DataSeries") with the returns for each bar.  ## Sharpe
     Ratio'
+  id: totrans-16
   prefs: []
   type: TYPE_NORMAL
+  zh: '返回一个[`pyalgotrade.dataseries.DataSeries`](dataseries.html#pyalgotrade.dataseries.DataSeries
+    "pyalgotrade.dataseries.DataSeries") ，其中包含每个条的收益。  ## 夏普比率'
 - en: '*class* `pyalgotrade.stratanalyzer.sharpe.``SharpeRatio`(*useDailyReturns=True*)'
+  id: totrans-17
   prefs: []
   type: TYPE_NORMAL
+  zh: '*类* `pyalgotrade.stratanalyzer.sharpe.``SharpeRatio`(*useDailyReturns=True*)'
 - en: 'Bases: [`pyalgotrade.stratanalyzer.StrategyAnalyzer`](#pyalgotrade.stratanalyzer.StrategyAnalyzer
     "pyalgotrade.stratanalyzer.StrategyAnalyzer")'
+  id: totrans-18
   prefs: []
   type: TYPE_NORMAL
+  zh: '基类: [`pyalgotrade.stratanalyzer.StrategyAnalyzer`](#pyalgotrade.stratanalyzer.StrategyAnalyzer
+    "pyalgotrade.stratanalyzer.StrategyAnalyzer")'
 - en: A [`pyalgotrade.stratanalyzer.StrategyAnalyzer`](#pyalgotrade.stratanalyzer.StrategyAnalyzer
     "pyalgotrade.stratanalyzer.StrategyAnalyzer") that calculates Sharpe ratio for
     the whole portfolio.
+  id: totrans-19
   prefs: []
   type: TYPE_NORMAL
+  zh: 一个 [`pyalgotrade.stratanalyzer.StrategyAnalyzer`](#pyalgotrade.stratanalyzer.StrategyAnalyzer
+    "pyalgotrade.stratanalyzer.StrategyAnalyzer") ，用于计算整个投资组合的夏普比率。
 - en: '| Parameters: | **useDailyReturns** (*boolean.*) – True if daily returns should
     be used instead of the returns for each bar. |'
+  id: totrans-20
   prefs: []
   type: TYPE_TB
+  zh: '| 参数: | **useDailyReturns** (*布尔类型.*) – 如果应使用每日收益而不是每个条的收益，则为True。 |'
 - en: '`getSharpeRatio`(*riskFreeRate*, *annualized=True*)'
+  id: totrans-21
   prefs: []
   type: TYPE_NORMAL
+  zh: '`getSharpeRatio`(*riskFreeRate*, *annualized=True*)'
 - en: Returns the Sharpe ratio for the strategy execution. If the volatility is 0,
     0 is returned.
+  id: totrans-22
   prefs: []
   type: TYPE_NORMAL
+  zh: 返回策略执行的夏普比率。如果波动率为0，则返回0。
 - en: '| Parameters: |'
+  id: totrans-23
   prefs: []
   type: TYPE_TB
+  zh: '| 参数: |'
 - en: '**riskFreeRate** (*int/float.*) – The risk free rate per annum.'
+  id: totrans-24
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**riskFreeRate** (*整数/浮点数.*) – 每年的无风险利率。'
 - en: '**annualized** (*boolean.*) – True if the sharpe ratio should be annualized.'
+  id: totrans-25
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**annualized** (*布尔类型.*) – 如果夏普比率应年化，则为True。'
 - en: '|  ## DrawDown'
+  id: totrans-26
   prefs: []
   type: TYPE_NORMAL
+  zh: '|  ## 最大回撤'
 - en: '*class* `pyalgotrade.stratanalyzer.drawdown.``DrawDown`'
+  id: totrans-27
   prefs: []
   type: TYPE_NORMAL
+  zh: '*类* `pyalgotrade.stratanalyzer.drawdown.``DrawDown`'
 - en: 'Bases: [`pyalgotrade.stratanalyzer.StrategyAnalyzer`](#pyalgotrade.stratanalyzer.StrategyAnalyzer
     "pyalgotrade.stratanalyzer.StrategyAnalyzer")'
+  id: totrans-28
   prefs: []
   type: TYPE_NORMAL
+  zh: '基类: [`pyalgotrade.stratanalyzer.StrategyAnalyzer`](#pyalgotrade.stratanalyzer.StrategyAnalyzer
+    "pyalgotrade.stratanalyzer.StrategyAnalyzer")'
 - en: A [`pyalgotrade.stratanalyzer.StrategyAnalyzer`](#pyalgotrade.stratanalyzer.StrategyAnalyzer
     "pyalgotrade.stratanalyzer.StrategyAnalyzer") that calculates max. drawdown and
     longest drawdown duration for the portfolio.
+  id: totrans-29
   prefs: []
   type: TYPE_NORMAL
+  zh: 一个 [`pyalgotrade.stratanalyzer.StrategyAnalyzer`](#pyalgotrade.stratanalyzer.StrategyAnalyzer
+    "pyalgotrade.stratanalyzer.StrategyAnalyzer") ，用于计算投资组合的最大回撤和最长回撤持续时间。
 - en: '`getLongestDrawDownDuration`()'
+  id: totrans-30
   prefs: []
   type: TYPE_NORMAL
+  zh: '`getLongestDrawDownDuration`()'
 - en: Returns the duration of the longest drawdown.
+  id: totrans-31
   prefs: []
   type: TYPE_NORMAL
+  zh: 返回最长回撤的持续时间。
 - en: '| Return type: | `datetime.timedelta`. |'
+  id: totrans-32
   prefs: []
   type: TYPE_TB
+  zh: '| 返回类型: | `datetime.timedelta`. |'
 - en: Note
+  id: totrans-33
   prefs: []
   type: TYPE_NORMAL
+  zh: 注意
 - en: Note that this is the duration of the longest drawdown, not necessarily the
     deepest one.
+  id: totrans-34
   prefs: []
   type: TYPE_NORMAL
 - en: '`getMaxDrawDown`()'
+  id: totrans-35
   prefs: []
   type: TYPE_NORMAL
 - en: 'Returns the max. (deepest) drawdown.  ## Trades'
+  id: totrans-36
   prefs: []
   type: TYPE_NORMAL
 - en: '*class* `pyalgotrade.stratanalyzer.trades.``Trades`'
+  id: totrans-37
   prefs: []
   type: TYPE_NORMAL
 - en: 'Bases: [`pyalgotrade.stratanalyzer.StrategyAnalyzer`](#pyalgotrade.stratanalyzer.StrategyAnalyzer
     "pyalgotrade.stratanalyzer.StrategyAnalyzer")'
+  id: totrans-38
   prefs: []
   type: TYPE_NORMAL
 - en: A [`pyalgotrade.stratanalyzer.StrategyAnalyzer`](#pyalgotrade.stratanalyzer.StrategyAnalyzer
     "pyalgotrade.stratanalyzer.StrategyAnalyzer") that records the profit/loss and
     returns of every completed trade.
+  id: totrans-39
   prefs: []
   type: TYPE_NORMAL
 - en: Note
+  id: totrans-40
   prefs: []
   type: TYPE_NORMAL
 - en: 'This analyzer operates on individual completed trades. For example, lets say
     you start with a $1000 cash, and then you buy 1 share of XYZ for $10 and later
     sell it for $20:'
+  id: totrans-41
   prefs: []
   type: TYPE_NORMAL
 - en: The trade’s profit was $10.
+  id: totrans-42
   prefs:
   - PREF_BQ
   - PREF_UL
   type: TYPE_NORMAL
 - en: The trade’s return is 100%, even though your whole portfolio went from $1000
     to $1020, a 2% return.
+  id: totrans-43
   prefs:
   - PREF_BQ
   - PREF_UL
   type: TYPE_NORMAL
 - en: '`getCount`()'
+  id: totrans-44
   prefs: []
   type: TYPE_NORMAL
 - en: Returns the total number of trades.
+  id: totrans-45
   prefs: []
   type: TYPE_NORMAL
 - en: '`getProfitableCount`()'
+  id: totrans-46
   prefs: []
   type: TYPE_NORMAL
 - en: Returns the number of profitable trades.
+  id: totrans-47
   prefs: []
   type: TYPE_NORMAL
 - en: '`getUnprofitableCount`()'
+  id: totrans-48
   prefs: []
   type: TYPE_NORMAL
 - en: Returns the number of unprofitable trades.
+  id: totrans-49
   prefs: []
   type: TYPE_NORMAL
 - en: '`getEvenCount`()'
+  id: totrans-50
   prefs: []
   type: TYPE_NORMAL
 - en: Returns the number of trades whose net profit was 0.
+  id: totrans-51
   prefs: []
   type: TYPE_NORMAL
 - en: '`getAll`()'
+  id: totrans-52
   prefs: []
   type: TYPE_NORMAL
 - en: Returns a numpy.array with the profits/losses for each trade.
+  id: totrans-53
   prefs: []
   type: TYPE_NORMAL
 - en: '`getProfits`()'
+  id: totrans-54
   prefs: []
   type: TYPE_NORMAL
 - en: Returns a numpy.array with the profits for each profitable trade.
+  id: totrans-55
   prefs: []
   type: TYPE_NORMAL
 - en: '`getLosses`()'
+  id: totrans-56
   prefs: []
   type: TYPE_NORMAL
 - en: Returns a numpy.array with the losses for each unprofitable trade.
+  id: totrans-57
   prefs: []
   type: TYPE_NORMAL
 - en: '`getAllReturns`()'
+  id: totrans-58
   prefs: []
   type: TYPE_NORMAL
 - en: Returns a numpy.array with the returns for each trade.
+  id: totrans-59
   prefs: []
   type: TYPE_NORMAL
 - en: '`getPositiveReturns`()'
+  id: totrans-60
   prefs: []
   type: TYPE_NORMAL
 - en: Returns a numpy.array with the positive returns for each trade.
+  id: totrans-61
   prefs: []
   type: TYPE_NORMAL
 - en: '`getNegativeReturns`()'
+  id: totrans-62
   prefs: []
   type: TYPE_NORMAL
 - en: Returns a numpy.array with the negative returns for each trade.
+  id: totrans-63
   prefs: []
   type: TYPE_NORMAL
 - en: '`getCommissionsForAllTrades`()'
+  id: totrans-64
   prefs: []
   type: TYPE_NORMAL
 - en: Returns a numpy.array with the commissions for each trade.
+  id: totrans-65
   prefs: []
   type: TYPE_NORMAL
 - en: '`getCommissionsForProfitableTrades`()'
+  id: totrans-66
   prefs: []
   type: TYPE_NORMAL
 - en: Returns a numpy.array with the commissions for each profitable trade.
+  id: totrans-67
   prefs: []
   type: TYPE_NORMAL
 - en: '`getCommissionsForUnprofitableTrades`()'
+  id: totrans-68
   prefs: []
   type: TYPE_NORMAL
 - en: Returns a numpy.array with the commissions for each unprofitable trade.
+  id: totrans-69
   prefs: []
   type: TYPE_NORMAL
 - en: '`getCommissionsForEvenTrades`()'
+  id: totrans-70
   prefs: []
   type: TYPE_NORMAL
 - en: Returns a numpy.array with the commissions for each trade whose net profit was
     0.
+  id: totrans-71
   prefs: []
   type: TYPE_NORMAL
 - en: Example
+  id: totrans-72
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
 - en: 'Save this code as sma_crossover.py:'
+  id: totrans-73
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE0]'
+  id: totrans-74
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: 'and save this code in a different file:'
+  id: totrans-75
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE1]'
+  id: totrans-76
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE1]'
 - en: 'The output should look like this:'
+  id: totrans-77
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE2]'
+  id: totrans-78
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE2]'
 - en: '[Table Of Contents](index.html)'
+  id: totrans-79
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
 - en: '[stratanalyzer – Strategy analyzers](#)'
+  id: totrans-80
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: '[Returns](#module-pyalgotrade.stratanalyzer.returns)'
+  id: totrans-81
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
 - en: '[Sharpe Ratio](#module-pyalgotrade.stratanalyzer.sharpe)'
+  id: totrans-82
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
 - en: '[DrawDown](#module-pyalgotrade.stratanalyzer.drawdown)'
+  id: totrans-83
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
 - en: '[Trades](#module-pyalgotrade.stratanalyzer.trades)'
+  id: totrans-84
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
 - en: '[Example](#example)'
+  id: totrans-85
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
 - en: Previous topic
+  id: totrans-86
   prefs:
   - PREF_H4
   type: TYPE_NORMAL
 - en: '[strategy – Basic strategy classes](strategy.html "previous chapter")'
+  id: totrans-87
   prefs: []
   type: TYPE_NORMAL
 - en: Next topic
+  id: totrans-88
   prefs:
   - PREF_H4
   type: TYPE_NORMAL
 - en: '[plotter – Strategy plotter](plotter.html "next chapter")'
+  id: totrans-89
   prefs: []
   type: TYPE_NORMAL
 - en: This Page
+  id: totrans-90
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
 - en: '[Show Source](_sources/stratanalyzer.txt)'
+  id: totrans-91
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: Quick search
+  id: totrans-92
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
 - en: Enter search terms or a module, class or function name.
+  id: totrans-93
   prefs: []
   type: TYPE_NORMAL
 - en: Navigation
+  id: totrans-94
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
 - en: '[index](genindex.html "General Index")'
+  id: totrans-95
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: '[modules](py-modindex.html "Python Module Index") |'
+  id: totrans-96
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: '[next](plotter.html "plotter – Strategy plotter") |'
+  id: totrans-97
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: '[previous](strategy.html "strategy – Basic strategy classes") |'
+  id: totrans-98
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: '[PyAlgoTrade 0.20 documentation](index.html) »'
+  id: totrans-99
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: '[Documentation for the code](code.html) »'
+  id: totrans-100
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[代码文档](code.html) »'
